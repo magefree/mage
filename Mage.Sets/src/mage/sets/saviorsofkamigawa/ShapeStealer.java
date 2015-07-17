@@ -56,13 +56,13 @@ public class ShapeStealer extends CardImpl {
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-
         
         // This ability triggers once for each creature blocked by or blocking Shape Stealer. 
         // If multiple creatures block it, Shape Stealer's power and toughness will change for
         // each one in succession. The first trigger put on the stack will be the last to resolve,
         // so that will set Shape Stealer's final power and toughness.
-        // Whenever Shape Stealer blocks or becomes blocked by a creature, change Shape Stealer's power and toughness to that creature's power and toughness until end of turn.
+        
+        // Whenever Shape Stealer blocks or becomes blocked by a creature, change Shape Stealer's base power and toughness to that creature's power and toughness until end of turn.
         this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new ShapeStealerEffect(), false));        
     }
 
@@ -80,7 +80,7 @@ class ShapeStealerEffect extends OneShotEffect {
     
     public ShapeStealerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "change {this}'s power and toughness to that creature's power and toughness until end of turn";
+        this.staticText = "change {this}'s base power and toughness to that creature's power and toughness until end of turn";
     }
     
     public ShapeStealerEffect(final ShapeStealerEffect effect) {

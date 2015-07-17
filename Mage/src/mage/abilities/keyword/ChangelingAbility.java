@@ -29,9 +29,9 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
-import mage.constants.Zone;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+import mage.constants.Zone;
 
 
 /**
@@ -61,7 +61,7 @@ public class ChangelingAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Changeling <i>(This card is every creature type at all times.)<i/>";
+        return "Changeling <i>(This card is every creature type.)<i/>";
     }
 
     @Override

@@ -158,8 +158,17 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     public boolean isKicked(Game game, Ability source, String costText) {
         String key = getActivationKey(source, costText, game);
-        if (activations.containsKey(key)) {
-            return activations.get(key) > 0;
+        if (kickerCosts.size() > 1) {
+            for (String activationKey : activations.keySet()) {
+                if (activationKey.startsWith(key) && activations.get(activationKey) > 0) {
+                    return true;
+                }
+            }
+        } else {
+            if (activations.containsKey(key)) {
+                return activations.get(key) > 0;
+
+            }
         }
         return false;
     }

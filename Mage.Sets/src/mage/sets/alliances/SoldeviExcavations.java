@@ -30,14 +30,13 @@ package mage.sets.alliances;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect;
-import mage.abilities.effects.common.LookLibraryMayPutToBottomEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -70,13 +69,12 @@ public class SoldeviExcavations extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
 
         // {tap}: Add {1}{U} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 0, 1,0 ), new TapSourceCost()));
-        // {1}, {tap}: Look at the top card of your library. You may put that card on the bottom of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryMayPutToBottomEffect(), new GenericManaCost(1));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 0, 1, 0), new TapSourceCost()));
+
+        // {1}, {tap}: Scry 1.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-
-
     }
 
     public SoldeviExcavations(final SoldeviExcavations card) {

@@ -50,11 +50,9 @@ public class TestOfFaith extends CardImpl {
         super(ownerId, 33, "Test of Faith", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "MMA";
 
-
-        // Prevent the next 3 damage that would be dealt to target creature this turn, and put a +1/+1 counter on that creature for each 1 damage prevented this way.
+        // Prevent the next 3 damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
         this.getSpellAbility().addEffect(new TestOfFaithPreventDamageTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
     }
 
     public TestOfFaith(final TestOfFaith card) {
@@ -73,7 +71,7 @@ class TestOfFaithPreventDamageTargetEffect extends PreventionEffectImpl {
 
     public TestOfFaithPreventDamageTargetEffect(Duration duration) {
         super(duration);
-        staticText = "Prevent the next 3 damage that would be dealt to target creature this turn, and put a +1/+1 counter on that creature for each 1 damage prevented this way";
+        staticText = "Prevent the next 3 damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature";
     }
 
     public TestOfFaithPreventDamageTargetEffect(final TestOfFaithPreventDamageTargetEffect effect) {
