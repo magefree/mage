@@ -29,7 +29,7 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LookLibraryMayPutToBottomEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -44,9 +44,8 @@ public class Opt extends CardImpl {
         super(ownerId, 64, "Opt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "INV";
 
-
-        // Look at the top card of your library. You may put that card on the bottom of your library.
-        this.getSpellAbility().addEffect(new LookLibraryMayPutToBottomEffect());
+        // Scry 1.
+        this.getSpellAbility().addEffect(new ScryEffect(1));
         
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

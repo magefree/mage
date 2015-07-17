@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.LookLibraryMayPutToBottomEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -51,8 +51,8 @@ public class DarksteelPendant extends CardImpl {
 
         // Darksteel Pendant is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
-        // {1}, {tap}: Look at the top card of your library. You may put that card on the bottom of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryMayPutToBottomEffect(), new GenericManaCost(1));
+        // {1}, {tap}: Scry 1.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
