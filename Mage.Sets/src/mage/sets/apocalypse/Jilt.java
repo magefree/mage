@@ -25,78 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class RushingRiver extends CardImpl {
+public class Jilt extends CardImpl {
 
-    public RushingRiver(UUID ownerId) {
-        super(ownerId, 30, "Rushing River", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "PLS";
+    public Jilt(UUID ownerId) {
+        super(ownerId, 27, "Jilt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "APC";
 
-
-        // Kicker-Sacrifice a land.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
-
-        // Return target nonland permanent to its owner's hand. If Rushing River was kicked, return another target nonland permanent to its owner's hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());        
+        // Kicker {1}{R}
+        this.addAbility(new KickerAbility("{1}{R}"));
+        
+        // Return target creature to its owner's hand. If Jilt was kicked, it deals 2 damage to another target creature.
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         Effect effect = new ConditionalOneShotEffect(
-                new ReturnToHandTargetEffect(),
+                new DamageTargetEffect(2),
                 KickedCondition.getInstance(),
-                "If {this} was kicked, return another target nonland permanent to its owner's hand");
+                "If {this} was kicked, it deals 2 damage to another target creature");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
-
+    
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility && KickedCondition.getInstance().apply(game, ability)) {
-            ability.addTarget(new TargetOtherNonlandPermanent(new FilterNonlandPermanent("another target nonland permanent")));
+            ability.addTarget(new TargetOtherCreaturePermanent(new FilterCreaturePermanent("another target creature")));
         }
 
     }
 
-    public RushingRiver(final RushingRiver card) {
+    public Jilt(final Jilt card) {
         super(card);
     }
 
     @Override
-    public RushingRiver copy() {
-        return new RushingRiver(this);
+    public Jilt copy() {
+        return new Jilt(this);
     }
 }
 
-class TargetOtherNonlandPermanent extends TargetNonlandPermanent {
+class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
 
-    public TargetOtherNonlandPermanent(FilterNonlandPermanent filter) {
+    public TargetOtherCreaturePermanent(FilterCreaturePermanent filter) {
         super(filter);
     }
 
-    public TargetOtherNonlandPermanent(final TargetOtherNonlandPermanent target) {
+    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
         super(target);
     }
 
@@ -109,7 +105,7 @@ class TargetOtherNonlandPermanent extends TargetNonlandPermanent {
     }
 
     @Override
-    public TargetOtherNonlandPermanent copy() {
-        return new TargetOtherNonlandPermanent(this);
+    public TargetOtherCreaturePermanent copy() {
+        return new TargetOtherCreaturePermanent(this);
     }
 }
