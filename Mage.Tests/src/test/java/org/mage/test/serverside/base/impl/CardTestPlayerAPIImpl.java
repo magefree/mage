@@ -712,6 +712,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Assert whether X permanents of the same name are tapped or not.
+     *
+     * @param cardName  Name of the permanent that should be checked.
+     * @param tapped    Whether the permanent is tapped or not
+     * @param count    The amount of this permanents that should be tapped
+     */
+    public void assertTappedCount(String cardName, boolean tapped, int count) throws AssertionError {
+        int tappedAmount = 0;
+        Permanent found = null;
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
+            if (permanent.getName().equals(cardName)) {
+                if(permanent.isTapped() == tapped) {
+                    tappedAmount++;
+                }
+                found = permanent;
+            }
+        }
+        Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
+        Assert.assertEquals("(Battlefield) " + count + " permanents (" + cardName + ") are not " + ((tapped) ? "" : "un") + "tapped.", count, tappedAmount);
+    }
+
+    /**
      * Assert whether a permanent is attacking or not
      *
      * @param cardName Name of the permanent that should be checked.
