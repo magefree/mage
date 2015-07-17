@@ -50,6 +50,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -212,7 +213,7 @@ class JaceTelepathUnboundEmblem extends Emblem {
         this.setName("Emblem - Jace");
         Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(5);
         effect.setText("target opponent puts the top five cards of his or her library into his or her graveyard");
-        Ability ability = new SpellCastControllerTriggeredAbility(effect, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);
         ability.addTarget(new TargetOpponent());
         getAbilities().add(ability);
     }
