@@ -51,6 +51,7 @@ public class MagicOrigins extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.numBoosterDoubleFaced = -1; // use by rarity
         /* There are additional cards, numbered 273–288, that don't appear in Magic
          Origin booster packs. These are reprints from earlier sets that are present in
          some supplemental products, including sample decks and the Deck Builder's Toolkit.
