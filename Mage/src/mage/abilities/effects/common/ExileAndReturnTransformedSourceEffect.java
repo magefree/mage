@@ -60,7 +60,7 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
         // Creature has to be on the battlefield to get exiled and be able to return transformed
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (sourceObject != null && controller != null) {
+        if (sourceObject != null && controller != null && sourceObject.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()) {
             Card card = (Card) sourceObject;
             if (controller.moveCards(card, Zone.BATTLEFIELD, Zone.EXILED, source, game)) {
                 Player owner = game.getPlayer(card.getOwnerId());
