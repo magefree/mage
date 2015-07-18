@@ -66,6 +66,22 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaToPayVsLand("{W/R}{R/G}", "Sacred Foundry", 2, 2); // can't auto choose to pay
     }
 
+    @Test
+    public void testManaCondensing() {
+        Assert.assertEquals("{5}{W}", ManaUtil.condenseManaCostString(("{1}{1}{1}{2}{W}")));
+        Assert.assertEquals("{4}{B}{B}", ManaUtil.condenseManaCostString("{2}{B}{2}{B}"));
+        Assert.assertEquals("{6}{R}{R}{R}{U}", ManaUtil.condenseManaCostString("{R}{1}{R}{2}{R}{3}{U}"));
+        Assert.assertEquals("{5}{B}{U}{W}", ManaUtil.condenseManaCostString("{1}{B}{W}{4}{U}"));
+        Assert.assertEquals("{8}{B}{G}{G}{U}", ManaUtil.condenseManaCostString("{1}{G}{1}{2}{3}{G}{B}{U}{1}"));
+        Assert.assertEquals("{3}{R}{U}", ManaUtil.condenseManaCostString("{3}{R}{U}"));
+        Assert.assertEquals("{10}", ManaUtil.condenseManaCostString("{1}{2}{3}{4}"));
+        Assert.assertEquals("{B}{G}{R}{U}{W}", ManaUtil.condenseManaCostString("{B}{G}{R}{U}{W}"));
+        Assert.assertEquals("{R}{R}", ManaUtil.condenseManaCostString("{R}{R}"));
+        Assert.assertEquals("{U}", ManaUtil.condenseManaCostString("{U}"));
+        Assert.assertEquals("{2}", ManaUtil.condenseManaCostString("{2}"));
+        Assert.assertEquals("", ManaUtil.condenseManaCostString(""));
+    }
+
     /**
      * Common way to test ManaUtil.tryToAutoPay
      *
@@ -133,4 +149,5 @@ public class ManaUtilTest extends CardTestPlayerBase {
         }
         return useableAbilities;
     }
+    
 }
