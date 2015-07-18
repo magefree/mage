@@ -56,7 +56,7 @@ public class ThopterSpyNetwork extends CardImpl {
 
         // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
         this.addAbility(new ThopterSpyNetworkUpkeepTriggeredAbility());
-        
+
         // Whenever one or more artifact creatures you control deals combat damage to a player, draw a card.
         this.addAbility(new ThopterSpyNetworkDamageTriggeredAbility());
     }
@@ -74,7 +74,7 @@ public class ThopterSpyNetwork extends CardImpl {
 class ThopterSpyNetworkUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
     public ThopterSpyNetworkUpkeepTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken("ORI"), 1), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken(), 1), false);
     }
 
     public ThopterSpyNetworkUpkeepTriggeredAbility(final ThopterSpyNetworkUpkeepTriggeredAbility ability) {
@@ -98,7 +98,7 @@ class ThopterSpyNetworkUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-    return game.getBattlefield().countAll(new FilterArtifactPermanent(), this.controllerId, game) >= 1;
+        return game.getBattlefield().countAll(new FilterArtifactPermanent(), this.controllerId, game) >= 1;
     }
 
     @Override
@@ -108,7 +108,7 @@ class ThopterSpyNetworkUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     List<UUID> damagedPlayerIds = new ArrayList<>();
 
     public ThopterSpyNetworkDamageTriggeredAbility() {
@@ -127,7 +127,7 @@ class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-            || event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
+                || event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
     }
 
     @Override
@@ -135,14 +135,14 @@ class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.getControllerId().equals(controllerId) 
-                    && creature.getCardType().contains(CardType.ARTIFACT) && !damagedPlayerIds.contains(event.getTargetId())) {
-                        damagedPlayerIds.add(event.getTargetId());
-                  return true;
+                if (creature != null && creature.getControllerId().equals(controllerId)
+                        && creature.getCardType().contains(CardType.ARTIFACT) && !damagedPlayerIds.contains(event.getTargetId())) {
+                    damagedPlayerIds.add(event.getTargetId());
+                    return true;
                 }
             }
         }
-        if (event.getType().equals(GameEvent.EventType.END_COMBAT_STEP_POST)){
+        if (event.getType().equals(GameEvent.EventType.END_COMBAT_STEP_POST)) {
             damagedPlayerIds.clear();
         }
         return false;

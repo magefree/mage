@@ -61,11 +61,11 @@ public class PiaAndKiranNalaar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Pia and Kiran Nalaar enters the battlefield put 2 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken("ORI"), 2)));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 2)));
+
         // {2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1,1, new FilterControlledArtifactPermanent("an artifact"),true)));       
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent("an artifact"), true)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

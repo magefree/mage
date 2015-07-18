@@ -28,12 +28,12 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -52,7 +52,7 @@ public class BeetlebackChief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Beetleback Chief enters the battlefield, put two 1/1 red Goblin creature tokens onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(expansionSetCode), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2)));
 
     }
 

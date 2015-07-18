@@ -49,6 +49,7 @@ import mage.game.permanent.token.ZombieToken;
 public class XathridNecromancer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Human"));
@@ -64,7 +65,7 @@ public class XathridNecromancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Xathrid Necromancer or another Human creature you control dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
-        Effect effect = new CreateTokenEffect(new ZombieToken("M14"), 1, true, false);
+        Effect effect = new CreateTokenEffect(new ZombieToken(), 1, true, false);
         Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(effect, false, filter);
         this.addAbility(ability);
 

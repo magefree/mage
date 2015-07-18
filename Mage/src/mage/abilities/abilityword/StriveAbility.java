@@ -39,6 +39,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.Target;
+import mage.util.ManaUtil;
 
 /**
  *
@@ -50,7 +51,7 @@ public class StriveAbility extends SimpleStaticAbility {
     private final String striveCost;
             
     public StriveAbility(String manaString) {
-        super(Zone.STACK, new StriveCostIncreasementEffect(new ManaCostsImpl(manaString)));
+        super(Zone.STACK, new StriveCostIncreasingEffect(new ManaCostsImpl(manaString)));
         setRuleAtTheTop(true);
         this.striveCost = manaString;
     }
@@ -71,29 +72,32 @@ public class StriveAbility extends SimpleStaticAbility {
     }
 }
 
-class StriveCostIncreasementEffect extends CostModificationEffectImpl {
+class StriveCostIncreasingEffect extends CostModificationEffectImpl {
 
     private ManaCostsImpl striveCosts = null;
 
-    public StriveCostIncreasementEffect(ManaCostsImpl striveCosts) {
+    public StriveCostIncreasingEffect(ManaCostsImpl striveCosts) {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.striveCosts = striveCosts;
     }
 
-    protected StriveCostIncreasementEffect(StriveCostIncreasementEffect effect) {
+    protected StriveCostIncreasingEffect(StriveCostIncreasingEffect effect) {
         super(effect);
         this.striveCosts = effect.striveCosts;
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        // Target target = abilityToModify.getTargets().get(0);
         for (Target target : abilityToModify.getTargets()) {
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
                 int additionalTargets = target.getTargets().size() - 1;
+                StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < additionalTargets; i++) {
-                    abilityToModify.getManaCostsToPay().add(striveCosts.copy());
+                    // Build up a string of strive costs for each target
+                    sb.append(striveCosts.getText());
                 }
+                String finalCost = ManaUtil.condenseManaCostString(sb.toString());
+                abilityToModify.getManaCostsToPay().add(new ManaCostsImpl(finalCost));
                 return true;
             }
         }
@@ -106,7 +110,7 @@ class StriveCostIncreasementEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public StriveCostIncreasementEffect copy() {
-        return new StriveCostIncreasementEffect(this);
+    public StriveCostIncreasingEffect copy() {
+        return new StriveCostIncreasingEffect(this);
     }
 }

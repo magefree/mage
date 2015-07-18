@@ -65,10 +65,10 @@ public class NissaSageAnimist extends CardImpl {
         this.expansionSetCode = "ORI";
         this.subtype.add("Nissa");
         this.color.setGreen(true);
-        
+
         this.nightCard = true;
         this.canTransform = true;
-        
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
@@ -95,21 +95,21 @@ public class NissaSageAnimist extends CardImpl {
 }
 
 class NissaSageAnimistPlusOneEffect extends OneShotEffect {
-    
+
     NissaSageAnimistPlusOneEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.";
     }
-    
+
     NissaSageAnimistPlusOneEffect(final NissaSageAnimistPlusOneEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public NissaSageAnimistPlusOneEffect copy() {
         return new NissaSageAnimistPlusOneEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

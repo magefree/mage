@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -83,14 +82,14 @@ class MoggInfestationEffect extends OneShotEffect {
 
     @Override
     public MoggInfestationEffect copy() {
-       return new MoggInfestationEffect(this);
+        return new MoggInfestationEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && getTargetPointer().getFirst(game, source) != null) {
-            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
                     Effect effect = new CreateTokenTargetEffect(new GoblinToken(), 2);
                     effect.setTargetPointer(getTargetPointer());

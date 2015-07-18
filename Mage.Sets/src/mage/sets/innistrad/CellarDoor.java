@@ -28,10 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,6 +35,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
@@ -95,7 +95,7 @@ class CellarDoorEffect extends OneShotEffect {
             if (card != null) {
                 player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    ZombieToken token = new ZombieToken("ISD");
+                    ZombieToken token = new ZombieToken();
                     token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
                 }
             }

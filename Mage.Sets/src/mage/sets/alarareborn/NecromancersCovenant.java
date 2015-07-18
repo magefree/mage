@@ -28,11 +28,6 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +36,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,9 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
  */
 public class NecromancersCovenant extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
-    
+
     static {
         filter.add(new SubtypePredicate("Zombie"));
     }
@@ -64,9 +64,6 @@ public class NecromancersCovenant extends CardImpl {
     public NecromancersCovenant(UUID ownerId) {
         super(ownerId, 82, "Necromancer's Covenant", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{B}{B}");
         this.expansionSetCode = "ARB";
-
-        
-
 
         // When Necromancer's Covenant enters the battlefield, exile all creature cards from target player's graveyard, then put a 2/2 black Zombie creature token onto the battlefield for each card exiled this way.
         Ability ability = new EntersBattlefieldTriggeredAbility(new NecromancersConvenantEffect(), false);
@@ -110,7 +107,7 @@ class NecromancersConvenantEffect extends OneShotEffect {
                 count += 1;
             }
         }
-        ZombieToken zombieToken = new ZombieToken("ALA");
+        ZombieToken zombieToken = new ZombieToken();
         if (zombieToken.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId())) {
             return true;
         }

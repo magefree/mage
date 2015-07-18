@@ -57,8 +57,8 @@ public class LilianasReaver extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         // Whenever Liliana's Reaver deals combat damage to a player, that player discards a card and you put a 2/2 black Zombie creature token onto the battlefield tapped.
 
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1),false, true);
-        ability.addEffect(new CreateTokenEffect(new ZombieToken("M14"), 1, true, false));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true);
+        ability.addEffect(new CreateTokenEffect(new ZombieToken(), 1, true, false));
         this.addAbility(ability);
     }
 

@@ -53,13 +53,12 @@ public class WasteNot extends CardImpl {
         super(ownerId, 122, "Waste Not", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M15";
 
-
         // Whenever an opponent discards a creature card, put a 2/2 black Zombie creature token onto the battlefield.
         this.addAbility(new WasteNotCreatureTriggeredAbility());
-        
+
         // Whenever an opponent discards a land card, add {B}{B} to your mana pool.
         this.addAbility(new WasteNotLandTriggeredAbility());
-        
+
         // Whenever an opponent discards a noncreature, nonland card, draw a card.
         this.addAbility(new WasteNotOtherTriggeredAbility());
     }
@@ -75,15 +74,15 @@ public class WasteNot extends CardImpl {
 }
 
 class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     WasteNotCreatureTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken("M15")), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), false);
     }
-    
+
     WasteNotCreatureTriggeredAbility(final WasteNotCreatureTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public WasteNotCreatureTriggeredAbility copy() {
         return new WasteNotCreatureTriggeredAbility(this);
@@ -93,7 +92,7 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DISCARDED_CARD;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
@@ -104,7 +103,7 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever an opponent discards a creature card, put a 2/2 black Zombie creature token onto the battlefield.";
@@ -112,15 +111,15 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     WasteNotLandTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)), false);
     }
-    
+
     WasteNotLandTriggeredAbility(final WasteNotLandTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public WasteNotLandTriggeredAbility copy() {
         return new WasteNotLandTriggeredAbility(this);
@@ -130,7 +129,7 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DISCARDED_CARD;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
@@ -141,7 +140,7 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever an opponent discards a land card, add {B}{B} to your mana pool.";
@@ -149,15 +148,15 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class WasteNotOtherTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     WasteNotOtherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
-    
+
     WasteNotOtherTriggeredAbility(final WasteNotOtherTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public WasteNotOtherTriggeredAbility copy() {
         return new WasteNotOtherTriggeredAbility(this);
@@ -167,7 +166,7 @@ class WasteNotOtherTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DISCARDED_CARD;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
@@ -178,7 +177,7 @@ class WasteNotOtherTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever an opponent discards a noncreature, nonland card, draw a card.";

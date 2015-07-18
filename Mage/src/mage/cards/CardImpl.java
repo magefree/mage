@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.cards;
 
 import java.lang.reflect.Constructor;
@@ -74,13 +73,14 @@ import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
+
     private static final long serialVersionUID = 1L;
 
     private static final Logger logger = Logger.getLogger(CardImpl.class);
 
     protected UUID ownerId;
     protected int cardNumber;
-    protected String expansionSetCode;
+    public String expansionSetCode;
     protected String tokenSetCode;
     protected Rarity rarity;
     protected boolean canTransform;
@@ -108,16 +108,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             Ability ability = new PlayLandAbility(name);
             ability.setSourceId(this.getId());
             abilities.add(ability);
-        }
-        else {            
+        } else {
             SpellAbility ability = new SpellAbility(manaCost, name, Zone.HAND, spellAbilityType);
             if (!cardType.contains(CardType.INSTANT)) {
                 ability.setTiming(TimingRule.SORCERY);
             }
             ability.setSourceId(this.getId());
-            abilities.add(ability);            
+            abilities.add(ability);
         }
-        this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length()-1));
+        this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length() - 1));
         this.morphCard = false;
     }
 
@@ -206,8 +205,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         game.getState().getCardState(objectId).addInfo(key, value);
     }
 
-    protected static final ArrayList<String> rulesError = new ArrayList<String>() {{add("Exception occured in rules generation");}};
-    
+    protected static final ArrayList<String> rulesError = new ArrayList<String>() {
+        {
+            add("Exception occured in rules generation");
+        }
+    };
+
     @Override
     public List<String> getRules() {
         try {
@@ -217,7 +220,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         return rulesError;
     }
-    
+
     @Override
     public List<String> getRules(Game game) {
         try {
@@ -228,7 +231,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     for (String data : cardState.getInfo().values()) {
                         rules.add(data);
                     }
-                    for (Ability ability: cardState.getAbilities()) {
+                    for (Ability ability : cardState.getAbilities()) {
                         rules.add(ability.getRule());
                     }
                 }
@@ -243,6 +246,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     /**
      * Gets all base abilities - does not include additional abilities added by
      * other cards or effects
+     *
      * @return A list of {@link Ability} - this collection is modifiable
      */
     @Override
@@ -251,9 +255,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     /**
-     * Gets all current abilities - includes additional abilities added by
-     * other cards or effects
-     * @param game 
+     * Gets all current abilities - includes additional abilities added by other
+     * cards or effects
+     *
+     * @param game
      * @return A list of {@link Ability} - this collection is not modifiable
      */
     @Override
@@ -265,28 +270,28 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Abilities<Ability> all = new AbilitiesImpl<>();
         all.addAll(abilities);
         all.addAll(otherAbilities);
-        return all;        
+        return all;
     }
 
     protected void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        for (Ability subAbility: ability.getSubAbilities()) {
+        for (Ability subAbility : ability.getSubAbilities()) {
             abilities.add(subAbility);
         }
     }
 
     protected void addAbilities(List<Ability> abilities) {
-        for (Ability ability: abilities) {
+        for (Ability ability : abilities) {
             addAbility(ability);
         }
     }
-    
+
     protected void addAbility(Ability ability, Watcher watcher) {
         addAbility(ability);
         ability.addWatcher(watcher);
     }
-    
+
     @Override
     public SpellAbility getSpellAbility() {
         if (spellAbility == null) {
@@ -322,9 +327,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public List<Mana> getMana() {
         List<Mana> mana = new ArrayList<>();
         for (ManaAbility ability : this.abilities.getManaAbilities(Zone.BATTLEFIELD)) {
-            for (Mana netMana: ability.getNetMana(null)) {
+            for (Mana netMana : ability.getNetMana(null)) {
                 mana.add(netMana);
-            }            
+            }
         }
         return mana;
     }
@@ -357,14 +362,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         game.getPlayer(ownerId).getSideboard().remove(this);
                         break;
                     case COMMAND:
-                        game.getState().getCommand().remove((Commander)game.getObject(objectId));
+                        game.getState().getCommand().remove((Commander) game.getObject(objectId));
                         break;
                     case STACK:
                         StackObject stackObject = game.getStack().getSpell(getId());
                         if (stackObject == null && (this instanceof SplitCard)) { // handle if half od Split cast is on the stack
-                            stackObject = game.getStack().getSpell(((SplitCard)this).getLeftHalfCard().getId());
+                            stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId());
                             if (stackObject == null) {
-                                stackObject = game.getStack().getSpell(((SplitCard)this).getRightHalfCard().getId());
+                                stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId());
                             }
                         }
                         if (stackObject != null) {
@@ -379,12 +384,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         logger.fatal(new StringBuilder("Invalid from zone [").append(fromZone)
                                 .append("] for card [").append(this.getName())
                                 .append("] to zone [").append(toZone)
-                                .append("] source [").append(sourceCard != null ? sourceCard.getName():"null").append("]").toString());
+                                .append("] source [").append(sourceCard != null ? sourceCard.getName() : "null").append("]").toString());
                         break;
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }
-            
+
             setFaceDown(false, game);
             updateZoneChangeCounter(game);
             switch (event.getToZone()) {
@@ -406,8 +411,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 case LIBRARY:
                     if (flag) {
                         game.getPlayer(ownerId).getLibrary().putOnTop(this, game);
-                    }
-                    else {
+                    } else {
                         game.getPlayer(ownerId).getLibrary().putOnBottom(this, game);
                     }
                     break;
@@ -428,9 +432,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 default:
                     Card sourceCard = game.getCard(sourceId);
                     logger.fatal(new StringBuilder("Invalid to zone [").append(toZone)
-                                .append("] for card [").append(this.getName())
-                                .append("] to zone [").append(toZone)
-                                .append("] source [").append(sourceCard != null ? sourceCard.getName():"null").append("]").toString());
+                            .append("] for card [").append(this.getName())
+                            .append("] to zone [").append(toZone)
+                            .append("] source [").append(sourceCard != null ? sourceCard.getName() : "null").append("]").toString());
                     return false;
             }
             game.setZone(objectId, event.getToZone());
@@ -462,12 +466,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     case OUTSIDE:
                         game.getPlayer(ownerId).getSideboard().remove(mainCard);
                         break;
-                        
+
                     case COMMAND:
-                        game.getState().getCommand().remove((Commander)game.getObject(mainCard.getId()));
+                        game.getState().getCommand().remove((Commander) game.getObject(mainCard.getId()));
                         break;
                     default:
-                        //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
+                    //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
                 }
                 game.rememberLKI(mainCard.getId(), event.getFromZone(), this);
             }
@@ -479,6 +483,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         return false;
     }
+
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
         return moveToExile(exileId, name, sourceId, game, null);
@@ -514,7 +519,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         break;
                     default:
                         MageObject object = game.getObject(sourceId);
-                        logger.warn(new StringBuilder("moveToExile, not fully implemented: from = ").append(fromZone).append(" - ").append(object != null ? object.getName():"null"));
+                        logger.warn(new StringBuilder("moveToExile, not fully implemented: from = ").append(fromZone).append(" - ").append(object != null ? object.getName() : "null"));
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }
@@ -537,19 +542,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
         return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, false, false, null);
     }
-        
+
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped){
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped) {
         return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, tapped, false, null);
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown){
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown) {
         return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, tapped, facedown, null);
     }
-     
-    @Override   
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects){
+
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects) {
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
         if (facedown) {
             this.setFaceDown(true, game);
@@ -582,7 +587,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         removed = true;
                         break;
                     default:
-                        logger.warn("putOntoBattlefield, not fully implemented: fromZone="+fromZone);
+                        logger.warn("putOntoBattlefield, not fully implemented: fromZone=" + fromZone);
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
                 if (!removed) {
@@ -601,7 +606,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.setScopeRelevant(false);
             game.applyEffects();
-            game.addSimultaneousEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));            
+            game.addSimultaneousEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));
             return true;
         }
         if (facedown) {
@@ -625,7 +630,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEUP, getId(), playerId);
         if (!game.replaceEvent(event)) {
             setFaceDown(false, game);
-            for (Ability ability :abilities) { // abilities that were set to not visible face down must be set to visible again
+            for (Ability ability : abilities) { // abilities that were set to not visible face down must be set to visible again
                 if (ability.getWorksFaceDown() && !ability.getRuleVisible()) {
                     ability.setRuleVisible(true);
                 }
@@ -678,7 +683,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void build() {}
+    public void build() {
+    }
 
     @Override
     public boolean getUsesVariousArt() {

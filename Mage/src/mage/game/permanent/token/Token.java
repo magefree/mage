@@ -1,35 +1,35 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.game.permanent.token;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
@@ -44,8 +44,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
-import mage.util.CardUtil;
-
 
 public class Token extends MageObjectImpl {
 
@@ -56,22 +54,26 @@ public class Token extends MageObjectImpl {
     private int originalCardNumber;
     private String originalExpansionSetCode;
     private Card copySourceCard; // the card the Token is a copy from
-    
+
+    // list of set codes tokene images are available for
+    protected List<String> availableImageSetCodes = new ArrayList<>();
+
     public enum Type {
+
         FIRST(1),
         SECOND(2);
-        
+
         int code;
-        
+
         Type(int code) {
-            this.code = code;    
+            this.code = code;
         }
-        
+
         int getCode() {
             return this.code;
         }
     }
-    
+
     public Token(String name, String description) {
         this.name = name;
         this.description = description;
@@ -95,7 +97,7 @@ public class Token extends MageObjectImpl {
         this.tokenType = token.tokenType;
         this.lastAddedTokenId = token.lastAddedTokenId;
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
-        this.originalCardNumber =  token.originalCardNumber;
+        this.originalCardNumber = token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
         this.copySourceCard = token.copySourceCard; // will never be changed
     }
@@ -165,7 +167,7 @@ public class Token extends MageObjectImpl {
                 }
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " puts a " + newToken.getLogName() + " token onto the battlefield");
-                }                
+                }
             }
 
             return true;
@@ -207,5 +209,13 @@ public class Token extends MageObjectImpl {
         }
     }
 
-    
+    public void setExpansionSetCodeForImage(String code) {
+        if (availableImageSetCodes.size() > 0) {
+            if (availableImageSetCodes.contains(code)) {
+                setOriginalExpansionSetCode(code);
+            } else {
+                setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+            }
+        }
+    }
 }
