@@ -293,7 +293,6 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
             }
             targetBuilder.append(target);
         }
-        System.out.println(targetBuilder.toString());
         return targetBuilder.toString();
     }
 
