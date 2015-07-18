@@ -161,7 +161,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are availble
-    protected boolean ALLOW_INTERRUPT = false; // change this for test / debugging purposes to false to switch off interrupts while debugging
+    protected boolean ALLOW_INTERRUPT = true; // change this for test / debugging purposes to false to switch off interrupts while debugging
 
     private transient Map<Mana, Card> unplayable = new TreeMap<>();
     private transient List<Card> playableNonInstant = new ArrayList<>();
