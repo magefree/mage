@@ -28,7 +28,6 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.SplitCardHalf;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -60,7 +60,6 @@ public class Omniscience extends CardImpl {
     public Omniscience(UUID ownerId) {
         super(ownerId, 63, "Omniscience", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{7}{U}{U}{U}");
         this.expansionSetCode = "M13";
-
 
         // You may cast nonland cards from your hand without paying their mana costs.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmniscienceCastingEffect()));
@@ -116,19 +115,18 @@ class OmniscienceCastingEffect extends ContinuousEffectImpl {
 
 class IsBeingCastFromHandCondition implements Condition {
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-		if(object instanceof Spell) {
-	        Spell spell = (Spell) object;
-	        return spell != null && spell.getFromZone() == Zone.HAND;
-		}
-		if(object instanceof Card) {
-			Card card = (Card)object;
-			return game.getPlayer(card.getOwnerId()).getHand().get(card.getId(), game) != null;
-		}
-		
-		return false;
-	}
+        if (object instanceof SplitCardHalf) {
+            UUID splitCardId = ((Card) object).getMainCard().getId();
+            object = game.getObject(splitCardId);
+        }
+        if (object instanceof Spell) {
+            Spell spell = (Spell) object;
+            return spell.getFromZone() == Zone.HAND;
+        }
+        return false;
+    }
 
 }
