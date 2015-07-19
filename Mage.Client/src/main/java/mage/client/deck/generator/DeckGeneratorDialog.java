@@ -39,7 +39,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -53,10 +54,12 @@ public class DeckGeneratorDialog {
     private static JComboBox cbDeckSize;
     private static JButton btnGenerate, btnCancel;
     private static JCheckBox cArtifacts, cSingleton, cNonBasicLands;
+    private static SimpleDateFormat dateFormat;
 
     public DeckGeneratorDialog()
     {
         initDialog();
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss-SSS");
     }
 
     private void initDialog() {
@@ -172,14 +175,17 @@ public class DeckGeneratorDialog {
         for (ActionListener al: btnCancel.getActionListeners()) {
             btnCancel.removeActionListener(al);
         }
-        //deck = null;
     }
 
     public String saveDeck(Deck deck) {
         try {
-            File tmp = File.createTempFile("tempDeck" + UUID.randomUUID().toString(), ".dck");
+            // Random directory through the system property to avoid random numeric string attached to temp files.
+            String tempDir = System.getProperty("java.io.tmpdir");
+            // Generated deck has a nice unique name which corresponds to the timestamp at which it was created.
+            String deckName = "Generated-Deck-" + dateFormat.format( new Date());
+            File tmp = new File(tempDir + File.separator + deckName + ".dck");
             tmp.createNewFile();
-            deck.setName("Generated-Deck-" + UUID.randomUUID());
+            deck.setName(deckName);
             Sets.saveDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
             DeckGeneratorDialog.cleanUp();
             return tmp.getAbsolutePath();
