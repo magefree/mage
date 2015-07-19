@@ -376,26 +376,94 @@ public abstract class TargetImpl implements Target {
         return targets.size() > 0;
     }
 
+    /**
+     * Returns all possible different target combinations
+     *
+     * @param source
+     * @param game
+     * @return
+     */
     @Override
     public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
         List<TargetImpl> options = new ArrayList<>();
-        Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
+        List<UUID> possibleTargets = new ArrayList<>();
+        possibleTargets.addAll(possibleTargets(source.getSourceId(), source.getControllerId(), game));
         possibleTargets.removeAll(getTargets());
-        Iterator<UUID> it = possibleTargets.iterator();
-        while (it.hasNext()) {
-            UUID targetId = it.next();
+
+        // get the length of the array
+        // e.g. for {'A','B','C','D'} => N = 4
+        int N = possibleTargets.size();
+        // not enough targets, return no option
+        if (N < getNumberOfTargets()) {
+            return options;
+        }
+        // not target but that's allowed, return one empty option
+        if (N == 0) {
             TargetImpl target = this.copy();
-            target.clearChosen();
-            target.addTarget(targetId, source, game, true);
-            if (!target.isChosen()) {
-                Iterator<UUID> it2 = possibleTargets.iterator();
-                while (it2.hasNext() && !target.isChosen()) {
-                    UUID nextTargetId = it2.next();
-                    target.addTarget(nextTargetId, source, game, true);
-                }
+            options.add(target);
+            return options;
+        }
+        int maxK = getMaxNumberOfTargets() - getTargets().size();
+        if (maxK > 5) { // Prevent endless iteration with targets set to INTEGER.maxvalue
+            maxK = 5;
+            if (N > 10) { // not more than 252 combinations
+                maxK = 4;
             }
-            if (target.isChosen()) {
-                options.add(target);
+            if (N > 20) { // not more than 4845 combinations
+                maxK = 3;
+            }
+        }
+        if (N < maxK) { // less possible targets than the maximum allowed so reduce the max
+            maxK = N;
+        }
+        int minK = getNumberOfTargets();
+        if (getNumberOfTargets() == 0) { // add option without targets if possible
+            TargetImpl target = this.copy();
+            options.add(target);
+            minK = 1;
+        }
+        for (int K = minK; K <= maxK; K++) {
+            // get the combination by index
+            // e.g. 01 --> AB , 23 --> CD
+            int combination[] = new int[K];
+
+            // position of current index
+            //  if (r = 1)              r*
+            //  index ==>        0   |   1   |   2
+            //  element ==>      A   |   B   |   C
+            int r = 0;
+            int index = 0;
+
+            while (r >= 0) {
+                // possible indexes for 1st position "r=0" are "0,1,2" --> "A,B,C"
+                // possible indexes for 2nd position "r=1" are "1,2,3" --> "B,C,D"
+
+                // for r = 0 ==> index < (4+ (0 - 2)) = 2
+                if (index <= (N + (r - K))) {
+                    combination[r] = index;
+
+                    // if we are at the last position print and increase the index
+                    if (r == K - 1) {
+                        //add the new target option
+                        TargetImpl target = this.copy();
+                        for (int i = 0; i < combination.length; i++) {
+                            target.addTarget(possibleTargets.get(combination[i]), source, game, true);
+                        }
+                        options.add(target);
+                        index++;
+                    } else {
+                        // select index for next position
+                        index = combination[r] + 1;
+                        r++;
+                    }
+                } else {
+                    r--;
+                    if (r > 0) {
+                        index = combination[r] + 1;
+                    } else {
+                        index = combination[0] + 1;
+                    }
+                }
             }
         }
         return options;

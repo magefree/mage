@@ -176,13 +176,15 @@ public class DeckGeneratorPool
      * @param card the card to add
      * @param cardCMC the converted mana cost of the card
      */
-    public void tryAddReserve(Card card, int cardCMC) {
+    public boolean tryAddReserve(Card card, int cardCMC) {
         // Only cards with CMC < 7 and don't already exist in the deck
         // can be added to our reserve pool as not to overwhelm the curve
         // with high CMC cards and duplicates.
         if(cardCMC < 7 && getCardCount(card.getName()) == 0) {
             this.reserveSpells.add(card);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -386,13 +388,13 @@ public class DeckGeneratorPool
             List<Card> spellsToAdd = new ArrayList<>(spellsNeeded);
 
             // Initial reservoir
-            for(int i = 0; i < spellsNeeded-1; i++)
+            for(int i = 0; i < spellsNeeded; i++)
                 spellsToAdd.add(reserveSpells.get(i));
 
-            for(int j = spellsNeeded+1; j < reserveSpells.size()-1; j++) {
-                int index = random.nextInt(j);
-                Card randomCard = reserveSpells.get(index);
-                if (index < j && isValidSpellCard(randomCard)) {
+            for(int i = spellsNeeded+1; i < reserveSpells.size()-1; i++) {
+                int j = random.nextInt(i);
+                Card randomCard = reserveSpells.get(j);
+                if (isValidSpellCard(randomCard) && j < spellsToAdd.size()) {
                     spellsToAdd.set(j, randomCard);
                 }
             }

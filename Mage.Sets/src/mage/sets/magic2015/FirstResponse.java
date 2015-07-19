@@ -51,7 +51,6 @@ public class FirstResponse extends CardImpl {
         super(ownerId, 12, "First Response", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "M15";
 
-
         // At the beginning of each upkeep, if you lost life last turn, put a 1/1 white Soldier creature token onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FirstResponseEffect(), TargetController.ANY, false), new PlayerLostLifeWatcher());
 
@@ -88,7 +87,7 @@ class FirstResponseEffect extends OneShotEffect {
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
         if (watcher != null) {
             if (watcher.getLiveLostLastTurn(source.getControllerId()) > 0) {
-                return new CreateTokenEffect(new SoldierToken("M15")).apply(game, source);
+                return new CreateTokenEffect(new SoldierToken()).apply(game, source);
             }
             return true;
         }

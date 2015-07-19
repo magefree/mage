@@ -100,6 +100,7 @@ public class Token extends MageObjectImpl {
         this.originalCardNumber = token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
         this.copySourceCard = token.copySourceCard; // will never be changed
+        this.availableImageSetCodes = token.availableImageSetCodes;
     }
 
     public String getDescription() {
@@ -215,6 +216,10 @@ public class Token extends MageObjectImpl {
                 setOriginalExpansionSetCode(code);
             } else {
                 setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+            }
+        } else {
+            if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
+                setOriginalExpansionSetCode(code);
             }
         }
     }

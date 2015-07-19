@@ -27,7 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import mage.MageInt;
 import mage.constants.CardType;
@@ -38,9 +40,15 @@ import mage.constants.CardType;
  */
 public class ZombieToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "CNS", "MMA", "BNG", "KTK", "DTK", "ORI"));
+    }
+
     public ZombieToken() {
         super("Zombie", "2/2 black Zombie creature token");
-        availableImageSetCodes.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "CNS", "MMA", "BNG", "KTK", "DTK", "ORI"));
+        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Zombie");
@@ -56,4 +64,12 @@ public class ZombieToken extends Token {
         }
     }
 
+    public ZombieToken(final ZombieToken token) {
+        super(token);
+    }
+
+    @Override
+    public ZombieToken copy() {
+        return new ZombieToken(this); //To change body of generated methods, choose Tools | Templates.
+    }
 }

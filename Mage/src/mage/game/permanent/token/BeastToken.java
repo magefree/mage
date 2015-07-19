@@ -27,7 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import mage.MageInt;
 import mage.constants.CardType;
@@ -38,9 +40,15 @@ import mage.constants.CardType;
  */
 public class BeastToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("C14", "LRW", "M15", "M14", "DDL", "M13", "M12"));
+    }
+
     public BeastToken() {
         super("Beast", "3/3 green Beast creature token");
-        availableImageSetCodes.addAll(Arrays.asList("C14", "LRW", "M15", "M14", "DDL", "M13", "M12"));
+        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Beast");
@@ -58,5 +66,14 @@ public class BeastToken extends Token {
         if (getOriginalExpansionSetCode().equals("M15")) {
             this.setTokenType(2);
         }
+    }
+
+    public BeastToken(final BeastToken token) {
+        super(token);
+    }
+
+    @Override
+    public BeastToken copy() {
+        return new BeastToken(this); //To change body of generated methods, choose Tools | Templates.
     }
 }

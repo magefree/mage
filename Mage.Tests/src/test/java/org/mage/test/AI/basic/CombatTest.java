@@ -25,40 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package org.mage.test.AI.basic;
 
-import java.util.UUID;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.SoldierToken;
+import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
  *
  * @author LevelX2
  */
-public class DeployToTheFront extends CardImpl {
+public class CombatTest extends CardTestPlayerBaseAI {
 
-    public DeployToTheFront(UUID ownerId) {
-        super(ownerId, 6, "Deploy to the Front", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
-        this.expansionSetCode = "C14";
-
-        // Put X 1/1 white Soldier creature tokens onto the battlefield, where X is the number of creatures on the battlefield.
-        Effect effect = new CreateTokenEffect(new SoldierToken(), new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("the number of creatures on the battlefield")));
-        effect.setText("Put X 1/1 white Soldier creature tokens onto the battlefield, where X is the number of creatures on the battlefield");
-        this.getSpellAbility().addEffect(effect);
-    }
-
-    public DeployToTheFront(final DeployToTheFront card) {
-        super(card);
-    }
-
-    @Override
-    public DeployToTheFront copy() {
-        return new DeployToTheFront(this);
-    }
+    /*
+     * Combat is not integrated yet in the CardTestPlayerBaseAI
+     *
+     * TODO: Modify CardTestPlayerBaseAI to use the AI combat acting
+     *
+     * Tests to create:
+     * AI is not attacking if opponent has a creature that can't block
+     * AI is not blocking also if able if the damage the attacker will do will kill the AI
+     * AI is not able to block with two or more creatures one attacking creature to kill it. Even if none of the AI creatures will die
+     * AI attacks with a flyer even if opponent has a bigger flyer that kills AI
+     */
 }

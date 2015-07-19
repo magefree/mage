@@ -1,19 +1,22 @@
 package org.mage.test.utils;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.mana.*;
+import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
 import mage.cards.repository.CardRepository;
 import mage.util.ManaUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -47,7 +50,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaToPayVsLand("{2}", "Cavern of Souls", 2, 2); // can't auto choose to pay
 
         testManaToPayVsLand("{2}", "Eldrazi Temple", 2, 2); // can't auto choose to pay
-        
+
         // hybrid mana
         testManaToPayVsLand("{W/R}{W/R}{W/R}", "Sacred Foundry", 2, 1); // auto choose for hybrid mana: choose any
         testManaToPayVsLand("{R}{W/R}", "Sacred Foundry", 2, RedManaAbility.class); // auto choose for hybrid mana: we should choose {R}
@@ -79,18 +82,20 @@ public class ManaUtilTest extends CardTestPlayerBase {
         Assert.assertEquals("{R}{R}", ManaUtil.condenseManaCostString("{R}{R}"));
         Assert.assertEquals("{U}", ManaUtil.condenseManaCostString("{U}"));
         Assert.assertEquals("{2}", ManaUtil.condenseManaCostString("{2}"));
-        Assert.assertEquals("", ManaUtil.condenseManaCostString(""));
+        Assert.assertEquals("", ManaUtil.condenseManaCostString("{}"));
     }
 
     /**
      * Common way to test ManaUtil.tryToAutoPay
      *
-     * We get all mana abilities, then try to auto pay and compare to expected1 and expected2 params.
+     * We get all mana abilities, then try to auto pay and compare to expected1
+     * and expected2 params.
      *
      * @param manaToPay Mana that should be paid using land.
      * @param landName Land to use as mana producer.
      * @param expected1 The amount of mana abilities the land should have.
-     * @param expected2 The amount of mana abilities that ManaUtil.tryToAutoPay should be returned after optimization.
+     * @param expected2 The amount of mana abilities that ManaUtil.tryToAutoPay
+     * should be returned after optimization.
      */
     private void testManaToPayVsLand(String manaToPay, String landName, int expected1, int expected2) {
         ManaCost unpaid = new ManaCostsImpl(manaToPay);
@@ -100,19 +105,20 @@ public class ManaUtilTest extends CardTestPlayerBase {
         HashMap<UUID, ManaAbility> useableAbilities = getManaAbilities(card);
         Assert.assertEquals(expected1, useableAbilities.size());
 
-        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ManaAbility>)useableAbilities);
+        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ManaAbility>) useableAbilities);
         Assert.assertEquals(expected2, useableAbilities.size());
     }
 
     /**
-     * Another way to test ManaUtil.tryToAutoPay
-     * Here we also check what ability was auto chosen
+     * Another way to test ManaUtil.tryToAutoPay Here we also check what ability
+     * was auto chosen
      *
-     * N.B. This method can be used ONLY if we have one ability left that auto choose mode!
-     * That's why we assert the following:
-     * Assert.assertEquals(1, useableAbilities.size());
+     * N.B. This method can be used ONLY if we have one ability left that auto
+     * choose mode! That's why we assert the following: Assert.assertEquals(1,
+     * useableAbilities.size());
      *
-     * We get all mana abilities, then try to auto pay and compare to expected1 and expected2 params.
+     * We get all mana abilities, then try to auto pay and compare to expected1
+     * and expected2 params.
      *
      * @param manaToPay Mana that should be paid using land.
      * @param landName Land to use as mana producer.
@@ -127,7 +133,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         HashMap<UUID, ManaAbility> useableAbilities = getManaAbilities(card);
         Assert.assertEquals(expected1, useableAbilities.size());
 
-        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ManaAbility>)useableAbilities);
+        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ManaAbility>) useableAbilities);
         Assert.assertEquals(1, useableAbilities.size());
         ManaAbility ability = useableAbilities.values().iterator().next();
         Assert.assertTrue("Wrong mana ability has been chosen", expectedChosen.isInstance(ability));
@@ -141,13 +147,13 @@ public class ManaUtilTest extends CardTestPlayerBase {
      */
     private HashMap<UUID, ManaAbility> getManaAbilities(Card card) {
         HashMap<UUID, ManaAbility> useableAbilities = new LinkedHashMap<>();
-        for (Ability ability: card.getAbilities()) {
+        for (Ability ability : card.getAbilities()) {
             if (ability instanceof ManaAbility) {
                 ability.newId(); // we need to assign id manually as we are not in game
-                useableAbilities.put(ability.getId(), (ManaAbility)ability);
+                useableAbilities.put(ability.getId(), (ManaAbility) ability);
             }
         }
         return useableAbilities;
     }
-    
+
 }

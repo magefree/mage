@@ -138,16 +138,10 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             options = optimizeOptions(game, options, ability);
             if (options.isEmpty()) {
                 allActions.add(ability);
-//                simulateAction(game, previousActions, ability);
             } else {
-//                ExecutorService simulationExecutor = Executors.newFixedThreadPool(4);
                 for (Ability option : options) {
                     allActions.add(option);
-//                    SimulationWorker worker = new SimulationWorker(game, this, previousActions, option);
-//                    simulationExecutor.submit(worker);
                 }
-//                simulationExecutor.shutdown();
-//                while(!simulationExecutor.isTerminated()) {}
             }
         }
     }
