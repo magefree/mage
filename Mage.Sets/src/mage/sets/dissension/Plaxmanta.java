@@ -25,38 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.dissension;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.ManaWasSpentCondition;
+import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
- * @author North
+ * @author fireshoes
  */
-public class TortoiseFormation extends CardImpl {
+public class Plaxmanta extends CardImpl {
 
-    public TortoiseFormation(UUID ownerId) {
-        super(ownerId, 61, "Tortoise Formation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "ALA";
+    public Plaxmanta(UUID ownerId) {
+        super(ownerId, 29, "Plaxmanta", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "DIS";
+        this.subtype.add("Beast");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-
-        // Creatures you control gain shroud until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        
+        // When Plaxmanta enters the battlefield, creatures you control gain shroud until end of turn.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures"))));
+        
+        // When Plaxmanta enters the battlefield, sacrifice it unless {G} was spent to cast it.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.G)), false), new ManaSpentToCastWatcher());
     }
 
-    public TortoiseFormation(final TortoiseFormation card) {
+    public Plaxmanta(final Plaxmanta card) {
         super(card);
     }
 
     @Override
-    public TortoiseFormation copy() {
-        return new TortoiseFormation(this);
+    public Plaxmanta copy() {
+        return new Plaxmanta(this);
     }
 }
