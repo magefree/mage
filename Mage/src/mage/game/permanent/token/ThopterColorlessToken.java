@@ -27,7 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
@@ -39,9 +41,15 @@ import mage.constants.CardType;
  */
 public class ThopterColorlessToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("EXO", "ORI"));
+    }
+
     public ThopterColorlessToken() {
         super("Thopter", "1/1 colorless Thopter artifact creature token with flying");
-        availableImageSetCodes.addAll(Arrays.asList("EXO", "ORI"));
+        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Thopter");
@@ -58,4 +66,14 @@ public class ThopterColorlessToken extends Token {
             this.setTokenType(new Random().nextInt(2) + 1);
         }
     }
+
+    public ThopterColorlessToken(final ThopterColorlessToken token) {
+        super(token);
+    }
+
+    @Override
+    public ThopterColorlessToken copy() {
+        return new ThopterColorlessToken(this); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

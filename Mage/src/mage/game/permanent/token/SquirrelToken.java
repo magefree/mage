@@ -27,6 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
 
@@ -36,12 +39,15 @@ import mage.constants.CardType;
  */
 public class SquirrelToken extends Token {
 
-    public SquirrelToken() {
-        this("CNS");
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("CNS"));
     }
-    public SquirrelToken(String setCode) {
+
+    public SquirrelToken() {
         super("Squirrel", "1/1 green Squirrel creature token");
-        setOriginalExpansionSetCode(setCode);
+        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         subtype.add("Squirrel");
 
