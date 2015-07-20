@@ -34,7 +34,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -63,9 +63,8 @@ public class DevouringStrossus extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeTargetEffect("sacrifice a creature"),
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterControlledCreaturePermanent("creature"), 1, null),
             TargetController.YOU, false);
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true));
         this.addAbility(ability);
         // Sacrifice a creature: Regenerate Devouring Strossus.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
