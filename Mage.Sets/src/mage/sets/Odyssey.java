@@ -47,8 +47,8 @@ public class Odyssey extends ExpansionSet {
         super("Odyssey", "ODY", "mage.sets.odyssey", new GregorianCalendar(2001, 9, 22).getTime(), SetType.EXPANSION);
         this.blockName = "Odyssey";
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;

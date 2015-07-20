@@ -25,57 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class IceCage extends CardImpl {
+public class KavuMauler extends CardImpl {
 
-    public IceCage(UUID ownerId) {
-        super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "M10";
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Kavu");
 
-        this.subtype.add("Aura");
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
-
-        // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
-        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));
+    static {
+        filter.add(new SubtypePredicate("Kavu"));
+        filter.add(new AnotherPredicate());
     }
 
-    public IceCage(final IceCage card) {
+    public KavuMauler(UUID ownerId) {
+        super(ownerId, 80, "Kavu Mauler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+        this.expansionSetCode = "APC";
+        this.subtype.add("Kavu");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Whenever Kavu Mauler attacks, it gets +1/+1 until end of turn for each other attacking Kavu.
+        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn, true), false));
+    }
+
+    public KavuMauler(final KavuMauler card) {
         super(card);
     }
 
     @Override
-    public IceCage copy() {
-        return new IceCage(this);
+    public KavuMauler copy() {
+        return new KavuMauler(this);
     }
 }

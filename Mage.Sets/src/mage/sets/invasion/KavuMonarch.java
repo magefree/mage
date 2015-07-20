@@ -25,57 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class IceCage extends CardImpl {
+public class KavuMonarch extends CardImpl {
 
-    public IceCage(UUID ownerId) {
-        super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "M10";
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Kavu creatures");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another Kavu");
 
-        this.subtype.add("Aura");
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
-
-        // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
-        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));
+    static {
+        filter1.add(new SubtypePredicate("Kavu"));
+        filter2.add(new SubtypePredicate("Kavu"));
+        filter2.add(new AnotherPredicate());
     }
 
-    public IceCage(final IceCage card) {
+    public KavuMonarch(UUID ownerId) {
+        super(ownerId, 149, "Kavu Monarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Kavu");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Kavu creatures have trample.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(),
+            Duration.WhileOnBattlefield, filter1)));
+
+        // Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter2));
+    }
+
+    public KavuMonarch(final KavuMonarch card) {
         super(card);
     }
 
     @Override
-    public IceCage copy() {
-        return new IceCage(this);
+    public KavuMonarch copy() {
+        return new KavuMonarch(this);
     }
 }

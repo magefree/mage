@@ -25,57 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.abilities.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class IceCage extends CardImpl {
+public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    public IceCage(UUID ownerId) {
-        super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "M10";
+    private final String enchantType;
 
-        this.subtype.add("Aura");
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
-
-        // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
-        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));
+    public BecomesTargetAttachedTriggeredAbility(Effect effect) {
+        this(effect, "creature");
     }
 
-    public IceCage(final IceCage card) {
-        super(card);
+    public BecomesTargetAttachedTriggeredAbility(Effect effect, String enchantType) {
+        super(Zone.BATTLEFIELD, effect);
+        this.enchantType = enchantType;
+    }
+
+    public BecomesTargetAttachedTriggeredAbility(final BecomesTargetAttachedTriggeredAbility ability) {
+        super(ability);
+        this.enchantType = ability.enchantType;
     }
 
     @Override
-    public IceCage copy() {
-        return new IceCage(this);
+    public BecomesTargetAttachedTriggeredAbility copy() {
+        return new BecomesTargetAttachedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent enchantment = game.getPermanent(sourceId);
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            if (event.getTargetId().equals(enchantment.getAttachedTo())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When enchanted " + enchantType + " becomes the target of a spell or ability, " + super.getRule();
     }
 }
