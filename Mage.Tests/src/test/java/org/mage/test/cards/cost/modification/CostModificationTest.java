@@ -8,7 +8,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  *
  * also tests cost reduction effects
- * 
+ *
  * @author BetaSteward
  */
 public class CostModificationTest extends CardTestPlayerBase {
@@ -46,16 +46,12 @@ public class CostModificationTest extends CardTestPlayerBase {
     }
 
     /**
-     * Test that cost reduction also works with mana source restriction
-     * Myr Superion
-     * Spend only mana produced by creatures to cast Myr Superion
+     * Test that cost reduction also works with mana source restriction Myr
+     * Superion Spend only mana produced by creatures to cast Myr Superion
      *
-     * Etherium Sculptor    {1}{U}
-     * Artifact Creature - Vedalken Artificer
-     * 1/2
+     * Etherium Sculptor {1}{U} Artifact Creature - Vedalken Artificer 1/2
      * Artifact spells you cast cost {1} less to cast.
      */
-
     @Test
     public void testCostReductionWithManaSourceRestrictionWorking() {
         // Artifact spells you cast cost {1} less to cast
@@ -95,4 +91,31 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Myr Superion", 1); // Can't be cast because mana was not produced by a creature
     }
 
+    /*
+     I had Goblin Electromancer, but somehow Pyretic Ritual wasn't cheaper howeverDesperate Ritual was.
+     */
+    @Test
+    public void testCostReductionForPyreticRitual() {
+        // Instant and sorcery spells you cast cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Electromancer");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        // Add {R}{R}{R} to your mana pool.
+        addCard(Zone.HAND, playerA, "Pyretic Ritual");
+        // Fated Conflagration deals 5 damage to target creature or planeswalker.
+        // If it's your turn, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+        addCard(Zone.HAND, playerA, "Fated Conflagration");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Carnivorous Moss-Beast"); // 4/5
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyretic Ritual");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fated Conflagration", "Carnivorous Moss-Beast");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Pyretic Ritual", 1);
+        assertGraveyardCount(playerA, "Fated Conflagration", 1);
+        assertGraveyardCount(playerB, "Carnivorous Moss-Beast", 1);
+    }
 }
