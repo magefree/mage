@@ -25,57 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.thedark;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class IceCage extends CardImpl {
+public class Tracker extends mage.sets.masterseditioniii.Tracker {
 
-    public IceCage(UUID ownerId) {
-        super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "M10";
-
-        this.subtype.add("Aura");
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
-
-        // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
-        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));
+    public Tracker(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 52;
+        this.expansionSetCode = "DRK";
+        this.rarity = Rarity.RARE;
     }
 
-    public IceCage(final IceCage card) {
+    public Tracker(final Tracker card) {
         super(card);
     }
 
     @Override
-    public IceCage copy() {
-        return new IceCage(this);
+    public Tracker copy() {
+        return new Tracker(this);
     }
 }

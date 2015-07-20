@@ -29,24 +29,20 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageEachOtherEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -66,7 +62,7 @@ public class VeinDrinker extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {R}, {tap}: Vein Drinker deals damage equal to its power to target creature. That creature deals damage equal to its power to Vein Drinker.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VeinDrinkerEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -82,40 +78,4 @@ public class VeinDrinker extends CardImpl {
     public VeinDrinker copy() {
         return new VeinDrinker(this);
     }
-}
-
-class VeinDrinkerEffect extends OneShotEffect {
-
-    public VeinDrinkerEffect() {
-        super(Outcome.Damage);
-    }
-
-    public VeinDrinkerEffect(final VeinDrinkerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        Permanent targetCreature = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        if (sourceCreature != null && targetCreature != null) {
-            if (sourceCreature.getCardType().contains(CardType.CREATURE) && targetCreature.getCardType().contains(CardType.CREATURE)) {
-                sourceCreature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
-                targetCreature.damage(sourceCreature.getPower().getValue(), sourceCreature.getId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public VeinDrinkerEffect copy() {
-        return new VeinDrinkerEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals damage equal to its power to target creature. That creature deals damage equal to its power to {this}";
-    }
-
 }

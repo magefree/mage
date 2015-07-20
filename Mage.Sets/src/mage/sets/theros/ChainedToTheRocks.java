@@ -52,33 +52,37 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 /**
- * If the land Chained to the Rocks is enchanting stops being a Mountain or another player
- * gains control of it, Chained to the Rocks will be put into its owner's graveyard when
- * state-based actions are performed.
+ * If the land Chained to the Rocks is enchanting stops being a Mountain or
+ * another player gains control of it, Chained to the Rocks will be put into its
+ * owner's graveyard when state-based actions are performed.
  *
- * Chained to the Rocks's ability causes a zone change with a duration, a style of ability
- * introduced in Magic 2014 that's somewhat reminiscent of older cards like Oblivion Ring.
- * However, unlike Oblivion Ring, cards like Chained to the Rocks have a single ability
- * that creates two one-shot effects: one that exiles the creature when the ability resolves,
- * and another that returns the exiled card to the battlefield immediately after Chained to
- * the Rocks leaves the battlefield.
+ * Chained to the Rocks's ability causes a zone change with a duration, a style
+ * of ability introduced in Magic 2014 that's somewhat reminiscent of older
+ * cards like Oblivion Ring. However, unlike Oblivion Ring, cards like Chained
+ * to the Rocks have a single ability that creates two one-shot effects: one
+ * that exiles the creature when the ability resolves, and another that returns
+ * the exiled card to the battlefield immediately after Chained to the Rocks
+ * leaves the battlefield.
  *
- * If Chained to the Rocks leaves the battlefield before its triggered ability resolves,
- * the target creature won't be exiled.
+ * If Chained to the Rocks leaves the battlefield before its triggered ability
+ * resolves, the target creature won't be exiled.
  *
- * Auras attached to the exiled creature will be put into their owners' graveyards (unless
- * they have bestow). Equipment attached to the exiled creature will become unattached and
- * remain on the battlefield. Any counters on the exiled creature will cease to exist.
+ * Auras attached to the exiled creature will be put into their owners'
+ * graveyards (unless they have bestow). Equipment attached to the exiled
+ * creature will become unattached and remain on the battlefield. Any counters
+ * on the exiled creature will cease to exist.
  *
- * If a creature token is exiled, it ceases to exist. It won't be returned to the battlefield.
+ * If a creature token is exiled, it ceases to exist. It won't be returned to
+ * the battlefield.
  *
- * The exiled card returns to the battlefield immediately after Chained to the Rocks leaves
- * the battlefield. Nothing happens between the two events, including state-based actions.
+ * The exiled card returns to the battlefield immediately after Chained to the
+ * Rocks leaves the battlefield. Nothing happens between the two events,
+ * including state-based actions.
  *
- * In a multiplayer game, if Chained to the Rocks's owner leaves the game, the exiled card
- * will return to the battlefield. Because the one-shot effect that returns the card isn't
- * an ability that goes on the stack, it won't cease to exist along with the leaving player's
- * spells and abilities on the stack.
+ * In a multiplayer game, if Chained to the Rocks's owner leaves the game, the
+ * exiled card will return to the battlefield. Because the one-shot effect that
+ * returns the card isn't an ability that goes on the stack, it won't cease to
+ * exist along with the leaving player's spells and abilities on the stack.
  *
  * @author LevelX2
  */
@@ -86,6 +90,7 @@ public class ChainedToTheRocks extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountain you control");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
+
     static {
         filter.add(new SubtypePredicate("Mountain"));
         filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -95,7 +100,6 @@ public class ChainedToTheRocks extends CardImpl {
         super(ownerId, 4, "Chained to the Rocks", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
-
 
         // Enchant Mountain you control
         TargetPermanent auraTarget = new TargetPermanent(filter);
@@ -144,7 +148,7 @@ class ChainedToTheRocksEffect extends OneShotEffect {
         // If Chained to the Rocks leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getName()).apply(game, source);
+            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName()).apply(game, source);
         }
         return false;
     }

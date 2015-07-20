@@ -25,16 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,14 +48,13 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class IceCage extends CardImpl {
+public class SleepingPotion extends CardImpl {
 
-    public IceCage(UUID ownerId) {
-        super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "M10";
-
+    public SleepingPotion(UUID ownerId) {
+        super(ownerId, 34, "Sleeping Potion", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.expansionSetCode = "PLS";
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -62,20 +63,22 @@ public class IceCage extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
-        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
-
-        // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
-        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));
+        // When Sleeping Potion enters the battlefield, tap enchanted creature.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
+        // Enchanted creature doesn't untap during its controller's untap step.
+        Effect effect = new DontUntapInControllersUntapStepEnchantedEffect();
+        effect.setText("Enchanted creature doesn't untap during its controller's untap step");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        // When enchanted creature becomes the target of a spell or ability, sacrifice Sleeping Potion.
+        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public IceCage(final IceCage card) {
+    public SleepingPotion(final SleepingPotion card) {
         super(card);
     }
 
     @Override
-    public IceCage copy() {
-        return new IceCage(this);
+    public SleepingPotion copy() {
+        return new SleepingPotion(this);
     }
 }

@@ -64,7 +64,6 @@ public class ConstrictingSliver extends CardImpl {
         filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-
     public ConstrictingSliver(UUID ownerId) {
         super(ownerId, 7, "Constricting Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.expansionSetCode = "M15";
@@ -73,15 +72,15 @@ public class ConstrictingSliver extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Sliver creatures you control have "When this creature enters the battlefield, you may exile target creature an opponent controls 
+        // Sliver creatures you control have "When this creature enters the battlefield, you may exile target creature an opponent controls
         // until this creature leaves the battlefield."
         Ability ability = new EntersBattlefieldTriggeredAbility(new ConstrictingSliverExileEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
-                Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Sliver","Sliver creatures"),
-                "Sliver creatures you control have \"When this creature enters the battlefield, you may exile target creature an opponent controls until this creature leaves the battlefield.\"")));
+                        Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Sliver", "Sliver creatures"),
+                        "Sliver creatures you control have \"When this creature enters the battlefield, you may exile target creature an opponent controls until this creature leaves the battlefield.\"")));
 
     }
 
@@ -117,7 +116,7 @@ class ConstrictingSliverExileEffect extends OneShotEffect {
         // If the creature leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getName()).apply(game, source);
+            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName()).apply(game, source);
         }
         return false;
     }

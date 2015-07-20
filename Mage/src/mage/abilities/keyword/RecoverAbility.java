@@ -77,6 +77,7 @@ public class RecoverAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
             if (zEvent.getTarget().getOwnerId().equals(getControllerId())
+                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
                     && !zEvent.getTarget().getId().equals(getSourceId())) {
                 return true;
             }

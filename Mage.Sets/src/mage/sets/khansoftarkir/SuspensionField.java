@@ -53,14 +53,14 @@ import mage.util.CardUtil;
 public class SuspensionField extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 3 or greater");
+
     static {
         filter.add(new ToughnessPredicate(ComparisonType.GreaterThan, 2));
-    }    
-    
+    }
+
     public SuspensionField(UUID ownerId) {
         super(ownerId, 25, "Suspension Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "KTK";
-
 
         // When Suspension Field enters the battlefield, you may exile target creature with toughness 3 or greater until Suspension Field leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SuspensionFieldExileEffect(), true);
@@ -101,7 +101,7 @@ class SuspensionFieldExileEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         // If Suspension Field leaves the battlefield before its triggered ability resolves, the target won't be exiled.
         if (sourcePermanent != null) {
-            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName()).apply(game, source);
+            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName()).apply(game, source);
         }
         return false;
     }

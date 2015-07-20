@@ -59,16 +59,14 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  */
 public class SistersOfStoneDeath extends CardImpl {
-    
+
     private UUID exileId = UUID.randomUUID();
-    
+
     public SistersOfStoneDeath(UUID ownerId) {
         super(ownerId, 231, "Sisters of Stone Death", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{G}{G}");
         this.expansionSetCode = "RAV";
         this.supertype.add("Legendary");
         this.subtype.add("Gorgon");
-        
-
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
@@ -79,7 +77,7 @@ public class SistersOfStoneDeath extends CardImpl {
         this.addAbility(ability);
 
         // {B}{G}: Exile target creature blocking or blocked by Sisters of Stone Death.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(exileId, "Sisters Of Stone Death"), new ManaCostsImpl("{B}{G}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(exileId, this.getIdName()), new ManaCostsImpl("{B}{G}"));
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Sisters of Stone Death");
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
                 new BlockingAttackerIdPredicate(this.getId())));
@@ -88,13 +86,13 @@ public class SistersOfStoneDeath extends CardImpl {
 
         // {2}{B}: Put a creature card exiled with Sisters of Stone Death onto the battlefield under your control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SistersOfStoneDeathEffect(exileId), new ManaCostsImpl("{2}{B}")));
-        
+
     }
-    
+
     public SistersOfStoneDeath(final SistersOfStoneDeath card) {
         super(card);
     }
-    
+
     @Override
     public SistersOfStoneDeath copy() {
         return new SistersOfStoneDeath(this);
@@ -102,20 +100,20 @@ public class SistersOfStoneDeath extends CardImpl {
 }
 
 class SistersOfStoneDeathEffect extends OneShotEffect {
-    
+
     private UUID exileId;
-    
+
     public SistersOfStoneDeathEffect(UUID exileId) {
         super(Outcome.PutCreatureInPlay);
         this.exileId = exileId;
         staticText = "Put a creature card exiled with {this} onto the battlefield under your control";
     }
-    
+
     public SistersOfStoneDeathEffect(final SistersOfStoneDeathEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         CardsImpl cardsInExile = new CardsImpl();
@@ -137,7 +135,7 @@ class SistersOfStoneDeathEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
     @Override
     public SistersOfStoneDeathEffect copy() {
         return new SistersOfStoneDeathEffect(this);

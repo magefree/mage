@@ -75,12 +75,12 @@ public class KarnLiberated extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
 
         // +4: Target player exiles a card from his or her hand.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Karn Liberated", new FilterCard()), 4);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, this.getIdName(), new FilterCard()), 4);
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
         // -3: Exile target permanent.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new ExileTargetEffect(exileId, "Karn Liberated"), -3);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new ExileTargetEffect(exileId, this.getIdName()), -3);
         ability2.addTarget(new TargetPermanent());
         this.addAbility(ability2);
 
@@ -120,9 +120,9 @@ class KarnLiberatedEffect extends OneShotEffect {
             return false;
         }
         List<Card> cards = new ArrayList<>();
-        for (ExileZone zone: game.getExile().getExileZones()) {
+        for (ExileZone zone : game.getExile().getExileZones()) {
             if (zone.getId().equals(exileId)) {
-                for (Card card: zone.getCards(game)) {
+                for (Card card : zone.getCards(game)) {
                     if (!card.getSubtype().contains("Aura") && CardUtil.isPermanentCard(card)) {
                         cards.add(card);
                     }
@@ -130,15 +130,15 @@ class KarnLiberatedEffect extends OneShotEffect {
             }
         }
         game.getState().clear();
-        for (Card card: game.getCards()) {
+        for (Card card : game.getCards()) {
             game.getState().addCard(card);
         }
-        for (Player player: game.getPlayers().values()) {
+        for (Player player : game.getPlayers().values()) {
             player.getGraveyard().clear();
             player.getHand().clear();
             player.getLibrary().clear();
-            for (Card card: game.getCards()) {
-                if (card.getOwnerId().equals(player.getId()) && !card.isCopy() // no copies 
+            for (Card card : game.getCards()) {
+                if (card.getOwnerId().equals(player.getId()) && !card.isCopy() // no copies
                         && !player.getSideboard().contains(card.getId())
                         && !cards.contains(card)) { // not the exiled cards
                     player.getLibrary().putOnTop(card, game);
@@ -146,8 +146,8 @@ class KarnLiberatedEffect extends OneShotEffect {
             }
             player.init(game);
         }
-        for (Card card: cards) {
-            if ( CardUtil.isPermanentCard(card) && !card.getSubtype().contains("Aura") ) {
+        for (Card card : cards) {
+            if (CardUtil.isPermanentCard(card) && !card.getSubtype().contains("Aura")) {
                 game.getExile().add(exileId, sourceObject.getIdName(), card);
             }
         }
@@ -215,10 +215,10 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
         if (exile != null) {
             Cards cards = new CardsImpl(); // needed because putOntoTheBattlefield removes from exile
             cards.addAll(exile);
-            for (Card card: cards.getCards(game)) {
+            for (Card card : cards.getCards(game)) {
                 card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
                 Permanent permanent = game.getPermanent(card.getId());
-                ((PermanentImpl)permanent).removeSummoningSickness();
+                ((PermanentImpl) permanent).removeSummoningSickness();
             }
             return true;
         }
