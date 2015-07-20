@@ -27,7 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -40,17 +40,22 @@ import mage.abilities.effects.common.ImprintTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author noxx
-
+ *
  */
 public class DarkImpostor extends CardImpl {
 
@@ -65,7 +70,7 @@ public class DarkImpostor extends CardImpl {
 
         // {4}{B}{B}: Exile target creature and put a +1/+1 counter on Dark Impostor.\
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ImprintTargetEffect(), new ManaCostsImpl("{4}{B}{B}"));
-        ability.addEffect(new ExileTargetEffect(null, "Dark Impostor"));
+        ability.addEffect(new ExileTargetEffect(null, this.getIdName()));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -99,10 +104,10 @@ class DarkImpostorContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null) {
-            for (UUID imprintedId: perm.getImprinted()) {
+            for (UUID imprintedId : perm.getImprinted()) {
                 Card card = game.getCard(imprintedId);
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability : card.getAbilities()) {
                         if (ability instanceof ActivatedAbility) {
                             perm.addAbility(ability, source.getSourceId(), game);
                         }

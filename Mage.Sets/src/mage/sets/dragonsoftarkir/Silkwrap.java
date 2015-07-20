@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  * @author jeffwadsworth
  */
 public class Silkwrap extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less an opponent controls");
 
     static {
@@ -69,8 +69,8 @@ public class Silkwrap extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new SilkwrapEffect());
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
-        this.addAbility(ability); 
-        
+        this.addAbility(ability);
+
     }
 
     public Silkwrap(final Silkwrap card) {
@@ -103,7 +103,7 @@ class SilkwrapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getName()).apply(game, source);
+            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName()).apply(game, source);
         }
         return false;
     }
