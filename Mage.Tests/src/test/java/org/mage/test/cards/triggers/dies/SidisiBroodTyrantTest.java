@@ -36,12 +36,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class SidisiBroodTyrantTest extends CardTestPlayerBase {
 
     /**
-     * Tests that if Sidisi, Brood Tyrant leaves the battlefield
-     * before it's first ability resolves, there will be no Zombie token added to the battlefield
+     * Tests that if Sidisi, Brood Tyrant leaves the battlefield before it's
+     * first ability resolves, there will be no Zombie token added to the
+     * battlefield
      *
      */
     @Test
@@ -73,4 +73,43 @@ public class SidisiBroodTyrantTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Another potential bug would be related to Sidisi, Brood Tyrant 's second
+     * trigger. If there is one in play and I play a Satyr Wayfinder or a Gather
+     * the Pack, then mill some creatures, Sidisi should trigger and make a
+     * Zombie token, right? This doesn't seem to work currently.
+     *
+     */
+    @Test
+    public void testDiesTriggeredAbilityNormal() {
+        // {1}{B}{G}{U}
+        // Whenever Sidisi, Brood Tyrant enters the battlefield or attacks, put the top three cards of your library into your graveyard
+        // Whenever one or more creature cards are put into your graveyard from your library, put a 2/2 black Zombie creature token onto the battlefield.
+        addCard(Zone.HAND, playerA, "Sidisi, Brood Tyrant"); // 2/2  {1}{B}{G}{U}
+
+        // When Satyr Wayfinder enters the battlefield, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard.
+        addCard(Zone.HAND, playerA, "Satyr Wayfinder"); // 1/1  {1}{G}
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 3);
+        addCard(Zone.LIBRARY, playerA, "Swamp", 1);
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 3);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sidisi, Brood Tyrant");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Satyr Wayfinder");
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Sidisi, Brood Tyrant", 1);
+        assertPermanentCount(playerA, "Satyr Wayfinder", 1);
+        assertHandCount(playerA, "Swamp", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 6);
+        assertPermanentCount(playerA, "Zombie", 2);
+
+    }
 }
