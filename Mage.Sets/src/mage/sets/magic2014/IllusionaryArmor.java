@@ -28,10 +28,10 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -40,10 +40,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -67,7 +63,7 @@ public class IllusionaryArmor extends CardImpl {
         // Enchanted creature gets +4/+4.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield)));
         // When enchanted creature becomes the target of a spell or ability, sacrifice Illusionary Armor.
-        this.addAbility(new IllusionaryArmorAbility());
+        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new SacrificeSourceEffect()));
     }
 
     public IllusionaryArmor(final IllusionaryArmor card) {
@@ -78,43 +74,4 @@ public class IllusionaryArmor extends CardImpl {
     public IllusionaryArmor copy() {
         return new IllusionaryArmor(this);
     }
-}
-
-
-class IllusionaryArmorAbility extends TriggeredAbilityImpl {
-
-    public IllusionaryArmorAbility() {
-        super(Zone.BATTLEFIELD, new DestroySourceEffect());
-    }
-
-    public IllusionaryArmorAbility(final IllusionaryArmorAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public IllusionaryArmorAbility copy() {
-        return new IllusionaryArmorAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(sourceId);
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (event.getTargetId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When enchanted creature becomes the target of a spell or ability, destroy {this}.";
-    }
-
 }
