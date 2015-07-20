@@ -25,49 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.Ability;
+import mage.abilities.condition.common.IsStepCondition;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.counters.CounterType;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class DwarvenArmory extends CardImpl {
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
-        
+    public DwarvenArmory(UUID ownerId) {
+        super(ownerId, 182, "Dwarven Armory", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+        this.expansionSetCode = "ICE";
 
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        // {2}, Sacrifice a land: Put a +2/+2 counter on target creature. Activate this ability only during any upkeep step.
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
+                new AddCountersTargetEffect(CounterType.P2P2.createInstance()),
+                new ManaCostsImpl("{2}"),
+                new IsStepCondition(PhaseStep.UPKEEP, false),
+                null);
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent())));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public DwarvenArmory(final DwarvenArmory card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public DwarvenArmory copy() {
+        return new DwarvenArmory(this);
     }
-
 }

@@ -25,49 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class AuraFracture extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
-        
-
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public AuraFracture(UUID ownerId) {
+        super(ownerId, 2, "Aura Fracture", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "PCY";
+
+        // Sacrifice a land: Destroy target enchantment.
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD, 
+                new DestroyTargetEffect(), 
+                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public AuraFracture(final AuraFracture card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public AuraFracture copy() {
+        return new AuraFracture(this);
     }
-
 }

@@ -25,49 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class DwarvenBlastminer extends CardImpl {
+    
+    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
+    public DwarvenBlastminer(UUID ownerId) {
+        super(ownerId, 199, "Dwarven Blastminer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Dwarf");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {2}{R}, {tap}: Destroy target nonbasic land.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{R}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent(filter));
+        this.addAbility(ability);
         
-
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        // Morph {R}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}")));
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public DwarvenBlastminer(final DwarvenBlastminer card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public DwarvenBlastminer copy() {
+        return new DwarvenBlastminer(this);
     }
-
 }

@@ -25,49 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnToHandAttachedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class SqueesEmbrace extends CardImpl {
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
+    public SqueesEmbrace(UUID ownerId) {
+        super(ownerId, 122, "Squee's Embrace", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{W}");
+        this.expansionSetCode = "APC";
+        this.subtype.add("Aura");
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         
-
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Enchanted creature gets +2/+2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        // When enchanted creature dies, return that card to its owner's hand.
+        this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted creature"));
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public SqueesEmbrace(final SqueesEmbrace card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public SqueesEmbrace copy() {
+        return new SqueesEmbrace(this);
     }
-
 }

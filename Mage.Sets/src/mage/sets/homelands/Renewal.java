@@ -25,49 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterBasicLandCard;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class Renewal extends CardImpl {
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
+    public Renewal(UUID ownerId) {
+        super(ownerId, 66, "Renewal", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        this.expansionSetCode = "HML";
+
+        // As an additional cost to cast Renewal, sacrifice a land.
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         
-
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard())));
         
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        // Draw a card at the beginning of the next turn's upkeep.
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public Renewal(final Renewal card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public Renewal copy() {
+        return new Renewal(this);
     }
-
 }

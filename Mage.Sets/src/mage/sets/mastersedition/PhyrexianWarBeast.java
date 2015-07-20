@@ -25,49 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.mastersedition;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class PhyrexianWarBeast extends mage.sets.alliances.PhyrexianWarBeast {
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
-        
-
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+    public PhyrexianWarBeast(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 162;
+        this.expansionSetCode = "MED";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public PhyrexianWarBeast(final PhyrexianWarBeast card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public PhyrexianWarBeast copy() {
+        return new PhyrexianWarBeast(this);
     }
-
 }

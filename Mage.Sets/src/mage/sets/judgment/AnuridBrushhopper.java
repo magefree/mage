@@ -25,49 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class AnuridBrushhopper extends CardImpl {
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
-        
-
-
+    public AnuridBrushhopper(UUID ownerId) {
+        super(ownerId, 137, "Anurid Brushhopper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Frog");
+        this.subtype.add("Beast");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+
+        // Discard two cards: Exile Anurid Brushhopper. Return it to the battlefield under its owner's control at the beginning of the next end step.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+                new ExileReturnToBattlefieldOwnerNextEndStepEffect(), 
+                new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards")))));
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public AnuridBrushhopper(final AnuridBrushhopper card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public AnuridBrushhopper copy() {
+        return new AnuridBrushhopper(this);
     }
-
 }

@@ -28,10 +28,7 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.abilities.keyword.ChampionAbility;
@@ -39,7 +36,6 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;

@@ -25,49 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.prophecy;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.ObjectColor;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class BogElemental extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("white");
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
-        
-
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public BogElemental(UUID ownerId) {
+        super(ownerId, 57, "Bog Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Elemental");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
+
+        // Protection from white
+        this.addAbility(new ProtectionAbility(filter));
+        
+        // At the beginning of your upkeep, sacrifice Bog Elemental unless you sacrifice a land.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))),
+                TargetController.YOU, 
+                false));
+    }
+
+    public BogElemental(final BogElemental card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public BogElemental copy() {
+        return new BogElemental(this);
     }
-
 }

@@ -25,49 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.masterseditioniv;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.game.Game;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class FloodwaterDam extends CardImpl {
+    
+    private final UUID originalId;
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
-        
+    public FloodwaterDam(UUID ownerId) {
+        super(ownerId, 200, "Floodwater Dam", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "ME4";
 
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        // {X}{X}{1}, {tap}: Tap X target lands.
+        Effect effect = new TapTargetEffect();
+        effect.setText("tap X target lands");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}{X}{1}"));
+        ability.addCost(new TapSourceCost());
+        originalId = ability.getOriginalId();
+        this.addAbility(ability);
+    }
+    
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getOriginalId().equals(originalId)){
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            ability.addTarget(new TargetLandPermanent(xValue, xValue, new FilterLandPermanent(), false));
+        }
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public FloodwaterDam(final FloodwaterDam card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public FloodwaterDam copy() {
+        return new FloodwaterDam(this);
     }
-
 }

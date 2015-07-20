@@ -25,49 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.TimingRule;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadrushCyclops extends CardImpl {
+public class MarshalingCry extends CardImpl {
+    
+    public MarshalingCry(UUID ownerId) {
+        super(ownerId, 13, "Marshaling Cry", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
+        this.expansionSetCode = "FUT";
 
-    public MadrushCyclops (UUID ownerId) {
-        super(ownerId, 119, "Madrush Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Warrior");
+        // Creatures you control get +1/+1 and gain vigilance until end of turn.
+        Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("Creatures you control get +1/+1");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and vigilance until end of turn");
+        this.getSpellAbility().addEffect(effect);
         
-
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Cycling {2}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
         
-        // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        // Flashback {3}{W}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{W}"), TimingRule.SORCERY));
     }
 
-    public MadrushCyclops (final MadrushCyclops card) {
+    public MarshalingCry(final MarshalingCry card) {
         super(card);
     }
 
     @Override
-    public MadrushCyclops copy() {
-        return new MadrushCyclops(this);
+    public MarshalingCry copy() {
+        return new MarshalingCry(this);
     }
-
 }

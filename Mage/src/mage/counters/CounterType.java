@@ -68,6 +68,7 @@ public enum CounterType {
     M1M1(new BoostCounter(-1, -1).name),
     MINING("mining"),
     P1P1(new BoostCounter(1, 1).name),
+    P2P2(new BoostCounter(2, 2).name),
     PAGE("page"),
     PAIN("pain"),
     PETRIFICATION("petrification"),
@@ -120,6 +121,8 @@ public enum CounterType {
         switch (this) {
             case P1P1:
                 return new BoostCounter(1, 1, amount);
+            case P2P2:
+                return new BoostCounter(2, 2, amount);
             case M1M1:
                 return new BoostCounter(-1, -1, amount);
             default:
