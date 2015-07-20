@@ -28,22 +28,21 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DamageEachOtherEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -67,9 +66,11 @@ public class PredatoryUrge extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature has "{tap}: This creature deals damage equal to its power to target creature.
         // That creature deals damage equal to its power to this creature."
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PredatoryUrgeEffect(), new TapSourceCost());
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
+        Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
+        effect.setText("Enchanted creature has \"{T}: This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature.\"");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public PredatoryUrge(final PredatoryUrge card) {
@@ -79,44 +80,5 @@ public class PredatoryUrge extends CardImpl {
     @Override
     public PredatoryUrge copy() {
         return new PredatoryUrge(this);
-    }
-}
-
-class PredatoryUrgeEffect extends OneShotEffect {
-
-    public PredatoryUrgeEffect() {
-        super(Outcome.Damage);
-        this.staticText = "This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature.";
-    }
-
-    public PredatoryUrgeEffect(final PredatoryUrgeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PredatoryUrgeEffect copy() {
-        return new PredatoryUrgeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean sourceOnBattlefield = true;
-        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        if (sourceCreature == null) {
-            sourceCreature = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            sourceOnBattlefield = false;
-        }
-
-        if (sourceCreature != null && targetCreature != null
-                && sourceCreature.getCardType().contains(CardType.CREATURE)
-                && targetCreature.getCardType().contains(CardType.CREATURE)) {
-            targetCreature.damage(sourceCreature.getPower().getValue(), sourceCreature.getId(), game, false, true);
-            if (sourceOnBattlefield) {
-                sourceCreature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
-            }
-            return true;
-        }
-        return false;
     }
 }
