@@ -75,7 +75,6 @@ public class DarettiScrapSavant extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Daretti");
 
-
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +2: Discard up to two cards, then draw that many cards.
@@ -126,7 +125,7 @@ class DarettiDiscardDrawEffect extends OneShotEffect {
             TargetDiscard target = new TargetDiscard(0, 2, new FilterCard(), controller.getId());
             target.choose(outcome, controller.getId(), source.getSourceId(), game);
             int count = 0;
-            for (UUID cardId: target.getTargets()) {
+            for (UUID cardId : target.getTargets()) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     controller.discard(card, source, game);
@@ -160,9 +159,9 @@ class DarettiSacrificeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetControlledPermanent(1,1,new FilterControlledArtifactPermanent(), true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
-                    controller.chooseTarget(outcome, target, source, game)) {
+            Target target = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent(), true);
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    && controller.chooseTarget(outcome, target, source, game)) {
                 Permanent artifact = game.getPermanent(target.getFirstTarget());
                 if (artifact != null && artifact.sacrifice(source.getSourceId(), game)) {
                     Card card = game.getCard(getTargetPointer().getFirst(game, source));
@@ -178,7 +177,9 @@ class DarettiSacrificeEffect extends OneShotEffect {
 }
 
 class DarettiScrapSavantEmblem extends Emblem {
+
     // You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
+
     public DarettiScrapSavantEmblem() {
         this.setName("Emblem - Daretti");
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
@@ -208,10 +209,10 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() == Zone.GRAVEYARD &&
-                zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                zEvent.getTarget().getCardType().contains(CardType.ARTIFACT) &&
-                zEvent.getTarget().getOwnerId().equals(this.controllerId)) {
+        if (zEvent.getToZone() == Zone.GRAVEYARD
+                && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)
+                && zEvent.getTarget().getOwnerId().equals(this.controllerId)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             }
@@ -245,9 +246,9 @@ class DarettiScrapSavantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
+        if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId()));
+            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             effect.setText("return that card to the battlefield at the beginning of the next end step");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.COMMAND, effect, TargetController.ANY);
             delayedAbility.setSourceId(source.getSourceId());
