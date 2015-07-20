@@ -25,57 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.iceage;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageEachOtherEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class IceCage extends CardImpl {
+public class KarplusanYeti extends CardImpl {
 
-    public IceCage(UUID ownerId) {
-        super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "M10";
+    public KarplusanYeti(UUID ownerId) {
+        super(ownerId, 197, "Karplusan Yeti", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "ICE";
+        this.subtype.add("Yeti");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        this.subtype.add("Aura");
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // {T}: Karplusan Yeti deals damage equal to its power to target creature. That creature deals damage equal to its power to Karplusan Yeti.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-
-        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
-
-        // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
-        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));
     }
 
-    public IceCage(final IceCage card) {
+    public KarplusanYeti(final KarplusanYeti card) {
         super(card);
     }
 
     @Override
-    public IceCage copy() {
-        return new IceCage(this);
+    public KarplusanYeti copy() {
+        return new KarplusanYeti(this);
     }
 }

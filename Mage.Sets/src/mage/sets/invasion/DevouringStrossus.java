@@ -25,57 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class IceCage extends CardImpl {
+public class DevouringStrossus extends CardImpl {
 
-    public IceCage(UUID ownerId) {
-        super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "M10";
+    public DevouringStrossus(UUID ownerId) {
+        super(ownerId, 101, "Devouring Strossus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Horror");
+        this.power = new MageInt(9);
+        this.toughness = new MageInt(9);
 
-        this.subtype.add("Aura");
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // At the beginning of your upkeep, sacrifice a creature.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterControlledCreaturePermanent("creature"), 1, null),
+            TargetController.YOU, false);
         this.addAbility(ability);
-
-        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
-
-        // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
-        this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));
+        // Sacrifice a creature: Regenerate Devouring Strossus.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+             new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true))));
     }
 
-    public IceCage(final IceCage card) {
+    public DevouringStrossus(final DevouringStrossus card) {
         super(card);
     }
 
     @Override
-    public IceCage copy() {
-        return new IceCage(this);
+    public DevouringStrossus copy() {
+        return new DevouringStrossus(this);
     }
 }

@@ -257,7 +257,7 @@ public abstract class ExpansionSet implements Serializable {
         }
     }
 
-    private void addToBooster(List<Card> booster, List<CardInfo> cards) {
+    protected void addToBooster(List<Card> booster, List<CardInfo> cards) {
         if (!cards.isEmpty()) {
             CardInfo cardInfo = cards.remove(rnd.nextInt(cards.size()));
             if (cardInfo != null) {

@@ -25,33 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets;
+package mage.sets.ninthedition;
 
-import java.util.GregorianCalendar;
-
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
+import java.util.UUID;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class IceAge extends ExpansionSet {
+public class KarplusanYeti extends mage.sets.iceage.KarplusanYeti {
 
-    private static final IceAge fINSTANCE = new IceAge();
-
-    public static IceAge getInstance() {
-        return fINSTANCE;
+    public KarplusanYeti(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 198;
+        this.expansionSetCode = "9ED";
     }
 
-    private IceAge() {
-        super("Ice Age", "ICE", "mage.sets.iceage", new GregorianCalendar(1995, 5, 1).getTime(), SetType.EXPANSION);
-        this.blockName = "Ice Age";
-        this.hasBoosters = true;
-        this.numBoosterLands = 0;
-        this.numBoosterCommon = 11;
-        this.numBoosterUncommon = 3;
-        this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 0;
+    public KarplusanYeti(final KarplusanYeti card) {
+        super(card);
+    }
+
+    @Override
+    public KarplusanYeti copy() {
+        return new KarplusanYeti(this);
     }
 }
