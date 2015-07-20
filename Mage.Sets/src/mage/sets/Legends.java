@@ -48,8 +48,8 @@ public class Legends extends ExpansionSet {
         super("Legends", "LEG", "mage.sets.legends", new GregorianCalendar(1994, 5, 1).getTime(), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;

@@ -47,8 +47,8 @@ public class ClassicSixthEdition extends ExpansionSet {
     private ClassicSixthEdition() {
         super("Classic Sixth Edition", "6ED", "mage.sets.classicsixthedition", new GregorianCalendar(1999, 3, 28).getTime(), SetType.CORE);
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;

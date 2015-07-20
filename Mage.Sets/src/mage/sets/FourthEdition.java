@@ -47,8 +47,8 @@ public class FourthEdition extends ExpansionSet {
     private FourthEdition() {
         super("Fourth Edition", "4ED", "mage.sets.fourthedition", new GregorianCalendar(1995, 3, 1).getTime(), SetType.CORE);
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;

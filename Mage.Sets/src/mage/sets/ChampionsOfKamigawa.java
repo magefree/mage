@@ -15,8 +15,8 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         super("Champions of Kamigawa", "CHK", "mage.sets.championsofkamigawa",  new GregorianCalendar(2004, 9, 1).getTime(), SetType.EXPANSION);
         this.blockName = "Kamigawa";
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
