@@ -25,48 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.sets.coldsnap;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.RecoverAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class UnstableFrontier extends CardImpl {
+public class SunsBounty extends CardImpl {
 
-    public UnstableFrontier(UUID ownerId) {
-        super(ownerId, 145, "Unstable Frontier", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CON";
+    public SunsBounty(UUID ownerId) {
+        super(ownerId, 18, "Sun's Bounty", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "CSP";
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {tap}: Target land you control becomes the basic land type of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        Target target = new TargetControlledPermanent(new FilterControlledLandPermanent());
-        ability.addTarget(target);
-        this.addAbility(ability);
+        // You gain 4 life.
+        this.getSpellAbility().addEffect(new GainLifeEffect(4));
+
+        // Recover {1}{W}
+        this.addAbility(new RecoverAbility(new ManaCostsImpl("{1}{W}"), this));
     }
 
-    public UnstableFrontier(final UnstableFrontier card) {
+    public SunsBounty(final SunsBounty card) {
         super(card);
     }
 
     @Override
-    public UnstableFrontier copy() {
-        return new UnstableFrontier(this);
+    public SunsBounty copy() {
+        return new SunsBounty(this);
     }
 }

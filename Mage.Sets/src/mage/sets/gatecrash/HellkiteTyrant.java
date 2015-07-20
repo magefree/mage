@@ -77,13 +77,13 @@ public class HellkiteTyrant extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Hellkite Tyrant deals combat damage to a player, gain control of all artifacts that player controls.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HellkiteTyrantEffect(),false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HellkiteTyrantEffect(), false, true));
 
         // At the beginning of your upkeep, if you control twenty or more artifacts, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(
                 ability,
-                new PermanentsOnTheBattlefieldCondition(new FilterArtifactPermanent(), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN,19),
+                new PermanentsOnTheBattlefieldCondition(new FilterArtifactPermanent(), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 19),
                 "At the beginning of your upkeep, if you control twenty or more artifacts, you win the game."));
 
     }
@@ -123,7 +123,7 @@ class HellkiteTyrantEffect extends OneShotEffect {
         FilterPermanent filter = new FilterArtifactPermanent();
         filter.add(new ControllerIdPredicate(player.getId()));
 
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId() , game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             ContinuousEffect effect = new HellkiteTyrantControlEffect(source.getControllerId());
             effect.setTargetPointer(new FixedTarget(permanent.getId()));
