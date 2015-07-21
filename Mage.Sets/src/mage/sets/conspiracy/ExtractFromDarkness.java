@@ -29,14 +29,10 @@ package mage.sets.conspiracy;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -45,7 +41,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -126,13 +121,7 @@ class ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect extends OneShotE
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && player.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId())) {
-                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(card.getId()));
-                        game.addEffect(effect, source);
-                    }
-                }
+                player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
             }
             return true;
         }

@@ -41,12 +41,10 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -82,7 +80,7 @@ public class FirebrandRanger extends CardImpl {
 
 class PutLandOnBattlefieldEffect extends OneShotEffect {
     
-    private static final FilterCard filter = new FilterCard("card other than a basic land card");
+    private static final FilterCard filter = new FilterCard("basic land card");
 
     static {
         filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic")));
@@ -116,10 +114,7 @@ class PutLandOnBattlefieldEffect extends OneShotEffect {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                Permanent permanent = game.getPermanent(card.getId());
-                if (permanent != null) {
-                        permanent.setTapped(true);
-                }
+
                 return true;
             }
         }
