@@ -111,6 +111,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
+    protected ManaCost currentlyUnpaidMana;
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
@@ -119,6 +120,8 @@ public class HumanPlayer extends PlayerImpl {
 
     public HumanPlayer(final HumanPlayer player) {
         super(player);
+        this.autoSelectReplacementEffects.addAll(autoSelectReplacementEffects);
+        this.currentlyUnpaidMana = player.currentlyUnpaidMana;
     }
 
     protected void waitForResponse(Game game) {
@@ -248,6 +251,12 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
+        if (outcome.equals(Outcome.PutManaInPool)) {
+            if (currentlyUnpaidMana != null
+                    && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
+                return true;
+            }
+        }
         updateGameStatePriority("choose(3)", game);
         while (!abort) {
             game.fireChooseChoiceEvent(playerId, choice);
@@ -765,8 +774,10 @@ public class HumanPlayer extends PlayerImpl {
         if (zone != null) {
             LinkedHashMap<UUID, ManaAbility> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (useableAbilities != null && useableAbilities.size() > 0) {
-                useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities);
+                useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
+                currentlyUnpaidMana = unpaid;
                 activateAbility(useableAbilities, object, game);
+                currentlyUnpaidMana = null;
             }
         }
     }

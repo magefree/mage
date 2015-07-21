@@ -39,28 +39,28 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author levelX2
  */
-
 public class MorphTest extends CardTestPlayerBase {
 
     /**
-     * Tests if a creature with Morph is cast normal, it behaves as normal creature
+     * Tests if a creature with Morph is cast normal, it behaves as normal
+     * creature
      *
      */
     @Test
     public void testCastMoprhCreatureWithoutMorph() {
-        /*    
-        Pine Walker
-        Creature - Elemental
-        5/5
-        Morph {4}{G} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
-        Whenever Pine Walker or another creature you control is turned face up, untap that creature.
-        */
+        /*
+         Pine Walker
+         Creature - Elemental
+         5/5
+         Morph {4}{G} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+         Whenever Pine Walker or another creature you control is turned face up, untap that creature.
+         */
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "No"); // cast it normal as 5/5
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -69,7 +69,6 @@ public class MorphTest extends CardTestPlayerBase {
 
     }
 
-
     /**
      * Cast the creature face down as a 2/2
      */
@@ -77,10 +76,10 @@ public class MorphTest extends CardTestPlayerBase {
     public void testCastFaceDown() {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -88,6 +87,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "", 2, 2);
 
     }
+
     /**
      * Test triggered turn face up ability of Pine Walker
      */
@@ -95,29 +95,29 @@ public class MorphTest extends CardTestPlayerBase {
     public void testTurnFaceUpTrigger() {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         attack(3, playerA, "");
-        
+
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 18);
-        
+
         assertPermanentCount(playerA, "", 0);
-        assertPermanentCount(playerA, "Pine Walker", 1);        
+        assertPermanentCount(playerA, "Pine Walker", 1);
         assertPowerToughness(playerA, "Pine Walker", 5, 5);
         assertTapped("Pine Walker", false);
 
     }
-    
+
     /**
-     * Test that the triggered "turned face up" ability of Pine Walker does not trigger
-     * as long as Pine Walker is not turned face up.
-     * 
+     * Test that the triggered "turned face up" ability of Pine Walker does not
+     * trigger as long as Pine Walker is not turned face up.
+     *
      */
     @Test
     public void testDoesNotTriggerFaceDown() {
@@ -127,34 +127,35 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Icefeather Aven");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven", NO_TARGET, "Pine Walker", StackClause.WHILE_NOT_ON_STACK);
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         attack(3, playerA, "");
         attack(3, playerA, "");
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{1}{G}{U}: Turn this face-down permanent face up.");
         setChoice(playerA, "No"); // Don't use return permanent to hand effect
-        
+
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertLife(playerA, 20);
         assertLife(playerB, 16);
-        
+
         assertHandCount(playerA, "Pine Walker", 0);
         assertHandCount(playerA, "Icefeather Aven", 0);
         assertPermanentCount(playerA, "", 1);
-        assertPermanentCount(playerA, "Icefeather Aven", 1);        
+        assertPermanentCount(playerA, "Icefeather Aven", 1);
         assertTapped("Icefeather Aven", true);
 
     }
 
     /**
-     * Test that Morph creature do not trigger abilities with their face up attributes
-     * 
+     * Test that Morph creature do not trigger abilities with their face up
+     * attributes
+     *
      */
     @Test
     public void testMorphedRemovesAttributesCreature() {
@@ -162,104 +163,106 @@ public class MorphTest extends CardTestPlayerBase {
         // Creature - Goblin Warrior
         // 2/2
         // When Ponyback Brigade enters the battlefield or is turned face up, put three 1/1 red Goblin creature tokens onto the battlefield.
-        // Morph {2}{R}{W}{B}(You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)        
+        // Morph {2}{R}{W}{B}(You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
         addCard(Zone.HAND, playerA, "Ponyback Brigade");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Soldier of the Pantheon", 1);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ponyback Brigade");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerB, 20); // and not 21 
-        
+        assertLife(playerB, 20); // and not 21
+
         assertPermanentCount(playerA, "", 1);
         assertPermanentCount(playerB, "Soldier of the Pantheon", 1);
 
     }
-    
-   /**
+
+    /**
      * Test to copy a morphed 2/2 creature
-     * 
+     *
      */
     @Test
     public void testCopyAMorphedCreature() {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        
+
         // Clever Impersonator  {2}{U}{U}
         // Creature - Shapeshifter
         // 0/0
         // You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
         addCard(Zone.HAND, playerB, "Clever Impersonator", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
         setChoice(playerB, "Yes"); // use to copy a nonland permanent
         addTarget(playerB, ""); // Morphed creature
-                
+
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, 20);
-        
-        assertPermanentCount(playerA, "", 1);
-        assertPowerToughness(playerA, "", 2,2);
-        assertPermanentCount(playerB, "", 1);
-        assertPowerToughness(playerB, "", 2,2);
 
-    }    
-    
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 2);
+        assertPermanentCount(playerB, "", 1);
+        assertPowerToughness(playerB, "", 2, 2);
+
+    }
+
     /**
-     * 
-     * 
+     *
+     *
      */
     @Test
     public void testPineWalkerWithUnboostEffect() {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
-        
+
         // Doomwake Giant  {4}{B}
         // Creature - Giant
         // 4/6
         // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
         addCard(Zone.HAND, playerB, "Doomwake Giant", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Doomwake Giant");
 
         // activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{R}{W}{B}: Turn this face-down permanent face up.");
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
-        
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 20);
-        
-        assertHandCount(playerA, "Pine Walker", 0);        
+
+        assertHandCount(playerA, "Pine Walker", 0);
         assertHandCount(playerB, "Doomwake Giant", 0);
         assertPermanentCount(playerA, "", 0);
         assertPermanentCount(playerB, "Doomwake Giant", 1);
         assertPermanentCount(playerA, "Pine Walker", 1);
-        assertPowerToughness(playerA, "Pine Walker", 4,4);
+        assertPowerToughness(playerA, "Pine Walker", 4, 4);
 
-    }    
+    }
+
     /**
-     * If a morph is on the table and an enemy Doomwake Giant comes down, the morph goes 
-     * down to 1/1 correctly. If you unmorph the 2/2 and is also a 2/2 after umorphing, 
-     * the morph will be erroneously reduced to 0/0 and die.
-     * 
+     * If a morph is on the table and an enemy Doomwake Giant comes down, the
+     * morph goes down to 1/1 correctly. If you unmorph the 2/2 and is also a
+     * 2/2 after umorphing, the morph will be erroneously reduced to 0/0 and
+     * die.
+     *
      */
     @Test
     public void testDoomwakeGiantEffect() {
@@ -267,38 +270,40 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
-        
+
         // Doomwake Giant  {4}{B}
         // Creature - Giant
         // 4/6
         // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
         addCard(Zone.HAND, playerB, "Doomwake Giant", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ponyback Brigade");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Doomwake Giant");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{R}{W}{B}: Turn this face-down permanent face up.");
-        
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 20);
-        
-        assertHandCount(playerA, "Ponyback Brigade", 0);        
+
+        assertHandCount(playerA, "Ponyback Brigade", 0);
         assertHandCount(playerB, "Doomwake Giant", 0);
         assertPermanentCount(playerA, "", 0);
         assertPermanentCount(playerA, "Goblin", 3);
-        assertPowerToughness(playerA, "Goblin", 1,1,Filter.ComparisonScope.Any);
+        assertPowerToughness(playerA, "Goblin", 1, 1, Filter.ComparisonScope.Any);
         assertPermanentCount(playerB, "Doomwake Giant", 1);
         assertPermanentCount(playerA, "Ponyback Brigade", 1);
-        assertPowerToughness(playerA, "Ponyback Brigade", 1,1);
+        assertPowerToughness(playerA, "Ponyback Brigade", 1, 1);
 
     }
+
     /**
-     * Clone a Morph creature that was cast face down and meanwhile was turned face up
+     * Clone a Morph creature that was cast face down and meanwhile was turned
+     * face up
      *
      */
     @Test
@@ -326,12 +331,13 @@ public class MorphTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Clone", 0);
 
         assertPermanentCount(playerA, "Sagu Mauler", 2);
-        assertPowerToughness(playerA, "Sagu Mauler", 6,6,Filter.ComparisonScope.Any);
+        assertPowerToughness(playerA, "Sagu Mauler", 6, 6, Filter.ComparisonScope.Any);
 
     }
+
     /**
-     * Check that you can't counter a creature cast for it morph costs
-     * with Disdainful Stroke if it's normal cmc > 3
+     * Check that you can't counter a creature cast for it morph costs with
+     * Disdainful Stroke if it's normal cmc > 3
      *
      */
     @Test
@@ -366,16 +372,17 @@ public class MorphTest extends CardTestPlayerBase {
     }
 
     /**
-     * Check that an effect like "Target creature and all other creatures with the same name" does
-     * only effect one face down creature, also if multiple on the battlefield. Because they have no
-     * name, they don't have the same name.
+     * Check that an effect like "Target creature and all other creatures with
+     * the same name" does only effect one face down creature, also if multiple
+     * on the battlefield. Because they have no name, they don't have the same
+     * name.
      *
      */
     @Test
     public void testEchoingDecaySameNameEffect() {
         // Sagu Mauler 6/6 - Creature - Beast
         // Trample, hexproof
-        // Morph {3}{G}{B} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+        // Morph {3}{G}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
         addCard(Zone.HAND, playerA, "Sagu Mauler", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
 
@@ -387,7 +394,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler", NO_TARGET, "Sagu Mauler", StackClause.WHILE_NOT_ON_STACK);
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Echoing Decay", "");
@@ -405,11 +412,11 @@ public class MorphTest extends CardTestPlayerBase {
     }
 
     /**
-     * I played a Akroma, Angel of Fury face down, and my opponent tried to counter it.
-     * The counter failed and Akroma face successfully play face down, when it should have
-     * been countered. (The card text on akroma should not prevent her from being countered).
+     * I played a Akroma, Angel of Fury face down, and my opponent tried to
+     * counter it. The counter failed and Akroma face successfully play face
+     * down, when it should have been countered. (The card text on akroma should
+     * not prevent her from being countered).
      */
-
     @Test
     public void testRuleModifyingEffectsFromManifestedCardWontBeAppliedAbilities() {
         addCard(Zone.HAND, playerA, "Akroma, Angel of Fury", 1);
@@ -417,7 +424,6 @@ public class MorphTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Counterspell", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
@@ -432,11 +438,11 @@ public class MorphTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Akroma, Angel of Fury", 1);
 
     }
-    /**
-     * Check if a face down Morph creature gets exiled, it will
-     * be face up in exile zone.
-     */
 
+    /**
+     * Check if a face down Morph creature gets exiled, it will be face up in
+     * exile zone.
+     */
     @Test
     public void testExileFaceDownCreature() {
         addCard(Zone.HAND, playerA, "Birchlore Rangers", 1);
@@ -444,7 +450,6 @@ public class MorphTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Swords to Plowshares", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
-
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birchlore Rangers");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
@@ -460,8 +465,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Swords to Plowshares", 1);
         assertExileCount("Birchlore Rangers", 1);
 
-
-        for (Card card: currentGame.getExile().getAllCards(currentGame)) {
+        for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Birchlore Rangers")) {
                 Assert.assertEquals("Birchlore Rangers has to be face up in exile", false, card.isFaceDown(currentGame));
                 break;
@@ -469,11 +473,11 @@ public class MorphTest extends CardTestPlayerBase {
         }
 
     }
-   /**
-     * Check that a DiesTriggeredAbility of a creature does not trigger
-     * if the creature dies face down
-     */
 
+    /**
+     * Check that a DiesTriggeredAbility of a creature does not trigger if the
+     * creature dies face down
+     */
     @Test
     public void testDiesTriggeredDoesNotTriggerIfFaceDown() {
         // Flying
@@ -485,7 +489,6 @@ public class MorphTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
-
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
@@ -501,20 +504,19 @@ public class MorphTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Ashcloud Phoenix", 1);
 
-
-        for (Card card: playerA.getGraveyard().getCards(currentGame)) {
+        for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Ashcloud Phoenix")) {
                 Assert.assertEquals("Ashcloud Phoenix has to be face up in graveyard", false, card.isFaceDown(currentGame));
                 break;
             }
         }
 
-    }    
-   /**
-     * Check that a DiesTriggeredAbility of a creature does not trigger
-     * if the creature dies face down in combat
-     */
+    }
 
+    /**
+     * Check that a DiesTriggeredAbility of a creature does not trigger if the
+     * creature dies face down in combat
+     */
     @Test
     public void testDiesTriggeredDoesNotTriggerInCombatIfFaceDown() {
         // Flying
@@ -524,24 +526,22 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Ashcloud Phoenix", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-        // First strike, forestwalk, vigilance 
+        // First strike, forestwalk, vigilance
         // (This creature deals combat damage before creatures without first strike, it can't be blocked as long as defending player controls a Forest, and attacking doesn't cause this creature to tap.)
         addCard(Zone.BATTLEFIELD, playerB, "Mirri, Cat Warrior");
-
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
 
         attack(2, playerB, "Mirri, Cat Warrior");
-        block(2, playerA, "", "Mirri, Cat Warrior"); 
+        block(2, playerA, "", "Mirri, Cat Warrior");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertGraveyardCount(playerA, "Ashcloud Phoenix", 1);
 
-
-        for (Card card: playerA.getGraveyard().getCards(currentGame)) {
+        for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Ashcloud Phoenix")) {
                 Assert.assertEquals("Ashcloud Phoenix has to be face up in graveyard", false, card.isFaceDown(currentGame));
                 break;
@@ -551,13 +551,14 @@ public class MorphTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-    }    
-    /**
-     * Supplant Form does not work correctly with morph creatures. If you bounce and copy
-     * a face-down morph, the created token should be a colorless 2/2, but the token created
-     * is instead the face-up of what the morph creature was.
-     */
+    }
 
+    /**
+     * Supplant Form does not work correctly with morph creatures. If you bounce
+     * and copy a face-down morph, the created token should be a colorless 2/2,
+     * but the token created is instead the face-up of what the morph creature
+     * was.
+     */
     @Test
     public void testSupplantFormWithMorphedCreature() {
         addCard(Zone.HAND, playerA, "Akroma, Angel of Fury", 1);
@@ -566,7 +567,6 @@ public class MorphTest extends CardTestPlayerBase {
         // Return target creature to its owner's hand. You put a token onto the battlefield that's a copy of that creature
         addCard(Zone.HAND, playerB, "Supplant Form", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
-
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
@@ -579,18 +579,17 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Supplant Form", 1);
         assertHandCount(playerA, "Akroma, Angel of Fury", 1);
-        
+
         assertPermanentCount(playerB, "Akroma, Angel of Fury", 0);
         assertPermanentCount(playerB, "", 1);
         assertPowerToughness(playerB, "", 2, 2);
 
-    }    
-    
-    /**
-     * Dragonlord Kolaghan passive of 10 damage works when you play a morph creature 
-     * and it isn't suposed to. Because it is nameless.
-     */
+    }
 
+    /**
+     * Dragonlord Kolaghan passive of 10 damage works when you play a morph
+     * creature and it isn't suposed to. Because it is nameless.
+     */
     @Test
     public void testDragonlordKolaghan() {
         addCard(Zone.GRAVEYARD, playerA, "Akroma, Angel of Fury", 1);
@@ -602,7 +601,6 @@ public class MorphTest extends CardTestPlayerBase {
         // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in his or her graveyard, that player loses 10 life.
         addCard(Zone.BATTLEFIELD, playerB, "Dragonlord Kolaghan", 1);
 
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
 
@@ -610,8 +608,8 @@ public class MorphTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20);
-        
+
         assertPermanentCount(playerA, "", 1);
 
-    }           
+    }
 }

@@ -626,4 +626,24 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
         return moreMana;
     }
+
+    public int getDifferentColors() {
+        int count = 0;
+        if (blue > 0) {
+            count++;
+        }
+        if (black > 0) {
+            count++;
+        }
+        if (green > 0) {
+            count++;
+        }
+        if (white > 0) {
+            count++;
+        }
+        if (red > 0) {
+            count++;
+        }
+        return count;
+    }
 }

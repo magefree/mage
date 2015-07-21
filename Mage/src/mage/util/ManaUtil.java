@@ -1,7 +1,10 @@
 package mage.util;
 
-import java.util.*;
-
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
@@ -17,6 +20,8 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
+import mage.choices.Choice;
+import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 
 /**
@@ -73,6 +78,56 @@ public class ManaUtil {
         }
 
         return useableAbilities;
+    }
+
+    /**
+     * For Human players this is called before a player is asked to select a
+     * mana color to pay a specific cost. If the choice obvious, the color is
+     * auto picked by this method without bothering the human player
+     *
+     * @param choice the color choice to do
+     * @param unpaid the mana still to pay
+     * @return
+     */
+    public static boolean tryToAutoSelectAManaColor(Choice choice, ManaCost unpaid) {
+        String colorToAutoPay = null;
+        if (unpaid.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
+            colorToAutoPay = "White";
+        }
+        if (unpaid.containsColor(ColoredManaSymbol.R) && choice.getChoices().contains("Red")) {
+            if (colorToAutoPay != null) {
+                return false;
+            }
+            colorToAutoPay = "Red";
+        }
+        if (unpaid.containsColor(ColoredManaSymbol.G) && choice.getChoices().contains("Green")) {
+            if (colorToAutoPay != null) {
+                return false;
+            }
+            colorToAutoPay = "Green";
+        }
+        if (unpaid.containsColor(ColoredManaSymbol.U) && choice.getChoices().contains("Blue")) {
+            if (colorToAutoPay != null) {
+                return false;
+            }
+            colorToAutoPay = "Blue";
+        }
+        if (unpaid.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
+            if (colorToAutoPay != null) {
+                return false;
+            }
+            colorToAutoPay = "Black";
+        }
+        // only colorless to pay so take first choice
+        if (unpaid.getMana().getDifferentColors() == 0) {
+            colorToAutoPay = choice.getChoices().iterator().next();
+        }
+        // one possible useful option found
+        if (colorToAutoPay != null) {
+            choice.setChoice(colorToAutoPay);
+            return true;
+        }
+        return false;
     }
 
     private static LinkedHashMap<UUID, ManaAbility> getManaAbilitiesUsingManaSymbols(LinkedHashMap<UUID, ManaAbility> useableAbilities, ManaSymbols symbols, Mana unpaidMana) {
@@ -378,13 +433,12 @@ public class ManaUtil {
         }
     }
 
-    /** Converts a collection of mana symbols into a single condensed string
-     *  e.g.
-     *  {1}{1}{1}{1}{1}{W} = {5}{W}
-     *  {2}{B}{2}{B}{2}{B} = {6}{B}{B}{B}
-     *  {1}{2}{R}{U}{1}{1} = {5}{R}{U}
-     *  {B}{G}{R}          = {B}{G}{R}
-     * */
+    /**
+     * Converts a collection of mana symbols into a single condensed string e.g.
+     * {1}{1}{1}{1}{1}{W} = {5}{W} {2}{B}{2}{B}{2}{B} = {6}{B}{B}{B}
+     * {1}{2}{R}{U}{1}{1} = {5}{R}{U} {B}{G}{R} = {B}{G}{R}
+     *
+     */
     public static String condenseManaCostString(String rawCost) {
         int total = 0;
         int index = 0;
@@ -394,7 +448,7 @@ public class ManaUtil {
         Arrays.sort(splitCost);
         for (String c : splitCost) {
             // If the string is a representation of a number
-            if(c.matches("\\d+")) {
+            if (c.matches("\\d+")) {
                 total += Integer.parseInt(c);
             } else {
                 // First non-number we see we can finish as they are sorted
@@ -405,15 +459,15 @@ public class ManaUtil {
         int splitCostLength = splitCost.length;
         // No need to add {total} to the mana cost if total == 0
         int shift = (total > 0) ? 1 : 0;
-        String [] finalCost = new String[shift + splitCostLength - index];
+        String[] finalCost = new String[shift + splitCostLength - index];
         // Account for no colourless mana symbols seen
-        if(total > 0) {
+        if (total > 0) {
             finalCost[0] = String.valueOf(total);
         }
         System.arraycopy(splitCost, index, finalCost, shift, splitCostLength - index);
         // Combine the cost back as a mana string
         StringBuilder sb = new StringBuilder();
-        for(String s: finalCost) {
+        for (String s : finalCost) {
             sb.append("{" + s + "}");
         }
         // Return the condensed string

@@ -58,6 +58,9 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaToPayVsLand("{G}{W/R}{W}", "Sacred Foundry", 2, WhiteManaAbility.class); // auto choose for hybrid mana: choose {W}
         testManaToPayVsLand("{W/B}{W/B}", "Swamp", 1, BlackManaAbility.class);
 
+        testManaToPayVsLand("{R}", "Glimmervoid", 1, 1);
+        testManaToPayVsLand("{R}{1}", "Glimmervoid", 1, 1);
+
         // we can't auto choose here:
         // let say we auto choose {R}, then we have to use it to pay for {R} not {W/R} (as {W/R} is more generic cost)
         // but in such case what is left to pay is {W/R}{W} and it is possible that we won't have 2 white sources
