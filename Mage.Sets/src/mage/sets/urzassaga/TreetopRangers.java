@@ -29,14 +29,13 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -62,9 +61,7 @@ public class TreetopRangers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Treetop Rangers can't be blocked except by creatures with flying.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(onlyFlyingCreatures, Duration.WhileOnBattlefield)
-        ));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(onlyFlyingCreatures, Duration.WhileOnBattlefield)));
     }
 
     public TreetopRangers(final TreetopRangers card) {

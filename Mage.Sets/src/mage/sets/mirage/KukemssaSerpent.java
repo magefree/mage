@@ -30,7 +30,7 @@ package mage.sets.mirage;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -44,13 +44,11 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -59,7 +57,7 @@ import mage.target.common.TargetLandPermanent;
  * @author fireshoes
  */
 public class KukemssaSerpent extends CardImpl {
-    
+
     private static final FilterLandPermanent filterOpponentLand = new FilterLandPermanent("land an opponent controls");
     private static final FilterControlledLandPermanent filterControlledLand = new FilterControlledLandPermanent("an Island");
 
@@ -76,16 +74,18 @@ public class KukemssaSerpent extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Kukemssa Serpent can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island", "an Island"))));
+
         // {U}, Sacrifice an Island: Target land an opponent controls becomes an Island until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, "Island"), new ManaCostsImpl("{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filterControlledLand, true)));
         ability.addTarget(new TargetLandPermanent(filterOpponentLand));
         this.addAbility(ability);
-        
+
         // When you control no Islands, sacrifice Kukemssa Serpent.
-        this.addAbility(new KukemssaSerpentTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
     }
 
     public KukemssaSerpent(final KukemssaSerpent card) {
@@ -95,31 +95,5 @@ public class KukemssaSerpent extends CardImpl {
     @Override
     public KukemssaSerpent copy() {
         return new KukemssaSerpent(this);
-    }
-}
-
-class KukemssaSerpentTriggeredAbility extends StateTriggeredAbility {
-
-    public KukemssaSerpentTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public KukemssaSerpentTriggeredAbility(final KukemssaSerpentTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KukemssaSerpentTriggeredAbility copy() {
-        return new KukemssaSerpentTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no islands, sacrifice {this}.";
     }
 }

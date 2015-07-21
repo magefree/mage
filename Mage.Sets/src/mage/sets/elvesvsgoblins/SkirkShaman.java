@@ -30,13 +30,12 @@ package mage.sets.elvesvsgoblins;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,7 +54,7 @@ public class SkirkShaman extends CardImpl {
                 Predicates.or(
                         Predicates.and(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)),
                         Predicates.and(new CardTypePredicate(CardType.CREATURE), new ColorPredicate(ObjectColor.RED)
-        ))));
+                        ))));
     }
 
     public SkirkShaman(UUID ownerId) {
@@ -68,7 +67,7 @@ public class SkirkShaman extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Skirk Shaman can't be blocked except by artifact creatures and/or red creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
 
     }
 

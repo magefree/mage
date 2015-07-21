@@ -29,7 +29,7 @@ package mage.sets.iceage;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
@@ -37,10 +37,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -56,10 +54,12 @@ public class GorillaPack extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Gorilla Pack can't attack unless defending player controls a Forest.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Forest","a Forest"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Forest", "a Forest"))));
 
         // When you control no Forests, sacrifice Gorilla Pack.
-        this.addAbility(new GorillaPackTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Forest", "no Forests"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
     }
 
     public GorillaPack(final GorillaPack card) {
@@ -69,37 +69,5 @@ public class GorillaPack extends CardImpl {
     @Override
     public GorillaPack copy() {
         return new GorillaPack(this);
-    }
-}
-
-class GorillaPackTriggeredAbility extends StateTriggeredAbility {
-    
-    public static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
-    
-    {
-        filter.add(new SubtypePredicate("Forest"));
-    }
-
-    public GorillaPackTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public GorillaPackTriggeredAbility(final GorillaPackTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GorillaPackTriggeredAbility copy() {
-        return new GorillaPackTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no forests, sacrifice {this}.";
     }
 }

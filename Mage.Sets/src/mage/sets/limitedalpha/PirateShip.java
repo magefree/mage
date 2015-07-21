@@ -30,7 +30,7 @@ package mage.sets.limitedalpha;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,17 +38,17 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class PirateShip extends CardImpl {
 
@@ -62,13 +62,15 @@ public class PirateShip extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Pirate Ship can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island", "an Island"))));
         // {tap}: Pirate Ship deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // When you control no Islands, sacrifice Pirate Ship.
-        this.addAbility(new PirateShipTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
     }
 
     public PirateShip(final PirateShip card) {
@@ -78,31 +80,5 @@ public class PirateShip extends CardImpl {
     @Override
     public PirateShip copy() {
         return new PirateShip(this);
-    }
-}
-
-class PirateShipTriggeredAbility extends StateTriggeredAbility {
-
-    public PirateShipTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public PirateShipTriggeredAbility(final PirateShipTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PirateShipTriggeredAbility copy() {
-        return new PirateShipTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no islands, sacrifice {this}.";
     }
 }

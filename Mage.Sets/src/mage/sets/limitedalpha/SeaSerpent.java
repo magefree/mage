@@ -29,7 +29,7 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
@@ -37,16 +37,14 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class SeaSerpent extends CardImpl {
 
@@ -67,7 +65,9 @@ public class SeaSerpent extends CardImpl {
         // Sea Serpent can't attack unless defending player controls an Island.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
         // When you control no Islands, sacrifice Sea Serpent.
-        this.addAbility(new SeaSerpentTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
     }
 
     public SeaSerpent(final SeaSerpent card) {
@@ -77,31 +77,5 @@ public class SeaSerpent extends CardImpl {
     @Override
     public SeaSerpent copy() {
         return new SeaSerpent(this);
-    }
-}
-
-class SeaSerpentTriggeredAbility extends StateTriggeredAbility {
-
-    public SeaSerpentTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public SeaSerpentTriggeredAbility(final SeaSerpentTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SeaSerpentTriggeredAbility copy() {
-        return new SeaSerpentTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no islands, sacrifice {this}.";
     }
 }

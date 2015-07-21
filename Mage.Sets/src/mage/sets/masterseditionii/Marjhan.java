@@ -30,7 +30,7 @@ package mage.sets.masterseditionii;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStepCondition;
@@ -51,13 +51,11 @@ import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -66,9 +64,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class Marjhan extends CardImpl {
-    
+
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
-    
+
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
@@ -82,25 +80,27 @@ public class Marjhan extends CardImpl {
 
         // Marjhan doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-        
+
         // {U}{U}, Sacrifice a creature: Untap Marjhan. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new UntapSourceEffect(), new ManaCostsImpl("{U}{U}"), new IsStepCondition(PhaseStep.UPKEEP), null);
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
-        
+
         // Marjhan can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island", "an Island"))));
+
         // {U}{U}: Marjhan gets -1/-0 until end of turn and deals 1 damage to target attacking creature without flying.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 0, Duration.EndOfTurn), new ManaCostsImpl("{U}{U}"));
         Effect effect = new DamageTargetEffect(1);
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-        
+
         // When you control no Islands, sacrifice Marjhan.
-        this.addAbility(new MarjhanTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
     }
 
     public Marjhan(final Marjhan card) {
@@ -110,31 +110,5 @@ public class Marjhan extends CardImpl {
     @Override
     public Marjhan copy() {
         return new Marjhan(this);
-    }
-}
-
-class MarjhanTriggeredAbility extends StateTriggeredAbility {
-
-    public MarjhanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public MarjhanTriggeredAbility(final MarjhanTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MarjhanTriggeredAbility copy() {
-        return new MarjhanTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no islands, sacrifice {this}.";
     }
 }

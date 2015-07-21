@@ -30,7 +30,7 @@ package mage.sets.commander2013;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -40,12 +40,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
@@ -57,6 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 public class EndrekSahrMasterBreeder extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a creature spell");
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -74,7 +74,9 @@ public class EndrekSahrMasterBreeder extends CardImpl {
         // Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost.
         this.addAbility(new SpellCastControllerTriggeredAbility(new EndrekSahrMasterBreederEffect(), filter, false, true));
         // When you control seven or more Thrulls, sacrifice Endrek Sahr, Master Breeder.
-        this.addAbility(new EndrekSahrMasterBreederTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterCreaturePermanent("Thrull", "seven or more Thrulls"), Filter.ComparisonType.GreaterThan, 6,
+                new SacrificeSourceEffect()));
     }
 
     public EndrekSahrMasterBreeder(final EndrekSahrMasterBreeder card) {
@@ -84,37 +86,6 @@ public class EndrekSahrMasterBreeder extends CardImpl {
     @Override
     public EndrekSahrMasterBreeder copy() {
         return new EndrekSahrMasterBreeder(this);
-    }
-}
-
-class EndrekSahrMasterBreederTriggeredAbility extends StateTriggeredAbility {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    static {
-        filter.add(new SubtypePredicate("Thrull"));
-    }
-
-    public EndrekSahrMasterBreederTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public EndrekSahrMasterBreederTriggeredAbility(final EndrekSahrMasterBreederTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EndrekSahrMasterBreederTriggeredAbility copy() {
-        return new EndrekSahrMasterBreederTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(filter, this.getControllerId(), game) >= 7);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control seven or more Thrulls, sacrifice {this}.";
     }
 }
 
@@ -138,8 +109,8 @@ class EndrekSahrMasterBreederEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell == null) {
-            spell = (Spell) game.getLastKnownInformation(((FixedTarget)getTargetPointer()).getTarget(), Zone.STACK);
-        }            
+            spell = (Spell) game.getLastKnownInformation(((FixedTarget) getTargetPointer()).getTarget(), Zone.STACK);
+        }
         if (spell != null) {
             int cmc = spell.getConvertedManaCost();
             if (cmc > 0) {

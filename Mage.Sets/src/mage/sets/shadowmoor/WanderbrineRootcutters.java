@@ -30,13 +30,12 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -45,9 +44,9 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
  */
 public class WanderbrineRootcutters extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
@@ -61,8 +60,8 @@ public class WanderbrineRootcutters extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Wanderbrine Rootcutters can't be blocked by green creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+
     }
 
     public WanderbrineRootcutters(final WanderbrineRootcutters card) {

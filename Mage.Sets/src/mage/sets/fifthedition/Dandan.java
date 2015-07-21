@@ -29,21 +29,19 @@ package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
 import mage.constants.*;
+import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class Dandan extends CardImpl {
 
@@ -56,10 +54,12 @@ public class Dandan extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Dandan can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island", "an Island"))));
+
         // When you control no Islands, sacrifice Dandan.
-        this.addAbility(new DandanTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
     }
 
     public Dandan(final Dandan card) {
@@ -69,31 +69,5 @@ public class Dandan extends CardImpl {
     @Override
     public Dandan copy() {
         return new Dandan(this);
-    }
-}
-
-class DandanTriggeredAbility extends StateTriggeredAbility {
-
-    public DandanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public DandanTriggeredAbility(final DandanTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DandanTriggeredAbility copy() {
-        return new DandanTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no Islands, sacrifice {this}.";
     }
 }
