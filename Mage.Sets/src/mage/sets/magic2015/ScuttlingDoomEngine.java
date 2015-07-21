@@ -31,14 +31,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -49,14 +48,15 @@ import mage.target.common.TargetOpponent;
  * @author emerald000
  */
 public class ScuttlingDoomEngine extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
+
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
     public ScuttlingDoomEngine(UUID ownerId) {
-        
+
         super(ownerId, 229, "Scuttling Doom Engine", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.expansionSetCode = "M15";
         this.subtype.add("Construct");
@@ -65,7 +65,7 @@ public class ScuttlingDoomEngine extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Scuttling Doom Engine can't be blocked by creatures with power 2 or less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
         // When Scuttling Doom Engine dies, it deals 6 damage to target opponnent
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(6), false);
         ability.addTarget(new TargetOpponent());

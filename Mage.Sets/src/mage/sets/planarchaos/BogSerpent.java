@@ -29,7 +29,7 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
@@ -37,10 +37,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -56,10 +54,12 @@ public class BogSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Bog Serpent can't attack unless defending player controls a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Swamp","a Swamp"))));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Swamp", "a Swamp"))));
+
         // When you control no Swamps, sacrifice Bog Serpent.
-        this.addAbility(new BogSerpentTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Swamp", "no Swamps"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
     }
 
     public BogSerpent(final BogSerpent card) {
@@ -69,37 +69,5 @@ public class BogSerpent extends CardImpl {
     @Override
     public BogSerpent copy() {
         return new BogSerpent(this);
-    }
-}
-
-class BogSerpentTriggeredAbility extends StateTriggeredAbility {
-    
-    public static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
-    
-    {
-        filter.add(new SubtypePredicate("Swamp"));
-    }
-
-    public BogSerpentTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public BogSerpentTriggeredAbility(final BogSerpentTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BogSerpentTriggeredAbility copy() {
-        return new BogSerpentTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no swamps, sacrifice {this}.";
     }
 }

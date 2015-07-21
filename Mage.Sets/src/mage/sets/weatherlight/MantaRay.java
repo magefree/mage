@@ -29,29 +29,35 @@ package mage.sets.weatherlight;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.StateTriggeredAbility;
+import mage.ObjectColor;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author fireshoes
  */
 public class MantaRay extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by blue creatures");
+
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLUE)));
+    }
 
     public MantaRay(UUID ownerId) {
         super(ownerId, 42, "Manta Ray", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
@@ -61,13 +67,16 @@ public class MantaRay extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Manta Ray can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island", "an Island"))));
+
         // Manta Ray can't be blocked except by blue creatures.
-        this.addAbility(MantaRayAbility.getInstance());
-        
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+
         // When you control no Islands, sacrifice Manta Ray.
-        this.addAbility(new MantaRayTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
+
     }
 
     public MantaRay(final MantaRay card) {
@@ -77,89 +86,5 @@ public class MantaRay extends CardImpl {
     @Override
     public MantaRay copy() {
         return new MantaRay(this);
-    }
-}
-
-class MantaRayTriggeredAbility extends StateTriggeredAbility {
-
-    public MantaRayTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public MantaRayTriggeredAbility(final MantaRayTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MantaRayTriggeredAbility copy() {
-        return new MantaRayTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no islands, sacrifice {this}.";
-    }
-}
-
-class MantaRayAbility extends EvasionAbility {
-
-    private static MantaRayAbility instance;
-
-    public static MantaRayAbility getInstance() {
-        if (instance == null) {
-            instance = new MantaRayAbility();
-        }
-        return instance;
-    }
-
-    private MantaRayAbility() {
-        this.addEffect(new MantaRayEffect());
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't be blocked except by blue creatures.";
-    }
-
-    @Override
-    public MantaRayAbility copy() {
-        return getInstance();
-    }
-}
-
-class MantaRayEffect extends RestrictionEffect {
-
-    public MantaRayEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public MantaRayEffect(final MantaRayEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(MantaRayAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getColor(game).isBlue()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public MantaRayEffect copy() {
-        return new MantaRayEffect(this);
     }
 }

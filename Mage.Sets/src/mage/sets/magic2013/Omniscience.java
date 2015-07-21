@@ -122,9 +122,13 @@ class IsBeingCastFromHandCondition implements Condition {
             UUID splitCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(splitCardId);
         }
-        if (object instanceof Spell) {
+        if (object instanceof Spell) { // needed to check if it can be cast by alternate cost
             Spell spell = (Spell) object;
             return spell.getFromZone() == Zone.HAND;
+        }
+        if (object instanceof Card) { // needed for the check what's playable
+            Card card = (Card) object;
+            return game.getPlayer(card.getOwnerId()).getHand().get(card.getId(), game) != null;
         }
         return false;
     }

@@ -29,6 +29,7 @@ package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -70,7 +71,7 @@ public class EvilEyeOfOrmsByGore extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, cantAttackFilter)));
 
         // Evil Eye of Orms-by-Gore can't be blocked except by Walls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(cantBeBlockedByFilter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(cantBeBlockedByFilter, Duration.WhileOnBattlefield)));
     }
 
     public EvilEyeOfOrmsByGore(final EvilEyeOfOrmsByGore card) {

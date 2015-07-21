@@ -29,23 +29,26 @@ package mage.sets.tempestremastered;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
  * @author emerald000
  */
 public class EndangeredArmodon extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 2 or less");
+
+    static {
+        filter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, 3));
+    }
 
     public EndangeredArmodon(UUID ownerId) {
         super(ownerId, 171, "Endangered Armodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
@@ -55,7 +58,9 @@ public class EndangeredArmodon extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When you control a creature with toughness 2 or less, sacrifice Endangered Armodon.
-        this.addAbility(new EndangeredArmodonStateTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                filter, Filter.ComparisonType.GreaterThan, 0,
+                new SacrificeSourceEffect()));
     }
 
     public EndangeredArmodon(final EndangeredArmodon card) {
@@ -65,36 +70,5 @@ public class EndangeredArmodon extends CardImpl {
     @Override
     public EndangeredArmodon copy() {
         return new EndangeredArmodon(this);
-    }
-}
-
-class EndangeredArmodonStateTriggeredAbility extends StateTriggeredAbility {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with toughness 2 or less");
-    static {
-        filter.add(new ToughnessPredicate(ComparisonType.LessThan, 3));
-    }
-
-    EndangeredArmodonStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    EndangeredArmodonStateTriggeredAbility(final EndangeredArmodonStateTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EndangeredArmodonStateTriggeredAbility copy() {
-        return new EndangeredArmodonStateTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().contains(filter, this.getControllerId(), game, 1);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control a creature with toughness 2 or less, sacrifice {this}.";
     }
 }

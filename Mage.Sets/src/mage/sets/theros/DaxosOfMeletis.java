@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -77,7 +77,7 @@ public class DaxosOfMeletis extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Daxos of Meletis can't be blocked by creatures with power 3 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
 
         // Whenever Daxos of Meletis deals combat damage to a player, exile the top card of that player's library. You gain life equal to that card's converted mana cost. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DaxosOfMeletisEffect(), false, true));

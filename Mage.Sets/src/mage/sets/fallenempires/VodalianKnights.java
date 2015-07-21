@@ -29,7 +29,7 @@ package mage.sets.fallenempires;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,10 +43,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -64,13 +62,15 @@ public class VodalianKnights extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // Vodalian Knights can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island", "an Island"))));
+
         // When you control no Islands, sacrifice Vodalian Knights.
-        this.addAbility(new VodalianKnightsTriggeredAbility());
-        
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
+
         // {U}: Vodalian Knights gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
@@ -82,31 +82,5 @@ public class VodalianKnights extends CardImpl {
     @Override
     public VodalianKnights copy() {
         return new VodalianKnights(this);
-    }
-}
-
-class VodalianKnightsTriggeredAbility extends StateTriggeredAbility {
-
-    public VodalianKnightsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public VodalianKnightsTriggeredAbility(final VodalianKnightsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VodalianKnightsTriggeredAbility copy() {
-        return new VodalianKnightsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no islands, sacrifice {this}.";
     }
 }

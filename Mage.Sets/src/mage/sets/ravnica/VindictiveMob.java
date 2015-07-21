@@ -30,14 +30,13 @@ package mage.sets.ravnica;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -52,7 +51,7 @@ public class VindictiveMob extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Saproling"));
     }
-    
+
     public VindictiveMob(UUID ownerId) {
         super(ownerId, 112, "Vindictive Mob", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "RAV";
@@ -63,9 +62,9 @@ public class VindictiveMob extends CardImpl {
 
         // When Vindictive Mob enters the battlefield, sacrifice a creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, null)));
-        
+
         // Vindictive Mob can't be blocked by Saprolings.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public VindictiveMob(final VindictiveMob card) {

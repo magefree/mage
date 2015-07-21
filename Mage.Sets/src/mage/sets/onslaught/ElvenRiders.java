@@ -29,14 +29,13 @@ package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,7 +52,7 @@ public class ElvenRiders extends CardImpl {
     static {
         filter.add(Predicates.not(Predicates.or(new SubtypePredicate("Wall"), new AbilityPredicate(FlyingAbility.class))));
     }
-    
+
     public ElvenRiders(UUID ownerId) {
         super(ownerId, 254, "Elven Riders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "ONS";
@@ -63,7 +62,7 @@ public class ElvenRiders extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Elven Riders can't be blocked except by Walls and/or creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public ElvenRiders(final ElvenRiders card) {

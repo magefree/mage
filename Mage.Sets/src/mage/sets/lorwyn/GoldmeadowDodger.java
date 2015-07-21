@@ -29,13 +29,12 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -51,7 +50,7 @@ public class GoldmeadowDodger extends CardImpl {
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
-    
+
     public GoldmeadowDodger(UUID ownerId) {
         super(ownerId, 16, "Goldmeadow Dodger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "LRW";
@@ -61,7 +60,7 @@ public class GoldmeadowDodger extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Goldmeadow Dodger can't be blocked by creatures with power 4 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public GoldmeadowDodger(final GoldmeadowDodger card) {
