@@ -30,24 +30,21 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -67,11 +64,13 @@ public class RaggedVeins extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted creature is dealt damage, its controller loses that much life.
-        this.addAbility(new RaggedVeinsTriggeredAbility());
+        Effect effect = new LoseLifeTargetEffect(new NumericSetToEffectValues("that much", "damage"));
+        effect.setText("its controller loses that much life");
+        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 
     public RaggedVeins(final RaggedVeins card) {
@@ -81,80 +80,5 @@ public class RaggedVeins extends CardImpl {
     @Override
     public RaggedVeins copy() {
         return new RaggedVeins(this);
-    }
-}
-
-class RaggedVeinsTriggeredAbility extends TriggeredAbilityImpl {
-
-    public RaggedVeinsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RaggedVeinsEffect());
-    }
-
-    public RaggedVeinsTriggeredAbility(final RaggedVeinsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RaggedVeinsTriggeredAbility copy() {
-        return new RaggedVeinsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(sourceId);
-        UUID targetId = event.getTargetId();
-        if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
-            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(targetId));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature is dealt damage, its controller loses that much life.";
-    }
-}
-
-class  RaggedVeinsEffect extends OneShotEffect {
-
-    public RaggedVeinsEffect() {
-        super(Outcome.Damage);
-        this.staticText = "its controller loses that much life";
-    }
-
-    public RaggedVeinsEffect(final RaggedVeinsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RaggedVeinsEffect copy() {
-        return new RaggedVeinsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = this.targetPointer.getFirst(game, source);
-        if (damageAmount != null && targetId != null) {
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            }
-            if (permanent != null) {
-                Player player = game.getPlayer(permanent.getControllerId());
-                if (player != null) {
-                    player.loseLife(damageAmount, game);
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

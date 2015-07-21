@@ -29,7 +29,7 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -37,10 +37,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -65,7 +64,8 @@ public class SpitefulShadows extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
-        this.addAbility(new SpitefulShadowsTriggeredAbility());
+        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, new SpitefulShadowsEffect(),
+            false, SetTargetPointer.PERMANENT));
     }
 
     public SpitefulShadows(final SpitefulShadows card) {
@@ -75,44 +75,6 @@ public class SpitefulShadows extends CardImpl {
     @Override
     public SpitefulShadows copy() {
         return new SpitefulShadows(this);
-    }
-}
-
-class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl {
-
-    public SpitefulShadowsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SpitefulShadowsEffect());
-    }
-
-    public SpitefulShadowsTriggeredAbility(final SpitefulShadowsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SpitefulShadowsTriggeredAbility copy() {
-        return new SpitefulShadowsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(sourceId);
-        UUID targetId = event.getTargetId();
-        if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
-            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(targetId));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature is dealt damage, it deals that much damage to its controller.";
     }
 }
 
@@ -134,7 +96,7 @@ class SpitefulShadowsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Integer damageAmount = (Integer) this.getValue("damageAmount");
+        Integer damageAmount = (Integer) this.getValue("damage");
         if (damageAmount != null) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
