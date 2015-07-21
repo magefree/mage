@@ -407,12 +407,12 @@ public class GameController implements GameCallback {
         if (allJoined()) {
             joinWaitingExecutor.shutdownNow();
             ThreadExecutor.getInstance().getCallExecutor().execute(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            startGame();
-                        }
-                    });
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        startGame();
+                    }
+                });
         }
     }
 

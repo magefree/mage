@@ -179,7 +179,7 @@ public class TableController {
                     deck = Deck.load(deckList, false, false);
                 } catch (GameException ex) {
                     logger.error("Error loading deck", ex);
-                    user.showUserMessage("Join Table", "Error loading deck");
+                    user.showUserMessage("Join Table", "Error loading deck: " + ex.getMessage());
                     return false;
                 }
             } else {
@@ -280,7 +280,7 @@ public class TableController {
             deck = Deck.load(deckList, false, false);
         } catch (GameException ex) {
             logger.error("Error load deck", ex);
-            user.showUserMessage("Join Table", "Error loading deck");
+            user.showUserMessage("Join Table", "Error loading deck:" + ex.getMessage());
             return false;
         }
 
@@ -373,7 +373,7 @@ public class TableController {
         }
         catch (GameException ex) {
             logger.error("Error loading deck", ex);
-            user.showUserError("Submit deck", "Error loading deck");
+            user.showUserError("Submit deck", "Error loading deck: " + ex.getMessage());
             return false;
         }
         if (table.getState() == TableState.SIDEBOARDING && table.getMatch() != null) {
@@ -402,7 +402,7 @@ public class TableController {
         }
         catch (GameException ex) {
             logger.error("Error loading deck", ex);
-            user.showUserError("Update deck", "Error loading deck");
+            user.showUserError("Update deck", "Error loading deck: " + ex.getMessage());
             return;
         }
         updateDeck(userId, playerId, deck);

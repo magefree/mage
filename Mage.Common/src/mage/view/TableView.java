@@ -63,6 +63,15 @@ public class TableView implements Serializable {
     private List<SeatView> seats = new ArrayList<>();
     private List<UUID> games = new ArrayList<>();
 
+    public static TableView emptyTableView = new TableView();
+    
+    private TableView() {
+        deckType = "";
+        additionalInfo = "";
+        skillLevel = SkillLevel.BEGINNER;
+        tableStateText = "Empty";
+    }
+    
     public TableView(Table table) {    
         this.tableId = table.getId();
         this.gameType = table.getGameType();

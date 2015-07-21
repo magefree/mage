@@ -223,7 +223,12 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     }
 
     public void receiveTableView(TableView view) {
-        tableViewQueue.offer(view);
+        if (view == null) {
+            tableViewQueue.offer(TableView.emptyTableView);
+        }
+        else {
+            tableViewQueue.offer(view);
+        }
     }
     
     public void receiveTournamentView(TournamentView view) {
