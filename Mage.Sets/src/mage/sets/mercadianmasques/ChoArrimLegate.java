@@ -52,7 +52,7 @@ public class ChoArrimLegate extends CardImpl {
     
     private static final FilterPermanent filterPlains = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();
-    private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("black");
 
     static {
         filterPlains.add(new SubtypePredicate(("Plains")));

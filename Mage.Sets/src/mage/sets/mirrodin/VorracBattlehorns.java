@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -61,7 +62,9 @@ public class VorracBattlehorns extends CardImpl {
 
         // Equipped creature has trample and can't be blocked by more than one creature.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT));
-        ability.addEffect(new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.EQUIPMENT, 1));
+        Effect effect = new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.EQUIPMENT, 1);
+        effect.setText(" and can't be blocked by more than one creature");
+        ability.addEffect(effect);
         this.addAbility(ability);
         
         // Equip {1}
