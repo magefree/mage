@@ -48,6 +48,7 @@ import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -69,6 +70,7 @@ public class JolraelEmpressOfBeasts extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JolraelEmpressOfBeastsEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
