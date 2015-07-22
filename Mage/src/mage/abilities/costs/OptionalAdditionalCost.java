@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs;
 
 /**
  * @author LevelX2
  */
-public interface OptionalAdditionalCost extends Cost {
+public interface OptionalAdditionalCost extends Costs {
 
     String getName();
 
@@ -52,14 +51,14 @@ public interface OptionalAdditionalCost extends Cost {
     String getReminderText();
 
     /**
-     * Returns a text suffix for the game log, that can be added to
-     * the cast message.
+     * Returns a text suffix for the game log, that can be added to the cast
+     * message.
      *
-     * @param position - if there are multiple costs, it's the postion the cost is set (starting with 0)
+     * @param position - if there are multiple costs, it's the postion the cost
+     * is set (starting with 0)
      * @return
      */
     String getCastSuffixMessage(int position);
-
 
     /**
      * If the player intends to pay the cost, the cost will be activated
@@ -96,8 +95,9 @@ public interface OptionalAdditionalCost extends Cost {
 
     /**
      * Returns the number of times the cost was activated
+     *
      * @return
      */
     int getActivateCount();
-        
+
 }
