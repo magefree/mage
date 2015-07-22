@@ -68,42 +68,53 @@ import mage.util.CardUtil;
  * the former as the direct result of a champion ability. #
  *
  */
-
 public class ChampionAbility extends StaticAbility {
 
     protected String[] subtypes;
     protected String objectDescription;
 
-
     public ChampionAbility(Card card, String subtype) {
         this(card, new String[]{subtype});
     }
-    
+
+    /**
+     * Champion one or more creature types or if the subtype array is empty
+     * champion every creature.
+     *
+     * @param card
+     * @param subtypes subtypes to champion with, if empty all creatures can be
+     * used
+     */
     public ChampionAbility(Card card, String[] subtypes) {
         super(Zone.BATTLEFIELD, null);
 
         this.subtypes = subtypes;
-
         StringBuilder sb = new StringBuilder("another ");
         ArrayList<Predicate<MageObject>> subtypesPredicates = new ArrayList<>();
-        int i = 0;
-        for (String subtype : this.subtypes) {
-            subtypesPredicates.add(new SubtypePredicate(subtype));
-            if (i == 0) {
-                sb.append(subtype);
-            } else {
-                sb.append(" or ").append(subtype);
+        if (subtypes != null) {
+            int i = 0;
+            for (String subtype : this.subtypes) {
+                subtypesPredicates.add(new SubtypePredicate(subtype));
+                if (i == 0) {
+                    sb.append(subtype);
+                } else {
+                    sb.append(" or ").append(subtype);
+                }
+                i++;
             }
-            i++;
+        } else {
+            sb.append("creature");
         }
         this.objectDescription = sb.toString();
         FilterControlledPermanent filter = new FilterControlledPermanent(objectDescription);
-        filter.add(Predicates.or(subtypesPredicates));
+        if (subtypes != null) {
+            filter.add(Predicates.or(subtypesPredicates));
+        }
         filter.add(new AnotherPredicate());
 
         // When this permanent enters the battlefield, sacrifice it unless you exile another [object] you control.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, new StringBuilder(card.getName()).append(" championed permanents").toString())),false);
+                new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, new StringBuilder(card.getName()).append(" championed permanents").toString())), false);
         ability1.setRuleVisible(false);
         addSubAbility(ability1);
 
@@ -139,7 +150,7 @@ class ChampionExileCost extends CostImpl {
     private String exileZone = null;
 
     public ChampionExileCost(FilterControlledPermanent filter, String exileZone) {
-        this.addTarget(new TargetControlledPermanent(1,1,filter, true));
+        this.addTarget(new TargetControlledPermanent(1, 1, filter, true));
         this.text = "exile " + filter.getMessage() + " you control";
         this.exileZone = exileZone;
     }
@@ -152,11 +163,11 @@ class ChampionExileCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Player controller = game.getPlayer(controllerId);
-        MageObject sourceObject = ability.getSourceObject(game);        
+        MageObject sourceObject = ability.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
                 UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter());
-                for (UUID targetId: targets.get(0).getTargets()) {
+                for (UUID targetId : targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent == null) {
                         return false;
