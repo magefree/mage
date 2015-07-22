@@ -25,45 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.Filter.ComparisonType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class ElementalBond extends CardImpl {
+public class CyclicalEvolution extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature with power 3 or greater");
+    public CyclicalEvolution(UUID ownerId) {
+        super(ownerId, 125, "Cyclical Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
+        this.expansionSetCode = "FUT";
 
-    static {
-        filter.add(new PowerPredicate(ComparisonType.GreaterThan, 2));
+        // Target creature gets +3/+3 until end of turn. Exile Cyclical Evolution with three time counters on it.
+        getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+        getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), new StaticValue(3), true, true);
+        effect.setText("with 3 time counters on it");
+        getSpellAbility().addEffect(effect);
+
+        // Suspend 3-{2}{G}
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{G}"), this));
     }
 
-    public ElementalBond(UUID ownerId) {
-        super(ownerId, 174, "Elemental Bond", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "ORI";
-
-        // Whenever a creature with power 3 or greater enters the battlefield under your control, draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
-    }
-
-    public ElementalBond(final ElementalBond card) {
+    public CyclicalEvolution(final CyclicalEvolution card) {
         super(card);
     }
 
     @Override
-    public ElementalBond copy() {
-        return new ElementalBond(this);
+    public CyclicalEvolution copy() {
+        return new CyclicalEvolution(this);
     }
 }
