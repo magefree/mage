@@ -63,7 +63,7 @@ public class VorracBattlehorns extends CardImpl {
         // Equipped creature has trample and can't be blocked by more than one creature.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.EQUIPMENT, 1);
-        effect.setText(" and can't be blocked by more than one creature");
+        effect.setText("and can't be blocked by more than one creature");
         ability.addEffect(effect);
         this.addAbility(ability);
         
