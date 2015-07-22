@@ -25,56 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.abilities.condition.CompoundCondition;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.OpponentControlsPermanentCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.constants.Zone;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class TrespasserIlVec extends CardImpl {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
-    private static final FilterPermanent filterSwamp = new FilterPermanent();
+    public TrespasserIlVec(UUID ownerId) {
+        super(ownerId, 138, "Trespasser il-Vec", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-    static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        // Discard a card: Trespasser il-Vec gains shadow until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+                new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), 
+                new DiscardCardCost()));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
-
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
-        this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
-    }
-
-    public Massacre(final Massacre card) {
+    public TrespasserIlVec(final TrespasserIlVec card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public TrespasserIlVec copy() {
+        return new TrespasserIlVec(this);
     }
 }

@@ -33,48 +33,50 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class MoggSalvage extends CardImpl {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
-    private static final FilterPermanent filterSwamp = new FilterPermanent();
+    private static final FilterPermanent filterMountain = new FilterPermanent();
+    private static final FilterPermanent filterIsland = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        filterMountain.add(new SubtypePredicate(("Mountain")));
+        filterIsland.add(new SubtypePredicate(("Island")));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+    public MoggSalvage(UUID ownerId) {
+        super(ownerId, 94, "Mogg Salvage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "NMS";
 
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
+        // If an opponent controls an Island and you control a Mountain, you may cast Mogg Salvage without paying its mana cost.
+        Condition condition = new CompoundCondition("If an opponent controls an Island and you control a Mountain",
+                new OpponentControlsPermanentCondition(filterIsland),
+                new PermanentsOnTheBattlefieldCondition(filterMountain));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
+
+        // Destroy target artifact.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
     }
 
-    public Massacre(final Massacre card) {
+    public MoggSalvage(final MoggSalvage card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public MoggSalvage copy() {
+        return new MoggSalvage(this);
     }
 }

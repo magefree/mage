@@ -25,56 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class RushwoodLegate extends CardImpl {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
-    private static final FilterPermanent filterSwamp = new FilterPermanent();
+    private static final FilterPermanent filterIsland = new FilterPermanent();
+    private static final FilterPermanent filterForest = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        filterForest.add(new SubtypePredicate(("Forest")));
+        filterIsland.add(new SubtypePredicate(("Island")));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+    public RushwoodLegate(UUID ownerId) {
+        super(ownerId, 266, "Rushwood Legate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Dryad");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
+        // If an opponent controls an Island and you control a Forest, you may cast Rushwood Legate without paying its mana cost.
+        Condition condition = new CompoundCondition("If an opponent controls an Island and you control a Forest",
+                new OpponentControlsPermanentCondition(filterIsland),
+                new PermanentsOnTheBattlefieldCondition(filterForest));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
     }
 
-    public Massacre(final Massacre card) {
+    public RushwoodLegate(final RushwoodLegate card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public RushwoodLegate copy() {
+        return new RushwoodLegate(this);
     }
 }

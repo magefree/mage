@@ -25,53 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.torment;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class MagusOfTheTabernacle extends CardImpl {
+public class CoralNet extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
 
-    static private final String rule = "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}\"";
+    static {
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.WHITE),
+                new ColorPredicate(ObjectColor.GREEN)));
+    }
+    
+    static private final String rule = "Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature unless you discard a card.\"";
 
-    public MagusOfTheTabernacle(UUID ownerId) {
-        super(ownerId, 8, "Magus of the Tabernacle", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    public CoralNet(UUID ownerId) {
+        super(ownerId, 35, "Coral Net", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
+        this.expansionSetCode = "TOR";
+        this.subtype.add("Aura");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(6);
-
-        // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
-        Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(abilityToGain, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), rule)));
+        // Enchant green or white creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        
+        // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you discard a card."
+        Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(
+                new SacrificeSourceUnlessPaysEffect(new DiscardCardCost()), TargetController.YOU, false);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public MagusOfTheTabernacle(final MagusOfTheTabernacle card) {
+    public CoralNet(final CoralNet card) {
         super(card);
     }
 
     @Override
-    public MagusOfTheTabernacle copy() {
-        return new MagusOfTheTabernacle(this);
+    public CoralNet copy() {
+        return new CoralNet(this);
     }
 }

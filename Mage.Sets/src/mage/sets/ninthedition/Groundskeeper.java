@@ -25,56 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.abilities.condition.CompoundCondition;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.OpponentControlsPermanentCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.constants.Zone;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class Groundskeeper extends CardImpl {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
-    private static final FilterPermanent filterSwamp = new FilterPermanent();
+    public Groundskeeper(UUID ownerId) {
+        super(ownerId, 247, "Groundskeeper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "9ED";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        // {1}{G}: Return target basic land card from your graveyard to your hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterBasicLandCard("basic land card from your graveyard")));
+        this.addAbility(ability);
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
-
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
-        this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
-    }
-
-    public Massacre(final Massacre card) {
+    public Groundskeeper(final Groundskeeper card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public Groundskeeper copy() {
+        return new Groundskeeper(this);
     }
 }

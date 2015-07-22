@@ -33,48 +33,49 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class RefreshingRain extends CardImpl {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
+    private static final FilterPermanent filterForest = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
+        filterForest.add(new SubtypePredicate(("Forest")));
         filterSwamp.add(new SubtypePredicate(("Swamp")));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+    public RefreshingRain(UUID ownerId) {
+        super(ownerId, 110, "Refreshing Rain", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "NMS";
 
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
+        // If an opponent controls a Swamp and you control a Forest, you may cast Refreshing Rain without paying its mana cost.
+        Condition condition = new CompoundCondition("If an opponent controls a Swamp and you control a Forest",
+                new OpponentControlsPermanentCondition(filterSwamp),
+                new PermanentsOnTheBattlefieldCondition(filterForest));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
+
+        // Target player gains 6 life.
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(6));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Massacre(final Massacre card) {
+    public RefreshingRain(final RefreshingRain card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public RefreshingRain copy() {
+        return new RefreshingRain(this);
     }
 }

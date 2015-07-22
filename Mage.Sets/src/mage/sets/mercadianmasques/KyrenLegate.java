@@ -25,56 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class KyrenLegate extends CardImpl {
 
     private static final FilterPermanent filterPlains = new FilterPermanent();
-    private static final FilterPermanent filterSwamp = new FilterPermanent();
+    private static final FilterPermanent filterMountain = new FilterPermanent();
 
     static {
         filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        filterMountain.add(new SubtypePredicate(("Mountain")));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+    public KyrenLegate(UUID ownerId) {
+        super(ownerId, 197, "Kyren Legate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Goblin");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
 
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
+        // If an opponent controls a Plains and you control a Mountain, you may cast Kyren Legate without paying its mana cost.
+        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Mountain",
                 new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
+                new PermanentsOnTheBattlefieldCondition(filterMountain));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
     }
 
-    public Massacre(final Massacre card) {
+    public KyrenLegate(final KyrenLegate card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public KyrenLegate copy() {
+        return new KyrenLegate(this);
     }
 }

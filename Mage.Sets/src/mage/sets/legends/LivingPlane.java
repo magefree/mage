@@ -25,56 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.legends;
 
 import java.util.UUID;
-import mage.abilities.condition.CompoundCondition;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.OpponentControlsPermanentCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.constants.Zone;
+import mage.filter.common.FilterLandPermanent;
+import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class LivingPlane extends CardImpl {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
-    private static final FilterPermanent filterSwamp = new FilterPermanent();
+    public LivingPlane(UUID ownerId) {
+        super(ownerId, 107, "Living Plane", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
+        this.expansionSetCode = "LEG";
+        this.supertype.add("World");
 
-    static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        // All lands are 1/1 creatures that are still lands.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new LivingPlaneToken(), "lands", new FilterLandPermanent("lands"), Duration.WhileOnBattlefield)));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
-
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
-        this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
-    }
-
-    public Massacre(final Massacre card) {
+    public LivingPlane(final LivingPlane card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public LivingPlane copy() {
+        return new LivingPlane(this);
+    }
+}
+
+class LivingPlaneToken extends Token {
+    public LivingPlaneToken() {
+        super("Land", "1/1 creature");
+        cardType.add(CardType.CREATURE);
+        power = new MageInt(1);
+        toughness = new MageInt(1);
     }
 }

@@ -25,56 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class DeepwoodLegate extends CardImpl {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
+    private static final FilterPermanent filterForest = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
+        filterForest.add(new SubtypePredicate(("Forest")));
         filterSwamp.add(new SubtypePredicate(("Swamp")));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+    public DeepwoodLegate(UUID ownerId) {
+        super(ownerId, 132, "Deepwood Legate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Shade");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
+        // If an opponent controls a Forest and you control a Swamp, you may cast Deepwood Legate without paying its mana cost.
+        Condition condition = new CompoundCondition("If an opponent controls a Forest and you control a Swamp",
+                new OpponentControlsPermanentCondition(filterForest),
                 new PermanentsOnTheBattlefieldCondition(filterSwamp));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
+
+        // {B}: Deepwood Legate gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public Massacre(final Massacre card) {
+    public DeepwoodLegate(final DeepwoodLegate card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public DeepwoodLegate copy() {
+        return new DeepwoodLegate(this);
     }
 }

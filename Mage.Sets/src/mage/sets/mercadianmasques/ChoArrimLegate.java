@@ -25,56 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
-
+public class ChoArrimLegate extends CardImpl {
+    
     private static final FilterPermanent filterPlains = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();
+    private static final FilterCard filter = new FilterCard("Black");
 
     static {
         filterPlains.add(new SubtypePredicate(("Plains")));
         filterSwamp.add(new SubtypePredicate(("Swamp")));
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+    public ChoArrimLegate(UUID ownerId) {
+        super(ownerId, 10, "Cho-Arrim Legate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
+        // Protection from black
+        this.addAbility(new ProtectionAbility(filter));
+        
+        // If an opponent controls a Swamp and you control a Plains, you may cast Cho-Arrim Legate without paying its mana cost.
+        Condition condition = new CompoundCondition("If an opponent controls a Swamp and you control a Plains", 
+                new OpponentControlsPermanentCondition(filterSwamp),
+                new PermanentsOnTheBattlefieldCondition(filterPlains));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
     }
 
-    public Massacre(final Massacre card) {
+    public ChoArrimLegate(final ChoArrimLegate card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public ChoArrimLegate copy() {
+        return new ChoArrimLegate(this);
     }
 }

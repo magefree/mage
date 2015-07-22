@@ -33,48 +33,49 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
-
+public class SivvisRuse extends CardImpl {
+    
+    private static final FilterPermanent filterMountain = new FilterPermanent();
     private static final FilterPermanent filterPlains = new FilterPermanent();
-    private static final FilterPermanent filterSwamp = new FilterPermanent();
 
     static {
+        filterMountain.add(new SubtypePredicate(("Mountain")));
         filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+    public SivvisRuse(UUID ownerId) {
+        super(ownerId, 21, "Sivvi's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
         this.expansionSetCode = "NMS";
 
-
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
+        // If an opponent controls a Mountain and you control a Plains, you may cast Sivvi's Ruse without paying its mana cost.
+        Condition condition = new CompoundCondition("If an opponent controls a Mountain and you control a Plains",
+                new OpponentControlsPermanentCondition(filterMountain),
+                new PermanentsOnTheBattlefieldCondition(filterPlains));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
+        
+        // Prevent all damage that would be dealt this turn to creatures you control.
+        this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, new FilterControlledCreatureInPlay()));
     }
 
-    public Massacre(final Massacre card) {
+    public SivvisRuse(final SivvisRuse card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public SivvisRuse copy() {
+        return new SivvisRuse(this);
     }
 }

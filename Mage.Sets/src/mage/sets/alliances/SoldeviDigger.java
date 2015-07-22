@@ -25,53 +25,75 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class MagusOfTheTabernacle extends CardImpl {
+public class SoldeviDigger extends CardImpl {
 
-    static private final String rule = "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}\"";
+    public SoldeviDigger(UUID ownerId) {
+        super(ownerId, 174, "Soldevi Digger", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "ALL";
 
-    public MagusOfTheTabernacle(UUID ownerId) {
-        super(ownerId, 8, "Magus of the Tabernacle", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(6);
-
-        // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
-        Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(abilityToGain, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), rule)));
+        // {2}: Put the top card of your graveyard on the bottom of your library.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoldeviDiggerEffect(), new ManaCostsImpl("{2}")));
     }
 
-    public MagusOfTheTabernacle(final MagusOfTheTabernacle card) {
+    public SoldeviDigger(final SoldeviDigger card) {
         super(card);
     }
 
     @Override
-    public MagusOfTheTabernacle copy() {
-        return new MagusOfTheTabernacle(this);
+    public SoldeviDigger copy() {
+        return new SoldeviDigger(this);
+    }
+}
+
+class SoldeviDiggerEffect extends OneShotEffect {
+
+    public SoldeviDiggerEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "put the top card of your graveyard on the bottom of your library";
+    }
+
+    public SoldeviDiggerEffect(final SoldeviDiggerEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SoldeviDiggerEffect copy() {
+        return new SoldeviDiggerEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card topCard = null;
+            for (Card card :controller.getGraveyard().getCards(game)) {
+                topCard = card;
+            }
+            if (topCard != null) {
+                return controller.moveCardToLibraryWithInfo(topCard, source.getSourceId(), game, Zone.GRAVEYARD, false, true);
+            }
+            return true;
+        }
+        return false;
     }
 }

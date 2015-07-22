@@ -25,56 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class Massacre extends CardImpl {
+public class SaprazzanLegate extends CardImpl {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
-    private static final FilterPermanent filterSwamp = new FilterPermanent();
+    private static final FilterPermanent filterMountain = new FilterPermanent();
+    private static final FilterPermanent filterIsland = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(("Plains")));
-        filterSwamp.add(new SubtypePredicate(("Swamp")));
+        filterMountain.add(new SubtypePredicate(("Mountain")));
+        filterIsland.add(new SubtypePredicate(("Island")));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+    public SaprazzanLegate(UUID ownerId) {
+        super(ownerId, 100, "Saprazzan Legate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-        // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
-                new OpponentControlsPermanentCondition(filterPlains),
-                new PermanentsOnTheBattlefieldCondition(filterSwamp));
+        // If an opponent controls a Mountain and you control an Island, you may cast Saprazzan Legate without paying its mana cost.
+        Condition condition = new CompoundCondition("If an opponent controls a Mountain and you control an Island",
+                new OpponentControlsPermanentCondition(filterMountain),
+                new PermanentsOnTheBattlefieldCondition(filterIsland));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
     }
 
-    public Massacre(final Massacre card) {
+    public SaprazzanLegate(final SaprazzanLegate card) {
         super(card);
     }
 
     @Override
-    public Massacre copy() {
-        return new Massacre(this);
+    public SaprazzanLegate copy() {
+        return new SaprazzanLegate(this);
     }
 }
