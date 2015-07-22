@@ -120,8 +120,13 @@ public abstract class ExpansionSet implements Serializable {
 
         List<Card> theBooster = this.createBooster();
         List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
-        while (15 > theBooster.size()) {
+        int iterations = 0;
+        while (15 > theBooster.size() && !commons.isEmpty()) {
             addToBooster(theBooster, commons);
+            iterations++;
+            if (iterations > 14) {
+                break;
+            }
         }
 
         while (theBooster.size() > 15) {
@@ -129,6 +134,18 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         return theBooster;
+    }
+
+    protected void addToBooster(List<Card> booster, List<CardInfo> cards) {
+        if (!cards.isEmpty()) {
+            CardInfo cardInfo = cards.remove(rnd.nextInt(cards.size()));
+            if (cardInfo != null) {
+                Card card = cardInfo.getCard();
+                if (card != null) {
+                    booster.add(card);
+                }
+            }
+        }
     }
 
     public List<Card> createBooster() {
@@ -254,18 +271,6 @@ public abstract class ExpansionSet implements Serializable {
             }
             List<CardInfo> doubleFacedCards = CardRepository.instance.findCards(criteria);
             addToBooster(booster, doubleFacedCards);
-        }
-    }
-
-    protected void addToBooster(List<Card> booster, List<CardInfo> cards) {
-        if (!cards.isEmpty()) {
-            CardInfo cardInfo = cards.remove(rnd.nextInt(cards.size()));
-            if (cardInfo != null) {
-                Card card = cardInfo.getCard();
-                if (card != null) {
-                    booster.add(card);
-                }
-            }
         }
     }
 
