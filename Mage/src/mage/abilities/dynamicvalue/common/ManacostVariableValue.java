@@ -13,7 +13,7 @@ public class ManacostVariableValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public ManacostVariableValue copy() {
         return new ManacostVariableValue();
     }
 
