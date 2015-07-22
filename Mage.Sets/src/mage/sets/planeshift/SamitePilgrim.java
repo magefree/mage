@@ -55,7 +55,7 @@ public class SamitePilgrim extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Domain - {tap}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.
+        // Domain - {T}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SamitePilgrimPreventDamageToTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -73,16 +73,14 @@ public class SamitePilgrim extends CardImpl {
 
 class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
 
-    protected int amount = 0;
 
     public SamitePilgrimPreventDamageToTargetEffect() {
-        super(Duration.EndOfTurn);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, false, true);
         staticText = "Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.";
     }
 
     public SamitePilgrimPreventDamageToTargetEffect(final SamitePilgrimPreventDamageToTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -93,46 +91,12 @@ class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        amount = new DomainValue().calculate(game, source, this);
+        amountToPrevent = new DomainValue().calculate(game, source, this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        boolean result = false;
-        int toPrevent = amount;
-        if (event.getAmount() < this.amount) {
-            toPrevent = event.getAmount();
-            amount -= event.getAmount();
-        } else {
-            amount = 0;
-        }
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent, false);
-        if (!game.replaceEvent(preventEvent)) {
-            Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-            if (targetCreature != null) {
-                if (amount == 0) {
-                    this.used = true;
-                    this.discard();
-                }
-                if (event.getAmount() >= toPrevent) {
-                    event.setAmount(event.getAmount() - toPrevent);
-                } else {
-                    event.setAmount(0);
-                    result = true;
-                }
-                if (toPrevent > 0) {
-                    game.informPlayers(new StringBuilder("Samite Pilgrim ").append("prevented ").append(toPrevent).append(" to ").append(targetCreature.getName()).toString());
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                            source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent));
-                }
-            }
-        }
-        return result;
     }
 
     @Override
