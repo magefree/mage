@@ -29,25 +29,22 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SquirrelToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -69,7 +66,9 @@ public class DruidsCall extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature is dealt damage, its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield.
-        this.addAbility(new DruidsCallTriggeredAbility());
+        Effect effect = new CreateTokenTargetEffect(new SquirrelToken(), new NumericSetToEffectValues("that much", "damage"));
+        effect.setText("its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield");
+        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 
     public DruidsCall(final DruidsCall card) {
@@ -79,81 +78,5 @@ public class DruidsCall extends CardImpl {
     @Override
     public DruidsCall copy() {
         return new DruidsCall(this);
-    }
-}
-
-class DruidsCallTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DruidsCallTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DruidsCallEffect());
-    }
-
-    public DruidsCallTriggeredAbility(final DruidsCallTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DruidsCallTriggeredAbility copy() {
-        return new DruidsCallTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(sourceId);
-        UUID targetId = event.getTargetId();
-        if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
-            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(targetId));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature is dealt damage, its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield.";
-    }
-}
-
-class  DruidsCallEffect extends OneShotEffect {
-
-    public DruidsCallEffect() {
-        super(Outcome.Damage);
-        this.staticText = "its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield";
-    }
-
-    public DruidsCallEffect(final DruidsCallEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DruidsCallEffect copy() {
-        return new DruidsCallEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = this.targetPointer.getFirst(game, source);
-        if (damageAmount != null && targetId != null) {
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            }
-            if (permanent != null) {
-                Player player = game.getPlayer(permanent.getControllerId());
-                if (player != null) {
-                    Token token = new SquirrelToken();
-                    token.putOntoBattlefield(damageAmount, game, source.getSourceId(), player.getId());
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
