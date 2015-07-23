@@ -52,7 +52,7 @@ public class ChangelingTitan extends CardImpl {
         this.addAbility(ChangelingAbility.getInstance());
         
         // Champion a creature
-        this.addAbility(new ChampionAbility(this, null);
+        this.addAbility(new ChampionAbility(this, ""));
     }
 
     public ChangelingTitan(final ChangelingTitan card) {
