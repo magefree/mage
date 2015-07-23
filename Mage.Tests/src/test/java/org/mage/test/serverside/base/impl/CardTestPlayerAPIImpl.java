@@ -219,6 +219,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player {@link Player} to remove all library cards from.
      */
+    @Override
     public void removeAllCardsFromLibrary(TestPlayer player) {
         getCommands(player).put(Zone.LIBRARY, "clear");
     }
@@ -241,6 +242,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * playerB.
      * @param cardName Card name in string format.
      */
+    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName) {
         addCard(gameZone, player, cardName, 1, false);
     }
@@ -254,6 +256,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param cardName Card name in string format.
      * @param count Amount of cards to be added.
      */
+    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
         addCard(gameZone, player, cardName, count, false);
     }
@@ -270,6 +273,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * permanent should be tapped. In case gameZone is other than Battlefield,
      * {@link IllegalArgumentException} is thrown
      */
+    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
         if (gameZone.equals(Zone.BATTLEFIELD)) {
@@ -324,6 +328,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player {@link Player} to set life count for.
      * @param life Life count to set.
      */
+    @Override
     public void setLife(TestPlayer player, int life) {
         getCommands(player).put(Zone.OUTSIDE, "life:" + String.valueOf(life));
     }
@@ -714,16 +719,16 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert whether X permanents of the same name are tapped or not.
      *
-     * @param cardName  Name of the permanent that should be checked.
-     * @param tapped    Whether the permanent is tapped or not
-     * @param count    The amount of this permanents that should be tapped
+     * @param cardName Name of the permanent that should be checked.
+     * @param tapped Whether the permanent is tapped or not
+     * @param count The amount of this permanents that should be tapped
      */
     public void assertTappedCount(String cardName, boolean tapped, int count) throws AssertionError {
         int tappedAmount = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
-                if(permanent.isTapped() == tapped) {
+                if (permanent.isTapped() == tapped) {
                     tappedAmount++;
                 }
                 found = permanent;

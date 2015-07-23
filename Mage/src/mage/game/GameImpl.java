@@ -44,6 +44,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 import java.util.UUID;
+import mage.MageException;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -1173,6 +1174,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
+        int errorContinueCounter = 0;
         int bookmark = 0;
         clearAllBookmarks();
         try {
@@ -1239,11 +1241,19 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     } catch (Exception ex) {
                         logger.fatal("Game exception gameId: " + getId(), ex);
-                        ex.printStackTrace();
                         this.fireErrorEvent("Game exception occurred: ", ex);
                         restoreState(bookmark, "");
                         bookmark = 0;
-                        continue;
+                        Player activePlayer = this.getPlayer(getActivePlayerId());
+                        if (errorContinueCounter > 15) {
+                            throw new MageException("Iterated player priority after game exception too often, game ends!");
+                        }
+                        if (activePlayer != null && !activePlayer.isTestMode()) {
+                            errorContinueCounter++;
+                            continue;
+                        } else {
+                            throw new MageException("Error in testclass");
+                        }
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1251,6 +1261,7 @@ public abstract class GameImpl implements Game, Serializable {
         } catch (Exception ex) {
             logger.fatal("Game exception ", ex);
             this.fireErrorEvent("Game exception occurred: ", ex);
+            this.end();
         } finally {
             resetLKI();
             clearAllBookmarks();
