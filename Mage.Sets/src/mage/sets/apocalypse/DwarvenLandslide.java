@@ -25,60 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlashAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.game.Game;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class RaggedVeins extends CardImpl {
+public class DwarvenLandslide extends CardImpl {
 
-    public RaggedVeins(UUID ownerId) {
-        super(ownerId, 139, "Ragged Veins", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Aura");
+    public DwarvenLandslide(UUID ownerId) {
+        super(ownerId, 60, "Dwarven Landslide", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
+        this.expansionSetCode = "APC";
 
-
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-
-        // Whenever enchanted creature is dealt damage, its controller loses that much life.
-        Effect effect = new LoseLifeTargetEffect(new NumericSetToEffectValues("that much", "damage"));
-        effect.setText("its controller loses that much life");
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
+        // Kicker-{2}{R}, Sacrifice a land.
+        Costs<Cost> kickerCosts = new CostsImpl<>();
+        kickerCosts.add(new ManaCostsImpl<>("{2}{R}"));
+        kickerCosts.add(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        this.addAbility(new KickerAbility(kickerCosts));
+        // Destroy target land. If Dwarven Landslide was kicked, destroy another target land.
+        getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target land. If {this} was kicked, destroy another target land"));
     }
 
-    public RaggedVeins(final RaggedVeins card) {
+    public DwarvenLandslide(final DwarvenLandslide card) {
         super(card);
     }
 
     @Override
-    public RaggedVeins copy() {
-        return new RaggedVeins(this);
+    public void adjustTargets(Ability ability, Game game) {
+        ability.addTarget(new TargetLandPermanent(KickedCondition.getInstance().apply(game, ability) ? 2 : 1));
+    }
+
+    @Override
+    public DwarvenLandslide copy() {
+        return new DwarvenLandslide(this);
     }
 }

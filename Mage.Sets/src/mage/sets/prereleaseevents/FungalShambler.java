@@ -25,79 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.costs;
+package mage.sets.prereleaseevents;
+
+import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
- * @author LevelX2
+ *
+ * @author LoneFox
  */
-public interface OptionalAdditionalCost extends Cost {
+public class FungalShambler extends mage.sets.apocalypse.FungalShambler {
 
-    String getName();
+    public FungalShambler(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 14;
+        this.expansionSetCode = "PTC";
+        this.rarity = Rarity.SPECIAL;
+    }
 
-    /**
-     * Returns the complete text for the addional cost or if onlyCost is true
-     * only the pure text fore the included native cost
-     *
-     * @param onlyCost
-     * @return
-     */
-    String getText(boolean onlyCost);
+    public FungalShambler(final FungalShambler card) {
+        super(card);
+    }
 
-    /**
-     * Returns a reminder text, if the cost has one
-     *
-     * @return
-     */
-    String getReminderText();
-
-    /**
-     * Returns a text suffix for the game log, that can be added to the cast
-     * message.
-     *
-     * @param position - if there are multiple costs, it's the postion the cost
-     * is set (starting with 0)
-     * @return
-     */
-    String getCastSuffixMessage(int position);
-
-    /**
-     * If the player intends to pay the cost, the cost will be activated
-     *
-     */
-    void activate();
-
-    /**
-     * Reset the activate and count information
-     *
-     */
-    void reset();
-
-    /**
-     * Set if the cost be multiple times activated
-     *
-     * @param repeatable
-     */
-    void setRepeatable(boolean repeatable);
-
-    /**
-     * Can the cost be multiple times activated
-     *
-     * @return
-     */
-    boolean isRepeatable();
-
-    /**
-     * Returns if the cost was activated
-     *
-     * @return
-     */
-    boolean isActivated();
-
-    /**
-     * Returns the number of times the cost was activated
-     *
-     * @return
-     */
-    int getActivateCount();
-
+    @Override
+    public FungalShambler copy() {
+        return new FungalShambler(this);
+    }
 }

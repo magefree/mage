@@ -25,60 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlashAbility;
+import mage.MageInt;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.MorphManacostVariableValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class RaggedVeins extends CardImpl {
+public class BaneOfTheLiving extends CardImpl {
 
-    public RaggedVeins(UUID ownerId) {
-        super(ownerId, 139, "Ragged Veins", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Aura");
+    public BaneOfTheLiving(UUID ownerId) {
+        super(ownerId, 60, "Bane of the Living", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Insect");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-
-        // Whenever enchanted creature is dealt damage, its controller loses that much life.
-        Effect effect = new LoseLifeTargetEffect(new NumericSetToEffectValues("that much", "damage"));
-        effect.setText("its controller loses that much life");
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
+        // Morph {X}{B}{B}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{X}{B}{B}")));
+        // When Bane of the Living is turned face up, all creatures get -X/-X until end of turn.
+        DynamicValue morphX = new SignInversionDynamicValue(new MorphManacostVariableValue());
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostAllEffect(morphX, morphX, Duration.EndOfTurn, new FilterCreaturePermanent(), false, "", true)));
     }
 
-    public RaggedVeins(final RaggedVeins card) {
+    public BaneOfTheLiving(final BaneOfTheLiving card) {
         super(card);
     }
 
     @Override
-    public RaggedVeins copy() {
-        return new RaggedVeins(this);
+    public BaneOfTheLiving copy() {
+        return new BaneOfTheLiving(this);
     }
 }

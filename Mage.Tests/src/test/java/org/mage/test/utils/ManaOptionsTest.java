@@ -30,6 +30,7 @@ package org.mage.test.utils;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -288,6 +289,43 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
         Assert.assertEquals("{W}{B}{B}", getManaOption(0, manaOptions));
         Assert.assertEquals("{B}{B}{B}", getManaOption(1, manaOptions));
+    }
+
+    @Test
+    public void testMageRingNetwork() {
+        // {T}: Add {1} to your mana pool.
+        // {T}, {1} : Put a storage counter on Mage-Ring Network.
+        // {T}, Remove X storage counters from Mage-Ring Network: Add {X} to your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("{1}{W}{B}", getManaOption(0, manaOptions));
+    }
+
+    @Test
+    public void testMageRingNetwork2() {
+        // {T}: Add {1} to your mana pool.
+        // {T}, {1} : Put a storage counter on Mage-Ring Network.
+        // {T}, Remove X storage counters from Mage-Ring Network: Add {X} to your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Mage-Ring Network", CounterType.STORAGE, 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        setStopAt(1, PhaseStep.DRAW);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("{4}{W}{B}", getManaOption(0, manaOptions));
     }
 
     @Test

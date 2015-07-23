@@ -1,15 +1,14 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 public class CountersCount implements DynamicValue {
+
     private final CounterType counter;
 
     public CountersCount(CounterType counter) {

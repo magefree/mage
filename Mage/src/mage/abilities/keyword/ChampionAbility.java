@@ -91,7 +91,7 @@ public class ChampionAbility extends StaticAbility {
         this.subtypes = subtypes;
         StringBuilder sb = new StringBuilder("another ");
         ArrayList<Predicate<MageObject>> subtypesPredicates = new ArrayList<>();
-        if (subtypes != null) {
+        if (!subtypes[0].isEmpty()) {
             int i = 0;
             for (String subtype : this.subtypes) {
                 subtypesPredicates.add(new SubtypePredicate(subtype));
@@ -107,7 +107,7 @@ public class ChampionAbility extends StaticAbility {
         }
         this.objectDescription = sb.toString();
         FilterControlledPermanent filter = new FilterControlledPermanent(objectDescription);
-        if (subtypes != null) {
+        if (!subtypesPredicates.isEmpty()) {
             filter.add(Predicates.or(subtypesPredicates));
         }
         filter.add(new AnotherPredicate());

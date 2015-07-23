@@ -25,51 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.DynamicManaAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.TargetController;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author Luna Skyrise
+ * @author LoneFox
  */
-public class CityOfShadows extends CardImpl {
+public class RewardsOfDiversity extends CardImpl {
 
-    public CityOfShadows(UUID ownerId) {
-        super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DRK";
+    private static final FilterSpell filter = new FilterSpell("multicolored spell");
 
-        // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
-        this.addAbility(ability);
-
-        // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
-                "{tap}: Add {X} to your mana pool, where X is the number of storage counters on {this}");
-        this.addAbility(ability);
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(new MulticoloredPredicate());
     }
 
-    public CityOfShadows(final CityOfShadows card) {
+    public RewardsOfDiversity(UUID ownerId) {
+        super(ownerId, 32, "Rewards of Diversity", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "INV";
+
+        // Whenever an opponent casts a multicolored spell, you gain 4 life.
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new GainLifeEffect(4), filter, false));
+    }
+
+    public RewardsOfDiversity(final RewardsOfDiversity card) {
         super(card);
     }
 
     @Override
-    public CityOfShadows copy() {
-        return new CityOfShadows(this);
+    public RewardsOfDiversity copy() {
+        return new RewardsOfDiversity(this);
     }
 }

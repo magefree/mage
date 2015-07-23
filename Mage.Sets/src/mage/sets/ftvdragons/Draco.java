@@ -124,11 +124,7 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             // The cost is reduced by {2} for each basic land type.
             int domainValueReduction = new DomainValue(2).calculate(game, source, this);
-            // Nothing to pay
-            if (domainValueReduction >= MAX_DOMAIN_VALUE) {
-                return true;
-            }
-            int count = (MAX_DOMAIN_VALUE-domainValueReduction );
+            int count = MAX_DOMAIN_VALUE - domainValueReduction;
             if (player.chooseUse(Outcome.Benefit, "Pay {" + count + "}? Or " + permanent.getName() + " will be sacrificed.", source, game)) {
                 GenericManaCost cost = new GenericManaCost(count);
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {

@@ -25,51 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.DynamicManaAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author Luna Skyrise
+ * @author LoneFox
  */
-public class CityOfShadows extends CardImpl {
+public class CanopySurge extends CardImpl {
 
-    public CityOfShadows(UUID ownerId) {
-        super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DRK";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
-        // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
-        this.addAbility(ability);
-
-        // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
-                "{tap}: Add {X} to your mana pool, where X is the number of storage counters on {this}");
-        this.addAbility(ability);
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public CityOfShadows(final CityOfShadows card) {
+    public CanopySurge(UUID ownerId) {
+        super(ownerId, 184, "Canopy Surge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+        this.expansionSetCode = "INV";
+
+        // Kicker {2}
+        this.addAbility(new KickerAbility("{2}"));
+        // Canopy Surge deals 1 damage to each creature with flying and each player. If Canopy Surge was kicked, it deals 4 damage to each creature with flying and each player instead.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageEverythingEffect(4, filter),
+            new DamageEverythingEffect(1, filter), KickedCondition.getInstance(),
+            "{this} deals 1 damage to each creature with flying and each player. If {this} was kicked, it deals 4 damage to each creature with flying and each player instead."));
+    }
+
+    public CanopySurge(final CanopySurge card) {
         super(card);
     }
 
     @Override
-    public CityOfShadows copy() {
-        return new CityOfShadows(this);
+    public CanopySurge copy() {
+        return new CanopySurge(this);
     }
 }

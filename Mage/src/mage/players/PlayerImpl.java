@@ -2164,7 +2164,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public ManaOptions getManaAvailable(Game game) {
         ManaOptions available = new ManaOptions();
 
-        List<Abilities<ManaAbility>> sourceWithoutCosts = new ArrayList<>();
+        List<Abilities<ManaAbility>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ManaAbility>> sourceWithCosts = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
             boolean canAdd = false;
@@ -2183,12 +2183,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (withCost) {
                     sourceWithCosts.add(manaAbilities);
                 } else {
-                    sourceWithoutCosts.add(manaAbilities);
+                    sourceWithoutManaCosts.add(manaAbilities);
                 }
             }
         }
 
-        for (Abilities<ManaAbility> manaAbilities : sourceWithoutCosts) {
+        for (Abilities<ManaAbility> manaAbilities : sourceWithoutManaCosts) {
             available.addMana(manaAbilities, game);
         }
         for (Abilities<ManaAbility> manaAbilities : sourceWithCosts) {

@@ -25,15 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -43,7 +39,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -53,7 +52,7 @@ import mage.game.permanent.Permanent;
  */
 public class ArgentSphinx extends CardImpl {
 
-    public ArgentSphinx (UUID ownerId) {
+    public ArgentSphinx(UUID ownerId) {
         super(ownerId, 28, "Argent Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Sphinx");
@@ -66,7 +65,7 @@ public class ArgentSphinx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArgentSphinx (final ArgentSphinx card) {
+    public ArgentSphinx(final ArgentSphinx card) {
         super(card);
     }
 
@@ -81,7 +80,7 @@ class ArgentSphinxEffect extends OneShotEffect {
 
     private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
 
-    ArgentSphinxEffect ( ) {
+    ArgentSphinxEffect() {
         super(Outcome.Benefit);
         staticText = effectText;
     }
@@ -93,10 +92,13 @@ class ArgentSphinxEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Argent Sphinx Exile", source.getSourceId(), game)) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (permanent != null && sourceObject != null) {
+            if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
                 //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility
+                        = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                                new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 delayedAbility.setSourceObject(source.getSourceObject(game), game);

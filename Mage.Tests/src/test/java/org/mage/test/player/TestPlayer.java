@@ -253,6 +253,9 @@ public class TestPlayer implements Player {
         int targetsSet = 0;
         for (Player player : game.getPlayers().values()) {
             if (player.getName().equals(target)) {
+                if (ability.getTargets().isEmpty()) {
+                    throw new UnsupportedOperationException("Ability has no targets, but there is a player target set - " + ability.toString());
+                }
                 ability.getTargets().get(0).addTarget(player.getId(), ability, game);
                 targetsSet++;
                 break;

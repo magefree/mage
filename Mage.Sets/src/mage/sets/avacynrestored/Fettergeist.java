@@ -102,10 +102,7 @@ class FettergeistUnlessPaysEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
             int count = amount.calculate(game, source, this);
-            if (count == 0) {
-                return true;
-            }
-            if (player.chooseUse(Outcome.Benefit, "Pay " + count + "?", source, game)) {
+            if (player.chooseUse(Outcome.Benefit, "Pay " + count + "?  Or " + permanent.getName() + " will be sacrificed.", source, game)) {
                 GenericManaCost cost = new GenericManaCost(count);
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;

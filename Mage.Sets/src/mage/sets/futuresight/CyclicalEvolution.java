@@ -25,60 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlashAbility;
+import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class RaggedVeins extends CardImpl {
+public class CyclicalEvolution extends CardImpl {
 
-    public RaggedVeins(UUID ownerId) {
-        super(ownerId, 139, "Ragged Veins", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Aura");
+    public CyclicalEvolution(UUID ownerId) {
+        super(ownerId, 125, "Cyclical Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
+        this.expansionSetCode = "FUT";
 
+        // Target creature gets +3/+3 until end of turn. Exile Cyclical Evolution with three time counters on it.
+        getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+        getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), new StaticValue(3), true, true);
+        effect.setText("with 3 time counters on it");
+        getSpellAbility().addEffect(effect);
 
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-
-        // Whenever enchanted creature is dealt damage, its controller loses that much life.
-        Effect effect = new LoseLifeTargetEffect(new NumericSetToEffectValues("that much", "damage"));
-        effect.setText("its controller loses that much life");
-        this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
+        // Suspend 3-{2}{G}
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{G}"), this));
     }
 
-    public RaggedVeins(final RaggedVeins card) {
+    public CyclicalEvolution(final CyclicalEvolution card) {
         super(card);
     }
 
     @Override
-    public RaggedVeins copy() {
-        return new RaggedVeins(this);
+    public CyclicalEvolution copy() {
+        return new CyclicalEvolution(this);
     }
 }

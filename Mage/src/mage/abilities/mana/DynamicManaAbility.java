@@ -48,6 +48,7 @@ public class DynamicManaAbility extends ManaAbility {
 
     /**
      * TapSourceCost added by default
+     *
      * @param mana
      * @param amount
      */
@@ -74,10 +75,24 @@ public class DynamicManaAbility extends ManaAbility {
     }
 
     public DynamicManaAbility(Mana mana, DynamicValue amount, Cost cost, String text, boolean oneChoice) {
-        super(Zone.BATTLEFIELD, new DynamicManaEffect(mana, amount, text, oneChoice), cost);
-        manaEffect = (DynamicManaEffect) this.getEffects().get(0);
+        this(mana, amount, cost, text, oneChoice, null);
     }
 
+    /**
+     *
+     * @param mana
+     * @param amount
+     * @param cost
+     * @param text
+     * @param oneChoice is all mana from the same colour or if false the player
+     * can choose different colours
+     * @param netAmount a dynamic value that calculates the possible available
+     * mana (e.g. if you have to pay by removing counters from source)
+     */
+    public DynamicManaAbility(Mana mana, DynamicValue amount, Cost cost, String text, boolean oneChoice, DynamicValue netAmount) {
+        super(Zone.BATTLEFIELD, new DynamicManaEffect(mana, amount, text, oneChoice, netAmount), cost);
+        manaEffect = (DynamicManaEffect) this.getEffects().get(0);
+    }
 
     public DynamicManaAbility(final DynamicManaAbility ability) {
         super(ability);
@@ -95,8 +110,9 @@ public class DynamicManaAbility extends ManaAbility {
         List<Mana> newNetMana = new ArrayList<>();
         if (game != null) {
             // TODO: effects from replacement effects like Mana Reflection are not considered yet
+            // TODO: effects that need a X payment (e.g. Mage-Ring Network) return always 0
             newNetMana.add(manaEffect.computeMana(true, game, this));
-        }        
-        return newNetMana;        
+        }
+        return newNetMana;
     }
 }

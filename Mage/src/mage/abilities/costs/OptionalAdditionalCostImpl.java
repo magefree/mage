@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs;
 
 /**
@@ -33,10 +32,7 @@ package mage.abilities.costs;
  * @author LevelX2
  * @param <T>
  */
-
-
-public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl> extends CostsImpl<Cost> implements OptionalAdditionalCost{
-
+public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> extends CostsImpl<Cost> implements OptionalAdditionalCost {
 
     protected String name;
     protected String reminderText;
@@ -104,25 +100,25 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl> e
     }
 
     /**
-     * Returns a text suffix for the game log, that can be added to
-     * the cast message.
+     * Returns a text suffix for the game log, that can be added to the cast
+     * message.
      *
-     * @param position - if there are multiple costs, it's the postion the cost is set (starting with 0)
+     * @param position - if there are multiple costs, it's the postion the cost
+     * is set (starting with 0)
      * @return
      */
     @Override
     public String getCastSuffixMessage(int position) {
         StringBuilder sb = new StringBuilder();
         if (isActivated() && (!isRepeatable() || getActivateCount() > 0)) {
-            sb.append(position > 0 ? " and ":"").append(" with ");
+            sb.append(position > 0 ? " and " : "").append(" with ");
             if (isRepeatable()) {
-                sb.append(getActivateCount()).append(getActivateCount() > 1? " times ":" time ");
+                sb.append(getActivateCount()).append(getActivateCount() > 1 ? " times " : " time ");
             }
             sb.append(name);
         }
-        return  sb.toString();
+        return sb.toString();
     }
-
 
     /**
      * If the player intends to pay the cost, the cost will be activated
@@ -132,7 +128,9 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl> e
     public void activate() {
         activated = true;
         ++activatedCounter;
-    };
+    }
+
+    ;
 
     /**
      * Reset the activate and count information
@@ -152,7 +150,7 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl> e
     @Override
     public void setRepeatable(boolean repeatable) {
         this.repeatable = repeatable;
-    }  
+    }
 
     /**
      * Can the cost be multiple times activated
@@ -162,7 +160,9 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl> e
     @Override
     public boolean isRepeatable() {
         return repeatable;
-    };
+    }
+
+    ;
 
     /**
      * Returns if the cost was activated
@@ -170,20 +170,24 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl> e
      * @return
      */
     @Override
-    public boolean isActivated(){
+    public boolean isActivated() {
         return activated;
-    };
+    }
+
+    ;
 
     /**
      * Returns the number of times the cost was activated
      * @return
      */
     @Override
-    public int getActivateCount(){
+    public int getActivateCount() {
         return activatedCounter;
-    };
+    }
 
-    
+    ;
+
+
     @Override
     public OptionalAdditionalCostImpl copy() {
         return new OptionalAdditionalCostImpl(this);
