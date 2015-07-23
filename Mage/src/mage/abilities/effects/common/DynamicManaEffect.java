@@ -44,17 +44,20 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     private final Mana computedMana;
     private final DynamicValue amount;
+    private final DynamicValue netAmount;
     private String text = null;
     private boolean oneChoice;
 
     public DynamicManaEffect(Mana mana, DynamicValue amount) {
-        super(mana);
-        this.amount = amount;
-        computedMana = new Mana();
+        this(mana, amount, null);
     }
 
     public DynamicManaEffect(Mana mana, DynamicValue amount, String text) {
         this(mana, amount, text, false);
+    }
+
+    public DynamicManaEffect(Mana mana, DynamicValue amount, String text, boolean oneChoice) {
+        this(mana, amount, text, oneChoice, null);
     }
 
     /**
@@ -62,14 +65,18 @@ public class DynamicManaEffect extends BasicManaEffect {
      * @param mana
      * @param amount
      * @param text
-     * @param oneChoice is all mana from the same colour or if false the player can choose different colours
+     * @param oneChoice is all mana from the same colour or if false the player
+     * can choose different colours
+     * @param netAmount a dynamic value that calculates the possible available
+     * mana (e.g. if you have to pay by removing counters from source)
      */
-    public DynamicManaEffect(Mana mana, DynamicValue amount, String text, boolean oneChoice) {
+    public DynamicManaEffect(Mana mana, DynamicValue amount, String text, boolean oneChoice, DynamicValue netAmount) {
         super(mana);
         this.amount = amount;
         computedMana = new Mana();
         this.text = text;
         this.oneChoice = oneChoice;
+        this.netAmount = netAmount;
     }
 
     public DynamicManaEffect(final DynamicManaEffect effect) {
@@ -78,6 +85,11 @@ public class DynamicManaEffect extends BasicManaEffect {
         this.amount = effect.amount.copy();
         this.text = effect.text;
         this.oneChoice = effect.oneChoice;
+        if (effect.netAmount != null) {
+            this.netAmount = effect.netAmount.copy();
+        } else {
+            this.netAmount = null;
+        }
     }
 
     @Override
@@ -106,9 +118,16 @@ public class DynamicManaEffect extends BasicManaEffect {
         return null;
     }
 
-    public Mana computeMana(boolean netMana ,Game game, Ability source){
+    public Mana computeMana(boolean netMana, Game game, Ability source) {
         this.computedMana.clear();
-        int count = amount.calculate(game, source, this);
+        int count;
+        if (netMana && netAmount != null) {
+            // calculate the maximum available mana
+            count = netAmount.calculate(game, source, this);
+        } else {
+            count = amount.calculate(game, source, this);
+        }
+
         if (mana.getBlack() > 0) {
             computedMana.setBlack(count);
         } else if (mana.getBlue() > 0) {
@@ -126,7 +145,7 @@ public class DynamicManaEffect extends BasicManaEffect {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
                     ChoiceColor choiceColor = new ChoiceColor();
-                    for(int i = 0; i < count; i++){
+                    for (int i = 0; i < count; i++) {
                         if (!choiceColor.isChosen()) {
                             while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
                                 if (!controller.isInGame()) {
@@ -150,7 +169,7 @@ public class DynamicManaEffect extends BasicManaEffect {
                         }
                     }
                 }
-            }            
+            }
         } else {
             computedMana.setColorless(count);
         }

@@ -95,7 +95,7 @@ public class ManaOptions extends ArrayList<Mana> {
                                 Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
                                 if (moreValuable != null) {
                                     // only keep the more valuable mana
-                                    existingMana.setToMana(newMana);
+                                    existingMana.setToMana(moreValuable);
                                     continue SkipAddMana;
                                 }
                             }

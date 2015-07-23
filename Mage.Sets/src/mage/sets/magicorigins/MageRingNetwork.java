@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -47,7 +48,7 @@ import mage.counters.CounterType;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class MageRingNetwork extends CardImpl {
 
@@ -55,17 +56,22 @@ public class MageRingNetwork extends CardImpl {
         super(ownerId, 249, "Mage-Ring Network", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ORI";
 
-        // {t}: Add {1} to your mana pool.
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        // {1}, {t}: Put a storage counter on Mage-Ring Network.
+        // {1}, {T}: Put a storage counter on Mage-Ring Network.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()),
-            new ManaCostsImpl("{1}"));
+                new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        // {t}, Remove X storage counters from Mage-Ring Network: Add {x} to your mana pool.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new RemovedCountersForCostValue(), "Add {X} to your mana pool");
+        // {T}, Remove X storage counters from Mage-Ring Network: Add {x} to your mana pool.
+        ability = new DynamicManaAbility(
+                Mana.ColorlessMana,
+                new RemovedCountersForCostValue(),
+                new TapSourceCost(),
+                "Add {X} to your mana pool",
+                true, new CountersCount(CounterType.STORAGE));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
-            "Remove X storage counters from {this}"));
+                "Remove X storage counters from {this}"));
         this.addAbility(ability);
     }
 

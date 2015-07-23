@@ -597,10 +597,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Returns the mana that is more colored but does not contain one less mana
-     * in any color but colorless if you call with {1}{W}{R} and {G}{W}{R} you
-     * get back {G}{W}{R} if you call with {G}{W}{R} and {G}{W}{R} you get back
-     * {G}{W}{R} if you call with {G}{W}{B} and {G}{W}{R} you get back null
+     * Returns the mana that is more colored or has a greater amount but does
+     * not contain one less mana in any color but colorless if you call with
+     * {1}{W}{R} and {G}{W}{R} you get back {G}{W}{R} if you call with {G}{W}{R}
+     * and {G}{W}{R} you get back {G}{W}{R} if you call with {G}{W}{B} and
+     * {G}{W}{R} you get back null
      *
      * @param mana1
      * @param mana2
@@ -609,7 +610,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public static Mana getMoreValuableMana(Mana mana1, Mana mana2) {
         Mana moreMana;
         Mana lessMana;
-        if (mana2.count() > mana1.count() || mana2.getAny() > mana1.getAny() || mana2.getColorless() < mana1.getColorless()) {
+        if (mana2.countColored() > mana1.countColored() || mana2.getAny() > mana1.getAny() || mana2.count() > mana1.count()) {
             moreMana = mana2;
             lessMana = mana1;
         } else {
