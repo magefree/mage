@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
@@ -81,8 +80,6 @@ public class VenserTheSojourner extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Venser");
 
-
-
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
@@ -131,7 +128,7 @@ class VenserTheSojournerEffect extends OneShotEffect {
             if (getTargetPointer().getFirst(game, source) != null) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                    if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                         //create delayed triggered ability
                         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                         delayedAbility.setSourceId(source.getSourceId());
@@ -174,7 +171,8 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     protected FilterSpell filter;
 
     /**
-     * If true, the source that triggered the ability will be set as target to effect.
+     * If true, the source that triggered the ability will be set as target to
+     * effect.
      */
     protected boolean rememberSource = false;
 
