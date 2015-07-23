@@ -67,7 +67,6 @@ public class NissaSageAnimist extends CardImpl {
         this.color.setGreen(true);
 
         this.nightCard = true;
-        this.canTransform = true;
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

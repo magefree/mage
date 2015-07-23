@@ -32,7 +32,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -52,7 +51,6 @@ public class QuestForTheGravelord extends CardImpl {
     public QuestForTheGravelord(UUID ownerId) {
         super(ownerId, 108, "Quest for the Gravelord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "ZEN";
-
 
         // Whenever a creature dies, you may put a quest counter on Quest for the Gravelord.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));

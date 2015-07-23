@@ -126,10 +126,10 @@ class SwiftWarkiteEffect extends OneShotEffect {
                         Permanent creature = game.getPermanent(card.getId());
                         if (creature != null) {
                             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                            effect.setTargetPointer(new FixedTarget(creature.getId()));
+                            effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
                             game.addEffect(effect, source);
                             Effect effect2 = new ReturnToHandTargetEffect();
-                            effect2.setTargetPointer(new FixedTarget(creature.getId()));
+                            effect2.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
                             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
                             delayedAbility.setControllerId(source.getControllerId());
                             delayedAbility.setSourceId(source.getSourceId());
@@ -147,10 +147,10 @@ class SwiftWarkiteEffect extends OneShotEffect {
                     Permanent creature = game.getPermanent(card.getId());
                     if (creature != null) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                        effect.setTargetPointer(new FixedTarget(creature.getId()));
+                        effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
                         game.addEffect(effect, source);
                         Effect effect2 = new ReturnToHandTargetEffect();
-                        effect2.setTargetPointer(new FixedTarget(creature.getId()));
+                        effect2.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
                         delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceId(source.getSourceId());
