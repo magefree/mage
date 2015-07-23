@@ -30,7 +30,7 @@ package mage.abilities.costs;
 /**
  * @author LevelX2
  */
-public interface OptionalAdditionalCost extends Costs {
+public interface OptionalAdditionalCost extends Cost {
 
     String getName();
 

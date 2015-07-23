@@ -218,15 +218,19 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                         if (kickerCost.canPay(ability, sourceId, controllerId, game)
                                 && player.chooseUse(Outcome.Benefit, "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
                             this.activateKicker(kickerCost, ability, game);
-                            for (Iterator itKickerCost = kickerCost.iterator(); itKickerCost.hasNext();) {
-                                Object kickerCostObject = itKickerCost.next();
-                                if ((kickerCostObject instanceof Costs) || (kickerCostObject instanceof CostsImpl)) {
-                                    for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext();) {
-                                        addKickerCostsToAbility(itDetails.next(), ability, game);
+                            if (kickerCost instanceof Costs) {
+                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext();) {
+                                    Object kickerCostObject = itKickerCost.next();
+                                    if ((kickerCostObject instanceof Costs) || (kickerCostObject instanceof CostsImpl)) {
+                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext();) {
+                                            addKickerCostsToAbility(itDetails.next(), ability, game);
+                                        }
+                                    } else {
+                                        addKickerCostsToAbility((Cost) kickerCostObject, ability, game);
                                     }
-                                } else {
-                                    addKickerCostsToAbility((Cost) kickerCostObject, ability, game);
                                 }
+                            } else {
+                                addKickerCostsToAbility((Cost) kickerCost, ability, game);
                             }
                             again = kickerCost.isRepeatable();
                         } else {
