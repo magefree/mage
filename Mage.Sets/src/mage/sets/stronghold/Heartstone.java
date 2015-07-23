@@ -25,28 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
- package mage.sets.stronghold;
+package mage.sets.stronghold;
 
- import java.util.LinkedHashSet;
- import java.util.Set;
- import java.util.UUID;
- import mage.Mana;
- import mage.abilities.Ability;
- import mage.abilities.common.SimpleStaticAbility;
- import mage.abilities.effects.common.cost.CostModificationEffectImpl;
- import mage.cards.CardImpl;
- import mage.constants.AbilityType;
- import mage.constants.CardType;
- import mage.constants.CostModificationType;
- import mage.constants.Duration;
- import mage.constants.Outcome;
- import mage.constants.Rarity;
- import mage.constants.Zone;
- import mage.filter.common.FilterCreaturePermanent;
- import mage.game.Game;
- import mage.game.permanent.Permanent;
- import mage.players.Player;
- import mage.util.CardUtil;
+import java.util.UUID;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.cards.CardImpl;
+import mage.constants.AbilityType;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -89,14 +87,14 @@ class HeartstoneEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
-        if (controller != null){
+        if (controller != null) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            if (mana.getColorless() > 1){
-              CardUtil.reduceCost(abilityToModify, 1);
+            if (mana.count() > 1 && mana.getColorless() > 0) {
+                CardUtil.reduceCost(abilityToModify, 1);
             }
             return true;
         }
-         return false;
+        return false;
     }
 
     @Override
