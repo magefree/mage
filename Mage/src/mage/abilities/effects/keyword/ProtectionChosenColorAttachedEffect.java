@@ -88,7 +88,7 @@ public class ProtectionChosenColorAttachedEffect extends ContinuousEffectImpl {
             if (protectionAbility != null) {
                 Permanent attachedTo = game.getPermanent(attachement.getAttachedTo());
                 if (attachedTo != null) {
-                    attachement.addAbility(protectionAbility, source.getSourceId(), game);
+                    attachedTo.addAbility(protectionAbility, source.getSourceId(), game);
                 }
                 return true;
             }
