@@ -29,23 +29,16 @@ package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.ChooseColorEffect;
+import mage.abilities.effects.keyword.ProtectionChosenColorSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.Zone;
 
 /**
  *
@@ -63,10 +56,12 @@ public class OrderOfTheStars extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        
+
         // As Order of the Stars enters the battlefield, choose a color.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
+
         // Order of the Stars has protection from the chosen color.
-        this.addAbility(new AsEntersBattlefieldAbility(new OrderOfTheStarsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorSourceEffect()));
     }
 
     public OrderOfTheStars(final OrderOfTheStars card) {
@@ -76,38 +71,5 @@ public class OrderOfTheStars extends CardImpl {
     @Override
     public OrderOfTheStars copy() {
         return new OrderOfTheStars(this);
-    }
-}
-
-class OrderOfTheStarsEffect extends OneShotEffect {
-    
-    public OrderOfTheStarsEffect() {
-        super(Outcome.Protect);
-        this.staticText = "{this} gains protection from the color of your choice";
-    }
-    
-    public OrderOfTheStarsEffect(final OrderOfTheStarsEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public OrderOfTheStarsEffect copy() {
-        return new OrderOfTheStarsEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = new ChoiceColor();
-        choice.setMessage("Choose color to get protection from");
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.choose(outcome, choice, game)) {
-            FilterCard protectionFilter = new FilterCard();
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice().toLowerCase());
-            ContinuousEffect effect = new GainAbilitySourceEffect(new ProtectionAbility(protectionFilter), Duration.WhileOnBattlefield);
-            game.addEffect(effect, source);
-            return true;
-        }
-        return false;
     }
 }
