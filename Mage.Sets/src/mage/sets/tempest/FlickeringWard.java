@@ -28,29 +28,20 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.effects.keyword.ProtectionChosenColorAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -72,8 +63,10 @@ public class FlickeringWard extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         
         // As Flickering Ward enters the battlefield, choose a color.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
+        
         // Enchanted creature has protection from the chosen color. This effect doesn't remove Flickering Ward.
-        this.addAbility(new AsEntersBattlefieldAbility(new FlickeringWardEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(true)));
         
         // {W}: Return Flickering Ward to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{W}")));
@@ -86,40 +79,5 @@ public class FlickeringWard extends CardImpl {
     @Override
     public FlickeringWard copy() {
         return new FlickeringWard(this);
-    }
-}
-
-class FlickeringWardEffect extends OneShotEffect {
-    
-    public FlickeringWardEffect() {
-        super(Outcome.Protect);
-        this.staticText = "enchanted creature has protection from the chosen color. This effect doesn't remove {this}";
-    }
-    
-    public FlickeringWardEffect(final FlickeringWardEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public FlickeringWardEffect copy() {
-        return new FlickeringWardEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = new ChoiceColor();
-        choice.setMessage("Choose color to get protection from");
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.choose(outcome, choice, game)) {
-            FilterCard protectionFilter = new FilterCard();
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice().toLowerCase());
-            ProtectionAbility protectionAbility = new ProtectionAbility(protectionFilter);
-            protectionAbility.setRemovesAuras(false);
-            ContinuousEffect effect = new GainAbilityAttachedEffect(protectionAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
-            game.addEffect(effect, source);
-            return true;
-        }
-        return false;
     }
 }

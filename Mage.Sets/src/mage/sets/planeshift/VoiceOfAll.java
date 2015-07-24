@@ -29,23 +29,16 @@ package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.ChooseColorEffect;
+import mage.abilities.effects.keyword.ProtectionChosenColorSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.Zone;
 
 /**
  *
@@ -62,9 +55,11 @@ public class VoiceOfAll extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // As Voice of All enters the battlefield, choose a color.
-        // Voice of All has protection from the chosen color.
-        this.addAbility(new AsEntersBattlefieldAbility(new VoiceOfAllEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
+        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorSourceEffect()));
     }
 
     public VoiceOfAll(final VoiceOfAll card) {
@@ -74,38 +69,5 @@ public class VoiceOfAll extends CardImpl {
     @Override
     public VoiceOfAll copy() {
         return new VoiceOfAll(this);
-    }
-}
-
-class VoiceOfAllEffect extends OneShotEffect {
-    
-    public VoiceOfAllEffect() {
-        super(Outcome.Protect);
-        this.staticText = "{this} gains protection from the color of your choice";
-    }
-    
-    public VoiceOfAllEffect(final VoiceOfAllEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public VoiceOfAllEffect copy() {
-        return new VoiceOfAllEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = new ChoiceColor();
-        choice.setMessage("Choose color to get protection from");
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.choose(outcome, choice, game)) {
-            FilterCard protectionFilter = new FilterCard();
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice().toLowerCase());
-            ContinuousEffect effect = new GainAbilitySourceEffect(new ProtectionAbility(protectionFilter), Duration.WhileOnBattlefield);
-            game.addEffect(effect, source);
-            return true;
-        }
-        return false;
     }
 }

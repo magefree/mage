@@ -28,27 +28,19 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.effects.keyword.ProtectionChosenColorAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -73,8 +65,10 @@ public class PentarchWard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         
         // As Pentarch Ward enters the battlefield, choose a color.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
+        
         // Enchanted creature has protection from the chosen color. This effect doesn't remove Pentarch Ward.
-        this.addAbility(new AsEntersBattlefieldAbility(new PentarchWardEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(true)));
     }
 
     public PentarchWard(final PentarchWard card) {
@@ -84,40 +78,5 @@ public class PentarchWard extends CardImpl {
     @Override
     public PentarchWard copy() {
         return new PentarchWard(this);
-    }
-}
-
-class PentarchWardEffect extends OneShotEffect {
-    
-    public PentarchWardEffect() {
-        super(Outcome.Protect);
-        this.staticText = "enchanted creature has protection from the chosen color. This effect doesn't remove {this}";
-    }
-    
-    public PentarchWardEffect(final PentarchWardEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public PentarchWardEffect copy() {
-        return new PentarchWardEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = new ChoiceColor();
-        choice.setMessage("Choose color to get protection from");
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.choose(outcome, choice, game)) {
-            FilterCard protectionFilter = new FilterCard();
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice().toLowerCase());
-            ProtectionAbility protectionAbility = new ProtectionAbility(protectionFilter);
-            protectionAbility.setRemovesAuras(false);
-            ContinuousEffect effect = new GainAbilityAttachedEffect(protectionAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
-            game.addEffect(effect, source);
-            return true;
-        }
-        return false;
     }
 }
