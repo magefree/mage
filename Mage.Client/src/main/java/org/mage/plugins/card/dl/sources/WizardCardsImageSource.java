@@ -92,6 +92,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ATH", "Anthologies");
         setsAliases.put("ATQ", "Antiquities");
         setsAliases.put("AVR", "Avacyn Restored");
+        setsAliases.put("BFZ", "Battle for Zendikar");
         setsAliases.put("BNG", "Born of the Gods");
         setsAliases.put("BOK", "Betrayers of Kamigawa");
         setsAliases.put("BRB", "Battle Royale Box Set");

@@ -30,7 +30,7 @@ package mage.sets.planeshift;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -64,7 +64,7 @@ public class VoiceOfAll extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // As Voice of All enters the battlefield, choose a color.
         // Voice of All has protection from the chosen color.
-        this.addAbility(new EntersBattlefieldAbility(new VoiceOfAllEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new VoiceOfAllEffect()));
     }
 
     public VoiceOfAll(final VoiceOfAll card) {
