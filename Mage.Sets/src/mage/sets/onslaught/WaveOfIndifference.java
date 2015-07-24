@@ -25,60 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.sets.onslaught;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
-import mage.constants.Outcome;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
+public class WaveOfIndifference extends CardImpl {
 
-public class ChooseCreatureTypeEffect extends OneShotEffect {
+    public WaveOfIndifference(UUID ownerId) {
+        super(ownerId, 243, "Wave of Indifference", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
+        this.expansionSetCode = "ONS";
 
-    public ChooseCreatureTypeEffect(Outcome outcome) {
-        super(outcome);
-        staticText = "choose a creature type";
+        // X target creatures can't block this turn.
+        Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
+        effect.setText("X target creatures can't block this turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
     }
 
-    public ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
-        super(effect);
+    public WaveOfIndifference(final WaveOfIndifference card) {
+        super(card);
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!controller.choose(outcome, typeChoice, game)) {
-                if (!controller.isInGame()) {
-                    return false;
-                }
-            }
-            if (!game.isSimulation()) {
-                game.informPlayers(permanent.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
-            }
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
         }
-        return false;
     }
 
     @Override
-    public ChooseCreatureTypeEffect copy() {
-        return new ChooseCreatureTypeEffect(this);
+    public WaveOfIndifference copy() {
+        return new WaveOfIndifference(this);
     }
-
 }
