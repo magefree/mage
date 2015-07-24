@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class KnuckleboneWitch extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Goblin you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

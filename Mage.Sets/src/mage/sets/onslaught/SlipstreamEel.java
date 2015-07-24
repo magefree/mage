@@ -38,20 +38,13 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author markedagain
+ * @author fireshoes
  */
 public class SlipstreamEel extends CardImpl {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
 
-    static {
-        filter.add(new SubtypePredicate("Island"));
-    }
-    
     public SlipstreamEel(UUID ownerId) {
         super(ownerId, 114, "Slipstream Eel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.expansionSetCode = "ONS";
@@ -61,7 +54,8 @@ public class SlipstreamEel extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Slipstream Eel can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
+        
         // Cycling {1}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
     }
