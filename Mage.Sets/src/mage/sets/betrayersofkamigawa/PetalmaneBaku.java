@@ -25,24 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
@@ -62,14 +64,19 @@ public class PetalmaneBaku extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        
+
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
 
         // {1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color to your mana pool.
-        Ability ability = new PetalmaneBakuManaAbility();
-        ability.addCost(new GenericManaCost(1));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(1)));
+        Ability ability = new DynamicManaAbility(
+                new Mana(0, 0, 0, 0, 0, 0, 1),
+                new RemovedCountersForCostValue(),
+                new TapSourceCost(),
+                "Add X mana of any one color to your mana pool",
+                true, new CountersCount(CounterType.KI));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
+                "Remove X ki counters from {this}"));
         this.addAbility(ability);
     }
 
@@ -81,8 +88,9 @@ public class PetalmaneBaku extends CardImpl {
     public PetalmaneBaku copy() {
         return new PetalmaneBaku(this);
     }
-    
+
     private class PetalmaneBakuManaAbility extends BasicManaAbility {
+
         PetalmaneBakuManaAbility() {
             super(new PetalmaneBakuManaEffect());
             this.addChoice(new ChoiceColor());
@@ -96,7 +104,7 @@ public class PetalmaneBaku extends CardImpl {
         public PetalmaneBakuManaAbility copy() {
             return new PetalmaneBakuManaAbility(this);
         }
-}
+    }
 
     private class PetalmaneBakuManaEffect extends ManaEffect {
 
@@ -118,9 +126,9 @@ public class PetalmaneBaku extends CardImpl {
                 int numberOfMana = 0;
                 for (Cost cost : source.getCosts()) {
                     if (cost instanceof RemoveVariableCountersSourceCost) {
-                        numberOfMana = ((RemoveVariableCountersSourceCost)cost).getAmount();
+                        numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
                     }
-                }                
+                }
                 if (choice.getColor().isBlack()) {
                     player.getManaPool().addMana(new Mana(0, 0, 0, 0, numberOfMana, 0, 0), game, source);
                     return true;
@@ -151,6 +159,5 @@ public class PetalmaneBaku extends CardImpl {
             return new PetalmaneBakuManaEffect(this);
         }
     }
-
 
 }

@@ -35,7 +35,9 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -67,10 +69,14 @@ public class IcatianStore extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.getInstance(), "if {this} is tapped, put a storage counter on it");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
         // {tap}, Remove any number of storage counters from Icatian Store: Add {W} to your mana pool for each storage counter removed this way.
-        Ability ability = new DynamicManaAbility(Mana.WhiteMana, new RemovedCountersForCostValue(),
-                "Add {W} to your mana pool for each storage counter removed this way");
-        ability.addCost(new RemoveVariableCountersSourceCost(
-                CounterType.STORAGE.createInstance(), "Remove any number of storage counters from {this}"));
+        Ability ability = new DynamicManaAbility(
+                Mana.WhiteMana,
+                new RemovedCountersForCostValue(),
+                new TapSourceCost(),
+                "Add {W} to your mana pool for each storage counter removed this way",
+                true, new CountersCount(CounterType.STORAGE));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
+                "Remove any number of storage counters from {this}"));
         this.addAbility(ability);
     }
 
