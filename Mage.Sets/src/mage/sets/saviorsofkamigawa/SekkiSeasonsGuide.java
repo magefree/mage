@@ -81,9 +81,9 @@ public class SekkiSeasonsGuide extends CardImpl {
 
         // Sacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
+                Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(8,8,filter, true))));
+                new SacrificeTargetCost(new TargetControlledPermanent(8, 8, filter, true))));
     }
 
     public SekkiSeasonsGuide(final SekkiSeasonsGuide card) {
@@ -98,45 +98,45 @@ public class SekkiSeasonsGuide extends CardImpl {
 
 class SekkiSeasonsGuideEffect extends PreventionEffectImpl {
 
-        public SekkiSeasonsGuideEffect() {
-            super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
-            staticText = "If damage would be dealt to {this}, prevent that damage, remove that many +1/+1 counters from {this}, and put that many 1/1 colorless Spirit creature tokens onto the battlefield";
-        }
-
-        public SekkiSeasonsGuideEffect(final SekkiSeasonsGuideEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public SekkiSeasonsGuideEffect copy() {
-            return new SekkiSeasonsGuideEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
-        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            int damage = event.getAmount();
-            preventDamageAction(event, source, game);
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                permanent.removeCounters(CounterType.P1P1.createInstance(damage), game);
-            }
-            new CreateTokenEffect(new SpiritToken(), damage).apply(game, source);
-            return true;
-        }
-
-        @Override
-        public boolean applies(GameEvent event, Ability source, Game game) {
-            if (super.applies(event, source, game)) {
-                if (event.getTargetId().equals(source.getSourceId())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
+    public SekkiSeasonsGuideEffect() {
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
+        staticText = "If damage would be dealt to {this}, prevent that damage, remove that many +1/+1 counters from {this}, and put that many 1/1 colorless Spirit creature tokens onto the battlefield";
     }
+
+    public SekkiSeasonsGuideEffect(final SekkiSeasonsGuideEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SekkiSeasonsGuideEffect copy() {
+        return new SekkiSeasonsGuideEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        int damage = event.getAmount();
+        preventDamageAction(event, source, game);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            permanent.removeCounters(CounterType.P1P1.createInstance(damage), game);
+        }
+        new CreateTokenEffect(new SpiritToken(), damage).apply(game, source);
+        return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (super.applies(event, source, game)) {
+            if (event.getTargetId().equals(source.getSourceId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+}
