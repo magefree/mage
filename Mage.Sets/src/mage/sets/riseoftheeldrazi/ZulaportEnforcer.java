@@ -27,29 +27,36 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author North, noxx
  */
 public class ZulaportEnforcer extends LevelerCard {
+
+    private final static FilterCreaturePermanent notBlackCreatures = new FilterCreaturePermanent("except by black creatures");
+
+    static {
+        notBlackCreatures.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+    }
 
     public ZulaportEnforcer(UUID ownerId) {
         super(ownerId, 133, "Zulaport Enforcer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
@@ -64,14 +71,13 @@ public class ZulaportEnforcer extends LevelerCard {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{4}")));
 
         // LEVEL 1-2:  3/3
-
         // LEVEL 3+: 5/5
         // Zulaport Enforcer can't be blocked except by black creatures.
-        Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
-        levelAbilities.add(ZulaportEnforcerAbility.getInstance());
+        Abilities<Ability> levelAbilities = new AbilitiesImpl<>();
+        levelAbilities.add(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(notBlackCreatures, Duration.WhileOnBattlefield)));
 
         this.addAbilities(LevelerCardBuilder.construct(
-                new LevelerCardBuilder.LevelAbility(1, 2, new AbilitiesImpl<Ability>(), 3, 3),
+                new LevelerCardBuilder.LevelAbility(1, 2, new AbilitiesImpl<>(), 3, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, levelAbilities, 5, 5)
         ));
         setMaxLevelCounters(3);
@@ -84,63 +90,5 @@ public class ZulaportEnforcer extends LevelerCard {
     @Override
     public ZulaportEnforcer copy() {
         return new ZulaportEnforcer(this);
-    }
-}
-
-class ZulaportEnforcerAbility extends EvasionAbility {
-
-    private static ZulaportEnforcerAbility instance;
-
-    public static ZulaportEnforcerAbility getInstance() {
-        if (instance == null) {
-            instance = new ZulaportEnforcerAbility();
-        }
-        return instance;
-    }
-
-    private ZulaportEnforcerAbility() {
-        this.addEffect(new ZulaportEnforcerEffect());
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't be blocked except by black creatures.";
-    }
-
-    @Override
-    public ZulaportEnforcerAbility copy() {
-        return getInstance();
-    }
-}
-
-class ZulaportEnforcerEffect extends RestrictionEffect {
-
-    public ZulaportEnforcerEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public ZulaportEnforcerEffect(final ZulaportEnforcerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(ZulaportEnforcerAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getColor(game).isBlack()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ZulaportEnforcerEffect copy() {
-        return new ZulaportEnforcerEffect(this);
     }
 }

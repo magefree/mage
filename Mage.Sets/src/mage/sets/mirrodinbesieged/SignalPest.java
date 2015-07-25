@@ -27,13 +27,10 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import java.io.ObjectStreamException;
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.MageSingleton;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.BattleCryAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -41,14 +38,26 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author North
  */
 public class SignalPest extends CardImpl {
+
+    private final static FilterCreaturePermanent notFlyingorReachCreatures = new FilterCreaturePermanent("except by creatures with flying or reach");
+
+    static {
+        notFlyingorReachCreatures.add(Predicates.not(
+                Predicates.or(
+                        new AbilityPredicate(FlyingAbility.class),
+                        new AbilityPredicate(ReachAbility.class)
+                )
+        ));
+    }
 
     public SignalPest(UUID ownerId) {
         super(ownerId, 131, "Signal Pest", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
@@ -58,8 +67,11 @@ public class SignalPest extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
+        // Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
         this.addAbility(new BattleCryAbility());
-        this.addAbility(SignalPestAbility.getInstance());
+
+        // Signal Pest can't be blocked except by creatures with flying or reach.
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(notFlyingorReachCreatures, Duration.WhileOnBattlefield)));
     }
 
     public SignalPest(final SignalPest card) {
@@ -69,67 +81,5 @@ public class SignalPest extends CardImpl {
     @Override
     public SignalPest copy() {
         return new SignalPest(this);
-    }
-}
-
-class SignalPestAbility extends EvasionAbility implements MageSingleton {
-
-    private static SignalPestAbility instance;
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    public static SignalPestAbility getInstance() {
-        if (instance == null) {
-            instance = new SignalPestAbility();
-        }
-        return instance;
-    }
-
-    private SignalPestAbility() {
-        this.addEffect(new SignalPestEffect());
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't be blocked except by creatures with flying or reach";
-    }
-
-    @Override
-    public SignalPestAbility copy() {
-        return getInstance();
-    }
-}
-
-class SignalPestEffect extends RestrictionEffect {
-
-    public SignalPestEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public SignalPestEffect(final SignalPestEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(SignalPestAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().contains(FlyingAbility.getInstance()) || blocker.getAbilities().contains(ReachAbility.getInstance())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public SignalPestEffect copy() {
-        return new SignalPestEffect(this);
     }
 }

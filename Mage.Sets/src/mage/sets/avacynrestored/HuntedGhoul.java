@@ -27,18 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.effects.RestrictionEffect;
-import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.UUID;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author noxx
@@ -54,7 +50,7 @@ public class HuntedGhoul extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Hunted Ghoul can't block Humans.
-        this.addAbility(HuntedGhoulAbility.getInstance());
+        this.addAbility(new SimpleEvasionAbility(new CantBlockCreaturesSourceEffect(new FilterCreaturePermanent("Human", "Humans"))));
     }
 
     public HuntedGhoul(final HuntedGhoul card) {
@@ -64,63 +60,5 @@ public class HuntedGhoul extends CardImpl {
     @Override
     public HuntedGhoul copy() {
         return new HuntedGhoul(this);
-    }
-}
-
-class HuntedGhoulAbility extends EvasionAbility {
-
-    private static HuntedGhoulAbility instance;
-
-    public static HuntedGhoulAbility getInstance() {
-        if (instance == null) {
-            instance = new HuntedGhoulAbility();
-        }
-        return instance;
-    }
-
-    private HuntedGhoulAbility() {
-        this.addEffect(new HuntedGhoulEffect());
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't block Humans.";
-    }
-
-    @Override
-    public HuntedGhoulAbility copy() {
-        return getInstance();
-    }
-}
-
-class HuntedGhoulEffect extends RestrictionEffect {
-
-    public HuntedGhoulEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public HuntedGhoulEffect(final HuntedGhoulEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(HuntedGhoulAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (attacker != null && attacker.hasSubtype("Human")) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public HuntedGhoulEffect copy() {
-        return new HuntedGhoulEffect(this);
     }
 }
