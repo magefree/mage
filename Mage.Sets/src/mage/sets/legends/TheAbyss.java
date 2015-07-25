@@ -97,6 +97,8 @@ class TheAbyssTriggeredAbility extends TriggeredAbilityImpl {
             filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
             filter.add(new ControllerIdPredicate(player.getId()));
             Target target = new TargetCreaturePermanent(filter);
+            target.setAbilityController(getControllerId());
+            target.setTargetController(player.getId());
             this.getTargets().clear();
             this.getTargets().add(target);
             return true;
