@@ -44,8 +44,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author fireshoes
  */
 public class ArtificersEpiphany extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts");
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control no artifacts");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
