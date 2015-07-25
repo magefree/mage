@@ -119,7 +119,20 @@ public class GameEvent implements Serializable {
          */
         SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
-        ADD_MANA, MANA_ADDED,
+        /* ADD_MANA
+         targetId    id of the ability that added the mana
+         sourceId    sourceId of the ability that added the mana
+         playerId    player the mana is added to the mana pool for
+         mana        the mana added
+         */
+        ADD_MANA,
+        /* MANA_ADDED
+         targetId    id of the ability that added the mana
+         sourceId    sourceId of the ability that added the mana
+         playerId    player the mana is added to the mana pool for
+         mana        the mana added
+         */
+        MANA_ADDED,
         /* MANA_PAYED
          targetId    id if the ability the mana was paid for (not the sourceId)
          sourceId    sourceId of the mana source
