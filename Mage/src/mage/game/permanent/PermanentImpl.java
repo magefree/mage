@@ -326,6 +326,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public Counters getCounters(Game game) {
+        return counters;
+    }
+
+    @Override
     public void addCounters(String name, int amount, Game game) {
         addCounters(name, amount, game, null);
     }
