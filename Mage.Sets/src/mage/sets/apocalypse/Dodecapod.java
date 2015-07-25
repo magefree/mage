@@ -25,49 +25,73 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2011;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DiscardOntoBattlefieldEffect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class ObstinateBaloth extends CardImpl {
+public class Dodecapod extends CardImpl {
 
-    public ObstinateBaloth(UUID ownerId) {
-        super(ownerId, 188, "Obstinate Baloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "M11";
-        this.subtype.add("Beast");
+    public Dodecapod(UUID ownerId) {
+        super(ownerId, 134, "Dodecapod", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "APC";
+        this.subtype.add("Golem");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // If a spell or ability an opponent controls causes you to discard Dodecapod, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.HAND, new DodecapodEffect()));
 
-        // When Obstinate Baloth enters the battlefield, you gain 4 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
-
-        // If a spell or ability an opponent controls causes you to discard Obstinate Baloth, put it onto the battlefield instead of putting it into your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.HAND, new DiscardOntoBattlefieldEffect()));
     }
 
-    public ObstinateBaloth(final ObstinateBaloth card) {
+    public Dodecapod(final Dodecapod card) {
         super(card);
     }
 
     @Override
-    public ObstinateBaloth copy() {
-        return new ObstinateBaloth(this);
+    public Dodecapod copy() {
+        return new Dodecapod(this);
     }
-
 }
 
+
+class DodecapodEffect extends DiscardOntoBattlefieldEffect {
+
+    public DodecapodEffect() {
+        super();
+        staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard";
+    }
+
+    public DodecapodEffect(final DodecapodEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DodecapodEffect copy() {
+        return new DodecapodEffect(this);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if(super.replaceEvent(event, source, game)) {
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)).apply(game, source);
+            return true;
+        }
+        return false;
+    }
+}

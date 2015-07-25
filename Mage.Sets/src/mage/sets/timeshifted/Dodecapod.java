@@ -25,50 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DiscardOntoBattlefieldEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class LoxodonSmiter extends CardImpl {
+public class Dodecapod extends mage.sets.apocalypse.Dodecapod {
 
-    public LoxodonSmiter(UUID ownerId) {
-        super(ownerId, 178, "Loxodon Smiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        this.expansionSetCode = "RTR";
-        this.subtype.add("Elephant");
-        this.subtype.add("Soldier");
-
-
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Loxodon Smiter can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
-
-        // If a spell or ability an opponent controls causes you to discard Loxodon Smiter, put it onto the battlefield instead of putting it into your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.HAND, new DiscardOntoBattlefieldEffect()));
+    public Dodecapod(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 108;
+        this.expansionSetCode = "TSB";
+        this.rarity = Rarity.SPECIAL;
     }
 
-    public LoxodonSmiter(final LoxodonSmiter card) {
+    public Dodecapod(final Dodecapod card) {
         super(card);
     }
 
     @Override
-    public LoxodonSmiter copy() {
-        return new LoxodonSmiter(this);
+    public Dodecapod copy() {
+        return new Dodecapod(this);
     }
 }
