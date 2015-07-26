@@ -84,7 +84,8 @@ public class DragonsMaze extends ExpansionSet {
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
                 savedCards.put(rarity, savedCardsInfos);
             }
-            return savedCardsInfos;
+            // Return a copy of the saved cards information, as not to modify the original.
+            return new ArrayList<>(savedCardsInfos);
         } else {
             return super.getCardsByRarity(rarity);
         }

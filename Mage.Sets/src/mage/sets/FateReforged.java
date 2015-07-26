@@ -81,9 +81,8 @@ public class FateReforged extends ExpansionSet {
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
                 savedCards.put(rarity, savedCardsInfos);
             }
-            List<CardInfo> cards = new ArrayList<>();
-            cards.addAll(savedCardsInfos);
-            return cards;
+            // Return a copy of the saved cards information, as not to modify the original.
+            return new ArrayList<>(savedCardsInfos);
         } else {
             return super.getCardsByRarity(rarity);
         }
