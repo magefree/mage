@@ -16,8 +16,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
  * @author klayhamn
  */
@@ -37,39 +35,42 @@ public class RippleEffect extends OneShotEffect {
         this.setText();
     }
 
+    public RippleEffect(final RippleEffect effect) {
+        super(effect);
+        this.rippleNumber = effect.rippleNumber;
+        this.isTargetSelf = effect.isTargetSelf;
+    }
+
+    @Override
+    public RippleEffect copy() {
+        return new RippleEffect(this);
+    }
+
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null) {
-            if (!player.chooseUse(Outcome.Neutral, "Reveal "+ rippleNumber + " cards from the top of your library?", source, game )){
-                return false; //fizzle
+            if (!player.chooseUse(Outcome.Neutral, "Reveal " + rippleNumber + " cards from the top of your library?", source, game)){
+                return true; //fizzle
             }
-
             Cards cards = new CardsImpl();
-            int count = Math.min(rippleNumber, player.getLibrary().size());
-            if (count == 0) {
-                return true;
-            }
-            player.revealCards(sourceObject.getIdName(), cards, game);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                cards.add(card);
-            }
+            cards.addAll(player.getLibrary().getTopCards(game, rippleNumber)); // pull top cards
+            player.revealCards(sourceObject.getIdName(), cards, game); // reveal the cards
 
-            // Select cards with the same name as the spell on which the ripple effect applies
+            // Find out which card should be rippled
             // FIXME: I'm not sure the "isTargetSelf" flag is the most elegant solution
             String cardNameToRipple;
             if (isTargetSelf) { // if the ripple applies to the same card that triggered it
                 cardNameToRipple = sourceObject.getName();
             } else { // if the ripple is caused by something else (e.g. Thrumming Stone)
-                if (targetPointer == null) {
-                    return true;  // this might be possible if the "rememberSource" param wasn't used (which would constitute a bug)
+                Spell spellOnStack = game.getStack().getSpell(targetPointer.getFirst(game, source));
+                if (spellOnStack == null) { // if the ripple target got countered or exiled
+                    spellOnStack = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
                 }
-                UUID triggeringSpellID = targetPointer.getFirst(game, source);
-                Spell spellOnStack = game.getStack().getSpell(triggeringSpellID);
                 if (spellOnStack == null) {
-                    return true; // spell was countered or exiled, effect should fizzle
+                    return true; // should not happen?
                 }
                 cardNameToRipple = spellOnStack.getName();
             }
@@ -90,22 +91,10 @@ public class RippleEffect extends OneShotEffect {
             }
             // move cards that weren't cast to the bottom of the library
             player.putCardsOnBottomOfLibrary(cards, game, source, true);
-            // do we need to fire an event here? there is nothing that listens to ripple so far...
             return true;
         }
 
         return false;
-    }
-
-    public RippleEffect(final RippleEffect effect) {
-        super(effect);
-        this.rippleNumber = effect.rippleNumber;
-        this.isTargetSelf = effect.isTargetSelf;
-    }
-
-    @Override
-    public RippleEffect copy() {
-        return new RippleEffect(this);
     }
 
     private void setText() {
