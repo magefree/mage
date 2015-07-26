@@ -25,41 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author magenoxx_at_gmail.com
+ * @author LoneFox
  */
-public class Telepathy extends CardImpl {
+public class SeersVision extends CardImpl {
 
-    public Telepathy(UUID ownerId) {
-        super(ownerId, 102, "Telepathy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "USG";
+    public SeersVision(UUID ownerId) {
+        super(ownerId, 270, "Seer's Vision", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");
+        this.expansionSetCode = "INV";
 
         // Your opponents play with their hands revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
+        // Sacrifice Seer's Vision: Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(), new SacrificeSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public Telepathy(final Telepathy card) {
+    public SeersVision(final SeersVision card) {
         super(card);
     }
 
     @Override
-    public Telepathy copy() {
-        return new Telepathy(this);
+    public SeersVision copy() {
+        return new SeersVision(this);
     }
 }

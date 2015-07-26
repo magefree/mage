@@ -25,11 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.legends;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
 import mage.cards.CardImpl;
@@ -37,29 +35,28 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
- * @author magenoxx_at_gmail.com
+ * @author LoneFox
  */
-public class Telepathy extends CardImpl {
+public class Revelation extends CardImpl {
 
-    public Telepathy(UUID ownerId) {
-        super(ownerId, 102, "Telepathy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "USG";
+    public Revelation(UUID ownerId) {
+        super(ownerId, 116, "Revelation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.expansionSetCode = "LEG";
+        this.supertype.add("World");
 
-        // Your opponents play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
+        // Players play with their hands revealed.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
     }
 
-    public Telepathy(final Telepathy card) {
+    public Revelation(final Revelation card) {
         super(card);
     }
 
     @Override
-    public Telepathy copy() {
-        return new Telepathy(this);
+    public Revelation copy() {
+        return new Revelation(this);
     }
 }

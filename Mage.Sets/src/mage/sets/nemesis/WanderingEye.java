@@ -25,41 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
- * @author magenoxx_at_gmail.com
+ * @author LoneFox
  */
-public class Telepathy extends CardImpl {
+public class WanderingEye extends CardImpl {
 
-    public Telepathy(UUID ownerId) {
-        super(ownerId, 102, "Telepathy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "USG";
+    public WanderingEye(UUID ownerId) {
+        super(ownerId, 50, "Wandering Eye", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Illusion");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Your opponents play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Players play with their hands revealed.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
     }
 
-    public Telepathy(final Telepathy card) {
+    public WanderingEye(final WanderingEye card) {
         super(card);
     }
 
     @Override
-    public Telepathy copy() {
-        return new Telepathy(this);
+    public WanderingEye copy() {
+        return new WanderingEye(this);
     }
 }
