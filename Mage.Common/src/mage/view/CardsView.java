@@ -49,6 +49,7 @@ import mage.game.GameState;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.TargetPointer;
+import mage.util.GameLog;
 
 /**
  *
@@ -145,11 +146,11 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                         for (UUID uuid : abilityTargets) {
                             MageObject mageObject = game.getObject(uuid);
                             if (mageObject != null) {
-                                names.add(mageObject.getName());
+                                names.add(GameLog.getColoredObjectIdNameForTooltip(mageObject));
                             }
                         }
                         if (!names.isEmpty()) {
-                            abilityView.getRules().add("<i>Related to: " + names.toString() + "</i>");
+                            abilityView.getRules().add("<i>Related objects: " + names.toString() + "</i>");
                         }
                     }
                 }

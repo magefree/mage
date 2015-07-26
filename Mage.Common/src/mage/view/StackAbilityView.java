@@ -41,6 +41,7 @@ import mage.game.Game;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
+import mage.util.GameLog;
 
 /**
  *
@@ -118,7 +119,7 @@ public class StackAbilityView extends CardView {
                             if ((mageObject instanceof Card) && ((Card) mageObject).isFaceDown(game)) {
                                 continue;
                             }
-                            names.add(mageObject.getName());
+                            names.add(GameLog.getColoredObjectIdNameForTooltip(mageObject));
                         }
                     }
 
