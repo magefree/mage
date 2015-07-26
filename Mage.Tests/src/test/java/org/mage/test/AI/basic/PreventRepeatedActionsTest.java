@@ -66,4 +66,21 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
         Assert.assertEquals("AI should only used Equipment once", 2, tappedLands);
     }
 
+    /**
+     * If the AI on a local server gets control of a Basalt Monolith it will
+     * infinite loop taping for three mana and then using the mana to untap lol.
+     * Seeing the computer durdle troll is quite the hillarious thing
+     */
+    @Test
+    public void testBasaltMonolith() {
+        // Basalt Monolith doesn't untap during your untap step.
+        // {T}: Add {3} to your mana pool.
+        // {3}: Untap Basalt Monolith.
+        addCard(Zone.BATTLEFIELD, playerA, "Basalt Monolith", 1);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped("Basalt Monolith", false);
+    }
 }
