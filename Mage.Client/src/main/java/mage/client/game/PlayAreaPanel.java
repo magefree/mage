@@ -333,7 +333,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             };
 
-            JMenu rollbackMainItem = new JMenu("Roll back");
+            JMenu rollbackMainItem = new JMenu("Rollback");
             rollbackMainItem.setMnemonic(KeyEvent.VK_R);
             rollbackMainItem.setToolTipText("The game will be rolled back to the start of the requested turn if all players agree.");
             popupMenu.add(rollbackMainItem);

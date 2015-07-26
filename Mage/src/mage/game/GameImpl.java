@@ -174,7 +174,7 @@ public abstract class GameImpl implements Game, Serializable {
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
-    // game states to allow player roll back
+    // game states to allow player rollback
     protected transient Map<Integer, GameState> gameStatesRollBack = new HashMap<>();
     protected boolean executingRollback;
 
