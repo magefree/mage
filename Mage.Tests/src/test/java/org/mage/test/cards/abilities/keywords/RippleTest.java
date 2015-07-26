@@ -39,11 +39,11 @@ public class RippleTest extends CardTestPlayerBase {
 
         execute();
 
-        assertHandCount(playerB, 3); // should have 2 less
+        assertHandCount(playerB, 3); // should have 1 less
         assertHandCount(playerA, 1); // after cast, one remains
 
-        assertGraveyardCount(playerA, "Surging Dementia", 1);
-        assertGraveyardCount(playerB, "Island", 1);
+        assertGraveyardCount(playerA, "Surging Dementia", 1); // 1 cast
+        assertGraveyardCount(playerB, "Island", 1); // 1 discarded
     }
 
     @Test
@@ -70,9 +70,9 @@ public class RippleTest extends CardTestPlayerBase {
         execute();
 
         assertHandCount(playerB, 2); // should have 2 less
-        assertHandCount(playerA, 1); // after cast, none remain
-        assertGraveyardCount(playerA, "Surging Dementia", 2);
-        assertGraveyardCount(playerB, "Island", 2);
+        assertHandCount(playerA, 1); // after cast, one remains in hand
+        assertGraveyardCount(playerA, "Surging Dementia", 2); // 2 were cast
+        assertGraveyardCount(playerB, "Island", 2); // 2 were discarded
 
     }
 
@@ -104,9 +104,9 @@ public class RippleTest extends CardTestPlayerBase {
 
         execute();
 
-        assertHandCount(playerB, 1); // should have 2 less
-        assertHandCount(playerA, 1); // after cast, none remain
-        assertGraveyardCount(playerA, "Surging Dementia", 3);
-        assertGraveyardCount(playerB, "Island", 3);
+        assertHandCount(playerB, 1); // should have 3 less
+        assertHandCount(playerA, 1); // after cast, one remains in hand
+        assertGraveyardCount(playerA, "Surging Dementia", 3); // 3 were cast
+        assertGraveyardCount(playerB, "Island", 3); // 3 were discarded
     }
 }
