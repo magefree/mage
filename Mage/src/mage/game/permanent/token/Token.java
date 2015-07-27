@@ -159,15 +159,17 @@ public class Token extends MageObjectImpl {
                 this.lastAddedTokenId = newToken.getId();
                 game.setScopeRelevant(true);
                 game.applyEffects();
-                newToken.entersBattlefield(sourceId, game, Zone.OUTSIDE, true);
+                boolean entered = newToken.entersBattlefield(sourceId, game, Zone.OUTSIDE, true);
                 game.setScopeRelevant(false);
                 game.applyEffects();
-                game.fireEvent(new ZoneChangeEvent(newToken, event.getPlayerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
-                if (attacking && game.getCombat() != null) {
-                    game.getCombat().addAttackingCreature(newToken.getId(), game);
-                }
-                if (!game.isSimulation()) {
-                    game.informPlayers(controller.getLogName() + " puts a " + newToken.getLogName() + " token onto the battlefield");
+                if (entered) {
+                    game.fireEvent(new ZoneChangeEvent(newToken, event.getPlayerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
+                    if (attacking && game.getCombat() != null) {
+                        game.getCombat().addAttackingCreature(newToken.getId(), game);
+                    }
+                    if (!game.isSimulation()) {
+                        game.informPlayers(controller.getLogName() + " puts a " + newToken.getLogName() + " token onto the battlefield");
+                    }
                 }
             }
 
