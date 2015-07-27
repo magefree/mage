@@ -14,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class represents a deck conforming to the rules contained in the 
- * subreddit /r/AllStandards.
+ * This class represents a deck from any past standard.
  * 
  * This class was originally made to work with the historical standard ruleset.
  * Data taken from http://thattournament.website/historic-tournament.php
@@ -25,7 +24,7 @@ import java.util.Map;
  *
  * @author Marthinwurer (at gmail.com)
  */
-public class AllStandards extends Constructed {
+public class HistoricalStandard extends Constructed {
 
     /*
      * This array stores the set codes of each standard up to 
@@ -33,44 +32,41 @@ public class AllStandards extends Constructed {
      */
     protected static final String[][] standards = {
         
-        // the first 10 standards are commented out to adhere to the all 
-        // standards ruleset, instaed of the historical standard ruleset.
+        //  1st standard: The Dark, Fallen Empires, and 4th.
+        { "DRK", "FEM", "4ED" },
         
-//        //  1st standard: The Dark, Fallen Empires, and 4th.
-//        { "DRK", "FEM", "4ED" },
-//        
-//        //  2nd standard: 4th, Fallen Empires, Ice Age, Chronicles, Homelands,
-//        //                Alliances, and Mirage.
-//        {"FEM", "4ED", "ICE", "HML", "ALL", "MIR"},
-//        
-//        //  3rd standard: 4th, Chronicles, Alliances, Mirage, Visions.
-//        {"4ED", "ALL", "MIR", "VIS"},
-//        
-//        //  4th Standard: Ice Age, Homelands, Alliances, Mirage, Visions, 5th,
-//        //                and Weatherlight.
-//        {"ICE", "HML", "ALL", "MIR", "VIS", "5ED", "WTH"},
-//        
-//        //  5th Standard: Mirage, Visions, 5th, Weatherlight, Tempest,
-//        //                Stronghold, and Exodus.
-//        {"MIR", "VIS", "5ED", "WTH", "TMP", "STH", "EXO"},
-//        
-//        //  6th Standard: 5th, Tempest, Stronghold, Exodus, Urza's Saga, Urza's
-//        //                Legacy, Urza's Destiny.
-//        {"5ED", "TMP", "STH", "EXO", "USG", "ULG"},
-//        
-//        //  7th Standard: Tempest, Stronghold, Exodus, Urza's Saga, Urza's
-//        //                Legacy, 6th, Urza's Destiny.
-//        {"TMP", "STH", "EXO", "USG", "ULG", "6ED", "UDS"},
-//        
-//        //  8th Standard: Urza's Saga, Urza's Legacy, 6th, Urza's Destiny,
-//        //                Mercadian Masques, Nemesis, Prophecy.
-//        {"USG", "ULG", "6ED", "UDS", "MMQ", "NMS", "PCY"},
-//        
-//        //  9th Standard
-//        {"6ED", "MMQ", "NMS", "PCY", "INV", "PLS"},
-//
-//        //  10th Standard
-//        {"7ED", "MMQ", "NMS", "PCY", "INV", "PLS", "APC"},
+        //  2nd standard: 4th, Fallen Empires, Ice Age, Chronicles, Homelands,
+        //                Alliances, and Mirage.
+        {"FEM", "4ED", "ICE", "HML", "ALL", "MIR"},
+        
+        //  3rd standard: 4th, Chronicles, Alliances, Mirage, Visions.
+        {"4ED", "ALL", "MIR", "VIS"},
+        
+        //  4th Standard: Ice Age, Homelands, Alliances, Mirage, Visions, 5th,
+        //                and Weatherlight.
+        {"ICE", "HML", "ALL", "MIR", "VIS", "5ED", "WTH"},
+        
+        //  5th Standard: Mirage, Visions, 5th, Weatherlight, Tempest,
+        //                Stronghold, and Exodus.
+        {"MIR", "VIS", "5ED", "WTH", "TMP", "STH", "EXO"},
+        
+        //  6th Standard: 5th, Tempest, Stronghold, Exodus, Urza's Saga, Urza's
+        //                Legacy, Urza's Destiny.
+        {"5ED", "TMP", "STH", "EXO", "USG", "ULG"},
+        
+        //  7th Standard: Tempest, Stronghold, Exodus, Urza's Saga, Urza's
+        //                Legacy, 6th, Urza's Destiny.
+        {"TMP", "STH", "EXO", "USG", "ULG", "6ED", "UDS"},
+        
+        //  8th Standard: Urza's Saga, Urza's Legacy, 6th, Urza's Destiny,
+        //                Mercadian Masques, Nemesis, Prophecy.
+        {"USG", "ULG", "6ED", "UDS", "MMQ", "NMS", "PCY"},
+        
+        //  9th Standard
+        {"6ED", "MMQ", "NMS", "PCY", "INV", "PLS"},
+
+        //  10th Standard
+        {"7ED", "MMQ", "NMS", "PCY", "INV", "PLS", "APC"},
 
         // 11th Standard
         {"7ED", "INV", "APC", "PLS", "ODY", "TOR", "JUD"},
@@ -110,32 +106,20 @@ public class AllStandards extends Constructed {
      * Constructor. Don't need to mess with any of the sets yet; that will be
      * done in the overridden validate function.
      */
-    public AllStandards() {
-        super("Constructed - All Standards");
+    public HistoricalStandard() {
+        super("Constructed - Historical Standard");
         
-        // banned cards for historical standard ruleset commented out.
-
-//        // banned cards
-//        banned.add("Balance");
-//        // Not banned in the format, but it is either this or Misty, and most
-//        // people choose Misty.
-//        banned.add("Batterskull");  
-//        banned.add("Memory Jar");
-//        banned.add("Mind Over Matter");
-//        banned.add("Mind Twist");
-//        banned.add("Skullclamp");
-//        banned.add("Tolarian Academy");
-//        banned.add("Yawgmoth's Bargain");
-        
-        banned.add("Ancient Den");
-        banned.add("Arcbound Ravager");
-        banned.add("Disciple of the Vault");
-        banned.add("Great Furnace");
-        banned.add("Jace, the Mind Sculptor");
-        banned.add("Seat of the Synod");
+        // banned cards
+        banned.add("Balance");
+        // Not banned in the format, but it is either this or Misty, and most
+        // people choose Misty.
+        banned.add("Batterskull");  
+        banned.add("Memory Jar");
+        banned.add("Mind Over Matter");
+        banned.add("Mind Twist");
         banned.add("Skullclamp");
-        banned.add("Tree of Tales");
-        banned.add("Vault of Whispers");
+        banned.add("Tolarian Academy");
+        banned.add("Yawgmoth's Bargain");
     }
 
     /**
@@ -212,16 +196,6 @@ public class AllStandards extends Constructed {
                 }
             }
             
-            // if either of the mirrodin blocks are in the time period, ban 
-            // misty and darksteel citadel
-            if( setCodes.contains("MRD") || setCodes.contains("SOM")){
-                banned.add("Darksteel Citadel");
-                banned.add("Stoneforge Mystic");
-            }else{
-                banned.remove("Darksteel Citadel");
-                banned.remove("Stoneforge Mystic");     
-            }
-
             // validate it. If it validates, clear the invalid cards and break.
             if (super.validate(deck)) {
                 invalid.clear();
