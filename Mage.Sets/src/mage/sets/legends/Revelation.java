@@ -25,51 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.sets.legends;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class WintermoonMesa extends CardImpl {
+public class Revelation extends CardImpl {
 
-    public WintermoonMesa(UUID ownerId) {
-        super(ownerId, 143, "Wintermoon Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PCY";
+    public Revelation(UUID ownerId) {
+        super(ownerId, 116, "Revelation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.expansionSetCode = "LEG";
+        this.supertype.add("World");
 
-        // Wintermoon Mesa enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {2}, {tap}, Sacrifice Wintermoon Mesa: Tap two target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetLandPermanent(2));
-        this.addAbility(ability);
+        // Players play with their hands revealed.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
     }
 
-    public WintermoonMesa(final WintermoonMesa card) {
+    public Revelation(final Revelation card) {
         super(card);
     }
 
     @Override
-    public WintermoonMesa copy() {
-        return new WintermoonMesa(this);
+    public Revelation copy() {
+        return new Revelation(this);
     }
 }

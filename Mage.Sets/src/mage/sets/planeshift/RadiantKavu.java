@@ -25,51 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class WintermoonMesa extends CardImpl {
+public class RadiantKavu extends CardImpl {
 
-    public WintermoonMesa(UUID ownerId) {
-        super(ownerId, 143, "Wintermoon Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PCY";
-
-        // Wintermoon Mesa enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {2}, {tap}, Sacrifice Wintermoon Mesa: Tap two target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetLandPermanent(2));
-        this.addAbility(ability);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures and black creatures");
+    static {
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public WintermoonMesa(final WintermoonMesa card) {
+    public RadiantKavu(UUID ownerId) {
+        super(ownerId, 120, "Radiant Kavu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
+        this.expansionSetCode = "PLS";
+        this.subtype.add("Kavu");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // {R}{G}{W}: Prevent all combat damage blue creatures and black creatures would deal this turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, (new PreventAllDamageByAllEffect(filter,
+           Duration.EndOfTurn, true)), new ManaCostsImpl("{R}{G}{W}")));
+    }
+
+    public RadiantKavu(final RadiantKavu card) {
         super(card);
     }
 
     @Override
-    public WintermoonMesa copy() {
-        return new WintermoonMesa(this);
+    public RadiantKavu copy() {
+        return new RadiantKavu(this);
     }
 }

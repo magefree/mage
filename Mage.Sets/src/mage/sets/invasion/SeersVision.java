@@ -25,51 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class WintermoonMesa extends CardImpl {
+public class SeersVision extends CardImpl {
 
-    public WintermoonMesa(UUID ownerId) {
-        super(ownerId, 143, "Wintermoon Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PCY";
+    public SeersVision(UUID ownerId) {
+        super(ownerId, 270, "Seer's Vision", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");
+        this.expansionSetCode = "INV";
 
-        // Wintermoon Mesa enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {2}, {tap}, Sacrifice Wintermoon Mesa: Tap two target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetLandPermanent(2));
+        // Your opponents play with their hands revealed.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
+        // Sacrifice Seer's Vision: Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(), new SacrificeSourceCost());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public WintermoonMesa(final WintermoonMesa card) {
+    public SeersVision(final SeersVision card) {
         super(card);
     }
 
     @Override
-    public WintermoonMesa copy() {
-        return new WintermoonMesa(this);
+    public SeersVision copy() {
+        return new SeersVision(this);
     }
 }

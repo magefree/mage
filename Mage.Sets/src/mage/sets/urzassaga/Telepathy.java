@@ -27,16 +27,18 @@
  */
 package mage.sets.urzassaga;
 
-import mage.constants.*;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
-
 import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -49,7 +51,7 @@ public class Telepathy extends CardImpl {
         this.expansionSetCode = "USG";
 
         // Your opponents play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpponentsPlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
     }
 
     public Telepathy(final Telepathy card) {
@@ -60,38 +62,4 @@ public class Telepathy extends CardImpl {
     public Telepathy copy() {
         return new Telepathy(this);
     }
-}
-
-class OpponentsPlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
-
-    public OpponentsPlayWithTheTopCardRevealedEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "Your opponents play with their hands revealed";
-    }
-
-    public OpponentsPlayWithTheTopCardRevealedEffect(final OpponentsPlayWithTheTopCardRevealedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null) {
-            for (UUID opponentId : game.getOpponents(controller.getId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    controller.revealCards(sourceObject.getIdName() + " " + opponent.getName(), opponent.getHand(), game, false);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public OpponentsPlayWithTheTopCardRevealedEffect copy() {
-        return new OpponentsPlayWithTheTopCardRevealedEffect(this);
-    }
-
 }

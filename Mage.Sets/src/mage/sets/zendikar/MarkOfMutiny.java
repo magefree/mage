@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,18 +47,28 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MarkOfMutiny extends CardImpl {
 
-    public MarkOfMutiny (UUID ownerId) {
+    public MarkOfMutiny(UUID ownerId) {
         super(ownerId, 137, "Mark of Mutiny", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "ZEN";
 
+        // Gain control of target creature until end of turn.
+        // Put a +1/+1 counter on it and untap it.
+        // That creature gains haste until end of turn. (It can attack and this turn.)
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+        effect.setText("Put a +1/+1 counter on it");
+        this.getSpellAbility().addEffect(effect);
+        effect = new UntapTargetEffect();
+        effect.setText("and untap it");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("That creature gains haste until end of turn. <i>(It can {T} attack and this turn.)</i>");
+        this.getSpellAbility().addEffect(effect);
+
     }
 
-    public MarkOfMutiny (final MarkOfMutiny card) {
+    public MarkOfMutiny(final MarkOfMutiny card) {
         super(card);
     }
 

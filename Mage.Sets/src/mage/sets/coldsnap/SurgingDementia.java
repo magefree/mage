@@ -25,51 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.sets.coldsnap;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.effects.keyword.RippleEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author anonymous
+ * @author klayhamn
  */
-public class WintermoonMesa extends CardImpl {
+public class SurgingDementia extends CardImpl {
 
-    public WintermoonMesa(UUID ownerId) {
-        super(ownerId, 143, "Wintermoon Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PCY";
+    public SurgingDementia(UUID ownerId) {
+        super(ownerId, 72, "Surging Dementia", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
+        this.expansionSetCode = "CSP";
 
-        // Wintermoon Mesa enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {2}, {tap}, Sacrifice Wintermoon Mesa: Tap two target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetLandPermanent(2));
-        this.addAbility(ability);
+        // Ripple 4
+        this.getSpellAbility().addEffect(new RippleEffect(4));
+        // Target player discards a card.
+        this.getSpellAbility().getEffects().add(new DiscardTargetEffect(1));
+        this.getSpellAbility().getTargets().add(new TargetPlayer());
     }
 
-    public WintermoonMesa(final WintermoonMesa card) {
+    public SurgingDementia(final SurgingDementia card) {
         super(card);
     }
 
     @Override
-    public WintermoonMesa copy() {
-        return new WintermoonMesa(this);
+    public SurgingDementia copy() {
+        return new SurgingDementia(this);
     }
 }

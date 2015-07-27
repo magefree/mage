@@ -25,35 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.sets.conspiracy;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
+public class SelvalaExplorerReturned extends mage.sets.vintagemasters.SelvalaExplorerReturned {
 
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    PARLEY("Parley"),
-    RAID("Raid");
+    public SelvalaExplorerReturned(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 51;
+        this.expansionSetCode = "CNS";
+    }
 
-    private final String text;
-
-    AbilityWord(String text) {
-        this.text = text;
+    public SelvalaExplorerReturned(final SelvalaExplorerReturned card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public SelvalaExplorerReturned copy() {
+        return new SelvalaExplorerReturned(this);
     }
-
 }

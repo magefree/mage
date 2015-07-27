@@ -25,35 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.sets.stronghold;
+
+import java.util.UUID;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.UntapAllEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
+public class Awakening extends CardImpl {
 
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    PARLEY("Parley"),
-    RAID("Raid");
+    private static final FilterPermanent filter = new FilterPermanent("creatures and lands");
 
-    private final String text;
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND)
+        ));
+    }
 
-    AbilityWord(String text) {
-        this.text = text;
+    public Awakening(UUID ownerId) {
+        super(ownerId, 51, "Awakening", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
+        this.expansionSetCode = "STH";
+
+        // At the beginning of each upkeep, untap all creatures and lands.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntapAllEffect(filter), TargetController.ANY, false));
+    }
+
+    public Awakening(final Awakening card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public Awakening copy() {
+        return new Awakening(this);
     }
-
 }

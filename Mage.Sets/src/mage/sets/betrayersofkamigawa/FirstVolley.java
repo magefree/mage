@@ -28,15 +28,12 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,9 +47,11 @@ public class FirstVolley extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-
         // First Volley deals 1 damage to target creature and 1 damage to that creature's controller.
-        this.getSpellAbility().addEffect(new FirstVolleyEffect());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+        Effect effect = new DamageTargetControllerEffect(1);
+        effect.setText("and 1 damage to that creature's controller");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
@@ -64,36 +63,5 @@ public class FirstVolley extends CardImpl {
     @Override
     public FirstVolley copy() {
         return new FirstVolley(this);
-    }
-}
-
-class FirstVolleyEffect extends OneShotEffect {
-
-    public FirstVolleyEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals 1 damage to target creature and 1 damage to that creature's controller";
-    }
-
-    public FirstVolleyEffect(final FirstVolleyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FirstVolleyEffect copy() {
-        return new FirstVolleyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            Player controller = game.getPlayer(permanent.getControllerId());
-            if (controller != null) {
-                permanent.damage(1, source.getSourceId(), game, false, true);
-                controller.damage(1, source.getSourceId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
     }
 }

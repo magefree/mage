@@ -25,35 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package org.mage.test.turnmod;
+
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
+public class SkipTurnTest extends CardTestPlayerBase {
 
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    PARLEY("Parley"),
-    RAID("Raid");
+    @Test
+    public void testEaterOfDays() {
+        // At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on Shrine of Boundless Growth.
+        // {T}, Sacrifice Shrine of Boundless Growth: Add {1} to your mana pool for each charge counter on Shrine of Boundless Growth.
+        addCard(Zone.HAND, playerA, "Shrine of Boundless Growth", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        // Flying
+        // Trample
+        // When Eater of Days enters the battlefield, you skip your next two turns.
+        addCard(Zone.HAND, playerA, "Eater of Days", 1);
 
-    private final String text;
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eater of Days");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shrine of Boundless Growth");
 
-    AbilityWord(String text) {
-        this.text = text;
+        setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Eater of Days", 1);
+        assertPermanentCount(playerA, "Shrine of Boundless Growth", 1);
+        assertCounterCount("Shrine of Boundless Growth", CounterType.CHARGE, 1);
     }
-
-    @Override
-    public String toString() {
-        return text;
-    }
-
 }

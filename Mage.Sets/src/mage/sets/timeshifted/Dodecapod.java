@@ -25,35 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.sets.timeshifted;
+
+import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public enum AbilityWord {
+public class Dodecapod extends mage.sets.apocalypse.Dodecapod {
 
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    PARLEY("Parley"),
-    RAID("Raid");
+    public Dodecapod(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 108;
+        this.expansionSetCode = "TSB";
+        this.rarity = Rarity.SPECIAL;
+    }
 
-    private final String text;
-
-    AbilityWord(String text) {
-        this.text = text;
+    public Dodecapod(final Dodecapod card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public Dodecapod copy() {
+        return new Dodecapod(this);
     }
-
 }
