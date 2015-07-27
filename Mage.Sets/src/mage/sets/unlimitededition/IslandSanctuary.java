@@ -25,35 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.sets.unlimitededition;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
+public class IslandSanctuary extends mage.sets.limitedalpha.IslandSanctuary {
 
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    PARLEY("Parley"),
-    RAID("Raid");
+    public IslandSanctuary(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 210;
+        this.expansionSetCode = "2ED";
+    }
 
-    private final String text;
-
-    AbilityWord(String text) {
-        this.text = text;
+    public IslandSanctuary(final IslandSanctuary card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public IslandSanctuary copy() {
+        return new IslandSanctuary(this);
     }
-
 }

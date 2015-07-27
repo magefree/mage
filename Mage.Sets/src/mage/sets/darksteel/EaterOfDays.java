@@ -25,35 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.sets.darksteel;
+
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
+public class EaterOfDays extends CardImpl {
 
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    PARLEY("Parley"),
-    RAID("Raid");
+    public EaterOfDays(UUID ownerId) {
+        super(ownerId, 120, "Eater of Days", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Leviathan");
+        this.power = new MageInt(9);
+        this.toughness = new MageInt(8);
 
-    private final String text;
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // When Eater of Days enters the battlefield, you skip your next two turns.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SkipNextTurnSourceEffect(2)));
+    }
 
-    AbilityWord(String text) {
-        this.text = text;
+    public EaterOfDays(final EaterOfDays card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public EaterOfDays copy() {
+        return new EaterOfDays(this);
     }
-
 }
