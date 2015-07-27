@@ -12,7 +12,7 @@ You can visit the XMage forum [here](http://www.slightlymagic.net/forum/viewforu
 * You can play either a two player duel or a multiplayer free-for-all game with up to 10 players.
 * Commander format (also up to 10 players).
 * Tiny Leaders duels.
-* All Standards and Historic Standard formats.
+* Super Standard and Historic Standard formats.
 * There are two tournament types supported, which can be played with up to 16 players:
 * Elimination or swiss type handling
 * Booster (also Cube) draft tournaments (4-16)
