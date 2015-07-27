@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
  * @author fireshoes
  */
-public class PhyrexianWarBeast extends mage.sets.alliances.PhyrexianWarBeast1 {
+public class Astrolabe1 extends mage.sets.masterseditioniii.Astrolabe {
 
-    public PhyrexianWarBeast(UUID ownerId) {
+    public Astrolabe1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
-        this.expansionSetCode = "MED";
-        this.rarity = Rarity.UNCOMMON;
+        this.cardNumber = 159;
+        this.expansionSetCode = "ALL";
     }
 
-    public PhyrexianWarBeast(final PhyrexianWarBeast card) {
+    public Astrolabe1(final Astrolabe1 card) {
         super(card);
     }
 
     @Override
-    public PhyrexianWarBeast copy() {
-        return new PhyrexianWarBeast(this);
+    public Astrolabe1 copy() {
+        return new Astrolabe1(this);
     }
 }

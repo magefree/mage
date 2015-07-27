@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.alliances;
 
 import java.util.UUID;
 import mage.constants.Rarity;
@@ -34,21 +34,20 @@ import mage.constants.Rarity;
  *
  * @author fireshoes
  */
-public class PhyrexianWarBeast extends mage.sets.alliances.PhyrexianWarBeast1 {
+public class GorillaShaman2 extends GorillaShaman1 {
 
-    public PhyrexianWarBeast(UUID ownerId) {
+    public GorillaShaman2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
-        this.expansionSetCode = "MED";
+        this.cardNumber = 107;
         this.rarity = Rarity.UNCOMMON;
     }
 
-    public PhyrexianWarBeast(final PhyrexianWarBeast card) {
+    public GorillaShaman2(final GorillaShaman2 card) {
         super(card);
     }
 
     @Override
-    public PhyrexianWarBeast copy() {
-        return new PhyrexianWarBeast(this);
+    public GorillaShaman2 copy() {
+        return new GorillaShaman2(this);
     }
 }

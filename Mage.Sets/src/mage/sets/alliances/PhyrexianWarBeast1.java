@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
@@ -43,9 +44,9 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class PhyrexianWarBeast extends CardImpl {
+public class PhyrexianWarBeast1 extends CardImpl {
 
-    public PhyrexianWarBeast(UUID ownerId) {
+    public PhyrexianWarBeast1(UUID ownerId) {
         super(ownerId, 169, "Phyrexian War Beast", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.expansionSetCode = "ALL";
         this.subtype.add("Beast");
@@ -53,18 +54,22 @@ public class PhyrexianWarBeast extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
-        Ability ability = new LeavesBattlefieldTriggeredAbility(new SacrificeTargetEffect(), false);
-        ability.addEffect(new DamageControllerEffect(1));
+        Effect effect = new SacrificeTargetEffect();
+        effect.setText("sacrifice a land");
+        Ability ability = new LeavesBattlefieldTriggeredAbility(effect, false);
+        effect = new DamageControllerEffect(1);
+        effect.setText("and {this} deals 1 damage to you");
+        ability.addEffect(effect);
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
     }
 
-    public PhyrexianWarBeast(final PhyrexianWarBeast card) {
+    public PhyrexianWarBeast1(final PhyrexianWarBeast1 card) {
         super(card);
     }
 
     @Override
-    public PhyrexianWarBeast copy() {
-        return new PhyrexianWarBeast(this);
+    public PhyrexianWarBeast1 copy() {
+        return new PhyrexianWarBeast1(this);
     }
 }

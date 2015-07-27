@@ -50,9 +50,9 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class GorillaShaman extends CardImpl {
+public class GorillaShaman1 extends CardImpl {
 
-    public GorillaShaman(UUID ownerId) {
+    public GorillaShaman1(UUID ownerId) {
         super(ownerId, 106, "Gorilla Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "ALL";
         this.subtype.add("Ape");
@@ -65,7 +65,7 @@ public class GorillaShaman extends CardImpl {
         ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("noncreature artifact with converted mana cost X")));
         this.addAbility(ability);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility) {
@@ -79,12 +79,12 @@ public class GorillaShaman extends CardImpl {
         }
     }
 
-    public GorillaShaman(final GorillaShaman card) {
+    public GorillaShaman1(final GorillaShaman1 card) {
         super(card);
     }
 
     @Override
-    public GorillaShaman copy() {
-        return new GorillaShaman(this);
+    public GorillaShaman1 copy() {
+        return new GorillaShaman1(this);
     }
 }

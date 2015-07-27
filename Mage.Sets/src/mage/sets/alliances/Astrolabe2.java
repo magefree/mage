@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Astrolabe extends mage.sets.masterseditioniii.Astrolabe {
+public class Astrolabe2 extends mage.sets.masterseditioniii.Astrolabe {
 
-    public Astrolabe(UUID ownerId) {
+    public Astrolabe2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = 160;
         this.expansionSetCode = "ALL";
     }
 
-    public Astrolabe(final Astrolabe card) {
+    public Astrolabe2(final Astrolabe2 card) {
         super(card);
     }
 
     @Override
-    public Astrolabe copy() {
-        return new Astrolabe(this);
+    public Astrolabe2 copy() {
+        return new Astrolabe2(this);
     }
 }

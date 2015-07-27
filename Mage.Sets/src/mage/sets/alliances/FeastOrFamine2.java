@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class FeastOrFamine extends mage.sets.izzetvsgolgari.FeastOrFamine {
+public class FeastOrFamine2 extends mage.sets.izzetvsgolgari.FeastOrFamine {
 
-    public FeastOrFamine(UUID ownerId) {
+    public FeastOrFamine2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = 9;
         this.expansionSetCode = "ALL";
     }
 
-    public FeastOrFamine(final FeastOrFamine card) {
+    public FeastOrFamine2(final FeastOrFamine2 card) {
         super(card);
     }
 
     @Override
-    public FeastOrFamine copy() {
-        return new FeastOrFamine(this);
+    public FeastOrFamine2 copy() {
+        return new FeastOrFamine2(this);
     }
 }
