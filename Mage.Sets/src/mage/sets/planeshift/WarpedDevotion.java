@@ -14,7 +14,7 @@
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIAB8LE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
  *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
  *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -25,43 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class FirstVolley extends CardImpl {
+public class WarpedDevotion extends mage.sets.eighthedition.WarpedDevotion {
 
-    public FirstVolley(UUID ownerId) {
-        super(ownerId, 100, "First Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "BOK";
-        this.subtype.add("Arcane");
-
-        // First Volley deals 1 damage to target creature and 1 damage to that creature's controller.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        Effect effect = new DamageTargetControllerEffect(1);
-        effect.setText("and 1 damage to that creature's controller");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
+    public WarpedDevotion(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 57;
+        this.expansionSetCode = "PLS";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public FirstVolley(final FirstVolley card) {
+    public WarpedDevotion(final WarpedDevotion card) {
         super(card);
     }
 
     @Override
-    public FirstVolley copy() {
-        return new FirstVolley(this);
+    public WarpedDevotion copy() {
+        return new WarpedDevotion(this);
     }
 }

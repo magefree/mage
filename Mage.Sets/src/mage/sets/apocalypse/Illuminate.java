@@ -25,13 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2011;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
+import mage.abilities.condition.common.KickedCostCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -39,29 +42,38 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class ChandrasOutrage extends CardImpl {
+public class Illuminate extends CardImpl {
 
-    public ChandrasOutrage(UUID ownerId) {
-        super(ownerId, 128, "Chandra's Outrage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "M11";
+    public Illuminate(UUID ownerId) {
+        super(ownerId, 63, "Illuminate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
+        this.expansionSetCode = "APC";
 
-        // Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        Effect effect = new DamageTargetControllerEffect(2);
-        effect.setText("and 2 damage to that creature's controller");
-        this.getSpellAbility().addEffect(effect);
+        // Kicker {2}{R} and/or {3}{U}
+        KickerAbility kickerAbility = new KickerAbility("{2}{R}");
+        kickerAbility.addKickerCost("{3}{U}");
+        this.addAbility(kickerAbility);
+        // Illuminate deals X damage to target creature. If Illuminate was kicked with its {2}{R} kicker, it deals X damage to that creature's controller. If Illuminate was kicked with its {3}{U} kicker, you draw X cards.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+            new DamageTargetControllerEffect(new ManacostVariableValue()),
+            new KickedCostCondition("{2}{R}"),
+            "If {this} was kicked with its {2}{R} kicker, it deals X damage to that creature's controller."));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+            new DrawCardSourceControllerEffect(new ManacostVariableValue()),
+            new KickedCostCondition("{3}{U}"),
+            "If {this} was kicked with its {3}{U} kicker, you draw X cards."));
+
     }
 
-    public ChandrasOutrage(final ChandrasOutrage card) {
+    public Illuminate(final Illuminate card) {
         super(card);
     }
 
     @Override
-    public ChandrasOutrage copy() {
-        return new ChandrasOutrage(this);
+    public Illuminate copy() {
+        return new Illuminate(this);
     }
-
 }

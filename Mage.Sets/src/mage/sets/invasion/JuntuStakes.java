@@ -25,51 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class WintermoonMesa extends CardImpl {
+public class JuntuStakes extends CardImpl {
 
-    public WintermoonMesa(UUID ownerId) {
-        super(ownerId, 143, "Wintermoon Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PCY";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 1 or less");
 
-        // Wintermoon Mesa enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {2}, {tap}, Sacrifice Wintermoon Mesa: Tap two target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetLandPermanent(2));
-        this.addAbility(ability);
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 2));
     }
 
-    public WintermoonMesa(final WintermoonMesa card) {
+    public JuntuStakes(UUID ownerId) {
+        super(ownerId, 304, "Juntu Stakes", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "INV";
+
+        // Creatures with power 1 or less don't untap during their controllers' untap steps.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+    }
+
+    public JuntuStakes(final JuntuStakes card) {
         super(card);
     }
 
     @Override
-    public WintermoonMesa copy() {
-        return new WintermoonMesa(this);
+    public JuntuStakes copy() {
+        return new JuntuStakes(this);
     }
 }

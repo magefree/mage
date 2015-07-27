@@ -25,51 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetLandPermanent;
+import mage.constants.TargetController;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class WintermoonMesa extends CardImpl {
+public class DestructiveFlow extends CardImpl {
 
-    public WintermoonMesa(UUID ownerId) {
-        super(ownerId, 143, "Wintermoon Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PCY";
+    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 
-        // Wintermoon Mesa enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {2}, {tap}, Sacrifice Wintermoon Mesa: Tap two target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetLandPermanent(2));
-        this.addAbility(ability);
+    static {
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
-    public WintermoonMesa(final WintermoonMesa card) {
+    public DestructiveFlow(UUID ownerId) {
+        super(ownerId, 102, "Destructive Flow", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{R}{G}");
+        this.expansionSetCode = "PLS";
+
+        // At the beginning of each player's upkeep, that player sacrifices a nonbasic land.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"),
+            TargetController.ANY, false));
+
+    }
+
+    public DestructiveFlow(final DestructiveFlow card) {
         super(card);
     }
 
     @Override
-    public WintermoonMesa copy() {
-        return new WintermoonMesa(this);
+    public DestructiveFlow copy() {
+        return new DestructiveFlow(this);
     }
 }
