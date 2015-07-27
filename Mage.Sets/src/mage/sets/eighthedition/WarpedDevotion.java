@@ -88,20 +88,17 @@ class WarpedDevotionTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent)event;
         if(zce.getFromZone() == Zone.BATTLEFIELD && zce.getToZone() == Zone.HAND) {
-            Card card = game.getCard(event.getTargetId());
-            if(card != null) {
-                for(Effect effect: getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(card.getOwnerId()));
-                }
-                return true;
+            for(Effect effect: getEffects()) {
+                effect.setTargetPointer(new FixedTarget(zce.getTarget().getOwnerId()));
             }
+            return true;
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever a permanent is returned to a player's hand, that player discards a card";
+        return "Whenever a permanent is returned to a player's hand, that player discards a card.";
     }
 
 }
