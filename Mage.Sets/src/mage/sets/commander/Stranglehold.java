@@ -30,6 +30,7 @@ package mage.sets.commander;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
@@ -37,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,10 +55,10 @@ public class Stranglehold extends CardImpl {
         this.expansionSetCode = "CMD";
 
         // Your opponents can't search libraries.
-        this.getSpellAbility().addEffect(new OpponentsCantSearchLibarariesEffect());
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpponentsCantSearchLibarariesEffect()));
+
         // If an opponent would begin an extra turn, that player skips that turn instead.
-        this.getSpellAbility().addEffect(new StrangleholdSkipExtraTurnsEffect());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StrangleholdSkipExtraTurnsEffect()));
     }
 
     public Stranglehold(final Stranglehold card) {
@@ -103,7 +105,7 @@ class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectI
     public boolean checksEventType(GameEvent event, Game game) {
         return EventType.SEARCH_LIBRARY.equals(event.getType());
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
