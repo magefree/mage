@@ -27,23 +27,30 @@
  */
 package mage.sets.magic2012;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -59,11 +66,15 @@ public class AdaptiveAutomaton extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As Adaptive Automaton enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new AdaptiveAutomatonEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
         // Adaptive Automaton is the chosen type in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AdaptiveAutomatonAddSubtypeEffect()));
         // Other creatures you control of the chosen type get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AdaptiveAutomatonBoostControlledEffect()));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("Other creatures you control of the chosen type");
+        filter.add(new ChosenSubtypePredicate(this.getId()));
+        filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     public AdaptiveAutomaton(final AdaptiveAutomaton card) {
@@ -76,43 +87,6 @@ public class AdaptiveAutomaton extends CardImpl {
     }
 }
 
-class AdaptiveAutomatonEffect extends OneShotEffect {
-
-    public AdaptiveAutomatonEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "choose a creature type";
-    }
-
-    public AdaptiveAutomatonEffect(final AdaptiveAutomatonEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.isInGame()) {
-                    return false;
-                }
-            }
-            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice().toString() + "</i>", game);
-        }
-        return false;
-    }
-
-    @Override
-    public AdaptiveAutomatonEffect copy() {
-        return new AdaptiveAutomatonEffect(this);
-    }
-
-}
 
 class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl {
     public AdaptiveAutomatonAddSubtypeEffect() {
@@ -140,41 +114,4 @@ class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl {
     public AdaptiveAutomatonAddSubtypeEffect copy() {
         return new AdaptiveAutomatonAddSubtypeEffect(this);
     }
-}
-
-class AdaptiveAutomatonBoostControlledEffect extends ContinuousEffectImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public AdaptiveAutomatonBoostControlledEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Other creatures you control of the chosen type get +1/+1";
-    }
-
-    public AdaptiveAutomatonBoostControlledEffect(final AdaptiveAutomatonBoostControlledEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AdaptiveAutomatonBoostControlledEffect copy() {
-        return new AdaptiveAutomatonBoostControlledEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
-            if (subtype != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    if (!perm.getId().equals(source.getSourceId()) && perm.hasSubtype(subtype)) {
-                        perm.addPower(1);
-                        perm.addToughness(1);
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
 }
