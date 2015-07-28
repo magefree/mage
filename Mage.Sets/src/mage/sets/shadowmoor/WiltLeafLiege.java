@@ -30,27 +30,18 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.DiscardOntoBattlefieldEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 
 /**
  *
@@ -66,7 +57,7 @@ public class WiltLeafLiege extends CardImpl {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterWhite.add(new ControllerPredicate(TargetController.YOU));
     }
-    
+
     public WiltLeafLiege(UUID ownerId) {
         super(ownerId, 245, "Wilt-Leaf Liege", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G/W}{G/W}{G/W}");
         this.expansionSetCode = "SHM";
@@ -77,11 +68,11 @@ public class WiltLeafLiege extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Other green creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new StaticValue(1), new StaticValue(1), Duration.WhileOnBattlefield, filterGreen, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
         // Other white creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new StaticValue(1), new StaticValue(1), Duration.WhileOnBattlefield, filterWhite, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
         // If a spell or ability an opponent controls causes you to discard Wilt-Leaf Liege, put it onto the battlefield instead of putting it into your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.HAND, new WiltLeafLiegeEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.HAND, new DiscardOntoBattlefieldEffect()));
     }
 
     public WiltLeafLiege(final WiltLeafLiege card) {
@@ -92,59 +83,4 @@ public class WiltLeafLiege extends CardImpl {
     public WiltLeafLiege copy() {
         return new WiltLeafLiege(this);
     }
-}
-
-class WiltLeafLiegeEffect extends ReplacementEffectImpl {
-
-    public WiltLeafLiegeEffect() {
-        super(Duration.EndOfGame, Outcome.PutCardInPlay);
-        staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield instead of putting it into your graveyard";
-    }
-
-    public WiltLeafLiegeEffect(final WiltLeafLiegeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WiltLeafLiegeEffect copy() {
-        return new WiltLeafLiegeEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.ZONE_CHANGE);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
-            if (zcEvent.getFromZone() == Zone.HAND && zcEvent.getToZone() == Zone.GRAVEYARD) {
-                StackObject spell = game.getStack().getStackObject(event.getSourceId());
-                if (spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
-    }
-
 }

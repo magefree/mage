@@ -27,12 +27,12 @@
  */
 package mage.abilities.effects.common.discard;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -98,7 +98,7 @@ public class DiscardControllerEffect extends OneShotEffect {
     }
 
     private void setText() {
-        StringBuilder sb = new StringBuilder("Discard ");
+        StringBuilder sb = new StringBuilder("discard ");
         if (amount.toString().equals("1")) {
             sb.append("a");
         } else {

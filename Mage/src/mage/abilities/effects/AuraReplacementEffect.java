@@ -51,13 +51,15 @@ import mage.target.common.TargetCardInGraveyard;
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
  * valid target on the battlefield. Also, when entering the battlefield and it
- * was not cast (so from Zone != Hand), this effect gets the target to whitch to attach it
- * and adds the Aura the the battlefield and attachs it to the target.
+ * was not cast (so from Zone != Hand), this effect gets the target to whitch to
+ * attach it and adds the Aura the the battlefield and attachs it to the target.
  * The "attachTo:" value in game state has to be set therefore.
- * 
- * If no "attachTo:" value is defined, the controlling player has to chose the aura target.
  *
- * This effect is automatically added to ContinuousEffects at the start of a game
+ * If no "attachTo:" value is defined, the controlling player has to chose the
+ * aura target.
+ *
+ * This effect is automatically added to ContinuousEffects at the start of a
+ * game
  *
  * @author North
  */
@@ -93,7 +95,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         // Aura enters the battlefield attached
-        Object object = game.getState().getValue("attachTo:"+card.getId());
+        Object object = game.getState().getValue("attachTo:" + card.getId());
         if (object != null && object instanceof PermanentCard) {
             return false;
         }
@@ -113,7 +115,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
                 targetId = stackAbility.getEffects().get(0).getTargetPointer().getFirst(game, stackAbility);
             }
         }
-        
+
         if (targetId == null) {
             Target target = card.getSpellAbility().getTargets().get(0);
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
@@ -122,9 +124,10 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             }
             Player player = game.getPlayer(card.getOwnerId());
             Outcome auraOutcome = Outcome.BoostCreature;
-            Ability: for (Ability ability:card.getAbilities()) {
+            Ability:
+            for (Ability ability : card.getAbilities()) {
                 if (ability instanceof SpellAbility) {
-                    for (Effect effect: ability.getEffects()) {
+                    for (Effect effect : ability.getEffects()) {
                         if (effect instanceof AttachEffect) {
                             auraOutcome = effect.getOutcome();
                             break Ability;
@@ -167,13 +170,16 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             game.getBattlefield().addPermanent(permanent);
             card.setZone(Zone.BATTLEFIELD, game);
             game.applyEffects();
-            permanent.entersBattlefield(event.getSourceId(), game, fromZone, true);
+            boolean entered = permanent.entersBattlefield(event.getSourceId(), game, fromZone, true);
             game.applyEffects();
+            if (!entered) {
+                return false;
+            }
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
 
             if (targetCard != null) {
                 permanent.attachTo(targetCard.getId(), game);
-            }            
+            }
             if (targetPermanent != null) {
                 targetPermanent.addAttachment(permanent.getId(), game);
             }
@@ -183,7 +189,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
@@ -192,7 +198,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
-                && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.HAND)) ) {
+                && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.HAND))) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")) {
                 return true;

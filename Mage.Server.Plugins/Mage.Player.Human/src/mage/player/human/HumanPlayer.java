@@ -251,7 +251,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        if (outcome.equals(Outcome.PutManaInPool)) {
+        if (Outcome.PutManaInPool.equals(outcome)) {
             if (currentlyUnpaidMana != null
                     && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
                 return true;

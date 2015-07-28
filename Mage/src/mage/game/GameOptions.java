@@ -4,8 +4,8 @@ import java.io.Serializable;
 import mage.constants.PhaseStep;
 
 /**
- * Game options for Mage game.
- * Mainly used in tests to configure {@link GameImpl} with specific params.
+ * Game options for Mage game. Mainly used in tests to configure
+ * {@link GameImpl} with specific params.
  *
  * @author ayratn
  */
@@ -23,8 +23,8 @@ public class GameOptions implements Serializable {
     public boolean testMode = false;
 
     /**
-     * Defines the turn number game should stop on.
-     * By default, is null meaning that game shouldn't stop on any specific turn.
+     * Defines the turn number game should stop on. By default, is null meaning
+     * that game shouldn't stop on any specific turn.
      */
     public Integer stopOnTurn = null;
 
@@ -37,9 +37,9 @@ public class GameOptions implements Serializable {
      * If true, library won't be shuffled at the beginning of the game
      */
     public boolean skipInitShuffling = false;
-    
+
     /**
-     * If true, players can roll back turn if all players agree
+     * If true, players can rollback turn if all players agree
      */
     public boolean rollbackTurnsAllowed = true;
 }

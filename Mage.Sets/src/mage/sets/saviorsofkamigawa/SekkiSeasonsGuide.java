@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -82,7 +82,7 @@ public class SekkiSeasonsGuide extends CardImpl {
         // Sacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(),
                 new SacrificeTargetCost(new TargetControlledPermanent(8, 8, filter, true))));
     }
 

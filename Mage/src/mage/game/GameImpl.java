@@ -174,7 +174,7 @@ public abstract class GameImpl implements Game, Serializable {
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
-    // game states to allow player roll back
+    // game states to allow player rollback
     protected transient Map<Integer, GameState> gameStatesRollBack = new HashMap<>();
     protected boolean executingRollback;
 
@@ -700,7 +700,6 @@ public abstract class GameImpl implements Game, Serializable {
                     if (!playTurn(playerByOrder)) {
                         break;
                     }
-                    state.setTurnNum(state.getTurnNum() + 1);
                 }
                 playExtraTurns();
                 playerByOrder = playerList.getNext(this);
@@ -741,7 +740,6 @@ public abstract class GameImpl implements Game, Serializable {
                         informPlayers(extraPlayer.getLogName() + " takes an extra turn");
                     }
                     playTurn(extraPlayer);
-                    state.setTurnNum(state.getTurnNum() + 1);
                 }
             }
             extraTurn = getNextExtraTurn();
@@ -768,6 +766,7 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     private boolean playTurn(Player player) {
+        boolean skipTurn = false;
         do {
             if (executingRollback) {
                 executingRollback = false;
@@ -781,39 +780,21 @@ public abstract class GameImpl implements Game, Serializable {
                 state.setActivePlayerId(player.getId());
                 saveRollBackGameState();
             }
-            this.logStartOfTurn(player);
             if (checkStopOnTurnOption()) {
                 return false;
             }
-            state.getTurn().play(this, player);
+            skipTurn = state.getTurn().play(this, player);
         } while (executingRollback);
 
         if (isPaused() || gameOver(null)) {
             return false;
         }
-        endOfTurn();
+        if (!skipTurn) {
+            endOfTurn();
+            state.setTurnNum(state.getTurnNum() + 1);
+        }
 
         return true;
-    }
-
-    private void logStartOfTurn(Player player) {
-        StringBuilder sb = new StringBuilder("Turn ").append(state.getTurnNum()).append(" ");
-        sb.append(player.getLogName());
-        sb.append(" (");
-        int delimiter = this.getPlayers().size() - 1;
-        for (Player gamePlayer : this.getPlayers().values()) {
-            sb.append(gamePlayer.getLife());
-            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
-            if (poison > 0) {
-                sb.append("[P:").append(poison).append("]");
-            }
-            if (delimiter > 0) {
-                sb.append(" - ");
-                delimiter--;
-            }
-        }
-        sb.append(")");
-        fireStatusEvent(sb.toString(), true);
     }
 
     private boolean checkStopOnTurnOption() {

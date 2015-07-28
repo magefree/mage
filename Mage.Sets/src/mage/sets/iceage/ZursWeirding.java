@@ -31,17 +31,16 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -59,8 +58,8 @@ public class ZursWeirding extends CardImpl {
         this.expansionSetCode = "ICE";
 
         // Players play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayerRevealHandCardsEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
+
         // If a player would draw a card, he or she reveals it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ZursWeirdingReplacementEffect()));
     }
@@ -81,7 +80,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "If a player would draw a card, he or she reveals it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.";
     }
-    
+
     public ZursWeirdingReplacementEffect(final ZursWeirdingReplacementEffect effect) {
         super(effect);
     }
@@ -90,7 +89,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
     public ZursWeirdingReplacementEffect copy() {
         return new ZursWeirdingReplacementEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -105,7 +104,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
             if (card != null) {
                 // reveals it instead
                 player.revealCards(sourceObject.getIdName() + " next draw of " + player.getName() + " (" + game.getTurnNum()+"|"+game.getPhase().getType() +")", new CardsImpl(card), game);
-                
+
                 // Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard
                 PlayerList playerList = game.getPlayerList().copy();
                 playerList.setCurrent(player.getId());
@@ -116,14 +115,14 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
                             currentPlayer.getLife() >= 2 &&
                             currentPlayer.chooseUse(Outcome.Benefit, message, source, game)) {
                         currentPlayer.loseLife(2, game);
-                        player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                        
+                        player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
 //                        game.getState().getRevealed().reset();
                         return true;
                     }
-                    
+
                     currentPlayer = playerList.getNext(game);
                 }
-                
+
 //                game.getState().getRevealed().reset();
             }
         }
@@ -132,43 +131,11 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }       
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
-    }
-    
-}
-class PlayerRevealHandCardsEffect extends ContinuousEffectImpl {
-
-    public PlayerRevealHandCardsEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "Players play with their hands revealed";
-    }
-
-    public PlayerRevealHandCardsEffect(final PlayerRevealHandCardsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerID : controller.getInRange()) {
-                Player player = game.getPlayer(playerID);
-                if (player != null) {
-                    player.revealCards(player.getName() + "'s hand cards", player.getHand(), game, false);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public PlayerRevealHandCardsEffect copy() {
-        return new PlayerRevealHandCardsEffect(this);
     }
 
 }

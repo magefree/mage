@@ -899,10 +899,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent) {
+    public boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent) {
         controlledFromStartOfControllerTurn = false;
         if (this.isFaceDown(game)) {
-            // remove some attributes here, bceause first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
+            // remove some attributes here, because first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
             MorphAbility.setPermanentToFaceDownCreature(this);
         }
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
@@ -914,7 +914,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     game.addSimultaneousEvent(event);
                 }
             }
+            return true;
         }
+        return false;
     }
 
     @Override

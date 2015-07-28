@@ -117,16 +117,11 @@ public abstract class ExpansionSet implements Serializable {
         // if the packs are too big, it removes the first cards.
         // since it adds lands then commons before uncommons
         // and rares this should be the least disruptive.
-
         List<Card> theBooster = this.createBooster();
         List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
-        int iterations = 0;
-        while (15 > theBooster.size() && !commons.isEmpty()) {
+
+        while (15 > theBooster.size()) {
             addToBooster(theBooster, commons);
-            iterations++;
-            if (iterations > 14) {
-                break;
-            }
         }
 
         while (theBooster.size() > 15) {
@@ -301,9 +296,8 @@ public abstract class ExpansionSet implements Serializable {
             savedCardsInfos = CardRepository.instance.findCards(criteria);
             savedCards.put(rarity, savedCardsInfos);
         }
-        List<CardInfo> cards = new ArrayList<>();
-        cards.addAll(savedCardsInfos);
-        return cards;
+        // Return a copy of the saved cards information, as not to modify the original.
+        return new ArrayList<>(savedCardsInfos);
     }
 
     public List<CardInfo> getSpecialCommon() {

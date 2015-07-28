@@ -28,9 +28,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,17 +35,15 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.ReturnToHandSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.turn.TurnMod;
-import mage.players.Player;
 
 /**
  *
@@ -62,21 +57,22 @@ public class MagosiTheWaterveil extends CardImpl {
 
         // Magosi, the Waterveil enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
-        // {tap}: Add {U} to your mana pool.
+
+        // {T}: Add {U} to your mana pool.
         this.addAbility(new BlueManaAbility());
-        
-        // {U}, {tap}: Put an eon counter on Magosi, the Waterveil. Skip your next turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagosiTheWaterveilEffect(), new ManaCostsImpl("{U}"));
+
+        // {U}, {T}: Put an eon counter on Magosi, the Waterveil. Skip your next turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.EON.createInstance()), new ManaCostsImpl("{U}"));
+        ability.addEffect(new SkipNextTurnSourceEffect());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
-        // {tap}, Remove an eon counter from Magosi, the Waterveil and return it to its owner's hand: Take an extra turn after this one.
+
+        // {T}, Remove an eon counter from Magosi, the Waterveil and return it to its owner's hand: Take an extra turn after this one.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
         ability2.addCost(new RemoveCountersSourceCost(CounterType.EON.createInstance()));
         ability2.addCost(new ReturnToHandSourceCost());
         this.addAbility(ability2);
-        
+
     }
 
     public MagosiTheWaterveil(final MagosiTheWaterveil card) {
@@ -87,36 +83,4 @@ public class MagosiTheWaterveil extends CardImpl {
     public MagosiTheWaterveil copy() {
         return new MagosiTheWaterveil(this);
     }
-}
-
-class MagosiTheWaterveilEffect extends OneShotEffect {
-
-    public MagosiTheWaterveilEffect() {
-        super(Outcome.Neutral);
-        staticText = "Put an eon counter on Magosi, the Waterveil. Skip your next turn";
-    }
-
-    public MagosiTheWaterveilEffect(final MagosiTheWaterveilEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MagosiTheWaterveilEffect copy() {
-        return new MagosiTheWaterveilEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent magosi = game.getPermanent(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        
-        if (magosi != null) {
-            magosi.addCounters(CounterType.EON.createInstance(), game);
-        }
-        if (player != null) {
-            game.getState().getTurnMods().add(new TurnMod(player.getId(), true));
-        }
-        return true;
-    }
-
 }

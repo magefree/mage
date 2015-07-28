@@ -28,14 +28,13 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -53,7 +52,6 @@ public class DeadReckoning extends CardImpl {
     public DeadReckoning(UUID ownerId) {
         super(ownerId, 56, "Dead Reckoning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "WWK";
-
 
         // You may put target creature card from your graveyard on top of your library. If you do, Dead Reckoning deals damage equal to that card's power to target creature.
         this.getSpellAbility().addEffect(new DeadReckoningEffect());
@@ -103,7 +101,7 @@ class DeadReckoningEffect extends OneShotEffect {
                         int power = creatureInGraveyard.getPower().getValue();
                         Permanent creature = game.getPermanent(target2.getFirstTarget());
                         if (creature != null) {
-                            creature.damage(power, id, game, true, true);
+                            creature.damage(power, source.getSourceId(), game, true, true);
                             return true;
                         }
                     }

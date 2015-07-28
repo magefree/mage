@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -116,16 +117,24 @@ public class Turn implements Serializable {
         return null;
     }
 
-    public void play(Game game, Player activePlayer) {
+    /**
+     *
+     * @param game
+     * @param activePlayer
+     * @return true if turn is skipped
+     */
+    public boolean play(Game game, Player activePlayer) {
         activePlayer.becomesActivePlayer();
         this.setDeclareAttackersStepStarted(false);
         if (game.isPaused() || game.gameOver(null)) {
-            return;
+            return false;
         }
 
         if (game.getState().getTurnMods().skipTurn(activePlayer.getId())) {
-            return;
+            game.informPlayers(activePlayer.getLogName() + " skips his or her turn.");
+            return true;
         }
+        logStartOfTurn(game, activePlayer);
 
         checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
 
@@ -134,7 +143,7 @@ public class Turn implements Serializable {
         game.getPlayer(activePlayer.getId()).beginTurn(game);
         for (Phase phase : phases) {
             if (game.isPaused() || game.gameOver(null)) {
-                return;
+                return false;
             }
             if (!isEndTurnRequested() || phase.getType().equals(TurnPhase.END)) {
                 currentPhase = phase;
@@ -142,7 +151,7 @@ public class Turn implements Serializable {
                 if (!game.getState().getTurnMods().skipPhase(activePlayer.getId(), currentPhase.getType())) {
                     if (phase.play(game, activePlayer.getId())) {
                         if (game.executingRollback()) {
-                            return;
+                            return false;
                         }
                         //20091005 - 500.4/703.4n
                         game.emptyManaPools();
@@ -155,7 +164,7 @@ public class Turn implements Serializable {
                 }
             }
         }
-
+        return false;
     }
 
     public void resumePlay(Game game, boolean wasPaused) {
@@ -327,4 +336,23 @@ public class Turn implements Serializable {
         return sb.toString();
     }
 
+    private void logStartOfTurn(Game game, Player player) {
+        StringBuilder sb = new StringBuilder("Turn ").append(game.getState().getTurnNum()).append(" ");
+        sb.append(player.getLogName());
+        sb.append(" (");
+        int delimiter = game.getPlayers().size() - 1;
+        for (Player gamePlayer : game.getPlayers().values()) {
+            sb.append(gamePlayer.getLife());
+            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
+            if (poison > 0) {
+                sb.append("[P:").append(poison).append("]");
+            }
+            if (delimiter > 0) {
+                sb.append(" - ");
+                delimiter--;
+            }
+        }
+        sb.append(")");
+        game.fireStatusEvent(sb.toString(), true);
+    }
 }
