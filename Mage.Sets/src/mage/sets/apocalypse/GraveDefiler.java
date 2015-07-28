@@ -31,11 +31,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -45,37 +43,34 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class EnlistmentOfficer extends CardImpl {
+public class GraveDefiler extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Soldier cards");
+    private static final FilterCard filter = new FilterCard("Zombie cards");
 
     static {
-        filter.add(new SubtypePredicate("Soldier"));
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public EnlistmentOfficer(UUID ownerId) {
-        super(ownerId, 9, "Enlistment Officer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public GraveDefiler(UUID ownerId) {
+        super(ownerId, 40, "Grave Defiler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "APC";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-
+        this.subtype.add("Zombie");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // When Enlistment Officer enters the battlefield, reveal the top four cards of your library. Put all Soldier cards revealed this way into your hand and the rest on the bottom of your library in any order.
+        // When Grave Defiler enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
-    }
+        // {1}{B}: Regenerate Grave Defiler.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));                                                                              }
 
-    public EnlistmentOfficer(final EnlistmentOfficer card) {
+    public GraveDefiler(final GraveDefiler card) {
         super(card);
     }
 
     @Override
-    public EnlistmentOfficer copy() {
-        return new EnlistmentOfficer(this);
+    public GraveDefiler copy() {
+        return new GraveDefiler(this);
     }
 }

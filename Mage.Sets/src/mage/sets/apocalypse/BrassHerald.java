@@ -29,53 +29,55 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.abilities.effects.common.EnvoyEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.EnvoyEffect;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class EnlistmentOfficer extends CardImpl {
+public class BrassHerald extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Soldier cards");
-
-    static {
-        filter.add(new SubtypePredicate("Soldier"));
-    }
-
-    public EnlistmentOfficer(UUID ownerId) {
-        super(ownerId, 9, "Enlistment Officer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public BrassHerald(UUID ownerId) {
+        super(ownerId, 133, "Brass Herald", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.expansionSetCode = "APC";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-
+        this.subtype.add("Golem");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // When Enlistment Officer enters the battlefield, reveal the top four cards of your library. Put all Soldier cards revealed this way into your hand and the rest on the bottom of your library in any order.
+        // As Brass Herald enters the battlefield, choose a creature type.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
+        // When Brass Herald enters the battlefield, reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order.
+        FilterCard filter = new FilterCard("creature cards of the chosen type");
+        filter.add(new ChosenSubtypePredicate(this.getId()));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
+
+        // Creatures of the chosen type get +1/+1.
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures of the chosen type");
+        filter2.add(new ChosenSubtypePredicate(this.getId()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield,
+            filter2, false)));
     }
 
-    public EnlistmentOfficer(final EnlistmentOfficer card) {
+    public BrassHerald(final BrassHerald card) {
         super(card);
     }
 
     @Override
-    public EnlistmentOfficer copy() {
-        return new EnlistmentOfficer(this);
+    public BrassHerald copy() {
+        return new BrassHerald(this);
     }
 }

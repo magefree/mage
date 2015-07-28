@@ -29,28 +29,31 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.EnvoyEffect;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.players.Player;
+
 /**
  *
  * @author LevelX2
  */
 public class SylvanMessenger extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("Elf cards");
+
+    static {
+        filter.add(new SubtypePredicate("Elf"));
+    }
 
     public SylvanMessenger(UUID ownerId) {
         super(ownerId, 87, "Sylvan Messenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -63,8 +66,7 @@ public class SylvanMessenger extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // When Sylvan Messenger enters the battlefield, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SylvanMessengerEffect()));
-
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
     }
 
     public SylvanMessenger(final SylvanMessenger card) {
@@ -74,47 +76,5 @@ public class SylvanMessenger extends CardImpl {
     @Override
     public SylvanMessenger copy() {
         return new SylvanMessenger(this);
-    }
-}
-
-class SylvanMessengerEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("Elf");
-    static {
-        filter.add(new SubtypePredicate("Elf"));
-    }
-
-    public SylvanMessengerEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order";
-    }
-
-    public SylvanMessengerEffect(final SylvanMessengerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SylvanMessengerEffect copy() {
-        return new SylvanMessengerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 4));
-        controller.revealCards(sourceObject.getName(), cards, game);
-        for (Card card: cards.getCards(game)) {
-            if (filter.match(card, game)) {
-                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                cards.remove(card);
-            }
-        }
-        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
-        return true;
     }
 }

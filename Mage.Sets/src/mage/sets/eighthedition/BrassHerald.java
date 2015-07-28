@@ -25,56 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.eighthedition;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.EnvoyEffect;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinRingleader extends CardImpl {
+public class BrassHerald extends mage.sets.apocalypse.BrassHerald {
 
-    private static final FilterCard filter = new FilterCard("Goblin cards");
-
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
+    public BrassHerald(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 293;
+        this.expansionSetCode = "8ED";
+        this.rarity = Rarity.RARE;
     }
 
-    public GoblinRingleader(UUID ownerId) {
-        super(ownerId, 62, "Goblin Ringleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "APC";
-        this.subtype.add("Goblin");
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-        // When Goblin Ringleader enters the battlefield, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
-    }
-
-    public GoblinRingleader(final GoblinRingleader card) {
+    public BrassHerald(final BrassHerald card) {
         super(card);
     }
 
     @Override
-    public GoblinRingleader copy() {
-        return new GoblinRingleader(this);
+    public BrassHerald copy() {
+        return new BrassHerald(this);
     }
 }

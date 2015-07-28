@@ -25,53 +25,33 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.filter.predicate.mageobject;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.EnvoyEffect;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.MageObject;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class KavuHowler extends CardImpl {
+public class ChosenSubtypePredicate implements Predicate<MageObject> {
 
-    private static final FilterCard filter = new FilterCard("Kavu cards");
+    private final UUID cardID;
 
-    static {
-        filter.add(new SubtypePredicate("Kavu"));
-    }
-
-    public KavuHowler(UUID ownerId) {
-        super(ownerId, 79, "Kavu Howler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "APC";
-        this.subtype.add("Kavu");
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(5);
-
-        // When Kavu Howler enters the battlefield, reveal the top four cards of your library. Put all Kavu cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
-    }
-
-    public KavuHowler(final KavuHowler card) {
-        super(card);
+    public ChosenSubtypePredicate(UUID cardID) {
+        this.cardID = cardID;
     }
 
     @Override
-    public KavuHowler copy() {
-        return new KavuHowler(this);
+    public boolean apply(MageObject input, Game game) {
+        String subtype = (String) game.getState().getValue(cardID + "_type");
+        return input.hasSubtype(subtype);
+    }
+
+    @Override
+    public String toString() {
+        return "Chosen subtype";
     }
 }
