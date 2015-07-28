@@ -41,6 +41,7 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbilities;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.abilities.SpecialActions;
 import mage.abilities.StaticAbility;
@@ -856,13 +857,19 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      */
     public void addOtherAbility(Card attachedTo, Ability ability) {
-        ability.setSourceId(attachedTo.getId());
-        ability.setControllerId(attachedTo.getOwnerId());
+        Ability newAbility;
+        if (ability instanceof MageSingleton) {
+            newAbility = ability;
+        } else {
+            newAbility = ability.copy();
+        }
+        newAbility.setSourceId(attachedTo.getId());
+        newAbility.setControllerId(attachedTo.getOwnerId());
         if (!cardState.containsKey(attachedTo.getId())) {
             cardState.put(attachedTo.getId(), new CardState());
         }
-        cardState.get(attachedTo.getId()).addAbility(ability);
-        addAbility(ability, attachedTo.getId(), attachedTo);
+        cardState.get(attachedTo.getId()).addAbility(newAbility);
+        addAbility(newAbility, attachedTo.getId(), attachedTo);
     }
 
     /**

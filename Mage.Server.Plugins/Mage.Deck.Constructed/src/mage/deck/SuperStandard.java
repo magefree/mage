@@ -76,10 +76,8 @@ public class SuperStandard extends Constructed {
         super("Constructed - All Standards");
 
         banned.add("Ancient Den");
-        banned.add("Arcbound Ravager");
         banned.add("Disciple of the Vault");
         banned.add("Great Furnace");
-        banned.add("Jace, the Mind Sculptor");
         banned.add("Seat of the Synod");
         banned.add("Skullclamp");
         banned.add("Tree of Tales");
@@ -98,6 +96,17 @@ public class SuperStandard extends Constructed {
         Map<String, String> leastInvalid = null;
         
         boolean valid = false;
+        
+        // first, check whether misty and batterskull are in the same deck.
+        Map<String, Integer> counts = new HashMap<>();
+        countCards(counts, deck.getCards());
+        countCards(counts, deck.getSideboard());
+        if( counts.containsKey("Stoneforge Mystic") 
+                && counts.containsKey("Batterskull")){
+            
+            // if both, then skip all following tests by returning
+            return false;
+        }
 
         // up to Lorwyn/Alara, standards will have to be hard-coded.
         // iterate through the array of standards.
@@ -113,10 +122,8 @@ public class SuperStandard extends Constructed {
             // misty and darksteel citadel
             if( setCodes.contains("MRD") || setCodes.contains("SOM")){
                 banned.add("Darksteel Citadel");
-                banned.add("Stoneforge Mystic");
             }else{
                 banned.remove("Darksteel Citadel");
-                banned.remove("Stoneforge Mystic");     
             }
 
             // validate it. If it validates, clear the invalid cards and break.
@@ -174,10 +181,8 @@ public class SuperStandard extends Constructed {
             // misty and darksteel citadel
             if( setCodes.contains("MRD") || setCodes.contains("SOM")){
                 banned.add("Darksteel Citadel");
-                banned.add("Stoneforge Mystic");
             }else{
                 banned.remove("Darksteel Citadel");
-                banned.remove("Stoneforge Mystic");     
             }
 
             // validate it. If it validates, clear the invalid cards and break.
