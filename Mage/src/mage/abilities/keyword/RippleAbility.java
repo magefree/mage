@@ -1,7 +1,8 @@
-package mage.abilities.effects.keyword;
+package mage.abilities.keyword;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -11,6 +12,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -19,26 +21,62 @@ import mage.util.CardUtil;
 /**
  * @author klayhamn
  */
-public class RippleEffect extends OneShotEffect {
+public class RippleAbility extends TriggeredAbilityImpl {
 
-    protected int rippleNumber;
-    protected boolean isTargetSelf; // is the source of the ripple also the target of the ripple?
+    protected final int rippleNumber;
 
-    public RippleEffect(int rippleNumber) {
-        this(rippleNumber, true); // by default, the source is also the target
+    public RippleAbility(int rippleNumber) {
+        super(Zone.STACK, new RippleEffect(rippleNumber), false);
+        this.rippleNumber = rippleNumber;
     }
 
-    public RippleEffect(int rippleNumber, boolean isTargetSelf) {
+    public RippleAbility(RippleAbility ability) {
+        super(ability);
+        this.rippleNumber = ability.rippleNumber;
+
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
+            return true;
+        }
+        return false;
+
+    }
+
+    @Override
+    public RippleAbility copy() {
+        return new RippleAbility(this);
+    }
+
+
+    @Override
+    public String getRule() {
+        return "Ripple <i>((When you cast this spell, you may reveal the top " + CardUtil.numberToText(rippleNumber) + " cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.))</i>";
+    }
+
+
+}
+
+class RippleEffect extends OneShotEffect {
+
+    protected int rippleNumber;
+
+    public RippleEffect(int rippleNumber) {
         super(Outcome.PlayForFree);
         this.rippleNumber = rippleNumber;
-        this.isTargetSelf = isTargetSelf;
-        this.setText();
     }
 
     public RippleEffect(final RippleEffect effect) {
         super(effect);
         this.rippleNumber = effect.rippleNumber;
-        this.isTargetSelf = effect.isTargetSelf;
     }
 
     @Override
@@ -55,32 +93,19 @@ public class RippleEffect extends OneShotEffect {
             if (!player.chooseUse(Outcome.Neutral, "Reveal " + rippleNumber + " cards from the top of your library?", source, game)){
                 return true; //fizzle
             }
+            // reveal to/**/p cards from library
             Cards cards = new CardsImpl();
-            cards.addAll(player.getLibrary().getTopCards(game, rippleNumber)); // pull top cards
-            player.revealCards(sourceObject.getIdName(), cards, game); // reveal the cards
+            cards.addAll(player.getLibrary().getTopCards(game, rippleNumber));
+            player.revealCards(sourceObject.getIdName(), cards, game);
 
-            // Find out which card should be rippled
-            // FIXME: I'm not sure the "isTargetSelf" flag is the most elegant solution
-            String cardNameToRipple;
-            if (isTargetSelf) { // if the ripple applies to the same card that triggered it
-                cardNameToRipple = sourceObject.getName();
-            } else { // if the ripple is caused by something else (e.g. Thrumming Stone)
-                Spell spellOnStack = game.getStack().getSpell(targetPointer.getFirst(game, source));
-                if (spellOnStack == null) { // if the ripple target got countered or exiled
-                    spellOnStack = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
-                }
-                if (spellOnStack == null) {
-                    return true; // should not happen?
-                }
-                cardNameToRipple = spellOnStack.getName();
-            }
-
+            // determine which card should be rippled
+            String cardNameToRipple = sourceObject.getName();
             FilterCard sameNameFilter = new FilterCard("card(s) with the name: \"" + cardNameToRipple + "\" to cast without paying their mana cost");
             sameNameFilter.add(new NamePredicate(cardNameToRipple));
             TargetCard target1 = new TargetCard(Zone.LIBRARY, sameNameFilter);
             target1.setRequired(false);
 
-            // Choose cards to play for free
+            // choose cards to play for free
             while (player.isInGame() && cards.count(sameNameFilter, game) > 0 && player.choose(Outcome.PlayForFree, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
@@ -97,11 +122,5 @@ public class RippleEffect extends OneShotEffect {
         return false;
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder("Ripple ").append(rippleNumber);
-            sb.append(". <i>(You may reveal the top ");
-            sb.append(CardUtil.numberToText(rippleNumber));
-            sb.append(" cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.)</i>");
-        staticText = sb.toString();
-    }
 }
+
