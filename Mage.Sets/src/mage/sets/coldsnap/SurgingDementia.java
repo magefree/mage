@@ -29,11 +29,8 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
-import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.abilities.effects.keyword.RippleEffect;
+import mage.abilities.keyword.RippleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -50,7 +47,8 @@ public class SurgingDementia extends CardImpl {
         this.expansionSetCode = "CSP";
 
         // Ripple 4
-        this.getSpellAbility().addEffect(new RippleEffect(4));
+        this.addAbility(new RippleAbility(4));
+
         // Target player discards a card.
         this.getSpellAbility().getEffects().add(new DiscardTargetEffect(1));
         this.getSpellAbility().getTargets().add(new TargetPlayer());
