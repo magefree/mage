@@ -18,7 +18,7 @@ import java.util.Map;
  * 
  * This class was originally made to work with the historical standard ruleset.
  * Data taken from http://thattournament.website/historic-tournament.php
- * (site changed, originally thtp://mtgt.nfshost.com/historic-tournament.php)
+ * (site changed, originally http://mtgt.nfshost.com/historic-tournament.php)
  * 
  * If there are any questions or corrections, feel free to contact me.
  *
@@ -111,9 +111,6 @@ public class HistoricalStandard extends Constructed {
         
         // banned cards
         banned.add("Balance");
-        // Not banned in the format, but it is either this or Misty, and most
-        // people choose Misty.
-        banned.add("Batterskull");  
         banned.add("Memory Jar");
         banned.add("Mind Over Matter");
         banned.add("Mind Twist");
@@ -134,6 +131,17 @@ public class HistoricalStandard extends Constructed {
         Map<String, String> leastInvalid = null;
         
         boolean valid = false;
+        
+        // first, check whether misty and batterskull are in the same deck.
+        Map<String, Integer> counts = new HashMap<>();
+        countCards(counts, deck.getCards());
+        countCards(counts, deck.getSideboard());
+        if( counts.containsKey("Stoneforge Mystic") 
+                && counts.containsKey("Batterskull")){
+            
+            // if both, then skip all following tests by returning
+            return false;
+        }
 
         // up to Lorwyn/Alara, standards will have to be hard-coded.
         // iterate through the array of standards.
