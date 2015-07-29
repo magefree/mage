@@ -28,13 +28,13 @@
 package mage.sets.eighthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class PrimevalForce extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Forest");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("three Forests");
     static{
         filter.add(new SubtypePredicate("Forest"));
     }
