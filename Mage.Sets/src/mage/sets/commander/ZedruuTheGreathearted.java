@@ -27,34 +27,35 @@
  */
 package mage.sets.commander;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.dynamicvalue.common.PermanentsYouOwnThatOpponentsControlCount;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author anonymous
+ * @author andyfries
  */
 public class ZedruuTheGreathearted extends CardImpl {
 
@@ -68,8 +69,12 @@ public class ZedruuTheGreathearted extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new PermanentsYouOwnThatOpponentsControlCount()), TargetController.YOU, false);
-        ability.addEffect(new DrawCardSourceControllerEffect(new PermanentsYouOwnThatOpponentsControlCount()));
+        Effect effect = new GainLifeEffect(new PermanentsYouOwnThatOpponentsControlCount());
+        effect.setText("you gain X life");
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false);
+        effect = new DrawCardSourceControllerEffect(new PermanentsYouOwnThatOpponentsControlCount());
+        effect.setText("and draw X cards, where X is the number of permanents you own that your opponents control");
+        ability.addEffect(effect);
         this.addAbility(ability);
 
         // {R}{W}{U}: Target opponent gains control of target permanent you control.
@@ -90,7 +95,7 @@ public class ZedruuTheGreathearted extends CardImpl {
 
     class ZedruuTheGreatheartedEffect extends ContinuousEffectImpl {
 
-        MageObjectReference targetPermanentReference;
+        private MageObjectReference targetPermanentReference;
 
         public ZedruuTheGreatheartedEffect() {
             super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
@@ -115,10 +120,9 @@ public class ZedruuTheGreathearted extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getFirstTarget());
             Permanent permanent = targetPermanentReference.getPermanent(game);
-            if (player != null && permanent != null) {
-                return permanent.changeControllerId(player.getId(), game);
+            if (permanent != null) {
+                return permanent.changeControllerId(source.getFirstTarget(), game);
             } else {
                 discard();
             }
