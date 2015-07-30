@@ -102,19 +102,17 @@ public class HumanPlayer extends PlayerImpl {
     protected static FilterCreatureForCombat filterCreatureForCombat = new FilterCreatureForCombat();
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
-    protected static final Choice replacementEffectChoice = new ChoiceImpl(true);
+    protected final Choice replacementEffectChoice;
 
     private static final Logger log = Logger.getLogger(HumanPlayer.class);
-
-    static {
-        replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
-    }
 
     protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
     protected ManaCost currentlyUnpaidMana;
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
+        replacementEffectChoice = new ChoiceImpl(true);
+        replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
         human = true;
     }
 
@@ -122,6 +120,7 @@ public class HumanPlayer extends PlayerImpl {
         super(player);
         this.autoSelectReplacementEffects.addAll(autoSelectReplacementEffects);
         this.currentlyUnpaidMana = player.currentlyUnpaidMana;
+        this.replacementEffectChoice = player.replacementEffectChoice;
     }
 
     protected void waitForResponse(Game game) {
@@ -515,7 +514,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), source.getSourceId(), game),
+            game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), source == null ? null : source.getSourceId(), game),
                     target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                     target.isRequired(source),
                     getOptions(target, null));
