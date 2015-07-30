@@ -68,11 +68,12 @@ public class ZedruuTheGreathearted extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new PermanentsYouOwnThatOpponentsControlCount()), TargetController.YOU, false));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsYouOwnThatOpponentsControlCount()), TargetController.YOU, false));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new PermanentsYouOwnThatOpponentsControlCount()), TargetController.YOU, false);
+        ability.addEffect(new DrawCardSourceControllerEffect(new PermanentsYouOwnThatOpponentsControlCount()));
+        this.addAbility(ability);
 
         // {R}{W}{U}: Target opponent gains control of target permanent you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZedruuTheGreatheartedEffect(), new ManaCostsImpl("{R}{W}{U}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZedruuTheGreatheartedEffect(), new ManaCostsImpl("{R}{W}{U}"));
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);
