@@ -25,46 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.cost.SpellsCostIncreasementControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianWarBeast extends CardImpl {
+public class JadeLeech extends CardImpl {
 
-    public PhyrexianWarBeast(UUID ownerId) {
-        super(ownerId, 169, "Phyrexian War Beast", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "ALL";
-        this.subtype.add("Beast");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+    private static final FilterCard filter = new FilterCard("Green spells");
 
-        // When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
-        Ability ability = new LeavesBattlefieldTriggeredAbility(new SacrificeTargetEffect(), false);
-        ability.addEffect(new DamageControllerEffect(1));
-        ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
-        this.addAbility(ability);
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public PhyrexianWarBeast(final PhyrexianWarBeast card) {
+    public JadeLeech(UUID ownerId) {
+        super(ownerId, 190, "Jade Leech", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Leech");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Green spells you cast cost {G} more to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+            new SpellsCostIncreasementControllerEffect(filter, new ManaCostsImpl("{G}"))));
+    }
+
+    public JadeLeech(final JadeLeech card) {
         super(card);
     }
 
     @Override
-    public PhyrexianWarBeast copy() {
-        return new PhyrexianWarBeast(this);
+    public JadeLeech copy() {
+        return new JadeLeech(this);
     }
 }

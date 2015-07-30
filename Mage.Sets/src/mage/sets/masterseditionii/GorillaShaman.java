@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author fireshoes
  */
-public class GorillaShaman extends mage.sets.alliances.GorillaShaman {
+public class GorillaShaman extends mage.sets.alliances.GorillaShaman1 {
 
     public GorillaShaman(UUID ownerId) {
         super(ownerId);

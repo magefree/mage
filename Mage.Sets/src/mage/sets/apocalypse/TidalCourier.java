@@ -25,47 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.EnvoyEffect;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class EngineeredPlague extends CardImpl {
+public class TidalCourier extends CardImpl {
 
-    public EngineeredPlague(UUID ownerId) {
-        super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "ULG";
+    private static final FilterCard filter = new FilterCard("Merfolk cards");
 
-
-        // As Engineered Plague enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
-        // All creatures of the chosen type get -1/-1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
+    static {
+        filter.add(new SubtypePredicate("Merfolk"));
     }
 
-    public EngineeredPlague(final EngineeredPlague card) {
+    public TidalCourier(UUID ownerId) {
+        super(ownerId, 31, "Tidal Courier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "APC";
+        this.subtype.add("Merfolk");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // When Tidal Courier enters the battlefield, reveal the top four cards of your library. Put all Merfolk cards revealed this way into your hand and the rest on the bottom of your library in any order.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
+        // {3}{U}: Tidal Courier gains flying until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(),
+            Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")));
+    }
+
+    public TidalCourier(final TidalCourier card) {
         super(card);
     }
 
     @Override
-    public EngineeredPlague copy() {
-        return new EngineeredPlague(this);
+    public TidalCourier copy() {
+        return new TidalCourier(this);
     }
 }

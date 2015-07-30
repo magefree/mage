@@ -25,47 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class EngineeredPlague extends CardImpl {
+public class PhyrexianWarBeast1 extends CardImpl {
 
-    public EngineeredPlague(UUID ownerId) {
-        super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "ULG";
+    public PhyrexianWarBeast1(UUID ownerId) {
+        super(ownerId, 169, "Phyrexian War Beast", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "ALL";
+        this.subtype.add("Beast");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-
-        // As Engineered Plague enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
-        // All creatures of the chosen type get -1/-1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
+        // When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
+        Effect effect = new SacrificeTargetEffect();
+        effect.setText("sacrifice a land");
+        Ability ability = new LeavesBattlefieldTriggeredAbility(effect, false);
+        effect = new DamageControllerEffect(1);
+        effect.setText("and {this} deals 1 damage to you");
+        ability.addEffect(effect);
+        ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
+        this.addAbility(ability);
     }
 
-    public EngineeredPlague(final EngineeredPlague card) {
+    public PhyrexianWarBeast1(final PhyrexianWarBeast1 card) {
         super(card);
     }
 
     @Override
-    public EngineeredPlague copy() {
-        return new EngineeredPlague(this);
+    public PhyrexianWarBeast1 copy() {
+        return new PhyrexianWarBeast1(this);
     }
 }

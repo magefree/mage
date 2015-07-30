@@ -25,47 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.eighthedition;
 
 import java.util.UUID;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class SharedTriumph extends CardImpl {
+public class BrassHerald extends mage.sets.apocalypse.BrassHerald {
 
-    public SharedTriumph(UUID ownerId) {
-        super(ownerId, 53, "Shared Triumph", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ONS";
-
-
-        // As Shared Triumph enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
-        // Creatures of the chosen type get +1/+1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+    public BrassHerald(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 293;
+        this.expansionSetCode = "8ED";
+        this.rarity = Rarity.RARE;
     }
 
-    public SharedTriumph(final SharedTriumph card) {
+    public BrassHerald(final BrassHerald card) {
         super(card);
     }
 
     @Override
-    public SharedTriumph copy() {
-        return new SharedTriumph(this);
+    public BrassHerald copy() {
+        return new BrassHerald(this);
     }
 }

@@ -25,66 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.SpellAbility;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class GorillaShaman extends CardImpl {
+public class Overload extends CardImpl {
 
-    public GorillaShaman(UUID ownerId) {
-        super(ownerId, 106, "Gorilla Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ALL";
-        this.subtype.add("Ape");
-        this.subtype.add("Shaman");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private static final FilterArtifactPermanent filter2 = new FilterArtifactPermanent("artifact if its converted mana cost is 2 or less");
+    private static final FilterArtifactPermanent filter5 = new FilterArtifactPermanent("artifact if its converted mana cost is 5 or less");
 
-        // {X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
-        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("noncreature artifact with converted mana cost X")));
-        this.addAbility(ability);
+    static {
+        filter2.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
+        filter5.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
     }
-    
+
+    public Overload(UUID ownerId) {
+        super(ownerId, 157, "Overload", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+        this.expansionSetCode = "INV";
+
+        // Kicker {2}
+        this.addAbility(new KickerAbility("{2}"));
+        // Destroy target artifact if its converted mana cost is 2 or less. If Overload was kicked, destroy that artifact if its converted mana cost is 5 or less instead.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent(filter5));
+    }
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("noncreature artifact with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
-            filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-            Target target = new TargetPermanent(filter);
-            ability.addTarget(target);
+        if(ability instanceof SpellAbility) {
+            if(!KickedCondition.getInstance().apply(game, ability)) {
+                ability.getTargets().clear();
+                ability.getTargets().add(new TargetArtifactPermanent(filter2));
+            }
         }
     }
 
-    public GorillaShaman(final GorillaShaman card) {
+    public Overload(final Overload card) {
         super(card);
     }
 
     @Override
-    public GorillaShaman copy() {
-        return new GorillaShaman(this);
+    public Overload copy() {
+        return new Overload(this);
     }
 }

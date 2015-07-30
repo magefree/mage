@@ -30,41 +30,50 @@ package mage.sets.invasion;
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
+import mage.abilities.decorator.ConditionalReplacementEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
- * @author michael.napoleon@gmail.com
+ * @author LoneFox
  */
-public class ExplosiveGrowth extends CardImpl {
+public class ScorchingLava extends CardImpl {
 
-    public ExplosiveGrowth(UUID ownerId) {
-        super(ownerId, 187, "Explosive Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+    public ScorchingLava(UUID ownerId) {
+        super(ownerId, 164, "Scorching Lava", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "INV";
 
-        // Kicker {5}
-        this.addAbility(new KickerAbility("{5}"));
-
-        // Target creature gets +2/+2 until end of turn. If Explosive Growth was kicked, that creature gets +5/+5 until end of turn instead.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(5, 5, Duration.EndOfTurn),
-          new BoostTargetEffect(2, 2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.getInstance()),
-          "Target creature gets +2/+2 until end of turn. If Explosive Growth was kicked, that creature gets +5/+5 until end of turn instead."));
+        // Kicker {R}
+        this.addAbility(new KickerAbility("{R}"));
+        // Scorching Lava deals 2 damage to target creature or player. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
+        this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
+            new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"), new LockedInCondition(KickedCondition.getInstance())));
+        Effect effect = new ConditionalReplacementEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn),
+            new LockedInCondition(KickedCondition.getInstance()));
+        effect.setText("and if it would die this turn, exile it instead");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
-    public ExplosiveGrowth(final ExplosiveGrowth card) {
+    public ScorchingLava(final ScorchingLava card) {
         super(card);
     }
 
     @Override
-    public ExplosiveGrowth copy() {
-        return new ExplosiveGrowth(this);
+    public ScorchingLava copy() {
+        return new ScorchingLava(this);
     }
 }

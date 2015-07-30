@@ -25,47 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasementControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class EngineeredPlague extends CardImpl {
+public class AndraditeLeech extends CardImpl {
 
-    public EngineeredPlague(UUID ownerId) {
-        super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "ULG";
+    private static final FilterCard filter = new FilterCard("Black spells");
 
-
-        // As Engineered Plague enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
-        // All creatures of the chosen type get -1/-1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public EngineeredPlague(final EngineeredPlague card) {
+    public AndraditeLeech(UUID ownerId) {
+        super(ownerId, 93, "Andradite Leech", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Leech");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Black spells you cast cost {B} more to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+            new SpellsCostIncreasementControllerEffect(filter, new ManaCostsImpl("{B}"))));
+        // {B}: Andradite Leech gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+            new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+    }
+
+    public AndraditeLeech(final AndraditeLeech card) {
         super(card);
     }
 
     @Override
-    public EngineeredPlague copy() {
-        return new EngineeredPlague(this);
+    public AndraditeLeech copy() {
+        return new AndraditeLeech(this);
     }
 }

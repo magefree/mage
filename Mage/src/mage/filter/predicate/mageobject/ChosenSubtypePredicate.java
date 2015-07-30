@@ -25,47 +25,33 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.filter.predicate.mageobject;
 
 import java.util.UUID;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+import mage.MageObject;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class EngineeredPlague extends CardImpl {
+public class ChosenSubtypePredicate implements Predicate<MageObject> {
 
-    public EngineeredPlague(UUID ownerId) {
-        super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "ULG";
+    private final UUID cardID;
 
-
-        // As Engineered Plague enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
-        // All creatures of the chosen type get -1/-1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
-    }
-
-    public EngineeredPlague(final EngineeredPlague card) {
-        super(card);
+    public ChosenSubtypePredicate(UUID cardID) {
+        this.cardID = cardID;
     }
 
     @Override
-    public EngineeredPlague copy() {
-        return new EngineeredPlague(this);
+    public boolean apply(MageObject input, Game game) {
+        String subtype = (String) game.getState().getValue(cardID + "_type");
+        return input.hasSubtype(subtype);
+    }
+
+    @Override
+    public String toString() {
+        return "Chosen subtype";
     }
 }

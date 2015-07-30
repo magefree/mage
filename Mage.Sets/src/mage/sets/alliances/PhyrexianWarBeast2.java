@@ -25,47 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class EngineeredPlague extends CardImpl {
+public class PhyrexianWarBeast2 extends PhyrexianWarBeast1 {
 
-    public EngineeredPlague(UUID ownerId) {
-        super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "ULG";
-
-
-        // As Engineered Plague enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
-        // All creatures of the chosen type get -1/-1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
+    public PhyrexianWarBeast2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 170;
     }
 
-    public EngineeredPlague(final EngineeredPlague card) {
+    public PhyrexianWarBeast2(final PhyrexianWarBeast2 card) {
         super(card);
     }
 
     @Override
-    public EngineeredPlague copy() {
-        return new EngineeredPlague(this);
+    public PhyrexianWarBeast2 copy() {
+        return new PhyrexianWarBeast2(this);
     }
 }

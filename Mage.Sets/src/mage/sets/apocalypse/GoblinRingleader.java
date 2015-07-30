@@ -29,29 +29,31 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.EnvoyEffect;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
  * @author Plopman
  */
 public class GoblinRingleader extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("Goblin cards");
+
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
+    }
 
     public GoblinRingleader(UUID ownerId) {
         super(ownerId, 62, "Goblin Ringleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -64,7 +66,7 @@ public class GoblinRingleader extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // When Goblin Ringleader enters the battlefield, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GoblinRingleaderEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
     }
 
     public GoblinRingleader(final GoblinRingleader card) {
@@ -74,47 +76,5 @@ public class GoblinRingleader extends CardImpl {
     @Override
     public GoblinRingleader copy() {
         return new GoblinRingleader(this);
-    }
-}
-
-class GoblinRingleaderEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("Goblin");
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
-    }
-    
-    public GoblinRingleaderEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order";
-    }
-
-    public GoblinRingleaderEffect(final GoblinRingleaderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GoblinRingleaderEffect copy() {
-        return new GoblinRingleaderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 4));
-        controller.revealCards(sourceObject.getName(), cards, game);
-        for (Card card: cards.getCards(game)) {
-            if (filter.match(card, game)) {
-                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                cards.remove(card);
-            }
-        }
-        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
-        return true;
     }
 }

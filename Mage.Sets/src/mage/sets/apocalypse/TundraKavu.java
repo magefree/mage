@@ -27,54 +27,86 @@
  */
 package mage.sets.apocalypse;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.EnvoyEffect;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class SylvanMessenger extends CardImpl {
+public class TundraKavu extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Elf cards");
-
-    static {
-        filter.add(new SubtypePredicate("Elf"));
-    }
-
-    public SylvanMessenger(UUID ownerId) {
-        super(ownerId, 87, "Sylvan Messenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public TundraKavu(UUID ownerId) {
+        super(ownerId, 71, "Tundra Kavu", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "APC";
-        this.subtype.add("Elf");
-
+        this.subtype.add("Kavu");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-        // When Sylvan Messenger enters the battlefield, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
+        // {T}: Target land becomes a Plains or an Island until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TundraKavuEffect(), new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
     }
 
-    public SylvanMessenger(final SylvanMessenger card) {
+    public TundraKavu(final TundraKavu card) {
         super(card);
     }
 
     @Override
-    public SylvanMessenger copy() {
-        return new SylvanMessenger(this);
+    public TundraKavu copy() {
+        return new TundraKavu(this);
+    }
+}
+
+
+class TundraKavuEffect extends BecomesBasicLandTargetEffect {
+
+    public TundraKavuEffect() {
+        super(Duration.EndOfTurn, false, true, "");
+        staticText = "Target land becomes a Plains or an Island until end of turn.";
+    }
+
+    public TundraKavuEffect(final TundraKavuEffect effect) {
+        super(effect);
+    }
+
+    public TundraKavuEffect copy() {
+        return new TundraKavuEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        landTypes.clear();
+        Player controller = game.getPlayer(source.getControllerId());
+        if(controller != null) {
+            Set<String> choiceSet = new LinkedHashSet<>();
+            choiceSet.add("Island");
+            choiceSet.add("Plains");
+            ChoiceImpl choice = new ChoiceImpl(true);
+            choice.setChoices(choiceSet);
+            choice.setMessage("Choose a basic land type");
+            controller.choose(outcome, choice, game);
+            landTypes.add(choice.getChoice());
+        } else {
+            this.discard();
+        }
+
+        super.init(source, game);
     }
 }

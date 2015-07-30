@@ -25,12 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.abilities.effects.common.EnvoyEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -38,34 +41,43 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class EngineeredPlague extends CardImpl {
+public class BrassHerald extends CardImpl {
 
-    public EngineeredPlague(UUID ownerId) {
-        super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "ULG";
+    public BrassHerald(UUID ownerId) {
+        super(ownerId, 133, "Brass Herald", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.expansionSetCode = "APC";
+        this.subtype.add("Golem");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-
-        // As Engineered Plague enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
-        // All creatures of the chosen type get -1/-1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
+        // As Brass Herald enters the battlefield, choose a creature type.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
+        // When Brass Herald enters the battlefield, reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order.
+        FilterCard filter = new FilterCard("creature cards of the chosen type");
         filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
+
+        // Creatures of the chosen type get +1/+1.
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures of the chosen type");
+        filter2.add(new ChosenSubtypePredicate(this.getId()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield,
+            filter2, false)));
     }
 
-    public EngineeredPlague(final EngineeredPlague card) {
+    public BrassHerald(final BrassHerald card) {
         super(card);
     }
 
     @Override
-    public EngineeredPlague copy() {
-        return new EngineeredPlague(this);
+    public BrassHerald copy() {
+        return new BrassHerald(this);
     }
 }

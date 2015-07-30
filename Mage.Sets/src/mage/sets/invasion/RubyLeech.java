@@ -25,28 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.cost.SpellsCostIncreasementControllerEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class FeastOrFamine extends mage.sets.izzetvsgolgari.FeastOrFamine {
+public class RubyLeech extends CardImpl {
 
-    public FeastOrFamine(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 8;
-        this.expansionSetCode = "ALL";
+    private static final FilterCard filter = new FilterCard("Red spells");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public FeastOrFamine(final FeastOrFamine card) {
+    public RubyLeech(UUID ownerId) {
+        super(ownerId, 161, "Ruby Leech", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Leech");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+        // Red spells you cast cost {R} more to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+            new SpellsCostIncreasementControllerEffect(filter, new ManaCostsImpl("{R}"))));
+    }
+
+    public RubyLeech(final RubyLeech card) {
         super(card);
     }
 
     @Override
-    public FeastOrFamine copy() {
-        return new FeastOrFamine(this);
+    public RubyLeech copy() {
+        return new RubyLeech(this);
     }
 }
