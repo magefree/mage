@@ -2869,6 +2869,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        return moveCards(cards, fromZone, toZone, source, game, true);
+    }
+
+    @Override
+    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         ArrayList<Card> cardList = new ArrayList<>();
         for (UUID cardId : cards) {
             if (fromZone.equals(Zone.BATTLEFIELD)) {
@@ -2883,20 +2888,30 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         }
-        return moveCards(cardList, fromZone, toZone, source, game);
+        return moveCards(cardList, fromZone, toZone, source, game, withName);
     }
 
     @Override
     public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
+        return moveCards(card, fromZone, toZone, source, game, true);
+    }
+
+    @Override
+    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         ArrayList<Card> cardList = new ArrayList<>();
         if (card != null) {
             cardList.add(card);
         }
-        return moveCards(cardList, fromZone, toZone, source, game);
+        return moveCards(cardList, fromZone, toZone, source, game, withName);
     }
 
     @Override
     public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        return moveCards(cards, fromZone, toZone, source, game, true);
+    }
+
+    @Override
+    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         if (cards.isEmpty()) {
             return true;
         }
@@ -2905,7 +2920,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case EXILED:
                 boolean result = false;
                 for (Card card : cards) {
-                    result |= moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, true);
+                    result |= moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, withName);
                 }
                 return result;
             case GRAVEYARD:
@@ -2913,21 +2928,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             case HAND:
                 result = false;
                 for (Card card : cards) {
-                    result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone);
+                    result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, withName);
                 }
                 return result;
             case BATTLEFIELD:
                 result = false;
                 for (Card card : cards) {
-                    result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId());
+                    result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, !withName);
                 }
                 return result;
             case LIBRARY:
                 result = false;
-                boolean withName = true;
-                if (fromZone.equals(Zone.HAND) || fromZone.equals(Zone.LIBRARY)) {
-                    withName = false;
-                }
                 for (Card card : cards) {
                     result |= moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, withName);
                 }

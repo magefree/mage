@@ -1673,6 +1673,21 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+        return computerPlayer.moveCards(card, fromZone, toZone, source, game);
+    }
+
+    @Override
+    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
+    }
+
+    @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, fromZone);
     }

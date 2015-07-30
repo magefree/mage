@@ -30,6 +30,7 @@ package mage.sets.magic2014;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -56,7 +57,6 @@ public class GrimReturn extends CardImpl {
         super(ownerId, 100, "Grim Return", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "M14";
 
-
         // Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control");
@@ -80,8 +80,10 @@ public class GrimReturn extends CardImpl {
         if (watcher != null) {
             FilterCard filter = new FilterCreatureCard(textFilter);
             List<CardIdPredicate> uuidPredicates = new ArrayList<>();
-            for (UUID uuid :watcher.getCardsPutToGraveyardFromBattlefield()) {
-                uuidPredicates.add(new CardIdPredicate(uuid));
+            for (MageObjectReference mor : watcher.getCardsPutToGraveyardFromBattlefield()) {
+                if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
+                    uuidPredicates.add(new CardIdPredicate(mor.getSourceId()));
+                }
             }
             filter.add(Predicates.or(uuidPredicates));
             ability.getTargets().clear();

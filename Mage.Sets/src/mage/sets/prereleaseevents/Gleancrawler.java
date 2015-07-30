@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.sets.prereleaseevents;
 
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.PersistAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -44,6 +44,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,58 +52,53 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
 /**
  *
- * @author jeffwadsworth
- *
+ * @author LevelX2
  */
-public class TwilightShepherd extends CardImpl {
+public class Gleancrawler extends CardImpl {
 
-    public TwilightShepherd(UUID ownerId) {
-        super(ownerId, 25, "Twilight Shepherd", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");
-        this.expansionSetCode = "SHM";
-        this.subtype.add("Angel");
+    public Gleancrawler(UUID ownerId) {
+        super(ownerId, 27, "Gleancrawler", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{3}{B/G}{B/G}{B/G}");
+        this.expansionSetCode = "PTC";
+        this.subtype.add("Insect");
+        this.subtype.add("Horror");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        // <i>({B/G} can be paid with either {B} or {G}.)</i>
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>({B/G} can be paid with either {B} or {G}.)</i>")));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // At the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new GleancrawlerEffect(), TargetController.YOU, false), new CardsPutIntoGraveyardWatcher());
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-
-        // When Twilight Shepherd enters the battlefield, return to your hand all cards in your graveyard that were put there from the battlefield this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TwilightShepherdEffect(), false), new CardsPutIntoGraveyardWatcher());
-
-        // Persist
-        this.addAbility(new PersistAbility());
     }
 
-    public TwilightShepherd(final TwilightShepherd card) {
+    public Gleancrawler(final Gleancrawler card) {
         super(card);
     }
 
     @Override
-    public TwilightShepherd copy() {
-        return new TwilightShepherd(this);
+    public Gleancrawler copy() {
+        return new Gleancrawler(this);
     }
 }
 
-class TwilightShepherdEffect extends OneShotEffect {
+class GleancrawlerEffect extends OneShotEffect {
 
     boolean applied = false;
 
-    public TwilightShepherdEffect() {
+    public GleancrawlerEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "return to your hand all cards in your graveyard that were put there from the battlefield this turn";
+        this.staticText = "return to your hand all creature cards in your graveyard that were put there from the battlefield this turn";
     }
 
-    public TwilightShepherdEffect(final TwilightShepherdEffect effect) {
+    public GleancrawlerEffect(final GleancrawlerEffect effect) {
         super(effect);
     }
 
     @Override
-    public TwilightShepherdEffect copy() {
-        return new TwilightShepherdEffect(this);
+    public GleancrawlerEffect copy() {
+        return new GleancrawlerEffect(this);
     }
 
     @Override
@@ -110,12 +106,12 @@ class TwilightShepherdEffect extends OneShotEffect {
         CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && watcher != null) {
-            Set<MageObjectReference> cardsInGraveyard = watcher.getCardsPutToGraveyardFromBattlefield();
+            Set<MageObjectReference> cardsToGraveyardThisTurn = watcher.getCardsPutToGraveyardFromBattlefield();
             Cards cardsToHand = new CardsImpl();
-            for (MageObjectReference mor : cardsInGraveyard) {
+            for (MageObjectReference mor : cardsToGraveyardThisTurn) {
                 if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
                     Card card = game.getCard(mor.getSourceId());
-                    if (card != null
+                    if (card != null && card.getCardType().contains(CardType.CREATURE)
                             && card.getOwnerId().equals(source.getControllerId())) {
                         cardsToHand.add(card);
                     }

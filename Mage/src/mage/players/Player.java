@@ -612,9 +612,15 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
+    boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
 
     boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
+
+    boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card

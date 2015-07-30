@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.watchers.common;
 
 import java.util.HashMap;
@@ -34,6 +33,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -42,16 +42,16 @@ import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
 
 /**
- * Counts amount of cards put into graveyards of players during the current turn.
- * Also the UUIDs of cards that went to graveyard from Battlefield this turn.
+ * Counts amount of cards put into graveyards of players during the current
+ * turn. Also the UUIDs of cards that went to graveyard from Battlefield this
+ * turn.
  *
  * @author LevelX2
  */
 public class CardsPutIntoGraveyardWatcher extends Watcher {
 
     private final Map<UUID, Integer> amountOfCardsThisTurn = new HashMap<>();
-    private final Set<UUID> cardsPutToGraveyardFromBattlefield = new HashSet<>();
-
+    private final Set<MageObjectReference> cardsPutToGraveyardFromBattlefield = new HashSet<>();
 
     public CardsPutIntoGraveyardWatcher() {
         super("CardsPutIntoGraveyardWatcher", WatcherScope.GAME);
@@ -81,7 +81,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
                 }
                 amountOfCardsThisTurn.put(playerId, amount);
                 if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
-                    cardsPutToGraveyardFromBattlefield.add(event.getTargetId());
+                    cardsPutToGraveyardFromBattlefield.add(new MageObjectReference(event.getTargetId(), game));
                 }
             }
         }
@@ -95,10 +95,8 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
         return 0;
     }
 
-    public Set<UUID> getCardsPutToGraveyardFromBattlefield() {
-        Set<UUID> cards = new HashSet<>();
-        cards.addAll(cardsPutToGraveyardFromBattlefield);
-        return cards;
+    public Set<MageObjectReference> getCardsPutToGraveyardFromBattlefield() {
+        return cardsPutToGraveyardFromBattlefield;
     }
 
     @Override
