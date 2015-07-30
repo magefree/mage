@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.dynamicvalue.common;
 
 import java.util.UUID;
@@ -72,7 +71,7 @@ public class CardsInAllGraveyardsCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardsInAllGraveyardsCount copy() {
         return new CardsInAllGraveyardsCount(this);
     }
 

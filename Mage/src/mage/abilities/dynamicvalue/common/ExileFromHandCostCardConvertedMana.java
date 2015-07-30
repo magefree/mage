@@ -36,20 +36,18 @@ import mage.cards.Card;
 import mage.game.Game;
 
 /**
- * Calculates the converted mana costs of a card that was
- * exiled from hand as cost.
- * If no card was exiled the getManaCostsToPay().getX() will
- * be used as value.
+ * Calculates the converted mana costs of a card that was exiled from hand as
+ * cost. If no card was exiled the getManaCostsToPay().getX() will be used as
+ * value.
  *
  *
  * @author LevelX2
  */
-
 public class ExileFromHandCostCardConvertedMana implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost: sourceAbility.getCosts()) {
+        for (Cost cost : sourceAbility.getCosts()) {
             if (cost.isPaid() && cost instanceof ExileFromHandCost) {
                 int xValue = 0;
                 for (Card card : ((ExileFromHandCost) cost).getCards()) {
@@ -62,7 +60,7 @@ public class ExileFromHandCostCardConvertedMana implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public ExileFromHandCostCardConvertedMana copy() {
         return new ExileFromHandCostCardConvertedMana();
     }
 

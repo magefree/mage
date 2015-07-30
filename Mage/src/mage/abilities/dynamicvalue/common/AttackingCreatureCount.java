@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -38,8 +37,6 @@ import mage.game.combat.CombatGroup;
  *
  * @author LevelX2
  */
-
-
 public class AttackingCreatureCount implements DynamicValue {
 
     private String message;
@@ -67,7 +64,7 @@ public class AttackingCreatureCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AttackingCreatureCount copy() {
         return new AttackingCreatureCount(this);
     }
 

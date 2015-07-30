@@ -39,9 +39,9 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class ManaSpentToCastCount  implements DynamicValue{
+public class ManaSpentToCastCount implements DynamicValue {
 
-    public ManaSpentToCastCount(){
+    public ManaSpentToCastCount() {
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ManaSpentToCastCount  implements DynamicValue{
     }
 
     @Override
-    public DynamicValue copy() {
+    public ManaSpentToCastCount copy() {
         return new ManaSpentToCastCount();
     }
 

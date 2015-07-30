@@ -74,7 +74,7 @@ public class DomainValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public DomainValue copy() {
         return new DomainValue(this);
     }
 

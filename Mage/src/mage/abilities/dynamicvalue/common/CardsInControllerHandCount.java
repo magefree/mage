@@ -7,6 +7,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 public class CardsInControllerHandCount implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {
@@ -19,7 +20,7 @@ public class CardsInControllerHandCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardsInControllerHandCount copy() {
         return new CardsInControllerHandCount();
     }
 

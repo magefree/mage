@@ -15,11 +15,11 @@ public class DiscardCostCardConvertedMana implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost: sourceAbility.getCosts()) {
+        for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof DiscardCardCost) {
                 DiscardCardCost discardCost = (DiscardCardCost) cost;
                 int cmc = 0;
-                for (Card card :discardCost.getCards()) {
+                for (Card card : discardCost.getCards()) {
                     cmc += card.getManaCost().convertedManaCost();
                 }
                 return cmc;
@@ -29,7 +29,7 @@ public class DiscardCostCardConvertedMana implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public DiscardCostCardConvertedMana copy() {
         return new DiscardCostCardConvertedMana();
     }
 
@@ -37,7 +37,6 @@ public class DiscardCostCardConvertedMana implements DynamicValue {
     public String toString() {
         return "";
     }
-
 
     @Override
     public String getMessage() {

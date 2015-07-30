@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.Mana;
@@ -40,33 +39,32 @@ import mage.game.stack.StackObject;
  *
  * @author Nicolas
  */
+public class SunburstCount implements DynamicValue {
 
+    public SunburstCount() {
 
-public class SunburstCount  implements DynamicValue{
-    public SunburstCount(){
-    
     }
-    
+
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         if (!game.getStack().isEmpty()) {
             StackObject spell = game.getStack().getFirst();
-            if (spell != null &&  spell instanceof Spell && ((Spell)spell).getSourceId().equals(source.getSourceId())) {
-                Mana mana = ((Spell)spell).getSpellAbility().getManaCostsToPay().getPayment();
-                if(mana.getBlack() > 0) {
+            if (spell != null && spell instanceof Spell && ((Spell) spell).getSourceId().equals(source.getSourceId())) {
+                Mana mana = ((Spell) spell).getSpellAbility().getManaCostsToPay().getPayment();
+                if (mana.getBlack() > 0) {
                     count++;
                 }
-                if(mana.getBlue() > 0) {
+                if (mana.getBlue() > 0) {
                     count++;
                 }
-                if(mana.getGreen() > 0) {
+                if (mana.getGreen() > 0) {
                     count++;
                 }
-                if(mana.getRed() > 0) {
+                if (mana.getRed() > 0) {
                     count++;
                 }
-                if(mana.getWhite() > 0) {
+                if (mana.getWhite() > 0) {
                     count++;
                 }
             }
@@ -75,14 +73,13 @@ public class SunburstCount  implements DynamicValue{
     }
 
     @Override
-    public DynamicValue copy() {
+    public SunburstCount copy() {
         return new SunburstCount();
     }
 
-    
     @Override
     public String getMessage() {
         return "color of mana spent to cast it";
     }
-    
+
 }

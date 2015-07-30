@@ -44,7 +44,7 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardsInControllerGraveyardCount copy() {
         return new CardsInControllerGraveyardCount(this);
     }
 

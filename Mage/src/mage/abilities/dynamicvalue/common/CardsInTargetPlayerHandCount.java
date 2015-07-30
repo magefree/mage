@@ -22,7 +22,7 @@ public class CardsInTargetPlayerHandCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardsInTargetPlayerHandCount copy() {
         return new CardsInTargetPlayerHandCount();
     }
 
@@ -30,5 +30,5 @@ public class CardsInTargetPlayerHandCount implements DynamicValue {
     public String getMessage() {
         return "cards in target player's hand";
     }
-    
+
 }

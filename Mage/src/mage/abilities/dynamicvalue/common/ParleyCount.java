@@ -81,7 +81,7 @@ public class ParleyCount implements DynamicValue, MageSingleton {
     }
 
     @Override
-    public DynamicValue copy() {
+    public ParleyCount copy() {
         return fINSTANCE;
     }
 

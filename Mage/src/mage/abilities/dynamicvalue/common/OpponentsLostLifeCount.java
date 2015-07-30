@@ -25,22 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.dynamicvalue.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
  */
-
 public class OpponentsLostLifeCount implements DynamicValue {
 
     @Override
@@ -52,7 +49,7 @@ public class OpponentsLostLifeCount implements DynamicValue {
         PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
         if (watcher != null) {
             int amountLifeLost = 0;
-            for(UUID opponent: game.getOpponents(controllerId)){
+            for (UUID opponent : game.getOpponents(controllerId)) {
                 amountLifeLost += watcher.getLiveLost(opponent);
             }
             return amountLifeLost;
@@ -61,7 +58,7 @@ public class OpponentsLostLifeCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public OpponentsLostLifeCount copy() {
         return new OpponentsLostLifeCount();
     }
 
