@@ -27,6 +27,7 @@
  */
 package mage.sets.alarareborn;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -35,12 +36,14 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-
-import java.util.UUID;
 
 /**
  *
@@ -53,8 +56,6 @@ public class MeddlingMage extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-
-
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
