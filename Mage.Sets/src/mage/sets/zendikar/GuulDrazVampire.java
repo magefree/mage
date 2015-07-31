@@ -29,6 +29,7 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.TenOrLessLifeCondition;
@@ -49,7 +50,7 @@ import mage.constants.Zone;
 public class GuulDrazVampire extends CardImpl {
 
     private static final String rule1 = "As long as an opponent has 10 or less life, {this} gets +2/+1";
-    private static final String rule2 = "As long as an opponent has 10 or less life, {this} has intimidate";
+    private static final String rule2 = "and has intimidate. <i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>";
 
     public GuulDrazVampire(UUID ownerId) {
         super(ownerId, 93, "Guul Draz Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
@@ -64,9 +65,9 @@ public class GuulDrazVampire extends CardImpl {
         // As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
         Condition condition = new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT);
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), condition, rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()), condition, rule2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()), condition, rule2));
+        this.addAbility(ability);
 
     }
 
