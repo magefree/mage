@@ -54,6 +54,7 @@ public class RainbowVale extends CardImpl {
         // {tap}: Add one mana of any color to your mana pool. An opponent gains control of Rainbow Vale at the beginning of the next end step.
         Ability ability = new AnyColorManaAbility();
         ability.addEffect(new RainbowValeEffect());
+        this.addAbility(ability);
     }
 
     public RainbowVale(final RainbowVale card) {
@@ -69,8 +70,8 @@ public class RainbowVale extends CardImpl {
     class RainbowValeEffect extends OneShotEffect {
 
         public RainbowValeEffect() {
-            super(Outcome.Neutral);
-            staticText = "Add one mana of any color to your mana pool. An opponent gains control of Rainbow Vale at the beginning of the next end step.";
+            super(Outcome.PutManaInPool);
+            staticText = "An opponent gains control of {this} at the beginning of the next end step.";
         }
 
         public RainbowValeEffect(final RainbowValeEffect effect) {
@@ -103,11 +104,20 @@ class OpponentGainControlEffect extends ContinuousEffectImpl {
 
     public OpponentGainControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.staticText = "An opponent gains control of {this} at the beginning of the next end step.";
+        this.staticText = "an opponent gains control of {this}";
     }
 
     public OpponentGainControlEffect(final OpponentGainControlEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public void init(Ability source, Game game){
+        super.init(source, game);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        Player targetOpponent = game.getPlayer(source.getFirstTarget());
+
+        game.informPlayers(permanent.getName() + " is now controlled by " + targetOpponent.getLogName());
     }
 
     @Override
@@ -121,7 +131,6 @@ class OpponentGainControlEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && targetOpponent != null) {
             permanent.changeControllerId(targetOpponent.getId(), game);
-            game.informPlayers(permanent.getName() + " is now controlled by " + targetOpponent.getLogName());
         } else {
             // no valid target exists, effect can be discarded
             discard();
