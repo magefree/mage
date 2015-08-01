@@ -693,7 +693,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Cards discard(int amount, boolean random, Ability source, Game game) {
         Cards discardedCards = new CardsImpl();
-        if (this.getHand().size() == 1) {
+        if (this.getHand().size() == 1 || this.getHand().size() == amount) {
             discardedCards.addAll(this.getHand());
             while (this.getHand().size() > 0) {
                 discard(this.getHand().get(this.getHand().iterator().next(), game), source, game);

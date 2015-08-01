@@ -1,9 +1,11 @@
 package mage.abilities.decorator;
 
+import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effects;
+import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -34,7 +36,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
 
     public ConditionalTriggeredAbility(final ConditionalTriggeredAbility triggered) {
         super(triggered);
-        this.ability = triggered.ability;
+        this.ability = triggered.ability.copy();
         this.condition = triggered.condition;
         this.text = triggered.text;
     }
@@ -72,6 +74,16 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public Effects getEffects() {
         return ability.getEffects();
+    }
+
+    @Override
+    public Modes getModes() {
+        return ability.getModes();
+    }
+
+    @Override
+    public Effects getEffects(Game game, EffectType effectType) {
+        return ability.getEffects(game, effectType);
     }
 
 }
