@@ -109,7 +109,7 @@ class TeferisRealmEffect extends OneShotEffect {
             choiceImpl.setMessage("Phase out which kind of permanents?");
             choiceImpl.setChoices(choices);
             while(!player.choose(outcome, choiceImpl, game)) {
-                if (player.isInGame()) {
+                if (player.canRespond()) {
                     return false;
                 }
             }

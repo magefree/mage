@@ -733,7 +733,7 @@ public abstract class GameImpl implements Game, Serializable {
             GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, extraTurn.getPlayerId());
             if (!replaceEvent(event)) {
                 Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
-                if (extraPlayer != null && extraPlayer.isInGame()) {
+                if (extraPlayer != null && extraPlayer.canRespond()) {
                     state.setExtraTurn(true);
                     state.setTurnId(extraTurn.getId());
                     if (!this.isSimulation()) {
@@ -1176,7 +1176,7 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
-                        while (!player.isPassed() && player.isInGame() && !isPaused() && !gameOver(null)) {
+                        while (!player.isPassed() && player.canRespond() && !isPaused() && !gameOver(null)) {
                             if (!resuming) {
                                 // 603.3. Once an ability has triggered, its controller puts it on the stack as an object thats not a card the next time a player would receive priority
                                 checkStateAndTriggered();
@@ -1270,7 +1270,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     protected boolean allPassed() {
         for (Player player : state.getPlayers().values()) {
-            if (!player.isPassed() && player.isInGame()) {
+            if (!player.isPassed() && player.canRespond()) {
                 return false;
             }
         }

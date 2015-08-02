@@ -1419,6 +1419,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean canRespond() {
+        return computerPlayer.canRespond();
+    }
+
+    @Override
     public boolean hasWon() {
         return computerPlayer.hasWon();
     }

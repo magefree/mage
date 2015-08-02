@@ -127,7 +127,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
             if (controller != null) {
                 while (!choice.isChosen()) {
                     controller.choose(Outcome.Neutral, choice, game);
-                    if (!controller.isInGame()) {
+                    if (!controller.canRespond()) {
                         return false;
                     }
                 }

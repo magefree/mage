@@ -148,7 +148,7 @@ public class DynamicManaEffect extends BasicManaEffect {
                     for (int i = 0; i < count; i++) {
                         if (!choiceColor.isChosen()) {
                             while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                                if (!controller.isInGame()) {
+                                if (!controller.canRespond()) {
                                     return computedMana;
                                 }
                             }

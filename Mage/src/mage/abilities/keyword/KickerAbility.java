@@ -209,7 +209,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                 this.resetKicker(game, ability);
                 for (OptionalAdditionalCost kickerCost : kickerCosts) {
                     boolean again = true;
-                    while (player.isInGame() && again) {
+                    while (player.canRespond() && again) {
                         String times = "";
                         if (kickerCost.isRepeatable()) {
                             int activatedCount = getKickedCounter(game, ability);

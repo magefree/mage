@@ -103,7 +103,7 @@ class CoalitionRelicEffect extends OneShotEffect {
             ChoiceColor choice = new ChoiceColor();
             for (int i = 0; i < chargeCounters; i++) {
                 while (!choice.isChosen()) {
-                    if (!player.isInGame()) {
+                    if (!player.canRespond()) {
                         return false;
                     }
                     player.choose(outcome, choice, game);

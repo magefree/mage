@@ -112,7 +112,7 @@ class TurnaboutEffect extends OneShotEffect {
             choiceImpl.setMessage("Choose card type to tap or untap");
             choiceImpl.setChoices(choice);
             while (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }
@@ -131,7 +131,7 @@ class TurnaboutEffect extends OneShotEffect {
             choiceImpl.setMessage("Choose to tap or untap");
             choiceImpl.setChoices(choice2);
             while (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }

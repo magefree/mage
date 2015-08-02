@@ -95,8 +95,8 @@ class ConundrumSphinxEffect extends OneShotEffect {
         for (Player player: game.getPlayers().values()) {
             if(player.getLibrary().size() > 0){
                 cardChoice.clearChoice();
-                while (!player.choose(Outcome.DrawCard, cardChoice, game)  && player.isInGame()) {
-                    if (!player.isInGame()) {
+                while (!player.choose(Outcome.DrawCard, cardChoice, game)  && player.canRespond()) {
+                    if (!player.canRespond()) {
                         return false;
                     }
                 }

@@ -148,7 +148,7 @@ class MarketFestivalManaEffect extends ManaEffect {
                     choiceColor.setMessage("Second mana color for " + sourceObject.getLogName());
                 }
                 while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                    if (!controller.isInGame()) {
+                    if (!controller.canRespond()) {
                         return false;
                     }
                 }

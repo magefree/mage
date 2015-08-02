@@ -1399,7 +1399,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
                         }
                         // while targets left and there is still allowed to untap
-                        while (isInGame() && leftForUntap.size() > 0 && numberToUntap > 0) {
+                        while (canRespond() && leftForUntap.size() > 0 && numberToUntap > 0) {
                             // player has to select the permanent he wants to untap for this restriction
                             Ability ability = handledEntry.getKey().getValue().iterator().next();
                             if (ability != null) {
@@ -1449,7 +1449,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
 
-            } while (isInGame() && playerCanceledSelection);
+            } while (canRespond() && playerCanceledSelection);
 
             if (!game.isSimulation()) {
                 // show in log which permanents were selected to untap
@@ -2015,6 +2015,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean isInGame() {
         return !hasQuit() && !hasLost() && !hasWon() && !hasLeft();
+    }
+
+    @Override
+    public boolean canRespond() { // abort is checked here to get out of player requests
+        return !hasQuit() && !hasLost() && !hasWon() && !hasLeft() && !abort;
     }
 
     @Override
@@ -3014,7 +3019,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (chooseOrder) {
                     TargetCard target = new TargetCard(fromZone, new FilterCard("card to put on the top of your graveyard (last one chosen will be topmost)"));
                     target.setRequired(true);
-                    while (choosingPlayer.isInGame() && cards.size() > 1) {
+                    while (choosingPlayer.canRespond() && cards.size() > 1) {
                         choosingPlayer.chooseTarget(Outcome.Neutral, cards, target, source, game);
                         UUID targetObjectId = target.getFirstTarget();
                         Card card = cards.get(targetObjectId, game);

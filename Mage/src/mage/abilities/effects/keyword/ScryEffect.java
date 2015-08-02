@@ -81,7 +81,7 @@ public class ScryEffect extends OneShotEffect {
             TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
             target1.setRequired(false);
             // move cards to the bottom of the library
-            while (player.isInGame() && cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
+            while (player.canRespond() && cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);

@@ -236,7 +236,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (!game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
                 player.selectAttackers(game, attackerId);
             }
-            if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
                 return;
             }
             // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the valid combat object!!!
@@ -393,7 +393,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 while (choose) {
                     controller.selectBlockers(game, defenderId);
-                    if (game.isPaused() || game.gameOver(null)) {
+                    if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
                         return;
                     }
                     if (!this.checkBlockRestrictions(defender, game)) {

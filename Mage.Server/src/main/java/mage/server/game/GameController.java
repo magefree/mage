@@ -487,13 +487,21 @@ public class GameController implements GameCallback {
                 if (data instanceof Integer) {
                     turnsToRollback = (Integer) data;
                     if (game.canRollbackTurns(turnsToRollback)) {
-                        requestsOpen = requestPermissionToRollback(userId, turnsToRollback);
-                        if (requestsOpen == 0) {
-                            game.rollbackTurns(turnsToRollback);
-                            turnsToRollback = -1;
-                            requestsOpen = -1;
+                        UUID playerId = getPlayerId(userId);
+                        if (game.getPriorityPlayerId().equals(playerId)) {
+                            requestsOpen = requestPermissionToRollback(userId, turnsToRollback);
+                            if (requestsOpen == 0) {
+                                game.rollbackTurns(turnsToRollback);
+                                turnsToRollback = -1;
+                                requestsOpen = -1;
+                            } else {
+                                userReqestingRollback = userId;
+                            }
                         } else {
-                            userReqestingRollback = userId;
+                            Player player = game.getPlayer(playerId);
+                            if (player != null) {
+                                game.informPlayer(player, "You can only request a rollback if you have priority.");
+                            }
                         }
                     } else {
                         UUID playerId = getPlayerId(userId);

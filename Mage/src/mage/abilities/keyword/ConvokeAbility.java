@@ -214,7 +214,7 @@ class ConvokeEffect extends OneShotEffect {
                             chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
                             while (!chooseManaType.isChosen()) {
                                 controller.choose(Outcome.Benefit, chooseManaType, game);
-                                if (!controller.isInGame()) {
+                                if (!controller.canRespond()) {
                                     return false;
                                 }
                             }

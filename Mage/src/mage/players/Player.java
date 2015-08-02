@@ -215,6 +215,14 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isInGame();
 
     /**
+     * Player is still active in game (has not left, lost or won the game) and
+     * no abort state is given.
+     *
+     * @return
+     */
+    boolean canRespond();
+
+    /**
      * Called if other player left the game
      *
      * @param game

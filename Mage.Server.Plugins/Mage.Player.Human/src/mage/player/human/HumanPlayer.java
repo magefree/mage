@@ -603,7 +603,7 @@ public class HumanPlayer extends PlayerImpl {
                     passedUntilStackResolved = false;
                 }
             }
-            while (isInGame()) {
+            while (canRespond()) {
                 updateGameStatePriority("priority", game);
                 game.firePriorityEvent(playerId);
                 waitForResponse(game);
@@ -697,7 +697,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         game.firePlayManaEvent(playerId, "Pay " + promptText, options);
         waitForResponse(game);
-        if (!this.isInGame()) {
+        if (!this.canRespond()) {
             return false;
         }
         if (response.getBoolean() != null) {
@@ -1028,7 +1028,7 @@ public class HumanPlayer extends PlayerImpl {
     public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
         updateGameStatePriority("assignDamage", game);
         int remainingDamage = damage;
-        while (remainingDamage > 0 && isInGame()) {
+        while (remainingDamage > 0 && canRespond()) {
             Target target = new TargetCreatureOrPlayer();
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
@@ -1208,7 +1208,7 @@ public class HumanPlayer extends PlayerImpl {
                     if (!source.getAbilityType().equals(AbilityType.TRIGGERED)) {
                         done = true;
                     }
-                    if (!isInGame()) {
+                    if (!canRespond()) {
                         return null;
                     }
                 }

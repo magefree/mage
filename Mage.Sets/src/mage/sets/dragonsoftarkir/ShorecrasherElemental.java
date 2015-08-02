@@ -150,7 +150,7 @@ class ShorecrasherElementalBoostEffect extends OneShotEffect {
             choice.getChoices().add(CHOICE_1);
             choice.getChoices().add(CHOICE_2);
             while (!choice.isChosen()) {
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
                 controller.choose(outcome, choice, game);

@@ -40,7 +40,7 @@ public class BecomesChosenNonWallCreatureTypeTargetEffect extends OneShotEffect 
             types.remove("Wall");
             typeChoice.setChoices(types);
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.isInGame()) {
+                if (!player.canRespond()) {
                     return false;
                 }
             }

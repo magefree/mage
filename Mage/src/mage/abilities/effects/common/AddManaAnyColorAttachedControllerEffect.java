@@ -60,7 +60,7 @@ public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
                 if (player != null) {
                     ChoiceColor choice = new ChoiceColor();
                     while (!player.choose(outcome, choice, game)) {
-                        if (!player.isInGame()) {
+                        if (!player.canRespond()) {
                             return false;
                         }
                     }

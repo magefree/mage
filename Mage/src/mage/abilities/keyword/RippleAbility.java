@@ -106,7 +106,7 @@ class RippleEffect extends OneShotEffect {
             target1.setRequired(false);
 
             // choose cards to play for free
-            while (player.isInGame() && cards.count(sameNameFilter, game) > 0 && player.choose(Outcome.PlayForFree, cards, target1, game)) {
+            while (player.canRespond() && cards.count(sameNameFilter, game) > 0 && player.choose(Outcome.PlayForFree, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     player.cast(card.getSpellAbility(), game, true);

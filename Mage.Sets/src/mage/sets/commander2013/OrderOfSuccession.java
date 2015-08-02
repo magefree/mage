@@ -100,14 +100,14 @@ class OrderOfSuccessionEffect extends OneShotEffect {
             boolean left = source.getChoices().get(0).getChoice().equals("Left");
             PlayerList playerList = game.getState().getPlayerList().copy();
             // set playerlist to controller
-            while (!playerList.get().equals(source.getControllerId()) && controller.isInGame()) {
+            while (!playerList.get().equals(source.getControllerId()) && controller.canRespond()) {
                 playerList.getNext();
             }
             Player currentPlayer = game.getPlayer(playerList.get());
             Player nextPlayer;
             UUID firstNextPlayer = null;
 
-            while (!getNextPlayerInDirection(left, playerList, game).equals(firstNextPlayer) && controller.isInGame()){
+            while (!getNextPlayerInDirection(left, playerList, game).equals(firstNextPlayer) && controller.canRespond()){
                 nextPlayer = game.getPlayer(playerList.get());
                 if (nextPlayer == null) {
                     return false;
@@ -116,7 +116,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
                 if (firstNextPlayer == null) {
                     firstNextPlayer = nextPlayer.getId();
                 }
-                if (!nextPlayer.isInGame()) {
+                if (!nextPlayer.canRespond()) {
                     continue;
                 }
                 // if player is in range he chooses a creature to control

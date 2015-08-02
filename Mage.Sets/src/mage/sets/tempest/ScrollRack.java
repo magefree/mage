@@ -124,7 +124,7 @@ class ScrollRackEffect extends OneShotEffect {
             TargetCardInExile target2 = new TargetCardInExile(filter2, source.getSourceId());
             ExileZone scrollRackExileZone = game.getExile().getExileZone(source.getSourceId());
             if (scrollRackExileZone != null) {
-                while (controller.isInGame() && scrollRackExileZone.count(filter, game) > 1) {
+                while (controller.canRespond() && scrollRackExileZone.count(filter, game) > 1) {
                     controller.lookAtCards("exiled cards with " + sourceObject.getName(), scrollRackExileZone, game);
                     controller.choose(Outcome.Neutral, scrollRackExileZone, target2, game);
                     Card card = game.getCard(target2.getFirstTarget());

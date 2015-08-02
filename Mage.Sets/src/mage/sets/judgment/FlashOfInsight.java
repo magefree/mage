@@ -141,7 +141,7 @@ class FlashOfInsightEffect extends OneShotEffect {
                     .append(" card").append(cards.size() > 1 ? "s":"")
                     .append(" on the bottom of his or her library").toString());
         }
-        while (player.isInGame() && cards.size() > 1) {
+        while (player.canRespond() && cards.size() > 1) {
             player.choose(Outcome.Neutral, cards, target, game);
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
