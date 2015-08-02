@@ -240,6 +240,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             if (!player.getUserData().getFlagName().equals(flagName)) {
                 flagName = player.getUserData().getFlagName();
                 this.avatarFlag.setIcon(CountryUtil.getCountryFlagIcon(flagName));
+                this.avatarFlag.setToolTipText(CountryUtil.getCountryName(flagName));
                 avatar.repaint();
             }
         }
