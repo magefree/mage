@@ -97,7 +97,7 @@ class FreneticSliverEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (player.flipCoin(game)) {
-                return new ExileReturnToBattlefieldOwnerNextEndStepEffect().apply(game, source);
+                return new ExileReturnToBattlefieldOwnerNextEndStepEffect(true).apply(game, source);
             } else {
                 Permanent perm = game.getPermanent(source.getSourceId());
                 if (perm != null) {

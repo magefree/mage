@@ -43,14 +43,27 @@ import mage.players.Player;
 public class ExileReturnToBattlefieldOwnerNextEndStepEffect extends OneShotEffect {
 
     private static final String effectText = "exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
+    private boolean returnAlways;
 
     public ExileReturnToBattlefieldOwnerNextEndStepEffect() {
+        this(false);
+    }
+
+    /**
+     *
+     * @param returnAlways return the permanent also if it does not go to exile
+     * but is moved to another zone (e.g. command zone by commander replacement
+     * effect)
+     */
+    public ExileReturnToBattlefieldOwnerNextEndStepEffect(boolean returnAlways) {
         super(Outcome.Benefit);
         staticText = effectText;
+        this.returnAlways = returnAlways;
     }
 
     public ExileReturnToBattlefieldOwnerNextEndStepEffect(ExileReturnToBattlefieldOwnerNextEndStepEffect effect) {
         super(effect);
+        this.returnAlways = effect.returnAlways;
     }
 
     @Override
@@ -60,7 +73,8 @@ public class ExileReturnToBattlefieldOwnerNextEndStepEffect extends OneShotEffec
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 int zcc = game.getState().getZoneChangeCounter(permanent.getId());
-                if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                boolean exiled = controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                if (exiled || (returnAlways && (zcc == game.getState().getZoneChangeCounter(permanent.getId()) - 1))) {
                     //create delayed triggered ability and return it from every public zone he was next moved to
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                             new ReturnToBattlefieldUnderOwnerControlSourceEffect(false, zcc + 1));

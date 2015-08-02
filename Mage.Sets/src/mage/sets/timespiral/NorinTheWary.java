@@ -73,7 +73,7 @@ public class NorinTheWary extends CardImpl {
 class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public NorinTheWaryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(), false);
+        super(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(true), false);
     }
 
     public NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {

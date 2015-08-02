@@ -43,9 +43,9 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author fireshoes
  */
 public class Saltskitter extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
-    
+
     static {
         filter.add(new AnotherPredicate());
     }
@@ -58,7 +58,7 @@ public class Saltskitter extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever another creature enters the battlefield, exile Saltskitter. Return Saltskitter to the battlefield under its owner's control at the beginning of the next end step.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ExileReturnToBattlefieldOwnerNextEndStepEffect(), filter));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ExileReturnToBattlefieldOwnerNextEndStepEffect(true), filter));
     }
 
     public Saltskitter(final Saltskitter card) {
