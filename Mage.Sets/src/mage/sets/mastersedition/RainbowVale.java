@@ -27,19 +27,24 @@
  */
 package mage.sets.mastersedition;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -66,7 +71,6 @@ public class RainbowVale extends CardImpl {
         return new RainbowVale(this);
     }
 
-
     class RainbowValeEffect extends OneShotEffect {
 
         public RainbowValeEffect() {
@@ -83,7 +87,6 @@ public class RainbowVale extends CardImpl {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OpponentGainControlEffect());
-                delayedAbility.addTarget(new TargetOpponent());
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 delayedAbility.setSourceObject(source.getSourceObject(game), game);
@@ -102,22 +105,39 @@ public class RainbowVale extends CardImpl {
 
 class OpponentGainControlEffect extends ContinuousEffectImpl {
 
+    private UUID opponentId;
+
     public OpponentGainControlEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.Detriment);
         this.staticText = "an opponent gains control of {this}";
+        opponentId = null;
     }
 
     public OpponentGainControlEffect(final OpponentGainControlEffect effect) {
         super(effect);
+        this.opponentId = effect.opponentId;
     }
 
     @Override
-    public void init(Ability source, Game game){
+    public void init(Ability source, Game game) {
         super.init(source, game);
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        Player targetOpponent = game.getPlayer(source.getFirstTarget());
-
-        game.informPlayers(permanent.getName() + " is now controlled by " + targetOpponent.getLogName());
+        if (controller != null && permanent != null) {
+            if (game.getOpponents(controller.getId()).size() == 1) {
+                opponentId = game.getOpponents(controller.getId()).iterator().next();
+            } else {
+                Target target = new TargetOpponent(true);
+                controller.chooseTarget(outcome, target, source, game);
+                opponentId = target.getFirstTarget();
+            }
+        }
+        Player targetOpponent = game.getPlayer(opponentId);
+        if (targetOpponent != null && permanent != null) {
+            game.informPlayers(permanent.getName() + " is now controlled by " + targetOpponent.getLogName());
+        } else {
+            discard();
+        }
     }
 
     @Override
@@ -127,10 +147,10 @@ class OpponentGainControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetOpponent = game.getPlayer(source.getFirstTarget());
+        Player targetOpponent = game.getPlayer(opponentId);
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && targetOpponent != null) {
-            permanent.changeControllerId(targetOpponent.getId(), game);
+            permanent.changeControllerId(opponentId, game);
         } else {
             // no valid target exists, effect can be discarded
             discard();
@@ -138,4 +158,3 @@ class OpponentGainControlEffect extends ContinuousEffectImpl {
         return true;
     }
 }
-
