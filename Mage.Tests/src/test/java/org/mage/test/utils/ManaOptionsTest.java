@@ -346,6 +346,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         Assert.assertEquals("{B}{B}", getManaOption(0, manaOptions));
     }
 
+    // TODO
+    // Test Calciform Pools combination mana lands
     private String getManaOption(int index, ManaOptions manaOptions) {
         if (manaOptions.size() < index + 1) {
             return "";

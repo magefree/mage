@@ -134,7 +134,7 @@ class OpponentGainControlEffect extends ContinuousEffectImpl {
         }
         Player targetOpponent = game.getPlayer(opponentId);
         if (targetOpponent != null && permanent != null) {
-            game.informPlayers(permanent.getName() + " is now controlled by " + targetOpponent.getLogName());
+            game.informPlayers(permanent.getLogName() + " is now controlled by " + targetOpponent.getLogName());
         } else {
             discard();
         }
