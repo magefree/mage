@@ -56,8 +56,8 @@ public class MarduHeartPiercer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <em>Raid</em> - When Mardu Heart-Piercer enters the battlefield, if you attacked with a creature this turn, Mardu Heart-Piercer deals 2 damage to target creature or player.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2)), RaidCondition.getInstance(), 
-                 "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, {this} deals 2 damage to target creature or player.", false);
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2)), RaidCondition.getInstance(),
+                "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, {this} deals 2 damage to target creature or player.");
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

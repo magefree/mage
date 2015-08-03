@@ -84,7 +84,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
      }*/
     @Override
     public boolean resolve(Game game) {
-        if (optional) {
+        if (isOptional()) {
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
             if (player != null) {
@@ -124,7 +124,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         StringBuilder sb = new StringBuilder();
         if (!superRule.isEmpty()) {
             String ruleLow = superRule.toLowerCase();
-            if (optional) {
+            if (isOptional()) {
                 if (ruleLow.startsWith("you ")) {
                     if (!ruleLow.startsWith("you may")) {
                         StringBuilder newRule = new StringBuilder(superRule);
@@ -195,6 +195,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             }
         }
         return super.isInUseableZone(game, source, event);
+    }
+
+    @Override
+    public boolean isOptional() {
+        return optional;
     }
 
 }

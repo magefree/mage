@@ -58,13 +58,12 @@ public class EyesOfTheWisent extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
 
-
         // Whenever an opponent casts a blue spell during your turn, you may put a 4/4 green Elemental creature token onto the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(
                 new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new EyesOfTheWisentElementalToken()), filter, true),
                 new MyTurnCondition(),
-                "Whenever an opponent casts a blue spell during your turn, you may put a 4/4 green Elemental creature token onto the battlefield.",
-                true));
+                "Whenever an opponent casts a blue spell during your turn, you may put a 4/4 green Elemental creature token onto the battlefield."
+        ));
     }
 
     public EyesOfTheWisent(final EyesOfTheWisent card) {

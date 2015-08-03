@@ -27,16 +27,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  *
  */
-
 package mage.sets.betrayersofkamigawa;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.*;
+import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -45,14 +43,15 @@ import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-
 
 /**
  * @author LevelX2
@@ -79,9 +78,9 @@ public class FaithfulSquire extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new KaisoMemoryOfLoyalty())),
                 new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
-                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it.", true));
+                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
 
-   }
+    }
 
     public FaithfulSquire(final FaithfulSquire card) {
         super(card);

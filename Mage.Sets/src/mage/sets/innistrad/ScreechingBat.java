@@ -68,7 +68,7 @@ public class ScreechingBat extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Screeching Bat.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalTriggeredAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility(), new TransformedCondition(true), "", true));
+        this.addAbility(new ConditionalTriggeredAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility(), new TransformedCondition(true), ""));
     }
 
     public ScreechingBat(final ScreechingBat card) {
@@ -84,7 +84,7 @@ public class ScreechingBat extends CardImpl {
 class ScreechingBatBeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScreechingBatBeginningOfUpkeepTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ScreechingBatTransformSourceEffect());
+        super(Zone.BATTLEFIELD, new ScreechingBatTransformSourceEffect(), true);
     }
 
     public ScreechingBatBeginningOfUpkeepTriggeredAbility(final ScreechingBatBeginningOfUpkeepTriggeredAbility ability) {

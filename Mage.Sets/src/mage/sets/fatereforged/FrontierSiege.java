@@ -76,8 +76,8 @@ public class FrontierSiege extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // As Frontier Siege enters the battlefield, choose Khans or Dragons.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?","Khans", "Dragons"),null, true,
-                "As {this} enters the battlefield, choose Khans or Dragons.",""));
+        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null, true,
+                "As {this} enters the battlefield, choose Khans or Dragons.", ""));
 
         // * Khans - At the beginning of each of your main phases, add {G}{G} to your mana pool.
         this.addAbility(new ConditionalTriggeredAbility(
@@ -89,7 +89,7 @@ public class FrontierSiege extends CardImpl {
         Ability ability2 = new ConditionalTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT, ""),
                 new ModeChoiceSourceCondition("Dragons"),
-                ruleTrigger2, true);
+                ruleTrigger2);
         ability2.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability2);
 
@@ -108,7 +108,7 @@ public class FrontierSiege extends CardImpl {
 class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
 
     public FrontierSiegeKhansTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(new Mana(0,2,0,0,0,0,0)), false);
+        super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), false);
 
     }
 

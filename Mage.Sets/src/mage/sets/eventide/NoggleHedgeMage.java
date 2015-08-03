@@ -48,18 +48,18 @@ import mage.target.TargetPlayer;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class NoggleHedgeMage extends CardImpl {
-    
+
     private final static FilterLandPermanent filter = new FilterLandPermanent();
     private final static FilterLandPermanent filter2 = new FilterLandPermanent();
-    
+
     static {
         filter.add(new SubtypePredicate("Island"));
         filter2.add(new SubtypePredicate("Mountain"));
     }
-    
+
     private String rule = "When {this} enters the battlefield, if you control two or more Islands, you may tap two target permanents.";
     private String rule2 = "When {this} enters the battlefield, if you control two or more Mountains, you may have {this} deal 2 damage to target player.";
 
@@ -73,12 +73,12 @@ public class NoggleHedgeMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Noggle Hedge-Mage enters the battlefield, if you control two or more Islands, you may tap two target permanents.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule, true);
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule);
         ability.addTarget(new TargetPermanent(2, new FilterPermanent()));
         this.addAbility(ability);
-        
+
         // When Noggle Hedge-Mage enters the battlefield, if you control two or more Mountains, you may have Noggle Hedge-Mage deal 2 damage to target player.
-        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2, true);
+        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
     }
