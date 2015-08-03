@@ -119,8 +119,8 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (targetId == null) {
             Target target = card.getSpellAbility().getTargets().get(0);
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
-            if (enchantCardInGraveyard && target != null) {
-                target.clearChosen();
+            if (target != null) {
+                target.clearChosen(); // neccessary if e.g. aura is blinked multiple times
             }
             Player player = game.getPlayer(card.getOwnerId());
             Outcome auraOutcome = Outcome.BoostCreature;
