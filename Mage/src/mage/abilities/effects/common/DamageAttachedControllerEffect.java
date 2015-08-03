@@ -82,7 +82,7 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "{this} deals " + amount + " to that creature's controller";
+        return "{this} deals " + amount + " damage to that creature's controller";
     }
 
 }
