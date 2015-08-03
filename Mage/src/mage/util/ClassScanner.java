@@ -47,13 +47,13 @@ import java.util.jar.JarInputStream;
 public class ClassScanner {
 
     public static List<Class> findClasses(List<String> packages, Class<?> type) {
-        List<Class> cards = new ArrayList<Class>();
+        List<Class> cards = new ArrayList<>();
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             assert classLoader != null;
 
-            HashMap<String, String> dirs = new HashMap<String, String>();
-            TreeSet<String> jars = new TreeSet<String>();
+            HashMap<String, String> dirs = new HashMap<>();
+            TreeSet<String> jars = new TreeSet<>();
             for (String packageName : packages) {
                 String path = packageName.replace('.', '/');
                 Enumeration<URL> resources = classLoader.getResources(path);
@@ -84,7 +84,7 @@ public class ClassScanner {
     }
 
     private static List<Class> findClasses(File directory, String packageName, Class<?> type) {
-        List<Class> cards = new ArrayList<Class>();
+        List<Class> cards = new ArrayList<>();
         if (!directory.exists()) {
             return cards;
         }
@@ -104,7 +104,7 @@ public class ClassScanner {
     }
 
     private static List<Class> findClassesInJar(File file, List<String> packages, Class<?> type) {
-        List<Class> cards = new ArrayList<Class>();
+        List<Class> cards = new ArrayList<>();
         if (!file.exists()) {
             return cards;
         }
@@ -117,7 +117,7 @@ public class ClassScanner {
                     break;
                 }
                 if (jarEntry.getName().endsWith(".class")) {
-                    String className = jarEntry.getName().replace('/', '.').replace(".class", "");
+                    String className = jarEntry.getName().replace(".class", "").replace('/', '.');
                     int packageNameEnd = className.lastIndexOf('.');
                     String packageName = packageNameEnd != -1 ? className.substring(0, packageNameEnd) : "";
                     if (packages.contains(packageName)) {

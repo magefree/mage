@@ -1,12 +1,12 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 public class FifthEdition extends ExpansionSet {
 
-    private static final FifthEdition fINSTANCE =  new FifthEdition();
+    private static final FifthEdition fINSTANCE = new FifthEdition();
 
     public static FifthEdition getInstance() {
         return fINSTANCE;
@@ -19,7 +19,7 @@ public class FifthEdition extends ExpansionSet {
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-    this.ratioBoosterMythic = 0;
+        this.ratioBoosterMythic = 0;
     }
 
 }
