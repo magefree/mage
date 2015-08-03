@@ -30,9 +30,10 @@ package mage.sets.planarchaos;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.VanishingSacrificeAbility;
@@ -41,11 +42,13 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -64,14 +67,16 @@ public class RealityAcid extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Vanishing 3
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3))));
         this.addAbility(new VanishingUpkeepAbility(3));
         this.addAbility(new VanishingSacrificeAbility());
-        
+
         // When Reality Acid leaves the battlefield, enchanted permanent's controller sacrifices it.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new RealityAcidLeavesBattlefieldTriggeredEffect(), false));
+        Effect effect = new SacrificeTargetEffect();
+        effect.setText("enchanted permanent's controller sacrifices it");
+        this.addAbility(new RealityAcidTriggeredAbility(effect, false));
     }
 
     public RealityAcid(final RealityAcid card) {
@@ -84,35 +89,36 @@ public class RealityAcid extends CardImpl {
     }
 }
 
-class RealityAcidLeavesBattlefieldTriggeredEffect extends OneShotEffect {
-    
-    public RealityAcidLeavesBattlefieldTriggeredEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "enchanted permanent's controller sacrifices it";
+class RealityAcidTriggeredAbility extends ZoneChangeTriggeredAbility {
+
+    public RealityAcidTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
     }
-    
-    public RealityAcidLeavesBattlefieldTriggeredEffect(final RealityAcidLeavesBattlefieldTriggeredEffect effect) {
-        super(effect);
+
+    public RealityAcidTriggeredAbility(RealityAcidTriggeredAbility ability) {
+        super(ability);
     }
-    
+
     @Override
-    public RealityAcidLeavesBattlefieldTriggeredEffect copy() {
-        return new RealityAcidLeavesBattlefieldTriggeredEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            if (sourcePermanent.getAttachedTo() != null) {
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (super.checkTrigger(event, game)) {
+            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
+            if (sourcePermanent != null && sourcePermanent.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
                 if (attachedTo != null) {
-                    attachedTo.sacrifice(source.getSourceId(), game);
+                    for (Effect effect : getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(attachedTo.getId(), attachedTo.getZoneChangeCounter(game)));
+                    }
                 }
             }
             return true;
         }
         return false;
     }
+
+    @Override
+    public RealityAcidTriggeredAbility copy() {
+        return new RealityAcidTriggeredAbility(this);
+    }
+
 }
