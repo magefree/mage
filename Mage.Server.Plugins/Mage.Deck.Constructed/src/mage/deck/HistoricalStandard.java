@@ -1,25 +1,24 @@
 package mage.deck;
 
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.decks.Constructed;
-import mage.cards.decks.Deck;
-import mage.constants.SetType;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
+import mage.cards.decks.Constructed;
+import mage.cards.decks.Deck;
+import mage.constants.SetType;
 
 /**
  * This class represents a deck from any past standard.
- * 
+ *
  * This class was originally made to work with the historical standard ruleset.
- * Data taken from http://thattournament.website/historic-tournament.php
- * (site changed, originally http://mtgt.nfshost.com/historic-tournament.php)
- * 
+ * Data taken from http://thattournament.website/historic-tournament.php (site
+ * changed, originally http://mtgt.nfshost.com/historic-tournament.php)
+ *
  * If there are any questions or corrections, feel free to contact me.
  *
  * @author Marthinwurer (at gmail.com)
@@ -27,77 +26,56 @@ import java.util.Map;
 public class HistoricalStandard extends Constructed {
 
     /*
-     * This array stores the set codes of each standard up to 
+     * This array stores the set codes of each standard up to
      * Kamigawa/Ravnica standard, where rotation stabilized.
      */
     protected static final String[][] standards = {
-        
         //  1st standard: The Dark, Fallen Empires, and 4th.
-        { "DRK", "FEM", "4ED" },
-        
+        {"DRK", "FEM", "4ED"},
         //  2nd standard: 4th, Fallen Empires, Ice Age, Chronicles, Homelands,
         //                Alliances, and Mirage.
         {"FEM", "4ED", "ICE", "HML", "ALL", "MIR"},
-        
         //  3rd standard: 4th, Chronicles, Alliances, Mirage, Visions.
         {"4ED", "ALL", "MIR", "VIS"},
-        
         //  4th Standard: Ice Age, Homelands, Alliances, Mirage, Visions, 5th,
         //                and Weatherlight.
         {"ICE", "HML", "ALL", "MIR", "VIS", "5ED", "WTH"},
-        
         //  5th Standard: Mirage, Visions, 5th, Weatherlight, Tempest,
         //                Stronghold, and Exodus.
         {"MIR", "VIS", "5ED", "WTH", "TMP", "STH", "EXO"},
-        
         //  6th Standard: 5th, Tempest, Stronghold, Exodus, Urza's Saga, Urza's
         //                Legacy, Urza's Destiny.
         {"5ED", "TMP", "STH", "EXO", "USG", "ULG"},
-        
         //  7th Standard: Tempest, Stronghold, Exodus, Urza's Saga, Urza's
         //                Legacy, 6th, Urza's Destiny.
         {"TMP", "STH", "EXO", "USG", "ULG", "6ED", "UDS"},
-        
         //  8th Standard: Urza's Saga, Urza's Legacy, 6th, Urza's Destiny,
         //                Mercadian Masques, Nemesis, Prophecy.
         {"USG", "ULG", "6ED", "UDS", "MMQ", "NMS", "PCY"},
-        
         //  9th Standard
         {"6ED", "MMQ", "NMS", "PCY", "INV", "PLS"},
-
         //  10th Standard
         {"7ED", "MMQ", "NMS", "PCY", "INV", "PLS", "APC"},
-
         // 11th Standard
         {"7ED", "INV", "APC", "PLS", "ODY", "TOR", "JUD"},
-
         // 12th Standard
-        {"7ED", "ODY", "TOR", "JUD", "ONS", "LGN", "LGN"},
-
+        {"7ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG"},
         // 13th Standard
-        {"8ED", "ODY", "TOR", "JUD", "ONS", "LGN", "LGN"},
-
+        {"8ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG"},
         // 14th Standard
-        {"8ED", "ONS", "LGN", "LGN", "MRD", "DST", "5DN"},
-
+        {"8ED", "ONS", "LGN", "SCG", "MRD", "DST", "5DN"},
         // 15th Standard
         {"8ED", "MRD", "DST", "5DN", "CHK", "BOK", "SOK"},
-
         // 16th Standard
         {"9ED", "MRD", "DST", "5DN", "CHK", "BOK", "SOK"},
-
         // 17th Standard
         {"9ED", "CHK", "BOK", "SOK", "RAV", "GPT", "DIS", "CSP"},
-
         // 18th Standard
         {"9ED", "RAV", "GPT", "DIS", "CSP", "TSP", "TSB", "PLC", "FUT"},
-
         // 19th Standard
         {"10E", "RAV", "GPT", "DIS", "CSP", "TSP", "PLC", "FUT"},
-
         // 20th Standard
         {"10E", "CSP", "TSP", "PLC", "FUT", "LRW", "MOR", "SHM", "EVE"},
-
         // 21st Standard
         {"10E", "LRW", "MOR", "SHM", "EVE", "ALA", "CON", "ARB"}
     };
@@ -108,7 +86,7 @@ public class HistoricalStandard extends Constructed {
      */
     public HistoricalStandard() {
         super("Constructed - Historical Standard");
-        
+
         // banned cards
         banned.add("Balance");
         banned.add("Memory Jar");
@@ -122,23 +100,24 @@ public class HistoricalStandard extends Constructed {
     /**
      * Overridden validate function. Changes the standard sets, then uses the
      * regular validation function to test validity.
+     *
      * @param deck - the deck to validate.
-     * @return 
+     * @return
      */
     @Override
     public boolean validate(Deck deck) {
 
         Map<String, String> leastInvalid = null;
-        
+
         boolean valid = false;
-        
+
         // first, check whether misty and batterskull are in the same deck.
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
-        if( counts.containsKey("Stoneforge Mystic") 
-                && counts.containsKey("Batterskull")){
-            
+        if (counts.containsKey("Stoneforge Mystic")
+                && counts.containsKey("Batterskull")) {
+
             // if both, then skip all following tests by returning
             return false;
         }
@@ -159,7 +138,7 @@ public class HistoricalStandard extends Constructed {
                 break;
             }
 
-            // if the map holding the invalid cards is empty, set it to a 
+            // if the map holding the invalid cards is empty, set it to a
             // copy of the current invalid list.
             if (leastInvalid == null) {
                 leastInvalid = new HashMap<>(this.getInvalid());
@@ -182,7 +161,7 @@ public class HistoricalStandard extends Constructed {
                 Calendar.SEPTEMBER, 1);
         GregorianCalendar current = new GregorianCalendar();
 
-        // use the method for determining regular standard legality, but change 
+        // use the method for determining regular standard legality, but change
         // the date for each standard.
         while (end.before(current) && !valid) {
 
@@ -190,11 +169,11 @@ public class HistoricalStandard extends Constructed {
             setCodes.clear();
             invalid.clear();
 
-            // increment the start and end dates. 
+            // increment the start and end dates.
             start.set(Calendar.YEAR, start.get(Calendar.YEAR) + 1);
             end.set(Calendar.YEAR, start.get(Calendar.YEAR) + 2);
 
-            // Get the sets in that time period. 
+            // Get the sets in that time period.
             // (code taken from standard.java)
             for (ExpansionSet set : Sets.getInstance().values()) {
                 if (set.getReleaseDate().after(start.getTime())
@@ -203,7 +182,7 @@ public class HistoricalStandard extends Constructed {
                     setCodes.add(set.getCode());
                 }
             }
-            
+
             // validate it. If it validates, clear the invalid cards and break.
             if (super.validate(deck)) {
                 invalid.clear();
@@ -214,20 +193,20 @@ public class HistoricalStandard extends Constructed {
             // see how many invalid cards there are. if there are less invalid
             // cards than the stored invalid list, assign the current invalid
             // to leastInvalid.
-            if (leastInvalid == null){
+            if (leastInvalid == null) {
                 leastInvalid = new HashMap<>(this.getInvalid());
-                
-            }else if (leastInvalid.size() > this.getInvalid().size()) {
+
+            } else if (leastInvalid.size() > this.getInvalid().size()) {
                 leastInvalid = new HashMap<>(this.getInvalid());
             }
         }
 
-        // if no standard environment is valid, set the invalid to the 
+        // if no standard environment is valid, set the invalid to the
         // invalid that had the least errors.
-        if( !valid ){
+        if (!valid) {
             this.invalid = new HashMap<>(leastInvalid);
         }
-        
+
         // return the validity.
         return valid;
     }
