@@ -79,6 +79,7 @@ public class Quickling extends CardImpl {
         return new Quickling(this);
     }
 }
+
 class QuicklingEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
@@ -88,12 +89,12 @@ class QuicklingEffect extends OneShotEffect {
         filter.add(new AnotherPredicate());
     }
 
-    QuicklingEffect ( ) {
+    QuicklingEffect() {
         super(Outcome.ReturnToHand);
         staticText = effectText;
     }
 
-    QuicklingEffect ( QuicklingEffect effect ) {
+    QuicklingEffect(QuicklingEffect effect) {
         super(effect);
     }
 
@@ -106,13 +107,13 @@ class QuicklingEffect extends OneShotEffect {
             if (target.canChoose(controller.getId(), game) && controller.chooseUse(outcome, "Return another creature you control to its owner's hand?", source, game)) {
                 controller.chooseTarget(Outcome.ReturnToHand, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if ( permanent != null ) {
+                if (permanent != null) {
                     targetChosen = true;
-                    controller.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                    controller.moveCards(permanent, null, Zone.HAND, source, game);
                 }
             }
 
-            if ( !targetChosen ) {
+            if (!targetChosen) {
                 new SacrificeSourceEffect().apply(game, source);
             }
             return true;

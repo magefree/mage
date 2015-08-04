@@ -93,14 +93,12 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {
-                    Card card = controller.getLibrary().remove(cardId, game);
+                    Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, revealCards);
-                        if (revealCards) {
-                            cards.add(card);
-                        }
+                        cards.add(card);
                     }
                 }
+                controller.moveCards(cards, null, Zone.HAND, source, game);
                 if (revealCards) {
                     String name = "Reveal";
                     Card sourceCard = game.getCard(source.getSourceId());

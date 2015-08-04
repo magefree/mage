@@ -2881,6 +2881,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         ArrayList<Card> cardList = new ArrayList<>();
         for (UUID cardId : cards) {
+            if (fromZone == null) {
+                fromZone = game.getState().getZone(cardId);
+            }
             if (fromZone.equals(Zone.BATTLEFIELD)) {
                 Permanent permanent = game.getPermanent(cardId);
                 if (permanent != null) {
@@ -2925,6 +2928,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case EXILED:
                 boolean result = false;
                 for (Card card : cards) {
+                    fromZone = game.getState().getZone(card.getId());
                     result |= moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, withName);
                 }
                 return result;
@@ -2933,18 +2937,21 @@ public abstract class PlayerImpl implements Player, Serializable {
             case HAND:
                 result = false;
                 for (Card card : cards) {
-                    result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, withName);
+                    fromZone = game.getState().getZone(card.getId());
+                    result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, withName);
                 }
                 return result;
             case BATTLEFIELD:
                 result = false;
                 for (Card card : cards) {
+                    fromZone = game.getState().getZone(card.getId());
                     result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, !withName);
                 }
                 return result;
             case LIBRARY:
                 result = false;
                 for (Card card : cards) {
+                    fromZone = game.getState().getZone(card.getId());
                     result |= moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, withName);
                 }
                 return result;
@@ -2954,13 +2961,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
-        return this.moveCardToHandWithInfo(card, sourceId, game, fromZone, true);
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
+        return this.moveCardToHandWithInfo(card, sourceId, game, true);
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean withName) {
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
         boolean result = false;
+        Zone fromZone = game.getState().getZone(card.getId());
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
@@ -3025,6 +3033,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         Card card = cards.get(targetObjectId, game);
                         cards.remove(targetObjectId);
                         if (card != null) {
+                            fromZone = game.getState().getZone(card.getId());
                             result &= choosingPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone);
                         }
                         target.clearChosen();
@@ -3045,6 +3054,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
+        //    Zone fromZone = game.getState().getZone(card.getId());
         if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone.equals(Zone.BATTLEFIELD) : false)) {
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard) {
@@ -3052,7 +3062,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
                         .append(" puts ").append(card.getLogName()).append(" ")
-                        .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "");
+                        .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "");
                 if (card.getOwnerId().equals(getId())) {
                     sb.append("into his or her graveyard");
                 } else {

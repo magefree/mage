@@ -101,36 +101,30 @@ class NessianGameWardenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player == null || sourcePermanent == null) {
+        if (controller == null || sourcePermanent == null) {
             return false;
         }
 
         Cards cards = new CardsImpl();
         int count = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
-        count = Math.min(player.getLibrary().size(), count);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.lookAtCards(sourcePermanent.getName(), cards, game);
+        cards.addAll(controller.getLibrary().getTopCards(game, count));
+        controller.lookAtCards(sourcePermanent.getIdName(), cards, game);
 
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCreatureCard("creature card to put into your hand"));
-            if (target.canChoose(source.getSourceId(), player.getId(), game) && player.choose(Outcome.DrawCard, cards, target, game)) {
+            if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
+                    controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
                     cards.remove(card);
-                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCards(card, null, Zone.HAND, source, game);
                 }
             }
         }
 
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
+        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }

@@ -71,18 +71,20 @@ public class EnvoyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if(controller == null || sourceObject == null) {
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, numCards));
-        controller.revealCards(sourceObject.getName(), cards, game);
-        for(Card card: cards.getCards(game)) {
-            if(filter.match(card, game)) {
-                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                cards.remove(card);
+        controller.revealCards(sourceObject.getIdName(), cards, game);
+        Cards cardsToHand = new CardsImpl();
+        for (Card card : cards.getCards(game)) {
+            if (filter.match(card, game)) {
+                cardsToHand.add(card);
             }
         }
+        cards.removeAll(cardsToHand);
+        controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
@@ -94,6 +96,6 @@ public class EnvoyEffect extends OneShotEffect {
         }
 
         return "Reveal the top " + CardUtil.numberToText(numCards) + " cards of your library. Put all "
-            + filter.getMessage() + " revealed this way into your hand and the rest on the bottom of your library in any order.";
+                + filter.getMessage() + " revealed this way into your hand and the rest on the bottom of your library in any order.";
     }
 }

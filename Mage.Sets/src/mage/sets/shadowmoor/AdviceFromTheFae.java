@@ -100,7 +100,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
             for (Card card : cardsFromTopLibrary) {
                 cards.add(card);
             }
-            controller.lookAtCards(mageObject.getName(), cards, game);
+            controller.lookAtCards(mageObject.getIdName(), cards, game);
             int max = 0;
             for (UUID playerId : controller.getInRange()) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
@@ -111,20 +111,11 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
                     }
                 }
             }
-            if (game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), controller.getId(), game) > max) {
-                TargetCard target = new TargetCard(2, Zone.LIBRARY, new FilterCard());
-                if (controller.choose(Outcome.DrawCard, cards, target, game)) {
-                    controller.moveCardToHandWithInfo(game.getCard(target.getFirstTarget()), source.getSourceId(), game, Zone.LIBRARY);
-                    cards.remove(game.getCard(target.getFirstTarget()));
-                    controller.moveCardToHandWithInfo(game.getCard(target.getTargets().get(1)), source.getSourceId(), game, Zone.LIBRARY);
-                    cards.remove(game.getCard(target.getTargets().get(1)));
-                }
-            } else {
-                TargetCard target = new TargetCard(1, Zone.LIBRARY, new FilterCard());
-                if (controller.choose(Outcome.DrawCard, cards, target, game)) {
-                    controller.moveCardToHandWithInfo(game.getCard(target.getFirstTarget()), source.getSourceId(), game, Zone.LIBRARY);
-                    cards.remove(game.getCard(target.getFirstTarget()));
-                }
+            boolean moreCreatures = game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), controller.getId(), game) > max;
+            TargetCard target = new TargetCard(moreCreatures ? 2 : 1, Zone.LIBRARY, new FilterCard());
+            if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+                cards.removeAll(target.getTargets());
+                controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
             }
             controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             return true;

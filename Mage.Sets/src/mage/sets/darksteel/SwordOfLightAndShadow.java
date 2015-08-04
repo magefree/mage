@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.darksteel;
 
 import java.util.UUID;
@@ -105,7 +104,7 @@ public class SwordOfLightAndShadow extends CardImpl {
                 // Target may only be added if possible target exists. Else the gain life effect won't trigger, becuase there is no valid target for the
                 // return to hand ability
                 if (controller.getGraveyard().count(new FilterCreatureCard(), ability.getSourceId(), ability.getControllerId(), game) > 0) {
-                    ability.addTarget(new TargetCardInYourGraveyard(0,1,new FilterCreatureCard("creature card from your graveyard")));
+                    ability.addTarget(new TargetCardInYourGraveyard(0, 1, new FilterCreatureCard("creature card from your graveyard")));
                 }
             }
         }
@@ -118,7 +117,7 @@ class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl {
     public SwordOfLightAndShadowAbility() {
         super(Zone.BATTLEFIELD, new SwordOfLightAndShadowReturnToHandTargetEffect(), false);
         this.addEffect(new GainLifeEffect(3));
-        
+
     }
 
     public SwordOfLightAndShadowAbility(final SwordOfLightAndShadowAbility ability) {
@@ -178,8 +177,8 @@ class SwordOfLightAndShadowReturnToHandTargetEffect extends OneShotEffect {
                         case GRAVEYARD:
                             Card card = game.getCard(targetId);
                             if (card != null) {
-                                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
-                            }  else {
+                                controller.moveCards(card, null, Zone.HAND, source, game);
+                            } else {
                                 result = false;
                             }
                             break;

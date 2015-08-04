@@ -25,51 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package org.mage.test.cards.triggers.combat.damage;
 
-import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class ClashWinReturnToHandSpellEffect extends OneShotEffect implements MageSingleton {
+public class GravebladeMarauderTest extends CardTestPlayerBase {
 
-    private static final ClashWinReturnToHandSpellEffect fINSTANCE = new ClashWinReturnToHandSpellEffect();
+    @Test
+    public void testTwoAttackers() {
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion", 3);
 
-    public static ClashWinReturnToHandSpellEffect getInstance() {
-        return fINSTANCE;
+        // Whenever Graveblade Marauder deals combat damage to a player, that player loses life equal to the number of creature cards in your graveyard.
+        addCard(Zone.BATTLEFIELD, playerB, "Graveblade Marauder", 2);//  1/4
+
+        attack(2, playerB, "Graveblade Marauder");
+        attack(2, playerB, "Graveblade Marauder");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 12); // 1 + 3  + 1 + 3 = 8
+        assertLife(playerB, 20);
     }
 
-    private ClashWinReturnToHandSpellEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Clash with an opponent. If you win, return {this} to its owner's hand";
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (ClashEffect.getInstance().apply(game, source)) {
-                Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
-                if (spellCard != null) {
-                    controller.moveCards(spellCard, null, Zone.HAND, source, game);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ClashWinReturnToHandSpellEffect copy() {
-        return fINSTANCE;
-    }
 }

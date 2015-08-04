@@ -33,6 +33,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -89,24 +91,26 @@ class SuddenReclamationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            Cards cardsToHand = new CardsImpl();
             Target target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
-                    controller.chooseTarget(outcome, target, source, game)) {
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    && controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+                    cardsToHand.add(card);
                 }
             }
             target = new TargetCardInYourGraveyard(new FilterLandCard("land card from your graveyard"));
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
-                    controller.chooseTarget(outcome, target, source, game)) {
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    && controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+                    cardsToHand.add(card);
                 }
             }
+            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
             return true;
         }
         return false;

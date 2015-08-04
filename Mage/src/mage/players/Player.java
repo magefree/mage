@@ -640,18 +640,17 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param fromZone if null, this info isn't postet
      * @return
      */
-    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
+    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game);
 
     /**
      * @param card
      * @param sourceId
      * @param game
      * @param withName show the card name in the log
-     * @param fromZone
      * @return
      *
      */
-    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean withName);
+    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName);
 
     /**
      * Uses card.moveToExile and posts a inform message about moving the card to
@@ -662,7 +661,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param exileName name of exile zone (optional)
      * @param sourceId
      * @param game
-     * @param fromZone if null, this info isn't postet
      * @param withName
      * @return
      */

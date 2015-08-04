@@ -28,6 +28,7 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -51,9 +52,10 @@ import mage.target.common.TargetCardInLibrary;
  * @author emerald000
  */
 public class WildResearch extends CardImpl {
-    
+
     private static final FilterCard filterEnchantment = new FilterCard("enchantment card");
     private static final FilterCard filterInstant = new FilterCard("instant card");
+
     static {
         filterEnchantment.add(new CardTypePredicate(CardType.ENCHANTMENT));
         filterInstant.add(new CardTypePredicate(CardType.INSTANT));
@@ -65,7 +67,7 @@ public class WildResearch extends CardImpl {
 
         // {1}{W}: Search your library for an enchantment card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WildResearchEffect(filterEnchantment), new ManaCostsImpl<>("{1}{W}")));
-        
+
         // {1}{U}: Search your library for an instant card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WildResearchEffect(filterInstant), new ManaCostsImpl<>("{1}{U}")));
 
@@ -82,43 +84,44 @@ public class WildResearch extends CardImpl {
 }
 
 class WildResearchEffect extends OneShotEffect {
-    
+
     protected final FilterCard filter;
-    
+
     WildResearchEffect(FilterCard filter) {
         super(Outcome.DrawCard);
         this.staticText = "Search your library for an " + filter.getMessage() + " and reveal that card. Put it into your hand, then discard a card at random. Then shuffle your library.";
         this.filter = filter;
     }
-    
+
     WildResearchEffect(final WildResearchEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
-    
+
     @Override
     public WildResearchEffect copy() {
         return new WildResearchEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (player.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
-                    Card card = player.getLibrary().remove(target.getFirstTarget(), game);
+                    Card card = controller.getLibrary().remove(target.getFirstTarget(), game);
                     if (card != null) {
-                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        controller.moveCards(card, null, Zone.HAND, source, game);
                         Cards cards = new CardsImpl();
                         cards.add(card);
-                        player.revealCards("Wild Research", cards, game, true);
+                        controller.revealCards(sourceObject.getIdName(), cards, game, true);
                     }
                 }
             }
-            player.discardOne(true, source, game);
-            player.shuffleLibrary(game);
+            controller.discardOne(true, source, game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

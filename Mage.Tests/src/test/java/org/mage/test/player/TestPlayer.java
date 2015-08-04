@@ -1693,13 +1693,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
-        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, fromZone);
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
+        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game);
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean withName) {
-        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, fromZone, withName);
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
+        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, withName);
     }
 
     @Override

@@ -33,6 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -78,27 +80,27 @@ public class ScourgeOfFleets extends CardImpl {
 }
 
 class ScourgeOfFleetsEffect extends OneShotEffect {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("number of Islands you control");
-    
+
     static {
         filter.add(new SubtypePredicate("Island"));
     }
-    
+
     public ScourgeOfFleetsEffect() {
         super(Outcome.Benefit);
         this.staticText = "return each creature your opponents control with toughness X or less, where X is the number of Islands you control";
     }
-    
+
     public ScourgeOfFleetsEffect(final ScourgeOfFleetsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ScourgeOfFleetsEffect copy() {
         return new ScourgeOfFleetsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -106,10 +108,12 @@ class ScourgeOfFleetsEffect extends OneShotEffect {
             int islands = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
             FilterPermanent creatureFilter = new FilterCreaturePermanent();
             creatureFilter.add(new ControllerPredicate(TargetController.OPPONENT));
-            creatureFilter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, islands +1));
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
-                controller.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+            creatureFilter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, islands + 1));
+            Cards cardsToHand = new CardsImpl();
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
+                cardsToHand.add(permanent);
             }
+            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
             return true;
         }
         return false;

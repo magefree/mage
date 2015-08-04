@@ -53,7 +53,6 @@ public class SpoilsOfTheVault extends CardImpl {
         super(ownerId, 78, "Spoils of the Vault", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "MRD";
 
-
         // Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new SpoilsOfTheVaultEffect());
@@ -68,7 +67,6 @@ public class SpoilsOfTheVault extends CardImpl {
         return new SpoilsOfTheVault(this);
     }
 }
-
 
 class SpoilsOfTheVaultEffect extends OneShotEffect {
 
@@ -94,28 +92,25 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
         if (sourceObject == null || controller == null || cardName == null || cardName.isEmpty()) {
             return false;
         }
-               
-        Cards cards = new CardsImpl();
+
+        Cards cardsToReveal = new CardsImpl();
+        Cards cardsToExile = new CardsImpl();
         while (controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
-                cards.add(card);
-                if(card.getName().equals(cardName)){
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                cardsToReveal.add(card);
+                if (card.getName().equals(cardName)) {
+                    controller.moveCards(card, null, Zone.HAND, source, game);
                     break;
+                } else {
+                    cardsToExile.add(card);
                 }
-                else{
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
-                }
-            }
-            else{
-                break;
             }
         }
-        
-        controller.revealCards(sourceObject.getName(), cards, game);
-        controller.loseLife(cards.size(), game);
-        
+        controller.revealCards(sourceObject.getIdName(), cardsToReveal, game);
+        controller.moveCards(cardsToExile, null, Zone.EXILED, source, game);
+        controller.loseLife(cardsToExile.size(), game);
+
         return true;
     }
 }
