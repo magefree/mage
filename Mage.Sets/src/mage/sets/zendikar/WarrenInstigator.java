@@ -29,29 +29,26 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
  * @author North
  */
 public class WarrenInstigator extends CardImpl {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a Goblin creature card");
+
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
+    }
 
     public WarrenInstigator(UUID ownerId) {
         super(ownerId, 154, "Warren Instigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");
@@ -63,7 +60,9 @@ public class WarrenInstigator extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(DoubleStrikeAbility.getInstance());
-        this.addAbility(new WarrenInstigatorTriggeredAbility());
+
+        // Whenever Warren Instigator deals damage to an opponent, you may put a Goblin creature card from your hand onto the battlefield.
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new PutPermanentOnBattlefieldEffect(filter), false));
     }
 
     public WarrenInstigator(final WarrenInstigator card) {
@@ -73,74 +72,5 @@ public class WarrenInstigator extends CardImpl {
     @Override
     public WarrenInstigator copy() {
         return new WarrenInstigator(this);
-    }
-}
-
-class WarrenInstigatorTriggeredAbility extends TriggeredAbilityImpl {
-
-    public WarrenInstigatorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WarrenInstigatorEffect(), true);
-    }
-
-    public WarrenInstigatorTriggeredAbility(final WarrenInstigatorTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WarrenInstigatorTriggeredAbility copy() {
-        return new WarrenInstigatorTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(this.sourceId)
-                && game.getOpponents(this.getControllerId()).contains(event.getTargetId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals damage to an opponent, you may put a Goblin creature card from your hand onto the battlefield.";
-    }
-}
-
-class WarrenInstigatorEffect extends OneShotEffect {
-
-    public WarrenInstigatorEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may put a Goblin creature card from your hand onto the battlefield";
-    }
-
-    public WarrenInstigatorEffect(final WarrenInstigatorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WarrenInstigatorEffect copy() {
-        return new WarrenInstigatorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        FilterCreatureCard filter = new FilterCreatureCard("Goblin creature card from your hand");
-        filter.add(new SubtypePredicate("Goblin"));
-        TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                return true;
-            }
-        }
-        return false;
     }
 }

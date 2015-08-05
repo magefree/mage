@@ -29,20 +29,12 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -50,13 +42,18 @@ import mage.target.common.TargetCardInHand;
  */
 public class DramaticEntrance extends CardImpl {
 
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a green creature card");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+    }
+
     public DramaticEntrance(UUID ownerId) {
         super(ownerId, 111, "Dramatic Entrance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
         this.expansionSetCode = "SHM";
 
-
         // You may put a green creature card from your hand onto the battlefield.
-        this.getSpellAbility().addEffect(new DramaticEntranceEffect());
+        this.getSpellAbility().addEffect(new PutPermanentOnBattlefieldEffect(filter));
 
     }
 
@@ -67,49 +64,5 @@ public class DramaticEntrance extends CardImpl {
     @Override
     public DramaticEntrance copy() {
         return new DramaticEntrance(this);
-    }
-}
-
-class DramaticEntranceEffect extends OneShotEffect {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a green creature card from your hand");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-
-    public DramaticEntranceEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a green creature card from your hand onto the battlefield";
-    }
-
-    public DramaticEntranceEffect(final DramaticEntranceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DramaticEntranceEffect copy() {
-        return new DramaticEntranceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.getHand().count(filter, game) > 0) {
-                if (controller.chooseUse(Outcome.PutCreatureInPlay,
-                        "Put a green creature card onto the battlefield?", source, game)) {
-                    Target target = new TargetCardInHand(filter);
-                    if (controller.chooseTarget(outcome, target, source, game)) {
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
