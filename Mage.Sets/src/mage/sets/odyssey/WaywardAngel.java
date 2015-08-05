@@ -36,9 +36,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
+import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetCardColorSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -75,21 +75,21 @@ public class WaywardAngel extends CardImpl {
                 new CardsInControllerGraveCondition(7),
                 "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +3/+3,"));
         ability.addEffect(new ConditionalContinuousEffect(
-                new SetCardColorSourceEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield),
+                new BecomesColorSourceEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
                 " is black,"));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
                 new CardsInControllerGraveCondition(7),
                 " has trample,"));
-        
+
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(new FilterControlledCreaturePermanent(), 1, ""), TargetController.YOU, false);
-        
+
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(gainedAbility),
                 new CardsInControllerGraveCondition(7),
                 " and has \"At the beginning of your upkeep, sacrifice a creature.\" "));
-        
+
         this.addAbility(ability);
     }
 
