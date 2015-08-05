@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -46,7 +46,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
     public DealsDamageToOpponentTriggeredAbility(Effect effect) {
         this(effect, false, false);
    }
-    
+
     public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }
