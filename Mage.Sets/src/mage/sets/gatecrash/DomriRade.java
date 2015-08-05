@@ -29,11 +29,6 @@ package mage.sets.gatecrash;
 
 import java.util.UUID;
 import mage.MageObject;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -50,7 +45,11 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -70,8 +69,6 @@ public class DomriRade extends CardImpl {
         super(ownerId, 156, "Domri Rade", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Domri");
-
-
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
@@ -127,8 +124,8 @@ class DomriRadeEffect1 extends OneShotEffect {
                 controller.lookAtCards(sourceObject.getName(), cards, game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     if (controller.chooseUse(outcome, "Reveal " + card.getName() + " and put it into your hand?", source, game)) {
-                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                        controller.revealCards(sourceObject.getName(), cards, game);
+                        controller.moveCards(card, null, Zone.HAND, source, game);
+                        controller.revealCards(sourceObject.getIdName(), cards, game);
                     }
                 }
                 return true;
@@ -139,7 +136,9 @@ class DomriRadeEffect1 extends OneShotEffect {
 }
 
 class DomriRadeEmblem extends Emblem {
+
     // "Creatures you control have double strike, trample, hexproof and haste."
+
     public DomriRadeEmblem() {
         this.setName("EMBLEM: Domri Rade");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
@@ -156,7 +155,7 @@ class DomriRadeEmblem extends Emblem {
 }
 
 class DomriRadeTargetOtherCreaturePermanent extends TargetCreaturePermanent {
-    
+
     public DomriRadeTargetOtherCreaturePermanent() {
         super();
     }

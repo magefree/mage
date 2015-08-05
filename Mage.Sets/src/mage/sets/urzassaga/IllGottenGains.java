@@ -32,8 +32,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -54,13 +54,12 @@ public class IllGottenGains extends CardImpl {
         super(ownerId, 138, "Ill-Gotten Gains", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "USG";
 
-
         // Exile Ill-Gotten Gains.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-        
+
         // Each player discards his or her hand,
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
-        
+
         //then returns up to three cards from his or her graveyard to his or her hand.
         this.getSpellAbility().addEffect(new IllGottenGainsEffect());
     }
@@ -76,34 +75,31 @@ public class IllGottenGains extends CardImpl {
 }
 
 class IllGottenGainsEffect extends OneShotEffect {
-    
+
     IllGottenGainsEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = ", then returns up to three cards from his or her graveyard to his or her hand.";
     }
-    
+
     IllGottenGainsEffect(final IllGottenGainsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public IllGottenGainsEffect copy() {
         return new IllGottenGainsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()){
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Target target = new TargetCardInYourGraveyard(0, 3, new FilterCard());
                     if (target.choose(Outcome.ReturnToHand, player.getId(), source.getSourceId(), game)) {
-                        for (UUID targetId : target.getTargets()) {
-                            Card card = game.getCard(targetId);
-                            player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
-                        }
+                        controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
                     }
                 }
             }

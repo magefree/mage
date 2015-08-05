@@ -6,7 +6,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -14,34 +15,34 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class PutCreatureOnBattlefieldEffect extends OneShotEffect {
+public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
 
-    private final FilterCreatureCard filter;
+    private final FilterCard filter;
 
-    public PutCreatureOnBattlefieldEffect() {
-        this(new FilterCreatureCard("a creature card"));
+    public PutPermanentOnBattlefieldEffect() {
+        this(new FilterPermanentCard("a permanent card"));
     }
 
-    public PutCreatureOnBattlefieldEffect(FilterCreatureCard filter) {
-        super(Outcome.PutCreatureInPlay);
+    public PutPermanentOnBattlefieldEffect(FilterCard filter) {
+        super(Outcome.PutCardInPlay);
         this.filter = filter;
     }
 
-    public PutCreatureOnBattlefieldEffect(final PutCreatureOnBattlefieldEffect effect) {
+    public PutPermanentOnBattlefieldEffect(final PutPermanentOnBattlefieldEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
 
     @Override
-    public PutCreatureOnBattlefieldEffect copy() {
-        return new PutCreatureOnBattlefieldEffect(this);
+    public PutPermanentOnBattlefieldEffect copy() {
+        return new PutPermanentOnBattlefieldEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         String choiceText = "Put " + filter.getMessage() + " from your hand onto the battlefield?";
-        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
+        if (player == null || !player.chooseUse(Outcome.PutCardInPlay, choiceText, source, game)) {
             return false;
         }
 
@@ -62,6 +63,6 @@ public class PutCreatureOnBattlefieldEffect extends OneShotEffect {
             return staticText;
         }
 
-        return "You may put " + filter.getMessage() + " from your hand onto the battlefield";
+        return "you may put " + filter.getMessage() + " from your hand onto the battlefield";
     }
 }

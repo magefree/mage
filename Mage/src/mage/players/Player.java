@@ -626,9 +626,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
 
-    boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
+    boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
+    boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
+
+    boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card
@@ -637,21 +639,19 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param card
      * @param sourceId
      * @param game
-     * @param fromZone if null, this info isn't postet
      * @return
      */
-    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
+    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game);
 
     /**
      * @param card
      * @param sourceId
      * @param game
      * @param withName show the card name in the log
-     * @param fromZone
      * @return
      *
      */
-    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean withName);
+    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName);
 
     /**
      * Uses card.moveToExile and posts a inform message about moving the card to
@@ -662,7 +662,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param exileName name of exile zone (optional)
      * @param sourceId
      * @param game
-     * @param fromZone if null, this info isn't postet
      * @param withName
      * @return
      */
@@ -689,7 +688,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param fromZone if null, this info isn't postet
      * @return
      */
-    boolean moveCardsToGraveyardWithInfo(List<Card> cards, Ability source, Game game, Zone fromZone);
+    boolean moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to

@@ -30,17 +30,19 @@ package mage.sets.timespiral;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.SourceIsCreatureCondition;
+import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
@@ -51,7 +53,7 @@ import java.util.UUID;
  */
 public class ForiysianTotem extends CardImpl {
 
-    private final static String ruleText = "As long as Foriysian Totem is a creature, it can block an additional creature.";
+    private final static String ruleText = "As long as {this} is a creature, it can block an additional creature.";
 
     public ForiysianTotem(UUID ownerId) {
         super(ownerId, 254, "Foriysian Totem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -64,7 +66,7 @@ public class ForiysianTotem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForiysianTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{R}")));
 
         // As long as Foriysian Totem is a creature, it can block an additional creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new CanBlockAdditionalCreatureEffect(1), SourceIsCreatureCondition.getInstance() , ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new CanBlockAdditionalCreatureEffect(1), new SourceMatchesFilterCondition(new FilterCreaturePermanent()), ruleText)));
     }
 
     public ForiysianTotem(final ForiysianTotem card) {
@@ -88,5 +90,6 @@ class ForiysianTotemToken extends Token {
         color.setRed(true);
         power = new MageInt(4);
         toughness = new MageInt(4);
+        this.addAbility(TrampleAbility.getInstance());
     }
 }

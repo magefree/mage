@@ -1673,7 +1673,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
     }
 
@@ -1688,22 +1688,27 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
-        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, fromZone);
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
+        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game);
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean withName) {
-        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, fromZone, withName);
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
+        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, withName);
     }
 
     @Override
-    public boolean moveCardsToGraveyardWithInfo(List<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+        return computerPlayer.moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
+    }
+
+    @Override
+    public boolean moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         return computerPlayer.moveCardsToGraveyardWithInfo(allCards, source, game, fromZone);
     }
 

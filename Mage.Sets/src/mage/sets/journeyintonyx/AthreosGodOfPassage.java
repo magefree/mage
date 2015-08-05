@@ -64,12 +64,12 @@ import mage.target.common.TargetOpponent;
 public class AthreosGodOfPassage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you own");
-    
+
     static {
         filter.add(new AnotherPredicate());
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
-    
+
     public AthreosGodOfPassage(UUID ownerId) {
         super(ownerId, 146, "Athreos, God of Passage", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{W}{B}");
         this.expansionSetCode = "JOU";
@@ -84,12 +84,12 @@ public class AthreosGodOfPassage extends CardImpl {
         // As long as your devotion to white and black is less than seven, Athreos isn't a creature.
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.W, ColoredManaSymbol.B), 7);
         effect.setText("As long as your devotion to white and black is less than seven, Athreos isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
         Ability ability = new AthreosDiesCreatureTriggeredAbility(new AthreosGodOfPassageReturnEffect(), false, filter);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        
+
     }
 
     public AthreosGodOfPassage(final AthreosGodOfPassage card) {
@@ -103,21 +103,21 @@ public class AthreosGodOfPassage extends CardImpl {
 }
 
 class AthreosGodOfPassageReturnEffect extends OneShotEffect {
-    
+
     public AthreosGodOfPassageReturnEffect() {
         super(Outcome.Benefit);
         this.staticText = "return it to your hand unless target opponent pays 3 life";
     }
-    
+
     public AthreosGodOfPassageReturnEffect(final AthreosGodOfPassageReturnEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public AthreosGodOfPassageReturnEffect copy() {
         return new AthreosGodOfPassageReturnEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -134,13 +134,13 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect {
                         if (cost.pay(source, game, source.getSourceId(), opponent.getId(), false)) {
                             paid = true;
                         }
-                    }            
+                    }
                 }
                 if (opponent == null || !paid) {
                     if (game.getState().getZone(creature.getId()).equals(Zone.GRAVEYARD)) {
-                        controller.moveCardToHandWithInfo(creature, source.getSourceId(), game, Zone.GRAVEYARD);
+                        controller.moveCards(creature, null, Zone.HAND, source, game);
                     }
-                }                
+                }
             }
             return true;
         }

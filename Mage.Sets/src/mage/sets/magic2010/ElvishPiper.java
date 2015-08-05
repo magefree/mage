@@ -27,17 +27,18 @@
  */
 package mage.sets.magic2010;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
@@ -56,7 +57,7 @@ public class ElvishPiper extends CardImpl {
 
         // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
+                new PutPermanentOnBattlefieldEffect(new FilterCreatureCard("a creature card")),
                 new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

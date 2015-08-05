@@ -143,6 +143,13 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         for (OptionalAdditionalCost cost : kickerCosts) {
             cost.reset();
         }
+        String key = getActivationKey(source, "", game);
+        for (String activationKey : activations.keySet()) {
+            if (activationKey.startsWith(key) && activations.get(activationKey) > 0) {
+                activations.put(key, 0);
+            }
+        }
+
     }
 
     public int getXManaValue() {

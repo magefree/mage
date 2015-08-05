@@ -31,8 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -51,7 +52,6 @@ public class Recall extends CardImpl {
     public Recall(UUID ownerId) {
         super(ownerId, 93, "Recall", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{U}");
         this.expansionSetCode = "5ED";
-
 
         // Discard X cards, then return a card from your graveyard to your hand for each card discarded this way.
         this.getSpellAbility().addEffect(new RecallEffect());
@@ -75,38 +75,33 @@ class RecallEffect extends OneShotEffect {
         super(Outcome.ReturnToHand);
         this.staticText = "Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. ";
     }
-    
+
     public RecallEffect(final RecallEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public RecallEffect copy() {
         return new RecallEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             // Discard X cards
-            int amount = source.getManaCostsToPay().getX();
-            int discarded = Math.min(amount, player.getHand().size());
-            player.discard(amount, false, source, game);
-            
-            // then return a card from your graveyard to your hand for each card discarded this way
-            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(discarded, new FilterCard());
-            target.choose(Outcome.ReturnToHand, player.getId(), source.getSourceId(), game);
-            for (UUID targetId : target.getTargets()) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
-                }
+            Cards cardsDiscarded = controller.discard(source.getManaCostsToPay().getX(), false, source, game);
+            if (!cardsDiscarded.isEmpty()) {
+                // then return a card from your graveyard to your hand for each card discarded this way
+                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(cardsDiscarded.size(), new FilterCard());
+                target.setNotTarget(true);
+                target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), game);
+                controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
             }
-            
+
             return true;
         }
         return false;
     }
-    
+
 }

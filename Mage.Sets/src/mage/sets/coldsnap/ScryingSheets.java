@@ -28,6 +28,7 @@
 package mage.sets.coldsnap;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -57,7 +58,7 @@ public class ScryingSheets extends CardImpl {
 
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        
+
         // {1}{snow}, {tap}: Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryingSheetsEffect(), new ManaCostsImpl<>("{1}{snow}"));
         ability.addCost(new TapSourceCost());
@@ -75,35 +76,35 @@ public class ScryingSheets extends CardImpl {
 }
 
 class ScryingSheetsEffect extends OneShotEffect {
-    
+
     ScryingSheetsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand";
     }
-    
+
     ScryingSheetsEffect(final ScryingSheetsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ScryingSheetsEffect copy() {
         return new ScryingSheetsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
-                player.lookAtCards("Scrying Sheets", cards, game);
+                controller.lookAtCards(sourceObject.getIdName(), cards, game);
                 if (card.getSupertype().contains("Snow")) {
-                    if (player.chooseUse(outcome, new StringBuilder("Reveal ").append(card.getName()).append(" and put it into your hand?").toString(), source, game)) {
-                        card = player.getLibrary().removeFromTop(game);
-                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                        player.revealCards("Scrying Sheets", cards, game);
+                    if (controller.chooseUse(outcome, "Reveal " + card.getLogName() + " and put it into your hand?", source, game)) {
+                        controller.moveCards(card, null, Zone.HAND, source, game);
+                        controller.revealCards(sourceObject.getIdName(), cards, game);
                     }
                 }
             }

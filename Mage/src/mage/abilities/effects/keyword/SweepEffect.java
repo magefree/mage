@@ -27,16 +27,15 @@
  */
 package mage.abilities.effects.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -53,7 +52,7 @@ public class SweepEffect extends OneShotEffect {
     public SweepEffect(String sweepSubtype) {
         super(Outcome.Benefit);
         this.sweepSubtype = sweepSubtype;
-        this.staticText = "<i>Sweep</i> - Return any number of "+ sweepSubtype + (sweepSubtype.endsWith("s") ? "":"s") + " you control to their owner's hand";
+        this.staticText = "<i>Sweep</i> - Return any number of " + sweepSubtype + (sweepSubtype.endsWith("s") ? "" : "s") + " you control to their owner's hand";
     }
 
     public SweepEffect(final SweepEffect effect) {
@@ -75,10 +74,7 @@ public class SweepEffect extends OneShotEffect {
             Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 game.getState().setValue(CardUtil.getCardZoneString("sweep", source.getSourceId(), game), target.getTargets().size());
-                for (UUID uuid : target.getTargets()) {
-                    Permanent land = game.getPermanent(uuid);
-                    controller.moveCardToHandWithInfo(land, source.getSourceId(), game, Zone.HAND);
-                }
+                controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
             }
             return true;
         }

@@ -27,7 +27,6 @@
  */
 package mage.sets.journeyintonyx;
 
-import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -74,7 +73,7 @@ public class BrainMaggot extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new BrainMaggotExileEffect());
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new BrainMaggotReturnExiledCardAbility()));
-        this.addAbility(ability);    
+        this.addAbility(ability);
     }
 
     public BrainMaggot(final BrainMaggot card) {
@@ -110,7 +109,7 @@ class BrainMaggotExileEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && opponent != null && sourcePermanent != null) {
             if (!opponent.getHand().isEmpty()) {
-                opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
+                opponent.revealCards(sourcePermanent.getIdName(), opponent.getHand(), game);
 
                 FilterCard filter = new FilterNonlandCard("nonland card to exile");
                 TargetCard target = new TargetCard(Zone.HAND, filter);
@@ -130,11 +129,10 @@ class BrainMaggotExileEffect extends OneShotEffect {
 }
 
 /**
- * Returns the exiled card as source permanent leaves battlefield
- * Uses no stack
+ * Returns the exiled card as source permanent leaves battlefield Uses no stack
+ *
  * @author LevelX2
  */
-
 class BrainMaggotReturnExiledCardAbility extends DelayedTriggeredAbility {
 
     public BrainMaggotReturnExiledCardAbility() {
@@ -190,18 +188,13 @@ class BrainMaggotReturnExiledCardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
             ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (exile != null && sourcePermanent != null) {
-                LinkedList<UUID> cards = new LinkedList<>(exile);
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
-                }
-                exile.clear();
+                controller.moveCards(exile, null, Zone.HAND, source, game);
                 return true;
-            }            
+            }
         }
         return false;
     }

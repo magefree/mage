@@ -27,7 +27,7 @@
  */
 package mage.sets.magicorigins;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -100,7 +100,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
         Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (targetOpponent != null && sourceObject != null) {
-            List<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 7);
+            Set<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 7);
             Cards cards = new CardsImpl(Zone.LIBRARY, allCards);
             targetOpponent.revealCards(sourceObject.getIdName() + " - " + targetOpponent.getName() + "'s top library cards", cards, game);
             for (Card card : allCards) {

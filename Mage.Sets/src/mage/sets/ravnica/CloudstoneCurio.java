@@ -57,6 +57,7 @@ import mage.target.TargetPermanent;
 public class CloudstoneCurio extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a nonartifact permanent");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -68,7 +69,6 @@ public class CloudstoneCurio extends CardImpl {
 
         // Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, SetTargetPointer.PERMANENT, "", true));
-
 
     }
 
@@ -120,7 +120,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
                 if (target.canChoose(controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
                     Permanent returningCreature = game.getPermanent(target.getFirstTarget());
                     if (returningCreature != null) {
-                        controller.moveCardToHandWithInfo(returningCreature, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        controller.moveCards(returningCreature, null, Zone.HAND, source, game);
                     }
                 }
             }

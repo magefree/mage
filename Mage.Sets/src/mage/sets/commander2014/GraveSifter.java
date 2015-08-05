@@ -32,8 +32,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -101,22 +101,17 @@ class GraveSifterEffect extends OneShotEffect {
         typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     typeChoice.clearChoice();
                     if (player.choose(outcome, typeChoice, game)) {
                         game.informPlayers(player.getLogName() + " has chosen: " + typeChoice.getChoice());
-                        FilterCard filter = new FilterCreatureCard("creature cards with creature type " + typeChoice.getChoice()+ " from your graveyard");
+                        FilterCard filter = new FilterCreatureCard("creature cards with creature type " + typeChoice.getChoice() + " from your graveyard");
                         filter.add(new SubtypePredicate(typeChoice.getChoice()));
-                        Target target = new TargetCardInYourGraveyard(0,Integer.MAX_VALUE, filter);
+                        Target target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter);
                         player.chooseTarget(outcome, target, source, game);
-                        for (UUID cardId: target.getTargets()) {
-                            Card card = game.getCard(cardId);
-                            if (card !=null) {
-                                player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
-                            }
-                        }
+                        player.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
                     }
 
                 }

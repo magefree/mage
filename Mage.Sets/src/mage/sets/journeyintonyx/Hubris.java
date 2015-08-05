@@ -31,6 +31,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -52,11 +54,9 @@ public class Hubris extends CardImpl {
         super(ownerId, 41, "Hubris", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "JOU";
 
-
         // Return target creature and all Auras attached to it to their owners' hand.
         this.getSpellAbility().addEffect(new HubrisReturnEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
 
     }
 
@@ -96,16 +96,12 @@ class HubrisReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID targetId: targetPointer.getTargets(game, source)) {
+            for (UUID targetId : targetPointer.getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
-                    controller.moveCardToHandWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD);
-                    for (UUID attachementId: creature.getAttachments()) {
-                        Permanent attachment = game.getPermanent(attachementId);
-                        if (attachment != null && filter.match(attachment, game)) {
-                            controller.moveCardToHandWithInfo(attachment, source.getSourceId(), game, Zone.BATTLEFIELD);
-                        }
-                    }
+                    Cards cardsToHand = new CardsImpl(creature.getAttachments());
+                    cardsToHand.add(creature);
+                    controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
                 }
             }
             return true;

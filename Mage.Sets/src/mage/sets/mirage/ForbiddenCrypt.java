@@ -57,7 +57,6 @@ public class ForbiddenCrypt extends CardImpl {
         super(ownerId, 22, "Forbidden Crypt", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "MIR";
 
-
         // If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForbiddenCryptDrawCardReplacementEffect()));
         // If a card would be put into your graveyard from anywhere, exile that card instead.
@@ -80,7 +79,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game";
     }
-    
+
     public ForbiddenCryptDrawCardReplacementEffect(final ForbiddenCryptDrawCardReplacementEffect effect) {
         super(effect);
     }
@@ -92,22 +91,23 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             boolean cardReturned = false;
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                if (target.choose(Outcome.ReturnToHand, player.getId(), source.getSourceId(), game)) {
+            target.setNotTarget(true);
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+                        controller.moveCards(card, null, Zone.HAND, source, game);
                         cardReturned = true;
                     }
                 }
             }
             if (!cardReturned) {
-                game.informPlayers(new StringBuilder(player.getLogName()).append(" can't return a card from graveyard to hand.").toString());
-                player.lost(game);
+                game.informPlayers(controller.getLogName() + " can't return a card from graveyard to hand.");
+                controller.lost(game);
             }
             return true;
         }
@@ -118,12 +118,12 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DRAW_CARD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId());
     }
-    
+
 }
 
 class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEffectImpl {
@@ -132,7 +132,7 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "If a card would be put into your graveyard from anywhere, exile that card instead";
     }
-    
+
     public ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
         super(effect);
     }
@@ -141,7 +141,7 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
     public ForbiddenCryptPutIntoYourGraveyardReplacementEffect copy() {
         return new ForbiddenCryptPutIntoYourGraveyardReplacementEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -166,12 +166,12 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
         }
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ZONE_CHANGE;
-    }   
-    
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
@@ -185,5 +185,5 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
         }
         return false;
     }
-    
+
 }

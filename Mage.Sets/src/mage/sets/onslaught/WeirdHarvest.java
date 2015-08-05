@@ -30,9 +30,9 @@ package mage.sets.onslaught;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -54,7 +54,6 @@ public class WeirdHarvest extends CardImpl {
     public WeirdHarvest(UUID ownerId) {
         super(ownerId, 299, "Weird Harvest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
         this.expansionSetCode = "ONS";
-
 
         // Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it.
         getSpellAbility().addEffect(new WeirdHarvestEffect());
@@ -89,20 +88,21 @@ class WeirdHarvestEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             int xValue = source.getManaCostsToPay().getX();
             if (xValue > 0) {
                 List<Player> usingPlayers = new ArrayList<>();
-                this.chooseAndSearchLibrary(usingPlayers, controller, xValue, source, game);
-                for (UUID playerId: controller.getInRange()) {
+                this.chooseAndSearchLibrary(usingPlayers, controller, xValue, source, sourceObject, game);
+                for (UUID playerId : controller.getInRange()) {
                     if (!playerId.equals(controller.getId())) {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {
-                            this.chooseAndSearchLibrary(usingPlayers, player, xValue, source, game);
+                            this.chooseAndSearchLibrary(usingPlayers, player, xValue, source, sourceObject, game);
                         }
                     }
                 }
-                for (Player player: usingPlayers) {
+                for (Player player : usingPlayers) {
                     player.shuffleLibrary(game);
                 }
                 return true;
@@ -111,21 +111,15 @@ class WeirdHarvestEffect extends OneShotEffect {
         return false;
     }
 
-    private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, int xValue, Ability source, Game game) {
+    private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, int xValue, Ability source, MageObject sourceObject, Game game) {
         if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up " + xValue + " creature cards and put them into your hand?", source, game)) {
             usingPlayers.add(player);
             TargetCardInLibrary target = new TargetCardInLibrary(0, xValue, new FilterCreatureCard());
             if (player.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
-                    Cards cards = new CardsImpl();
-                    for (UUID cardId: (List<UUID>)target.getTargets()) {
-                        Card card = player.getLibrary().getCard(cardId, game);
-                        if (card != null) {
-                            cards.add(card);
-                            player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                        }
-                    }
-                    player.revealCards("Weird Harvest", cards, game);
+                    Cards cards = new CardsImpl(target.getTargets());
+                    player.moveCards(cards, null, Zone.HAND, source, game);
+                    player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ")", cards, game);
                 }
             }
         }

@@ -66,21 +66,21 @@ public class PulseOfTheGrid extends CardImpl {
 }
 
 class PulseOfTheGridReturnToHandEffect extends OneShotEffect {
-    
+
     PulseOfTheGridReturnToHandEffect() {
         super(Outcome.Benefit);
         this.staticText = "Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return {this} to its owner's hand";
     }
-    
+
     PulseOfTheGridReturnToHandEffect(final PulseOfTheGridReturnToHandEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PulseOfTheGridReturnToHandEffect copy() {
         return new PulseOfTheGridReturnToHandEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -89,7 +89,7 @@ class PulseOfTheGridReturnToHandEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.getHand().size() > controller.getHand().size()) {
                     Card card = game.getCard(source.getSourceId());
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.STACK);
+                    controller.moveCards(card, null, Zone.HAND, source, game);
                     return true;
                 }
             }

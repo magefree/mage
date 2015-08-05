@@ -99,13 +99,13 @@ class ElderPineOfJukaiEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller == null || sourceObject == null) {
             return false;
-        }        
+        }
         Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, 3));
         controller.revealCards(sourceObject.getName(), cards, game);
-        for (Card card: cards.getCards(game)) {
+        for (Card card : cards.getCards(game)) {
             if (card.getCardType().contains(CardType.LAND)) {
-                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                controller.moveCards(card, null, Zone.HAND, source, game);
                 cards.remove(card);
             }
         }
