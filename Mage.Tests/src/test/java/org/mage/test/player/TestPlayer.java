@@ -1673,7 +1673,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
     }
 
@@ -1688,7 +1688,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
     }
 
@@ -1703,7 +1703,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCardsToGraveyardWithInfo(List<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+        return computerPlayer.moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
+    }
+
+    @Override
+    public boolean moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         return computerPlayer.moveCardsToGraveyardWithInfo(allCards, source, game, fromZone);
     }
 

@@ -27,7 +27,7 @@
  */
 package mage.sets.magic2014;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -66,7 +66,7 @@ public class JacesMindseeker extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of his or her library into his or her graveyard. 
+        // When Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of his or her library into his or her graveyard.
         // You may cast an instant or sorcery card from among them without paying its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new JaceMindseekerEffect());
         ability.addTarget(new TargetOpponent());
@@ -106,17 +106,17 @@ class JaceMindseekerEffect extends OneShotEffect {
         Cards cardsToCast = new CardsImpl();
         Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetOpponent != null) {
-            List<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 5);
+            Set<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 5);
             targetOpponent.moveCards(allCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
-            for(Card card : allCards) {
+            for (Card card : allCards) {
                 if (filter.match(card, game)) {
                     Zone zone = game.getState().getZone(card.getId());
-                    // If the five cards are put into a public zone such as exile instead of a graveyard (perhaps due to the ability of Rest in Peace), 
-                    // you can cast one of those instant or sorcery cards from that zone. 
-                    if (zone.equals(Zone.GRAVEYARD) || zone.equals(Zone.EXILED)) {                        
+                    // If the five cards are put into a public zone such as exile instead of a graveyard (perhaps due to the ability of Rest in Peace),
+                    // you can cast one of those instant or sorcery cards from that zone.
+                    if (zone.equals(Zone.GRAVEYARD) || zone.equals(Zone.EXILED)) {
                         cardsToCast.add(card);
                     }
-                }                
+                }
             }
         }
 
@@ -127,14 +127,14 @@ class JaceMindseekerEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.GRAVEYARD, filter); // zone should be ignored here
                 target.setNotTarget(true);
                 if (controller.chooseUse(outcome, "Cast an instant or sorcery card from among them for free?", source, game)
-                        && controller.choose(outcome, cardsToCast, target, game)) {                  
+                        && controller.choose(outcome, cardsToCast, target, game)) {
                     Card card = cardsToCast.get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.cast(card.getSpellAbility(), game, true);
                     }
                 }
             }
-         
+
         }
 
         return false;

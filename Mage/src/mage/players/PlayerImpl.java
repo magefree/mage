@@ -859,14 +859,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * Can be cards or permanents that go to library
      *
-     * @param cards
+     * @param cardsToLibrary
      * @param game
      * @param source
      * @param anyOrder
      * @return
      */
     @Override
-    public boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
+    public boolean putCardsOnTopOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
+        Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
+        cards.addAll(cardsToLibrary);
         if (cards.size() != 0) {
             if (!anyOrder) {
                 for (UUID cardId : cards) {
@@ -2879,7 +2881,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
-        ArrayList<Card> cardList = new ArrayList<>();
+        Set<Card> cardList = new HashSet<>();
         for (UUID cardId : cards) {
             if (fromZone == null) {
                 fromZone = game.getState().getZone(cardId);
@@ -2906,7 +2908,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
-        ArrayList<Card> cardList = new ArrayList<>();
+        Set<Card> cardList = new HashSet<>();
         if (card != null) {
             cardList.add(card);
         }
@@ -2914,12 +2916,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         return moveCards(cards, fromZone, toZone, source, game, true);
     }
 
     @Override
-    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         if (cards.isEmpty()) {
             return true;
         }
@@ -2961,6 +2963,20 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+        if (cards.isEmpty()) {
+            return true;
+        }
+        game.fireEvent(new ZoneChangeGroupEvent(cards, source == null ? null : source.getSourceId(), this.getId(), null, Zone.EXILED));
+        boolean result = false;
+        for (Card card : cards) {
+            Zone fromZone = game.getState().getZone(card.getId());
+            result |= moveCardToExileWithInfo(card, exileId, exileZoneName, source == null ? null : source.getSourceId(), game, fromZone, withName);
+        }
+        return result;
+    }
+
+    @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
         return this.moveCardToHandWithInfo(card, sourceId, game, true);
     }
@@ -2974,7 +2990,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 card = game.getCard(card.getId());
             }
             if (!game.isSimulation()) {
-                StringBuilder sb = new StringBuilder(this.getLogName()).append(" puts ").append(withName ? card.getLogName() : "a face down card");
+                StringBuilder sb = new StringBuilder(this.getLogName()).append(" puts ").append(withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"));
                 switch (fromZone) {
                     case EXILED:
                         sb.append(" from exile zone ");
@@ -2992,7 +3008,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardsToGraveyardWithInfo(List<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public boolean moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         boolean result = true;
         UUID sourceId = source == null ? null : source.getSourceId();
         while (!allCards.isEmpty()) {

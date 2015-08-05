@@ -27,12 +27,10 @@
  */
 package mage.sets.shadowmoor;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -95,12 +93,8 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null) {
-            List<Card> cardsFromTopLibrary = controller.getLibrary().getTopCards(game, 5);
-            Cards cards = new CardsImpl(Zone.LIBRARY);
-            for (Card card : cardsFromTopLibrary) {
-                cards.add(card);
-            }
-            controller.lookAtCards(mageObject.getIdName(), cards, game);
+            Cards cardsFromLibrary = new CardsImpl(Zone.LIBRARY, controller.getLibrary().getTopCards(game, 5));
+            controller.lookAtCards(mageObject.getIdName(), cardsFromLibrary, game);
             int max = 0;
             for (UUID playerId : controller.getInRange()) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
@@ -113,11 +107,11 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
             }
             boolean moreCreatures = game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), controller.getId(), game) > max;
             TargetCard target = new TargetCard(moreCreatures ? 2 : 1, Zone.LIBRARY, new FilterCard());
-            if (controller.choose(Outcome.DrawCard, cards, target, game)) {
-                cards.removeAll(target.getTargets());
+            if (controller.choose(Outcome.DrawCard, cardsFromLibrary, target, game)) {
+                cardsFromLibrary.removeAll(target.getTargets());
                 controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
             }
-            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
+            controller.putCardsOnBottomOfLibrary(cardsFromLibrary, game, source, true);
             return true;
         }
         return false;
