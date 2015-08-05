@@ -105,7 +105,7 @@ class ApostlesBlessingEffect extends OneShotEffect {
         if (controller != null) {
             ChoiceColorOrArtifact choice = new ChoiceColorOrArtifact();
             while (!choice.isChosen()) {
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
                 controller.choose(outcome, choice, game);

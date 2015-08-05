@@ -120,7 +120,7 @@ class WorldQuellerEffect extends OneShotEffect {
         if (you != null && sourceCreature != null) {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);
-            while (you.isInGame() && !you.choose(Outcome.Neutral, choiceImpl, game)) {}
+            while (you.canRespond() && !you.choose(Outcome.Neutral, choiceImpl, game)) {}
             CardType type = null;
             String choosenType = choiceImpl.getChoice();
 
@@ -150,7 +150,7 @@ class WorldQuellerEffect extends OneShotEffect {
 
                 // you always go first
                 if (target.canChoose(you.getId(), game)) {
-                    while (you.isInGame() && !target.isChosen() && target.canChoose(you.getId(), game)) {
+                    while (you.canRespond() && !target.isChosen() && target.canChoose(you.getId(), game)) {
                         you.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                     }
                     Permanent permanent = game.getPermanent(target.getFirstTarget());

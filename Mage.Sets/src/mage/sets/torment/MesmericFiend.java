@@ -71,7 +71,7 @@ public class MesmericFiend extends CardImpl {
         this.addAbility(ability);
 
         // When Mesmeric Fiend leaves the battlefield, return the exiled card to its owner's hand.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new MesmericFiendLeaveEffect(), false ));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new MesmericFiendLeaveEffect(), false));
     }
 
     public MesmericFiend(final MesmericFiend card) {
@@ -83,6 +83,7 @@ public class MesmericFiend extends CardImpl {
         return new MesmericFiend(this);
     }
 }
+
 class MesmericFiendExileEffect extends OneShotEffect {
 
     public MesmericFiendExileEffect() {
@@ -120,7 +121,6 @@ class MesmericFiendExileEffect extends OneShotEffect {
         return false;
     }
 
-
 }
 
 class MesmericFiendLeaveEffect extends OneShotEffect {
@@ -143,16 +143,11 @@ class MesmericFiendLeaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject !=null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+        if (controller != null && sourceObject != null) {
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
             ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exZone != null) {
-                for (Card card : exZone.getCards(game)) {
-                    if (card != null) {
-                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
-                    }
-                }
-                return true;
+                return controller.moveCards(exZone, null, Zone.HAND, source, game);
             }
         }
         return false;

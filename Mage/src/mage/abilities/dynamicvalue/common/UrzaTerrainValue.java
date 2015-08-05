@@ -8,6 +8,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
 public class UrzaTerrainValue implements DynamicValue {
+
     private final int value;
 
     public UrzaTerrainValue(int value) {
@@ -19,24 +20,21 @@ public class UrzaTerrainValue implements DynamicValue {
         FilterControlledPermanent pp = new FilterControlledPermanent("Urza's Power Plant");
         pp.add(new SubtypePredicate("Urza's Power-Plant"));
         PermanentsOnBattlefieldCount ppP = new PermanentsOnBattlefieldCount(pp);
-        if (ppP.calculate(game, sourceAbility, effect) < 1)
-        {
+        if (ppP.calculate(game, sourceAbility, effect) < 1) {
             return 1;
         }
 
         FilterControlledPermanent to = new FilterControlledPermanent("Urza's Tower");
         to.add(new SubtypePredicate("Urza's Tower"));
         PermanentsOnBattlefieldCount toP = new PermanentsOnBattlefieldCount(to);
-        if (toP.calculate(game, sourceAbility, effect) < 1)
-        {
+        if (toP.calculate(game, sourceAbility, effect) < 1) {
             return 1;
         }
 
         FilterControlledPermanent mi = new FilterControlledPermanent("Urza's Mine");
         mi.add(new SubtypePredicate("Urza's Mine"));
         PermanentsOnBattlefieldCount miP = new PermanentsOnBattlefieldCount(mi);
-        if (miP.calculate(game, sourceAbility, effect) < 1)
-        {
+        if (miP.calculate(game, sourceAbility, effect) < 1) {
             return 1;
         }
 
@@ -44,7 +42,7 @@ public class UrzaTerrainValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public UrzaTerrainValue copy() {
         return new UrzaTerrainValue(value);
     }
 

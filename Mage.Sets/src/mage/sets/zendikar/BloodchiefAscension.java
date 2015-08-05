@@ -29,21 +29,21 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 
@@ -69,7 +69,7 @@ public class BloodchiefAscension extends CardImpl {
                 new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                         new LoseLifeTargetEffect(2), true, new FilterCard("a card"), TargetController.OPPONENT, SetTargetPointer.PLAYER),
                 new SourceHasCounterCondition(CounterType.QUEST, 3),
-                "Whenever a card is put into an opponent's graveyard from anywhere, if Bloodchief Ascension has three or more quest counters on it, you may have that player lose 2 life. If you do, you gain 2 life", true);
+                "Whenever a card is put into an opponent's graveyard from anywhere, if {this} has three or more quest counters on it, you may have that player lose 2 life. If you do, you gain 2 life");
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
 

@@ -70,14 +70,14 @@ public class HiredMuscle extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Scarmaker";
 
-        // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Hired Muscle.   
+        // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Hired Muscle.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
-        
+
         // At the beginning of the end step, if there are two or more ki counters on Hired Muscle, you may flip it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new Scarmaker())),
                 new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
-                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it.", true));
+                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
     }
 
     public HiredMuscle(final HiredMuscle card) {

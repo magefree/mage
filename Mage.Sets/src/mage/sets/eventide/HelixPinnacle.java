@@ -56,7 +56,6 @@ public class HelixPinnacle extends CardImpl {
         super(ownerId, 68, "Helix Pinnacle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "EVE";
 
-
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
 
@@ -64,12 +63,12 @@ public class HelixPinnacle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.TOWER.createInstance(), new ManacostVariableValue(), true),
                 new ManaCostsImpl("{X}")));
-        
+
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.YOU, false),
                 new SourceHasCounterCondition(CounterType.TOWER, 100),
-                rule, false ));
+                rule));
 
     }
 

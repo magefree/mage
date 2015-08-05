@@ -28,13 +28,14 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,10 +48,14 @@ public class SlaughterCry extends CardImpl {
         super(ownerId, 149, "Slaughter Cry", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ZEN";
 
-
+        // Target creature gets +3/+0 and gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(3, 0, Duration.EndOfTurn);
+        effect.setText("Target creature gets +3/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains first strike until end of turn. <i>(It deals combat damage before creatures without first strike.)</i>");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public SlaughterCry(final SlaughterCry card) {

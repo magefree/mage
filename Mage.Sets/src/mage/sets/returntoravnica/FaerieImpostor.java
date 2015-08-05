@@ -28,9 +28,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,7 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -88,12 +87,12 @@ class FaerieImpostorEffect extends OneShotEffect {
         filter.add(new AnotherPredicate());
     }
 
-    FaerieImpostorEffect ( ) {
+    FaerieImpostorEffect() {
         super(Outcome.ReturnToHand);
         staticText = effectText;
     }
 
-    FaerieImpostorEffect ( FaerieImpostorEffect effect ) {
+    FaerieImpostorEffect(FaerieImpostorEffect effect) {
         super(effect);
     }
 
@@ -108,13 +107,13 @@ class FaerieImpostorEffect extends OneShotEffect {
                 controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
 
-                if ( permanent != null ) {
+                if (permanent != null) {
                     targetChosen = true;
-                    controller.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                    controller.moveCards(permanent, null, Zone.HAND, source, game);
                 }
             }
 
-            if ( !targetChosen ) {
+            if (!targetChosen) {
                 new SacrificeSourceEffect().apply(game, source);
             }
             return true;

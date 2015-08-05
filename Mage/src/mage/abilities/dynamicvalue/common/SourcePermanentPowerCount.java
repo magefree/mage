@@ -21,7 +21,7 @@ public class SourcePermanentPowerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public SourcePermanentPowerCount copy() {
         return new SourcePermanentPowerCount();
     }
 

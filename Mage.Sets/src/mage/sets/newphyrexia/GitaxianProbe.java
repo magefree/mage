@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -46,20 +46,19 @@ import mage.target.TargetPlayer;
  */
 public class GitaxianProbe extends CardImpl {
 
-    public GitaxianProbe (UUID ownerId) {
+    public GitaxianProbe(UUID ownerId) {
         super(ownerId, 35, "Gitaxian Probe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{UP}");
         this.expansionSetCode = "NPH";
-
 
         // Look at target player's hand.
         this.getSpellAbility().addEffect(new GitaxianProbeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        
+
     }
 
-    public GitaxianProbe (final GitaxianProbe card) {
+    public GitaxianProbe(final GitaxianProbe card) {
         super(card);
     }
 
@@ -71,6 +70,7 @@ public class GitaxianProbe extends CardImpl {
 }
 
 class GitaxianProbeEffect extends OneShotEffect {
+
     GitaxianProbeEffect() {
         super(Outcome.DrawCard);
         staticText = "Look at target player's hand";
@@ -84,8 +84,9 @@ class GitaxianProbeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null && controller != null) {
-            controller.lookAtCards("Gitaxian Probe", player.getHand(), game);
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player != null && controller != null && sourceObject != null) {
+            controller.lookAtCards(sourceObject.getIdName() + " (" + player.getName() + ")", player.getHand(), game);
         }
         return true;
     }

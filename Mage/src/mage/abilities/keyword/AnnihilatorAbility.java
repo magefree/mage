@@ -127,7 +127,7 @@ class AnnihilatorEffect extends OneShotEffect {
             int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId(), game));
             Target target = new TargetControlledPermanent(amount, amount, filter, false);
             if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game) && player.isInGame()) {
+                while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
                     player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 }
                 for (int idx = 0; idx < target.getTargets().size(); idx++) {

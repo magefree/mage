@@ -116,7 +116,7 @@ class GrindstoneEffect extends OneShotEffect {
                     }
                 }
                 targetPlayer.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
-            } while (colorShared && targetPlayer.isInGame());
+            } while (colorShared && targetPlayer.canRespond());
             return true;
         }
         return false;

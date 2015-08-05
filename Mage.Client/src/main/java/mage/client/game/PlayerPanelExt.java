@@ -36,7 +36,6 @@ package mage.client.game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -105,7 +104,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final Border emptyBorder = BorderFactory.createEmptyBorder(0, 0, 0, 0);
 
     private int avatarId = -1;
-    private String flagName = "";
+    private String flagName;
 
     private PriorityTimer timer;
 
@@ -124,7 +123,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         session = MageFrame.getSession();
         cheat.setVisible(session.isTestMode());
         cheat.setFocusable(false);
-
+        flagName = null;
         if (priorityTime > 0) {
             long delay = 1000L;
 
@@ -157,6 +156,25 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     public void update(PlayerView player) {
         this.player = player;
+        if (flagName == null) { // do only once
+            avatar.setText(this.player.getName());
+            if (!player.getUserData().getFlagName().equals(flagName)) {
+                flagName = player.getUserData().getFlagName();
+                this.avatar.setTopTextImage(CountryUtil.getCountryFlagIcon(flagName).getImage());
+            }
+            // TODO: Add the wins to the tooltiptext of the avatar
+            String countryname = CountryUtil.getCountryName(flagName);
+            if (countryname == null) {
+                countryname = "Unknown";
+            }
+            String tooltip = "<HTML>Name: " + player.getName() + "<br/>Country: " + countryname;
+            avatar.setToolTipText(tooltip);
+            avatar.repaint();
+
+            // used if avatar image can't be used
+            this.btnPlayer.setText(player.getName());
+            this.btnPlayer.setToolTipText(tooltip);
+        }
         int playerLife = player.getLife();
         if (playerLife > 99) {
             Font font = lifeLabel.getFont();
@@ -235,15 +253,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 Image image = ImageHelper.getImageFromResources(path);
                 Rectangle r = new Rectangle(80, 80);
                 BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                this.avatar.update("player", resized, resized, resized, resized, r);
-            }
-            if (!player.getUserData().getFlagName().equals(flagName)) {
-                flagName = player.getUserData().getFlagName();
-                this.avatarFlag.setIcon(CountryUtil.getCountryFlagIcon(flagName));
-                avatar.repaint();
+                this.avatar.update(this.player.getName(), resized, resized, resized, resized, r);
             }
         }
-        this.avatar.setText(player.getName());
         if (this.timer != null) {
             if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
                 String priorityTimeValue = getPriorityTimeLeftString(player);
@@ -258,8 +270,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
 
-        this.btnPlayer.setText(player.getName());
-        this.btnPlayer.setToolTipText("Life: " + player.getLife());
         if (player.isActive()) {
             this.avatar.setBorder(greenBorder);
             this.btnPlayer.setBorder(greenBorder);
@@ -323,15 +333,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         Image image = ImageHelper.getImageFromResources(DEFAULT_AVATAR_PATH);
 
         BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-        avatar = new HoverButton("player", resized, resized, resized, r);
-        avatar.setLayout(new GridLayout(4, 1, 0, 0));
-        avatar.add(new JLabel());
-        avatar.add(new JLabel());
-        avatar.add(avatarFlag);
-        avatar.setAlignTextLeft(true);
-        avatarFlag.setHorizontalAlignment(JLabel.LEFT);
-        avatarFlag.setVerticalAlignment(JLabel.BOTTOM);
-        avatar.add(new JLabel());
+        avatar = new HoverButton("", resized, resized, resized, r);
+
         String showPlayerNamePermanently = MageFrame.getPreferences().get(PreferencesDialog.KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         if (showPlayerNamePermanently.equals("true")) {
             avatar.setTextAlwaysVisible(true);

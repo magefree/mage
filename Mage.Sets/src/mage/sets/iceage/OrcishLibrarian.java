@@ -121,7 +121,7 @@ class OrcishLibrarianEffect extends OneShotEffect {
                 }
                 player.lookAtCards("OrcishLibrarian", cards, game);
                 TargetCard target = new TargetCard (Zone.PICK, new FilterCard("card to put on the top of target player's library"));
-                while (player.isInGame() && cards.size() > 0) {
+                while (player.canRespond() && cards.size() > 0) {
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {

@@ -39,8 +39,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
@@ -55,9 +54,10 @@ public class SharedTriumph extends CardImpl {
 
         // As Shared Triumph enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
-        
         // Creatures of the chosen type get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, new FilterSharedTriumph(), false)));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures of the chosen type");
+        filter.add(new ChosenSubtypePredicate(this.getId()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     public SharedTriumph(final SharedTriumph card) {
@@ -68,32 +68,4 @@ public class SharedTriumph extends CardImpl {
     public SharedTriumph copy() {
         return new SharedTriumph(this);
     }
-}
-
-class FilterSharedTriumph extends FilterCreaturePermanent {
-
-    public FilterSharedTriumph() {
-        super("Creatures of the chosen type");
-    }
-
-    public FilterSharedTriumph(final FilterSharedTriumph filter) {
-        super(filter);
-    }
-
-    @Override
-    public FilterSharedTriumph copy() {
-        return new FilterSharedTriumph(this);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if(super.match(permanent, sourceId, playerId, game)){
-            String subtype = (String) game.getState().getValue(sourceId + "_type");
-            if(subtype != null && !subtype.equals("") && permanent.hasSubtype(subtype)){
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

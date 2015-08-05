@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
@@ -47,14 +47,13 @@ import mage.target.common.TargetControlledPermanent;
  * @author jeffwadsworth
  */
 public class RecurringNightmare extends CardImpl {
-    
+
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your graveyard");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("creature");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("creature");
 
     public RecurringNightmare(UUID ownerId) {
         super(ownerId, 72, "Recurring Nightmare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "EXO";
-
 
         // Sacrifice a creature, Return Recurring Nightmare to its owner's hand: Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter2)));

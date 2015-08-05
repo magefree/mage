@@ -49,7 +49,7 @@ public class TargetConvertedManaCost implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public TargetConvertedManaCost copy() {
         return new TargetConvertedManaCost();
     }
 

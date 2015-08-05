@@ -70,13 +70,13 @@ public class CunningBandit extends CardImpl {
         this.flipCardName = "Azamuki, Treachery Incarnate";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Cunning Bandit.
-         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Cunning Bandit, you may flip it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new AzamukiTreacheryIncarnate())),
                 new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
-                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it.", true));
+                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
     }
 
     public CunningBandit(final CunningBandit card) {

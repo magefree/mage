@@ -138,7 +138,7 @@ class DawnsReflectionManaEffect extends ManaEffect {
             Mana mana = new Mana();
             for(int i = 0; i < x; i++){
                 ChoiceColor choiceColor = new ChoiceColor();
-                while (controller.isInGame() && !controller.choose(Outcome.Benefit, choiceColor, game)) {
+                while (controller.canRespond() && !controller.choose(Outcome.Benefit, choiceColor, game)) {
                 }
 
                 if (choiceColor.getColor().isBlack()) {

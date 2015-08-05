@@ -44,7 +44,6 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-
 public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterCard filter;
@@ -58,7 +57,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
     public PutCardIntoGraveFromAnywhereAllTriggeredAbility(Effect effect, boolean optional, FilterCard filter, TargetController targetController) {
         this(effect, optional, filter, targetController, SetTargetPointer.NONE);
     }
-    
+
     public PutCardIntoGraveFromAnywhereAllTriggeredAbility(Effect effect, boolean optional, FilterCard filter, TargetController targetController, SetTargetPointer setTargetPointer) {
         this(Zone.BATTLEFIELD, effect, optional, filter, targetController, setTargetPointer);
     }
@@ -110,13 +109,13 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
             if (card != null && filter.match(card, getSourceId(), getControllerId(), game)) {
                 switch (setTargetPointer) {
                     case CARD:
-                        for (Effect effect: getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(card.getId()));
+                        for (Effect effect : getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                         }
                         break;
                     case PLAYER:
-                        for (Effect effect: getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(card.getOwnerId()));
+                        for (Effect effect : getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(card.getOwnerId(), 0));
                         }
                         break;
 

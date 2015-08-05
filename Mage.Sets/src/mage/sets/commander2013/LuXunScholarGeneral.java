@@ -29,7 +29,7 @@ package mage.sets.commander2013;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;

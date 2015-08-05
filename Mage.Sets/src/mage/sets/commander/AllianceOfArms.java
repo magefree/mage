@@ -117,7 +117,7 @@ class AllianceOfArmsEffect extends OneShotEffect {
     protected static int playerPaysXGenericMana(Player player, Ability source, Game game) {
         int xValue = 0;
         boolean payed = false;
-        while (player.isInGame() && !payed) {
+        while (player.canRespond() && !payed) {
             xValue = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
             if (xValue > 0) {
                 Cost cost = new GenericManaCost(xValue);

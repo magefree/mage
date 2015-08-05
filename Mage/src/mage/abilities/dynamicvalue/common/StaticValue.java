@@ -1,18 +1,19 @@
 package mage.abilities.dynamicvalue.common;
 
-
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
 public class StaticValue implements DynamicValue {
+
     private int value = 0;
     private String message;
-    
+
     public StaticValue(int value) {
         this(value, "");
     }
+
     public StaticValue(int value, String message) {
         this.value = value;
         this.message = message;
@@ -29,7 +30,7 @@ public class StaticValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public StaticValue copy() {
         return new StaticValue(this);
     }
 

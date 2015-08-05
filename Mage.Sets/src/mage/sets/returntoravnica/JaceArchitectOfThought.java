@@ -258,12 +258,12 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             for (UUID cardUuid : cardsToHand) {
                 Card card = cardsToHand.get(cardUuid, game);
                 if (card != null) {
-                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    player.moveCards(card, null, Zone.HAND, source, game);
                 }
             }
 
             TargetCard targetCard = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-            while (player.isInGame() && cardsToLibrary.size() > 1) {
+            while (player.canRespond() && cardsToLibrary.size() > 1) {
                 player.choose(Outcome.Neutral, cardsToLibrary, targetCard, game);
                 Card card = cardsToLibrary.get(targetCard.getFirstTarget(), game);
                 if (card != null) {

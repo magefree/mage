@@ -96,7 +96,7 @@ class CranialExtractionEffect extends OneShotEffect {
             cardChoice.clearChoice();
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }

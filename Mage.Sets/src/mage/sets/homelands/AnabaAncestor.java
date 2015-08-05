@@ -25,66 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.homelands;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class GorillaShaman extends CardImpl {
+public class AnabaAncestor extends CardImpl {
 
-    public GorillaShaman(UUID ownerId) {
-        super(ownerId, 106, "Gorilla Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ALL";
-        this.subtype.add("Ape");
-        this.subtype.add("Shaman");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Another target Minotaur creature");
+
+    static {
+        filter.add(new SubtypePredicate("Minotaur"));
+        filter.add(new AnotherPredicate());
+    }
+
+    public AnabaAncestor(UUID ownerId) {
+        super(ownerId, 81, "Anaba Ancestor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "HML";
+        this.subtype.add("Minotaur");
+        this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
-        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("noncreature artifact with converted mana cost X")));
+        // {T}: Another target Minotaur creature gets +1/+1 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
-    
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
-            int xValue = ability.getManaCostsToPay().getX();
-            ability.getTargets().clear();
-            FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("noncreature artifact with converted mana cost ").append(xValue).toString());
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
-            filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-            Target target = new TargetPermanent(filter);
-            ability.addTarget(target);
-        }
-    }
 
-    public GorillaShaman(final GorillaShaman card) {
+    public AnabaAncestor(final AnabaAncestor card) {
         super(card);
     }
 
     @Override
-    public GorillaShaman copy() {
-        return new GorillaShaman(this);
+    public AnabaAncestor copy() {
+        return new AnabaAncestor(this);
     }
 }

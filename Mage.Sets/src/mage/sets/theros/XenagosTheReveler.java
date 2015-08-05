@@ -127,7 +127,7 @@ class XenagosManaEffect extends OneShotEffect {
             for (int i = 0; i < x; i++){
                 Mana mana = new Mana();
                 while (!player.choose(Outcome.Benefit, manaChoice, game)) {
-                    if (!player.isInGame()) {
+                    if (!player.canRespond()) {
                         return false;
                     }
                 }

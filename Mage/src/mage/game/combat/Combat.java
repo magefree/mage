@@ -236,7 +236,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (!game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
                 player.selectAttackers(game, attackerId);
             }
-            if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
                 return;
             }
             // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the valid combat object!!!
@@ -393,7 +393,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 while (choose) {
                     controller.selectBlockers(game, defenderId);
-                    if (game.isPaused() || game.gameOver(null)) {
+                    if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
                         return;
                     }
                     if (!this.checkBlockRestrictions(defender, game)) {
@@ -810,19 +810,21 @@ public class Combat implements Serializable, Copyable<Combat> {
                 // check now, if it already blocks a creature that mustBeBlockedByAtLeastOne
                 if (possibleBlocker.getBlocking() > 0) {
                     CombatGroup combatGroupOfPossibleBlocker = findGroupOfBlocker(possibleBlockerId);
-                    for (UUID blockedAttackerId : combatGroupOfPossibleBlocker.getAttackers()) {
-                        if (mustBeBlockedByAtLeastOne.containsKey(blockedAttackerId)) {
-                            // blocks a creature that has to be blocked by at least one
-                            if (combatGroupOfPossibleBlocker.getBlockers().size() == 1) {
-                                // the creature blocks alone already a creature that has to be blocked by at least one,
-                                // so this is ok
-                                return null;
+                    if (combatGroupOfPossibleBlocker != null) {
+                        for (UUID blockedAttackerId : combatGroupOfPossibleBlocker.getAttackers()) {
+                            if (mustBeBlockedByAtLeastOne.containsKey(blockedAttackerId)) {
+                                // blocks a creature that has to be blocked by at least one
+                                if (combatGroupOfPossibleBlocker.getBlockers().size() == 1) {
+                                    // the creature blocks alone already a creature that has to be blocked by at least one,
+                                    // so this is ok
+                                    return null;
+                                }
+                                // TODO: Check if the attacker is already blocked by another creature
+                                // and despite there is need that this attacker blocks this attacker also
+                                // I don't know why
+                                Permanent blockedAttacker = game.getPermanent(blockedAttackerId);
+                                return possibleBlocker.getIdName() + " blocks with other creatures " + blockedAttacker.getIdName() + ", which has to be blocked by only one creature. ";
                             }
-                            // TODO: Check if the attacker is already blocked by another creature
-                            // and despite there is need that this attacker blocks this attacker also
-                            // I don't know why
-                            Permanent blockedAttacker = game.getPermanent(blockedAttackerId);
-                            return possibleBlocker.getIdName() + " blocks with other creatures " + blockedAttacker.getIdName() + ", which has to be blocked by only one creature. ";
                         }
                     }
                 }
@@ -947,9 +949,12 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (!canDefenderBeAttacked(attackerId, defenderId, game)) {
             return false;
         }
+        Permanent attacker = game.getPermanent(attackerId);
+        if (attacker == null) {
+            return false;
+        }
         CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defender != null ? defender.getControllerId() : defenderId);
         newGroup.attackers.add(attackerId);
-        Permanent attacker = game.getPermanent(attackerId);
         attacker.setAttacking(true);
         groups.add(newGroup);
         return true;

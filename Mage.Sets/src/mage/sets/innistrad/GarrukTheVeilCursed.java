@@ -153,7 +153,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
         Target target = new TargetControlledPermanent(1, 1, filterCreature, false);
         boolean sacrificed = false;
         if (target.canChoose(controller.getId(), game)) {
-            while (controller.isInGame() && !target.isChosen() && target.canChoose(controller.getId(), game)) {
+            while (controller.canRespond() && !target.isChosen() && target.canChoose(controller.getId(), game)) {
                 controller.chooseTarget(Outcome.Sacrifice, target, source, game);
             }
 

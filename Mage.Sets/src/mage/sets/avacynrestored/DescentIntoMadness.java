@@ -126,7 +126,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                 do {
                     selectCards(currentPlayer, selectedObjects, count, source, game);
                     currentPlayer = playerList.getNextInRange(controller, game);                    
-                } while (!currentPlayer.equals(controller) && controller.isInGame());
+                } while (!currentPlayer.equals(controller) && controller.canRespond());
                 
                 // move permanents and hand cards to exile
                 for (UUID objectId : selectedObjects) {
@@ -159,7 +159,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
         int amount = Math.min(count, player.getHand().size() + game.getBattlefield().getAllActivePermanents(player.getId()).size());
         int cardsFromHand = 0;
         
-        while (player.isInGame() && amount > 0) {
+        while (player.canRespond() && amount > 0) {
             
             Target target;
             do {
@@ -185,7 +185,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                         }
                     }
                 }
-            } while (amount > 0 && !target.getTargets().isEmpty() && player.isInGame());
+            } while (amount > 0 && !target.getTargets().isEmpty() && player.canRespond());
             if (amount > 0) {                
                 TargetCard targetInHand;
                 do {
@@ -207,7 +207,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                             cardsFromHand++;
                         }
                     }
-                } while (amount > 0 && !targetInHand.getTargets().isEmpty() && player.isInGame());
+                } while (amount > 0 && !targetInHand.getTargets().isEmpty() && player.canRespond());
 
             }
         }

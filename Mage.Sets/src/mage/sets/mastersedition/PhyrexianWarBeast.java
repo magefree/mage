@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author fireshoes
  */
-public class PhyrexianWarBeast extends mage.sets.alliances.PhyrexianWarBeast {
+public class PhyrexianWarBeast extends mage.sets.alliances.PhyrexianWarBeast1 {
 
     public PhyrexianWarBeast(UUID ownerId) {
         super(ownerId);

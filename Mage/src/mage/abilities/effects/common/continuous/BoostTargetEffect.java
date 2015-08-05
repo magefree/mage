@@ -115,8 +115,11 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
+        if (mode == null || mode.getTargets().size() == 0) {
+            return "no target";
+        }
         Target target = mode.getTargets().get(0);
+        StringBuilder sb = new StringBuilder();
         if (target.getMaxNumberOfTargets() > 1) {
             if (target.getNumberOfTargets() < target.getNumberOfTargets()) {
                 sb.append("up to ");

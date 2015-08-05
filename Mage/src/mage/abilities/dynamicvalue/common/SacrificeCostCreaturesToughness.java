@@ -15,11 +15,11 @@ public class SacrificeCostCreaturesToughness implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost: sourceAbility.getCosts()) {
+        for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
                 int toughnessSum = 0;
-                for (Permanent permanent :sacrificeCost.getPermanents()) {
+                for (Permanent permanent : sacrificeCost.getPermanents()) {
                     toughnessSum += permanent.getToughness().getValue();
                 }
                 return toughnessSum;
@@ -29,7 +29,7 @@ public class SacrificeCostCreaturesToughness implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public SacrificeCostCreaturesToughness copy() {
         return new SacrificeCostCreaturesToughness();
     }
 
@@ -37,7 +37,6 @@ public class SacrificeCostCreaturesToughness implements DynamicValue {
     public String toString() {
         return "X";
     }
-
 
     @Override
     public String getMessage() {

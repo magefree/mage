@@ -29,7 +29,7 @@ public class CountersCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CountersCount copy() {
         return new CountersCount(this);
     }
 

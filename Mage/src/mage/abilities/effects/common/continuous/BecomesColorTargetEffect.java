@@ -83,7 +83,7 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
                 controller.choose(Outcome.PutManaInPool, choice, game);
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return;
                 }
             }

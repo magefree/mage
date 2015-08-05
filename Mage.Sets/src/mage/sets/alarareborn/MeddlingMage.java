@@ -57,8 +57,6 @@ public class MeddlingMage extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-
-
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -117,7 +115,8 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
-        return object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY));
+        // fixes issue #1072
+        return object != null && !object.isCopy() && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY));
     }
 
 }

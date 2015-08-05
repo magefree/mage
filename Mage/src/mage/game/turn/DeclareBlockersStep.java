@@ -25,14 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.turn;
 
+import java.util.UUID;
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
-
-import java.util.UUID;
 
 /**
  *
@@ -63,7 +61,7 @@ public class DeclareBlockersStep extends Step {
     public void beginStep(Game game, UUID activePlayerId) {
         super.beginStep(game, activePlayerId);
         game.getCombat().selectBlockers(game);
-        if (!game.isPaused()) {
+        if (!game.isPaused() && !game.executingRollback()) {
             game.getCombat().acceptBlockers(game);
             game.getCombat().damageAssignmentOrder(game);
         }

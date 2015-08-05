@@ -143,6 +143,13 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         for (OptionalAdditionalCost cost : kickerCosts) {
             cost.reset();
         }
+        String key = getActivationKey(source, "", game);
+        for (String activationKey : activations.keySet()) {
+            if (activationKey.startsWith(key) && activations.get(activationKey) > 0) {
+                activations.put(key, 0);
+            }
+        }
+
     }
 
     public int getXManaValue() {
@@ -209,7 +216,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                 this.resetKicker(game, ability);
                 for (OptionalAdditionalCost kickerCost : kickerCosts) {
                     boolean again = true;
-                    while (player.isInGame() && again) {
+                    while (player.canRespond() && again) {
                         String times = "";
                         if (kickerCost.isRepeatable()) {
                             int activatedCount = getKickedCounter(game, ability);

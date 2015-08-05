@@ -102,7 +102,7 @@ class RidersOfGavonyEffect extends OneShotEffect {
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.isInGame()) {
+                if (!player.canRespond()) {
                     return false;
                 }
             }

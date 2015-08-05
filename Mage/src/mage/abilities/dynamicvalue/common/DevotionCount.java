@@ -4,6 +4,8 @@
  */
 package mage.abilities.dynamicvalue.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -12,11 +14,9 @@ import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
- * Each colored mana symbol (e.g. {U}) in the mana costs of permanents you control counts toward your devotion to that color.
+ * Each colored mana symbol (e.g. {U}) in the mana costs of permanents you
+ * control counts toward your devotion to that color.
  *
  * @author LevelX2
  */
@@ -36,8 +36,8 @@ public class DevotionCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int devotion = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
-            for(ManaCost manaCost :permanent.getManaCost()) {
-                for(ColoredManaSymbol coloredManaSymbol: devotionColors) {
+            for (ManaCost manaCost : permanent.getManaCost()) {
+                for (ColoredManaSymbol coloredManaSymbol : devotionColors) {
                     if (manaCost.containsColor(coloredManaSymbol)) {
                         devotion++;
                         break; // count each manaCost maximum of one time (Hybrid don't count for multiple colors of devotion)
@@ -49,7 +49,7 @@ public class DevotionCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public DevotionCount copy() {
         return new DevotionCount(this);
     }
 
@@ -62,7 +62,7 @@ public class DevotionCount implements DynamicValue {
     public String getMessage() {
         StringBuilder sb = new StringBuilder("devotion to ");
         int count = 0;
-        for (ColoredManaSymbol coloredManaSymbol:devotionColors) {
+        for (ColoredManaSymbol coloredManaSymbol : devotionColors) {
             if (count > 0) {
                 sb.append(" and ");
             }

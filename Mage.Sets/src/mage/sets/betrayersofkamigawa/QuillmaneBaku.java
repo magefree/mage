@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
@@ -39,7 +38,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -69,7 +67,7 @@ public class QuillmaneBaku extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        
+
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
 
@@ -87,11 +85,11 @@ public class QuillmaneBaku extends CardImpl {
             int maxConvManaCost = 0;
             for (Cost cost : ability.getCosts()) {
                 if (cost instanceof RemoveVariableCountersSourceCost) {
-                    maxConvManaCost = ((RemoveVariableCountersSourceCost)cost).getAmount();
+                    maxConvManaCost = ((RemoveVariableCountersSourceCost) cost).getAmount();
                 }
             }
             ability.getTargets().clear();
-            FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with converted mana cost " + maxConvManaCost  + " or less");
+            FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with converted mana cost " + maxConvManaCost + " or less");
             newFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, maxConvManaCost + 1));
             TargetCreaturePermanent target = new TargetCreaturePermanent(newFilter);
             ability.getTargets().add(target);
@@ -106,7 +104,7 @@ public class QuillmaneBaku extends CardImpl {
     public QuillmaneBaku copy() {
         return new QuillmaneBaku(this);
     }
-    
+
     class QuillmaneBakuReturnEffect extends OneShotEffect {
 
         public QuillmaneBakuReturnEffect() {
@@ -125,16 +123,15 @@ public class QuillmaneBaku extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player == null) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller == null) {
                 return false;
             }
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                player.moveCardToHandWithInfo((Card) permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
-                return true;
+                controller.moveCards(permanent, null, Zone.HAND, source, game);
             }
-            return false;
+            return true;
         }
     }
 }

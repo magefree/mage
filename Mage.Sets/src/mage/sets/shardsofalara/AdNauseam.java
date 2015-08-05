@@ -50,7 +50,6 @@ public class AdNauseam extends CardImpl {
         super(ownerId, 63, "Ad Nauseam", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
         this.expansionSetCode = "ALA";
 
-
         // Reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost. You may repeat this process any number of times.
         this.getSpellAbility().addEffect(new AdNauseamEffect());
     }
@@ -92,12 +91,12 @@ class AdNauseamEffect extends OneShotEffect {
         while (controller.chooseUse(outcome, message, source, game) && controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
-                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                controller.moveCards(card, null, Zone.HAND, source, game);
                 int cmc = card.getManaCost().convertedManaCost();
                 if (cmc > 0) {
                     controller.loseLife(cmc, game);
                 }
-                controller.revealCards(new StringBuilder(sourceCard.getName()).append(" put into hand").toString(), new CardsImpl(card), game);
+                controller.revealCards(sourceCard.getIdName() + " put into hand", new CardsImpl(card), game);
             }
         }
         return true;

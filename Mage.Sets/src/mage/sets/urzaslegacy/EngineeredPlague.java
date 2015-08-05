@@ -28,16 +28,18 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
@@ -53,7 +55,9 @@ public class EngineeredPlague extends CardImpl {
         // As Engineered Plague enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
         // All creatures of the chosen type get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, new FilterEngineeredPlague(), false)));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
+        filter.add(new ChosenSubtypePredicate(this.getId()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     public EngineeredPlague(final EngineeredPlague card) {
@@ -64,33 +68,4 @@ public class EngineeredPlague extends CardImpl {
     public EngineeredPlague copy() {
         return new EngineeredPlague(this);
     }
-    
-    class FilterEngineeredPlague extends FilterCreaturePermanent {
-
-        public FilterEngineeredPlague() {
-            super("All creatures of the chosen type");
-        }
-
-        public FilterEngineeredPlague(final FilterEngineeredPlague filter) {
-            super(filter);
-        }
-
-        @Override
-        public FilterEngineeredPlague copy() {
-            return new FilterEngineeredPlague(this);
-        }
-
-        @Override
-        public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-            if(super.match(permanent, sourceId, playerId, game)){
-                String subtype = (String) game.getState().getValue(sourceId + "_type");
-                if(subtype != null && !subtype.equals("") && permanent.hasSubtype(subtype)){
-                    return true;
-                }
-            }
-            return false;
-        }
-         
-    }
-    
 }

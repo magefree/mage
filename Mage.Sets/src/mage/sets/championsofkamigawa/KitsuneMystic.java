@@ -28,10 +28,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -42,6 +38,10 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -72,8 +72,7 @@ public class KitsuneMystic extends CardImpl {
         // At the beginning of the end step, if Kitsune Mystic is enchanted by two or more Auras, flip it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new AutumnTailKitsuneSage())),
-                new EnchantedCondition(2),"At the beginning of the end step, if {this} is enchanted by two or more Auras, flip it.", false
-                ));
+                new EnchantedCondition(2), "At the beginning of the end step, if {this} is enchanted by two or more Auras, flip it."));
     }
 
     public KitsuneMystic(final KitsuneMystic card) {

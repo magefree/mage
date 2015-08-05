@@ -27,6 +27,8 @@
  */
 package mage.sets.eventide;
 
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -43,8 +45,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -55,7 +55,6 @@ public class SanityGrinding extends CardImpl {
     public SanityGrinding(UUID ownerId) {
         super(ownerId, 29, "Sanity Grinding", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}{U}");
         this.expansionSetCode = "EVE";
-
 
         // Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new SanityGrindingEffect());
@@ -86,18 +85,15 @@ class SanityGrindingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetOpponent = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        Cards revealed = new CardsImpl();
-        int amount;
-        if (controller == null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
-        amount = (Math.min(10, controller.getLibrary().size()));
-        for (int i = 0; i < amount; i++) {
-            revealed.add(controller.getLibrary().removeFromTop(game));
-        }
-        controller.revealCards("Sanity Grinding", revealed, game);
+        Cards revealed = new CardsImpl();
+        revealed.addAll(controller.getLibrary().getTopCards(game, 10));
+        controller.revealCards(sourceObject.getIdName(), revealed, game);
+        Player targetOpponent = game.getPlayer(source.getFirstTarget());
         if (targetOpponent != null) {
             targetOpponent.moveCards(targetOpponent.getLibrary().getTopCards(game, new ChromaSanityGrindingCount(revealed).calculate(game, source, this)),
                     Zone.LIBRARY, Zone.GRAVEYARD, source, game);

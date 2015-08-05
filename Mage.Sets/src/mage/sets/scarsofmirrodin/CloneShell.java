@@ -125,7 +125,7 @@ class CloneShellEffect extends OneShotEffect {
 
         if (cards.size() > 0) {
             TargetCard target2 = new TargetCard(Zone.PICK, filter2);
-            while (player.isInGame() && cards.size() > 1) {
+            while (player.canRespond() && cards.size() > 1) {
                 player.choose(Outcome.Benefit, cards, target2, game);
                 Card card = cards.get(target2.getFirstTarget(), game);
                 if (card != null) {

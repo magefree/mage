@@ -107,7 +107,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                     Player player = game.getPlayer(game.getActivePlayerId());
                     if (player != null) {
                         while (!player.choose(outcome, choiceImpl, game)) {
-                            if (player.isInGame()) {
+                            if (player.canRespond()) {
                                 return false;
                             }
                         }

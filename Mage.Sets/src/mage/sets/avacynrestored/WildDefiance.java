@@ -93,7 +93,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
         if (permanent != null && permanent.getControllerId().equals(this.controllerId) && permanent.getCardType().contains(CardType.CREATURE)) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object instanceof Spell) {
-                Card c = (Spell)object;
+                Card c = (Spell) object;
                 if (c.getCardType().contains(CardType.INSTANT) || c.getCardType().contains(CardType.SORCERY)) {
                     if (getTargets().size() == 0) {
                         for (Effect effect : getEffects()) {
@@ -109,6 +109,6 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn";
+        return "Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.";
     }
 }

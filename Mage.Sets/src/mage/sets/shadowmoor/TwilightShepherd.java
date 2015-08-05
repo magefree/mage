@@ -30,19 +30,23 @@ package mage.sets.shadowmoor;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.PersistAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
 /**
@@ -104,17 +108,22 @@ class TwilightShepherdEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
-        if (watcher != null) {
-            Set<UUID> cardsInGraveyardId = watcher.getCardsPutToGraveyardFromBattlefield();
-            for (UUID cardId : cardsInGraveyardId) {
-                Card card = game.getCard(cardId);
-                if (card != null 
-                        && card.getOwnerId().equals(source.getControllerId())
-                        && game.getState().getZone(card.getId()).match(Zone.GRAVEYARD)) {
-                    applied = card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && watcher != null) {
+            Set<MageObjectReference> cardsInGraveyard = watcher.getCardsPutToGraveyardFromBattlefield();
+            Cards cardsToHand = new CardsImpl();
+            for (MageObjectReference mor : cardsInGraveyard) {
+                if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
+                    Card card = game.getCard(mor.getSourceId());
+                    if (card != null
+                            && card.getOwnerId().equals(source.getControllerId())) {
+                        cardsToHand.add(card);
+                    }
                 }
             }
+            controller.moveCards(cardsToHand, Zone.GRAVEYARD, Zone.HAND, source, game);
+            return true;
         }
-        return applied;
+        return false;
     }
 }

@@ -421,13 +421,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     game.setZone(objectId, Zone.BATTLEFIELD);
                     game.setScopeRelevant(true);
                     game.applyEffects();
-                    permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
+                    boolean entered = permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
                     game.setScopeRelevant(false);
                     game.applyEffects();
-                    if (flag) {
-                        permanent.setTapped(true);
+                    if (entered) {
+                        if (flag) {
+                            permanent.setTapped(true);
+                        }
+                        event.setTarget(permanent);
+                    } else {
+                        return false;
                     }
-                    event.setTarget(permanent);
                     break;
                 default:
                     Card sourceCard = game.getCard(sourceId);
@@ -603,11 +607,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             game.setScopeRelevant(true);
             permanent.setTapped(tapped);
             permanent.setFaceDown(facedown, game);
-            permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
+            boolean entered = permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.setScopeRelevant(false);
             game.applyEffects();
-            game.addSimultaneousEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));
-            return true;
+            if (entered) {
+                game.addSimultaneousEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));
+                return true;
+            }
         }
         if (facedown) {
             this.setFaceDown(false, game);

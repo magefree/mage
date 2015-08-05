@@ -106,7 +106,7 @@ class ObeliskOfUrdEnterBattlefieldEffect extends OneShotEffect {
             typeChoice.setMessage("Choose a creature type:");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.isInGame()) {
+                if (!player.canRespond()) {
                     return false;
                 }
             }

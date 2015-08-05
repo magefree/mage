@@ -27,21 +27,15 @@
  */
 package mage.sets.zendikar;
 
-import java.util.ArrayList;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
@@ -55,7 +49,6 @@ public class RavenousTrap extends CardImpl {
         super(ownerId, 109, "Ravenous Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
-
 
         // If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(
@@ -97,7 +90,7 @@ class RavenousTrapAlternativeCost extends AlternativeCostImpl {
     public boolean isAvailable(Game game, Ability source) {
         CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
         if (watcher != null) {
-            for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 if (watcher.getAmountCardsPutToGraveyard(opponentId) > 2) {
                     return true;
                 }
@@ -108,6 +101,6 @@ class RavenousTrapAlternativeCost extends AlternativeCostImpl {
 
     @Override
     public String getText() {
-        return "If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost";
+        return "If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay {this}'s mana cost";
     }
 }

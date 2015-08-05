@@ -25,14 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,12 +60,12 @@ public class ReturnToHandTargetPermanentCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
-                for (UUID targetId: targets.get(0).getTargets()) {
+                for (UUID targetId : targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent == null) {
                         return false;
                     }
-                    paid |= controller.moveCardToHandWithInfo(permanent, sourceId, game, Zone.HAND);
+                    paid |= controller.moveCardToHandWithInfo(permanent, sourceId, game);
                 }
             }
         }
@@ -83,6 +81,5 @@ public class ReturnToHandTargetPermanentCost extends CostImpl {
     public ReturnToHandTargetPermanentCost copy() {
         return new ReturnToHandTargetPermanentCost(this);
     }
-
 
 }

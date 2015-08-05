@@ -25,28 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.portal;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class Astrolabe extends mage.sets.masterseditioniii.Astrolabe {
-
-    public Astrolabe(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 159;
-        this.expansionSetCode = "ALL";
+public class PlantElemental extends CardImpl {
+    
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Forest");
+    
+    static{
+        filter.add(new SubtypePredicate("Forest"));
     }
 
-    public Astrolabe(final Astrolabe card) {
+    public PlantElemental(UUID ownerId) {
+        super(ownerId, 107, "Plant Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "POR";
+        this.subtype.add("Plant");
+        this.subtype.add("Elemental");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // When Plant Elemental enters the battlefield, sacrifice it unless you sacrifice a Forest.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+    }
+
+    public PlantElemental(final PlantElemental card) {
         super(card);
     }
 
     @Override
-    public Astrolabe copy() {
-        return new Astrolabe(this);
+    public PlantElemental copy() {
+        return new PlantElemental(this);
     }
 }

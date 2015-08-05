@@ -31,14 +31,14 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Vanishing ")
-            .append(vanishingAmount)
-            .append(" <i>(This permanent enters the battlefield with ").append(CardUtil.numberToText(vanishingAmount))
-            .append(" time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)<i>").toString();
+        return "Vanishing " + vanishingAmount
+                + " <i>(This permanent enters the battlefield with " + CardUtil.numberToText(vanishingAmount)
+                + " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)<i>";
     }
 }
 
 class VanishingEffect extends OneShotEffect {
+
     VanishingEffect() {
         super(Outcome.Sacrifice);
     }
@@ -47,7 +47,6 @@ class VanishingEffect extends OneShotEffect {
         super(effect);
     }
 
-
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
@@ -55,6 +54,7 @@ class VanishingEffect extends OneShotEffect {
             int amount = p.getCounters().getCount(CounterType.TIME);
             if (amount > 0) {
                 p.removeCounters(CounterType.TIME.createInstance(), game);
+                game.informPlayers("Removed a time counter from " + p.getLogName() + " (" + amount + " left)");
             }
             return true;
         }

@@ -83,4 +83,26 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
 
         assertTapped("Basalt Monolith", false);
     }
+
+    /**
+     * AI gets stuck with two Kiora's Followers #1167
+     */
+    @Test
+    public void testKiorasFollower() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2, true);
+        // {T}: Untap another target permanent.
+        addCard(Zone.BATTLEFIELD, playerA, "Kiora's Follower", 1, true);
+        addCard(Zone.BATTLEFIELD, playerA, "Kiora's Follower", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2);
+
+        attack(2, playerB, "Silvercoat Lion");
+        attack(2, playerB, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 16);
+        assertTapped("Kiora's Follower", false);
+    }
 }

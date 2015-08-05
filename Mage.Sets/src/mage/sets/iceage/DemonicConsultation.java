@@ -28,6 +28,7 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -54,7 +55,6 @@ public class DemonicConsultation extends CardImpl {
         super(ownerId, 9, "Demonic Consultation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ICE";
 
-
         // Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way.
         this.getSpellAbility().addEffect(new DemonicConsultationEffect());
     }
@@ -70,63 +70,58 @@ public class DemonicConsultation extends CardImpl {
 }
 
 class DemonicConsultationEffect extends OneShotEffect {
-    
+
     DemonicConsultationEffect() {
         super(Outcome.Benefit);
         this.staticText = "Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way";
     }
-    
+
     DemonicConsultationEffect(final DemonicConsultationEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DemonicConsultationEffect copy() {
         return new DemonicConsultationEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             // Name a card.
             Choice choice = new ChoiceImpl();
             choice.setChoices(CardRepository.instance.getNames());
-            while (!player.choose(Outcome.Benefit, choice, game)) {
-                if (!player.isInGame()) {
+            while (!controller.choose(Outcome.Benefit, choice, game)) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }
             String name = choice.getChoice();
             game.informPlayers("Card named: " + name);
-            
+
             // Exile the top six cards of your library,
-            int num = Math.min(6, player.getLibrary().size());
-            for (int i = 0; i < num; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
-                }
-            }
-            
+            controller.moveCards(controller.getLibrary().getTopCards(game, 6), null, Zone.EXILED, source, game);
+
             // then reveal cards from the top of your library until you reveal the named card.
-            Cards cards = new CardsImpl(Zone.LIBRARY);
-            while (player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().removeFromTop(game);
+            Cards cardsToReaveal = new CardsImpl();
+            Card cardToHand = null;
+            while (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    cards.add(card);
+                    cardsToReaveal.add(card);
                     // Put that card into your hand
                     if (card.getName().equals(name)) {
-                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        cardToHand = card;
                         break;
-                    }
-                    // and exile all other cards revealed this way.
-                    else {
-                        player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
             }
-            player.revealCards("Demonic Consultation", cards, game);
+            controller.moveCards(cardToHand, null, Zone.HAND, source, game);
+            controller.revealCards(sourceObject.getIdName(), cardsToReaveal, game);
+            cardsToReaveal.remove(cardToHand);
+            controller.moveCards(cardsToReaveal, null, Zone.EXILED, source, game);
             return true;
         }
         return false;

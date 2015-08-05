@@ -130,28 +130,28 @@ class GainAbilitySpellsEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            for (Card card: game.getExile().getAllCards(game)) {
+            for (Card card : game.getExile().getAllCards(game)) {
                 if (card.getOwnerId().equals(source.getControllerId()) && filter.match(card, game)) {
                     game.getState().addOtherAbility(card, ability);
                 }
             }
-            for (Card card: player.getLibrary().getCards(game)) {
+            for (Card card : player.getLibrary().getCards(game)) {
                 if (filter.match(card, game)) {
                     game.getState().addOtherAbility(card, ability);
                 }
             }
-            for (Card card: player.getHand().getCards(game)) {
+            for (Card card : player.getHand().getCards(game)) {
                 if (filter.match(card, game)) {
                     game.getState().addOtherAbility(card, ability);
                 }
             }
-            for (Card card: player.getGraveyard().getCards(game)) {
+            for (Card card : player.getGraveyard().getCards(game)) {
                 if (filter.match(card, game)) {
                     game.getState().addOtherAbility(card, ability);
                 }
             }
             for (StackObject stackObject : game.getStack()) {
-                if (stackObject.getControllerId().equals(source.getControllerId())) {                        
+                if (stackObject.getControllerId().equals(source.getControllerId())) {
                     Card card = game.getCard(stackObject.getSourceId());
                     if (card != null && filter.match(card, game)) {
                         if (!card.getAbilities().contains(ability)) {
@@ -199,15 +199,15 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        MageObject mageObject = game.getObject(spellId);        
-        if (mageObject == null || !(mageObject instanceof Spell) || ((Spell)mageObject).isCopiedSpell()) {
+        MageObject mageObject = game.getObject(spellId);
+        if (mageObject == null || !(mageObject instanceof Spell) || ((Spell) mageObject).isCopiedSpell()) {
             return false;
         } else {
             Card sourceCard = game.getCard(spellId);
             if (sourceCard != null) {
                 Player player = game.getPlayer(sourceCard.getOwnerId());
                 if (player != null) {
-                    player.moveCardToHandWithInfo(sourceCard, source.getSourceId(), game, Zone.STACK);
+                    player.moveCards(sourceCard, null, Zone.HAND, source, game);
                     discard();
                     return true;
                 }
@@ -215,6 +215,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
         }
         return false;
     }
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
@@ -225,21 +226,21 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
         //Something hit the stack from the hand, see if its a spell with this ability.
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (spellId == null && // because this effect works only once, spellId has to be null here
-                zEvent.getFromZone() == Zone.HAND &&
-                zEvent.getToZone() == Zone.STACK &&
-                event.getPlayerId().equals(source.getControllerId())) {
+                zEvent.getFromZone() == Zone.HAND
+                && zEvent.getToZone() == Zone.STACK
+                && event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getTargetId());
             if (object instanceof Card) {
-                if (filter.match((Card)object, game)) {
+                if (filter.match((Card) object, game)) {
                     this.spellId = event.getTargetId();
                 }
             }
         } else {
             // the spell goes to graveyard now so move it to hand again
-            if (zEvent.getFromZone() == Zone.STACK &&
-                    zEvent.getToZone() == Zone.GRAVEYARD &&
-                    event.getTargetId().equals(spellId)) {
-                Spell spell = game.getStack().getSpell(spellId);               
+            if (zEvent.getFromZone() == Zone.STACK
+                    && zEvent.getToZone() == Zone.GRAVEYARD
+                    && event.getTargetId().equals(spellId)) {
+                Spell spell = game.getStack().getSpell(spellId);
                 if (spell != null && !spell.isCountered()) {
                     return true;
                 }

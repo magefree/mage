@@ -114,7 +114,7 @@ class IntuitionEffect extends SearchEffect {
                 TargetCard targetCard = new TargetCard(Zone.PICK, new FilterCard());
                 
                 while(!opponent.choose(Outcome.Neutral, cards, targetCard, game)) {
-                    if (!opponent.isInGame()) {
+                    if (!opponent.canRespond()) {
                         return false;
                     }
                 }

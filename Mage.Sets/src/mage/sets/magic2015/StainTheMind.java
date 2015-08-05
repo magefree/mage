@@ -92,7 +92,7 @@ class StainTheMindEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
             cardChoice.setMessage("Name a nonland card");
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }

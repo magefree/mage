@@ -25,28 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.ravnica;
 
 import java.util.UUID;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
  *
  * @author fireshoes
  */
-public class FeastOrFamine extends mage.sets.izzetvsgolgari.FeastOrFamine {
+public class Blockbuster extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
-    public FeastOrFamine(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 8;
-        this.expansionSetCode = "ALL";
+    static {
+        filter.add(new TappedPredicate());
     }
 
-    public FeastOrFamine(final FeastOrFamine card) {
+    public Blockbuster(UUID ownerId) {
+        super(ownerId, 115, "Blockbuster", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
+        this.expansionSetCode = "RAV";
+
+        // {1}{R}, Sacrifice Blockbuster: Blockbuster deals 3 damage to each tapped creature and each player.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(3, filter), new ManaCostsImpl("{1}{R}")));
+    }
+
+    public Blockbuster(final Blockbuster card) {
         super(card);
     }
 
     @Override
-    public FeastOrFamine copy() {
-        return new FeastOrFamine(this);
+    public Blockbuster copy() {
+        return new Blockbuster(this);
     }
 }

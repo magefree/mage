@@ -60,7 +60,7 @@ public class ClashWinReturnToHandSpellEffect extends OneShotEffect implements Ma
             if (ClashEffect.getInstance().apply(game, source)) {
                 Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
                 if (spellCard != null) {
-                    controller.moveCardToHandWithInfo(spellCard, source.getSourceId(), game, Zone.STACK);
+                    controller.moveCards(spellCard, null, Zone.HAND, source, game);
                 }
             }
             return true;

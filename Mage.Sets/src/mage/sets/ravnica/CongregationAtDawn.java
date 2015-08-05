@@ -107,7 +107,7 @@ class CongregationAtDawnEffect extends OneShotEffect {
 
                     TargetCard targetToLib = new TargetCard(Zone.PICK, new FilterCard(textTop));
 
-                    while (revealed.size() > 1 && controller.isInGame()) {
+                    while (revealed.size() > 1 && controller.canRespond()) {
                         controller.choose(Outcome.Neutral, revealed, targetToLib, game);
                         Card card = revealed.get(targetToLib.getFirstTarget(), game);
                         if (card != null) {

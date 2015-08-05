@@ -34,12 +34,11 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -50,11 +49,7 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -63,7 +58,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class GarrukCallerOfBeasts extends CardImpl {
 
-    private static final FilterCreatureCard filterGreenCreature = new FilterCreatureCard("a green creature card from your hand");
+    private static final FilterCreatureCard filterGreenCreature = new FilterCreatureCard("a green creature card");
+
     static {
         filterGreenCreature.add(new ColorPredicate(ObjectColor.GREEN));
     }
@@ -80,7 +76,7 @@ public class GarrukCallerOfBeasts extends CardImpl {
         this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(5, new FilterCreatureCard("all creature cards"),true), 1));
 
         // -3: You may put a green creature card from your hand onto the battlefield.
-        this.addAbility(new LoyaltyAbility(new GarrukCallerOfBeastsPutOntoBattlefieldEffect(), -3));
+        this.addAbility(new LoyaltyAbility(new PutPermanentOnBattlefieldEffect(filterGreenCreature), -3));
 
         // -7: You get an emblem with "Whenever you cast a creature spell, you may search your library for a creature card, put it onto the battlefield, then shuffle your library.");
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new GarrukCallerOfBeastsEmblem()), -7));
@@ -96,6 +92,7 @@ public class GarrukCallerOfBeasts extends CardImpl {
         return new GarrukCallerOfBeasts(this);
     }
 }
+
 /**
  * Emblem: "Whenever you cast a creature spell, you may search your library for a creature card, put it onto the battlefield, then shuffle your library."
  */
@@ -111,50 +108,5 @@ class GarrukCallerOfBeastsEmblem extends Emblem {
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")),false, true, Outcome.PutCreatureInPlay);
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, filter, true, false);
         this.getAbilities().add(ability);
-    }
-}
-
-class GarrukCallerOfBeastsPutOntoBattlefieldEffect extends OneShotEffect {
-
-    private static final FilterCreatureCard filterGreenCreature = new FilterCreatureCard("a green creature card from your hand");
-
-    static {
-        filterGreenCreature.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-
-    public GarrukCallerOfBeastsPutOntoBattlefieldEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a green creature card from your hand onto the battlefield";
-    }
-
-    public GarrukCallerOfBeastsPutOntoBattlefieldEffect(final GarrukCallerOfBeastsPutOntoBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GarrukCallerOfBeastsPutOntoBattlefieldEffect copy() {
-        return new GarrukCallerOfBeastsPutOntoBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.getHand().count(filterGreenCreature, game) > 0) {
-
-                if (controller.chooseUse(Outcome.PutCreatureInPlay,
-                        "Put a green creature card onto the battlefield?", source, game)) {
-                    Target target = new TargetCardInHand(filterGreenCreature);
-                    if (controller.chooseTarget(outcome, target, source, game)) {
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

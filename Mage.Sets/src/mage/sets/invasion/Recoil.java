@@ -50,11 +50,10 @@ public class Recoil extends CardImpl {
         super(ownerId, 264, "Recoil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
         this.expansionSetCode = "INV";
 
-
         // Return target permanent to its owner's hand. Then that player discards a card.
         this.getSpellAbility().addEffect(new RecoilEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());        
-        
+        this.getSpellAbility().addTarget(new TargetPermanent());
+
     }
 
     public Recoil(final Recoil card) {
@@ -86,13 +85,11 @@ class RecoilEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target != null) {
-            Player controller = game.getPlayer(target.getControllerId());
-            if (controller != null) {
-                controller.moveCardToHandWithInfo(target, source.getSourceId(), game, Zone.BATTLEFIELD);
-                controller.discard(1, source, game);
-                return true;
-            }
+        Player controller = game.getPlayer(target.getControllerId());
+        if (target != null && controller != null) {
+            controller.moveCards(target, null, Zone.HAND, source, game);
+            controller.discard(1, false, source, game);
+            return true;
         }
         return false;
     }

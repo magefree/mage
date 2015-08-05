@@ -27,7 +27,7 @@
  */
 package mage.sets.khansoftarkir;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -49,7 +49,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -89,12 +88,12 @@ public class NarsetEnlightenedMaster extends CardImpl {
 class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
 
     public NarsetEnlightenedMasterExileEffect() {
-      super(Outcome.Discard);
-      staticText = "exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with {this} this turn without paying their mana costs";
+        super(Outcome.Discard);
+        staticText = "exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with {this} this turn without paying their mana costs";
     }
 
     public NarsetEnlightenedMasterExileEffect(final NarsetEnlightenedMasterExileEffect effect) {
-      super(effect);
+        super(effect);
     }
 
     @Override
@@ -102,16 +101,16 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && sourceObject != null) {
-            List<Card> cards = player.getLibrary().getTopCards(game, 4);
+            Set<Card> cards = player.getLibrary().getTopCards(game, 4);
             player.moveCards(cards, Zone.LIBRARY, Zone.EXILED, source, game);
             for (Card card : cards) {
-                if (game.getState().getZone(card.getId()) == Zone.EXILED &&
-                        !card.getCardType().contains(CardType.CREATURE) &&
-                        !card.getCardType().contains(CardType.LAND)) {
+                if (game.getState().getZone(card.getId()) == Zone.EXILED
+                        && !card.getCardType().contains(CardType.CREATURE)
+                        && !card.getCardType().contains(CardType.LAND)) {
                     ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
-                }                
+                }
             }
             return true;
         }
@@ -120,7 +119,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
 
     @Override
     public NarsetEnlightenedMasterExileEffect copy() {
-      return new NarsetEnlightenedMasterExileEffect(this);
+        return new NarsetEnlightenedMasterExileEffect(this);
     }
 }
 

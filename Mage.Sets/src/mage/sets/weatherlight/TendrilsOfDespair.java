@@ -25,46 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.weatherlight;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author fireshoes
  */
-public class PhyrexianWarBeast extends CardImpl {
+public class TendrilsOfDespair extends CardImpl {
 
-    public PhyrexianWarBeast(UUID ownerId) {
-        super(ownerId, 169, "Phyrexian War Beast", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "ALL";
-        this.subtype.add("Beast");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+    public TendrilsOfDespair(UUID ownerId) {
+        super(ownerId, 25, "Tendrils of Despair", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
+        this.expansionSetCode = "WTH";
 
-        // When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
-        Ability ability = new LeavesBattlefieldTriggeredAbility(new SacrificeTargetEffect(), false);
-        ability.addEffect(new DamageControllerEffect(1));
-        ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
-        this.addAbility(ability);
+        // As an additional cost to cast Tendrils of Despair, sacrifice a creature.
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        
+        // Target opponent discards two cards.
+        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(2));        
     }
 
-    public PhyrexianWarBeast(final PhyrexianWarBeast card) {
+    public TendrilsOfDespair(final TendrilsOfDespair card) {
         super(card);
     }
 
     @Override
-    public PhyrexianWarBeast copy() {
-        return new PhyrexianWarBeast(this);
+    public TendrilsOfDespair copy() {
+        return new TendrilsOfDespair(this);
     }
 }

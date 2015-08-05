@@ -102,7 +102,7 @@ class RiptideShapeshifterEffect extends OneShotEffect {
             choice.setMessage("Choose a creature type:");
             choice.setChoices(CardRepository.instance.getCreatureTypes());
             while (!player.choose(Outcome.BoostCreature, choice, game)) {
-                if (!player.isInGame()) {
+                if (!player.canRespond()) {
                     return false;
                 }
             }

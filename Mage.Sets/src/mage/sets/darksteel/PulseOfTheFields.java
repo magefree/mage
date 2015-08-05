@@ -66,21 +66,21 @@ public class PulseOfTheFields extends CardImpl {
 }
 
 class PulseOfTheFieldsReturnToHandEffect extends OneShotEffect {
-    
+
     PulseOfTheFieldsReturnToHandEffect() {
         super(Outcome.Benefit);
         this.staticText = "Then if an opponent has more life than you, return {this} to its owner's hand";
     }
-    
+
     PulseOfTheFieldsReturnToHandEffect(final PulseOfTheFieldsReturnToHandEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PulseOfTheFieldsReturnToHandEffect copy() {
         return new PulseOfTheFieldsReturnToHandEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -89,7 +89,7 @@ class PulseOfTheFieldsReturnToHandEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.getLife() > controller.getLife()) {
                     Card card = game.getCard(source.getSourceId());
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.STACK);
+                    controller.moveCards(card, null, Zone.HAND, source, game);
                     return true;
                 }
             }

@@ -94,7 +94,7 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
             typeChoice.setMessage("Choose a creature type:");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
             while (!player.choose(Outcome.LoseLife, typeChoice, game)) {
-                if (!player.isInGame()) {
+                if (!player.canRespond()) {
                     return false;
                 }
             }
