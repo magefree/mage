@@ -63,6 +63,6 @@ public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
             return staticText;
         }
 
-        return "You may put " + filter.getMessage() + " from your hand onto the battlefield";
+        return "you may put " + filter.getMessage() + " from your hand onto the battlefield";
     }
 }
