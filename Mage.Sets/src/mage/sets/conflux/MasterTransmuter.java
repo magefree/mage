@@ -28,25 +28,19 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -65,7 +59,7 @@ public class MasterTransmuter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {tap}, Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MasterTransmuterEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(new FilterArtifactCard("an artifact card")), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         this.addAbility(ability);
@@ -79,40 +73,5 @@ public class MasterTransmuter extends CardImpl {
     @Override
     public MasterTransmuter copy() {
         return new MasterTransmuter(this);
-    }
-}
-
-class MasterTransmuterEffect extends OneShotEffect {
-
-    public MasterTransmuterEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You may put an artifact card from your hand onto the battlefield";
-    }
-
-    public MasterTransmuterEffect(final MasterTransmuterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MasterTransmuterEffect copy() {
-        return new MasterTransmuterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInHand(new FilterArtifactCard("an artifact card from your hand"));
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.chooseUse(outcome, "Put an artifact from your hand to battlefield?", source, game)
-                    && controller.chooseTarget(outcome, target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                     controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                }
-            }
-        }
-
-        return false;
     }
 }

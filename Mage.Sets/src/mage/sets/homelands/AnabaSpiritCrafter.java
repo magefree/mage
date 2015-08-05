@@ -25,48 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.homelands;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterPermanentCard;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class GoblinLackey extends CardImpl {
+public class AnabaSpiritCrafter extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("a Goblin permanent card");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaur creatures");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate("Minotaur"));
     }
 
-    public GoblinLackey(UUID ownerId) {
-        super(ownerId, 190, "Goblin Lackey", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "USG";
-        this.subtype.add("Goblin");
-
+    public AnabaSpiritCrafter(UUID ownerId) {
+        super(ownerId, 86, "Anaba Spirit Crafter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "HML";
+        this.subtype.add("Minotaur");
+        this.subtype.add("Shaman");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Whenever Goblin Lackey deals damage to a player, you may put a Goblin permanent card from your hand onto the battlefield.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new PutPermanentOnBattlefieldEffect(filter), false));
+        // Minotaur creatures get +1/+0.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public GoblinLackey(final GoblinLackey card) {
+    public AnabaSpiritCrafter(final AnabaSpiritCrafter card) {
         super(card);
     }
 
     @Override
-    public GoblinLackey copy() {
-        return new GoblinLackey(this);
+    public AnabaSpiritCrafter copy() {
+        return new AnabaSpiritCrafter(this);
     }
 }

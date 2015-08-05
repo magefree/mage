@@ -25,44 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.sets.masterseditioniii;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class VedalkenHeretic extends CardImpl {
+public class AnabaSpiritCrafter extends mage.sets.homelands.AnabaSpiritCrafter {
 
-    public VedalkenHeretic(UUID ownerId) {
-        super(ownerId, 104, "Vedalken Heretic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{U}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Vedalken");
-        this.subtype.add("Rogue");
-
-
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Vedalken Heretic deals damage to an opponent, you may draw a card.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
-
+    public AnabaSpiritCrafter(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 87;
+        this.expansionSetCode = "ME3";
+        this.rarity = Rarity.COMMON;
     }
 
-    public VedalkenHeretic(final VedalkenHeretic card) {
+    public AnabaSpiritCrafter(final AnabaSpiritCrafter card) {
         super(card);
     }
 
     @Override
-    public VedalkenHeretic copy() {
-        return new VedalkenHeretic(this);
+    public AnabaSpiritCrafter copy() {
+        return new AnabaSpiritCrafter(this);
     }
 }

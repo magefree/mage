@@ -25,48 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class GoblinLackey extends CardImpl {
+public class Didgeridoo extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("a Goblin permanent card");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("a Minotaur permanent card");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate("Minotaur"));
     }
 
-    public GoblinLackey(UUID ownerId) {
-        super(ownerId, 190, "Goblin Lackey", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "USG";
-        this.subtype.add("Goblin");
+    public Didgeridoo(UUID ownerId) {
+        super(ownerId, 130, "Didgeridoo", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "HML";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Goblin Lackey deals damage to a player, you may put a Goblin permanent card from your hand onto the battlefield.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new PutPermanentOnBattlefieldEffect(filter), false));
+        // {3}: You may put a Minotaur permanent card from your hand onto the battlefield.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(filter), new ManaCostsImpl("{3}")));
     }
 
-    public GoblinLackey(final GoblinLackey card) {
+    public Didgeridoo(final Didgeridoo card) {
         super(card);
     }
 
     @Override
-    public GoblinLackey copy() {
-        return new GoblinLackey(this);
+    public Didgeridoo copy() {
+        return new Didgeridoo(this);
     }
 }

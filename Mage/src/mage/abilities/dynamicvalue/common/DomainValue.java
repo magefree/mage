@@ -15,7 +15,7 @@ public class DomainValue implements DynamicValue {
 
     private Integer amount;
     private boolean countTargetPlayer;
-    private UUID player;
+    private UUID playerId;
 
     public DomainValue() {
         this(1);
@@ -34,15 +34,15 @@ public class DomainValue implements DynamicValue {
         this.countTargetPlayer = countTargetPlayer;
     }
 
-    public DomainValue(Integer amount, UUID player) {
+    public DomainValue(Integer amount, UUID playerId) {
         this(amount, false);
-        this.player = player;
+        this.playerId = playerId;
     }
 
     public DomainValue(final DomainValue dynamicValue) {
         this.amount = dynamicValue.amount;
         this.countTargetPlayer = dynamicValue.countTargetPlayer;
-        this.player = dynamicValue.player;
+        this.playerId = dynamicValue.playerId;
     }
 
     @Override
@@ -53,8 +53,8 @@ public class DomainValue implements DynamicValue {
         int haveSwamps = 0;
         int haveForests = 0;
         UUID targetPlayer;
-        if(player != null) {
-            targetPlayer = player;
+        if(playerId != null) {
+            targetPlayer = playerId;
         }
         else if(countTargetPlayer) {
             targetPlayer = sourceAbility.getTargets().getFirstTarget();

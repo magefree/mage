@@ -30,8 +30,8 @@ package mage.sets.legends;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.discard.DiscardHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -60,7 +60,7 @@ public class NicolBolas extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, sacrifice Nicol Bolas unless you pay {U}{B}{R}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}{B}{R}")), TargetController.YOU, false));
-        
+
         // Whenever Nicol Bolas deals damage to an opponent, that player discards his or her hand.
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardHandTargetEffect("that player"), false));
     }
