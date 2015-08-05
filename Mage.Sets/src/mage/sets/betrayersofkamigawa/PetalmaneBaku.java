@@ -75,7 +75,7 @@ public class PetalmaneBaku extends CardImpl {
                 new ManaCostsImpl<>("{1}"),
                 "Add X mana of any one color to your mana pool",
                 true, new CountersCount(CounterType.KI));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(),
                 "Remove X ki counters from {this}"));
         this.addAbility(ability);
     }
