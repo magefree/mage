@@ -431,6 +431,7 @@ public class HumanPlayer extends PlayerImpl {
             if (!choosable.isEmpty()) {
                 options.put("choosable", (Serializable) choosable);
             }
+
             game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
