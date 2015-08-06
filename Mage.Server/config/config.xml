@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
-    <!-- 
-    serverAddress       - ip of the XMage server. Set it to "0.0.0.0" for local host or to the IP the server should use 
-    port                - the port the primary server socket is bound to 
-    secondaryBindPort   - the port to which the secondary server socket is to be bound. if "-1" is set , an arbitrary port is selected. 
-    backlogSize         - the preferred number of unaccepted incoming connections allowed at a given time. The actual number may be greater 
+    <!--
+    serverAddress       - ip of the XMage server. Set it to "0.0.0.0" for local host or to the IP the server should use
+    port                - the port the primary server socket is bound to
+    secondaryBindPort   - the port to which the secondary server socket is to be bound. if "-1" is set , an arbitrary port is selected.
+    backlogSize         - the preferred number of unaccepted incoming connections allowed at a given time. The actual number may be greater
                           than the specified backlog. When the queue is full, further connection requests are rejected. The JBoss default value is 200
-    numAcceptThreads    - the number of threads listening on the ServerSocket. The JBoss default value is 1 
-    maxPoolSize         - the maximum number of ServerThreads that can exist at any given time. The JBoss default value is 300 
-    leasePeriod         - To turn on server side connection failure detection of remoting clients, it is necessary to satisfy two criteria. 
-                          The first is that the client lease period is set and is a value greater than 0. The value is represented in milliseconds. 
+    numAcceptThreads    - the number of threads listening on the ServerSocket. The JBoss default value is 1
+    maxPoolSize         - the maximum number of ServerThreads that can exist at any given time. The JBoss default value is 300
+    leasePeriod         - To turn on server side connection failure detection of remoting clients, it is necessary to satisfy two criteria.
+                          The first is that the client lease period is set and is a value greater than 0. The value is represented in milliseconds.
                           The client lease period can be set by either the 'clientLeasePeriod' attribute within the Connector configuration or by calling the Connector method
     maxGameThreads      - Number of games that can be started simultanously on the server
     maxSecondsIdle      - Number of seconds after that a game is auto conceded by the player that was idle for such a time
@@ -23,15 +23,15 @@
     <server serverAddress="0.0.0.0"
             serverName="mage-server"
             port="17171"
-            secondaryBindPort="17179"             
-            backlogSize="200" 
-            numAcceptThreads="2" 
-            maxPoolSize="300" 
-            leasePeriod="5000"             
+            secondaryBindPort="17179"
+            backlogSize="200"
+            numAcceptThreads="2"
+            maxPoolSize="300"
+            leasePeriod="5000"
             maxGameThreads="10"
             maxSecondsIdle="600"
             minUserNameLength="3"
-            maxUserNameLength="14" 
+            maxUserNameLength="14"
             userNamePattern="[^a-z0-9_]"
             maxAiOpponents="15"
             saveGameActivated="false"
@@ -41,14 +41,14 @@
         <!--<playerType name="Computer - minimax" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>-->
         <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
         <!--<playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>-->
-	<playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
+        <playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
     </playerTypes>
     <gameTypes>
         <gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
         <gameType name="Free For All" jar="mage-game-freeforall.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
         <gameType name="Commander Two Player Duel" jar="mage-game-commanderduel.jar" className="mage.game.CommanderDuelMatch" typeName="mage.game.CommanderDuelType"/>
         <gameType name="Commander Free For All" jar="mage-game-commanderfreeforall.jar" className="mage.game.CommanderFreeForAllMatch" typeName="mage.game.CommanderFreeForAllType"/>
-	<gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
+        <gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
     </gameTypes>
     <tournamentTypes>
         <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>
@@ -71,8 +71,8 @@
         <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MonoBlueCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2013"/>
-        <draftCube name="MTGO Holiday Cube 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2014"/>        
-        <draftCube name="MTGO Holiday Cube 2015" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2015"/>   
+        <draftCube name="MTGO Holiday Cube 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2014"/>
+        <draftCube name="MTGO Holiday Cube 2015" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2015"/>
         <draftCube name="MTGO Legacy Cube (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCube"/>
         <draftCube name="MTGO Legacy Cube 2015 (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCube2015"/>
         <draftCube name="The Peasant's Toolbox (800 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
@@ -84,12 +84,12 @@
         <deckType name="Constructed - Modern" jar="mage-deck-constructed.jar" className="mage.deck.Modern"/>
         <deckType name="Constructed - Vintage" jar="mage-deck-constructed.jar" className="mage.deck.Vintage"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed.jar" className="mage.deck.Legacy"/>
-        <deckType name="Constructed - Pauper" jar="mage-deck-constructed.jar" className="mage.deck.Pauper"/>        
+        <deckType name="Constructed - Pauper" jar="mage-deck-constructed.jar" className="mage.deck.Pauper"/>
+        <deckType name="Constructed - Historical Standard" jar="mage-deck-constructed.jar" className="mage.deck.HistoricalStandard"/>
+        <deckType name="Constructed - Super Standard" jar="mage-deck-constructed.jar" className="mage.deck.SuperStandard"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
-        <deckType name="Variant Magic - Historical Standard" jar="mage-deck-constructed.jar" className="mage.deck.HistoricalStandard"/>
-	<deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
-        <deckType name="Variant Magic - Super Standard" jar="mage-deck-constructed.jar" className="mage.deck.SuperStandard"/>
+        <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
         <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed.jar" className="mage.deck.KamigawaBlock"/>
         <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed.jar" className="mage.deck.KhansOfTarkirBlock"/>
@@ -97,7 +97,7 @@
         <deckType name="Block Constructed - Scars of Mirrodin" jar="mage-deck-constructed.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
         <deckType name="Block Constructed - Shadowmoor" jar="mage-deck-constructed.jar" className="mage.deck.ShadowmoorBlock"/>
         <deckType name="Block Constructed - Shards of Alara" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
-        <deckType name="Block Constructed - Theros" jar="mage-deck-constructed.jar" className="mage.deck.TherosBlock"/>       
+        <deckType name="Block Constructed - Theros" jar="mage-deck-constructed.jar" className="mage.deck.TherosBlock"/>
         <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
         <deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
     </deckTypes>
