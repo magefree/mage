@@ -34,26 +34,15 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
-import mage.watchers.Watcher;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
 /**
@@ -86,6 +75,7 @@ public class UrborgJustice extends CardImpl {
 }
 
 class UrborgJusticeDynamicValue implements DynamicValue {
+
     @Override
     public UrborgJusticeDynamicValue copy() {
         return new UrborgJusticeDynamicValue();
