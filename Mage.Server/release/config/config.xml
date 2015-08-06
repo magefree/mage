@@ -64,11 +64,11 @@
         <deckType name="Constructed - Vintage" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Vintage"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Legacy"/>
         <deckType name="Constructed - Pauper" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Pauper"/>
+        <deckType name="Constructed - Historical Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.HistoricalStandard"/>
+        <deckType name="Constructed - Super Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.SuperStandard"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.DuelCommander"/>
-        <deckType name="Variant Magic - Historical Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.HistoricalStandard"/>
         <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.TinyLeaders"/>
-        <deckType name="Variant Magic - Super Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.SuperStandard"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.InnistradBlock"/>
         <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.KamigawaBlock"/>
         <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.KhansOfTarkirBlock"/>

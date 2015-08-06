@@ -61,7 +61,7 @@ public class SuperStandard extends Constructed {
      * done in the overridden validate function.
      */
     public SuperStandard() {
-        super("Constructed - All Standards");
+        super("Variant Magic - Super Standard");
 
         banned.add("Ancient Den");
         banned.add("Disciple of the Vault");

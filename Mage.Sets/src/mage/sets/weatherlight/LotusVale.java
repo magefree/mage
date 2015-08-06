@@ -30,8 +30,10 @@ package mage.sets.weatherlight;
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -43,11 +45,12 @@ import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author anonymous
+ * @author Luna Skyrise
  */
 public class LotusVale extends CardImpl {
-    
+
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two untapped lands");
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -57,10 +60,11 @@ public class LotusVale extends CardImpl {
         this.expansionSetCode = "WTH";
 
         // If Lotus Vale would enter the battlefield, sacrifice two untapped lands instead. If you do, put Lotus Vale onto the battlefield. If you don't, put it into its owner's graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false)))));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(
+                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false)))));
 
         // {tap}: Add three mana of any one color to your mana pool.
-        this.addAbility(new AnyColorManaAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost()));
     }
 
     public LotusVale(final LotusVale card) {
