@@ -27,14 +27,19 @@
  */
 package mage.sets.weatherlight;
 
+import java.util.Set;
 import java.util.UUID;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SacrificeEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
@@ -45,9 +50,11 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
+import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
 /**
  *
@@ -60,7 +67,7 @@ public class UrborgJustice extends CardImpl {
         this.expansionSetCode = "WTH";
 
         // Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
-        this.getSpellAbility().addWatcher(new UrborgJusticeWatcher());
+        this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
         SacrificeEffect sacrificeEffect = new SacrificeEffect(new FilterCreaturePermanent(), new UrborgJusticeDynamicValue(), "");
         sacrificeEffect.setText("Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn");
 
@@ -75,46 +82,6 @@ public class UrborgJustice extends CardImpl {
     @Override
     public UrborgJustice copy() {
         return new UrborgJustice(this);
-    }
-}
-
-class UrborgJusticeWatcher extends Watcher {
-
-    private int creaturesCount = 0;
-
-    public UrborgJusticeWatcher() {
-        super("YourCreaturesDied", WatcherScope.PLAYER);
-        condition = true;
-    }
-
-    public UrborgJusticeWatcher(final UrborgJusticeWatcher watcher) {
-        super(watcher);
-        this.creaturesCount = watcher.creaturesCount;
-    }
-
-    @Override
-    public UrborgJusticeWatcher copy() {
-        return new UrborgJusticeWatcher(this);
-    }
-
-    public int getCreaturesCount() {
-        return creaturesCount;
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            Permanent card = (Permanent)game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE)) {
-                creaturesCount++;
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        creaturesCount = 0;
     }
 }
 
@@ -136,10 +103,21 @@ class UrborgJusticeDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        UrborgJusticeWatcher watcher = (UrborgJusticeWatcher) game.getState().getWatchers().get("YourCreaturesDied", sourceAbility.getControllerId());
-        if (watcher != null) {
-            return watcher.getCreaturesCount();
+        CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
+
+        int count = 0;
+        Player controller = game.getPlayer(sourceAbility.getControllerId());
+        if (controller != null && watcher != null) {
+            Set<MageObjectReference> cardsInGraveyard = watcher.getCardsPutToGraveyardFromBattlefield();
+            for (MageObjectReference mor : cardsInGraveyard) {
+                if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
+                    Card card = game.getCard(mor.getSourceId());
+                    if (card != null && card.getOwnerId().equals(sourceAbility.getControllerId()) && card.getCardType().contains(CardType.CREATURE)) {
+                        count++;
+                    }
+                }
+            }
         }
-        return 0;
+        return count;
     }
 }
