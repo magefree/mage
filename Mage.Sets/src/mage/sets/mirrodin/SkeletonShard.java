@@ -45,7 +45,7 @@ public class SkeletonShard extends mage.sets.planechase.SkeletonShard {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SkeletonShard copy() {
         return new SkeletonShard(this);
     }

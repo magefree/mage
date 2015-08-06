@@ -63,7 +63,7 @@ public class AltarsLight extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public AltarsLight copy() {
         return new AltarsLight(this);
     }

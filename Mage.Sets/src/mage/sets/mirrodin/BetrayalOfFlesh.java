@@ -73,7 +73,7 @@ public class BetrayalOfFlesh extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public BetrayalOfFlesh copy() {
         return new BetrayalOfFlesh(this);
     }

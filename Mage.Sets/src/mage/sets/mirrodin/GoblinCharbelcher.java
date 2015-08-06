@@ -68,7 +68,7 @@ public class GoblinCharbelcher extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public GoblinCharbelcher copy() {
         return new GoblinCharbelcher(this);
     }
@@ -85,12 +85,12 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public GoblinCharbelcherEffect copy() {
         return new GoblinCharbelcherEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         boolean isMountain = false;
         MageObject sourceObject = game.getObject(source.getSourceId());

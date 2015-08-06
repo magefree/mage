@@ -71,7 +71,7 @@ public class SwordOfKaldra extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SwordOfKaldra copy() {
         return new SwordOfKaldra(this);
     }
@@ -87,17 +87,17 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
             super(ability);
     }
 
-    @Override
+    @java.lang.Override
     public SwordOfKaldraTriggeredAbility copy() {
             return new SwordOfKaldraTriggeredAbility(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DAMAGED_CREATURE;
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
         if (equipment != null
@@ -111,7 +111,7 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public String getRule() {
             return "Whenever equipped creature deals damage to a creature, " + super.getRule();
     }

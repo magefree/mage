@@ -56,7 +56,7 @@ public class FarsightMask extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public FarsightMask copy() {
         return new FarsightMask(this);
     }
@@ -72,23 +72,23 @@ class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @Override
+    @java.lang.Override
     public FarsightMaskTriggeredAbility copy() {
         return new FarsightMaskTriggeredAbility(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER);
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkInterveningIfClause(Game game) {
         Permanent permanent = game.getPermanent(getSourceId());
         return permanent != null && !permanent.isTapped();
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(controllerId)) {
             UUID sourceControllerId = game.getControllerId(event.getSourceId());
@@ -99,7 +99,7 @@ class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public String getRule() {
         return "Whenever a source an opponent controls deals damage to you, if {this} is untapped, you may draw a card.";
     }

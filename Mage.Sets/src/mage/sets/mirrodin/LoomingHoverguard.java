@@ -69,7 +69,7 @@ public class LoomingHoverguard extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public LoomingHoverguard copy() {
         return new LoomingHoverguard(this);
     }

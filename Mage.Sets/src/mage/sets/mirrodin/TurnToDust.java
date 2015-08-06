@@ -63,7 +63,7 @@ public class TurnToDust extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public TurnToDust copy() {
         return new TurnToDust(this);
     }

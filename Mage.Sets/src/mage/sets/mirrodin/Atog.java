@@ -68,7 +68,7 @@ public class Atog extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Atog copy() {
         return new Atog(this);
     }

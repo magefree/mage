@@ -55,7 +55,7 @@ public class Cathodion extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Cathodion copy() {
         return new Cathodion(this);
     }

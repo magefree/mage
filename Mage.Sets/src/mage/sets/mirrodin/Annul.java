@@ -63,7 +63,7 @@ public class Annul extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Annul copy() {
         return new Annul(this);
     }

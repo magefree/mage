@@ -66,7 +66,7 @@ public class RoarOfTheKha extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public RoarOfTheKha copy() {
         return new RoarOfTheKha(this);
     }

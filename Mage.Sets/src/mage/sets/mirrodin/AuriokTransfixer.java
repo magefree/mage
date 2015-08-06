@@ -73,7 +73,7 @@ public class AuriokTransfixer extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public AuriokTransfixer copy() {
         return new AuriokTransfixer(this);
     }

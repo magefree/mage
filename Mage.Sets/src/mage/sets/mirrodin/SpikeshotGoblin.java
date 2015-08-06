@@ -68,7 +68,7 @@ public class SpikeshotGoblin extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SpikeshotGoblin copy() {
         return new SpikeshotGoblin(this);
     }
@@ -84,7 +84,7 @@ class SpikeshotGoblinEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
@@ -109,7 +109,7 @@ class SpikeshotGoblinEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public SpikeshotGoblinEffect copy() {
         return new SpikeshotGoblinEffect(this);
     }

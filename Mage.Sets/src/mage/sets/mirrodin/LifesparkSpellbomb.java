@@ -71,7 +71,7 @@ public class LifesparkSpellbomb extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public LifesparkSpellbomb copy() {
         return new LifesparkSpellbomb(this);
     }

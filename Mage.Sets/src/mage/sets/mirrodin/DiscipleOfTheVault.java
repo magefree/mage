@@ -69,7 +69,7 @@ public class DiscipleOfTheVault extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public DiscipleOfTheVault copy() {
         return new DiscipleOfTheVault(this);
     }

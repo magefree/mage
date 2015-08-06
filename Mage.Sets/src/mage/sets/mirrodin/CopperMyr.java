@@ -54,7 +54,7 @@ public class CopperMyr extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public CopperMyr copy() {
         return new CopperMyr(this);
     }

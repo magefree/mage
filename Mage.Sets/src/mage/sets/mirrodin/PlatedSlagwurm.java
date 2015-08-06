@@ -55,7 +55,7 @@ public class PlatedSlagwurm extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public PlatedSlagwurm copy() {
         return new PlatedSlagwurm(this);
     }

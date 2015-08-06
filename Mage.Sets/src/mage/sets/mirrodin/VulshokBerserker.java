@@ -45,7 +45,7 @@ public class VulshokBerserker extends mage.sets.magic2011.VulshokBerserker {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public VulshokBerserker copy() {
         return new VulshokBerserker(this);
     }

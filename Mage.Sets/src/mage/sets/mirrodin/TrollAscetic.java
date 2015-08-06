@@ -61,7 +61,7 @@ public class TrollAscetic extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public TrollAscetic copy() {
         return new TrollAscetic(this);
     }

@@ -69,7 +69,7 @@ public class ProteusStaff extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ProteusStaff copy() {
         return new ProteusStaff(this);
     }
@@ -86,12 +86,12 @@ class ProteusStaffEffect extends OneShotEffect {
         super(effect);
     }
     
-    @Override
+    @java.lang.Override
     public ProteusStaffEffect copy() {
         return new ProteusStaffEffect(this);
     }
     
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {

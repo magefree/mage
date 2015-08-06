@@ -45,7 +45,7 @@ public class Terror extends mage.sets.tenthedition.Terror {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Terror copy() {
         return new Terror(this);
     }

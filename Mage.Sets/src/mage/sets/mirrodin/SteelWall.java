@@ -54,7 +54,7 @@ public class SteelWall extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SteelWall copy() {
         return new SteelWall(this);
     }

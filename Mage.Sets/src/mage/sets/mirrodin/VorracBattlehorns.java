@@ -75,7 +75,7 @@ public class VorracBattlehorns extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public VorracBattlehorns copy() {
         return new VorracBattlehorns(this);
     }
@@ -103,12 +103,12 @@ class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl {
         this.attachmentType = effect.attachmentType;
     }
 
-    @Override
+    @java.lang.Override
     public CantBeBlockedByMoreThanOneAttachedEffect copy() {
         return new CantBeBlockedByMoreThanOneAttachedEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         switch (layer) {
             case RulesEffects:
@@ -125,12 +125,12 @@ class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.RulesEffects;
     }
