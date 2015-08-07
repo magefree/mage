@@ -25,16 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.sets.visions;
 
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
@@ -42,52 +40,47 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
-import mage.watchers.common.DamagedByWatcher;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author North
+ * @author fireshoes
  */
-public class Aggravate extends CardImpl {
+public class Simoon extends CardImpl {
 
-    public Aggravate(UUID ownerId) {
-        super(ownerId, 125, "Aggravate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "AVR";
+    public Simoon(UUID ownerId) {
+        super(ownerId, 136, "Simoon", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}");
+        this.expansionSetCode = "VIS";
 
-
-        // Aggravate deals 1 damage to each creature target player controls.
-        this.getSpellAbility().addEffect(new AggravateEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        // Each creature dealt damage this way attacks this turn if able.
-        this.getSpellAbility().addEffect(new AggravateRequirementEffect());
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        // Simoon deals 1 damage to each creature target opponent controls.
+        this.getSpellAbility().addEffect(new SimoonEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Aggravate(final Aggravate card) {
+    public Simoon(final Simoon card) {
         super(card);
     }
 
     @Override
-    public Aggravate copy() {
-        return new Aggravate(this);
+    public Simoon copy() {
+        return new Simoon(this);
     }
 }
 
-class AggravateEffect extends OneShotEffect {
+class SimoonEffect extends OneShotEffect {
 
-    public AggravateEffect() {
+    public SimoonEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals 1 damage to each creature target player controls";
+        this.staticText = "{this} deals 1 damage to each creature target opponent controls";
     }
 
-    public AggravateEffect(final AggravateEffect effect) {
+    public SimoonEffect(final SimoonEffect effect) {
         super(effect);
     }
 
     @Override
-    public AggravateEffect copy() {
-        return new AggravateEffect(this);
+    public SimoonEffect copy() {
+        return new SimoonEffect(this);
     }
 
     @Override
@@ -102,42 +95,6 @@ class AggravateEffect extends OneShotEffect {
             }
             return true;
         }
-        return false;
-    }
-}
-
-class AggravateRequirementEffect extends RequirementEffect {
-
-    public AggravateRequirementEffect() {
-        super(Duration.EndOfTurn);
-        this.staticText = "Each creature dealt damage this way attacks this turn if able";
-    }
-
-    public AggravateRequirementEffect(final AggravateRequirementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AggravateRequirementEffect copy() {
-        return new AggravateRequirementEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-        if (watcher != null) {
-            return watcher.wasDamaged(permanent, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean mustAttack(Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean mustBlock(Game game) {
         return false;
     }
 }
