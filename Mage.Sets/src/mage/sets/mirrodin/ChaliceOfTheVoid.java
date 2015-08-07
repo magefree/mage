@@ -68,7 +68,7 @@ public class ChaliceOfTheVoid extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ChaliceOfTheVoid copy() {
         return new ChaliceOfTheVoid(this);
     }
@@ -84,7 +84,7 @@ class ChaliceOfTheVoidEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
@@ -101,7 +101,7 @@ class ChaliceOfTheVoidEffect extends OneShotEffect {
         return true;
     }
 
-    @Override
+    @java.lang.Override
     public ChaliceOfTheVoidEffect copy() {
         return new ChaliceOfTheVoidEffect(this);
     }
@@ -119,17 +119,17 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
         super(abiltity);
     }
 
-    @Override
+    @java.lang.Override
     public ChaliceOfTheVoidTriggeredAbility copy() {
         return new ChaliceOfTheVoidTriggeredAbility(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
     
-    @Override
+    @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent chalice = game.getPermanent(getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
@@ -142,7 +142,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public String getRule() {
         return "Whenever a player casts a spell with converted mana cost equal to the number of charge counters on {this}, counter that spell.";
     }
@@ -159,12 +159,12 @@ class CounterEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public CounterEffect copy() {
         return new CounterEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         return game.getStack().counter(this.getTargetPointer().getFirst(game, source), source.getSourceId(), game);
     }

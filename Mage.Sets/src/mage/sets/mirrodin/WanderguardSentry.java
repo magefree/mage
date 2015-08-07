@@ -45,7 +45,7 @@ public class WanderguardSentry extends mage.sets.ninthedition.WanderguardSentry 
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public WanderguardSentry copy() {
         return new WanderguardSentry(this);
     }

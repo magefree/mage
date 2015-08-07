@@ -58,7 +58,7 @@ public class NeurokHoversail extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NeurokHoversail copy() {
         return new NeurokHoversail(this);
     }

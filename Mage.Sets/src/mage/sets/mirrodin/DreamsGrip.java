@@ -74,7 +74,7 @@ public class DreamsGrip extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public DreamsGrip copy() {
         return new DreamsGrip(this);
     }

@@ -73,7 +73,7 @@ public class LeoninDenGuard extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public LeoninDenGuard copy() {
         return new LeoninDenGuard(this);
     }

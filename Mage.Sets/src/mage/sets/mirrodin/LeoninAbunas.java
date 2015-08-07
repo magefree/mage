@@ -64,7 +64,7 @@ public class LeoninAbunas extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public LeoninAbunas copy() {
         return new LeoninAbunas(this);
     }

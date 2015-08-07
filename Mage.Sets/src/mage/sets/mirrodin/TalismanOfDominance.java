@@ -62,7 +62,7 @@ public class TalismanOfDominance extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public TalismanOfDominance copy() {
         return new TalismanOfDominance(this);
     }

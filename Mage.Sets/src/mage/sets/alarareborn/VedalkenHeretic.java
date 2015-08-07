@@ -29,7 +29,7 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -54,7 +54,7 @@ public class VedalkenHeretic extends CardImpl {
 
         // Whenever Vedalken Heretic deals damage to an opponent, you may draw a card.
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
-        
+
     }
 
     public VedalkenHeretic(final VedalkenHeretic card) {

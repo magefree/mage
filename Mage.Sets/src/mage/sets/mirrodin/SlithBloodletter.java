@@ -62,7 +62,7 @@ public class SlithBloodletter extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SlithBloodletter copy() {
         return new SlithBloodletter(this);
     }

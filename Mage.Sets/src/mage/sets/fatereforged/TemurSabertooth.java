@@ -103,13 +103,13 @@ class TemurSabertoothEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetPermanent(1,1, filter, true);
+            Target target = new TargetPermanent(1, 1, filter, true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (controller.chooseUse(outcome, "Return another creature to hand?", source, game) &&
-                        controller.chooseTarget(outcome, target, source, game)) {
+                if (controller.chooseUse(outcome, "Return another creature to hand?", source, game)
+                        && controller.chooseTarget(outcome, target, source, game)) {
                     Permanent toHand = game.getPermanent(target.getFirstTarget());
                     if (toHand != null) {
-                        controller.moveCardToHandWithInfo(toHand, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        controller.moveCards(toHand, null, Zone.HAND, source, game);
                     }
                     game.addEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), source);
                 }

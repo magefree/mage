@@ -72,7 +72,7 @@ public class ClockworkVorrac extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ClockworkVorrac copy() {
         return new ClockworkVorrac(this);
     }
@@ -88,7 +88,7 @@ class ClockworkVorracEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
@@ -100,7 +100,7 @@ class ClockworkVorracEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public ClockworkVorracEffect copy() {
         return new ClockworkVorracEffect(this);
     }

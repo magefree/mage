@@ -35,6 +35,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -86,22 +88,20 @@ class NoRestForTheWickedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         NoRestForTheWickedWatcher watcher = (NoRestForTheWickedWatcher) game.getState().getWatchers().get("NoRestForTheWickedWatcher");
-        if (watcher != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (watcher != null && controller != null) {
+            Cards cardsToHand = new CardsImpl();
             for (UUID cardId : watcher.cards) {
                 Card c = game.getCard(cardId);
                 if (c != null) {
                     if (game.getState().getZone(cardId) == Zone.GRAVEYARD
                             && c.getCardType().contains(CardType.CREATURE)
                             && c.getOwnerId().equals(source.getControllerId())) {
-                        //400.3
-                       Player p = game.getPlayer(source.getControllerId());
-                       if (p != null) {
-                           p.moveCardToHandWithInfo(c, source.getSourceId(), game, Zone.GRAVEYARD);
-                       }
-                       return false;
+                        cardsToHand.add(c);
                     }
                 }
             }
+            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
             return true;
         }
         return false;

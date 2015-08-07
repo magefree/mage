@@ -20,6 +20,8 @@ import mage.client.util.Command;
  */
 public class HoverButton extends JPanel implements MouseListener {
 
+    static final int TOP_TEXT_IMAGE_GAP = 3;
+
     private Image image;
     private Image hoverImage;
     private Image disabledImage;
@@ -36,6 +38,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Dimension overlayImageSize;
 
     private String topText;
+    private Image topTextImage;
 
     private boolean isHovered = false;
     private boolean isSelected = false;
@@ -45,7 +48,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command observer = null;
     private Command onHover = null;
     private Color textColor = Color.white;
-    private Color textBGColor = Color.black;
+    private final Color textBGColor = Color.black;
 
     static final Font textFont = new Font("Arial", Font.PLAIN, 12);
     static final Font textFontMini = new Font("Arial", Font.PLAIN, 11);
@@ -120,9 +123,12 @@ public class HoverButton extends JPanel implements MouseListener {
             }
             topTextOffsetX = calculateOffsetForTop(g2d, topText);
             g2d.setColor(textBGColor);
-            g2d.drawString(topText, topTextOffsetX + 1, 13);
+            g2d.drawString(topText, topTextOffsetX + 1, 14);
             g2d.setColor(textColor);
-            g2d.drawString(topText, topTextOffsetX, 12);
+            g2d.drawString(topText, topTextOffsetX, 13);
+        }
+        if (topTextImage != null) {
+            g.drawImage(topTextImage, 4, 3, this);
         }
         if (overlayImage != null) {
             g.drawImage(overlayImage, (imageSize.width - overlayImageSize.width) / 2, 10, this);
@@ -168,7 +174,9 @@ public class HoverButton extends JPanel implements MouseListener {
         if (topTextOffsetX == -1) { // calculate once
             FontRenderContext frc = g2d.getFontRenderContext();
             int textWidth = (int) textFont.getStringBounds(text, frc).getWidth();
-            topTextOffsetX = (imageSize.width - textWidth) / 2;
+            int neededImageWidth = (topTextImage == null ? 0 : topTextImage.getWidth(this));
+            int availableXWidth = imageSize.width - neededImageWidth;
+            topTextOffsetX = (availableXWidth - textWidth) / 2 + neededImageWidth;
         }
         return topTextOffsetX;
     }
@@ -282,6 +290,11 @@ public class HoverButton extends JPanel implements MouseListener {
 
     public void setTopText(String topText) {
         this.topText = topText;
+    }
+
+    public void setTopTextImage(Image topTextImage) {
+        this.topTextImage = topTextImage;
+        this.textOffsetX = -1; // rest for new clculation
     }
 
     public void setTextAlwaysVisible(boolean textAlwaysVisible) {

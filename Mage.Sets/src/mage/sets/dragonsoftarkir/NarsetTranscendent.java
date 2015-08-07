@@ -60,7 +60,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-
 /**
  *
  * @author LevelX2
@@ -73,13 +72,13 @@ public class NarsetTranscendent extends CardImpl {
         this.subtype.add("Narset");
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
-        
+
         // +1: Look at the top card of your library. If it's a noncreature, nonland card, you may reveal it and put it into your hand.
         this.addAbility(new LoyaltyAbility(new NarsetTranscendentEffect1(), 1));
-        
+
         // -2: When you cast your next instant or sorcery spell from your hand this turn, it gains rebound.
         this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(new NarsetTranscendentTriggeredAbility()), -2));
-                       
+
         // -9:You get an emblem with "Your opponents can't cast noncreature spells."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new NarsetTranscendentEmblem()), -9));
     }
@@ -119,11 +118,11 @@ class NarsetTranscendentEffect1 extends OneShotEffect {
             if (card != null) {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
-                controller.lookAtCards(sourceObject.getName(), cards, game);
+                controller.lookAtCards(sourceObject.getIdName(), cards, game);
                 if (!card.getCardType().contains(CardType.CREATURE) && !card.getCardType().contains(CardType.LAND)) {
-                    if (controller.chooseUse(outcome, "Reveal " + card.getName() + " and put it into your hand?", source, game)) {
-                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                        controller.revealCards(sourceObject.getName(), cards, game);
+                    if (controller.chooseUse(outcome, "Reveal " + card.getLogName() + " and put it into your hand?", source, game)) {
+                        controller.moveCards(card, null, Zone.HAND, source, game);
+                        controller.revealCards(sourceObject.getIdName(), cards, game);
                     }
                 }
                 return true;
@@ -142,6 +141,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
     private NarsetTranscendentTriggeredAbility(final NarsetTranscendentTriggeredAbility ability) {
         super(ability);
     }
+
     @Override
     public NarsetTranscendentTriggeredAbility copy() {
         return new NarsetTranscendentTriggeredAbility(this);
@@ -157,9 +157,9 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getFromZone().equals(Zone.HAND)) {
-                if (spell.getCard() != null && 
-                        spell.getCard().getCardType().contains(CardType.INSTANT) || spell.getCard().getCardType().contains(CardType.SORCERY)) {
-                    for(Effect effect: getEffects()) {
+                if (spell.getCard() != null
+                        && spell.getCard().getCardType().contains(CardType.INSTANT) || spell.getCard().getCardType().contains(CardType.SORCERY)) {
+                    for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(spell.getId()));
                     }
                     return true;
@@ -171,7 +171,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you cast your next instant or sorcery spell from your hand this turn, " + super.getRule() ;
+        return "When you cast your next instant or sorcery spell from your hand this turn, " + super.getRule();
     }
 }
 
@@ -226,11 +226,11 @@ class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
 
 class NarsetTranscendentEmblem extends Emblem {
     // "Your opponents can't cast noncreature spells.
-    
+
     public NarsetTranscendentEmblem() {
-        
+
         this.setName("EMBLEM: Narset Transcendent");
-        
+
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new NarsetTranscendentCantCastEffect()));
     }
 }
@@ -269,7 +269,7 @@ class NarsetTranscendentCantCastEffect extends ContinuousRuleModifyingEffectImpl
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());

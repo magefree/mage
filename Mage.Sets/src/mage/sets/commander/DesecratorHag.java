@@ -113,20 +113,18 @@ class DesecratorHagEffect extends OneShotEffect {
                 }
             }
             if (cards.size() == 0) {
-                return false;
+                return true;
             }
             if (cards.size() > 1
                     && you.choose(Outcome.DrawCard, cards, target, game)) {
                 if (target != null) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        return you.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+                        return you.moveCards(card, null, Zone.HAND, source, game);
                     }
                 }
             } else {
-                for (Card card : cards.getCards(game)) {
-                    return you.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
-                }
+                return you.moveCards(cards, null, Zone.HAND, source, game);
             }
         }
         return false;

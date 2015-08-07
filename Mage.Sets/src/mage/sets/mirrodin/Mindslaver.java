@@ -47,7 +47,7 @@ public class Mindslaver extends mage.sets.scarsofmirrodin.Mindslaver {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Mindslaver copy() {
         return new Mindslaver(this);
     }

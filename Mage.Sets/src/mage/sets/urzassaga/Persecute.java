@@ -87,9 +87,10 @@ class PersecuteEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller != null && sourceObject != null && targetPlayer != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
                 controller.choose(outcome, choice, game);
@@ -100,12 +101,12 @@ class PersecuteEffect extends OneShotEffect {
             if (choice.getColor() == null) {
                 return false;
             }
-            Cards hand = controller.getHand();
-            controller.revealCards(sourceObject.getIdName(), hand, game);
+            Cards hand = targetPlayer.getHand();
+            targetPlayer.revealCards(sourceObject.getIdName(), hand, game);
             Set<Card> cards = hand.getCards(game);
             for (Card card : cards) {
                 if (card != null && card.getColor(game).shares(choice.getColor())) {
-                    controller.discard(card, source, game);
+                    targetPlayer.discard(card, source, game);
                 }
             }
             return true;

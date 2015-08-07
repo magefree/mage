@@ -53,7 +53,7 @@ public class Regress extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Regress copy() {
         return new Regress(this);
     }

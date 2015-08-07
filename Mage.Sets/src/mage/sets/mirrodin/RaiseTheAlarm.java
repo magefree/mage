@@ -52,7 +52,7 @@ public class RaiseTheAlarm extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public RaiseTheAlarm copy() {
         return new RaiseTheAlarm(this);
     }

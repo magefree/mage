@@ -65,7 +65,7 @@ public class ToothOfChissGoria extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ToothOfChissGoria copy() {
         return new ToothOfChissGoria(this);
     }

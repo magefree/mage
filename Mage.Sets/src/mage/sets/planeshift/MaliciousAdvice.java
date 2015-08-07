@@ -67,9 +67,6 @@ public class MaliciousAdvice extends CardImpl {
         effect.setText("Tap X target artifacts, creatures, and/or lands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(new ManacostVariableValue()));
-        // Correct number of targets will be set in adjustTargets
-        // I'm not sure if/why this needs to be here, but other such cards do have it...
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     @Override

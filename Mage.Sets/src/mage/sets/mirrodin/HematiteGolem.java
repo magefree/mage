@@ -58,7 +58,7 @@ public class HematiteGolem extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public HematiteGolem copy() {
         return new HematiteGolem(this);
     }

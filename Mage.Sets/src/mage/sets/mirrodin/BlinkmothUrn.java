@@ -41,7 +41,7 @@ public class BlinkmothUrn extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public BlinkmothUrn copy() {
         return new BlinkmothUrn(this);
     }
@@ -59,12 +59,12 @@ class BlinkmothUrnEffect extends OneShotEffect {
         super(effect);
     }
     
-    @Override
+    @java.lang.Override
     public BlinkmothUrnEffect copy() {
         return new BlinkmothUrnEffect(this);
     }
     
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
         FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts you control");

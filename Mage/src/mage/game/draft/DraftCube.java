@@ -43,6 +43,7 @@ import org.apache.log4j.Logger;
 public abstract class DraftCube {
 
     public class CardIdentity {
+
         private String name;
         private String extension;
 
@@ -69,7 +70,7 @@ public abstract class DraftCube {
     }
 
     private static final Logger logger = Logger.getLogger(DraftCube.class);
-    
+
     private static final Random rnd = new Random();
     private final String name;
     private final int boosterSize = 15;
@@ -88,13 +89,13 @@ public abstract class DraftCube {
     public List<CardIdentity> getCubeCards() {
         return cubeCards;
     }
-    
+
     public List<Card> createBooster() {
         List<Card> booster = new ArrayList<>();
         if (leftCubeCards.isEmpty()) {
             leftCubeCards.addAll(cubeCards);
         }
-        
+
         for (int i = 0; i < boosterSize; i++) {
             boolean done = false;
             int notValid = 0;
@@ -111,9 +112,9 @@ public abstract class DraftCube {
                             cardInfo = cardList.get(0);
                         }
                     } else {
-                        cardInfo = CardRepository.instance.findCard(cardId.getName());
+                        cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardId.getName());
                     }
-                    
+
                     if (cardInfo != null) {
                         booster.add(cardInfo.getCard());
                         done = true;

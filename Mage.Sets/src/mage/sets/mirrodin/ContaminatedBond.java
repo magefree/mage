@@ -45,7 +45,7 @@ public class ContaminatedBond extends mage.sets.ninthedition.ContaminatedBond {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ContaminatedBond copy() {
         return new ContaminatedBond(this);
     }

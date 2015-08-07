@@ -28,6 +28,7 @@
 package mage.sets.modernmasters;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -51,7 +52,6 @@ public class PetalsOfInsight extends CardImpl {
         super(ownerId, 60, "Petals of Insight", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "MMA";
         this.subtype.add("Arcane");
-
 
         // Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards.
         this.getSpellAbility().addEffect(new PetalsOfInsightEffect());
@@ -85,33 +85,23 @@ class PetalsOfInsightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.lookAtCards("Petals of Insight", cards, game);
-        if (player.chooseUse(outcome, "Put the cards on the bottom of your library in any order?", source, game)) {
-            player.putCardsOnBottomOfLibrary(cards, game, source, true);
+        cards.addAll(controller.getLibrary().getTopCards(game, 3));
+
+        controller.lookAtCards(sourceObject.getIdName(), cards, game);
+        if (controller.chooseUse(outcome, "Put the cards on the bottom of your library in any order?", source, game)) {
+            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
             if (spellCard != null) {
-                player.moveCardToHandWithInfo(spellCard, source.getSourceId(), game, Zone.STACK);
+                controller.moveCards(spellCard, null, Zone.HAND, source, game);
             }
         } else {
-            for (UUID cardId: cards) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-            }
-            player.drawCards(3, game);
+            controller.drawCards(3, game);
         }
         return true;
     }

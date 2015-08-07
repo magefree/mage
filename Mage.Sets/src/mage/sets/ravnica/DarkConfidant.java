@@ -28,10 +28,6 @@
 package mage.sets.ravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,8 +36,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,6 +75,7 @@ public class DarkConfidant extends CardImpl {
 }
 
 class DarkConfidantEffect extends OneShotEffect {
+
     DarkConfidantEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
@@ -87,17 +87,16 @@ class DarkConfidantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            if (player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().removeFromTop(game);
+        if (controller != null && sourcePermanent != null) {
+            if (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    Cards cards = new CardsImpl();
-                    cards.add(card);
-                    player.revealCards(sourcePermanent.getName(), cards, game);
-                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    player.loseLife(card.getManaCost().convertedManaCost(), game);
+                    Cards cards = new CardsImpl(card);
+                    controller.revealCards(sourcePermanent.getIdName(), cards, game);
+                    controller.moveCards(card, null, Zone.HAND, source, game);
+                    controller.loseLife(card.getManaCost().convertedManaCost(), game);
 
                 }
                 return true;

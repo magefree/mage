@@ -51,7 +51,6 @@ public class WhirlpoolWhelm extends CardImpl {
         super(ownerId, 69, "Whirlpool Whelm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CMD";
 
-
         // Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead.
         this.getSpellAbility().addEffect(new WhirlpoolWhelmEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -90,12 +89,12 @@ class WhirlpoolWhelmEffect extends OneShotEffect {
         if (controller != null) {
             boolean topOfLibrary = false;
             if (ClashEffect.getInstance().apply(game, source)) {
-                topOfLibrary = controller.chooseUse(outcome, "Put " + creature.getLogName() + " to top of libraray instead?" , source, game);
+                topOfLibrary = controller.chooseUse(outcome, "Put " + creature.getLogName() + " to top of libraray instead?", source, game);
             }
             if (topOfLibrary) {
-                controller.moveCardToHandWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD);
-            } else {
                 controller.moveCardToLibraryWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
+            } else {
+                controller.moveCards(creature, null, Zone.HAND, source, game);
             }
             return true;
         }

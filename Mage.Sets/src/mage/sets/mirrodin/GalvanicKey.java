@@ -69,7 +69,7 @@ public class GalvanicKey extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public GalvanicKey copy() {
         return new GalvanicKey(this);
     }

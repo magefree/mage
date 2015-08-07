@@ -57,7 +57,7 @@ public class TelJiladChosen extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public TelJiladChosen copy() {
         return new TelJiladChosen(this);
     }

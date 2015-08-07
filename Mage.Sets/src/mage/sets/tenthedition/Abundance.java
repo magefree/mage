@@ -28,6 +28,7 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -94,35 +95,35 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
+        Player controller = game.getPlayer(event.getPlayerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             FilterCard filter = new FilterCard();
-            if (player.chooseUse(Outcome.Benefit, "Choose land? (No = nonland)", source, game)) {
+            if (controller.chooseUse(Outcome.Benefit, "Choose land? (No = nonland)", source, game)) {
                 filter.add(new CardTypePredicate(CardType.LAND));
-            }
-            else {
+            } else {
                 filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
             }
             Cards cards = new CardsImpl();
-            while (player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().removeFromTop(game);
+            while (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCards(card, null, Zone.HAND, source, game);
                     break;
                 }
                 cards.add(card);
             }
-            player.revealCards("Abundance", cards, game);
-            player.putCardsOnBottomOfLibrary(cards, game, source, true);
+            controller.revealCards(sourceObject.getIdName(), cards, game);
+            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         }
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())) {

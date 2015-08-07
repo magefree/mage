@@ -81,7 +81,7 @@ public class Duplicant extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Duplicant copy() {
         return new Duplicant(this);
     }
@@ -97,12 +97,12 @@ class ExileTargetEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public ExileTargetEffect copy() {
         return new ExileTargetEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent sourcePermananent = game.getPermanent(source.getSourceId());
@@ -117,7 +117,7 @@ class ExileTargetEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public String getText(Mode mode) {
         return "you may exile target nontoken creature";
     }
@@ -135,12 +135,12 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         super(effect);
         }
 
-    @Override
+    @java.lang.Override
     public DuplicantContinuousEffect copy() {
         return new DuplicantContinuousEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
@@ -172,12 +172,12 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         return false;
     }
     
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         return false;
     }
        
-    @Override
+    @java.lang.Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
     }

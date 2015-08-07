@@ -59,7 +59,7 @@ public class VedalkenArchmage extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public VedalkenArchmage copy() {
         return new VedalkenArchmage(this);
     }

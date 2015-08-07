@@ -35,21 +35,20 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
-*
-* @author Xavierv3131
-*/
+ *
+ * @author Xavierv3131
+ */
 public class CoastalPiracy extends CardImpl {
 
     public CoastalPiracy(UUID ownerId) {
         super(ownerId, 68, "Coastal Piracy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "MMQ";
-
 
         // Whenever a creature you control deals combat damage to an opponent, you may draw a card.
         this.addAbility(new CoastalPiracyTriggeredAbility());
@@ -88,8 +87,8 @@ class CoastalPiracyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedPlayerEvent) event).isCombatDamage()) &&
-        	game.getOpponents(this.controllerId).contains(((DamagedPlayerEvent) event).getPlayerId())) {
+        if (((DamagedPlayerEvent) event).isCombatDamage()
+                && game.getOpponents(this.controllerId).contains(((DamagedPlayerEvent) event).getPlayerId())) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null && creature.getControllerId().equals(controllerId)) {
                 return true;

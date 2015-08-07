@@ -45,7 +45,7 @@ public class Island2 extends mage.cards.basiclands.Island {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Island2 copy() {
         return new Island2(this);
     }

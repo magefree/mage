@@ -44,7 +44,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.constants.CardType;
+import mage.constants.SetType;
 import org.apache.log4j.Logger;
 
 /**
@@ -60,7 +63,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 41;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 30;
+    private static final long CARD_CONTENT_VERSION = 32;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -293,6 +296,25 @@ public enum CardRepository {
         List<CardInfo> cards = findCards(name);
         if (!cards.isEmpty()) {
             return cards.get(random.nextInt(cards.size()));
+        }
+        return null;
+    }
+
+    public CardInfo findPreferedCoreExpansionCard(String name) {
+        List<CardInfo> cards = findCards(name);
+        if (!cards.isEmpty()) {
+            CardInfo cardInfo = cards.get(random.nextInt(cards.size()));
+            ExpansionSet set = Sets.getInstance().get(cardInfo.getSetCode());
+            if (set.getSetType().equals(SetType.EXPANSION) || set.getSetType().equals(SetType.CORE)) {
+                return cardInfo;
+            }
+            for (CardInfo cardInfoToCheck : cards) {
+                set = Sets.getInstance().get(cardInfoToCheck.getSetCode());
+                if (set.getSetType().equals(SetType.CORE) || set.getSetType().equals(SetType.EXPANSION)) {
+                    return cardInfoToCheck;
+                }
+            }
+            return cardInfo;
         }
         return null;
     }

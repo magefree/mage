@@ -65,7 +65,7 @@ public class RustmouthOgre extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public RustmouthOgre copy() {
         return new RustmouthOgre(this);
     }
@@ -81,17 +81,17 @@ class RustmouthOgreTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @Override
+    @java.lang.Override
     public RustmouthOgreTriggeredAbility copy() {
         return new RustmouthOgreTriggeredAbility(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DAMAGED_PLAYER;
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
@@ -106,7 +106,7 @@ class RustmouthOgreTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, you may destroy target artifact that player controls.";
     }

@@ -28,10 +28,6 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,6 +38,10 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -73,7 +73,7 @@ public class SkywardEyeProphets extends CardImpl {
     public SkywardEyeProphets copy() {
         return new SkywardEyeProphets(this);
     }
-    
+
     public static class SkywardEyeProphetsEffect extends OneShotEffect {
 
         public SkywardEyeProphetsEffect() {
@@ -108,7 +108,7 @@ public class SkywardEyeProphets extends CardImpl {
                 if (card.getCardType().contains(CardType.LAND)) {
                     return controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 } else {
-                    return controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCards(card, null, Zone.HAND, source, game);
                 }
             }
             return true;

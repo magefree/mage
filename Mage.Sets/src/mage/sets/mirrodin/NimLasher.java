@@ -67,7 +67,7 @@ public class NimLasher extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NimLasher copy() {
         return new NimLasher(this);
     }

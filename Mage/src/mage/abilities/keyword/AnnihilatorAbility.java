@@ -1,16 +1,16 @@
 /*
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
- * 
+ *
  *    1. Redistributions of source code must retain the above copyright notice, this list of
  *       conditions and the following disclaimer.
- * 
+ *
  *    2. Redistributions in binary form must reproduce the above copyright notice, this list
  *       of conditions and the following disclaimer in the documentation and/or other materials
  *       provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,7 +20,7 @@
  * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * The views and conclusions contained in the software and documentation are those of the
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
@@ -79,7 +79,7 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(sourceId, game);
             if (defendingPlayerId != null) {
                 // the id has to be set here because the source can be leave battlefield
-                for(Effect effect : getEffects()) {
+                for (Effect effect : getEffects()) {
                     effect.setValue("defendingPlayerId", defendingPlayerId);
                 }
                 return true;
@@ -90,8 +90,8 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Annihilator " + count + "<i>(Whenever this creature attacks, defending player sacrifices " +
-                (count == 1 ? "a permanent": CardUtil.numberToText(count) + " permanents") + ".)</i>";
+        return "Annihilator " + count + "<i>(Whenever this creature attacks, defending player sacrifices "
+                + (count == 1 ? "a permanent" : CardUtil.numberToText(count) + " permanents") + ".)</i>";
     }
 
     @Override
@@ -121,17 +121,17 @@ class AnnihilatorEffect extends OneShotEffect {
         UUID defendingPlayerId = (UUID) getValue("defendingPlayerId");
         Player player = null;
         if (defendingPlayerId != null) {
-            player= game.getPlayer(defendingPlayerId);
+            player = game.getPlayer(defendingPlayerId);
         }
         if (player != null) {
             int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId(), game));
-            Target target = new TargetControlledPermanent(amount, amount, filter, false);
+            Target target = new TargetControlledPermanent(amount, amount, filter, true);
             if (target.canChoose(player.getId(), game)) {
                 while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
                     player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 }
                 for (int idx = 0; idx < target.getTargets().size(); idx++) {
-                    Permanent permanent = game.getPermanent((UUID) target.getTargets().get(idx));
+                    Permanent permanent = game.getPermanent(target.getTargets().get(idx));
                     if (permanent != null) {
                         permanent.sacrifice(source.getSourceId(), game);
                     }

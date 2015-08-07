@@ -69,9 +69,8 @@ public class TidehollowSculler extends CardImpl {
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
-
         // When Tidehollow Sculler leaves the battlefield, return the exiled card to its owner's hand.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new TidehollowScullerLeaveEffect(), false ));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new TidehollowScullerLeaveEffect(), false));
     }
 
     public TidehollowSculler(final TidehollowSculler card) {
@@ -124,7 +123,6 @@ class TidehollowScullerExileEffect extends OneShotEffect {
         return false;
     }
 
-
 }
 
 class TidehollowScullerLeaveEffect extends OneShotEffect {
@@ -148,15 +146,11 @@ class TidehollowScullerLeaveEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
             ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exZone != null) {
-                for (Card card : exZone.getCards(game)) {
-                    if (card != null) {
-                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
-                    }
-                }
-            }            
+                controller.moveCards(exZone, null, Zone.HAND, source, game);
+            }
             return true;
         }
         return false;

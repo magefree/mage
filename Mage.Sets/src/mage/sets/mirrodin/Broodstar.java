@@ -45,7 +45,7 @@ public class Broodstar extends mage.sets.planechase.Broodstar {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Broodstar copy() {
         return new Broodstar(this);
     }

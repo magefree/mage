@@ -51,7 +51,7 @@ public class SeethingSong extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SeethingSong copy() {
         return new SeethingSong(this);
     }

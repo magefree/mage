@@ -45,7 +45,7 @@ public class BlindingBeam extends mage.sets.elspethvstezzeret.BlindingBeam {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public BlindingBeam copy() {
         return new BlindingBeam(this);
     }

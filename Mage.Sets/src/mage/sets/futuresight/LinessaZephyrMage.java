@@ -76,13 +76,13 @@ public class LinessaZephyrMage extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // Grandeur - Discard another card named Linessa, Zephyr Mage: Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
         ability = new GrandeurAbility(new LinessaZephyrMageEffect(), "Linessa, Zephyr Mage");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
-    
+
     public LinessaZephyrMage(final LinessaZephyrMage card) {
         super(card);
     }
@@ -105,21 +105,21 @@ public class LinessaZephyrMage extends CardImpl {
 }
 
 class LinessaZephyrMageEffect extends OneShotEffect {
-    
+
     LinessaZephyrMageEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land";
     }
-    
+
     LinessaZephyrMageEffect(final LinessaZephyrMageEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public LinessaZephyrMageEffect copy() {
         return new LinessaZephyrMageEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -132,7 +132,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        targetPlayer.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
                     }
                 }
 
@@ -144,10 +144,10 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        targetPlayer.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
                     }
                 }
-                
+
                 // an enchantment,
                 filter = new FilterControlledPermanent("enchantment you control");
                 filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
@@ -156,10 +156,10 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        targetPlayer.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
                     }
                 }
-                
+
                 // and a land.
                 filter = new FilterControlledPermanent("land you control");
                 filter.add(new CardTypePredicate(CardType.LAND));
@@ -168,10 +168,10 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        targetPlayer.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
                     }
                 }
-                
+
                 return true;
             }
         }

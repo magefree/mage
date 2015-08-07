@@ -63,7 +63,7 @@ public class Deconstruct extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Deconstruct copy() {
         return new Deconstruct(this);
     }

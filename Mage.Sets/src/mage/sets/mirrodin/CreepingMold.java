@@ -45,7 +45,7 @@ public class CreepingMold extends mage.sets.tenthedition.CreepingMold {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public CreepingMold copy() {
         return new CreepingMold(this);
     }

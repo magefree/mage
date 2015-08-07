@@ -63,7 +63,7 @@ public class SunbeamSpellbomb extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SunbeamSpellbomb copy() {
         return new SunbeamSpellbomb(this);
     }

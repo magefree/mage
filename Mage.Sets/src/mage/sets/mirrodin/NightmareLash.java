@@ -68,7 +68,7 @@ public class NightmareLash extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NightmareLash copy() {
         return new NightmareLash(this);
     }

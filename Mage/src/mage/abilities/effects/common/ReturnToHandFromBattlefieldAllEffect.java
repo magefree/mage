@@ -25,11 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -41,12 +42,10 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-
-
 public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
 
     private final FilterPermanent filter;
-    
+
     public ReturnToHandFromBattlefieldAllEffect(FilterPermanent filter) {
         super(Outcome.ReturnToHand);
         this.filter = filter;
@@ -62,9 +61,11 @@ public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            Cards cardsToHand = new CardsImpl();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                controller.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                cardsToHand.add(permanent);
             }
+            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
             return true;
         }
         return false;

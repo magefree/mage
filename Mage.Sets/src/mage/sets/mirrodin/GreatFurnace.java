@@ -50,7 +50,7 @@ public class GreatFurnace extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public GreatFurnace copy() {
         return new GreatFurnace(this);
     }
