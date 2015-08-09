@@ -82,7 +82,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_card" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="main_game" pref="189" max="32767" attributes="0"/>
+                      <Component id="main_game" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -159,7 +159,7 @@
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -173,7 +173,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Write the card&apos;s name on the card to make the card name more recognizable."/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -333,16 +333,23 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbGameLogAutoSave" min="-2" pref="528" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbGameLogAutoSave" alignment="0" min="-2" pref="528" max="-2" attributes="0"/>
+                              <Component id="cbDraftLogAutoSave" min="-2" pref="528" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cbGameLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="cbGameLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbDraftLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -355,6 +362,16 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGameLogAutoSaveActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbDraftLogAutoSave">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Auto save draft logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDraftLogAutoSaveActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -512,7 +529,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="phases_stopSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace pref="45" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1155,7 +1172,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="avatarPane" alignment="0" pref="359" max="32767" attributes="0"/>
+                  <Component id="avatarPane" alignment="0" pref="432" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -1606,7 +1623,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnlProxySettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                      <EmptySpace pref="90" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1819,7 +1836,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblURLServerList" max="32767" attributes="0"/>
-                              <Component id="txtURLServerList" max="32767" attributes="0"/>
+                              <Component id="txtURLServerList" pref="28" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
