@@ -29,6 +29,7 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -60,7 +61,9 @@ public class AvenRiftwatcher extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Vanishing 3
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3))));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(3));
         this.addAbility(new VanishingSacrificeAbility());
 

@@ -28,15 +28,16 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.VanishingSacrificeAbility;
 import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -56,7 +57,9 @@ public class Calciderm extends CardImpl {
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
         // Vanishing 4
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4))));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(4));
         this.addAbility(new VanishingSacrificeAbility());
     }

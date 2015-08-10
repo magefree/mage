@@ -28,8 +28,6 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -39,6 +37,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.VanishingSacrificeAbility;
 import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 
@@ -58,12 +58,14 @@ public class KeldonMarauders extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Vanishing 2
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(2))));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(2)));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(2));
         this.addAbility(new VanishingSacrificeAbility());
-        
+
         // When Keldon Marauders enters the battlefield or leaves the battlefield, it deals 1 damage to target player.
-        Ability ability = new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new DamageTargetEffect(1), false);
+        ability = new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new DamageTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

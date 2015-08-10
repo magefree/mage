@@ -29,6 +29,7 @@ package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -49,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  * @author fireshoes
  */
 public class SoultetherGolem extends CardImpl {
-    
+
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
@@ -65,10 +66,12 @@ public class SoultetherGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Vanishing 1
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(1))));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(1)));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(1));
         this.addAbility(new VanishingSacrificeAbility());
-        
+
         // Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
