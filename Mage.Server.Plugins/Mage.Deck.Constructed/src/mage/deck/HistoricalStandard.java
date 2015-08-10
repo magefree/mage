@@ -85,7 +85,7 @@ public class HistoricalStandard extends Constructed {
      * done in the overridden validate function.
      */
     public HistoricalStandard() {
-        super("Variant Magic - Historical Standard");
+        super("Constructed - Historical Standard");
 
         // banned cards
         banned.add("Balance");

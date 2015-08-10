@@ -34,6 +34,7 @@ package mage.counters;
  * @author nantuko
  */
 public enum CounterType {
+    
     AGE("age"),
     AIM("aim"),
     ARROWHEAD("arrowhead"),
@@ -76,6 +77,7 @@ public enum CounterType {
     POISON("poison"),
     PRESSURE("pressure"),
     QUEST("quest"),
+    SHIELD("shield"),
     SLIME("slime"),
     SPORE("spore"),
     STORAGE("storage"),
@@ -84,6 +86,7 @@ public enum CounterType {
     TIME("time"),
     TOWER("tower"),
     VELOCITY("velocity"),
+    VERSE("verse"),
     VILE("vile"),
     WISH("wish");
 
@@ -112,7 +115,8 @@ public enum CounterType {
     }
 
     /**
-     * Create instance of counter type with defined amount of counters of the given type.
+     * Create instance of counter type with defined amount of counters of the 
+     * given type.
      *
      * @param amount amount of counters of the given type.
      * @return

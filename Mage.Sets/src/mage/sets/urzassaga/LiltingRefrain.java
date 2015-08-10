@@ -55,7 +55,7 @@ public class LiltingRefrain extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on Lilting Refrain.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.VERSE.createInstance()), TargetController.YOU, true));
-        
+
         // Sacrifice Lilting Refrain: Counter target spell unless its controller pays {X}, where X is the number of verse counters on Lilting Refrain.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new CountersCount(CounterType.VERSE)), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell());
