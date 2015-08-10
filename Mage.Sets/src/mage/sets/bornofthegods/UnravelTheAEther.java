@@ -53,17 +53,16 @@ public class UnravelTheAEther extends CardImpl {
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                                 new CardTypePredicate(CardType.ENCHANTMENT)));
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public UnravelTheAEther(UUID ownerId) {
         super(ownerId, 143, "Unravel the AEther", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "BNG";
 
-
         // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
         this.getSpellAbility().addEffect(new UnravelTheAEtherShuffleIntoLibraryEffect());
-        Target target = new TargetPermanent(1,1,filter,true);
+        Target target = new TargetPermanent(1, 1, filter, false);
         this.getSpellAbility().addTarget(target);
     }
 
@@ -76,6 +75,7 @@ public class UnravelTheAEther extends CardImpl {
         return new UnravelTheAEther(this);
     }
 }
+
 class UnravelTheAEtherShuffleIntoLibraryEffect extends OneShotEffect {
 
     public UnravelTheAEtherShuffleIntoLibraryEffect() {
@@ -96,7 +96,7 @@ class UnravelTheAEtherShuffleIntoLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true) ) {
+            if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
                 game.getPlayer(permanent.getOwnerId()).shuffleLibrary(game);
                 return true;
             }
