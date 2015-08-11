@@ -28,18 +28,12 @@
 package mage.cards.decks.importer;
 
 import java.util.Arrays;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionInfo;
-import mage.cards.repository.ExpansionRepository;
-import mage.constants.SetType;
 
 /**
  *
@@ -56,6 +50,10 @@ public class TxtDeckImporter extends DeckImporter {
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
+        if (line.toLowerCase().contains("sideboard")) {
+            sideboard = true;
+            return;
+        }
         if (line.startsWith("//")) {
             return;
         }
@@ -67,11 +65,6 @@ public class TxtDeckImporter extends DeckImporter {
             return;
         } else {
             emptyLinesInARow = 0;
-        }
-
-        if (line.toLowerCase().startsWith("sideboard")) {
-            sideboard = true;
-            return;
         }
 
         line = line.replace("\t", " "); // changing tabs to blanks as delimiter
@@ -93,36 +86,15 @@ public class TxtDeckImporter extends DeckImporter {
         }
         try {
             int num = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
-            List<CardInfo> cards = CardRepository.instance.findCards(lineName);
-            if (cards.isEmpty()) {
+            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName);
+            if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
             } else {
-                // search the card released last with this name
-                Date lastReleaseDate = new GregorianCalendar(1900, 1, 1).getTime();
-                Date lastExpansionDate = new GregorianCalendar(1900, 1, 1).getTime();
-                CardInfo cardToUse = null;
-                for (CardInfo cardinfo : cards) {
-                    ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
-                    if (set != null) {
-                        if ((set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.CORE))
-                                && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
-                            cardToUse = cardinfo;
-                            lastExpansionDate = set.getReleaseDate();
-                        }
-                        if (lastExpansionDate == null && (lastReleaseDate == null || set.getReleaseDate().after(lastReleaseDate))) {
-                            cardToUse = cardinfo;
-                            lastReleaseDate = set.getReleaseDate();
-                        }
-                    }
-                }
-                if (cardToUse == null) {
-                    cardToUse = cards.get(0);
-                }
                 for (int i = 0; i < num; i++) {
                     if (!sideboard) {
-                        deckList.getCards().add(new DeckCardInfo(cardToUse.getName(), cardToUse.getCardNumber(), cardToUse.getSetCode()));
+                        deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
                     } else {
-                        deckList.getSideboard().add(new DeckCardInfo(cardToUse.getName(), cardToUse.getCardNumber(), cardToUse.getSetCode()));
+                        deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
                     }
                 }
             }
