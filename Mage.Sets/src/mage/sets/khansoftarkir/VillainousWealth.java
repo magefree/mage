@@ -33,6 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -41,7 +43,6 @@ import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
@@ -57,7 +58,6 @@ public class VillainousWealth extends CardImpl {
     public VillainousWealth(UUID ownerId) {
         super(ownerId, 211, "Villainous Wealth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{G}{U}");
         this.expansionSetCode = "KTK";
-
 
         // Target opponent exiles the top X cards of his or her library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -101,28 +101,24 @@ class VillainousWealthEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             if (player != null) {
-
-                // putting cards to exile shouldn't end the game, so getting minimun available
-                int cardsCount = Math.min(source.getManaCostsToPay().getX(), player.getLibrary().size());
-                for (int i = 0; i < cardsCount; i++) {
-                    Card card = player.getLibrary().getFromTop(game);
-                    if (card != null) {
-                        controller.moveCardToExileWithInfo(card, exileId, mageObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                Cards cardsToExile = new CardsImpl();
+                cardsToExile.addAll(player.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+                controller.moveCards(cardsToExile, null, Zone.EXILED, source, game, true);
+                if (controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + mageObject.getLogName() + "  without paying its mana cost?", source, game)) {
+                    OuterLoop:
+                    while (cardsToExile.count(filter, game) > 0) {
+                        TargetCardInExile target = new TargetCardInExile(0, 1, filter, exileId, false);
+                        while (cardsToExile.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
+                            Card card = game.getCard(target.getFirstTarget());
+                            if (card != null) {
+                                controller.cast(card.getSpellAbility(), game, true);
+                                cardsToExile.remove(card);
+                            } else {
+                                break OuterLoop;
+                            }
+                            target.clearChosen();
+                        }
                     }
-                }
-            }
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            while (exileZone != null && exileZone.count(filter, game) > 0
-                    && controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + mageObject.getLogName() +"  without paying its mana cost?", source, game)) {
-                TargetCardInExile target = new TargetCardInExile(0,1, filter, exileId, false);
-                while (exileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {                            
-                        controller.cast(card.getSpellAbility(), game, true);
-                    } else {
-                        break;
-                    }
-                    target.clearChosen();
                 }
             }
             return true;

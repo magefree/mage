@@ -43,6 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -95,6 +96,9 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                         if (!controllerSet) {
                             if (object instanceof Permanent) {
                                 ability.setControllerId(((Permanent) object).getControllerId());
+                            } else if (object instanceof Spell) {
+                                // needed so that cast triggered abilities have to correct controller (e.g. Ulamog, the Infinite Gyre).
+                                ability.setControllerId(((Spell) object).getControllerId());
                             } else if (object instanceof Card) {
                                 ability.setControllerId(((Card) object).getOwnerId());
                             }
