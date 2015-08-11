@@ -39,13 +39,13 @@ import com.j256.ormlite.table.TableUtils;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import org.apache.log4j.Logger;
@@ -303,18 +303,24 @@ public enum CardRepository {
     public CardInfo findPreferedCoreExpansionCard(String name) {
         List<CardInfo> cards = findCards(name);
         if (!cards.isEmpty()) {
-            CardInfo cardInfo = cards.get(random.nextInt(cards.size()));
-            ExpansionSet set = Sets.getInstance().get(cardInfo.getSetCode());
-            if (set.getSetType().equals(SetType.EXPANSION) || set.getSetType().equals(SetType.CORE)) {
-                return cardInfo;
-            }
-            for (CardInfo cardInfoToCheck : cards) {
-                set = Sets.getInstance().get(cardInfoToCheck.getSetCode());
-                if (set.getSetType().equals(SetType.CORE) || set.getSetType().equals(SetType.EXPANSION)) {
-                    return cardInfoToCheck;
+            Date lastReleaseDate = new GregorianCalendar(1900, 1, 1).getTime();
+            Date lastExpansionDate = new GregorianCalendar(1900, 1, 1).getTime();
+            CardInfo cardToUse = null;
+            for (CardInfo cardinfo : cards) {
+                ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
+                if (set != null) {
+                    if ((set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.CORE))
+                            && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
+                        cardToUse = cardinfo;
+                        lastExpansionDate = set.getReleaseDate();
+                    }
+                    if (lastExpansionDate == null && (lastReleaseDate == null || set.getReleaseDate().after(lastReleaseDate))) {
+                        cardToUse = cardinfo;
+                        lastReleaseDate = set.getReleaseDate();
+                    }
                 }
             }
-            return cardInfo;
+            return cardToUse;
         }
         return null;
     }
@@ -323,7 +329,6 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("name", new SelectArg(name));
-
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
