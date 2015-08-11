@@ -82,7 +82,7 @@ public class Triskelavus extends CardImpl {
 class TriskelaviteToken extends Token {
 
     public TriskelaviteToken() {
-        super("Triskelavite", "colorless Triskelavite artifact creature token with flying onto the battlefield. It has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");
+        super("Triskelavite", "1/1 colorless Triskelavite artifact creature token with flying onto the battlefield. It has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");
         this.setOriginalExpansionSetCode("TSP");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

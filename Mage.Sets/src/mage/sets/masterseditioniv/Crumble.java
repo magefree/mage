@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.masterseditioniv;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,73 +35,66 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
- * @author ayratn
+ * @author fireshoes
  */
-public class DivineOffering extends CardImpl {
+public class Crumble extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("artifact");
+    public Crumble(UUID ownerId) {
+        super(ownerId, 147, "Crumble", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "ME4";
 
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        // Destroy target artifact. It can't be regenerated.
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        
+        // That artifact's controller gains life equal to its converted mana cost.
+        this.getSpellAbility().addEffect(new CrumbleEffect());
     }
 
-    public DivineOffering(UUID ownerId) {
-        super(ownerId, 5, "Divine Offering", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "MBS";
-
-
-        // Destroy target artifact. You gain life equal to its converted mana cost.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new DivineOfferingEffect());
-    }
-
-    public DivineOffering(final DivineOffering card) {
+    public Crumble(final Crumble card) {
         super(card);
     }
 
     @Override
-    public DivineOffering copy() {
-        return new DivineOffering(this);
+    public Crumble copy() {
+        return new Crumble(this);
+    }
+}
+
+class CrumbleEffect extends OneShotEffect {
+
+    public CrumbleEffect() {
+        super(Outcome.GainLife);
+        staticText = "That artifact's controller gains life equal to its converted mana cost";
     }
 
-    private class DivineOfferingEffect extends OneShotEffect {
+    public CrumbleEffect(final CrumbleEffect effect) {
+        super(effect);
+    }
 
-        public DivineOfferingEffect() {
-            super(Outcome.DestroyPermanent);
-            staticText = "You gain life equal to its converted mana cost";
-        }
+    @Override
+    public CrumbleEffect copy() {
+        return new CrumbleEffect(this);
+    }
 
-        public DivineOfferingEffect(DivineOfferingEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent artifact = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-            if (artifact != null) {
-                int cost = artifact.getManaCost().convertedManaCost();
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null) {
-                    player.gainLife(cost, game);
-                }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            int cost = permanent.getManaCost().convertedManaCost();
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (player != null) {
+                player.gainLife(cost, game);
             }
             return true;
         }
-
-        @Override
-        public DivineOfferingEffect copy() {
-            return new DivineOfferingEffect(this);
-        }
-
+        return false;
     }
 }
