@@ -25,53 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.nemesis;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
-import mage.abilities.effects.common.TapAllEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class WrathOfMaritLage extends CardImpl {
-
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
+public class Lightbringer extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
     
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
-    public WrathOfMaritLage(UUID ownerId) {
-        super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "ICE";
-
-
-        // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
-        // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public WrathOfMaritLage(final WrathOfMaritLage card) {
+    public Lightbringer(UUID ownerId) {
+        super(ownerId, 11, "Lightbringer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Kor");
+        this.subtype.add("Rebel");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {tap}, Sacrifice Lightbringer: Exile target black creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public Lightbringer(final Lightbringer card) {
         super(card);
     }
 
     @Override
-    public WrathOfMaritLage copy() {
-        return new WrathOfMaritLage(this);
+    public Lightbringer copy() {
+        return new Lightbringer(this);
     }
 }

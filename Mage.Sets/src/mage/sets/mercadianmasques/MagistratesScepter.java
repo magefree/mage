@@ -25,53 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
-import mage.abilities.effects.common.TapAllEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.counters.CounterType;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class WrathOfMaritLage extends CardImpl {
+public class MagistratesScepter extends CardImpl {
 
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
-    public WrathOfMaritLage(UUID ownerId) {
-        super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "ICE";
+    public MagistratesScepter(UUID ownerId) {
+        super(ownerId, 304, "Magistrate's Scepter", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "MMQ";
 
-
-        // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
-        // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        // {4}, {tap}: Put a charge counter on Magistrate's Scepter.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(4));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+        
+        // {tap}, Remove three charge counters from Magistrate's Scepter: Take an extra turn after this one.
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3)));
+        this.addAbility(ability);
     }
 
-    public WrathOfMaritLage(final WrathOfMaritLage card) {
+    public MagistratesScepter(final MagistratesScepter card) {
         super(card);
     }
 
     @Override
-    public WrathOfMaritLage copy() {
-        return new WrathOfMaritLage(this);
+    public MagistratesScepter copy() {
+        return new MagistratesScepter(this);
     }
 }

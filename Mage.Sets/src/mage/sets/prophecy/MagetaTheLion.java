@@ -25,53 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
-import mage.abilities.effects.common.TapAllEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class WrathOfMaritLage extends CardImpl {
-
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
+public class MagetaTheLion extends CardImpl {
     
+    private static final FilterPermanent filter = new FilterPermanent("creatures except for {this}");
+
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
-    public WrathOfMaritLage(UUID ownerId) {
-        super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "ICE";
-
-
-        // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
-        // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new AnotherPredicate());
     }
 
-    public WrathOfMaritLage(final WrathOfMaritLage card) {
+    public MagetaTheLion(UUID ownerId) {
+        super(ownerId, 13, "Mageta the Lion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "PCY";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Spellshaper");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // {2}{W}{W}, {tap}, Discard two cards: Destroy all creatures except for Mageta the Lion. Those creatures can't be regenerated.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter, true), new ManaCostsImpl("{2}{W}{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2,2, new FilterCard("two cards"))));
+        this.addAbility(ability);
+    }
+
+    public MagetaTheLion(final MagetaTheLion card) {
         super(card);
     }
 
     @Override
-    public WrathOfMaritLage copy() {
-        return new WrathOfMaritLage(this);
+    public MagetaTheLion copy() {
+        return new MagetaTheLion(this);
     }
 }

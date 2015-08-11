@@ -28,7 +28,6 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
@@ -39,39 +38,39 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class WrathOfMaritLage extends CardImpl {
-
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
+public class CurseOfMaritLage extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterPermanent("Islands");
     
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
-    public WrathOfMaritLage(UUID ownerId) {
-        super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
+        filter.add(new SubtypePredicate("Island"));
+    }    
+
+    public CurseOfMaritLage(UUID ownerId) {
+        super(ownerId, 181, "Curse of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "ICE";
 
-
-        // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
+        // When Curse of Marit Lage enters the battlefield, tap all Islands.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
-        // Red creatures don't untap during their controllers' untap steps.
+        
+        // Islands don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public WrathOfMaritLage(final WrathOfMaritLage card) {
+    public CurseOfMaritLage(final CurseOfMaritLage card) {
         super(card);
     }
 
     @Override
-    public WrathOfMaritLage copy() {
-        return new WrathOfMaritLage(this);
+    public CurseOfMaritLage copy() {
+        return new CurseOfMaritLage(this);
     }
 }

@@ -25,53 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
-import mage.abilities.effects.common.TapAllEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.game.permanent.token.SaprolingToken;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class WrathOfMaritLage extends CardImpl {
+public class SaprolingCluster extends CardImpl {
 
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
-    public WrathOfMaritLage(UUID ownerId) {
-        super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "ICE";
+    public SaprolingCluster(UUID ownerId) {
+        super(ownerId, 114, "Saproling Cluster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
+        this.expansionSetCode = "NMS";
 
-
-        // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
-        // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        // {1}, Discard a card: Put a 1/1 green Saproling creature token onto the battlefield. Any player may activate this ability.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()) , new GenericManaCost(1));
+        ability.addCost(new DiscardCardCost());
+        ability.setMayActivate(TargetController.ANY);
+        ability.addEffect(new InfoEffect("Any player may activate this ability"));
+        this.addAbility(ability);
     }
 
-    public WrathOfMaritLage(final WrathOfMaritLage card) {
+    public SaprolingCluster(final SaprolingCluster card) {
         super(card);
     }
 
     @Override
-    public WrathOfMaritLage copy() {
-        return new WrathOfMaritLage(this);
+    public SaprolingCluster copy() {
+        return new SaprolingCluster(this);
     }
 }

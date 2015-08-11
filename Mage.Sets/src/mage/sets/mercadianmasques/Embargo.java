@@ -25,53 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
-import mage.abilities.effects.common.TapAllEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterNonlandPermanent;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class WrathOfMaritLage extends CardImpl {
-
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
+public class Embargo extends CardImpl {
     
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
-    public WrathOfMaritLage(UUID ownerId) {
-        super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "ICE";
+    private static final FilterPermanent filter = new FilterNonlandPermanent();
 
+    public Embargo(UUID ownerId) {
+        super(ownerId, 77, "Embargo", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        this.expansionSetCode = "MMQ";
 
-        // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
-        // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        // Nonland permanents don't untap during their controllers' untap steps.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        
+        // At the beginning of your upkeep, you lose 2 life.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
     }
 
-    public WrathOfMaritLage(final WrathOfMaritLage card) {
+    public Embargo(final Embargo card) {
         super(card);
     }
 
     @Override
-    public WrathOfMaritLage copy() {
-        return new WrathOfMaritLage(this);
+    public Embargo copy() {
+        return new Embargo(this);
     }
 }

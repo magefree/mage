@@ -25,53 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
-import mage.abilities.effects.common.TapAllEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class WrathOfMaritLage extends CardImpl {
-
-    public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
+public class Squeeze extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("Sorcery spells");
     
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
-    public WrathOfMaritLage(UUID ownerId) {
-        super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "ICE";
-
-
-        // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
-        // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        filter.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public WrathOfMaritLage(final WrathOfMaritLage card) {
+    public Squeeze(UUID ownerId) {
+        super(ownerId, 105, "Squeeze", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        this.expansionSetCode = "MMQ";
+
+        // Sorcery spells cost {3} more to cast.
+        Effect effect = new SpellsCostIncreasementAllEffect(filter, 3);
+        effect.setText("Sorcery spells cost {3} more to cast");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+    }
+
+    public Squeeze(final Squeeze card) {
         super(card);
     }
 
     @Override
-    public WrathOfMaritLage copy() {
-        return new WrathOfMaritLage(this);
+    public Squeeze copy() {
+        return new Squeeze(this);
     }
 }
