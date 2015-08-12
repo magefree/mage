@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
 
@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Reinforcements extends mage.sets.masterseditionii.Reinforcements {
+public class Panic extends mage.sets.masterseditionii.Panic {
 
-    public Reinforcements(UUID ownerId) {
+    public Panic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
-        this.expansionSetCode = "ALL";
+        this.cardNumber = 260;
+        this.expansionSetCode = "5ED";
     }
 
-    public Reinforcements(final Reinforcements card) {
+    public Panic(final Panic card) {
         super(card);
     }
 
     @Override
-    public Reinforcements copy() {
-        return new Reinforcements(this);
+    public Panic copy() {
+        return new Panic(this);
     }
 }
