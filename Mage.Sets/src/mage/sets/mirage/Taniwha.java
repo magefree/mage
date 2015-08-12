@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -98,7 +98,7 @@ class TaniwhaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), controller.getId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), controller.getId(), game)) {
                 permanent.phaseOut(game);
             }
             return true;
