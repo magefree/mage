@@ -37,7 +37,7 @@ public class Reinforcements2 extends mage.sets.masterseditionii.Reinforcements {
 
     public Reinforcements2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = 143;
         this.expansionSetCode = "ALL";
     }
 
