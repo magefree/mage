@@ -29,47 +29,38 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class GossamerPhantasm extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public GossamerPhantasm(UUID ownerId) {
+        super(ownerId, 55, "Gossamer Phantasm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
+        this.subtype.add("Illusion");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
-        this.addAbility(new VanishingSacrificeAbility());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Gossamer Phantasm becomes the target of a spell or ability, sacrifice it.
+        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public Calciderm(final Calciderm card) {
+    public GossamerPhantasm(final GossamerPhantasm card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public GossamerPhantasm copy() {
+        return new GossamerPhantasm(this);
     }
 }

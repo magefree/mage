@@ -29,47 +29,40 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.keyword.EchoAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class UktabiDrake extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public UktabiDrake(UUID ownerId) {
+        super(ownerId, 141, "Uktabi Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
+        this.subtype.add("Drake");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
-        this.addAbility(new VanishingSacrificeAbility());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Echo {1}{G}{G}
+        this.addAbility(new EchoAbility("{1}{G}{G}"));
     }
 
-    public Calciderm(final Calciderm card) {
+    public UktabiDrake(final UktabiDrake card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public UktabiDrake copy() {
+        return new UktabiDrake(this);
     }
 }

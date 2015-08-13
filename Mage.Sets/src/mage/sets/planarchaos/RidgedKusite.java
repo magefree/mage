@@ -30,46 +30,54 @@ package mage.sets.planarchaos;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class RidgedKusite extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public RidgedKusite(UUID ownerId) {
+        super(ownerId, 78, "Ridged Kusite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
+        this.subtype.add("Horror");
+        this.subtype.add("Spellshaper");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
-        ability.setRuleVisible(false);
+        // {1}{B}, {tap}, Discard a card: Target creature gets +1/+0 and gains first strike until end of turn.
+        Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
+        effect.setText("Target creature gets +1/+0");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
+        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains first strike until end of turn");
+        ability.addEffect(effect);
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
-        this.addAbility(new VanishingSacrificeAbility());
     }
 
-    public Calciderm(final Calciderm card) {
+    public RidgedKusite(final RidgedKusite card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public RidgedKusite copy() {
+        return new RidgedKusite(this);
     }
 }

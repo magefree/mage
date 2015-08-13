@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.portal;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.TapAllEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class Thundermare extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
+    public Thundermare(UUID ownerId) {
+        super(ownerId, 158, "Thundermare", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        this.expansionSetCode = "POR";
+        this.subtype.add("Elemental");
+        this.subtype.add("Horse");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
-        this.addAbility(new VanishingSacrificeAbility());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // When Thundermare enters the battlefield, tap all other creatures.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
     }
 
-    public Calciderm(final Calciderm card) {
+    public Thundermare(final Thundermare card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public Thundermare copy() {
+        return new Thundermare(this);
     }
 }

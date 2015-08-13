@@ -29,47 +29,39 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class RiptidePilferer extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public RiptidePilferer(UUID ownerId) {
+        super(ownerId, 60, "Riptide Pilferer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
+        this.subtype.add("Merfolk");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
-        this.addAbility(new VanishingSacrificeAbility());
+        // Whenever Riptide Pilferer deals combat damage to a player, that player discards a card.
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));                                                                                               // Morph {U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public Calciderm(final Calciderm card) {
+    public RiptidePilferer(final RiptidePilferer card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public RiptidePilferer copy() {
+        return new RiptidePilferer(this);
     }
 }

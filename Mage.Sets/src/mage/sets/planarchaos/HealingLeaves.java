@@ -28,48 +28,41 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class HealingLeaves extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public HealingLeaves(UUID ownerId) {
+        super(ownerId, 150, "Healing Leaves", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
-        this.addAbility(new VanishingSacrificeAbility());
+        // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(3));
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        Mode mode = new Mode();
+        mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
+        mode.getTargets().add(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addMode(mode);
     }
 
-    public Calciderm(final Calciderm card) {
+    public HealingLeaves(final HealingLeaves card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public HealingLeaves copy() {
+        return new HealingLeaves(this);
     }
 }

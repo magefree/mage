@@ -29,47 +29,50 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.TapAllEffect;
+import mage.abilities.keyword.EchoAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class Timbermare extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
+    public Timbermare(UUID ownerId) {
+        super(ownerId, 140, "Timbermare", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
-
+        this.subtype.add("Elemental");
+        this.subtype.add("Horse");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
-        this.addAbility(new VanishingSacrificeAbility());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Echo {5}{G}
+        this.addAbility(new EchoAbility("{5}{G}"));
+        // When Timbermare enters the battlefield, tap all other creatures.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
     }
 
-    public Calciderm(final Calciderm card) {
+    public Timbermare(final Timbermare card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public Timbermare copy() {
+        return new Timbermare(this);
     }
 }

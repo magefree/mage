@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.VanishingSacrificeAbility;
 import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
@@ -42,34 +41,32 @@ import mage.counters.CounterType;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class WaningWurm extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public WaningWurm(UUID ownerId) {
+        super(ownerId, 83, "Waning Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
+        this.subtype.add("Zombie");
+        this.subtype.add("Wurm");
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(6);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
+        // Vanishing 2
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(2)));
         ability.setRuleVisible(false);
         this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
+        this.addAbility(new VanishingUpkeepAbility(2));
         this.addAbility(new VanishingSacrificeAbility());
     }
 
-    public Calciderm(final Calciderm card) {
+    public WaningWurm(final WaningWurm card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public WaningWurm copy() {
+        return new WaningWurm(this);
     }
 }

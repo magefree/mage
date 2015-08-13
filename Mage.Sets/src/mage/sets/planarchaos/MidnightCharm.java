@@ -28,48 +28,48 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Calciderm extends CardImpl {
+public class MidnightCharm extends CardImpl {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public MidnightCharm(UUID ownerId) {
+        super(ownerId, 74, "Midnight Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(4));
-        this.addAbility(new VanishingSacrificeAbility());
+        // Choose one - Midnight Charm deals 1 damage to target creature and you gain 1 life; or target creature gains first strike until end of turn; or tap target creature.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+        this.getSpellAbility().addEffect(new GainLifeEffect(1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        Mode mode = new Mode();
+        mode.getEffects().add(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        mode.getTargets().add(new TargetCreaturePermanent());
+        this.getSpellAbility().addMode(mode);
+        mode = new Mode();
+        mode.getEffects().add(new TapTargetEffect());
+        mode.getTargets().add(new TargetCreaturePermanent());
+        this.getSpellAbility().addMode(mode);
     }
 
-    public Calciderm(final Calciderm card) {
+    public MidnightCharm(final MidnightCharm card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public MidnightCharm copy() {
+        return new MidnightCharm(this);
     }
 }

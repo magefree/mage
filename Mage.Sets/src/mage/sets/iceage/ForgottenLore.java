@@ -25,49 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.sets.iceage;
 
 import java.util.UUID;
 
-import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.PhaseStep;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
-
 /**
  *
- * @author jeffwadsworth
- *
+ * @author LoneFox
  */
-public class HammerOfBogardan extends CardImpl {
+public class ForgottenLore extends mage.sets.masterseditionii.ForgottenLore {
 
-    public HammerOfBogardan(UUID ownerId) {
-        super(ownerId, 181, "Hammer of Bogardan", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "MIR";
-
-
-        // Hammer of Bogardan deals 3 damage to target creature or player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-
-        // {2}{R}{R}{R}: Return Hammer of Bogardan from your graveyard to your hand. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{R}{R}{R}"), new IsStepCondition(PhaseStep.UPKEEP), null));
+    public ForgottenLore(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 125;
+        this.expansionSetCode = "ICE";
     }
 
-    public HammerOfBogardan(final HammerOfBogardan card) {
+    public ForgottenLore(final ForgottenLore card) {
         super(card);
     }
 
     @Override
-    public HammerOfBogardan copy() {
-        return new HammerOfBogardan(this);
+    public ForgottenLore copy() {
+        return new ForgottenLore(this);
     }
 }
