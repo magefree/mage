@@ -41,10 +41,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -53,9 +64,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
 import mage.client.components.tray.MageTray;
 import mage.client.deckeditor.SortSettingDraft;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Event;
@@ -93,6 +107,19 @@ public class DraftPanel extends javax.swing.JPanel {
     protected SimpleCardsView pickedCardsShown = new SimpleCardsView();
     // id of card with popup menu
     protected UUID cardIdPopupMenu;
+
+    // Filename for the draft log (only updated if writing the log).
+    private String logFilename;
+
+    // Number of the current booster (for draft log writing).
+    private int packNo;
+
+    // Number of the current card pick (for draft log writing).
+    private int pickNo;
+
+    // Cached booster data to be written into the log (see logLastPick).
+    private String currentBoosterHeader;
+    private String[] currentBooster;
 
     private static final CardsView emptyView = new CardsView();
 
@@ -149,6 +176,20 @@ public class DraftPanel extends javax.swing.JPanel {
         if (!session.joinDraft(draftId)) {
             hideDraft();
         }
+
+        if (isLogging()) {
+            // If we are logging the draft create a file that will contain
+            // the log.
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            logFilename = "Draft_" + sdf.format(new Date()) + "_" + draftId + ".txt";
+            try {
+                Files.write(pathToDraftLog(), "".getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            } catch (IOException ex) {
+                Logger.getLogger(DraftPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            logFilename = null;
+        }
     }
 
     public void updateDraft(DraftView draftView) {        
@@ -166,6 +207,9 @@ public class DraftPanel extends javax.swing.JPanel {
         this.chkPack2.setSelected(draftView.getBoosterNum() > 1);
         this.chkPack3.setSelected(draftView.getBoosterNum() > 2);
         this.txtCardNo.setText(Integer.toString(draftView.getCardNum()));
+
+        packNo = draftView.getBoosterNum();
+        pickNo = draftView.getCardNum();
 
         int right = draftView.getPlayers().size() / 2;
         int left = draftView.getPlayers().size() - right;
@@ -247,6 +291,7 @@ public class DraftPanel extends javax.swing.JPanel {
     }
 
     public void loadBooster(DraftPickView draftPickView) {
+        logLastPick(draftPickView);
         // upper area that shows the picks
         loadCardsToPickedCardsArea(draftPickView.getPicks());
 
@@ -412,6 +457,94 @@ public class DraftPanel extends javax.swing.JPanel {
         cardsHidden.clear();
         draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCardsShown), bigCard, null);
     }
+
+    // Log the last card picked into the draft log together with booster
+    // contents.
+    // We don't get any event when the card is selected due to timeout
+    // that's why instead of proactively logging our pick we instead
+    // log *last* pick from the list of picks.
+    // To make this possible we cache the list of cards from the
+    // previous booster and it's sequence number (pack number / pick number)
+    // in fields currentBooster and currentBoosterHeader.
+    private void logLastPick(DraftPickView pickView) {
+        if (!isLogging()) {
+            return;
+        }
+        if (currentBooster != null) {
+            String lastPick = getCardName(getLastPick(pickView.getPicks().values()));
+            if (lastPick != null) {
+                logPick(lastPick);
+            }
+            currentBooster = null;
+        }
+        setCurrentBoosterForLog(pickView.getBooster());
+        if (currentBooster.length == 1) {
+            logPick(currentBooster[0]);
+        }
+    }
+
+    private static boolean isLogging() {
+        String autoSave = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_LOG_AUTO_SAVE, "true");
+        return autoSave.equals("true");
+    }
+
+    private void setCurrentBoosterForLog(SimpleCardsView booster) {
+        LinkedList<String> cards = new LinkedList<>();
+        for (SimpleCardView simple: booster.values()) {
+            String cardName = getCardName(simple);
+            if (cardName != null) {
+                cards.add(cardName);
+            }
+        }
+
+        currentBoosterHeader = "Pack " + packNo + " pick " + pickNo + ":\n";
+        currentBooster = cards.toArray(new String[cards.size()]);
+    }
+
+    private void logPick(String pick) {
+        StringBuilder b = new StringBuilder();
+        b.append(currentBoosterHeader);
+        for (String name : currentBooster) {
+            b.append(pick.equals(name) ? "--> " : "    ");
+            b.append(name);
+            b.append('\n');
+        }
+        b.append('\n');
+        appendToDraftLog(b.toString());
+    }
+
+    private Path pathToDraftLog() {
+        File saveDir = new File("gamelogs");
+        if(!saveDir.exists()) {
+            saveDir.mkdirs();
+        }
+        return new File(saveDir, logFilename).toPath();
+    }
+
+    private void appendToDraftLog(String data) {
+        try {
+            Files.write(pathToDraftLog(), data.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException ex) {
+            Logger.getLogger(DraftPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private static SimpleCardView getLastPick(Collection<SimpleCardView> picks) {
+        SimpleCardView last = null;
+        for (SimpleCardView pick : picks) {
+            last = pick;
+        }
+        return last;
+    }
+
+    private static String getCardName(SimpleCardView card) {
+        if (card == null) {
+            return null;
+        }
+        CardInfo cardInfo = CardRepository.instance.findCard(card.getExpansionSetCode(), card.getCardNumber());
+        return cardInfo != null ? cardInfo.getName() : null;
+    }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
