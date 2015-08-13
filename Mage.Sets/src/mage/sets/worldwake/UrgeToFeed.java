@@ -28,15 +28,14 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,6 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -58,7 +58,6 @@ public class UrgeToFeed extends CardImpl {
     public UrgeToFeed(UUID ownerId) {
         super(ownerId, 70, "Urge to Feed", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "WWK";
-
 
         // Target creature gets -3/-3 until end of turn. You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
@@ -97,20 +96,17 @@ class UrgeToFeedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-        while (true) {
-            target.clearChosen();
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
-                UUID vampire = target.getFirstTarget();
+        TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
+            for (UUID vampireId : target.getTargets()) {
+                Permanent vampire = game.getPermanent(vampireId);
                 if (vampire != null) {
-                    game.getPermanent(vampire).tap(game);
-                    game.getPermanent(vampire).addCounters(CounterType.P1P1.createInstance(), game);
+                    vampire.tap(game);
+                    vampire.addCounters(CounterType.P1P1.createInstance(), game);
                 }
-            } else {
-                break;
             }
         }
-        return false;
+        return true;
     }
 
     @Override

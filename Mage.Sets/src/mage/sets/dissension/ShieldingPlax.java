@@ -43,8 +43,8 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,12 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ShieldingPlax extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+    private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-    
     public ShieldingPlax(UUID ownerId) {
         super(ownerId, 147, "Shielding Plax", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G/U}");
         this.expansionSetCode = "DIS";
@@ -71,12 +67,13 @@ public class ShieldingPlax extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // When Shielding Plax enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
-        
+
         // Enchanted creature can't be the target of spells or abilities your opponents control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedAttachedEffect(filter, Duration.WhileOnBattlefield, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new CantBeTargetedAttachedEffect(filter, Duration.WhileOnBattlefield, AttachmentType.AURA, TargetController.OPPONENT)));
     }
 
     public ShieldingPlax(final ShieldingPlax card) {

@@ -18,19 +18,26 @@ import mage.target.common.TargetCardInHand;
 public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
 
     private final FilterCard filter;
+    private final boolean useTargetController;
 
     public PutPermanentOnBattlefieldEffect() {
-        this(new FilterPermanentCard("a permanent card"));
+        this(new FilterPermanentCard("a permanent card"), false);
     }
 
     public PutPermanentOnBattlefieldEffect(FilterCard filter) {
+        this(filter, false);
+    }
+
+    public PutPermanentOnBattlefieldEffect(FilterCard filter, boolean useTargetController) {
         super(Outcome.PutCardInPlay);
         this.filter = filter;
+        this.useTargetController = useTargetController;
     }
 
     public PutPermanentOnBattlefieldEffect(final PutPermanentOnBattlefieldEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
+        this.useTargetController = effect.useTargetController;
     }
 
     @Override
@@ -40,7 +47,13 @@ public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player player;
+        if(useTargetController) {
+            player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        }
+        else {
+            player = game.getPlayer(source.getControllerId());
+        }
         String choiceText = "Put " + filter.getMessage() + " from your hand onto the battlefield?";
         if (player == null || !player.chooseUse(Outcome.PutCardInPlay, choiceText, source, game)) {
             return false;
@@ -63,6 +76,11 @@ public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
             return staticText;
         }
 
-        return "you may put " + filter.getMessage() + " from your hand onto the battlefield";
+        if(useTargetController) {
+            return "that player may put " + filter.getMessage() + " from his or her hand onto the battlefield";
+        }
+        else {
+            return "you may put " + filter.getMessage() + " from your hand onto the battlefield";
+        }
     }
 }

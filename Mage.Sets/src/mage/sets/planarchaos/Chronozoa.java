@@ -28,8 +28,8 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
@@ -64,7 +64,9 @@ public class Chronozoa extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Vanishing 3
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(timeCounters))));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(timeCounters)));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(timeCounters));
         this.addAbility(new VanishingSacrificeAbility());
         // When Chronozoa is put into a graveyard from play, if it had no time counters on it, put two tokens into play that are copies of it.

@@ -390,6 +390,11 @@ public abstract class GameImpl implements Game, Serializable {
             object = state.getBattlefield().getPermanent(objectId);
             return object;
         }
+        // can be an ability of a sacrificed Token trying to get it's source object
+        object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
+        if (object != null) {
+            return object;
+        }
         for (CommandObject commandObject : state.getCommand()) {
             if (commandObject instanceof Commander && commandObject.getId().equals(objectId)) {
                 return commandObject;
@@ -402,8 +407,6 @@ public abstract class GameImpl implements Game, Serializable {
                     return commandObject;
                 }
             }
-            // can be an ability of a sacrificed Token trying to get it's source object
-            object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
         return object;
     }
