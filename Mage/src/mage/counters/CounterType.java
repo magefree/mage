@@ -80,6 +80,7 @@ public enum CounterType {
     SLIME("slime"),
     SPORE("spore"),
     STORAGE("storage"),
+    STRIFE("strife"),
     STUDY("study"),
     THEFT("theft"),
     TIME("time"),
