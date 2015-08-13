@@ -56,7 +56,7 @@ import mage.target.TargetObject;
  */
 public class HydromorphGuardian extends CardImpl {
 
-    private static FilterSpell filter = new FilterSpell("spell that targets a creature you control");
+    private static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
 
     public HydromorphGuardian(UUID ownerId) {
         super(ownerId, 39, "Hydromorph Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
