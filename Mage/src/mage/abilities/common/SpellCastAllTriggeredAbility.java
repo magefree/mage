@@ -86,10 +86,10 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && filter.match(spell, getControllerId(), game)) {
+        if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
             if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
                 for (Effect effect : this.getEffects()) {
-                    switch(setTargetPointer) {
+                    switch (setTargetPointer) {
                         case SPELL:
                             effect.setTargetPointer(new FixedTarget(spell.getId()));
                             break;

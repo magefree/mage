@@ -112,7 +112,7 @@ class OpalineSliverTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             return event.getTargetId().equals(this.getSourceId())
                     && game.getOpponents(this.controllerId).contains(event.getPlayerId())
-                    && spellCard.match(spell, event.getPlayerId(), game);
+                    && spellCard.match(spell, getSourceId(), getControllerId(), game);
         }
     }
 
