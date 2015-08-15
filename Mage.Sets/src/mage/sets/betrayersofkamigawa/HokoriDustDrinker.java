@@ -62,7 +62,7 @@ public class HokoriDustDrinker extends CardImpl {
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
         // Lands don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterLandPermanent("Lands"))));

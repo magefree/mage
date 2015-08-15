@@ -55,7 +55,6 @@ public class NaturalAffinity extends CardImpl {
         super(ownerId, 256, "Natural Affinity", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "9ED";
 
-
         // All lands become 2/2 creatures until end of turn. They're still lands.
         this.getSpellAbility().addEffect(new BecomesCreatureAllEffect());
     }
@@ -72,9 +71,8 @@ public class NaturalAffinity extends CardImpl {
 
 class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
-  
     public BecomesCreatureAllEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
+        super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "All lands become 2/2 creatures until end of turn. They're still lands";
     }
 
@@ -86,12 +84,12 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     public BecomesCreatureAllEffect copy() {
         return new BecomesCreatureAllEffect(this);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         this.affectedObjectsSet = true;
-        for (Permanent perm: game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
             affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }
@@ -101,9 +99,9 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
-                        if(permanent != null){
+                        if (permanent != null) {
                             permanent.getCardType().add(CardType.CREATURE);
                         } else {
                             it.remove();
@@ -116,7 +114,7 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                 if (sublayer == SubLayer.SetPT_7b) {
                     for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
-                        if(permanent != null){
+                        if (permanent != null) {
                             permanent.getPower().setValue(2);
                             permanent.getToughness().setValue(2);
                         } else {
@@ -132,7 +130,6 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         return false;
     }
-
 
     @Override
     public boolean hasLayer(Layer layer) {

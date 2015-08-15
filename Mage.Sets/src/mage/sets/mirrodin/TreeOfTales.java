@@ -50,7 +50,7 @@ public class TreeOfTales extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public TreeOfTales copy() {
         return new TreeOfTales(this);
     }

@@ -34,7 +34,6 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.Target;
-import mage.target.Targets;
 
 /**
  *
@@ -57,7 +56,7 @@ public class NumberOfTargetsPredicate implements Predicate<MageObject> {
                 Mode mode = spell.getSpellAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     numberOfTargets += target.getTargets().size();
-                }                
+                }
             }
             if (numberOfTargets == targets) {
                 return true;

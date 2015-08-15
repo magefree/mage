@@ -58,8 +58,8 @@ public class StoneSeederHierophant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a land enters the battlefield under your control, untap Stone-Seeder Hierophant.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new FilterLandPermanent("a land"), false));
-        
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new FilterLandPermanent("a land"), false, null, true));
+
         // {tap}: Untap target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
         Target target = new TargetLandPermanent();

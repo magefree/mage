@@ -54,7 +54,7 @@ public class MindsEye extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public MindsEye copy() {
         return new MindsEye(this);
     }

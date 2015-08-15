@@ -54,7 +54,7 @@ public class IronMyr extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public IronMyr copy() {
         return new IronMyr(this);
     }

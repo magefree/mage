@@ -70,7 +70,7 @@ public class CrystalShard extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public CrystalShard copy() {
         return new CrystalShard(this);
     }
@@ -91,12 +91,12 @@ class CrystalShardEffect extends OneShotEffect {
         this.cost = effect.cost.copy();
     }
 
-    @Override
+    @java.lang.Override
     public CrystalShardEffect copy() {
         return new CrystalShardEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {        

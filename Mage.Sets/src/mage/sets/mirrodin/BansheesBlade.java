@@ -71,7 +71,7 @@ public class BansheesBlade extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public BansheesBlade copy() {
         return new BansheesBlade(this);
     }
@@ -91,12 +91,12 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
         this.usedInPhase = ability.usedInPhase;
     }
 
-    @Override
+    @java.lang.Override
     public BansheesBladeAbility copy() {
         return new BansheesBladeAbility(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DAMAGED_PLAYER
                 || event.getType() == EventType.DAMAGED_CREATURE
@@ -104,7 +104,7 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
                 || event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE;
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedEvent && ((DamagedEvent) event).isCombatDamage() && !usedInPhase) {
             Permanent permanent = game.getPermanent(event.getSourceId());
@@ -119,7 +119,7 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public String getRule() {
         return "Whenever equipped creature deals combat damage, put a charge counter on {this}.";
     }

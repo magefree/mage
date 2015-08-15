@@ -28,16 +28,11 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -52,7 +47,6 @@ public class Oppression extends CardImpl {
     public Oppression(UUID ownerId) {
         super(ownerId, 143, "Oppression", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "USG";
-
 
         // Whenever a player casts a spell, that player discards a card.
         this.addAbility(new OppressionTriggeredAbility());
@@ -82,7 +76,7 @@ class OppressionTriggeredAbility extends SpellCastAllTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getControllerId(), game)) {
+            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }

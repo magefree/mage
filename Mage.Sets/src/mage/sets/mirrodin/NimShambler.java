@@ -72,7 +72,7 @@ public class NimShambler extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NimShambler copy() {
         return new NimShambler(this);
     }

@@ -27,34 +27,43 @@
  */
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterStackObject;
+import mage.constants.TargetController;
+import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
 /**
  *
  * @author LevelX2
  */
-
 public class CantBeTargetedTargetEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private final FilterStackObject filterSource;
+    private final FilterObject filterSource;
+    private final TargetController targetController;
 
-    public CantBeTargetedTargetEffect(FilterStackObject filterSource, Duration duration) {
+    public CantBeTargetedTargetEffect(FilterObject filterSource, Duration duration) {
+        this(filterSource, duration, TargetController.ANY);
+    }
+
+    public CantBeTargetedTargetEffect(FilterObject filterSource, Duration duration, TargetController targetController) {
         super(duration, Outcome.Benefit, false, false);
+        this.targetController = targetController;
         this.filterSource = filterSource;
     }
 
     public CantBeTargetedTargetEffect(final CantBeTargetedTargetEffect effect) {
         super(effect);
         this.filterSource = effect.filterSource.copy();
+        this.targetController = effect.targetController;
     }
 
     @Override
@@ -75,8 +84,18 @@ public class CantBeTargetedTargetEffect extends ContinuousRuleModifyingEffectImp
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {
-            StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-            if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {
+            if (targetController.equals(TargetController.OPPONENT)
+                    && !game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+                return false;
+            }
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+            MageObject sourceObject;
+            if (stackObject instanceof StackAbility) {
+                sourceObject = ((StackAbility) stackObject).getSourceObject(game);
+            } else {
+                sourceObject = stackObject;
+            }
+            if (sourceObject != null && filterSource.match(sourceObject, game)) {
                 return true;
             }
         }
@@ -95,13 +114,13 @@ public class CantBeTargetedTargetEffect extends ContinuousRuleModifyingEffectImp
         sb.append(" can't be the target of ");
         sb.append(filterSource.getMessage());
         if (!duration.toString().isEmpty()) {
-            sb.append(" ");            
+            sb.append(" ");
             if (duration.equals(Duration.EndOfTurn)) {
                 sb.append("this turn");
             } else {
                 sb.append(duration.toString());
             }
-        }        
+        }
         return sb.toString();
     }
 

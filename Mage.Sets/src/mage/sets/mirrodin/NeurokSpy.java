@@ -67,7 +67,7 @@ public class NeurokSpy extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NeurokSpy copy() {
         return new NeurokSpy(this);
     }

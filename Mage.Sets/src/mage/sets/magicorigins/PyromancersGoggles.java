@@ -112,7 +112,7 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(abilityOriginalId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getControllerId(), game)) {
+            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }

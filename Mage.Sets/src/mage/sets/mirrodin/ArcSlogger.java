@@ -65,7 +65,7 @@ public class ArcSlogger extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ArcSlogger copy() {
         return new ArcSlogger(this);
     }

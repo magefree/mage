@@ -62,7 +62,7 @@ public class TalismanOfIndulgence extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public TalismanOfIndulgence copy() {
         return new TalismanOfIndulgence(this);
     }

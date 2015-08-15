@@ -73,7 +73,7 @@ public class LoxodonMender extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public LoxodonMender copy() {
         return new LoxodonMender(this);
     }

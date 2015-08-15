@@ -58,7 +58,7 @@ public class AssertAuthority extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public AssertAuthority copy() {
         return new AssertAuthority(this);
     }

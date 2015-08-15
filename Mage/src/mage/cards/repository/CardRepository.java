@@ -39,12 +39,15 @@ import com.j256.ormlite.table.TableUtils;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import mage.constants.CardType;
+import mage.constants.SetType;
 import org.apache.log4j.Logger;
 
 /**
@@ -60,7 +63,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 41;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 31;
+    private static final long CARD_CONTENT_VERSION = 32;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -297,11 +300,35 @@ public enum CardRepository {
         return null;
     }
 
+    public CardInfo findPreferedCoreExpansionCard(String name) {
+        List<CardInfo> cards = findCards(name);
+        if (!cards.isEmpty()) {
+            Date lastReleaseDate = new GregorianCalendar(1900, 1, 1).getTime();
+            Date lastExpansionDate = new GregorianCalendar(1900, 1, 1).getTime();
+            CardInfo cardToUse = null;
+            for (CardInfo cardinfo : cards) {
+                ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
+                if (set != null) {
+                    if ((set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.CORE))
+                            && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
+                        cardToUse = cardinfo;
+                        lastExpansionDate = set.getReleaseDate();
+                    }
+                    if (lastExpansionDate == null && (lastReleaseDate == null || set.getReleaseDate().after(lastReleaseDate))) {
+                        cardToUse = cardinfo;
+                        lastReleaseDate = set.getReleaseDate();
+                    }
+                }
+            }
+            return cardToUse;
+        }
+        return null;
+    }
+
     public List<CardInfo> findCards(String name) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("name", new SelectArg(name));
-
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }

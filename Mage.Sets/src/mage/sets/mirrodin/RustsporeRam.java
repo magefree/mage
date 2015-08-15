@@ -66,7 +66,7 @@ public class RustsporeRam extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public RustsporeRam copy() {
         return new RustsporeRam(this);
     }

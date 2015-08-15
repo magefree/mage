@@ -42,6 +42,7 @@ import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.constants.AbilityType;
@@ -261,6 +262,12 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                     game.informPlayers(game.getPlayer(this.controllerId).getLogName() + " announced a value of " + xManaValue + " for " + " kicker X ");
                 }
                 ability.getManaCostsToPay().add(new GenericManaCost(xManaValue));
+                ManaCostsImpl<ManaCost> kickerManaCosts = (ManaCostsImpl) cost;
+                for (ManaCost manaCost : kickerManaCosts) {
+                    if (!(manaCost instanceof VariableManaCost)) {
+                        ability.getManaCostsToPay().add(manaCost.copy());
+                    }
+                }
             } else {
                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
             }

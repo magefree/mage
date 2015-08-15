@@ -67,7 +67,7 @@ public class MolderSlug extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public MolderSlug copy() {
         return new MolderSlug(this);
     }

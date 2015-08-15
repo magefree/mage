@@ -30,9 +30,10 @@ package mage.sets.mirrodin;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -42,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -76,7 +78,10 @@ public class NimDevourer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.WhileOnBattlefield)));
         
         // {B}{B}: Return Nim Devourer from your graveyard to the battlefield, then sacrifice a creature. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
+                new ReturnSourceFromGraveyardToBattlefieldEffect(), 
+                new ManaCostsImpl("{B}{B}"), 
+                new IsStepCondition(PhaseStep.UPKEEP), null);
         ability.addEffect(new NimDevourerEffect());
         this.addAbility(ability);
     }
@@ -85,7 +90,7 @@ public class NimDevourer extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NimDevourer copy() {
         return new NimDevourer(this);
     }
@@ -102,12 +107,12 @@ class NimDevourerEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public NimDevourerEffect copy() {
         return new NimDevourerEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {

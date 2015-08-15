@@ -53,7 +53,7 @@ public class Shatter extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Shatter copy() {
         return new Shatter(this);
     }

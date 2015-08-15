@@ -27,25 +27,20 @@
  */
 package mage.sets.iceage;
 
-import java.util.List;
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
+import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -59,16 +54,16 @@ public class WrathOfMaritLage extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
     
-    
     public WrathOfMaritLage(UUID ownerId) {
         super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "ICE";
 
 
         // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
         // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
     public WrathOfMaritLage(final WrathOfMaritLage card) {
@@ -78,32 +73,5 @@ public class WrathOfMaritLage extends CardImpl {
     @Override
     public WrathOfMaritLage copy() {
         return new WrathOfMaritLage(this);
-    }
-}
-
-class TapAllEffect extends OneShotEffect {
-   
-    public TapAllEffect() {
-        super(Outcome.Tap);
-        staticText = "tap all red creatures";
-    }
-
-    public TapAllEffect(final TapAllEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(WrathOfMaritLage.filter, source.getSourceId(), game);
-        for (Permanent creature : creatures) {
-            creature.tap(game);
-        }
-        return true;
-    }
-
-    @Override
-    public TapAllEffect copy() {
-        return new TapAllEffect(this);
     }
 }

@@ -33,7 +33,6 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +55,7 @@ public class MwonvuliAcidMoss extends CardImpl {
         // Destroy target land. Search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterLandPermanent()));
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), false, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), true, true));
     }
 
     public MwonvuliAcidMoss(final MwonvuliAcidMoss card) {

@@ -58,7 +58,7 @@ public class PsychogenicProbe extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public PsychogenicProbe copy() {
         return new PsychogenicProbe(this);
     }
@@ -74,17 +74,17 @@ class PsychogenicProbeTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @Override
+    @java.lang.Override
     public PsychogenicProbeTriggeredAbility copy() {
         return new PsychogenicProbeTriggeredAbility(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType().equals(EventType.LIBRARY_SHUFFLED);
     }
     
-    @Override
+    @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
         for (Effect effect : this.getEffects()) {
             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -92,7 +92,7 @@ class PsychogenicProbeTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
+    @java.lang.Override
     public String getRule() {
         return "Whenever a spell or ability causes a player to shuffle his or her library, Psychogenic Probe deals 2 damage to him or her.";
     }

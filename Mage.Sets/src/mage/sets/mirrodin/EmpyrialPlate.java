@@ -61,7 +61,7 @@ public class EmpyrialPlate extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public EmpyrialPlate copy() {
         return new EmpyrialPlate(this);
     }

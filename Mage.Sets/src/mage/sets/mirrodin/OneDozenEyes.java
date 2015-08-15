@@ -45,7 +45,7 @@ public class OneDozenEyes extends mage.sets.commander2013.OneDozenEyes {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public OneDozenEyes copy() {
         return new OneDozenEyes(this);
     }

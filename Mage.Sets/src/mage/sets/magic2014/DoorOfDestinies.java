@@ -155,7 +155,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
                 filter.add(new ControllerPredicate(TargetController.YOU));
                 filter.add(new SubtypePredicate(subtype));
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && filter.match(spell, controllerId, game)) {
+                if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                     return true;
                 }
             }
@@ -168,7 +168,6 @@ class AddCounterAbility extends TriggeredAbilityImpl {
         return "Whenever you cast a spell of the chosen type, put a charge counter on {source}";
     }
 }
-
 
 class BoostCreatureEffectEffect extends ContinuousEffectImpl {
 
@@ -194,7 +193,7 @@ class BoostCreatureEffectEffect extends ContinuousEffectImpl {
         if (permanent != null) {
             String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
             if (subtype != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (perm.hasSubtype(subtype)) {
                         int boost = permanent.getCounters().getCount(CounterType.CHARGE);
                         perm.addPower(boost);

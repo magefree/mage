@@ -60,7 +60,7 @@ public class LuminousAngel extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public LuminousAngel copy() {
         return new LuminousAngel(this);
     }

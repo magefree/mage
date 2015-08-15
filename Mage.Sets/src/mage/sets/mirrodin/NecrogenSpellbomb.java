@@ -65,7 +65,7 @@ public class NecrogenSpellbomb extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NecrogenSpellbomb copy() {
         return new NecrogenSpellbomb(this);
     }

@@ -29,14 +29,14 @@ package mage.sets.avacynrestored;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -57,7 +57,7 @@ public class Aggravate extends CardImpl {
 
 
         // Aggravate deals 1 damage to each creature target player controls.
-        this.getSpellAbility().addEffect(new AggraveteEffect());
+        this.getSpellAbility().addEffect(new AggravateEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Each creature dealt damage this way attacks this turn if able.
         this.getSpellAbility().addEffect(new AggravateRequirementEffect());
@@ -74,20 +74,20 @@ public class Aggravate extends CardImpl {
     }
 }
 
-class AggraveteEffect extends OneShotEffect {
+class AggravateEffect extends OneShotEffect {
 
-    public AggraveteEffect() {
+    public AggravateEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to each creature target player controls";
     }
 
-    public AggraveteEffect(final AggraveteEffect effect) {
+    public AggravateEffect(final AggravateEffect effect) {
         super(effect);
     }
 
     @Override
-    public AggraveteEffect copy() {
-        return new AggraveteEffect(this);
+    public AggravateEffect copy() {
+        return new AggravateEffect(this);
     }
 
     @Override

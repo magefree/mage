@@ -45,7 +45,7 @@ public class SkyhunterPatrol extends mage.sets.tenthedition.SkyhunterPatrol {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SkyhunterPatrol copy() {
         return new SkyhunterPatrol(this);
     }

@@ -45,7 +45,7 @@ public class BarterInBlood extends mage.sets.avacynrestored.BarterInBlood {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public BarterInBlood copy() {
         return new BarterInBlood(this);
     }

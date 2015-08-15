@@ -45,7 +45,7 @@ public class MaskOfMemory extends mage.sets.planechase.MaskOfMemory {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public MaskOfMemory copy() {
         return new MaskOfMemory(this);
     }

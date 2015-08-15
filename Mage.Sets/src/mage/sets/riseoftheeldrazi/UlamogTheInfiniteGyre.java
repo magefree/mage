@@ -64,7 +64,7 @@ public class UlamogTheInfiniteGyre extends CardImpl {
 
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
-        
+
         // When you cast Ulamog, the Infinite Gyre, destroy target permanent.
         this.addAbility(new UlamogTheInfiniteGyreDestroyOnCastAbility());
         // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
@@ -87,7 +87,7 @@ public class UlamogTheInfiniteGyre extends CardImpl {
 
 class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl {
 
-    UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
+    UlamogTheInfiniteGyreDestroyOnCastAbility() {
         super(Zone.STACK, new DestroyTargetEffect());
         this.addTarget(new TargetPermanent());
     }
@@ -114,13 +114,13 @@ class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When you cast {this}, ").append(super.getRule()).toString();
+        return "When you cast {this}, " + super.getRule();
     }
 }
 
 class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect {
 
-    UlamogTheInfiniteGyreEnterGraveyardEffect ( ) {
+    UlamogTheInfiniteGyreEnterGraveyardEffect() {
         super(Outcome.Benefit);
         staticText = "its owner shuffles his or her graveyard into his or her library";
     }
@@ -144,9 +144,9 @@ class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(ownerId);
         if (player != null) {
-            for (Card cardToMove: player.getGraveyard().getCards(game)) {
+            for (Card cardToMove : player.getGraveyard().getCards(game)) {
                 cardToMove.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }                           
+            }
             player.shuffleLibrary(game);
             return true;
         }

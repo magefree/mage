@@ -63,7 +63,7 @@ public class LoxodonPunisher extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public LoxodonPunisher copy() {
         return new LoxodonPunisher(this);
     }

@@ -62,7 +62,7 @@ public class WallOfBlood extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public WallOfBlood copy() {
         return new WallOfBlood(this);
     }

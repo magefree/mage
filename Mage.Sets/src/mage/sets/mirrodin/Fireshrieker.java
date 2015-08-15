@@ -45,7 +45,7 @@ public class Fireshrieker extends mage.sets.magic2014.Fireshrieker {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Fireshrieker copy() {
         return new Fireshrieker(this);
     }

@@ -58,7 +58,7 @@ public class SlithAscendant extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SlithAscendant copy() {
         return new SlithAscendant(this);
     }

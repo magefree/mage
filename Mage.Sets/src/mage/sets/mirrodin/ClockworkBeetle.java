@@ -65,7 +65,7 @@ public class ClockworkBeetle extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ClockworkBeetle copy() {
         return new ClockworkBeetle(this);
     }
@@ -81,7 +81,7 @@ class ClockworkBeetleEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
@@ -93,7 +93,7 @@ class ClockworkBeetleEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public ClockworkBeetleEffect copy() {
         return new ClockworkBeetleEffect(this);
     }

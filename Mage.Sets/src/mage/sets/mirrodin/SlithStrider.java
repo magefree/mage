@@ -59,7 +59,7 @@ public class SlithStrider extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SlithStrider copy() {
         return new SlithStrider(this);
     }
