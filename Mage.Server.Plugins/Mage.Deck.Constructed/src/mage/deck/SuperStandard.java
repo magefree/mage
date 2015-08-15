@@ -49,9 +49,9 @@ public class SuperStandard extends Constructed {
         // 18th Standard
         {"9ED", "RAV", "GPT", "DIS", "CSP", "TSP", "TSB", "PLC", "FUT"},
         // 19th Standard
-        {"10E", "RAV", "GPT", "DIS", "CSP", "TSP", "PLC", "FUT"},
+        {"10E", "RAV", "GPT", "DIS", "CSP", "TSP", "TSB", "PLC", "FUT"},
         // 20th Standard
-        {"10E", "CSP", "TSP", "PLC", "FUT", "LRW", "MOR", "SHM", "EVE"},
+        {"10E", "CSP", "TSP", "TSB", "PLC", "FUT", "LRW", "MOR", "SHM", "EVE"},
         // 21st Standard
         {"10E", "LRW", "MOR", "SHM", "EVE", "ALA", "CON", "ARB"}
     };
