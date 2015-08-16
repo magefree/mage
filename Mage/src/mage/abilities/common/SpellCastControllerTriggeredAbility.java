@@ -47,7 +47,8 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     protected String rule;
 
     /**
-     * If true, the source that triggered the ability will be set as target to effect.
+     * If true, the source that triggered the ability will be set as target to
+     * effect.
      */
     protected boolean rememberSource = false;
 
@@ -58,7 +59,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
         this(effect, filter, optional, false);
     }
-    
+
     public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, String rule) {
         this(effect, filter, optional, false);
         this.rule = rule;
@@ -90,7 +91,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getControllerId(), game)) {
+            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                 if (rememberSource) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
                 }

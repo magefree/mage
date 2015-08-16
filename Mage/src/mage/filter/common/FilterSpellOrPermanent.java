@@ -1,5 +1,5 @@
 /*
- *  
+ *
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -25,10 +25,11 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
+ *
  */
 package mage.filter.common;
 
+import java.util.UUID;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
@@ -36,8 +37,6 @@ import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-
-import java.util.UUID;
 
 /**
  *
@@ -77,7 +76,7 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
     @Override
     public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Spell) {
-            return spellFilter.match((Spell) o, playerId, game);
+            return spellFilter.match((Spell) o, sourceId, playerId, game);
         } else if (o instanceof Permanent) {
             return permanentFilter.match((Permanent) o, sourceId, playerId, game);
         }
