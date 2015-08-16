@@ -60,7 +60,7 @@ import mage.watchers.Watcher;
  *
  */
 public class GroundlingPouncer extends CardImpl {
-    
+
     private String rule = "{this} gets +1/+3 and gains flying until end of turn. Activate this ability only once each turn and only if an opponent controls a creature with flying.";
 
     public GroundlingPouncer(UUID ownerId) {
@@ -118,7 +118,7 @@ class GroundingPouncerCondition implements Condition {
 
 class ActivatedAbilityUsedThisTurnWatcher extends Watcher {
 
-    public Set<UUID> activatedThisTurn = new HashSet<UUID>();
+    public Set<UUID> activatedThisTurn = new HashSet<>();
 
     public ActivatedAbilityUsedThisTurnWatcher() {
         super("ActivatedAbilityUsedThisTurn", WatcherScope.GAME);
