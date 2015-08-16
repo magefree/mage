@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GoblinBurrows extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creature");
 
     static {
         filter.add(new SubtypePredicate(("Goblin")));
