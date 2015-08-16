@@ -620,16 +620,13 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
-
+//    boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
     boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
-
+//    boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
     boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
-
+    // boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
     boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
     /**
