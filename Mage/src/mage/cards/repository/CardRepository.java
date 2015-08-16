@@ -250,6 +250,24 @@ public enum CardRepository {
         }
         return subtypes;
     }
+    
+    public Set<String> getLandTypes() {
+        TreeSet<String> subtypes = new TreeSet<>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("subtypes");
+            qb.where().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                subtypes.addAll(card.getSubTypes());
+            }
+            // Removing Dryad because of Dryad Arbor
+            subtypes.remove("Dryad");
+
+        } catch (SQLException ex) {
+        }
+        return subtypes;
+    }
 
     public CardInfo findCard(String setCode, int cardNumber) {
         try {

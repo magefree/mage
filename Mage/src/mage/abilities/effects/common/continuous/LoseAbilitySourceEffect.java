@@ -27,7 +27,7 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl{
     public LoseAbilitySourceEffect(Ability ability, Duration duration){
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         this.ability = ability;
-        staticText = "{this} loses \"" + ability.getRule() + "\"" + duration.toString();
+        staticText = "{this} loses " + ability.getRule() + duration.toString();
     }
     
     public LoseAbilitySourceEffect(final LoseAbilitySourceEffect effect){

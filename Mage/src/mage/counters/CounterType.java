@@ -78,6 +78,7 @@ public enum CounterType {
     PRESSURE("pressure"),
     QUEST("quest"),
     SHIELD("shield"),
+    SHRED("shred"),
     SLIME("slime"),
     SPORE("spore"),
     STORAGE("storage"),
