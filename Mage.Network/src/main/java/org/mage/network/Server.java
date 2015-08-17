@@ -36,15 +36,14 @@ import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
-import org.mage.network.handlers.ExceptionHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.handlers.server.ConnectionHandler;
 import org.mage.network.handlers.server.HeartbeatHandler;
+import org.mage.network.handlers.server.ServerExceptionHandler;
 import org.mage.network.handlers.server.ServerRequestHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.messages.MessageType;
-import org.mage.network.messages.PingMessage;
 import org.mage.network.messages.callback.ChatMessageCallback;
 import org.mage.network.messages.callback.ConstructCallback;
 import org.mage.network.messages.callback.DraftInitCallback;
@@ -87,7 +86,7 @@ public class Server {
 
     private static final int IDLE_PING_TIME = 30;
     private static final int IDLE_TIMEOUT = 60;
-    private static final PingMessage ping = new PingMessage();
+//    private static final PingMessage ping = new PingMessage();
     
     public static final ChannelGroup clients = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     
@@ -99,13 +98,13 @@ public class Server {
     private final EventExecutorGroup handlersExecutor = new DefaultEventExecutorGroup(Runtime.getRuntime().availableProcessors() * 2);
     private final ServerRequestHandler serverMessageHandler;
     
-    private final ExceptionHandler exceptionHandler;
+    private final ServerExceptionHandler exceptionHandler;
     
     public Server(MageServer server) {
         this.server = server;
 //        h = new MessageHandler();
         serverMessageHandler = new ServerRequestHandler(server);
-        exceptionHandler = new ExceptionHandler();
+        exceptionHandler = new ServerExceptionHandler(server);
     }
     
     public void start(int port, boolean ssl) throws Exception {

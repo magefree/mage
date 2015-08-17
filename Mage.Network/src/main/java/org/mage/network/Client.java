@@ -33,7 +33,7 @@ import mage.view.TournamentView;
 import mage.view.UserDataView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
-import org.mage.network.handlers.ExceptionHandler;
+import org.mage.network.handlers.client.ClientExceptionHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
@@ -57,7 +57,7 @@ public class Client {
     private final ClientMessageHandler clientMessageHandler;
     private final ClientRegisteredMessageHandler clientRegisteredMessageHandler;
     
-    private final ExceptionHandler exceptionHandler;
+    private final ClientExceptionHandler exceptionHandler;
     
     private SslContext sslCtx;
     private Channel channel;
@@ -72,7 +72,7 @@ public class Client {
         clientMessageHandler = new ClientMessageHandler(client);
         clientRegisteredMessageHandler = new ClientRegisteredMessageHandler();
         
-        exceptionHandler = new ExceptionHandler();
+        exceptionHandler = new ClientExceptionHandler(this);
     }
     
     public boolean connect(Connection connection, MageVersion version) {

@@ -112,10 +112,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             }
         }
         List<UsersView> users = new ArrayList<>();
+        String pingInfo;
         for (User user : UserManager.getInstance().getUsers()) {
             Session session = SessionManager.getInstance().getSession(user.getSessionId());
+            pingInfo = session == null ? "<no ping>" : session.getPingInfo();
             try {
-               users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), user.getInfo(), user.getGameInfo(), session.getPingInfo()));
+               users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), user.getInfo(), user.getGameInfo(), pingInfo));
             } catch (Exception ex) {
                 logger.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
                 users.add(new UsersView(
@@ -123,7 +125,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                         user.getName() != null ? user.getName() : "<no name>",
                         user.getInfo() != null ? user.getInfo() : "<no info>",
                         "[exception]",
-                        session.getPingInfo() != null ? session.getPingInfo() : "<no ping>"));
+                        pingInfo));
             }
         }
 
