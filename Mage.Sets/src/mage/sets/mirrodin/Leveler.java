@@ -25,82 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
  * @author fireshoes
  */
-public class FreneticEfreet extends CardImpl {
+public class Leveler extends CardImpl {
 
-    public FreneticEfreet(UUID ownerId) {
-        super(ownerId, 324, "Frenetic Efreet", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "MIR";
-        this.subtype.add("Efreet");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+    public Leveler(UUID ownerId) {
+        super(ownerId, 195, "Leveler", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Juggernaut");
+        this.power = new MageInt(10);
+        this.toughness = new MageInt(10);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        
-        // {0}: Flip a coin. If you win the flip, Frenetic Efreet phases out. If you lose the flip, sacrifice Frenetic Efreet.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FreneticEfreetEffect(), new GenericManaCost(0)));
+        // When Leveler enters the battlefield, exile all cards from your library.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LevelerExileLibraryEffect(), false));
     }
 
-    public FreneticEfreet(final FreneticEfreet card) {
+    public Leveler(final Leveler card) {
         super(card);
     }
 
-    @Override
-    public FreneticEfreet copy() {
-        return new FreneticEfreet(this);
+    @java.lang.Override
+    public Leveler copy() {
+        return new Leveler(this);
     }
 }
 
-class FreneticEfreetEffect extends OneShotEffect {
+class LevelerExileLibraryEffect extends OneShotEffect {
 
-    public FreneticEfreetEffect() {
-        super(Outcome.Damage);
-        staticText = "Flip a coin. If you win the flip, {this} phases out. If you lose the flip, sacrifice {this}";
+    public LevelerExileLibraryEffect() {
+        super(Outcome.Exile);
+        staticText = "exile all cards from your library";
     }
 
-    public FreneticEfreetEffect(FreneticEfreetEffect effect) {
-        super(effect);
+    @java.lang.Override
+    public LevelerExileLibraryEffect copy() {
+        return new LevelerExileLibraryEffect();
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent != null) {
-            if (controller.flipCoin(game)) {
-                return permanent.phaseOut(game);
-            } else {
-                permanent.sacrifice(source.getSourceId(), game);
-                return true;
-            }
+        if (controller != null) {
+            int count = controller.getLibrary().size();
+            Cards cards = new CardsImpl();
+            cards.addAll(controller.getLibrary().getTopCards(game, count));
+            controller.moveCards(cards, Zone.LIBRARY, Zone.EXILED, source, game);
+            return true;
         }
         return false;
-    }
-
-    @Override
-    public FreneticEfreetEffect copy() {
-        return new FreneticEfreetEffect(this);
     }
 }
