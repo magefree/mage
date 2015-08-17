@@ -33,7 +33,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -64,7 +63,6 @@ public class WakeTheDead extends CardImpl {
         super(ownerId, 31, "Wake the Dead", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");
         this.expansionSetCode = "C14";
 
-
         // Cast Wake the Dead only during combat on an opponent's turn.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new WakeTheDeadEffect());
         ability.setRuleAtTheTop(true);
@@ -72,7 +70,7 @@ public class WakeTheDead extends CardImpl {
 
         // Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
         this.getSpellAbility().addEffect(new WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
     @Override
@@ -80,7 +78,7 @@ public class WakeTheDead extends CardImpl {
         if (ability instanceof SpellAbility) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
-            ability.addTarget(new TargetCardInYourGraveyard(xValue,xValue, new FilterCreatureCard("creature cards from your graveyard")));
+            ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, new FilterCreatureCard("creature cards from your graveyard")));
         }
     }
 
@@ -159,8 +157,8 @@ class WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEff
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
                             permanent.changeControllerId(source.getControllerId(), game);
-                            Effect effect = new SacrificeTargetEffect("Sacrifice those creatures at the beginning of the next end step");
-                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                            Effect effect = new SacrificeTargetEffect("Sacrifice those creatures at the beginning of the next end step", source.getControllerId());
+                            effect.setTargetPointer(new FixedTarget(permanent, game));
                             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
                             delayedAbility.setSourceId(source.getSourceId());
                             delayedAbility.setControllerId(source.getControllerId());

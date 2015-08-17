@@ -46,6 +46,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -113,15 +114,16 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
             }
             token.addAbility(HasteAbility.getInstance());
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect();
-            sacrificeEffect.setText("Sacrifice the token at the beginning of the next end step");
-            sacrificeEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            Permanent permanent = game.getPermanent(token.getLastAddedToken());
+            if (permanent != null) {
+                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
+                sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
+                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                game.addDelayedTriggeredAbility(delayedAbility);
+            }
             return true;
         }
 

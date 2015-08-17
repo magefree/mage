@@ -29,13 +29,12 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -51,11 +50,9 @@ public class ServantOfVolrath extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Servant of Volrath leaves the battlefield, sacrifice a creature.
-        Ability ability = new LeavesBattlefieldTriggeredAbility(new SacrificeTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, ""), false));
     }
-    
+
     public ServantOfVolrath(final ServantOfVolrath card) {
         super(card);
     }

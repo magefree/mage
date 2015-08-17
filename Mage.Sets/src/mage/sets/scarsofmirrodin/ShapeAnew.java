@@ -25,13 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -39,7 +35,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -60,16 +58,19 @@ public class ShapeAnew extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public ShapeAnew (UUID ownerId) {
+    public ShapeAnew(UUID ownerId) {
         super(ownerId, 43, "Shape Anew", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "SOM";
 
-        this.getSpellAbility().addEffect(new SacrificeTargetEffect());
+        // The controller of target artifact sacrifices it, then reveals cards from the top
+        // of his or her library until he or she reveals an artifact card. That player puts
+        // that card onto the battlefield, then shuffles all other cards revealed this way into his or her library.
+        this.getSpellAbility().addEffect(new SacrificeTargetEffect("The controller of target artifact sacrifices it"));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ShapeAnewEffect());
     }
 
-    public ShapeAnew (final ShapeAnew card) {
+    public ShapeAnew(final ShapeAnew card) {
         super(card);
     }
 
@@ -82,7 +83,7 @@ public class ShapeAnew extends CardImpl {
 
         public ShapeAnewEffect() {
             super(Outcome.PutCardInPlay);
-            staticText = "Then reveals cards from the top of his or her library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library";
+            staticText = ", then reveals cards from the top of his or her library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library";
         }
 
         public ShapeAnewEffect(ShapeAnewEffect effect) {
@@ -102,9 +103,9 @@ public class ShapeAnew extends CardImpl {
             Cards revealed = new CardsImpl();
             Card artifactCard = null;
             Cards nonArtifactCards = new CardsImpl();
-            Player player = game.getPlayer(sourcePermanent.getControllerId());
-            while (artifactCard == null && player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().removeFromTop(game);
+            Player targetController = game.getPlayer(sourcePermanent.getControllerId());
+            while (artifactCard == null && targetController.getLibrary().size() > 0) {
+                Card card = targetController.getLibrary().removeFromTop(game);
                 revealed.add(card);
                 if (card.getCardType().contains(CardType.ARTIFACT)) {
                     artifactCard = card;
@@ -112,14 +113,12 @@ public class ShapeAnew extends CardImpl {
                     nonArtifactCards.add(card);
                 }
             }
-            player.revealCards("Shape Anew", revealed, game);
+            targetController.revealCards(sourcePermanent.getIdName(), revealed, game);
             if (artifactCard != null) {
-                artifactCard.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
+                artifactCard.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), targetController.getId());
             }
-            for (Card cardToMove: nonArtifactCards.getCards(game)) {
-                cardToMove.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }   
-            player.shuffleLibrary(game);
+            targetController.moveCards(nonArtifactCards, null, Zone.LIBRARY, source, game);
+            targetController.shuffleLibrary(game);
             return true;
         }
 

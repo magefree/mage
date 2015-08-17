@@ -43,6 +43,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -55,10 +56,6 @@ public class SlaveOfBolas extends CardImpl {
     public SlaveOfBolas(UUID ownerId) {
         super(ownerId, 136, "Slave of Bolas", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U/R}{B}");
         this.expansionSetCode = "ARB";
-
-
-
-        
 
         // Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
@@ -96,13 +93,17 @@ class SlaveOfBolasEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this");
-        sacrificeEffect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
-        return true;
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this", source.getControllerId());
+            sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+            delayedAbility.setSourceId(source.getSourceId());
+            delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
+            game.addDelayedTriggeredAbility(delayedAbility);
+            return true;
+        }
+        return false;
     }
 }

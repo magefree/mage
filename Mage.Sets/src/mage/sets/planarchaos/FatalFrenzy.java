@@ -28,10 +28,6 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -43,7 +39,12 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -56,7 +57,6 @@ public class FatalFrenzy extends CardImpl {
     public FatalFrenzy(UUID ownerId) {
         super(ownerId, 98, "Fatal Frenzy", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "PLC";
-
 
         // Until end of turn, target creature you control gains trample and gets +X/+0, where X is its power. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
@@ -94,13 +94,16 @@ class FatalFrenzyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this");
-        sacrificeEffect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
+        if (targetCreature != null) {
+            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this", source.getControllerId());
+            sacrificeEffect.setTargetPointer(new FixedTarget(targetCreature, game));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+            delayedAbility.setSourceId(source.getSourceId());
+            delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
+            game.addDelayedTriggeredAbility(delayedAbility);
+        }
         return true;
     }
 }

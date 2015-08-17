@@ -76,8 +76,7 @@ public class RealityAcid extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Reality Acid leaves the battlefield, enchanted permanent's controller sacrifices it.
-        Effect effect = new SacrificeTargetEffect();
-        effect.setText("enchanted permanent's controller sacrifices it");
+        Effect effect = new SacrificeTargetEffect("enchanted permanent's controller sacrifices it");
         this.addAbility(new RealityAcidTriggeredAbility(effect, false));
     }
 

@@ -30,14 +30,12 @@ package mage.sets.invasion;
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
 
 /**
  *
@@ -46,18 +44,18 @@ import mage.target.TargetPermanent;
 public class Dredge extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a creature or land");
-    
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
-    
+
     public Dredge(UUID ownerId) {
         super(ownerId, 103, "Dredge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "INV";
 
         // Sacrifice a creature or land.
         this.getSpellAbility().addEffect(new SacrificeControllerEffect(filter, 1, ""));
-        
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
