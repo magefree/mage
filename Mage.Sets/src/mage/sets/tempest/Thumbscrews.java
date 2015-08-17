@@ -25,43 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class IvoryCraneNetsuke extends CardImpl {
+public class Thumbscrews extends CardImpl {
 
-    public IvoryCraneNetsuke(UUID ownerId) {
-        super(ownerId, 155, "Ivory Crane Netsuke", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOK";
+    public Thumbscrews(UUID ownerId) {
+        super(ownerId, 302, "Thumbscrews", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "TMP";
 
-        // At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), TargetController.YOU, false);
-        CardsInHandCondition condition = new CardsInHandCondition(CardsInHandCondition.CountType.MORE_THAN, 6);
-        this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life."));
-        
+        // At the beginning of your upkeep, if you have five or more cards in hand, Thumbscrews deals 1 damage to target opponent.
+        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
+                new DamageTargetEffect(1), TargetController.YOU, false);
+        ability.addTarget(new TargetOpponent());
+        CardsInHandCondition condition = new CardsInHandCondition(CardsInHandCondition.CountType.MORE_THAN, 4);
+        this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have five or more cards in hand, {this} deals 1 damage to target opponent."));
     }
 
-    public IvoryCraneNetsuke(final IvoryCraneNetsuke card) {
+    public Thumbscrews(final Thumbscrews card) {
         super(card);
     }
 
     @Override
-    public IvoryCraneNetsuke copy() {
-        return new IvoryCraneNetsuke(this);
+    public Thumbscrews copy() {
+        return new Thumbscrews(this);
     }
 }

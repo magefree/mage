@@ -25,43 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.CardsInHandCondition;
+import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class IvoryCraneNetsuke extends CardImpl {
+public class OversoldCemetery extends CardImpl {
 
-    public IvoryCraneNetsuke(UUID ownerId) {
-        super(ownerId, 155, "Ivory Crane Netsuke", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOK";
+    public OversoldCemetery(UUID ownerId) {
+        super(ownerId, 160, "Oversold Cemetery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "ONS";
 
-        // At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), TargetController.YOU, false);
-        CardsInHandCondition condition = new CardsInHandCondition(CardsInHandCondition.CountType.MORE_THAN, 6);
-        this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life."));
-        
+        // At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
+        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, true);
+        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
+        CardsInControllerGraveCondition condition = new CardsInControllerGraveCondition(4, new FilterCreatureCard("creature card from your graveyard"));
+        this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
     }
 
-    public IvoryCraneNetsuke(final IvoryCraneNetsuke card) {
+    public OversoldCemetery(final OversoldCemetery card) {
         super(card);
     }
 
     @Override
-    public IvoryCraneNetsuke copy() {
-        return new IvoryCraneNetsuke(this);
+    public OversoldCemetery copy() {
+        return new OversoldCemetery(this);
     }
 }
