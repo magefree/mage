@@ -25,55 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class SeasideHaven extends CardImpl {
+public class MarbleTitan extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 3 or greater");
 
-    static{
-        filter.add(new SubtypePredicate("Bird"));
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public SeasideHaven(UUID ownerId) {
-        super(ownerId, 323, "Seaside Haven", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
+    public MarbleTitan(UUID ownerId) {
+        super(ownerId, 240, "Marble Titan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Giant");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {W}{U}, {tap}, Sacrifice a Bird: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
+        // Creatures with power 3 or greater don't untap during their controllers' untap steps.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public SeasideHaven(final SeasideHaven card) {
+    public MarbleTitan(final MarbleTitan card) {
         super(card);
     }
 
     @Override
-    public SeasideHaven copy() {
-        return new SeasideHaven(this);
+    public MarbleTitan copy() {
+        return new MarbleTitan(this);
     }
 }

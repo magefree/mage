@@ -28,52 +28,39 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class SeasideHaven extends CardImpl {
+public class Inspirit extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
-
-    static{
-        filter.add(new SubtypePredicate("Bird"));
-    }
-
-    public SeasideHaven(UUID ownerId) {
-        super(ownerId, 323, "Seaside Haven", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+    public Inspirit(UUID ownerId) {
+        super(ownerId, 41, "Inspirit", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ONS";
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {W}{U}, {tap}, Sacrifice a Bird: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
+        // Untap target creature. It gets +2/+4 until end of turn.
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        Effect effect = new BoostTargetEffect(2, 4, Duration.EndOfTurn);
+        effect.setText("It gets +2/+4 until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SeasideHaven(final SeasideHaven card) {
+    public Inspirit(final Inspirit card) {
         super(card);
     }
 
     @Override
-    public SeasideHaven copy() {
-        return new SeasideHaven(this);
+    public Inspirit copy() {
+        return new Inspirit(this);
     }
 }

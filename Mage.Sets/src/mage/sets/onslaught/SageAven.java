@@ -28,45 +28,25 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Temba21
+ * @author LoneFox
  */
-public class DeathPulse extends CardImpl {
+public class SageAven extends mage.sets.ninthedition.SageAven {
 
-    public DeathPulse(UUID ownerId) {
-        super(ownerId, 137, "Death Pulse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
+    public SageAven(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 111;
         this.expansionSetCode = "ONS";
-
-        // Target creature gets -4/-4 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
-        // Cycling {1}{B}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}{B}")));
-        // When you cycle Death Pulse, you may have target creature get -1/-1 until end of turn.
-        Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true);
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
     }
 
-    public DeathPulse(final DeathPulse card) {
+    public SageAven(final SageAven card) {
         super(card);
     }
 
     @Override
-    public DeathPulse copy() {
-        return new DeathPulse(this);
+    public SageAven copy() {
+        return new SageAven(this);
     }
 }

@@ -25,55 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class SeasideHaven extends CardImpl {
+public class FlowstoneShambler extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
+    public FlowstoneShambler(UUID ownerId) {
+        super(ownerId, 185, "Flowstone Shambler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "9ED";
+        this.subtype.add("Beast");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    static{
-        filter.add(new SubtypePredicate("Bird"));
+        // {R}: Flowstone Shambler gets +1/-1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+            new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public SeasideHaven(UUID ownerId) {
-        super(ownerId, 323, "Seaside Haven", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
-
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {W}{U}, {tap}, Sacrifice a Bird: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
-    }
-
-    public SeasideHaven(final SeasideHaven card) {
+    public FlowstoneShambler(final FlowstoneShambler card) {
         super(card);
     }
 
     @Override
-    public SeasideHaven copy() {
-        return new SeasideHaven(this);
+    public FlowstoneShambler copy() {
+        return new FlowstoneShambler(this);
     }
 }

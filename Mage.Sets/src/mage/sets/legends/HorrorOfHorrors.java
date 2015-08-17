@@ -25,55 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.legends;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class SeasideHaven extends CardImpl {
+public class HorrorOfHorrors extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
+    private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("a Swamp");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("black creature");
 
-    static{
-        filter.add(new SubtypePredicate("Bird"));
+    static {
+        filter1.add(new SubtypePredicate("Swamp"));
+        filter2.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public SeasideHaven(UUID ownerId) {
-        super(ownerId, 323, "Seaside Haven", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
+    public HorrorOfHorrors(UUID ownerId) {
+        super(ownerId, 20, "Horror of Horrors", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
+        this.expansionSetCode = "LEG";
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {W}{U}, {tap}, Sacrifice a Bird: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        // Sacrifice a Swamp: Regenerate target black creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(),
+            new SacrificeTargetCost(new TargetControlledPermanent(filter1)));
+        ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);
     }
 
-    public SeasideHaven(final SeasideHaven card) {
+    public HorrorOfHorrors(final HorrorOfHorrors card) {
         super(card);
     }
 
     @Override
-    public SeasideHaven copy() {
-        return new SeasideHaven(this);
+    public HorrorOfHorrors copy() {
+        return new HorrorOfHorrors(this);
     }
 }

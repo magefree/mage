@@ -25,55 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class SeasideHaven extends CardImpl {
+public class SanctumGuardian extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
+    public SanctumGuardian(UUID ownerId) {
+        super(ownerId, 40, "Sanctum Guardian", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
+        this.expansionSetCode = "9ED";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-    static{
-        filter.add(new SubtypePredicate("Bird"));
-    }
-
-    public SeasideHaven(UUID ownerId) {
-        super(ownerId, 323, "Seaside Haven", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
-
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {W}{U}, {tap}, Sacrifice a Bird: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        // Sacrifice Sanctum Guardian: The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToTargetEffect(Duration.EndOfTurn),
+            new SacrificeSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
-    public SeasideHaven(final SeasideHaven card) {
+    public SanctumGuardian(final SanctumGuardian card) {
         super(card);
     }
 
     @Override
-    public SeasideHaven copy() {
-        return new SeasideHaven(this);
+    public SanctumGuardian copy() {
+        return new SanctumGuardian(this);
     }
 }

@@ -25,55 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.coldsnap;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class SeasideHaven extends CardImpl {
+public class LovisaColdeyes extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control that's a Barbarian, a Warrior, or a Berserker");
 
-    static{
-        filter.add(new SubtypePredicate("Bird"));
+    static {
+        filter.add(Predicates.or(new SubtypePredicate("Barbarian"), new SubtypePredicate("Warrior"), new SubtypePredicate("Berserker")));
     }
 
-    public SeasideHaven(UUID ownerId) {
-        super(ownerId, 323, "Seaside Haven", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
+    public LovisaColdeyes(UUID ownerId) {
+        super(ownerId, 90, "Lovisa Coldeyes", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "CSP";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {W}{U}, {tap}, Sacrifice a Bird: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        // Each creature you control that's a Barbarian, a Warrior, or a Berserker gets +2/+2 and has haste.
+        Effect effect = new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false);
+        effect.setText("Each creature you control that's a Barbarian, a Warrior, or a Berserker gets +2/+2");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
+        effect.setText("and has haste");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
-    public SeasideHaven(final SeasideHaven card) {
+    public LovisaColdeyes(final LovisaColdeyes card) {
         super(card);
     }
 
     @Override
-    public SeasideHaven copy() {
-        return new SeasideHaven(this);
+    public LovisaColdeyes copy() {
+        return new LovisaColdeyes(this);
     }
 }

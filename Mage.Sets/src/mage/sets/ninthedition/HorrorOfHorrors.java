@@ -25,48 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Temba21
+ * @author LoneFox
  */
-public class DeathPulse extends CardImpl {
+public class HorrorOfHorrors extends mage.sets.legends.HorrorOfHorrors {
 
-    public DeathPulse(UUID ownerId) {
-        super(ownerId, 137, "Death Pulse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
-        this.expansionSetCode = "ONS";
-
-        // Target creature gets -4/-4 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
-        // Cycling {1}{B}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}{B}")));
-        // When you cycle Death Pulse, you may have target creature get -1/-1 until end of turn.
-        Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true);
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    public HorrorOfHorrors(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 140;
+        this.expansionSetCode = "9ED";
     }
 
-    public DeathPulse(final DeathPulse card) {
+    public HorrorOfHorrors(final HorrorOfHorrors card) {
         super(card);
     }
 
     @Override
-    public DeathPulse copy() {
-        return new DeathPulse(this);
+    public HorrorOfHorrors copy() {
+        return new HorrorOfHorrors(this);
     }
 }
