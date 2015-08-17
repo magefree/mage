@@ -27,6 +27,7 @@
  */
 package mage.sets.tempest;
 
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -110,7 +111,11 @@ class ScrollRackEffect extends OneShotEffect {
             }
             // Put that many cards from the top of your library into your hand.
             if (amountExiled > 0) {
-                controller.moveCards(controller.getLibrary().getTopCards(game, amountExiled), null, Zone.HAND, source, game, false);
+                Set<Card> cards = controller.getLibrary().getTopCards(game, amountExiled);
+                for (Card card : cards) {
+                    card.setFaceDown(true, game);
+                }
+                controller.moveCards(cards, null, Zone.HAND, source, game);
             }
             // Then look at the exiled cards and put them on top of your library in any order
             controller.putCardsOnTopOfLibrary(game.getExile().getExileZone(source.getSourceId()), game, source, true);

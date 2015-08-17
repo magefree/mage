@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.riseoftheeldrazi;
 
 import java.util.LinkedHashSet;
@@ -33,6 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
@@ -56,14 +56,14 @@ import mage.util.CardUtil;
  */
 public class TrainingGrounds extends CardImpl {
 
-    public TrainingGrounds (UUID ownerId) {
+    public TrainingGrounds(UUID ownerId) {
         super(ownerId, 91, "Training Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "ROE";
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingGroundsEffect()));
     }
 
-    public TrainingGrounds (final TrainingGrounds card) {
+    public TrainingGrounds(final TrainingGrounds card) {
         super(card);
     }
 
@@ -74,7 +74,7 @@ public class TrainingGrounds extends CardImpl {
 }
 
 class TrainingGroundsEffect extends CostModificationEffectImpl {
-    
+
     private static final String effectText = "Activated abilities of creatures you control cost up to {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
@@ -90,41 +90,42 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
-        if (controller != null){
+        if (controller != null) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
             int reduceMax = mana.getColorless();
-            if (reduceMax > 0 && mana.count() == mana.getColorless()){
+            if (reduceMax > 0 && mana.count() == mana.getColorless()) {
                 reduceMax--;
             }
-            if (reduceMax > 2){
+            if (reduceMax > 2) {
                 reduceMax = 2;
             }
             if (reduceMax > 0) {
                 ChoiceImpl choice = new ChoiceImpl(true);
                 Set<String> set = new LinkedHashSet<>();
 
-                for(int i = 0; i <= reduceMax; i++){
+                for (int i = 0; i <= reduceMax; i++) {
                     set.add(String.valueOf(i));
                 }
                 choice.setChoices(set);
                 choice.setMessage("Reduce ability cost");
-                if(controller.choose(Outcome.Benefit, choice, game)){
+                if (controller.choose(Outcome.Benefit, choice, game)) {
                     int reduce = Integer.parseInt(choice.getChoice());
                     CardUtil.reduceCost(abilityToModify, reduce);
                 }
             }
             return true;
         }
-         return false;
+        return false;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)) {
+        if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)
+                || (abilityToModify.getAbilityType().equals(AbilityType.MANA) && (abilityToModify instanceof ActivatedAbility))) {
             //Activated abilities of creatures you control
             Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
             if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                return true;             
+                return true;
             }
         }
         return false;

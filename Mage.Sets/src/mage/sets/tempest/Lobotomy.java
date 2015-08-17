@@ -46,8 +46,8 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -100,13 +100,13 @@ class LobotomyEffect extends OneShotEffect {
         if (targetPlayer != null && sourceObject != null && controller != null) {
 
             // reveal hand of target player
-            targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
+            targetPlayer.revealCards(sourceObject.getIdName(), targetPlayer.getHand(), game);
 
             // You choose card other than a basic land card
-            TargetCardInHand target = new TargetCardInHand(filter);
+            TargetCard target = new TargetCard(Zone.HAND, filter);
             target.setNotTarget(true);
             Card chosenCard = null;
-            if (controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());
             }
 
@@ -115,6 +115,7 @@ class LobotomyEffect extends OneShotEffect {
             FilterCard filterNamedCards = new FilterCard();
             if (chosenCard != null) {
                 filterNamedCards.add(new NamePredicate(chosenCard.getName()));
+                filterNamedCards.setMessage("cards named " + chosenCard.getName());
             } else {
                 filterNamedCards.add(new NamePredicate("----")); // so no card matches
             }
@@ -129,8 +130,8 @@ class LobotomyEffect extends OneShotEffect {
                     }
                 }
                 // search cards in hand
-                TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
-                controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsHand, source, game);
+                TargetCard targetCardsHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCards);
+                controller.chooseTarget(outcome, targetPlayer.getHand(), targetCardsHand, source, game);
                 for (UUID cardId : targetCardsHand.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
@@ -153,7 +154,7 @@ class LobotomyEffect extends OneShotEffect {
 
             }
             if (!cardsToExile.isEmpty()) {
-                controller.moveCards(cardsToExile, null, Zone.EXILED, source, game, true);
+                controller.moveCards(cardsToExile, null, Zone.EXILED, source, game);
             }
             targetPlayer.shuffleLibrary(game);
             return true;

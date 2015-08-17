@@ -29,11 +29,8 @@ package mage.sets.ravnica;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -55,9 +52,8 @@ public class SuppressionField extends CardImpl {
         super(ownerId, 31, "Suppression Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "RAV";
 
-
         // Activated abilities cost {2} more to activate unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SuppressionFieldCostReductionEffect() ));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SuppressionFieldCostReductionEffect()));
     }
 
     public SuppressionField(final SuppressionField card) {
@@ -72,7 +68,7 @@ public class SuppressionField extends CardImpl {
 
 class SuppressionFieldCostReductionEffect extends CostModificationEffectImpl {
 
-    SuppressionFieldCostReductionEffect ( ) {
+    SuppressionFieldCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Activated abilities cost {2} more to activate unless they're mana abilities";
     }
@@ -89,10 +85,7 @@ class SuppressionFieldCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)) {
-            return true;
-        }
-        return false;
+        return abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED);
     }
 
     @Override

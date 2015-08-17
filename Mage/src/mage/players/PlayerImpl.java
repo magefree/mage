@@ -2873,14 +2873,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     public UUID getCommanderId() {
         return this.commanderId;
     }
+//
+//    @Override
+//    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+//        return moveCards(cards, fromZone, toZone, source, game, true);
+//    }
 
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return moveCards(cards, fromZone, toZone, source, game, true);
-    }
-
-    @Override
-    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         Set<Card> cardList = new HashSet<>();
         for (UUID cardId : cards) {
             if (fromZone == null) {
@@ -2898,30 +2898,28 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         }
-        return moveCards(cardList, fromZone, toZone, source, game, withName);
+        return moveCards(cardList, fromZone, toZone, source, game);
     }
 
+//    @Override
+//    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
+//        return moveCards(card, fromZone, toZone, source, game, true);
+//    }
     @Override
     public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return moveCards(card, fromZone, toZone, source, game, true);
-    }
-
-    @Override
-    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         Set<Card> cardList = new HashSet<>();
         if (card != null) {
             cardList.add(card);
         }
-        return moveCards(cardList, fromZone, toZone, source, game, withName);
+        return moveCards(cardList, fromZone, toZone, source, game);
     }
 
+//    @Override
+//    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+//        return moveCards(cards, fromZone, toZone, source, game, true);
+//    }
     @Override
     public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return moveCards(cards, fromZone, toZone, source, game, true);
-    }
-
-    @Override
-    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
         if (cards.isEmpty()) {
             return true;
         }
@@ -2931,6 +2929,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 boolean result = false;
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
+                    boolean withName = (fromZone.equals(Zone.BATTLEFIELD) || fromZone.equals(Zone.STACK)) || !card.isFaceDown(game);
                     result |= moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, withName);
                 }
                 return result;
@@ -2940,20 +2939,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 result = false;
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
-                    result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, withName);
+                    boolean hideCard = fromZone.equals(Zone.LIBRARY)
+                            || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
+                    result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard);
                 }
                 return result;
             case BATTLEFIELD:
                 result = false;
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
-                    result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, !withName);
+                    result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, !card.isFaceDown(game));
                 }
                 return result;
             case LIBRARY:
                 result = false;
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
+                    boolean withName = fromZone.equals(Zone.BATTLEFIELD) || !card.isFaceDown(game);
                     result |= moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, withName);
                 }
                 return result;
