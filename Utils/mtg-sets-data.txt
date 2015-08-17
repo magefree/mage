@@ -53,6 +53,7 @@ Duel Decks: Phyrexia vs. the Coalition|DDE|
 Duel Decks: Sorin vs. Tibalt|DDK|
 Duel Decks: Speed vs. Cunning|DDN|
 Duel Decks: Venser vs. Koth|DDI|
+Duel Decks: Zendikar vs. Eldrazi|DDP|
 Eventide|EVE|
 Exodus|EXO|
 Fallen Empires|FEM|
