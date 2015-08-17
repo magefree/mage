@@ -70,7 +70,7 @@ public class IncandescentSoulstoke extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Elemental"));
     }
-    
+
     public IncandescentSoulstoke(UUID ownerId) {
         super(ownerId, 178, "Incandescent Soulstoke", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "LRW";
@@ -81,13 +81,12 @@ public class IncandescentSoulstoke extends CardImpl {
 
         // Other Elemental creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        
-        
+
         // {1}{R}, {T}: You may put an Elemental creature card from your hand onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IncandescentSoulstokeEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
     }
 
     public IncandescentSoulstoke(final IncandescentSoulstoke card) {
@@ -101,7 +100,7 @@ public class IncandescentSoulstoke extends CardImpl {
 }
 
 class IncandescentSoulstokeEffect extends OneShotEffect {
-    
+
     private static final String choiceText = "Put an Elemental creature card from your hand onto the battlefield?";
 
     public IncandescentSoulstokeEffect() {
@@ -133,10 +132,10 @@ class IncandescentSoulstokeEffect extends OneShotEffect {
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null) {
                                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                                effect.setTargetPointer(new FixedTarget(permanent, game));
                                 game.addEffect(effect, source);
-                                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName());
-                                sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
+                                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName(), source.getControllerId());
+                                sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
                                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
                                 delayedAbility.setSourceId(source.getSourceId());
                                 delayedAbility.setControllerId(source.getControllerId());

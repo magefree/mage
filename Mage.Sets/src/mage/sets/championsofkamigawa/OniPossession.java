@@ -30,22 +30,26 @@ package mage.sets.championsofkamigawa;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continuous.SetCardSubtypeAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,7 +58,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OniPossession extends CardImpl {
 
-    private static final List<String> setSubtypes = new ArrayList<String>();
+    private static final List<String> setSubtypes = new ArrayList<>();
+
     static {
         setSubtypes.add("Demon");
         setSubtypes.add("Spirit");
@@ -67,13 +72,14 @@ public class OniPossession extends CardImpl {
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-    this.getSpellAbility().addTarget(auraTarget);
-    this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-    Ability ability = new EnchantAbility(auraTarget.getTargetName());
-    this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
         // At the beginning of your upkeep, sacrifice a creature.
-        Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new SacrificeTargetEffect("sacrifice a creature"), TargetController.YOU, false);
-        ability2.addTarget(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent(),false));
+        Ability ability2 = new BeginningOfUpkeepTriggeredAbility(
+                new SacrificeControllerEffect(new FilterControlledCreaturePermanent(), 1, ""), TargetController.YOU, false);
         this.addAbility(ability2);
         // Enchanted creature gets +3/+3 and has trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));

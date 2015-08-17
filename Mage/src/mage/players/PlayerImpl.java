@@ -2873,19 +2873,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     public UUID getCommanderId() {
         return this.commanderId;
     }
-//
-//    @Override
-//    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-//        return moveCards(cards, fromZone, toZone, source, game, true);
-//    }
 
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         Set<Card> cardList = new HashSet<>();
         for (UUID cardId : cards) {
-            if (fromZone == null) {
-                fromZone = game.getState().getZone(cardId);
-            }
+            fromZone = game.getState().getZone(cardId);
             if (fromZone.equals(Zone.BATTLEFIELD)) {
                 Permanent permanent = game.getPermanent(cardId);
                 if (permanent != null) {
@@ -2901,10 +2894,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         return moveCards(cardList, fromZone, toZone, source, game);
     }
 
-//    @Override
-//    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
-//        return moveCards(card, fromZone, toZone, source, game, true);
-//    }
     @Override
     public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
         Set<Card> cardList = new HashSet<>();
@@ -2914,10 +2903,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         return moveCards(cardList, fromZone, toZone, source, game);
     }
 
-//    @Override
-//    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-//        return moveCards(cards, fromZone, toZone, source, game, true);
-//    }
     @Override
     public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         if (cards.isEmpty()) {
@@ -2987,22 +2972,19 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
         boolean result = false;
         Zone fromZone = game.getState().getZone(card.getId());
+        if (fromZone.equals(Zone.BATTLEFIELD) && !(card instanceof Permanent)) {
+            card = game.getPermanent(card.getId());
+        }
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }
             if (!game.isSimulation()) {
-                StringBuilder sb = new StringBuilder(this.getLogName()).append(" puts ").append(withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"));
-                switch (fromZone) {
-                    case EXILED:
-                        sb.append(" from exile zone ");
-                        break;
-                    default:
-                        sb.append(fromZone != null ? new StringBuilder(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "");
-                        break;
-                }
-                sb.append(card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand");
-                game.informPlayers(sb.toString());
+                game.informPlayers(this.getLogName() + " puts "
+                        + (withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"))
+                        + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " "
+                        + (card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand")
+                );
             }
             result = true;
         }

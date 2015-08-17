@@ -52,12 +52,12 @@ public class Complicate extends CardImpl {
         // Counter target spell unless its controller pays {3}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
         this.getSpellAbility().addTarget(new TargetSpell());
-        
+
         // Cycling {2}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{U}")));
-        
+
         // When you cycle Complicate, you may counter target spell unless its controller pays {1}.
-        Ability ability = new CycleTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)));
+        Ability ability = new CycleTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), true);
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }

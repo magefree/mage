@@ -63,7 +63,6 @@ public class ThroughTheBreach extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThroughTheBreachEffect());
         // Splice onto Arcane {2}{R}{R}
@@ -81,7 +80,7 @@ public class ThroughTheBreach extends CardImpl {
 }
 
 class ThroughTheBreachEffect extends OneShotEffect {
-    
+
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
 
     public ThroughTheBreachEffect() {
@@ -111,10 +110,10 @@ class ThroughTheBreachEffect extends OneShotEffect {
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null) {
                                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                                effect.setTargetPointer(new FixedTarget(permanent, game));
                                 game.addEffect(effect, source);
-                                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName());
-                                sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
+                                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName(), source.getControllerId());
+                                sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
                                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
                                 delayedAbility.setSourceId(source.getSourceId());
                                 delayedAbility.setControllerId(source.getControllerId());

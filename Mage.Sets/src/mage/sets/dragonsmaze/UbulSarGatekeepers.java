@@ -25,21 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,18 +50,17 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-
-
 public class UbulSarGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("creature an opponent controls");
+
     static {
         filter.add(new SubtypePredicate("Gate"));
         targetFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public UbulSarGatekeepers (UUID ownerId) {
+    public UbulSarGatekeepers(UUID ownerId) {
         super(ownerId, 30, "Ubul Sar Gatekeepers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Zombie");
@@ -73,7 +71,7 @@ public class UbulSarGatekeepers extends CardImpl {
 
         // Whenever Ubul Sar Gatekeepers enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.
         Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(2))),
+                new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn)),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 1),
                 "Whenever {this} enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.");
         Target target = new TargetCreaturePermanent(targetFilter);
@@ -81,7 +79,7 @@ public class UbulSarGatekeepers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UbulSarGatekeepers (final UbulSarGatekeepers card) {
+    public UbulSarGatekeepers(final UbulSarGatekeepers card) {
         super(card);
     }
 

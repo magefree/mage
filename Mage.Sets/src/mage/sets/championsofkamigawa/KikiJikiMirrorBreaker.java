@@ -28,10 +28,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -42,7 +38,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -124,8 +123,7 @@ class KikiJikiMirrorBreakerEffect extends OneShotEffect {
             token.addAbility(HasteAbility.getInstance());
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
-            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect();
-            sacrificeEffect.setText("Sacrifice the token at the beginning of the next end step");
+            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
             sacrificeEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
             delayedAbility.setSourceId(source.getSourceId());

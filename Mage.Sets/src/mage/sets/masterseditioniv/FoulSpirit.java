@@ -29,16 +29,13 @@ package mage.sets.masterseditioniv;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -55,13 +52,9 @@ public class FoulSpirit extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Foul Spirit enters the battlefield, sacrifice a land.
-        Effect effect = new SacrificeTargetEffect();
-        effect.setText("sacrifice a land");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, ""), false));
     }
 
     public FoulSpirit(final FoulSpirit card) {

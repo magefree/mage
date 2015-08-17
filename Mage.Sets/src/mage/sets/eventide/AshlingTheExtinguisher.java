@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.eventide;
 
 import java.util.UUID;
@@ -51,19 +50,20 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AshlingTheExtinguisher extends CardImpl {
 
-    public AshlingTheExtinguisher (UUID ownerId) {
+    public AshlingTheExtinguisher(UUID ownerId) {
         super(ownerId, 33, "Ashling, the Extinguisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "EVE";
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
 
+        // Whenever Ashling, the Extinguisher deals combat damage to a player, choose target creature that player controls. He or she sacrifices that creature.
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new AshlingTheExtinguisherTriggeredAbility());
     }
 
-    public AshlingTheExtinguisher (final AshlingTheExtinguisher card) {
+    public AshlingTheExtinguisher(final AshlingTheExtinguisher card) {
         super(card);
     }
 
@@ -75,6 +75,7 @@ public class AshlingTheExtinguisher extends CardImpl {
 }
 
 class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl {
+
     public AshlingTheExtinguisherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeTargetEffect());
         this.addTarget(new TargetCreaturePermanent());

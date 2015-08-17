@@ -93,20 +93,23 @@ class SpellskiteEffect extends OneShotEffect {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (stackObject != null && sourceObject != null) {
-            Targets targets;
+            Targets targets = new Targets();
             Ability sourceAbility;
             MageObject oldTarget = null;
             if (stackObject instanceof Spell) {
-                Spell spell = (Spell)stackObject;
+                Spell spell = (Spell) stackObject;
                 sourceAbility = spell.getSpellAbility();
-                targets = spell.getSpellAbility().getTargets();
             } else if (stackObject instanceof StackAbility) {
-                StackAbility stackAbility = (StackAbility)stackObject;
+                StackAbility stackAbility = (StackAbility) stackObject;
                 sourceAbility = stackAbility;
-                targets = stackAbility.getTargets();
             } else {
                 return false;
             }
+            for (UUID modeId : sourceAbility.getModes().getSelectedModes()) {
+                sourceAbility.getModes().setActiveMode(modeId);
+                targets.addAll(sourceAbility.getTargets());
+            }
+
             boolean twoTimesTarget = false;
             if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
                 Target target = targets.get(0);
@@ -115,25 +118,25 @@ class SpellskiteEffect extends OneShotEffect {
                     target.clearChosen();
                     // The source is still the spell on the stack
                     target.addTarget(source.getSourceId(), stackObject.getStackAbility(), game);
-                }                
+                }
             } else {
                 Player player = game.getPlayer(source.getControllerId());
-                for (Target target: targets) {
-                    for (UUID targetId: target.getTargets()) {
+                for (Target target : targets) {
+                    for (UUID targetId : target.getTargets()) {
                         MageObject object = game.getObject(targetId);
                         String name;
                         if (object == null) {
                             Player targetPlayer = game.getPlayer(targetId);
                             name = targetPlayer.getLogName();
                         } else {
-                            name = object.getName();
+                            name = object.getLogName();
                         }
                         if (!targetId.equals(source.getSourceId()) && target.getTargets().contains(source.getSourceId())) {
                             // you can't change this target to Spellskite because Spellskite is already another targetId of that target.
                             twoTimesTarget = true;
                             continue;
                         }
-                        if (name != null && player.chooseUse(Outcome.Neutral, new StringBuilder("Change target from ").append(name).append(" to ").append(sourceObject.getName()).append("?").toString(), source, game)) {
+                        if (name != null && player.chooseUse(Outcome.Neutral, "Change target from " + name + " to " + sourceObject.getLogName() + "?", source, game)) {
                             if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
                                 oldTarget = game.getObject(targets.getFirstTarget());
                                 target.remove(targetId);
@@ -146,12 +149,12 @@ class SpellskiteEffect extends OneShotEffect {
                 }
             }
             if (oldTarget != null) {
-                game.informPlayers(sourceObject.getLogName() + ": Changed target of " +stackObject.getLogName() + " from " + oldTarget.getLogName() + " to " + sourceObject.getLogName());
+                game.informPlayers(sourceObject.getLogName() + ": Changed target of " + stackObject.getLogName() + " from " + oldTarget.getLogName() + " to " + sourceObject.getLogName());
             } else {
                 if (twoTimesTarget) {
-                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its not valid to target it twice for " + stackObject.getName());
+                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its not valid to target it twice for " + stackObject.getLogName());
                 } else {
-                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getName());
+                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getLogName());
                 }
             }
             return true;

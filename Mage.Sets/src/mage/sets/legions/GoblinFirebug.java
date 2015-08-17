@@ -29,15 +29,12 @@ package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -53,11 +50,7 @@ public class GoblinFirebug extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Goblin Firebug leaves the battlefield, sacrifice a land.
-        Effect effect = new SacrificeTargetEffect();
-        effect.setText("sacrifice a land");
-        Ability ability = new LeavesBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
-        this.addAbility(ability);
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, ""), false));
     }
 
     public GoblinFirebug(final GoblinFirebug card) {

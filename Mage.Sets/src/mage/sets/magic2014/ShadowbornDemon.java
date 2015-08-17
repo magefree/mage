@@ -30,14 +30,13 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -50,7 +49,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -60,6 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ShadowbornDemon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
+
     static {
         filter.add(Predicates.not(new SubtypePredicate("Demon")));
     }
@@ -75,17 +74,14 @@ public class ShadowbornDemon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Shadowborn Demon enters the battlefield, destroy target non-Demon creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(),false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
+
         // At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.
-        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeTargetEffect(), TargetController.YOU, false);
-        target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(false);
-        triggeredAbility.addTarget(target);
         this.addAbility(new ConditionalTriggeredAbility(
-                triggeredAbility,
+                new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, ""), TargetController.YOU, false),
                 new InvertCondition(new CreatureCardsInControllerGraveCondition(6)),
                 "At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature"));
 
@@ -102,6 +98,7 @@ public class ShadowbornDemon extends CardImpl {
 }
 
 class CreatureCardsInControllerGraveCondition implements Condition {
+
     private int value;
 
     public CreatureCardsInControllerGraveCondition(int value) {
@@ -111,9 +108,8 @@ class CreatureCardsInControllerGraveCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player p = game.getPlayer(source.getControllerId());
-        if (p != null && p.getGraveyard().count(new FilterCreatureCard(), game) >= value)
-        {
-                    return true;
+        if (p != null && p.getGraveyard().count(new FilterCreatureCard(), game) >= value) {
+            return true;
         }
         return false;
     }
