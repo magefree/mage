@@ -28,9 +28,11 @@
 package mage.sets.commander2013;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -44,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
@@ -58,7 +61,6 @@ public class CurseOfShallowGraves extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Aura");
         this.subtype.add("Curse");
-
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
@@ -83,7 +85,7 @@ public class CurseOfShallowGraves extends CardImpl {
 class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfShallowTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new ZombieToken(), new StaticValue(1), true, false), true);
+        super(Zone.BATTLEFIELD, new CurseOfShallowEffect());
     }
 
     public CurseOfShallowTriggeredAbility(Effect effect, boolean optional, String text) {
@@ -105,7 +107,7 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            for (Effect effect: this.getEffects()) {
+            for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
             }
             return true;
@@ -123,4 +125,32 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
         return new CurseOfShallowTriggeredAbility(this);
     }
 
+}
+
+class CurseOfShallowEffect extends OneShotEffect {
+
+    public CurseOfShallowEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "that attacking player may put a 2/2 black Zombie creature token onto the battlefield tapped";
+    }
+
+    public CurseOfShallowEffect(final CurseOfShallowEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CurseOfShallowEffect copy() {
+        return new CurseOfShallowEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        if (attacker != null && attacker.chooseUse(outcome, "Put a 2/2 black Zombie creature token onto the battlefield tapped?", source, game)) {
+            Effect effect = new CreateTokenTargetEffect(new ZombieToken(), new StaticValue(1), true, false);
+            effect.setTargetPointer(targetPointer);
+            return effect.apply(game, source);
+        }
+        return false;
+    }
 }
