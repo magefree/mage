@@ -28,6 +28,7 @@
 package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -50,11 +51,11 @@ public class ExplosiveGrowth extends CardImpl {
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));
-        
+
         // Target creature gets +2/+2 until end of turn. If Explosive Growth was kicked, that creature gets +5/+5 until end of turn instead.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(5, 5, Duration.EndOfTurn),
-          new BoostTargetEffect(2, 2, Duration.EndOfTurn), KickedCondition.getInstance(), 
+          new BoostTargetEffect(2, 2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.getInstance()),
           "Target creature gets +2/+2 until end of turn. If Explosive Growth was kicked, that creature gets +5/+5 until end of turn instead."));
     }
 

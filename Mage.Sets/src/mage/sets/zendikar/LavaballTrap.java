@@ -30,9 +30,6 @@ package mage.sets.zendikar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.Cost;
@@ -40,8 +37,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -59,7 +59,6 @@ public class LavaballTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-
         // If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new LavaballTrapAlternativeCost());
         this.getSpellAbility().addWatcher(new LavaballTrapWatcher());
@@ -67,7 +66,7 @@ public class LavaballTrap extends CardImpl {
         // Destroy two target lands. Lavaball Trap deals 4 damage to each creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));
-        this.getSpellAbility().addTarget(new TargetLandPermanent(2));
+        this.getSpellAbility().addTarget(new TargetLandPermanent(2, 2, new FilterLandPermanent("lands"), false));
 
     }
 

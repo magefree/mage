@@ -63,7 +63,7 @@ public class MoltenRain extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public MoltenRain copy() {
         return new MoltenRain(this);
     }
@@ -80,12 +80,12 @@ class MoltenRainEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public MoltenRainEffect copy() {
         return new MoltenRainEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (permanent != null && !permanent.getSupertype().contains("Basic")) {

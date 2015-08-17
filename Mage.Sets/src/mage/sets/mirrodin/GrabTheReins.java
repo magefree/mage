@@ -89,7 +89,7 @@ public class GrabTheReins extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public GrabTheReins copy() {
         return new GrabTheReins(this);
     }
@@ -106,7 +106,7 @@ class GrabTheReinsEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
         Target target = new TargetCreaturePermanent();
@@ -142,7 +142,7 @@ class GrabTheReinsEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public GrabTheReinsEffect copy() {
         return new GrabTheReinsEffect(this);
     }

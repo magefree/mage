@@ -37,16 +37,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -65,15 +62,13 @@ public class LordOfTresserhorn extends CardImpl {
 
         // When Lord of Tresserhorn enters the battlefield, you lose 2 life, you sacrifice two creatures, and target opponent draws two cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(2), false);
-        ability.addEffect(new SacrificeTargetEffect(", you sacrifice two creatures"));
-        Target target = new TargetControlledCreaturePermanent(2,2, new FilterControlledCreaturePermanent(), true);
-        ability.addTarget(target);
+        ability.addEffect(new SacrificeControllerEffect(new FilterControlledCreaturePermanent("creatures"), 2, "you"));
         Effect effect = new DrawCardTargetEffect(2);
         effect.setText(", and target opponent draws two cards");
-        effect.setTargetPointer(new SecondTargetPointer());
         ability.addEffect(effect);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
+
         // {B}: Regenerate Lord of Tresserhorn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }

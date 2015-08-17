@@ -31,8 +31,9 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -45,6 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -94,21 +96,22 @@ class GhostwayEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            int numberCreatures = 0;
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (creature != null) {
-                    controller.moveCardToExileWithInfo(creature, exileId,sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
-                    numberCreatures++;
+                    int zcc = game.getState().getZoneChangeCounter(creature.getId());
+                    controller.moveCardToExileWithInfo(creature, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                    if (zcc == game.getState().getZoneChangeCounter(creature.getId()) - 1) {
+                        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                        effect.setTargetPointer(new FixedTarget(creature.getId(), zcc + 1));
+                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
                 }
-            }
-            if (numberCreatures > 0) {
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, false));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);                
             }
             return true;
         }

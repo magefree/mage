@@ -53,7 +53,6 @@ public class DeathOfAThousandStings extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-
         // Target player loses 1 life and you gain 1 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -64,10 +63,10 @@ public class DeathOfAThousandStings extends CardImpl {
         // At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                    new ReturnSourceFromGraveyardToHandEffect(),
-                    TargetController.YOU, true),
+                        new ReturnSourceFromGraveyardToHandEffect(),
+                        TargetController.YOU, true),
                 new MoreCardsInHandThanOpponentsCondition(),
-                "At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return {this} from your graveyard to your hand.", true);
+                "At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return {this} from your graveyard to your hand.");
         this.addAbility(ability);
     }
 

@@ -59,7 +59,7 @@ public class ViridianJoiner extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ViridianJoiner copy() {
         return new ViridianJoiner(this);
     }

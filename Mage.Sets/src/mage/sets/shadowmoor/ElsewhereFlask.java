@@ -29,8 +29,6 @@ package mage.sets.shadowmoor;
 
 import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,9 +36,20 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.*;
+import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -95,7 +104,7 @@ class ElsewhereFlaskEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             ChoiceImpl choices = new ChoiceImpl(true);
-            Set choicesSet = choices.getChoices();
+            Set<String> choicesSet = choices.getChoices();
             choicesSet.add("Forest");
             choicesSet.add("Plains");
             choicesSet.add("Mountain");

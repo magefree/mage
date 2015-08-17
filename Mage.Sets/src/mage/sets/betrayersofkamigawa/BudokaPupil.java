@@ -71,13 +71,13 @@ public class BudokaPupil extends CardImpl {
         this.flipCardName = "Ichiga, Who Topples Oaks";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Budoka Pupil.
-         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
         this.addAbility(new ConditionalTriggeredAbility(
-                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new IchigaWhoTopplesOaks())),
+                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new IchigaWhoTopplesOaks()), true),
                 new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
-                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it.", true));
+                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
     }
 
     public BudokaPupil(final BudokaPupil card) {
@@ -107,7 +107,7 @@ class IchigaWhoTopplesOaks extends Token {
         // Remove a ki counter from Ichiga, Who Topples Oaks: Target creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BoostTargetEffect(2,2, Duration.EndOfTurn),
+                new BoostTargetEffect(2, 2, Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

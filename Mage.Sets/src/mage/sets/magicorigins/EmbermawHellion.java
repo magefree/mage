@@ -29,11 +29,11 @@ package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -44,6 +44,7 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -101,11 +102,19 @@ class EmbermawHellionEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if(source.getControllerId().equals(game.getControllerId(event.getSourceId()))) {
-            Card card = game.getCard(event.getSourceId());
-            return card != null && card.getColor(game).isRed() && !card.getId().equals(source.getSourceId());
+            MageObject sourceObject;
+            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if(sourcePermanent == null) {
+                sourceObject = game.getObject(event.getSourceId());
+            }
+            else {
+                sourceObject = sourcePermanent;
+            }
+            return sourceObject != null && sourceObject.getColor(game).isRed() && !sourceObject.getId().equals(source.getSourceId());
         }
         return false;
     }
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;

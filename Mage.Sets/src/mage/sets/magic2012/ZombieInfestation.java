@@ -28,13 +28,13 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInHand;
@@ -49,10 +49,9 @@ public class ZombieInfestation extends CardImpl {
         super(ownerId, 120, "Zombie Infestation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M12";
 
-
         // Discard two cards: Put a 2/2 black Zombie creature token onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new ZombieToken("M12")),
+                new CreateTokenEffect(new ZombieToken()),
                 new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
         this.addAbility(ability);
     }

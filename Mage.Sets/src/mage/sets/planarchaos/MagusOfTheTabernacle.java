@@ -28,11 +28,6 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,6 +36,11 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -63,7 +63,7 @@ public class MagusOfTheTabernacle extends CardImpl {
 
         // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
         Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(abilityToGain, Duration.WhileInGraveyard, new FilterCreaturePermanent(), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(abilityToGain, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), rule)));
     }
 
     public MagusOfTheTabernacle(final MagusOfTheTabernacle card) {

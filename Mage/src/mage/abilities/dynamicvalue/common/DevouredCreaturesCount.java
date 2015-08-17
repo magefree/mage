@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -40,7 +39,6 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-
 public class DevouredCreaturesCount implements DynamicValue {
 
     int multiplier;
@@ -65,7 +63,7 @@ public class DevouredCreaturesCount implements DynamicValue {
         if (sourcePermanent != null) {
             for (Ability ability : sourcePermanent.getAbilities()) {
                 if (ability instanceof DevourAbility) {
-                    for (Effect abilityEffect: ability.getEffects()) {
+                    for (Effect abilityEffect : ability.getEffects()) {
                         if (abilityEffect instanceof DevourEffect) {
                             DevourEffect devourEffect = (DevourEffect) abilityEffect;
                             return devourEffect.getDevouredCreaturesAmount(game, sourcePermanent.getId()) * multiplier;

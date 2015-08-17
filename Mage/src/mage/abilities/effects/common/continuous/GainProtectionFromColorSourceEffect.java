@@ -72,7 +72,7 @@ public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect
             colorChoice.setMessage("Choose color for protection ability");
             while (!colorChoice.isChosen()) {
                 controller.choose(outcome, colorChoice, game);
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     discard();
                     return;
                 }

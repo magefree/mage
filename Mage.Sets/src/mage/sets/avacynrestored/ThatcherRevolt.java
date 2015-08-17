@@ -28,9 +28,6 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -40,7 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 
@@ -53,7 +54,6 @@ public class ThatcherRevolt extends CardImpl {
     public ThatcherRevolt(UUID ownerId) {
         super(ownerId, 158, "Thatcher Revolt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "AVR";
-
 
         // Put three 1/1 red Human creature tokens with haste onto the battlefield. Sacrifice those tokens at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThatcherRevoltEffect());
@@ -90,14 +90,16 @@ class ThatcherRevoltEffect extends OneShotEffect {
         for (int i = 0; i < 3; i++) {
             RedHumanToken token = new RedHumanToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this token");
-            sacrificeEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            Permanent permanent = game.getPermanent(token.getLastAddedToken());
+            if (permanent != null) {
+                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this token", source.getControllerId());
+                sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
+                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                game.addDelayedTriggeredAbility(delayedAbility);
+            }
         }
         return true;
     }

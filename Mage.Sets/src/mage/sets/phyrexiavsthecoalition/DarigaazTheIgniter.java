@@ -101,7 +101,7 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
             ChoiceColor choice = new ChoiceColor(true);
             while (!choice.isChosen()) {
                 controller.choose(outcome, choice, game);
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }

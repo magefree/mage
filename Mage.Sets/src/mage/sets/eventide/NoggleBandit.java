@@ -29,14 +29,13 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -44,12 +43,12 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class NoggleBandit extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by creatures with defender");
-    
+
     static {
         filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
     }
@@ -64,8 +63,8 @@ public class NoggleBandit extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Noggle Bandit can't be blocked except by creatures with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
-        
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+
     }
 
     public NoggleBandit(final NoggleBandit card) {

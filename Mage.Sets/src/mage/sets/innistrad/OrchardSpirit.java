@@ -28,24 +28,35 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author North
  */
 public class OrchardSpirit extends CardImpl {
+
+    private final static FilterCreaturePermanent notFlyingorReachCreatures = new FilterCreaturePermanent("except by creatures with flying or reach");
+
+    static {
+        notFlyingorReachCreatures.add(Predicates.not(
+                Predicates.or(
+                        new AbilityPredicate(FlyingAbility.class),
+                        new AbilityPredicate(ReachAbility.class)
+                )
+        ));
+    }
 
     public OrchardSpirit(UUID ownerId) {
         super(ownerId, 198, "Orchard Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -56,7 +67,7 @@ public class OrchardSpirit extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Orchard Spirit can't be blocked except by creatures with flying or reach.
-        this.addAbility(OrchardSpiritAbility.getInstance());
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(notFlyingorReachCreatures, Duration.WhileOnBattlefield)));
 
     }
 
@@ -67,63 +78,5 @@ public class OrchardSpirit extends CardImpl {
     @Override
     public OrchardSpirit copy() {
         return new OrchardSpirit(this);
-    }
-}
-
-class OrchardSpiritAbility extends EvasionAbility {
-
-    private static OrchardSpiritAbility instance;
-
-    public static OrchardSpiritAbility getInstance() {
-        if (instance == null) {
-            instance = new OrchardSpiritAbility();
-        }
-        return instance;
-    }
-
-    private OrchardSpiritAbility() {
-        this.addEffect(new OrchardSpiritEffect());
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't be blocked except by creatures with flying or reach.";
-    }
-
-    @Override
-    public OrchardSpiritAbility copy() {
-        return getInstance();
-    }
-}
-
-class OrchardSpiritEffect extends RestrictionEffect {
-
-    public OrchardSpiritEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public OrchardSpiritEffect(final OrchardSpiritEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(OrchardSpiritAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().contains(FlyingAbility.getInstance()) || blocker.getAbilities().contains(ReachAbility.getInstance())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public OrchardSpiritEffect copy() {
-        return new OrchardSpiritEffect(this);
     }
 }

@@ -45,7 +45,7 @@ public class ViridianShaman extends mage.sets.tenthedition.ViridianShaman {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ViridianShaman copy() {
         return new ViridianShaman(this);
     }

@@ -55,7 +55,7 @@ public class BushidoAbility extends BlocksOrBecomesBlockedTriggeredAbility {
     }
 
     static String getReminder(String xValue) {
-        return "  <i>(When this blocks or becomes blocked, it gets +" + xValue+ "/+" + xValue + " until end of turn.)</i>";
+        return "  <i>(Whenever this creature blocks or becomes blocked, it gets +" + xValue+ "/+" + xValue + " until end of turn.)</i>";
     }
 
     public BushidoAbility(final BushidoAbility ability) {

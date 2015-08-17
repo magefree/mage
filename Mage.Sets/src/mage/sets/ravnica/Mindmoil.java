@@ -91,7 +91,7 @@ class MindmoilEffect extends OneShotEffect {
                 cards.add(card.getId());
             }
             TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-            while (you.isInGame() && cards.size() > 1) {
+            while (you.canRespond() && cards.size() > 1) {
                 you.choose(Outcome.Neutral, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {

@@ -65,7 +65,7 @@ public class ScaleOfChissGoria extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ScaleOfChissGoria copy() {
         return new ScaleOfChissGoria(this);
     }

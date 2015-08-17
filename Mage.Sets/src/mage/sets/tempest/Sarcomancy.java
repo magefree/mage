@@ -32,7 +32,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
@@ -41,7 +40,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.token.ZombieToken;
 
 /**

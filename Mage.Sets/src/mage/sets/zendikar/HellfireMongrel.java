@@ -30,11 +30,9 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -42,9 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -64,9 +60,9 @@ public class HellfireMongrel extends CardImpl {
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Hellfire Mongrel deals 2 damage to him or her.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), TargetController.OPPONENT, false, true),
-                new CardsInActivePlayersHandCondition(), 
-                "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, {this} deals 2 damage to him or her.",
-                false));
+                new CardsInActivePlayersHandCondition(),
+                "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, {this} deals 2 damage to him or her."
+        ));
     }
 
     public HellfireMongrel(final HellfireMongrel card) {

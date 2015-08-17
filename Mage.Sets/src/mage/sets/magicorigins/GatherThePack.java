@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -98,10 +97,10 @@ class GatherThePackEffect extends OneShotEffect {
                 }
                 TargetCard target = new TargetCard(0, max, Zone.LIBRARY, new FilterCreatureCard("creature card" + (max > 1 ? "s" : "") + " to put into your hand"));
                 if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                    Cards cardsToHand = new CardsImpl(target.getTargets());
+                    if (cardsToHand.size() > 0) {
+                        cards.removeAll(cardsToHand);
+                        controller.moveCards(cardsToHand, Zone.LIBRARY, Zone.HAND, source, game);
                     }
                 }
             }

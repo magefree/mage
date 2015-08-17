@@ -62,7 +62,6 @@ public class SneakAttack extends CardImpl {
         super(ownerId, 218, "Sneak Attack", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "USG";
 
-
         // {R}: You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SneakAttackEffect(), new ManaCostsImpl("{R}")));
     }
@@ -78,23 +77,23 @@ public class SneakAttack extends CardImpl {
 }
 
 class SneakAttackEffect extends OneShotEffect {
-    
+
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
-    
+
     public SneakAttackEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step";
     }
-    
+
     public SneakAttackEffect(final SneakAttackEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public SneakAttackEffect copy() {
         return new SneakAttackEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -106,20 +105,21 @@ class SneakAttackEffect extends OneShotEffect {
                     if (card != null) {
                         if (player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
                             Permanent permanent = game.getPermanent(card.getId());
-                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                            game.addEffect(effect, source);
-                            
-                            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName());
-                            sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
-                            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-                            delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setControllerId(source.getControllerId());
-                            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                            game.addDelayedTriggeredAbility(delayedAbility);
-                            
+                            if (permanent != null) {
+                                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                                effect.setTargetPointer(new FixedTarget(permanent, game));
+                                game.addEffect(effect, source);
+
+                                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName(), source.getControllerId());
+                                sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
+                                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+                                delayedAbility.setSourceId(source.getSourceId());
+                                delayedAbility.setControllerId(source.getControllerId());
+                                delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                                game.addDelayedTriggeredAbility(delayedAbility);
+                            }
                             return true;
-                        }                        
+                        }
                     }
                     return false;
                 }

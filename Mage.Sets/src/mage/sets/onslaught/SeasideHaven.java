@@ -33,6 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -47,9 +48,9 @@ import mage.target.common.TargetControlledPermanent;
  * @author anonymous
  */
 public class SeasideHaven extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
-    
+
     static{
         filter.add(new SubtypePredicate("Bird"));
     }
@@ -61,7 +62,7 @@ public class SeasideHaven extends CardImpl {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {W}{U}, {tap}, Sacrifice a Bird: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, null, new ManaCostsImpl<>("{W}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

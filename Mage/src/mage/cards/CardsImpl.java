@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.cards;
 
 import java.io.Serializable;
@@ -44,20 +43,20 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
 
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializable {
-    
+
     private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
     private static Random rnd = new Random();
     private UUID ownerId;
     private Zone zone;
 
-    public CardsImpl() { }
+    public CardsImpl() {
+    }
 
     public CardsImpl(Card card) {
         if (card != null) {
@@ -74,10 +73,10 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     public CardsImpl(Zone zone) {
         this.zone = zone;
     }
-    
+
     public CardsImpl(Zone zone, Collection<Card> cards) {
         this(zone);
-        for (Card card: cards) {
+        for (Card card : cards) {
             this.add(card.getId());
         }
     }
@@ -117,7 +116,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public void setOwner(UUID ownerId, Game game) {
         this.ownerId = ownerId;
-        for (UUID card: this) {
+        for (UUID card : this) {
             game.getCard(card).setOwnerId(ownerId);
         }
     }
@@ -134,7 +133,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public int count(FilterCard filter, Game game) {
         int result = 0;
-        for (UUID cardId: this) {
+        for (UUID cardId : this) {
             if (filter.match(game.getCard(cardId), game)) {
                 result++;
             }
@@ -145,7 +144,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public int count(FilterCard filter, UUID playerId, Game game) {
         int result = 0;
-        for (UUID card: this) {
+        for (UUID card : this) {
             if (filter.match(game.getCard(card), playerId, game)) {
                 result++;
             }
@@ -159,7 +158,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             return count(filter, playerId, game);
         }
         int result = 0;
-        for (UUID card: this) {
+        for (UUID card : this) {
             if (filter.match(game.getCard(card), sourceId, playerId, game)) {
                 result++;
             }
@@ -170,7 +169,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Set<Card> getCards(FilterCard filter, UUID sourceId, UUID playerId, Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID card: this) {
+        for (UUID card : this) {
             boolean match = filter.match(game.getCard(card), sourceId, playerId, game);
             if (match) {
                 cards.add(game.getCard(card));
@@ -182,7 +181,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID card: this) {
+        for (UUID card : this) {
             boolean match = filter.match(game.getCard(card), game);
             if (match) {
                 cards.add(game.getCard(card));
@@ -194,11 +193,11 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Set<Card> getCards(Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID cardId: this) {
+        for (UUID cardId : this) {
             Card card = game.getCard(cardId);
             if (card != null) { // this can happen during the cancelation (player concedes) of a game
                 cards.add(card);
-            } 
+            }
         }
         return cards;
     }
@@ -207,12 +206,12 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     public String getValue(Game game) {
         StringBuilder sb = threadLocalBuilder.get();
         List<String> cards = new ArrayList<>();
-        for (UUID cardId: this) {
+        for (UUID cardId : this) {
             Card card = game.getCard(cardId);
             cards.add(card.getName());
         }
         Collections.sort(cards);
-        for (String name: cards) {
+        for (String name : cards) {
             sb.append(name).append(":");
         }
         return sb.toString();
@@ -220,7 +219,14 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public void addAll(List<Card> cards) {
-        for (Card card: cards) {
+        for (Card card : cards) {
+            add(card.getId());
+        }
+    }
+
+    @Override
+    public void addAll(Set<Card> cards) {
+        for (Card card : cards) {
             add(card.getId());
         }
     }
@@ -228,7 +234,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Collection<Card> getUniqueCards(Game game) {
         Map<String, Card> cards = new HashMap<>();
-        for(UUID cardId: this) {
+        for (UUID cardId : this) {
             Card card = game.getCard(cardId);
             if (!cards.containsKey(card.getName())) {
                 cards.put(card.getName(), card);

@@ -27,7 +27,7 @@
  */
 package mage.sets.dragonsoftarkir;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -94,14 +94,13 @@ class CommuneWithLavaEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null) {
             int amount = source.getManaCostsToPay().getX();
-            List<Card> cards = controller.getLibrary().getTopCards(game, amount);
+            Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
+            controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName());
+
             for (Card card : cards) {
-                if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                    ContinuousEffect effect = new CommuneWithLavaMayPlayEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
-                }
+                ContinuousEffect effect = new CommuneWithLavaMayPlayEffect();
+                effect.setTargetPointer(new FixedTarget(card.getId()));
+                game.addEffect(effect, source);
             }
 
             return true;

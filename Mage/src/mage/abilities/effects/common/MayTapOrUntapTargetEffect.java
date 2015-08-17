@@ -12,6 +12,7 @@ import mage.players.Player;
  * @author Loki
  */
 public class MayTapOrUntapTargetEffect extends OneShotEffect {
+
     public MayTapOrUntapTargetEffect() {
         super(Outcome.Benefit);
     }
@@ -47,9 +48,9 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         if (mode.getTargets().isEmpty()) {
-            return "You may tap or untap it";
+            return "you may tap or untap it";
         } else {
-            return "You may tap or untap target " + mode.getTargets().get(0).getTargetName();
+            return "you may tap or untap target " + mode.getTargets().get(0).getTargetName();
         }
     }
 }

@@ -28,17 +28,20 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedTriggeredAbility;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,17 +59,16 @@ public class LustForWar extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes tapped, Lust for War deals 3 damage to that creature's controller.
-        Ability attachedAbility = new BecomesTappedTriggeredAbility(new DamageControllerEffect(3));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(attachedAbility, AttachmentType.AURA)));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(3), false));
 
         // Enchanted creature attacks each turn if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
+            new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 
     public LustForWar(final LustForWar card) {

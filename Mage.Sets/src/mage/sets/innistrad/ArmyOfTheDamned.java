@@ -37,7 +37,6 @@ import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
 
-
 /**
  * @author nantuko
  */
@@ -47,9 +46,8 @@ public class ArmyOfTheDamned extends CardImpl {
         super(ownerId, 87, "Army of the Damned", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{B}{B}{B}");
         this.expansionSetCode = "ISD";
 
-
         // Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("ISD"), 13, true, false));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 13, true, false));
 
         // Flashback {7}{B}{B}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}{B}"), TimingRule.SORCERY));

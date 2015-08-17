@@ -27,8 +27,8 @@
  */
 package mage.sets.bornofthegods;
 
-import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -44,7 +44,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
@@ -58,7 +57,6 @@ public class Peregrination extends CardImpl {
     public Peregrination(UUID ownerId) {
         super(ownerId, 132, "Peregrination", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "BNG";
-
 
         // Seach your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle your library, then scry 1.
         this.getSpellAbility().addEffect(new PeregrinationEffect());
@@ -97,36 +95,39 @@ class PeregrinationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
-        Player player = game.getPlayer(source.getControllerId());
-        if (player.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards revealed = new CardsImpl();
-                for (UUID cardId: target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
+                for (UUID cardId : target.getTargets()) {
+                    Card card = controller.getLibrary().getCard(cardId, game);
                     revealed.add(card);
                 }
-                player.revealCards("Peregrination", revealed, game);
+                controller.revealCards(sourceObject.getIdName(), revealed, game);
                 if (target.getTargets().size() == 2) {
-                    TargetCard target2 = new TargetCard(Zone.PICK, filter);
-                    player.choose(Outcome.Benefit, revealed, target2, game);
+                    TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
+                    controller.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
 
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
                     revealed.remove(card);
                     card = revealed.getCards(game).iterator().next();
-                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                }
-                else if (target.getTargets().size() == 1) {
+                    controller.moveCards(card, null, Zone.HAND, source, game);
+                } else if (target.getTargets().size() == 1) {
                     Card card = revealed.getCards(game).iterator().next();
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
                 }
 
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
 
     }

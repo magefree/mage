@@ -57,7 +57,7 @@ public class PewterGolem extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public PewterGolem copy() {
         return new PewterGolem(this);
     }

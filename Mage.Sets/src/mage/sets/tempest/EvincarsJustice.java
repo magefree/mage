@@ -46,8 +46,9 @@ public class EvincarsJustice extends CardImpl {
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));
+        
         // Evincar's Justice deals 2 damage to each creature and each player.
-         this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
     }
 
     public EvincarsJustice(final EvincarsJustice card) {

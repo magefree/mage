@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
@@ -57,11 +58,15 @@ public class FountainOfCho extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}: Put a storage counter on Fountain of Cho.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
-        // {tap}, Remove any number of storage counters from Fountain of Cho: Add {W} to your mana pool for each storage counter removed this way.
-        Ability ability = new DynamicManaAbility(Mana.WhiteMana, new RemovedCountersForCostValue(),
-                "Add {W} to your mana pool for each storage counter removed this way");
-        ability.addCost(new RemoveVariableCountersSourceCost(
-                CounterType.STORAGE.createInstance(), "Remove any number of storage counters from {this}"));
+        // {T}, Remove any number of storage counters from Fountain of Cho: Add {W} to your mana pool for each storage counter removed this way.
+        Ability ability = new DynamicManaAbility(
+                Mana.WhiteMana,
+                new RemovedCountersForCostValue(),
+                new TapSourceCost(),
+                "Add {W} to your mana pool for each storage counter removed this way",
+                true, new CountersCount(CounterType.STORAGE));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
+                "Remove any number of storage counters from {this}"));
         this.addAbility(ability);
     }
 

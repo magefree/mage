@@ -258,12 +258,12 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             for (UUID cardUuid : cardsToHand) {
                 Card card = cardsToHand.get(cardUuid, game);
                 if (card != null) {
-                    player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    player.moveCards(card, null, Zone.HAND, source, game);
                 }
             }
 
             TargetCard targetCard = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-            while (player.isInGame() && cardsToLibrary.size() > 1) {
+            while (player.canRespond() && cardsToLibrary.size() > 1) {
                 player.choose(Outcome.Neutral, cardsToLibrary, targetCard, game);
                 Card card = cardsToLibrary.get(targetCard.getFirstTarget(), game);
                 if (card != null) {
@@ -342,14 +342,12 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         while (jaceExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, jaceExileZone, target, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-
                 if (controller.cast(card.getSpellAbility(), game, true)) {
                     game.getExile().removeCard(card, game);
                 }
             }
             target.clearChosen();
         }
-
         return true;
     }
 }

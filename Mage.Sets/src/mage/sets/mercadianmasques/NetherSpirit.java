@@ -61,7 +61,7 @@ public class NetherSpirit extends CardImpl {
 
         // At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to the battlefield.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), TargetController.YOU, true);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new NetherSpiritCondition(), "At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to the battlefield.", true));
+        this.addAbility(new ConditionalTriggeredAbility(ability, new NetherSpiritCondition(), "At the beginning of your upkeep, if {this} is the only creature card in your graveyard, you may return {this} to the battlefield."));
     }
 
     public NetherSpirit(final NetherSpirit card) {
@@ -75,7 +75,7 @@ public class NetherSpirit extends CardImpl {
 }
 
 class NetherSpiritCondition implements Condition {
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());

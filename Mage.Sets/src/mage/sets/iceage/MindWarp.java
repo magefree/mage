@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
 public class MindWarp extends CardImpl {
 
     public MindWarp(UUID ownerId) {
-        super(ownerId, 14, "Mind Warp", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");
+        super(ownerId, 36, "Mind Warp", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");
         this.expansionSetCode = "ICE";
 
 

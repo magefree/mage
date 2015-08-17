@@ -91,6 +91,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER = "gameAskMoveToGraveORder";
 
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
+    public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
 
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
@@ -362,6 +363,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbAskMoveToGraveOrder = new javax.swing.JCheckBox();
         main_gamelog = new javax.swing.JPanel();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
+        cbDraftLogAutoSave = new javax.swing.JCheckBox();
         tabPhases = new javax.swing.JPanel();
         jLabelHeadLine = new javax.swing.JLabel();
         jLabelYourTurn = new javax.swing.JLabel();
@@ -643,18 +645,32 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        cbDraftLogAutoSave.setSelected(true);
+        cbDraftLogAutoSave.setText("Auto save draft logs     (to \"../Mage.Client/gamelogs/\" directory)");
+        cbDraftLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
+        cbDraftLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDraftLogAutoSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout main_gamelogLayout = new javax.swing.GroupLayout(main_gamelog);
         main_gamelog.setLayout(main_gamelogLayout);
         main_gamelogLayout.setHorizontalGroup(
             main_gamelogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_gamelogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbGameLogAutoSave, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(main_gamelogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbGameLogAutoSave, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbDraftLogAutoSave, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_gamelogLayout.setVerticalGroup(
             main_gamelogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cbGameLogAutoSave, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(main_gamelogLayout.createSequentialGroup()
+                .addComponent(cbGameLogAutoSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbDraftLogAutoSave))
         );
 
         javax.swing.GroupLayout tabMainLayout = new javax.swing.GroupLayout(tabMain);
@@ -675,7 +691,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, 189, Short.MAX_VALUE)
+                .addComponent(main_game, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -861,7 +877,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(checkBoxEndTurnOthers))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(phases_stopSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases", tabPhases);
@@ -1435,7 +1451,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(avatarPane, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+            .addComponent(avatarPane, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
@@ -1585,7 +1601,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(connection_serversLayout.createSequentialGroup()
                 .addGroup(connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblURLServerList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtURLServerList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtURLServerList, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17))
         );
@@ -1617,7 +1633,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
@@ -1681,6 +1697,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbConfirmEmptyManaPool, KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbAskMoveToGraveOrder, KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
         // Phases
         save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
@@ -2001,6 +2018,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAskMoveToGraveOrderActionPerformed
 
+    private void cbDraftLogAutoSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDraftLogAutoSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDraftLogAutoSaveActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -2079,6 +2100,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbAskMoveToGraveOrder, KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true");
 
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
+        load(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true");
 
         load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on", "on");
         load(prefs, dialog.checkBoxDrawYou, DRAW_YOU, "on", "on");
@@ -2449,6 +2471,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbAskMoveToGraveOrder;
     private javax.swing.JCheckBox cbCheckForNewImages;
     private javax.swing.JCheckBox cbConfirmEmptyManaPool;
+    private javax.swing.JCheckBox cbDraftLogAutoSave;
     private javax.swing.JCheckBox cbEnableBattlefieldBGM;
     private javax.swing.JCheckBox cbEnableDraftSounds;
     private javax.swing.JCheckBox cbEnableGameSounds;

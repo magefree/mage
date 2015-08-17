@@ -109,7 +109,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
         if (controller != null) {
             int tappedAmount = 0;
             TargetPermanent target = new TargetPermanent(0,1,filter, false);
-            while (true && controller.isInGame()) {
+            while (true && controller.canRespond()) {
                 target.clearChosen();
                 if (target.canChoose(source.getControllerId(), game)) {
                     Map<String, Serializable> options = new HashMap<>();

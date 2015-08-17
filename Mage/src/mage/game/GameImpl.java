@@ -44,6 +44,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 import java.util.UUID;
+import mage.MageException;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -173,7 +174,7 @@ public abstract class GameImpl implements Game, Serializable {
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
-    // game states to allow player roll back
+    // game states to allow player rollback
     protected transient Map<Integer, GameState> gameStatesRollBack = new HashMap<>();
     protected boolean executingRollback;
 
@@ -204,6 +205,7 @@ public abstract class GameImpl implements Game, Serializable {
     private int priorityTime;
 
     private final int startLife;
+    protected PlayerList playerList;
 
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
         this.id = UUID.randomUUID();
@@ -388,6 +390,11 @@ public abstract class GameImpl implements Game, Serializable {
             object = state.getBattlefield().getPermanent(objectId);
             return object;
         }
+        // can be an ability of a sacrificed Token trying to get it's source object
+        object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
+        if (object != null) {
+            return object;
+        }
         for (CommandObject commandObject : state.getCommand()) {
             if (commandObject instanceof Commander && commandObject.getId().equals(objectId)) {
                 return commandObject;
@@ -400,8 +407,6 @@ public abstract class GameImpl implements Game, Serializable {
                     return commandObject;
                 }
             }
-            // can be an ability of a sacrificed Token trying to get it's source object
-            object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
         return object;
     }
@@ -613,6 +618,7 @@ public abstract class GameImpl implements Game, Serializable {
                 GameState restore = gameStates.rollback(stateNum);
                 if (restore != null) {
                     state.restore(restore);
+                    playerList.setCurrent(state.getActivePlayerId());
                 }
             }
         }
@@ -667,8 +673,8 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void resume() {
-        PlayerList players = state.getPlayerList(state.getActivePlayerId());
-        Player player = getPlayer(players.get());
+        playerList = state.getPlayerList(state.getActivePlayerId());
+        Player player = getPlayer(playerList.get());
         boolean wasPaused = state.isPaused();
         state.resume();
         if (!gameOver(null)) {
@@ -679,7 +685,7 @@ public abstract class GameImpl implements Game, Serializable {
             state.getTurn().resumePlay(this, wasPaused);
             if (!isPaused() && !gameOver(null)) {
                 endOfTurn();
-                player = players.getNext(this);
+                player = playerList.getNext(this);
                 state.setTurnNum(state.getTurnNum() + 1);
             }
         }
@@ -688,8 +694,8 @@ public abstract class GameImpl implements Game, Serializable {
 
     protected void play(UUID nextPlayerId) {
         if (!isPaused() && !gameOver(null)) {
-            PlayerList players = state.getPlayerList(nextPlayerId);
-            Player playerByOrder = getPlayer(players.get());
+            playerList = state.getPlayerList(nextPlayerId);
+            Player playerByOrder = getPlayer(playerList.get());
             while (!isPaused() && !gameOver(null)) {
                 playExtraTurns();
                 GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, playerByOrder.getId());
@@ -697,10 +703,9 @@ public abstract class GameImpl implements Game, Serializable {
                     if (!playTurn(playerByOrder)) {
                         break;
                     }
-                    state.setTurnNum(state.getTurnNum() + 1);
                 }
                 playExtraTurns();
-                playerByOrder = players.getNext(this);
+                playerByOrder = playerList.getNext(this);
             }
         }
         if (gameOver(null) && !isSimulation()) {
@@ -731,14 +736,13 @@ public abstract class GameImpl implements Game, Serializable {
             GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, extraTurn.getPlayerId());
             if (!replaceEvent(event)) {
                 Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
-                if (extraPlayer != null && extraPlayer.isInGame()) {
+                if (extraPlayer != null && extraPlayer.canRespond()) {
                     state.setExtraTurn(true);
                     state.setTurnId(extraTurn.getId());
                     if (!this.isSimulation()) {
                         informPlayers(extraPlayer.getLogName() + " takes an extra turn");
                     }
                     playTurn(extraPlayer);
-                    state.setTurnNum(state.getTurnNum() + 1);
                 }
             }
             extraTurn = getNextExtraTurn();
@@ -765,6 +769,7 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     private boolean playTurn(Player player) {
+        boolean skipTurn = false;
         do {
             if (executingRollback) {
                 executingRollback = false;
@@ -778,39 +783,21 @@ public abstract class GameImpl implements Game, Serializable {
                 state.setActivePlayerId(player.getId());
                 saveRollBackGameState();
             }
-            this.logStartOfTurn(player);
             if (checkStopOnTurnOption()) {
                 return false;
             }
-            state.getTurn().play(this, player);
+            skipTurn = state.getTurn().play(this, player);
         } while (executingRollback);
 
         if (isPaused() || gameOver(null)) {
             return false;
         }
-        endOfTurn();
+        if (!skipTurn) {
+            endOfTurn();
+            state.setTurnNum(state.getTurnNum() + 1);
+        }
 
         return true;
-    }
-
-    private void logStartOfTurn(Player player) {
-        StringBuilder sb = new StringBuilder("Turn ").append(state.getTurnNum()).append(" ");
-        sb.append(player.getLogName());
-        sb.append(" (");
-        int delimiter = this.getPlayers().size() - 1;
-        for (Player gamePlayer : this.getPlayers().values()) {
-            sb.append(gamePlayer.getLife());
-            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
-            if (poison > 0) {
-                sb.append("[P:").append(poison).append("]");
-            }
-            if (delimiter > 0) {
-                sb.append(" - ");
-                delimiter--;
-            }
-        }
-        sb.append(")");
-        fireStatusEvent(sb.toString(), true);
     }
 
     private boolean checkStopOnTurnOption() {
@@ -1171,6 +1158,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
+        int errorContinueCounter = 0;
         int bookmark = 0;
         clearAllBookmarks();
         try {
@@ -1191,7 +1179,7 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
-                        while (!player.isPassed() && player.isInGame() && !isPaused() && !gameOver(null)) {
+                        while (!player.isPassed() && player.canRespond() && !isPaused() && !gameOver(null)) {
                             if (!resuming) {
                                 // 603.3. Once an ability has triggered, its controller puts it on the stack as an object thats not a card the next time a player would receive priority
                                 checkStateAndTriggered();
@@ -1237,11 +1225,19 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     } catch (Exception ex) {
                         logger.fatal("Game exception gameId: " + getId(), ex);
-                        ex.printStackTrace();
                         this.fireErrorEvent("Game exception occurred: ", ex);
                         restoreState(bookmark, "");
                         bookmark = 0;
-                        continue;
+                        Player activePlayer = this.getPlayer(getActivePlayerId());
+                        if (errorContinueCounter > 15) {
+                            throw new MageException("Iterated player priority after game exception too often, game ends!");
+                        }
+                        if (activePlayer != null && !activePlayer.isTestMode()) {
+                            errorContinueCounter++;
+                            continue;
+                        } else {
+                            throw new MageException("Error in testclass");
+                        }
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1249,6 +1245,7 @@ public abstract class GameImpl implements Game, Serializable {
         } catch (Exception ex) {
             logger.fatal("Game exception ", ex);
             this.fireErrorEvent("Game exception occurred: ", ex);
+            this.end();
         } finally {
             resetLKI();
             clearAllBookmarks();
@@ -1276,7 +1273,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     protected boolean allPassed() {
         for (Player player : state.getPlayers().values()) {
-            if (!player.isPassed() && player.isInGame()) {
+            if (!player.isPassed() && player.canRespond()) {
                 return false;
             }
         }
@@ -2647,15 +2644,16 @@ public abstract class GameImpl implements Game, Serializable {
                 GameState restore = gameStatesRollBack.get(turnToGoTo);
                 if (restore != null) {
                     informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
+                    state.restoreForRollBack(restore);
+                    playerList.setCurrent(state.getActivePlayerId());
+                    // because restore uses the objects without copy each copy the state again
+                    gameStatesRollBack.put(getTurnNum(), state.copy());
+                    executingRollback = true;
                     for (Player playerObject : getPlayers().values()) {
                         if (playerObject.isHuman() && playerObject.isInGame()) {
                             playerObject.abort();
                         }
                     }
-                    state.restoreForRollBack(restore);
-                    // because restore uses the objects without copy each copy the state again
-                    gameStatesRollBack.put(getTurnNum(), state.copy());
-                    executingRollback = true;
                     fireUpdatePlayersEvent();
                 }
             }

@@ -135,7 +135,7 @@ class AEtherspoutsEffect extends OneShotEffect {
                 }
                 TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on the top of library (last choosen will be the top most)"));
                 while (cards.size() > 1) {
-                    if (!player.isInGame()) {
+                    if (!player.canRespond()) {
                         return false;
                     }
                     player.choose(Outcome.Neutral, cards, target, game);
@@ -174,7 +174,7 @@ class AEtherspoutsEffect extends OneShotEffect {
                     }
                 }
                 target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on bottom of library (last choosen will be bottommost card)"));
-                while (player.isInGame() && cards.size() > 1) {
+                while (player.canRespond() && cards.size() > 1) {
                     player.choose(Outcome.Neutral, cards, target, game);
 
                     Card card = cards.get(target.getFirstTarget(), game);
@@ -199,7 +199,7 @@ class AEtherspoutsEffect extends OneShotEffect {
                     player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, false);
                 }
                 player = playerList.getNext(game);            
-            } while (player != null && !player.getId().equals(game.getActivePlayerId()) && activePlayer.isInGame());
+            } while (player != null && !player.getId().equals(game.getActivePlayerId()) && activePlayer.canRespond());
             return true;
         }
         return false;

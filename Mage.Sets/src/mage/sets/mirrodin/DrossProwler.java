@@ -55,7 +55,7 @@ public class DrossProwler extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public DrossProwler copy() {
         return new DrossProwler(this);
     }

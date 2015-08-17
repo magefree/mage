@@ -69,7 +69,7 @@ public class NimShrieker extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NimShrieker copy() {
         return new NimShrieker(this);
     }

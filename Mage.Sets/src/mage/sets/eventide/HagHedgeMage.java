@@ -47,18 +47,18 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class HagHedgeMage extends CardImpl {
-    
+
     private final static FilterLandPermanent filter = new FilterLandPermanent();
     private final static FilterLandPermanent filter2 = new FilterLandPermanent();
-    
+
     static {
         filter.add(new SubtypePredicate("Swamp"));
         filter2.add(new SubtypePredicate("Forest"));
     }
-    
+
     private String rule = "When {this} enters the battlefield, if you control two or more Swamps, you may have target player discard a card.";
     private String rule2 = "When {this} enters the battlefield, if you control two or more Forests, you may put target card from your graveyard on top of your library.";
 
@@ -72,12 +72,12 @@ public class HagHedgeMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Hag Hedge-Mage enters the battlefield, if you control two or more Swamps, you may have target player discard a card.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule, true);
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
         // When Hag Hedge-Mage enters the battlefield, if you control two or more Forests, you may put target card from your graveyard on top of your library.
-        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2, true);
+        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
         ability2.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability2);
     }

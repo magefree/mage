@@ -47,7 +47,7 @@ public class ConsumeSpirit extends mage.sets.magic2010.ConsumeSpirit {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ConsumeSpirit copy() {
         return new ConsumeSpirit(this);
     }

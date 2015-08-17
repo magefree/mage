@@ -102,7 +102,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
@@ -110,8 +110,8 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
                 Permanent enchantment = game.getPermanent(source.getSourceId());
-                if (enchantment != null && enchantment.getAttachedTo() != null &&
-                        card.getOwnerId().equals(enchantment.getAttachedTo())) {
+                if (enchantment != null && enchantment.getAttachedTo() != null
+                        && card.getOwnerId().equals(enchantment.getAttachedTo())) {
                     return true;
                 }
             }
@@ -128,7 +128,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
             if (card != null) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 Cards cards = new CardsImpl(card);
-                controller.revealCards(sourceObject.getName(), cards, game);
+                controller.revealCards(sourceObject.getIdName(), cards, game);
                 controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, zEvent.getFromZone(), false, true);
                 return true;
             }

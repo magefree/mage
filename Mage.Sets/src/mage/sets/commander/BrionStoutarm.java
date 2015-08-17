@@ -76,7 +76,7 @@ public class BrionStoutarm extends CardImpl {
         // {R}, {tap}, Sacrifice a creature other than Brion Stoutarm: Brion Stoutarm deals damage equal to the sacrificed creature's power to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrionStoutarmEffect(), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -110,9 +110,9 @@ class BrionStoutarmEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int amount = 0;
-        for (Cost cost: source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
-                amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
+        for (Cost cost : source.getCosts()) {
+            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
+                amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getPower().getValue();
                 break;
             }
         }
@@ -120,9 +120,8 @@ class BrionStoutarmEffect extends OneShotEffect {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {
                 player.damage(amount, source.getSourceId(), game, false, true);
-                return true;
             }
         }
-        return false;
+        return true;
     }
 }

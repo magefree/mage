@@ -71,7 +71,7 @@ public class GoblinReplica extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public GoblinReplica copy() {
         return new GoblinReplica(this);
     }

@@ -27,20 +27,18 @@
  */
 package mage.sets.conspiracy;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 

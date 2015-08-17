@@ -102,23 +102,25 @@ public class HumanPlayer extends PlayerImpl {
     protected static FilterCreatureForCombat filterCreatureForCombat = new FilterCreatureForCombat();
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
-    protected static final Choice replacementEffectChoice = new ChoiceImpl(true);
+    protected final Choice replacementEffectChoice;
 
     private static final Logger log = Logger.getLogger(HumanPlayer.class);
 
-    static {
-        replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
-    }
-
     protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
+    protected ManaCost currentlyUnpaidMana;
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
+        replacementEffectChoice = new ChoiceImpl(true);
+        replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
         human = true;
     }
 
     public HumanPlayer(final HumanPlayer player) {
         super(player);
+        this.autoSelectReplacementEffects.addAll(autoSelectReplacementEffects);
+        this.currentlyUnpaidMana = player.currentlyUnpaidMana;
+        this.replacementEffectChoice = player.replacementEffectChoice;
     }
 
     protected void waitForResponse(Game game) {
@@ -248,6 +250,12 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
+        if (Outcome.PutManaInPool.equals(outcome)) {
+            if (currentlyUnpaidMana != null
+                    && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
+                return true;
+            }
+        }
         updateGameStatePriority("choose(3)", game);
         while (!abort) {
             game.fireChooseChoiceEvent(playerId, choice);
@@ -423,6 +431,7 @@ public class HumanPlayer extends PlayerImpl {
             if (!choosable.isEmpty()) {
                 options.put("choosable", (Serializable) choosable);
             }
+
             game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
@@ -506,7 +515,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), source.getSourceId(), game),
+            game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), source == null ? null : source.getSourceId(), game),
                     target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                     target.isRequired(source),
                     getOptions(target, null));
@@ -595,7 +604,7 @@ public class HumanPlayer extends PlayerImpl {
                     passedUntilStackResolved = false;
                 }
             }
-            while (isInGame()) {
+            while (canRespond()) {
                 updateGameStatePriority("priority", game);
                 game.firePriorityEvent(playerId);
                 waitForResponse(game);
@@ -674,7 +683,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
+    public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
         boolean result = playManaHandling(unpaid, promptText, game);
         payManaMode = false;
@@ -689,7 +698,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         game.firePlayManaEvent(playerId, "Pay " + promptText, options);
         waitForResponse(game);
-        if (!this.isInGame()) {
+        if (!this.canRespond()) {
             return false;
         }
         if (response.getBoolean() != null) {
@@ -765,8 +774,10 @@ public class HumanPlayer extends PlayerImpl {
         if (zone != null) {
             LinkedHashMap<UUID, ManaAbility> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (useableAbilities != null && useableAbilities.size() > 0) {
-                useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities);
+                useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
+                currentlyUnpaidMana = unpaid;
                 activateAbility(useableAbilities, object, game);
+                currentlyUnpaidMana = null;
             }
         }
     }
@@ -1018,7 +1029,7 @@ public class HumanPlayer extends PlayerImpl {
     public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
         updateGameStatePriority("assignDamage", game);
         int remainingDamage = damage;
-        while (remainingDamage > 0 && isInGame()) {
+        while (remainingDamage > 0 && canRespond()) {
             Target target = new TargetCreatureOrPlayer();
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
@@ -1198,7 +1209,7 @@ public class HumanPlayer extends PlayerImpl {
                     if (!source.getAbilityType().equals(AbilityType.TRIGGERED)) {
                         done = true;
                     }
-                    if (!isInGame()) {
+                    if (!canRespond()) {
                         return null;
                     }
                 }

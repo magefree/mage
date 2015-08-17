@@ -116,7 +116,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
                 cardChoice.setChoices(choices);
                 cardChoice.clearChoice();
                 while (!targetPlayer.choose(Outcome.Benefit, cardChoice, game)) {
-                    if (!targetPlayer.isInGame()) {
+                    if (!targetPlayer.canRespond()) {
                         return false;
                     }
                 }

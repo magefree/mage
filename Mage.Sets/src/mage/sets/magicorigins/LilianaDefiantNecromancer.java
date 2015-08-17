@@ -139,7 +139,8 @@ class LilianaDefiantNecromancerEmblem extends Emblem {
     //  You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step."
     public LilianaDefiantNecromancerEmblem() {
         this.setName("Emblem - Liliana");
-        this.getAbilities().add(new DiesCreatureTriggeredAbility(new LilianaDefiantNecromancerEmblemEffect(), false, filter, true));
+        Ability ability = new DiesCreatureTriggeredAbility(Zone.COMMAND, new LilianaDefiantNecromancerEmblemEffect(), false, filter, true);
+        this.getAbilities().add(ability);
     }
 }
 
@@ -164,7 +165,7 @@ class LilianaDefiantNecromancerEmblemEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId()));
+            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             effect.setText("return that card to the battlefield at the beginning of the next end step");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.COMMAND, effect, TargetController.ANY);
             delayedAbility.setSourceId(source.getSourceId());

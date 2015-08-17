@@ -32,12 +32,13 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
@@ -96,11 +97,13 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
             if (permanent.getName().isEmpty()) {
                 filter.add(new PermanentIdPredicate(permanent.getId()));  // if no name (face down creature) only the creature itself is selected
             } else {
-                filter.add(new NamePredicate(permanent.getName()));        
+                filter.add(new NamePredicate(permanent.getName()));
             }
-            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                controller.moveCardToHandWithInfo(perm, source.getSourceId(), game, Zone.BATTLEFIELD);
+            Cards cardsToHand = new CardsImpl();
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+                cardsToHand.add(perm);
             }
+            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
             return true;
         }
         return true;

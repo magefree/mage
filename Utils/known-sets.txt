@@ -5,6 +5,7 @@ Apocalypse|apocalypse|
 Archenemy|archenemy|
 Arabian Nights|arabiannights|
 Avacyn Restored|avacynrestored|
+Battle for Zendikar|battleforzendikar|
 Betrayers of Kamigawa|betrayersofkamigawa|
 Born of the Gods|bornofthegods|
 Champions of Kamigawa|championsofkamigawa|

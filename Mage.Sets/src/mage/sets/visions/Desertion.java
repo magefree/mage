@@ -56,7 +56,6 @@ public class Desertion extends CardImpl {
         super(ownerId, 30, "Desertion", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "VIS";
 
-
         // Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
         this.getSpellAbility().addEffect(new DesertionEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -81,7 +80,7 @@ class DesertionEffect extends OneShotEffect {
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     public DesertionEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.";
@@ -106,7 +105,7 @@ class DesertionEffect extends OneShotEffect {
             if (stackObject instanceof Spell) {
                 game.rememberLKI(objectId, Zone.STACK, (Spell) stackObject);
                 game.getStack().remove(stackObject);
-                if (!((Spell) stackObject).isCopiedSpell() && filter.match(stackObject, source.getControllerId(), game)) {
+                if (!((Spell) stackObject).isCopiedSpell() && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game)) {
                     MageObject card = game.getObject(stackObject.getSourceId());
                     if (card instanceof Card) {
                         ((Card) card).putOntoBattlefield(game, Zone.STACK, source.getSourceId(), source.getControllerId());
@@ -120,5 +119,5 @@ class DesertionEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }

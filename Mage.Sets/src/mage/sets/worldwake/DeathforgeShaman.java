@@ -27,6 +27,7 @@
  */
 package mage.sets.worldwake;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,8 +42,6 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
@@ -61,7 +60,7 @@ public class DeathforgeShaman extends CardImpl {
 
         // Multikicker {R}
         this.addAbility(new MultikickerAbility("{R}"));
-        
+
         // When Deathforge Shaman enters the battlefield, it deals damage to target player equal to twice the number of times it was kicked.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DeathforgeShamanEffect());
         ability.addTarget(new TargetPlayer());
@@ -101,7 +100,7 @@ class DeathforgeShamanEffect extends OneShotEffect {
 
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.damage(damage, id, game, false, true);
+            player.damage(damage, source.getSourceId(), game, false, true);
             return true;
         }
         return false;

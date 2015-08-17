@@ -28,16 +28,14 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,10 +48,12 @@ public class RavagingBlaze extends CardImpl {
         super(ownerId, 159, "Ravaging Blaze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
         this.expansionSetCode = "ORI";
 
-        // Ravaging Blaze deals X damage to target creature. 
-        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, Ravaging Blaze also deals X damage to that creature's controller.
-        this.getSpellAbility().addEffect(new RavagingBlazeEffect());
+        // Ravaging Blaze deals X damage to target creature.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, Ravaging Blaze also deals X damage to that creature's controller.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetControllerEffect(new ManacostVariableValue()),
+            SpellMasteryCondition.getInstance(), "<br><i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, Ravaging Blaze also deals X damage to that creature's controller."));
     }
 
     public RavagingBlaze(final RavagingBlaze card) {
@@ -64,42 +64,4 @@ public class RavagingBlaze extends CardImpl {
     public RavagingBlaze copy() {
         return new RavagingBlaze(this);
     }
-}
-
-class RavagingBlazeEffect extends OneShotEffect {
-
-    public RavagingBlazeEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals X damage to target creature.<br>"
-                + "<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, {this} also deals X damage to that creature's controller.";
-    }
-
-    public RavagingBlazeEffect(final RavagingBlazeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RavagingBlazeEffect copy() {
-        return new RavagingBlazeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            int xValue = source.getManaCostsToPay().getX();
-            if (xValue > 0) {
-                permanent.damage(xValue, source.getSourceId(), game, false, true);
-                if (SpellMasteryCondition.getInstance().apply(game, source)) {
-                    Player targetController = game.getPlayer(permanent.getControllerId());
-                    if (targetController != null) {
-                        targetController.damage(xValue, source.getSourceId(), game, false, true);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
 }

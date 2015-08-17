@@ -33,6 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -44,8 +46,8 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -96,62 +98,65 @@ class LobotomyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer != null && sourceObject != null && controller != null) {
-            
-            // reveal hand of target player 
-            targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
-            
+
+            // reveal hand of target player
+            targetPlayer.revealCards(sourceObject.getIdName(), targetPlayer.getHand(), game);
+
             // You choose card other than a basic land card
-            TargetCardInHand target = new TargetCardInHand(filter);
+            TargetCard target = new TargetCard(Zone.HAND, filter);
             target.setNotTarget(true);
             Card chosenCard = null;
-            if (controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());
             }
-            
-            
+
             // Exile all cards with the same name
             // Building a card filter with the name
             FilterCard filterNamedCards = new FilterCard();
             if (chosenCard != null) {
-                filterNamedCards.add(new NamePredicate(chosenCard.getName()));                            
+                filterNamedCards.add(new NamePredicate(chosenCard.getName()));
+                filterNamedCards.setMessage("cards named " + chosenCard.getName());
             } else {
                 filterNamedCards.add(new NamePredicate("----")); // so no card matches
             }
-
+            Cards cardsToExile = new CardsImpl();
             // The cards you're searching for must be found and exiled if they're in the graveyard because it's a public zone.
             // Finding those cards in the hand and library is optional, because those zones are hidden (even if the hand is temporarily revealed).
             // search cards in graveyard
             if (chosenCard != null) {
                 for (Card checkCard : targetPlayer.getGraveyard().getCards(game)) {
                     if (checkCard.getName().equals(chosenCard.getName())) {
-                        controller.moveCardToExileWithInfo(checkCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                        cardsToExile.add(checkCard);
                     }
                 }
-
                 // search cards in hand
-                TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
-                controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsHand, source, game);
-                for(UUID cardId:  targetCardsHand.getTargets()) {
+                TargetCard targetCardsHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCards);
+                controller.chooseTarget(outcome, targetPlayer.getHand(), targetCardsHand, source, game);
+                for (UUID cardId : targetCardsHand.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
+                        cardsToExile.add(card);
                     }
                 }
-            }            
+            }
 
             // search cards in Library
             // If the player has no nonland cards in his or her hand, you can still search that player's library and have him or her shuffle it.
             if (chosenCard != null || controller.chooseUse(outcome, "Search library anyway?", source, game)) {
                 TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());
-                for(UUID cardId:  targetCardsLibrary.getTargets()) {
+                for (UUID cardId : targetCardsLibrary.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
+                        cardsToExile.add(card);
                     }
                 }
-                targetPlayer.shuffleLibrary(game);
+
             }
+            if (!cardsToExile.isEmpty()) {
+                controller.moveCards(cardsToExile, null, Zone.EXILED, source, game);
+            }
+            targetPlayer.shuffleLibrary(game);
             return true;
         }
         return false;

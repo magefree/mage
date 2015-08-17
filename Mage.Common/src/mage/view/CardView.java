@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.view;
 
 import java.util.ArrayList;
@@ -59,6 +58,7 @@ import mage.target.Targets;
  * @author BetaSteward_at_googlemail.com
  */
 public class CardView extends SimpleCardView {
+
     private static final long serialVersionUID = 1L;
 
     protected UUID parentId;
@@ -91,7 +91,7 @@ public class CardView extends SimpleCardView {
 
     protected boolean flipCard;
     protected boolean faceDown;
-    
+
     protected String alternateName;
     protected String originalName;
 
@@ -117,7 +117,7 @@ public class CardView extends SimpleCardView {
     protected boolean isPlayable;
     protected boolean isChoosable;
     protected boolean selected;
-    protected boolean canAttack;    
+    protected boolean canAttack;
 
     public CardView(Card card) {
         this(card, null, false);
@@ -137,13 +137,42 @@ public class CardView extends SimpleCardView {
      *
      * @param card
      * @param game
-     * @param controlled is the card view created for the card controller - used for morph / face down cards to know which player may see information for the card
+     * @param controlled is the card view created for the card controller - used
+     * for morph / face down cards to know which player may see information for
+     * the card
      */
     public CardView(Card card, Game game, boolean controlled) {
+        this(card, game, controlled, false);
+    }
+
+    /**
+     *
+     * @param card
+     * @param game
+     * @param controlled is the card view created for the card controller - used
+     * for morph / face down cards to know which player may see information for
+     * the card
+     * @param showFaceDownCard if true and the card is not on the battelfield,
+     * also a face dwon card is shown in the view dwon cards will be shown
+     */
+    public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null);
         // no information available for face down cards as long it's not a controlled face down morph card
-        // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2        
-        if (game != null && card.isFaceDown(game)) {
+        // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
+        boolean showFaceUp = true;
+        if (game != null) {
+            if (card.isFaceDown(game)) {
+                showFaceUp = false;
+                if (!Zone.BATTLEFIELD.equals(game.getState().getZone(card.getId()))) {
+                    if (showFaceDownCard) {
+                        showFaceUp = true;
+                    }
+                }
+            }
+        }
+        //  boolean showFaceUp = game == null || !card.isFaceDown(game) || (!game.getState().getZone(card.getId()).equals(Zone.BATTLEFIELD) && showFaceDownCard);
+
+        if (!showFaceUp) {
             this.fillEmpty(card, controlled);
             if (card instanceof Spell) {
                 // special handling for casting of Morph cards
@@ -154,10 +183,10 @@ public class CardView extends SimpleCardView {
                 }
                 this.power = "2";
                 this.toughness = "2";
-                this.rules.add("You may cast this card as a 2/2 face-down creature, with no text," +
-                    " no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.");
+                this.rules.add("You may cast this card as a 2/2 face-down creature, with no text,"
+                        + " no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.");
                 return;
-            } else {                
+            } else {
                 if (card instanceof Permanent) {
                     this.power = Integer.toString(card.getPower().getValue());
                     this.toughness = Integer.toString(card.getToughness().getValue());
@@ -176,7 +205,7 @@ public class CardView extends SimpleCardView {
             rotate = true;
         } else {
             if (card instanceof Spell) {
-                switch(((Spell) card).getSpellAbility().getSpellAbilityType()) {
+                switch (((Spell) card).getSpellAbility().getSpellAbilityType()) {
                     case SPLIT_FUSED:
                         splitCard = (SplitCard) ((Spell) card).getCard();
                         rotate = true;
@@ -212,7 +241,7 @@ public class CardView extends SimpleCardView {
 
         if (card instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
-            Permanent permanent = (Permanent)card;
+            Permanent permanent = (Permanent) card;
             this.loyalty = Integer.toString(permanent.getCounters().getCount(CounterType.LOYALTY));
             this.pairedCard = permanent.getPairedCard();
             if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
@@ -220,7 +249,7 @@ public class CardView extends SimpleCardView {
             }
             if (game != null && permanent.getCounters() != null && !permanent.getCounters().isEmpty()) {
                 counters.clear();
-                for (Counter counter: permanent.getCounters().values()) {
+                for (Counter counter : permanent.getCounters().values()) {
                     counters.add(new CounterView(counter));
                 }
             }
@@ -233,7 +262,7 @@ public class CardView extends SimpleCardView {
             this.loyalty = "";
             if (game != null && card.getCounters(game) != null && !card.getCounters(game).isEmpty()) {
                 counters.clear();
-                for (Counter counter: card.getCounters(game).values()) {
+                for (Counter counter : card.getCounters(game).values()) {
                     counters.add(new CounterView(counter));
                 }
             }
@@ -249,8 +278,8 @@ public class CardView extends SimpleCardView {
         this.color = card.getColor(game);
         this.canTransform = card.canTransform();
         this.flipCard = card.isFlipCard();
-        this.faceDown = game != null ? card.isFaceDown(game) : false;
-        
+        this.faceDown = !showFaceUp;
+
         if (card instanceof PermanentToken) {
             this.isToken = true;
             this.mageObjectType = MageObjectType.TOKEN;
@@ -267,7 +296,7 @@ public class CardView extends SimpleCardView {
             // set code und card number for token copies to get the image
             this.rules.clear();
             this.rules.addAll(((PermanentToken) card).getRules(game));
-            this.type = ((PermanentToken)card).getToken().getTokenType();
+            this.type = ((PermanentToken) card).getToken().getTokenType();
         } else {
             this.rarity = card.getRarity();
             this.isToken = false;
@@ -279,7 +308,7 @@ public class CardView extends SimpleCardView {
             this.originalName = card.getName();
         }
         this.flipCard = card.isFlipCard();
-        if (card.isFlipCard() &&  card.getFlipCardName() != null) {
+        if (card.isFlipCard() && card.getFlipCardName() != null) {
             this.alternateName = card.getFlipCardName();
             this.originalName = card.getName();
         }
@@ -287,8 +316,8 @@ public class CardView extends SimpleCardView {
         if (card instanceof Spell) {
             this.mageObjectType = MageObjectType.SPELL;
             Spell spell = (Spell) card;
-            for (SpellAbility spellAbility: spell.getSpellAbilities()) {
-                for(UUID modeId : spellAbility.getModes().getSelectedModes()) {
+            for (SpellAbility spellAbility : spell.getSpellAbilities()) {
+                for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                     spellAbility.getModes().setActiveMode(modeId);
                     if (spellAbility.getTargets().size() > 0) {
                         setTargets(spellAbility.getTargets());
@@ -298,12 +327,12 @@ public class CardView extends SimpleCardView {
             // show for modal spell, which mode was choosen
             if (spell.getSpellAbility().isModal()) {
                 Modes modes = spell.getSpellAbility().getModes();
-                for(UUID modeId : modes.getSelectedModes()) {
+                for (UUID modeId : modes.getSelectedModes()) {
                     modes.setActiveMode(modeId);
-                    this.rules.add("<span color='green'><i>Chosen mode: " + spell.getSpellAbility().getEffects().getText(modes.get(modeId))+"</i></span>");
+                    this.rules.add("<span color='green'><i>Chosen mode: " + spell.getSpellAbility().getEffects().getText(modes.get(modeId)) + "</i></span>");
                 }
             }
-        }       
+        }
     }
 
     public CardView(MageObject object) {
@@ -346,7 +375,7 @@ public class CardView extends SimpleCardView {
             this.rules.addAll(emblem.getAbilities().getRules(emblem.getName()));
         }
         if (this.rarity == null && object instanceof StackAbility) {
-            StackAbility stackAbility = (StackAbility)object;
+            StackAbility stackAbility = (StackAbility) object;
             this.rarity = Rarity.NA;
             this.rules.clear();
             this.rules.add(stackAbility.getRule());
@@ -359,7 +388,7 @@ public class CardView extends SimpleCardView {
     protected CardView() {
         super(null, "", 0, false, "", true);
     }
-    
+
     public CardView(EmblemView emblem) {
         this(true);
         this.gameObject = true;
@@ -409,7 +438,7 @@ public class CardView extends SimpleCardView {
                 } else {
                     this.mageObjectType = MageObjectType.CARD;
                 }
-            }            
+            }
             if (card instanceof PermanentToken) {
                 this.mageObjectType = MageObjectType.TOKEN;
             }
@@ -422,7 +451,7 @@ public class CardView extends SimpleCardView {
 
     CardView(Token token) {
         super(token.getId(), "", 0, false, "");
-        this.isToken  = true;
+        this.isToken = true;
         this.id = token.getId();
         this.name = token.getName();
         this.displayName = token.getName();
@@ -528,11 +557,11 @@ public class CardView extends SimpleCardView {
     public String getExpansionSetCode() {
         return expansionSetCode;
     }
-    
+
     public void setExpansionSetCode(String expansionSetCode) {
         this.expansionSetCode = expansionSetCode;
     }
-    
+
     @Override
     public UUID getId() {
         return id;
@@ -544,8 +573,7 @@ public class CardView extends SimpleCardView {
     }
 
     /**
-     * Returns UUIDs for targets.
-     * Can be null if there is no target selected.
+     * Returns UUIDs for targets. Can be null if there is no target selected.
      *
      * @return
      */
@@ -607,7 +635,8 @@ public class CardView extends SimpleCardView {
     }
 
     /**
-     * Stores the name of the original name, to provide it for a flipped or transformed or copying card
+     * Stores the name of the original name, to provide it for a flipped or
+     * transformed or copying card
      *
      * @return
      */
@@ -718,7 +747,7 @@ public class CardView extends SimpleCardView {
     public boolean isChoosable() {
         return isChoosable;
     }
-    
+
     public void setChoosable(boolean isChoosable) {
         this.isChoosable = isChoosable;
     }
@@ -738,5 +767,5 @@ public class CardView extends SimpleCardView {
     public void setCanAttack(boolean canAttack) {
         this.canAttack = canAttack;
     }
-       
+
 }

@@ -81,7 +81,6 @@ public class GarrukApexPredator extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Garruk");
 
-
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         // +1: Destroy another target planeswalker.
@@ -100,7 +99,9 @@ public class GarrukApexPredator extends CardImpl {
         this.addAbility(ability);
 
         // -8: Target opponent gets an emblem with "Whenever a creature attacks you, it gets +5/+5 and gains trample until end of turn."
-        ability = new LoyaltyAbility(new GetEmblemTargetPlayerEffect(new GarrukApexPredatorEmblem()), -8);
+        Effect effect = new GetEmblemTargetPlayerEffect(new GarrukApexPredatorEmblem());
+        effect.setText("Target opponent gets an emblem with \"Whenever a creature attacks you, it gets +5/+5 and gains trample until end of turn.\"");
+        ability = new LoyaltyAbility(effect, -8);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -148,7 +149,7 @@ class GarrukApexPredatorBeastToken extends Token {
     public GarrukApexPredatorBeastToken() {
         super("Beast", "3/3 black Beast creature token with deathtouch");
         setOriginalExpansionSetCode("M15");
-        setTokenType(2);
+        setTokenType(1);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Beast");
@@ -162,13 +163,14 @@ class GarrukApexPredatorBeastToken extends Token {
 }
 
 /**
- * Emblem with "Whenever a creature attacks you, it gets +5/+5 and gains trample until end of turn."
+ * Emblem with "Whenever a creature attacks you, it gets +5/+5 and gains trample
+ * until end of turn."
  */
 class GarrukApexPredatorEmblem extends Emblem {
 
     public GarrukApexPredatorEmblem() {
         setName("EMBLEM: Garruk, Apex Predator");
-        Effect effect = new BoostTargetEffect(5,5,Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(5, 5, Duration.EndOfTurn);
         effect.setText("it gets +5/+5");
         Ability ability = new AttackedByCreatureTriggeredAbility(Zone.COMMAND, effect, false, SetTargetPointer.PERMANENT);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn,

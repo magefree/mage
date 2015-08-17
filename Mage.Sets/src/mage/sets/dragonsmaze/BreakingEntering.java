@@ -25,15 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -42,7 +36,11 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,12 +48,6 @@ import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class BreakingEntering extends SplitCard {
 
@@ -106,18 +98,18 @@ class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
         if (player != null) {
             Target target = new TargetCardInGraveyard(new FilterCreatureCard());
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game) &&
-                    player.chooseTarget(outcome, target, source, game)) {
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                    && player.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId())) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(card.getId()));
                         game.addEffect(effect, source);
-                        return true;
                     }
                 }
             }
+            return true;
         }
         return false;
     }

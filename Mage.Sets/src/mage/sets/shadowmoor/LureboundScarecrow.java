@@ -64,7 +64,7 @@ public class LureboundScarecrow extends CardImpl {
 
         // As Lurebound Scarecrow enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new LureboundScarecrowChooseColorEffect()));
-        
+
         // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
         this.addAbility(new LureboundScarecrowTriggeredAbility());
     }
@@ -80,7 +80,7 @@ public class LureboundScarecrow extends CardImpl {
 }
 
 class LureboundScarecrowChooseColorEffect extends OneShotEffect {
-    
+
     public LureboundScarecrowChooseColorEffect() {
         super(Outcome.BoostCreature);
         staticText = "choose a color";
@@ -110,11 +110,11 @@ class LureboundScarecrowChooseColorEffect extends OneShotEffect {
     public LureboundScarecrowChooseColorEffect copy() {
         return new LureboundScarecrowChooseColorEffect(this);
     }
-    
+
 }
 
 class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility {
-    
+
     private static final String staticText = "When you control no permanents of the chosen color, sacrifice {this}.";
 
     public LureboundScarecrowTriggeredAbility() {
@@ -127,16 +127,17 @@ class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE  || event.getType() == GameEvent.EventType.LOST_CONTROL
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.LOST_CONTROL
                 || event.getType() == GameEvent.EventType.COLOR_CHANGED
                 || event.getType() == GameEvent.EventType.SPELL_CAST) {
             Card card = game.getCard(this.getSourceId());
             if (card != null) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(card.getId() + "_color");
                 if (color != null) {
-                    for (Permanent perm: game.getBattlefield().getAllActivePermanents(controllerId)) {
-                        if (perm.getColor(game).contains(color))
+                    for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
+                        if (perm.getColor(game).contains(color)) {
                             return false;
+                        }
                     }
                     return true;
                 }

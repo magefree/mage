@@ -54,7 +54,7 @@ public class TargetPermanentPowerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public TargetPermanentPowerCount copy() {
         return new TargetPermanentPowerCount();
     }
 

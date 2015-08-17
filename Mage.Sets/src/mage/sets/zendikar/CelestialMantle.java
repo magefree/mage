@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.zendikar;
 
 import java.util.UUID;
@@ -34,7 +33,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -58,22 +56,26 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CelestialMantle extends CardImpl {
 
-    public CelestialMantle (UUID ownerId) {
+    public CelestialMantle(UUID ownerId) {
         super(ownerId, 6, "Celestial Mantle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}{W}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
 
-
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // Enchanted creature gets +3/+3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
+
+        // Whenever enchanted creature deals combat damage to a player, double its controller's life total.
         this.addAbility(new CelestialMantleAbility());
     }
 
-    public CelestialMantle (final CelestialMantle card) {
+    public CelestialMantle(final CelestialMantle card) {
         super(card);
     }
 
@@ -88,7 +90,6 @@ class CelestialMantleAbility extends TriggeredAbilityImpl {
 
     public CelestialMantleAbility() {
         super(Zone.BATTLEFIELD, new CelestialMantleEffect());
-        this.addEffect(new UntapAllLandsControllerEffect());
     }
 
     public CelestialMantleAbility(final CelestialMantleAbility ability) {
@@ -107,7 +108,7 @@ class CelestialMantleAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent p = game.getPermanent(event.getSourceId());
         return damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId());
     }
@@ -119,6 +120,7 @@ class CelestialMantleAbility extends TriggeredAbilityImpl {
 }
 
 class CelestialMantleEffect extends OneShotEffect {
+
     CelestialMantleEffect() {
         super(Outcome.GainLife);
     }

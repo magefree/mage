@@ -25,9 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.dynamicvalue.common;
 
+import java.io.ObjectStreamException;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -35,18 +36,14 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
-import java.io.ObjectStreamException;
-import java.util.UUID;
-
 /**
  * Amount of life the controller got this turn.
- * 
+ *
  * @author LevelX2
  */
-
 public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
 
-    private static final ControllerGotLifeCount fINSTANCE =  new ControllerGotLifeCount();
+    private static final ControllerGotLifeCount fINSTANCE = new ControllerGotLifeCount();
 
     private Object readResolve() throws ObjectStreamException {
         return fINSTANCE;
@@ -70,7 +67,7 @@ public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
     }
 
     @Override
-    public DynamicValue copy() {
+    public ControllerGotLifeCount copy() {
         return new ControllerGotLifeCount();
     }
 

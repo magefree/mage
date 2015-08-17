@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.constants;
 
 /**
@@ -33,15 +32,17 @@ package mage.constants;
  * @author LevelX2
  */
 public enum AbilityWord {
+
     BLOODRUSH("Bloodrush"),
     CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),    
+    FEROCIOUS("Ferocious"),
+    FORMIDABLE("Formidable"),
+    GRANDEUR("Grandeur"),
     HELLBENT("Hellbent"),
     HEROIC("Heroic"),
-    FORMIDABLE("Formidable"),
     LANDFALL("Landfall"),
     METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
+    PARLEY("Parley"),
     RAID("Raid");
 
     private final String text;

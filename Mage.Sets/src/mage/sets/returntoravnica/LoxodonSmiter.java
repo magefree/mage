@@ -32,19 +32,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.DiscardOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 
 /**
  *
@@ -67,7 +60,7 @@ public class LoxodonSmiter extends CardImpl {
         this.addAbility(new CantBeCounteredAbility());
 
         // If a spell or ability an opponent controls causes you to discard Loxodon Smiter, put it onto the battlefield instead of putting it into your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.HAND, new LoxodonSmiterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.HAND, new DiscardOntoBattlefieldEffect()));
     }
 
     public LoxodonSmiter(final LoxodonSmiter card) {
@@ -78,60 +71,4 @@ public class LoxodonSmiter extends CardImpl {
     public LoxodonSmiter copy() {
         return new LoxodonSmiter(this);
     }
-}
-
-class LoxodonSmiterEffect extends ReplacementEffectImpl {
-
-    public LoxodonSmiterEffect() {
-        super(Duration.EndOfGame, Outcome.PutCardInPlay);
-        staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield instead of putting it into your graveyard";
-    }
-
-    public LoxodonSmiterEffect(final LoxodonSmiterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LoxodonSmiterEffect copy() {
-        return new LoxodonSmiterEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
-            if (zcEvent.getFromZone() == Zone.HAND && zcEvent.getToZone() == Zone.GRAVEYARD) {
-                StackObject spell = game.getStack().getStackObject(event.getSourceId());
-                if (spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                if (card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
-    }
-
 }

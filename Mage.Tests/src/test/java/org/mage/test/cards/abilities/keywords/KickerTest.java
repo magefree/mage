@@ -328,4 +328,39 @@ public class KickerTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Check that kicker condition does also work for kicker cards with multiple
+     * kicker options
+     *
+     */
+    @Test
+    public void testKickerCondition() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        // Kicker {1}{G} and/or {2}{U}
+        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        // Counter target spell if it was kicked.
+        addCard(Zone.HAND, playerB, "Ertai's Trickery", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
+        addTarget(playerA, "Birds of Paradise");
+        setChoice(playerA, "Yes");  // {1}{G} destroy target creature with flying
+        setChoice(playerA, "Yes"); //  {2}{U} draw two cards
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Ertai's Trickery", "Sunscape Battlemage");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Birds of Paradise", 1);
+        assertGraveyardCount(playerB, "Ertai's Trickery", 1);
+        assertGraveyardCount(playerA, "Sunscape Battlemage", 1);
+
+    }
 }

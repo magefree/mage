@@ -36,11 +36,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class SpellskiteTest extends CardTestPlayerBase {
 
     /**
-     * Tests that Wild Defiance triggers for Spellskite if spell target is changed to Spellskite
+     * Tests that Wild Defiance triggers for Spellskite if spell target is
+     * changed to Spellskite
      */
     @Test
     public void testDisabledEffectOnChangeZone() {
@@ -64,19 +64,22 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         assertPowerToughness(playerA, "Spellskite", 3, 7);
-        
+
     }
 
     /**
-     * If Spellskite changes controller, its activated ability can activate but doesn't resolve properly.
-     * 
-     * The specific instance was a Spellskite controlled by Vedalken Shackles. Land was targeted by Frost Titan,
-     * controller (not owner) of Spellskite paid the redirection cost, ability went on the stack, seemed to resolve,
+     * If Spellskite changes controller, its activated ability can activate but
+     * doesn't resolve properly.
+     *
+     * The specific instance was a Spellskite controlled by Vedalken Shackles.
+     * Land was targeted by Frost Titan, controller (not owner) of Spellskite
+     * paid the redirection cost, ability went on the stack, seemed to resolve,
      * target never changed.
-     * 
+     *
      */
     /**
-     * TODO: This test fails sometimes when building the complete Test Project -> Find the reason
+     * TODO: This test fails sometimes when building the complete Test Project
+     * -> Find the reason
      */
     @Test
     public void testAfterChangeOfController() {
@@ -88,17 +91,17 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
         // {UP}: Change a target of target spell or ability to Spellskite.
-        addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);        
+        addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);
         // {4}{U}{U}
-        // Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.        
+        // Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.
         // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
         addCard(Zone.HAND, playerB, "Frost Titan", 1);
-        
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Gain control", "Spellskite");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frost Titan");
         addTarget(playerB, "Silvercoat Lion");
-        
+
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{UP}: Change a target", "stack ability (Whenever {this} enters ");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -106,13 +109,13 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Spellskite", 1);
         assertPermanentCount(playerB, "Frost Titan", 1);
-        
+
         assertTapped("Spellskite", true);
         // (Battlefield) Tapped state is not equal (Silvercoat Lion) expected:<false> but was:<true>
         assertTapped("Silvercoat Lion", false);
-        
-    }    
-    
+
+    }
+
     /**
      * Spellskite fails to redirect Cryptic Command on itself
      */
@@ -123,21 +126,21 @@ public class SpellskiteTest extends CardTestPlayerBase {
         // Counter target spell;
         // or return target permanent to its owner's hand;
         // or tap all creatures your opponents control;
-        // or draw a card.        
+        // or draw a card.
         addCard(Zone.HAND, playerA, "Cryptic Command");
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Command", "mode=1Lightning Bolt^mode=2Silvercoat Lion", "Lightning Bolt");        
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Command", "mode=1Lightning Bolt^mode=2Silvercoat Lion", "Lightning Bolt");
         setModeChoice(playerA, "1"); // Counter target spell
-        setModeChoice(playerA, "2"); // return target permanent to its owner's hand        
-        
+        setModeChoice(playerA, "2"); // return target permanent to its owner's hand
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Cryptic Command");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -146,12 +149,52 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
 
         assertGraveyardCount(playerA, "Cryptic Command", 1);
-        
+
         assertHandCount(playerB, "Spellskite", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        
-    }    
+
+    }
+
+    /**
+     * My opponent cast Cryptic Command tapping all of my creatures and bouncing
+     * a Blade Splicer token I had. I activated a Spellskite but got an error
+     * stating that Spellskite is not a legal target.
+     */
+    @Test
+    public void testSpellskite2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        // Choose two -
+        // Counter target spell;
+        // or return target permanent to its owner's hand;
+        // or tap all creatures your opponents control;
+        // or draw a card.
+        addCard(Zone.HAND, playerA, "Cryptic Command");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Command", "mode=2Silvercoat Lion");
+        setModeChoice(playerA, "2"); // return target permanent to its owner's hand
+        setModeChoice(playerA, "3"); // tap all creatures your opponents control
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Cryptic Command");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Cryptic Command", 1);
+
+        assertHandCount(playerB, "Spellskite", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+        assertTapped("Silvercoat Lion", true);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+    }
 }

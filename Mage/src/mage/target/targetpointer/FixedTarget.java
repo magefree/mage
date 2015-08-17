@@ -6,6 +6,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 public class FixedTarget implements TargetPointer {
 
@@ -16,6 +17,12 @@ public class FixedTarget implements TargetPointer {
     public FixedTarget(UUID target) {
         this.targetId = target;
         this.initialized = false;
+    }
+
+    public FixedTarget(Permanent permanent, Game game) {
+        this.targetId = permanent.getId();
+        this.zoneChangeCounter = permanent.getZoneChangeCounter(game);
+        this.initialized = true;
     }
 
     /**

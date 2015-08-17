@@ -28,8 +28,6 @@
 package mage.abilities.decorator;
 
 import java.util.UUID;
-
-import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -38,6 +36,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -47,12 +46,12 @@ import mage.game.Game;
  */
 public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
 
-        private Condition condition;
-        private String staticText = "";
+    private final Condition condition;
+    private String staticText = "";
 
-        private static final Effects emptyEffects = new Effects();
+    private static final Effects emptyEffects = new Effects();
 
-        public ConditionalGainActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
+    public ConditionalGainActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;
         this.staticText = rule;

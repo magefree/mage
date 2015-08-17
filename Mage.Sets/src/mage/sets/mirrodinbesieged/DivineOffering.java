@@ -28,14 +28,13 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -88,9 +87,9 @@ public class DivineOffering extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent artefact = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-            if (artefact != null) {
-                int cost = artefact.getManaCost().convertedManaCost();
+            Permanent artifact = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            if (artifact != null) {
+                int cost = artifact.getManaCost().convertedManaCost();
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
                     player.gainLife(cost, game);

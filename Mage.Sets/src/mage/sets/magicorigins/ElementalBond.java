@@ -43,8 +43,9 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  * @author emerald000
  */
 public class ElementalBond extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature with power 3 or greater");
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature with power 3 or greater");
+
     static {
         filter.add(new PowerPredicate(ComparisonType.GreaterThan, 2));
     }

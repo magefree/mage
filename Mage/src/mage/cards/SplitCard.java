@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards;
 
 import java.util.ArrayList;
@@ -53,9 +52,9 @@ public abstract class SplitCard extends CardImpl {
     protected Card rightHalfCard;
 
     public SplitCard(UUID ownerId, int cardNumber, String nameLeft, String nameRight, Rarity rarity, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
-        super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" // ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight, (fused ?SpellAbilityType.SPLIT_FUSED:SpellAbilityType.SPLIT));
-        this.createLeftHalfCard(nameLeft, costsLeft);
-        this.createRightHalfCard(nameRight, costsRight);
+        super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" // ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight, (fused ? SpellAbilityType.SPLIT_FUSED : SpellAbilityType.SPLIT));
+        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), this.getCardNumber(), nameLeft, this.rarity, cardTypes, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
+        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), this.getCardNumber(), nameRight, this.rarity, cardTypes, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
         this.splitCard = true;
     }
 
@@ -65,29 +64,11 @@ public abstract class SplitCard extends CardImpl {
         this.rightHalfCard = card.rightHalfCard.copy();
     }
 
-    private Card createLeftHalfCard (String nameLeft, String costsLeft) {
-        CardType[] cardTypes = new CardType[getCardType().size()];
-        this.getCardType().toArray(cardTypes);
-        leftHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), nameLeft, this.rarity, cardTypes, costsLeft, this);
-        //leftHalfCard.getAbilities().setSourceId(objectId);
+    public Card getLeftHalfCard() {
         return leftHalfCard;
     }
 
-    private Card createRightHalfCard (String nameRight, String costsRight) {
-        CardType[] cardTypes = new CardType[getCardType().size()];
-        this.getCardType().toArray(cardTypes);
-        rightHalfCard = new RightHalfCard(this.getOwnerId(), this.getCardNumber(), nameRight, this.rarity, cardTypes, costsRight, this);
-        //rightHalfCard.getAbilities().setSourceId(objectId);
-        return rightHalfCard;
-    }
-
-
-
-    public Card getLeftHalfCard () {
-        return leftHalfCard;
-    }
-
-    public Card getRightHalfCard () {
+    public Card getRightHalfCard() {
         return rightHalfCard;
     }
 
@@ -114,7 +95,7 @@ public abstract class SplitCard extends CardImpl {
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        switch(ability.getSpellAbilityType()) {
+        switch (ability.getSpellAbilityType()) {
             case SPLIT_LEFT:
                 return this.getLeftHalfCard().cast(game, fromZone, ability, controllerId);
             case SPLIT_RIGHT:
@@ -131,17 +112,16 @@ public abstract class SplitCard extends CardImpl {
         game.setZone(getRightHalfCard().getId(), zone);
     }
 
-
     @Override
-    public Abilities<Ability> getAbilities(){
+    public Abilities<Ability> getAbilities() {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities()) {
-            if (ability instanceof SpellAbility && !((SpellAbility)ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
+            if (ability instanceof SpellAbility && !((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
                 allAbilites.add(ability);
             }
         }
         allAbilites.addAll(leftHalfCard.getAbilities());
-        allAbilites.addAll(rightHalfCard.getAbilities());                
+        allAbilites.addAll(rightHalfCard.getAbilities());
         return allAbilites;
     }
 
@@ -149,15 +129,15 @@ public abstract class SplitCard extends CardImpl {
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities(game)) {
-            if (ability instanceof SpellAbility && !((SpellAbility)ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
+            if (ability instanceof SpellAbility && !((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
                 allAbilites.add(ability);
             }
         }
         allAbilites.addAll(leftHalfCard.getAbilities(game));
-        allAbilites.addAll(rightHalfCard.getAbilities(game));                
+        allAbilites.addAll(rightHalfCard.getAbilities(game));
         return allAbilites;
     }
-    
+
     @Override
     public List<String> getRules() {
         List<String> rules = new ArrayList<>();
@@ -176,139 +156,6 @@ public abstract class SplitCard extends CardImpl {
         rightHalfCard.getAbilities().setControllerId(ownerId);
         rightHalfCard.setOwnerId(ownerId);
 
-    }
-
-}
-
-/*
- * The left side card of the split card
- */
-class LeftHalfCard  extends CardImpl {
-
-    SplitCard splitCardParent;
-
-    public LeftHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SplitCard splitCardParent) {
-        super(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.SPLIT_LEFT);
-        this.splitCardParent = splitCardParent;
-    }
-
-    public LeftHalfCard(final LeftHalfCard card) {
-        super(card);
-        this.splitCardParent = card.splitCardParent;
-    }
-
-    @Override
-    public LeftHalfCard copy() {
-        return new LeftHalfCard(this);
-    }
-
-    @Override
-    public UUID getOwnerId() {
-        return splitCardParent.getOwnerId();
-    }
-
-    @Override
-    public String getImageName() {
-        return splitCardParent.getImageName();
-    }
-
-    @Override
-    public String getExpansionSetCode() {
-        return splitCardParent.getExpansionSetCode();
-    }
-
-    @Override
-    public int getCardNumber() {
-        return splitCardParent.getCardNumber();
-    }
-
-    @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        return splitCardParent.moveToZone(toZone, sourceId, game, flag, appliedEffects);
-    }
-  
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
-    }
-
-    @Override
-    public Card getMainCard() {
-        return splitCardParent;
-    }
-
-    @Override
-    public void setZone(Zone zone, Game game) {
-        super.setZone(zone, game);
-        game.setZone(splitCardParent.getId(), zone);
-        game.setZone(splitCardParent.getRightHalfCard().getId(), zone);
-    }
-
-
-}
-
-/*
- * The right side card of the split card
- */
-class RightHalfCard  extends CardImpl {
-
-    SplitCard splitCardParent;
-    
-    public RightHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SplitCard splitCardParent) {
-        super(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.SPLIT_RIGHT);
-        this.splitCardParent = splitCardParent;
-    }
-
-    public RightHalfCard(final RightHalfCard card) {
-        super(card);
-        this.splitCardParent = card.splitCardParent;
-    }
-
-    @Override
-    public RightHalfCard copy() {
-        return new RightHalfCard(this);
-    }
-
-    @Override
-    public UUID getOwnerId() {
-        return splitCardParent.getOwnerId();
-    }
-
-    @Override
-    public String getImageName() {
-        return splitCardParent.getImageName();
-    }
-
-    @Override
-    public String getExpansionSetCode() {
-        return splitCardParent.getExpansionSetCode();
-    }
-
-    @Override
-    public int getCardNumber() {
-        return splitCardParent.getCardNumber();
-    }
-
-    @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        return splitCardParent.moveToZone(toZone, sourceId, game, flag, appliedEffects);
-    }
-    
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
-    }
-    
-    @Override
-    public Card getMainCard() {
-        return splitCardParent;
-    }
-
-    @Override
-    public void setZone(Zone zone, Game game) {
-        super.setZone(zone, game);
-        game.setZone(splitCardParent.getId(), zone);
-        game.setZone(splitCardParent.getLeftHalfCard().getId(), zone);
     }
 
 }

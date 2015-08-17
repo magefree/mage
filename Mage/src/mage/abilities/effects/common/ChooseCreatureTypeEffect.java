@@ -63,12 +63,13 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
             while (!controller.choose(outcome, typeChoice, game)) {
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(permanent.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
+            }
             game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
             permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
         }

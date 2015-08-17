@@ -29,13 +29,12 @@ package mage.sets.thedark;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,7 +49,7 @@ public class BogRats extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Wall"));
     }
-    
+
     public BogRats(UUID ownerId) {
         super(ownerId, 4, "Bog Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "DRK";
@@ -60,7 +59,7 @@ public class BogRats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bog Rats can't be blocked by Walls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public BogRats(final BogRats card) {

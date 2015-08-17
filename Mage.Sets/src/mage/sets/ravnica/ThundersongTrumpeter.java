@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.combat.CantBlockTargetEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -54,8 +54,8 @@ public class ThundersongTrumpeter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {tap}: Target creature can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        // {T}: Target creature can't attack or block this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

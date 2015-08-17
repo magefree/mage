@@ -1,41 +1,45 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.game.stack;
 
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.EffectType;
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.StateTriggeredAbility;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -45,19 +49,19 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
-import mage.game.Game;
-import mage.target.Target;
-import mage.target.Targets;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.cards.Card;
+import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.EffectType;
+import mage.constants.Zone;
+import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.Targets;
 import mage.util.GameLog;
 import mage.watchers.Watcher;
 
@@ -96,7 +100,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     public boolean isActivated() {
         return ability.isActivated();
     }
-    
+
     @Override
     public boolean resolve(Game game) {
         if (ability.getTargets().stillLegal(ability, game)) {
@@ -110,13 +114,14 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void reset(Game game) { }
+    public void reset(Game game) {
+    }
 
     @Override
     public void counter(UUID sourceId, Game game) {
         //20100716 - 603.8
         if (ability instanceof StateTriggeredAbility) {
-            ((StateTriggeredAbility)ability).counter(game);
+            ((StateTriggeredAbility) ability).counter(game);
         }
     }
 
@@ -127,14 +132,14 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public String getIdName() {
-        return getName() + " ["+getId().toString().substring(0,3) +"]";
+        return getName() + " [" + getId().toString().substring(0, 3) + "]";
     }
-    
+
     @Override
     public String getLogName() {
         return GameLog.getColoredObjectIdName(this);
     }
-    
+
     @Override
     public String getImageName() {
         return name;
@@ -221,9 +226,9 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public int getConvertedManaCost() {
-        // Activated abilities have an "activation cost" but they don't have a characteristic related to that while on the stack. 
+        // Activated abilities have an "activation cost" but they don't have a characteristic related to that while on the stack.
         // There are certain effects that interact with the cost to activate an ability (e.g., Training Grounds, Power Artifact)
-        // but nothing that looks for that quality of an ability once it's on the stack. 
+        // but nothing that looks for that quality of an ability once it's on the stack.
         return 0;
     }
 
@@ -258,13 +263,16 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void setSourceId(UUID sourceID) {}
+    public void setSourceId(UUID sourceID) {
+    }
 
     @Override
-    public void addCost(Cost cost) {}
+    public void addCost(Cost cost) {
+    }
 
     @Override
-    public void addEffect(Effect effect) {}
+    public void addEffect(Effect effect) {
+    }
 
     @Override
     public boolean activate(Game game, boolean noMana) {
@@ -277,7 +285,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void addTarget(Target target) {}
+    public void addTarget(Target target) {
+    }
 
     @Override
     public UUID getFirstTarget() {
@@ -290,7 +299,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void addChoice(Choice choice) {}
+    public void addChoice(Choice choice) {
+    }
 
     @Override
     public List<AlternativeCost> getAlternativeCosts() {
@@ -298,7 +308,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void addAlternativeCost(AlternativeCost cost) { }
+    public void addAlternativeCost(AlternativeCost cost) {
+    }
 
     @Override
     public ManaCosts<ManaCost> getManaCosts() {
@@ -306,12 +317,13 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public ManaCosts<ManaCost> getManaCostsToPay ( ) {
+    public ManaCosts<ManaCost> getManaCostsToPay() {
         return ability.getManaCostsToPay();
     }
 
     @Override
-    public void addManaCost(ManaCost cost) { }
+    public void addManaCost(ManaCost cost) {
+    }
 
     @Override
     public AbilityType getAbilityType() {
@@ -329,7 +341,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void setName(String name) { 
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -344,7 +356,7 @@ public class StackAbility extends StackObjImpl implements Ability {
             card.adjustChoices(ability, game);
         }
     }
-    
+
     @Override
     public void adjustCosts(Ability ability, Game game) {
         Card card = game.getCard(ability.getSourceId());
@@ -367,7 +379,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void addOptionalCost(Cost cost) {}
+    public void addOptionalCost(Cost cost) {
+    }
 
     @Override
     public boolean checkIfClause(Game game) {
@@ -382,7 +395,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void newOriginalId() {}
+    public void newOriginalId() {
+    }
 
     @Override
     public Ability getStackAbility() {
@@ -395,7 +409,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void addMode(Mode mode) {}
+    public void addMode(Mode mode) {
+    }
 
     @Override
     public Modes getModes() {
@@ -455,7 +470,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     public void setAdditionalCostsRuleVisible(boolean ruleAdditionalCostsVisible) {
         this.ability.setAdditionalCostsRuleVisible(ruleAdditionalCostsVisible);
     }
-    
+
     @Override
     public UUID getOriginalId() {
         return this.ability.getOriginalId();
@@ -478,7 +493,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public void setCostModificationActive(boolean active) {
-        throw new UnsupportedOperationException("Not supported. Only neede for flashbacked spells"); 
+        throw new UnsupportedOperationException("Not supported. Only neede for flashbacked spells");
     }
 
     @Override
@@ -500,7 +515,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     public void addWatcher(Watcher watcher) {
         throw new UnsupportedOperationException("Not supported.");
     }
-    
+
     @Override
     public List<Ability> getSubAbilities() {
         return this.ability.getSubAbilities();
@@ -513,7 +528,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        throw new UnsupportedOperationException("Not supported.");
+        return game.getBaseObject(getSourceId());
     }
 
     @Override
@@ -529,7 +544,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public void setSourceObject(MageObject sourceObject, Game game) {
         throw new UnsupportedOperationException("Not supported.");
-    }    
+    }
 
     @Override
     public int getZoneChangeCounter(Game game) {

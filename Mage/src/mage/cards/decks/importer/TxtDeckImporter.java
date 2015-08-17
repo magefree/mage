@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,27 +20,20 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.decks.importer;
 
 import java.util.Arrays;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionInfo;
-import mage.cards.repository.ExpansionRepository;
-import mage.constants.SetType;
 
 /**
  *
@@ -48,15 +41,19 @@ import mage.constants.SetType;
  */
 public class TxtDeckImporter extends DeckImporter {
 
-    public static final String[] SET_VALUES = new String[] { "lands", "creatures", "planeswalkers","other spells","sideboard cards" };
+    public static final String[] SET_VALUES = new String[]{"lands", "creatures", "planeswalkers", "other spells", "sideboard cards",
+        "Instant", "Land", "Enchantment", "Artifact", "Sorcery", "Planeswalker", "Creature"};
     public static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
-    
+
     private boolean sideboard = false;
     private int emptyLinesInARow = 0;
 
-
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
+        if (line.toLowerCase().contains("sideboard")) {
+            sideboard = true;
+            return;
+        }
         if (line.startsWith("//")) {
             return;
         }
@@ -70,57 +67,34 @@ public class TxtDeckImporter extends DeckImporter {
             emptyLinesInARow = 0;
         }
 
-        if (line.toLowerCase().startsWith("sideboard")) {
-            sideboard = true;
-            return;
-        }
-
-        line = line.replace("\t"," "); // changing tabs to blanks as delimiter
+        line = line.replace("\t", " "); // changing tabs to blanks as delimiter
         int delim = line.indexOf(' ');
         if (delim < 0) {
             return;
         }
         String lineNum = line.substring(0, delim).trim();
-        String lineName = line.substring(delim).replace("’","\'").trim();
-        lineName = lineName.replace("&amp;","//").replace("Ã†", "AE").replace("Ã¶", "ö");
+        String lineName = line.substring(delim).replace("’", "\'").trim();
+        lineName = lineName.replace("&amp;", "//").replace("Ã†", "AE").replace("Ã¶", "ö");
         if (lineName.contains("//") && !lineName.contains(" // ")) {
-            lineName = lineName.replace("//"," // ");
+            lineName = lineName.replace("//", " // ");
         }
-        if (IGNORE_NAMES.contains(lineName)) {
+        if (lineName.contains(" / ")) {
+            lineName = lineName.replace(" / ", " // ");
+        }
+        if (IGNORE_NAMES.contains(lineName) || IGNORE_NAMES.contains(lineNum)) {
             return;
         }
         try {
-            int num = Integer.parseInt(lineNum);
-            List<CardInfo> cards = CardRepository.instance.findCards(lineName);
-            if (cards.isEmpty()) {
+            int num = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
+            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName);
+            if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
             } else {
-                // search the card released last with this name
-                Date lastReleaseDate = new GregorianCalendar(1900, 1, 1).getTime();
-                Date lastExpansionDate = new GregorianCalendar(1900, 1, 1).getTime();
-                CardInfo cardToUse = null;
-                for (CardInfo cardinfo: cards) {
-                    ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
-                    if (set != null) {
-                        if ((set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.CORE)) &&
-                                (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
-                            cardToUse = cardinfo;
-                            lastExpansionDate = set.getReleaseDate();
-                        }
-                        if (lastExpansionDate == null && (lastReleaseDate == null || set.getReleaseDate().after(lastReleaseDate))) {
-                            cardToUse = cardinfo;
-                            lastReleaseDate = set.getReleaseDate();
-                        }
-                    }
-                }
-                if (cardToUse == null) {
-                    cardToUse = cards.get(0);
-                }
                 for (int i = 0; i < num; i++) {
                     if (!sideboard) {
-                        deckList.getCards().add(new DeckCardInfo(cardToUse.getName(),cardToUse.getCardNumber(), cardToUse.getSetCode()));
+                        deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
                     } else {
-                        deckList.getSideboard().add(new DeckCardInfo(cardToUse.getName(),cardToUse.getCardNumber(), cardToUse.getSetCode()));
+                        deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
                     }
                 }
             }

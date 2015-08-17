@@ -59,7 +59,7 @@ public class CobaltGolem extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public CobaltGolem copy() {
         return new CobaltGolem(this);
     }

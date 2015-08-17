@@ -34,8 +34,8 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -76,21 +76,21 @@ public class RallyTheAncestors extends CardImpl {
 }
 
 class RallyTheAncestorsEffect extends OneShotEffect {
-    
+
     RallyTheAncestorsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return each creature card with converted mana cost X or less from your graveyard to the battlefield. Exile those creatures at the beginning of your next upkeep";
     }
-    
+
     RallyTheAncestorsEffect(final RallyTheAncestorsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public RallyTheAncestorsEffect copy() {
         return new RallyTheAncestorsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -101,14 +101,15 @@ class RallyTheAncestorsEffect extends OneShotEffect {
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
             for (Card card : cards) {
                 if (card != null) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
-                    Effect exileEffect = new ExileTargetEffect("Exile those creatures at the beginning of your next upkeep");
-                    exileEffect.setTargetPointer(new FixedTarget(card.getId()));
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(exileEffect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    if (player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+                        Effect exileEffect = new ExileTargetEffect("Exile those creatures at the beginning of your next upkeep");
+                        exileEffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(exileEffect);
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
                 }
             }
             return true;

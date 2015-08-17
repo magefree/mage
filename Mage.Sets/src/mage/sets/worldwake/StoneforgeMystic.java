@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,7 +20,7 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
@@ -35,25 +35,15 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
-
-
 
 /**
  *
@@ -64,7 +54,6 @@ public class StoneforgeMystic extends CardImpl {
     private static final FilterCard filter = new FilterCard("an Equipment card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new SubtypePredicate("Equipment"));
     }
 
@@ -82,7 +71,7 @@ public class StoneforgeMystic extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
 
         // {1}{W}, {T}: You may put an Equipment card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StoneforgeMysticEffect(), new ManaCostsImpl("{1}{W}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(filter), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -96,45 +85,4 @@ public class StoneforgeMystic extends CardImpl {
         return new StoneforgeMystic(this);
     }
 
-}
-
-class StoneforgeMysticEffect extends OneShotEffect {
-
-    private static final FilterArtifactCard filter = new FilterArtifactCard("an Equipment card from your hand");
-
-    static {
-        filter.add(new SubtypePredicate("Equipment"));
-    }
-
-    public StoneforgeMysticEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You may put an Equipment card from your hand onto the battlefield";
-    }
-
-    public StoneforgeMysticEffect(final StoneforgeMysticEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StoneforgeMysticEffect copy() {
-        return new StoneforgeMysticEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInHand(filter);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.chooseUse(outcome, "Put an Equipment from your hand to battlefield?", source, game)
-                    && controller.chooseTarget(outcome, target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                     controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                }
-            }
-            return true;
-        }
-        return false;
-    }
 }

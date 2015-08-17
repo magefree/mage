@@ -25,11 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.single;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -37,27 +37,24 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class OmniscienceTest extends CardTestPlayerBase {
 
     /**
-     * Omniscience   {7}{U}{U}{U}
+     * Omniscience {7}{U}{U}{U}
      *
-     * Enchantment
-     * You may cast nonland cards from your hand without paying their mana costs.
+     * Enchantment You may cast nonland cards from your hand without paying
+     * their mana costs.
      *
      */
-
     @Test
     public void testCastingCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
-        
-        /* player.getPlayable does not take alternate
-           casting costs in account, so for the test the mana has to be available
-           but won't be used
-        */
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
+        /* player.getPlayable does not take alternate
+         casting costs in account, so for the test the mana has to be available
+         but won't be used
+         */
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
 
@@ -80,7 +77,7 @@ public class OmniscienceTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        
+
         // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
         addCard(Zone.HAND, playerA, "Fire // Ice");
 
@@ -94,7 +91,7 @@ public class OmniscienceTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
-        
+
         assertTapped("Island", false);
         assertTapped("Mountain", false);
     }
@@ -104,9 +101,9 @@ public class OmniscienceTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
 
         /* player.getPlayable does not take alternate
-           casting costs in account, so for the test the mana has to be available
-           but won't be used
-        */
+         casting costs in account, so for the test the mana has to be available
+         but won't be used
+         */
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);
 
@@ -124,12 +121,13 @@ public class OmniscienceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Ornithopter", 1);
         assertTapped("Mountain", false);
     }
-    /**
-     * Spell get cast for 0 if Omniscience is being in play.
-     * But with Trinisphere it costs at least {3}.
-     * Cost/alternate cost (Omniscience) + additional costs - cost reductions + minimum cost (Trinishpere) = total cost.
-     */
 
+    /**
+     * Spell get cast for 0 if Omniscience is being in play. But with
+     * Trinisphere it costs at least {3}. Cost/alternate cost (Omniscience) +
+     * additional costs - cost reductions + minimum cost (Trinishpere) = total
+     * cost.
+     */
     @Test
     public void testCastingWithTrinisphere() {
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
@@ -153,4 +151,45 @@ public class OmniscienceTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertTapped("Plains", true); // plains have to be tapped because {3} have to be paid
     }
+
+    /**
+     * Omniscience is not allowing me to cast spells for free. I'm playing a
+     * Commander game against the Computer, if that helps.
+     *
+     * Edit: It's not letting me cast fused spells for free. Others seems to be
+     * working.
+     */
+    @Test
+    @Ignore  // targeting of fused/split spells not supported by thestplayer
+    public void testCastingFusedSpell() {
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");
+
+        /*
+         * Instant
+         * Far {1}{U} Return target creature to its owner's hand.
+         * Away{2}{B} Target player sacrifices a creature.
+         * Fuse (You may cast one or both halves of this card from your hand.)
+         */
+        addCard(Zone.HAND, playerA, "Far // Away");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Far // Away", "Silvercoat Lion^targetPlayer=PlayerB");
+        playerB.addTarget("Pillarfield Ox");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertHandCount(playerB, 0);
+
+        assertGraveyardCount(playerA, "Far // Away", 1);
+
+        assertPermanentCount(playerB, "Pillarfield Ox", 0);
+        assertGraveyardCount(playerB, "Pillarfield Ox", 1);
+    }
+
 }

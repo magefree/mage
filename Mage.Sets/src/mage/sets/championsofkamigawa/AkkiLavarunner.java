@@ -2,6 +2,7 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,7 +11,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -21,8 +21,9 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
@@ -126,11 +127,19 @@ class TokTokVolcanoBornEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getSourceId());
-        if (card != null && card.getColor(game).isRed()) {
+        MageObject sourceObject;
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if(sourcePermanent == null) {
+            sourceObject = game.getObject(event.getSourceId());
+        }
+        else {
+            sourceObject = sourcePermanent;
+        }
+
+        if (sourceObject != null && sourceObject.getColor(game).isRed()) {
             return true;
         }
         return false;

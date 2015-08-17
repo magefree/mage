@@ -34,24 +34,15 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
@@ -66,8 +57,10 @@ public class BelbesPortal extends CardImpl {
         // As Belbe's Portal enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.PutCreatureInPlay)));
         // {3}, {tap}: You may put a creature card of the chosen type from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BelbesPortalPutCreatureOnBattlefieldEffect(),
+        FilterCreatureCard filter = new FilterCreatureCard("a creature card of the chosen type");
+        filter.add(new ChosenSubtypePredicate(this.getId()));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PutPermanentOnBattlefieldEffect(filter),
                 new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -80,50 +73,5 @@ public class BelbesPortal extends CardImpl {
     @Override
     public BelbesPortal copy() {
         return new BelbesPortal(this);
-    }
-}
-
-class BelbesPortalPutCreatureOnBattlefieldEffect extends OneShotEffect {
-    BelbesPortalPutCreatureOnBattlefieldEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "You may put a creature card of the chosen type from your hand onto the battlefield";
-    }
-
-    BelbesPortalPutCreatureOnBattlefieldEffect(final BelbesPortalPutCreatureOnBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BelbesPortalPutCreatureOnBattlefieldEffect copy() {
-        return new BelbesPortalPutCreatureOnBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
-            if (subtype != null) {
-                Player player = game.getPlayer(source.getControllerId());
-                String choiceText = "Put a " + subtype.toLowerCase() + " creature card from your hand onto the battlefield?";
-
-                if (player != null) {
-                    if (player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
-                        FilterCreatureCard creatureTypeFilter = new FilterCreatureCard();
-                        creatureTypeFilter.add(new SubtypePredicate(subtype));
-
-                        TargetCardInHand target = new TargetCardInHand(creatureTypeFilter);
-                        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-                            Card card = game.getCard(target.getFirstTarget());
-                            if (card != null) {
-                                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                            }
-                        }
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

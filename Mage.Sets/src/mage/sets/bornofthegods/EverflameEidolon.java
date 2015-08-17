@@ -29,19 +29,22 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.SourceHasSubtypeCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -60,12 +63,7 @@ public class EverflameEidolon extends CardImpl {
         // Bestow {2}{R}
         this.addAbility(new BestowAbility(this, "{2}{R}"));
         // {R}: Everflame Eidolon gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostEnchantedEffect(1, 0, Duration.EndOfTurn),
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new SourceHasSubtypeCondition("Aura"),
-                "{this} gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead"),
-                new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EverflameEidolonEffect(), new ManaCostsImpl("{R}")));
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
     }
@@ -77,5 +75,36 @@ public class EverflameEidolon extends CardImpl {
     @Override
     public EverflameEidolon copy() {
         return new EverflameEidolon(this);
+    }
+}
+
+class EverflameEidolonEffect extends OneShotEffect {
+
+    public EverflameEidolonEffect() {
+        super(Outcome.BoostCreature);
+        this.staticText = "{this} gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead";
+    }
+
+    public EverflameEidolonEffect(final EverflameEidolonEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EverflameEidolonEffect copy() {
+        return new EverflameEidolonEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourceObject != null) {
+            if (sourceObject.getSubtype().contains("Aura")) {
+                new BoostEnchantedEffect(1, 0, Duration.EndOfTurn).apply(game, source);
+            } else {
+                game.addEffect(new BoostSourceEffect(1, 0, Duration.EndOfTurn), source);
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -45,7 +45,7 @@ public class Plains3 extends mage.cards.basiclands.Plains {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Plains3 copy() {
         return new Plains3(this);
     }

@@ -86,7 +86,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
 
     public UndeadAlchemistTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), true);
-        this.addEffect(new CreateTokenEffect(new ZombieToken("ISD")));
+        this.addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 
     public UndeadAlchemistTriggeredAbility(final UndeadAlchemistTriggeredAbility ability) {
@@ -105,7 +105,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.LIBRARY && zEvent.getToZone() == Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getCardType().contains(CardType.CREATURE)) {

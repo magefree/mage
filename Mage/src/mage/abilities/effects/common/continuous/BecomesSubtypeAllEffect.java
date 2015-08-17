@@ -6,8 +6,11 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -25,21 +28,23 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
 
 	protected ArrayList<String> subtypes = new ArrayList();
 	protected boolean loseOther; // loses other subtypes
+    protected FilterCreaturePermanent filter;
 
-	public BecomesSubtypeAllEffect(Duration duration, String subtype) {
+    public BecomesSubtypeAllEffect(Duration duration, String subtype) {
 		this(duration, createArrayList(subtype));
 	}
 
 	public BecomesSubtypeAllEffect(Duration duration, ArrayList<String> subtypes) {
-		this(duration, subtypes, true);
+		this(duration, subtypes, new FilterCreaturePermanent("All creatures"), true);
 	}
 
 	public BecomesSubtypeAllEffect(Duration duration,
-			ArrayList<String> subtypes, boolean loseOther) {
+			ArrayList<String> subtypes, FilterCreaturePermanent filter, boolean loseOther) {
 		super(duration, Outcome.Detriment);
 		this.subtypes = subtypes;
 		this.staticText = setText();
 		this.loseOther = loseOther;
+        this.filter = filter;
 	}
 
 	private static ArrayList<String> createArrayList(String subtype) {
@@ -52,7 +57,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
 		super(effect);
 		this.subtypes.addAll(effect.subtypes);
 		this.loseOther = effect.loseOther;
-		this.loseOther = effect.loseOther;
+		this.filter = effect.filter;
 	}
 
 	@Override
@@ -68,9 +73,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
 	@Override
 	public boolean apply(Layer layer, SubLayer sublayer, Ability source,
 			Game game) {
-
-		for (Permanent permanent : game.getBattlefield()
-				.getAllActivePermanents(new FilterCreaturePermanent(), game)) {
+		for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
 			if (permanent != null) {
 				switch (layer) {
 				case TypeChangingEffects_4:

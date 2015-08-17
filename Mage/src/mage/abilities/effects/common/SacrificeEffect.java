@@ -90,7 +90,7 @@ public class SacrificeEffect extends OneShotEffect{
         // A spell or ability could have removed the only legal target this player
         // had, if thats the case this ability should fizzle.
         if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), game) && player.isInGame()) {
+            while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
                 player.chooseTarget(Outcome.Sacrifice, target, source, game);
             }
 

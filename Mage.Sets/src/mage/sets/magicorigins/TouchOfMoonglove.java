@@ -69,7 +69,6 @@ public class TouchOfMoonglove extends CardImpl {
                 DeathtouchAbility.getInstance(), Duration.EndOfTurn, "and gains deathtouch until end of turn"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         // Whenever a creature dealt damage by that creature this turn dies, its controller loses 2 life.
-        // this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(null));
         this.getSpellAbility().addEffect(new TouchOfMoongloveAddTriggerEffect());
 
     }
@@ -119,7 +118,7 @@ class TouchOfMoongloveDelayedTriggeredAbility extends DelayedTriggeredAbility {
     private final MageObjectReference creatureToCheck;
 
     public TouchOfMoongloveDelayedTriggeredAbility(MageObjectReference creatureToCheck) {
-        super(new DamageTargetEffect(2), Duration.EndOfTurn);
+        super(new DamageTargetEffect(2), Duration.EndOfTurn, false);
         this.creatureToCheck = creatureToCheck;
     }
 

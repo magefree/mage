@@ -28,13 +28,13 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -62,8 +62,9 @@ public class Expunge extends CardImpl {
         // Destroy target nonartifact, nonblack creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-		// Cycling {2} ({2}, Discard this card: Draw a card.)
-		this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        
+	// Cycling {2} ({2}, Discard this card: Draw a card.)
+	this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
 		
     }
 

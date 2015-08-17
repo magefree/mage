@@ -63,10 +63,10 @@ public class SunDroplet extends CardImpl {
         // Whenever you're dealt damage, put that many charge counters on Sun Droplet.
         this.addAbility(new SunDropletTriggeredAbility());
         // At the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life.
-        Effect effect = new DoIfCostPaid(new GainLifeEffect(1),new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
+        Effect effect = new DoIfCostPaid(new GainLifeEffect(1), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false),
                 new SourceHasCounterCondition(CounterType.CHARGE, 1),
-                "At the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life", false));
+                "At the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life"));
     }
 
     public SunDroplet(final SunDroplet card) {

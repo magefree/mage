@@ -27,6 +27,8 @@
  */
 package mage.abilities.costs.mana;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.constants.ColoredManaSymbol;
@@ -128,6 +130,14 @@ public class HybridManaCost extends ManaCostImpl {
     @Override
     public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
         return mana1.equals(coloredManaSymbol) || mana2.equals(coloredManaSymbol);
+    }
+
+    @Override
+    public List<Mana> getManaOptions() {
+        List<Mana> manaList = new ArrayList<>();
+        manaList.add(new Mana(mana1));
+        manaList.add(new Mana(mana2));
+        return manaList;
     }
 
     public ColoredManaSymbol getMana1() {

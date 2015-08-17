@@ -102,7 +102,7 @@ class RevealingWindEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             while (game.getBattlefield().count(filter, source.getOriginalId(), source.getControllerId(), game) > 0 &&
                     controller.chooseUse(outcome, "Look at a face-down attacking creature?", source, game)) {
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
                 Target target = new TargetCreaturePermanent(filter);

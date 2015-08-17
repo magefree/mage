@@ -25,20 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -48,29 +53,27 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class DemonicAppetite extends CardImpl {
 
-   public DemonicAppetite (UUID ownerId) {
+    public DemonicAppetite(UUID ownerId) {
         super(ownerId, 106, "Demonic Appetite", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-
+        // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // Enchanted creature gets +3/+3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
 
-        ability = new BeginningOfUpkeepTriggeredAbility(
-                new DemonicAppetiteEffect(), 
-                TargetController.YOU,
-                false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        // At the beginning of your upkeep, sacrifice a creature.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent("a creature"), 1, ""),
+                TargetController.YOU, false));
     }
 
-    public DemonicAppetite (final DemonicAppetite card) {
+    public DemonicAppetite(final DemonicAppetite card) {
         super(card);
     }
 
@@ -80,16 +83,16 @@ public class DemonicAppetite extends CardImpl {
     }
 }
 
-    class DemonicAppetiteEffect extends SacrificeTargetEffect {
+class DemonicAppetiteEffect extends SacrificeTargetEffect {
 
-        DemonicAppetiteEffect() {
-                super();
-                staticText = "sacrifice a creature";
-        }
+    DemonicAppetiteEffect() {
+        super();
+        staticText = "sacrifice a creature";
+    }
 
-        @Override
-        public DemonicAppetiteEffect copy() {
-                return new DemonicAppetiteEffect();
-        }
+    @Override
+    public DemonicAppetiteEffect copy() {
+        return new DemonicAppetiteEffect();
+    }
 
-}  
+}

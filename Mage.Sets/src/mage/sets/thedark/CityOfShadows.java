@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author Luna Skyrise
  */
 public class CityOfShadows extends CardImpl {
 
@@ -53,12 +53,14 @@ public class CityOfShadows extends CardImpl {
         super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DRK";
 
-        // {tap}, Exile a creature you control: Put a storage counter on City of Shadows.
+        // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
         ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
-        // {tap}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
+        this.addAbility(ability);
+
+        // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
         ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
-                "{tap}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows");
+                "{tap}: Add {X} to your mana pool, where X is the number of storage counters on {this}");
         this.addAbility(ability);
     }
 

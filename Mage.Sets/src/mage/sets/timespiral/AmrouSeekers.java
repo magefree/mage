@@ -28,30 +28,35 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.MageSingleton;
-import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.IntimidateAbility;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
 public class AmrouSeekers extends CardImpl {
+
+    private final static FilterCreaturePermanent notArtificatOrWhite = new FilterCreaturePermanent("except by artifact creatures and/or white creatures");
+
+    static {
+        notArtificatOrWhite.add(Predicates.not(
+                Predicates.or(
+                        new CardTypePredicate(CardType.ARTIFACT),
+                        new ColorPredicate(ObjectColor.WHITE)
+                )
+        ));
+    }
 
     public AmrouSeekers(UUID ownerId) {
         super(ownerId, 2, "Amrou Seekers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -63,7 +68,7 @@ public class AmrouSeekers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
-        this.addAbility(new AmrouSeekersEvasionAbility());
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(notArtificatOrWhite, Duration.WhileOnBattlefield)));
 
     }
 
@@ -74,59 +79,5 @@ public class AmrouSeekers extends CardImpl {
     @Override
     public AmrouSeekers copy() {
         return new AmrouSeekers(this);
-    }
-}
-
-class AmrouSeekersEvasionAbility extends EvasionAbility implements MageSingleton  {
-
-    public AmrouSeekersEvasionAbility() {
-        super();
-        this.addEffect(new AmrouSeekersRestrictionEffect());
-    }
-
-    public AmrouSeekersEvasionAbility(final AmrouSeekersEvasionAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public String getRule() {
-        return "Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.";
-    }
-
-    @Override
-    public AmrouSeekersEvasionAbility copy() {
-        return new AmrouSeekersEvasionAbility(this);
-    }
-}
-
-
-class AmrouSeekersRestrictionEffect extends RestrictionEffect  {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures and/or white creatures");
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new ColorPredicate(ObjectColor.WHITE)));
-    }
-
-    public AmrouSeekersRestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public AmrouSeekersRestrictionEffect(final AmrouSeekersRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return filter.match(blocker, source.getSourceId(), source.getControllerId(), game);
-    }
-
-    @Override
-    public AmrouSeekersRestrictionEffect copy() {
-        return new AmrouSeekersRestrictionEffect(this);
     }
 }

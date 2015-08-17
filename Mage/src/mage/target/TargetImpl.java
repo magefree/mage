@@ -1,45 +1,52 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.target;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.AbilityType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-
-import java.util.*;
-import mage.MageObject;
-import mage.constants.AbilityType;
 
 /**
  *
@@ -104,7 +111,7 @@ public abstract class TargetImpl implements Target {
     public void setMinNumberOfTargets(int minNumberOftargets) {
         this.minNumberOfTargets = minNumberOftargets;
     }
-    
+
     @Override
     public void setMaxNumberOfTargets(int maxNumberOftargets) {
         this.maxNumberOfTargets = maxNumberOftargets;
@@ -116,7 +123,7 @@ public abstract class TargetImpl implements Target {
         if (targetController != null) {
             // Hint for the selecting player that the targets must be valid from the point of the ability controller
             // e.g. select opponent text may be misleading otherwise
-            suffix = " (target controlling!)"; 
+            suffix = " (target controlling!)";
         }
         if (getMaxNumberOfTargets() != 1) {
             StringBuilder sb = new StringBuilder();
@@ -158,7 +165,7 @@ public abstract class TargetImpl implements Target {
     public Zone getZone() {
         return zone;
     }
-    
+
     @Override
     public boolean isRequired(UUID sourceId, Game game) {
         MageObject object = game.getObject(sourceId);
@@ -168,12 +175,12 @@ public abstract class TargetImpl implements Target {
             return isRequired();
         }
     }
-    
+
     @Override
     public boolean isRequired() {
         return required;
     }
-    
+
     @Override
     public boolean isRequired(Ability ability) {
         return ability == null || ability.isActivated() || !(ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED));
@@ -217,6 +224,7 @@ public abstract class TargetImpl implements Target {
             if (!targets.containsKey(id)) {
                 targets.put(id, 0);
                 rememberZoneChangeCounter(id, game);
+                chosen = targets.size() >= getNumberOfTargets();
             }
         }
     }
@@ -254,7 +262,7 @@ public abstract class TargetImpl implements Target {
             }
         }
     }
-    
+
     @Override
     public void updateTarget(UUID id, Game game) {
         rememberZoneChangeCounter(id, game);
@@ -315,7 +323,7 @@ public abstract class TargetImpl implements Target {
                     int i = 0;
                     int rnd = new Random().nextInt(possibleTargets.size());
                     Iterator it = possibleTargets.iterator();
-                    while( i < rnd) {
+                    while (i < rnd) {
                         it.next();
                         i++;
                     }
@@ -336,9 +344,9 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
-        Set <UUID> illegalTargets = new HashSet<>();
+        Set<UUID> illegalTargets = new HashSet<>();
 //        int replacedTargets = 0;
-        for (UUID targetId: targets.keySet()) {
+        for (UUID targetId : targets.keySet()) {
             Card card = game.getCard(targetId);
             if (card != null) {
                 if (zoneChangeCounters.containsKey(targetId) && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter(game)) {
@@ -356,7 +364,7 @@ public abstract class TargetImpl implements Target {
             }
         }
         // remove illegal targets, needed to handle if only a subset of targets was illegal
-        for (UUID targetId: illegalTargets) {
+        for (UUID targetId : illegalTargets) {
             targets.remove(targetId);
         }
 //        if (replacedTargets > 0 && replacedTargets == targets.size()) {
@@ -368,28 +376,96 @@ public abstract class TargetImpl implements Target {
         return targets.size() > 0;
     }
 
+    /**
+     * Returns all possible different target combinations
+     *
+     * @param source
+     * @param game
+     * @return
+     */
     @Override
     public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
         List<TargetImpl> options = new ArrayList<>();
-        Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
+        List<UUID> possibleTargets = new ArrayList<>();
+        possibleTargets.addAll(possibleTargets(source.getSourceId(), source.getControllerId(), game));
         possibleTargets.removeAll(getTargets());
-        Iterator<UUID> it = possibleTargets.iterator();
-        while (it.hasNext()) {
-            UUID targetId = it.next();
+
+        // get the length of the array
+        // e.g. for {'A','B','C','D'} => N = 4
+        int N = possibleTargets.size();
+        // not enough targets, return no option
+        if (N < getNumberOfTargets()) {
+            return options;
+        }
+        // not target but that's allowed, return one empty option
+        if (N == 0) {
             TargetImpl target = this.copy();
-            target.clearChosen();
-            target.addTarget(targetId, source, game, true);
-            if (!target.isChosen()) {
-                Iterator<UUID> it2 = possibleTargets.iterator();
-                while (it2.hasNext()&& !target.isChosen()) {
-                    UUID nextTargetId = it2.next();
-                    target.addTarget(nextTargetId, source, game, true);
+            options.add(target);
+            return options;
+        }
+        int maxK = getMaxNumberOfTargets() - getTargets().size();
+        if (maxK > 5) { // Prevent endless iteration with targets set to INTEGER.maxvalue
+            maxK = 5;
+            if (N > 10) { // not more than 252 combinations
+                maxK = 4;
+            }
+            if (N > 20) { // not more than 4845 combinations
+                maxK = 3;
+            }
+        }
+        if (N < maxK) { // less possible targets than the maximum allowed so reduce the max
+            maxK = N;
+        }
+        int minK = getNumberOfTargets();
+        if (getNumberOfTargets() == 0) { // add option without targets if possible
+            TargetImpl target = this.copy();
+            options.add(target);
+            minK = 1;
+        }
+        for (int K = minK; K <= maxK; K++) {
+            // get the combination by index
+            // e.g. 01 --> AB , 23 --> CD
+            int combination[] = new int[K];
+
+            // position of current index
+            //  if (r = 1)              r*
+            //  index ==>        0   |   1   |   2
+            //  element ==>      A   |   B   |   C
+            int r = 0;
+            int index = 0;
+
+            while (r >= 0) {
+                // possible indexes for 1st position "r=0" are "0,1,2" --> "A,B,C"
+                // possible indexes for 2nd position "r=1" are "1,2,3" --> "B,C,D"
+
+                // for r = 0 ==> index < (4+ (0 - 2)) = 2
+                if (index <= (N + (r - K))) {
+                    combination[r] = index;
+
+                    // if we are at the last position print and increase the index
+                    if (r == K - 1) {
+                        //add the new target option
+                        TargetImpl target = this.copy();
+                        for (int i = 0; i < combination.length; i++) {
+                            target.addTarget(possibleTargets.get(combination[i]), source, game, true);
+                        }
+                        options.add(target);
+                        index++;
+                    } else {
+                        // select index for next position
+                        index = combination[r] + 1;
+                        r++;
+                    }
+                } else {
+                    r--;
+                    if (r > 0) {
+                        index = combination[r] + 1;
+                    } else {
+                        index = combination[0] + 1;
+                    }
                 }
             }
-            if (target.isChosen()) {
-                options.add(target);
-            }
-        }        
+        }
         return options;
     }
 
@@ -458,6 +534,6 @@ public abstract class TargetImpl implements Target {
         } else {
             return game.getPlayer(playerId);
         }
-    }    
-    
+    }
+
 }

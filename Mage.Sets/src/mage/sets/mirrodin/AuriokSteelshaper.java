@@ -82,7 +82,7 @@ public class AuriokSteelshaper extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public AuriokSteelshaper copy() {
         return new AuriokSteelshaper(this);
     }
@@ -99,18 +99,18 @@ class AuriokSteelshaperCostReductionEffect extends CostModificationEffectImpl {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public AuriokSteelshaperCostReductionEffect copy() {
         return new AuriokSteelshaperCostReductionEffect(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         CardUtil.reduceCost(abilityToModify, 1);
         return true;
     }
 
-    @Override
+    @java.lang.Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify.getControllerId().equals(source.getControllerId()) &&
                 (abilityToModify instanceof EquipAbility);

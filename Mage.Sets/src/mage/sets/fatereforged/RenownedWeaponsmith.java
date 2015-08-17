@@ -115,7 +115,7 @@ class RenownedWeaponsmithCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        return (object != null 
+        return (object != null
                 && object.getCardType().contains(CardType.ARTIFACT));
     }
 }
@@ -149,8 +149,8 @@ class RenownedWeaponsmithEffect extends OneShotEffect {
                     Card card = game.getCard(target.getFirstTarget());
                     Cards revealed = new CardsImpl();
                     revealed.add(card);
-                    controller.revealCards(sourceObject.getName(), revealed, game);
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);                    
+                    controller.revealCards(sourceObject.getIdName(), revealed, game);
+                    controller.moveCards(revealed, null, Zone.HAND, source, game);
                 }
             }
             controller.shuffleLibrary(game);

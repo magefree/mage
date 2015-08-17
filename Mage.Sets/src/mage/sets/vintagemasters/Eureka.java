@@ -89,18 +89,18 @@ class EurekaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             PlayerList playerList = game.getState().getPlayerList().copy();
-            while (!playerList.get().equals(source.getControllerId()) && controller.isInGame()) {
+            while (!playerList.get().equals(source.getControllerId()) && controller.canRespond()) {
                 playerList.getNext();
             }
             Player currentPlayer = game.getPlayer(playerList.get());
             UUID firstInactivePlayer = null;
             Target target = new TargetCardInHand(new FilterPermanentCard());
 
-            while (controller.isInGame()) {
+            while (controller.canRespond()) {
                 if (firstInactivePlayer == null) {
                     firstInactivePlayer = currentPlayer.getId();
                 }
-                if (currentPlayer != null && currentPlayer.isInGame() && controller.getInRange().contains(currentPlayer.getId())) {
+                if (currentPlayer != null && currentPlayer.canRespond() && controller.getInRange().contains(currentPlayer.getId())) {
 
                     target.clearChosen();
                     if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)

@@ -6,6 +6,7 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 
 public class SignInversionDynamicValue implements DynamicValue {
+
     private final DynamicValue value;
 
     public SignInversionDynamicValue(DynamicValue value) {
@@ -22,7 +23,7 @@ public class SignInversionDynamicValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public SignInversionDynamicValue copy() {
         return new SignInversionDynamicValue(this);
     }
 

@@ -28,14 +28,14 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**

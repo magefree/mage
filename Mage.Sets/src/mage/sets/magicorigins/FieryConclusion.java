@@ -28,6 +28,7 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -39,6 +40,7 @@ public class FieryConclusion extends mage.sets.ravnica.FieryConclusion {
         super(ownerId);
         this.cardNumber = 144;
         this.expansionSetCode = "ORI";
+        this.rarity = Rarity.UNCOMMON;
     }
 
     public FieryConclusion(final FieryConclusion card) {

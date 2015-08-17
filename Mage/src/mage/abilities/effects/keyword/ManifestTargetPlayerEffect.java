@@ -27,12 +27,11 @@
  */
 package mage.abilities.effects.keyword;
 
-import java.util.List;
+import java.util.Set;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
@@ -44,20 +43,18 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
-
 public class ManifestTargetPlayerEffect extends OneShotEffect {
 
     private final int amount;
     private final String prefix;
 
-    public ManifestTargetPlayerEffect(int  amount, String prefix) {
+    public ManifestTargetPlayerEffect(int amount, String prefix) {
         super(Outcome.PutCreatureInPlay);
         this.amount = amount;
         this.prefix = prefix;
@@ -81,8 +78,8 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
         if (targetPlayer != null) {
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
-            List<Card> cards = targetPlayer.getLibrary().getTopCards(game, amount);
-            for (Card card: cards) {
+            Set<Card> cards = targetPlayer.getLibrary().getTopCards(game, amount);
+            for (Card card : cards) {
                 ManaCosts manaCosts = null;
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     manaCosts = card.getSpellAbility().getManaCosts();
@@ -90,13 +87,13 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
                         manaCosts = new ManaCostsImpl("{0}");
                     }
                 }
-                MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) +1, game);
-                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                
+                MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
+                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
                 targetPlayer.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, newSource.getSourceId(), false, true);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                     permanent.setManifested(true);
-                }            
+                }
             }
             return true;
         }

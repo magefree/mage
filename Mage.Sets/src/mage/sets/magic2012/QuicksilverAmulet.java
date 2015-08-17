@@ -30,11 +30,12 @@ package mage.sets.magic2012;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureCard;
 
 import java.util.UUID;
 
@@ -50,7 +51,7 @@ public class QuicksilverAmulet extends CardImpl {
 
         // {4}, {tap}: You may put a creature card from your hand onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
+                new PutPermanentOnBattlefieldEffect(new FilterCreatureCard("a creature card")),
                 new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

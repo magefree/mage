@@ -27,16 +27,43 @@
  */
 package mage.player.ai;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.ExaltedAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -47,7 +74,25 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
-import mage.game.turn.*;
+import mage.game.turn.BeginCombatStep;
+import mage.game.turn.BeginningPhase;
+import mage.game.turn.CleanupStep;
+import mage.game.turn.CombatDamageStep;
+import mage.game.turn.CombatPhase;
+import mage.game.turn.DeclareAttackersStep;
+import mage.game.turn.DeclareBlockersStep;
+import mage.game.turn.DrawStep;
+import mage.game.turn.EndOfCombatStep;
+import mage.game.turn.EndPhase;
+import mage.game.turn.EndStep;
+import mage.game.turn.FirstCombatDamageStep;
+import mage.game.turn.Phase;
+import mage.game.turn.PostCombatMainPhase;
+import mage.game.turn.PostCombatMainStep;
+import mage.game.turn.PreCombatMainPhase;
+import mage.game.turn.PreCombatMainStep;
+import mage.game.turn.UntapStep;
+import mage.game.turn.UpkeepStep;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
 import mage.player.ai.ma.optimizers.impl.DiscardCardOptimizer;
 import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
@@ -59,11 +104,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.Targets;
-
-import java.io.File;
-import java.util.*;
-import java.util.concurrent.*;
-import mage.constants.AbilityType;
 
 /**
  *
@@ -89,6 +129,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected int lastLoggedTurn = 0;
     Random random = new Random();
     protected static final String BLANKS = "...............................................";
+
     static {
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
@@ -316,7 +357,6 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                  * attack with any of them // let's try once again to avoid
                  * possible horizon effect return false; } }
                  */
-
                 logger.info("simulating -- continuing previous action chain");
                 actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
@@ -523,9 +563,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         List<Ability> allActions = currentPlayer.simulatePriority(game);
         optimize(game, allActions);
         if (logger.isInfoEnabled() && allActions.size() > 0 && depth == maxDepth) {
-            logger.info("Sim Prio [" + depth + "] player " + currentPlayer.getName() + " adding " + allActions.size() + " actions:" + allActions);
+            logger.info("ADDED ACTIONS (" + allActions.size() + ") " + " " + allActions);
         }
         int counter = 0;
+        int bestValSubNodes = Integer.MIN_VALUE;
         for (Ability action : allActions) {
             counter++;
             if (ALLOW_INTERRUPT && Thread.interrupted()) {
@@ -553,15 +594,14 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 sim.checkStateAndTriggered();
                 int val;
                 if (action instanceof PassAbility) {
-                    // Stop to simulate deeper if PassAbility 
+                    // Stop to simulate deeper if PassAbility
                     val = GameStateEvaluator2.evaluate(this.getId(), sim);
 //                    logger.info("evaluate  = " + val );
                 } else {
                     val = addActions(newNode, depth - 1, alpha, beta);
-//                    logger.info("addAction = " + val );
                 }
-                logger.debug("Sim Prio " + BLANKS.substring(0, 2 + (maxDepth-depth) * 3)+ "["+depth+"]#"+counter+" <" + val +"> - ("+action.toString()+") "+newNode.hashCode()+" parent node "+node.hashCode());
-                if (logger.isInfoEnabled() && depth == maxDepth) {
+                logger.debug("Sim Prio " + BLANKS.substring(0, 2 + (maxDepth - depth) * 3) + "[" + depth + "]#" + counter + " <" + val + "> - (" + action.toString() + ") ");
+                if (logger.isInfoEnabled() && depth >= maxDepth) {
                     StringBuilder sb = new StringBuilder("Sim Prio [").append(depth).append("] #").append(counter)
                             .append(" <").append(val).append("> (").append(action)
                             .append(action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
@@ -578,6 +618,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
 
                 if (currentPlayer.getId().equals(playerId)) {
+                    if (val > bestValSubNodes) {
+                        bestValSubNodes = val;
+                    }
                     if (depth == maxDepth && action instanceof PassAbility) {
                         val = val - PASSIVITY_PENALTY; // passivity penalty
                     }
@@ -594,7 +637,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                          * choices = node.getChoices();
                          */
                         if (depth == maxDepth) {
-                            logger.info(new StringBuilder("Sim Prio [").append(depth).append("] -- Saved best node yet <").append(bestNode.getScore()).append("> ").append(bestNode.getAbilities().toString()).toString());
+                            logger.info("Sim Prio [" + depth + "] -- Saved best node yet <" + bestNode.getScore() + "> " + bestNode.getAbilities().toString());
                             node.children.clear();
                             node.children.add(bestNode);
                             node.setScore(bestNode.getScore());
@@ -652,7 +695,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
              }
              */
             //logger.info("returning priority alpha: " + alpha);
-            return alpha;
+            return bestValSubNodes;
         } else {
 //            if (beta == Integer.MAX_VALUE) {
 //                 int val = GameStateEvaluator2.evaluate(playerId, game);
@@ -861,7 +904,6 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             CombatUtil.sortByPower(attackers, false);
 
             //this is where my code goes
-
             CombatInfo combatInfo = CombatUtil.blockWithGoodTrade2(game, attackers, possibleBlockers);
             Player player = game.getPlayer(this.playerId);
 
@@ -995,7 +1037,6 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
 
             //CombatUtil.handleExalted();
-
             //TODO: refactor -- extract to method
             //List<Permanent> counterAttackList = new ArrayList<Permanent>();
             //int counterAttackDamage = 0;
@@ -1107,10 +1148,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
              * (totalFirstStrikeBlockPower < attacker.getToughness().getValue())
              * ) { finalAttackers.add(attacker); } }
              */
-
             // The AI will now attack more sanely.  Simple, but good enough for now.
-            // The sim minmax does not work at the moment.  
-
+            // The sim minmax does not work at the moment.
             boolean safeToAttack;
             CombatEvaluator eval = new CombatEvaluator();
 
@@ -1418,7 +1457,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             if (powerLeftToKill <= 0) {
                 return blockers.iterator().next().getId();
             }
-            for (Permanent blocker: blockers) {
+            for (Permanent blocker : blockers) {
                 if (attackerDeathtouch || powerLeftToKill >= blocker.getToughness().getValue()) {
                     if (!blocker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
                         return blocker.getId();
@@ -1435,7 +1474,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
     private List<Permanent> getAlreadyBlockingPermanents(List<UUID> blockerOrder, Game game) {
         List<Permanent> blockerAlreadySet = new ArrayList<>();
-        for (UUID uuid :blockerOrder) {
+        for (UUID uuid : blockerOrder) {
             Permanent permanent = game.getPermanent(uuid);
             if (permanent != null) {
                 blockerAlreadySet.add(permanent);
@@ -1454,6 +1493,5 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         }
         return toughnessAlreadyNeeded;
     }
-
 
 }

@@ -29,7 +29,6 @@ package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
@@ -52,7 +51,7 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
-    
+
     @Test
     public void testSimpleCast2() {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
@@ -65,9 +64,8 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
     }
-    
+
     @Test
-    @Ignore // AI should cast Myr Enforcer -> Check why it does not
     public void testSimpleCast3() {
         // Affinity for artifacts (This spell costs less to cast for each artifact you control.)
         addCard(Zone.HAND, playerA, "Myr Enforcer");
@@ -80,5 +78,84 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
         execute();
 
         assertPermanentCount(playerA, "Myr Enforcer", 1);
-    }    
+    }
+
+    @Test
+    public void testSimpleCast4() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Plains");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+
+        addCard(Zone.HAND, playerA, "Fireshrieker");
+        addCard(Zone.HAND, playerA, "Blazing Specter"); // {2}{R}{B}
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Plains", 2);
+        assertPermanentCount(playerA, "Fireshrieker", 0);
+        assertPermanentCount(playerA, "Blazing Specter", 1);
+    }
+
+    @Test
+    public void testCast4Creature() {
+        addCard(Zone.LIBRARY, playerA, "Swamp", 1);
+        addCard(Zone.LIBRARY, playerA, "Mountain", 1);
+        addCard(Zone.LIBRARY, playerA, "Island", 1);
+        addCard(Zone.HAND, playerA, "Plains");
+        skipInitShuffling();
+
+        addCard(Zone.HAND, playerA, "Loyal Sentry");       // {W}     1/1
+        addCard(Zone.HAND, playerA, "Silvercoat Lion");    // {1}{W}  2/2
+        addCard(Zone.HAND, playerA, "Rootwater Commando"); // {2}{U}  2/2
+        addCard(Zone.HAND, playerA, "Bog Wraith");         // {3}{B}  3/3
+
+        setStopAt(7, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Plains", 1);
+        assertPermanentCount(playerA, "Mountain", 1);
+        assertPermanentCount(playerA, "Island", 1);
+        assertPermanentCount(playerA, "Swamp", 1);
+
+        // assertLife(playerB, 11);  // 1 + 1+2 +  1+2+2 =
+        assertPermanentCount(playerA, "Loyal Sentry", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Rootwater Commando", 1);
+        assertPermanentCount(playerA, "Bog Wraith", 1);
+
+    }
+
+    @Test
+    public void testCast4Creature2() {
+        addCard(Zone.LIBRARY, playerA, "Swamp", 1);
+        addCard(Zone.LIBRARY, playerA, "Swamp", 1);
+        addCard(Zone.LIBRARY, playerA, "Plains", 1);
+
+        addCard(Zone.HAND, playerA, "Island", 1);
+        addCard(Zone.HAND, playerA, "Plains");
+        skipInitShuffling();
+
+        addCard(Zone.HAND, playerA, "Loyal Sentry");       // {W}     1/1
+        addCard(Zone.HAND, playerA, "Steadfast Guard");    // {W}{W}  2/2
+        addCard(Zone.HAND, playerA, "Rootwater Commando"); // {2}{U}  2/2
+        addCard(Zone.HAND, playerA, "Bog Wraith");         // {3}{B}  3/3
+
+        setStopAt(7, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Plains", 2);
+        assertPermanentCount(playerA, "Island", 1);
+        assertPermanentCount(playerA, "Swamp", 1);
+
+        // assertLife(playerB, 11);  // 1 + 1+2 +  1+2+2 =
+        assertPermanentCount(playerA, "Loyal Sentry", 1);
+        assertPermanentCount(playerA, "Steadfast Guard", 1);
+        assertPermanentCount(playerA, "Rootwater Commando", 1);
+        assertPermanentCount(playerA, "Bog Wraith", 1);
+
+    }
 }

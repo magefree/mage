@@ -38,8 +38,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -55,7 +56,7 @@ public class UnstableFrontier extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Target land you control becomes the basic land type of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        Target target = new TargetLandPermanent();
+        Target target = new TargetControlledPermanent(new FilterControlledLandPermanent());
         ability.addTarget(target);
         this.addAbility(ability);
     }

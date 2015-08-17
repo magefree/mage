@@ -45,7 +45,7 @@ public class GildedLotus extends mage.sets.magic2013.GildedLotus {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public GildedLotus copy() {
         return new GildedLotus(this);
     }

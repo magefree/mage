@@ -118,7 +118,7 @@ class ButcherOfTheHordeEffect extends OneShotEffect {
             abilityChoice.setChoices(abilities);
             while (!abilityChoice.isChosen()) {
                 controller.choose(Outcome.AddAbility, abilityChoice, game);
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }

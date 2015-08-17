@@ -29,10 +29,6 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.MageObject;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -40,6 +36,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,7 +54,6 @@ public class CaravanVigil extends CardImpl {
     public CaravanVigil(UUID ownerId) {
         super(ownerId, 173, "Caravan Vigil", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "ISD";
-
 
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         // Morbid - You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.
@@ -103,10 +102,10 @@ class CaravanVigilEffect extends OneShotEffect {
                             && controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to put the card onto the battlefield instead?", source, game)) {
                         controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                     } else {
-                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        controller.moveCards(card, null, Zone.HAND, source, game);
                     }
-                    controller.revealCards(sourceObject.getName(), cards, game);
-                }                
+                    controller.revealCards(sourceObject.getIdName(), cards, game);
+                }
             }
             controller.shuffleLibrary(game);
             return true;

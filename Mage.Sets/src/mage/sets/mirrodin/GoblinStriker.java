@@ -58,7 +58,7 @@ public class GoblinStriker extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public GoblinStriker copy() {
         return new GoblinStriker(this);
     }

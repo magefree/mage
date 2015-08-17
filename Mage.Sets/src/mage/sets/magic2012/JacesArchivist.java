@@ -27,19 +27,21 @@
  */
 package mage.sets.magic2012;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -55,6 +57,7 @@ public class JacesArchivist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // {U}, {T}: Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JacesArchivistEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -71,6 +74,7 @@ public class JacesArchivist extends CardImpl {
 }
 
 class JacesArchivistEffect extends OneShotEffect {
+
     JacesArchivistEffect() {
         super(Outcome.Discard);
         staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way";
@@ -83,20 +87,18 @@ class JacesArchivistEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int maxDiscarded = 0;
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId : sourcePlayer.getInRange()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                int discarded = 0;
-                for (Card c : player.getHand().getCards(game)) {
-                    if (player.discard(c, source, game))
-                        discarded++;
-                }
-                if (discarded > maxDiscarded)
+                int discarded = player.getHand().size();
+                player.discard(discarded, false, source, game);
+                if (discarded > maxDiscarded) {
                     maxDiscarded = discarded;
+                }
             }
         }
-        for (UUID playerId : sourcePlayer.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.drawCards(maxDiscarded, game);

@@ -29,13 +29,13 @@ package mage.sets.planechase2012;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -48,9 +48,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -123,35 +120,39 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose what the creature becomes to");
+            choice.setMessage("Choose what " + permanent.getIdName() + " becomes to");
             choice.getChoices().add(choice33);
             choice.getChoices().add(choice22);
             choice.getChoices().add(choice16);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                while(!choice.isChosen()) {
+                while (!choice.isChosen()) {
                     controller.choose(Outcome.Neutral, choice, game);
-                    if (!controller.isInGame()) {
+                    if (!controller.canRespond()) {
                         return false;
                     }
                 }
             }
+            int power = 0;
+            int toughness = 0;
             switch (choice.getChoice()) {
                 case choice33:
-                    permanent.getPower().setValue(3);
-                    permanent.getToughness().setValue(3);
+                    power = 3;
+                    toughness = 3;
                     break;
                 case choice22:
-                    permanent.getPower().setValue(2);
-                    permanent.getToughness().setValue(2);
-                    permanent.addAbility(FlyingAbility.getInstance(), source.getId(), game);
+                    power = 2;
+                    toughness = 2;
+                    game.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.Custom), source);
                     break;
                 case choice16:
-                    permanent.getPower().setValue(1);
-                    permanent.getToughness().setValue(6);
-                    permanent.addAbility(DefenderAbility.getInstance(), source.getId(), game);
+                    power = 1;
+                    toughness = 6;
+                    game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                     break;
             }
+            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom), source);
+
         }
         return false;
 

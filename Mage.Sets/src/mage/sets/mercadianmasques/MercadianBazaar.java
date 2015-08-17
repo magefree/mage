@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
@@ -58,10 +59,14 @@ public class MercadianBazaar extends CardImpl {
         // {tap}: Put a storage counter on Mercadian Bazaar.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {tap}, Remove any number of storage counters from Mercadian Bazaar: Add {R} to your mana pool for each storage counter removed this way.
-        Ability ability = new DynamicManaAbility(Mana.RedMana, new RemovedCountersForCostValue(),
-                "Add {R} to your mana pool for each storage counter removed this way");
-        ability.addCost(new RemoveVariableCountersSourceCost(
-                CounterType.STORAGE.createInstance(), "Remove any number of storage counters from {this}"));
+        Ability ability = new DynamicManaAbility(
+                Mana.RedMana,
+                new RemovedCountersForCostValue(),
+                new TapSourceCost(),
+                "Add {R} to your mana pool for each storage counter removed this way",
+                true, new CountersCount(CounterType.STORAGE));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
+                "Remove any number of storage counters from {this}"));
         this.addAbility(ability);
     }
 

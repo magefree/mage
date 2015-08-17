@@ -1,36 +1,42 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.view;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
@@ -45,18 +51,15 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
 import mage.watchers.common.CastSpellLastTurnWatcher;
-
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class GameView implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private static final transient Logger logger = Logger.getLogger(GameView.class);
@@ -83,70 +86,73 @@ public class GameView implements Serializable {
     private final int spellsCastCurrentTurn;
     private final boolean rollbackTurnsAllowed;
 
-
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         Player createdForPlayer = null;
         this.isPlayer = createdForPlayerId != null;
         this.priorityTime = game.getPriorityTime();
-        for (Player player: state.getPlayers().values()) {
+        for (Player player : state.getPlayers().values()) {
             players.add(new PlayerView(player, state, game, createdForPlayerId, watcherUserId));
             if (player.getId().equals(createdForPlayerId)) {
                 createdForPlayer = player;
             }
         }
-        for (StackObject stackObject: state.getStack()) {
+        for (StackObject stackObject : state.getStack()) {
             if (stackObject instanceof StackAbility) {
-                // Stack Ability                
+                // Stack Ability
                 MageObject object = game.getObject(stackObject.getSourceId());
                 Card card = game.getCard(stackObject.getSourceId());
                 if (card != null) {
                     if (object != null) {
-                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility)stackObject, card.getName(), new CardView(card)));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, card.getName(), new CardView(card)));
                     } else {
-                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility)stackObject, "", new CardView(card)));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, "", new CardView(card)));
                     }
                     if (card.canTransform()) {
                         updateLatestCardView(game, card, stackObject.getId());
                     }
-                    checkPaid(stackObject.getId(), (StackAbility)stackObject);
+                    checkPaid(stackObject.getId(), (StackAbility) stackObject);
                 } else if (object != null) {
                     if (object instanceof PermanentToken) {
-                        PermanentToken token = (PermanentToken)object;
-                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility)stackObject, token.getName(), new CardView(token)));
-                        checkPaid(stackObject.getId(), (StackAbility)stackObject);
+                        PermanentToken token = (PermanentToken) object;
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, token.getName(), new CardView(token)));
+                        checkPaid(stackObject.getId(), (StackAbility) stackObject);
                     } else if (object instanceof Emblem) {
-                        Card sourceCard = game.getCard(((Emblem)object).getSourceId());
+                        Card sourceCard = game.getCard(((Emblem) object).getSourceId());
                         if (sourceCard != null) {
-                            ((StackAbility)stackObject).setName("Emblem " + sourceCard.getName());
-                            ((StackAbility)stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
+                            if (!sourceCard.getCardType().contains(CardType.PLANESWALKER)) {
+                                if (sourceCard.getSecondCardFace() != null) {
+                                    sourceCard = sourceCard.getSecondCardFace();
+                                }
+                            }
+                            ((StackAbility) stackObject).setName("Emblem " + sourceCard.getName());
+                            ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
                         } else {
                             throw new IllegalArgumentException("Source card for emblem not found.");
                         }
-                        stack.put(stackObject.getId(), 
-                                new StackAbilityView(game, (StackAbility)stackObject, object.getName(), new CardView(new EmblemView(((Emblem)object),sourceCard))));
-                        checkPaid(stackObject.getId(), ((StackAbility)stackObject));
+                        stack.put(stackObject.getId(),
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), new CardView(new EmblemView(((Emblem) object), sourceCard))));
+                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else {
-                        StackAbility stackAbility = ((StackAbility)object);
+                        StackAbility stackAbility = ((StackAbility) object);
                         stackAbility.newId();
-                        stack.put(stackObject.getId(), new CardView(((StackAbility)stackObject)));
-                        checkPaid(stackObject.getId(), ((StackAbility)stackObject));
+                        stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));
+                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     }
                 } else {
                     logger.error("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
-            }
-            else {
+            } else {
                 // Spell
-                stack.put(stackObject.getId(), new CardView((Spell)stackObject, game, stackObject.getControllerId().equals(createdForPlayerId)));
-                checkPaid(stackObject.getId(), (Spell)stackObject);
+                stack.put(stackObject.getId(), new CardView((Spell) stackObject, game, stackObject.getControllerId().equals(createdForPlayerId)));
+                checkPaid(stackObject.getId(), (Spell) stackObject);
             }
             //stackOrder.add(stackObject.getId());
         }
         //Collections.reverse(stackOrder);
-        for (ExileZone exileZone: state.getExile().getExileZones()) {
+        for (ExileZone exileZone : state.getExile().getExileZones()) {
             exiles.add(new ExileView(exileZone, game));
         }
-        for (String name: state.getRevealed().keySet()) {
+        for (String name : state.getRevealed().keySet()) {
             revealed.add(new RevealedView(name, state.getRevealed().get(name), game));
         }
         this.phase = state.getTurn().getPhaseType();
@@ -163,7 +169,7 @@ public class GameView implements Serializable {
         } else {
             this.priorityPlayerName = "";
         }
-        for (CombatGroup combatGroup: state.getCombat().getGroups()) {
+        for (CombatGroup combatGroup : state.getCombat().getGroups()) {
             combat.add(new CombatGroupView(combatGroup, game));
         }
         if (isPlayer) {
@@ -174,13 +180,13 @@ public class GameView implements Serializable {
         } else {
             this.special = false;
         }
-        
+
         CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
         if (watcher != null) {
             spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();
         } else {
             spellsCastCurrentTurn = 0;
-        }        
+        }
         rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
     }
 
@@ -215,7 +221,7 @@ public class GameView implements Serializable {
         }
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent == null) {
-            permanent = (Permanent)game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
+            permanent = (Permanent) game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
         }
         if (permanent != null) {
             if (permanent.isTransformed()) {
@@ -328,5 +334,5 @@ public class GameView implements Serializable {
     public boolean isRollbackTurnsAllowed() {
         return rollbackTurnsAllowed;
     }
-    
+
 }

@@ -58,7 +58,7 @@ public class SlithFirewalker extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public SlithFirewalker copy() {
         return new SlithFirewalker(this);
     }

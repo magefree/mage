@@ -28,14 +28,13 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -49,7 +48,7 @@ public class BiomassMutation extends CardImpl {
         this.expansionSetCode = "GTC";
 
 
-        // Creatures you control become X/X until end of turn.
+        // Creatures you control have base power and toughness X/X until end of turn.
         DynamicValue variableMana = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control"), true));
     }

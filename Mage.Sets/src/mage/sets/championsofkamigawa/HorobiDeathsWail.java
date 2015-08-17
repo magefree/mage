@@ -37,8 +37,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -51,11 +49,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class HorobiDeathsWail extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
-    static {
-        filter.add(new SubtypePredicate("Demon"));
-    }
-
     public HorobiDeathsWail(UUID ownerId) {
         super(ownerId, 117, "Horobi, Death's Wail", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
@@ -67,6 +60,7 @@ public class HorobiDeathsWail extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // Whenever a creature becomes the target of a spell or ability, destroy that creature.
         this.addAbility(new HorobiDeathsWailAbility(new DestroyTargetEffect()));
     }

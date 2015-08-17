@@ -34,9 +34,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Checks that a dies triggered ability of a Token works
+ *
  * @author LevelX2
  */
-
 public class ReefWormTest extends CardTestPlayerBase {
 
     @Test
@@ -50,15 +50,17 @@ public class ReefWormTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Reef Worm", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Reef Worm");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Fish");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Whale");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Whale");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", "Fish");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Whale");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Whale");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 4);
 
         assertPermanentCount(playerB, "Fish", 0);
         assertPermanentCount(playerB, "Whale", 0);

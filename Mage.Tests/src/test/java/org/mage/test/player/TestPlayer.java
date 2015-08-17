@@ -253,6 +253,9 @@ public class TestPlayer implements Player {
         int targetsSet = 0;
         for (Player player : game.getPlayers().values()) {
             if (player.getName().equals(target)) {
+                if (ability.getTargets().isEmpty()) {
+                    throw new UnsupportedOperationException("Ability has no targets, but there is a player target set - " + ability.toString());
+                }
                 ability.getTargets().get(0).addTarget(player.getId(), ability, game);
                 targetsSet++;
                 break;
@@ -1416,6 +1419,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean canRespond() {
+        return computerPlayer.canRespond();
+    }
+
+    @Override
     public boolean hasWon() {
         return computerPlayer.hasWon();
     }
@@ -1665,22 +1673,41 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
     }
 
+//    @Override
+//    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+//        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
+//    }
+//
+//    @Override
+//    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+//        return computerPlayer.moveCards(card, fromZone, toZone, source, game);
+//    }
+//
+//    @Override
+//    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+//        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
+//    }
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
-        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, fromZone);
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
+        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game);
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean withName) {
-        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, fromZone, withName);
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
+        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, withName);
     }
 
     @Override
-    public boolean moveCardsToGraveyardWithInfo(List<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+        return computerPlayer.moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
+    }
+
+    @Override
+    public boolean moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         return computerPlayer.moveCardsToGraveyardWithInfo(allCards, source, game, fromZone);
     }
 
@@ -1826,8 +1853,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
-        return computerPlayer.playMana(unpaid, promptText, game);
+    public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
+        return computerPlayer.playMana(ability, unpaid, promptText, game);
     }
 
     @Override

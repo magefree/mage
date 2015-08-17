@@ -50,6 +50,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -72,13 +73,16 @@ public class JaceTelepathUnbound extends CardImpl {
         this.expansionSetCode = "ORI";
         this.subtype.add("Jace");
 
+        this.color.setBlue(true);
         this.nightCard = true;
         this.canTransform = true;
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         // +1: Up to one target creature gets -2/-0 until your next turn.
-        Ability ability = new LoyaltyAbility(new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn), 1);
+        Effect effect = new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn);
+        effect.setText("Up to one target creature gets -2/-0 until your next turn");
+        Ability ability = new LoyaltyAbility(effect, 1);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
@@ -205,12 +209,11 @@ class JaceTelepathUnboundReplacementEffect extends ReplacementEffectImpl {
 class JaceTelepathUnboundEmblem extends Emblem {
 
     //  You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
-
     public JaceTelepathUnboundEmblem() {
         this.setName("Emblem - Jace");
         Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(5);
         effect.setText("target opponent puts the top five cards of his or her library into his or her graveyard");
-        Ability ability = new SpellCastControllerTriggeredAbility(effect, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);
         ability.addTarget(new TargetOpponent());
         getAbilities().add(ability);
     }

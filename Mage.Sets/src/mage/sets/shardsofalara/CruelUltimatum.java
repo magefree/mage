@@ -58,7 +58,6 @@ public class CruelUltimatum extends CardImpl {
         super(ownerId, 164, "Cruel Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}{B}{B}{B}{R}{R}");
         this.expansionSetCode = "ALA";
 
-
         // Target opponent sacrifices a creature, discards three cards, then loses 5 life.
         // You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -99,17 +98,17 @@ class CruelUltimatumEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card == null) {
                 return false;
             }
-            return player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+            controller.moveCards(card, null, Zone.HAND, source, game);
         }
         return true;
     }

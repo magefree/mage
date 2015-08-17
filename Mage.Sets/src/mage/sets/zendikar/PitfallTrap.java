@@ -28,14 +28,14 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -48,7 +48,7 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class PitfallTrap extends CardImpl {
 
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("creature without flying");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
@@ -59,10 +59,9 @@ public class PitfallTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-
         // If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new PitfallTrapAlternativeCost());
-        
+
         // Destroy target attacking creature without flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 1, filter, false));

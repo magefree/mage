@@ -25,7 +25,6 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,7 +40,6 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-
 public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private FilterCreaturePermanent filter;
@@ -50,6 +48,7 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
     public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, new FilterCreaturePermanent("a creature"), false);
     }
+
     public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
@@ -72,7 +71,7 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
-                for(Effect effect :this.getEffects()) {
+                for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
             }
@@ -83,9 +82,7 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
-        sb.append(" becomes blocked, ").append(super.getRule());
-        return sb.toString();
+        return "Whenever " + filter.getMessage() + " becomes blocked, " + super.getRule();
     }
 
     @Override

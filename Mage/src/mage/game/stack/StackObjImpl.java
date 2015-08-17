@@ -182,7 +182,7 @@ public abstract class StackObjImpl implements StackObject {
                                 newTarget.clearChosen();
                             }
                         }
-                    } while (targetController.isInGame() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
+                    } while (targetController.canRespond() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                     // choose a new target
                 } else {
                     // build a target definition with exactly one possible target to select that replaces old target
@@ -235,7 +235,7 @@ public abstract class StackObjImpl implements StackObject {
                                 newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), ability, game, false);
                             }
                         }
-                    } while (again && targetController.isInGame());
+                    } while (again && targetController.canRespond());
                 }
             } // keep the target
             else {

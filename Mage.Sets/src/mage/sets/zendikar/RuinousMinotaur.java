@@ -30,16 +30,11 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -57,7 +52,8 @@ public class RuinousMinotaur extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Ruinous Minotaur deals damage to an opponent, sacrifice a land.
-        this.addAbility(new RuinousMinotaurTriggeredAbility());
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, ""), false, false));
+
     }
 
     public RuinousMinotaur(final RuinousMinotaur card) {
@@ -67,40 +63,5 @@ public class RuinousMinotaur extends CardImpl {
     @Override
     public RuinousMinotaur copy() {
         return new RuinousMinotaur(this);
-    }
-}
-
-class RuinousMinotaurTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
-
-    public RuinousMinotaurTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeTargetEffect(), false);
-        this.addTarget(new TargetControlledPermanent(filter));
-    }
-
-    public RuinousMinotaurTriggeredAbility(final RuinousMinotaurTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RuinousMinotaurTriggeredAbility copy() {
-        return new RuinousMinotaurTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(this.sourceId)
-                && game.getOpponents(this.getControllerId()).contains(event.getTargetId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals damage to an opponent, sacrifice a land.";
     }
 }

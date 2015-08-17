@@ -48,7 +48,7 @@ public class CommanderDuelMatch extends MatchImpl {
         // Don't like it to compare but seems like it's complicated to do it in another way
         if (options.getDeckType().equals("Variant Magic - Duel Commander")) {
             startLife = 30;
-            alsoHand = false;
+            alsoHand = true;  // commander going to hand allowed to go to command zone effective July 17, 2015
         }
         CommanderDuel game = new CommanderDuel(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setStartMessage(this.createGameStartMessage());

@@ -79,7 +79,7 @@ public class GideonsPhalanx extends CardImpl {
 class GideonsPhalanxKnightToken extends Token {
 
     public GideonsPhalanxKnightToken() {
-        super("Soldier", "2/2 white Knight creature tokens with vigilance");
+        super("Knight", "2/2 white Knight creature tokens with vigilance");
         this.setOriginalExpansionSetCode("ORI");
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.WHITE);

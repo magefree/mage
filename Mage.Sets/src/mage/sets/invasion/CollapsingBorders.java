@@ -42,7 +42,7 @@ import mage.constants.TargetController;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class CollapsingBorders extends CardImpl {
 
@@ -51,7 +51,7 @@ public class CollapsingBorders extends CardImpl {
         this.expansionSetCode = "INV";
 
         // Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls. Then Collapsing Borders deals 3 damage to him or her.
-        Effect effect = new GainLifeTargetEffect(new DomainValue());
+        Effect effect = new GainLifeTargetEffect(new DomainValue(true));
         effect.setText("that player gains 1 life for each basic land type among lands he or she controls.");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false);
         effect = new DamageTargetEffect(3);

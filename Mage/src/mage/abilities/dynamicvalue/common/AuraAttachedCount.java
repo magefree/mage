@@ -27,14 +27,13 @@
  */
 package mage.abilities.dynamicvalue.common;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -74,7 +73,7 @@ public class AuraAttachedCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AuraAttachedCount copy() {
         return new AuraAttachedCount(this);
     }
 

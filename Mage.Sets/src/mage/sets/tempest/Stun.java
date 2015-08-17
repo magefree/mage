@@ -28,9 +28,6 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
@@ -50,10 +47,8 @@ public class Stun extends CardImpl {
         this.expansionSetCode = "TMP";
 
         // Target creature can't block this turn.
-        Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
-        effect.setText("Target creature can't block this turn.");
-        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -21,7 +20,7 @@ public class RevealTargetFromHandCostCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost: sourceAbility.getCosts()) {
+        for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof RevealTargetFromHandCost) {
                 return ((RevealTargetFromHandCost) cost).getNumberRevealedCards();
             }
@@ -31,11 +30,11 @@ public class RevealTargetFromHandCostCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-          return "number of revealed cards";
+        return "number of revealed cards";
     }
 
     @Override
-    public DynamicValue copy() {
+    public RevealTargetFromHandCostCount copy() {
         return new RevealTargetFromHandCostCount();
     }
 

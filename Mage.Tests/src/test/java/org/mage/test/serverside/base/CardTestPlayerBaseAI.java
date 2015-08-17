@@ -41,11 +41,10 @@ import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
  *
  * @author LevelX2
  */
-
 public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
- 
-    int skill = 9;
-    
+
+    int skill = 6;
+
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, 0, 20);
@@ -53,8 +52,8 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");
         return game;
-    }    
-    
+    }
+
     @Override
     protected TestPlayer createPlayer(String name) {
         if (name.equals("PlayerA")) {
@@ -65,7 +64,7 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
         return super.createPlayer(name);
     }
 
-    public void  setAISkill(int skill) {
+    public void setAISkill(int skill) {
         this.skill = skill;
     }
 }

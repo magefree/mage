@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -21,7 +20,7 @@ public class RemovedCountersForCostValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost: sourceAbility.getCosts()) {
+        for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof RemoveVariableCountersSourceCost) {
                 return ((RemoveVariableCountersSourceCost) cost).getAmount();
             }
@@ -31,11 +30,11 @@ public class RemovedCountersForCostValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-          return "number of removed counters";
+        return "number of removed counters";
     }
 
     @Override
-    public DynamicValue copy() {
+    public RemovedCountersForCostValue copy() {
         return new RemovedCountersForCostValue();
     }
 

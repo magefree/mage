@@ -95,7 +95,7 @@ class HallOfTriumphEffect extends OneShotEffect {
             ChoiceColor colorChoice = new ChoiceColor();
             colorChoice.setMessage("Choose color");
             while (!player.choose(Outcome.BoostCreature, colorChoice, game)) {
-                if (!player.isInGame()) {
+                if (!player.canRespond()) {
                     return false;
                 }
             }

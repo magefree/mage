@@ -26,7 +26,20 @@
 #Generate|TOK:TPR|Thopter|
 #Generate|TOK:TPR|Zombie|
 
+#|Generate|TOK:ORI|Ashaya, the Awoken World|
+#|Generate|TOK:ORI|Angel|
+#|Generate|TOK:ORI|Demon|
+#|Generate|TOK:ORI|Elemental|
+#|Generate|TOK:ORI|Elf Warrior|
+#|Generate|TOK:ORI|Goblin|
+#|Generate|TOK:ORI|Knight|
+#|Generate|TOK:ORI|Soldier|
+#|Generate|TOK:ORI|Thopter 1|
+#|Generate|TOK:ORI|Thopter 2|
 #|Generate|TOK:ORI|Zombie|
+#|Generate|EMBLEM!:ORI|Emblem Chandra, Roaring Flame|
+#|Generate|EMBLEM!:ORI|Emblem Jace, Telepath Unbound|
+#|Generate|EMBLEM!:ORI|Emblem Liliana, Defiant Necromancer|
 
 #|Generate|TOK:PTC|Angel|
 #|Generate|TOK:PTC|Avatar|

@@ -73,7 +73,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
             choice.clearChoice();
             while (!choice.isChosen()) {
                 controller.choose(Outcome.Protect, choice, game);
-                if (!controller.isInGame()) {
+                if (!controller.canRespond()) {
                     return;
                 }
             }

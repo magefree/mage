@@ -154,6 +154,11 @@ public interface Game extends MageItem, Serializable {
 
     boolean canPlaySorcery(UUID playerId);
 
+    /**
+     * Id of the player the current turn it is.
+     *
+     * @return
+     */
     UUID getActivePlayerId();
 
     UUID getPriorityPlayerId();

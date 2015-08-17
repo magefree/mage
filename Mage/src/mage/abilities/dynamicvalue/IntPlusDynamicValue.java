@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
@@ -36,8 +35,8 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-
 public class IntPlusDynamicValue implements DynamicValue {
+
     private final DynamicValue value;
     private final int baseValue;
 
@@ -57,7 +56,7 @@ public class IntPlusDynamicValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public IntPlusDynamicValue copy() {
         return new IntPlusDynamicValue(this);
     }
 

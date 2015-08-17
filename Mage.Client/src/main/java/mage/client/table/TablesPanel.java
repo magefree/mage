@@ -1,37 +1,36 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 
 /*
  * TablesPanel.java
  *
  * Created on 15-Dec-2009, 10:54:01 PM
  */
-
 package mage.client.table;
 
 import java.awt.Color;
@@ -119,14 +118,16 @@ public class TablesPanel extends javax.swing.JPanel {
     private List<String> messages;
     private int currentMessage;
     private MageTableRowSorter activeTablesSorter;
-    
+
     JToggleButton[] filterButtons;
-    
+
     private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60, 60};
-    
-    /** Creates new form TablesPanel */
+
+    /**
+     * Creates new form TablesPanel
+     */
     public TablesPanel() {
-        
+
         tableModel = new TableTableModel();
         matchesModel = new MatchesTableModel();
         gameChooser = new GameChooser();
@@ -135,49 +136,46 @@ public class TablesPanel extends javax.swing.JPanel {
         tableModel.setClient(client);
 
         tableTables.createDefaultColumnsFromModel();
-        
+
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
-        
-        TableUtil.setColumnWidthAndOrder(tableTables, defaultColumnsWidth, 
+
+        TableUtil.setColumnWidthAndOrder(tableTables, defaultColumnsWidth,
                 PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER);
-        
+
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
 
         chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
         chatPanel.setBorder(null);
         chatPanel.setChatType(ChatPanel.ChatType.TABLES);
 
-        filterButtons = new JToggleButton[] 
-            {btnStateWaiting, btnStateActive, btnStateFinished,
-             btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,  
-             btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
-             btnSkillBeginner, btnSkillCasual, btnSkillSerious };
-        
-        JComponent[] components = new JComponent[] {chatPanel, jSplitPane1, jScrollPane1, jScrollPane2, topPanel, jPanel3};
+        filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
+            btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
+            btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
+            btnSkillBeginner, btnSkillCasual, btnSkillSerious};
+
+        JComponent[] components = new JComponent[]{chatPanel, jSplitPane1, jScrollPane1, jScrollPane2, topPanel, jPanel3};
         for (JComponent component : components) {
             component.setOpaque(false);
         }
 
-        jScrollPane1.getViewport().setBackground(new Color(255,255,255,50));
-        jScrollPane2.getViewport().setBackground(new Color(255,255,255,50));
-        
+        jScrollPane1.getViewport().setBackground(new Color(255, 255, 255, 50));
+        jScrollPane2.getViewport().setBackground(new Color(255, 255, 255, 50));
+
         restoreSettings();
-        
+
         Action openTableAction;
-        openTableAction = new AbstractAction()
-        {
+        openTableAction = new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int modelRow = Integer.valueOf( e.getActionCommand() );
-                UUID tableId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 3);
-                UUID gameId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
-                String action = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
-                String deckType = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_DECK_TYPE);
-                String status = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_STATUS);
-                boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
-                String owner = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_OWNER);
+            public void actionPerformed(ActionEvent e) {
+                int modelRow = Integer.valueOf(e.getActionCommand());
+                UUID tableId = (UUID) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 3);
+                UUID gameId = (UUID) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
+                String action = (String) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
+                String deckType = (String) tableModel.getValueAt(modelRow, TableTableModel.COLUMN_DECK_TYPE);
+                String status = (String) tableModel.getValueAt(modelRow, TableTableModel.COLUMN_STATUS);
+                boolean isTournament = (Boolean) tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
+                String owner = (String) tableModel.getValueAt(modelRow, TableTableModel.COLUMN_OWNER);
                 switch (action) {
                     case "Join":
                         if (owner.equals(client.getUserName())) {
@@ -215,49 +213,46 @@ public class TablesPanel extends javax.swing.JPanel {
                         } else {
                             logger.info("Joining table " + tableId);
                             joinTableDialog.showDialog(roomId, tableId, false, false);
-                        }  
+                        }
                         break;
                     case "Remove":
                         if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             client.removeTable(roomId, tableId);
-                        }  
+                        }
                         break;
                     case "Show":
                         if (isTournament) {
                             logger.info("Showing tournament table " + tableId);
                             client.watchTable(roomId, tableId);
-                        }  
+                        }
                         break;
                     case "Watch":
                         if (!isTournament) {
                             logger.info("Watching table " + tableId);
                             client.watchTable(roomId, tableId);
-                        }  
+                        }
                         break;
                     case "Replay":
                         logger.info("Replaying game " + gameId);
                         client.replayGame(gameId);
                         break;
                 }
-             }
-         };
+            }
+        };
 
-        Action closedTableAction;        
-        closedTableAction = new AbstractAction()
-        {
+        Action closedTableAction;
+        closedTableAction = new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int modelRow = Integer.valueOf( e.getActionCommand() );
-                String action = (String)matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
+            public void actionPerformed(ActionEvent e) {
+                int modelRow = Integer.valueOf(e.getActionCommand());
+                String action = (String) matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
                 switch (action) {
-                    case "Replay":                
-                        List<UUID> gameList  = matchesModel.getListofGames(modelRow);
+                    case "Replay":
+                        List<UUID> gameList = matchesModel.getListofGames(modelRow);
                         if (gameList != null && gameList.size() > 0) {
                             if (gameList.size() == 1) {
                                 client.replayGame(gameList.get(0));
-                            }
-                            else {
+                            } else {
                                 gameChooser.show(gameList, MageFrame.getDesktop().getMousePosition());
                             }
                         }
@@ -267,18 +262,18 @@ public class TablesPanel extends javax.swing.JPanel {
                         if (matchesModel.isTournament(modelRow)) {
                             logger.info("Showing tournament table " + matchesModel.getTableId(modelRow));
                             client.watchTable(roomId, matchesModel.getTableId(modelRow));
-                        }                         
+                        }
                         break;
                 }
             }
         };
-                     
+
         // !!!! adds action buttons to the table panel (don't delete this)
         new ButtonColumn(tableTables, openTableAction, tableTables.convertColumnIndexToView(TableTableModel.ACTION_COLUMN));
         new ButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.ACTION_COLUMN));
         // !!!!
     }
-    
+
     public void cleanUp() {
         saveSettings();
         chatPanel.cleanUp();
@@ -293,30 +288,30 @@ public class TablesPanel extends javax.swing.JPanel {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, Integer.toString(chatPanel.getSplitDividerLocation()));
     }
-    
+
     private void restoreSettings() {
         // filter settings
         String formatSettings = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_FILTER_SETTINGS, "");
         int i = 0;
         for (JToggleButton component : filterButtons) {
             if (formatSettings.length() > i) {
-                component.setSelected(formatSettings.substring(i,i+1).equals("x"));
+                component.setSelected(formatSettings.substring(i, i + 1).equals("x"));
             } else {
                 component.setSelected(true);
             }
             i++;
-        }               
+        }
         setTableFilter();
     }
-        
+
     private void saveSettings() {
         // Filters
         StringBuilder formatSettings = new StringBuilder();
         for (JToggleButton component : filterButtons) {
-            formatSettings.append(component.isSelected() ? "x":"-");
+            formatSettings.append(component.isSelected() ? "x" : "-");
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_FILTER_SETTINGS, formatSettings.toString());
-        
+
         TableUtil.saveColumnWidthAndOrderToPrefs(tableTables, KEY_TABLES_COLUMNS_WIDTH, KEY_TABLES_COLUMNS_ORDER);
     }
 
@@ -333,13 +328,12 @@ public class TablesPanel extends javax.swing.JPanel {
                 }
                 if (this.btnStateFinished.isSelected()) {
                     this.jSplitPane2.setDividerLocation(-1);
-                }
-                else {
+                } else {
                     location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, null);
                     if (location != null && jSplitPane2 != null) {
                         jSplitPane2.setDividerLocation(Integer.parseInt(location));
                     }
-                }                
+                }
                 location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, null);
                 if (location != null && chatPanel != null) {
                     chatPanel.setSplitDividerLocation(Integer.parseInt(location));
@@ -347,7 +341,7 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     public Map<String, JComponent> getUIComponents() {
         Map<String, JComponent> components = new HashMap<>();
 
@@ -447,15 +441,15 @@ public class TablesPanel extends javax.swing.JPanel {
         reloadMessages();
 
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
-        
+
         // divider locations have to be set with delay else values set are overwritten with system defaults
         Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
             @Override
             public void run() {
                 restoreDividerLocations();
             }
-        }, 300, TimeUnit.MILLISECONDS);       
-        
+        }, 300, TimeUnit.MILLISECONDS);
+
     }
 
     protected void reloadMessages() {
@@ -478,7 +472,7 @@ public class TablesPanel extends javax.swing.JPanel {
         this.saveDividerLocations();
         for (Component component : MageFrame.getDesktop().getComponents()) {
             if (component instanceof TableWaitingDialog) {
-                ((TableWaitingDialog)component).closeDialog();
+                ((TableWaitingDialog) component).closeDialog();
             }
         }
         stopTasks();
@@ -489,7 +483,7 @@ public class TablesPanel extends javax.swing.JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((TablesPane)c).hideFrame();
+            ((TablesPane) c).hideFrame();
         }
     }
 
@@ -522,31 +516,31 @@ public class TablesPanel extends javax.swing.JPanel {
         // format
         List<RowFilter<Object, Object>> formatFilterList = new ArrayList<>();
         if (btnFormatBlock.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Block", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Constructed.*Block", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatStandard.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Standard", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Constructed - Standard", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatModern.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Modern", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Constructed - Modern", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatLegacy.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Legacy", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Constructed - Legacy", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatVintage.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Vintage", TableTableModel.COLUMN_DECK_TYPE));
-        }        
+            formatFilterList.add(RowFilter.regexFilter("^Constructed - Vintage", TableTableModel.COLUMN_DECK_TYPE));
+        }
         if (btnFormatCommander.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Commander", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Commander|^Duel Commander", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatTinyLeader.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Tiny", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Tiny", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatLimited.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Limited", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Limited", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatOther.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("Pauper|Extended", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Constructed - Pauper|^Constructed - Extended|^Constructed - Historical|^Constructed - Super", TableTableModel.COLUMN_DECK_TYPE));
         }
 
         List<RowFilter<Object, Object>> skillFilterList = new ArrayList<>();
@@ -559,7 +553,7 @@ public class TablesPanel extends javax.swing.JPanel {
         if (btnSkillSerious.isSelected()) {
             skillFilterList.add(RowFilter.regexFilter(SkillLevel.SERIOUS.toString(), TableTableModel.COLUMN_SKILL));
         }
-        
+
         if (stateFilterList.isEmpty() || typeFilterList.isEmpty() || formatFilterList.isEmpty() || skillFilterList.isEmpty()) { // no selection
             activeTablesSorter.setRowFilter(RowFilter.regexFilter("Nothing", TableTableModel.COLUMN_SKILL));
         } else {
@@ -570,7 +564,7 @@ public class TablesPanel extends javax.swing.JPanel {
             } else if (stateFilterList.size() == 1) {
                 filterList.addAll(stateFilterList);
             }
-            
+
             if (typeFilterList.size() > 1) {
                 filterList.add(RowFilter.orFilter(typeFilterList));
             } else if (typeFilterList.size() == 1) {
@@ -588,7 +582,7 @@ public class TablesPanel extends javax.swing.JPanel {
             } else if (skillFilterList.size() == 1) {
                 filterList.addAll(skillFilterList);
             }
-            
+
             if (filterList.size() == 1) {
                 activeTablesSorter.setRowFilter(filterList.get(0));
             } else {
@@ -596,11 +590,11 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         }
     }
-       
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1126,17 +1120,17 @@ public class TablesPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
         private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
-            newTournamentDialog.showDialog(roomId);
+        newTournamentDialog.showDialog(roomId);
 }//GEN-LAST:event_btnNewTournamentActionPerformed
 
         private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
-            TableView table;
-            try {
-                File f = new File("test.dck");
-                if (!f.exists()) {
-                    JOptionPane.showMessageDialog(null, "Couldn't find test.dck file for quick game start", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+        TableView table;
+        try {
+            File f = new File("test.dck");
+            if (!f.exists()) {
+                JOptionPane.showMessageDialog(null, "Couldn't find test.dck file for quick game start", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
                 MatchOptions options = new MatchOptions("1", "Two Player Duel");
                 options.getPlayerTypes().add("Human");
@@ -1182,8 +1176,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private void btnStateFinishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStateFinishedActionPerformed
         if (this.btnStateFinished.isSelected()) {
             this.jSplitPane2.setDividerLocation(-1);
-        }
-        else {
+        } else {
             this.jSplitPane2.setDividerLocation(this.jPanel3.getHeight());
         }
         this.startTasks();
@@ -1194,7 +1187,6 @@ public class TablesPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnFormatBlock;
     private javax.swing.JToggleButton btnFormatCommander;
@@ -1237,14 +1229,15 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JTable tableTables;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
-   
+
 }
 
 class TableTableModel extends AbstractTableModel {
+
     ImageIcon tourneyIcon = new javax.swing.ImageIcon(getClass().getResource("/tables/tourney_icon.png"));
     ImageIcon matchIcon = new javax.swing.ImageIcon(getClass().getResource("/tables/match_icon.png"));
-    
-    public static final int COLUMN_ICON = 0; 
+
+    public static final int COLUMN_ICON = 0;
     public static final int COLUMN_DECK_TYPE = 1; // column the deck type is located (starting with 0) Start string is used to check for Limited
     public static final int COLUMN_OWNER = 2;
     public static final int COLUMN_GAME_TYPE = 3;
@@ -1253,18 +1246,19 @@ class TableTableModel extends AbstractTableModel {
     public static final int COLUMN_SKILL = 7;
     public static final int ACTION_COLUMN = 8; // column the action is located (starting with 0)
 
-    private final String[] columnNames = new String[]{"M/T","Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Action"};
-         
+    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Action"};
+
     private TableView[] tables = new TableView[0];
-    private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");;
+    private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
+    ;
 
     private Client client;
-    
+
     public void loadData(Collection<TableView> tables) throws MageRemoteException {
         this.tables = tables.toArray(new TableView[0]);
         this.fireTableDataChanged();
-    }   
-    
+    }
+
     @Override
     public int getRowCount() {
         return tables.length;
@@ -1283,7 +1277,7 @@ class TableTableModel extends AbstractTableModel {
     public Object getValueAt(int arg0, int arg1) {
         switch (arg1) {
             case 0:
-                return tables[arg0].isTournament() ? tourneyIcon:matchIcon;
+                return tables[arg0].isTournament() ? tourneyIcon : matchIcon;
             case 1:
                 return tables[arg0].getDeckType();
             case 2:
@@ -1318,10 +1312,10 @@ class TableTableModel extends AbstractTableModel {
                         } else {
                             owner = tables[arg0].getControllerName();
                             if (client != null && owner.equals(client.getUserName())) {
-                                  return "";
+                                return "";
                             }
                             return "Watch";
-                        }                        
+                        }
                     default:
                         return "";
                 }
@@ -1350,7 +1344,7 @@ class TableTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Class getColumnClass(int columnIndex){
+    public Class getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case COLUMN_ICON:
                 return Icon.class;
@@ -1416,7 +1410,8 @@ class UpdateRoomTask extends SwingWorker<Void, RoomView> {
             get();
         } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Tables Task error", ex);
-        } catch (CancellationException ex) {}
+        } catch (CancellationException ex) {
+        }
     }
 
 }
@@ -1464,7 +1459,7 @@ class MatchesTableModel extends AbstractTableModel {
 
     public static final int ACTION_COLUMN = 6; // column the action is located (starting with 0)
     public static final int GAMES_LIST_COLUMN = 7;
-    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Result", "Start Time", "End Time","Action"};
+    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Result", "Start Time", "End Time", "Action"};
     private MatchView[] matches = new MatchView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
@@ -1515,30 +1510,29 @@ class MatchesTableModel extends AbstractTableModel {
                     } else {
                         return "None";
                     }
-                }               
+                }
             case 7:
                 return matches[arg0].getGames();
         }
         return "";
     }
-    
-    public List<UUID> getListofGames (int row) {
-         return matches[row].getGames();
+
+    public List<UUID> getListofGames(int row) {
+        return matches[row].getGames();
     }
-    
+
     public boolean isTournament(int row) {
-         return matches[row].isTournament();
+        return matches[row].isTournament();
     }
 
     public UUID getMatchId(int row) {
-         return matches[row].getMatchId();
+        return matches[row].getMatchId();
     }
-    
+
     public UUID getTableId(int row) {
-         return matches[row].getTableId();
+        return matches[row].getTableId();
     }
-    
-    
+
     @Override
     public String getColumnName(int columnIndex) {
         String colName = "";
@@ -1551,7 +1545,7 @@ class MatchesTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Class getColumnClass(int columnIndex){
+    public Class getColumnClass(int columnIndex) {
         return String.class;
     }
 
@@ -1617,7 +1611,7 @@ class GameChooser extends JPopupMenu {
             return;
         }
         this.removeAll();
-        for (UUID gameId: games) {
+        for (UUID gameId : games) {
             this.add(new GameChooserAction(gameId, gameId.toString()));
         }
         this.show(MageFrame.getDesktop(), p.x, p.y);

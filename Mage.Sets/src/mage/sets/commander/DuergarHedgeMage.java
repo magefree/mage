@@ -60,8 +60,8 @@ public class DuergarHedgeMage extends CardImpl {
         filter2.add(new SubtypePredicate("Plains"));
         filter3.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
-    private String rule1 = "When {this} enters the battlefield, if you control two or more Mountains, you may destroy target artifact.";
-    private String rule2 = "When {this} enters the battlefield, if you control two or more Plains, you may destroy target enchantment.";
+    private final String rule1 = "When {this} enters the battlefield, if you control two or more Mountains, you may destroy target artifact.";
+    private final String rule2 = "When {this} enters the battlefield, if you control two or more Plains, you may destroy target enchantment.";
 
     public DuergarHedgeMage(UUID ownerId) {
         super(ownerId, 195, "Duergar Hedge-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}");

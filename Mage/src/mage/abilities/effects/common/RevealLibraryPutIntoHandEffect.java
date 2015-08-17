@@ -28,11 +28,13 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -45,7 +47,6 @@ import mage.util.CardUtil;
  *
  * @author LevelX
  */
-
 public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
 
     private DynamicValue amountCards;
@@ -78,27 +79,26 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
         CardsImpl cards = new CardsImpl();
-        int amount = Math.min(amountCards.calculate(game, source, this), player.getLibrary().size());
-        for (int i = 0; i < amount; i++) {
-            cards.add(player.getLibrary().removeFromTop(game));
-        }
-        player.revealCards(new StringBuilder("Put ").append(filter.getMessage()).append(" into hand").toString(), cards, game);
+        cards.addAll(controller.getLibrary().getTopCards(game, amountCards.calculate(game, source, this)));
+        controller.revealCards(sourceObject.getIdName(), cards, game);
 
         Set<Card> cardsList = cards.getCards(game);
+        Cards cardsToHand = new CardsImpl();
         for (Card card : cardsList) {
             if (filter.match(card, game)) {
-                player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                cardsToHand.add(card);
                 cards.remove(card);
             }
         }
-
-        player.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
+        controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+        controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
         return true;
     }
 

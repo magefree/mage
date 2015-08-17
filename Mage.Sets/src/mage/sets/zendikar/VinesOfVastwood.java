@@ -25,23 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CantBeTargetedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,12 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VinesOfVastwood extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+    private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-    
     private static final String staticText = "If {this} was kicked, that creature gets +4/+4 until end of turn";
 
     public VinesOfVastwood(UUID ownerId) {
@@ -66,7 +61,7 @@ public class VinesOfVastwood extends CardImpl {
 
         // Target creature can't be the target of spells or abilities your opponents control this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new CantBeTargetedTargetEffect(filter, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBeTargetedTargetEffect(filter, Duration.EndOfTurn, TargetController.OPPONENT));
 
         // If Vines of Vastwood was kicked, that creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
@@ -82,4 +77,3 @@ public class VinesOfVastwood extends CardImpl {
         return new VinesOfVastwood(this);
     }
 }
-

@@ -44,7 +44,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class FoundryOfTheConsuls extends CardImpl {
 
@@ -55,8 +55,8 @@ public class FoundryOfTheConsuls extends CardImpl {
         // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {5}, {T}, Sacrifice Foundry of the Consuls: Put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken("ORI"), 2),
-            new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken(), 2),
+                new ManaCostsImpl("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

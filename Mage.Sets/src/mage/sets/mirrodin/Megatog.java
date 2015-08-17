@@ -72,7 +72,7 @@ public class Megatog extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Megatog copy() {
         return new Megatog(this);
     }

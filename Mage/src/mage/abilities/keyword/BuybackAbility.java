@@ -96,6 +96,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         }
     }
 
+    @Override
     public boolean isActivated() {
         if (buybackCost != null) {
             return buybackCost.isActivated();
@@ -112,11 +113,11 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetBuyback();
                 if (buybackCost != null) {
-                    if (player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(buybackCost.getText(false)).append(" ?").toString(), ability, game)) {
+                    if (player.chooseUse(Outcome.Benefit, "Pay " + buybackCost.getText(false) + " ?", ability, game)) {
                         buybackCost.activate();
                         for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();

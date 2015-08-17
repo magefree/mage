@@ -58,7 +58,7 @@ public class Tanglebloom extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public Tanglebloom copy() {
         return new Tanglebloom(this);
     }

@@ -58,7 +58,7 @@ public class VulshokBattlegear extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public VulshokBattlegear copy() {
         return new VulshokBattlegear(this);
     }

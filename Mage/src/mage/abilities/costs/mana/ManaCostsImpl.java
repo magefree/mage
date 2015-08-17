@@ -101,6 +101,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public List<Mana> getManaOptions() {
+        List<Mana> manaVariants = new ArrayList<>();
+        for (ManaCost cost : this) {
+            manaVariants.addAll(cost.getManaOptions());
+        }
+        return manaVariants;
+    }
+
+    @Override
     public Mana getPayment() {
         Mana manaTotal = new Mana();
         for (ManaCost cost : this) {
@@ -122,7 +131,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         while (!isPaid()) {
             ManaCost unpaid = this.getUnpaid();
             String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);
-            if (player.playMana(unpaid, promptText, game)) {
+            if (player.playMana(ability, unpaid, promptText, game)) {
                 assignPayment(game, ability, player.getManaPool());
             } else {
                 return false;

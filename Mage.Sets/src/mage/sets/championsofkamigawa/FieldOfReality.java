@@ -25,30 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantBlockSourceEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -62,13 +56,15 @@ public class FieldOfReality extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
 
-
-        // Enchanted creature can't be blocked by Spirits.
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new FieldOfRealityEvasionAbility(), AttachmentType.AURA )));
+
+        // Enchanted creature can't be blocked by Spirits.
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesAttachedEffect(
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Spirit", "Spirits"), AttachmentType.AURA)));
         // {1}{U}: Return Field of Reality to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
     }
@@ -82,46 +78,4 @@ public class FieldOfReality extends CardImpl {
         return new FieldOfReality(this);
     }
 
-}
-
-class FieldOfRealityEvasionAbility extends EvasionAbility {
-
-    public FieldOfRealityEvasionAbility() {
-        this.addEffect(new FieldOfRealityEvasionEffect());
-    }
-
-    public FieldOfRealityEvasionAbility(final FieldOfRealityEvasionAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public String getRule() {
-        return "can't be blocked by Spirits";
-    }
-
-    @Override
-    public FieldOfRealityEvasionAbility copy() {
-        return new FieldOfRealityEvasionAbility(this);
-    }
-}
-
-class FieldOfRealityEvasionEffect extends CantBlockSourceEffect {
-
-    public FieldOfRealityEvasionEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public FieldOfRealityEvasionEffect(final FieldOfRealityEvasionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !blocker.hasSubtype("Spirit") ;
-    }
-
-    @Override
-    public FieldOfRealityEvasionEffect copy() {
-        return new FieldOfRealityEvasionEffect(this);
-    }
 }

@@ -27,12 +27,13 @@
  */
 package mage.abilities.effects.common.combat;
 
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -40,17 +41,17 @@ import mage.game.permanent.Permanent;
  */
 public class CantBlockAttachedEffect extends RestrictionEffect {
 
-    public CantBlockAttachedEffect(AttachmentType attachmentType) {        
+    public CantBlockAttachedEffect(AttachmentType attachmentType) {
         this(attachmentType, Duration.WhileOnBattlefield);
     }
-    
-    public CantBlockAttachedEffect(AttachmentType attachmentType, Duration duration) {        
+
+    public CantBlockAttachedEffect(AttachmentType attachmentType, Duration duration) {
         super(duration);
         StringBuilder sb = new StringBuilder();
         if (attachmentType.equals(AttachmentType.AURA)) {
             sb.append("Enchanted creature can't block");
         } else {
-            sb.append("Equiped creature can't block");
+            sb.append("Equipped creature can't block");
         }
         if (!duration.toString().isEmpty()) {
             sb.append(" ").append(duration.toString());
@@ -63,7 +64,21 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (affectedObjectsSet) {
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
+            }
+        }
+    }
+
+    @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (affectedObjectsSet) {
+            return targetPointer.getFirst(game, source).equals(permanent.getId());
+        }
         return permanent.getAttachments().contains(source.getSourceId());
     }
 

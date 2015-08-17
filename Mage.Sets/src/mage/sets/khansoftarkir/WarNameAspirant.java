@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -38,7 +38,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,8 +49,9 @@ import mage.watchers.common.PlayerAttackedWatcher;
  * @author emerald000
  */
 public class WarNameAspirant extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 1 or less");
+
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 2));
     }
@@ -66,15 +66,15 @@ public class WarNameAspirant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Raid</i> - War-Name Aspirant enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false), 
-                RaidCondition.getInstance(), 
-                true, 
-                "<i>Raid</i> - {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn", 
-                "{this} enters the battlefield with a +1/+1 counter"), 
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false),
+                RaidCondition.getInstance(),
+                true,
+                "<i>Raid</i> - {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn",
+                "{this} enters the battlefield with a +1/+1 counter"),
                 new PlayerAttackedWatcher());
 
         // War-Name Aspirant can't be blocked by creatures with power 1 or less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public WarNameAspirant(final WarNameAspirant card) {

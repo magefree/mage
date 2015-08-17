@@ -117,11 +117,11 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Permanent permanent = zEvent.getTarget();
 
-        if (permanent != null &&
-                zEvent.getToZone() == Zone.GRAVEYARD &&
-                zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                !(permanent instanceof PermanentToken) &&
-                permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent != null
+                && zEvent.getToZone() == Zone.GRAVEYARD
+                && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && !(permanent instanceof PermanentToken)
+                && permanent.getCardType().contains(CardType.CREATURE)) {
 
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             return true;
@@ -131,7 +131,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with {this} to its owner's graveyard";
+        return "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with {this} to its owner's graveyard.";
     }
 }
 

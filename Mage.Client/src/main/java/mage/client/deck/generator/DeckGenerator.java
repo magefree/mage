@@ -193,6 +193,7 @@ public class DeckGenerator {
         Random random = new Random();
         int count = 0;
         int reservesAdded = 0;
+        boolean added;
         if (retrievedCount > 0 && retrievedCount >= spellCount) {
             int tries = 0;
             while (count < spellCount) {
@@ -208,9 +209,10 @@ public class DeckGenerator {
                                 count++;
                             }
                         } else {
-                            if (reservesAdded < genPool.getDeckSize() / 2) {
-                                genPool.tryAddReserve(card, cardCMC);
-                                reservesAdded++;
+                            if (reservesAdded < (genPool.getDeckSize() / 2)) {
+                                added = genPool.tryAddReserve(card, cardCMC);
+                                if(added)
+                                    reservesAdded++;
                             }
                         }
                     }

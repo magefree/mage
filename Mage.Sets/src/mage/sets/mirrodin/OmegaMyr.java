@@ -52,7 +52,7 @@ public class OmegaMyr extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public OmegaMyr copy() {
         return new OmegaMyr(this);
     }

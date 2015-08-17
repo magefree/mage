@@ -47,9 +47,8 @@ public class MoanOfTheUnhallowed extends CardImpl {
         super(ownerId, 109, "Moan of the Unhallowed", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "ISD";
 
-
         // Put two 2/2 black Zombie creature tokens onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("ISD"), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 2));
 
         // Flashback {5}{B}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));

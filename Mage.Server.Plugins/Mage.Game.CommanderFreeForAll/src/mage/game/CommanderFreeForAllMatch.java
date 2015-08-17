@@ -47,7 +47,7 @@ public class CommanderFreeForAllMatch extends MatchImpl {
         boolean alsoHand = true;
         if (options.getDeckType().equals("Variant Magic - Duel Commander")) {
             startLife = 30;
-            alsoHand = false;
+            alsoHand = true;  // commander going to hand allowed to go to command zone effective July 17, 2015
         }
         CommanderFreeForAll game = new CommanderFreeForAll(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setStartMessage(this.createGameStartMessage());

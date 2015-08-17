@@ -73,7 +73,7 @@ public class DeepSeaKraken extends CardImpl {
         // Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new SpellCastAllTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), filter, false, SetTargetPointer.NONE), SuspendedCondition.getInstance(),
-                "Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.", false));
+                "Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it."));
     }
 
     public DeepSeaKraken(final DeepSeaKraken card) {

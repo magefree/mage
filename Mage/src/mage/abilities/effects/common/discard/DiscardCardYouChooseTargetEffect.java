@@ -134,7 +134,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                 Cards revealedCards = new CardsImpl(Zone.HAND);
                 numberToReveal = Math.min(player.getHand().size(), numberToReveal);
                 if (player.getHand().size() > numberToReveal) {
-                    TargetCardInHand chosenCards = new TargetCardInHand(numberToReveal, numberToReveal, new FilterCard("card in "+ player.getLogName() +"'s hand"));
+                    TargetCardInHand chosenCards = new TargetCardInHand(numberToReveal, numberToReveal, new FilterCard("card in " + player.getLogName() + "'s hand"));
                     chosenCards.setNotTarget(true);
                     if (chosenCards.canChoose(player.getId(), game) && player.chooseTarget(Outcome.Discard, player.getHand(), chosenCards, source, game)) {
                         if (!chosenCards.getTargets().isEmpty()) {
@@ -151,7 +151,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                     revealedCards.addAll(player.getHand());
                 }
 
-                player.revealCards(sourceCard != null ? sourceCard.getName() :"Discard", revealedCards, game);
+                player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ")" : "Discard", revealedCards, game);
 
                 boolean result = true;
                 int filteredCardsCount = revealedCards.count(filter, source.getSourceId(), source.getControllerId(), game);
@@ -183,7 +183,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
 
     private String setText() {
         StringBuilder sb = new StringBuilder("Target ");
-        switch(targetController) {
+        switch (targetController) {
             case OPPONENT:
                 sb.append("opponent");
                 break;

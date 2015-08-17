@@ -64,7 +64,7 @@ public class NimReplica extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public NimReplica copy() {
         return new NimReplica(this);
     }

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -42,13 +42,13 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 
@@ -80,7 +80,9 @@ public class Seasinger extends CardImpl {
         seasinger.add(new CardIdPredicate(this.getId()));
 
         // When you control no Islands, sacrifice Seasinger.
-        this.addAbility(new SeasingerTriggeredAbility());
+        this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
+                new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
+                new SacrificeSourceEffect()));
 
         // You may choose not to untap Seasinger during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
@@ -102,31 +104,5 @@ public class Seasinger extends CardImpl {
     @Override
     public Seasinger copy() {
         return new Seasinger(this);
-    }
-}
-
-class SeasingerTriggeredAbility extends StateTriggeredAbility {
-
-    public SeasingerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    public SeasingerTriggeredAbility(final SeasingerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SeasingerTriggeredAbility copy() {
-        return new SeasingerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you control no islands, sacrifice {this}.";
     }
 }

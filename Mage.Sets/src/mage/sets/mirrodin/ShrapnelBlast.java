@@ -63,7 +63,7 @@ public class ShrapnelBlast extends CardImpl {
         super(card);
     }
 
-    @Override
+    @java.lang.Override
     public ShrapnelBlast copy() {
         return new ShrapnelBlast(this);
     }

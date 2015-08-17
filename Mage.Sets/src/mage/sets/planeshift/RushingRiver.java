@@ -39,7 +39,6 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;

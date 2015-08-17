@@ -28,13 +28,13 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class KnightOfGlory extends CardImpl {
     
-    private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("black");
     
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

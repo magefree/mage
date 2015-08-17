@@ -81,25 +81,26 @@ class DaysUndoingEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId: sourcePlayer.getInRange()) {
+        for (UUID playerId : sourcePlayer.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card card: player.getHand().getCards(game)) {
+                for (Card card : player.getHand().getCards(game)) {
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
-                for (Card card: player.getGraveyard().getCards(game)) {
+                for (Card card : player.getGraveyard().getCards(game)) {
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
+                game.informPlayers(player.getLogName() + " puts his or her hand and graveyard into his or her library");
                 player.shuffleLibrary(game);
-                
+
             }
         }
-        game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects 
-        for (UUID playerId: sourcePlayer.getInRange()) {
+        game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects
+        for (UUID playerId : sourcePlayer.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.drawCards(7, game);
-            }            
+            }
         }
         return true;
     }

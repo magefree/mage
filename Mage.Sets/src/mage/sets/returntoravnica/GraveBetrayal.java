@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
@@ -58,13 +57,11 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-
 public class GraveBetrayal extends CardImpl {
 
-    public GraveBetrayal (UUID ownerId) {
+    public GraveBetrayal(UUID ownerId) {
         super(ownerId, 67, "Grave Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");
         this.expansionSetCode = "RTR";
-
 
         // Whenever a creature you don't control dies, return it to the battlefield under
         // your control with an additional +1/+1 counter on it at the beginning of the
@@ -72,7 +69,7 @@ public class GraveBetrayal extends CardImpl {
         this.addAbility(new GraveBetrayalTriggeredAbility());
     }
 
-    public GraveBetrayal (final GraveBetrayal card) {
+    public GraveBetrayal(final GraveBetrayal card) {
         super(card);
     }
 
@@ -108,13 +105,10 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && !permanent.getControllerId().equals(this.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
-                Card card = (Card)game.getObject(permanent.getId());
+                Card card = (Card) game.getObject(permanent.getId());
                 if (card != null) {
                     Effect effect = new GraveBetrayalEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    Integer zoneChanges = card.getZoneChangeCounter(game);
-                    effect.setValue("zoneChanges", zoneChanges);
-
+                    effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
                     delayedAbility.setSourceId(this.getSourceId());
                     delayedAbility.setControllerId(this.getControllerId());
@@ -153,17 +147,14 @@ class GraveBetrayalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
-            Integer zoneChanges = (Integer) getValue("zoneChanges");
-            if (card.getZoneChangeCounter(game) == zoneChanges) {
-                Zone currentZone = game.getState().getZone(card.getId());
-                if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
-                    Permanent creature = game.getPermanent(card.getId());
-                    creature.addCounters(CounterType.P1P1.createInstance(), game);
-                    ContinuousEffect effect = new GraveBetrayalContiniousEffect();
-                    effect.setTargetPointer(new FixedTarget(creature.getId()));
-                    game.addEffect(effect, source);
-                    return true;
-                }
+            Zone currentZone = game.getState().getZone(card.getId());
+            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
+                Permanent creature = game.getPermanent(card.getId());
+                creature.addCounters(CounterType.P1P1.createInstance(), game);
+                ContinuousEffect effect = new GraveBetrayalContiniousEffect();
+                effect.setTargetPointer(new FixedTarget(creature.getId()));
+                game.addEffect(effect, source);
+                return true;
             }
         }
         return false;

@@ -34,8 +34,10 @@
 
 package mage.client.dialog;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.ComboBoxModel;
@@ -122,8 +124,8 @@ public class NewTournamentDialog extends MageDialog {
             cbAllowSpectators.setSelected(true);
             setTournamentSettingsFromPrefs();
             this.setModal(true);
-            this.setLocation(150, 100);            
-        }        
+            this.setLocation(150, 100);
+        }
         this.setVisible(true);
     }
 
@@ -341,7 +343,7 @@ public class NewTournamentDialog extends MageDialog {
 
         pnlRandomPacks.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlRandomPacks.setToolTipText("");
-        pnlRandomPacks.setLayout(new java.awt.GridLayout(0, 1, 2, 0));
+        pnlRandomPacks.setLayout(new javax.swing.BoxLayout(pnlRandomPacks, javax.swing.BoxLayout.Y_AXIS));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -468,7 +470,7 @@ public class NewTournamentDialog extends MageDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlRandomPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlRandomPacks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -477,7 +479,7 @@ public class NewTournamentDialog extends MageDialog {
                                 .addComponent(lblNumRounds))
                             .addComponent(lblNbrPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(spnNumPlayers)
-                            .addComponent(pnlDraftOptions, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(pnlDraftOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -533,7 +535,18 @@ public class NewTournamentDialog extends MageDialog {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
             } else if (tournamentType.isRandom()) {
                 tOptions.getLimitedOptions().getSetCodes().clear();
-                tOptions.getLimitedOptions().getSetCodes().addAll(randomPackSelector.getSelectedPacks());
+                ArrayList<String> selected = randomPackSelector.getSelectedPacks();
+                int maxPacks = 3 * (players.size() + 1);
+                if (selected.size() > maxPacks ){
+                    StringBuilder infoString = new StringBuilder("More sets were selected than needed. ");
+                    infoString.append(maxPacks);
+                    infoString.append(" sets will be randomly chosen.");
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), infoString, "Information", JOptionPane.INFORMATION_MESSAGE);
+                    Collections.shuffle(selected);
+                    tOptions.getLimitedOptions().getSetCodes().addAll(selected.subList(0, maxPacks));
+                }else{
+                     tOptions.getLimitedOptions().getSetCodes().addAll(selected);
+                }
             } else {
                 for (JComboBox pack: packs) {
                     tOptions.getLimitedOptions().getSetCodes().add(((ExpansionInfo) pack.getSelectedItem()).getCode());
@@ -717,6 +730,7 @@ public class NewTournamentDialog extends MageDialog {
         if (pnlRandomPacks.getComponentCount() == 0) {
             if (randomPackSelector == null) {
                 randomPackSelector = new RandomPacksSelectorDialog();
+                randomPackSelector.setLocationRelativeTo(this);
             }
             txtRandomPacks = new JTextArea();
             txtRandomPacks.setEnabled(false);
@@ -736,9 +750,10 @@ public class NewTournamentDialog extends MageDialog {
                 }
                 txtRandomPacks.setText(packList.toString());
             }
-
+            txtRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
             pnlRandomPacks.add(txtRandomPacks);
             JButton btnSelectRandomPacks = new JButton();
+            btnSelectRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
             btnSelectRandomPacks.setText("Select packs to be included in the pool");
             btnSelectRandomPacks.setToolTipText(RandomPacksSelectorDialog.randomDraftDescription);
             btnSelectRandomPacks.addActionListener(new java.awt.event.ActionListener() {
@@ -749,11 +764,11 @@ public class NewTournamentDialog extends MageDialog {
                 }
             });
             pnlRandomPacks.add(btnSelectRandomPacks);
-                }
+        }
         this.pack();
         this.revalidate();
         this.repaint();
-            }
+    }
 
     private void showRandomPackSelectorDialog() {
         randomPackSelector.showDialog();

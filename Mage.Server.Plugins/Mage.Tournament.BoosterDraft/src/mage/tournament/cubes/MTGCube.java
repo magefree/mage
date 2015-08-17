@@ -42,7 +42,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Academy Ruins", ""));
         cubeCards.add(new CardIdentity("Accorder Paladin", ""));
         cubeCards.add(new CardIdentity("Acidic Slime", ""));
-        cubeCards.add(new CardIdentity("Aetherling", ""));
+        cubeCards.add(new CardIdentity("AEtherling", ""));
         cubeCards.add(new CardIdentity("Ajani Goldmane", ""));
         cubeCards.add(new CardIdentity("Ajani Vengeant", ""));
         cubeCards.add(new CardIdentity("Ancestral Recall", ""));
@@ -66,7 +66,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Baleful Strix", ""));
         cubeCards.add(new CardIdentity("Bane of the Living", ""));
         cubeCards.add(new CardIdentity("Baneslayer Angel", ""));
-        cubeCards.add(new CardIdentity("Bant", ""));
+        cubeCards.add(new CardIdentity("Bant Charm", ""));
         cubeCards.add(new CardIdentity("Batterskull", ""));
         cubeCards.add(new CardIdentity("Battlefield Forge", ""));
         cubeCards.add(new CardIdentity("Bayou", ""));
@@ -102,7 +102,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Caves of Koilos", ""));
         cubeCards.add(new CardIdentity("Celestial Colonnade", ""));
         cubeCards.add(new CardIdentity("Chain Lightning", ""));
-        cubeCards.add(new CardIdentity("Chainers Edict", ""));
+        cubeCards.add(new CardIdentity("Chainer's Edict", ""));
         cubeCards.add(new CardIdentity("Chameleon Colossus", ""));
         cubeCards.add(new CardIdentity("Chandra Nalaar", ""));
         cubeCards.add(new CardIdentity("Chandra, Pyromaster", ""));
@@ -149,7 +149,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Electrolyze", ""));
         cubeCards.add(new CardIdentity("Elesh Norn, Grand Cenobite", ""));
         cubeCards.add(new CardIdentity("Elite Vanguard", ""));
-        cubeCards.add(new CardIdentity("Elspeth, Knight Errant", ""));
+        cubeCards.add(new CardIdentity("Elspeth, Knight-Errant", ""));
         cubeCards.add(new CardIdentity("Elspeth, Sun's Champion", ""));
         cubeCards.add(new CardIdentity("Empty the Warrens", ""));
         cubeCards.add(new CardIdentity("Emrakul, the Aeons Torn", ""));
@@ -157,7 +157,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Enlightened Tutor", ""));
         cubeCards.add(new CardIdentity("Entomb", ""));
         cubeCards.add(new CardIdentity("Erratic Portal", ""));
-        cubeCards.add(new CardIdentity("Esper", ""));
+        cubeCards.add(new CardIdentity("Esper Charm", ""));
         cubeCards.add(new CardIdentity("Eternal Witness", ""));
         cubeCards.add(new CardIdentity("Eureka", ""));
         cubeCards.add(new CardIdentity("Everflowing Chalice", ""));
@@ -168,7 +168,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Fact or Fiction", ""));
         cubeCards.add(new CardIdentity("Faerie Conclave", ""));
         cubeCards.add(new CardIdentity("Faithless Looting", ""));
-        cubeCards.add(new CardIdentity("Faiths Fetters", ""));
+        cubeCards.add(new CardIdentity("Faith's Fetters", ""));
         cubeCards.add(new CardIdentity("Falkenrath Aristocrat", ""));
         cubeCards.add(new CardIdentity("Fauna Shaman", ""));
         cubeCards.add(new CardIdentity("Figure of Destiny", ""));
@@ -201,7 +201,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Gifts Ungiven", ""));
         cubeCards.add(new CardIdentity("Gilded Drake", ""));
         cubeCards.add(new CardIdentity("Glen Elendra Archmage", ""));
-        cubeCards.add(new CardIdentity("Go For The Throat", ""));
+        cubeCards.add(new CardIdentity("Go for the Throat", ""));
         cubeCards.add(new CardIdentity("Goblin Guide", ""));
         cubeCards.add(new CardIdentity("Goblin Welder", ""));
         cubeCards.add(new CardIdentity("Godless Shrine", ""));
@@ -216,7 +216,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Green Sun's Zenith", ""));
         cubeCards.add(new CardIdentity("Grim Lavamancer", ""));
         cubeCards.add(new CardIdentity("Grim Monolith", ""));
-        cubeCards.add(new CardIdentity("Grixis", ""));
+        cubeCards.add(new CardIdentity("Grixis Charm", ""));
         cubeCards.add(new CardIdentity("Gruul Signet", ""));
         cubeCards.add(new CardIdentity("Guul Draz Assassin", ""));
         cubeCards.add(new CardIdentity("Hallowed Fountain", ""));
@@ -248,7 +248,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Jackal Pup", ""));
         cubeCards.add(new CardIdentity("Joraga Treespeaker", ""));
         cubeCards.add(new CardIdentity("Journey to Nowhere", ""));
-        cubeCards.add(new CardIdentity("Jund", ""));
+        cubeCards.add(new CardIdentity("Jund Charm", ""));
         cubeCards.add(new CardIdentity("Jungle Lion", ""));
         cubeCards.add(new CardIdentity("Kalonian Hydra", ""));
         cubeCards.add(new CardIdentity("Karmic Guide", ""));
@@ -260,7 +260,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Kird Ape", ""));
         cubeCards.add(new CardIdentity("Kitchen Finks", ""));
         cubeCards.add(new CardIdentity("Knight of Meadowgrain", ""));
-        cubeCards.add(new CardIdentity("Kodamas Reach", ""));
+        cubeCards.add(new CardIdentity("Kodama's Reach", ""));
         cubeCards.add(new CardIdentity("Kor Sanctifiers", ""));
         cubeCards.add(new CardIdentity("Kor Skyfisher", ""));
         cubeCards.add(new CardIdentity("Koth of the Hammer", ""));
@@ -286,7 +286,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Luminarch Ascension", ""));
         cubeCards.add(new CardIdentity("Maelstrom Pulse", ""));
         cubeCards.add(new CardIdentity("Magma Jet", ""));
-        cubeCards.add(new CardIdentity("Man-O-War", ""));
+        cubeCards.add(new CardIdentity("Man-o'-War", ""));
         cubeCards.add(new CardIdentity("Mana Crypt", ""));
         cubeCards.add(new CardIdentity("Mana Drain", ""));
         cubeCards.add(new CardIdentity("Mana Leak", ""));
@@ -331,16 +331,16 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Mystical Tutor", ""));
         cubeCards.add(new CardIdentity("Nantuko Vigilante", ""));
         cubeCards.add(new CardIdentity("Natural Order", ""));
-        cubeCards.add(new CardIdentity("Naya", ""));
+        cubeCards.add(new CardIdentity("Naya Charm", ""));
         cubeCards.add(new CardIdentity("Necromancy", ""));
         cubeCards.add(new CardIdentity("Nekrataal", ""));
-        cubeCards.add(new CardIdentity("Nevinyrrals Disk", ""));
+        cubeCards.add(new CardIdentity("Nevinyrral's Disk", ""));
         cubeCards.add(new CardIdentity("Nezumi Graverobber", ""));
         cubeCards.add(new CardIdentity("Nicol Bolas, Planeswalker", ""));
         cubeCards.add(new CardIdentity("Noble Hierarch", ""));
         cubeCards.add(new CardIdentity("Ob Nixilis, the Fallen", ""));
         cubeCards.add(new CardIdentity("Oblivion Ring", ""));
-        cubeCards.add(new CardIdentity("Oonas Prowler", ""));
+        cubeCards.add(new CardIdentity("Oona's Prowler", ""));
         cubeCards.add(new CardIdentity("Opposition", ""));
         cubeCards.add(new CardIdentity("Orzhov Signet", ""));
         cubeCards.add(new CardIdentity("Overgrown Tomb", ""));
@@ -398,7 +398,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Seal of Cleansing", ""));
         cubeCards.add(new CardIdentity("Searing Spear", ""));
         cubeCards.add(new CardIdentity("Selesnya Signet", ""));
-        cubeCards.add(new CardIdentity("Senseis Divining Top", ""));
+        cubeCards.add(new CardIdentity("Sensei's Divining Top", ""));
         cubeCards.add(new CardIdentity("Serendib Efreet", ""));
         cubeCards.add(new CardIdentity("Shadowborn Demon", ""));
         cubeCards.add(new CardIdentity("Shadowmage Infiltrator", ""));
@@ -408,7 +408,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Sigarda, Host of Herons", ""));
         cubeCards.add(new CardIdentity("Silverblade Paladin", ""));
         cubeCards.add(new CardIdentity("Simic Charm", ""));
-        cubeCards.add(new CardIdentity("SImic Growth Chamber", ""));
+        cubeCards.add(new CardIdentity("Simic Growth Chamber", ""));
         cubeCards.add(new CardIdentity("Simic Signet", ""));
         cubeCards.add(new CardIdentity("Simic Sky Swallower", ""));
         cubeCards.add(new CardIdentity("Sinkhole", ""));
@@ -416,7 +416,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Skinshifter", ""));
         cubeCards.add(new CardIdentity("Skullclamp", ""));
         cubeCards.add(new CardIdentity("Smallpox", ""));
-        cubeCards.add(new CardIdentity("Smoke Stack", ""));
+        cubeCards.add(new CardIdentity("Smokestack", ""));
         cubeCards.add(new CardIdentity("Snapcaster Mage", ""));
         cubeCards.add(new CardIdentity("Sneak Attack", ""));
         cubeCards.add(new CardIdentity("Snuff Out", ""));
@@ -494,7 +494,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Twinblade Slasher", ""));
         cubeCards.add(new CardIdentity("Uktabi Orangutan", ""));
         cubeCards.add(new CardIdentity("Ulamog, the Infinite Gyre", ""));
-        cubeCards.add(new CardIdentity("Umezawas Jitte", ""));
+        cubeCards.add(new CardIdentity("Umezawa's Jitte", ""));
         cubeCards.add(new CardIdentity("Underground Sea", ""));
         cubeCards.add(new CardIdentity("Undiscovered Paradise", ""));
         cubeCards.add(new CardIdentity("Upheaval", ""));
@@ -513,7 +513,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Viridian Shaman", ""));
         cubeCards.add(new CardIdentity("Voice of Resurgence", ""));
         cubeCards.add(new CardIdentity("Volcanic Island", ""));
-        cubeCards.add(new CardIdentity("Volraths Stronghold", ""));
+        cubeCards.add(new CardIdentity("Volrath's Stronghold", ""));
         cubeCards.add(new CardIdentity("Wall of Blossoms", ""));
         cubeCards.add(new CardIdentity("Wall of Omens", ""));
         cubeCards.add(new CardIdentity("Wall of Roots", ""));
@@ -537,7 +537,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Wurmcoil Engine", ""));
         cubeCards.add(new CardIdentity("Xenagos, the Reveler", ""));
         cubeCards.add(new CardIdentity("Yavimaya Elder", ""));
-        cubeCards.add(new CardIdentity("Yawgmoths Will", ""));
+        cubeCards.add(new CardIdentity("Yawgmoth's Will", ""));
         cubeCards.add(new CardIdentity("Young Pyromancer", ""));
         cubeCards.add(new CardIdentity("Zuran Orb", ""));
 
