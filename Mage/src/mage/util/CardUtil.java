@@ -25,7 +25,6 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.util;
 
 import java.util.Arrays;
@@ -58,7 +57,6 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.util.functions.CopyTokenFunction;
 
-
 /**
  * @author nantuko
  */
@@ -71,16 +69,16 @@ public class CardUtil {
     private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
-    
-    static String numberStrings[] = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-                                      "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
 
-    public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[] { "Mountain", "Forest", "Plains", "Swamp", "Island",
-                                                                                 "Aura", "Curse", "Shrine",
-                                                                                 "Equipment", "Fortification", "Contraption",
-                                                                                 "Trap", "Arcane"};
-    public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));    
-    
+    static String numberStrings[] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
+
+    public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{"Mountain", "Forest", "Plains", "Swamp", "Island",
+        "Aura", "Curse", "Shrine",
+        "Equipment", "Fortification", "Contraption",
+        "Trap", "Arcane"};
+    public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
+
     /**
      * Checks whether two cards share card types.
      *
@@ -102,6 +100,7 @@ public class CardUtil {
 
         return false;
     }
+
     /**
      * Checks whether two cards share card subtypes.
      *
@@ -116,10 +115,10 @@ public class CardUtil {
         }
 
         if (card1.getCardType().contains(CardType.CREATURE) && card2.getCardType().contains(CardType.CREATURE)) {
-            if (card1.getAbilities().contains(ChangelingAbility.getInstance()) ||
-                    card1.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE) ||
-                    card2.getAbilities().contains(ChangelingAbility.getInstance()) ||
-                    card2.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
+            if (card1.getAbilities().contains(ChangelingAbility.getInstance())
+                    || card1.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)
+                    || card2.getAbilities().contains(ChangelingAbility.getInstance())
+                    || card2.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
                 return true;
             }
         }
@@ -164,7 +163,7 @@ public class CardUtil {
         CardUtil.adjustAbilityCost((Ability) spellAbility, reduceCount);
         adjustAlternativeCosts(spellAbility, reduceCount);
     }
-    
+
     public static ManaCosts<ManaCost> increaseCost(ManaCosts<ManaCost> manaCosts, int increaseCount) {
         return adjustCost(manaCosts, -increaseCount);
     }
@@ -207,8 +206,6 @@ public class CardUtil {
         }
     }
 
-
-
     /**
      * Adjusts ability cost to be paid.
      *
@@ -220,10 +217,10 @@ public class CardUtil {
         ability.getManaCostsToPay().clear();
         ability.getManaCostsToPay().addAll(adjustedCost);
     }
-    
+
     private static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
         int restToReduce = reduceCount;
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();        
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         boolean updated = false;
         for (ManaCost manaCost : manaCosts) {
             Mana mana = manaCost.getOptions().get(0);
@@ -251,18 +248,18 @@ public class CardUtil {
 
     public static ManaCosts<ManaCost> removeVariableManaCost(ManaCosts<ManaCost> manaCosts) {
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
-        for (ManaCost manaCost: manaCosts) {
+        for (ManaCost manaCost : manaCosts) {
             if (!(manaCost instanceof VariableManaCost)) {
                 adjustedCost.add(manaCost);
             }
         }
         return adjustedCost;
     }
-    
+
     public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         adjustCost(spellAbility, manaCostsToReduce, true);
     }
-    
+
     public static void increaseCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToIncrease) {
         ManaCosts<ManaCost> increasedCost = spellAbility.getManaCostsToPay().copy();
 
@@ -279,18 +276,18 @@ public class CardUtil {
      *
      * @param spellAbility
      * @param manaCostsToReduce costs to reduce
-     * @param convertToGeneric colored mana does reduce generic mana if no appropriate colored mana is in the costs included
+     * @param convertToGeneric colored mana does reduce generic mana if no
+     * appropriate colored mana is in the costs included
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();        
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         // save X value (e.g. convoke ability)
-        for (VariableCost vCost: previousCost.getVariableCosts()) {
+        for (VariableCost vCost : previousCost.getVariableCosts()) {
             if (vCost instanceof VariableManaCost) {
                 adjustedCost.add((VariableManaCost) vCost);
             }
         }
-
 
         Mana reduceMana = new Mana();
         for (ManaCost manaCost : manaCostsToReduce) {
@@ -304,46 +301,46 @@ public class CardUtil {
             }
             if (mana.getBlack() > 0 && reduceMana.getBlack() > 0) {
                 if (reduceMana.getBlack() > mana.getBlack()) {
-                    reduceMana.setBlack(reduceMana.getBlack()-mana.getBlack());
+                    reduceMana.setBlack(reduceMana.getBlack() - mana.getBlack());
                     mana.setBlack(0);
                 } else {
-                    mana.setBlack(mana.getBlack()-reduceMana.getBlack());
+                    mana.setBlack(mana.getBlack() - reduceMana.getBlack());
                     reduceMana.setBlack(0);
                 }
             }
             if (mana.getRed() > 0 && reduceMana.getRed() > 0) {
                 if (reduceMana.getRed() > mana.getRed()) {
-                    reduceMana.setRed(reduceMana.getRed()-mana.getRed());
+                    reduceMana.setRed(reduceMana.getRed() - mana.getRed());
                     mana.setRed(0);
                 } else {
-                    mana.setRed(mana.getRed()-reduceMana.getRed());
+                    mana.setRed(mana.getRed() - reduceMana.getRed());
                     reduceMana.setRed(0);
                 }
             }
             if (mana.getBlue() > 0 && reduceMana.getBlue() > 0) {
                 if (reduceMana.getBlue() > mana.getBlue()) {
-                    reduceMana.setBlue(reduceMana.getBlue()-mana.getBlue());
+                    reduceMana.setBlue(reduceMana.getBlue() - mana.getBlue());
                     mana.setBlue(0);
                 } else {
-                    mana.setBlue(mana.getBlue()-reduceMana.getBlue());
+                    mana.setBlue(mana.getBlue() - reduceMana.getBlue());
                     reduceMana.setBlue(0);
                 }
             }
             if (mana.getGreen() > 0 && reduceMana.getGreen() > 0) {
                 if (reduceMana.getGreen() > mana.getGreen()) {
-                    reduceMana.setGreen(reduceMana.getGreen()-mana.getGreen());
+                    reduceMana.setGreen(reduceMana.getGreen() - mana.getGreen());
                     mana.setGreen(0);
                 } else {
-                    mana.setGreen(mana.getGreen()-reduceMana.getGreen());
+                    mana.setGreen(mana.getGreen() - reduceMana.getGreen());
                     reduceMana.setGreen(0);
                 }
             }
             if (mana.getWhite() > 0 && reduceMana.getWhite() > 0) {
                 if (reduceMana.getWhite() > mana.getWhite()) {
-                    reduceMana.setWhite(reduceMana.getWhite()-mana.getWhite());
+                    reduceMana.setWhite(reduceMana.getWhite() - mana.getWhite());
                     mana.setWhite(0);
                 } else {
-                    mana.setWhite(mana.getWhite()-reduceMana.getWhite());
+                    mana.setWhite(mana.getWhite() - reduceMana.getWhite());
                     reduceMana.setWhite(0);
                 }
             }
@@ -384,10 +381,10 @@ public class CardUtil {
         spellAbility.getManaCostsToPay().clear();
         spellAbility.getManaCostsToPay().addAll(adjustedCost);
     }
-    
 
     /**
-     * Returns function that copies params\abilities from one card to {@link Token}.
+     * Returns function that copies params\abilities from one card to
+     * {@link Token}.
      *
      * @param target
      * @return
@@ -396,7 +393,7 @@ public class CardUtil {
         return new CopyTokenFunction(target);
     }
 
-    public static boolean isPermanentCard ( Card card )  {
+    public static boolean isPermanentCard(Card card) {
         boolean permanent = false;
 
         permanent |= card.getCardType().contains(CardType.ARTIFACT);
@@ -409,23 +406,24 @@ public class CardUtil {
     }
 
     /**
-     * Converts an integer number to string
-     * Numbers > 20 will be returned as digits
+     * Converts an integer number to string Numbers > 20 will be returned as
+     * digits
      *
      * @param number
-     * @return 
+     * @return
      */
     public static String numberToText(int number) {
         return numberToText(number, "one");
     }
-    
+
     /**
      * Converts an integer number to string like "one", "two", "three", ...
      * Numbers > 20 will be returned as digits
-     * 
+     *
      * @param number number to convert to text
-     * @param forOne if the number is 1, this string will be returnedinstead of "one".
-     * @return 
+     * @param forOne if the number is 1, this string will be returnedinstead of
+     * "one".
+     * @return
      */
     public static String numberToText(int number, String forOne) {
         if (number == 1 && forOne != null) {
@@ -458,8 +456,8 @@ public class CardUtil {
     }
 
     public static boolean checkNumeric(String s) {
-        for(int i = 0; i < s.length(); i++) {
-            if(!Character.isDigit(s.charAt(i))) {
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i))) {
                 return false;
             }
         }
@@ -476,7 +474,7 @@ public class CardUtil {
     public static UUID getCardExileZoneId(Game game, Ability source) {
         return getCardExileZoneId(game, source.getSourceId());
     }
-    
+
     public static UUID getCardExileZoneId(Game game, UUID sourceId) {
         return getCardExileZoneId(game, sourceId, false);
     }
@@ -484,7 +482,7 @@ public class CardUtil {
     public static UUID getCardExileZoneId(Game game, UUID sourceId, boolean previous) {
         return getExileZoneId(getCardZoneString(SOURCE_EXILE_ZONE_TEXT, sourceId, game, previous), game);
     }
-    
+
     public static UUID getObjectExileZoneId(Game game, MageObject mageObject) {
         return getObjectExileZoneId(game, mageObject, false);
     }
@@ -499,26 +497,27 @@ public class CardUtil {
         if (zoneChangeCounter > 0 && previous) {
             zoneChangeCounter--;
         }
-        return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT,mageObject.getId(), game, zoneChangeCounter, false), game);
+        return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT, mageObject.getId(), game, zoneChangeCounter, false), game);
     }
-    
+
     public static UUID getExileZoneId(Game game, UUID objectId, int zoneChangeCounter) {
-        return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT,objectId, game, zoneChangeCounter, false), game);
+        return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT, objectId, game, zoneChangeCounter, false), game);
     }
-    
+
     public static UUID getExileZoneId(String key, Game game) {
         UUID exileId = (UUID) game.getState().getValue(key);
         if (exileId == null) {
             exileId = UUID.randomUUID();
             game.getState().setValue(key, exileId);
         }
-        return exileId;        
+        return exileId;
     }
 
     /**
-     * Creates a string from text + cardId and the zoneChangeCounter of the card (from cardId).
-     * This string can be used to save and get values that must be specific to a permanent instance.
-     * So they won't match, if a permanent was e.g. exiled and came back immediately.
+     * Creates a string from text + cardId and the zoneChangeCounter of the card
+     * (from cardId). This string can be used to save and get values that must
+     * be specific to a permanent instance. So they won't match, if a permanent
+     * was e.g. exiled and came back immediately.
      *
      * @param text short value to describe the value
      * @param cardId id of the card
@@ -529,15 +528,15 @@ public class CardUtil {
         return getCardZoneString(text, cardId, game, false);
     }
 
-    public static String getCardZoneString(String text, UUID cardId, Game game, boolean previous) {        
-        int zoneChangeCounter= 0;
+    public static String getCardZoneString(String text, UUID cardId, Game game, boolean previous) {
+        int zoneChangeCounter = 0;
         Card card = game.getCard(cardId); // if called for a token, the id is enough
         if (card != null) {
             zoneChangeCounter = card.getZoneChangeCounter(game);
         }
-        return getObjectZoneString(text,cardId, game, zoneChangeCounter, previous);
+        return getObjectZoneString(text, cardId, game, zoneChangeCounter, previous);
     }
-    
+
     public static String getObjectZoneString(String text, MageObject mageObject, Game game) {
         int zoneChangeCounter = 0;
         if (mageObject instanceof Permanent) {
@@ -547,22 +546,23 @@ public class CardUtil {
         }
         return getObjectZoneString(text, mageObject.getId(), game, zoneChangeCounter, false);
     }
-    
+
     public static String getObjectZoneString(String text, UUID objectId, Game game, int zoneChangeCounter, boolean previous) {
         StringBuilder uniqueString = new StringBuilder();
         if (text != null) {
             uniqueString.append(text);
         }
         uniqueString.append(objectId);
-        uniqueString.append(previous ? zoneChangeCounter - 1: zoneChangeCounter);
-        return uniqueString.toString();        
+        uniqueString.append(previous ? zoneChangeCounter - 1 : zoneChangeCounter);
+        return uniqueString.toString();
     }
-    
+
     /**
-     * Returns if the ability is used to check which cards
-     * are playable on hand. (Issue #457)
+     * Returns if the ability is used to check which cards are playable on hand.
+     * (Issue #457)
+     *
      * @param ability - ability to check
-     * @return 
+     * @return
      */
     public static boolean isCheckPlayableMode(Ability ability) {
         if (ability instanceof ActivatedAbility) {
@@ -572,8 +572,8 @@ public class CardUtil {
     }
 
     /**
-     * Adds tags to mark the additional info of a card
-     * (e.g. blue font color)
+     * Adds tags to mark the additional info of a card (e.g. blue font color)
+     *
      * @param text text body
      * @return
      */
@@ -584,7 +584,7 @@ public class CardUtil {
     public static boolean convertedManaCostsIsEqual(MageObject object1, MageObject object2) {
         Set<Integer> cmcObject1 = getCMC(object1);
         Set<Integer> cmcObject2 = getCMC(object2);
-        for (Integer integer :cmcObject1) {
+        for (Integer integer : cmcObject1) {
             if (cmcObject2.contains(integer)) {
                 return true;
             }
@@ -595,7 +595,7 @@ public class CardUtil {
     public static Set<Integer> getCMC(MageObject object) {
         Set<Integer> cmcObject = new HashSet<>();
         if (object instanceof Spell) {
-            cmcObject.add(((Spell)object).getConvertedManaCost());
+            cmcObject.add(((Spell) object).getConvertedManaCost());
         } else if (object instanceof Card) {
             Card card = (Card) object;
             if (card instanceof SplitCard) {
@@ -605,16 +605,16 @@ public class CardUtil {
             } else {
                 cmcObject.add(card.getManaCost().convertedManaCost());
             }
-        } 
+        }
         return cmcObject;
     }
-    
+
     /**
-     * Gets the colors that are in the casting cost but also in the rules text 
+     * Gets the colors that are in the casting cost but also in the rules text
      * as far as not included in reminder text.
-     * 
+     *
      * @param card
-     * @return 
+     * @return
      */
     public static FilterMana getColorIdentity(Card card) {
         FilterMana mana = new FilterMana();
@@ -644,8 +644,17 @@ public class CardUtil {
         }
         return mana;
     }
-    
+
     public static boolean isNonCreatureSubtype(String subtype) {
         return NON_CREATURE_SUBTYPES.contains(subtype);
     }
+
+    public static boolean cardCanBePlayedNow(Card card, UUID playerId, Game game) {
+        if (card.getCardType().contains(CardType.LAND)) {
+            return game.canPlaySorcery(playerId) && game.getPlayer(playerId).canPlayLand();
+        } else {
+            return card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game);
+        }
+    }
+
 }

@@ -1613,8 +1613,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void revealFaceDownCard(Card card, Game game) {
-        computerPlayer.revealFaceDownCard(card, game);
+    public boolean lookAtFaceDownCard(Card card, Game game) {
+        return computerPlayer.lookAtFaceDownCard(card, game);
     }
 
     @Override

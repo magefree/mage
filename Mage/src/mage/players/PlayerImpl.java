@@ -2830,11 +2830,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void revealFaceDownCard(Card card, Game game) {
-        if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.REVEAL_FACE_DOWN, this.getId(), game)) {
-            Cards cards = new CardsImpl(card);
-            this.revealCards(getName(), cards, game);
+    public boolean lookAtFaceDownCard(Card card, Game game) {
+        if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.LOOK_AT_FACE_DOWN, this.getId(), game)) {
+            if (chooseUse(Outcome.Benefit, "Look at that card?", null, game)) {
+                Cards cards = new CardsImpl(card);
+                this.lookAtCards(getName(), cards, game);
+                return true;
+            }
         }
+        return false;
     }
 
     @Override

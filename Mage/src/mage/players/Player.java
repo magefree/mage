@@ -566,8 +566,9 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param card
      * @param game
+     * @return player looked at the card
      */
-    void revealFaceDownCard(Card card, Game game);
+    boolean lookAtFaceDownCard(Card card, Game game);
 
     /**
      * Set seconds left to play the game.
