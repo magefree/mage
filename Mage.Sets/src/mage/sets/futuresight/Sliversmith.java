@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
 
 /**
  *
- * @author anonymous
+ * @author Luna Skyrise
  */
 public class Sliversmith extends CardImpl {
 
@@ -55,7 +55,7 @@ public class Sliversmith extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, {tap}, Discard a card: Put a 1/1 colorless Sliver artifact creature token named Metallic Sliver onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.HAND, new CreateTokenEffect(new MetallicSliverToken()), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliversmithToken()), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
@@ -71,10 +71,10 @@ public class Sliversmith extends CardImpl {
     }
 }
 
-class MetallicSliverToken extends Token {
+class SliversmithToken extends Token {
 
-    MetallicSliverToken() {
-        super("Metallic Sliver", "a 1/1 colorless Sliver creature token");
+    SliversmithToken() {
+        super("Sliver", "a 1/1 colorless Sliver creature token");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add("Sliver");
