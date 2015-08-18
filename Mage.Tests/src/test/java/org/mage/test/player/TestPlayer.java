@@ -1359,6 +1359,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void resetPlayerPassedActions() {
+        computerPlayer.resetPlayerPassedActions();
+    }
+
+    @Override
     public void quit(Game game) {
         computerPlayer.quit(game);
     }
@@ -1699,6 +1704,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
         return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, withName);
+    }
+
+    @Override
+    public boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+        return computerPlayer.moveCardsToExile(card, source, game, withName, exileId, exileZoneName);
     }
 
     @Override

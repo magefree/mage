@@ -2657,6 +2657,7 @@ public abstract class GameImpl implements Game, Serializable {
                     for (Player playerObject : getPlayers().values()) {
                         if (playerObject.isHuman() && playerObject.isInGame()) {
                             playerObject.abort();
+                            playerObject.resetPlayerPassedActions();
                         }
                     }
                     fireUpdatePlayersEvent();

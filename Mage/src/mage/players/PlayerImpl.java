@@ -330,9 +330,21 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.name = player.getName();
         this.human = player.isHuman();
         this.life = player.getLife();
-        this.wins = player.hasWon();
-        this.loses = player.hasLost();
 
+        // Don't restore more global states. If restored they are probably cause for unintended draws (https://github.com/magefree/mage/issues/1205).
+//        this.wins = player.hasWon();
+//        this.loses = player.hasLost();
+//        this.left = player.hasLeft();
+//        this.quit = player.hasQuit();
+        // Makes no sense to restore
+//        this.passed = player.isPassed();
+//        this.priorityTimeLeft = player.getPriorityTimeLeft();
+//        this.idleTimeout = player.hasIdleTimeout();
+//        this.timerTimeout = player.hasTimerTimeout();
+        // can't change so no need to restore
+//        this.isTestMode = player.isTestMode();
+        // This is meta data and should'nt be restored by rollback
+//        this.userData = player.getUserData();
         this.library = player.getLibrary().copy();
         this.sideboard = player.getSideboard().copy();
         this.hand = player.getHand().copy();
@@ -349,10 +361,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.manaPool = player.getManaPool().copy();
         this.turns = player.getTurns();
 
-        this.left = player.hasLeft();
-        this.quit = player.hasQuit();
-        this.timerTimeout = player.hasTimerTimeout();
-        this.idleTimeout = player.hasIdleTimeout();
         this.range = player.getRange();
         this.canGainLife = player.isCanGainLife();
         this.canLoseLife = player.isCanLoseLife();
@@ -361,7 +369,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.inRange.clear();
         this.inRange.addAll(player.getInRange());
-        this.userData = player.getUserData();
         this.canPayLifeCost = player.canPayLifeCost();
         this.canPaySacrificeCost = player.canPaySacrificeCost();
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
@@ -371,12 +378,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.topCardRevealed = player.isTopCardRevealed();
         this.playersUnderYourControl.clear();
         this.playersUnderYourControl.addAll(player.getPlayersUnderYourControl());
-        this.isTestMode = player.isTestMode();
         this.isGameUnderControl = player.isGameUnderControl();
 
         this.turnController = player.getTurnControlledBy();
-        this.passed = player.isPassed();
-        this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
         this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
         this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
@@ -1824,6 +1828,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void resetPlayerPassedActions() {
+        this.passedAllTurns = false;
+        this.passedTurn = false;
+        this.passedUntilEndOfTurn = false;
+        this.passedUntilNextMain = false;
+        this.passedUntilStackResolved = false;
+    }
+
+    @Override
     public void quit(Game game) {
         quit = true;
         this.concede(game);
@@ -2947,6 +2960,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             default:
                 throw new UnsupportedOperationException("to Zone not supported yet");
         }
+    }
+
+    @Override
+    public boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+        Set<Card> cards = new HashSet<>();
+        cards.add(card);
+        return moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
     }
 
     @Override
