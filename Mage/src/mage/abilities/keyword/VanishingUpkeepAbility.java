@@ -31,9 +31,14 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Vanishing " + vanishingAmount
+        if(vanishingAmount > 0) {
+            return "Vanishing " + vanishingAmount
                 + " <i>(This permanent enters the battlefield with " + CardUtil.numberToText(vanishingAmount)
-                + " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)<i>";
+                + " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)</i>";
+        }
+        else {
+            return "Vanishing <i>(At the beginning of your upkeep, remove a time counter from this permanent. When the last is removed, sacrifice it.)</i>";
+        }
     }
 }
 
