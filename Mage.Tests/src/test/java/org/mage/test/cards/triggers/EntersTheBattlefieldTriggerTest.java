@@ -25,42 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package org.mage.test.cards.triggers;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class SupremeVerdict extends CardImpl {
+public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
-    public SupremeVerdict(UUID ownerId) {
-        super(ownerId, 201, "Supreme Verdict", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{W}{U}");
-        this.expansionSetCode = "RTR";
+    @Test
+    public void testDrawCardsAddedCounters() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.HAND, playerA, "Soul Warden");
 
-        // Supreme Verdict can't be countered.
-        Ability ability = new CantBeCounteredAbility();
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        // You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
+        addCard(Zone.HAND, playerB, "Clever Impersonator", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
-        // Destroy all creatures. 
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Warden");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
+        setChoice(playerB, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Soul Warden", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+
+        assertLife(playerA, 21);
+        assertLife(playerB, 20);
     }
 
-    public SupremeVerdict(final SupremeVerdict card) {
-        super(card);
-    }
-
-    @Override
-    public SupremeVerdict copy() {
-        return new SupremeVerdict(this);
-    }
 }
