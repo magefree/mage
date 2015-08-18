@@ -702,6 +702,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
         if (target instanceof TargetSpellOrPermanent) {
+            // TODO: Also check if a spell should be selected
             List<Permanent> targets;
             boolean outcomeTargets = true;
             if (outcome.isGood()) {
@@ -713,10 +714,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = threats(null, source == null ? null : source.getSourceId(), ((TargetSpellOrPermanent) target).getPermanentFilter(), game, target.getTargets());
                 Collections.reverse(targets);
                 outcomeTargets = false;
-                //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
-                if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                if (((TargetSpellOrPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
                     if (!outcomeTargets || target.getMaxNumberOfTargets() <= target.getTargets().size()) {
                         return true;
