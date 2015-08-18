@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
@@ -46,10 +46,9 @@ public class HailOfArrows extends CardImpl {
         super(ownerId, 11, "Hail of Arrows", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{W}");
         this.expansionSetCode = "SOK";
 
-
         // Hail of Arrows deals X damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetAttackingCreature(0, Integer.MAX_VALUE, new FilterAttackingCreature(), true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(new ManacostVariableValue(), new FilterAttackingCreature()));
     }
 
     public HailOfArrows(final HailOfArrows card) {
