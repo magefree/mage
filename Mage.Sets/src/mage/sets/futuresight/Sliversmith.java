@@ -74,7 +74,7 @@ public class Sliversmith extends CardImpl {
 class SliversmithToken extends Token {
 
     SliversmithToken() {
-        super("Sliver", "a 1/1 colorless Sliver creature token");
+        super("Metallic Sliver", "a 1/1 colorless Sliver creature token named Metallic Sliver");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add("Sliver");
