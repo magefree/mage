@@ -71,7 +71,8 @@ public class Tidewalker extends CardImpl {
         this.addAbility(new VanishingUpkeepAbility(0));
         this.addAbility(new VanishingSacrificeAbility());
         // Tidewalker's power and toughness are each equal to the number of time counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CountersCount(CounterType.TIME), Duration.WhileOnBattlefield)));                                  }
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CountersCount(CounterType.TIME), Duration.EndOfGame)));
+    }
 
     public Tidewalker(final Tidewalker card) {
         super(card);
