@@ -84,6 +84,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.choices.Choice;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
@@ -1536,83 +1537,133 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void initGame(UUID gameId, GameView gameView) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.init(gameView);
-        }
+    public void initGame(final UUID gameId, final GameView gameView) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.init(gameView);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameAsk(UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.ask(question, gameView, options);
-        }
+    public void gameAsk(final UUID gameId, final GameView gameView, final String question, final Map<String, Serializable> options) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.ask(question, gameView, options);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.pickTarget(question, cardView, gameView, targets, required, options);
-        }
+    public void gameTarget(final UUID gameId, final GameView gameView, final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.pickTarget(question, cardView, gameView, targets, required, options);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameChooseAbility(UUID gameId, AbilityPickerView abilities) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.pickAbility(abilities);
-        }
+    public void gameChooseAbility(final UUID gameId, final AbilityPickerView abilities) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.pickAbility(abilities);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameChoosePile(UUID gameId, String message, CardsView pile1, CardsView pile2) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.pickPile(message, pile1, pile2);
-        }
+    public void gameChoosePile(final UUID gameId, final String message, final CardsView pile1, final CardsView pile2) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.pickPile(message, pile1, pile2);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameChooseChoice(UUID gameId, mage.choices.Choice choice) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.getChoice(choice);
-        }
+    public void gameChooseChoice(final UUID gameId, final Choice choice) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.getChoice(choice);
+                }
+            }
+        });
     }
 
     @Override
-    public void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.playMana(message, gameView, options);
-        }
+    public void gamePlayMana(final UUID gameId, final GameView gameView, final String message, final Map<String, Serializable> options) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.playMana(message, gameView, options);
+                }
+            }
+        });
     }
 
     @Override
-    public void gamePlayXMana(UUID gameId, GameView gameView, String message) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.playXMana(message, gameView);
-        }
+    public void gamePlayXMana(final UUID gameId, final GameView gameView, final String message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.playXMana(message, gameView);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameSelectAmount(UUID gameId, String message, int min, int max) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.getAmount(min, max, message);
-        }
+    public void gameSelectAmount(final UUID gameId, final String message, final int min, final int max) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.getAmount(min, max, message);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.select(message, gameView, options);
-        }
+    public void gameSelect(final UUID gameId, final GameView gameView, final String message, final Map<String, Serializable> options) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.select(message, gameView, options);
+                }
+            }
+        });
     }
 
     @Override
@@ -1626,35 +1677,55 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void gameUpdate(UUID gameId, GameView gameView) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.updateGame(gameView);
-        }
+    public void gameUpdate(final UUID gameId, final GameView gameView) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.updateGame(gameView);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameInform(UUID gameId, GameClientMessage message) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.inform(message.getMessage(), message.getGameView());
-        }
+    public void gameInform(final UUID gameId, final GameClientMessage message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.inform(message.getMessage(), message.getGameView());
+                }
+            }
+        });
     }
 
     @Override
-    public void gameInformPersonal(UUID gameId, GameClientMessage message) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message", JOptionPane.INFORMATION_MESSAGE);
-        }
+    public void gameInformPersonal(final UUID gameId, final GameClientMessage message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
     }
 
     @Override
-    public void gameOver(UUID gameId, String message) {
-        GamePanel panel = MageFrame.getGame(gameId);
-        if (panel != null) {
-            panel.endMessage(message);
-        }
+    public void gameOver(final UUID gameId, final String message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.endMessage(message);
+                }
+            }
+        });
     }
 
     @Override
