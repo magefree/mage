@@ -35,11 +35,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
-import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -62,7 +60,7 @@ public class BribersPurse extends CardImpl {
         this.expansionSetCode = "KTK";
 
         // Briber's Purse enters the battlefield with X gem counters on it.
-       this.addAbility(new EntersBattlefieldAbility(new BribersPurseEffect(), "{this} enters the battlefield with X gem counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new BribersPurseEffect(), "{this} enters the battlefield with X gem counters on it"));
 
         // {1}, {T}, Remove a gem counter from Briber's Purse: Target creature can't attack or block this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
@@ -83,6 +81,7 @@ public class BribersPurse extends CardImpl {
 }
 
 class BribersPurseEffect extends OneShotEffect {
+
     public BribersPurseEffect() {
         super(Outcome.Benefit);
     }
@@ -96,7 +95,8 @@ class BribersPurseEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                 int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
                 if (amount > 0) {
                     permanent.addCounters(new Counter("gem", amount), game);

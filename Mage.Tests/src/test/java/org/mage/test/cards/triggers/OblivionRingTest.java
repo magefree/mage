@@ -8,13 +8,15 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author noxx
  *
- * Card: When Oblivion Ring enters the battlefield, exile another target nonland permanent.
- * When Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+ * Card: When Oblivion Ring enters the battlefield, exile another target nonland
+ * permanent. When Oblivion Ring leaves the battlefield, return the exiled card
+ * to the battlefield under its owner's control.
  */
 public class OblivionRingTest extends CardTestPlayerBase {
 
     /**
-     * When Oblivion Ring enters the battlefield, exile another target nonland permanent.
+     * When Oblivion Ring enters the battlefield, exile another target nonland
+     * permanent.
      */
     @Test
     public void testFirstTriggeredAbility() {
@@ -24,7 +26,7 @@ public class OblivionRingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
 
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -34,7 +36,8 @@ public class OblivionRingTest extends CardTestPlayerBase {
     }
 
     /**
-     * When Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+     * When Oblivion Ring leaves the battlefield, return the exiled card to the
+     * battlefield under its owner's control.
      */
     @Test
     public void testSecondTriggeredAbility() {
@@ -79,7 +82,8 @@ public class OblivionRingTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests that when Oblivion Ring gets destroyed planeswalker returns with new counters and can be used second time at the same turn
+     * Tests that when Oblivion Ring gets destroyed planeswalker returns with
+     * new counters and can be used second time at the same turn
      */
     @Test
     public void testExilePlaneswalker() {
@@ -99,5 +103,37 @@ public class OblivionRingTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Oblivion Ring", 0);
         assertPermanentCount(playerA, "Jace Beleren", 1); // returns back
         assertHandCount(playerA, 2); // can use ability twice
+    }
+
+    /**
+     * Oblivion Ring leaves from battlefield Effect brings Hangarback Walker
+     * back with counters. But with rules it should come back with no counters
+     */
+    @Test
+    public void testReturningHangarbackWalker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        // Hangarback Walker enters the battlefield with X +1/+1 counters on it.
+        // When Hangarback Walker dies, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield for each +1/+1 counter on Hangarback Walker.
+        // {1}, {t}: Put a +1/+1 counter on Hangarback Walker.
+        addCard(Zone.HAND, playerA, "Hangarback Walker"); // {X}{X}
+        addCard(Zone.HAND, playerA, "Naturalize");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
+        addCard(Zone.HAND, playerB, "Oblivion Ring");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hangarback Walker");
+        setChoice(playerA, "X=2");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Oblivion Ring");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Naturalize", "Oblivion Ring");
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Oblivion Ring", 0);
+        assertGraveyardCount(playerB, "Oblivion Ring", 1);
+        assertPermanentCount(playerA, "Hangarback Walker", 0);
+        assertGraveyardCount(playerA, "Hangarback Walker", 1);
+
     }
 }

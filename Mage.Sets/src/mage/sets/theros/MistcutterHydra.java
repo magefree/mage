@@ -54,6 +54,7 @@ import mage.game.permanent.Permanent;
 public class MistcutterHydra extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("from blue");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
@@ -102,10 +103,9 @@ class MistcutterHydraEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
-                int amount = ((SpellAbility)obj).getManaCostsToPay().getX();
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
+                int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
                 if (amount > 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
                 }

@@ -32,10 +32,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -59,7 +57,7 @@ public class IvyElemental extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Ivy Elemental enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new IvyElementalEntersBattlefieldEffect() ,"with X +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new IvyElementalEntersBattlefieldEffect(), "with X +1/+1 counters on it"));
     }
 
     public IvyElemental(final IvyElemental card) {
@@ -88,9 +86,8 @@ class IvyElementalEntersBattlefieldEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                 SpellAbility spellAbility = (SpellAbility) obj;
                 if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast
                     int amount = spellAbility.getManaCostsToPay().getX();

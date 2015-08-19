@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.conspiracy;
 
 import java.util.UUID;
@@ -49,14 +48,13 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author andyfries
  */
-
 public class AcademyElite extends CardImpl {
+
     public AcademyElite(UUID ownerId) {
         super(ownerId, 20, "Academy Elite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "CNS";
@@ -75,7 +73,6 @@ public class AcademyElite extends CardImpl {
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(ability);
     }
-
 
     public AcademyElite(final AcademyElite card) {
         super(card);
@@ -104,7 +101,8 @@ class AcademyEliteEffect1 extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                 CardsInAllGraveyardsCount instantsAndSorceries = new CardsInAllGraveyardsCount(new FilterInstantOrSorceryCard("instant or sorcery cards"));
                 int instantsAndSorceriesCount = instantsAndSorceries.calculate(game, source, this);
                 if (instantsAndSorceriesCount > 0) {
@@ -120,4 +118,3 @@ class AcademyEliteEffect1 extends OneShotEffect {
         return new AcademyEliteEffect1(this);
     }
 }
-

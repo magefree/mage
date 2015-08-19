@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2015;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -54,10 +55,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-import java.util.UUID;
-
-
-
 /**
  *
  * @author LevelX2
@@ -72,7 +69,6 @@ public class GenesisHydra extends CardImpl {
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-
 
         // When you cast Genesis Hydra, reveal the top X cards of your library. You may put a nonland permanent card with converted mana cost X or less from among them onto the battlefield. Then shuffle the rest into your library.
         this.addAbility(new CastSourceTriggeredAbility(new GenesisHydraPutOntoBattlefieldEffect(), false));
@@ -106,9 +102,8 @@ class GenesisHydraEntersBattlefieldEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                 SpellAbility spellAbility = (SpellAbility) obj;
                 if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast
                     int amount = spellAbility.getManaCostsToPay().getX();
