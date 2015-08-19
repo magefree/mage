@@ -103,6 +103,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("DDM", "duel-decks-jace-vs-vraska");
             put("DDN", "duel-decks-speed-vs-cunning");
             put("DDO", "duel-decks-elspeth-vs-kiora");
+            put("DDP", "duel-decks-zendikar-vs-eldrazi");
         }
         private static final long serialVersionUID = 1L;
     };

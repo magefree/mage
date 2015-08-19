@@ -68,7 +68,6 @@ public class MistbindClique extends CardImpl {
         // When a Faerie is championed with Mistbind Clique, tap all lands target player controls.
         this.addAbility(new MistbindCliqueAbility());
 
-
     }
 
     public MistbindClique(final MistbindClique card) {
@@ -105,8 +104,10 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId() != null && event.getSourceId().equals(getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+        if (event.getSourceId() != null
+                && event.getSourceId().equals(getSourceId())
+                && !event.getSourceId().equals(event.getTargetId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getTarget() != null && zEvent.getTarget().hasSubtype("Faerie")) {
                 return true;
             }

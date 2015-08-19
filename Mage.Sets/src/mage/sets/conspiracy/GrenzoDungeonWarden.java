@@ -64,7 +64,7 @@ public class GrenzoDungeonWarden extends CardImpl {
 
         // Grenzo, Dungeon Warden enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new GrenzoDungeonWardenEtBEffect()));
-        
+
         // {2}: Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to Grenzo's power, put it onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrenzoDungeonWardenEffect(), new GenericManaCost(2)));
     }
@@ -95,9 +95,8 @@ class GrenzoDungeonWardenEtBEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                 int amount = ((Ability) obj).getManaCostsToPay().getX();
                 if (amount > 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
@@ -114,21 +113,21 @@ class GrenzoDungeonWardenEtBEffect extends OneShotEffect {
 }
 
 class GrenzoDungeonWardenEffect extends OneShotEffect {
-    
+
     GrenzoDungeonWardenEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to {this}'s power, put it onto the battlefield";
     }
-    
+
     GrenzoDungeonWardenEffect(final GrenzoDungeonWardenEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public GrenzoDungeonWardenEffect copy() {
         return new GrenzoDungeonWardenEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

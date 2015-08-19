@@ -94,7 +94,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
         Map<UUID, List<Permanent>> permanentsOwned = new HashMap<>();
-        Collection<Permanent> permanents = game.getBattlefield().getAllPermanents();
+        Collection<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             List<Permanent> list = permanentsOwned.get(permanent.getOwnerId());
             if (list == null) {

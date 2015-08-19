@@ -77,7 +77,7 @@ class FreneticEfreetEffect extends OneShotEffect {
 
     public FreneticEfreetEffect() {
         super(Outcome.Damage);
-        staticText = "Flip a coin. If you win the flip, Frenetic Efreet phases out. If you lose the flip, sacrifice Frenetic Efreet";
+        staticText = "Flip a coin. If you win the flip, {this} phases out. If you lose the flip, sacrifice {this}";
     }
 
     public FreneticEfreetEffect(FreneticEfreetEffect effect) {

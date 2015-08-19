@@ -73,15 +73,15 @@ public class HeartwoodStoryteller extends CardImpl {
 }
 
 class HeartwoodStorytellerTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     HeartwoodStorytellerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HeartwoodStorytellerEffect(), false);
     }
-    
+
     HeartwoodStorytellerTriggeredAbility(final HeartwoodStorytellerTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public HeartwoodStorytellerTriggeredAbility copy() {
         return new HeartwoodStorytellerTriggeredAbility(this);
@@ -91,7 +91,7 @@ class HeartwoodStorytellerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.SPELL_CAST;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
@@ -103,7 +103,7 @@ class HeartwoodStorytellerTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever a player casts a noncreature spell, each of that player's opponents may draw a card.";
@@ -111,27 +111,29 @@ class HeartwoodStorytellerTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class HeartwoodStorytellerEffect extends OneShotEffect {
-    
+
     HeartwoodStorytellerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Each of that player's opponents may draw a card";
     }
-    
+
     HeartwoodStorytellerEffect(final HeartwoodStorytellerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public HeartwoodStorytellerEffect copy() {
         return new HeartwoodStorytellerEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(this.getTargetPointer().getFirst(game, source))) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.drawCards(1, game);
+                if (player.chooseUse(outcome, "Draw a card?", source, game)) {
+                    player.drawCards(1, game);
+                }
             }
         }
         return true;

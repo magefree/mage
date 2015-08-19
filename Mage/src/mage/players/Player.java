@@ -179,6 +179,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void resetPassed();
 
+    void resetPlayerPassedActions();
+
     boolean getPassedTurn();
 
     boolean getPassedUntilEndOfTurn();
@@ -564,8 +566,9 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param card
      * @param game
+     * @return player looked at the card
      */
-    void revealFaceDownCard(Card card, Game game);
+    boolean lookAtFaceDownCard(Card card, Game game);
 
     /**
      * Set seconds left to play the game.
@@ -620,13 +623,12 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
-//    boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
     boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
 
-//    boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
     boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    // boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
+    boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
+
     boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
     /**
@@ -683,9 +685,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param fromZone if null, this info isn't postet
-     * @return
+     * @return Set<Cards> that were successful moved to graveyard
      */
-    boolean moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
+    Set<Card> moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to

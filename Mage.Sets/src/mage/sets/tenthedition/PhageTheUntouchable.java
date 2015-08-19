@@ -53,7 +53,7 @@ public class PhageTheUntouchable extends CardImpl {
         super(ownerId, 166, "Phage the Untouchable", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}{B}");
         this.expansionSetCode = "10E";
         this.supertype.add("Legendary");
-        this.subtype.add("Zombie");
+        this.subtype.add("Avatar");
         this.subtype.add("Minion");
 
         this.power = new MageInt(4);

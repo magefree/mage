@@ -34,7 +34,6 @@ import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
-import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.ClashEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -45,7 +44,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *

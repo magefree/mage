@@ -602,6 +602,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             PermanentCard permanent = new PermanentCard(this, event.getPlayerId(), game);
             // make sure the controller of all continuous effects of this card are switched to the current controller
             game.getContinuousEffects().setController(objectId, event.getPlayerId());
+            // check if there are counters to add to the permanent (e.g. from non replacement effects like Persist)
+            checkForCountersToAdd(permanent, game);
             game.addPermanent(permanent);
             setZone(Zone.BATTLEFIELD, game);
             game.setScopeRelevant(true);
@@ -619,6 +621,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             this.setFaceDown(false, game);
         }
         return false;
+    }
+
+    private void checkForCountersToAdd(PermanentCard permanent, Game game) {
+        Counters countersToAdd = game.getEnterWithCounters(permanent.getId());
+        if (countersToAdd != null) {
+            for (Counter counter : countersToAdd.values()) {
+                permanent.addCounters(counter, game);
+            }
+            game.setEnterWithCounters(permanent.getId(), null);
+        }
     }
 
     @Override

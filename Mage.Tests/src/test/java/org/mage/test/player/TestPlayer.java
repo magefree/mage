@@ -1359,6 +1359,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void resetPlayerPassedActions() {
+        computerPlayer.resetPlayerPassedActions();
+    }
+
+    @Override
     public void quit(Game game) {
         computerPlayer.quit(game);
     }
@@ -1608,8 +1613,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void revealFaceDownCard(Card card, Game game) {
-        computerPlayer.revealFaceDownCard(card, game);
+    public boolean lookAtFaceDownCard(Card card, Game game) {
+        return computerPlayer.lookAtFaceDownCard(card, game);
     }
 
     @Override
@@ -1702,12 +1707,17 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+        return computerPlayer.moveCardsToExile(card, source, game, withName, exileId, exileZoneName);
+    }
+
+    @Override
     public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
         return computerPlayer.moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
     }
 
     @Override
-    public boolean moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         return computerPlayer.moveCardsToGraveyardWithInfo(allCards, source, game, fromZone);
     }
 

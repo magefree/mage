@@ -27,6 +27,8 @@
  */
 package mage.sets.fatereforged;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -81,14 +83,21 @@ class DarkDealEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            Map<UUID, Integer> cardsToDraw = new LinkedHashMap<>();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int cardsInHand = player.getHand().size();
                     player.discard(cardsInHand, false, source, game);
                     if (cardsInHand > 1) {
-                        player.drawCards(cardsInHand - 1, game);
+                        cardsToDraw.put(playerId, cardsInHand - 1);
                     }
+                }
+            }
+            for (UUID playerId : cardsToDraw.keySet()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.drawCards(cardsToDraw.get(playerId), game);
                 }
             }
             return true;

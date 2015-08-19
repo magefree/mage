@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -35,30 +34,34 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- *     702.52. Transmute
+ * 702.52. Transmute
  *
- *      702.52a Transmute is an activated ability that functions only while the card with transmute is
- *      in a player’s hand. “Transmute [cost]” means “[Cost], Discard this card: Search your library for
- *      a card with the same converted mana cost as the discarded card, reveal that card, and put it into
- *      your hand. Then shuffle your library. Play this ability only any time you could play a sorcery.”
+ * 702.52a Transmute is an activated ability that functions only while the card
+ * with transmute is in a player’s hand. “Transmute [cost]” means “[Cost],
+ * Discard this card: Search your library for a card with the same converted
+ * mana cost as the discarded card, reveal that card, and put it into your hand.
+ * Then shuffle your library. Play this ability only any time you could play a
+ * sorcery.”
  *
- *      702.52b Although the transmute ability is playable only if the card is in a player’s hand, it
- *      continues to exist while the object is in play and in all other zones. Therefore objects with
- *      transmute will be affected by effects that depend on objects having one or more activated abilities.
+ * 702.52b Although the transmute ability is playable only if the card is in a
+ * player’s hand, it continues to exist while the object is in play and in all
+ * other zones. Therefore objects with transmute will be affected by effects
+ * that depend on objects having one or more activated abilities.
  *
  * @author LevelX2
  */
-
-public class TransmuteTest extends CardTestPlayerBase{
+public class TransmuteTest extends CardTestPlayerBase {
 
     @Test
     public void searchSimpleOneManaCmcSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        // Target creature gets -3/-0 until end of turn.
+        // Transmute {1}{U}{U}
         addCard(Zone.HAND, playerA, "Dizzy Spell");
 
         addCard(Zone.LIBRARY, playerA, "Lightning Bolt");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{U}");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -74,7 +77,7 @@ public class TransmuteTest extends CardTestPlayerBase{
 
         addCard(Zone.LIBRARY, playerA, "Wear // Tear");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{U}");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

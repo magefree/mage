@@ -50,7 +50,7 @@ public class SpinIntoMyth extends CardImpl {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new FatesealEffect(2);
-        effect.setText("then fateseal 2. <i>(To fateseal 2, look at the top two cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order.)</i>");
+        effect.setText(", then fateseal 2. <i>(To fateseal 2, look at the top two cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order.)</i>");
         this.getSpellAbility().addEffect(effect);
     }
 

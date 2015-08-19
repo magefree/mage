@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -15,33 +14,32 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *     702.78. Persist
- *       702.78a Persist is a triggered ability. "Persist" means "When this permanent is put into a graveyard
- *       from the battlefield, if it had no -1/-1 counters on it, return it to the battlefield under its
- *       owner's control with a -1/-1 counter on it."
+ * 702.78. Persist 702.78a Persist is a triggered ability. "Persist" means "When
+ * this permanent is put into a graveyard from the battlefield, if it had no
+ * -1/-1 counters on it, return it to the battlefield under its owner's control
+ * with a -1/-1 counter on it."
  *
  * @author LevelX2
  */
-
 public class PersistTest extends CardTestPlayerBase {
 
     /**
-     * Tests Safehold Elite don't returns from Persist if already a -1/-1 counter
-     * was put on it from another source
+     * Tests Safehold Elite don't returns from Persist if already a -1/-1
+     * counter was put on it from another source
      *
      */
     @Test
     public void testUndyingdoesntTriggerWithMinusCounter() {
-        
+
         // Safehold Elite 2/2   {1}{G/W}
         // Creature - Elf Scout
-        // 
+        //
         // Persist
         addCard(Zone.BATTLEFIELD, playerA, "Safehold Elite");
 
         // Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter.
-        addCard(Zone.HAND, playerB, "Virulent Wound",1);
-        addCard(Zone.HAND, playerB, "Lightning Bolt",1);
+        addCard(Zone.HAND, playerB, "Virulent Wound", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
@@ -58,9 +56,9 @@ public class PersistTest extends CardTestPlayerBase {
         Assert.assertEquals(1, playerA.getCounters().getCount(CounterType.POISON));
     }
 
-
     /**
-     * If a card with persist is removed from a graveyard before the persist ability resolves, persist will do nothing.
+     * If a card with persist is removed from a graveyard before the persist
+     * ability resolves, persist will do nothing.
      */
     @Test
     public void testWontTriggerIfPersistCardIsRemovedFromGraveyard() {
@@ -72,14 +70,14 @@ public class PersistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Safehold Elite");
 
         // Exile target card from a graveyard. You gain 3 life.
-        addCard(Zone.HAND, playerB, "Lightning Bolt",1);
-        addCard(Zone.HAND, playerB, "Shadowfeed",1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        addCard(Zone.HAND, playerB, "Shadowfeed", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Shadowfeed", "Safehold Elite","Persist <i>(When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)</i>");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Shadowfeed", "Safehold Elite", "Persist <i>(When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)</i>");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -103,11 +101,11 @@ public class PersistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kitchen Finks", 1);
 
         /**
-         * Deathtouch, lifelink
-         * When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with
-         * deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.
+         * Deathtouch, lifelink When Wurmcoil Engine dies, put a 3/3 colorless
+         * Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm
+         * artifact creature token with lifelink onto the battlefield.
          */
-        addCard(Zone.BATTLEFIELD, playerB, "Wurmcoil Engine",1);
+        addCard(Zone.BATTLEFIELD, playerB, "Wurmcoil Engine", 1);
 
         attack(2, playerB, "Wurmcoil Engine");
         block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
@@ -117,13 +115,12 @@ public class PersistTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Wurmcoil Engine", 1);
         assertPermanentCount(playerA, "Kitchen Finks", 1);
-        assertPowerToughness(playerA, "Kitchen Finks", 2,1);
+        assertPowerToughness(playerA, "Kitchen Finks", 2, 1);
 
         assertLife(playerA, 22); // Kitchen Finks +2 life
         assertLife(playerB, 26); // Wurmcoil Engine +6 ife
 
     }
-
 
     @Test
     public void testInteractionWithToporOrb() {
@@ -137,12 +134,12 @@ public class PersistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kitchen Finks", 2);
 
         /**
-         * Deathtouch, lifelink
-         * When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with
-         * deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.
+         * Deathtouch, lifelink When Wurmcoil Engine dies, put a 3/3 colorless
+         * Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm
+         * artifact creature token with lifelink onto the battlefield.
          */
-        addCard(Zone.BATTLEFIELD, playerB, "Wurmcoil Engine",1);
-        addCard(Zone.BATTLEFIELD, playerB, "Torpor Orb",1);
+        addCard(Zone.BATTLEFIELD, playerB, "Wurmcoil Engine", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Torpor Orb", 1);
 
         attack(2, playerB, "Wurmcoil Engine");
         block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
@@ -161,9 +158,44 @@ public class PersistTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Wurm", 2);
         assertPermanentCount(playerA, "Kitchen Finks", 2);
         assertPowerToughness(playerA, "Kitchen Finks", 2, 1, Filter.ComparisonScope.All);
- 
+
     }
 
+    /**
+     * Situation: Clever Impersonator is copying ". Opponent casts Supreme
+     * Verdict. Persist on the clone of Glen Elendra Archmage triggers and goes
+     * on the stack, and I am asked to put triggers on the stack. Problem: No
+     * options pop up. I tried pressing many buttons, but the game was
+     * deadlocked.
+     */
+    @Test
+    public void testCopiedCreatureWithPersists() {
 
-    // some tests were moved to LastKnownInformationTest
+        // Flying
+        // {U}, Sacrifice Glen Elendra Archmage: Counter target noncreature spell.
+        // Persist
+        addCard(Zone.BATTLEFIELD, playerB, "Glen Elendra Archmage", 1); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Supreme Verdict can't be countered.
+        // Destroy all creatures.
+        addCard(Zone.HAND, playerB, "Supreme Verdict", 1); // {1}{W}{W}{U}
+
+        // You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
+        addCard(Zone.HAND, playerA, "Clever Impersonator", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
+        setChoice(playerA, "Glen Elendra Archmage");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Supreme Verdict");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Glen Elendra Archmage", 1);
+        assertPowerToughness(playerB, "Glen Elendra Archmage", 1, 1);
+        assertPermanentCount(playerA, "Glen Elendra Archmage", 1);
+        assertPowerToughness(playerA, "Glen Elendra Archmage", 1, 1);
+    }
 }
