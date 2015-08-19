@@ -25,52 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class SoltariLancer extends CardImpl {
+public class ThalakosSentry extends CardImpl {
 
-    private static final String rule = "{this} has first strike as long as it's attacking";
-
-    public SoltariLancer(UUID ownerId) {
-        super(ownerId, 30, "Soltari Lancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "TPR";
-        this.subtype.add("Soltari");
-        this.subtype.add("Knight");
-        this.power = new MageInt(2);
+    public ThalakosSentry(UUID ownerId) {
+        super(ownerId, 95, "Thalakos Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Thalakos");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
-
-        // Soltari Lancer has first strike as long as it's attacking.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new SourceMatchesFilterCondition(new FilterAttackingCreature()), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SoltariLancer(final SoltariLancer card) {
+    public ThalakosSentry(final ThalakosSentry card) {
         super(card);
     }
 
     @Override
-    public SoltariLancer copy() {
-        return new SoltariLancer(this);
+    public ThalakosSentry copy() {
+        return new ThalakosSentry(this);
     }
 }
