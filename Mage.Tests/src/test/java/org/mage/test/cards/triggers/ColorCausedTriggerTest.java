@@ -25,44 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package org.mage.test.cards.triggers;
 
-import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.abilities.effects.common.discard.DiscardHandAllEffect;
-import mage.abilities.keyword.MiracleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ReforgeTheSoul extends CardImpl {
+public class ColorCausedTriggerTest extends CardTestPlayerBase {
 
-    public ReforgeTheSoul(UUID ownerId) {
-        super(ownerId, 151, "Reforge the Soul", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "AVR";
+    @Test
+    public void testGhostfire() {
+        // Whenever a player casts a red spell, you may gain 1 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Dragon's Claw", 1);
 
-        // Each player discards his or her hand, then draws seven cards.
-        this.getSpellAbility().addEffect(new DiscardHandAllEffect());
-        Effect effect = new DrawCardAllEffect(7);
-        effect.setText(", then draws seven cards");
-        this.getSpellAbility().addEffect(effect);
+        // Ghostfire deals 3 damage to target creature or player.
+        addCard(Zone.HAND, playerA, "Ghostfire", 1); // {2}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-        // Miracle {1}{R}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{R}")));
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ghostfire", playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Ghostfire", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
     }
 
-    public ReforgeTheSoul(final ReforgeTheSoul card) {
-        super(card);
-    }
-
-    @Override
-    public ReforgeTheSoul copy() {
-        return new ReforgeTheSoul(this);
-    }
 }
