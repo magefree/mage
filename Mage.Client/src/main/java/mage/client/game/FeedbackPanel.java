@@ -49,7 +49,6 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.Constants;
 import mage.constants.PlayerAction;
-//import mage.remote.Session;
 import org.apache.log4j.Logger;
 import org.mage.network.Client;
 
@@ -89,13 +88,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options) {
-//        synchronized (this) {
-//            if (messageId < this.lastMessageId) {
-//                logger.warn("ignoring message from later source: " + messageId + ", text=" + message);
-//                return;
-//            }
-//            this.lastMessageId = messageId;
-//        }
 
         this.lblMessage.setText(message);
         this.helper.setMessage(message);

@@ -30,7 +30,6 @@ package mage.client.game;
 
 import mage.client.MageFrame;
 import mage.client.util.gui.GuiDisplayUtil;
-//import mage.remote.Session;
 import mage.view.AbilityPickerView;
 
 import javax.swing.*;

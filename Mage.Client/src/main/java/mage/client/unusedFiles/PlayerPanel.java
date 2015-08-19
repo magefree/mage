@@ -41,7 +41,6 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.util.Config;
-//import mage.remote.Session;
 import mage.view.PlayerView;
 import org.mage.network.Client;
 

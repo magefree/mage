@@ -37,7 +37,6 @@ package mage.client.dialog;
 
 import mage.client.MageFrame;
 import mage.constants.PlayerAction;
-//import mage.remote.Session;
 import mage.view.UserRequestMessage;
 import org.mage.network.Client;
 

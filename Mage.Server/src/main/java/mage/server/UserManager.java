@@ -27,18 +27,13 @@
  */
 package mage.server;
 
-import mage.remote.DisconnectReason;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import mage.server.User.UserState;
+import mage.remote.DisconnectReason;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
@@ -65,14 +60,6 @@ public class UserManager {
         return INSTANCE;
     }
     
-//    private UserManager()  {
-//        expireExecutor.scheduleAtFixedRate(new Runnable() {
-//            @Override
-//            public void run() {
-//                checkExpired();
-//            }
-//        }, 60, 60, TimeUnit.SECONDS);
-//    }
 
     public User createUser(String userName, String host) {
         if (findUser(userName) != null) {
@@ -160,45 +147,16 @@ public class UserManager {
         }        
     }
 
-//    public boolean extendUserSession(UUID userId, String pingInfo) {
-//        if (userId != null) {
-//            User user = users.get(userId);
-//            if (user != null) {  
-//                user.updateLastActivity(pingInfo);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-    /**
-     * Is the connection lost for more than 3 minutes, the user will be removed (within 3 minutes the user can reconnect)
-     */
-//    private void checkExpired() {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.MINUTE, -3);
-//        List<User> usersToCheck = new ArrayList<>();
-//        usersToCheck.addAll(users.values());
-//        for (User user : usersToCheck) {
-//            if (!user.getUserState().equals(UserState.Expired) && user.isExpired(calendar.getTime())) {
-//                removeUser(user.getId(), DisconnectReason.SessionExpired);
-//            }
-//        }
-//    }
-
     public void handleException(Exception ex) {
         if (ex != null) {
             logger.fatal("User manager exception " + (ex.getMessage() == null ? "null":ex.getMessage()));
             if (ex.getCause() != null) {
                 logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null":ex.getCause().getMessage()));
             }
-            ex.printStackTrace();
+            logger.error("UserManager error:", ex);
         }else {
             logger.fatal("User manager exception - null");
         }
     }
 
-    void recordPingTime(UUID userId, long milliSeconds) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -3,7 +3,6 @@ package mage.client.components.ability;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
-//import mage.remote.Session;
 import mage.view.AbilityPickerView;
 import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;

@@ -111,7 +111,6 @@ public class ChatManager {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
-//                User user = UserManager.getInstance().findUser(userName);
                 if (chatSession.performUserCommand(user, message, chatId)) {
                     return;
                 }
@@ -140,14 +139,11 @@ public class ChatManager {
      * @param color 
      */
     public void broadcast(User user, String message, MessageColor color) {
-//        User user = UserManager.getInstance().getUser(userId);
-//        if (user != null) {
             for (ChatSession chat: chatSessions.values()) {
                 if (chat.hasUser(user.getId())) {
                     chat.broadcast(user.getName(), message, color);
                 }
             }
-//        }
     }
 
     public void sendReconnectMessage(UUID userId) {

@@ -162,13 +162,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static MageFrame instance;
 
-//    private static Session session;
-//    public static MageClient client;
     private static Client client;
     private ServerState serverState;
     private ConnectDialog connectDialog;
     private final ErrorDialog errorDialog;
-//    private static CallbackClient callbackClient;
     private static final Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
@@ -185,22 +182,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Map<UUID, DraftPanel> drafts = new HashMap<>();
     private static final MageUI ui = new MageUI();
 
-//    private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
 
-//    /**
-//     * @return the session
-//     */
-//    public static Session getSession() {
-//        return session;
-//    }
-
     public static Client getClient() {
         return client;
     }
-    
+
     public static JDesktopPane getDesktop() {
         return desktopPane;
     }
@@ -230,7 +219,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      */
     public MageFrame() {
         setWindowTitle();
-        
+
         clientId = UUID.randomUUID();
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {
@@ -263,21 +252,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         DialogManager.updateParams(768, 1024, false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-//        session = new SessionImpl(this);
-//        callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
         errorDialog = new ErrorDialog();
         errorDialog.setLocation(100, 100);
         desktopPane.add(errorDialog, JLayeredPane.POPUP_LAYER);
         ui.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
-
-//        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
-//            @Override
-//            public void run() {
-//                session.ping();
-//            }
-//        }, 60, 60, TimeUnit.SECONDS);
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 
@@ -621,7 +601,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (activeFrame != frame) {
             frame.deactivated();
         }
-        
+
     }
 
     private static MagePane getTopMost(MagePane exclude) {
@@ -824,10 +804,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
         return result;
     }
-    
-//    public static boolean stopConnecting() {
-//        return session.stopConnecting();
-//    }
 
     public boolean autoConnect() {
         boolean autoConnectParamValue = Boolean.parseBoolean(prefs.get("autoConnect", "false"));
@@ -1420,14 +1396,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     @Override
     public void disconnected(final boolean errorCall) {
-//        if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
-//            logger.info("DISCONNECTED (Event Dispatch Thread)");
-//            setStatusText("Not connected");
-//            disableButtons();
-//            hideGames();
-//            hideTables();
-//        } else {
-//            logger.info("DISCONNECTED (NO Event Dispatch Thread)");
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -1439,12 +1407,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                         if (performConnect()) {
                             enableButtons();
                         }
-//                    } else {
-//                        client.disconnect();
                     }
                 }
             });
-//        }
     }
 
     public void showMessage(final String title, final String message) {
@@ -1464,11 +1429,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         });
     }
-
-//    @Override
-//    public void processCallback(ClientCallback callback) {
-//        callbackClient.processCallback(callback);
-//    }
 
     @Override
     public void inform(String title, String message, MessageType type) {
@@ -1506,13 +1466,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     @Override
     public void clientRegistered(ServerState state) {
         this.serverState = state;
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                setWindowTitle();
-//                showGames(false);                
-//            }
-//        });
     }
 
     @Override

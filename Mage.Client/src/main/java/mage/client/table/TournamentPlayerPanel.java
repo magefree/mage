@@ -41,7 +41,6 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import org.mage.network.Client;
-//import mage.remote.Session;
 
 /**
  *

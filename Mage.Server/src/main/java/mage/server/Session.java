@@ -64,24 +64,17 @@ public class Session {
     private final LinkedList<Long> pingTime = new LinkedList<>();
     private String pingInfo = "";
         
-//    private final AsynchInvokerCallbackHandler callbackHandler;
 
     private final ReentrantLock lock;
 
     public Session(String sessionId) {
         this.sessionId = sessionId;
-//        this.callbackHandler = (AsynchInvokerCallbackHandler) callbackHandler;
         this.isAdmin = false;
         this.timeConnected = new Date();
         this.lock = new ReentrantLock();
     }
 
     public String registerUser(Connection connection) {
-//        String returnMessage = registerUserHandling(userName);
-//        if (returnMessage != null) {
-//            sendErrorMessageToClient(returnMessage);
-//        }
-//        return returnMessage;
         pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -117,7 +110,6 @@ public class Session {
         if (user == null) {  // user already exists
             user = UserManager.getInstance().findUser(userName);
             if (user.getHost().equals(host)) {
-//                user.updateLastActivity(null);  // minimizes possible expiration
                 this.userId = user.getId();
                 if (user.getSessionId().isEmpty()) {
                     logger.info("Reconnecting session for " + userName);
@@ -164,7 +156,6 @@ public class Session {
     }
 
     public boolean setUserData(User user, UserDataView userDataView) {
-//        User user = UserManager.getInstance().findUser(userName);
         if (user != null) {
             UserData userData = user.getUserData();
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
@@ -281,20 +272,6 @@ public class Session {
 
     }
 
-//    public void fireCallback(final ClientCallback call) {
-//        try {
-//            call.setMessageId(messageId++);
-//            callbackHandler.handleCallbackOneway(new Callback(call));
-//        } catch (HandleCallbackException ex) {
-//            User user = UserManager.getInstance().getUser(userId);
-//            logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName():"") + " userId " + userId);
-//            logger.warn(" - method: " + call.getMethod());
-//            logger.warn(" - cause: " + getBasicCause(ex).toString());
-//            logger.trace("Stack trace:", ex);
-//            userLostConnection();
-//        }
-//    }
-
     public UUID getUserId() {
         return userId;
     }
@@ -314,13 +291,6 @@ public class Session {
     void setHost(String hostAddress) {
         this.host = hostAddress;
     }
-
-//    void sendErrorMessageToClient(String message) {
-//        List<String> messageData = new LinkedList<>();
-//        messageData.add("Error while connecting to server");
-//        messageData.add(message);
-//        fireCallback(new ClientCallback("showUserMessage", null, messageData));
-//    }
 
     public static Throwable getBasicCause(Throwable cause) {
         Throwable t = cause;

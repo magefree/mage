@@ -38,7 +38,6 @@ import mage.client.util.gui.ArrowUtil;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
 import mage.constants.EnlargeMode;
-//import mage.remote.Session;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PermanentView;

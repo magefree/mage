@@ -159,7 +159,6 @@ public class ChatSession {
                 User chatUser = UserManager.getInstance().getUser(userId);                
                 if (chatUser != null) {
                     ServerMain.getInstance().sendChatMessage(chatUser.getSessionId(), chatId, new ChatMessage(userName, message, time, color, messageType, soundToPlay));
-//                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {
                     logger.error("User not found but connected to chat - userId: " + userId + "  chatId: " + chatId);

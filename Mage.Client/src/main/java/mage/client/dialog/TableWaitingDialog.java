@@ -143,7 +143,6 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveDown.setVisible(false);
             this.btnMoveUp.setVisible(false);
         }
-//        UUID chatId = client.getTableChatId(tableId);
         if (chatId != null) {
             this.chatPanel.connect(chatId);
             updateTask.execute();

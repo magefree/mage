@@ -44,7 +44,6 @@ import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import org.mage.network.Client;
-//import mage.remote.Session;
 
 /**
  *

@@ -94,7 +94,6 @@ public class User {
     private String info = "";
     private String pingInfo = "";
     private Date disconnectionTime;
-//    private Date lastActivity;
     private UserState userState;
     private UserData userData;
 
@@ -105,7 +104,6 @@ public class User {
         this.userState = UserState.Created;
 
         this.connectionTime = new Date();
-//        this.lastActivity = new Date();
 
         this.tables = new ConcurrentHashMap<>();
         this.gameSessions = new ConcurrentHashMap<>();
@@ -188,23 +186,11 @@ public class User {
         return connectionTime;
     }
 
-//    public void fireCallback(final ClientCallback call) {
-//        if (isConnected()) {
-//            Session session = SessionManager.getInstance().getSession(sessionId);
-//            if (session != null) {
-//                
-//                session.fireCallback(call);
-//            }
-//        }
-//    }
-
     public void joinedTable(final UUID roomId, final UUID tableId, final UUID chatId, boolean owner, boolean tournament) {
-//        fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
         ServerMain.getInstance().joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
     }
 
     public void gameStarted(final UUID gameId, final UUID playerId) {
-//        fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
         ServerMain.getInstance().gameStarted(sessionId, gameId, playerId);
     }
 
@@ -352,49 +338,24 @@ public class User {
     }
 
     public void sendPlayerUUID(final UUID gameId, final UUID data) {
-//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerUUID(gameId, userId, data);
     }
 
     public void sendPlayerString(final UUID gameId, final String data) {
-//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerString(gameId, userId, data);
     }
 
     public void sendPlayerManaType(final UUID gameId, final UUID playerId, final ManaType data) {
-//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerManaType(gameId, playerId, userId, data);
     }
 
     public void sendPlayerBoolean(final UUID gameId, final Boolean data) {
-//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerBoolean(gameId, userId, data);
     }
 
     public void sendPlayerInteger(final UUID gameId, final Integer data) {
-//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerInteger(gameId, userId, data);
     }
-
-//    public void updateLastActivity(String pingInfo) {
-//        if (pingInfo != null) {
-//            this.pingInfo = pingInfo;
-//        }
-//        lastActivity = new Date();
-//        if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
-//            userState = UserState.Reconnected;
-//        }
-//    }
-
-//    public boolean isExpired(Date expired) {
-//        if (lastActivity.before(expired)) {
-//            logger.trace(userName + " is expired!");
-//            userState = UserState.Expired;
-//            return true;
-//        }
-//        logger.trace(new StringBuilder("isExpired: User ").append(userName).append(" lastActivity: ").append(lastActivity).append(" expired: ").append(expired).toString());
-//        return false; /*userState == UserState.Disconnected && */ 
-//    }
 
     private void reconnect() {
         for (Entry<UUID, Table> entry : tables.entrySet()) {
@@ -634,13 +595,5 @@ public class User {
     public UserState getUserState() {
         return userState;
     }
-
-//    public String getPingInfo() {
-//        if (isConnected()) {
-//            return pingInfo;
-//        } else {
-//            return " (discon. "+ getDisconnectDuration() + ")";
-//        }
-//    }
 
 }

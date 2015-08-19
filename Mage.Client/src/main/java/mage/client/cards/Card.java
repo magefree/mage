@@ -47,7 +47,6 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
-//import mage.remote.Session;
 import mage.view.*;
 
 import javax.swing.*;
@@ -69,7 +68,6 @@ import org.mage.network.Client;
 @SuppressWarnings("serial")
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
-//    protected static Session session = MageFrame.getSession();
     protected static Client client = MageFrame.getClient();
     protected static DefaultActionCallback callback = DefaultActionCallback.getInstance();
 

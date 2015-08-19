@@ -404,7 +404,6 @@ public class ConnectDialog extends MageDialog {
                 logger.fatal("Connection timeout: ", ex);
                 lblStatus.setText("Could not connect");
             } finally {
-//                MageFrame.stopConnecting();
                 btnConnect.setEnabled(true);
             }
         }

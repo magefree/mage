@@ -57,7 +57,7 @@ public class Connection implements Serializable {
     private boolean forceDBComparison;
 
     private UserDataView userData;
-    
+
 //    private int avatarId;
 //    private boolean showAbilityPickerForced;
 //    private boolean allowRequestShowHandCards;
@@ -65,51 +65,6 @@ public class Connection implements Serializable {
 //    private String flagName;
 //    private UserSkipPrioritySteps userSkipPrioritySteps;
 
-//    private static final String serialization = "?serializationtype=jboss";    
-//    private static final String transport = "bisocket";
-
-//    private final String parameter; 
-
-//    public Connection() {
-//        this("");
-//    }
-//    
-//    public Connection(String parameter) {
-//        this.parameter = parameter;
-//    }
-
-//    @Override
-//    public int hashCode() {
-//        return (transport + host + Integer.toString(port) + proxyType.toString()).hashCode();    
-//    }
-//
-//    @Override
-//    public boolean equals(Object object) {
-//        if (! (object instanceof Connection)) {
-//            return false;    
-//        }
-//        Connection otherConnection = (Connection) object;
-//        return hashCode() == otherConnection.hashCode();
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return host + ":" + Integer.toString(port) + "/" + serialization + parameter;
-//    }
-//
-//    public String getURI() {
-//        if (host.equals("localhost")) {
-//            try {
-//                InetAddress inet = getLocalAddress();
-//                if (inet != null) {
-//                    return transport + "://" + inet.getHostAddress() + ":" + port + "/" + serialization + parameter;
-//                }
-//            } catch (SocketException ex) {
-//                // just use localhost if can't find local ip
-//            }
-//        }
-//        return transport + "://" + host + ":" + port + "/" + serialization + parameter;
-//    }
 
     public ProxyType getProxyType() {
         return proxyType;

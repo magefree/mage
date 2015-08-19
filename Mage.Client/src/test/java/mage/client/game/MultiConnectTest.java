@@ -97,11 +97,6 @@ public class MultiConnectTest {
             logger.info("showError: " + message);
         }
 
-//        @Override
-//        public void processCallback(ClientCallback callback) {
-//            logger.info("processCallback");
-//        }
-
         @Override
         public void inform(String title, String message, MessageType type) {
             if (type == MessageType.ERROR) {

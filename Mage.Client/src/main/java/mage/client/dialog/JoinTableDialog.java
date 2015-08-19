@@ -31,7 +31,6 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
-//import mage.remote.Session;
 import org.apache.log4j.Logger;
 import org.mage.network.Client;
 

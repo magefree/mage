@@ -70,7 +70,6 @@ import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
-//import mage.remote.Session;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;

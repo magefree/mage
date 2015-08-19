@@ -70,7 +70,6 @@ import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
 import mage.constants.ManaType;
-//import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;

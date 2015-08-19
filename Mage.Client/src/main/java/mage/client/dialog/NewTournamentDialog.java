@@ -60,7 +60,6 @@ import mage.game.draft.DraftOptions;
 import mage.game.draft.DraftOptions.TimingOption;
 import mage.game.tournament.LimitedOptions;
 import mage.game.tournament.TournamentOptions;
-//import mage.remote.Session;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;

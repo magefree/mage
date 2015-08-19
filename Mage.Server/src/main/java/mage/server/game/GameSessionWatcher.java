@@ -65,7 +65,6 @@ public class GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gameInit", game.getId(), getGameView()));
                 user.initGame(game.getId(), getGameView());
                 return true;
             }

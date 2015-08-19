@@ -66,17 +66,10 @@ public class SessionManager {
         return session;
     }
 
-//    public void createSession(String sessionId) {
-//        Session session = new Session(sessionId);
-//        sessions.put(sessionId, session);
-//    }
-
     public boolean registerUser(String sessionId, Connection connection, String host) {
         Session session = new Session(sessionId);
         sessions.put(sessionId, session);
         session.setHost(host);
-//        Session session = sessions.get(sessionId);
-//        if (session != null) {
             String returnMessage = session.registerUser(connection);
             if (returnMessage == null) {
                 LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, connection.getUsername(), session.getHost(), sessionId);
@@ -89,11 +82,6 @@ public class SessionManager {
             }
             logger.debug(connection.getUsername() + " not registered: " + returnMessage);
             ServerMain.getInstance().informClient(sessionId, "Connection Error", returnMessage, MessageType.ERROR);
-//            Server.informClient(sessionId, returnMessage, MessageType.ERROR);
-
-//        } else {
-//            logger.error(userName + " tried to join with no sessionId");
-//        }
         return false;
     }
 
@@ -215,14 +203,6 @@ public class SessionManager {
         }
         return null;
     }
-
-//    public boolean extendUserSession(String sessionId, String pingInfo) {
-//        Session session = sessions.get(sessionId);
-//        if (session != null) {
-//            return UserManager.getInstance().extendUserSession(session.getUserId(), pingInfo);
-//        }
-//        return false;
-//    }
 
     void recordPingTime(String sessionId, long milliSeconds) {
         Session session = sessions.get(sessionId);

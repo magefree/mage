@@ -48,7 +48,6 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
-//import mage.remote.Session;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;

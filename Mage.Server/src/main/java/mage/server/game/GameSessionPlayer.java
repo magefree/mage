@@ -80,7 +80,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(getGameView(), question)));
                 user.gameAsk(game.getId(), getGameView(), question, options);
             }
         }
@@ -90,7 +89,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));
                 user.gameTarget(game.getId(), getGameView(), question, cardView, targets, required, options);
             }
         }
@@ -100,7 +98,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message, options)));
                 user.gameSelect(game.getId(), getGameView(), message, options);
             }
         }
@@ -110,7 +107,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities));
                 user.gameChooseAbility(game.getId(), abilities);
             }
         }
@@ -120,7 +116,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2)));
                 user.gameChoosePile(game.getId(), message, pile1, pile2);
             }
         }
@@ -130,7 +125,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gameChooseChoice", game.getId(), new GameClientMessage(choice)));
                 user.gameChooseChoice(game.getId(), choice);
             }
         }
@@ -140,7 +134,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(getGameView(), message)));
                 user.gamePlayMana(game.getId(), getGameView(), message, options);
             }
         }
@@ -150,7 +143,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(getGameView(), message)));
                 user.gamePlayXMana(game.getId(), getGameView(), message);
             }
         }
@@ -160,7 +152,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
                 user.gameSelectAmount(game.getId(), message, min, max);
             }
         }
@@ -170,7 +161,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-//                user.fireCallback(new ClientCallback("endGameInfo", game.getId(), getGameEndView(playerId, table)));
                 user.endGameInfo(game.getId(), getGameEndView(playerId, table));
             }
         }
@@ -198,7 +188,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_ROLLBACK_TURN);
                 userRequestMessage.setButton2("Deny", PlayerAction.DENY_PERMISSON_TO_ROLLBACK_TURN);
-//                requestedUser.fireCallback(new ClientCallback("userRequestDialog", game.getId(), userRequestMessage));
                 requestedUser.userRequestDialog(game.getId(), userRequestMessage);
             }
         }
@@ -217,7 +206,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_SEE_HAND_CARDS);
                 userRequestMessage.setButton2("Reject", null);
-//                user.fireCallback(new ClientCallback("userRequestDialog", game.getId(), userRequestMessage));
                 user.userRequestDialog(game.getId(), userRequestMessage);
             }
         }

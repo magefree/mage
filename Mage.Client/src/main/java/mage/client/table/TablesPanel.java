@@ -88,7 +88,6 @@ import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
-//import mage.remote.Session;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.RoomView;
@@ -108,8 +107,6 @@ public class TablesPanel extends javax.swing.JPanel {
     private MatchesTableModel matchesModel;
     private UUID roomId;
     private UpdateRoomTask updateRoomTask;
-//    private UpdatePlayersTask updatePlayersTask;
-//    private UpdateMatchesTask updateMatchesTask;
     private JoinTableDialog joinTableDialog;
     private NewTableDialog newTableDialog;
     private NewTournamentDialog newTournamentDialog;
@@ -377,21 +374,6 @@ public class TablesPanel extends javax.swing.JPanel {
                 updateRoomTask = new UpdateRoomTask(client, roomId, this, this.chatPanel);
                 updateRoomTask.execute();
             }
-//            if (updatePlayersTask == null || updatePlayersTask.isDone()) {
-//                updatePlayersTask = new UpdatePlayersTask(client, roomId, this.chatPanel);
-//                updatePlayersTask.execute();
-//            }
-//            if (this.btnStateFinished.isSelected()) {
-//                if (updateMatchesTask == null || updateMatchesTask.isDone()) {
-//                    updateMatchesTask = new UpdateMatchesTask(client, roomId, this);
-//                    updateMatchesTask.execute();
-//                }
-//            }
-//            else {
-//                   if (updateMatchesTask != null) {
-//                        updateMatchesTask.cancel(true);
-//                   }
-//            }
         }
     }
 
@@ -399,12 +381,6 @@ public class TablesPanel extends javax.swing.JPanel {
         if (updateRoomTask != null) {
             updateRoomTask.cancel(true);
         }
-//        if (updatePlayersTask != null) {
-//            updatePlayersTask.cancel(true);
-//        }
-//        if (updateMatchesTask != null) {
-//            updateMatchesTask.cancel(true);
-//        }
     }
 
     public void showTables(UUID roomId) {
@@ -1416,45 +1392,6 @@ class UpdateRoomTask extends SwingWorker<Void, RoomView> {
 
 }
 
-//class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
-//
-//    private final Client client;
-//    private final UUID roomId;
-//    private final ChatPanel chat;
-//
-//    private static final Logger logger = Logger.getLogger(UpdatePlayersTask.class);
-//
-//    UpdatePlayersTask(Client client, UUID roomId, ChatPanel chat) {
-//        this.client = client;
-//        this.roomId = roomId;
-//        this.chat = chat;
-//    }
-//
-//    @Override
-//    protected Void doInBackground() throws Exception {
-//        while (!isCancelled()) {
-//            this.publish(client.getRoomUsers(roomId));
-//            Thread.sleep(3000);
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    protected void process(List<Collection<RoomUsersView>> roomUserInfo) {
-//        chat.setRoomUserInfo(roomUserInfo);
-//    }
-//
-//    @Override
-//    protected void done() {
-//        try {
-//            get();
-//        } catch (InterruptedException | ExecutionException ex) {
-//            logger.fatal("Update Players Task error", ex);
-//        } catch (CancellationException ex) {}
-//    }
-//
-//}
-
 class MatchesTableModel extends AbstractTableModel {
 
     public static final int ACTION_COLUMN = 6; // column the action is located (starting with 0)
@@ -1555,48 +1492,6 @@ class MatchesTableModel extends AbstractTableModel {
     }
 
 }
-
-//class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
-//
-//    private final Client client;
-//    private final UUID roomId;
-//    private final TablesPanel panel;
-//
-//    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
-//
-//    UpdateMatchesTask(Client client, UUID roomId, TablesPanel panel) {
-//        this.client = client;
-//        this.roomId = roomId;
-//        this.panel = panel;
-//    }
-//
-//    @Override
-//    protected Void doInBackground() throws Exception {
-//        while (!isCancelled()) {
-//            Collection<MatchView> matches = client.getFinishedMatches(roomId);
-//            if (matches != null) {
-//                this.publish(matches);
-//            }
-//            Thread.sleep(10000);
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    protected void process(List<Collection<MatchView>> view) {
-//        panel.updateMatches(view.get(0));
-//    }
-//
-//    @Override
-//    protected void done() {
-//        try {
-//            get();
-//        } catch (InterruptedException | ExecutionException ex) {
-//            logger.fatal("Update Matches Task error", ex);
-//        } catch (CancellationException ex) {}
-//    }
-//
-//}
 
 class GameChooser extends JPopupMenu {
 

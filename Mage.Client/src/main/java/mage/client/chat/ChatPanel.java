@@ -53,7 +53,6 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.remote.MageRemoteException;
 import mage.view.ChatMessage;
-//import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.RoomUsersView;
@@ -388,7 +387,6 @@ public class ChatPanel extends javax.swing.JPanel {
         private UsersView[] players = new UsersView[0];
 
         public void loadData(RoomUsersView roomUserInfo) throws MageRemoteException {
-//            RoomUsersView roomUserInfo = roomUserInfoList.iterator().next();
             this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
