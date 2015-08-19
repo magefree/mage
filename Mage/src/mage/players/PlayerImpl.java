@@ -1192,8 +1192,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
-        if (!(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game)) {
-            for (Ability ability : object.getAbilities()) {
+        boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
+        for (Ability ability : object.getAbilities()) {
+            if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
                 if (ability.getZone().match(zone)) {
                     if (ability instanceof ActivatedAbility) {
                         if (((ActivatedAbility) ability).canActivate(playerId, game)) {
@@ -1210,16 +1211,20 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-            if (zone != Zone.HAND) {
-                if (Zone.GRAVEYARD.equals(zone) && canPlayCardsFromGraveyard()) {
-                    for (ActivatedAbility ability : object.getAbilities().getPlayableAbilities(Zone.HAND)) {
+        }
+        if (zone != Zone.HAND) {
+            if (Zone.GRAVEYARD.equals(zone) && canPlayCardsFromGraveyard()) {
+                for (ActivatedAbility ability : object.getAbilities().getPlayableAbilities(Zone.HAND)) {
+                    if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
                         if (ability.canActivate(playerId, game)) {
                             useable.put(ability.getId(), ability);
                         }
                     }
                 }
-                if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game)) {
-                    for (Ability ability : object.getAbilities()) {
+            }
+            if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game)) {
+                for (Ability ability : object.getAbilities()) {
+                    if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
                         ability.setControllerId(this.getId());
                         if (ability instanceof ActivatedAbility && ability.getZone().match(Zone.HAND)
                                 && ((ActivatedAbility) ability).canActivate(playerId, game)) {
@@ -1228,8 +1233,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-            getOtherUseableActivatedAbilities(object, zone, game, useable);
         }
+        getOtherUseableActivatedAbilities(object, zone, game, useable);
+
         return useable;
     }
 
@@ -1237,49 +1243,52 @@ public abstract class PlayerImpl implements Player, Serializable {
     private void getOtherUseableActivatedAbilities(MageObject object, Zone zone, Game game, Map<UUID, ActivatedAbility> useable) {
         Abilities<ActivatedAbility> otherAbilities = game.getState().getActivatedOtherAbilities(object.getId(), zone);
         if (otherAbilities != null) {
+            boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
             for (ActivatedAbility ability : otherAbilities) {
-                Card card = game.getCard(ability.getSourceId());
-                if (card.isSplitCard() && ability instanceof FlashbackAbility) {
-                    FlashbackAbility flashbackAbility;
-                    // Left Half
-                    if (card.getCardType().contains(CardType.INSTANT)) {
-                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.INSTANT);
-                    } else {
-                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.SORCERY);
-                    }
-                    flashbackAbility.setSourceId(card.getId());
-                    flashbackAbility.setControllerId(card.getOwnerId());
-                    flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_LEFT);
-                    flashbackAbility.setAbilityName(((SplitCard) card).getLeftHalfCard().getName());
-                    if (flashbackAbility.canActivate(playerId, game)) {
-                        useable.put(flashbackAbility.getId(), flashbackAbility);
-                    }
-                    // Right Half
-                    if (card.getCardType().contains(CardType.INSTANT)) {
-                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.INSTANT);
-                    } else {
-                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.SORCERY);
-                    }
-                    flashbackAbility.setSourceId(card.getId());
-                    flashbackAbility.setControllerId(card.getOwnerId());
-                    flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_RIGHT);
-                    flashbackAbility.setAbilityName(((SplitCard) card).getRightHalfCard().getName());
-                    if (flashbackAbility.canActivate(playerId, game)) {
-                        useable.put(flashbackAbility.getId(), flashbackAbility);
-                    }
+                if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
+                    Card card = game.getCard(ability.getSourceId());
+                    if (card.isSplitCard() && ability instanceof FlashbackAbility) {
+                        FlashbackAbility flashbackAbility;
+                        // Left Half
+                        if (card.getCardType().contains(CardType.INSTANT)) {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.INSTANT);
+                        } else {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.SORCERY);
+                        }
+                        flashbackAbility.setSourceId(card.getId());
+                        flashbackAbility.setControllerId(card.getOwnerId());
+                        flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_LEFT);
+                        flashbackAbility.setAbilityName(((SplitCard) card).getLeftHalfCard().getName());
+                        if (flashbackAbility.canActivate(playerId, game)) {
+                            useable.put(flashbackAbility.getId(), flashbackAbility);
+                        }
+                        // Right Half
+                        if (card.getCardType().contains(CardType.INSTANT)) {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.INSTANT);
+                        } else {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.SORCERY);
+                        }
+                        flashbackAbility.setSourceId(card.getId());
+                        flashbackAbility.setControllerId(card.getOwnerId());
+                        flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_RIGHT);
+                        flashbackAbility.setAbilityName(((SplitCard) card).getRightHalfCard().getName());
+                        if (flashbackAbility.canActivate(playerId, game)) {
+                            useable.put(flashbackAbility.getId(), flashbackAbility);
+                        }
 
-                } else {
-                    useable.put(ability.getId(), ability);
+                    } else {
+                        useable.put(ability.getId(), ability);
+                    }
                 }
-
             }
         }
     }
 
     protected LinkedHashMap<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<>();
-        if (!(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game)) {
-            for (ManaAbility ability : object.getAbilities().getManaAbilities(zone)) {
+        boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
+        for (ManaAbility ability : object.getAbilities().getManaAbilities(zone)) {
+            if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
                 if (ability.canActivate(playerId, game)) {
                     useable.put(ability.getId(), ability);
                 }
