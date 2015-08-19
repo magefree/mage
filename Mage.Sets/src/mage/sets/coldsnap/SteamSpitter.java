@@ -25,59 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class DreamscapeArtist extends CardImpl {
+public class SteamSpitter extends CardImpl {
 
-    public DreamscapeArtist(UUID ownerId) {
-        super(ownerId, 40, "Dreamscape Artist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+    public SteamSpitter(UUID ownerId) {
+        super(ownerId, 124, "Steam Spitter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "CSP";
+        this.subtype.add("Spider");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(5);
 
-        // {2}{U}, {tap}, Discard a card, Sacrifice a land: Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay),
-                new ManaCostsImpl("{2}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardCardCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
-        this.addAbility(ability);
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
+        // {R}: Steam Spitter gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public DreamscapeArtist(final DreamscapeArtist card) {
+    public SteamSpitter(final SteamSpitter card) {
         super(card);
     }
 
     @Override
-    public DreamscapeArtist copy() {
-        return new DreamscapeArtist(this);
+    public SteamSpitter copy() {
+        return new SteamSpitter(this);
     }
 }

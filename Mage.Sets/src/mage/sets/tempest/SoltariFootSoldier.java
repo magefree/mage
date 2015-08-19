@@ -25,59 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class DreamscapeArtist extends CardImpl {
+public class SoltariFootSoldier extends CardImpl {
 
-    public DreamscapeArtist(UUID ownerId) {
-        super(ownerId, 40, "Dreamscape Artist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+    public SoltariFootSoldier(UUID ownerId) {
+        super(ownerId, 255, "Soltari Foot Soldier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Soltari");
+        this.subtype.add("Soldier");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {2}{U}, {tap}, Discard a card, Sacrifice a land: Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay),
-                new ManaCostsImpl("{2}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardCardCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
-        this.addAbility(ability);
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
     }
 
-    public DreamscapeArtist(final DreamscapeArtist card) {
+    public SoltariFootSoldier(final SoltariFootSoldier card) {
         super(card);
     }
 
     @Override
-    public DreamscapeArtist copy() {
-        return new DreamscapeArtist(this);
+    public SoltariFootSoldier copy() {
+        return new SoltariFootSoldier(this);
     }
 }

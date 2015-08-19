@@ -25,55 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author KholdFuzion
-
+ * @author LoneFox
  */
-public class SliverLegion extends CardImpl {
+public class ThalakosSentry extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
-    private static final FilterPermanent countfilter = new FilterPermanent("Sliver", " for each other Sliver on the battlefield");
+    public ThalakosSentry(UUID ownerId) {
+        super(ownerId, 95, "Thalakos Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Thalakos");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-    static {
-        countfilter.add(new AnotherPredicate());
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
     }
 
-    public SliverLegion(UUID ownerId) {
-        super(ownerId, 158, "Sliver Legion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "FUT";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sliver");
-
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
-
-        // All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
-    }
-
-    public SliverLegion(final SliverLegion card) {
+    public ThalakosSentry(final ThalakosSentry card) {
         super(card);
     }
 
     @Override
-    public SliverLegion copy() {
-        return new SliverLegion(this);
+    public ThalakosSentry copy() {
+        return new ThalakosSentry(this);
     }
 }

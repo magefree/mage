@@ -25,55 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.constants.TargetController;
 
 /**
  *
- * @author KholdFuzion
-
+ * @author LoneFox
  */
-public class SliverLegion extends CardImpl {
+public class GrinningDemon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
-    private static final FilterPermanent countfilter = new FilterPermanent("Sliver", " for each other Sliver on the battlefield");
+    public GrinningDemon(UUID ownerId) {
+        super(ownerId, 153, "Grinning Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Demon");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-    static {
-        countfilter.add(new AnotherPredicate());
+        // At the beginning of your upkeep, you lose 2 life.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
+        // Morph {2}{B}{B}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}{B}")));
     }
 
-    public SliverLegion(UUID ownerId) {
-        super(ownerId, 158, "Sliver Legion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "FUT";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sliver");
-
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
-
-        // All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
-    }
-
-    public SliverLegion(final SliverLegion card) {
+    public GrinningDemon(final GrinningDemon card) {
         super(card);
     }
 
     @Override
-    public SliverLegion copy() {
-        return new SliverLegion(this);
+    public GrinningDemon copy() {
+        return new GrinningDemon(this);
     }
 }

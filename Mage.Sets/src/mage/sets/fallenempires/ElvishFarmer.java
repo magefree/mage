@@ -25,41 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.archenemy;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.abilities.effects.keyword.FatesealEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class SpinIntoMyth extends CardImpl {
+public class ElvishFarmer extends mage.sets.masterseditionii.ElvishFarmer {
 
-    public SpinIntoMyth(UUID ownerId) {
-        super(ownerId, 8, "Spin into Myth", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "ARC";
-
-        // Put target creature on top of its owner's library, then fateseal 2.
-        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new FatesealEffect(2);
-        effect.setText(", then fateseal 2. <i>(To fateseal 2, look at the top two cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order.)</i>");
-        this.getSpellAbility().addEffect(effect);
+    public ElvishFarmer(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 71;
+        this.expansionSetCode = "FEM";
     }
 
-    public SpinIntoMyth(final SpinIntoMyth card) {
+    public ElvishFarmer(final ElvishFarmer card) {
         super(card);
     }
 
     @Override
-    public SpinIntoMyth copy() {
-        return new SpinIntoMyth(this);
+    public ElvishFarmer copy() {
+        return new ElvishFarmer(this);
     }
 }

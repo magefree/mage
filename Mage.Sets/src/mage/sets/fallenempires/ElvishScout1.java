@@ -25,59 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PreventDamageByTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class DreamscapeArtist extends CardImpl {
+public class ElvishScout1 extends CardImpl {
 
-    public DreamscapeArtist(UUID ownerId) {
-        super(ownerId, 40, "Dreamscape Artist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature you control");
+
+    static {
+        filter.add(new AttackingPredicate());
+    }
+
+    public ElvishScout1(UUID ownerId) {
+        super(ownerId, 75, "Elvish Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Elf");
+        this.subtype.add("Scout");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {2}{U}, {tap}, Discard a card, Sacrifice a land: Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay),
-                new ManaCostsImpl("{2}{U}"));
+        // {G}, {tap}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardCardCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
+        effect.setText("Prevent all combat damage that would be dealt to");
+        ability.addEffect(effect);
+        effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true);
+        effect.setText("and dealt by it this turn");
+        ability.addEffect(effect);
+        ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    public DreamscapeArtist(final DreamscapeArtist card) {
+    public ElvishScout1(final ElvishScout1 card) {
         super(card);
     }
 
     @Override
-    public DreamscapeArtist copy() {
-        return new DreamscapeArtist(this);
+    public ElvishScout1 copy() {
+        return new ElvishScout1(this);
     }
 }

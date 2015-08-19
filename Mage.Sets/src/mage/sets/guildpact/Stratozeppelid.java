@@ -25,55 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.common.CanBlockOnlyFlyingAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author KholdFuzion
-
+ * @author LoneFox
  */
-public class SliverLegion extends CardImpl {
+public class Stratozeppelid extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
-    private static final FilterPermanent countfilter = new FilterPermanent("Sliver", " for each other Sliver on the battlefield");
+    public Stratozeppelid(UUID ownerId) {
+        super(ownerId, 36, "Stratozeppelid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "GPT";
+        this.subtype.add("Beast");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-    static {
-        countfilter.add(new AnotherPredicate());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Stratozeppelid can block only creatures with flying.
+        this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public SliverLegion(UUID ownerId) {
-        super(ownerId, 158, "Sliver Legion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "FUT";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sliver");
-
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
-
-        // All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
-    }
-
-    public SliverLegion(final SliverLegion card) {
+    public Stratozeppelid(final Stratozeppelid card) {
         super(card);
     }
 
     @Override
-    public SliverLegion copy() {
-        return new SliverLegion(this);
+    public Stratozeppelid copy() {
+        return new Stratozeppelid(this);
     }
 }

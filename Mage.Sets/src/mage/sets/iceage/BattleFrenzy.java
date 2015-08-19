@@ -25,55 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.ObjectColor;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author KholdFuzion
-
+ * @author LoneFox
  */
-public class SliverLegion extends CardImpl {
+public class BattleFrenzy extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
-    private static final FilterPermanent countfilter = new FilterPermanent("Sliver", " for each other Sliver on the battlefield");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("green creatures");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nongreen creatures");
 
     static {
-        countfilter.add(new AnotherPredicate());
+        filter1.add(new ColorPredicate(ObjectColor.GREEN));
+        filter2.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    public SliverLegion(UUID ownerId) {
-        super(ownerId, 158, "Sliver Legion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "FUT";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sliver");
 
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
+    public BattleFrenzy(UUID ownerId) {
+        super(ownerId, 175, "Battle Frenzy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        this.expansionSetCode = "ICE";
 
-        // All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
+        // Green creatures you control get +1/+1 until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter1));
+        // Nongreen creatures you control get +1/+0 until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter2));
     }
 
-    public SliverLegion(final SliverLegion card) {
+    public BattleFrenzy(final BattleFrenzy card) {
         super(card);
     }
 
     @Override
-    public SliverLegion copy() {
-        return new SliverLegion(this);
+    public BattleFrenzy copy() {
+        return new BattleFrenzy(this);
     }
 }

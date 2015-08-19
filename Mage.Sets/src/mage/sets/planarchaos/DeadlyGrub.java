@@ -25,70 +25,68 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.keyword.VanishingSacrificeAbility;
+import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class GoldmeadowLookout extends CardImpl {
+public class DeadlyGrub extends CardImpl {
 
-    public GoldmeadowLookout(UUID ownerId) {
-        super(ownerId, 22, "Goldmeadow Lookout", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "FUT";
-        this.subtype.add("Kithkin");
-        this.subtype.add("Spellshaper");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    public DeadlyGrub(UUID ownerId) {
+        super(ownerId, 69, "Deadly Grub", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "PLC";
+        this.subtype.add("Insect");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        // {W}, {tap}, Discard a card: Put a 1/1 white Kithkin Soldier creature token named Goldmeadow Harrier onto the battlefield. It has "{W}, {tap}: Tap target creature."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoldmeadowHarrierToken()), new ManaCostsImpl("{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardCardCost());
+        // Vanishing 3
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
+        ability.setRuleVisible(false);
         this.addAbility(ability);
+        this.addAbility(new VanishingUpkeepAbility(3));
+        this.addAbility(new VanishingSacrificeAbility());
+        // When Deadly Grub dies, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield.
+        this.addAbility(new ConditionalTriggeredAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DeadlyGrubToken(), 1)),
+            new LastTimeCounterRemovedCondition(), "When {this} dies, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield."));
     }
 
-    public GoldmeadowLookout(final GoldmeadowLookout card) {
+    public DeadlyGrub(final DeadlyGrub card) {
         super(card);
     }
 
     @Override
-    public GoldmeadowLookout copy() {
-        return new GoldmeadowLookout(this);
+    public DeadlyGrub copy() {
+        return new DeadlyGrub(this);
     }
 }
 
-class GoldmeadowHarrierToken extends Token {
-
-    public GoldmeadowHarrierToken() {
-        super("Goldmeadow Harrier", "1/1 white Kithkin Soldier creature token named Goldmeadow Harrier with \"{W}, {T}: Tap target creature.\"");
-        this.setOriginalExpansionSetCode("FUT");
+class DeadlyGrubToken extends Token {
+    DeadlyGrubToken() {
+        super("Insect", "6/1 green Insect creature token with shroud");
         cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Kithkin");
-        subtype.add("Soldier");
-        power = new MageInt(1);
+        color.setGreen(true);
+        subtype.add("Insect");
+        power = new MageInt(6);
         toughness = new MageInt(1);
-
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ShroudAbility.getInstance());
     }
 }

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AlluringScent extends CardImpl {
 
     public AlluringScent(UUID ownerId) {
-        super(ownerId, 61, "Alluring Scent", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
+        super(ownerId, 80, "Alluring Scent", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
         this.expansionSetCode = "POR";
 
         // All creatures able to block target creature this turn do so.

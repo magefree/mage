@@ -56,8 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class VitasporeThallid extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Saproling");
     static {
         filter.add(new SubtypePredicate("Saproling"));
     }
@@ -73,11 +73,11 @@ public class VitasporeThallid extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
         // Remove three spore counters from Vitaspore Thallid: Put a 1/1 green Saproling creature token onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new SaprolingToken()), 
+                new CreateTokenEffect(new SaprolingToken()),
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // Sacrifice a Saproling: Target creature gains haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

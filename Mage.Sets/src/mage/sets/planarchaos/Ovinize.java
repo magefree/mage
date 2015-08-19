@@ -28,6 +28,7 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
@@ -50,7 +51,9 @@ public class Ovinize extends CardImpl {
         // Target creature loses all abilities and becomes 0/1 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(0, 1, Duration.EndOfTurn));
+        Effect effect = new SetPowerToughnessTargetEffect(0, 1, Duration.EndOfTurn);
+        effect.setText("and has base power and toughness 0/1");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public Ovinize(final Ovinize card) {

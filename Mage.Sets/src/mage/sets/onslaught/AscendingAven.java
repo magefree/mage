@@ -25,55 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.common.CanBlockOnlyFlyingAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author KholdFuzion
-
+ * @author LoneFox
  */
-public class SliverLegion extends CardImpl {
+public class AscendingAven extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
-    private static final FilterPermanent countfilter = new FilterPermanent("Sliver", " for each other Sliver on the battlefield");
+    public AscendingAven(UUID ownerId) {
+        super(ownerId, 68, "Ascending Aven", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Bird");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-    static {
-        countfilter.add(new AnotherPredicate());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Ascending Aven can block only creatures with flying.
+        this.addAbility(new CanBlockOnlyFlyingAbility());
+        // Morph {2}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
-    public SliverLegion(UUID ownerId) {
-        super(ownerId, 158, "Sliver Legion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "FUT";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sliver");
-
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
-
-        // All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
-    }
-
-    public SliverLegion(final SliverLegion card) {
+    public AscendingAven(final AscendingAven card) {
         super(card);
     }
 
     @Override
-    public SliverLegion copy() {
-        return new SliverLegion(this);
+    public AscendingAven copy() {
+        return new AscendingAven(this);
     }
 }

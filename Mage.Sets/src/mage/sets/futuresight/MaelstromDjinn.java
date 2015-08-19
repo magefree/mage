@@ -25,59 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.VanishingSacrificeAbility;
+import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
+import mage.counters.CounterType;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class DreamscapeArtist extends CardImpl {
+public class MaelstromDjinn extends CardImpl {
 
-    public DreamscapeArtist(UUID ownerId) {
-        super(ownerId, 40, "Dreamscape Artist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Spellshaper");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public MaelstromDjinn(UUID ownerId) {
+        super(ownerId, 39, "Maelstrom Djinn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{U}");
+        this.expansionSetCode = "FUT";
+        this.subtype.add("Djinn");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(6);
 
-        // {2}{U}, {tap}, Discard a card, Sacrifice a land: Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay),
-                new ManaCostsImpl("{2}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardCardCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Morph {2}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
+        // When Maelstrom Djinn is turned face up, put two time counters on it and it gains vanishing.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(2)));
+        Effect effect = new GainAbilitySourceEffect(new VanishingUpkeepAbility(0), Duration.WhileOnBattlefield);
+        effect.setText("and it gains vanishing");
+        ability.addEffect(effect);
+        effect = new GainAbilitySourceEffect(new VanishingSacrificeAbility(), Duration.WhileOnBattlefield);
+        effect.setText("");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
-    public DreamscapeArtist(final DreamscapeArtist card) {
+    public MaelstromDjinn(final MaelstromDjinn card) {
         super(card);
     }
 
     @Override
-    public DreamscapeArtist copy() {
-        return new DreamscapeArtist(this);
+    public MaelstromDjinn copy() {
+        return new MaelstromDjinn(this);
     }
 }

@@ -25,55 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.VanishingSacrificeAbility;
+import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.counters.CounterType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author KholdFuzion
-
+ * @author LoneFox
  */
-public class SliverLegion extends CardImpl {
+public class Tidewalker extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
-    private static final FilterPermanent countfilter = new FilterPermanent("Sliver", " for each other Sliver on the battlefield");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island you control");
 
     static {
-        countfilter.add(new AnotherPredicate());
+        filter.add(new SubtypePredicate("Island"));
     }
 
-    public SliverLegion(UUID ownerId) {
-        super(ownerId, 158, "Sliver Legion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "FUT";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sliver");
+    public Tidewalker(UUID ownerId) {
+        super(ownerId, 49, "Tidewalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "PLC";
+        this.subtype.add("Elemental");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
+        // Tidewalker enters the battlefield with a time counter on it for each Island you control.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(0), new PermanentsOnBattlefieldCount(filter), true), "with a time counter on it for each Island you control"));
+        // Vanishing
+        this.addAbility(new VanishingUpkeepAbility(0));
+        this.addAbility(new VanishingSacrificeAbility());
+        // Tidewalker's power and toughness are each equal to the number of time counters on it.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new CountersCount(CounterType.TIME), Duration.WhileOnBattlefield)));                                  }
 
-        // All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
-    }
-
-    public SliverLegion(final SliverLegion card) {
+    public Tidewalker(final Tidewalker card) {
         super(card);
     }
 
     @Override
-    public SliverLegion copy() {
-        return new SliverLegion(this);
+    public Tidewalker copy() {
+        return new Tidewalker(this);
     }
 }
