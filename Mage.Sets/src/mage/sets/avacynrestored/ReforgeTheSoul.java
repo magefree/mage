@@ -30,7 +30,10 @@ package mage.sets.avacynrestored;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -50,9 +53,11 @@ public class ReforgeTheSoul extends CardImpl {
         super(ownerId, 151, "Reforge the Soul", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "AVR";
 
-
         // Each player discards his or her hand, then draws seven cards.
-        this.getSpellAbility().addEffect(new ReforgeTheSoulEffect());
+        this.getSpellAbility().addEffect(new DiscardHandAllEffect());
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText(", then draws seven cards");
+        this.getSpellAbility().addEffect(effect);
 
         // Miracle {1}{R}
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{R}")));
@@ -94,7 +99,6 @@ class ReforgeTheSoulEffect extends OneShotEffect {
                     for (Card card : player.getHand().getCards(game)) {
                         player.discard(card, source, game);
                     }
-
                     player.drawCards(7, game);
                 }
             }

@@ -48,7 +48,6 @@ public class Windfall extends CardImpl {
         super(ownerId, 111, "Windfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "USG";
 
-
         // Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
         this.getSpellAbility().addEffect(new WindfallEffect());
     }
@@ -64,6 +63,7 @@ public class Windfall extends CardImpl {
 }
 
 class WindfallEffect extends OneShotEffect {
+
     WindfallEffect() {
         super(Outcome.Discard);
         staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.";
@@ -76,11 +76,11 @@ class WindfallEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int maxDiscarded = 0;
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        if (sourcePlayer == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        for (UUID playerId : sourcePlayer.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 int discarded = 0;
@@ -94,7 +94,7 @@ class WindfallEffect extends OneShotEffect {
                 }
             }
         }
-        for (UUID playerId : sourcePlayer.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.drawCards(maxDiscarded, game);

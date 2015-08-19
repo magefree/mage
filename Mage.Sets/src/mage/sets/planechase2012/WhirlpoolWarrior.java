@@ -27,11 +27,9 @@
  */
 package mage.sets.planechase2012;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,7 +39,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -99,16 +100,23 @@ class WhirlpoolWarriorTriggeredEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int cardsHand = controller.getHand().size();
-            if (cardsHand > 0){
-                for (Card card: controller.getHand().getCards(game)) {
-                    if (card != null) {
-                        controller.removeFromHand(card, game);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            Map<UUID, Integer> cardsToDraw = new LinkedHashMap<>();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    int cardsInHand = player.getHand().size();
+                    if (cardsInHand > 0) {
+                        cardsToDraw.put(playerId, cardsInHand);
                     }
+                    player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                    player.shuffleLibrary(game);
                 }
-                controller.shuffleLibrary(game);
-                controller.drawCards(cardsHand, game);
+            }
+            for (UUID playerId : cardsToDraw.keySet()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.drawCards(cardsToDraw.get(playerId), game);
+                }
             }
             return true;
         }
@@ -141,8 +149,8 @@ class WhirlpoolWarriorActivatedEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int cardsHand = player.getHand().size();
-                    if (cardsHand > 0){
-                        for (Card card: player.getHand().getCards(game)) {
+                    if (cardsHand > 0) {
+                        for (Card card : player.getHand().getCards(game)) {
                             if (card != null) {
                                 player.removeFromHand(card, game);
                                 card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);

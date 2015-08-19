@@ -28,15 +28,17 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,12 +53,15 @@ public class TimeSpiral extends CardImpl {
         super(ownerId, 103, "Time Spiral", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "USG";
 
-
         // Exile Time Spiral. Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. You untap up to six lands.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
         this.getSpellAbility().addEffect(new TimeSpiralEffect());
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText(", then draws seven cards");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new UntapLandsEffect(6));
     }
+
     public TimeSpiral(final TimeSpiral card) {
         super(card);
     }
@@ -71,7 +76,7 @@ class TimeSpiralEffect extends OneShotEffect {
 
     public TimeSpiralEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
+        staticText = "Each player shuffles his or her hand and graveyard into his or her library";
     }
 
     public TimeSpiralEffect(final TimeSpiralEffect effect) {
@@ -81,17 +86,16 @@ class TimeSpiralEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId: sourcePlayer.getInRange()) {
+        for (UUID playerId : sourcePlayer.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card card: player.getHand().getCards(game)) {
+                for (Card card : player.getHand().getCards(game)) {
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }                    
-                for (Card card: player.getGraveyard().getCards(game)) {
+                }
+                for (Card card : player.getGraveyard().getCards(game)) {
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }                  
+                }
                 player.shuffleLibrary(game);
-                player.drawCards(7, game);
             }
         }
         return true;

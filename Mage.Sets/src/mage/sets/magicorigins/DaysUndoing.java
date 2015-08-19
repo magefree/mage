@@ -31,9 +31,10 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.EndTurnEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -54,6 +55,9 @@ public class DaysUndoing extends CardImpl {
 
         // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. If it's your turn, end the turn.
         this.getSpellAbility().addEffect(new DaysUndoingEffect());
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText(", then draws seven cards");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new EndTurnEffect(), MyTurnCondition.getInstance(), "If it's your turn, end the turn"));
     }
 
@@ -71,7 +75,7 @@ class DaysUndoingEffect extends OneShotEffect {
 
     public DaysUndoingEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
+        staticText = "Each player shuffles his or her hand and graveyard into his or her library";
     }
 
     public DaysUndoingEffect(final DaysUndoingEffect effect) {
@@ -80,26 +84,14 @@ class DaysUndoingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId : sourcePlayer.getInRange()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card card : player.getHand().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-                game.informPlayers(player.getLogName() + " puts his or her hand and graveyard into his or her library");
+                player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                player.moveCards(player.getGraveyard(), Zone.GRAVEYARD, Zone.LIBRARY, source, game);
                 player.shuffleLibrary(game);
 
-            }
-        }
-        game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects
-        for (UUID playerId : sourcePlayer.getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.drawCards(7, game);
             }
         }
         return true;
