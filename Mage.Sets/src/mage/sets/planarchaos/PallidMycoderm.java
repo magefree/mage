@@ -59,7 +59,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class PallidMycoderm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control that's a Fungus or a Saproling");
-    private static final FilterControlledCreaturePermanent filterSaproling = new FilterControlledCreaturePermanent("Saproling");
+    private static final FilterControlledCreaturePermanent filterSaproling = new FilterControlledCreaturePermanent("a Saproling");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.or(new SubtypePredicate("Fungus"), new SubtypePredicate("Saproling")));
@@ -79,10 +79,9 @@ public class PallidMycoderm extends CardImpl {
         // Remove three spore counters from Pallid Mycoderm: Put a 1/1 green Saproling creature token onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // Sacrifice a Saproling: Each creature you control that's a Fungus or a Saproling gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new BoostAllEffect(1,1,Duration.EndOfTurn, filter, false), 
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BoostAllEffect(1,1,Duration.EndOfTurn, filter, false),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filterSaproling, false))));
-        
     }
 
     public PallidMycoderm(final PallidMycoderm card) {
