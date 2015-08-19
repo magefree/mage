@@ -685,9 +685,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param fromZone if null, this info isn't postet
-     * @return
+     * @return Set<Cards> that were successful moved to graveyard
      */
-    boolean moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
+    Set<Card> moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to

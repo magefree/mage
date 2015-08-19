@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -2925,45 +2926,52 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (cards.isEmpty()) {
             return true;
         }
-        game.fireEvent(new ZoneChangeGroupEvent(cards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
+        Set<Card> successfulMovedCards = new LinkedHashSet<>();
         switch (toZone) {
             case EXILED:
-                boolean result = false;
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
                     boolean withName = (fromZone.equals(Zone.BATTLEFIELD) || fromZone.equals(Zone.STACK)) || !card.isFaceDown(game);
-                    result |= moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, withName);
+                    if (moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, withName)) {
+                        successfulMovedCards.add(card);
+                    }
                 }
-                return result;
+                break;
             case GRAVEYARD:
-                return moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
+                successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
+                break;
             case HAND:
-                result = false;
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
                     boolean hideCard = fromZone.equals(Zone.LIBRARY)
                             || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
-                    result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard);
+                    if (moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard)) {
+                        successfulMovedCards.add(card);
+                    }
                 }
-                return result;
+                break;
             case BATTLEFIELD:
-                result = false;
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
-                    result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, !card.isFaceDown(game));
+                    if (putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, !card.isFaceDown(game))) {
+                        successfulMovedCards.add(card);
+                    }
                 }
-                return result;
+                break;
             case LIBRARY:
-                result = false;
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
                     boolean withName = fromZone.equals(Zone.BATTLEFIELD) || !card.isFaceDown(game);
-                    result |= moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, withName);
+                    if (moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, withName)) {
+                        successfulMovedCards.add(card);
+                    }
                 }
-                return result;
+                break;
             default:
                 throw new UnsupportedOperationException("to Zone not supported yet");
         }
+        game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
+        return successfulMovedCards.size() > 0;
     }
 
     @Override
@@ -3016,9 +3024,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
-        boolean result = true;
+    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         UUID sourceId = source == null ? null : source.getSourceId();
+        Set<Card> movedCards = new LinkedHashSet<>();
         while (!allCards.isEmpty()) {
             // identify cards from one owner
             Cards cards = new CardsImpl();
@@ -3058,21 +3066,28 @@ public abstract class PlayerImpl implements Player, Serializable {
                         cards.remove(targetObjectId);
                         if (card != null) {
                             fromZone = game.getState().getZone(card.getId());
-                            result &= choosingPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone);
+                            if (choosingPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone)) {
+                                movedCards.add(card);
+                            }
                         }
                         target.clearChosen();
                     }
                     if (cards.size() == 1) {
-                        result &= choosingPlayer.moveCardToGraveyardWithInfo(cards.getCards(game).iterator().next(), sourceId, game, fromZone);
+                        Card card = cards.getCards(game).iterator().next();
+                        if (card != null && choosingPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone)) {
+                            movedCards.add(card);
+                        }
                     }
                 } else {
                     for (Card card : cards.getCards(game)) {
-                        result &= choosingPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone);
+                        if (choosingPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone)) {
+                            movedCards.add(card);
+                        }
                     }
                 }
             }
         }
-        return result;
+        return movedCards;
     }
 
     @Override

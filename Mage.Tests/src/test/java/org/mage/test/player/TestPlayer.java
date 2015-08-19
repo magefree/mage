@@ -1717,7 +1717,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         return computerPlayer.moveCardsToGraveyardWithInfo(allCards, source, game, fromZone);
     }
 
