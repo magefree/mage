@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author anonymous
  */
 public class LymphSliver extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
 
     public LymphSliver(UUID ownerId) {
@@ -57,7 +57,8 @@ public class LymphSliver extends CardImpl {
 
         // All Sliver creatures have absorb 1.
         Ability absorb = new SimpleStaticAbility(Zone.BATTLEFIELD, new SliverAbsorbEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(absorb, Duration.WhileOnBattlefield, filter, "absorb 1. <i>(If a source would deal damage to a Sliver, prevent 1 of that damage.)</i>")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(absorb,
+            Duration.WhileOnBattlefield, filter, "All Sliver creatures have absorb 1. <i>(If a source would deal damage to a Sliver, prevent 1 of that damage.)</i>")));
     }
 
     public LymphSliver(final LymphSliver card) {
@@ -73,7 +74,7 @@ public class LymphSliver extends CardImpl {
 class SliverAbsorbEffect extends PreventionEffectImpl {
     public SliverAbsorbEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
-        this.staticText = "If a source would deal damage to a Sliver, prevent 1 of that damage";
+        this.staticText = "Absorb 1 <i>(If a source would deal damage to this creature, prevent 1 of that damage.</i>)";
     }
 
     public SliverAbsorbEffect(SliverAbsorbEffect effect) {

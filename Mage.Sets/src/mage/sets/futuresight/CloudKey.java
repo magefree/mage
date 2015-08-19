@@ -31,45 +31,45 @@ import mage.util.CardUtil;
  * @author nick.myers
  */
 public class CloudKey extends CardImpl {
-    
+
     public CloudKey(UUID ownerId) {
         super(ownerId, 160, "Cloud Key", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "FUT";
-        
-        // As Cloud Key enters the battlefield, choose artifact, creature, 
+
+        // As Cloud Key enters the battlefield, choose artifact, creature,
         // enchantment, instant, or sorcery.
         this.addAbility(new AsEntersBattlefieldAbility(new CloudKeyChooseTypeEffect()));
-        
+
         // Spells of the chosen type cost {1} less to cast
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CloudKeyCostModificationEffect()));
     }
-    
+
     @Override
     public CloudKey copy() {
         return new CloudKey(this);
     }
-    
+
     public CloudKey(final CloudKey card) {
         super(card);
     }
 }
 
 class CloudKeyChooseTypeEffect extends OneShotEffect {
-    
+
     public CloudKeyChooseTypeEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Choose a spell type";
+        this.staticText = "choose artifact, creature, enchantment, instant, or sorcery.";
     }
-    
+
     public CloudKeyChooseTypeEffect(final CloudKeyChooseTypeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CloudKeyChooseTypeEffect copy() {
         return new CloudKeyChooseTypeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -90,20 +90,20 @@ class CloudKeyChooseTypeEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }
 
 class CloudKeyCostModificationEffect extends CostModificationEffectImpl {
 
     public CloudKeyCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "choose artifact, creature, enchantment, instant, or sorcery. Spells of the chosen type cost {1} less to cast.";
+        this.staticText = "Spells of the chosen type cost {1} less to cast.";
     }
-    
+
     public CloudKeyCostModificationEffect(final CloudKeyCostModificationEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CloudKeyCostModificationEffect copy() {
         return new CloudKeyCostModificationEffect(this);
@@ -118,15 +118,15 @@ class CloudKeyCostModificationEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        
+
         if (abilityToModify instanceof SpellAbility && abilityToModify.getControllerId().equals(source.getControllerId())) {
             Card card = game.getCard(abilityToModify.getSourceId());
-            if (card.getCardType().toString().contains((String) game.getState().getValue(source.getSourceId().toString() + "_CloudKey"))) {                
+            if (card.getCardType().toString().contains((String) game.getState().getValue(source.getSourceId().toString() + "_CloudKey"))) {
                 return true;
             }
         }
-        
+
         return false;
-    }    
+    }
 }
 
