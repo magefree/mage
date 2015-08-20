@@ -1,5 +1,9 @@
 package org.mage.server.test;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.constants.MatchTimeLimit;
@@ -35,19 +39,43 @@ public class ServerTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ServerMain.main(new String[] {"-fastDbMode=true"});
+//                ServerMain.main(new String[] {"-fastDbMode=true"});
+                ServerMain.main(new String[] {""});
             }
         }).start();
-        client = new TestClient();
         try {
-            Thread.sleep(10000);  //wait for server to startup
-        } catch (InterruptedException ex) {
+            waitForServer("ACTIVE");  //wait for server to startup
+        } catch (InterruptedException | IOException ex) {
         }
+        client = new TestClient();
         client.connect(USERNAME);
         try {
             Thread.sleep(10000);  //wait for user to join main room
         } catch (InterruptedException ex) {
         }
+    }
+    
+    public static void waitForServer(String message) throws FileNotFoundException, IOException, InterruptedException {
+        FileReader fr = new FileReader("mageserver.log");
+        BufferedReader br = new BufferedReader(fr);
+
+        do {    //read until end-of-file
+            String line = br.readLine();
+            if (line == null) {
+                break;
+            }
+        } while (true); 
+
+        do {    //read only new lines
+            String line = br.readLine();
+            if (line == null) {
+                Thread.sleep(1000);
+            } 
+            else {
+                if (line.contains(message))
+                    break;
+            }
+        } while (true);
     }
     
     @AfterClass
