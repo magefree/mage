@@ -29,8 +29,9 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -49,9 +50,11 @@ public class Timetwister extends CardImpl {
         super(ownerId, 85, "Timetwister", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "LEA";
 
-
         // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards.
         this.getSpellAbility().addEffect(new TimetwisterEffect());
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText(", then draws seven cards");
+        this.getSpellAbility().addEffect(effect);
 
     }
 
@@ -69,7 +72,7 @@ class TimetwisterEffect extends OneShotEffect {
 
     public TimetwisterEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
+        staticText = "Each player shuffles his or her hand and graveyard into his or her library";
     }
 
     public TimetwisterEffect(final TimetwisterEffect effect) {
@@ -78,26 +81,13 @@ class TimetwisterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId: sourcePlayer.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card card: player.getHand().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-                for (Card card: player.getGraveyard().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
+                player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                player.moveCards(player.getGraveyard(), Zone.GRAVEYARD, Zone.LIBRARY, source, game);
                 player.shuffleLibrary(game);
-                
             }
-        }
-        game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects 
-        for (UUID playerId: sourcePlayer.getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.drawCards(7, game);
-            }            
         }
         return true;
     }

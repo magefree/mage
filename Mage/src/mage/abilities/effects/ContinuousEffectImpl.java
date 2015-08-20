@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities.effects;
 
 import java.util.ArrayList;
@@ -69,7 +68,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected boolean affectedObjectsSet = false;
     protected List<MageObjectReference> affectedObjectList = new ArrayList<>();
     protected boolean temporary = false;
-    
+
     // until your next turn
     protected int startingTurn;
     protected UUID startingControllerId;
@@ -96,7 +95,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.used = effect.used;
         this.discarded = effect.discarded;
         this.affectedObjectsSet = effect.affectedObjectsSet;
-        this.affectedObjectList.addAll(effect.affectedObjectList); 
+        this.affectedObjectList.addAll(effect.affectedObjectList);
         this.temporary = effect.temporary;
         this.startingTurn = effect.startingTurn;
         this.startingControllerId = effect.startingControllerId;
@@ -148,8 +147,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     /**
-     * Sets the discarded state of the effect. So it
-     * will be removed on next check.
+     * Sets the discarded state of the effect. So it will be removed on next
+     * check.
      */
     @Override
     public void discard() {
@@ -160,7 +159,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     public void init(Ability source, Game game) {
         targetPointer.init(game, source);
         //20100716 - 611.2c
-        if (AbilityType.ACTIVATED.equals(source.getAbilityType())  
+        if (AbilityType.ACTIVATED.equals(source.getAbilityType())
                 || AbilityType.SPELL.equals(source.getAbilityType())
                 || AbilityType.TRIGGERED.equals(source.getAbilityType())) {
             if (layer != null) {
@@ -174,11 +173,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                     case PTChangingEffects_7:
                         this.affectedObjectsSet = true;
                 }
-            }
-            else {
-                if (hasLayer(Layer.CopyEffects_1) || hasLayer(Layer.ControlChangingEffects_2) || hasLayer(Layer.TextChangingEffects_3) ||
-                    hasLayer(Layer.TypeChangingEffects_4) || hasLayer(Layer.ColorChangingEffects_5) || hasLayer(Layer.AbilityAddingRemovingEffects_6) ||
-                    hasLayer(Layer.PTChangingEffects_7)) {
+            } else {
+                if (hasLayer(Layer.CopyEffects_1) || hasLayer(Layer.ControlChangingEffects_2) || hasLayer(Layer.TextChangingEffects_3)
+                        || hasLayer(Layer.TypeChangingEffects_4) || hasLayer(Layer.ColorChangingEffects_5) || hasLayer(Layer.AbilityAddingRemovingEffects_6)
+                        || hasLayer(Layer.PTChangingEffects_7)) {
                     this.affectedObjectsSet = true;
                 }
             }
@@ -226,7 +224,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             return true;
         }
         if (toughness instanceof DomainValue) {
-            return ((DomainValue)toughness).getAmount() < 0;
+            return ((DomainValue) toughness).getAmount() < 0;
         }
         return false;
     }
@@ -237,8 +235,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     /**
-     * Returns the status if the effect is temporary added to the ContinuousEffects
-     * @return 
+     * Returns the status if the effect is temporary added to the
+     * ContinuousEffects
+     *
+     * @return
      */
     @Override
     public boolean isTemporary() {

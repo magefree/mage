@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -54,10 +54,8 @@ public class PhyrexianWarBeast1 extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
-        Effect effect = new SacrificeTargetEffect();
-        effect.setText("sacrifice a land");
-        Ability ability = new LeavesBattlefieldTriggeredAbility(effect, false);
-        effect = new DamageControllerEffect(1);
+        Ability ability = new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterControlledLandPermanent(), 1, ""), false);
+        Effect effect = new DamageControllerEffect(1);
         effect.setText("and {this} deals 1 damage to you");
         ability.addEffect(effect);
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));

@@ -31,12 +31,11 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -53,10 +52,12 @@ public class CommanderGrevenIlVec extends CardImpl {
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+
+        // Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)
         this.addAbility(FearAbility.getInstance());
+
+        // When Commander Greven il-Vec enters the battlefield, sacrifice a creature.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, ""), false));
     }
 
     public CommanderGrevenIlVec(final CommanderGrevenIlVec card) {

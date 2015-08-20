@@ -123,6 +123,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DDM", "Duel Decks: Jace vs. Vraska");
         setsAliases.put("DDN", "Duel Decks: Speed vs. Cunning");
         setsAliases.put("DDO", "Duel Decks: Elspeth vs. Kiora");
+        setsAliases.put("DDP", "Duel Decks: Zendikar vs. Eldrazi");
         setsAliases.put("DGM", "Dragon's Maze");
         setsAliases.put("DIS", "Dissension");
         setsAliases.put("DKA", "Dark Ascension");

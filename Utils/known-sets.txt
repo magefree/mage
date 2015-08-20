@@ -39,6 +39,7 @@ Duel Decks: Phyrexia vs. the Coalition|phyrexiavsthecoalition|
 Duel Decks: Sorin vs. Tibalt|sorinvstibalt|
 Duel Decks: Speed vs. Cunning|speedvscunning|
 Duel Decks: Venser vs. Koth|venservskoth|
+Duel Decks: Zendikar vs. Eldrazi|zendikarvseldrazi|
 Eighth Edition|eighthedition|
 Eventide|eventide|
 Exodus|exodus|

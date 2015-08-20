@@ -30,23 +30,19 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -62,7 +58,10 @@ public class WineOfBloodAndIron extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true),
                 new GenericManaCost(4));
-        ability.addEffect(new WineOfBloodAndIronEffect());
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect()), false);
+        effect.setText("Sacrifice {this} at the beginning of the next end step");
+        ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -74,34 +73,5 @@ public class WineOfBloodAndIron extends CardImpl {
     @Override
     public WineOfBloodAndIron copy() {
         return new WineOfBloodAndIron(this);
-    }
-}
-
-class WineOfBloodAndIronEffect extends OneShotEffect {
-
-    public WineOfBloodAndIronEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "Sacrifice {this} at the beginning of the next end step";
-    }
-
-    public WineOfBloodAndIronEffect(final WineOfBloodAndIronEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WineOfBloodAndIronEffect copy() {
-        return new WineOfBloodAndIronEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this");
-        sacrificeEffect.setTargetPointer(new FixedTarget(source.getSourceId()));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
-        return true;
     }
 }

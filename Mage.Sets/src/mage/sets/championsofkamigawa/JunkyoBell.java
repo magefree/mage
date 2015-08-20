@@ -25,13 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,8 +37,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -58,8 +56,8 @@ public class JunkyoBell extends CardImpl {
     public JunkyoBell(UUID ownerId) {
         super(ownerId, 258, "Junkyo Bell", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "CHK";
-        
-        // At the beginning of your upkeep, you may have target creature you control get +X/+X until end of turn, 
+
+        // At the beginning of your upkeep, you may have target creature you control get +X/+X until end of turn,
         // where X is the number of creatures you control. If you do, sacrifice that creature at the beginning of the next end step.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(amount, amount, Duration.EndOfTurn), TargetController.YOU, true);
@@ -77,37 +75,36 @@ public class JunkyoBell extends CardImpl {
         return new JunkyoBell(this);
     }
 
-    
-private class JunkyoBellSacrificeEffect extends OneShotEffect {
+    private class JunkyoBellSacrificeEffect extends OneShotEffect {
 
-    public JunkyoBellSacrificeEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "If you do, sacrifice that creature at the beginning of the next end step";
-    }
-
-    public JunkyoBellSacrificeEffect(final JunkyoBellSacrificeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public JunkyoBellSacrificeEffect copy() {
-        return new JunkyoBellSacrificeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null) {
-            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice boosted " + creature.getName());
-            sacrificeEffect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
+        public JunkyoBellSacrificeEffect() {
+            super(Outcome.Sacrifice);
+            this.staticText = "If you do, sacrifice that creature at the beginning of the next end step";
         }
-        return false;
-    }
+
+        public JunkyoBellSacrificeEffect(final JunkyoBellSacrificeEffect effect) {
+            super(effect);
+        }
+
+        @Override
+        public JunkyoBellSacrificeEffect copy() {
+            return new JunkyoBellSacrificeEffect(this);
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Permanent creature = game.getPermanent(source.getFirstTarget());
+            if (creature != null) {
+                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice boosted " + creature.getName(), source.getControllerId());
+                sacrificeEffect.setTargetPointer(new FixedTarget(creature, game));
+                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                game.addDelayedTriggeredAbility(delayedAbility);
+                return true;
+            }
+            return false;
+        }
     }
 }

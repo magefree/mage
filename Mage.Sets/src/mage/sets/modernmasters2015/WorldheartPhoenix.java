@@ -65,10 +65,10 @@ public class WorldheartPhoenix extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. 
+        // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
         // If you do, it enters the battlefield with two +1/+1 counters on it.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new WorldheartPhoenixPlayEffect());
-        ability.addEffect(new EntersBattlefieldEffect(new WorldheartPhoenixEntersBattlefieldEffect(), 
+        ability.addEffect(new EntersBattlefieldEffect(new WorldheartPhoenixEntersBattlefieldEffect(),
                 "If you do, it enters the battlefield with two +1/+1 counters on it"));
         this.addAbility(ability);
 
@@ -137,7 +137,8 @@ public class WorldheartPhoenix extends CardImpl {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-                if (obj != null && obj instanceof SpellAbility) {
+                if (obj != null && obj instanceof SpellAbility
+                        && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                     // TODO: No perfect solution because there could be other effects that allow to cast the card for this mana cost
                     if (((SpellAbility) obj).getManaCosts().getText().equals("{W}{U}{B}{R}{G}")) {
                         permanent.addCounters(CounterType.P1P1.createInstance(2), game);

@@ -30,6 +30,7 @@ package mage.sets.stronghold;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
@@ -99,7 +100,8 @@ class HeartstoneEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)) {
+        if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)
+                || (abilityToModify.getAbilityType().equals(AbilityType.MANA) && (abilityToModify instanceof ActivatedAbility))) {
             // Activated abilities of creatures
             Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
             if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {

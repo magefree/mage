@@ -54,6 +54,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.counters.Counters;
 import mage.game.combat.Combat;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
@@ -436,4 +437,8 @@ public interface Game extends MageItem, Serializable {
     void rollbackTurns(int turnsToRollback);
 
     boolean executingRollback();
+
+    void setEnterWithCounters(UUID sourceId, Counters counters);
+
+    Counters getEnterWithCounters(UUID sourceId);
 }

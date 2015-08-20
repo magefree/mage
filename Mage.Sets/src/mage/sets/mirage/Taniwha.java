@@ -51,7 +51,7 @@ import mage.players.Player;
 public class Taniwha extends CardImpl {
 
     public Taniwha(UUID ownerId) {
-        super(ownerId, 95, "Taniwha", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 95, "Taniwha", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "MIR";
         this.supertype.add("Legendary");
         this.subtype.add("Serpent");

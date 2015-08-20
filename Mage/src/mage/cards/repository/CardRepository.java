@@ -63,7 +63,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 41;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 32;
+    private static final long CARD_CONTENT_VERSION = 33;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -245,6 +245,24 @@ public enum CardRepository {
             subtypes.add("Survivor");
             subtypes.add("Tetravite");
             subtypes.add("Triskelavite");
+
+        } catch (SQLException ex) {
+        }
+        return subtypes;
+    }
+
+    public Set<String> getLandTypes() {
+        TreeSet<String> subtypes = new TreeSet<>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("subtypes");
+            qb.where().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                subtypes.addAll(card.getSubTypes());
+            }
+            // Removing Dryad because of Dryad Arbor
+            subtypes.remove("Dryad");
 
         } catch (SQLException ex) {
         }

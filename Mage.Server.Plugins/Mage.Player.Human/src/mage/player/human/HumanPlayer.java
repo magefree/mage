@@ -629,21 +629,23 @@ public class HumanPlayer extends PlayerImpl {
                 if (object != null) {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
-                        if (object instanceof Card && ((Card) object).isFaceDown(game)) {
-                            revealFaceDownCard((Card) object, game);
+                        if (object instanceof Card
+                                && ((Card) object).isFaceDown(game)
+                                && lookAtFaceDownCard((Card) object, game)) {
                             result = true;
-                        }
-                        Player actingPlayer = null;
-                        if (game.getPriorityPlayerId().equals(playerId)) {
-                            actingPlayer = this;
-                        } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
-                            actingPlayer = game.getPlayer(game.getPriorityPlayerId());
-                        }
-                        if (actingPlayer != null) {
-                            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = actingPlayer.getUseableActivatedAbilities(object, zone, game);
-                            if (useableAbilities != null && useableAbilities.size() > 0) {
-                                activateAbility(useableAbilities, object, game);
-                                result = true;
+                        } else {
+                            Player actingPlayer = null;
+                            if (game.getPriorityPlayerId().equals(playerId)) {
+                                actingPlayer = this;
+                            } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
+                                actingPlayer = game.getPlayer(game.getPriorityPlayerId());
+                            }
+                            if (actingPlayer != null) {
+                                LinkedHashMap<UUID, ActivatedAbility> useableAbilities = actingPlayer.getUseableActivatedAbilities(object, zone, game);
+                                if (useableAbilities != null && useableAbilities.size() > 0) {
+                                    activateAbility(useableAbilities, object, game);
+                                    result = true;
+                                }
                             }
                         }
                     }

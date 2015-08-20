@@ -25,20 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -47,21 +42,20 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SupremeVerdict extends CardImpl {
 
-    public SupremeVerdict (UUID ownerId) {
+    public SupremeVerdict(UUID ownerId) {
         super(ownerId, 201, "Supreme Verdict", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{W}{U}");
         this.expansionSetCode = "RTR";
-
 
         // Supreme Verdict can't be countered.
         Ability ability = new CantBeCounteredAbility();
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // Destroy all creatures.
+        // Destroy all creatures. 
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
     }
 
-    public SupremeVerdict (final SupremeVerdict card) {
+    public SupremeVerdict(final SupremeVerdict card) {
         super(card);
     }
 

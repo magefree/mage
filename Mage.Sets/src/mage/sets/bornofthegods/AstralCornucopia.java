@@ -77,6 +77,7 @@ public class AstralCornucopia extends CardImpl {
 }
 
 class AstralCornucopiaEffect extends OneShotEffect {
+
     public AstralCornucopiaEffect() {
         super(Outcome.Benefit);
     }
@@ -90,9 +91,8 @@ class AstralCornucopiaEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                 int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
                 if (amount > 0) {
                     permanent.addCounters(CounterType.CHARGE.createInstance(amount), game);
@@ -130,7 +130,7 @@ class AstralCornucopiaManaAbility extends ManaAbility {
         if (sourcePermanent != null) {
             int counters = sourcePermanent.getCounters().getCount(CounterType.CHARGE.getName());
             if (counters > 0) {
-                netMana.add(new Mana(0,0,0,0,0,0,counters));
+                netMana.add(new Mana(0, 0, 0, 0, 0, 0, counters));
             }
         }
         return netMana;

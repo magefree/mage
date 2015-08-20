@@ -54,8 +54,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author fireshoes
  */
 public class PsychotropeThallid extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Saproling");
     static {
         filter.add(new SubtypePredicate("Saproling"));
     }
@@ -71,11 +71,11 @@ public class PsychotropeThallid extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
         // Remove three spore counters from Psychotrope Thallid: Put a 1/1 green Saproling creature token onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new SaprolingToken()), 
+                new CreateTokenEffect(new SaprolingToken()),
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // {1}, Sacrifice a Saproling: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new DrawCardSourceControllerEffect(1), 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DrawCardSourceControllerEffect(1),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false)));
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);

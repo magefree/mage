@@ -74,6 +74,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -161,7 +162,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are availble
-    protected boolean ALLOW_INTERRUPT = true; // change this for test / debugging purposes to false to switch off interrupts while debugging
+    protected boolean ALLOW_INTERRUPT = true;     // change this for test / debugging purposes to false to switch off interrupts while debugging
 
     private transient Map<Mana, Card> unplayable = new TreeMap<>();
     private transient List<Card> playableNonInstant = new ArrayList<>();
@@ -522,8 +523,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
             if (outcome.isGood()) {
-                ArrayList<Card> cardsInHand = new ArrayList<>(hand.getCards(game));
-                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() > target.getTargets().size()) {
+                Cards cards = new CardsImpl(target.possibleTargets(source.getSourceId(), getId(), game));
+                ArrayList<Card> cardsInHand = new ArrayList<>(cards.getCards(game));
+                while (!target.isChosen()
+                        && target.possibleTargets(source.getSourceId(), getId(), game).size() > 0
+                        && target.getMaxNumberOfTargets() > target.getTargets().size()) {
                     Card card = pickBestCard(cardsInHand, null, target, source, game);
                     if (card != null) {
                         if (target.canTarget(getId(), card.getId(), source, game)) {
@@ -684,17 +688,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        if (target instanceof TargetCardInHand) {
-            List<Card> cards = new ArrayList<>();
-            cards.addAll(this.hand.getCards(game));
-            while (!target.isChosen() && !cards.isEmpty()) {
-                Card pick = pickTarget(cards, outcome, target, source, game);
-                if (pick != null) {
-                    target.addTarget(pick.getId(), source, game);
-                }
-            }
-            return target.isChosen();
-        }
         if (target instanceof TargetSpell) {
             if (game.getStack().size() > 0) {
                 Iterator<StackObject> it = game.getStack().iterator();
@@ -709,6 +702,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
         if (target instanceof TargetSpellOrPermanent) {
+            // TODO: Also check if a spell should be selected
             List<Permanent> targets;
             boolean outcomeTargets = true;
             if (outcome.isGood()) {
@@ -720,10 +714,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = threats(null, source == null ? null : source.getSourceId(), ((TargetSpellOrPermanent) target).getPermanentFilter(), game, target.getTargets());
                 Collections.reverse(targets);
                 outcomeTargets = false;
-                //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
-                if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                if (((TargetSpellOrPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
                     if (!outcomeTargets || target.getMaxNumberOfTargets() <= target.getTargets().size()) {
                         return true;

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
@@ -79,6 +78,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Voice of Resurgence", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+        // Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
         addCard(Zone.HAND, playerB, "Flamebreak");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.");
@@ -97,7 +97,41 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Elemental", 2);
 
-        
+    }
+
+    /**
+     * Kiki-Jiki, Mirror Breaker creates a copy of Humble Defector, activate
+     * Humble defector, token gets sacrificed while under opponents control.
+     */
+    @Test
+    public void testTokenNotSacrificedIfNotControlled() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        // Tap target creature you don't control.
+        // Overload {3}{U}
+        addCard(Zone.HAND, playerA, "Blustersquall", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Kiki-Jiki, Mirror Breaker", 1);
+        // {T}: Draw two cards. Target opponent gains control of Humble Defector. Activate this ability only during your turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Humble Defector", 1);
+
+        castSpell(2, PhaseStep.UPKEEP, playerA, "Blustersquall", "Humble Defector"); // Tap nontoken Defector so only the Token can be used later
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.");
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Draw two cards. Target opponent gains control");
+
+        setStopAt(3, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertHandCount(playerB, 3); // normal 1 draw of turn two + 2 from Defector
+
+        assertGraveyardCount(playerA, "Blustersquall", 1);
+        assertPermanentCount(playerB, "Humble Defector", 1);
+        assertPermanentCount(playerA, "Humble Defector", 1);
+
     }
 
 }

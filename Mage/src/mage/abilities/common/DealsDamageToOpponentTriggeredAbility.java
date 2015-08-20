@@ -31,7 +31,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -45,7 +44,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
 
     public DealsDamageToOpponentTriggeredAbility(Effect effect) {
         this(effect, false, false);
-   }
+    }
 
     public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);

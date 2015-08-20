@@ -42,7 +42,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -57,6 +56,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
 public class VastwoodHydra extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
@@ -103,9 +103,8 @@ class VastwoodHydraEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                 int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
                 if (amount > 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
@@ -126,7 +125,7 @@ class VastwoodHydraDistributeEffect extends OneShotEffect {
 
     public VastwoodHydraDistributeEffect() {
         super(Outcome.BoostCreature);
-                this.staticText = "distribute a number of +1/+1 counters equal to the number of +1/+1 counters on {this} among any number of creatures you control";
+        this.staticText = "distribute a number of +1/+1 counters equal to the number of +1/+1 counters on {this} among any number of creatures you control";
     }
 
     public VastwoodHydraDistributeEffect(final VastwoodHydraDistributeEffect effect) {
@@ -142,7 +141,7 @@ class VastwoodHydraDistributeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (source.getTargets().size() > 0) {
             Target multiTarget = source.getTargets().get(0);
-            for (UUID target: multiTarget.getTargets()) {
+            for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
                     permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);

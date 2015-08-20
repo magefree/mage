@@ -1,3 +1,9 @@
+#Generate|TOK:DDP|Eldrazi Spawn 1|
+#Generate|TOK:DDP|Eldrazi Spawn 2|
+#Generate|TOK:DDP|Eldrazi Spawn 3|
+#Generate|TOK:DDP|Hellion|
+#Generate|TOK:DDP|Plant|
+
 #Generate|TOK:MM2|Eldrazi Spawn 1|
 #Generate|TOK:MM2|Eldrazi Spawn 2|
 #Generate|TOK:MM2|Eldrazi Spawn 3|

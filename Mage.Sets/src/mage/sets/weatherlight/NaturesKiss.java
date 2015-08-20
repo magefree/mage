@@ -30,20 +30,17 @@ package mage.sets.weatherlight;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.common.ExileTopCardOfGraveyardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -66,7 +63,7 @@ public class NaturesKiss extends CardImpl {
         
         // {1}, Exile the top card of your graveyard: Enchanted creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}"));
-        ability.addCost(new ExileFromTopOfGraveyardCost(1));
+        ability.addCost(new ExileTopCardOfGraveyardCost(1));
         this.addAbility(ability);
     }
 
@@ -77,50 +74,5 @@ public class NaturesKiss extends CardImpl {
     @Override
     public NaturesKiss copy() {
         return new NaturesKiss(this);
-    }
-}
-
-class ExileFromTopOfGraveyardCost extends CostImpl {
-
-    private final int amount;
-
-    public ExileFromTopOfGraveyardCost(int amount) {
-        this.amount = amount;
-        this.text = "Exile the top card of your graveyard";
-    }
-
-    public ExileFromTopOfGraveyardCost(ExileFromTopOfGraveyardCost cost) {
-        super(cost);
-        this.amount = cost.amount;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Player controller = game.getPlayer(controllerId);
-        if(controller == null) {
-            return false;
-        }
-        return controller.getGraveyard().size() >= amount;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        Player controller = game.getPlayer(controllerId);
-        if(controller != null) {
-            Card topCard = null;
-            for (Card card :controller.getGraveyard().getCards(game)) {
-                topCard = card;
-            }
-            if (topCard != null) {
-                controller.moveCardToExileWithInfo(topCard, null, "", ability.getSourceId(), game, Zone.GRAVEYARD, true);
-                paid = true;
-            }
-        }
-        return paid;
-    }
-
-    @Override
-    public ExileFromTopOfGraveyardCost copy() {
-        return new ExileFromTopOfGraveyardCost(this);
     }
 }

@@ -51,8 +51,8 @@ public class IvoryCraneNetsuke extends CardImpl {
 
         // At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), TargetController.YOU, false);
-        CardsInHandCondition contition = new CardsInHandCondition(CardsInHandCondition.CountType.MORE_THAN, 6);
-        this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life."));
+        CardsInHandCondition condition = new CardsInHandCondition(CardsInHandCondition.CountType.MORE_THAN, 6);
+        this.addAbility(new ConditionalTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life."));
         
     }
 
