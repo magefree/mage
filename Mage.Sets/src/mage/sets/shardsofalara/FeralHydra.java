@@ -28,7 +28,6 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import static javax.xml.bind.JAXBIntrospector.getValue;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -66,7 +65,7 @@ public class FeralHydra extends CardImpl {
         // Feral Hydra enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new FeralHydraEffect(), true));
         // {3}: Put a +1/+1 counter on Feral Hydra. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()) , new ManaCostsImpl("{3}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{3}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
@@ -81,7 +80,6 @@ public class FeralHydra extends CardImpl {
         return new FeralHydra(this);
     }
 }
-
 
 class FeralHydraEffect extends OneShotEffect {
 
@@ -99,10 +97,9 @@ class FeralHydraEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object obj = getValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
-                int amount = ((SpellAbility)obj).getManaCostsToPay().getX();
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
+                int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
                 if (amount > 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
                 }

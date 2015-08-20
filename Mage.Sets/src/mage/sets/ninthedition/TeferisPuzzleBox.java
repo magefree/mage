@@ -27,25 +27,22 @@
  */
 package mage.sets.ninthedition;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
-
-import java.util.UUID;
 
 /**
  *
  * @author noxx
-
+ *
  */
 public class TeferisPuzzleBox extends CardImpl {
 
@@ -87,30 +84,7 @@ class TeferisPuzzleBoxEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             int count = player.getHand().size();
-
-            // puts the cards in his or her hand on the bottom of his or her library in any order
-            Cards cards = new CardsImpl();
-            for (Card card : player.getHand().getCards(game)) {
-                cards.add(card.getId());
-            }
-            
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-            while (player.canRespond() && cards.size() > 1) {
-                player.choose(Outcome.Neutral, cards, target, game);
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                }
-                target.clearChosen();
-            }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-            player.getHand().clear();
-
-            // draws that many cards
+            player.putCardsOnBottomOfLibrary(player.getHand(), game, source, true);
             player.drawCards(count, game);
         }
         return true;

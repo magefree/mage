@@ -31,7 +31,6 @@
  *
  * Created on Jan 7, 2011, 2:15:48 PM
  */
-
 package mage.client.draft;
 
 import java.awt.Component;
@@ -123,14 +122,16 @@ public class DraftPanel extends javax.swing.JPanel {
 
     private static final CardsView emptyView = new CardsView();
 
-    /** Creates new form DraftPanel */
+    /**
+     * Creates new form DraftPanel
+     */
     public DraftPanel() {
         initComponents();
 
         draftBooster.setOpaque(false);
         draftPicks.setSortSetting(SortSettingDraft.getInstance());
         draftPicks.setOpaque(false);
-        
+
         popupMenuPickedArea = new JPopupMenu();
         addPopupMenuPickArea();
         this.add(popupMenuPickedArea);
@@ -142,18 +143,17 @@ public class DraftPanel extends javax.swing.JPanel {
         draftLeftPane.setOpaque(false);
 
         countdown = new Timer(1000,
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (--timeout > 0) {
-                        setTimeout(timeout);
-                    }
-                    else {
-                        setTimeout(0);
-                        countdown.stop();
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (--timeout > 0) {
+                            setTimeout(timeout);
+                        } else {
+                            setTimeout(0);
+                            countdown.stop();
+                        }
                     }
                 }
-            }
         );
     }
 
@@ -192,13 +192,13 @@ public class DraftPanel extends javax.swing.JPanel {
         }
     }
 
-    public void updateDraft(DraftView draftView) {        
-        if (draftView.getSets().size() != 3){
+    public void updateDraft(DraftView draftView) {
+        if (draftView.getSets().size() != 3) {
             // Random draft
             this.txtPack1.setText("Random Boosters");
             this.txtPack2.setText("Random Boosters");
             this.txtPack3.setText("Random Boosters");
-        }else{
+        } else {
             this.txtPack1.setText(draftView.getSets().get(0));
             this.txtPack2.setText(draftView.getSets().get(1));
             this.txtPack3.setText(draftView.getSets().get(2));
@@ -215,13 +215,13 @@ public class DraftPanel extends javax.swing.JPanel {
         int left = draftView.getPlayers().size() - right;
         int height = left * 18;
         lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
-        Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() == 2 ? "/draft/table_left.png":"/draft/table_right.png");
+        Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() == 2 ? "/draft/table_left.png" : "/draft/table_right.png");
         BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth());
         lblTableImage.setIcon(new ImageIcon(resizedTable));
-        
+
         int count = 0;
         int numberPlayers = draftView.getPlayers().size();
-        for(String playerName: draftView.getPlayers()) {
+        for (String playerName : draftView.getPlayers()) {
             count++;
             setPlayerNameToLabel(playerName, count, numberPlayers);
         }
@@ -232,13 +232,13 @@ public class DraftPanel extends javax.swing.JPanel {
         int right = players / 2;
         int left = players - right;
         if (index <= left) {
-            // left side down (1 - 8)         
+            // left side down (1 - 8)
             tablePosition = index;
         } else {
             // right side up (16 - 9)
             tablePosition = 9 + right - (index - left);
         }
-        switch(tablePosition) {
+        switch (tablePosition) {
             case 1:
                 lblPlayer01.setText(name);
                 break;
@@ -296,46 +296,46 @@ public class DraftPanel extends javax.swing.JPanel {
         loadCardsToPickedCardsArea(draftPickView.getPicks());
 
         this.draftPicks.clearCardEventListeners();
-        this.draftPicks.addCardEventListener(new Listener<Event> () {
-                @Override
-                public void event(Event event) {
-                    if (event.getEventName().equals("show-popup-menu")) {
-                        if (event.getSource() != null) {
-                            // Popup Menu Card
-                            cardIdPopupMenu = ((SimpleCardView)event.getSource()).getId();
-                            popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
-                        } else {
-                            // Popup Menu area
-                            popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
-                        }
+        this.draftPicks.addCardEventListener(new Listener<Event>() {
+            @Override
+            public void event(Event event) {
+                if (event.getEventName().equals("show-popup-menu")) {
+                    if (event.getSource() != null) {
+                        // Popup Menu Card
+                        cardIdPopupMenu = ((SimpleCardView) event.getSource()).getId();
+                        popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
+                    } else {
+                        // Popup Menu area
+                        popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
                     }
                 }
             }
+        }
         );
 
         // lower area that shows the booster
         draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
         this.draftBooster.clearCardEventListeners();
         this.draftBooster.addCardEventListener(
-            new Listener<Event> () {
-                @Override
-                public void event(Event event) {
-                    if (event.getEventName().equals("pick-a-card")) {
-                        SimpleCardView source = (SimpleCardView) event.getSource();
-                        DraftPickView view = session.sendCardPick(draftId, source.getId(), cardsHidden);
-                        if (view != null) {
-                            loadCardsToPickedCardsArea(view.getPicks());
-                            draftBooster.loadBooster(emptyView, bigCard);                            
-                            Plugins.getInstance().getActionCallback().hidePopup();
-                            setMessage("Waiting for other players");
+                new Listener<Event>() {
+                    @Override
+                    public void event(Event event) {
+                        if (event.getEventName().equals("pick-a-card")) {
+                            SimpleCardView source = (SimpleCardView) event.getSource();
+                            DraftPickView view = session.sendCardPick(draftId, source.getId(), cardsHidden);
+                            if (view != null) {
+                                loadCardsToPickedCardsArea(view.getPicks());
+                                draftBooster.loadBooster(emptyView, bigCard);
+                                Plugins.getInstance().getActionCallback().hidePopup();
+                                setMessage("Waiting for other players");
+                            }
+                        }
+                        if (event.getEventName().equals("mark-a-card")) {
+                            SimpleCardView source = (SimpleCardView) event.getSource();
+                            session.sendCardMark(draftId, source.getId());
                         }
                     }
-                    if (event.getEventName().equals("mark-a-card")) {
-                        SimpleCardView source = (SimpleCardView) event.getSource();
-                        session.sendCardMark(draftId, source.getId());
-                    }
                 }
-            }
         );
         setMessage("Pick a card");
         if (!MageFrame.getInstance().isActive()) {
@@ -352,7 +352,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
     private void loadCardsToPickedCardsArea(SimpleCardsView pickedCards) {
         this.pickedCards = pickedCards;
-        for (Map.Entry<UUID,SimpleCardView> entry: pickedCards.entrySet()) {
+        for (Map.Entry<UUID, SimpleCardView> entry : pickedCards.entrySet()) {
             if (!cardsHidden.contains(entry.getKey())) {
                 pickedCardsShown.put(entry.getKey(), entry.getValue());
             }
@@ -360,22 +360,22 @@ public class DraftPanel extends javax.swing.JPanel {
         draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCardsShown), bigCard, null);
     }
 
-    private void setTimeout(int s){
-        int minute = s/60;
-        int second = s - (minute*60);
+    private void setTimeout(int s) {
+        int minute = s / 60;
+        int second = s - (minute * 60);
         String text;
-        if(minute < 10){
+        if (minute < 10) {
             text = "0" + Integer.toString(minute) + ":";
-        }else{
+        } else {
             text = Integer.toString(minute) + ":";
         }
-        if(second < 10){
+        if (second < 10) {
             text = text + "0" + Integer.toString(second);
-        }else{
+        } else {
             text = text + Integer.toString(second);
         }
         this.txtTimeRemaining.setText(text);
-        if (s==6 && !draftBooster.isEmptyGrid()) {
+        if (s == 6 && !draftBooster.isEmptyGrid()) {
             AudioManager.playOnCountdown1();
         }
     }
@@ -386,7 +386,7 @@ public class DraftPanel extends javax.swing.JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((DraftPane)c).removeDraft();
+            ((DraftPane) c).removeDraft();
         }
     }
 
@@ -420,7 +420,6 @@ public class DraftPanel extends javax.swing.JPanel {
         });
 
         // popupMenuPickedArea.addSeparator();
-
     }
 
     private void addPopupMenuCardPanel() {
@@ -439,7 +438,6 @@ public class DraftPanel extends javax.swing.JPanel {
         });
 
         // popupMenuCardPanel.addSeparator();
-
     }
 
     private void hideThisCard(UUID card) {
@@ -472,7 +470,7 @@ public class DraftPanel extends javax.swing.JPanel {
         }
         if (currentBooster != null) {
             String lastPick = getCardName(getLastPick(pickView.getPicks().values()));
-            if (lastPick != null) {
+            if (lastPick != null && currentBooster.length > 1) {
                 logPick(lastPick);
             }
             currentBooster = null;
@@ -490,7 +488,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
     private void setCurrentBoosterForLog(SimpleCardsView booster) {
         LinkedList<String> cards = new LinkedList<>();
-        for (SimpleCardView simple: booster.values()) {
+        for (SimpleCardView simple : booster.values()) {
             String cardName = getCardName(simple);
             if (cardName != null) {
                 cards.add(cardName);
@@ -515,7 +513,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
     private Path pathToDraftLog() {
         File saveDir = new File("gamelogs");
-        if(!saveDir.exists()) {
+        if (!saveDir.exists()) {
             saveDir.mkdirs();
         }
         return new File(saveDir, logFilename).toPath();
@@ -545,11 +543,10 @@ public class DraftPanel extends javax.swing.JPanel {
         return cardInfo != null ? cardInfo.getName() : null;
     }
 
-
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

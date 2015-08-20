@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.guildpact;
 
 import java.util.UUID;
@@ -49,19 +48,18 @@ import mage.target.TargetPlayer;
  */
 public class BurningTreeShaman extends CardImpl {
 
-    public BurningTreeShaman (UUID ownerId) {
+    public BurningTreeShaman(UUID ownerId) {
         super(ownerId, 105, "Burning-Tree Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Centaur");
         this.subtype.add("Shaman");
-
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(new BurningTreeShamanTriggeredAbility());
     }
 
-    public BurningTreeShaman (final BurningTreeShaman card) {
+    public BurningTreeShaman(final BurningTreeShaman card) {
         super(card);
     }
 
@@ -72,6 +70,7 @@ public class BurningTreeShaman extends CardImpl {
 }
 
 class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
+
     BurningTreeShamanTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
         this.addTarget(new TargetPlayer());
@@ -94,7 +93,7 @@ class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
+        if (stackAbility != null && stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
             this.getTargets().get(0).add(event.getPlayerId(), game);
             return true;
         }

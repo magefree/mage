@@ -63,7 +63,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 41;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 32;
+    private static final long CARD_CONTENT_VERSION = 33;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -250,7 +250,7 @@ public enum CardRepository {
         }
         return subtypes;
     }
-    
+
     public Set<String> getLandTypes() {
         TreeSet<String> subtypes = new TreeSet<>();
         try {

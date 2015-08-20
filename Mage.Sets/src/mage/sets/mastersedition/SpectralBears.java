@@ -52,7 +52,7 @@ public class SpectralBears extends CardImpl {
 
     public SpectralBears(UUID ownerId) {
         super(ownerId, 131, "Spectral Bears", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "HML";
+        this.expansionSetCode = "MED";
         this.subtype.add("Bear");
         this.subtype.add("Spirit");
         this.power = new MageInt(3);

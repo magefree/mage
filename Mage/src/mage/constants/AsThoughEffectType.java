@@ -17,7 +17,7 @@ public enum AsThoughEffectType {
     DAMAGE,
     HEXPROOF,
     PAY,
-    REVEAL_FACE_DOWN,
+    LOOK_AT_FACE_DOWN,
     SPEND_ANY_MANA,
     TARGET
 }

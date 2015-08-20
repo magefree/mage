@@ -78,6 +78,7 @@ import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -207,6 +208,9 @@ public abstract class GameImpl implements Game, Serializable {
     private final int startLife;
     protected PlayerList playerList;
 
+    // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
+    protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
+
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
         this.id = UUID.randomUUID();
         this.range = range;
@@ -246,6 +250,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.priorityTime = game.priorityTime;
         this.saveGame = game.saveGame;
         this.startLife = game.startLife;
+        this.enterWithCounters.putAll(game.enterWithCounters);
     }
 
     @Override
@@ -2652,6 +2657,7 @@ public abstract class GameImpl implements Game, Serializable {
                     for (Player playerObject : getPlayers().values()) {
                         if (playerObject.isHuman() && playerObject.isInGame()) {
                             playerObject.abort();
+                            playerObject.resetPlayerPassedActions();
                         }
                     }
                     fireUpdatePlayersEvent();
@@ -2663,6 +2669,22 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public boolean executingRollback() {
         return executingRollback;
+    }
+
+    @Override
+    public void setEnterWithCounters(UUID sourceId, Counters counters) {
+        if (counters == null) {
+            if (enterWithCounters.containsKey(sourceId)) {
+                enterWithCounters.remove(sourceId);
+            }
+            return;
+        }
+        enterWithCounters.put(sourceId, counters);
+    }
+
+    @Override
+    public Counters getEnterWithCounters(UUID sourceId) {
+        return enterWithCounters.get(sourceId);
     }
 
 }

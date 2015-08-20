@@ -139,7 +139,7 @@ class HideawayExileEffect extends OneShotEffect {
 class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
 
     public HideawayLookAtFaceDownCardEffect() {
-        super(AsThoughEffectType.REVEAL_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }
 

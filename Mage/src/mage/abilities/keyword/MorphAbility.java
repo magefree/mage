@@ -237,7 +237,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             if (player != null) {
                 this.resetMorph();
                 if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
-                    if (player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(getCosts().getText()).append(" ?").toString(), ability, game)) {
+                    if (player.chooseUse(Outcome.Benefit, "Cast this card as a 2/2 face-down creature for " + getCosts().getText() + " ?", ability, game)) {
                         activateMorph(game);
                         // change mana costs
                         ability.getManaCostsToPay().clear();

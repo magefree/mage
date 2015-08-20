@@ -61,7 +61,7 @@ public class LifebloodHydra extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Lifeblood Hydra enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new LifebloodHydraComesIntoPlayEffect(), "with X +1/+1 counters on it"));
 
@@ -95,7 +95,8 @@ class LifebloodHydraComesIntoPlayEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && !permanent.isFaceDown(game)) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
+            if (obj != null && obj instanceof SpellAbility
+                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
                 int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
                 if (amount > 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
@@ -111,6 +112,7 @@ class LifebloodHydraComesIntoPlayEffect extends OneShotEffect {
     }
 
 }
+
 class LifebloodHydraEffect extends OneShotEffect {
 
     public LifebloodHydraEffect() {

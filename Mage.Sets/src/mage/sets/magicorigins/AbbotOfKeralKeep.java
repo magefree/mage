@@ -42,7 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
@@ -65,7 +64,7 @@ public class AbbotOfKeralKeep extends CardImpl {
 
         // Prowess
         this.addAbility(new ProwessAbility());
-        
+
         // When Abbot of Keral Keep enters the battlefield, exile the top card of your library. Until end of turn, you may play that card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AbbotOfKeralKeepExileEffect()));
     }
@@ -104,10 +103,10 @@ class AbbotOfKeralKeepExileEffect extends OneShotEffect {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {
-                String exileName = new StringBuilder(sourcePermanent.getIdName()).append(" <this card may be played the turn it was exiled>").toString();
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), exileName, source.getSourceId(), game, Zone.LIBRARY, true);
+                String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled>";
+                controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
                 ContinuousEffect effect = new AbbotOfKeralKeepCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
+                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                 game.addEffect(effect, source);
             }
             return true;
@@ -139,7 +138,7 @@ class AbbotOfKeralKeepCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId) &&
-                objectId.equals(getTargetPointer().getFirst(game, source));
+        return source.getControllerId().equals(affectedControllerId)
+                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

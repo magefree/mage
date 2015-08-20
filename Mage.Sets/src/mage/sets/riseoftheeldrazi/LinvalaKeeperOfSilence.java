@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
@@ -48,7 +47,7 @@ import mage.game.permanent.Permanent;
  */
 public class LinvalaKeeperOfSilence extends CardImpl {
 
-    public LinvalaKeeperOfSilence (UUID ownerId) {
+    public LinvalaKeeperOfSilence(UUID ownerId) {
         super(ownerId, 33, "Linvala, Keeper of Silence", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "ROE";
         this.supertype.add("Legendary");
@@ -57,12 +56,14 @@ public class LinvalaKeeperOfSilence extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
+        // Activated abilities of creatures your opponents control can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LinvalaKeeperOfSilenceCantActivateEffect()));
     }
 
-    public LinvalaKeeperOfSilence (final LinvalaKeeperOfSilence card) {
+    public LinvalaKeeperOfSilence(final LinvalaKeeperOfSilence card) {
         super(card);
     }
 
