@@ -45,9 +45,9 @@ import mage.game.permanent.token.Token;
  *
  * @author anonymous
  */
-public class RukhEgg extends CardImpl {
+public class RukhEgg1 extends CardImpl {
 
-    public RukhEgg(UUID ownerId) {
+    public RukhEgg1(UUID ownerId) {
         super(ownerId, 52, "Rukh Egg", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "ARN";
         this.subtype.add("Bird");
@@ -61,13 +61,13 @@ public class RukhEgg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RukhEgg(final RukhEgg card) {
+    public RukhEgg1(final RukhEgg1 card) {
         super(card);
     }
 
     @Override
-    public RukhEgg copy() {
-        return new RukhEgg(this);
+    public RukhEgg1 copy() {
+        return new RukhEgg1(this);
     }
 }
 

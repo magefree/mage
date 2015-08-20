@@ -115,7 +115,7 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you discards a card, " + super.getRule();
+        return "Whenever you discard a card, " + super.getRule();
     }
 }
 

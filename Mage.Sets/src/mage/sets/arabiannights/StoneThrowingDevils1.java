@@ -25,30 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
+import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.MageInt;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.cards.CardImpl;
 
 /**
  *
- * @author anonymous
+ * @author North
  */
-public class RukhEgg extends mage.sets.arabiannights.RukhEgg1 {
+public class StoneThrowingDevils1 extends CardImpl {
 
-    public RukhEgg(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 214;
-        this.expansionSetCode = "9ED";
-        this.rarity = Rarity.RARE;
+    public StoneThrowingDevils1(UUID ownerId) {
+        super(ownerId, 14, "Stone-Throwing Devils", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "ARN";
+        this.subtype.add("Devil");
+
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public RukhEgg(final RukhEgg card) {
+    public StoneThrowingDevils1(final StoneThrowingDevils1 card) {
         super(card);
     }
 
     @Override
-    public RukhEgg copy() {
-        return new RukhEgg(this);
+    public StoneThrowingDevils1 copy() {
+        return new StoneThrowingDevils1(this);
     }
 }

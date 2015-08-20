@@ -25,53 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.antiquities;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.IslandwalkAbility;
-import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Laxika
+ *
+ * @author North
  */
-public class FishliverOil extends CardImpl {
+public class UrzasMine4 extends mage.sets.fifthedition.UrzasMine {
 
-    public FishliverOil(UUID ownerId) {
-        super(ownerId, 17, "Fishliver Oil", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "ARN";
-        this.subtype.add("Aura");
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // Enchanted creature has islandwalk.        
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(new IslandwalkAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+    public UrzasMine4(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 78;
+        this.expansionSetCode = "ATQ";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public FishliverOil(final FishliverOil card) {
+    public UrzasMine4(final UrzasMine4 card) {
         super(card);
     }
 
     @Override
-    public FishliverOil copy() {
-        return new FishliverOil(this);
+    public UrzasMine4 copy() {
+        return new UrzasMine4(this);
     }
 }

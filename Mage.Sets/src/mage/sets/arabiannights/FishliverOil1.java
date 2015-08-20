@@ -25,30 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.IslandwalkAbility;
+import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
- * @author anonymous
+ * @author Laxika
  */
-public class RukhEgg extends mage.sets.arabiannights.RukhEgg1 {
+public class FishliverOil1 extends CardImpl {
 
-    public RukhEgg(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 214;
-        this.expansionSetCode = "9ED";
-        this.rarity = Rarity.RARE;
+    public FishliverOil1(UUID ownerId) {
+        super(ownerId, 17, "Fishliver Oil", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.expansionSetCode = "ARN";
+        this.subtype.add("Aura");
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature has islandwalk.        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new GainAbilityAttachedEffect(new IslandwalkAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public RukhEgg(final RukhEgg card) {
+    public FishliverOil1(final FishliverOil1 card) {
         super(card);
     }
 
     @Override
-    public RukhEgg copy() {
-        return new RukhEgg(this);
+    public FishliverOil1 copy() {
+        return new FishliverOil1(this);
     }
 }

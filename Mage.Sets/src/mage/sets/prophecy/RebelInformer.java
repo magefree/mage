@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicates;
@@ -55,7 +56,7 @@ import mage.target.TargetPermanent;
  */
 public class RebelInformer extends CardImpl {
     
-    private static final FilterStackObject filterWhite = new FilterStackObject("white spells or abilities from white sources");
+    private static final FilterObject filterWhite = new FilterStackObject("white spells or abilities from white sources");
     private static final FilterPermanent filterRebel = new FilterPermanent("nontoken Rebel");
 
     static {

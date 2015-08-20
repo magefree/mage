@@ -25,30 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.antiquities;
 
 import java.util.UUID;
 import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
+ * @author North
  */
-public class WyluliWolf extends mage.sets.fifthedition.WyluliWolf {
+public class UrzasPowerPlant3 extends mage.sets.fifthedition.UrzasPowerPlant {
 
-    public WyluliWolf(UUID ownerId) {
+    public UrzasPowerPlant3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
-        this.expansionSetCode = "ARN";
-        this.rarity = Rarity.COMMON;
+        this.cardNumber = 81;
+        this.expansionSetCode = "ATQ";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public WyluliWolf(final WyluliWolf card) {
+    public UrzasPowerPlant3(final UrzasPowerPlant3 card) {
         super(card);
     }
 
     @Override
-    public WyluliWolf copy() {
-        return new WyluliWolf(this);
+    public UrzasPowerPlant3 copy() {
+        return new UrzasPowerPlant3(this);
     }
 }

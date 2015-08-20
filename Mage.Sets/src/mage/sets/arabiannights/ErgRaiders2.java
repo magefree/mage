@@ -25,30 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author anonymous
- */
-public class RukhEgg extends mage.sets.arabiannights.RukhEgg1 {
+ * @author LoneFox
 
-    public RukhEgg(UUID ownerId) {
+ */
+public class ErgRaiders2 extends mage.sets.fourthedition.ErgRaiders {
+
+    public ErgRaiders2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
-        this.expansionSetCode = "9ED";
-        this.rarity = Rarity.RARE;
+        this.cardNumber = 4;
+        this.expansionSetCode = "ARN";
     }
 
-    public RukhEgg(final RukhEgg card) {
+    public ErgRaiders2(final ErgRaiders2 card) {
         super(card);
     }
 
     @Override
-    public RukhEgg copy() {
-        return new RukhEgg(this);
+    public ErgRaiders2 copy() {
+        return new ErgRaiders2(this);
     }
 }
