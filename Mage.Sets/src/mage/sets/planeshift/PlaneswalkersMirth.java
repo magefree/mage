@@ -25,84 +25,82 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.SearchEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class InameDeathAspect extends CardImpl {
+public class PlaneswalkersMirth extends CardImpl {
 
-    public InameDeathAspect(UUID ownerId) {
-        super(ownerId, 118, "Iname, Death Aspect", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Spirit");
+    public PlaneswalkersMirth(UUID ownerId) {
+        super(ownerId, 12, "Planeswalker's Mirth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "PLS";
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new InameDeathAspectEffect(), true));
+        // {3}{W}: Target opponent reveals a card at random from his or her hand. You gain life equal to that card's converted mana cost.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersMirthEffect(), new ManaCostsImpl("{3}{W}"));
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
-    public InameDeathAspect(final InameDeathAspect card) {
+    public PlaneswalkersMirth(final PlaneswalkersMirth card) {
         super(card);
     }
 
     @Override
-    public InameDeathAspect copy() {
-        return new InameDeathAspect(this);
+    public PlaneswalkersMirth copy() {
+        return new PlaneswalkersMirth(this);
     }
 }
 
-class InameDeathAspectEffect extends SearchEffect {
+class PlaneswalkersMirthEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-
-    static {
-        filter.add(new SubtypePredicate("Spirit"));
+    public PlaneswalkersMirthEffect() {
+        super(Outcome.Damage);
+        staticText = "Target opponent reveals a card at random from his or her hand. You gain life equal to that card's converted mana cost";
     }
 
-    public InameDeathAspectEffect() {
-        super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);
-        staticText = "search your library for any number of Spirit cards and put them into your graveyard. If you do, shuffle your library";
-    }
-
-    public InameDeathAspectEffect(final InameDeathAspectEffect effect) {
+    public PlaneswalkersMirthEffect(final PlaneswalkersMirthEffect effect) {
         super(effect);
     }
 
     @Override
-    public InameDeathAspectEffect copy() {
-        return new InameDeathAspectEffect(this);
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                player.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+        if (opponent != null && player!= null && opponent.getHand().size() > 0) {
+            Cards revealed = new CardsImpl();
+            Card card = opponent.getHand().getRandom(game);
+            if (card != null) {
+                revealed.add(card);
+                opponent.revealCards("Planeswalker's Mirth", revealed, game);
+                player.gainLife(card.getManaCost().convertedManaCost(), game);
             }
-            player.shuffleLibrary(game);
             return true;
         }
         return false;
     }
+
+    @Override
+    public PlaneswalkersMirthEffect copy() {
+        return new PlaneswalkersMirthEffect(this);
+    }
+
 }
