@@ -20,7 +20,7 @@ public class PingMessageHandler extends SimpleChannelInboundHandler<PingMessage>
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, PingMessage msg) throws Exception {
         ctx.writeAndFlush(pong).addListener(WriteListener.getInstance());
-        logger.info("Received ping.  Sending pong");
+//        logger.info("Received ping.  Sending pong");
     }
     
 }
