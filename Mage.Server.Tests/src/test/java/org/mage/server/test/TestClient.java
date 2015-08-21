@@ -55,6 +55,10 @@ public class TestClient implements MageClient {
         return client.connect(connection, MageVersion.getCurrent());
     }
     
+    public void disconnect(boolean error) {
+        client.disconnect(error);
+    }
+    
     public boolean isConnected() {
         return client.isConnected();
     }
@@ -65,7 +69,7 @@ public class TestClient implements MageClient {
 
     @Override
     public void disconnected(boolean error) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // do nothing
     }
 
     @Override
