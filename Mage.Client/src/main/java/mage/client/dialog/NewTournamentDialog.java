@@ -113,6 +113,7 @@ public class NewTournamentDialog extends MageDialog {
             cbDeckType.setModel(new DefaultComboBoxModel(client.getServerState().getDeckTypes()));
 
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
+            cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));
             cbDraftCube.setModel(new DefaultComboBoxModel(client.getServerState().getDraftCubes()));
             cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
             // update player types
