@@ -191,7 +191,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 //this.cardTableSelector.loadCards(this.bigCard);
                 this.btnExit.setVisible(true);
                 this.btnImport.setVisible(true);
-                if (!MageFrame.getClient().getServerState().isTestMode()) {
+                if (MageFrame.getClient().getServerState() != null && !MageFrame.getClient().getServerState().isTestMode()) {
                     this.btnLoad.setVisible(true);
                 }
                 this.deckArea.showSideboard(true);

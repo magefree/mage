@@ -9,6 +9,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.choices.Choice;
 import mage.game.match.MatchOptions;
 import mage.interfaces.ServerState;
+import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.utils.MageVersion;
@@ -50,7 +51,7 @@ public class TestClient implements MageClient {
         connection.setSSL(true);
         connection.setUsername(userName);
         connection.setForceDBComparison(false);
-        connection.setUserData(new UserDataView(51, false, false, false, new UserSkipPrioritySteps(), "world", false));
+        connection.setUserData(new UserDataView(UserGroup.PLAYER, 51, false, false, false, new UserSkipPrioritySteps(), "world", false, false, false));
         return client.connect(connection, MageVersion.getCurrent());
     }
     
@@ -112,7 +113,7 @@ public class TestClient implements MageClient {
     }
 
     @Override
-    public void gameAsk(UUID gameId, GameView gameView, String question) {
+    public void gameAsk(UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -137,7 +138,7 @@ public class TestClient implements MageClient {
     }
 
     @Override
-    public void gamePlayMana(UUID gameId, GameView gameView, String message) {
+    public void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -260,4 +261,5 @@ public class TestClient implements MageClient {
     public void watchGame(UUID gameId, UUID chatId, GameView game) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
