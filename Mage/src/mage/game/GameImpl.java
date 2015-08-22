@@ -1136,10 +1136,10 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void sendPlayerAction(PlayerAction playerAction, UUID playerId) {
+    public void sendPlayerAction(PlayerAction playerAction, UUID playerId, Object data) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            player.sendPlayerAction(playerAction, this);
+            player.sendPlayerAction(playerAction, this, data);
         }
     }
 
@@ -1929,11 +1929,16 @@ public abstract class GameImpl implements Game, Serializable {
         playerQueryEventSource.target(playerId, message, cards, required, options);
     }
 
+    /**
+     * Only used from human players to select order triggered abilities go to
+     * the stack.
+     *
+     * @param playerId
+     * @param message
+     * @param abilities
+     */
     @Override
-    public void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
-        if (simulation) {
-            return;
-        }
+    public void fireSelectTargetTriggeredAbilityEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
         playerQueryEventSource.target(playerId, message, abilities);
     }
 

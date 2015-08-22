@@ -63,6 +63,7 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
@@ -108,6 +109,11 @@ public class HumanPlayer extends PlayerImpl {
 
     protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
     protected ManaCost currentlyUnpaidMana;
+
+    protected Set<UUID> triggerAutoOrderAbilityFirst = new HashSet<>();
+    protected Set<UUID> triggerAutoOrderAbilityLast = new HashSet<>();
+    protected Set<String> triggerAutoOrderNameFirst = new HashSet<>();
+    protected Set<String> triggerAutoOrderNameLast = new HashSet<>();
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
@@ -669,12 +675,39 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+        // try to set trigger auto order
+        List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
+        TriggeredAbility abilityOrderLast = null;
+        for (TriggeredAbility ability : abilities) {
+            if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
+                return ability;
+            }
+            if (triggerAutoOrderNameFirst.contains(ability.getRule())) {
+                return ability;
+            }
+            if (triggerAutoOrderAbilityLast.contains(ability.getOriginalId())) {
+                abilityOrderLast = ability;
+                continue;
+            }
+            if (triggerAutoOrderNameLast.contains(ability.getRule())) {
+                abilityOrderLast = ability;
+                continue;
+            }
+            abilitiesWithNoOrderSet.add(ability);
+        }
+        if (abilitiesWithNoOrderSet.isEmpty()) {
+            return abilityOrderLast;
+        }
+        if (abilitiesWithNoOrderSet.size() == 1) {
+            return abilitiesWithNoOrderSet.iterator().next();
+        }
+
         updateGameStatePriority("chooseTriggeredAbility", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, "Pick triggered ability (goes to the stack first)", abilities);
+            game.fireSelectTargetTriggeredAbilityEvent(playerId, "Pick triggered ability (goes to the stack first)", abilitiesWithNoOrderSet);
             waitForResponse(game);
             if (response.getUUID() != null) {
-                for (TriggeredAbility ability : abilities) {
+                for (TriggeredAbility ability : abilitiesWithNoOrderSet) {
                     if (ability.getId().equals(response.getUUID())) {
                         return ability;
                     }
@@ -1309,11 +1342,60 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public void sendPlayerAction(PlayerAction playerAction, Game game) {
-        if (PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS.equals(playerAction)) {
-            autoSelectReplacementEffects.clear();
-        } else {
-            super.sendPlayerAction(playerAction, game);
+    public void sendPlayerAction(PlayerAction playerAction, Game game, Object data) {
+        switch (playerAction) {
+            case RESET_AUTO_SELECT_REPLACEMENT_EFFECTS:
+                autoSelectReplacementEffects.clear();
+                break;
+            case TRIGGER_AUTO_ORDER_ABILITY_FIRST:
+            case TRIGGER_AUTO_ORDER_ABILITY_LAST:
+            case TRIGGER_AUTO_ORDER_NAME_FIRST:
+            case TRIGGER_AUTO_ORDER_NAME_LAST:
+            case TRIGGER_AUTO_ORDER_RESET_ALL:
+                setTriggerAutoOrder(playerAction, game, data);
+                break;
+            default:
+                super.sendPlayerAction(playerAction, game, data);
+        }
+    }
+
+    private void setTriggerAutoOrder(PlayerAction playerAction, Game game, Object data) {
+        if (playerAction.equals(TRIGGER_AUTO_ORDER_RESET_ALL)) {
+            triggerAutoOrderAbilityFirst.clear();
+            triggerAutoOrderAbilityLast.clear();
+            triggerAutoOrderNameFirst.clear();
+            triggerAutoOrderNameLast.clear();
+            return;
+        }
+        if (data instanceof UUID) {
+            UUID abilityId = (UUID) data;
+            UUID originalId = null;
+            for (TriggeredAbility ability : game.getState().getTriggered(getId())) {
+                if (ability.getId().equals(abilityId)) {
+                    originalId = ability.getOriginalId();
+                    break;
+                }
+            }
+            if (originalId != null) {
+                switch (playerAction) {
+                    case TRIGGER_AUTO_ORDER_ABILITY_FIRST:
+                        triggerAutoOrderAbilityFirst.add(originalId);
+                        break;
+                    case TRIGGER_AUTO_ORDER_ABILITY_LAST:
+                        triggerAutoOrderAbilityFirst.add(originalId);
+                        break;
+                }
+            }
+        } else if (data instanceof String) {
+            String abilityName = (String) data;
+            switch (playerAction) {
+                case TRIGGER_AUTO_ORDER_NAME_FIRST:
+                    triggerAutoOrderNameFirst.add(abilityName);
+                    break;
+                case TRIGGER_AUTO_ORDER_NAME_LAST:
+                    triggerAutoOrderNameLast.add(abilityName);
+                    break;
+            }
         }
     }
 
@@ -1332,7 +1414,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             if (!chooseUse(Outcome.Detriment, GameLog.getPlayerConfirmColoredText("You have still mana in your mana pool. Pass regardless?")
                     + GameLog.getSmallSecondLineText(activePlayerText + " / " + game.getStep().getType().toString() + priorityPlayerText), null, game)) {
-                sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, game);
+                sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, game, null);
                 return false;
             }
         }

@@ -66,8 +66,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingWorker;
 import javax.swing.border.Border;
@@ -100,7 +102,9 @@ import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
+import mage.client.util.Event;
 import mage.client.util.GameManager;
+import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
@@ -118,7 +122,13 @@ import static mage.constants.PhaseStep.FIRST_COMBAT_DAMAGE;
 import static mage.constants.PhaseStep.UNTAP;
 import static mage.constants.PhaseStep.UPKEEP;
 import mage.constants.PlayerAction;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_FIRST;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_LAST;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_FIRST;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.constants.Zone;
+import mage.game.events.PlayerQueryEvent;
 import mage.remote.Session;
 import mage.view.AbilityPickerView;
 import mage.view.CardView;
@@ -131,6 +141,7 @@ import mage.view.PlayerView;
 import mage.view.RevealedView;
 import mage.view.SimpleCardsView;
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
@@ -143,6 +154,13 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final String YOUR_HAND = "Your hand";
     private static final int X_PHASE_WIDTH = 55;
     private static final int STACK_MIN_CARDS_OFFSET_Y = 7;
+
+    private static final String CMD_AUTO_ORDER_FIRST = "cmdAutoOrderFirst";
+    private static final String CMD_AUTO_ORDER_LAST = "cmdAutoOrderLast";
+    private static final String CMD_AUTO_ORDER_NAME_FIRST = "cmdAutoOrderNameFirst";
+    private static final String CMD_AUTO_ORDER_NAME_LAST = "cmdAutoOrderNameLast";
+    private static final String CMD_AUTO_ORDER_RESET_ALL = "cmdAutoOrderResetAll";
+
     private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
 
     // non modal frames
@@ -174,8 +192,21 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private MageDialogState choiceWindowState;
 
+    private enum PopUpMenuType {
+
+        TRIGGER_ORDER
+    }
+    // CardView popupMenu was invoked last
+    private CardView cardViewPopupMenu;
+
+    // popup menu for a card
+    private JPopupMenu popupMenuCardPanel;
+
     public GamePanel() {
         initComponents();
+
+        createTriggerOrderPupupMenu();
+        this.add(popupMenuCardPanel);
 
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
@@ -281,7 +312,7 @@ public final class GamePanel extends javax.swing.JPanel {
             pickTargetDialog.cleanUp();
             pickTargetDialog.removeDialog();
         }
-        Plugins.getInstance().getActionCallback().hidePopup();
+        Plugins.getInstance().getActionCallback().hideTooltipPopup();
         try {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
@@ -957,31 +988,37 @@ public final class GamePanel extends javax.swing.JPanel {
      * @param messageId
      */
     public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
-        ShowCardsDialog dialog = null;
-        if (options != null && options.containsKey("targetZone")) {
-            if (Zone.HAND.equals(options.get("targetZone"))) { // mark selectable target cards in hand
-                List<UUID> choosen = null;
-                if (options.containsKey("chosen")) {
-                    choosen = (List<UUID>) options.get("chosen");
-                }
-                for (CardView card : gameView.getHand().values()) {
-                    if (targets == null || targets.isEmpty()) {
-                        card.setPlayable(false);
-                        card.setChoosable(true);
-                    } else if (targets.contains(card.getId())) {
-                        card.setPlayable(false);
-                        card.setChoosable(true);
+        PopUpMenuType popupMenuType = null;
+        if (options != null) {
+            if (options.containsKey("targetZone")) {
+                if (Zone.HAND.equals(options.get("targetZone"))) { // mark selectable target cards in hand
+                    List<UUID> choosen = null;
+                    if (options.containsKey("chosen")) {
+                        choosen = (List<UUID>) options.get("chosen");
                     }
-                    if (choosen != null && choosen.contains(card.getId())) {
-                        card.setSelected(true);
+                    for (CardView card : gameView.getHand().values()) {
+                        if (targets == null || targets.isEmpty()) {
+                            card.setPlayable(false);
+                            card.setChoosable(true);
+                        } else if (targets.contains(card.getId())) {
+                            card.setPlayable(false);
+                            card.setChoosable(true);
+                        }
+                        if (choosen != null && choosen.contains(card.getId())) {
+                            card.setSelected(true);
+                        }
                     }
                 }
+            }
+            if (options.containsKey("queryType") && PlayerQueryEvent.QueryType.PICK_ABILITY.equals(options.get("queryType"))) {
+                popupMenuType = PopUpMenuType.TRIGGER_ORDER;
             }
         }
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
+        ShowCardsDialog dialog = null;
         if (cardView != null && cardView.size() > 0) {
-            dialog = showCards(message, cardView, required, options0);
+            dialog = showCards(message, cardView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
         this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);
@@ -1066,10 +1103,16 @@ public final class GamePanel extends javax.swing.JPanel {
         ((MageActionCallback) callback).hideGameUpdate(gameId);
     }
 
-    private ShowCardsDialog showCards(String title, CardsView cards, boolean required, Map<String, Serializable> options) {
+    private ShowCardsDialog showCards(String title, CardsView cards, boolean required, Map<String, Serializable> options, PopUpMenuType popupMenuType) {
         hideAll();
         ShowCardsDialog showCards = new ShowCardsDialog();
-        showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required, options);
+        JPopupMenu popupMenu = null;
+        Listener<Event> eventListener = null;
+        if (PopUpMenuType.TRIGGER_ORDER.equals(popupMenuType)) {
+            popupMenu = getTriggerOrderPopupMenu();
+            eventListener = getTriggerOrderEventListener(showCards);
+        }
+        showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required, options, popupMenu, eventListener);
         return showCards;
     }
 
@@ -1940,6 +1983,102 @@ public final class GamePanel extends javax.swing.JPanel {
         button.setPreferredSize(new Dimension(36, 36));
         button.addMouseListener(mouseAdapter);
         hoverButtons.put(name, button);
+    }
+
+    // TriggerOrderPopupMenu
+    private Listener<Event> getTriggerOrderEventListener(final ShowCardsDialog dialog) {
+        return new Listener<Event>() {
+            @Override
+            public void event(Event event) {
+                if (event.getEventName().equals("show-popup-menu")) {
+                    if (event.getComponent() != null && event.getComponent() instanceof CardPanel) {
+                        JPopupMenu menu = ((CardPanel) event.getComponent()).getPopupMenu();
+                        if (menu != null) {
+                            cardViewPopupMenu = ((CardView) event.getSource());
+                            menu.show(event.getComponent(), event.getxPos(), event.getyPos());
+                        }
+                    }
+                }
+                if (event.getEventName().equals("action-consumed")) {
+                    dialog.hideDialog();
+                }
+            }
+        };
+    }
+
+    public void handleTriggerOrderPopupMenuEvent(ActionEvent e) {
+        UUID abilityId = null;
+        String abilityRuleText = null;
+        if (cardViewPopupMenu instanceof CardView && cardViewPopupMenu.getAbility() != null) {
+            abilityId = cardViewPopupMenu.getAbility().getId();
+            if (!cardViewPopupMenu.getAbility().getRules().isEmpty() && !cardViewPopupMenu.getAbility().getRules().equals("")) {
+                abilityRuleText = cardViewPopupMenu.getAbility().getRules().get(0);
+            }
+        }
+        switch (e.getActionCommand()) {
+            case CMD_AUTO_ORDER_FIRST:
+                session.sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_FIRST, gameId, abilityId);
+                break;
+            case CMD_AUTO_ORDER_LAST:
+                session.sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_LAST, gameId, abilityId);
+                break;
+            case CMD_AUTO_ORDER_NAME_FIRST:
+                if (abilityRuleText != null) {
+                    session.sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_FIRST, gameId, abilityRuleText);
+                }
+                break;
+            case CMD_AUTO_ORDER_NAME_LAST:
+                if (abilityRuleText != null) {
+                    session.sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_LAST, gameId, abilityRuleText);
+                }
+                break;
+            case CMD_AUTO_ORDER_RESET_ALL:
+                session.sendPlayerAction(TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
+                break;
+        }
+    }
+
+    public JPopupMenu getTriggerOrderPopupMenu() {
+        return popupMenuCardPanel;
+    }
+
+    private void createTriggerOrderPupupMenu() {
+
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleTriggerOrderPopupMenuEvent(e);
+            }
+        };
+
+        popupMenuCardPanel = new JPopupMenu();
+
+        // String tooltipText = "";
+        JMenuItem menuItem;
+        menuItem = new JMenuItem("Put this ability always first on the stack");
+        menuItem.setActionCommand(CMD_AUTO_ORDER_FIRST);
+        menuItem.addActionListener(actionListener);
+        popupMenuCardPanel.add(menuItem);
+
+        menuItem = new JMenuItem("Put this ability always last on the stack");
+        menuItem.setActionCommand(CMD_AUTO_ORDER_LAST);
+        menuItem.addActionListener(actionListener);
+        popupMenuCardPanel.add(menuItem);
+
+        menuItem = new JMenuItem("Put all abilities with that rule text always first on the stack");
+        menuItem.setActionCommand(CMD_AUTO_ORDER_NAME_FIRST);
+        menuItem.addActionListener(actionListener);
+        popupMenuCardPanel.add(menuItem);
+
+        menuItem = new JMenuItem("Put all abilities with that rule text always last on the stack");
+        menuItem.setActionCommand(CMD_AUTO_ORDER_NAME_LAST);
+        menuItem.addActionListener(actionListener);
+        popupMenuCardPanel.add(menuItem);
+
+        menuItem = new JMenuItem("Reset all order settings for triggered abilities");
+        menuItem.setActionCommand(CMD_AUTO_ORDER_RESET_ALL);
+        menuItem.addActionListener(actionListener);
+        popupMenuCardPanel.add(menuItem);
     }
 
     public String getGameLog() {

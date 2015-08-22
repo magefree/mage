@@ -35,7 +35,7 @@ public class EmptyCallback implements ActionCallback {
     }
 
     @Override
-    public void hidePopup() {
+    public void hideTooltipPopup() {
     }
 
     @Override
