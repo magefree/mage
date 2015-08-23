@@ -25,63 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.other.FaceDownPredicate;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class PrimalWhisperer extends CardImpl {
 
-    private FilterCard filter;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature");
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+    static {
+        filter.add(new FaceDownPredicate());
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
+    public PrimalWhisperer(UUID ownerId) {
+        super(ownerId, 135, "Primal Whisperer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Elf");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Primal Whisperer gets +2/+2 for each face-down creature on the battlefield.
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 2);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
+        // Morph {3}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}")));
     }
 
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public PrimalWhisperer(final PrimalWhisperer card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public PrimalWhisperer copy() {
+        return new PrimalWhisperer(this);
     }
 }

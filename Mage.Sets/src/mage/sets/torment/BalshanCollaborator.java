@@ -25,63 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.torment;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class BalshanCollaborator extends CardImpl {
 
-    private FilterCard filter;
+    public BalshanCollaborator(UUID ownerId) {
+        super(ownerId, 25, "Balshan Collaborator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "TOR";
+        this.subtype.add("Bird");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {B}: Balshan Collaborator gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
-    }
-
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public BalshanCollaborator(final BalshanCollaborator card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public BalshanCollaborator copy() {
+        return new BalshanCollaborator(this);
     }
 }

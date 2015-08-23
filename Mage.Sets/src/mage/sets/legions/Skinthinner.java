@@ -25,63 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class Skinthinner extends CardImpl {
 
-    private FilterCard filter;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
+    public Skinthinner(UUID ownerId) {
+        super(ownerId, 80, "Skinthinner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Morph {3}{B}{B}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}{B}")));
+        // When Skinthinner is turned face up, destroy target nonblack creature. It can't be regenerated.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect(true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public Skinthinner(final Skinthinner card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public Skinthinner copy() {
+        return new Skinthinner(this);
     }
 }

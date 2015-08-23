@@ -25,63 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class WingbeatWarrior extends CardImpl {
 
-    private FilterCard filter;
+    public WingbeatWarrior(UUID ownerId) {
+        super(ownerId, 29, "Wingbeat Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Bird");
+        this.subtype.add("Soldier");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Morph {2}{W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}")));
+        // When Wingbeat Warrior is turned face up, target creature gains first strike until end of turn.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
-    }
-
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public WingbeatWarrior(final WingbeatWarrior card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public WingbeatWarrior copy() {
+        return new WingbeatWarrior(this);
     }
 }

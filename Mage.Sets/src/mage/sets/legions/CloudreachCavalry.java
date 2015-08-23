@@ -25,51 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class DiligentFarmhand extends CardImpl {
+public class CloudreachCavalry extends CardImpl {
 
-    public DiligentFarmhand(UUID ownerId) {
-        super(ownerId, 237, "Diligent Farmhand", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "ODY";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
+
+    static {
+        filter.add(new SubtypePredicate("Bird"));
+    }
+
+    public CloudreachCavalry(UUID ownerId) {
+        super(ownerId, 7, "Cloudreach Cavalry", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "LGN";
         this.subtype.add("Human");
-        this.subtype.add("Druid");
-
+        this.subtype.add("Soldier");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}{G}, Sacrifice Diligent Farmhand: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), new ManaCostsImpl("{1}{G}"));
-        ability.addCost(new SacrificeSourceCost());
+        // As long as you control a Bird, Cloudreach Cavalry gets +2/+2 and has flying.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
+            new PermanentsOnTheBattlefieldCondition(filter),
+            "As long as you control a Bird, {this} gets +2/+2"));
+        ability.addEffect(new ConditionalContinuousEffect(
+            new GainAbilitySourceEffect(FlyingAbility.getInstance()),
+            new PermanentsOnTheBattlefieldCondition(filter),
+            "and has flying"));
         this.addAbility(ability);
-        // If Diligent Farmhand is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.
-        this.addAbility(MuscleBurst.getCountAsAbility());
     }
 
-    public DiligentFarmhand(final DiligentFarmhand card) {
+    public CloudreachCavalry(final CloudreachCavalry card) {
         super(card);
     }
 
     @Override
-    public DiligentFarmhand copy() {
-        return new DiligentFarmhand(this);
+    public CloudreachCavalry copy() {
+        return new CloudreachCavalry(this);
     }
 }

@@ -25,63 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class GlintwingInvoker extends CardImpl {
 
-    private FilterCard filter;
+    public GlintwingInvoker(UUID ownerId) {
+        super(ownerId, 40, "Glintwing Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.subtype.add("Mutant");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        // {7}{U}: Glintwing Invoker gets +3/+3 and gains flying until end of turn.
+        Effect effect = new BoostSourceEffect(3, 3, Duration.EndOfTurn);
+        effect.setText("{this} gets +3/+3");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{7}{U}"));
+        effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying until end of turn");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
-    }
-
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public GlintwingInvoker(final GlintwingInvoker card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public GlintwingInvoker copy() {
+        return new GlintwingInvoker(this);
     }
 }

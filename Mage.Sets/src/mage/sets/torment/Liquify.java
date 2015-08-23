@@ -25,63 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.torment;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class Liquify extends CardImpl {
 
-    private FilterCard filter;
+    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 3 or less");
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+    static {
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
+    public Liquify(UUID ownerId) {
+        super(ownerId, 41, "Liquify", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        this.expansionSetCode = "TOR";
+
+        // Counter target spell with converted mana cost 3 or less. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public Liquify(final Liquify card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public Liquify copy() {
+        return new Liquify(this);
     }
 }

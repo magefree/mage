@@ -25,63 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.MageInt;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class CovertOperative extends CardImpl {
 
-    private FilterCard filter;
+    public CovertOperative(UUID ownerId) {
+        super(ownerId, 33, "Covert Operative", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        // Covert Operative can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
-    }
-
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public CovertOperative(final CovertOperative card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public CovertOperative copy() {
+        return new CovertOperative(this);
     }
 }

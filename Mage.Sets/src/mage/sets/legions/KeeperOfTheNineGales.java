@@ -25,51 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class DiligentFarmhand extends CardImpl {
+public class KeeperOfTheNineGales extends CardImpl {
 
-    public DiligentFarmhand(UUID ownerId) {
-        super(ownerId, 237, "Diligent Farmhand", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Birds you control");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {1}{G}, Sacrifice Diligent Farmhand: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), new ManaCostsImpl("{1}{G}"));
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
-        // If Diligent Farmhand is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.
-        this.addAbility(MuscleBurst.getCountAsAbility());
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(new SubtypePredicate("Bird"));
     }
 
-    public DiligentFarmhand(final DiligentFarmhand card) {
+    public KeeperOfTheNineGales(UUID ownerId) {
+        super(ownerId, 42, "Keeper of the Nine Gales", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Bird");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {tap}, Tap two untapped Birds you control: Return target permanent to its owner's hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
+        ability.addCost(new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
+    }
+
+    public KeeperOfTheNineGales(final KeeperOfTheNineGales card) {
         super(card);
     }
 
     @Override
-    public DiligentFarmhand copy() {
-        return new DiligentFarmhand(this);
+    public KeeperOfTheNineGales copy() {
+        return new KeeperOfTheNineGales(this);
     }
 }

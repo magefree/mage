@@ -25,63 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.MageInt;
+import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class PardicFirecat extends CardImpl {
 
-    private FilterCard filter;
+    public PardicFirecat(UUID ownerId) {
+        super(ownerId, 211, "Pardic Firecat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Elemental");
+        this.subtype.add("Cat");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // If Pardic Firecat is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst.
+        this.addAbility(FlameBurst.getCountAsAbility());
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
-    }
-
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public PardicFirecat(final PardicFirecat card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public PardicFirecat copy() {
+        return new PardicFirecat(this);
     }
 }

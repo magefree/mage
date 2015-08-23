@@ -25,63 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.MageInt;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class DefenderOfTheOrder extends CardImpl {
 
-    private FilterCard filter;
+    public DefenderOfTheOrder(UUID ownerId) {
+        super(ownerId, 11, "Defender of the Order", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        // Morph {W}{W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}{W}")));
+        // When Defender of the Order is turned face up, creatures you control get +0/+2 until end of turn.
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(0, 2, Duration.EndOfTurn)));
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
-    }
-
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public DefenderOfTheOrder(final DefenderOfTheOrder card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public DefenderOfTheOrder copy() {
+        return new DefenderOfTheOrder(this);
     }
 }

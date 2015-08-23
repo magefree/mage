@@ -25,63 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.MageInt;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class VileDeacon extends CardImpl {
 
-    private FilterCard filter;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Clerics");
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+    static {
+        filter.add(new SubtypePredicate("Cleric"));
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
+    public VileDeacon(UUID ownerId) {
+        super(ownerId, 85, "Vile Deacon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Whenever Vile Deacon attacks, it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield.
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter);
+        Effect effect = new BoostSourceEffect(amount, amount, Duration.EndOfTurn);
+        effect.setText("it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield");
+        this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public VileDeacon(final VileDeacon card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public VileDeacon copy() {
+        return new VileDeacon(this);
     }
 }

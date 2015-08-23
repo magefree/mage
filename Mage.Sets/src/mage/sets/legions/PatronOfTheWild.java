@@ -25,63 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class PatronOfTheWild extends CardImpl {
 
-    private FilterCard filter;
+    public PatronOfTheWild(UUID ownerId) {
+        super(ownerId, 134, "Patron of the Wild", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Elf");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        // Morph {2}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}")));
+        // When Patron of the Wild is turned face up, target creature gets +3/+3 until end of turn.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
-    }
-
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public PatronOfTheWild(final PatronOfTheWild card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public PatronOfTheWild copy() {
+        return new PatronOfTheWild(this);
     }
 }

@@ -25,63 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.legions;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class CardsInAllGraveyardsCount implements DynamicValue {
+public class DaruSanctifier extends CardImpl {
 
-    private FilterCard filter;
+    public DaruSanctifier(UUID ownerId) {
+        super(ownerId, 9, "Daru Sanctifier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        // Morph {1}{W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{W}")));
+        // When Daru Sanctifier is turned face up, destroy target enchantment.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetEnchantmentPermanent());
+        this.addAbility(ability);
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
-    }
-
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter.copy();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+    public DaruSanctifier(final DaruSanctifier card) {
+        super(card);
     }
 
     @Override
-    public CardsInAllGraveyardsCount copy() {
-        return new CardsInAllGraveyardsCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return filter.getMessage() + " in all graveyards";
+    public DaruSanctifier copy() {
+        return new DaruSanctifier(this);
     }
 }
