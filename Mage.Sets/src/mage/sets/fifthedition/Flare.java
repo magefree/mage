@@ -44,13 +44,13 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class Flare extends CardImpl {
 
     public Flare(UUID ownerId) {
-        super(ownerId, 11, "Flare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        super(ownerId, 230, "Flare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "5ED";
 
         // Flare deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        
+
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class Recall extends CardImpl {
 
     public Recall(UUID ownerId) {
-        super(ownerId, 93, "Recall", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{U}");
+        super(ownerId, 115, "Recall", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{U}");
         this.expansionSetCode = "5ED";
 
         // Discard X cards, then return a card from your graveyard to your hand for each card discarded this way.

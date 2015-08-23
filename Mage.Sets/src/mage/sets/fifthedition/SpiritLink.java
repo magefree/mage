@@ -37,7 +37,7 @@ public class SpiritLink extends mage.sets.seventhedition.SpiritLink {
 
     public SpiritLink(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = 340;
         this.expansionSetCode = "5ED";
     }
 
