@@ -30,6 +30,7 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.AbilityType;
@@ -41,6 +42,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -56,6 +58,8 @@ public class BurningTreeShaman extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
+        // Whenever a player activates an ability that isn't a mana ability, Burning-Tree Shaman deals 1 damage to that player.
         this.addAbility(new BurningTreeShamanTriggeredAbility());
     }
 
@@ -72,7 +76,7 @@ public class BurningTreeShaman extends CardImpl {
 class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     BurningTreeShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1, false, "that player"));
         this.addTarget(new TargetPlayer());
     }
 
@@ -94,7 +98,9 @@ class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
         if (stackAbility != null && stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
-            this.getTargets().get(0).add(event.getPlayerId(), game);
+            for (Effect effect : getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            }
             return true;
         }
         return false;
