@@ -112,7 +112,7 @@ public abstract class DraftCube {
                             cardInfo = cardList.get(0);
                         }
                     } else {
-                        cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardId.getName());
+                        cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardId.getName(), false);
                     }
 
                     if (cardInfo != null) {

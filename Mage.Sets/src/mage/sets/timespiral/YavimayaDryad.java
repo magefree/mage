@@ -25,40 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.sets.timespiral;
+
+import java.util.UUID;
 
 /**
- * Defines player actions for a game
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public enum PlayerAction {
+public class YavimayaDryad extends mage.sets.archenemy.YavimayaDryad {
 
-    PASS_PRIORITY_UNTIL_MY_NEXT_TURN,
-    PASS_PRIORITY_UNTIL_TURN_END_STEP,
-    PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE,
-    PASS_PRIORITY_UNTIL_NEXT_TURN,
-    PASS_PRIORITY_UNTIL_STACK_RESOLVED,
-    PASS_PRIORITY_CANCEL_ALL_ACTIONS,
-    TRIGGER_AUTO_ORDER_ABILITY_FIRST,
-    TRIGGER_AUTO_ORDER_NAME_FIRST,
-    TRIGGER_AUTO_ORDER_ABILITY_LAST,
-    TRIGGER_AUTO_ORDER_NAME_LAST,
-    TRIGGER_AUTO_ORDER_RESET_ALL,
-    ROLLBACK_TURNS,
-    UNDO,
-    CONCEDE,
-    MANA_AUTO_PAYMENT_ON,
-    MANA_AUTO_PAYMENT_OFF,
-    MANA_AUTO_PAYMENT_RESTRICTED_ON,
-    MANA_AUTO_PAYMENT_RESTRICTED_OFF,
-    RESET_AUTO_SELECT_REPLACEMENT_EFFECTS,
-    REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS,
-    REQUEST_PERMISSION_TO_SEE_HAND_CARDS,
-    REQUEST_PERMISSION_TO_ROLLBACK_TURN,
-    ADD_PERMISSION_TO_SEE_HAND_CARDS,
-    ADD_PERMISSION_TO_ROLLBACK_TURN,
-    DENY_PERMISSON_TO_ROLLBACK_TURN,
-    PERMISSION_REQUESTS_ALLOWED_ON,
-    PERMISSION_REQUESTS_ALLOWED_OFF
+    public YavimayaDryad(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 235;
+        this.expansionSetCode = "TSP";
+    }
+
+    public YavimayaDryad(final YavimayaDryad card) {
+        super(card);
+    }
+
+    @Override
+    public YavimayaDryad copy() {
+        return new YavimayaDryad(this);
+    }
 }

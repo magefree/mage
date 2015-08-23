@@ -278,6 +278,18 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
+        menuItem = new JMenuItem("Triggered abilities - reset auto stack order");
+        menuItem.setMnemonic(KeyEvent.VK_T);
+        menuItem.setToolTipText("Deletes all triggered ability order settings you added during the game.");
+        automaticConfirmsMenu.add(menuItem);
+        // Reset the replacement effcts that were auto selected for the game
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().sendPlayerAction(PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
+            }
+        });
+
         JMenu handCardsMenu = new JMenu("Cards on hand");
         handCardsMenu.setMnemonic(KeyEvent.VK_H);
         popupMenu.add(handCardsMenu);

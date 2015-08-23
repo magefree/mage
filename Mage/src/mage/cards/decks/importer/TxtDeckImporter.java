@@ -74,7 +74,7 @@ public class TxtDeckImporter extends DeckImporter {
         }
         String lineNum = line.substring(0, delim).trim();
         String lineName = line.substring(delim).replace("’", "\'").trim();
-        lineName = lineName.replace("&amp;", "//").replace("Ã†", "AE").replace("Ã¶", "ö");
+        lineName = lineName.replace("&amp;", "//").replace("Ã†", "AE").replace("Ã¶", "ö").replace("û", "u").replace("\"", "'");
         if (lineName.contains("//") && !lineName.contains(" // ")) {
             lineName = lineName.replace("//", " // ");
         }
@@ -86,7 +86,7 @@ public class TxtDeckImporter extends DeckImporter {
         }
         try {
             int num = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
-            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName);
+            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
             if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
             } else {

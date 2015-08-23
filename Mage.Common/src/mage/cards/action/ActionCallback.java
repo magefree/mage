@@ -12,6 +12,6 @@ public interface ActionCallback {
     void mouseEntered(MouseEvent e, TransferData data);
     void mouseExited(MouseEvent e, TransferData data);
     void mouseWheelMoved(MouseWheelEvent e, TransferData data);
-    void hidePopup();
+    void hideTooltipPopup();
 
 }

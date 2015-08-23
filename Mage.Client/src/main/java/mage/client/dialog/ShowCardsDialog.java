@@ -35,28 +35,28 @@ package mage.client.dialog;
 
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 import javax.swing.JLayeredPane;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
-import mage.client.util.CardsViewUtil;
+import mage.client.util.Event;
+import mage.client.util.Listener;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.game.events.PlayerQueryEvent.QueryType;
 import mage.view.CardsView;
-import mage.view.SimpleCardsView;
 import org.mage.card.arcane.CardPanel;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ShowCardsDialog extends MageDialog implements MouseListener {
+public class ShowCardsDialog extends MageDialog {
 
     // remember if this dialog was already auto positioned, so don't do it after the first time
     private boolean positioned;
@@ -83,18 +83,13 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
         }
     }
 
-    public void loadCards(String name, SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
-        loadCards(name, CardsViewUtil.convertSimple(showCards), bigCard, dimension, gameId, modal);
-    }
-
-    public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
-        loadCards(name, showCards, bigCard, dimension, gameId, modal, null);
-    }
-
-    public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal, Map<String, Serializable> options) {
+    public void loadCards(String name, CardsView showCards, BigCard bigCard,
+            CardDimensions dimension, UUID gameId, boolean modal, Map<String, Serializable> options,
+            JPopupMenu popupMenu, Listener<Event> eventListener) {
         this.title = name;
         this.setTitelBarToolTip(name);
-        cardArea.loadCards(showCards, bigCard, dimension, gameId, this);
+        cardArea.clearCardEventListeners();
+        cardArea.loadCards(showCards, bigCard, dimension, gameId);
         if (options != null) {
             if (options.containsKey("chosen")) {
                 java.util.List<UUID> chosenCards = (java.util.List<UUID>) options.get("chosen");
@@ -104,6 +99,15 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
                 java.util.List<UUID> choosableCards = (java.util.List<UUID>) options.get("choosable");
                 cardArea.markCards(choosableCards);
             }
+            if (options.containsKey("queryType") && QueryType.PICK_ABILITY.equals(options.get("queryType"))) {
+                cardArea.setPopupMenu(popupMenu);
+            }
+        }
+        if (popupMenu != null) {
+            this.cardArea.setPopupMenu(popupMenu);
+        }
+        if (eventListener != null) {
+            this.cardArea.addCardEventListener(eventListener);
         }
 
         if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
@@ -141,38 +145,9 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
         setResizable(true);
         getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(cardArea, java.awt.BorderLayout.CENTER);
-        this.addMouseListener(this);
 
         pack();
     }
 
     private CardArea cardArea;
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if (e.getSource() instanceof CardPanel) {
-            this.hideDialog();
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        // only hide dialog, if a cardPanel was selected
-        if (e.getSource() instanceof CardPanel) {
-            this.hideDialog();
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
 }

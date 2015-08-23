@@ -6,157 +6,7 @@ git log tagOrSha1..HEAD --diff-filter=A --name-status | sed -ne 's/^A[^u]Mage.Se
 
 for Windows: you need to replace ' by "" and remove -u in sort
 
-Example for cards implemented from 0.8.7 till 0.9:
-git log 9ac166abc92f70aebdbe34825880ff8f909465ed..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.0.2-release:
-git log 6b38cd5b18298b07962b969bfa2eb69c62839575..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.0.3-release:
-git log 7ba3d451da95183b8c1cfb732b332f640963cc4a..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-git log 68333a2eff6b643b2028d18dad16d1f228be7a2c..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-20130901
-git log 10902581140fe4268fc12408f099ad82347d7cd0..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.1.0-release:
-git log d6c1075125e657d4dd2e7bb120e108bb4c4536ff..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.1.2-2013_10_26-release:
-git log 63889f5bd4faa0a0915bb1e845ca3a0bc1093070..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.2.0
-git log b724d7fe136abbe09144eb2824739df3238061ee..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-02-03
-git log 9c5d5208b96e28e1e767574e1143b845e6b7308f..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-02-15
-git log 88d8c30b6c3dbf7c90354eccfd04107641c308f1..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-04-25
-git log a1cfd040d74dd6d2100168754961cfebb154f153..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-05-10
-git log e93cd580dd8ff985fbda018bb5ea652134c1865e..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-05-10v2
-git log e484da4028e6c0498bbcd76b83af39bca93d26b1..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2014-05-30v1
-git log 99a60c3063521551ab08c506386729f1feaee257..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-06-15
-git log 6c8b818d890e9e0ce4bc5e3128249bb9e62c0b23..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-06-28
-git log 1129858a6c5c0dae5d1e29ea931804c1165b8c38..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-07-11
-git log 458255cd0627af90c2ebeab4c410a16d55a36f41..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-07-19
-git log 75eb0bdfdf36ba83dd5a3e2c6a204ceb186c9d5e..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-07-30
-git log 69ce53e6e8036bf01bdd090e8785f4d63c486d1e..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-08-11
-git log 709dc83ae6fd6778e5b52e5176a978f1c6fda3b7..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-08-19
-git log edd1563c12422f69c10bc76d310e0a84421ab4a2..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-08-30
-git log fbc2a7258face1e908f3f08da1c2fec4ec0f86fe..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-09-13
-git log 632f711fe237defe43111f9b7236fda1da74bfc0..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-09-26
-git log b76102b0cdb911c7217fc2f510b4de86651f91d2..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2014-10-05
-git log 8121849a185b913ef2de59fff2f3d9a6c9b3a613..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2014-10-18v1
-git log 58bbe60c724c7940996cf33db690d5eb1abfce0a..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-10-18v2 (2014-10-20)
-git log 974cb4435bb826769b935aaffc8335eeaa83d53f..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-10-18v3 (2014-10-25)
-git log 26b5a277c4404a93e3b41ba477c5ec58dedcf826..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2014-11-01v1
-git log 8426816b0948991fdb100ce010f009a4aae7796a..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-11-08v1
-git log 0ce2348e3362c60972c7901b1c083361c926f861..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-11-29v1
-git log 3446953a9d594f324a4b4e36ea13560f1fe2685b..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-11-29v2
-git log 68f2b65c345d4f16f33f6f23d849d48b1924bbd1..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-11-29v3
-git log 68fed320f79a43a4af21ed9238b7659df53a008e..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-11-29v4 (2014-12-13)
-git log 96ce77e9d0e21610569071c81e661f91c53a3a17..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.3.0-2014-11-29v5 (2014-12-27)
-git log c4ad51c4af2467f3483204e29f23b76c53f8f880..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2014-11-29v7 (2015-01-01)
-git log c370189787cff7fc129b1ccf1b223807143460de..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2014-11-29v8 (2015-01-17)
-git log 79ceae999a72151e2fadd1e15ddd37ec76c3f205..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2014-11-29v10 (2015-01-23)
-git log 79ceae999a72151e2fadd1e15ddd37ec76c3f205..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-02-07v1
-git log e0b17eacc7b3abff4f6a6e878c01ebfab577df9e..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-02-07v3
-git log ba1fb775b2efd63d4de60786ab9d7857e00c3a57..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-02-07v4
-git log 7d7afb60d6fbe6d3f15a8fae9af147df3d3f31c6..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-02-07v7
-git log 6bd17716cd23e0f19142fb59c9c1bc44d87441e3..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-03-14v1
-git log ece4d69f367536ffb80cdf94d5a3dd771ba40f04..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-03-14v2
-git log b78d6f69af6d2b565c95b3ac20f76dd7eeecb3f8..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-03-14v2
-git log 78df43fd30850568c6494fb12c1f9d8415ef850f..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-03-14v5
-git log 65f731557bb55d0c85723e382001bdf9701f0a7f..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-03-14v6
-git log b79d6e64cff01726be93cbbfffca8a6f18188a3c..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-03-14v8
-git log 47b17535194c6aa5397a966463c8b17d37f8bd44..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.3.0-2015-03-14v9
-git log 00692410273d4c2ff70eec7bfcf6a601fb404bf9..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.0.v0
-git log fa847e8feb646e94d77fc8abc35e1d9817622f8a..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.0.v1
-git log e8b2e01cd465f6a8ced2c83ec52a698ee093baa4..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-since 1.4.0.v2
-git log eb96b08dfac3de4f78403d6f23e41ce8d41ece6f..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.1.v0
-git log 7a54d5364c9789ce2c3ef2c3eb4df7e0e0cde0cf..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.1.v1
-git log 3e9b4cfb7c22d363755d28f5ff1de351f6b7123c..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.1.v2
-git log 675801e8d493b023add4333e7835751d20da07a1..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.1.v3
-git log 757b9ea99ec1f0ce46bb533f9f86f3473d122a60..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.2.v0
-git log cd0cba6ec7d8799bb85247b7b4f5d545e170b093..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.2.v1
-git log 0b26aaff6ec033a538179bf607b1c7a7736aedb2..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.2.v2
-git log 8d5137e40ebe1c029e737ef475935ff7cc40bb64..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.2.v3
-git log 60c7a2b34b5dd9a64bd415b65424a559294cf52b..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
-
-since 1.4.2.v4
-git log 193177d9999d56729a687ca3b1a2fc3f3b96d9e2..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+Example for cards implemented since hash:
 
 since 1.4.2.v5
 git log 8dca887fadbbea41fb649ff17c5fe547a82ef23a..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
@@ -166,6 +16,13 @@ git log 5de4637d9c7967612c207d3cf915c2861d922029..HEAD --diff-filter=A --name-st
 
 since 1.4.3.v2
 git log 6d8378d5e49629a2fa126baf84340156a28f25db..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.3.v3
+git log 23039572f2206ade860f5835e9b85e82a9c4b2a1..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.3.v2
+git log 6d8378d5e49629a2fa126baf84340156a28f25db..23039572f2206ade860f5835e9b85e82a9c4b2a1 --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
 
 3. Copy added_cards.txt to trunk\Utils folder
 4. Run script:

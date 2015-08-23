@@ -582,7 +582,7 @@ public class GameController implements GameCallback {
                 }
                 break;
             default:
-                game.sendPlayerAction(playerAction, getPlayerId(userId));
+                game.sendPlayerAction(playerAction, getPlayerId(userId), data);
         }
     }
 
