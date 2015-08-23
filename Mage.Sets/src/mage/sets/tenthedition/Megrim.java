@@ -25,20 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetOpponent;
+import mage.constants.SetTargetPointer;
 
 /**
  *
@@ -46,14 +41,15 @@ import mage.target.common.TargetOpponent;
  */
 public class Megrim extends CardImpl {
 
-    public Megrim (UUID ownerId) {
+    public Megrim(UUID ownerId) {
         super(ownerId, 157, "Megrim", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "10E";
 
-        this.addAbility(new MergimTriggeredAbility());
+        // Whenever an opponent discards a card, Megrim deals 2 damage to that player.
+        this.addAbility(new DiscardsACardOpponentTriggeredAbility(new DamageTargetEffect(2, true, "that player"), false, SetTargetPointer.PLAYER));
     }
 
-    public Megrim (final Megrim card) {
+    public Megrim(final Megrim card) {
         super(card);
     }
 
@@ -62,40 +58,4 @@ public class Megrim extends CardImpl {
         return new Megrim(this);
     }
 
-}
-
-class MergimTriggeredAbility extends TriggeredAbilityImpl {
-    
-    MergimTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
-        this.addTarget(new TargetOpponent());
-    }
-
-    MergimTriggeredAbility(final MergimTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MergimTriggeredAbility copy() {
-        return new MergimTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
-            this.getTargets().get(0).add(event.getPlayerId(), game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent discards a card, {this} deals 2 damage to that player.";
-    }
 }
