@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
-    <server serverAddress="0.0.0.0" 
-            serverName="mage-server" 
-            port="17171" 
-            secondaryBindPort="-1" 
-            backlogSize="200" 
-            numAcceptThreads="2" 
-            maxPoolSize="300" 
-            leasePeriod="5000" 
+    <server serverName="mage-server"
+            port="17171"
             maxGameThreads="10"
             maxSecondsIdle="600"
             minUserNameLength="3"

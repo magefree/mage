@@ -2,16 +2,8 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
     <!-- 
-    serverAddress       - ip of the XMage server. Set it to "0.0.0.0" for local host or to the IP the server should use 
+    serverName          - name of the XMage server 
     port                - the port the primary server socket is bound to 
-    secondaryBindPort   - the port to which the secondary server socket is to be bound. if "-1" is set , an arbitrary port is selected. 
-    backlogSize         - the preferred number of unaccepted incoming connections allowed at a given time. The actual number may be greater 
-                          than the specified backlog. When the queue is full, further connection requests are rejected. The JBoss default value is 200
-    numAcceptThreads    - the number of threads listening on the ServerSocket. The JBoss default value is 1 
-    maxPoolSize         - the maximum number of ServerThreads that can exist at any given time. The JBoss default value is 300 
-    leasePeriod         - To turn on server side connection failure detection of remoting clients, it is necessary to satisfy two criteria. 
-                          The first is that the client lease period is set and is a value greater than 0. The value is represented in milliseconds. 
-                          The client lease period can be set by either the 'clientLeasePeriod' attribute within the Connector configuration or by calling the Connector method
     maxGameThreads      - Number of games that can be started simultanously on the server
     maxSecondsIdle      - Number of seconds after that a game is auto conceded by the player that was idle for such a time
     minUserNameLength   - minmal allowed length of a user name to connect to the server
@@ -20,14 +12,8 @@
     maxAiOpponents      - number of allowed AI opponents on the server
     saveGameActivated   - allow game save and replay options (not working correctly yet)
     -->
-    <server serverAddress="0.0.0.0"
-            serverName="mage-server"
+    <server serverName="mage-test-server"
             port="17171"
-            secondaryBindPort="17179"             
-            backlogSize="200" 
-            numAcceptThreads="2" 
-            maxPoolSize="300" 
-            leasePeriod="5000"             
             maxGameThreads="10"
             maxSecondsIdle="600"
             minUserNameLength="3"

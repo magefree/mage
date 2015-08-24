@@ -17,16 +17,10 @@
     
 	<xs:element name="server">
 		<xs:complexType>
-			<xs:attribute name="serverAddress" type="xs:string" use="required"/>
 			<xs:attribute name="serverName" type="xs:string" use="required"/>
 			<xs:attribute name="port" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="maxGameThreads" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="maxSecondsIdle" type="xs:positiveInteger" use="required"/>
-                        <xs:attribute name="secondaryBindPort" type="xs:integer" use="required"/>
-                        <xs:attribute name="backlogSize" type="xs:positiveInteger" use="required"/>
-                        <xs:attribute name="numAcceptThreads" type="xs:positiveInteger" use="required"/>
-                        <xs:attribute name="maxPoolSize" type="xs:positiveInteger" use="required"/>
-                        <xs:attribute name="leasePeriod" type="xs:positiveInteger" use="required"/>                        
                         <xs:attribute name="minUserNameLength" type="xs:positiveInteger" use="required"/>
                         <xs:attribute name="maxUserNameLength" type="xs:positiveInteger" use="required"/>
                         <xs:attribute name="userNamePattern" type="xs:string" use="required"/>

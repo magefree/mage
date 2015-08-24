@@ -22,20 +22,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-server</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss</groupId>
-                    <artifactId>jboss-common-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.remoting</groupId>
-                    <artifactId>jboss-remoting</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jboss</groupId>
-                    <artifactId>jboss-serialization</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 </project>

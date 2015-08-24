@@ -196,7 +196,7 @@ public class ServerMain implements MageServer {
             server = new Server(instance);
             server.start(config.getPort(), config.isUseSSL());
         } catch (Exception ex) {
-            logger.fatal("Failed to start server - " + config.getServerAddress(), ex);
+            logger.fatal("Failed to start server - " + config.getServerName(), ex);
         }
 
     }

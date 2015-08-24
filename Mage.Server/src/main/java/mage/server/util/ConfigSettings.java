@@ -63,10 +63,6 @@ public class ConfigSettings {
         }
     }
 
-    public String getServerAddress() {
-        return config.getServer().getServerAddress();
-    }
-
     public String getServerName() {
         return config.getServer().getServerName();
     }
