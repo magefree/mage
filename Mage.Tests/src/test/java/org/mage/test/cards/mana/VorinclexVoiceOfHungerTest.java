@@ -25,50 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package org.mage.test.cards.mana;
 
-import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.SetTargetPointer;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class MirarisWake extends CardImpl {
+public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
 
-    public MirarisWake(UUID ownerId) {
-        super(ownerId, 139, "Mirari's Wake", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{W}");
-        this.expansionSetCode = "JUD";
-
-        // Creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
-
+    /**
+     * Vorinclex, Voice of Hunger is not mana doubling River of Tears.
+     */
+    @Test
+    public void testRiverOfTears() {
+        // Trample
         // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
-        AddManaOfAnyTypeProducedEffect effect = new AddManaOfAnyTypeProducedEffect();
-        effect.setText("add one mana to your mana pool of any type that land produced");
-        this.addAbility(new TapForManaAllTriggeredManaAbility(
-                effect,
-                new FilterControlledLandPermanent("you tap a land"),
-                SetTargetPointer.PERMANENT));
+        // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
+        addCard(Zone.BATTLEFIELD, playerA, "Vorinclex, Voice of Hunger", 1);
+        // {T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
+        addCard(Zone.BATTLEFIELD, playerA, "River of Tears", 1);
+        addCard(Zone.HAND, playerA, "Vedalken Mastermind", 1);
+
+        // because available mana calculation does not work correctly with Vorinclex, Voice of Hunger we have to tap the land manually
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U} to your mana pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vedalken Mastermind");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Vedalken Mastermind", 1);
 
     }
 
-    public MirarisWake(final MirarisWake card) {
-        super(card);
-    }
-
-    @Override
-    public MirarisWake copy() {
-        return new MirarisWake(this);
-    }
 }

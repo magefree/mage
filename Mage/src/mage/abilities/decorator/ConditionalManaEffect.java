@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.decorator;
 
 import mage.Mana;
@@ -33,14 +32,14 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.choices.ChoiceColor;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-
-
 public class ConditionalManaEffect extends ManaEffect {
 
     private BasicManaEffect effect;
@@ -70,14 +69,46 @@ public class ConditionalManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         if (condition.apply(game, source)) {
             effect.setTargetPointer(this.targetPointer);
-            return effect.apply(game, source);
         } else if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
-            return otherwiseEffect.apply(game, source);
         }
-        return false;
+        Mana mana = getMana(game, source);
+
+        if (mana != null && mana.getAny() > 0) {
+            int amount = mana.getAny();
+
+            ChoiceColor choice = new ChoiceColor(true);
+            Mana createdMana = null;
+            if (controller.choose(outcome, choice, game)) {
+                if (choice.getColor() == null) {
+                    return false; // it happens, don't know how
+                }
+
+                if (choice.getColor().isBlack()) {
+                    createdMana = Mana.BlackMana(amount);
+                } else if (choice.getColor().isBlue()) {
+                    createdMana = Mana.BlueMana(amount);
+                } else if (choice.getColor().isRed()) {
+                    createdMana = Mana.RedMana(amount);
+                } else if (choice.getColor().isGreen()) {
+                    createdMana = Mana.GreenMana(amount);
+                } else if (choice.getColor().isWhite()) {
+                    createdMana = Mana.WhiteMana(amount);
+                }
+            }
+            mana = createdMana;
+        }
+
+        if (mana != null) {
+            controller.getManaPool().addMana(mana, game, source);
+        }
+        return true;
     }
 
     @Override
@@ -85,12 +116,18 @@ public class ConditionalManaEffect extends ManaEffect {
         return new ConditionalManaEffect(this);
     }
 
-    public Mana getMana(Game game, Ability source) {
+    @Override
+    public Mana getMana(Game game, Ability source
+    ) {
+        Mana mana = null;
         if (condition.apply(game, source)) {
-            return effect.getMana();
+            mana = effect.getMana();
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.getMana();
+            mana = otherwiseEffect.getMana();
         }
-        return null;
+        if (mana != null) {
+            checkToFirePossibleEvents(mana, game, source);
+        }
+        return mana;
     }
 }
