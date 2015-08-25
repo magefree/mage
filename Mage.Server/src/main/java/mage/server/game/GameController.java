@@ -846,7 +846,8 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).target(question, new CardsView(abilities, game), null, required, options);
+                CardsView cardsView = new CardsView(abilities, game);
+                getGameSession(playerId).target(question, cardsView, null, required, options);
             }
         });
     }
