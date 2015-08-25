@@ -116,9 +116,14 @@ class FlamerushRiderEffect extends OneShotEffect {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(permanent);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true);
-            Effect effect = new ExileTargetEffect();
-            effect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect), false).apply(game, source);
+            for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+                Permanent tokenPermanent = game.getPermanent(tokenId);
+                if (tokenPermanent != null) {
+                    Effect effect = new ExileTargetEffect();
+                    effect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                    new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect), false).apply(game, source);
+                }
+            }
             return true;
         }
         return false;

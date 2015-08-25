@@ -35,9 +35,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlSourceEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -51,6 +52,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 
@@ -73,7 +75,7 @@ public class TatsumasaTheDragonsFang extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TatsumaTheDragonsFangEffect(), new GenericManaCost(6));
         ability.addCost(new ExileSourceCost(true));
         this.addAbility(ability);
-        
+
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
@@ -106,14 +108,21 @@ class TatsumaTheDragonsFangEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect =  new CreateTokenEffect(new TatsumaDragonToken());
+        CreateTokenEffect effect = new CreateTokenEffect(new TatsumaDragonToken());
         effect.apply(game, source);
-        FixedTarget fixedTarget = new FixedTarget(effect.getLastAddedTokenId());
-        DelayedTriggeredAbility delayedAbility = new TatsumaTheDragonsFangTriggeredAbility(fixedTarget);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        for (UUID tokenId : effect.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                FixedTarget fixedTarget = new FixedTarget(tokenPermanent, game);
+                Effect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                returnEffect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())));
+                DelayedTriggeredAbility delayedAbility = new TatsumaTheDragonsFangTriggeredAbility(fixedTarget, returnEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                game.addDelayedTriggeredAbility(delayedAbility);
+            }
+        }
 
         return true;
     }
@@ -123,8 +132,8 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
 
     protected FixedTarget fixedTarget;
 
-    public TatsumaTheDragonsFangTriggeredAbility(FixedTarget fixedTarget) {
-        super(new ReturnToBattlefieldUnderYourControlSourceEffect(), Duration.OneUse);
+    public TatsumaTheDragonsFangTriggeredAbility(FixedTarget fixedTarget, Effect effect) {
+        super(effect, Duration.OneUse);
         this.fixedTarget = fixedTarget;
     }
 
@@ -155,11 +164,12 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Return {this} to the battlefield under its owner's control when that token dies." ;
+        return "Return {this} to the battlefield under its owner's control when that token dies.";
     }
 }
 
 class TatsumaDragonToken extends Token {
+
     public TatsumaDragonToken() {
         super("Dragon Spirit", "5/5 blue Dragon Spirit creature token with flying");
         cardType.add(CardType.CREATURE);

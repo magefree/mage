@@ -210,13 +210,18 @@ class MimicVatCreateTokenEffect extends OneShotEffect {
                 token.addAbility(HasteAbility.getInstance());
                 token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
-                ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+                    Permanent tokenPermanent = game.getPermanent(tokenId);
+                    if (tokenPermanent != null) {
+                        ExileTargetEffect exileEffect = new ExileTargetEffect();
+                        exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
+                }
 
                 return true;
             }
