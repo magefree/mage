@@ -54,11 +54,11 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     protected boolean lockedIn = false;
 
     public BoostControlledEffect(int power, int toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("Creatures"), false);
+        this(power, toughness, duration, new FilterCreaturePermanent("creatures"), false);
     }
 
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("Creatures"), false);
+        this(power, toughness, duration, new FilterCreaturePermanent("creatures"), false);
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, boolean excludeSource) {

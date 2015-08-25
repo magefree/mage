@@ -55,7 +55,7 @@ public class DecDeckImporter extends DeckImporter {
         String lineName = line.substring(delim).trim();
         try {
             int num = Integer.parseInt(lineNum);
-            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName);
+            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
             if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
             } else {

@@ -31,10 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,7 +61,7 @@ public class DiligentFarmhand extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // If Diligent Farmhand is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("If Diligent Farmhand is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst")));
+        this.addAbility(MuscleBurst.getCountAsAbility());
     }
 
     public DiligentFarmhand(final DiligentFarmhand card) {

@@ -25,19 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.*;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -45,17 +49,23 @@ import mage.cards.CardImpl;
  */
 public class SwiftfootBoots extends CardImpl {
 
-    public SwiftfootBoots (UUID ownerId) {
+    public SwiftfootBoots(UUID ownerId) {
         super(ownerId, 219, "Swiftfoot Boots", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "M12";
         this.subtype.add("Equipment");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
+
+        // Equipped creature has hexproof and haste.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
+        effect.setText("and haste");
+        this.addAbility(ability);
+
+        // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
 
     }
 
-    public SwiftfootBoots (final SwiftfootBoots card) {
+    public SwiftfootBoots(final SwiftfootBoots card) {
         super(card);
     }
 

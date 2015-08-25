@@ -31,15 +31,54 @@
  *
  * Created on 17-Dec-2009, 9:20:50 PM
  */
-
 package mage.client.cards;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.cards.Sets;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
+import static mage.client.constants.Constants.CONTENT_MAX_XOFFSET;
+import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
+import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
+import static mage.client.constants.Constants.NAME_FONT_MAX_SIZE;
+import static mage.client.constants.Constants.NAME_MAX_YOFFSET;
+import static mage.client.constants.Constants.POWBOX_TEXT_MAX_LEFT;
+import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
+import static mage.client.constants.Constants.SYMBOL_MAX_XOFFSET;
+import static mage.client.constants.Constants.SYMBOL_MAX_YOFFSET;
+import static mage.client.constants.Constants.TYPE_MAX_YOFFSET;
 import mage.client.game.PlayAreaPanel;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
@@ -47,18 +86,11 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
-import mage.view.*;
-
-import javax.swing.*;
-import javax.swing.text.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import static mage.client.constants.Constants.*;
+import mage.view.AbilityView;
+import mage.view.CardView;
+import mage.view.CounterView;
+import mage.view.PermanentView;
+import mage.view.StackAbilityView;
 import org.mage.network.Client;
 
 /**
@@ -77,14 +109,17 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     protected final UUID gameId;
     protected final BigCard bigCard;
     protected CardView card;
-    protected Popup popup;
-    protected boolean popupShowing;
+    protected Popup tooltipPopup;
+    protected boolean tooltipShowing;
 
-    protected TextPopup popupText = new TextPopup();
+    protected TextPopup tooltipText = new TextPopup();
     protected BufferedImage background;
     protected BufferedImage image = new BufferedImage(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT, BufferedImage.TYPE_INT_RGB);
     protected BufferedImage small;
     protected String backgroundName;
+
+    // if this is set, it's opened if the user right clicks on the card panel
+    private JPopupMenu popupMenu;
 
     /**
      * Creates new form Card
@@ -141,7 +176,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             background = ImageHelper.getBackground(card, backgroundName);
         }
 
-        popupText.setText(getText(cardType));
+        tooltipText.setText(getText(cardType));
 
         gImage.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gImage.setColor(Color.BLACK);
@@ -159,8 +194,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gImage.drawString(card.getName(), CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
         if (card.getCardTypes().contains(CardType.CREATURE)) {
             gImage.drawString(card.getPower() + "/" + card.getToughness(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
-        }
-        else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+        } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
             gImage.drawString(card.getLoyalty(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
         }
 
@@ -174,8 +208,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gSmall.drawString(card.getName(), Config.dimensions.contentXOffset, Config.dimensions.nameYOffset);
         if (card.getCardTypes().contains(CardType.CREATURE)) {
             gSmall.drawString(card.getPower() + "/" + card.getToughness(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
-        }
-        else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+        } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
             gSmall.drawString(card.getLoyalty(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
         }
 
@@ -197,8 +230,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             for (String rule: getRules()) {
                 sb.append("\n").append(rule);
             }
-        }
-        else {
+        } else {
             sb.append(card.getName());
             if (card.getManaCost().size() > 0) {
                 sb.append("\n").append(card.getManaCost());
@@ -209,8 +241,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             }
             if (card.getCardTypes().contains(CardType.CREATURE)) {
                 sb.append("\n").append(card.getPower()).append("/").append(card.getToughness());
-            }
-            else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+            } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
                 sb.append("\n").append(card.getLoyalty());
             }
             for (String rule: getRules()) {
@@ -233,8 +264,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         StringBuilder sb = new StringBuilder();
         if (card.getCardTypes().contains(CardType.LAND)) {
             sb.append("land").append(card.getSuperTypes()).append(card.getSubTypes());
-        }
-        else if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
+        } else if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
             sb.append("creature");
         }
         sb.append(card.getColor()).append(card.getRarity()).append(card.getExpansionSetCode());
@@ -249,7 +279,8 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             for (String rule: getRules()) {
                 doc.insertString(doc.getLength(), rule + "\n", doc.getStyle("small"));
             }
-        } catch (BadLocationException e) {}
+        } catch (BadLocationException e) {
+        }
 
         text.setCaretPosition(0);
     }
@@ -261,8 +292,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
                 rules.add(counter.getCount() + " x " + counter.getName());
             }
             return rules;
-        }
-        else {
+        } else {
             return card.getRules();
         }
     }
@@ -288,10 +318,10 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         return sbType.toString();
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -362,18 +392,18 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     @Override
     public void mouseEntered(MouseEvent arg0) {
-        if (!popupShowing) {
-            if (popup != null) {
-                popup.hide();
+        if (!tooltipShowing) {
+            if (tooltipPopup != null) {
+                tooltipPopup.hide();
             }
             PopupFactory factory = PopupFactory.getSharedInstance();
-            popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
-            popup.show();
-            //hack to get popup to resize to fit text
-            popup.hide();
-            popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
-            popup.show();
-            popupShowing = true;
+            tooltipPopup = factory.getPopup(this, tooltipText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
+            tooltipPopup.show();
+            //hack to get tooltipPopup to resize to fit text
+            tooltipPopup.hide();
+            tooltipPopup = factory.getPopup(this, tooltipText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
+            tooltipPopup.show();
+            tooltipShowing = true;
 
             // Draw Arrows for targets
             List<UUID> targets = card.getTargets();
@@ -404,9 +434,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         if(getMousePosition(true) != null) {
             return;
         }
-        if (popup != null) {
-            popup.hide();
-            popupShowing = false;
+        if (tooltipPopup != null) {
+            tooltipPopup.hide();
+            tooltipShowing = false;
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.PAIRED);
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.SOURCE);
@@ -421,8 +451,8 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     @Override
     public void focusLost(FocusEvent arg0) {
-        if (popup != null) {
-            popup.hide();
+        if (tooltipPopup != null) {
+            tooltipPopup.hide();
         }
         this.repaint();
     }
@@ -437,38 +467,50 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void componentResized(ComponentEvent e) { }
+    public void componentResized(ComponentEvent e) {
+    }
 
     @Override
-    public void componentMoved(ComponentEvent e) { }
+    public void componentMoved(ComponentEvent e) {
+    }
 
     @Override
-    public void componentShown(ComponentEvent e) { }
+    public void componentShown(ComponentEvent e) {
+    }
 
     @Override
     public void componentHidden(ComponentEvent e) {
-        if (popup != null) {
-            popup.hide();
+        if (tooltipPopup != null) {
+            tooltipPopup.hide();
         }
     }
 
     @Override
-    public List<MagePermanent> getLinks() {return null;}
+    public List<MagePermanent> getLinks() {
+        return null;
+    }
 
     @Override
-    public boolean isTapped() {return false;}
+    public boolean isTapped() {
+        return false;
+    }
 
     @Override
-    public boolean isFlipped() {return false;}
+    public boolean isFlipped() {
+        return false;
+    }
 
     @Override
-    public void onBeginAnimation() {}
+    public void onBeginAnimation() {
+    }
 
     @Override
-    public void onEndAnimation() {}
+    public void onEndAnimation() {
+    }
 
     @Override
-    public void setAlpha(float transparency) {}
+    public void setAlpha(float transparency) {
+    }
 
     @Override
     public CardView getOriginal() {
@@ -540,5 +582,13 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
+    public JPopupMenu getPopupMenu() {
+        return popupMenu;
+    }
     
+    @Override
+    public void setPopupMenu(JPopupMenu popupMenu) {
+        this.popupMenu = popupMenu;
+}
 }

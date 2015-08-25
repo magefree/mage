@@ -89,4 +89,37 @@ public class BoostEnchantedTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Boomerang", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 3, 2);
     }
+
+    /**
+     * If the aura moves between activation and resolution, the new enchanted
+     * creature should be boosted, not the old one.
+     */
+
+    @Test
+    public void testFirebreathingWithAuraGraft() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        // {R}: Enchanted creature gets +1/+0 until end of turn.
+        addCard(Zone.HAND, playerA, "Firebreathing"); // {R} Enchantment - Aura
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
+        // Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
+        addCard(Zone.HAND, playerB, "Aura Graft"); // {1}{U} Instant
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Firebreathing", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Enchanted creature");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Aura Graft", "Firebreathing");
+        setChoice(playerB, "Pillarfield Ox");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Aura Graft", 1);
+        assertPermanentCount(playerB, "Firebreathing", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
+        assertPowerToughness(playerB, "Pillarfield Ox", 3, 4);
+
+    }
+
 }

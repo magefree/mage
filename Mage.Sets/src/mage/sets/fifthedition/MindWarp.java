@@ -37,7 +37,7 @@ public class MindWarp extends mage.sets.iceage.MindWarp {
 
     public MindWarp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = 39;
         this.expansionSetCode = "5ED";
     }
 

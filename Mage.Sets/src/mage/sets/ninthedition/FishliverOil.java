@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author Laxika
  */
-public class FishliverOil extends mage.sets.arabiannights.FishliverOil {
+public class FishliverOil extends mage.sets.arabiannights.FishliverOil1 {
 
     public FishliverOil(UUID ownerId) {
         super(ownerId);

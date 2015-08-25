@@ -254,20 +254,20 @@ public class Permanent extends Card {
 
     @Override
     public void mouseEntered(MouseEvent arg0) {
-        if (!popupShowing) {
-            if (popup != null) {
-                popup.hide();
+        if (!tooltipShowing) {
+            if (tooltipPopup != null) {
+                tooltipPopup.hide();
             }
             PopupFactory factory = PopupFactory.getSharedInstance();
             int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?Config.dimensions.frameHeight:Config.dimensions.frameWidth);
             int y = (int) this.getLocationOnScreen().getY() + 40;
-            popup = factory.getPopup(this, popupText, x, y);
-            popup.show();
-            //hack to get popup to resize to fit text
-            popup.hide();
-            popup = factory.getPopup(this, popupText, x, y);
-            popup.show();
-            popupShowing = true;
+            tooltipPopup = factory.getPopup(this, tooltipText, x, y);
+            tooltipPopup.show();
+            //hack to get tooltipPopup to resize to fit text
+            tooltipPopup.hide();
+            tooltipPopup = factory.getPopup(this, tooltipText, x, y);
+            tooltipPopup.show();
+            tooltipShowing = true;
         }
     }
 

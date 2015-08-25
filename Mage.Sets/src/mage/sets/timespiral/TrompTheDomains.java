@@ -38,7 +38,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -51,14 +50,13 @@ public class TrompTheDomains extends CardImpl {
         super(ownerId, 230, "Tromp the Domains", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}");
         this.expansionSetCode = "TSP";
 
-
         // Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.
         Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("<i>Domain</i> - Until end of turn, creatures you control gain Trample");
         this.getSpellAbility().addEffect(effect);
         DynamicValue domain = new DomainValue();
         effect = new BoostControlledEffect(domain, domain, Duration.EndOfTurn, new FilterCreaturePermanent(), false);
-        effect.setText(" and get +1/+1 for each basic land type among lands you control");
+        effect.setText("and get +1/+1 for each basic land type among lands you control");
         this.getSpellAbility().addEffect(effect);
 
     }

@@ -32,13 +32,13 @@ import java.util.UUID;
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class SeaSerpent extends mage.sets.limitedalpha.SeaSerpent {
 
     public SeaSerpent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = 118;
         this.expansionSetCode = "5ED";
     }
 

@@ -51,8 +51,8 @@ public class CardsInAllGraveyardsCount implements DynamicValue {
         this.filter = filter;
     }
 
-    private CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter;
+    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
+        this.filter = dynamicValue.filter.copy();
     }
 
     @Override

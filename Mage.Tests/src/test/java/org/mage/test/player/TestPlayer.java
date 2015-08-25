@@ -1384,8 +1384,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void sendPlayerAction(mage.constants.PlayerAction playerAction, Game game) {
-        computerPlayer.sendPlayerAction(playerAction, game);
+    public void sendPlayerAction(mage.constants.PlayerAction playerAction, Game game, Object data) {
+        computerPlayer.sendPlayerAction(playerAction, game, data);
     }
 
     @Override

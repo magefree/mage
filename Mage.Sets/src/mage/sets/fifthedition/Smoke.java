@@ -32,13 +32,13 @@ import java.util.UUID;
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class Smoke extends mage.sets.limitedalpha.Smoke {
 
     public Smoke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = 268;
         this.expansionSetCode = "5ED";
     }
 

@@ -402,7 +402,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void skip();
 
     // priority, undo, ...
-    void sendPlayerAction(PlayerAction passPriorityAction, Game game);
+    void sendPlayerAction(PlayerAction passPriorityAction, Game game, Object data);
 
     int getStoredBookmark();
 

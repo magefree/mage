@@ -170,11 +170,11 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             sb.append(target.getTargetName()).append(" gains ");
 
         }
+        sb.append(ability.getRule());
         if (durationPhaseStep != null) {
             sb.append(" until your next ").append(durationPhaseStep.toString().toLowerCase(Locale.ENGLISH));
-        }
-        if (!duration.toString().isEmpty()) {
-            sb.append(ability.getRule()).append(" ").append(duration.toString());
+        } else if (!duration.toString().isEmpty()) {
+            sb.append(" ").append(duration.toString());
         }
         return sb.toString();
     }

@@ -229,7 +229,7 @@ public interface Game extends MageItem, Serializable {
 
     void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options);
 
-    void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
+    void fireSelectTargetTriggeredAbilityEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
 
     void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required);
 
@@ -353,7 +353,7 @@ public interface Game extends MageItem, Serializable {
     void addPermanent(Permanent permanent);
 
     // priority method
-    void sendPlayerAction(PlayerAction playerAction, UUID playerId);
+    void sendPlayerAction(PlayerAction playerAction, UUID playerId, Object data);
 
     /**
      * This version supports copying of copies of any depth.
