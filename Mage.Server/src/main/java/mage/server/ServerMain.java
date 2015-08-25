@@ -797,20 +797,15 @@ public class ServerMain implements MageServer {
     public ServerState getServerState() {
         return state;
     }
-//
-//    @Override
-//    public void cheat(final UUID gameId, final String sessionId, final UUID playerId, final DeckCardLists deckList) throws MageException {
-//        execute("cheat", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                if (testMode) {
-//                    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                    GameManager.getInstance().cheat(gameId, userId, playerId, deckList);
-//                }
-//            }
-//        });
-//    }
-//
+
+    @Override
+    public void cheat(final UUID gameId, final String sessionId, final UUID playerId, final DeckCardLists deckList) {
+        if (testMode) {
+            UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+            GameManager.getInstance().cheat(gameId, userId, playerId, deckList);
+        }
+    }
+
 //    @Override
 //    public boolean cheat(final UUID gameId, final String sessionId, final UUID playerId, final String cardName) throws MageException {
 //        return executeWithResult("cheatOne", sessionId, new ActionWithBooleanResult() {

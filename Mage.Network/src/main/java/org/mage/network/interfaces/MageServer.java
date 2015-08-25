@@ -78,5 +78,7 @@ public interface MageServer {
     void stopWatching(UUID gameId, String sessionId);
     
     void pingTime(long milliSeconds, String sessionId);
+    
+    void cheat(UUID gameId, String sessionId, UUID playerId, DeckCardLists deckList);
 
 }

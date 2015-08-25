@@ -23,6 +23,7 @@ import org.mage.network.interfaces.MageClient;
 import org.mage.network.messages.ClientMessage;
 import org.mage.network.messages.requests.ChatMessageRequest;
 import org.mage.network.messages.requests.ChatRoomIdRequest;
+import org.mage.network.messages.requests.CheatRequest;
 import org.mage.network.messages.requests.CreateTableRequest;
 import org.mage.network.messages.requests.CreateTournamentRequest;
 import org.mage.network.messages.requests.GetRoomRequest;
@@ -319,6 +320,10 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
 
     public void stopWatching(UUID gameId) {
         ctx.writeAndFlush(new StopWatchingRequest(gameId)).addListener(WriteListener.getInstance());
+    }
+
+    public void cheat(UUID gameId, UUID playerId, DeckCardLists importDeck) {
+        ctx.writeAndFlush(new CheatRequest(gameId, playerId, importDeck)).addListener(WriteListener.getInstance());
     }
 
 }

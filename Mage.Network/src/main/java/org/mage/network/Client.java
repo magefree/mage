@@ -33,8 +33,8 @@ import mage.view.TournamentView;
 import mage.view.UserDataView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
-import org.mage.network.handlers.client.ClientExceptionHandler;
 import org.mage.network.handlers.PingMessageHandler;
+import org.mage.network.handlers.client.ClientExceptionHandler;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
 import org.mage.network.handlers.client.HeartbeatHandler;
@@ -412,7 +412,11 @@ public class Client {
     }
 
     public void cheat(UUID gameId, UUID playerId, DeckCardLists importDeck) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.cheat(gameId, playerId, importDeck);
+        } catch (Exception ex) {
+            logger.error("Error cheating", ex);
+        }
     }
 
     public UUID joinGame(UUID gameId) {
