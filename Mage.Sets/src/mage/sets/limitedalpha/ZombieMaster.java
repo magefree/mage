@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class ZombieMaster extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Zombies");
+    private static final FilterPermanent filter = new FilterPermanent("Zombie creatures");
 
     static {
         filter.add(new SubtypePredicate("Zombie"));
@@ -66,9 +66,11 @@ public class ZombieMaster extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Zombie creatures have swampwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SwampwalkAbility(), Duration.WhileOnBattlefield, filter, true)));
+        Effect effect = new GainAbilityAllEffect(new SwampwalkAbility(), Duration.WhileOnBattlefield, filter, true);
+        effect.setText("Other Zombie creatures have swampwalk. <i>(They can't be blocked as long as defending player controls a Swamp.)</i>");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Other Zombies have "{B}: Regenerate this permanent."
-        Effect effect = new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")), Duration.WhileOnBattlefield, filter, true);
+        effect = new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")), Duration.WhileOnBattlefield, filter, true);
         effect.setText("Other Zombies have \"{B}: Regenerate this permanent.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

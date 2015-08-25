@@ -61,7 +61,7 @@ public class ChariotOfVictory extends CardImpl {
         effect.setText(", trample");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
-        effect.setText(" and haste");
+        effect.setText("and haste");
         ability.addEffect(effect);
         this.addAbility(ability);
 

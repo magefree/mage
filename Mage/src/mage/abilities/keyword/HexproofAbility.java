@@ -1,14 +1,13 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
-
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.constants.Zone;
 
 /**
- * Hexproof
- * (This creature or player can't be the target of spells or abilities your opponents control.)
+ * Hexproof (This creature or player can't be the target of spells or abilities
+ * your opponents control.)
  *
  * @author loki
  */
@@ -39,6 +38,6 @@ public class HexproofAbility extends SimpleStaticAbility implements MageSingleto
 
     @Override
     public String getRule() {
-        return "Hexproof";
+        return "hexproof";
     }
 }
