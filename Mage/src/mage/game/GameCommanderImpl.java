@@ -193,7 +193,7 @@ public abstract class GameCommanderImpl extends GameImpl {
             for (Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()) {
                 if (entrySet.getValue() > 20) {
                     Player opponent = getPlayer(entrySet.getKey());
-                    if (opponent != null && player.isInGame()) {
+                    if (opponent != null && !opponent.hasLost() && player.isInGame()) {
                         opponent.lost(this);
                     }
                 }
