@@ -40,7 +40,7 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
         jPanel.setPreferredSize(new Dimension(width - 30, height));
 
         for (PermanentView permanent : ((BattlefieldPanel) jLayeredPane).getBattlefield().values()) {
-            if (permanent.getAttachments() != null) {
+            if (permanent.getAttachments() != null && permanent.getAttachments().size() > 0) {
                 groupAttachments(jLayeredPane, jPanel, permanents, permanent);
             }
         }
