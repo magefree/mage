@@ -50,9 +50,9 @@ public class MirarisWake extends CardImpl {
         super(ownerId, 139, "Mirari's Wake", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{W}");
         this.expansionSetCode = "JUD";
 
-
         // Creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1,Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
+
         // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
         AddManaOfAnyTypeProducedEffect effect = new AddManaOfAnyTypeProducedEffect();
         effect.setText("add one mana to your mana pool of any type that land produced");

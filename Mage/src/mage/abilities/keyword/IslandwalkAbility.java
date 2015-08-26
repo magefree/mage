@@ -43,7 +43,11 @@ public class IslandwalkAbility extends LandwalkAbility {
     }
 
     public IslandwalkAbility() {
-        super(filter);
+        this(true);
+    }
+
+    public IslandwalkAbility(boolean withHintText) {
+        super(filter, withHintText);
     }
 
     public IslandwalkAbility(final IslandwalkAbility ability) {

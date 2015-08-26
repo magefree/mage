@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -29,41 +29,26 @@ package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class CanAttackAsThoughtItDidntHaveDefenderAllEffect extends AsThoughEffectImpl {
 
-    private final FilterPermanent filter;
-    
-    public CanAttackAsThoughtItDidntHaveDefenderAllEffect(Duration duration) {
-        this(duration, new FilterCreaturePermanent());
-    }
-    
-    public CanAttackAsThoughtItDidntHaveDefenderAllEffect(Duration duration, FilterPermanent filter) {
+public class CanAttackAsThoughItDidntHaveDefenderTargetEffect extends AsThoughEffectImpl {
+
+    public CanAttackAsThoughItDidntHaveDefenderTargetEffect(Duration duration) {
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
-        this.filter = filter;
-        this.staticText = getText();
     }
 
-    public CanAttackAsThoughtItDidntHaveDefenderAllEffect(final CanAttackAsThoughtItDidntHaveDefenderAllEffect effect) {
+    public CanAttackAsThoughItDidntHaveDefenderTargetEffect(final CanAttackAsThoughItDidntHaveDefenderTargetEffect effect) {
         super(effect);
-        this.filter = effect.filter.copy();
-    }
-
-    @Override
-    public CanAttackAsThoughtItDidntHaveDefenderAllEffect copy() {
-        return new CanAttackAsThoughtItDidntHaveDefenderAllEffect(this);
     }
 
     @Override
@@ -72,23 +57,28 @@ public class CanAttackAsThoughtItDidntHaveDefenderAllEffect extends AsThoughEffe
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Permanent permanent = game.getPermanent(objectId);
-        return permanent != null && filter.match(permanent, game);
+    public CanAttackAsThoughItDidntHaveDefenderTargetEffect copy() {
+        return new CanAttackAsThoughItDidntHaveDefenderTargetEffect(this);
     }
-    
-    private String getText() {
-        StringBuilder sb = new StringBuilder(filter.getMessage());
-        sb.append(" can attack ");
-        if (!duration.toString().isEmpty()) {            
-            if(Duration.EndOfTurn.equals(duration)) {
-                sb.append("this turn");
-            } else {
-                sb.append(duration.toString());
-            }
-            sb.append(" ");
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return this.getTargetPointer().getTargets(game, source).contains(objectId);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
-        sb.append("as though they didn't have defender");
-        return  sb.toString();
+        if (!mode.getTargets().isEmpty()) {
+            if (this.duration == Duration.EndOfTurn) {
+                return "Target " + mode.getTargets().get(0).getTargetName() + " can attack this turn as though it didn't have defender";
+            } else {
+                return "Target " + mode.getTargets().get(0).getTargetName() + " can attack as though it didn't have defender";
+            }
+        } else {
+            throw new UnsupportedOperationException("No target defined");
+        }
     }
 }

@@ -41,7 +41,7 @@ import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 
@@ -64,7 +64,7 @@ public class SpireSerpent extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.getInstance(), abilityText1);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
-        Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
+        Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 MetalcraftCondition.getInstance());
         effect.setText("and can attack as though it didn't have defender");
         ability.addEffect(effect);

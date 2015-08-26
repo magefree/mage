@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -57,7 +57,7 @@ public class ReturnedPhalanx extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
     }
 
     public ReturnedPhalanx(final ReturnedPhalanx card) {

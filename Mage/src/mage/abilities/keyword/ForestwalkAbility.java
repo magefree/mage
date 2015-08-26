@@ -43,7 +43,11 @@ public class ForestwalkAbility extends LandwalkAbility {
     }
 
     public ForestwalkAbility() {
-        super(filter);
+        this(true);
+    }
+
+    public ForestwalkAbility(boolean withHintText) {
+        super(filter, withHintText);
     }
 
     public ForestwalkAbility(final ForestwalkAbility ability) {

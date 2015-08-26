@@ -28,16 +28,16 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -53,7 +53,6 @@ public class RiteOfReplication extends CardImpl {
     public RiteOfReplication(UUID ownerId) {
         super(ownerId, 61, "Rite of Replication", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "ZEN";
-
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));

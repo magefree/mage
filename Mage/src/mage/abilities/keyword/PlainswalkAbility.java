@@ -32,7 +32,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author nantuko
+ * @author BetaSteward_at_googlemail.com
  */
 public class PlainswalkAbility extends LandwalkAbility {
 
@@ -43,7 +43,11 @@ public class PlainswalkAbility extends LandwalkAbility {
     }
 
     public PlainswalkAbility() {
-        super(filter);
+        this(true);
+    }
+
+    public PlainswalkAbility(boolean withHintText) {
+        super(filter, withHintText);
     }
 
     public PlainswalkAbility(final PlainswalkAbility ability) {
