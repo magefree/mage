@@ -68,7 +68,9 @@ public enum CounterType {
     LOYALTY("loyalty"),
     MANNEQUIN("mannequin"),
     M1M1(new BoostCounter(-1, -1).name),
+    M2M2(new BoostCounter(-2, -2).name),
     MINING("mining"),
+    P1P0(new BoostCounter(1, 0).name),
     P1P1(new BoostCounter(1, 1).name),
     P2P2(new BoostCounter(2, 2).name),
     PAGE("page"),
@@ -126,12 +128,16 @@ public enum CounterType {
      */
     public Counter createInstance(int amount) {
         switch (this) {
+            case P1P0:
+                return new BoostCounter(1, 0, amount);
             case P1P1:
                 return new BoostCounter(1, 1, amount);
             case P2P2:
                 return new BoostCounter(2, 2, amount);
             case M1M1:
                 return new BoostCounter(-1, -1, amount);
+            case M2M2:
+                return new BoostCounter(-2, -2, amount);
             default:
                 return new Counter(name, amount);
         }
