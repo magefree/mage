@@ -30,6 +30,7 @@ package mage.sets.alliances;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -41,6 +42,7 @@ import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 
 /**
@@ -60,8 +62,10 @@ public class Burnout extends CardImpl {
         this.expansionSetCode = "ALL";
 
         // Counter target instant spell if it's blue.
+        Effect effect = new BurnoutCounterTargetEffect();
+        effect.setText("Counter target instant spell if it's blue");
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-        this.getSpellAbility().addEffect(new BurnoutCounterTargetEffect());
+        this.getSpellAbility().addEffect(effect);
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
@@ -95,13 +99,10 @@ class BurnoutCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if(game.getStack().getSpell(source.getFirstTarget()).getColor(game).isBlue()){
+        Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
+        if(targetSpell != null && targetSpell.getColor(game).isBlue()){
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
         }
         return true;
-    }
-
-    public String getText(Ability source) {
-        return "Counter target instant spell if it's blue";
     }
 }

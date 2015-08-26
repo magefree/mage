@@ -30,6 +30,7 @@ package mage.sets.mercadianmasques;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -63,8 +64,11 @@ public class CaveSense extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +1/+1 and has mountainwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MountainwalkAbility(), AttachmentType.AURA)));
+        Effect effect = new GainAbilityAttachedEffect(new MountainwalkAbility(), AttachmentType.AURA);
+        effect.setText("and has mountainwalk");
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1));
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public CaveSense(final CaveSense card) {

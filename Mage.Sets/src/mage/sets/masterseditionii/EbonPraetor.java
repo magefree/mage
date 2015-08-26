@@ -151,6 +151,6 @@ class EbonPraetorEffect extends OneShotEffect {
                 }
             }
         }
-        return false;
+        return true;
     }
 }

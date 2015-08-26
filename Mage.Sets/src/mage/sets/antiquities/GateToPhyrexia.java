@@ -91,11 +91,4 @@ class GateToPhyrexiaAbility extends LimitedTimesPerTurnActivatedAbility {
         }
         return super.canActivate(playerId, game);
     }
-
-    @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder("");
-        sb.append(super.getRule()).append(" <i>Activate this ability only during your upkeep.</i>");
-        return sb.toString();
-    }
 }

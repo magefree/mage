@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
 import mage.abilities.keyword.ForestwalkAbility;
@@ -65,8 +66,10 @@ public class ScarwoodHag extends CardImpl {
         this.addAbility(ability);
 
         // {tap}: Target creature loses forestwalk until end of turn.
+        Effect effect = new LoseAbilityTargetEffect(new ForestwalkAbility(true), Duration.EndOfTurn);
+        effect.setText("Target creature loses forestwalk until end of turn");
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new LoseAbilityTargetEffect(new ForestwalkAbility(false), Duration.EndOfTurn),
+                effect,
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

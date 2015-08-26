@@ -87,10 +87,7 @@ class ThermokarstEffect extends OneShotEffect {
         if (permanent != null && controller != null) {
             permanent.destroy(source.getSourceId(), game, false);
             if (permanent.getSupertype().contains("Snow")) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null) {
-                    player.gainLife(1, game);
-                }
+                controller.gainLife(1, game);
             }
             return true;
         }
