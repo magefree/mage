@@ -85,7 +85,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.playerId = effect.playerId;
         this.additionalCardType = effect.additionalCardType;
         this.gainsHaste = effect.gainsHaste;
-        this.addedTokenPermanents.addAll(effect.addedTokenPermanents);
+        this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
     }
 
     @Override
