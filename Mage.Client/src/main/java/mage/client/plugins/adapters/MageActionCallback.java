@@ -292,6 +292,10 @@ public class MageActionCallback implements ActionCallback {
             // drag'n'drop is allowed for HAND zone only
             return;
         }
+        if (!SwingUtilities.isLeftMouseButton(e)) {
+            // only allow draging with the left mouse button
+            return;
+        }
         isDragging = true;
         prevCard = card;
         Point p = card.getCardLocation();
