@@ -26,6 +26,7 @@ import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.UserDataView;
 import mage.view.UserRequestMessage;
+import org.apache.log4j.Logger;
 import org.mage.network.Client;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.messages.MessageType;
@@ -36,6 +37,8 @@ import org.mage.network.messages.MessageType;
  */
 public class TestClient implements MageClient {
 
+    protected static final Logger logger = Logger.getLogger(TestClient.class);
+    
     private Client client;
     private ServerState serverState;
     private boolean joinedTableFired = false;
@@ -77,9 +80,18 @@ public class TestClient implements MageClient {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void joinMainChat() {
+        UUID mainRoomId = client.getServerState().getMainRoomId();
+        client.joinChat(client.getRoomChatId(mainRoomId));
+    }
+    
+    public void sendChatMessage(UUID chatId, String message) {
+        client.sendChatMessage(chatId, message);
+    }
+
     @Override
     public void receiveChatMessage(UUID chatId, ChatMessage message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        logger.info("Recieved message: " + message);
     }
 
     @Override
@@ -102,7 +114,7 @@ public class TestClient implements MageClient {
         joinedTableFired = true;
     }
     
-    public boolean isJointedTableFired() {
+    public boolean isJoinedTableFired() {
         return joinedTableFired;
     }
 

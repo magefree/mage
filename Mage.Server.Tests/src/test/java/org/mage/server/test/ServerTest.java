@@ -149,7 +149,7 @@ public class ServerTest {
         Assert.assertEquals("Table state incorrect", TableState.WAITING, table.getTableState());
         boolean result = client.joinTable(client.getMainRoomId(), table.getTableId(), USERNAME, "Human", 1, DeckImporterUtil.importDeck("TestDeck.dck"), "");
         Assert.assertTrue("Unable to join table", result);
-        Assert.assertTrue("Joined table didn't fire", client.isJointedTableFired());
+        Assert.assertTrue("Joined table didn't fire", client.isJoinedTableFired());
 
     }
 }
