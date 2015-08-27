@@ -56,14 +56,14 @@ public class WormwoodDryad extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}: Wormwood Dryad gains forestwalk until end of turn and deals 1 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(new ForestwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl("{G}"));
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);
-        
+
         // {B}: Wormwood Dryad gains swampwalk until end of turn and deals 1 damage to you.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{B}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(new SwampwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl("{B}"));
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);
     }

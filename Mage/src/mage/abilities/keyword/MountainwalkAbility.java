@@ -43,7 +43,11 @@ public class MountainwalkAbility extends LandwalkAbility {
     }
 
     public MountainwalkAbility() {
-        super(filter);
+        this(true);
+    }
+
+    public MountainwalkAbility(boolean withHintText) {
+        super(filter, withHintText);
     }
 
     public MountainwalkAbility(final MountainwalkAbility ability) {

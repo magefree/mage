@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,45 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.combat;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.game.Game;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
+public class RidingTheDiluHorse extends mage.sets.masterseditioniii.RidingTheDiluHorse {
 
-public class CanAttackAsThoughtItDidntHaveDefenderSourceEffect extends AsThoughEffectImpl {
-
-    public CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration duration) {
-        super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
-        staticText = "{this} can attack as though it didn't have defender";
+    public RidingTheDiluHorse(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 144;
+        this.expansionSetCode = "PTK";
+        this.rarity = Rarity.RARE;
     }
 
-    public CanAttackAsThoughtItDidntHaveDefenderSourceEffect(final CanAttackAsThoughtItDidntHaveDefenderSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public RidingTheDiluHorse(final RidingTheDiluHorse card) {
+        super(card);
     }
 
     @Override
-    public CanAttackAsThoughtItDidntHaveDefenderSourceEffect copy() {
-        return new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(this);
+    public RidingTheDiluHorse copy() {
+        return new RidingTheDiluHorse(this);
     }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(source.getSourceId());
-    }
-
 }

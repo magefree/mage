@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -57,13 +59,13 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private final UUID playerId;
     private final CardType additionalCardType;
     private boolean gainsHaste;
-    private Permanent addedTokenPermanent;
+    private List<Permanent> addedTokenPermanents;
 
     public PutTokenOntoBattlefieldCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
         this.playerId = null;
         this.additionalCardType = null;
-        this.addedTokenPermanent = null;
+        this.addedTokenPermanents = new ArrayList<>();
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId) {
@@ -75,7 +77,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.playerId = playerId;
         this.additionalCardType = additionalCardType;
         this.gainsHaste = gainsHaste;
-        this.addedTokenPermanent = null;
+        this.addedTokenPermanents = new ArrayList<>();
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(final PutTokenOntoBattlefieldCopyTargetEffect effect) {
@@ -83,7 +85,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.playerId = effect.playerId;
         this.additionalCardType = effect.additionalCardType;
         this.gainsHaste = effect.gainsHaste;
-        this.addedTokenPermanent = effect.addedTokenPermanent;
+        this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
     }
 
     @Override
@@ -118,21 +120,24 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
                 token.addAbility(HasteAbility.getInstance());
             }
             token.putOntoBattlefield(1, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId);
-            addedTokenPermanent = game.getPermanent(token.getLastAddedToken());
-            if (addedTokenPermanent != null) {
-                game.copyPermanent(copyFromPermanent, addedTokenPermanent, source, applier);
-                if (additionalCardType != null) {
-                    ContinuousEffect effect = new AddCardTypeTargetEffect(additionalCardType, Duration.Custom);
-                    effect.setTargetPointer(new FixedTarget(addedTokenPermanent.getId()));
-                    game.addEffect(effect, source);
+            for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+                Permanent tokenPermanent = game.getPermanent(tokenId);
+                if (tokenPermanent != null) {
+                    addedTokenPermanents.add(tokenPermanent);
+                    game.copyPermanent(copyFromPermanent, tokenPermanent, source, applier);
+                    if (additionalCardType != null) {
+                        ContinuousEffect effect = new AddCardTypeTargetEffect(additionalCardType, Duration.Custom);
+                        effect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                        game.addEffect(effect, source);
+                    }
+                    if (gainsHaste) {
+                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                        effect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                        game.addEffect(effect, source);
+                    }
                 }
-                if (gainsHaste) {
-                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                    effect.setTargetPointer(new FixedTarget(addedTokenPermanent.getId()));
-                    game.addEffect(effect, source);
-                }
-                return true;
             }
+            return true;
         }
         return false;
     }
@@ -153,7 +158,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
 
     }
 
-    public Permanent getAddedPermanent() {
-        return addedTokenPermanent;
+    public List<Permanent> getAddedPermanent() {
+        return addedTokenPermanents;
     }
 }

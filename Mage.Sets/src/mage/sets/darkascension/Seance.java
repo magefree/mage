@@ -43,6 +43,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -58,7 +59,6 @@ public class Seance extends CardImpl {
     public Seance(UUID ownerId) {
         super(ownerId, 20, "Seance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "DKA";
-
 
         // At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SeanceEffect(), TargetController.ANY, true);
@@ -103,16 +103,20 @@ class SeanceEffect extends OneShotEffect {
 
                 if (!token.hasSubtype("Spirit")) {
                     token.getSubtype().add("Spirit");
-                }                
+                }
                 token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-                ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+                    Permanent tokenPermanent = game.getPermanent(tokenId);
+                    if (tokenPermanent != null) {
+                        ExileTargetEffect exileEffect = new ExileTargetEffect();
+                        exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
+                }
             }
 
             return true;

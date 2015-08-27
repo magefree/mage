@@ -29,7 +29,7 @@ package mage.sets.stronghold;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderAllEffect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -56,7 +56,7 @@ public class RollingStones extends CardImpl {
 
 
         // Wall creatures can attack as though they didn't have defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public RollingStones(final RollingStones card) {

@@ -199,14 +199,14 @@ public final class GamePanel extends javax.swing.JPanel {
     // CardView popupMenu was invoked last
     private CardView cardViewPopupMenu;
 
-    // popup menu for a card
-    private JPopupMenu popupMenuCardPanel;
+    // popup menu for triggered abilities order
+    private JPopupMenu popupMenuTriggerOrder;
 
     public GamePanel() {
         initComponents();
 
-        createTriggerOrderPupupMenu();
-        this.add(popupMenuCardPanel);
+        initPopupMenuTriggerOrder();
+        //this.add(popupMenuTriggerOrder);
 
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
@@ -1110,12 +1110,10 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         ShowCardsDialog showCards = new ShowCardsDialog();
         JPopupMenu popupMenu = null;
-        Listener<Event> eventListener = null;
         if (PopUpMenuType.TRIGGER_ORDER.equals(popupMenuType)) {
-            popupMenu = getTriggerOrderPopupMenu();
-            eventListener = getTriggerOrderEventListener(showCards);
+            popupMenu = popupMenuTriggerOrder;
         }
-        showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required, options, popupMenu, eventListener);
+        showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required, options, popupMenu, getShowCardsEventListener(showCards));
         return showCards;
     }
 
@@ -1988,8 +1986,8 @@ public final class GamePanel extends javax.swing.JPanel {
         hoverButtons.put(name, button);
     }
 
-    // TriggerOrderPopupMenu
-    private Listener<Event> getTriggerOrderEventListener(final ShowCardsDialog dialog) {
+    // Event listener for the ShowCardsDialog
+    private Listener<Event> getShowCardsEventListener(final ShowCardsDialog dialog) {
         return new Listener<Event>() {
             @Override
             public void event(Event event) {
@@ -2014,7 +2012,8 @@ public final class GamePanel extends javax.swing.JPanel {
         String abilityRuleText = null;
         if (cardViewPopupMenu instanceof CardView && cardViewPopupMenu.getAbility() != null) {
             abilityId = cardViewPopupMenu.getAbility().getId();
-            if (!cardViewPopupMenu.getAbility().getRules().isEmpty() && !cardViewPopupMenu.getAbility().getRules().equals("")) {
+            if (!cardViewPopupMenu.getAbility().getRules().isEmpty()
+                    && !cardViewPopupMenu.getAbility().getRules().get(0).isEmpty()) {
                 abilityRuleText = cardViewPopupMenu.getAbility().getRules().get(0);
             }
         }
@@ -2041,11 +2040,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public JPopupMenu getTriggerOrderPopupMenu() {
-        return popupMenuCardPanel;
-    }
-
-    private void createTriggerOrderPupupMenu() {
+    private void initPopupMenuTriggerOrder() {
 
         ActionListener actionListener = new ActionListener() {
             @Override
@@ -2054,34 +2049,34 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         };
 
-        popupMenuCardPanel = new JPopupMenu();
+        popupMenuTriggerOrder = new JPopupMenu();
 
         // String tooltipText = "";
         JMenuItem menuItem;
         menuItem = new JMenuItem("Put this ability always first on the stack");
         menuItem.setActionCommand(CMD_AUTO_ORDER_FIRST);
         menuItem.addActionListener(actionListener);
-        popupMenuCardPanel.add(menuItem);
+        popupMenuTriggerOrder.add(menuItem);
 
         menuItem = new JMenuItem("Put this ability always last on the stack");
         menuItem.setActionCommand(CMD_AUTO_ORDER_LAST);
         menuItem.addActionListener(actionListener);
-        popupMenuCardPanel.add(menuItem);
+        popupMenuTriggerOrder.add(menuItem);
 
         menuItem = new JMenuItem("Put all abilities with that rule text always first on the stack");
         menuItem.setActionCommand(CMD_AUTO_ORDER_NAME_FIRST);
         menuItem.addActionListener(actionListener);
-        popupMenuCardPanel.add(menuItem);
+        popupMenuTriggerOrder.add(menuItem);
 
         menuItem = new JMenuItem("Put all abilities with that rule text always last on the stack");
         menuItem.setActionCommand(CMD_AUTO_ORDER_NAME_LAST);
         menuItem.addActionListener(actionListener);
-        popupMenuCardPanel.add(menuItem);
+        popupMenuTriggerOrder.add(menuItem);
 
         menuItem = new JMenuItem("Reset all order settings for triggered abilities");
         menuItem.setActionCommand(CMD_AUTO_ORDER_RESET_ALL);
         menuItem.addActionListener(actionListener);
-        popupMenuCardPanel.add(menuItem);
+        popupMenuTriggerOrder.add(menuItem);
     }
 
     public String getGameLog() {

@@ -42,6 +42,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -55,7 +56,6 @@ public class FeralLightning extends CardImpl {
     public FeralLightning(UUID ownerId) {
         super(ownerId, 97, "Feral Lightning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{R}");
         this.expansionSetCode = "SOK";
-
 
         // Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new FeralLightningEffect());
@@ -95,13 +95,16 @@ class FeralLightningEffect extends OneShotEffect {
             CreateTokenEffect effect = new CreateTokenEffect(new FeralLightningElementalToken(), 3);
             effect.apply(game, source);
             for (UUID tokenId : effect.getLastAddedTokenIds()) {
-                ExileTargetEffect exileEffect = new ExileTargetEffect(null,"",Zone.BATTLEFIELD);
-                exileEffect.setTargetPointer(new FixedTarget(tokenId));
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                Permanent tokenPermanent = game.getPermanent(tokenId);
+                if (tokenPermanent != null) {
+                    ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                    game.addDelayedTriggeredAbility(delayedAbility);
+                }
             }
             return true;
         }
