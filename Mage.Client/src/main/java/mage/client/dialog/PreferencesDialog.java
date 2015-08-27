@@ -2446,8 +2446,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
-    public static UserData getUserData() {
-        return new UserData(UserGroup.PLAYER,
+    public static UserDataView getUserData() {
+        return new UserDataView(UserGroup.PLAYER,
                 PreferencesDialog.selectedAvatarId,
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
