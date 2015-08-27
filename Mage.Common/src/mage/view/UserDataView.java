@@ -20,8 +20,12 @@ public class UserDataView implements Serializable {
     String flagName;
     protected boolean askMoveToGraveOrder;
 
-    static UserData getDefaultUserDataView() {
+    static UserData getDefaultUserData() {
         return UserData.getDefaultUserDataView();
+    }
+
+    public static UserDataView getDefaultUserDataView() {
+        return new UserDataView(getDefaultUserData());
     }
 
     public UserDataView(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards,

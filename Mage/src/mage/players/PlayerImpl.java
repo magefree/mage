@@ -1033,8 +1033,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             int bookmark = game.bookmarkState();
             if (ability.activate(game, false)) {
                 if (ability.resolve(game)) {
-                    if (ability.isUndoPossible() && storedBookmark == -1 || storedBookmark > bookmark) { // e.g. usefull for undo Nykthos, Shrine to Nyx
+                    if (ability.isUndoPossible() && (storedBookmark == -1 || storedBookmark > bookmark)) { // e.g. usefull for undo Nykthos, Shrine to Nyx
                         setStoredBookmark(bookmark);
+                    } else {
+                        resetStoredBookmark(game);
                     }
                     return true;
                 }
@@ -1366,6 +1368,17 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 502.1
         List<Permanent> phasedOut = game.getBattlefield().getPhasedOut(playerId);
         for (Permanent permanent : game.getBattlefield().getPhasedIn(playerId)) {
+            // 502.15i When a permanent phases out, any local enchantments or Equipment
+            // attached to that permanent phase out at the same time. This alternate way of
+            // phasing out is known as phasing out "indirectly." An enchantment or Equipment
+            // that phased out indirectly won't phase in by itself, but instead phases in
+            // along with the card it's attached to.
+            for (UUID attachmentId : permanent.getAttachments()) {
+                Permanent attachment = game.getPermanent(attachmentId);
+                if (attachment != null) {
+                    attachment.phaseOut(game);
+                }
+            }
             permanent.phaseOut(game);
         }
         for (Permanent permanent : phasedOut) {
