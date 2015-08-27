@@ -47,11 +47,8 @@ public class RainOfRust extends CardImpl {
         super(ownerId, 76, "Rain of Rust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "5DN";
 
-
-        // Choose one - 
-        this.getSpellAbility().getModes().setMinModes(1);
-        this.getSpellAbility().getModes().setMaxModes(1);
-        //Destroy target artifact; 
+        // Choose one -
+        //Destroy target artifact;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         //or destroy target land.

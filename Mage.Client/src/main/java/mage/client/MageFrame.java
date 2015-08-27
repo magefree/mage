@@ -359,6 +359,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                         showGames(false);
                     }
                 }
+                setWindowTitle();
             }
         });
 
@@ -370,8 +371,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void setWindowTitle() {
-        setTitle(TITLE_NAME + "  Client: " 
+    private void setWindowTitle() {
+        setTitle(TITLE_NAME + "  Client: "
                 + version == null ? "<not available>" : version.toString() + "  Server: "
                 + ((client != null && client.isConnected()) ? serverState.getVersion().toString():"<not connected>"));
     }
@@ -1040,6 +1041,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 showGames(false);
             }
         }
+        setWindowTitle();
     }//GEN-LAST:event_btnConnectActionPerformed
 
     public void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
