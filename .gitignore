@@ -89,4 +89,3 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 *.netbeans_automatic_build
 *.txt
 Mage.Client/serverlist.txt
-/bin/
