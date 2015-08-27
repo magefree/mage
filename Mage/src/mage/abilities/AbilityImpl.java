@@ -761,20 +761,24 @@ public abstract class AbilityImpl implements Ability {
         if (abilityWord != null) {
             sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> &mdash; "));
         }
+        String ruleStart = sbRule.toString();
         String text = modes.getText();
+        String rule;
         if (!text.isEmpty()) {
-            if (sbRule.length() > 1) {
-                String end = sbRule.substring(sbRule.length() - 2).trim();
+            if (ruleStart.length() > 1) {
+                String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    sbRule.append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
+                    rule = ruleStart + Character.toUpperCase(text.charAt(0)) + text.substring(1);
                 } else {
-                    sbRule.append(text);
+                    rule = ruleStart + text;
                 }
             } else {
-                sbRule.append(text);
+                rule = ruleStart + text;
             }
+        } else {
+            rule = ruleStart;
         }
-        return sbRule.toString();
+        return rule;
     }
 
     @Override

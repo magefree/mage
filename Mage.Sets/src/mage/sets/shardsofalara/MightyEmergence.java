@@ -28,39 +28,39 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author Plopman
  */
 public class MightyEmergence extends CardImpl {
-    
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with power 5 or greater");
+
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
+    }
+
     public MightyEmergence(UUID ownerId) {
         super(ownerId, 137, "Mighty Emergence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "ALA";
 
-
         // Whenever a creature with power 5 or greater enters the battlefield under your control, you may put two +1/+1 counters on it.
-        this.addAbility(new MightyEmergenceTriggeredAbility());
+        Effect effect = new AddCountersTargetEffect(CounterType.P2P2.createInstance());
+        effect.setText("you may put two +1/+1 counters on it");
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, true, SetTargetPointer.PERMANENT, "", true));
     }
 
     public MightyEmergence(final MightyEmergence card) {
@@ -71,85 +71,4 @@ public class MightyEmergence extends CardImpl {
     public MightyEmergence copy() {
         return new MightyEmergence(this);
     }
-}
-
-
-class MightyEmergenceTriggeredAbility extends TriggeredAbilityImpl {
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature with power 5 or greater");
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
-    }
-    
-    public MightyEmergenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MightyEmergenceAddCountersTargetEffect(), true);
-    }
-
-    public MightyEmergenceTriggeredAbility(MightyEmergenceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        UUID targetId = event.getTargetId();
-        Permanent permanent = game.getPermanent(targetId);
-        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            if (getTargets().size() == 0) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(targetId));
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature with power 5 or greater enters the battlefield under your control, you may put two +1/+1 counters on it";
-    }
-
-    @Override
-    public MightyEmergenceTriggeredAbility copy() {
-        return new MightyEmergenceTriggeredAbility(this);
-    }
-}
-
-class MightyEmergenceAddCountersTargetEffect extends OneShotEffect {
-
-
-
-     public MightyEmergenceAddCountersTargetEffect() {
-        super(Outcome.Benefit);
-     }
-
-    public MightyEmergenceAddCountersTargetEffect(final MightyEmergenceAddCountersTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(2), game);
-            return true;
-        } 
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "put two +1/+1 counters on it";
-    }
-
-    @Override
-    public MightyEmergenceAddCountersTargetEffect copy() {
-        return new MightyEmergenceAddCountersTargetEffect(this);
-    }
-
-    
 }

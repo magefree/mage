@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  * @author fireshoes
  */
 public class ZombieTrailblazer extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Zombie you control");
 
     static {
@@ -70,14 +70,14 @@ public class ZombieTrailblazer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped Zombie you control: Target land becomes a Swamp until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BecomesBasicLandTargetEffect(Duration.EndOfTurn, "Swamp"), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
-        
+
         // Tap an untapped Zombie you control: Target creature gains swampwalk until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainAbilityTargetEffect(new SwampwalkAbility(), Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter)));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(new SwampwalkAbility(false), Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

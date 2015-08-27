@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.HashSet;
@@ -48,8 +47,8 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
  */
 public class Reciprocate extends CardImpl {
 
-        public Reciprocate(UUID ownerId) {
-        super(ownerId, 40, "Reciprocate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+    public Reciprocate(UUID ownerId) {
+        super(ownerId, 40, "Reciprocate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "CHK";
 
         // Exile target creature that dealt damage to you this turn.
@@ -81,7 +80,7 @@ class ReciprocateTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",source.getControllerId());
+        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", source.getControllerId());
         if (watcher != null && watcher.hasSourceDoneDamage(id, game)) {
             return super.canTarget(id, source, game);
         }
@@ -95,7 +94,7 @@ class ReciprocateTarget extends TargetPermanent {
         PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
         for (UUID targetId : availablePossibleTargets) {
             Permanent permanent = game.getPermanent(targetId);
-            if(permanent != null && watcher != null && watcher.hasSourceDoneDamage(targetId, game)){
+            if (permanent != null && watcher != null && watcher.hasSourceDoneDamage(targetId, game)) {
                 possibleTargets.add(targetId);
             }
         }
@@ -111,14 +110,14 @@ class ReciprocateTarget extends TargetPermanent {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
                     && watcher != null && watcher.hasSourceDoneDamage(permanent.getId(), game)) {
-                        count++;
-                        if (count >= remainingTargets) {
-                            return true;
-                        }
+                count++;
+                if (count >= remainingTargets) {
+                    return true;
                 }
+            }
         }
         return false;
     }

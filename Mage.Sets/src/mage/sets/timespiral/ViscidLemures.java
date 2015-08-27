@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.SwampwalkAbility;
@@ -55,9 +56,12 @@ public class ViscidLemures extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {0}: Viscid Lemures gets -1/-0 and gains swampwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.EndOfTurn), new GenericManaCost(0));
-        ability.addEffect(new BoostSourceEffect(-1, 0, Duration.EndOfTurn));
+        Effect effect = new BoostSourceEffect(-1, 0, Duration.EndOfTurn);
+        effect.setText("{this} gets -1/-0");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(0));
+        effect = new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.EndOfTurn);
+        effect.setText("and gains swampwalk until end of turn. <i>(It can't be blocked as long as defending player controls a Swamp.)</i>");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 

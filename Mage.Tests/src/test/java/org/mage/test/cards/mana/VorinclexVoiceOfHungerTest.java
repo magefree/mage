@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,45 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.combat;
+package org.mage.test.cards.mana;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.game.Game;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
+public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
 
-public class CanAttackAsThoughtItDidntHaveDefenderSourceEffect extends AsThoughEffectImpl {
+    /**
+     * Vorinclex, Voice of Hunger is not mana doubling River of Tears.
+     */
+    @Test
+    public void testRiverOfTears() {
+        // Trample
+        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
+        addCard(Zone.BATTLEFIELD, playerA, "Vorinclex, Voice of Hunger", 1);
+        // {T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
+        addCard(Zone.BATTLEFIELD, playerA, "River of Tears", 1);
+        addCard(Zone.HAND, playerA, "Vedalken Mastermind", 1);
 
-    public CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration duration) {
-        super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
-        staticText = "{this} can attack as though it didn't have defender";
-    }
+        // because available mana calculation does not work correctly with Vorinclex, Voice of Hunger we have to tap the land manually
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U} to your mana pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vedalken Mastermind");
 
-    public CanAttackAsThoughtItDidntHaveDefenderSourceEffect(final CanAttackAsThoughtItDidntHaveDefenderSourceEffect effect) {
-        super(effect);
-    }
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
+        assertPermanentCount(playerA, "Vedalken Mastermind", 1);
 
-    @Override
-    public CanAttackAsThoughtItDidntHaveDefenderSourceEffect copy() {
-        return new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(source.getSourceId());
     }
 
 }

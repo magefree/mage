@@ -37,6 +37,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 
@@ -89,7 +90,8 @@ class PyroblastCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if(game.getStack().getSpell(source.getFirstTarget()).getColor(game).isBlue()){
+        Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
+        if(targetSpell != null && targetSpell.getColor(game).isBlue()){
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
         }
         return true;

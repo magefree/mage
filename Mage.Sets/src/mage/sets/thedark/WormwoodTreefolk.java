@@ -56,14 +56,14 @@ public class WormwoodTreefolk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {G}{G}: Wormwood Treefolk gains forestwalk until end of turn and deals 2 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(new ForestwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl("{G}{G}"));
         ability.addEffect(new DamageControllerEffect(2));
         this.addAbility(ability);
-        
+
         // {B}{B}: Wormwood Treefolk gains swampwalk until end of turn and deals 2 damage to you.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{B}{B}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(new SwampwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl("{B}{B}"));
         ability.addEffect(new DamageControllerEffect(2));
         this.addAbility(ability);
     }

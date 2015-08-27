@@ -28,12 +28,12 @@
 package mage.sets.weatherlight;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PhasingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -49,7 +49,10 @@ public class TolarianDrake extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // Phasing
         this.addAbility(PhasingAbility.getInstance());
     }
 

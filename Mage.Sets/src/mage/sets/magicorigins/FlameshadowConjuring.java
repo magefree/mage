@@ -54,9 +54,9 @@ import mage.target.targetpointer.FixedTarget;
  * @author fireshoes
  */
 public class FlameshadowConjuring extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
-    
+
     static {
         filterNontoken.add(Predicates.not(new TokenPredicate()));
     }
@@ -66,8 +66,8 @@ public class FlameshadowConjuring extends CardImpl {
         this.expansionSetCode = "ORI";
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FlameshadowConjuringEffect(), filterNontoken, false, SetTargetPointer.PERMANENT, 
-        "Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step");
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FlameshadowConjuringEffect(), filterNontoken, false, SetTargetPointer.PERMANENT,
+                "Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step");
         ability.addCost(new ManaCostsImpl("{R}"));
         this.addAbility(ability);
     }
@@ -104,15 +104,16 @@ class FlameshadowConjuringEffect extends OneShotEffect {
         if (permanent != null) {
             PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(null, null, true);
             effect.setTargetPointer(getTargetPointer());
-            if (effect.apply(game, source) && effect.getAddedPermanent() != null) {
-                ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTarget(effect.getAddedPermanent().getId()));
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
-
+            if (effect.apply(game, source)) {
+                for (Permanent tokenPermanent : effect.getAddedPermanent()) {
+                    ExileTargetEffect exileEffect = new ExileTargetEffect();
+                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                    game.addDelayedTriggeredAbility(delayedAbility);
+                }
                 return true;
             }
         }

@@ -28,9 +28,6 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -38,6 +35,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -68,7 +68,8 @@ public class TattermungeDuo extends CardImpl {
         // Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), redFilter, false));
         // Whenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), greenFilter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(false),
+                Duration.EndOfTurn), greenFilter, false));
     }
 
     public TattermungeDuo(final TattermungeDuo card) {
