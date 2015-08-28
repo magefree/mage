@@ -685,35 +685,34 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        // try to set trigger auto order
-        List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
-        TriggeredAbility abilityOrderLast = null;
-        for (TriggeredAbility ability : abilities) {
-            if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
-                return ability;
-            }
-            if (triggerAutoOrderNameFirst.contains(ability.getRule())) {
-                return ability;
-            }
-            if (triggerAutoOrderAbilityLast.contains(ability.getOriginalId())) {
-                abilityOrderLast = ability;
-                continue;
-            }
-            if (triggerAutoOrderNameLast.contains(ability.getRule())) {
-                abilityOrderLast = ability;
-                continue;
-            }
-            abilitiesWithNoOrderSet.add(ability);
-        }
-        if (abilitiesWithNoOrderSet.isEmpty()) {
-            return abilityOrderLast;
-        }
-        if (abilitiesWithNoOrderSet.size() == 1) {
-            return abilitiesWithNoOrderSet.iterator().next();
-        }
-
-        updateGameStatePriority("chooseTriggeredAbility", game);
         while (!abort) {
+            // try to set trigger auto order
+            List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
+            TriggeredAbility abilityOrderLast = null;
+            for (TriggeredAbility ability : abilities) {
+                if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
+                    return ability;
+                }
+                if (triggerAutoOrderNameFirst.contains(ability.getRule())) {
+                    return ability;
+                }
+                if (triggerAutoOrderAbilityLast.contains(ability.getOriginalId())) {
+                    abilityOrderLast = ability;
+                    continue;
+                }
+                if (triggerAutoOrderNameLast.contains(ability.getRule())) {
+                    abilityOrderLast = ability;
+                    continue;
+                }
+                abilitiesWithNoOrderSet.add(ability);
+            }
+            if (abilitiesWithNoOrderSet.isEmpty()) {
+                return abilityOrderLast;
+            }
+            if (abilitiesWithNoOrderSet.size() == 1) {
+                return abilitiesWithNoOrderSet.iterator().next();
+            }
+            updateGameStatePriority("chooseTriggeredAbility", game);
             game.fireSelectTargetTriggeredAbilityEvent(playerId, "Pick triggered ability (goes to the stack first)", abilitiesWithNoOrderSet);
             waitForResponse(game);
             if (response.getUUID() != null) {

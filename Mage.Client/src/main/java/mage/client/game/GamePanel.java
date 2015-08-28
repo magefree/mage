@@ -1998,7 +1998,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     }
                 }
                 if (event.getEventName().equals("action-consumed")) {
-                    dialog.hideDialog();
+                    dialog.removeDialog();
                 }
             }
         };
@@ -2017,23 +2017,30 @@ public final class GamePanel extends javax.swing.JPanel {
         switch (e.getActionCommand()) {
             case CMD_AUTO_ORDER_FIRST:
                 session.sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_FIRST, gameId, abilityId);
+                session.sendPlayerUUID(gameId, abilityId);
                 break;
             case CMD_AUTO_ORDER_LAST:
                 session.sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_LAST, gameId, abilityId);
+                session.sendPlayerUUID(gameId, null); // Don't use this but refresh the displayed abilities
                 break;
             case CMD_AUTO_ORDER_NAME_FIRST:
                 if (abilityRuleText != null) {
                     session.sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_FIRST, gameId, abilityRuleText);
+                    session.sendPlayerUUID(gameId, abilityId);
                 }
                 break;
             case CMD_AUTO_ORDER_NAME_LAST:
                 if (abilityRuleText != null) {
                     session.sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_LAST, gameId, abilityRuleText);
+                    session.sendPlayerUUID(gameId, null); // Don't use this but refresh the displayed abilities
                 }
                 break;
             case CMD_AUTO_ORDER_RESET_ALL:
                 session.sendPlayerAction(TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
                 break;
+        }
+        for (ShowCardsDialog dialog : pickTarget) {
+            dialog.removeDialog();
         }
     }
 
