@@ -25,47 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.EntwineAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class RainOfRust extends CardImpl {
+public class ReturnToBattle extends CardImpl {
 
-    public RainOfRust(UUID ownerId) {
-        super(ownerId, 76, "Rain of Rust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "5DN";
+    public ReturnToBattle(UUID ownerId) {
+        super(ownerId, 81, "Return to Battle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
+        this.expansionSetCode = "PTK";
 
-        // Choose one -
-        //Destroy target artifact;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        //or destroy target land.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetLandPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
-        // Entwine {3}{R}
-        this.addAbility(new EntwineAbility("{3}{R}"));
+        // Return target creature card from your graveyard to your hand.
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
     }
 
-    public RainOfRust(final RainOfRust card) {
+    public ReturnToBattle(final ReturnToBattle card) {
         super(card);
     }
 
     @Override
-    public RainOfRust copy() {
-        return new RainOfRust(this);
+    public ReturnToBattle copy() {
+        return new ReturnToBattle(this);
     }
 }

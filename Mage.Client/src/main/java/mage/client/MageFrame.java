@@ -358,6 +358,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 } else {
                     connectDialog.showDialog();
                 }
+                setWindowTitle();
             }
         });
 
@@ -369,7 +370,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void setWindowTitle() {
+    private void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: "
                 + version == null ? "<not available>" : version.toString() + "  Server: "
                         + ((session != null && session.isConnected()) ? session.getVersionInfo() : "<not connected>"));
@@ -959,12 +960,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 session.disconnect(false);
                 tablesPane.clearChat();
-                setWindowTitle();
                 showMessage("You have disconnected");
             }
         } else {
             connectDialog.showDialog();
         }
+        setWindowTitle();
     }//GEN-LAST:event_btnConnectActionPerformed
 
     public void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed

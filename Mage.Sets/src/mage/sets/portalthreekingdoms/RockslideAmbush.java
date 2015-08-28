@@ -25,47 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.EntwineAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class RainOfRust extends CardImpl {
+public class RockslideAmbush extends CardImpl {
 
-    public RainOfRust(UUID ownerId) {
-        super(ownerId, 76, "Rain of Rust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "5DN";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
-        // Choose one -
-        //Destroy target artifact;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        //or destroy target land.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetLandPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
-        // Entwine {3}{R}
-        this.addAbility(new EntwineAbility("{3}{R}"));
+    static {
+        filter.add(new SubtypePredicate("Mountain"));
     }
 
-    public RainOfRust(final RainOfRust card) {
+    public RockslideAmbush(UUID ownerId) {
+        super(ownerId, 121, "Rockslide Ambush", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        this.expansionSetCode = "PTK";
+
+        // Rockslide Ambush deals damage to target creature equal to the number of Mountains you control.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));                                                                                                     this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    }
+
+    public RockslideAmbush(final RockslideAmbush card) {
         super(card);
     }
 
     @Override
-    public RainOfRust copy() {
-        return new RainOfRust(this);
+    public RockslideAmbush copy() {
+        return new RockslideAmbush(this);
     }
 }

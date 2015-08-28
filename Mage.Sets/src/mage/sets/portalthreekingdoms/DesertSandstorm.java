@@ -25,47 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.EntwineAbility;
+import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class RainOfRust extends CardImpl {
+public class DesertSandstorm extends CardImpl {
 
-    public RainOfRust(UUID ownerId) {
-        super(ownerId, 76, "Rain of Rust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "5DN";
+    public DesertSandstorm(UUID ownerId) {
+        super(ownerId, 107, "Desert Sandstorm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
+        this.expansionSetCode = "PTK";
 
-        // Choose one -
-        //Destroy target artifact;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        //or destroy target land.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetLandPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
-        // Entwine {3}{R}
-        this.addAbility(new EntwineAbility("{3}{R}"));
+        // Desert Sandstorm deals 1 damage to each creature.
+        this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterCreaturePermanent()));
     }
 
-    public RainOfRust(final RainOfRust card) {
+    public DesertSandstorm(final DesertSandstorm card) {
         super(card);
     }
 
     @Override
-    public RainOfRust copy() {
-        return new RainOfRust(this);
+    public DesertSandstorm copy() {
+        return new DesertSandstorm(this);
     }
 }

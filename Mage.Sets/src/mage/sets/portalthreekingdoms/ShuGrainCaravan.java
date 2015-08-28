@@ -25,47 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.EntwineAbility;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class RainOfRust extends CardImpl {
+public class ShuGrainCaravan extends CardImpl {
 
-    public RainOfRust(UUID ownerId) {
-        super(ownerId, 76, "Rain of Rust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "5DN";
+    public ShuGrainCaravan(UUID ownerId) {
+        super(ownerId, 26, "Shu Grain Caravan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "PTK";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Choose one -
-        //Destroy target artifact;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        //or destroy target land.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetLandPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
-        // Entwine {3}{R}
-        this.addAbility(new EntwineAbility("{3}{R}"));
+        // When Shu Grain Caravan enters the battlefield, you gain 2 life.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
     }
 
-    public RainOfRust(final RainOfRust card) {
+    public ShuGrainCaravan(final ShuGrainCaravan card) {
         super(card);
     }
 
     @Override
-    public RainOfRust copy() {
-        return new RainOfRust(this);
+    public ShuGrainCaravan copy() {
+        return new ShuGrainCaravan(this);
     }
 }
