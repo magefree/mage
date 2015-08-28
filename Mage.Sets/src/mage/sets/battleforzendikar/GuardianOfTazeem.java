@@ -31,11 +31,15 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -45,13 +49,14 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author fireshoes
  */
 public class GuardianOfTazeem extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
@@ -67,7 +72,7 @@ public class GuardianOfTazeem extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // <i>Landfall</i> - Whenever a land enters the battlefield under you control, tap target creature an opponent controls. If that land is an Island, that creature doesn't untap during its controller's next untap step.
         Ability ability = new GuardianOfTazeemTriggeredAbility();
         ability.addTarget(new TargetCreaturePermanent(filter));
@@ -87,7 +92,8 @@ public class GuardianOfTazeem extends CardImpl {
 class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
 
     public GuardianOfTazeemTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+        super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
+        addEffect(new GuardianOfTazeemEffect());
     }
 
     public GuardianOfTazeemTriggeredAbility(final GuardianOfTazeemTriggeredAbility ability) {
@@ -107,10 +113,13 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-            addEffect(new TapTargetEffect());
-            if (permanent.hasSubtype("Island")) {
-                    addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
+        if (permanent != null
+                && permanent.getCardType().contains(CardType.LAND)
+                && permanent.getControllerId().equals(getControllerId())) {
+            for (Effect effect : getEffects()) {
+                if (effect instanceof GuardianOfTazeemEffect) {
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                }
             }
             return true;
         }
@@ -119,6 +128,37 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "<i>Landfall</i> - Whenever a land enters the battlefield under your control, tap target creature an opponent controls. If that land is an Island, that creature doesn't untap during its controller's next untap step.";
+        return "<i>Landfall</i> - Whenever a land enters the battlefield under your control, " + super.getRule();
+    }
+}
+
+class GuardianOfTazeemEffect extends OneShotEffect {
+
+    public GuardianOfTazeemEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "If that land is an Island, that creature doesn't untap during its controller's next untap step";
+    }
+
+    public GuardianOfTazeemEffect(final GuardianOfTazeemEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GuardianOfTazeemEffect copy() {
+        return new GuardianOfTazeemEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
+        if (land != null && targetCreature != null) {
+            if (land.hasSubtype("Island")) {
+                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("that creature");
+                effect.setTargetPointer(new FixedTarget(targetCreature, game));
+                game.addEffect(effect, source);
+            }
+        }
+        return true;
     }
 }
