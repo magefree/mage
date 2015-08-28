@@ -184,13 +184,7 @@ public class HelperPanel extends JPanel {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (linkSpecial != null) {
-                    {
-//                        if (evt.getActionCommand().equals("automatic")) {
-//                            showPopupMenu(evt);
-//                        } else {
-                        clickButton(linkSpecial);
-//                        }
-                    }
+                    clickButton(linkSpecial);
                 }
             }
         });
