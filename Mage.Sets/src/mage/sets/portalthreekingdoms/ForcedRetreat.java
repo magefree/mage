@@ -25,50 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.keyword.ExaltedAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class NefaroxOverlordOfGrixis extends CardImpl {
+public class ForcedRetreat extends mage.sets.masterseditioniii.ForcedRetreat {
 
-    public NefaroxOverlordOfGrixis(UUID ownerId) {
-        super(ownerId, 103, "Nefarox, Overlord of Grixis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "M13";
-        this.supertype.add("Legendary");
-        this.subtype.add("Demon");
-
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Exalted
-        this.addAbility(new ExaltedAbility());
-        // Whenever Nefarox, Overlord of Grixis attacks alone, defending player sacrifices a creature.
-        this.addAbility(new AttacksAloneTriggeredAbility(new SacrificeEffect(
-            new FilterControlledCreaturePermanent("a creature"), 1, "defending player")));
+    public ForcedRetreat(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 44;
+        this.expansionSetCode = "PTK";
     }
 
-    public NefaroxOverlordOfGrixis(final NefaroxOverlordOfGrixis card) {
+    public ForcedRetreat(final ForcedRetreat card) {
         super(card);
     }
 
     @Override
-    public NefaroxOverlordOfGrixis copy() {
-        return new NefaroxOverlordOfGrixis(this);
+    public ForcedRetreat copy() {
+        return new ForcedRetreat(this);
     }
 }
