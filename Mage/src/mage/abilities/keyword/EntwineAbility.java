@@ -90,6 +90,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         }
     }
 
+    @Override
     public boolean isActivated() {
         if (additionalCost != null) {
             return additionalCost.isActivated();
