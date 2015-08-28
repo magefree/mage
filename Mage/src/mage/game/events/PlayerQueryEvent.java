@@ -149,8 +149,14 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         this.playerId = playerId;
     }
 
-    public static PlayerQueryEvent askEvent(UUID playerId, String message) {
-        return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false, null);
+    public static PlayerQueryEvent askEvent(UUID playerId, String message, Ability source, Map<String, Serializable> options) {
+        if (source != null) {
+            if (options == null) {
+                options = new HashMap<>();
+            }
+            options.put("originalId", source.getOriginalId());
+        }
+        return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false, options);
     }
 
     public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, String objectName, List<? extends ActivatedAbility> choices) {

@@ -25,46 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package org.mage.test.cards.triggers;
+
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Defines player actions for a game
  *
  * @author LevelX2
  */
-public enum PlayerAction {
+public class TargetedTriggeredTest extends CardTestPlayerBase {
 
-    PASS_PRIORITY_UNTIL_MY_NEXT_TURN,
-    PASS_PRIORITY_UNTIL_TURN_END_STEP,
-    PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE,
-    PASS_PRIORITY_UNTIL_NEXT_TURN,
-    PASS_PRIORITY_UNTIL_STACK_RESOLVED,
-    PASS_PRIORITY_CANCEL_ALL_ACTIONS,
-    TRIGGER_AUTO_ORDER_ABILITY_FIRST,
-    TRIGGER_AUTO_ORDER_NAME_FIRST,
-    TRIGGER_AUTO_ORDER_ABILITY_LAST,
-    TRIGGER_AUTO_ORDER_NAME_LAST,
-    TRIGGER_AUTO_ORDER_RESET_ALL,
-    ROLLBACK_TURNS,
-    UNDO,
-    CONCEDE,
-    MANA_AUTO_PAYMENT_ON,
-    MANA_AUTO_PAYMENT_OFF,
-    MANA_AUTO_PAYMENT_RESTRICTED_ON,
-    MANA_AUTO_PAYMENT_RESTRICTED_OFF,
-    RESET_AUTO_SELECT_REPLACEMENT_EFFECTS,
-    REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS,
-    REQUEST_PERMISSION_TO_SEE_HAND_CARDS,
-    REQUEST_PERMISSION_TO_ROLLBACK_TURN,
-    ADD_PERMISSION_TO_SEE_HAND_CARDS,
-    ADD_PERMISSION_TO_ROLLBACK_TURN,
-    DENY_PERMISSON_TO_ROLLBACK_TURN,
-    PERMISSION_REQUESTS_ALLOWED_ON,
-    PERMISSION_REQUESTS_ALLOWED_OFF,
-    REQUEST_AUTO_ANSWER_ID_YES,
-    REQUEST_AUTO_ANSWER_ID_NO,
-    REQUEST_AUTO_ANSWER_TEXT_YES,
-    REQUEST_AUTO_ANSWER_TEXT_NO,
-    REQUEST_AUTO_ANSWER_RESET_ALL,
+    /**
+     * Tests that the first spell that targets Kira, Great Glass-Spinner is
+     * countered.
+     *
+     */
+    @Test
+    @Ignore
+    // this does currently not work in test, because the target event will be fired earlier during tests,
+    // so the zone change counter for the fixed target of the counterspell will not work
+    public void testKiraGreatGlassSpinnerFirstSpellTurn() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Kira, Great Glass-Spinner", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Kira, Great Glass-Spinner");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+
+        assertPermanentCount(playerB, "Kira, Great Glass-Spinner", 1);
+    }
 
 }
