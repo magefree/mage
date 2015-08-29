@@ -29,24 +29,20 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -55,13 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author jeffwadsworth
  */
 public class BoshIronGolem extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-    
+
     public BoshIronGolem(UUID ownerId) {
         super(ownerId, 108, "Bosh, Iron Golem", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");
         this.expansionSetCode = "HOP";
@@ -73,10 +63,12 @@ public class BoshIronGolem extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // {3}{R}, Sacrifice an artifact: Bosh, Iron Golem deals damage equal to the sacrificed artifact's converted mana cost to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoshIronGolemEffect(), new ManaCostsImpl("{3}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Effect effect = new DamageTargetEffect(new SacrificeCostConvertedMana("artifact"));
+        effect.setText("{this} deals damage equal to the sacrificed artifact's converted mana cost to target creature or player");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{R}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
@@ -89,46 +81,4 @@ public class BoshIronGolem extends CardImpl {
     public BoshIronGolem copy() {
         return new BoshIronGolem(this);
     }
-}
-
-class BoshIronGolemEffect extends OneShotEffect {
-
-    public BoshIronGolemEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals damage equal to the sacrificed artifact's converted mana cost to target creature or player";
-    }
-
-    public BoshIronGolemEffect(final BoshIronGolemEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = 0;
-        for (Cost cost: source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
-                amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getManaCost().convertedManaCost();
-                break;
-            }
-        }
-        if (amount > 0) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public BoshIronGolemEffect copy() {
-        return new BoshIronGolemEffect(this);
-    }
-
 }
