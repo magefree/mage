@@ -54,7 +54,6 @@ public class EnchantedEvening extends CardImpl {
         super(ownerId, 140, "Enchanted Evening", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W/U}{W/U}");
         this.expansionSetCode = "SHM";
 
-
         // All permanents are enchantments in addition to their other types.
         Effect effect = new EnchangedEveningEffect(CardType.ENCHANTMENT, Duration.WhileOnBattlefield, new FilterPermanent());
         effect.setText("All permanents are enchantments in addition to their other types");
@@ -70,37 +69,38 @@ public class EnchantedEvening extends CardImpl {
     public EnchantedEvening copy() {
         return new EnchantedEvening(this);
     }
-}
 
-class EnchangedEveningEffect extends ContinuousEffectImpl {
+    // need to be enclosed class for dependent check of continuous effects
+    class EnchangedEveningEffect extends ContinuousEffectImpl {
 
-    private final CardType addedCardType;
-    private final FilterPermanent filter;
+        private final CardType addedCardType;
+        private final FilterPermanent filter;
 
-    public EnchangedEveningEffect(CardType addedCardType, Duration duration, FilterPermanent filter) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        this.addedCardType = addedCardType;
-        this.filter = filter;
-    }
-
-    public EnchangedEveningEffect(final EnchangedEveningEffect effect) {
-        super(effect);
-        this.addedCardType = effect.addedCardType;
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
-            if (permanent != null && !permanent.getCardType().contains(addedCardType)) {
-                permanent.getCardType().add(addedCardType);
-            }
+        public EnchangedEveningEffect(CardType addedCardType, Duration duration, FilterPermanent filter) {
+            super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+            this.addedCardType = addedCardType;
+            this.filter = filter;
         }
-        return true;
-    }
 
-    @Override
-    public EnchangedEveningEffect copy() {
-        return new EnchangedEveningEffect(this);
+        public EnchangedEveningEffect(final EnchangedEveningEffect effect) {
+            super(effect);
+            this.addedCardType = effect.addedCardType;
+            this.filter = effect.filter;
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                if (permanent != null && !permanent.getCardType().contains(addedCardType)) {
+                    permanent.getCardType().add(addedCardType);
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public EnchangedEveningEffect copy() {
+            return new EnchangedEveningEffect(this);
+        }
     }
 }

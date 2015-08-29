@@ -28,6 +28,12 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.mana.RedManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -35,12 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -52,6 +52,12 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 public class MagusOfTheMoon extends CardImpl {
+
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
+
+    static {
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+    }
 
     public MagusOfTheMoon(UUID ownerId) {
         super(ownerId, 101, "Magus of the Moon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -74,53 +80,49 @@ public class MagusOfTheMoon extends CardImpl {
     public MagusOfTheMoon copy() {
         return new MagusOfTheMoon(this);
     }
-}
 
-class MagusOfTheMoonEffect extends ContinuousEffectImpl {
+    class MagusOfTheMoonEffect extends ContinuousEffectImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
-
-    MagusOfTheMoonEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.staticText = "Nonbasic lands are Mountains";
-    }
-
-    MagusOfTheMoonEffect(final MagusOfTheMoonEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public MagusOfTheMoonEffect copy() {
-        return new MagusOfTheMoonEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent land: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            switch (layer) {
-                case AbilityAddingRemovingEffects_6:
-                    land.removeAllAbilities(source.getSourceId(), game);
-                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                    break;
-                case TypeChangingEffects_4:
-                    land.getSubtype().clear();
-                    land.getSubtype().add("Mountain");
-                    break;
-            }
+        MagusOfTheMoonEffect() {
+            super(Duration.WhileOnBattlefield, Outcome.Detriment);
+            this.staticText = "Nonbasic lands are Mountains";
         }
-        return true;
+
+        MagusOfTheMoonEffect(final MagusOfTheMoonEffect effect) {
+            super(effect);
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return false;
+        }
+
+        @Override
+        public MagusOfTheMoonEffect copy() {
+            return new MagusOfTheMoonEffect(this);
+        }
+
+        @Override
+        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+            for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+                switch (layer) {
+                    case AbilityAddingRemovingEffects_6:
+                        land.removeAllAbilities(source.getSourceId(), game);
+                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                        break;
+                    case TypeChangingEffects_4:
+                        land.getSubtype().clear();
+                        land.getSubtype().add("Mountain");
+                        break;
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public boolean hasLayer(Layer layer) {
+            return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+        }
     }
 
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
-    }
 }
