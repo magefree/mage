@@ -27,10 +27,11 @@
  */
 package mage.sets.fifthedition;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -48,7 +49,6 @@ public class WindsOfChange extends CardImpl {
     public WindsOfChange(UUID ownerId) {
         super(ownerId, 275, "Winds of Change", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "5ED";
-
 
         // Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
         this.getSpellAbility().addEffect(new WindsOfChangeEffect());
@@ -84,19 +84,19 @@ class WindsOfChangeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            Map<UUID, Integer> permanentsCount = new HashMap<>();
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int cardsHand = player.getHand().size();
-                    if (cardsHand > 0){
-                        for (Card card: player.getHand().getCards(game)) {
-                            player.removeFromHand(card, game);
-                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                        }
-                        game.informPlayers(player.getLogName() + " shuffles the cards from his or her hand into his or her library");
-                        player.shuffleLibrary(game);
-                        player.drawCards(cardsHand, game);
-                    }
+                    permanentsCount.put(playerId, player.getHand().size());
+                    player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                    player.shuffleLibrary(game);
+                }
+            }
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null && permanentsCount.containsKey(playerId)) {
+                    player.drawCards(permanentsCount.get(playerId), game);
                 }
             }
             return true;
