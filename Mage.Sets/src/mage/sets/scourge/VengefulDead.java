@@ -25,49 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.scourge;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.ZombieToken;
 
 /**
  *
  * @author fireshoes
  */
-public class RotlungReanimator extends CardImpl {
+public class VengefulDead extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Cleric");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Zombie");
     
     static {
-        filter.add(new SubtypePredicate("Cleric"));
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public RotlungReanimator(UUID ownerId) {
-        super(ownerId, 164, "Rotlung Reanimator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "ONS";
+    public VengefulDead(UUID ownerId) {
+        super(ownerId, 80, "Vengeful Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "SCG";
         this.subtype.add("Zombie");
-        this.subtype.add("Cleric");
-        this.power = new MageInt(2);
+        this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever Rotlung Reanimator or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false, filter));
+        // Whenever Vengeful Dead or another Zombie dies, each opponent loses 1 life.
+        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter));
     }
 
-    public RotlungReanimator(final RotlungReanimator card) {
+    public VengefulDead(final VengefulDead card) {
         super(card);
     }
 
     @Override
-    public RotlungReanimator copy() {
-        return new RotlungReanimator(this);
+    public VengefulDead copy() {
+        return new VengefulDead(this);
     }
 }

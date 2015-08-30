@@ -25,49 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.ZombieToken;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class RotlungReanimator extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Cleric");
+public class DrossScorpion extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
     
     static {
-        filter.add(new SubtypePredicate("Cleric"));
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
+    
+    public DrossScorpion(UUID ownerId) {
+        super(ownerId, 164, "Dross Scorpion", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Scorpion");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
+
+        // Whenever Dross Scorpion or another artifact creature dies, you may untap target artifact.
+        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new UntapTargetEffect(), true, filter);
+        ability.addTarget(new TargetArtifactPermanent());
+        this.addAbility(ability);
     }
 
-    public RotlungReanimator(UUID ownerId) {
-        super(ownerId, 164, "Rotlung Reanimator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "ONS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Cleric");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Whenever Rotlung Reanimator or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false, filter));
-    }
-
-    public RotlungReanimator(final RotlungReanimator card) {
+    public DrossScorpion(final DrossScorpion card) {
         super(card);
     }
 
-    @Override
-    public RotlungReanimator copy() {
-        return new RotlungReanimator(this);
+    @java.lang.Override
+    public DrossScorpion copy() {
+        return new DrossScorpion(this);
     }
 }
