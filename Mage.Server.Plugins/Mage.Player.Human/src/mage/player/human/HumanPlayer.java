@@ -63,6 +63,7 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
@@ -89,6 +90,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDefender;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
+import mage.util.MessageToClient;
 import org.apache.log4j.Logger;
 
 /**
@@ -105,7 +107,7 @@ public class HumanPlayer extends PlayerImpl {
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
     protected final Choice replacementEffectChoice;
 
-    private static final Logger log = Logger.getLogger(HumanPlayer.class);
+    private static final Logger logger = Logger.getLogger(HumanPlayer.class);
 
     protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
     protected ManaCost currentlyUnpaidMana;
@@ -114,6 +116,9 @@ public class HumanPlayer extends PlayerImpl {
     protected Set<UUID> triggerAutoOrderAbilityLast = new HashSet<>();
     protected Set<String> triggerAutoOrderNameFirst = new HashSet<>();
     protected Set<String> triggerAutoOrderNameLast = new HashSet<>();
+
+    protected Map<String, Boolean> requestAutoAnswerId = new HashMap<>();
+    protected Map<String, Boolean> requestAutoAnswerText = new HashMap<>();
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
@@ -131,53 +136,30 @@ public class HumanPlayer extends PlayerImpl {
 
     protected void waitForResponse(Game game) {
         response.clear();
-        log.debug("Waiting response from player: " + getId());
+        logger.debug("Waiting response from player: " + getId());
         game.resumeTimer(getTurnControlledBy());
         synchronized (response) {
             try {
                 response.wait();
-                log.debug("Got response from player: " + getId());
+                logger.debug("Got response from player: " + getId());
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                logger.error("Response error for player " + getName() + " gameId: " + game.getId(), ex);
             } finally {
                 game.pauseTimer(getTurnControlledBy());
             }
         }
     }
 
-    protected void waitForBooleanResponse(Game game) {
-        do {
-            waitForResponse(game);
-        } while (response.getBoolean() == null && !abort);
-    }
-
-    protected void waitForUUIDResponse(Game game) {
-        do {
-            waitForResponse(game);
-        } while (response.getUUID() == null && !abort);
-    }
-
-    protected void waitForStringResponse(Game game) {
-        do {
-            waitForResponse(game);
-        } while (response.getString() == null && !abort);
-    }
-
-    protected void waitForIntegerResponse(Game game) {
-        do {
-            waitForResponse(game);
-        } while (response.getInteger() == null && !abort);
-    }
-
     @Override
     public boolean chooseMulligan(Game game) {
         updateGameStatePriority("chooseMulligan", game);
         int nextHandSize = game.mulliganDownTo(playerId);
-        game.fireAskPlayerEvent(playerId, new StringBuilder("Mulligan ")
-                .append(getHand().size() > nextHandSize ? "down to " : "for free, draw ")
-                .append(nextHandSize)
-                .append(nextHandSize == 1 ? " card?" : " cards?").toString());
-        waitForBooleanResponse(game);
+        do {
+            game.fireAskPlayerEvent(playerId, new MessageToClient("Mulligan "
+                    + (getHand().size() > nextHandSize ? "down to " : "for free, draw ")
+                    + nextHandSize + (nextHandSize == 1 ? " card?" : " cards?")), null);
+            waitForResponse(game);
+        } while (response.getBoolean() == null && !abort);
         if (!abort) {
             return response.getBoolean();
         }
@@ -186,13 +168,41 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+        if (source != null) {
+            Boolean answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
+            if (answer != null) {
+                return answer;
+            } else {
+                answer = requestAutoAnswerText.get(message);
+                if (answer != null) {
+                    return answer;
+                }
+            }
+        }
         updateGameStatePriority("chooseUse", game);
-        game.fireAskPlayerEvent(playerId, addSecondLineWithObjectName(message, source == null ? null : source.getSourceId(), game));
-        waitForBooleanResponse(game);
+        do {
+            game.fireAskPlayerEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), source);
+            waitForResponse(game);
+        } while (response.getBoolean() == null && !abort);
         if (!abort) {
             return response.getBoolean();
         }
         return false;
+    }
+
+    private String getRelatedObjectName(Ability source, Game game) {
+        if (source != null) {
+            return getRelatedObjectName(source.getSourceId(), game);
+        }
+        return null;
+    }
+
+    private String getRelatedObjectName(UUID sourceId, Game game) {
+        MageObject mageObject = game.getObject(sourceId);
+        if (mageObject != null) {
+            return mageObject.getLogName();
+        }
+        return null;
     }
 
     private String addSecondLineWithObjectName(String message, UUID sourceId, Game game) {
@@ -232,7 +242,7 @@ public class HumanPlayer extends PlayerImpl {
         while (!abort) {
             game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
             waitForResponse(game);
-            log.debug("Choose effect: " + response.getString());
+            logger.debug("Choose effect: " + response.getString());
             if (response.getString() != null) {
                 if (response.getString().startsWith("#")) {
                     autoSelectReplacementEffects.add(response.getString().substring(1));
@@ -304,7 +314,7 @@ public class HumanPlayer extends PlayerImpl {
             List<UUID> chosen = target.getTargets();
             options.put("chosen", (Serializable) chosen);
 
-            game.fireSelectTargetEvent(getId(), addSecondLineWithObjectName(target.getMessage(), sourceId, game), targetIds, required, getOptions(target, options));
+            game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(sourceId, game)), targetIds, required, getOptions(target, options));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (!targetIds.contains(response.getUUID())) {
@@ -370,7 +380,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            game.fireSelectTargetEvent(getId(), addSecondLineWithObjectName(target.getMessage(), source == null ? null : source.getSourceId(), game), possibleTargets, required, getOptions(target, null));
+            game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargets, required, getOptions(target, null));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.getTargets().contains(response.getUUID())) {
@@ -438,7 +448,7 @@ public class HumanPlayer extends PlayerImpl {
                 options.put("choosable", (Serializable) choosable);
             }
 
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
+            game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {
@@ -492,7 +502,7 @@ public class HumanPlayer extends PlayerImpl {
             if (!choosable.isEmpty()) {
                 options.put("choosable", (Serializable) choosable);
             }
-            game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName(target.getMessage(), source == null ? null : source.getSourceId(), game), cards, required, options);
+            game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.getTargets().contains(response.getUUID())) { // if already included remove it
@@ -521,7 +531,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), source == null ? null : source.getSourceId(), game),
+            game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), getRelatedObjectName(source, game)),
                     target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                     target.isRequired(source),
                     getOptions(target, null));
@@ -675,35 +685,34 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        // try to set trigger auto order
-        List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
-        TriggeredAbility abilityOrderLast = null;
-        for (TriggeredAbility ability : abilities) {
-            if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
-                return ability;
-            }
-            if (triggerAutoOrderNameFirst.contains(ability.getRule())) {
-                return ability;
-            }
-            if (triggerAutoOrderAbilityLast.contains(ability.getOriginalId())) {
-                abilityOrderLast = ability;
-                continue;
-            }
-            if (triggerAutoOrderNameLast.contains(ability.getRule())) {
-                abilityOrderLast = ability;
-                continue;
-            }
-            abilitiesWithNoOrderSet.add(ability);
-        }
-        if (abilitiesWithNoOrderSet.isEmpty()) {
-            return abilityOrderLast;
-        }
-        if (abilitiesWithNoOrderSet.size() == 1) {
-            return abilitiesWithNoOrderSet.iterator().next();
-        }
-
-        updateGameStatePriority("chooseTriggeredAbility", game);
         while (!abort) {
+            // try to set trigger auto order
+            List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
+            TriggeredAbility abilityOrderLast = null;
+            for (TriggeredAbility ability : abilities) {
+                if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
+                    return ability;
+                }
+                if (triggerAutoOrderNameFirst.contains(ability.getRule())) {
+                    return ability;
+                }
+                if (triggerAutoOrderAbilityLast.contains(ability.getOriginalId())) {
+                    abilityOrderLast = ability;
+                    continue;
+                }
+                if (triggerAutoOrderNameLast.contains(ability.getRule())) {
+                    abilityOrderLast = ability;
+                    continue;
+                }
+                abilitiesWithNoOrderSet.add(ability);
+            }
+            if (abilitiesWithNoOrderSet.isEmpty()) {
+                return abilityOrderLast;
+            }
+            if (abilitiesWithNoOrderSet.size() == 1) {
+                return abilitiesWithNoOrderSet.iterator().next();
+            }
+            updateGameStatePriority("chooseTriggeredAbility", game);
             game.fireSelectTargetTriggeredAbilityEvent(playerId, "Pick triggered ability (goes to the stack first)", abilitiesWithNoOrderSet);
             waitForResponse(game);
             if (response.getUUID() != null) {
@@ -779,8 +788,10 @@ public class HumanPlayer extends PlayerImpl {
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         int xValue = 0;
         updateGameStatePriority("announceXMana", game);
-        game.fireGetAmountEvent(playerId, message, min, max);
-        waitForIntegerResponse(game);
+        do {
+            game.fireGetAmountEvent(playerId, message, min, max);
+            waitForResponse(game);
+        } while (response.getInteger() == null && !abort);
         if (response != null && response.getInteger() != null) {
             xValue = response.getInteger();
         }
@@ -791,8 +802,10 @@ public class HumanPlayer extends PlayerImpl {
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
         int xValue = 0;
         updateGameStatePriority("announceXCost", game);
-        game.fireGetAmountEvent(playerId, message, min, max);
-        waitForIntegerResponse(game);
+        do {
+            game.fireGetAmountEvent(playerId, message, min, max);
+            waitForResponse(game);
+        } while (response.getInteger() == null && !abort);
         if (response != null && response.getInteger() != null) {
             xValue = response.getInteger();
         }
@@ -1043,7 +1056,8 @@ public class HumanPlayer extends PlayerImpl {
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
-        game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName("Select attacker to block", blockerId, game), target.possibleTargets(null, playerId, game), false, getOptions(target, null));
+        game.fireSelectTargetEvent(playerId, new MessageToClient("Select attacker to block", getRelatedObjectName(blockerId, game)),
+                target.possibleTargets(null, playerId, game), false, getOptions(target, null));
         waitForResponse(game);
         if (response.getBoolean() != null) {
             // do nothing
@@ -1090,8 +1104,10 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public int getAmount(int min, int max, String message, Game game) {
         updateGameStatePriority("getAmount", game);
-        game.fireGetAmountEvent(playerId, message, min, max);
-        waitForIntegerResponse(game);
+        do {
+            game.fireGetAmountEvent(playerId, message, min, max);
+            waitForResponse(game);
+        } while (response.getInteger() == null && !abort);
         if (response != null && response.getInteger() != null) {
             return response.getInteger();
         } else {
@@ -1178,11 +1194,7 @@ public class HumanPlayer extends PlayerImpl {
             if (!ability.getSourceId().equals(getCastSourceIdWithAlternateMana()) && ability.getManaCostsToPay().convertedManaCost() > 0) {
                 return true;
             }
-            if (ability instanceof ManaAbility) {
-                return true;
-            }
-            // if ability has no mana costs you have to pick it from ability picker
-            return false;
+            return ability instanceof ManaAbility;
         }
         return true;
     }
@@ -1257,8 +1269,10 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
         updateGameStatePriority("choosePile", game);
-        game.fireChoosePileEvent(playerId, message, pile1, pile2);
-        waitForBooleanResponse(game);
+        do {
+            game.fireChoosePileEvent(playerId, message, pile1, pile2);
+            waitForResponse(game);
+        } while (response.getBoolean() == null && !abort);
         if (!abort) {
             return response.getBoolean();
         }
@@ -1270,7 +1284,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.setString(responseString);
             response.notify();
-            log.debug("Got response string from player: " + getId());
+            logger.debug("Got response string from player: " + getId());
         }
     }
 
@@ -1280,7 +1294,7 @@ public class HumanPlayer extends PlayerImpl {
             response.setManaType(manaType);
             response.setResponseManaTypePlayerId(manaTypePlayerId);
             response.notify();
-            log.debug("Got response mana type from player: " + getId());
+            logger.debug("Got response mana type from player: " + getId());
         }
     }
 
@@ -1289,7 +1303,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.setUUID(responseUUID);
             response.notify();
-            log.debug("Got response UUID from player: " + getId());
+            logger.debug("Got response UUID from player: " + getId());
         }
     }
 
@@ -1298,7 +1312,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.setBoolean(responseBoolean);
             response.notify();
-            log.debug("Got response boolean from player: " + getId());
+            logger.debug("Got response boolean from player: " + getId());
         }
     }
 
@@ -1307,7 +1321,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.setInteger(responseInteger);
             response.notify();
-            log.debug("Got response integer from player: " + getId());
+            logger.debug("Got response integer from player: " + getId());
         }
     }
 
@@ -1316,7 +1330,7 @@ public class HumanPlayer extends PlayerImpl {
         abort = true;
         synchronized (response) {
             response.notify();
-            log.debug("Got cancel action from player: " + getId());
+            logger.debug("Got cancel action from player: " + getId());
         }
     }
 
@@ -1325,7 +1339,7 @@ public class HumanPlayer extends PlayerImpl {
         synchronized (response) {
             response.setInteger(0);
             response.notify();
-            log.debug("Got skip action from player: " + getId());
+            logger.debug("Got skip action from player: " + getId());
         }
     }
 
@@ -1336,7 +1350,7 @@ public class HumanPlayer extends PlayerImpl {
 
     protected void updateGameStatePriority(String methodName, Game game) {
         if (game.getState().getPriorityPlayerId() != null) { // don't do it if priority was set to null before (e.g. discard in cleanaup)
-            log.debug("Setting game priority to " + getId() + " [" + methodName + "]");
+            logger.debug("Setting game priority to " + getId() + " [" + methodName + "]");
             game.getState().setPriorityPlayerId(getId());
         }
     }
@@ -1354,8 +1368,40 @@ public class HumanPlayer extends PlayerImpl {
             case TRIGGER_AUTO_ORDER_RESET_ALL:
                 setTriggerAutoOrder(playerAction, game, data);
                 break;
+            case REQUEST_AUTO_ANSWER_ID_NO:
+            case REQUEST_AUTO_ANSWER_ID_YES:
+            case REQUEST_AUTO_ANSWER_TEXT_NO:
+            case REQUEST_AUTO_ANSWER_TEXT_YES:
+            case REQUEST_AUTO_ANSWER_RESET_ALL:
+                setRequestAutoAnswer(playerAction, game, data);
+                break;
             default:
                 super.sendPlayerAction(playerAction, game, data);
+        }
+    }
+
+    private void setRequestAutoAnswer(PlayerAction playerAction, Game game, Object data) {
+        if (playerAction.equals(REQUEST_AUTO_ANSWER_RESET_ALL)) {
+            requestAutoAnswerId.clear();
+            requestAutoAnswerText.clear();
+            return;
+        }
+        if (data instanceof String) {
+            String key = (String) data;
+            switch (playerAction) {
+                case REQUEST_AUTO_ANSWER_ID_NO:
+                    requestAutoAnswerId.put(key, false);
+                    break;
+                case REQUEST_AUTO_ANSWER_TEXT_NO:
+                    requestAutoAnswerText.put(key, false);
+                    break;
+                case REQUEST_AUTO_ANSWER_ID_YES:
+                    requestAutoAnswerId.put(key, true);
+                    break;
+                case REQUEST_AUTO_ANSWER_TEXT_YES:
+                    requestAutoAnswerText.put(key, true);
+                    break;
+            }
         }
     }
 

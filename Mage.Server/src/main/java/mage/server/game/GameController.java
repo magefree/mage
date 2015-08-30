@@ -228,7 +228,7 @@ public class GameController implements GameCallback {
                         try {
                             switch (event.getQueryType()) {
                                 case ASK:
-                                    ask(event.getPlayerId(), event.getMessage());
+                                    ask(event.getPlayerId(), event.getMessage(), event.getOptions());
                                     break;
                                 case PICK_TARGET:
                                     target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getPerms(), event.getTargets(), event.isRequired(), event.getOptions());
@@ -774,11 +774,11 @@ public class GameController implements GameCallback {
         // TODO: inform watchers about game end and who won
     }
 
-    private synchronized void ask(UUID playerId, final String question) throws MageException {
+    private synchronized void ask(UUID playerId, final String question, final Map<String, Serializable> options) throws MageException {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).ask(question);
+                getGameSession(playerId).ask(question, options);
             }
         });
 

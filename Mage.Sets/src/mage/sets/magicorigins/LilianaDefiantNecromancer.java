@@ -57,7 +57,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -84,7 +83,6 @@ public class LilianaDefiantNecromancer extends CardImpl {
         this.color.setBlack(true);
 
         this.nightCard = true;
-        // this.canTransform = true;
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
@@ -97,7 +95,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
-        //-8: You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step.";
+        //-8: You get an emblem with "Whenever a creature dies, return it to the battlefield under your control at the beginning of the next end step.";
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaDefiantNecromancerEmblem()), -8));
     }
 
@@ -130,11 +128,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
 
 class LilianaDefiantNecromancerEmblem extends Emblem {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     //  You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step."
     public LilianaDefiantNecromancerEmblem() {

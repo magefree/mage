@@ -135,10 +135,10 @@ public class MageActionCallback implements ActionCallback {
         ArrowUtil.drawArrowsForPairedCards(data, parentPoint);
         ArrowUtil.drawArrowsForEnchantPlayers(data, parentPoint);
 
-        showPopup(data, parentComponent, parentPoint);
+        showTooltipPopup(data, parentComponent, parentPoint);
     }
 
-    private void showPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
+    private void showTooltipPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
         if (data.component != null) {
             String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
             if (showTooltips.equals("false")) {

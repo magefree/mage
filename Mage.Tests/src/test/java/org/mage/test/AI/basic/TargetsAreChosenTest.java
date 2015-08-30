@@ -63,7 +63,7 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
 
     /**
      * Check that the AI does not cast Rack and Ruin if it would destroy the
-     * owly creature on the battlefield owned by the AI
+     * only creature on the battlefield owned by the AI
      */
     @Test
     public void testRackAndRuin2() {
@@ -196,7 +196,7 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
     }
 
     /**
-     * Test that AI counters creatire spell
+     * Test that AI counters creature spell
      */
     @Test
     @Ignore   // counter spells don't seem to be cast by AI
@@ -222,4 +222,13 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
 
     }
 
+    /**
+     * Target selection from EntersTheBattlefield is not varied in the AI
+     * calculation, so value is only calculated for the one selected target set.
+     *
+     * E.g. If AI casts an Eyeblight Assassin and opponent has a 3/1 and a 2/2,
+     * the AI should target the 3/1.
+     *
+     * Add test to check such situations
+     */
 }

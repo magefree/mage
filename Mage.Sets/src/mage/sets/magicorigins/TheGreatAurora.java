@@ -117,9 +117,11 @@ class TheGreatAuroraEffect extends OneShotEffect {
                 for (Permanent permanent : list) {
                     player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
                 }
-                player.getLibrary().shuffle();
+                player.shuffleLibrary(game);
             }
         }
+
+        game.applyEffects(); // so effects from creatures that were on the battlefield won't trigger from draw or put into play
 
         // Draw cards
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

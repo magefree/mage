@@ -29,7 +29,7 @@ package mage.sets.magic2013;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksAloneTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -37,12 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
@@ -64,7 +59,8 @@ public class NefaroxOverlordOfGrixis extends CardImpl {
         // Exalted
         this.addAbility(new ExaltedAbility());
         // Whenever Nefarox, Overlord of Grixis attacks alone, defending player sacrifices a creature.
-        this.addAbility(new NefaroxOverlordOfGrixisTriggeredAbility());
+        this.addAbility(new AttacksAloneTriggeredAbility(new SacrificeEffect(
+            new FilterControlledCreaturePermanent("a creature"), 1, "defending player")));
     }
 
     public NefaroxOverlordOfGrixis(final NefaroxOverlordOfGrixis card) {
@@ -75,53 +71,4 @@ public class NefaroxOverlordOfGrixis extends CardImpl {
     public NefaroxOverlordOfGrixis copy() {
         return new NefaroxOverlordOfGrixis(this);
     }
-}
-
-class NefaroxOverlordOfGrixisTriggeredAbility extends TriggeredAbilityImpl {
-    
-    private static final FilterControlledPermanent filter;
-
-    static {
-        filter = new FilterControlledPermanent(" a creature");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
-    public NefaroxOverlordOfGrixisTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, "defending player"));
-    }
-
-    public NefaroxOverlordOfGrixisTriggeredAbility(final NefaroxOverlordOfGrixisTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NefaroxOverlordOfGrixisTriggeredAbility copy() {
-        return new NefaroxOverlordOfGrixisTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(this.controllerId) ) {
-            UUID nefarox = this.getSourceId();
-            if (nefarox != null) {
-                if (game.getCombat().attacksAlone() && nefarox == game.getCombat().getAttackers().get(0)) {
-                    UUID defender = game.getCombat().getDefenderId(nefarox);
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} attacks alone, defending player sacrifices a creature.";
-    }
-
 }

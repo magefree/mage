@@ -29,6 +29,7 @@ package mage.abilities.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -248,6 +249,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public void setTemporary(boolean temporary) {
         this.temporary = temporary;
+    }
+
+    @Override
+    public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
+        return null;
     }
 
 }

@@ -83,6 +83,10 @@ public final class Constants {
 
         public static final String POSSIBLE_ATTACKERS = "possibleAttackers";
         public static final String SPECIAL_BUTTON = "specialButton";
+        // used to control automatic answers of optional effects
+        public static final String ORIGINAL_ID = "originalId";
+        public static final String SECOND_MESSAGE = "secondMessage";
+        public static final String HINT_TEXT = "hintText";
 
     }
 
