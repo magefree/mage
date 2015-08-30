@@ -28,18 +28,15 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -51,9 +48,16 @@ public class LeechingBite extends CardImpl {
         super(ownerId, 113, "Leeching Bite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "NPH";
 
-
-        this.getSpellAbility().addEffect(new LeechingBiteEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
+        // Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn.
+        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("Target creature gets +1/+1 until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (getting the +1/+1 counter)")));
+        effect = new BoostTargetEffect(-1, -1, Duration.EndOfTurn);
+        effect.setText("Another target creature gets -1/-1 until end of turn");
+        effect.setTargetPointer(new SecondTargetPointer());
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (getting the -1/-1 counter)")));
     }
 
     public LeechingBite(final LeechingBite card) {
@@ -63,37 +67,5 @@ public class LeechingBite extends CardImpl {
     @Override
     public LeechingBite copy() {
         return new LeechingBite(this);
-    }
-}
-
-class LeechingBiteEffect extends ContinuousEffectImpl {
-
-    public LeechingBiteEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        this.staticText = "Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn";
-    }
-
-    public LeechingBiteEffect(final LeechingBiteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LeechingBiteEffect copy() {
-        return new LeechingBiteEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            permanent.addPower(1);
-            permanent.addToughness(1);
-        }
-        permanent = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
-        if (permanent != null) {
-            permanent.addPower(-1);
-            permanent.addToughness(-1);
-        }
-        return true;
     }
 }
