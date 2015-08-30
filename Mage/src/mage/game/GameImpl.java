@@ -67,6 +67,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.CardType;
@@ -1525,6 +1526,9 @@ public abstract class GameImpl implements Game, Serializable {
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
         while (copiedCards.hasNext()) {
             Card card = copiedCards.next();
+            if (card instanceof SplitCardHalf) {
+                continue; // only the main card is moves, not the halves
+            }
             Zone zone = state.getZone(card.getId());
             if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
                 switch (zone) {

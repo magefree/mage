@@ -50,12 +50,12 @@ public class MockSplitCard extends SplitCard {
         }
 
         CardInfo leftHalf = CardRepository.instance.findCard(getLeftHalfName(card));
-        if(leftHalf != null) {
+        if (leftHalf != null) {
             this.leftHalfCard = new MockCard(leftHalf);
         }
 
         CardInfo rightHalf = CardRepository.instance.findCard(getRightHalfName(card));
-        if(rightHalf != null) {
+        if (rightHalf != null) {
             this.rightHalfCard = new MockCard(rightHalf);
         }
     }
