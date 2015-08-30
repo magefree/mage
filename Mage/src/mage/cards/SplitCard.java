@@ -60,16 +60,32 @@ public abstract class SplitCard extends CardImpl {
 
     public SplitCard(SplitCard card) {
         super(card);
-        this.leftHalfCard = card.leftHalfCard.copy();
+        this.leftHalfCard = card.getLeftHalfCard().copy();
+        ((SplitCardHalf) leftHalfCard).setParentCard(this);
         this.rightHalfCard = card.rightHalfCard.copy();
+        ((SplitCardHalf) rightHalfCard).setParentCard(this);
     }
 
-    public Card getLeftHalfCard() {
-        return leftHalfCard;
+    public SplitCardHalf getLeftHalfCard() {
+        return (SplitCardHalf) leftHalfCard;
     }
 
-    public Card getRightHalfCard() {
-        return rightHalfCard;
+    public SplitCardHalf getRightHalfCard() {
+        return (SplitCardHalf) rightHalfCard;
+    }
+
+    @Override
+    public void assignNewId() {
+        super.assignNewId();
+        leftHalfCard.assignNewId();
+        rightHalfCard.assignNewId();
+    }
+
+    @Override
+    public void setCopy(boolean isCopy) {
+        super.setCopy(isCopy);
+        leftHalfCard.setCopy(isCopy);
+        rightHalfCard.setCopy(isCopy);
     }
 
     @Override

@@ -100,7 +100,7 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     public List<Card> getAllCards(Game game) {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
         for (ExileZone exile : exileZones.values()) {
             cards.addAll(exile.getCards(game));
         }
