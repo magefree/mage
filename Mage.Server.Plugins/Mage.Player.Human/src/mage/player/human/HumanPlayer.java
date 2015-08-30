@@ -1080,6 +1080,7 @@ public class HumanPlayer extends PlayerImpl {
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
             Target target = new TargetCreatureOrPlayer();
+            target.setNotTarget(true);
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
             }
