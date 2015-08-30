@@ -1,4 +1,5 @@
 #Generate|TOK:BFZ|Eldrazi Scion|
+#Generate|TOK:BFZ|Elemental|
 
 #Generate|TOK:DDP|Eldrazi Spawn 1|
 #Generate|TOK:DDP|Eldrazi Spawn 2|
