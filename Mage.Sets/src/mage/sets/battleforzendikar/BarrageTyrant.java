@@ -31,22 +31,18 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -55,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author fireshoes
  */
 public class BarrageTyrant extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another colorless creature");
 
     static {
@@ -72,9 +68,9 @@ public class BarrageTyrant extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
-        
+
         // {2}{R}, Sacrifice another colorless creature: Barrage Tyrant deals damage equal to the sacrificed creature's power to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BarrageTyrantEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SacrificeCostCreaturesPower()), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -87,46 +83,5 @@ public class BarrageTyrant extends CardImpl {
     @Override
     public BarrageTyrant copy() {
         return new BarrageTyrant(this);
-    }
-}
-
-class BarrageTyrantEffect extends OneShotEffect {
-
-    public BarrageTyrantEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals damage equal to the sacrificed creature's power to target creature or player";
-    }
-
-    public BarrageTyrantEffect(final BarrageTyrantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = 0;
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
-                amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getPower().getValue();
-                break;
-            }
-        }
-        if (amount > 0) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public BarrageTyrantEffect copy() {
-        return new BarrageTyrantEffect(this);
     }
 }

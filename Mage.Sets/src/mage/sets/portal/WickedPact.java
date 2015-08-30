@@ -25,53 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.sets.portal;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.ObjectColor;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Backfir3
+ * @author fireshoes
  */
-public class BloodshotCyclops extends CardImpl {
+public class WickedPact extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
-    public BloodshotCyclops(UUID ownerId) {
-        super(ownerId, 77, "Bloodshot Cyclops", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "UDS";
-        this.subtype.add("Cyclops");
-        this.subtype.add("Giant");
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // {T}, Sacrifice a creature: Bloodshot Cyclops deals damage equal to the sacrificed
-        // creature's power to target creature or player.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(new SacrificeCostCreaturesPower()),
-                new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public BloodshotCyclops(final BloodshotCyclops card) {
+    public WickedPact(UUID ownerId) {
+        super(ownerId, 40, "Wicked Pact", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
+        this.expansionSetCode = "POR";
+
+        // Destroy two target nonblack creatures. You lose 5 life.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, filter, false));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(5));
+    }
+
+    public WickedPact(final WickedPact card) {
         super(card);
     }
 
     @Override
-    public BloodshotCyclops copy() {
-        return new BloodshotCyclops(this);
+    public WickedPact copy() {
+        return new WickedPact(this);
     }
 }
