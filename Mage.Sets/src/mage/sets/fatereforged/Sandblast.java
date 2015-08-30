@@ -46,7 +46,8 @@ public class Sandblast extends CardImpl {
 
         // Sandblast deals 5 damage to target attacking or blocking creature.
         getSpellAbility().addEffect(new DamageTargetEffect(5));
-        getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());    }
+        getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
+    }
 
     public Sandblast(final Sandblast card) {
         super(card);
