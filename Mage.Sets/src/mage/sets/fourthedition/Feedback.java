@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.fourthedition;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Heal extends mage.sets.iceage.Heal {
+public class Feedback extends mage.sets.limitedalpha.Feedback {
 
-    public Heal(UUID ownerId) {
+    public Feedback(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 71;
+        this.expansionSetCode = "4ED";
     }
 
-    public Heal(final Heal card) {
+    public Feedback(final Feedback card) {
         super(card);
     }
 
     @Override
-    public Heal copy() {
-        return new Heal(this);
+    public Feedback copy() {
+        return new Feedback(this);
     }
 }

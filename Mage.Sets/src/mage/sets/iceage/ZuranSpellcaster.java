@@ -25,55 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.sets.iceage;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class Blessing extends CardImpl {
+public class ZuranSpellcaster extends CardImpl {
 
-    public Blessing(UUID ownerId) {
-        super(ownerId, 259, "Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "4ED";
-        this.subtype.add("Aura");
+    public ZuranSpellcaster(UUID ownerId) {
+        super(ownerId, 111, "Zuran Spellcaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "ICE";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        // {W}: Enchanted creature gets +1/+1 until end of turn.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // {T}: Zuran Spellcaster deals 1 damage to target creature or player.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());                                                                          ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),
-                new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public Blessing(final Blessing card) {
+    public ZuranSpellcaster(final ZuranSpellcaster card) {
         super(card);
     }
 
     @Override
-    public Blessing copy() {
-        return new Blessing(this);
+    public ZuranSpellcaster copy() {
+        return new ZuranSpellcaster(this);
     }
 }

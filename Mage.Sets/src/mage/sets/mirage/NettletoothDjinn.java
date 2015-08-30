@@ -25,55 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.sets.mirage;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class Blessing extends CardImpl {
+public class NettletoothDjinn extends CardImpl {
 
-    public Blessing(UUID ownerId) {
-        super(ownerId, 259, "Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "4ED";
-        this.subtype.add("Aura");
+    public NettletoothDjinn(UUID ownerId) {
+        super(ownerId, 130, "Nettletooth Djinn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "MIR";
+        this.subtype.add("Djinn");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
+        // At the beginning of your upkeep, Nettletooth Djinn deals 1 damage to you.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));                                                                                 }
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        // {W}: Enchanted creature gets +1/+1 until end of turn.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),
-                new ColoredManaCost(ColoredManaSymbol.W)));
-    }
-
-    public Blessing(final Blessing card) {
+    public NettletoothDjinn(final NettletoothDjinn card) {
         super(card);
     }
 
     @Override
-    public Blessing copy() {
-        return new Blessing(this);
+    public NettletoothDjinn copy() {
+        return new NettletoothDjinn(this);
     }
 }

@@ -25,55 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.sets.antiquities;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageInt;
+import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class Blessing extends CardImpl {
+public class PriestOfYawgmoth extends CardImpl {
 
-    public Blessing(UUID ownerId) {
-        super(ownerId, 259, "Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "4ED";
-        this.subtype.add("Aura");
+    public PriestOfYawgmoth(UUID ownerId) {
+        super(ownerId, 49, "Priest of Yawgmoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "ATQ";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        // {W}: Enchanted creature gets +1/+1 until end of turn.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // {T}, Sacrifice an artifact: Add to your mana pool an amount of {B} equal to the sacrificed artifact's converted mana cost.
+        Ability ability = new DynamicManaAbility(Mana.BlackMana, new SacrificeCostConvertedMana("artifact"),
+            new TapSourceCost(), "add to your mana pool an amount of {B} equal to the sacrificed artifact's converted mana cost");
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent())));
         this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),
-                new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public Blessing(final Blessing card) {
+    public PriestOfYawgmoth(final PriestOfYawgmoth card) {
         super(card);
     }
 
     @Override
-    public Blessing copy() {
-        return new Blessing(this);
+    public PriestOfYawgmoth copy() {
+        return new PriestOfYawgmoth(this);
     }
 }

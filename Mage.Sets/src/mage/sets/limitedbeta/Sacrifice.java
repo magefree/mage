@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.limitedbeta;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Heal extends mage.sets.iceage.Heal {
+public class Sacrifice extends mage.sets.unlimitededition.Sacrifice {
 
-    public Heal(UUID ownerId) {
+    public Sacrifice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 33;
+        this.expansionSetCode = "LEB";
     }
 
-    public Heal(final Heal card) {
+    public Sacrifice(final Sacrifice card) {
         super(card);
     }
 
     @Override
-    public Heal copy() {
-        return new Heal(this);
+    public Sacrifice copy() {
+        return new Sacrifice(this);
     }
 }

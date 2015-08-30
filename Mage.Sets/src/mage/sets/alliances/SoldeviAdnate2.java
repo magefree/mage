@@ -25,55 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class Blessing extends CardImpl {
+public class SoldeviAdnate2 extends SoldeviAdnate1 {
 
-    public Blessing(UUID ownerId) {
-        super(ownerId, 259, "Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "4ED";
-        this.subtype.add("Aura");
-
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        // {W}: Enchanted creature gets +1/+1 until end of turn.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),
-                new ColoredManaCost(ColoredManaSymbol.W)));
+    public SoldeviAdnate2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 26;
     }
 
-    public Blessing(final Blessing card) {
+    public SoldeviAdnate2(final SoldeviAdnate2 card) {
         super(card);
     }
 
     @Override
-    public Blessing copy() {
-        return new Blessing(this);
+    public SoldeviAdnate2 copy() {
+        return new SoldeviAdnate2(this);
     }
 }

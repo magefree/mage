@@ -25,55 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.sets.tempest;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class Blessing extends CardImpl {
+public class KnightOfDawn extends CardImpl {
 
-    public Blessing(UUID ownerId) {
-        super(ownerId, 259, "Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "4ED";
-        this.subtype.add("Aura");
+    public KnightOfDawn(UUID ownerId) {
+        super(ownerId, 238, "Knight of Dawn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        // {W}: Enchanted creature gets +1/+1 until end of turn.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),
-                new ColoredManaCost(ColoredManaSymbol.W)));
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+        // {W}{W}: Knight of Dawn gains protection from the color of your choice until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
     }
 
-    public Blessing(final Blessing card) {
+    public KnightOfDawn(final KnightOfDawn card) {
         super(card);
     }
 
     @Override
-    public Blessing copy() {
-        return new Blessing(this);
+    public KnightOfDawn copy() {
+        return new KnightOfDawn(this);
     }
 }

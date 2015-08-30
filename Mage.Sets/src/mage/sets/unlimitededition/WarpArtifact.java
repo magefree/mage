@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.unlimitededition;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Heal extends mage.sets.iceage.Heal {
+public class WarpArtifact extends mage.sets.fifthedition.WarpArtifact {
 
-    public Heal(UUID ownerId) {
+    public WarpArtifact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 42;
+        this.expansionSetCode = "2ED";
     }
 
-    public Heal(final Heal card) {
+    public WarpArtifact(final WarpArtifact card) {
         super(card);
     }
 
     @Override
-    public Heal copy() {
-        return new Heal(this);
+    public WarpArtifact copy() {
+        return new WarpArtifact(this);
     }
 }

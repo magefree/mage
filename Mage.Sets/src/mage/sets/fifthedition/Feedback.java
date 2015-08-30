@@ -31,22 +31,22 @@ import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Heal extends mage.sets.iceage.Heal {
+public class Feedback extends mage.sets.limitedalpha.Feedback {
 
-    public Heal(UUID ownerId) {
+    public Feedback(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
+        this.cardNumber = 85;
         this.expansionSetCode = "5ED";
     }
 
-    public Heal(final Heal card) {
+    public Feedback(final Feedback card) {
         super(card);
     }
 
     @Override
-    public Heal copy() {
-        return new Heal(this);
+    public Feedback copy() {
+        return new Feedback(this);
     }
 }

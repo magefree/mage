@@ -25,28 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.limitedbeta;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Heal extends mage.sets.iceage.Heal {
+public class TwoHeadedGiantOfForiys extends mage.sets.masterseditioniv.TwoHeadedGiantOfForiys {
 
-    public Heal(UUID ownerId) {
+    public TwoHeadedGiantOfForiys(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 181;
+        this.expansionSetCode = "LEB";
+        this.rarity = Rarity.RARE;
     }
 
-    public Heal(final Heal card) {
+    public TwoHeadedGiantOfForiys(final TwoHeadedGiantOfForiys card) {
         super(card);
     }
 
     @Override
-    public Heal copy() {
-        return new Heal(this);
+    public TwoHeadedGiantOfForiys copy() {
+        return new TwoHeadedGiantOfForiys(this);
     }
 }

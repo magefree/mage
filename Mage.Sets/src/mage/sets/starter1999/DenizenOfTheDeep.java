@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.starter1999;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Heal extends mage.sets.iceage.Heal {
+public class DenizenOfTheDeep extends mage.sets.tenthedition.DenizenOfTheDeep {
 
-    public Heal(UUID ownerId) {
+    public DenizenOfTheDeep(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 35;
+        this.expansionSetCode = "S99";
     }
 
-    public Heal(final Heal card) {
+    public DenizenOfTheDeep(final DenizenOfTheDeep card) {
         super(card);
     }
 
     @Override
-    public Heal copy() {
-        return new Heal(this);
+    public DenizenOfTheDeep copy() {
+        return new DenizenOfTheDeep(this);
     }
 }

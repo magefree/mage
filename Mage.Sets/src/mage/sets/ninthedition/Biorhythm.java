@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Heal extends mage.sets.iceage.Heal {
+public class Biorhythm extends mage.sets.onslaught.Biorhythm {
 
-    public Heal(UUID ownerId) {
+    public Biorhythm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 231;
+        this.expansionSetCode = "9ED";
     }
 
-    public Heal(final Heal card) {
+    public Biorhythm(final Biorhythm card) {
         super(card);
     }
 
     @Override
-    public Heal copy() {
-        return new Heal(this);
+    public Biorhythm copy() {
+        return new Biorhythm(this);
     }
 }

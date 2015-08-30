@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Heal extends mage.sets.iceage.Heal {
+public class FinalPunishment extends mage.sets.scourge.FinalPunishment {
 
-    public Heal(UUID ownerId) {
+    public FinalPunishment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 131;
+        this.expansionSetCode = "9ED";
     }
 
-    public Heal(final Heal card) {
+    public FinalPunishment(final FinalPunishment card) {
         super(card);
     }
 
     @Override
-    public Heal copy() {
-        return new Heal(this);
+    public FinalPunishment copy() {
+        return new FinalPunishment(this);
     }
 }

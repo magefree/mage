@@ -25,55 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- *
- * @author jonubuu
+ * @author LoneFox
  */
-public class Blessing extends CardImpl {
+public class SacrificeCostConvertedMana implements DynamicValue {
 
-    public Blessing(UUID ownerId) {
-        super(ownerId, 259, "Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "4ED";
-        this.subtype.add("Aura");
+    private final String type;
 
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        // {W}: Enchanted creature gets +1/+1 until end of turn.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),
-                new ColoredManaCost(ColoredManaSymbol.W)));
+    public SacrificeCostConvertedMana(String type) {
+        this.type = type;
     }
 
-    public Blessing(final Blessing card) {
-        super(card);
+    public SacrificeCostConvertedMana(SacrificeCostConvertedMana value) {
+        this.type = value.type;
     }
 
     @Override
-    public Blessing copy() {
-        return new Blessing(this);
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        for(Cost cost : sourceAbility.getCosts()) {
+            if(cost instanceof SacrificeTargetCost) {
+                SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
+                int totalCMC = 0;
+                for(Permanent permanent : sacrificeCost.getPermanents()) {
+                    totalCMC += permanent.getManaCost().convertedManaCost();
+                }
+                return totalCMC;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public SacrificeCostConvertedMana copy() {
+        return new SacrificeCostConvertedMana(this);
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "the sacrificed " + type + "'s converted mana cost";
     }
 }
