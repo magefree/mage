@@ -73,20 +73,20 @@ public class DiluvianPrimordial extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Diluvian Primordial enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a card cast this way would be put into a graveyard this turn, exile it instead.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiluvianPrimordialEffect(),false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiluvianPrimordialEffect(), false));
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             ability.getTargets().clear();
-            for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
                     FilterCard filter = new FilterCard("instant or sorcery card from " + opponent.getLogName() + "'s graveyard");
                     filter.add(new OwnerIdPredicate(opponentId));
-                    filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),new CardTypePredicate(CardType.SORCERY)));
-                    TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0,1, filter);
+                    filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+                    TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0, 1, filter);
                     ability.addTarget(target);
                 }
             }
@@ -123,17 +123,16 @@ class DiluvianPrimordialEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Target target: source.getTargets()) {
+            for (Target target : source.getTargets()) {
                 if (target instanceof TargetCardInOpponentsGraveyard) {
                     Card targetCard = game.getCard(target.getFirstTarget());
                     if (targetCard != null) {
-                        if (controller.chooseUse(outcome, "Cast " + targetCard.getLogName() +"?", source, game)) {
-                            // TODO: Handle the case if the cast is not possible, so the replacement effect shouldn't be active
-                            ContinuousEffect effect = new DiluvianPrimordialReplacementEffect();
-                            effect.setTargetPointer(new FixedTarget(targetCard.getId()));
-                            game.addEffect(effect, source);
-                            
-                            controller.cast(targetCard.getSpellAbility(), game, true);
+                        if (controller.chooseUse(outcome, "Cast " + targetCard.getLogName() + "?", source, game)) {
+                            if (controller.cast(targetCard.getSpellAbility(), game, true)) {
+                                ContinuousEffect effect = new DiluvianPrimordialReplacementEffect();
+                                effect.setTargetPointer(new FixedTarget(targetCard.getId(), game.getState().getZoneChangeCounter(targetCard.getId())));
+                                game.addEffect(effect, source);
+                            }
                         }
                     }
                 }
@@ -169,7 +168,7 @@ class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(((FixedTarget)getTargetPointer()).getTarget());
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 controller.moveCards(card, Zone.STACK, Zone.EXILED, source, game);
                 return true;
