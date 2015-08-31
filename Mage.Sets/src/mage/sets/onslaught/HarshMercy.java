@@ -94,14 +94,15 @@ class HarshMercyEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             Set<String> chosenTypes = new HashSet<>();
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game) ) {
+            PlayerIteration:
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose a creature type");
                 typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
                 while (!player.choose(Outcome.DestroyPermanent, typeChoice, game)) {
                     if (!player.canRespond()) {
-                        continue;
+                        continue PlayerIteration;
                     }
                 }
                 String chosenType = typeChoice.getChoice();
@@ -115,9 +116,8 @@ class HarshMercyEffect extends OneShotEffect {
             for (String type : chosenTypes) {
                 filter.add(Predicates.not(new SubtypePredicate(type)));
             }
-                       
 
-            return (new DestroyAllEffect(filter, true)).apply(game, source);
+            return new DestroyAllEffect(filter, true).apply(game, source);
         }
         return false;
     }
