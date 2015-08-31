@@ -37,7 +37,7 @@ public class ForerunnerOfSlaughter extends mage.sets.zendikarvseldrazi.Forerunne
 
     public ForerunnerOfSlaughter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 998;
+        this.cardNumber = 204;
         this.expansionSetCode = "BFZ";
     }
 

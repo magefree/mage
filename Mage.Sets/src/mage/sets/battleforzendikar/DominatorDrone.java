@@ -59,7 +59,7 @@ public class DominatorDrone extends CardImpl {
     }
 
     public DominatorDrone(UUID ownerId) {
-        super(ownerId, 997, "Dominator Drone", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, 92, "Dominator Drone", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
