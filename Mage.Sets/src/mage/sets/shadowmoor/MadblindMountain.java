@@ -69,7 +69,10 @@ public class MadblindMountain extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {R}, {tap}: Shuffle your library. Activate this ability only if you control two or more red permanents.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibrarySourceEffect(), new ManaCostsImpl("{R}"), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+                new ShuffleLibrarySourceEffect(),
+                new ManaCostsImpl("{R}"),
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

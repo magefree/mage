@@ -42,7 +42,7 @@ import mage.constants.Zone;
 public class EldraziScionToken extends Token {
 
     public EldraziScionToken() {
-        super("Eldrazi Scion", "1/1 colorless Eldrazi Scion creature with \"Sacrifice this creature: Add {1} to your mana pool.\"");
+        super("Eldrazi Scion", "1/1 colorless Eldrazi Scion creature token with \"Sacrifice this creature: Add {1} to your mana pool.\"");
         cardType.add(CardType.CREATURE);
         subtype.add("Eldrazi");
         subtype.add("Scion");
