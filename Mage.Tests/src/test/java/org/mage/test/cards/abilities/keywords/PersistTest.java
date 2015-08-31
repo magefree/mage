@@ -198,4 +198,34 @@ public class PersistTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Glen Elendra Archmage", 1);
         assertPowerToughness(playerA, "Glen Elendra Archmage", 1, 1);
     }
+
+    @Test
+    public void testMeliraSylvokOutcast() {
+
+        // You can't get poison counters.
+        // Creatures you control can't have -1/-1 counters placed on them.
+        // Creatures your opponents control lose infect.
+        addCard(Zone.BATTLEFIELD, playerA, "Melira, Sylvok Outcast", 1); // 2/2
+        // When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.
+        // Persist
+        addCard(Zone.HAND, playerA, "Murderous Redcap", 1); // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murderous Redcap");
+        addTarget(playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Murderous Redcap");
+        addTarget(playerA, "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 2);
+        assertPowerToughness(playerA, "Murderous Redcap", 2, 2); // Got no -1/-1 after returning because of Melira in play
+    }
 }
