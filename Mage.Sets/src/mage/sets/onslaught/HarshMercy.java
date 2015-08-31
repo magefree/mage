@@ -27,9 +27,7 @@
  */
 package mage.sets.onslaught;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -60,6 +58,7 @@ public class HarshMercy extends CardImpl {
         super(ownerId, 39, "Harsh Mercy", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "ONS";
 
+        // Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated.
         this.getSpellAbility().addEffect(new HarshMercyEffect());
     }
 
@@ -90,36 +89,35 @@ class HarshMercyEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability ability) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        MageObject sourceObject = game.getObject(ability.getSourceId());
-        if (controller != null) {
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             Set<String> chosenTypes = new HashSet<>();
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game) ) {
                 Player player = game.getPlayer(playerId);
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose a creature type");
                 typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
                 while (!player.choose(Outcome.DestroyPermanent, typeChoice, game)) {
                     if (!player.canRespond()) {
-                        break;
+                        continue;
                     }
                 }
                 String chosenType = typeChoice.getChoice();
                 if (chosenType != null) {
-                    game.informPlayers(sourceObject.getName() + ": " + player.getLogName() + " has chosen " + chosenType);
+                    game.informPlayers(sourceObject.getIdName() + ": " + player.getLogName() + " has chosen " + chosenType);
                     chosenTypes.add(chosenType);
                 }
             }
-            
-            List<SubtypePredicate> predicates = new ArrayList<>();
-            for (String type : chosenTypes) {
-                predicates.add((SubtypePredicate) Predicates.not(new SubtypePredicate(type)));
-            }
+
             FilterPermanent filter = new FilterCreaturePermanent("creatures");
-            filter.add(Predicates.or(predicates));
-            
-            return (new DestroyAllEffect(filter, true)).apply(game, ability);
+            for (String type : chosenTypes) {
+                filter.add(Predicates.not(new SubtypePredicate(type)));
+            }
+                       
+
+            return (new DestroyAllEffect(filter, true)).apply(game, source);
         }
         return false;
     }
