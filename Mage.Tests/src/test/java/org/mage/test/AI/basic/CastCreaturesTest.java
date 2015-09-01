@@ -52,6 +52,10 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
 
+    /**
+     * This test fails sometimes, probably because two plains are tapped for the
+     * first creature
+     */
     @Test
     public void testSimpleCast2() {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");

@@ -55,4 +55,63 @@ public class CryptoplasmTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Cryptoplasm", 0);
         assertPermanentCount(playerB, "Sigiled Paladin", 2);
     }
+
+    /**
+     * I'm at 8 life, opponent (AI) is at 21. I have a Cryptoplasm currently
+     * copying my opponent's Divinity of Pride, the Crypto also has my Followed
+     * Footsteps attached to it. Additionally, I have another Cryptoplasm on the
+     * battlefield also copying the same Divinity, and a Clever Impersonator
+     * that ETB copying the first Cryptoplasm and is currently also a copy of
+     * the Divinity.
+     *
+     * Opponent attacks with his only Divinity of Pride (4/4) and a Serra
+     * Avenger (3/3). I block the Divinity with two of my Divinity copies (the
+     * Clever Impersonator and unenchanted Cryptoplasm) and the Avenger with the
+     * enchanted Divinity (originally a Cryptoplasm). My opponent's Divinity
+     * kills my two copies and dies, and then his Avenger dies and kills the
+     * Divinity blocking it, also sending my Followed Footsteps down with it.
+     *
+     * How does any of that add up? Not only should his Divinity only kill one
+     * of mine since it was a 4/4 and only becomes an 8/8 after dealing its
+     * damage (at which point it should be too late to go back and say the 4
+     * damage are now 8, since it was that exact damage that put him at 25
+     * life), but even more confusing is how the Serra Avenger, which is a 3/3,
+     * somehow kills my 4/4 that had suffered no other damage that turn.
+     *
+     * No other permanents in play at that moment had any influence in this
+     * either, they were only basic lands and a couple of creatures with no
+     * relevant abilities.
+     *
+     * I won't put aside me completely missing something here, but I really
+     * can't see any other explanation to this other than a game bug.
+     */
+    @Test
+    public void testDamageLifelink() {
+        setLife(playerA, 21);
+        setLife(playerB, 8);
+        // First strike
+        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
+        addCard(Zone.BATTLEFIELD, playerA, "Divinity of Pride", 1); //  {W}{W}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+        // At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
+        addCard(Zone.BATTLEFIELD, playerB, "Cryptoplasm", 2); // {1}{U}{U}
+        addTarget(playerB, "Divinity of Pride");
+        addTarget(playerB, "Divinity of Pride");
+
+        attack(3, playerA, "Divinity of Pride");
+        block(3, playerB, "Divinity of Pride", "Divinity of Pride");
+        block(3, playerB, "Divinity of Pride", "Divinity of Pride");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Cryptoplasm", 0);
+
+        assertPermanentCount(playerA, "Divinity of Pride", 0);
+        assertPermanentCount(playerB, "Divinity of Pride", 1);
+
+        assertLife(playerB, 16);
+        assertLife(playerA, 25);
+    }
 }
