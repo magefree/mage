@@ -37,7 +37,7 @@ public class RetreatToKazandu extends mage.sets.zendikarvseldrazi.RetreatToKazan
 
     public RetreatToKazandu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 999;
+        this.cardNumber = 186;
         this.expansionSetCode = "BFZ";
     }
 

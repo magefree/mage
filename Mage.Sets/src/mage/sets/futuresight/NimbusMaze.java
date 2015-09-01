@@ -28,20 +28,21 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-
+import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 
 /**
@@ -50,14 +51,12 @@ import mage.game.Game;
  */
 public class NimbusMaze extends CardImpl {
 
-    private static final FilterPermanent controlIsland = new FilterPermanent("you control an Island");
-    private static final FilterPermanent controlPlains = new FilterPermanent("you control a Plains");
+    private static final FilterControlledPermanent controlIsland = new FilterControlledPermanent("you control an Island");
+    private static final FilterControlledPermanent controlPlains = new FilterControlledPermanent("you control a Plains");
+
     static {
         controlIsland.add(new SubtypePredicate("Island"));
-        controlIsland.add(new ControllerPredicate(TargetController.YOU));
-
         controlPlains.add(new SubtypePredicate("Plains"));
-        controlPlains.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public NimbusMaze(UUID ownerId) {
@@ -67,13 +66,17 @@ public class NimbusMaze extends CardImpl {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {W} to your mana pool. Activate this ability only if you control an Island.
-        Ability addW = new WhiteManaAbility();
-        addW.addCost(new FilterPermanentCost(controlIsland));
-        this.addAbility(addW);
+        this.addAbility(new ActivateIfConditionManaAbility(
+                Zone.BATTLEFIELD,
+                new BasicManaEffect(Mana.WhiteMana),
+                new TapSourceCost(),
+                new PermanentsOnTheBattlefieldCondition(controlIsland)));
         // {tap}: Add {U} to your mana pool. Activate this ability only if you control a Plains.
-        Ability addU = new BlueManaAbility();
-        addU.addCost(new FilterPermanentCost(controlPlains));
-        this.addAbility(addU);
+        this.addAbility(new ActivateIfConditionManaAbility(
+                Zone.BATTLEFIELD,
+                new BasicManaEffect(Mana.BlueMana),
+                new TapSourceCost(),
+                new PermanentsOnTheBattlefieldCondition(controlPlains)));
     }
 
     public NimbusMaze(final NimbusMaze card) {

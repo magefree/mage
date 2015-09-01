@@ -115,7 +115,7 @@ class GideonAllyOfZendikarToken extends Token {
 class KnightAllyToken extends Token {
 
     public KnightAllyToken() {
-        super("Knight Ally", "2/2 white Knight Ally creature");
+        super("Knight Ally", "2/2 white Knight Ally creature token");
         cardType.add(CardType.CREATURE);
         subtype.add("Knight");
         subtype.add("Ally");

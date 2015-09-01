@@ -28,14 +28,11 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ControlPermanentCost;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersCount;
@@ -43,6 +40,10 @@ import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,7 +55,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BloodthirstyOgre extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Demon");
+    
     static {
         filter.add(new SubtypePredicate("Demon"));
     }
@@ -71,11 +73,13 @@ public class BloodthirstyOgre extends CardImpl {
 
         // {T}: Put a devotion counter on Bloodthirsty Ogre
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.DEVOTION.createInstance()),new TapSourceCost()));
+
         // {T}: Target creature gets -X/-X until end of turn, where X is the number of devotion counters on Bloodthirsty Ogre. Activate this ability only if you control a Demon.
         DynamicValue devotionCounters = new SignInversionDynamicValue(new CountersCount(CounterType.DEVOTION));
-        Ability ability;
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(devotionCounters,devotionCounters, Duration.EndOfTurn, true),new TapSourceCost());
-        ability.addCost(new ControlPermanentCost(filter));
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
+                new BoostTargetEffect(devotionCounters,devotionCounters, Duration.EndOfTurn, true),
+                new TapSourceCost(),
+                new PermanentsOnTheBattlefieldCondition(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -87,6 +91,6 @@ public class BloodthirstyOgre extends CardImpl {
     @Override
     public BloodthirstyOgre copy() {
         return new BloodthirstyOgre(this);
-    }    
+    }
 
 }
