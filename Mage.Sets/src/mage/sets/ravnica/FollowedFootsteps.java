@@ -30,8 +30,10 @@ package mage.sets.ravnica;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -40,15 +42,14 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class FollowedFootsteps extends CardImpl {
 
@@ -99,10 +100,9 @@ class FollowedFootstepsEffect extends OneShotEffect {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Permanent target = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
         if (target != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(target);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
+            Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+            effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+            return effect.apply(game, source);
         }
         return false;
     }
