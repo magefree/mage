@@ -112,11 +112,12 @@ class DralnusPetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility
-                    && permanent.getZoneChangeCounter(game) - 1 == ((SpellAbility) obj).getSourceObjectZoneChangeCounter()) {
+            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+            if (spellAbility != null
+                    && spellAbility.getSourceId().equals(source.getSourceId())
+                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
                 int cmc = 0;
-                for (Cost cost : ((SpellAbility) obj).getCosts()) {
+                for (Cost cost : spellAbility.getCosts()) {
                     if (cost instanceof DiscardCardCost && ((DiscardCardCost) cost).getCards().size() > 0) {
                         cmc = ((DiscardCardCost) cost).getCards().get(0).getManaCost().convertedManaCost();
                     }
