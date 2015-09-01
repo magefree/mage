@@ -1,6 +1,6 @@
 package org.mage.server.test.load;
 
-import java.util.Random;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.server.test.TestClient;
 
@@ -14,7 +14,6 @@ public class ChatLoadTest extends BaseLoadTest {
     private static final int NUM_TESTS = 50;
 
     private static final StringBuilder sb = new StringBuilder();
-    private static final Random rng = new Random();
 
     private static final char[] symbols;
     static {
@@ -29,6 +28,7 @@ public class ChatLoadTest extends BaseLoadTest {
     }   
     
     @Test
+    @Ignore
     public void chat() {
         connect(USER_COUNT);
         
@@ -42,10 +42,7 @@ public class ChatLoadTest extends BaseLoadTest {
             String message = randomString();
             logger.info("Sending chat message#:" + i + " message:" + message);
             client.sendChatMessage(client.getServerState().getMainRoomId(), message);
-            try {
-                Thread.sleep(rng.nextInt(450) + 50);  // sleep between 50 and 500 ms
-            } catch (InterruptedException ex) {
-            }
+            pause(50, 500);  // wait 50 to 500 ms
         }
         
         disconnect();

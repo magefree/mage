@@ -41,6 +41,7 @@ public class TestClient implements MageClient {
     
     private Client client;
     private ServerState serverState;
+    private String userName;
     private boolean joinedTableFired = false;
     
     public TestClient() {
@@ -48,6 +49,7 @@ public class TestClient implements MageClient {
     }
     
     public boolean connect(String userName) {
+        this.userName = userName;
         Connection connection = new Connection();
         connection.setHost("localhost");
         connection.setPort(17171);
@@ -91,7 +93,7 @@ public class TestClient implements MageClient {
 
     @Override
     public void receiveChatMessage(UUID chatId, ChatMessage message) {
-        logger.info("Recieved message: " + message);
+        logger.info("Recieved message for " + userName + ": " + message.getUsername() + "-" + message.getTime() + "-" + message.getMessage());
     }
 
     @Override

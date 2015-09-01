@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import mage.server.ServerMain;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -19,6 +20,7 @@ import org.mage.server.test.TestClient;
 public abstract class BaseLoadTest {
     
     protected static final Logger logger = Logger.getLogger(BaseLoadTest.class);
+    protected static final Random rng = new Random();
     
     protected Map<String, TestClient> users = new HashMap<>();
 
@@ -66,6 +68,7 @@ public abstract class BaseLoadTest {
             TestClient client = new TestClient();
             client.connect(username);
             users.put(username, client);
+            pause(10, 50);  // wait 10 to 50 ms
         }
         
     }
@@ -73,9 +76,18 @@ public abstract class BaseLoadTest {
     protected void disconnect() {
         for (TestClient client: users.values()) {
             client.disconnect(false);
+            pause(10, 50);  // wait 10 to 50 ms
         }
+        logger.info("Finished disconnecting");
         for (TestClient client: users.values()) {
             Assert.assertFalse("user did not disconnect", client.isConnected());
+        }        
+    }
+    
+    protected void pause(int min, int max) {
+        try {
+            Thread.sleep(rng.nextInt(max - min) + min);
+        } catch (InterruptedException ex) {
         }        
     }
 
