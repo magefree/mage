@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -40,6 +41,7 @@ import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -83,17 +85,24 @@ public class ProtectionAbility extends StaticAbility {
             }
             return true;
         }
-        if (filter instanceof FilterSpell) {
-            if (source instanceof Spell) {
-                return !filter.match(source, game);
-            }
-            return true;
-        }
+
         if (filter instanceof FilterCard) {
             if (source instanceof Card) {
                 return !filter.match(source, game);
             }
             return true;
+        }
+        if (filter instanceof FilterSpell) {
+            if (source instanceof Spell) {
+                return !filter.match(source, game);
+            }
+            // Problem here is that for the check if a player can play a Spell, the source
+            // object is still a card and not a spell yet. So retunr only if the source object can't be a spell
+            // otherwise the following FilterObject check will be appied
+            if (source instanceof StackObject
+                    || (!source.getCardType().contains(CardType.INSTANT) && !source.getCardType().contains(CardType.SORCERY))) {
+                return true;
+            }
         }
         if (filter instanceof FilterObject) {
             return !filter.match(source, game);
