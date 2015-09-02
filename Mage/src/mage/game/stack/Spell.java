@@ -636,6 +636,10 @@ public class Spell extends StackObjImpl implements Card {
         if (this.isCopiedSpell() && !zone.equals(Zone.STACK)) {
             return true;
         }
+        Card card = game.getCard(getSourceId());
+        if (card != null) {
+            return card.moveToZone(zone, sourceId, game, flag, appliedEffects);
+        }
         throw new UnsupportedOperationException("Unsupported operation");
     }
 

@@ -85,7 +85,7 @@ public class WheelOfSunAndMoon extends CardImpl {
 class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
 
     public WheelOfSunAndMoonEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Damage);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library";
     }
 
@@ -126,10 +126,9 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
         if (controller != null && sourceObject != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 Cards cards = new CardsImpl(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, zEvent.getFromZone(), false, true);
+                controller.putCardsOnBottomOfLibrary(cards, game, source, false);
                 return true;
             }
         }
