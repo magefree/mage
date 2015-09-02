@@ -41,14 +41,16 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class MaraudingMaulhorn extends CardImpl {
-    
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature named Advocate of the Beast");    
+
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature named Advocate of the Beast");
+
     static {
         filter.add(new NamePredicate("Advocate of the Beast"));
     }
@@ -67,8 +69,8 @@ public class MaraudingMaulhorn extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control a creature named Advocate of the Beast");
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new AttackedThisTurnWatcher());
+
     }
 
     public MaraudingMaulhorn(final MaraudingMaulhorn card) {

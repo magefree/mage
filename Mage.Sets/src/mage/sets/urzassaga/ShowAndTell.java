@@ -55,7 +55,6 @@ public class ShowAndTell extends CardImpl {
         super(ownerId, 96, "Show and Tell", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "USG";
 
-
         // Each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.
         this.getSpellAbility().addEffect(new ShowAndTellEffect());
     }
@@ -105,8 +104,8 @@ class ShowAndTellEffect extends OneShotEffect {
         }
         List<Card> cardsToPutIntoPlay = new ArrayList<>();
         TargetCardInHand target = new TargetCardInHand(filter);
-        
-        for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
+
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 if (player.chooseUse(outcome, "Put an artifact, creature, enchantment, or land card from hand onto the battlefield?", source, game)) {
@@ -117,10 +116,10 @@ class ShowAndTellEffect extends OneShotEffect {
                             cardsToPutIntoPlay.add(card);
                         }
                     }
-                }                
+                }
             }
         }
-        for (Card card: cardsToPutIntoPlay) {
+        for (Card card : cardsToPutIntoPlay) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
                 player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
