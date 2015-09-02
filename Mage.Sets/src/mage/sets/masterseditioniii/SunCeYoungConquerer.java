@@ -25,47 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.masterseditioniii;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.EntwineAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class RainOfRust extends CardImpl {
+public class SunCeYoungConquerer extends CardImpl {
 
-    public RainOfRust(UUID ownerId) {
-        super(ownerId, 76, "Rain of Rust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "5DN";
+    public SunCeYoungConquerer(UUID ownerId) {
+        super(ownerId, 52, "Sun Ce, Young Conquerer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+        this.expansionSetCode = "ME3";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Choose one -
-        //Destroy target artifact;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        //or destroy target land.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetLandPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
-        // Entwine {3}{R}
-        this.addAbility(new EntwineAbility("{3}{R}"));
+        // Horsemanship
+        this.addAbility(HorsemanshipAbility.getInstance());
+        // When Sun Ce, Young Conquerer enters the battlefield, you may return target creature to its owner's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public RainOfRust(final RainOfRust card) {
+    public SunCeYoungConquerer(final SunCeYoungConquerer card) {
         super(card);
     }
 
     @Override
-    public RainOfRust copy() {
-        return new RainOfRust(this);
+    public SunCeYoungConquerer copy() {
+        return new SunCeYoungConquerer(this);
     }
 }

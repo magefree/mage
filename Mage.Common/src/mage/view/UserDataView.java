@@ -23,7 +23,7 @@ public class UserDataView implements Serializable {
     protected boolean manaPoolAutomatic;
     protected boolean manaPoolAutomaticRestricted;
 
-    static UserData getDefaultUserDataView() {
+    static UserData getDefaultUserData() {
         return UserData.getDefaultUserDataView();
     }
 

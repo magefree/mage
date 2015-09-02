@@ -25,47 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.EntwineAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class RainOfRust extends CardImpl {
+public class RidingRedHare extends CardImpl {
 
-    public RainOfRust(UUID ownerId) {
-        super(ownerId, 76, "Rain of Rust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "5DN";
+    public RidingRedHare(UUID ownerId) {
+        super(ownerId, 18, "Riding Red Hare", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
+        this.expansionSetCode = "PTK";
 
-        // Choose one -
-        //Destroy target artifact;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        //or destroy target land.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetLandPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
-        // Entwine {3}{R}
-        this.addAbility(new EntwineAbility("{3}{R}"));
+        // Target creature gets +3/+3 and gains horsemanship until end of turn.
+        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
+        effect.setText("Target creature gets +3/+3");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HorsemanshipAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains horsemanship until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RainOfRust(final RainOfRust card) {
+    public RidingRedHare(final RidingRedHare card) {
         super(card);
     }
 
     @Override
-    public RainOfRust copy() {
-        return new RainOfRust(this);
+    public RidingRedHare copy() {
+        return new RidingRedHare(this);
     }
 }
