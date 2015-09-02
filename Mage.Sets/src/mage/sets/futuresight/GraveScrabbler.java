@@ -42,7 +42,6 @@ public class GraveScrabbler extends CardImpl{
 
 	@Override
 	public Card copy() {
-		// TODO Auto-generated method stub
 		return new GraveScrabbler(this);
 	}
 
