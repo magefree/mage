@@ -25,37 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.sets.battleforzendikar;
+
+import java.util.UUID;
+import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
+public class RadiantFlames extends CardImpl {
 
-    RALLY("Rally"),
-    BLOODRUSH("Bloodrush"),
-    CONVERGE("Converge"),
-    CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    PARLEY("Parley"),
-    RAID("Raid");
+    public RadiantFlames(UUID ownerId) {
+        super(ownerId, 151, "Radiant Flames", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
+        this.expansionSetCode = "BFZ";
 
-    private final String text;
+        // Converge — Radiant Flames deals X damage to each creature, where X is the number of colors of mana spent to cast Radiant Flames.
+        getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        getSpellAbility().addEffect(new DamageAllEffect(ColorsOfManaSpentToCastCount.getInstance(), new FilterCreaturePermanent()));
+    }
 
-    AbilityWord(String text) {
-        this.text = text;
+    public RadiantFlames(final RadiantFlames card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public RadiantFlames copy() {
+        return new RadiantFlames(this);
     }
-
 }

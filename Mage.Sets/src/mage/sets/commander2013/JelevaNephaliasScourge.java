@@ -116,7 +116,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {
                             int cardsToExile = Math.min(player.getLibrary().size(), xValue);
-                            for(int i = 0; i < cardsToExile; i++) {
+                            for (int i = 0; i < cardsToExile; i++) {
                                 Card card = player.getLibrary().removeFromTop(game);
                                 if (card != null) {
                                     card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceCard.getName(), source.getSourceId(), game);
@@ -170,7 +170,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
 
 class JelevaNephaliasWatcher extends Watcher {
 
-    private Map<Integer, Integer> manaSpendToCast = new HashMap<>(); // cast
+    private final Map<Integer, Integer> manaSpendToCast = new HashMap<>(); // cast
 
     public JelevaNephaliasWatcher() {
         super("ManaPaidToCastJelevaNephalias", WatcherScope.CARD);
@@ -190,10 +190,10 @@ class JelevaNephaliasWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(sourceId)) {
             if (!game.getStack().isEmpty()) {
                 for (StackObject stackObject : game.getStack()) {
-                    if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(sourceId)) {
+                    if (stackObject instanceof Spell && ((Spell) stackObject).getSourceId().equals(sourceId)) {
                         Card card = game.getCard(sourceId);
                         if (!manaSpendToCast.containsValue(card.getZoneChangeCounter(game))) {
-                            manaSpendToCast.put(new Integer(card.getZoneChangeCounter(game)), new Integer(((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost()));
+                            manaSpendToCast.put(card.getZoneChangeCounter(game), ((Spell) stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost());
                         }
                     }
                 }
