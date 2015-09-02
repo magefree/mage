@@ -305,10 +305,6 @@ public class Server {
         if (ch != null)
             ch.writeAndFlush(new GameErrorCallback(gameId, message)).addListener(WriteListener.getInstance());
     }
-    
-    public void showGameEndDialog(String sessionId, UUID gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public void startDraft(String sessionId, UUID draftId, UUID playerId) {
         Channel ch = findChannel(sessionId);

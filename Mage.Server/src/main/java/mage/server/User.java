@@ -279,10 +279,6 @@ public class User {
         ServerMain.getInstance().showTournament(sessionId, tournamentId);
     }
 
-    public void showGameEndDialog(final UUID gameId) {
-        ServerMain.getInstance().showGameEndDialog(sessionId, gameId);
-    }
-
     public void draftStarted(final UUID draftId, final UUID playerId) {
         ServerMain.getInstance().startDraft(sessionId, draftId, playerId);
     }

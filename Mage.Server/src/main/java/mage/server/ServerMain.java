@@ -1214,10 +1214,6 @@ public class ServerMain implements MageServer {
         server.showTournament(sessionId, tournamentId);
     }
 
-    public void showGameEndDialog(String sessionId, UUID gameId) {
-        server.showGameEndDialog(sessionId, gameId);
-    }
-
     public void watchGame(String sessionId, UUID gameId, UUID chatId, GameView game) {
         server.watchGame(sessionId, gameId, chatId, game);
     }
