@@ -14,7 +14,6 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-
 public class AttacksEachCombatStaticAbility extends StaticAbility {
 
     public AttacksEachCombatStaticAbility() {
