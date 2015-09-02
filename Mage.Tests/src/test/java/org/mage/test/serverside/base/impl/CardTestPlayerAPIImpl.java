@@ -779,7 +779,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         FilterCard filter = new FilterCard();
         filter.add(new NamePredicate(cardName));
         int actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
-        Assert.assertEquals("(Hand) Card counts for card " + cardName + " are not equal ", count, actual);
+        Assert.assertEquals("(Hand) Card counts for card " + cardName + " for " + player.getName() + " are not equal ", count, actual);
     }
 
     /**
