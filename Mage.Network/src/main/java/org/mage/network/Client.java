@@ -61,10 +61,11 @@ public class Client {
     
     private SslContext sslCtx;
     private Channel channel;
-    private EventLoopGroup group;
     private String username;
     private String host;
     private int port;
+
+    private static final EventLoopGroup group = new NioEventLoopGroup();
     
     public Client(MageClient client) {
         this.client = client;
@@ -81,7 +82,6 @@ public class Client {
         this.host = connection.getHost();
         this.port = connection.getPort();
 
-        group = new NioEventLoopGroup();
         try {
             if (connection.isSSL()) {
                 sslCtx = SslContext.newClientContext(InsecureTrustManagerFactory.INSTANCE);
@@ -112,7 +112,7 @@ public class Client {
         }
         return false;
     }
-        
+            
     private class ClientInitializer extends ChannelInitializer<SocketChannel> {
 
         @Override
@@ -141,11 +141,13 @@ public class Client {
         try {
             channel.disconnect().sync();
             client.disconnected(error);
-        } catch (InterruptedException ex) {
+        } 
+        catch (InterruptedException ex) {
             logger.fatal("Error disconnecting", ex);
-        } finally {
-            group.shutdownGracefully();
-        }
+        } 
+//        finally {
+//            group.shutdownGracefully();
+//        }
     }
     
     public boolean isConnected() {

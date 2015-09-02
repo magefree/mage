@@ -42,13 +42,14 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent e = (IdleStateEvent) evt;
             if (e.state() == IdleState.READER_IDLE) {
-                server.disconnect(getSessionId(ctx), DisconnectReason.LostConnection);
+                String sessionId = getSessionId(ctx);
+                server.disconnect(sessionId, DisconnectReason.LostConnection);
                 ctx.disconnect();
-                logger.info("Disconnected due to extended idle");
+                logger.info(sessionId + " disconnected due to extended idle");
             } else if (e.state() == IdleState.WRITER_IDLE) {
                 startTime = System.nanoTime();
                 ctx.writeAndFlush(ping).addListener(WriteListener.getInstance());
-                logger.info("Sending ping");
+                logger.debug("Sending ping");
             }
         }
     }

@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class ConnectionLoadTest extends BaseLoadTest {
     
-    private static final Integer USER_COUNT = 400;
+    private static final Integer USER_COUNT = 1000;
 
     @Test
     public void connectTest() {

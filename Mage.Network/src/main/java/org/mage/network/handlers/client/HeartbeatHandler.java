@@ -29,7 +29,7 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
                 logger.info("Disconnected due to extended idle");
             } else if (e.state() == IdleState.WRITER_IDLE) {
                 ctx.writeAndFlush(ping).addListener(WriteListener.getInstance());
-                logger.info("Sending ping");
+                logger.debug("Sending ping");
             }
         }
     }
