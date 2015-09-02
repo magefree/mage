@@ -35,7 +35,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
@@ -74,23 +73,22 @@ public class DestroyTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        if (source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // for Rain of Thorns
-            for (Target target : source.getTargets()) {
-                for (UUID permanentId : target.getTargets()) {
-                    Permanent permanent = game.getPermanent(permanentId);
-                    if (permanent != null) {
-                        permanent.destroy(source.getSourceId(), game, noRegen);
-                        affectedTargets++;
-                    }
-                }
-            }
-        } else if (targetPointer.getTargets(game, source).size() > 0) {
-            for (UUID permanentId : targetPointer.getTargets(game, source)) {
-                Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    permanent.destroy(source.getSourceId(), game, noRegen);
-                    affectedTargets++;
-                }
+//        if (source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // for Rain of Thorns
+//            for (Target target : source.getTargets()) {
+//                for (UUID permanentId : target.getTargets()) {
+//                    Permanent permanent = game.getPermanent(permanentId);
+//                    if (permanent != null) {
+//                        permanent.destroy(source.getSourceId(), game, noRegen);
+//                        affectedTargets++;
+//                    }
+//                }
+//            }
+//        } else
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+                permanent.destroy(source.getSourceId(), game, noRegen);
+                affectedTargets++;
             }
         }
         return affectedTargets > 0;

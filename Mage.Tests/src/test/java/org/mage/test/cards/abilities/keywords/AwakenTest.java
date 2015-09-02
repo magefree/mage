@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,51 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.keyword;
+package org.mage.test.cards.abilities.keywords;
 
-import mage.abilities.SpellAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
-import mage.cards.Card;
-import mage.constants.SpellAbilityType;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
-import mage.target.common.TargetCardInHand;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class RetraceAbility extends SpellAbility {
+public class AwakenTest extends CardTestPlayerBase {
 
-    public RetraceAbility(Card card) {
-        super(card.getManaCost(), card.getName() + " with retrace", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE);
-        this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
-        this.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
-        this.getEffects().addAll(card.getSpellAbility().getEffects());
-        this.getTargets().addAll(card.getSpellAbility().getTargets());
-        this.getChoices().addAll(card.getSpellAbility().getChoices());
-        this.getWatchers().addAll(card.getSpellAbility().getWatchers());
-        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.timing = card.getSpellAbility().getTiming();
+    @Test
+    public void testCastWithAwaken() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        // Destroy target creature or planeswalker.
+        // Awaken 4-{5}{B}{B}
+        addCard(Zone.HAND, playerA, "Ruinous Path", 1);
 
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ruinous Path with awaken", "Silvercoat Lion");
+        addTarget(playerA, "Plains");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, "Plains", 4, 4);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
     }
 
-    public RetraceAbility(final RetraceAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RetraceAbility copy() {
-        return new RetraceAbility(this);
-    }
-
-    @Override
-    public String getRule(boolean all) {
-        return getRule();
-    }
-
-    @Override
-    public String getRule() {
-        return "Retrace <i>(You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)</i>";
-    }
 }
