@@ -1,0 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mage.util;
+
+/**
+ *
+ * @author LevelX2
+ */
+public class MessageToClient {
+
+    private String message;
+    private String secondMessage;
+    private String hintText;
+
+    public MessageToClient(String message) {
+        this(message, null);
+    }
+
+    public MessageToClient(String message, String secondMessage) {
+        this(message, secondMessage, null);
+    }
+
+    public MessageToClient(String message, String secondMessage, String hintText) {
+        this.message = message;
+        this.secondMessage = secondMessage;
+        this.hintText = hintText;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getSecondMessage() {
+        return secondMessage;
+    }
+
+    public String getHintText() {
+        return hintText;
+    }
+}

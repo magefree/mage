@@ -366,7 +366,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         break;
                     case STACK:
                         StackObject stackObject = game.getStack().getSpell(getId());
-                        if (stackObject == null && (this instanceof SplitCard)) { // handle if half od Split cast is on the stack
+                        if (stackObject == null && (this instanceof SplitCard)) { // handle if half of Split cast is on the stack
                             stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId());
                             if (stackObject == null) {
                                 stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId());
@@ -602,10 +602,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             PermanentCard permanent = new PermanentCard(this, event.getPlayerId(), game);
             // make sure the controller of all continuous effects of this card are switched to the current controller
             game.getContinuousEffects().setController(objectId, event.getPlayerId());
-            // check if there are counters to add to the permanent (e.g. from non replacement effects like Persist)
-            checkForCountersToAdd(permanent, game);
             game.addPermanent(permanent);
             setZone(Zone.BATTLEFIELD, game);
+            // check if there are counters to add to the permanent (e.g. from non replacement effects like Persist)
+            checkForCountersToAdd(permanent, game);
             game.setScopeRelevant(true);
             permanent.setTapped(tapped);
             permanent.setFaceDown(facedown, game);

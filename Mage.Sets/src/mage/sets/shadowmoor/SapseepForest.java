@@ -50,9 +50,9 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
  */
 public class SapseepForest extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("if you control two or more green permanents");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
@@ -64,15 +64,18 @@ public class SapseepForest extends CardImpl {
 
         // <i>({tap}: Add {G} to your mana pool.)</i>
         this.addAbility(new GreenManaAbility());
-        
+
         // Sapseep Forest enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // {G}, {tap}: You gain 1 life. Activate this ability only if you control two or more green permanents.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl("{G}"), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+                new GainLifeEffect(1),
+                new ManaCostsImpl("{G}"),
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
     }
 
     public SapseepForest(final SapseepForest card) {

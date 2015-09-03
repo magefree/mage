@@ -64,30 +64,29 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     //20130711 708.6c
-    /* If anything performs a comparison involving multiple characteristics or 
-     * values of one or more split cards in any zone other than the stack or 
-     * involving multiple characteristics or values of one or more fused split 
-     * spells, each characteristic or value is compared separately. If each of 
-     * the individual comparisons would return a “yes” answer, the whole 
+    /* If anything performs a comparison involving multiple characteristics or
+     * values of one or more split cards in any zone other than the stack or
+     * involving multiple characteristics or values of one or more fused split
+     * spells, each characteristic or value is compared separately. If each of
+     * the individual comparisons would return a “yes” answer, the whole
      * comparison returns a “yes” answer. The individual comparisons may involve
      * different halves of the same split card.
      */
-    
     @Override
     public boolean match(Card card, Game game) {
-        if(card.isSplitCard()){
-            return super.match(((SplitCard)card).getLeftHalfCard(), game) ||
-                    super.match(((SplitCard)card).getRightHalfCard(), game);
-        }
-        else{
-           return super.match(card, game); 
+        if (card.isSplitCard()) {
+            return super.match(((SplitCard) card).getLeftHalfCard(), game)
+                    || super.match(((SplitCard) card).getRightHalfCard(), game);
+        } else {
+            return super.match(card, game);
         }
     }
+
     public boolean match(Card card, UUID playerId, Game game) {
         if (!this.match(card, game)) {
             return false;
         }
-        
+
         return Predicates.and(extraPredicates).apply(new ObjectPlayer(card, playerId), game);
     }
 
@@ -111,7 +110,7 @@ public class FilterCard extends FilterObject<Card> {
         }
         return filtered;
     }
-    
+
     public boolean hasPredicates() {
         return predicates.size() > 0;
     }

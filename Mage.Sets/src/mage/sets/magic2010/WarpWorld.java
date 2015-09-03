@@ -27,25 +27,25 @@
  */
 package mage.sets.magic2010;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.players.PlayerList;
 
 /**
  *
@@ -56,7 +56,6 @@ public class WarpWorld extends CardImpl {
     public WarpWorld(UUID ownerId) {
         super(ownerId, 163, "Warp World", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");
         this.expansionSetCode = "M10";
-
 
         // Each player shuffles all permanents he or she owns into his or her library, then reveals that many cards from the top of his or her library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of his or her library.
         this.getSpellAbility().addEffect(new WarpWorldEffect());
@@ -90,105 +89,99 @@ class WarpWorldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Map<UUID, List<Permanent>> permanentsOwned = new HashMap<>();
-
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject == null) {
+            return false;
+        }
+        Map<UUID, Set<Card>> permanentsOwned = new HashMap<>();
         Collection<Permanent> permanents = game.getBattlefield().getAllPermanents();
         for (Permanent permanent : permanents) {
-            List<Permanent> list = permanentsOwned.get(permanent.getOwnerId());
-            if (list == null) {
-                list = new ArrayList<>();
+            Set<Card> set = permanentsOwned.get(permanent.getOwnerId());
+            if (set == null) {
+                set = new LinkedHashSet<>();
             }
-            list.add(permanent);
-            permanentsOwned.put(permanent.getOwnerId(), list);
+            set.add(permanent);
+            permanentsOwned.put(permanent.getOwnerId(), set);
         }
 
         // shuffle permanents into owner's library
         Map<UUID, Integer> permanentsCount = new HashMap<>();
-        PlayerList playerList = game.getPlayerList();
-        playerList.setCurrent(game.getActivePlayerId());
-        Player player = game.getPlayer(game.getActivePlayerId());
-        do {
-            List<Permanent> list = permanentsOwned.remove(player.getId());
-            Integer count = 0;
-            if (list != null) {
-                count = list.size();
-                for (Permanent permanent : list) {
-                    permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                Set<Card> set = permanentsOwned.remove(playerId);
+                Integer count = 0;
+                if (set != null) {
+                    count = set.size();
+                    player.moveCards(set, Zone.BATTLEFIELD, Zone.LIBRARY, source, game);
                 }
+
+                if (count > 0) {
+                    player.shuffleLibrary(game);
+                }
+                permanentsCount.put(playerId, count);
             }
+        }
 
-            if (count > 0) {
-                player.shuffleLibrary(game);
-            }
-
-            permanentsCount.put(player.getId(), count);
-            player = playerList.getNext(game);
-        } while (!player.getId().equals(game.getActivePlayerId()));
-
+        game.applyEffects(); // so effects from creatures that were on the battlefield won't trigger from draw or later put into play
 
         Map<UUID, CardsImpl> cardsRevealed = new HashMap<>();
 
         // draw cards and reveal them
-        playerList.setCurrent(game.getActivePlayerId());
-        player = game.getPlayer(game.getActivePlayerId());
-        do {
-            Integer count = Math.min(permanentsCount.get(player.getId()), player.getLibrary().size());
-            CardsImpl cards = new CardsImpl();
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                Integer count = Math.min(permanentsCount.get(player.getId()), player.getLibrary().size());
+                CardsImpl cards = new CardsImpl();
+                for (int i = 0; i < count; i++) {
+                    Card card = player.getLibrary().removeFromTop(game);
+                    if (card != null) {
+                        cards.add(card);
+                    }
                 }
+                player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ")", cards, game);
+                cardsRevealed.put(player.getId(), cards);
             }
-            player.revealCards("Warp World " + player.getName(), cards, game);
-
-            cardsRevealed.put(player.getId(), cards);
-
-            player = playerList.getNext(game);
-        } while (!player.getId().equals(game.getActivePlayerId()));
-
+        }
 
         // put artifacts, creaturs and lands onto the battlefield
-        playerList.setCurrent(game.getActivePlayerId());
-        player = game.getPlayer(game.getActivePlayerId());
-        do {
-            CardsImpl cards = cardsRevealed.get(player.getId());
-            for (Card card : cards.getCards(game)) {
-                if (card != null && (card.getCardType().contains(CardType.ARTIFACT)
-                        || card.getCardType().contains(CardType.CREATURE)
-                        || card.getCardType().contains(CardType.LAND))) {
-                    card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
-                    cards.remove(card);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                CardsImpl cards = cardsRevealed.get(player.getId());
+                for (Card card : cards.getCards(game)) {
+                    if (card != null && (card.getCardType().contains(CardType.ARTIFACT)
+                            || card.getCardType().contains(CardType.CREATURE)
+                            || card.getCardType().contains(CardType.LAND))) {
+                        card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
+                        cards.remove(card);
+                    }
                 }
+
             }
-
-            player = playerList.getNext(game);
-        } while (!player.getId().equals(game.getActivePlayerId()));
-
+        }
         // put enchantments onto the battlefield
-        playerList.setCurrent(game.getActivePlayerId());
-        player = game.getPlayer(game.getActivePlayerId());
-        do {
-            CardsImpl cards = cardsRevealed.get(player.getId());
-            for (Card card : cards.getCards(game)) {
-                if (card != null && card.getCardType().contains(CardType.ENCHANTMENT)) {
-                    card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
-                    cards.remove(card);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                CardsImpl cards = cardsRevealed.get(player.getId());
+                for (Card card : cards.getCards(game)) {
+                    if (card != null && card.getCardType().contains(CardType.ENCHANTMENT)) {
+                        card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
+                        cards.remove(card);
+                    }
                 }
+
             }
-
-            player = playerList.getNext(game);
-        } while (!player.getId().equals(game.getActivePlayerId()));
-
+        }
         // put the rest of the cards on buttom of the library
-        playerList.setCurrent(game.getActivePlayerId());
-        player = game.getPlayer(game.getActivePlayerId());
-        do {
-            CardsImpl cards = cardsRevealed.get(player.getId());            
-            player.putCardsOnBottomOfLibrary(cards, game, source, false);
-            player = playerList.getNext(game);
-        } while (!player.getId().equals(game.getActivePlayerId()));
-
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                CardsImpl cards = cardsRevealed.get(player.getId());
+                player.putCardsOnBottomOfLibrary(cards, game, source, false);
+            }
+        }
         return true;
     }
 }

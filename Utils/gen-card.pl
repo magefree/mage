@@ -183,6 +183,8 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                                     $vars{'abilities'} .= "\n        this.addAbility(" . $kw . "Ability.getInstance());";
                                 } elsif ($keywords{$kw} eq 'new') {
                                     $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . "Ability());";
+                                } elsif ($keywords{$kw} eq 'color') {
+                                    $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . "Ability(this.color));";
                                 } elsif ($keywords{$kw} eq 'number') {
                                     $ability =~ m/(\b\d+?\b)/g;
                                     $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(' . $1 . '));';

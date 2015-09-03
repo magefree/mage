@@ -125,11 +125,11 @@ public class EmblemsTest extends CardTestPlayerBase {
 
     /**
      * Liliana, Defiant Necromancer: -8: You get an emblem with "Whenever a
-     * creature you control dies, return it to the battlefield under your
-     * control at the beginning of the next end step.";
+     * creature dies, return it to the battlefield under your control at the
+     * beginning of the next end step.";
      *
-     * Tests "Whenever a creature you control dies, return it to the battlefield
-     * under your control at the beginning of the next end step."
+     * Tests "Whenever a creature dies, return it to the battlefield under your
+     * control at the beginning of the next end step."
      */
     @Test
     public void testLilianaDefiantNecromancer() {
@@ -152,7 +152,7 @@ public class EmblemsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
         assertPermanentCount(playerA, "Elite Vanguard", 1);
-        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
 
         assertHandCount(playerA, 0);
 

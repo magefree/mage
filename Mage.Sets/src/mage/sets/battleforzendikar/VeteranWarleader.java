@@ -37,7 +37,7 @@ public class VeteranWarleader extends mage.sets.zendikarvseldrazi.VeteranWarlead
 
     public VeteranWarleader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 999;
+        this.cardNumber = 221;
         this.expansionSetCode = "BFZ";
     }
 

@@ -36,7 +36,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
 
     @Test
@@ -47,7 +46,7 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
 
         // Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library.
         addCard(Zone.HAND, playerA, "Black Sun's Zenith", 1);
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Witch's Familiar", 1);
 
@@ -59,13 +58,12 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
-        
-        assertPermanentCount(playerA, "Witch's Familiar", 1);        
+
+        assertPermanentCount(playerA, "Witch's Familiar", 1);
         assertPowerToughness(playerA, "Witch's Familiar", 0, 1);
 
-        assertPermanentCount(playerB, "Witch's Familiar", 1);        
+        assertPermanentCount(playerB, "Witch's Familiar", 1);
         assertPowerToughness(playerB, "Witch's Familiar", 0, 1);
-        
 
     }
 

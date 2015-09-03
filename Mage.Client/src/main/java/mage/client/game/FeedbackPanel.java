@@ -47,7 +47,9 @@ import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
-import mage.constants.Constants;
+import static mage.constants.Constants.Option.ORIGINAL_ID;
+import static mage.constants.Constants.Option.SECOND_MESSAGE;
+import static mage.constants.Constants.Option.SPECIAL_BUTTON;
 import mage.constants.PlayerAction;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
@@ -85,6 +87,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     public void init(UUID gameId) {
         this.gameId = gameId;
         session = MageFrame.getSession();
+        helper.init(gameId);
     }
 
     public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
@@ -95,61 +98,42 @@ public class FeedbackPanel extends javax.swing.JPanel {
             }
             this.lastMessageId = messageId;
         }
-
-        this.lblMessage.setText(message);
-        this.helper.setMessage(message);
+        this.helper.setBasicMessage(message);
+        this.helper.setOriginalId(null); // reference to the feedback causing ability
+        String lblText = addAdditionalText(message, options);
+        this.helper.setTextArea(lblText);
+        this.lblMessage.setText(lblText);
         this.mode = mode;
         switch (this.mode) {
             case INFORM:
-                this.btnLeft.setVisible(false);
-                this.btnRight.setVisible(false);
-                this.helper.setState("", false, "", false);
+                setButtonState("", "", mode);
                 break;
             case QUESTION:
-                this.btnLeft.setVisible(true);
-                this.btnLeft.setText("Yes");
-                this.btnRight.setVisible(true);
-                this.btnRight.setText("No");
-                this.helper.setState("Yes", true, "No", true);
+                setButtonState("Yes", "No", mode);
+                if (options != null && options.containsKey(ORIGINAL_ID)) {
+                    this.helper.setOriginalId((UUID) options.get(ORIGINAL_ID));
+                }
                 break;
             case CONFIRM:
-                this.btnLeft.setVisible(true);
-                this.btnLeft.setText("OK");
-                this.btnRight.setVisible(true);
-                this.btnRight.setText("Cancel");
-                this.helper.setState("Ok", true, "Cancel", true);
+                setButtonState("OK", "Cancel", mode);
                 break;
             case CANCEL:
-                this.btnLeft.setVisible(false);
-                this.btnRight.setVisible(true);
-                this.btnRight.setText("Cancel");
-                this.helper.setState("", false, "Cancel", true);
+                setButtonState("", "Cancel", mode);
                 this.helper.setUndoEnabled(false);
                 break;
             case SELECT:
-                this.btnLeft.setVisible(false);
-                this.btnRight.setVisible(true);
-                this.btnRight.setText("Done");
-                this.helper.setState("", false, "Done", true);
+                setButtonState("", "Done", mode);
                 break;
             case END:
-                this.btnLeft.setVisible(false);
-                this.btnRight.setVisible(true);
-                this.btnRight.setText("Close game");
-                this.helper.setState("", false, "Close game", true);
+                setButtonState("", "Close game", mode);
                 ArrowBuilder.getBuilder().removeAllArrows(gameId);
                 endWithTimeout();
                 break;
         }
-        if (options != null && options.containsKey(Constants.Option.SPECIAL_BUTTON)) {
-            String specialText = (String) options.get(Constants.Option.SPECIAL_BUTTON);
-            this.btnSpecial.setVisible(true);
-            this.btnSpecial.setText(specialText);
-            this.helper.setSpecial(specialText, true);
+        if (options != null && options.containsKey(SPECIAL_BUTTON)) {
+            this.setSpecial((String) options.get(SPECIAL_BUTTON), true);
         } else {
-            this.btnSpecial.setVisible(special);
-            this.btnSpecial.setText("Special");
-            this.helper.setSpecial("Special", special);
+            this.setSpecial("Special", special);
         }
 
         requestFocusIfPossible();
@@ -160,6 +144,32 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setLinks(btnLeft, btnRight, btnSpecial, btnUndo);
 
         this.helper.setVisible(true);
+    }
+
+    private void setButtonState(String leftText, String rightText, FeedbackMode mode) {
+        btnLeft.setVisible(!leftText.isEmpty());
+        btnLeft.setText(leftText);
+        btnRight.setVisible(!rightText.isEmpty());
+        btnRight.setText(rightText);
+        this.helper.setState(leftText, !leftText.isEmpty(), rightText, !rightText.isEmpty(), mode);
+    }
+
+    private String addAdditionalText(String message, Map<String, Serializable> options) {
+        if (options != null && options.containsKey(SECOND_MESSAGE)) {
+            return message + getSmallText((String) options.get(SECOND_MESSAGE));
+        } else {
+            return message;
+        }
+    }
+
+    protected String getSmallText(String text) {
+        return "<div style='font-size:11pt'>" + text + "</div>";
+    }
+
+    private void setSpecial(String text, boolean visible) {
+        this.btnSpecial.setText(text);
+        this.btnSpecial.setVisible(visible);
+        this.helper.setSpecial(text, visible);
     }
 
     /**

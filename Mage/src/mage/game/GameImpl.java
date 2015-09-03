@@ -67,6 +67,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.CardType;
@@ -118,6 +119,7 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.GameLog;
+import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
 import mage.watchers.common.BlockedAttackerWatcher;
@@ -1524,6 +1526,9 @@ public abstract class GameImpl implements Game, Serializable {
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
         while (copiedCards.hasNext()) {
             Card card = copiedCards.next();
+            if (card instanceof SplitCardHalf) {
+                continue; // only the main card is moves, not the halves
+            }
             Zone zone = state.getZone(card.getId());
             if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
                 switch (zone) {
@@ -1886,11 +1891,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireAskPlayerEvent(UUID playerId, String message) {
+    public void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.ask(playerId, message);
+        playerQueryEventSource.ask(playerId, message.getMessage(), source, addMessageToOptions(message, null));
     }
 
     @Override
@@ -1914,19 +1919,19 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+    public void fireSelectTargetEvent(UUID playerId, MessageToClient message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, targets, required, options);
+        playerQueryEventSource.target(playerId, message.getMessage(), targets, required, addMessageToOptions(message, options));
     }
 
     @Override
-    public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
+    public void fireSelectTargetEvent(UUID playerId, MessageToClient message, Cards cards, boolean required, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, cards, required, options);
+        playerQueryEventSource.target(playerId, message.getMessage(), cards, required, addMessageToOptions(message, options));
     }
 
     /**
@@ -2692,4 +2697,19 @@ public abstract class GameImpl implements Game, Serializable {
         return enterWithCounters.get(sourceId);
     }
 
+    private Map<String, Serializable> addMessageToOptions(MessageToClient message, Map<String, Serializable> options) {
+        if (message.getSecondMessage() != null) {
+            if (options == null) {
+                options = new HashMap<>();
+            }
+            options.put("secondMessage", message.getSecondMessage());
+        }
+        if (message.getHintText() != null) {
+            if (options == null) {
+                options = new HashMap<>();
+            }
+            options.put("hintText", message.getHintText());
+        }
+        return options;
+    }
 }

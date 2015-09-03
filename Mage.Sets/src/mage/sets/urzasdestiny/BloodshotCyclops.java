@@ -28,21 +28,16 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -63,7 +58,9 @@ public class BloodshotCyclops extends CardImpl {
 
         // {T}, Sacrifice a creature: Bloodshot Cyclops deals damage equal to the sacrificed
         // creature's power to target creature or player.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BloodshotCyclopsEffect(), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DamageTargetEffect(new SacrificeCostCreaturesPower()),
+                new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -76,46 +73,5 @@ public class BloodshotCyclops extends CardImpl {
     @Override
     public BloodshotCyclops copy() {
         return new BloodshotCyclops(this);
-    }
-}
-
-class BloodshotCyclopsEffect extends OneShotEffect {
-
-    public BloodshotCyclopsEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals damage equal to the sacrificed creature's power to target creature or player";
-    }
-
-    public BloodshotCyclopsEffect(final BloodshotCyclopsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = 0;
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
-                amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getPower().getValue();
-                break;
-            }
-        }
-        if (amount > 0) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public BloodshotCyclopsEffect copy() {
-        return new BloodshotCyclopsEffect(this);
     }
 }

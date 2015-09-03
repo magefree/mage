@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Blessing extends CardImpl {
 
     public Blessing(UUID ownerId) {
-        super(ownerId, 1, "Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
+        super(ownerId, 259, "Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
         this.expansionSetCode = "4ED";
         this.subtype.add("Aura");
 

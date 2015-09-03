@@ -28,21 +28,21 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -56,6 +56,12 @@ import mage.players.Players;
  */
 public class LeechriddenSwamp extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control two or more black permanents");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
+
     public LeechriddenSwamp(UUID ownerId) {
         super(ownerId, 273, "Leechridden Swamp", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "SHM";
@@ -68,9 +74,11 @@ public class LeechriddenSwamp extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {B}, {tap}: Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechriddenSwampLoseLifeEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
+                new LeechriddenSwampLoseLifeEffect(),
+                new ManaCostsImpl("{B}"),
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ControlTwoOrMoreBlackPermanentsCost());
         this.addAbility(ability);
     }
 
@@ -81,39 +89,6 @@ public class LeechriddenSwamp extends CardImpl {
     @Override
     public LeechriddenSwamp copy() {
         return new LeechriddenSwamp(this);
-    }
-}
-
-class ControlTwoOrMoreBlackPermanentsCost extends CostImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
-    public ControlTwoOrMoreBlackPermanentsCost() {
-        this.text = "Activate this ability only if you control two or more black permanents";
-    }
-
-    public ControlTwoOrMoreBlackPermanentsCost(final ControlTwoOrMoreBlackPermanentsCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, controllerId, 2, game);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        this.paid = true;
-            return paid;
-    }
-
-    @Override
-    public ControlTwoOrMoreBlackPermanentsCost copy() {
-        return new ControlTwoOrMoreBlackPermanentsCost(this);
     }
 }
 

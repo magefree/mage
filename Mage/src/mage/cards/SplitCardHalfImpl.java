@@ -62,7 +62,7 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     }
 
     @Override
-    public Card getMainCard() {
+    public SplitCard getMainCard() {
         return splitCardParent;
     }
 
@@ -74,8 +74,13 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     }
 
     @Override
-    public SplitCardHalfImpl copy() {
+    public SplitCardHalf copy() {
         return new SplitCardHalfImpl(this);
+    }
+
+    @Override
+    public void setParentCard(SplitCard card) {
+        this.splitCardParent = card;
     }
 
 }

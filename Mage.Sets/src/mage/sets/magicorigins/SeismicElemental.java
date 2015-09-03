@@ -45,13 +45,13 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  * @author LevelX2
  */
 public class SeismicElemental extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
-    
+
     public SeismicElemental(UUID ownerId) {
         super(ownerId, 161, "Seismic Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "ORI";

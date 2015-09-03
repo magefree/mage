@@ -27,11 +27,11 @@
  */
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
@@ -42,9 +42,8 @@ import mage.util.CardUtil;
 
 /**
  *
- * @author anonymous
+ * @author Luna Skyrise
  */
-
 public class RevealTargetPlayerLibraryEffect extends OneShotEffect {
 
     private DynamicValue amountCards;
@@ -73,28 +72,18 @@ public class RevealTargetPlayerLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-
-        if (player == null || targetPlayer == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player == null || targetPlayer == null || sourceObject == null) {
             return false;
         }
 
         Cards cards = new CardsImpl(Zone.LIBRARY);
-        int count = Math.min(targetPlayer.getLibrary().size(), amountCards.calculate(game, source, this));
-        for (int i = 0; i < count; i++) {
-            Card card = targetPlayer.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-
-        player.lookAtCards("Top " + amountCards.toString() + "cards of " + targetPlayer.getName() + "\'s library", cards, game);
-
+        cards.addAll(player.getLibrary().getTopCards(game, amountCards.calculate(game, source, this)));
+        player.revealCards(sourceObject.getIdName() + " - Top " + amountCards.toString() + "cards of " + targetPlayer.getName() + "\'s library", cards, game);
         return true;
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Reveal the top ");
-        sb.append(CardUtil.numberToText(amountCards.toString())).append(" cards of target player's library.");
-        return sb.toString();
+        return "Reveal the top " + CardUtil.numberToText(amountCards.toString()) + " cards of target player's library.";
     }
 }

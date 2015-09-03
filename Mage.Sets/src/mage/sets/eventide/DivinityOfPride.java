@@ -28,11 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,6 +37,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -57,15 +56,19 @@ public class DivinityOfPride extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 
-
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
+
+        // Divinity of Pride gets +4/+4 as long as you have 25 or more life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
-                new DivinityOfPrideCondition(),
-                "Divinity of Pride gets +4/+4 as long as you have 25 or more life")));
+                        new DivinityOfPrideCondition(),
+                        "{this} gets +4/+4 as long as you have 25 or more life")));
     }
 
     public DivinityOfPride(final DivinityOfPride card) {
