@@ -176,6 +176,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * and abilities in the stack and will pass them as well.
      */
     protected boolean passedAllTurns; // F9
+    protected AbilityType justActivatedType; // used to check if priority can be passed automatically
 
     protected int turns;
     protected int storedBookmark = -1;
@@ -317,6 +318,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passedUntilStackResolved = player.passedUntilStackResolved;
         this.dateLastAddedToStack = player.dateLastAddedToStack;
         this.passedAllTurns = player.passedAllTurns;
+        this.justActivatedType = player.justActivatedType;
 
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
@@ -440,6 +442,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.skippedAtLeastOnce = false;
         this.passedUntilStackResolved = false;
         this.passedAllTurns = false;
+        this.justActivatedType = null;
         this.canGainLife = true;
         this.canLoseLife = true;
         this.topCardRevealed = false;
@@ -1130,7 +1133,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         //if player has taken an action then reset all player passed flags
+        justActivatedType = null;
         if (result) {
+            if (isHuman() && (ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED))) {
+                setJustActivatedType(ability.getAbilityType());
+            }
             game.getPlayers().resetPassed();
         }
         return result;
@@ -3244,6 +3251,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean getPassedUntilStackResolved() {
         return passedUntilStackResolved;
+    }
+
+    @Override
+    public AbilityType getJustActivatedType() {
+        return justActivatedType;
+    }
+
+    @Override
+    public void setJustActivatedType(AbilityType justActivatedType) {
+        this.justActivatedType = justActivatedType;
     }
 
     @Override

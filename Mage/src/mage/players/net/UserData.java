@@ -19,10 +19,14 @@ public class UserData implements Serializable {
     protected boolean askMoveToGraveOrder;
     protected boolean manaPoolAutomatic;
     protected boolean manaPoolAutomaticRestricted;
+    protected boolean passPriorityCast;
+    protected boolean passPriorityActivation;
+    protected boolean autoOrderTrigger;
 
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
-            String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted) {
+            String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted,
+            boolean passPriorityCast, boolean passPriorityActivation, boolean autoOrderTrigger) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
@@ -33,6 +37,9 @@ public class UserData implements Serializable {
         this.askMoveToGraveOrder = askMoveToGraveOrder;
         this.manaPoolAutomatic = manaPoolAutomatic;
         this.manaPoolAutomaticRestricted = manaPoolAutomaticRestricted;
+        this.passPriorityCast = passPriorityCast;
+        this.passPriorityActivation = passPriorityActivation;
+        this.autoOrderTrigger = autoOrderTrigger;
     }
 
     public void update(UserData userData) {
@@ -46,10 +53,13 @@ public class UserData implements Serializable {
         this.askMoveToGraveOrder = userData.askMoveToGraveOrder;
         this.manaPoolAutomatic = userData.manaPoolAutomatic;
         this.manaPoolAutomaticRestricted = userData.manaPoolAutomaticRestricted;
+        this.passPriorityCast = userData.passPriorityCast;
+        this.passPriorityActivation = userData.passPriorityActivation;
+        this.autoOrderTrigger = userData.autoOrderTrigger;
     }
 
     public static UserData getDefaultUserDataView() {
-        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, "world.png", false, true, true);
+        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, "world.png", false, true, true, false, false, false);
     }
 
     public void setGroupId(int groupId) {
@@ -130,6 +140,30 @@ public class UserData implements Serializable {
 
     public void setManaPoolAutomaticRestricted(boolean manaPoolAutomaticRestricted) {
         this.manaPoolAutomaticRestricted = manaPoolAutomaticRestricted;
+    }
+
+    public boolean isPassPriorityCast() {
+        return passPriorityCast;
+    }
+
+    public void setPassPriorityCast(boolean passPriorityCast) {
+        this.passPriorityCast = passPriorityCast;
+    }
+
+    public boolean isPassPriorityActivation() {
+        return passPriorityActivation;
+    }
+
+    public void setPassPriorityActivation(boolean passPriorityActivation) {
+        this.passPriorityActivation = passPriorityActivation;
+    }
+
+    public boolean isAutoOrderTrigger() {
+        return autoOrderTrigger;
+    }
+
+    public void setAutoOrderTrigger(boolean autoOrderTrigger) {
+        this.autoOrderTrigger = autoOrderTrigger;
     }
 
 }

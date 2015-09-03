@@ -52,6 +52,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PlayerAction;
@@ -191,6 +192,10 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean getPassedUntilStackResolved();
 
     boolean getPassedAllTurns();
+
+    AbilityType getJustActivatedType();
+
+    void setJustActivatedType(AbilityType abilityType);
 
     boolean hasLost();
 

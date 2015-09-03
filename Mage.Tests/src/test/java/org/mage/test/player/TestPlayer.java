@@ -53,6 +53,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -803,6 +804,9 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
+        if (message.getMessage().equals("Scry 1?")) {
+            return false;
+        }
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
                 choices.remove(0);
@@ -813,7 +817,7 @@ public class TestPlayer implements Player {
                 return true;
             }
         }
-        return true;
+        return computerPlayer.chooseUse(outcome, message, source, game);
     }
 
     @Override
@@ -1820,6 +1824,16 @@ public class TestPlayer implements Player {
     @Override
     public MatchPlayer getMatchPlayer() {
         return computerPlayer.getMatchPlayer();
+    }
+
+    @Override
+    public AbilityType getJustActivatedType() {
+        return computerPlayer.getJustActivatedType();
+    }
+
+    @Override
+    public void setJustActivatedType(AbilityType justActivatedType) {
+        computerPlayer.setJustActivatedType(justActivatedType);
     }
 
     @Override
