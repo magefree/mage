@@ -65,7 +65,6 @@ public class TableWaitingDialog extends MageDialog {
     private UUID tableId;
     private UUID roomId;
     private boolean isTournament;
-    private Client client;
     private final TableWaitModel tableWaitModel;
     private UpdateSeatsTask updateTask;
     private static final int[] defaultColumnsWidth = {20, 50, 100, 100};
@@ -75,7 +74,6 @@ public class TableWaitingDialog extends MageDialog {
      */
     public TableWaitingDialog() {
 
-        client = MageFrame.getClient();
         tableWaitModel = new TableWaitModel();
 
         initComponents();
@@ -132,8 +130,7 @@ public class TableWaitingDialog extends MageDialog {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        client = MageFrame.getClient();
-        updateTask = new UpdateSeatsTask(client, roomId, tableId, this);
+        updateTask = new UpdateSeatsTask(MageFrame.getClient(), roomId, tableId, this);
         if (owner) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
@@ -263,11 +260,11 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if (!isTournament) {
-            if (client.startMatch(roomId, tableId)) {
+            if (MageFrame.getClient().startMatch(roomId, tableId)) {
                 closeDialog();
             }
         } else {
-            if (client.startTournament(roomId, tableId)) {
+            if (MageFrame.getClient().startTournament(roomId, tableId)) {
                 closeDialog();
             }
         }
@@ -275,7 +272,7 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         try {
-            if (!client.leaveTable(roomId, tableId)) {
+            if (!MageFrame.getClient().leaveTable(roomId, tableId)) {
                 return; // already started, so leave no more possible
             }
         } catch (Exception e) {
@@ -288,7 +285,7 @@ public class TableWaitingDialog extends MageDialog {
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
         int row = this.tableSeats.getSelectedRow();
         if (row < this.tableSeats.getRowCount() - 1) {
-            client.swapSeats(roomId, tableId, row, row + 1);
+            MageFrame.getClient().swapSeats(roomId, tableId, row, row + 1);
             this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
         }
 
@@ -297,7 +294,7 @@ public class TableWaitingDialog extends MageDialog {
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
         int row = this.tableSeats.getSelectedRow();
         if (row > 0) {
-            client.swapSeats(roomId, tableId, row, row - 1);
+            MageFrame.getClient().swapSeats(roomId, tableId, row, row - 1);
             this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed

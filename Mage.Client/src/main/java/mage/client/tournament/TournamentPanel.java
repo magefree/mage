@@ -76,7 +76,6 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     private UUID tournamentId;
     private boolean firstInitDone = false;
-    private Client client;
     private final TournamentPlayersTableModel playersModel;
     private TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
@@ -124,7 +123,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 //                }
                 if (state.startsWith("Dueling") && actionText.equals("Watch")) {
                     logger.info("Watching game " + gameId);
-                    client.watchTournamentTable(tableId);
+                    MageFrame.getClient().watchTournamentTable(tableId);
                 }
             }
         };
@@ -172,10 +171,9 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     public synchronized void showTournament(UUID tournamentId) {
         this.tournamentId = tournamentId;
-        client = MageFrame.getClient();
         // MageFrame.addTournament(tournamentId, this);
-        UUID chatRoomId = client.getTournamentChatId(tournamentId);
-        if (client.joinTournament(tournamentId) && chatRoomId != null) {
+        UUID chatRoomId = MageFrame.getClient().getTournamentChatId(tournamentId);
+        if (MageFrame.getClient().joinTournament(tournamentId) && chatRoomId != null) {
             this.chatPanel1.connect(chatRoomId);
             startTasks();
             this.setVisible(true);
@@ -263,7 +261,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         btnQuitTournament.setVisible(false);
         if (tournament.getEndTime() == null) {
             for (TournamentPlayerView player : tournament.getPlayers()) {
-                if (player.getName().equals(client.getUserName())) {
+                if (player.getName().equals(MageFrame.getClient().getUserName())) {
                     if (!player.hasQuit()) {
                         btnQuitTournament.setVisible(true);
                     }
@@ -275,9 +273,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void startTasks() {
-        if (client != null) {
+        if (MageFrame.getClient() != null) {
             if (updateTask == null || updateTask.isDone()) {
-                updateTask = new UpdateTournamentTask(client, tournamentId, this);
+                updateTask = new UpdateTournamentTask(MageFrame.getClient(), tournamentId, this);
                 updateTask.execute();
             }
         }

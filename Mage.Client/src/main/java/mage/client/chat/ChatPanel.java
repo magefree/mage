@@ -36,7 +36,6 @@ package mage.client.chat;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.Icon;
@@ -58,7 +57,6 @@ import mage.view.ChatMessage.MessageType;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.network.Client;
 
 /**
  *
@@ -67,7 +65,6 @@ import org.mage.network.Client;
 public class ChatPanel extends javax.swing.JPanel {
 
     private UUID chatId;
-    private Client client;
     private final List<String> players = new ArrayList<>();
     private final UserTableModel userTableModel;
     /**
@@ -192,15 +189,14 @@ public class ChatPanel extends javax.swing.JPanel {
     }
 
     public void connect(UUID chatId) {
-        client = MageFrame.getClient();
         this.chatId = chatId;
-        client.joinChat(chatId);
+        MageFrame.getClient().joinChat(chatId);
         MageFrame.addChat(chatId, this);
     }
 
     public void disconnect() {
-        if (client != null) {
-            client.leaveChat(chatId);
+        if (MageFrame.getClient() != null) {
+            MageFrame.getClient().leaveChat(chatId);
             MageFrame.removeChat(chatId);
         }
     }
@@ -259,11 +255,7 @@ public class ChatPanel extends javax.swing.JPanel {
                 userColor = USER_INFO_COLOR;
                 break;
             default:
-                if (parentChatRef != null) {
-                    userColor = parentChatRef.client.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
-                } else {
-                    userColor = client.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
-                }
+                userColor = MageFrame.getClient().getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }
@@ -550,9 +542,9 @@ public class ChatPanel extends javax.swing.JPanel {
     private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             if (parentChatRef != null) {
-                parentChatRef.client.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
+                MageFrame.getClient().sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
             } else {
-                client.sendChatMessage(chatId, this.txtMessage.getText());
+                MageFrame.getClient().sendChatMessage(chatId, this.txtMessage.getText());
             }
             this.txtMessage.setText("");
             this.txtMessage.repaint();

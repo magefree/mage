@@ -81,7 +81,6 @@ import mage.view.DraftPickView;
 import mage.view.DraftView;
 import mage.view.SimpleCardView;
 import mage.view.SimpleCardsView;
-import org.mage.network.Client;
 
 /**
  *
@@ -90,7 +89,6 @@ import org.mage.network.Client;
 public class DraftPanel extends javax.swing.JPanel {
 
     private UUID draftId;
-    private Client client;
     private Timer countdown;
     private int timeout;
 
@@ -171,9 +169,8 @@ public class DraftPanel extends javax.swing.JPanel {
 
     public synchronized void showDraft(UUID draftId) {
         this.draftId = draftId;
-        client = MageFrame.getClient();
         MageFrame.addDraft(draftId, this);
-        if (!client.joinDraft(draftId)) {
+        if (!MageFrame.getClient().joinDraft(draftId)) {
             hideDraft();
         }
 
@@ -322,7 +319,7 @@ public class DraftPanel extends javax.swing.JPanel {
                 public void event(Event event) {
                     SimpleCardView source = (SimpleCardView) event.getSource();
                     if (event.getEventName().equals("pick-a-card")) {
-                        DraftPickView view = client.pickCard(draftId, source.getId(), cardsHidden);
+                        DraftPickView view = MageFrame.getClient().pickCard(draftId, source.getId(), cardsHidden);
                         if (view != null) {
                             loadCardsToPickedCardsArea(view.getPicks());
                             draftBooster.loadBooster(emptyView, bigCard);                            
@@ -331,7 +328,7 @@ public class DraftPanel extends javax.swing.JPanel {
                         }
                     }
                     if (event.getEventName().equals("mark-a-card")) {
-                        client.markCard(draftId, source.getId());
+                        MageFrame.getClient().markCard(draftId, source.getId());
                     }
                 }
             }

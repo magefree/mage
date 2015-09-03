@@ -152,23 +152,23 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                         break;
                     }
                     case "F3": {
-                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
+                        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
                         break;
                     }
                     case "F4": {
-                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
+                        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
                         break;
                     }
                     case "F5": {
-                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
+                        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
                         break;
                     }
                     case "F7": {
-                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
+                        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
                         break;
                     }
                     case "F9": {
-                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
+                        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
                         break;
                     }
                 }
@@ -240,7 +240,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 boolean manaPoolAutomatic = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT, manaPoolAutomatic ? "true" : "false");
                 gamePanel.setMenuStates(manaPoolAutomatic, manaPoolMenuItem2.getState());
-                gamePanel.getClient().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
+                MageFrame.getClient().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }
         });
 
@@ -258,7 +258,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 boolean manaPoolAutomaticRestricted = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, manaPoolAutomaticRestricted ? "true" : "false");
                 gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted);
-                gamePanel.getClient().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON: PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
+                MageFrame.getClient().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON: PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
             }
         });
 
@@ -274,7 +274,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getClient().sendPlayerAction(PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS, gameId, null);
+                MageFrame.getClient().sendPlayerAction(PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS, gameId, null);
             }
         });
 
@@ -286,7 +286,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getClient().sendPlayerAction(PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
+                MageFrame.getClient().sendPlayerAction(PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
             }
         });
 
@@ -303,7 +303,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             menuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    gamePanel.getClient().sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId);
+                    MageFrame.getClient().sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId);
                 }
             });
         } else {
@@ -318,7 +318,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 public void actionPerformed(ActionEvent e) {
                     boolean requestsAllowed = ((JCheckBoxMenuItem) e.getSource()).getState();
                     PreferencesDialog.setPrefValue(KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, requestsAllowed);
-                    gamePanel.getClient().sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON: PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
+                    MageFrame.getClient().sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON: PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
                 }
             });
 
@@ -331,7 +331,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             menuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    gamePanel.getClient().sendPlayerAction(PlayerAction.REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS, gameId, null);
+                    MageFrame.getClient().sendPlayerAction(PlayerAction.REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS, gameId, null);
                 }
             });
         }
@@ -341,7 +341,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int turnsToRollBack = Integer.parseInt(e.getActionCommand());
-                    gamePanel.getClient().sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
+                    MageFrame.getClient().sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
                 }
             };
 
@@ -448,7 +448,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to stop watching the game?", "Confirm stop watching game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    gamePanel.getClient().stopWatching(gameId);
+                    MageFrame.getClient().stopWatching(gameId);
                     gamePanel.removeGame();
                 }
             }
@@ -461,7 +461,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getClient().sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId);
+                MageFrame.getClient().sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId);
             }
         });
 

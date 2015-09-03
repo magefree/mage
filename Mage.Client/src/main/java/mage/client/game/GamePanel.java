@@ -173,7 +173,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private UUID gameId;
     private UUID playerId; // playerId of the player
-    private Client client;
     GamePane gamePane;
     private ReplayTask replayTask;
     private final PickNumberDialog pickNumber;
@@ -401,11 +400,10 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameId = gameId;
         this.gamePane = gamePane;
         this.playerId = playerId;
-        client = MageFrame.getClient();
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
-        this.abilityPicker.init(client, gameId);
+        this.abilityPicker.init(gameId);
 
         this.btnConcede.setVisible(true);
         this.btnStopWatching.setVisible(false);
@@ -421,7 +419,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlReplay.setVisible(false);
 
         this.gameChatPanel.clear();
-        UUID chatId = client.joinGame(gameId);
+        UUID chatId = MageFrame.getClient().joinGame(gameId);
         if (chatId == null) {
             removeGame();
         } else {
@@ -435,7 +433,6 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameId = gameId;
         this.gamePane = gamePane;
         this.playerId = null;
-        client = MageFrame.getClient();
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
@@ -469,7 +466,6 @@ public final class GamePanel extends javax.swing.JPanel {
     public synchronized void replayGame(UUID gameId) {
         this.gameId = gameId;
         this.playerId = null;
-        client = MageFrame.getClient();
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
@@ -479,7 +475,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.btnStopWatching.setVisible(false);
         this.pnlReplay.setVisible(true);
         this.gameChatPanel.clear();
-        if (!client.startReplay(gameId)) {
+        if (!MageFrame.getClient().startReplay(gameId)) {
             removeGame();
         }
         for (PlayAreaPanel panel : getPlayers().values()) {
@@ -1120,9 +1116,9 @@ public final class GamePanel extends javax.swing.JPanel {
     public void getAmount(int min, int max, String message) {
         pickNumber.showDialog(min, max, message);
         if (pickNumber.isCancel()) {
-            client.sendPlayerBoolean(gameId, false);
+            MageFrame.getClient().sendPlayerBoolean(gameId, false);
         } else {
-            client.sendPlayerInteger(gameId, pickNumber.getAmount());
+            MageFrame.getClient().sendPlayerInteger(gameId, pickNumber.getAmount());
         }
     }
 
@@ -1132,12 +1128,12 @@ public final class GamePanel extends javax.swing.JPanel {
         pickChoice.showDialog(choice, choiceWindowState);
         if (choice.isKeyChoice()) {
             if (pickChoice.isAutoSelect()) {
-                client.sendPlayerString(gameId, "#" + choice.getChoiceKey());
+                MageFrame.getClient().sendPlayerString(gameId, "#" + choice.getChoiceKey());
             } else {
-                client.sendPlayerString(gameId, choice.getChoiceKey());
+                MageFrame.getClient().sendPlayerString(gameId, choice.getChoiceKey());
             }
         } else {
-            client.sendPlayerString(gameId, choice.getChoice());
+            MageFrame.getClient().sendPlayerString(gameId, choice.getChoice());
         }
         choiceWindowState = new MageDialogState(pickChoice);
         pickChoice.removeDialog();
@@ -1147,7 +1143,7 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         PickPileDialog pickPileDialog = new PickPileDialog();
         pickPileDialog.loadCards(message, pile1, pile2, bigCard, Config.dimensions, gameId);
-        client.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
+        MageFrame.getClient().sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
         pickPileDialog.cleanUp();
         pickPileDialog.removeDialog();
     }
@@ -1865,42 +1861,42 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {
         if (modalQuestion("Are you sure you want to concede?", "Confirm concede") == JOptionPane.YES_OPTION) {
-            client.sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
+            MageFrame.getClient().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
         }
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        client.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
+        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(true, false, false, false, false);
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        client.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
+        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, true, false, false, false);
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
-        client.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
+        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, true, false, false);
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        client.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
+        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, false, true, false);
     }
 
     private void btnPassPriorityUntilStackResolvedActionPerformed(java.awt.event.ActionEvent evt) {
-        client.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId, null);
+        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, false, false, true);
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
-        client.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
+        MageFrame.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
         AudioManager.playOnSkipButtonCancel();
         updateSkipButtons(false, false, false, false, false);
     }
@@ -1931,7 +1927,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void btnStopWatchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopWatchingActionPerformed
         if (modalQuestion("Are you sure you want to stop watching?", "Stop watching") == JOptionPane.YES_OPTION) {
-            client.stopWatching(gameId);
+            MageFrame.getClient().stopWatching(gameId);
             this.removeGame();
         }
     }//GEN-LAST:event_btnStopWatchingActionPerformed
@@ -1940,27 +1936,27 @@ public final class GamePanel extends javax.swing.JPanel {
         if (replayTask != null && !replayTask.isDone()) {
             replayTask.cancel(true);
         } else if (modalQuestion("Are you sure you want to stop replay?", "Stop replay") == JOptionPane.YES_OPTION) {
-            client.stopReplay(gameId);
+            MageFrame.getClient().stopReplay(gameId);
         }
     }//GEN-LAST:event_btnStopReplayActionPerformed
 
     private void btnNextPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextPlayActionPerformed
-        client.nextPlay(gameId);
+        MageFrame.getClient().nextPlay(gameId);
     }//GEN-LAST:event_btnNextPlayActionPerformed
 
     private void btnPreviousPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousPlayActionPerformed
-        client.previousPlay(gameId);
+        MageFrame.getClient().previousPlay(gameId);
     }//GEN-LAST:event_btnPreviousPlayActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         if (replayTask == null || replayTask.isDone()) {
-            replayTask = new ReplayTask(client, gameId);
+            replayTask = new ReplayTask(MageFrame.getClient(), gameId);
             replayTask.execute();
         }
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void btnSkipForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkipForwardActionPerformed
-        client.skipForward(gameId, 10);
+        MageFrame.getClient().skipForward(gameId, 10);
     }//GEN-LAST:event_btnSkipForwardActionPerformed
 
     public void setJLayeredPane(JLayeredPane jLayeredPane) {
@@ -2019,23 +2015,23 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         switch (e.getActionCommand()) {
             case CMD_AUTO_ORDER_FIRST:
-                client.sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_FIRST, gameId, abilityId);
+                MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_FIRST, gameId, abilityId);
                 break;
             case CMD_AUTO_ORDER_LAST:
-                client.sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_LAST, gameId, abilityId);
+                MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_LAST, gameId, abilityId);
                 break;
             case CMD_AUTO_ORDER_NAME_FIRST:
                 if (abilityRuleText != null) {
-                    client.sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_FIRST, gameId, abilityRuleText);
+                    MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_FIRST, gameId, abilityRuleText);
                 }
                 break;
             case CMD_AUTO_ORDER_NAME_LAST:
                 if (abilityRuleText != null) {
-                    client.sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_LAST, gameId, abilityRuleText);
+                    MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_LAST, gameId, abilityRuleText);
                 }
                 break;
             case CMD_AUTO_ORDER_RESET_ALL:
-                client.sendPlayerAction(TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
+                MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
                 break;
         }
     }
@@ -2081,10 +2077,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public String getGameLog() {
         return gameChatPanel.getText();
-    }
-
-    public Client getClient() {
-        return client;
     }
 
     public Map<String, Card> getLoadedCards() {

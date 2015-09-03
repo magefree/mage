@@ -3,20 +3,12 @@ package mage.client.plugins.adapters;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -46,18 +38,14 @@ import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.images.ImageCache;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
-import java.util.*;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import org.mage.network.Client;
 
 /**
  * Class that handles the callbacks from the card panels to mage to display big
@@ -81,7 +69,6 @@ public class MageActionCallback implements ActionCallback {
     private JPopupMenu jPopupMenu;
     private BigCard bigCard;
     protected static final DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
-    protected static Client client = MageFrame.getClient();
     private CardView tooltipCard;
     private TransferData popupData;
     private JComponent cardInfoPane;
@@ -115,9 +102,6 @@ public class MageActionCallback implements ActionCallback {
     }
 
     public synchronized void refreshSession() {
-        if (client == null) {
-            client = MageFrame.getClient();
-        }
         if (cardInfoPane == null) {
             cardInfoPane = Plugins.getInstance().getCardInfoPane();
         }
@@ -183,7 +167,7 @@ public class MageActionCallback implements ActionCallback {
             public void run() {
                 ThreadUtils.sleep(300);
 
-                if (tooltipCard == null || !tooltipCard.equals(data.card) || client == null || !popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                if (tooltipCard == null || !tooltipCard.equals(data.card) || !popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
                     return;
                 }
 
@@ -262,14 +246,14 @@ public class MageActionCallback implements ActionCallback {
             this.startedDragging = false;
             if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
                 transferData.component.requestFocusInWindow();
-                defaultCallback.mouseClicked(e, transferData.gameId, client, transferData.card);
+                defaultCallback.mouseClicked(e, transferData.gameId, MageFrame.getClient(), transferData.card);
                 // Closes popup & enlarged view if a card/Permanent is selected
                 hideTooltipPopup();
             }
             e.consume();
         } else {
             transferData.component.requestFocusInWindow();
-            defaultCallback.mouseClicked(e, transferData.gameId, client, transferData.card);
+            defaultCallback.mouseClicked(e, transferData.gameId, MageFrame.getClient(), transferData.card);
             // Closes popup & enlarged view if a card/Permanent is selected
             hideTooltipPopup();
             e.consume();
@@ -434,7 +418,7 @@ public class MageActionCallback implements ActionCallback {
             jPopupMenu.setVisible(false);
         }
         try {
-            if (client == null) {
+            if (MageFrame.getClient() == null) {
                 return;
             }
             // set enlarged card display to visible = false

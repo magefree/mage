@@ -16,7 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.List;
-import org.mage.network.Client;
+import mage.client.MageFrame;
 
 /**
  * Dialog for choosing abilities.
@@ -35,7 +35,6 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private List<Object> choices;
     private String message = DEFAULT_MESSAGE;
 
-    private Client client;
     private UUID gameId;
 
     private BackgroundPainter mwPanelPainter;
@@ -78,8 +77,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
     }
 
-    public void init(Client client, UUID gameId) {
-        this.client = client;
+    public void init(UUID gameId) {
         this.gameId = gameId;
     }
 
@@ -449,7 +447,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             if (id == null) {
                 cancel();
             } else {
-                client.sendPlayerUUID(gameId, id);
+                MageFrame.getClient().sendPlayerUUID(gameId, id);
             }
             setVisible(false);
             AbilityPicker.this.selected = true;
@@ -464,7 +462,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     private void cancel() {
         try {
-             client.sendPlayerBoolean(gameId, false);
+             MageFrame.getClient().sendPlayerBoolean(gameId, false);
         } catch (Exception e) {
             log.error("Couldn't cancel choose dialog: " + e, e);
         }

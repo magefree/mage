@@ -89,7 +89,6 @@ import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
 import mage.view.MatchView;
-import mage.view.RoomUsersView;
 import mage.view.RoomView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
@@ -111,7 +110,6 @@ public class TablesPanel extends javax.swing.JPanel {
     private NewTableDialog newTableDialog;
     private NewTournamentDialog newTournamentDialog;
     private GameChooser gameChooser;
-    private Client client;
     private List<String> messages;
     private int currentMessage;
     private MageTableRowSorter activeTablesSorter;
@@ -130,7 +128,6 @@ public class TablesPanel extends javax.swing.JPanel {
         gameChooser = new GameChooser();
 
         initComponents();
-        tableModel.setClient(client);
 
         tableTables.createDefaultColumnsFromModel();
 
@@ -175,7 +172,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 String owner = (String) tableModel.getValueAt(modelRow, TableTableModel.COLUMN_OWNER);
                 switch (action) {
                     case "Join":
-                        if (owner.equals(client.getUserName())) {
+                        if (owner.equals(MageFrame.getClient().getUserName())) {
                             try {
                                 JDesktopPane desktopPane = (JDesktopPane) MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                                 JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -200,7 +197,7 @@ public class TablesPanel extends javax.swing.JPanel {
                             logger.info("Joining tournament " + tableId);
                             if (deckType.startsWith("Limited")) {
                                 if (!status.endsWith("PW")) {
-                                    client.joinTournamentTable(roomId, tableId, client.getUserName(), "Human", 1, null, "");
+                                    MageFrame.getClient().joinTournamentTable(roomId, tableId, MageFrame.getClient().getUserName(), "Human", 1, null, "");
                                 } else {
                                     joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
                                 }
@@ -214,24 +211,24 @@ public class TablesPanel extends javax.swing.JPanel {
                         break;
                     case "Remove":
                         if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            client.removeTable(roomId, tableId);
+                            MageFrame.getClient().removeTable(roomId, tableId);
                         }
                         break;
                     case "Show":
                         if (isTournament) {
                             logger.info("Showing tournament table " + tableId);
-                            client.watchTable(roomId, tableId);
+                            MageFrame.getClient().watchTable(roomId, tableId);
                         }
                         break;
                     case "Watch":
                         if (!isTournament) {
                             logger.info("Watching table " + tableId);
-                            client.watchTable(roomId, tableId);
+                            MageFrame.getClient().watchTable(roomId, tableId);
                         }
                         break;
                     case "Replay":
                         logger.info("Replaying game " + gameId);
-                        client.replayGame(gameId);
+                        MageFrame.getClient().replayGame(gameId);
                         break;
                 }
             }
@@ -248,7 +245,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         List<UUID> gameList = matchesModel.getListofGames(modelRow);
                         if (gameList != null && gameList.size() > 0) {
                             if (gameList.size() == 1) {
-                                client.replayGame(gameList.get(0));
+                                MageFrame.getClient().replayGame(gameList.get(0));
                             } else {
                                 gameChooser.show(gameList, MageFrame.getDesktop().getMousePosition());
                             }
@@ -258,7 +255,7 @@ public class TablesPanel extends javax.swing.JPanel {
                     case "Show":;
                         if (matchesModel.isTournament(modelRow)) {
                             logger.info("Showing tournament table " + matchesModel.getTableId(modelRow));
-                            client.watchTable(roomId, matchesModel.getTableId(modelRow));
+                            MageFrame.getClient().watchTable(roomId, matchesModel.getTableId(modelRow));
                         }
                         break;
                 }
@@ -369,9 +366,9 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     public void startTasks() {
-        if (client != null) {
+        if (MageFrame.getClient() != null) {
             if (updateRoomTask == null || updateRoomTask.isDone()) {
-                updateRoomTask = new UpdateRoomTask(client, roomId, this, this.chatPanel);
+                updateRoomTask = new UpdateRoomTask(MageFrame.getClient(), roomId, this, this.chatPanel);
                 updateRoomTask.execute();
             }
         }
@@ -385,12 +382,10 @@ public class TablesPanel extends javax.swing.JPanel {
 
     public void showTables(UUID roomId) {
         this.roomId = roomId;
-        client = MageFrame.getClient();
         UUID chatRoomId = null;
-        if (client != null) {
-            btnQuickStart.setVisible(client.getServerState().isTestMode());
-            gameChooser.init(client);
-            chatRoomId = client.getRoomChatId(roomId);
+        if (MageFrame.getClient() != null) {
+            btnQuickStart.setVisible(MageFrame.getClient().getServerState().isTestMode());
+            chatRoomId = MageFrame.getClient().getRoomChatId(roomId);
         }
         if (newTableDialog == null) {
             newTableDialog = new NewTableDialog();
@@ -412,7 +407,6 @@ public class TablesPanel extends javax.swing.JPanel {
         } else {
             hideTables();
         }
-        tableModel.setClient(client);
 
         reloadMessages();
 
@@ -430,7 +424,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     protected void reloadMessages() {
         // reload server messages
-        List<String> serverMessages = client.getServerMessages();
+        List<String> serverMessages = MageFrame.getClient().getServerMessages();
         synchronized (this) {
             this.messages = serverMessages;
             this.currentMessage = 0;
@@ -1119,11 +1113,11 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setFreeMulligans(2);
                 options.setSkillLevel(SkillLevel.CASUAL);
                 options.setRollbackTurnsAllowed(true);
-                table = client.createTable(roomId, options);
+                table = MageFrame.getClient().createTable(roomId, options);
 
-                client.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"),"");
-                client.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"),"");
-                client.startMatch(roomId, table.getTableId());
+                MageFrame.getClient().joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"),"");
+                MageFrame.getClient().joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"),"");
+                MageFrame.getClient().startMatch(roomId, table.getTableId());
             } catch (HeadlessException ex) {
                 handleError(ex);
             }
@@ -1228,7 +1222,6 @@ class TableTableModel extends AbstractTableModel {
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
     ;
 
-    private Client client;
 
     public void loadData(Collection<TableView> tables) throws MageRemoteException {
         this.tables = tables.toArray(new TableView[0]);
@@ -1243,10 +1236,6 @@ class TableTableModel extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         return columnNames.length;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     @Override
@@ -1273,7 +1262,7 @@ class TableTableModel extends AbstractTableModel {
 
                     case WAITING:
                         String owner = tables[arg0].getControllerName();
-                        if (client != null && owner.equals(client.getUserName())) {
+                        if (MageFrame.getClient() != null && owner.equals(MageFrame.getClient().getUserName())) {
                             return "";
                         }
                         return "Join";
@@ -1287,7 +1276,7 @@ class TableTableModel extends AbstractTableModel {
                             return "Show";
                         } else {
                             owner = tables[arg0].getControllerName();
-                            if (client != null && owner.equals(client.getUserName())) {
+                            if (MageFrame.getClient() != null && owner.equals(MageFrame.getClient().getUserName())) {
                                 return "";
                             }
                             return "Watch";
@@ -1495,12 +1484,6 @@ class MatchesTableModel extends AbstractTableModel {
 
 class GameChooser extends JPopupMenu {
 
-    private Client client;
-
-    public void init(Client client) {
-        this.client = client;
-    }
-
     public void show(List<UUID> games, Point p) {
         if (p == null) {
             return;
@@ -1524,7 +1507,7 @@ class GameChooser extends JPopupMenu {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            client.replayGame(id);
+            MageFrame.getClient().replayGame(id);
             setVisible(false);
         }
 

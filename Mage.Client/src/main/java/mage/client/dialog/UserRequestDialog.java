@@ -38,7 +38,6 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.constants.PlayerAction;
 import mage.view.UserRequestMessage;
-import org.mage.network.Client;
 
 /**
  *
@@ -176,9 +175,8 @@ public class UserRequestDialog extends MageDialog {
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void sendUserReplay(PlayerAction playerAction) {
-        Client client = MageFrame.getClient();
-        if (client != null && playerAction != null) {
-            client.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
+        if (MageFrame.getClient() != null && playerAction != null) {
+            MageFrame.getClient().sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
         }
     }
 

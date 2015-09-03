@@ -38,23 +38,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import mage.MageException;
 import mage.cards.decks.importer.DckDeckImporter;
 import mage.client.MageFrame;
@@ -75,20 +65,16 @@ import mage.view.ManaPoolView;
 import mage.view.PlayerView;
 import org.mage.card.arcane.ManaSymbols;
 
-import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
-import org.mage.network.Client;
 
 /**
  * Enhanced player pane.
@@ -99,7 +85,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private UUID playerId;
     private UUID gameId;
-    private Client client;
     private PlayerView player;
 
     private BigCard bigCard;
@@ -134,8 +119,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
-        client = MageFrame.getClient();
-        cheat.setVisible(client.getServerState().isTestMode());
+        cheat.setVisible(MageFrame.getClient().getServerState().isTestMode());
         cheat.setFocusable(false);
         flagName = null;
         if (priorityTime > 0) {
@@ -357,7 +341,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         avatar.setObserver(new Command() {
             @Override
             public void execute() {
-                client.sendPlayerUUID(gameId, playerId);
+                MageFrame.getClient().sendPlayerUUID(gameId, playerId);
             }
         });
 
@@ -485,7 +469,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         btnPlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.sendPlayerUUID(gameId, playerId);
+                MageFrame.getClient().sendPlayerUUID(gameId, playerId);
             }
         });
 
@@ -801,7 +785,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnManaActionPerformed(ManaType manaType) {
-        client.sendPlayerManaType(gameId, player.getPlayerId(), manaType);
+        MageFrame.getClient().sendPlayerManaType(gameId, player.getPlayerId(), manaType);
     }
 
     private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {
@@ -822,7 +806,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
         DckDeckImporter deckImporter = new DckDeckImporter();
-        client.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
+        MageFrame.getClient().cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
     }
 
     public PlayerView getPlayer() {

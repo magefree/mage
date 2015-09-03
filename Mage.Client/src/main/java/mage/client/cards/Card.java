@@ -91,7 +91,6 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
-import org.mage.network.Client;
 
 /**
  *
@@ -100,7 +99,6 @@ import org.mage.network.Client;
 @SuppressWarnings("serial")
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
-    protected static Client client = MageFrame.getClient();
     protected static DefaultActionCallback callback = DefaultActionCallback.getInstance();
 
     protected Point p;
@@ -383,7 +381,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void mousePressed(MouseEvent e) {
         requestFocusInWindow();
-        callback.mouseClicked(e, gameId, client, card);
+        callback.mouseClicked(e, gameId, MageFrame.getClient(), card);
     }
 
     @Override

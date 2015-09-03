@@ -50,7 +50,6 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.constants.Constants;
 import mage.constants.PlayerAction;
 import org.apache.log4j.Logger;
-import org.mage.network.Client;
 
 /**
  *
@@ -66,7 +65,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private UUID gameId;
-    private Client client;
     private FeedbackMode mode;
     private MageDialog connectedDialog;
     private ChatPanel connectedChatPanel;
@@ -84,7 +82,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     public void init(UUID gameId) {
         this.gameId = gameId;
-        client = MageFrame.getClient();
     }
 
     public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options) {
@@ -273,29 +270,29 @@ public class FeedbackPanel extends javax.swing.JPanel {
             connectedDialog = null;
         }
         if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
-            client.sendPlayerInteger(gameId, 0);
+            MageFrame.getClient().sendPlayerInteger(gameId, 0);
         } else if (mode == FeedbackMode.END) {
             GamePanel gamePanel = MageFrame.getGame(gameId);
             if (gamePanel != null) {
                 gamePanel.removeGame();
             }
         } else {
-            client.sendPlayerBoolean(gameId, false);
+            MageFrame.getClient().sendPlayerBoolean(gameId, false);
         }
         //AudioManager.playButtonOk();
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
-        client.sendPlayerBoolean(gameId, true);
+        MageFrame.getClient().sendPlayerBoolean(gameId, true);
         AudioManager.playButtonCancel();
     }//GEN-LAST:event_btnLeftActionPerformed
 
     private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
-        client.sendPlayerString(gameId, "special");
+        MageFrame.getClient().sendPlayerString(gameId, "special");
     }//GEN-LAST:event_btnSpecialActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {
-        client.sendPlayerAction(PlayerAction.UNDO, gameId, null);
+        MageFrame.getClient().sendPlayerAction(PlayerAction.UNDO, gameId, null);
     }
 
     public void setHelperPanel(HelperPanel helper) {
