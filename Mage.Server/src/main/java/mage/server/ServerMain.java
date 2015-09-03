@@ -900,6 +900,11 @@ public class ServerMain implements MageServer {
 //
     
     @Override
+    public List<String> getCards() {
+        return CardRepository.instance.getClassNames();
+    }
+
+    @Override
     public List<String> getServerMessages() {
         return ServerMessagesUtil.getInstance().getMessages();
     }

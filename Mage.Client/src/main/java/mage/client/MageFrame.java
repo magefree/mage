@@ -776,7 +776,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
         long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
         if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
-            List<String> classNames = CardRepository.instance.getClassNames();
+            List<String> classNames = client.getCards(); //CardRepository.instance.getClassNames();
             List<CardInfo> cards = CardRepository.instance.getMissingCards(classNames);
             CardRepository.instance.addCards(cards);
             CardRepository.instance.setContentVersion(serverState.getCardsContentVersion());

@@ -26,6 +26,7 @@ import org.mage.network.messages.requests.ChatRoomIdRequest;
 import org.mage.network.messages.requests.CheatRequest;
 import org.mage.network.messages.requests.CreateTableRequest;
 import org.mage.network.messages.requests.CreateTournamentRequest;
+import org.mage.network.messages.requests.GetCardsRequest;
 import org.mage.network.messages.requests.GetRoomRequest;
 import org.mage.network.messages.requests.GetTournamentChatIdRequest;
 import org.mage.network.messages.requests.GetTournamentRequest;
@@ -96,6 +97,12 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     public List<String> getServerMessages() throws Exception {
         stringListQueue.clear();
         ctx.writeAndFlush(new ServerMessagesRequest()).addListener(WriteListener.getInstance());
+        return stringListQueue.take();
+    }
+
+    public List<String> getCards() throws Exception {
+        stringListQueue.clear();
+        ctx.writeAndFlush(new GetCardsRequest()).addListener(WriteListener.getInstance());
         return stringListQueue.take();
     }
 

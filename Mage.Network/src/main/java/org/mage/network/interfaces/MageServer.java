@@ -39,6 +39,7 @@ public interface MageServer {
     ServerState getServerState();
 
     List<String> getServerMessages();
+    List<String> getCards();
     RoomView getRoom(UUID roomId);
     TableView createTable(String sessionId, UUID roomId, MatchOptions options);
     boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password);

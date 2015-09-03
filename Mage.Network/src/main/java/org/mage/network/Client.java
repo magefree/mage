@@ -112,7 +112,7 @@ public class Client {
         }
         return false;
     }
-            
+
     private class ClientInitializer extends ChannelInitializer<SocketChannel> {
 
         @Override
@@ -194,6 +194,15 @@ public class Client {
 
     public ServerState getServerState() {
         return client.getServerState();
+    }
+
+    public List<String> getCards() {
+        try {
+            return clientMessageHandler.getCards();
+        } catch (Exception ex) {
+            logger.error("Error getting cards", ex);
+        }
+        return null;
     }
 
     public boolean submitDeck(UUID tableId, DeckCardLists deckCardLists) {

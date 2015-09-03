@@ -282,6 +282,7 @@ public enum CardRepository {
         return null;
     }
 
+    //TODO: cache the results of this query
     public List<String> getClassNames() {
         List<String> names = new ArrayList<>();
         try {
