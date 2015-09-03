@@ -148,6 +148,7 @@ import mage.target.common.TargetDiscard;
 import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.common.TargetSpellOrPermanent;
 import mage.util.Copier;
+import mage.util.MessageToClient;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
@@ -1323,6 +1324,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+    }
+
+    @Override
+    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
         log.debug("chooseUse: " + outcome.isGood());
         // Be proactive! Always use abilities, the evaluation function will decide if it's good or not
         // Otherwise some abilities won't be used by AI like LoseTargetEffect that has "bad" outcome

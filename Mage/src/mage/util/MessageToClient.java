@@ -40,4 +40,17 @@ public class MessageToClient {
     public String getHintText() {
         return hintText;
     }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setSecondMessage(String secondMessage) {
+        this.secondMessage = secondMessage;
+    }
+
+    public void setHintText(String hintText) {
+        this.hintText = hintText;
+    }
+
 }

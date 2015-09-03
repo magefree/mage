@@ -97,6 +97,7 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.common.TargetPermanentOrPlayer;
+import mage.util.MessageToClient;
 import org.junit.Ignore;
 
 /**
@@ -797,6 +798,11 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+    }
+
+    @Override
+    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
                 choices.remove(0);
@@ -1895,6 +1901,11 @@ public class TestPlayer implements Player {
     @Override
     public void pickCard(List<Card> cards, Deck deck, Draft draft) {
         computerPlayer.pickCard(cards, deck, draft);
+    }
+
+    @Override
+    public boolean scry(int value, Ability source, Game game) {
+        return computerPlayer.scry(value, source, game);
     }
 
     public void setAIPlayer(boolean AIPlayer) {
