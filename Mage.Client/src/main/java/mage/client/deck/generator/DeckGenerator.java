@@ -396,7 +396,8 @@ public class DeckGenerator {
     private static Card getBasicLand(ColoredManaSymbol color, Map<String, List<CardInfo>> basicLands) {
         Random random = new Random();
         String landName = DeckGeneratorPool.getBasicLandName(color.toString());
-        return basicLands.get(landName).get(random.nextInt(basicLands.size() - 1)).getMockCard().copy();
+        List<CardInfo> basicLandsInfo = basicLands.get(landName);
+        return basicLandsInfo.get(random.nextInt(basicLandsInfo.size() - 1)).getMockCard().copy();
     }
 
 
