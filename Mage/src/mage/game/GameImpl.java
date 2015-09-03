@@ -875,13 +875,14 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         //20091005 - 103.3
+        int startingHandSize = 7;
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (!gameOptions.testMode || player.getLife() == 0) {
                 player.initLife(this.getLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(7, this);
+                player.drawCards(startingHandSize, this);
             }
         }
 
@@ -923,6 +924,15 @@ public abstract class GameImpl implements Game, Serializable {
             }
             saveState(false);
         } while (!mulliganPlayers.isEmpty());
+        // new scry rule
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            Player player = getPlayer(playerId);
+            if (player != null && player.getHand().size() < startingHandSize) {
+                if (player.chooseUse(Outcome.Benefit, new MessageToClient("Scry 1?", "Look at the top card of your library. You may put that card on the bottom of your library."), null, this)) {
+                    player.scry(1, null, this);
+                }
+            }
+        }
         getState().setChoosingPlayerId(null);
         Watchers watchers = state.getWatchers();
         // add default watchers
@@ -1085,15 +1095,6 @@ public abstract class GameImpl implements Game, Serializable {
         player.drawCards(numCards - deduction, this);
     }
 
-//    @Override
-//    public void quit(UUID playerId) {
-//        if (state != null) {
-//            Player player = state.getPlayer(playerId);
-//            if (player != null && player.isInGame()) {
-//                player.quit(this);
-//            }
-//        }
-//    }
     @Override
     public synchronized void timerTimeout(UUID playerId) {
         Player player = state.getPlayer(playerId);

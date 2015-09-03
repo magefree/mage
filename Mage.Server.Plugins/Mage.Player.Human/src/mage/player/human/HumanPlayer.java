@@ -168,12 +168,17 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+    }
+
+    @Override
+    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
         if (source != null) {
-            Boolean answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
+            Boolean answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message.getMessage());
             if (answer != null) {
                 return answer;
             } else {
-                answer = requestAutoAnswerText.get(message);
+                answer = requestAutoAnswerText.get(message.getMessage());
                 if (answer != null) {
                     return answer;
                 }
@@ -181,7 +186,10 @@ public class HumanPlayer extends PlayerImpl {
         }
         updateGameStatePriority("chooseUse", game);
         do {
-            game.fireAskPlayerEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), source);
+            if (message.getSecondMessage() == null) {
+                message.setSecondMessage(getRelatedObjectName(source, game));
+            }
+            game.fireAskPlayerEvent(playerId, message, source);
             waitForResponse(game);
         } while (response.getBoolean() == null && !abort);
         if (!abort) {
