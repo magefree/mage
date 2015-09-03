@@ -82,8 +82,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_card" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="main_game" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="main_game" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -159,7 +159,7 @@
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Standardcursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -173,7 +173,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Write the card&apos;s name on the card to make the card name more recognizable."/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Standardcursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -231,7 +231,7 @@
                           <Component id="cbConfirmEmptyManaPool" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbAskMoveToGraveOrder" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -381,8 +381,8 @@
         <Container class="javax.swing.JPanel" name="tabPhases">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Phases">
-                <Property name="tabTitle" type="java.lang.String" value="Phases"/>
+              <JTabbedPaneConstraints tabName="Phases &amp; Priority">
+                <Property name="tabTitle" type="java.lang.String" value="Phases &amp; Priority"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -528,8 +528,8 @@
                           <Component id="checkBoxEndTurnOthers" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="phases_stopSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="45" max="32767" attributes="0"/>
+                      <Component id="phases_stopSettings" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -537,7 +537,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelHeadLine">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Choose phases your game will stop on:"/>
+                <Property name="text" type="java.lang.String" value="Choose phases your game will stop on if not skipped by a skip action (e.g. F6):"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelYourTurn">
@@ -628,7 +628,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="1"/>
-                <Property name="rows" type="int" value="4"/>
+                <Property name="rows" type="int" value="7"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbStopAttack">
@@ -673,6 +673,45 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopOnAllEndActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbPassPriorityCast">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Pass priority automatically after you have put a spell on the stack"/>
+                    <Property name="toolTipText" type="java.lang.String" value="If activated the system passes priority automatically for you if you have put a spell on the stack."/>
+                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[300, 25]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPassPriorityCastActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbPassPriorityActivation">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Pass priority automatically after you have put an activated ability on the stack"/>
+                    <Property name="toolTipText" type="java.lang.String" value="If activated the system passes priority for you automatically after you have put an activated ability on the stack."/>
+                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[300, 25]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPassPriorityActivationActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbAutoOrderTrigger">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Set order for your triggers automatically if all have the same text"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;If activated the order to put on the stack your triggers that trigger at the same time&lt;br/&gt;&#xa;is set automatically if all have the same text."/>
+                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[300, 25]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAutoOrderTriggerActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

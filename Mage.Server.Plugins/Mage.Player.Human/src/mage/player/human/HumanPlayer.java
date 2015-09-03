@@ -562,6 +562,18 @@ public class HumanPlayer extends PlayerImpl {
     public boolean priority(Game game) {
         passed = false;
         if (!abort) {
+            if (getJustActivatedType() != null) {
+                if (userData.isPassPriorityCast() && getJustActivatedType().equals(AbilityType.SPELL)) {
+                    setJustActivatedType(null);
+                    pass(game);
+                    return false;
+                }
+                if (userData.isPassPriorityActivation() && getJustActivatedType().equals(AbilityType.ACTIVATED)) {
+                    setJustActivatedType(null);
+                    pass(game);
+                    return false;
+                }
+            }
             if (passedAllTurns) {
                 if (passWithManaPoolCheck(game)) {
                     return false;
@@ -693,6 +705,8 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+        String autoOrderRuleText = null;
+        boolean autoOrderUse = getUserData().isAutoOrderTrigger();
         while (!abort) {
             // try to set trigger auto order
             List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
@@ -712,12 +726,19 @@ public class HumanPlayer extends PlayerImpl {
                     abilityOrderLast = ability;
                     continue;
                 }
+                if (autoOrderUse) {
+                    if (autoOrderRuleText == null) {
+                        autoOrderRuleText = ability.getRule();
+                    } else if (!ability.getRule().equals(autoOrderRuleText)) {
+                        autoOrderUse = false;
+                    }
+                }
                 abilitiesWithNoOrderSet.add(ability);
             }
             if (abilitiesWithNoOrderSet.isEmpty()) {
                 return abilityOrderLast;
             }
-            if (abilitiesWithNoOrderSet.size() == 1) {
+            if (abilitiesWithNoOrderSet.size() == 1 || autoOrderUse) {
                 return abilitiesWithNoOrderSet.iterator().next();
             }
             updateGameStatePriority("chooseTriggeredAbility", game);
