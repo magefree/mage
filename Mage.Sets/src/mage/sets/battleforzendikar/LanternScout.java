@@ -31,10 +31,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -65,9 +65,10 @@ public class LanternScout extends CardImpl {
                 new SubtypePredicate("Ally")));
 
         // <i>Rally</i> - Whenever Lantern Scout or another Ally enters the battlefield under your control, creatures you control gain lifelink until end of turn.
+        Effect effect = new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
+        effect.setText("creatures you control gain lifelink until end of turn");
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent()), false);
-        ability.setAbilityWord(AbilityWord.RALLY);
+                effect, false);
         this.addAbility(ability);
     }
 
