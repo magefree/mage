@@ -25,56 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.Ability;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
- * @author noxx
+ *
+ * @author fireshoes
  */
-public class AvacynAngelOfHope extends CardImpl {
+public class HeroOfGomaFada extends CardImpl {
 
-    public AvacynAngelOfHope(UUID ownerId) {
-        super(ownerId, 6, "Avacyn, Angel of Hope", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}{W}");
-        this.expansionSetCode = "AVR";
-        this.supertype.add("Legendary");
-        this.subtype.add("Angel");
+    public HeroOfGomaFada(UUID ownerId) {
+        super(ownerId, 31, "Hero of Goma Fada", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        this.expansionSetCode = "BFZ";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.subtype.add("Ally");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(8);
-        this.toughness = new MageInt(8);
-
-        // Flying, vigilance, indestructible
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(IndestructibleAbility.getInstance());
-
-        // Other permanents you control are indestructible.
-        FilterControlledPermanent filter = new FilterControlledPermanent("Other permanents you control");
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
-        effect.setText("Other permanents you control are indestructible");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        // <i>Rally</i> - Whenever Hero of Goma Fada or another Ally enters the battlefield under your control, creatures you control gain indestructible until end of turn.
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(
+                new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent()), false);
+        ability.setAbilityWord(AbilityWord.RALLY);
+        this.addAbility(ability);
     }
 
-    public AvacynAngelOfHope(final AvacynAngelOfHope card) {
+    public HeroOfGomaFada(final HeroOfGomaFada card) {
         super(card);
     }
 
     @Override
-    public AvacynAngelOfHope copy() {
-        return new AvacynAngelOfHope(this);
+    public HeroOfGomaFada copy() {
+        return new HeroOfGomaFada(this);
     }
 }
