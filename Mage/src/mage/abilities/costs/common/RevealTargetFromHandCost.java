@@ -28,6 +28,8 @@
 // author jeffwadsworth
 package mage.abilities.costs.common;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,16 +46,19 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     public int convertedManaCosts = 0;
     protected int numberCardsRevealed = 0;
+    protected List<Card> revealedCards;
 
     public RevealTargetFromHandCost(TargetCardInHand target) {
         this.addTarget(target);
         this.text = (target.getNumberOfTargets() == 0 ? "you may " : "") + "reveal " + target.getTargetName();
+        this.revealedCards = new ArrayList<>();
     }
 
     public RevealTargetFromHandCost(final RevealTargetFromHandCost cost) {
         super(cost);
         this.convertedManaCosts = cost.convertedManaCosts;
         this.numberCardsRevealed = cost.numberCardsRevealed;
+        this.revealedCards = new ArrayList<>(cost.revealedCards);
     }
 
     @Override
@@ -69,6 +74,7 @@ public class RevealTargetFromHandCost extends CostImpl {
                     convertedManaCosts += card.getManaCost().convertedManaCost();
                     numberCardsRevealed++;
                     cards.add(card);
+                    revealedCards.add(card);
                 }
             }
             if (numberCardsRevealed > 0) {
@@ -90,6 +96,10 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     public int getNumberRevealedCards() {
         return numberCardsRevealed;
+    }
+
+    public List<Card> getRevealedCards() {
+        return revealedCards;
     }
 
     @Override
