@@ -409,14 +409,11 @@ class GainHasteEffect extends ContinuousEffectImpl {
             suspendController = source.getControllerId();
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (suspendController.equals(source.getControllerId())) {
-                permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
-                return true;
-            } else {
-                this.discard();
-            }
+        if (permanent != null && suspendController.equals(source.getControllerId())) {
+            permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
+            return true;
         }
+        this.discard();
         return false;
     }
 
