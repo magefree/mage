@@ -37,8 +37,10 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -47,11 +49,12 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author fireshoes
  */
 public class OmnathLocusOfRage extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Elemental");
-    
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elemental you control");
+
     static {
         filter.add(new SubtypePredicate("Elemental"));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public OmnathLocusOfRage(UUID ownerId) {
@@ -64,7 +67,7 @@ public class OmnathLocusOfRage extends CardImpl {
 
         // <i>Landfall</i> - Whenever a land enters the battlefield under your control, put a 5/5 red and green Elemental creature token onto the battlefield.
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new OmnathElementalToken()), false));
-        
+
         // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to target creature or player.
         Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new DamageTargetEffect(3), false, filter);
         ability.addTarget(new TargetCreatureOrPlayer());
