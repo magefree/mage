@@ -64,10 +64,10 @@ public class BrimazKingOfOreskos extends CardImpl {
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        
+
         // Whenever Brimaz, King of Oreskos attacks, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new CatSoldierCreatureToken(), 1, false, true), false));
-        
+
         // Whenever Brimaz blocks a creature, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield blocking that creature.
         this.addAbility(new BlocksCreatureTriggeredAbility(new BrimazKingOfOreskosEffect(), false, true));
     }
@@ -83,44 +83,49 @@ public class BrimazKingOfOreskos extends CardImpl {
 }
 
 class BrimazKingOfOreskosEffect extends OneShotEffect {
-    
+
     public BrimazKingOfOreskosEffect() {
         super(Outcome.Benefit);
         this.staticText = "put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield blocking that creature";
     }
-    
+
     public BrimazKingOfOreskosEffect(final BrimazKingOfOreskosEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public BrimazKingOfOreskosEffect copy() {
         return new BrimazKingOfOreskosEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        
+
         if (controller != null) {
             Token token = new CatSoldierCreatureToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            Permanent catToken = game.getPermanent(token.getLastAddedToken());
-            Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));            
-            if (catToken != null && attackingCreature != null && game.getState().getCombat() != null) {
+            Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (attackingCreature != null && game.getState().getCombat() != null) {
                 // Possible ruling (see Ætherplasm)
                 // The token you put onto the battlefield is blocking the attacking creature,
                 // even if the block couldn't legally be declared (for example, if that creature
-                // enters the battlefield tapped, or it can't block, or the attacking creature 
+                // enters the battlefield tapped, or it can't block, or the attacking creature
                 // has protection from it)
                 CombatGroup combatGroup = game.getState().getCombat().findGroup(attackingCreature.getId());
                 if (combatGroup != null) {
-                    combatGroup.addBlocker(catToken.getId(), source.getControllerId(), game);
-                    game.getCombat().addBlockingGroup(catToken.getId(),attackingCreature.getId() , source.getControllerId(), game);    
+                    for (UUID tokenId : token.getLastAddedTokenIds()) {
+                        Permanent catToken = game.getPermanent(tokenId);
+                        if (catToken != null) {
+                            combatGroup.addBlocker(tokenId, source.getControllerId(), game);
+                            game.getCombat().addBlockingGroup(tokenId, attackingCreature.getId(), controller.getId(), game);
+                        }
+                    }
+                    combatGroup.pickBlockerOrder(attackingCreature.getControllerId(), game);
                 }
             }
             return true;
-        }    
+        }
         return false;
     }
 }

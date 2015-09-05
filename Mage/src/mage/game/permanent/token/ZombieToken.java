@@ -62,6 +62,9 @@ public class ZombieToken extends Token {
         if (getOriginalExpansionSetCode().equals("ISD")) {
             this.setTokenType(new Random().nextInt(3) + 1);
         }
+        if (getOriginalExpansionSetCode().equals("C14")) {
+            this.setTokenType(2);
+        }
     }
 
     public ZombieToken(final ZombieToken token) {

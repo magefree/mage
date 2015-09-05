@@ -25,52 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.sets.zendikarvseldrazi;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.SuspendAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class RiftwingCloudskate extends CardImpl {
+public class OblivionSower extends mage.sets.battleforzendikar.OblivionSower {
 
-    public RiftwingCloudskate(UUID ownerId) {
-        super(ownerId, 73, "Riftwing Cloudskate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "TSP";
-        this.subtype.add("Illusion");
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Riftwing Cloudskate enters the battlefield, return target permanent to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
-
-        // Suspend 3-{1}{U}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{U}"), this));
+    public OblivionSower(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 41;
+        this.expansionSetCode = "DDP";
     }
 
-    public RiftwingCloudskate(final RiftwingCloudskate card) {
+    public OblivionSower(final OblivionSower card) {
         super(card);
     }
 
     @Override
-    public RiftwingCloudskate copy() {
-        return new RiftwingCloudskate(this);
+    public OblivionSower copy() {
+        return new OblivionSower(this);
     }
 }

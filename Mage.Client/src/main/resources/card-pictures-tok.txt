@@ -61,14 +61,19 @@
 #|Generate|TOK:PTC|Wolf|
 #|Generate|TOK:PTC|Wurm|
 
-#|Generate|TOK:DTK|Djinn Monk|
-#|Generate|TOK:DTK|Dragon|
-#|Generate|TOK:DTK|Goblin|
-#|Generate|TOK:DTK|Morph|
-#|Generate|TOK:DTK|Warrior|
-#|Generate|TOK:DTK|Zombie|
-#|Generate|TOK:DTK|Zombie Horror|
-#|Generate|EMBLEM!:DTK|Emblem Narset Transcendent|
+|Generate|TOK:DTK|Djinn Monk|
+|Generate|TOK:DTK|Dragon|
+|Generate|TOK:DTK|Goblin|
+|Generate|TOK:DTK|Morph|
+|Generate|TOK:DTK|Warrior|
+|Generate|TOK:DTK|Zombie|
+|Generate|TOK:DTK|Zombie Horror|
+|Generate|EMBLEM!:DTK|Emblem Narset|
+
+|Generate|TOK:FRF|Monk|
+|Generate|TOK:FRF|Spirit|
+|Generate|TOK:FRF|Warrior|
+|Generate|TOK:FRF|Manifest|
 
 #|Generate|TOK:GRC|Bird|
 #|Generate|TOK:GRC|Golem|
@@ -105,21 +110,59 @@
 |Generate|TOK:FNMP|Wolf|
 #|Generate|TOK:FNMP|Wurm|
 
+|Generate|TOK:C14|Angel|
+|Generate|TOK:C14|Cat|
+|Generate|TOK:C14|Goat|
+|Generate|TOK:C14|Kor Soldier|
+|Generate|TOK:C14|Pegasus|
+|Generate|TOK:C14|Soldier|
+|Generate|TOK:C14|Spirit|
+|Generate|TOK:C14|Fish|
+|Generate|TOK:C14|Kraken|
+|Generate|TOK:C14|Whale|
+|Generate|TOK:C14|Zombie 1|
+|Generate|TOK:C14|Demon 1|
+|Generate|TOK:C14|Demon 2|
+|Generate|TOK:C14|Germ|
+|Generate|TOK:C14|Horror|
+|Generate|TOK:C14|Zombie 2|
+|Generate|TOK:C14|Goblin|
+|Generate|TOK:C14|Ape|
+|Generate|TOK:C14|Beast 1|
+|Generate|TOK:C14|Beast 2|
+|Generate|TOK:C14|Elemental|
+|Generate|TOK:C14|Elephant|
+|Generate|TOK:C14|Elf Druid|
+|Generate|TOK:C14|Elf Warrior|
+|Generate|TOK:C14|Treefolk|
+|Generate|TOK:C14|Wolf|
+|Generate|TOK:C14|Gargoyle|
+|Generate|TOK:C14|Myr|
+|Generate|TOK:C14|Pentavite|
+|Generate|TOK:C14|Stoneforged Blade|
+|Generate|TOK:C14|Tuktuk the Returned|
+|Generate|TOK:C14|Wurm 1|
+|Generate|TOK:C14|Wurm 2|
+|Generate|EMBLEM!:C14|Emblem Teferi
+|Generate|EMBLEM!:C14|Emblem Nixilis
+|Generate|EMBLEM!:C14|Emblem Daretti
+
+
 |Generate|TOK:DDN|Goblin|
 
-#|Generate|TOK:KTK|Bear|
-#|Generate|TOK:KTK|Bird|
-#|Generate|TOK:KTK|Goblin|
-#|Generate|TOK:KTK|Morph|
-#|Generate|TOK:KTK|Snake|
-#|Generate|TOK:KTK|Spirit Warrior|
-#|Generate|TOK:KTK|Spirit|
-#|Generate|TOK:KTK|Vampire|
-#|Generate|TOK:KTK|Warrior 1|
-#|Generate|TOK:KTK|Warrior 2|
-#|Generate|TOK:KTK|Zombie|
-#|Generate|EMBLEM!:KTK|Emblem Sarkhan, the Dragonspeaker|
-#|Generate|EMBLEM!:KTK|Emblem Sorin, Solemn Visitor|
+|Generate|TOK:KTK|Bear|
+|Generate|TOK:KTK|Bird|
+|Generate|TOK:KTK|Goblin|
+|Generate|TOK:KTK|Morph|
+|Generate|TOK:KTK|Snake|
+|Generate|TOK:KTK|Spirit Warrior|
+|Generate|TOK:KTK|Spirit|
+|Generate|TOK:KTK|Vampire|
+|Generate|TOK:KTK|Warrior 1|
+|Generate|TOK:KTK|Warrior 2|
+|Generate|TOK:KTK|Zombie|
+|Generate|EMBLEM!:KTK|Emblem Sarkhan|
+|Generate|EMBLEM!:KTK|Emblem Sorin|
 
 |Generate|TOK:M15|Sliver|
 |Generate|TOK:M15|Soldier|
@@ -448,4 +491,4 @@
 
 |Generate|TOK:CSP|Marit Lage|
 
-|Generate|TOK:CHK|Spirit|
+#|Generate|TOK:CHK|Spirit|

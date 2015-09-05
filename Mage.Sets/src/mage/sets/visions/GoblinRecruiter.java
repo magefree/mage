@@ -32,19 +32,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -78,18 +75,16 @@ public class GoblinRecruiter extends CardImpl {
 class GoblinRecruiterEffect extends OneShotEffect {
 
     private static final FilterCard goblinFilter = new FilterCard("Goblin cards");
-    
-    private static final FilterCard putOnTopOfLibraryFilter = new FilterCard("card to put on the top of your library (last chosen will be on top)");
-    
+
     static {
         goblinFilter.add(new SubtypePredicate("Goblin"));
     }
-    
+
     public GoblinRecruiterEffect() {
         super(Outcome.Benefit);
         this.staticText = "search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.";
     }
-    
+
     public GoblinRecruiterEffect(final GoblinRecruiterEffect effect) {
         super(effect);
     }
@@ -98,54 +93,26 @@ class GoblinRecruiterEffect extends OneShotEffect {
     public GoblinRecruiterEffect copy() {
         return new GoblinRecruiterEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             TargetCardInLibrary targetGoblins = new TargetCardInLibrary(0, Integer.MAX_VALUE, goblinFilter);
             Cards cards = new CardsImpl();
-            if (player.searchLibrary(targetGoblins, game)) {
-                for (UUID targetId : targetGoblins.getTargets()) {
-                    Card card = player.getLibrary().remove(targetId, game);
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
+            if (controller.searchLibrary(targetGoblins, game)) {
+                cards.addAll(targetGoblins.getTargets());
             }
-            
-            player.shuffleLibrary(game);
-               
+            controller.revealCards(staticText, cards, game);
+            controller.shuffleLibrary(game);
+
             int numberOfGoblins = cards.size();
             if (numberOfGoblins > 0) {
-                if (cards.size() > 1) {
-                    TargetCard targetCard = new TargetCard(Zone.LIBRARY, putOnTopOfLibraryFilter);
-                    while (player.canRespond() && cards.size() > 1) {
-                        player.choose(Outcome.Benefit, cards, targetCard, game);
-                        Card card = cards.get(targetCard.getFirstTarget(), game);
-                        if (card != null) {
-                            cards.remove(card);
-                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                        }
-                        targetCard.clearChosen();
-                    }
-                }
-                if (cards.size() == 1) {
-                    Card card = cards.get(cards.iterator().next(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
-                }
+                controller.putCardsOnTopOfLibrary(cards, game, source, true);
             }
-
-            game.informPlayers(new StringBuilder(player.getLogName()).append(" puts ")
-                    .append(numberOfGoblins).append(" Goblin").append(numberOfGoblins == 1 ? " card" : " cards")
-                    .append(" on top of his library").toString());
-
             return true;
         }
         return false;
     }
-    
+
 }
