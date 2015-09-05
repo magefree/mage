@@ -27,7 +27,9 @@
  */
 package mage.sets.shadowmoor;
 
+import java.util.Random;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -39,6 +41,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -46,9 +49,9 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
  */
 public class WildSwing extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("target nonenchantment permanents");
-    
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ENCHANTMENT)));
     }
@@ -57,11 +60,10 @@ public class WildSwing extends CardImpl {
         super(ownerId, 108, "Wild Swing", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "SHM";
 
-
         // Choose three target nonenchantment permanents. Destroy one of them at random.
         this.getSpellAbility().addEffect(new WildSwingEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(3, filter));
-        
+
     }
 
     public WildSwing(final WildSwing card) {
@@ -92,11 +94,18 @@ class WildSwingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int randomNumber = (int)(Math.random() * 3);
-        Permanent target = game.getPermanent(source.getTargets().get(randomNumber).getFirstTarget());
-        if (target != null) {
-            game.informPlayers("Wild Swing: The randomly chosen target to destroy is " + target.getName());
-            return target.destroy(source.getSourceId(), game, false);
+        MageObject sourceObject = source.getSourceObject(game);
+        if (!source.getTargets().isEmpty() && sourceObject != null) {
+            Target target = source.getTargets().get(0);
+            if (target != null && !target.getTargets().isEmpty()) {
+                Random rnd = new Random();
+                Permanent targetPermanent = game.getPermanent(target.getTargets().get(rnd.nextInt(target.getTargets().size())));
+                if (targetPermanent != null) {
+                    game.informPlayers(sourceObject.getLogName() + ": The randomly chosen target to destroy is " + targetPermanent.getLogName());
+                    targetPermanent.destroy(source.getSourceId(), game, false);
+                }
+                return true;
+            }
         }
         return false;
     }
