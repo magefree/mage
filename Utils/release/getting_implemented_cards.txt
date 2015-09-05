@@ -20,8 +20,6 @@ git log 6d8378d5e49629a2fa126baf84340156a28f25db..HEAD --diff-filter=A --name-st
 since 1.4.3.v3
 git log 23039572f2206ade860f5835e9b85e82a9c4b2a1..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 
-since 1.4.3.v2
-git log 6d8378d5e49629a2fa126baf84340156a28f25db..23039572f2206ade860f5835e9b85e82a9c4b2a1 --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 
 since 1.4.4.v0
 git log 0a458707ddaaa5e7e82ab06d17633084f67077c1..23039572f2206ade860f5835e9b85e82a9c4b2a1 --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
