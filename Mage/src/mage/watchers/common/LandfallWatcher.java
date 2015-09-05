@@ -17,14 +17,14 @@ import mage.watchers.Watcher;
 public class LandfallWatcher extends Watcher {
 
     Set<UUID> playerPlayedLand = new HashSet<>();
-    
+
     public LandfallWatcher() {
         super("LandPlayed", WatcherScope.GAME);
     }
 
     public LandfallWatcher(final LandfallWatcher watcher) {
         super(watcher);
-        playerPlayedLand.addAll(playerPlayedLand);
+        playerPlayedLand.addAll(watcher.playerPlayedLand);
     }
 
     @Override
@@ -45,9 +45,9 @@ public class LandfallWatcher extends Watcher {
     @Override
     public void reset() {
         playerPlayedLand.clear();
-        super.reset(); 
+        super.reset();
     }
-    
+
     public boolean landPlayed(UUID playerId) {
         return playerPlayedLand.contains(playerId);
     }
