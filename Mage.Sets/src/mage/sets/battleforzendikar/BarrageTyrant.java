@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -70,7 +71,9 @@ public class BarrageTyrant extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {2}{R}, Sacrifice another colorless creature: Barrage Tyrant deals damage equal to the sacrificed creature's power to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SacrificeCostCreaturesPower()), new ManaCostsImpl("{2}{R}"));
+        Effect effect = new DamageTargetEffect(new SacrificeCostCreaturesPower());
+        effect.setText("{this} deals damage equal to the sacrificed creature's power to target creature or player");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

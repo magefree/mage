@@ -743,8 +743,9 @@ public class GameState implements Serializable, Copyable<GameState> {
             this.triggers.add((TriggeredAbility) ability, sourceId, attachedTo);
         }
         for (Watcher watcher : ability.getWatchers()) {
-            watcher.setControllerId(attachedTo.getOwnerId());
-            watcher.setSourceId(attachedTo.getId());
+            // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
+            watcher.setControllerId(attachedTo == null ? ability.getControllerId() : attachedTo.getOwnerId());
+            watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
             watchers.add(watcher);
         }
         for (Ability sub : ability.getSubAbilities()) {
