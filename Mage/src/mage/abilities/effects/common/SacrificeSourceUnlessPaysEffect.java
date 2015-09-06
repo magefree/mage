@@ -39,7 +39,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
             StringBuilder sb = new StringBuilder(cost.getText()).append("?");
             if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ") ) {
                 sb.insert(0, "Pay ");
-            } 
+            }
             String message = CardUtil.replaceSourceName(sb.toString(), sourceObject.getLogName());
             message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
             if (player.chooseUse(Outcome.Benefit, message, source, game)) {
@@ -59,23 +59,26 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
         return new SacrificeSourceUnlessPaysEffect(this);
     }
 
-        @Override
+    @Override
     public String getText(Mode mode) {
-            StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
-            String costText = cost.getText();
-            if (costText.toLowerCase().startsWith("discard") 
-                    || costText.toLowerCase().startsWith("remove")
-                    || costText.toLowerCase().startsWith("return")
-                    || costText.toLowerCase().startsWith("exile")
-                    || costText.toLowerCase().startsWith("sacrifice")) {
-                sb.append(costText.substring(0, 1).toLowerCase());
-                sb.append(costText.substring(1));
-            } 
-            else {
-                sb.append("pay ").append(costText);
-            }
+        if(staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
 
-            return sb.toString();
+        StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
+        String costText = cost.getText();
+        if (costText.toLowerCase().startsWith("discard")
+                || costText.toLowerCase().startsWith("remove")
+                || costText.toLowerCase().startsWith("return")
+                || costText.toLowerCase().startsWith("exile")
+                || costText.toLowerCase().startsWith("sacrifice")) {
+            sb.append(costText.substring(0, 1).toLowerCase());
+            sb.append(costText.substring(1));
+        }
+        else {
+            sb.append("pay ").append(costText);
+        }
 
+        return sb.toString();
     }
  }
