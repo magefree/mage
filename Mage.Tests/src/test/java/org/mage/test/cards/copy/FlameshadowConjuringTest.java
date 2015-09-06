@@ -72,4 +72,42 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
         assertLife(playerA, 18);
     }
 
+    /**
+     * I created a token copy of Wurmcoil Engine and sacrificed it. This gave me
+     * 4 tokens
+     */
+    @Test
+    public void testWurmcoilEngine() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature.
+        // That token gains haste. Exile it at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Flameshadow Conjuring", 1);
+        // Sacrifice a creature: Nantuko Husk gets +2/+2 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Nantuko Husk", 1);
+
+        // Deathtouch, lifelink
+        // When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.
+        addCard(Zone.HAND, playerA, "Wurmcoil Engine", 1); // 6/6 - {6}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wurmcoil Engine");
+        setChoice(playerA, "Yes");
+
+        attack(1, playerA, "Wurmcoil Engine");
+        attack(1, playerA, "Nantuko Husk");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice a creature");
+        // addTarget(playerA, "Wurmcoil Engine[only copy]");
+        setChoice(playerA, "Wurmcoil Engine[only copy]");
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Wurmcoil Engine", 1);
+        assertPowerToughness(playerA, "Nantuko Husk", 4, 4);
+        assertLife(playerB, 12);
+        assertLife(playerA, 26);
+
+        assertPermanentCount(playerA, "Wurm", 2);
+
+    }
+
 }

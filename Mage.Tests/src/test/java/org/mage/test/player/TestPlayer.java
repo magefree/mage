@@ -71,6 +71,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.filter.predicate.permanent.SummoningSicknessPredicate;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.game.Table;
@@ -478,6 +479,7 @@ public class TestPlayer implements Player {
                 FilterCreatureForCombat filter = new FilterCreatureForCombat();
                 filter.add(new NamePredicate(groups[0]));
                 filter.add(Predicates.not(new AttackingPredicate()));
+                filter.add(Predicates.not(new SummoningSicknessPredicate()));
                 Permanent attacker = findPermanent(filter, computerPlayer.getId(), game);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
@@ -571,21 +573,37 @@ public class TestPlayer implements Player {
                     String[] targetList = choose2.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
+                        boolean originOnly = false;
+                        boolean copyOnly = false;
+                        if (targetName.endsWith("]")) {
+                            if (targetName.endsWith("[no copy]")) {
+                                originOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 9);
+                            }
+                            if (targetName.endsWith("[only copy]")) {
+                                copyOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 11);
+                            }
+                        }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPermanent, game)) {
                             if (target.getTargets().contains(permanent.getId())) {
                                 continue;
                             }
                             if (permanent.getName().equals(targetName)) {
                                 if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), null, game)) {
-                                    target.add(permanent.getId(), game);
-                                    targetFound = true;
-                                    break;
+                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
+                                        target.add(permanent.getId(), game);
+                                        targetFound = true;
+                                        break;
+                                    }
                                 }
                             } else if ((permanent.getName() + "-" + permanent.getExpansionSetCode()).equals(targetName)) {
                                 if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), null, game)) {
-                                    target.add(permanent.getId(), game);
-                                    targetFound = true;
-                                    break;
+                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
+                                        target.add(permanent.getId(), game);
+                                        targetFound = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
