@@ -25,58 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.weatherlight;
 
-import mage.constants.Outcome;
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class AddPoisonCounterTargetEffect extends OneShotEffect {
+public class GoblinGrenadiers extends CardImpl {
 
-    protected int amount;
+    public GoblinGrenadiers(UUID ownerId) {
+        super(ownerId, 104, "Goblin Grenadiers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "WTH";
+        this.subtype.add("Goblin");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    public AddPoisonCounterTargetEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
+        // Whenever Goblin Grenadiers attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature and target land.
+        Effect effect = new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost(), "Sacrifice {this} to destroy target creature and target land?");
+        effect.setText("you may sacrifice it. If you do, destroy target creature and target land");
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(effect);
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public AddPoisonCounterTargetEffect copy() {
-        return new AddPoisonCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.addCounters(CounterType.POISON.createInstance(amount), game);
-            return true;
-        }
-        return false;
+    public GoblinGrenadiers(final GoblinGrenadiers card) {
+        super(card);
     }
 
     @Override
-    public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+    public GoblinGrenadiers copy() {
+        return new GoblinGrenadiers(this);
     }
 }
