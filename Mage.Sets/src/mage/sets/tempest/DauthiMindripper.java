@@ -25,58 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.tempest;
 
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.keyword.ShadowAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class AddPoisonCounterTargetEffect extends OneShotEffect {
+public class DauthiMindripper extends CardImpl {
 
-    protected int amount;
+    public DauthiMindripper(UUID ownerId) {
+        super(ownerId, 19, "Dauthi Mindripper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Dauthi");
+        this.subtype.add("Minion");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-    public AddPoisonCounterTargetEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
+        // Whenever Dauthi Mindripper attacks and isn't blocked, you may sacrifice it. If you do, defending player discards three cards.
+        Effect effect = new DiscardTargetEffect(3);
+        effect.setText("defending player discards three cards");
+        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(effect, new SacrificeSourceCost()), false, true));
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public AddPoisonCounterTargetEffect copy() {
-        return new AddPoisonCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.addCounters(CounterType.POISON.createInstance(amount), game);
-            return true;
-        }
-        return false;
+    public DauthiMindripper(final DauthiMindripper card) {
+        super(card);
     }
 
     @Override
-    public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+    public DauthiMindripper copy() {
+        return new DauthiMindripper(this);
     }
 }

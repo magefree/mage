@@ -25,58 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.masterseditionii;
 
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
+import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class AddPoisonCounterTargetEffect extends OneShotEffect {
+public class FarrelsZealot extends mage.sets.fallenempires.FarrelsZealot1 {
 
-    protected int amount;
-
-    public AddPoisonCounterTargetEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
+    public FarrelsZealot(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 14;
+        this.expansionSetCode = "ME2";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
+    public FarrelsZealot(final FarrelsZealot card) {
+        super(card);
     }
 
     @Override
-    public AddPoisonCounterTargetEffect copy() {
-        return new AddPoisonCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.addCounters(CounterType.POISON.createInstance(amount), game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+    public FarrelsZealot copy() {
+        return new FarrelsZealot(this);
     }
 }

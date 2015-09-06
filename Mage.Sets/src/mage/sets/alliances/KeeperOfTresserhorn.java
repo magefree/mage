@@ -25,58 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.alliances;
 
-import mage.constants.Outcome;
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class AddPoisonCounterTargetEffect extends OneShotEffect {
+public class KeeperOfTresserhorn extends CardImpl {
 
-    protected int amount;
+    public KeeperOfTresserhorn(UUID ownerId) {
+        super(ownerId, 14, "Keeper of Tresserhorn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");
+        this.expansionSetCode = "ALL";
+        this.subtype.add("Avatar");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-    public AddPoisonCounterTargetEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
+        // Whenever Keeper of Tresserhorn attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 2 life.
+        Effect effect = new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn);
+        effect.setText("it assigns no combat damage this turn");
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true);
+        effect = new LoseLifeTargetEffect(2);
+        effect.setText("and defending player loses 2 life");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public AddPoisonCounterTargetEffect copy() {
-        return new AddPoisonCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.addCounters(CounterType.POISON.createInstance(amount), game);
-            return true;
-        }
-        return false;
+    public KeeperOfTresserhorn(final KeeperOfTresserhorn card) {
+        super(card);
     }
 
     @Override
-    public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+    public KeeperOfTresserhorn copy() {
+        return new KeeperOfTresserhorn(this);
     }
 }
