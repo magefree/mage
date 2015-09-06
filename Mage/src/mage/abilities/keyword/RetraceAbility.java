@@ -34,6 +34,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -45,10 +46,12 @@ public class RetraceAbility extends SpellAbility {
         super(card.getManaCost(), card.getName() + " with retrace", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE);
         this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
         this.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
-        this.getEffects().addAll(card.getSpellAbility().getEffects());
-        this.getTargets().addAll(card.getSpellAbility().getTargets());
-        this.getChoices().addAll(card.getSpellAbility().getChoices());
-        this.getWatchers().addAll(card.getSpellAbility().getWatchers());
+        this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
+        this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
+        this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
+        for (Watcher watcher : card.getSpellAbility().getWatchers()) {
+            this.getWatchers().add(watcher.copy());
+        }
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
 
