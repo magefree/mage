@@ -45,7 +45,6 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-
 //20130711
 /*
  * 903.11. If a commander would be put into its owner’s graveyard from anywhere, that player may put it into the command zone instead.
@@ -98,18 +97,18 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch(((ZoneChangeEvent)event).getToZone()) {
+        switch (((ZoneChangeEvent) event).getToZone()) {
             case HAND:
-                if (!alsoHand && ((ZoneChangeEvent)event).getToZone() == Zone.HAND) {
+                if (!alsoHand && ((ZoneChangeEvent) event).getToZone() == Zone.HAND) {
                     return false;
                 }
             case LIBRARY:
-                if (!alsoLibrary && ((ZoneChangeEvent)event).getToZone() == Zone.LIBRARY) {
+                if (!alsoLibrary && ((ZoneChangeEvent) event).getToZone() == Zone.LIBRARY) {
                     return false;
                 }
             case GRAVEYARD:
-            case EXILED:            
-                if(commanderId.equals(event.getTargetId())){
+            case EXILED:
+                if (commanderId.equals(event.getTargetId())) {
                     return true;
                 }
                 break;
@@ -125,23 +124,24 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-    
+
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {        
-        if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
-            Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+            Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getOwnerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)){
+                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)) {
                     boolean result = permanent.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
-                    if (!game.isSimulation())
+                    if (!game.isSimulation()) {
                         game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
+                    }
                     return result;
                 }
             }
         } else {
             Card card = null;
-            if (((ZoneChangeEvent)event).getFromZone().equals(Zone.STACK)) {
+            if (((ZoneChangeEvent) event).getFromZone().equals(Zone.STACK)) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {
                     card = game.getCard(spell.getSourceId());
@@ -149,13 +149,14 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             }
             if (card == null) {
                 card = game.getCard(event.getTargetId());
-            }           
+            }
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)){                    
+                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)) {
                     boolean result = card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
-                    if (!game.isSimulation())
+                    if (!game.isSimulation()) {
                         game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
+                    }
                     return result;
                 }
             }

@@ -577,6 +577,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
     }
 
+    @Override
+    public void assertCommandZoneCount(Player player, String commandZoneObjectName, int count) throws AssertionError {
+        int actualCount = 0;
+        for (CommandObject commandObject : currentGame.getState().getCommand()) {
+            if (commandObject.getControllerId().equals(player.getId()) && commandObject.getName().equals(commandZoneObjectName)) {
+                actualCount++;
+            }
+        }
+        Assert.assertEquals("(Battlefield) Card counts are not equal (" + commandZoneObjectName + ")", count, actualCount);
+    }
+
     /**
      * Assert emblem count under player's control
      *
@@ -584,6 +595,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count
      * @throws AssertionError
      */
+    @Override
     public void assertEmblemCount(Player player, int count) throws AssertionError {
         int actualCount = 0;
         for (CommandObject commandObject : currentGame.getState().getCommand()) {

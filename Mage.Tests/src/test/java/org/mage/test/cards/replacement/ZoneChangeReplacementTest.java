@@ -382,4 +382,39 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * I was using Anafenza, the Foremost as Commander. She attacked and traded
+     * with two creatures. I moved Anafenza to the Command Zone, but the
+     * opponent's creatures "when {this} dies" abilities triggered. Since
+     * Anafenza and those creatures all received lethal damage at the same time,
+     * the creatures should have been exiled due to Anafenza's replacement
+     * effect, but I guess since the logic asks if you want to use the Command
+     * Zone replacement effect first, that it doesn't see her leaving the
+     * battlefield at the same time as the other creatures.
+     *
+     * http://blogs.magicjudges.org/rulestips/2015/05/anafenza-vs-deathmist-raptor/
+     */
+    @Test
+    public void testAnafenzaExileInCombat() {
+        // Whenever Anafenza, the Foremost attacks, put a +1/+1 counter on another target tapped creature you control.
+        // If a creature card would be put into an opponent's graveyard from anywhere, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Anafenza, the Foremost"); // 4/4
+
+        // Reach (This creature can block creatures with flying.)
+        addCard(Zone.BATTLEFIELD, playerB, "Skyraker Giant"); // 4/3
+
+        attack(2, playerB, "Skyraker Giant");
+        block(2, playerA, "Anafenza, the Foremost", "Skyraker Giant");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertExileCount("Skyraker Giant", 1);
+        assertPermanentCount(playerA, "Anafenza, the Foremost", 0);
+        assertGraveyardCount(playerA, "Anafenza, the Foremost", 1);
+
+    }
 }
