@@ -34,7 +34,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -49,9 +48,6 @@ public class RetraceAbility extends SpellAbility {
         this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
         this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
         this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
-        for (Watcher watcher : card.getSpellAbility().getWatchers()) {
-            this.getWatchers().add(watcher.copy());
-        }
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
 

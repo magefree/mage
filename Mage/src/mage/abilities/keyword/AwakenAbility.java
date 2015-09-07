@@ -51,7 +51,6 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -70,9 +69,6 @@ public class AwakenAbility extends SpellAbility {
         this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
         this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
         this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
-        for (Watcher watcher : card.getSpellAbility().getWatchers()) {
-            this.getWatchers().add(watcher.copy());
-        }
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
         this.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent(filterMessage)));
