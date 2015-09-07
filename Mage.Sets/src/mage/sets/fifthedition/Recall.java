@@ -73,7 +73,7 @@ class RecallEffect extends OneShotEffect {
 
     public RecallEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. ";
+        this.staticText = "Discard X cards, then return a card from your graveyard to your hand for each card discarded this way";
     }
 
     public RecallEffect(final RecallEffect effect) {
