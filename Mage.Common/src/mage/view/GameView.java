@@ -143,7 +143,8 @@ public class GameView implements Serializable {
                         }
                     }
                 } else {
-                    logger.error("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
+                    // can happen if a player times out while ability is on the stack
+                    logger.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
             } else {
                 // Spell
