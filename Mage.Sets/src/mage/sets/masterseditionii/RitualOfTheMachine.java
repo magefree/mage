@@ -25,58 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.ObjectColor;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author ilcartographer
+ * @author LoneFox
  */
-public class KoboldDrillSergeant extends CardImpl {
+public class RitualOfTheMachine extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kobold creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
 
     static {
-        filter.add(new SubtypePredicate("Kobold"));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public KoboldDrillSergeant(UUID ownerId) {
-        super(ownerId, 104, "Kobold Drill Sergeant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "ME3";
-        this.subtype.add("Kobold");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+    public RitualOfTheMachine(UUID ownerId) {
+        super(ownerId, 109, "Ritual of the Machine", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+        this.expansionSetCode = "ME2";
 
-        // Other Kobold creatures you control get +0/+1 and have trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true));
-        Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
-        effect.setText("and have trample");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // As an additional cost to cast Ritual of the Machine, sacrifice a creature.
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        // Gain control of target nonartifact, nonblack creature.
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfGame));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public KoboldDrillSergeant(final KoboldDrillSergeant card) {
+    public RitualOfTheMachine(final RitualOfTheMachine card) {
         super(card);
     }
 
     @Override
-    public KoboldDrillSergeant copy() {
-        return new KoboldDrillSergeant(this);
+    public RitualOfTheMachine copy() {
+        return new RitualOfTheMachine(this);
     }
 }

@@ -25,58 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.sets.mirage;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.RampageAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author ilcartographer
+ * @author LoneFox
  */
-public class KoboldDrillSergeant extends CardImpl {
+public class HorribleHordes extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kobold creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Kobold"));
-    }
-
-    public KoboldDrillSergeant(UUID ownerId) {
-        super(ownerId, 104, "Kobold Drill Sergeant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "ME3";
-        this.subtype.add("Kobold");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(1);
+    public HorribleHordes(UUID ownerId) {
+        super(ownerId, 269, "Horrible Hordes", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "MIR";
+        this.subtype.add("Spirit");
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Other Kobold creatures you control get +0/+1 and have trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true));
-        Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
-        effect.setText("and have trample");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Rampage 1
+        this.addAbility(new RampageAbility(1));
     }
 
-    public KoboldDrillSergeant(final KoboldDrillSergeant card) {
+    public HorribleHordes(final HorribleHordes card) {
         super(card);
     }
 
     @Override
-    public KoboldDrillSergeant copy() {
-        return new KoboldDrillSergeant(this);
+    public HorribleHordes copy() {
+        return new HorribleHordes(this);
     }
 }

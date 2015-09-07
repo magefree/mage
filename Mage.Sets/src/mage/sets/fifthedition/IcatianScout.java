@@ -25,35 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class TorGiant extends CardImpl {
+public class IcatianScout extends mage.sets.masterseditionii.IcatianScout {
 
-    public TorGiant(UUID ownerId) {
-        super(ownerId, 220, "Tor Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "ICE";
-        this.subtype.add("Giant");
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+    public IcatianScout(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 313;
+        this.expansionSetCode = "5ED";
     }
 
-    public TorGiant(final TorGiant card) {
+    public IcatianScout(final IcatianScout card) {
         super(card);
     }
 
     @Override
-    public TorGiant copy() {
-        return new TorGiant(this);
+    public IcatianScout copy() {
+        return new IcatianScout(this);
     }
 }

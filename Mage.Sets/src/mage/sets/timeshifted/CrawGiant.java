@@ -25,35 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class TorGiant extends CardImpl {
+public class CrawGiant extends mage.sets.legends.CrawGiant {
 
-    public TorGiant(UUID ownerId) {
-        super(ownerId, 220, "Tor Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "ICE";
-        this.subtype.add("Giant");
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+    public CrawGiant(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 76;
+        this.expansionSetCode = "TSB";
+        this.rarity = Rarity.SPECIAL;
     }
 
-    public TorGiant(final TorGiant card) {
+    public CrawGiant(final CrawGiant card) {
         super(card);
     }
 
     @Override
-    public TorGiant copy() {
-        return new TorGiant(this);
+    public CrawGiant copy() {
+        return new CrawGiant(this);
     }
 }

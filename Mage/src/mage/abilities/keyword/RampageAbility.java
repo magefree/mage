@@ -25,58 +25,82 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.abilities.keyword;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.game.combat.CombatGroup;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author ilcartographer
+ * @author LoneFox
  */
-public class KoboldDrillSergeant extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kobold creatures");
+public class RampageAbility extends BecomesBlockedTriggeredAbility {
 
-    static {
-        filter.add(new SubtypePredicate("Kobold"));
+    private final String rule;
+
+    public RampageAbility(int amount) {
+        super(null, false);
+        rule = "rampage " + amount;
+        RampageValue rv = new RampageValue(amount);
+        this.addEffect(new BoostSourceEffect(rv, rv, Duration.EndOfTurn));
     }
 
-    public KoboldDrillSergeant(UUID ownerId) {
-        super(ownerId, 104, "Kobold Drill Sergeant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "ME3";
-        this.subtype.add("Kobold");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // Other Kobold creatures you control get +0/+1 and have trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true));
-        Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
-        effect.setText("and have trample");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-    }
-
-    public KoboldDrillSergeant(final KoboldDrillSergeant card) {
-        super(card);
+    public RampageAbility(final RampageAbility ability) {
+        super(ability);
+        this.rule = ability.rule;
     }
 
     @Override
-    public KoboldDrillSergeant copy() {
-        return new KoboldDrillSergeant(this);
+    public RampageAbility copy() {
+        return new RampageAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return rule;
+    }
+}
+
+
+class RampageValue implements DynamicValue {
+
+    private final int amount;
+
+    public RampageValue(int amount) {
+        this.amount = amount;
+    }
+
+    public RampageValue(final RampageValue value) {
+        this.amount = value.amount;
+    }
+
+    @Override
+    public RampageValue copy() {
+        return new RampageValue(this);
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        int count = 0;
+        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
+                 int blockers = combatGroup.getBlockers().size();
+                 return blockers > 1 ? (blockers - 1) * amount : 0;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public String getMessage() {
+        return "Rampage " + amount;
     }
 }

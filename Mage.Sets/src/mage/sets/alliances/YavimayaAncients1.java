@@ -25,53 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventDamageByTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class LadyEvangela extends CardImpl {
+public class YavimayaAncients1 extends mage.sets.masterseditionii.YavimayaAncients {
 
-    public LadyEvangela(UUID ownerId) {
-        super(ownerId, 280, "Lady Evangela", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        this.expansionSetCode = "LEG";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // {W}{B}, {tap}: Prevent all combat damage that would be dealt by target creature this turn.
-        Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage that would be dealt by target creature this turn.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    public YavimayaAncients1(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 91;
+        this.expansionSetCode = "ALL";
+        this.rarity = Rarity.COMMON;
     }
 
-    public LadyEvangela(final LadyEvangela card) {
+    public YavimayaAncients1(final YavimayaAncients1 card) {
         super(card);
     }
 
     @Override
-    public LadyEvangela copy() {
-        return new LadyEvangela(this);
+    public YavimayaAncients1 copy() {
+        return new YavimayaAncients1(this);
     }
 }

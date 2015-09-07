@@ -25,58 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.sets.revisededition;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author ilcartographer
+ * @author LoneFox
  */
-public class KoboldDrillSergeant extends CardImpl {
+public class GraniteGargoyle extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kobold creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Kobold"));
-    }
-
-    public KoboldDrillSergeant(UUID ownerId) {
-        super(ownerId, 104, "Kobold Drill Sergeant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "ME3";
-        this.subtype.add("Kobold");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(1);
+    public GraniteGargoyle(UUID ownerId) {
+        super(ownerId, 155, "Granite Gargoyle", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "3ED";
+        this.subtype.add("Gargoyle");
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Other Kobold creatures you control get +0/+1 and have trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true));
-        Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
-        effect.setText("and have trample");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {R}: Granite Gargoyle gets +0/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public KoboldDrillSergeant(final KoboldDrillSergeant card) {
+    public GraniteGargoyle(final GraniteGargoyle card) {
         super(card);
     }
 
     @Override
-    public KoboldDrillSergeant copy() {
-        return new KoboldDrillSergeant(this);
+    public GraniteGargoyle copy() {
+        return new GraniteGargoyle(this);
     }
 }

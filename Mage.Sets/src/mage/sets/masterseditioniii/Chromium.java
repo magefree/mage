@@ -29,54 +29,46 @@ package mage.sets.masterseditioniii;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.RampageAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.constants.TargetController;
 
 /**
  *
- * @author ilcartographer
+ * @author LoneFox
  */
-public class KoboldDrillSergeant extends CardImpl {
+public class Chromium extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kobold creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Kobold"));
-    }
-
-    public KoboldDrillSergeant(UUID ownerId) {
-        super(ownerId, 104, "Kobold Drill Sergeant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public Chromium(UUID ownerId) {
+        super(ownerId, 147, "Chromium", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{U}{U}{B}{B}");
         this.expansionSetCode = "ME3";
-        this.subtype.add("Kobold");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.supertype.add("Legendary");
+        this.subtype.add("Elder");
+        this.subtype.add("Dragon");
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-        // Other Kobold creatures you control get +0/+1 and have trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true));
-        Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
-        effect.setText("and have trample");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Rampage 2
+        this.addAbility(new RampageAbility(2));
+        // At the beginning of your upkeep, sacrifice Chromium unless you pay {W}{U}{B}.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
+            new ManaCostsImpl("{W}{U}{B}")), TargetController.YOU, false));
     }
 
-    public KoboldDrillSergeant(final KoboldDrillSergeant card) {
+    public Chromium(final Chromium card) {
         super(card);
     }
 
     @Override
-    public KoboldDrillSergeant copy() {
-        return new KoboldDrillSergeant(this);
+    public Chromium copy() {
+        return new Chromium(this);
     }
 }
