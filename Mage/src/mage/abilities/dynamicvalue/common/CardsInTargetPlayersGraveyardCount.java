@@ -25,58 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.abilities.dynamicvalue.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
-import mage.counters.CounterType;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class AddPoisonCounterTargetEffect extends OneShotEffect {
-
-    protected int amount;
-
-    public AddPoisonCounterTargetEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
+public class CardsInTargetPlayersGraveyardCount implements DynamicValue {
 
     @Override
-    public AddPoisonCounterTargetEffect copy() {
-        return new AddPoisonCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Player player = game.getPlayer(effect.getTargetPointer().getFirst(game, sourceAbility));
         if (player != null) {
-            player.addCounters(CounterType.POISON.createInstance(amount), game);
-            return true;
+            return player.getGraveyard().size();
         }
-        return false;
+        return 0;
     }
 
     @Override
-    public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+    public CardsInTargetPlayersGraveyardCount copy() {
+        return new CardsInTargetPlayersGraveyardCount();
     }
+
+    @Override
+    public String getMessage() {
+        return "cards in target player's graveyard";
+    }
+
 }

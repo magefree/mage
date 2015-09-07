@@ -25,58 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.stronghold;
 
-import mage.constants.Outcome;
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.keyword.ShadowAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class AddPoisonCounterTargetEffect extends OneShotEffect {
+public class ThalakosDeceiver extends CardImpl {
 
-    protected int amount;
+    public ThalakosDeceiver(UUID ownerId) {
+        super(ownerId, 45, "Thalakos Deceiver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "STH";
+        this.subtype.add("Thalakos");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    public AddPoisonCounterTargetEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
+        // Whenever Thalakos Deceiver attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature.
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new GainControlTargetEffect(Duration.EndOfGame), new SacrificeSourceCost()));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public AddPoisonCounterTargetEffect copy() {
-        return new AddPoisonCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.addCounters(CounterType.POISON.createInstance(amount), game);
-            return true;
-        }
-        return false;
+    public ThalakosDeceiver(final ThalakosDeceiver card) {
+        super(card);
     }
 
     @Override
-    public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+    public ThalakosDeceiver copy() {
+        return new ThalakosDeceiver(this);
     }
 }

@@ -45,13 +45,21 @@ import static mage.game.events.GameEvent.EventType.DAMAGE_PLAYER;
 
 public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
 
+    private boolean partOfOptionalEffect;
+
     public AssignNoCombatDamageSourceEffect(Duration duration) {
+        this(duration, false);
+    }
+
+    public AssignNoCombatDamageSourceEffect(Duration duration, boolean partOfOptionalEffect) {
         super(duration, Outcome.PreventDamage);
+        this.partOfOptionalEffect = partOfOptionalEffect;
         staticText = setText();
     }
 
     public AssignNoCombatDamageSourceEffect(final AssignNoCombatDamageSourceEffect effect) {
         super(effect);
+        this.partOfOptionalEffect = effect.partOfOptionalEffect;
     }
 
     @Override
@@ -88,19 +96,23 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("{this} assigns no combat damage");
+        String text = "";
+        if(partOfOptionalEffect) {
+            text = "If you do, ";
+        }
+        text += "{this} assigns no combat damage";
         switch(duration) {
             case EndOfTurn:
-                sb.append("this turn");
+                text += " this turn";
                 break;
             case EndOfCombat:
-                sb.append("this combat");
+                text += " this combat";
                 break;
             default:
                 if (duration.toString().length() > 0) {
-                    sb.append(" ").append(duration.toString());
+                    text += " " + duration.toString();
                 }
         }
-        return sb.toString();
+        return text;
     }
 }

@@ -25,58 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.timespiral;
 
-import mage.constants.Outcome;
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
+import mage.abilities.keyword.ShadowAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class AddPoisonCounterTargetEffect extends OneShotEffect {
+public class ZealotIlVec extends CardImpl {
 
-    protected int amount;
+    public ZealotIlVec(UUID ownerId) {
+        super(ownerId, 47, "Zealot il-Vec", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Human");
+        this.subtype.add("Rebel");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    public AddPoisonCounterTargetEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
+        // Whenever Zealot il-Vec attacks and isn't blocked, you may have it deal 1 damage to target creature. If you do, prevent all combat damage Zealot il-Vec would deal this turn.
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new DamageTargetEffect(1), true);
+        Effect effect = new PreventCombatDamageBySourceEffect(Duration.EndOfTurn);
+        effect.setText("if you do, prevent all combat damage {this} would deal this turn");
+        ability.addEffect(effect);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public AddPoisonCounterTargetEffect copy() {
-        return new AddPoisonCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.addCounters(CounterType.POISON.createInstance(amount), game);
-            return true;
-        }
-        return false;
+    public ZealotIlVec(final ZealotIlVec card) {
+        super(card);
     }
 
     @Override
-    public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+    public ZealotIlVec copy() {
+        return new ZealotIlVec(this);
     }
 }

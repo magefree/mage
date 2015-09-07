@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.watchers.common;
 
 import mage.Mana;
@@ -58,16 +57,16 @@ public class ManaSpentToCastWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.HAND) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.HAND) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (this.getSourceId().equals(spell.getSourceId())) {
-               payment = spell.getSpellAbility().getManaCostsToPay().getPayment();
+            if (spell != null && this.getSourceId().equals(spell.getSourceId())) {
+                payment = spell.getSpellAbility().getManaCostsToPay().getPayment();
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && this.getSourceId().equals(event.getSourceId())) {
-             if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
-                 payment = null;
-             }
+            if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+                payment = null;
+            }
         }
     }
 

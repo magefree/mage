@@ -25,47 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.sets.fridaynightmagic;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class NantukoHusk extends CardImpl {
+public class Ophidian extends mage.sets.vintagemasters.Ophidian {
 
-    public NantukoHusk(UUID ownerId) {
-        super(ownerId, 162, "Nantuko Husk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Zombie");
-        this.subtype.add("Insect");
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Sacrifice a creature: Nantuko Husk gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")))));
+    public Ophidian(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 13;
+        this.expansionSetCode = "FNMP";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public NantukoHusk(final NantukoHusk card) {
+    public Ophidian(final Ophidian card) {
         super(card);
     }
 
     @Override
-    public NantukoHusk copy() {
-        return new NantukoHusk(this);
+    public Ophidian copy() {
+        return new Ophidian(this);
     }
 }
