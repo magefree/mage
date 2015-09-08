@@ -92,4 +92,51 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
 
     }
 
+    /**
+     * Token don't go to exile because they are no creature cards
+     */
+    @Test
+    public void testAnafenzaExileInCombatOmnathToken() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Acidic Slime", 1);
+
+        addCard(Zone.HAND, playerB, "Forest", 2);
+        // <i>Landfall</i> - Whenever a land enters the battlefield under your control, put a 5/5 red and green Elemental creature token onto the battlefield.
+        // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to target creature or player.
+        addCard(Zone.BATTLEFIELD, playerB, "Omnath, Locus of Rage", 1);
+
+        // Whenever Anafenza, the Foremost attacks, put a +1/+1 counter on another target tapped creature you control.
+        // If a creature card would be put into an opponent's graveyard from anywhere, exile it instead.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anafenza, the Foremost");
+
+        playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
+        playLand(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
+
+        attack(5, playerA, "Acidic Slime");
+        block(5, playerB, "Elemental", "Acidic Slime");
+        attack(5, playerA, "Anafenza, the Foremost");
+        block(5, playerB, "Elemental", "Anafenza, the Foremost");
+        addTarget(playerB, playerA);
+
+        setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertExileCount(playerA, 0);
+        assertExileCount(playerB, 0);
+
+        assertPermanentCount(playerB, "Elemental", 1);
+
+        assertGraveyardCount(playerA, "Acidic Slime", 1);
+        assertGraveyardCount(playerA, "Anafenza, the Foremost", 0);
+        assertCommandZoneCount(playerA, "Anafenza, the Foremost", 1);
+
+        assertHandCount(playerA, 2); // turn 3 + 5 draw
+        assertHandCount(playerB, 2); // turn 2 + 4 draw
+
+        assertLife(playerA, 37);
+        assertLife(playerB, 40);
+    }
+
 }

@@ -43,7 +43,7 @@ import mage.target.common.TargetLandPermanent;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class PlagueSpores extends CardImpl {
 
@@ -58,7 +58,7 @@ public class PlagueSpores extends CardImpl {
         this.expansionSetCode = "INV";
 
         // Destroy target nonblack creature and target land. They can't be regenerated.
-        Effect effect = new DestroyTargetEffect(true);
+        Effect effect = new DestroyTargetEffect(true, true);
         effect.setText("Destroy target nonblack creature and target land. They can't be regenerated.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

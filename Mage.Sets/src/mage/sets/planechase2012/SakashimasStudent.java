@@ -28,16 +28,17 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
@@ -60,7 +61,7 @@ public class SakashimasStudent extends CardImpl {
         // Ninjutsu {1}{U}
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
         // You may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,new EntersBattlefieldEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
                 new CopyPermanentEffect(new SakashimasStudentApplyToPermanent()),
                 "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types",
                 true)));
@@ -86,4 +87,13 @@ class SakashimasStudentApplyToPermanent extends ApplyToPermanent {
         }
         return true;
     }
+
+    @Override
+    public Boolean apply(Game game, MageObject mageObject) {
+        if (!mageObject.getSubtype().contains("Ninja")) {
+            mageObject.getSubtype().add("Ninja");
+        }
+        return true;
+    }
+
 }

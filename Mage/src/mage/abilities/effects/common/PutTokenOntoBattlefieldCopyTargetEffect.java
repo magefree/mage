@@ -33,19 +33,14 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
@@ -72,6 +67,13 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this(playerId, null, false);
     }
 
+    /**
+     *
+     * @param playerId null the token is controlled/owned by the controller of
+     * the source ability
+     * @param additionalCardType the token gains tis card types in addition
+     * @param gainsHaste the token gains haste
+     */
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
@@ -113,28 +115,19 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
 
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(copyFromPermanent); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+            applier.apply(game, token);
             if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
                 token.getCardType().add(additionalCardType);
             }
             if (gainsHaste) {
                 token.addAbility(HasteAbility.getInstance());
             }
+
             token.putOntoBattlefield(1, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId);
             for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
                 Permanent tokenPermanent = game.getPermanent(tokenId);
                 if (tokenPermanent != null) {
                     addedTokenPermanents.add(tokenPermanent);
-                    game.copyPermanent(copyFromPermanent, tokenPermanent, source, applier);
-                    if (additionalCardType != null) {
-                        ContinuousEffect effect = new AddCardTypeTargetEffect(additionalCardType, Duration.Custom);
-                        effect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                        game.addEffect(effect, source);
-                    }
-                    if (gainsHaste) {
-                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                        effect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                        game.addEffect(effect, source);
-                    }
                 }
             }
             return true;

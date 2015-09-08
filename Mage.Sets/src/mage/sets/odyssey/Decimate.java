@@ -48,9 +48,8 @@ public class Decimate extends CardImpl {
         super(ownerId, 287, "Decimate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{G}");
         this.expansionSetCode = "ODY";
 
-
         // Destroy target artifact, target creature, target enchantment, and target land.
-        Effect effect = new DestroyTargetEffect();
+        Effect effect = new DestroyTargetEffect(false, true);
         effect.setText("Destroy target artifact, target creature, target enchantment, and target land.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());

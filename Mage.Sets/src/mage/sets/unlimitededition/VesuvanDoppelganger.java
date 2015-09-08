@@ -29,6 +29,7 @@ package mage.sets.unlimitededition;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -115,6 +116,15 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
                                     new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false, rule2));
                             return true;
                         }
+
+                        @Override
+                        public Boolean apply(Game game, MageObject mageObject) {
+                            mageObject.getColor(game).setColor(sourcePermanent.getColor(game));
+                            mageObject.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+                                    new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false, rule2));
+                            return true;
+                        }
+
                     });
                     return true;
                 }

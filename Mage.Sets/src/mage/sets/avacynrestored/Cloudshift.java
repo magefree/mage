@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -46,10 +46,11 @@ public class Cloudshift extends CardImpl {
         super(ownerId, 12, "Cloudshift", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "AVR";
 
-
         // Exile target creature you control, then return that card to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
+        Effect effect = new ExileTargetForSourceEffect();
+        effect.setApplyEffectsAfter();
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
     }
 

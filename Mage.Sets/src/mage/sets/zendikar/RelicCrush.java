@@ -29,15 +29,12 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -45,14 +42,16 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
  */
 public class RelicCrush extends CardImpl {
-    
+
     public RelicCrush(UUID ownerId) {
         super(ownerId, 179, "Relic Crush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
         this.expansionSetCode = "ZEN";
 
         // Destroy target artifact or enchantment and up to one other target artifact or enchantment.
         FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent();
-        this.getSpellAbility().addEffect(new RelicCrushEffect());
+        Effect effect = new DestroyTargetEffect(false, true);
+        effect.setText("Destroy target artifact or enchantment and up to one other target artifact or enchantment");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter, false));
     }
@@ -64,35 +63,5 @@ public class RelicCrush extends CardImpl {
     @Override
     public RelicCrush copy() {
         return new RelicCrush(this);
-    }
-}
-
-class RelicCrushEffect extends OneShotEffect {
-
-    public RelicCrushEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact or enchantment and up to one other target artifact or enchantment";
-    }
-
-    public RelicCrushEffect(final RelicCrushEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RelicCrushEffect copy() {
-        return new RelicCrushEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent firstTarget = game.getPermanent(source.getFirstTarget());
-        Permanent secondTarget = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (firstTarget != null) {
-            firstTarget.destroy(id, game, false);
-        }
-        if (secondTarget != null) {
-            return secondTarget.destroy(id, game, false);
-        }
-        return true;
     }
 }

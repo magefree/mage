@@ -55,7 +55,7 @@ public class GoblinGrenadiers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Goblin Grenadiers attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature and target land.
-        Effect effect = new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost(), "Sacrifice {this} to destroy target creature and target land?");
+        Effect effect = new DoIfCostPaid(new DestroyTargetEffect(false, true), new SacrificeSourceCost(), "Sacrifice {this} to destroy target creature and target land?");
         effect.setText("you may sacrifice it. If you do, destroy target creature and target land");
         Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(effect);
         ability.addTarget(new TargetCreaturePermanent());

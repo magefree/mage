@@ -52,7 +52,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPlayer;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.stack.Spell;

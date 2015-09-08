@@ -28,7 +28,7 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -50,14 +50,13 @@ import mage.util.functions.ApplyToPermanent;
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class CopyArtifact extends CardImpl {
 
     public CopyArtifact(UUID ownerId) {
         super(ownerId, 54, "Copy Artifact", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "LEA";
-
 
         // You may have Copy Artifact enter the battlefield as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
@@ -78,6 +77,25 @@ public class CopyArtifact extends CardImpl {
 }
 
 class CopyArtifactEffect extends OneShotEffect {
+
+    ApplyToPermanent applier = new ApplyToPermanent() {
+        @Override
+        public Boolean apply(Game game, Permanent permanent) {
+            if (!permanent.getCardType().contains(CardType.ENCHANTMENT)) {
+                permanent.getCardType().add(CardType.ENCHANTMENT);
+            }
+            return true;
+        }
+
+        @Override
+        public Boolean apply(Game game, MageObject mageObject) {
+            if (!mageObject.getCardType().contains(CardType.ENCHANTMENT)) {
+                mageObject.getCardType().add(CardType.ENCHANTMENT);
+            }
+            return true;
+        }
+
+    };
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
@@ -104,16 +122,7 @@ class CopyArtifactEffect extends OneShotEffect {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
-                        @Override
-                        public Boolean apply(Game game, Permanent permanent) {
-                            if (!permanent.getCardType().contains(CardType.ENCHANTMENT)) {
-                                permanent.getCardType().add(CardType.ENCHANTMENT);
-                            }
-                            return true;
-                        }
-                    });
-
+                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, applier);
                     return true;
                 }
             }

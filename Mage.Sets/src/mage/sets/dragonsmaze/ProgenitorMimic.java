@@ -53,13 +53,19 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
 import mage.util.CardUtil;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.AbilityApplier;
 
 /**
  *
  * @author LevelX2
  */
 public class ProgenitorMimic extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("no Token");
+
+    static {
+        filter.add(Predicates.not(new TokenPredicate()));
+    }
 
     public ProgenitorMimic(UUID ownerId) {
         super(ownerId, 92, "Progenitor Mimic", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{U}");
@@ -72,11 +78,17 @@ public class ProgenitorMimic extends CardImpl {
         // You may have Progenitor Mimic enter the battlefield as a copy of any creature on the battlefield
         // except it gains "At the beginning of your upkeep, if this creature isn't a token,
         // put a token onto the battlefield that's a copy of this creature."
+        AbilityApplier applier = new AbilityApplier(
+                new ConditionalTriggeredAbility(
+                        new BeginningOfUpkeepTriggeredAbility(new ProgenitorMimicCopyEffect(), TargetController.YOU, false),
+                        new SourceMatchesFilterCondition(filter),
+                        "At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.")
+        );
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new EntersBattlefieldEffect(new CopyPermanentEffect(new ProgenitorMimicApplyToPermanent()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains \"At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.\"",
-                true)));
+                new EntersBattlefieldEffect(new CopyPermanentEffect(applier),
+                        "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains \"At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.\"",
+                        true)));
     }
 
     public ProgenitorMimic(final ProgenitorMimic card) {
@@ -86,24 +98,6 @@ public class ProgenitorMimic extends CardImpl {
     @Override
     public ProgenitorMimic copy() {
         return new ProgenitorMimic(this);
-    }
-}
-
-class ProgenitorMimicApplyToPermanent extends ApplyToPermanent {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("no Token");
-    static {
-        filter.add(Predicates.not(new TokenPredicate()));
-    }
-    
-    @Override
-    public Boolean apply(Game game, Permanent permanent) {
-        Ability ability = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ProgenitorMimicCopyEffect(), TargetController.YOU, false),
-                new SourceMatchesFilterCondition(filter),
-                "At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.");
-        permanent.addAbility(ability, game);
-        return true;
     }
 }
 
@@ -144,14 +138,14 @@ class ProgenitorMimicCopyEffect extends OneShotEffect {
             // if it was no copy of copy take the target itself
             copyFromPermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         }
-        
-        if (copyFromPermanent != null) {                        
-            EmptyToken token = new EmptyToken();            
+
+        if (copyFromPermanent != null) {
+            EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(copyFromPermanent); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             Permanent newPermanentToken = game.getPermanent(token.getLastAddedToken());
             if (newPermanentToken != null) {
-                game.copyPermanent(copyFromPermanent, newPermanentToken, source, null);                
+                game.copyPermanent(copyFromPermanent, newPermanentToken, source, null);
                 return true;
             }
         }

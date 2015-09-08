@@ -29,6 +29,7 @@ package mage.sets.vintagemasters;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -86,4 +87,12 @@ class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
         permanent.addAbility(HasteAbility.getInstance(), game);
         return true;
     }
+
+    @Override
+    public Boolean apply(Game game, MageObject mageObject) {
+        mageObject.getAbilities().add(new DethroneAbility());
+        mageObject.getAbilities().add(HasteAbility.getInstance());
+        return true;
+    }
+
 }

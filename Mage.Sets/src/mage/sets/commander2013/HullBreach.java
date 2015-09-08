@@ -50,7 +50,6 @@ public class HullBreach extends CardImpl {
         super(ownerId, 193, "Hull Breach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}{G}");
         this.expansionSetCode = "C13";
 
-
         // Choose one - Destroy target artifact;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Target target = new TargetArtifactPermanent();
@@ -63,17 +62,13 @@ public class HullBreach extends CardImpl {
         this.getSpellAbility().addMode(mode);
         // or destroy target artifact and target enchantment.
         mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        target = new TargetArtifactPermanent();
-        mode.getTargets().add(target);
         Effect effect = new DestroyTargetEffect();
         effect.setTargetPointer(new SecondTargetPointer());
-        effect.setText("and target enchantment");
+        effect.setText("destroy target artifact and target enchantment");
         mode.getEffects().add(effect);
-        target = new TargetPermanent(new FilterEnchantmentPermanent());
-        mode.getTargets().add(target);
+        mode.getTargets().add(new TargetArtifactPermanent());
+        mode.getTargets().add(new TargetPermanent(new FilterEnchantmentPermanent()));
         this.getSpellAbility().addMode(mode);
-
 
     }
 
