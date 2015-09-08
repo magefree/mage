@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SorceressQueen extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature other than {this}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
     
     static {
         filter.add(new AnotherPredicate());
