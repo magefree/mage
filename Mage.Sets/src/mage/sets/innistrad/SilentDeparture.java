@@ -28,13 +28,12 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,7 +46,6 @@ public class SilentDeparture extends CardImpl {
     public SilentDeparture(UUID ownerId) {
         super(ownerId, 75, "Silent Departure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "ISD";
-
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
