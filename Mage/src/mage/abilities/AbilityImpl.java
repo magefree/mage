@@ -237,6 +237,7 @@ public abstract class AbilityImpl implements Ability {
                  */
                 if (effect.applyEffectsAfter()) {
                     game.applyEffects();
+                    game.getState().getTriggers().checkStateTriggers(game);
                 }
             }
         }

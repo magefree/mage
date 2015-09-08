@@ -1464,6 +1464,7 @@ public abstract class GameImpl implements Game, Serializable {
      */
     public boolean checkTriggered() {
         boolean played = false;
+        state.getTriggers().checkStateTriggers(this);
         for (UUID playerId : state.getPlayerList(state.getActivePlayerId())) {
             Player player = getPlayer(playerId);
             while (player.isInGame()) { // player can die or win caused by triggered abilities or leave the game

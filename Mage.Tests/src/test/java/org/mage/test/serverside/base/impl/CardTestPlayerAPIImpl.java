@@ -585,7 +585,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 actualCount++;
             }
         }
-        Assert.assertEquals("(Battlefield) Card counts are not equal (" + commandZoneObjectName + ")", count, actualCount);
+        Assert.assertEquals("(Command Zone) Card counts are not equal (" + commandZoneObjectName + ")", count, actualCount);
     }
 
     /**
@@ -777,7 +777,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertHandCount(Player player, int count) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getHand().size();
-        Assert.assertEquals("(Hand) Card counts are not equal ", count, actual);
+        Assert.assertEquals("(Hand " + player.getName() + ") Card counts are not equal ", count, actual);
     }
 
     /**
