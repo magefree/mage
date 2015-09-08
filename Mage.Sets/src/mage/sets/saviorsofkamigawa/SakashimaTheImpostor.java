@@ -29,6 +29,7 @@ package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -119,6 +120,21 @@ class SakashimaTheImpostorCopyEffect extends OneShotEffect {
                             ), game);
                             return true;
                         }
+
+                        @Override
+                        public Boolean apply(Game game, MageObject mageObject) {
+                            if (!mageObject.getSupertype().contains("Legendary")) {
+                                mageObject.getSubtype().add("Legendary");
+                            }
+                            mageObject.setName("Sakashima the Impostor");
+                            // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
+                            mageObject.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                                    new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
+                                    new ManaCostsImpl("{2}{U}{U}")
+                            ));
+                            return true;
+                        }
+
                     });
 
                     return true;

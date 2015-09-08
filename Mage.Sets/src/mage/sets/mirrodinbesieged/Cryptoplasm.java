@@ -29,6 +29,7 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -110,6 +111,15 @@ class CryptoplasmEffect extends OneShotEffect {
                     permanent.addAbility(upkeepAbility, source.getSourceId(), game);
                     return true;
                 }
+
+                @Override
+                public Boolean apply(Game game, MageObject mageObject) {
+                    Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
+                    upkeepAbility.addTarget(new TargetCreaturePermanent());
+                    mageObject.getAbilities().add(upkeepAbility);
+                    return true;
+                }
+
             });
             game.addEffect(effect, source);
 

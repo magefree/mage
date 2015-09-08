@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.AbilityApplier;
 
 /**
  *
@@ -82,6 +82,7 @@ public class MercurialPretender extends CardImpl {
         return new MercurialPretender(this);
     }
 }
+
 class MercurialPretenderCopyEffect extends OneShotEffect {
 
     public MercurialPretenderCopyEffect() {
@@ -103,16 +104,10 @@ class MercurialPretenderCopyEffect extends OneShotEffect {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
-                        @Override
-                        public Boolean apply(Game game, Permanent permanent) {
+                    game.copyPermanent(copyFromPermanent, sourcePermanent, source,
                             // {2}{U}{U}: Return this creature to its owner's hand.
-                            Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}"));
-                            permanent.addAbility(ability, game);
-                            return true;
-                        }
-                    });
-
+                            new AbilityApplier(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}")))
+                    );
                     return true;
                 }
             }

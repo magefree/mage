@@ -137,7 +137,7 @@ public class Token extends MageObjectImpl {
             return false;
         }
         lastAddedTokenIds.clear();
-        // TODO: Check this setCode handling because it makes no sens if token put into play with e.g. "Feldon of the third Path"
+        // TODO: Check this setCode handling because it makes no sense if token put into play with e.g. "Feldon of the third Path"
         Card source = game.getCard(sourceId);
         String setCode;
         if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {

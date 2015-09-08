@@ -29,6 +29,7 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -115,6 +116,18 @@ class PhantasmalImageCopyEffect extends OneShotEffect {
                             //permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
                             return true;
                         }
+
+                        @Override
+                        public Boolean apply(Game game, MageObject mageObject) {
+                            if (!mageObject.getSubtype().contains("Illusion")) {
+                                mageObject.getSubtype().add("Illusion");
+                            }
+                            // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
+                            mageObject.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+                            //permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
+                            return true;
+                        }
+
                     });
 
                     return true;
