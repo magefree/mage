@@ -27,6 +27,7 @@
  */
 package mage.sets.dissension;
 
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -39,10 +40,7 @@ import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  *

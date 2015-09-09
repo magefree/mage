@@ -29,90 +29,88 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.DevoidAbility;
-import mage.abilities.keyword.IngestAbility;
-import mage.cards.Card;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
  * @author fireshoes
  */
-public class FathomFeeder extends CardImpl {
+public class SmotheringAbomination extends CardImpl {
 
-    public FathomFeeder(UUID ownerId) {
-        super(ownerId, 203, "Fathom Feeder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{B}");
+    public SmotheringAbomination(UUID ownerId) {
+        super(ownerId, 99, "Smothering Abomination", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Eldrazi");
-        this.subtype.add("Drone");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-        // Ingest
-        this.addAbility(new IngestAbility());
+        // At the beginning of your upkeep, sacrifice a creature
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(
+                new FilterCreaturePermanent(), 1, null), TargetController.YOU, false));
 
-        // {3}{U}{B}: Draw a card. Each opponent exiles the top card of his or her library.
-        Effect effect = new FathomFeederEffect();
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}{U}{B}"));
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Whenever you sacrifice a creature, draw a card.
+        this.addAbility(new SmotheringAbominationTriggeredAbility());
     }
 
-    public FathomFeeder(final FathomFeeder card) {
+    public SmotheringAbomination(final SmotheringAbomination card) {
         super(card);
     }
 
     @Override
-    public FathomFeeder copy() {
-        return new FathomFeeder(this);
+    public SmotheringAbomination copy() {
+        return new SmotheringAbomination(this);
     }
 }
 
-class FathomFeederEffect extends OneShotEffect {
-    public FathomFeederEffect() {
-        super(Outcome.Exile);
-        this.staticText = "Each opponent exiles the top card of his or her library";
+class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
+
+    public SmotheringAbominationTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
     }
 
-    public FathomFeederEffect(final FathomFeederEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FathomFeederEffect copy() {
-        return new FathomFeederEffect(this);
+    public SmotheringAbominationTriggeredAbility(final SmotheringAbominationTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(opponentId);
-            if (player != null) {
-                Card card = player.getLibrary().getFromTop(game);
-                if (card != null) {
-                    player.moveCards(card, Zone.LIBRARY, Zone.EXILED, source, game);
-                }
-            }
-        }
-        return true;
+    public SmotheringAbominationTriggeredAbility copy() {
+        return new SmotheringAbominationTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SACRIFICED_PERMANENT;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getPlayerId().equals(this.getControllerId())
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getCardType().contains(CardType.CREATURE);
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you sacrifice a creature, " + super.getRule();
     }
 }
+
