@@ -30,7 +30,7 @@ package mage.sets.battleforzendikar;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -80,7 +80,7 @@ public class UlamogsNullifier extends CardImpl {
         // from exile into their owners' graveyards. If you do, counter target spell.
         Effect effect = new UlamogsNullifierEffect();
         effect.setText("you may put two cards your opponents own from exile into their owners' graveyards. If you do, ");
-        Ability ability = new EntersBattlefieldAbility(effect, true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addEffect(new CounterTargetEffect());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
