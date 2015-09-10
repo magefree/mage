@@ -448,7 +448,8 @@ public class TableController {
             if (userPlayerMap.get(userId) != null) {
                 return;
             }
-            UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId(), getChatId());
+            UUID gameId = match.getGame().getId();
+            UserManager.getInstance().getUser(userId).watchGame(gameId, GameManager.getInstance().getChatId(gameId));
         }
     }
 
