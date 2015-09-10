@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -48,6 +47,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
@@ -81,7 +81,6 @@ public class UlamogsNullifier extends CardImpl {
         Effect effect = new UlamogsNullifierEffect();
         effect.setText("you may put two cards your opponents own from exile into their owners' graveyards. If you do, ");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
-        ability.addEffect(new CounterTargetEffect());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
@@ -121,12 +120,14 @@ class UlamogsNullifierEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Spell spell = game.getStack().getSpell(source.getFirstTarget());
+        if (controller != null && spell != null) {
             Target target = new TargetCardInExile(2, 2, filter, null);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Cards cardsToGraveyard = new CardsImpl(target.getTargets());
                     controller.moveCards(cardsToGraveyard, null, Zone.GRAVEYARD, source, game);
+                    game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
                     return true;
                 }
             }
