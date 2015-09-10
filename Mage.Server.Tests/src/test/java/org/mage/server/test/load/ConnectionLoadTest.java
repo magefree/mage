@@ -1,5 +1,6 @@
 package org.mage.server.test.load;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -11,6 +12,7 @@ public class ConnectionLoadTest extends BaseLoadTest {
     private static final Integer USER_COUNT = 1000;
 
     @Test
+    @Ignore
     public void connectTest() {
         connect(USER_COUNT);
         

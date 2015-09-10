@@ -56,7 +56,7 @@ public class TestClient implements MageClient {
         connection.setSSL(true);
         connection.setUsername(userName);
         connection.setForceDBComparison(false);
-        connection.setUserData(new UserDataView(UserGroup.PLAYER, 51, false, false, false, new UserSkipPrioritySteps(), "world", false, false, false));
+        connection.setUserData(new UserDataView(UserGroup.PLAYER, 51, false, false, false, new UserSkipPrioritySteps(), "world", false, false, false, false, false, false));
         return client.connect(connection, MageVersion.getCurrent());
     }
     
