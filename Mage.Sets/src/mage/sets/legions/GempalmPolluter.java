@@ -32,17 +32,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -50,11 +49,11 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class GempalmPolluter extends CardImpl {
 
-  static final private FilterPermanent filter = new FilterPermanent("Zombie");
+    static final private FilterPermanent filter = new FilterPermanent("Zombie");
 
-  static {
-      filter.add(new SubtypePredicate("Zombie"));
-  }
+    static {
+        filter.add(new SubtypePredicate("Zombie"));
+    }
 
     public GempalmPolluter(UUID ownerId) {
         super(ownerId, 70, "Gempalm Avenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
@@ -66,13 +65,15 @@ public class GempalmPolluter extends CardImpl {
         // Cycling {B}{B}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}{B}")));
 
-        // When you cycle Gempalm Polluter, Target player loses X lifes where X is the number of zombies in game.
+        // When you cycle Gempalm Polluter, you may have target player lose life equal to the number of Zombies on the battlefield.
         Effect effect = new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter));
+        effect.setText("you may have target player lose life equal to the number of Zombies on the battlefield");
+        Ability ability = new CycleTriggeredAbility(effect, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public GempalmPolluter(final GempalPolluter card) {
+    public GempalmPolluter(final GempalmPolluter card) {
         super(card);
     }
 
