@@ -153,7 +153,7 @@ public class CardView extends SimpleCardView {
      * for morph / face down cards to know which player may see information for
      * the card
      * @param showFaceDownCard if true and the card is not on the battelfield,
-     * also a face dwon card is shown in the view dwon cards will be shown
+     * also a face down card is shown in the view down cards will be shown
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null);
@@ -191,6 +191,7 @@ public class CardView extends SimpleCardView {
                     this.power = Integer.toString(card.getPower().getValue());
                     this.toughness = Integer.toString(card.getToughness().getValue());
                     this.cardTypes = card.getCardType();
+                    this.faceDown = ((Permanent) card).isFaceDown(game);
                 } else {
                     // this.hideInfo = true;
                     return;
