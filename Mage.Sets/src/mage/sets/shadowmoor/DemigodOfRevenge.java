@@ -30,8 +30,8 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -43,8 +43,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -64,10 +62,12 @@ public class DemigodOfRevenge extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // When you cast Demigod of Revenge, return all cards named Demigod of Revenge from your graveyard to the battlefield.
-        this.addAbility(new DemigodOfRevengeTriggeredAbility());
+        this.addAbility(new CastSourceTriggeredAbility(new DemigodOfRevengeReturnEffect()));
     }
 
     public DemigodOfRevenge(final DemigodOfRevenge card) {
@@ -80,40 +80,10 @@ public class DemigodOfRevenge extends CardImpl {
     }
 }
 
-class DemigodOfRevengeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DemigodOfRevengeTriggeredAbility() {
-        super(Zone.STACK, new DemigodOfRevengeReturnEffect(), false);
-    }
-
-    public DemigodOfRevengeTriggeredAbility(final DemigodOfRevengeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DemigodOfRevengeTriggeredAbility copy() {
-        return new DemigodOfRevengeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When you cast {this}, " + super.getRule();
-    }
-}
-
 class DemigodOfRevengeReturnEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard();
+
     static {
         filter.add(new NamePredicate("Demigod of Revenge"));
     }

@@ -28,10 +28,6 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -40,6 +36,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 
 
@@ -57,13 +57,15 @@ public class AvacynAngelOfHope extends CardImpl {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 
+        // Flying, vigilance, indestructible
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
+        this.addAbility(IndestructibleAbility.getInstance());
 
-        // Avacyn, Angel of Hope and other permanents you control are indestructible.
-        FilterControlledPermanent filter = new FilterControlledPermanent("Avacyn, Angel of Hope and other permanents you control");
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
-        effect.setText("{this} and other permanents you control are indestructible");
+        // Other permanents you control are indestructible.
+        FilterControlledPermanent filter = new FilterControlledPermanent("Other permanents you control");
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
+        effect.setText("Other permanents you control are indestructible");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

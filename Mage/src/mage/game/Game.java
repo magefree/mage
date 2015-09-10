@@ -73,6 +73,7 @@ import mage.game.turn.Turn;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
 
 public interface Game extends MageItem, Serializable {
@@ -221,13 +222,13 @@ public interface Game extends MageItem, Serializable {
 
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
 
-    void fireAskPlayerEvent(UUID playerId, String message);
+    void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source);
 
     void fireChooseChoiceEvent(UUID playerId, Choice choice);
 
-    void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
+    void fireSelectTargetEvent(UUID playerId, MessageToClient message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
 
-    void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options);
+    void fireSelectTargetEvent(UUID playerId, MessageToClient message, Cards cards, boolean required, Map<String, Serializable> options);
 
     void fireSelectTargetTriggeredAbilityEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
 

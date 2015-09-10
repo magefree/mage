@@ -25,20 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.ObjectColor;
+import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -46,10 +43,18 @@ import mage.game.stack.Spell;
  */
 public class AngelsFeather extends CardImpl {
 
+    private final static FilterSpell filter = new FilterSpell("a white spell");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+    }
+
     public AngelsFeather(UUID ownerId) {
         super(ownerId, 311, "Angel's Feather", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "10E";
-        this.addAbility(new AngelsFeatherAbility());
+
+        // Whenever a player casts a white spell, you may gain 1 life.
+        this.addAbility(new SpellCastAllTriggeredAbility(new GainLifeEffect(1), filter, true));
     }
 
     public AngelsFeather(final AngelsFeather card) {
@@ -59,39 +64,6 @@ public class AngelsFeather extends CardImpl {
     @Override
     public AngelsFeather copy() {
         return new AngelsFeather(this);
-    }
-
-}
-
-class AngelsFeatherAbility extends TriggeredAbilityImpl {
-
-    public AngelsFeatherAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-    }
-
-    public AngelsFeatherAbility(final AngelsFeatherAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AngelsFeatherAbility copy() {
-        return new AngelsFeatherAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getColor(game).isWhite();
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player casts a white spell, you may gain 1 life.";
     }
 
 }

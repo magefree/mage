@@ -58,6 +58,7 @@ public class SwiftfootBoots extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and haste");
+        ability.addEffect(effect);
         this.addAbility(ability);
 
         // Equip {1}

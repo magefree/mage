@@ -28,13 +28,14 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,10 +49,12 @@ public class TravelPreparations extends CardImpl {
         super(ownerId, 206, "Travel Preparations", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "ISD";
 
-
         // Put a +1/+1 counter on each of up to two target creatures.
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+        effect.setText("Put a +1/+1 counter on each of up to two target creatures");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+
         // Flashback {1}{W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{W}"), TimingRule.SORCERY));
     }

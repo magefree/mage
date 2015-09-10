@@ -53,6 +53,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -70,6 +71,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.filter.predicate.permanent.SummoningSicknessPredicate;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.game.Table;
@@ -97,6 +99,7 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.common.TargetPermanentOrPlayer;
+import mage.util.MessageToClient;
 import org.junit.Ignore;
 
 /**
@@ -476,6 +479,7 @@ public class TestPlayer implements Player {
                 FilterCreatureForCombat filter = new FilterCreatureForCombat();
                 filter.add(new NamePredicate(groups[0]));
                 filter.add(Predicates.not(new AttackingPredicate()));
+                filter.add(Predicates.not(new SummoningSicknessPredicate()));
                 Permanent attacker = findPermanent(filter, computerPlayer.getId(), game);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
@@ -569,21 +573,37 @@ public class TestPlayer implements Player {
                     String[] targetList = choose2.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
+                        boolean originOnly = false;
+                        boolean copyOnly = false;
+                        if (targetName.endsWith("]")) {
+                            if (targetName.endsWith("[no copy]")) {
+                                originOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 9);
+                            }
+                            if (targetName.endsWith("[only copy]")) {
+                                copyOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 11);
+                            }
+                        }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPermanent, game)) {
                             if (target.getTargets().contains(permanent.getId())) {
                                 continue;
                             }
                             if (permanent.getName().equals(targetName)) {
                                 if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), null, game)) {
-                                    target.add(permanent.getId(), game);
-                                    targetFound = true;
-                                    break;
+                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
+                                        target.add(permanent.getId(), game);
+                                        targetFound = true;
+                                        break;
+                                    }
                                 }
                             } else if ((permanent.getName() + "-" + permanent.getExpansionSetCode()).equals(targetName)) {
                                 if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), null, game)) {
-                                    target.add(permanent.getId(), game);
-                                    targetFound = true;
-                                    break;
+                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
+                                        target.add(permanent.getId(), game);
+                                        targetFound = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -797,6 +817,14 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+    }
+
+    @Override
+    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
+        if (message.getMessage().equals("Scry 1?")) {
+            return false;
+        }
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
                 choices.remove(0);
@@ -807,7 +835,7 @@ public class TestPlayer implements Player {
                 return true;
             }
         }
-        return true;
+        return computerPlayer.chooseUse(outcome, message, source, game);
     }
 
     @Override
@@ -1817,6 +1845,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public AbilityType getJustActivatedType() {
+        return computerPlayer.getJustActivatedType();
+    }
+
+    @Override
+    public void setJustActivatedType(AbilityType justActivatedType) {
+        computerPlayer.setJustActivatedType(justActivatedType);
+    }
+
+    @Override
     public void cleanUpOnMatchEnd() {
         computerPlayer.cleanUpOnMatchEnd();
     }
@@ -1895,6 +1933,11 @@ public class TestPlayer implements Player {
     @Override
     public void pickCard(List<Card> cards, Deck deck, Draft draft) {
         computerPlayer.pickCard(cards, deck, draft);
+    }
+
+    @Override
+    public boolean scry(int value, Ability source, Game game) {
+        return computerPlayer.scry(value, source, game);
     }
 
     public void setAIPlayer(boolean AIPlayer) {

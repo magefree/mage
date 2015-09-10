@@ -25,13 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,7 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,7 +49,7 @@ import mage.players.Player;
  */
 public class PestilenceDemon extends CardImpl {
 
-    public PestilenceDemon (UUID ownerId) {
+    public PestilenceDemon(UUID ownerId) {
         super(ownerId, 124, "Pestilence Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Demon");
@@ -62,7 +60,7 @@ public class PestilenceDemon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PestilenceDemonEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public PestilenceDemon (final PestilenceDemon card) {
+    public PestilenceDemon(final PestilenceDemon card) {
         super(card);
     }
 
@@ -74,6 +72,7 @@ public class PestilenceDemon extends CardImpl {
 }
 
 class PestilenceDemonEffect extends OneShotEffect {
+
     PestilenceDemonEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 1 damage to each creature and each player";
@@ -94,7 +93,7 @@ class PestilenceDemonEffect extends OneShotEffect {
         for (UUID playerId : game.getPlayerList()) {
             Player p = game.getPlayer(playerId);
             if (p != null) {
-                p.damage(1, source.getSourceId(), game, true, false);
+                p.damage(1, source.getSourceId(), game, false, true);
             }
         }
         return true;

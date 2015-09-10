@@ -54,13 +54,13 @@ import mage.game.Game;
  * @author jeffwadsworth
  */
 public class IvoryGuardians extends CardImpl {
-    
-    private static final FilterCard filter = new FilterCard();
-    
+
+    private static final FilterCard filter = new FilterCard("red");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
-    
+
     private static final String rule = "Creatures named {this} get +1/+1 as long as an opponent controls a nontoken red permanent";
 
     public IvoryGuardians(UUID ownerId) {
@@ -73,10 +73,10 @@ public class IvoryGuardians extends CardImpl {
 
         // Protection from red
         this.addAbility(new ProtectionAbility(filter));
-        
+
         // Creatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield), new IvoryGuardiansCondition(), rule)));
-        
+
     }
 
     public IvoryGuardians(final IvoryGuardians card) {

@@ -39,7 +39,6 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-
 public class RetraceAbility extends SpellAbility {
 
     public RetraceAbility(Card card) {
@@ -51,7 +50,7 @@ public class RetraceAbility extends SpellAbility {
         this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
-        
+
     }
 
     public RetraceAbility(final RetraceAbility ability) {

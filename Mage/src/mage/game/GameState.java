@@ -742,9 +742,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             // TODO: add sources for triggers - the same way as in addEffect: sources
             this.triggers.add((TriggeredAbility) ability, sourceId, attachedTo);
         }
-        for (Watcher watcher : ability.getWatchers()) {
-            watcher.setControllerId(attachedTo.getOwnerId());
-            watcher.setSourceId(attachedTo.getId());
+        List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
+        for (Watcher watcher : watcherList) {
+            // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
+            watcher.setControllerId(attachedTo == null ? ability.getControllerId() : attachedTo.getOwnerId());
+            watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
             watchers.add(watcher);
         }
         for (Ability sub : ability.getSubAbilities()) {

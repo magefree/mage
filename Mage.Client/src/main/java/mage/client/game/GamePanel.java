@@ -1997,7 +1997,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     }
                 }
                 if (event.getEventName().equals("action-consumed")) {
-                    dialog.hideDialog();
+                    dialog.removeDialog();
                 }
             }
         };
@@ -2016,24 +2016,31 @@ public final class GamePanel extends javax.swing.JPanel {
         switch (e.getActionCommand()) {
             case CMD_AUTO_ORDER_FIRST:
                 MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_FIRST, gameId, abilityId);
+                MageFrame.getClient().sendPlayerUUID(gameId, abilityId);
                 break;
             case CMD_AUTO_ORDER_LAST:
                 MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_LAST, gameId, abilityId);
+                MageFrame.getClient().sendPlayerUUID(gameId, null); // Don't use this but refresh the displayed abilities
                 break;
             case CMD_AUTO_ORDER_NAME_FIRST:
                 if (abilityRuleText != null) {
                     MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_FIRST, gameId, abilityRuleText);
+                    MageFrame.getClient().sendPlayerUUID(gameId, abilityId);
                 }
                 break;
             case CMD_AUTO_ORDER_NAME_LAST:
                 if (abilityRuleText != null) {
                     MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_LAST, gameId, abilityRuleText);
+                    MageFrame.getClient().sendPlayerUUID(gameId, null); // Don't use this but refresh the displayed abilities
                 }
                 break;
             case CMD_AUTO_ORDER_RESET_ALL:
                 MageFrame.getClient().sendPlayerAction(TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
                 break;
         }
+        for (ShowCardsDialog dialog : pickTarget) {
+            dialog.removeDialog();
+    }
     }
 
     private void initPopupMenuTriggerOrder() {

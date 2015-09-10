@@ -35,7 +35,6 @@ import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
@@ -127,20 +126,16 @@ class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.LOST_CONTROL
-                || event.getType() == GameEvent.EventType.COLOR_CHANGED
-                || event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Card card = game.getCard(this.getSourceId());
-            if (card != null) {
-                ObjectColor color = (ObjectColor) game.getState().getValue(card.getId() + "_color");
-                if (color != null) {
-                    for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
-                        if (perm.getColor(game).contains(color)) {
-                            return false;
-                        }
+        Permanent permanent = game.getPermanent(getSourceId());
+        if (permanent != null) {
+            ObjectColor color = (ObjectColor) game.getState().getValue(getSourceId() + "_color");
+            if (color != null) {
+                for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
+                    if (perm.getColor(game).contains(color)) {
+                        return false;
                     }
-                    return true;
                 }
+                return true;
             }
         }
         return false;

@@ -133,13 +133,18 @@ public class GameView implements Serializable {
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), new CardView(new EmblemView(((Emblem) object), sourceCard))));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else {
-                        StackAbility stackAbility = ((StackAbility) object);
-                        stackAbility.newId();
-                        stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));
-                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));
+                        if (object instanceof StackAbility) {
+                            StackAbility stackAbility = ((StackAbility) object);
+                            stackAbility.newId();
+                            stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));
+                            checkPaid(stackObject.getId(), ((StackAbility) stackObject));
+                        } else {
+                            logger.fatal("Object can't be cast to StackAbility: " + object.getName() + " " + object.toString());
+                        }
                     }
                 } else {
-                    logger.error("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
+                    // can happen if a player times out while ability is on the stack
+                    logger.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
             } else {
                 // Spell

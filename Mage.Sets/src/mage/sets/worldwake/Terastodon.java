@@ -28,15 +28,15 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -68,7 +68,7 @@ public class Terastodon extends CardImpl {
 
         // When Terastodon enters the battlefield, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller puts a 3/3 green Elephant creature token onto the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TerastodonEffect(), true);
-        ability.addTarget(new TargetPermanent(0, 3, filter, true));
+        ability.addTarget(new TargetPermanent(0, 3, filter, false));
         this.addAbility(ability);
     }
 

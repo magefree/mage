@@ -72,59 +72,59 @@ public class YixlidJailer extends CardImpl {
     public YixlidJailer copy() {
         return new YixlidJailer(this);
     }
-}
 
-class YixlidJailerEffect extends ContinuousEffectImpl {
+    class YixlidJailerEffect extends ContinuousEffectImpl {
 
-    YixlidJailerEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
-        staticText = "Cards in graveyards lose all abilities.";
-    }
+        YixlidJailerEffect() {
+            super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
+            staticText = "Cards in graveyards lose all abilities.";
+        }
 
-    YixlidJailerEffect(final YixlidJailerEffect effect) {
-        super(effect);
-    }
+        YixlidJailerEffect(final YixlidJailerEffect effect) {
+            super(effect);
+        }
 
-    @Override
-    public YixlidJailerEffect copy() {
-        return new YixlidJailerEffect(this);
-    }
+        @Override
+        public YixlidJailerEffect copy() {
+            return new YixlidJailerEffect(this);
+        }
 
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (layer == Layer.AbilityAddingRemovingEffects_6) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                for (UUID playerId : controller.getInRange()) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        for (Card card : player.getGraveyard().getCards(game)) {
-                            if (card != null) {
-                                card.getAbilities(game).clear(); // Will the abilities ever come back????
-                                // TODO: Fix that (LevelX2)
-                                // game.getContinuousEffects().removeGainedEffectsForSource(card.getId());
-                                // game.getState().resetTriggersForSourceId(card.getId());
-                                Abilities abilities = game.getState().getAllOtherAbilities(card.getId());
-                                if (abilities != null) {
-                                    abilities.clear();
+        @Override
+        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+            if (layer == Layer.AbilityAddingRemovingEffects_6) {
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null) {
+                    for (UUID playerId : controller.getInRange()) {
+                        Player player = game.getPlayer(playerId);
+                        if (player != null) {
+                            for (Card card : player.getGraveyard().getCards(game)) {
+                                if (card != null) {
+                                    card.getAbilities(game).clear(); // Will the abilities ever come back????
+                                    // TODO: Fix that (LevelX2)
+                                    // game.getContinuousEffects().removeGainedEffectsForSource(card.getId());
+                                    // game.getState().resetTriggersForSourceId(card.getId());
+                                    Abilities abilities = game.getState().getAllOtherAbilities(card.getId());
+                                    if (abilities != null) {
+                                        abilities.clear();
+                                    }
                                 }
                             }
                         }
                     }
+                    return true;
                 }
-                return true;
             }
+            return false;
         }
-        return false;
-    }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return false;
+        }
 
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
+        @Override
+        public boolean hasLayer(Layer layer) {
+            return layer == Layer.AbilityAddingRemovingEffects_6;
+        }
     }
 }

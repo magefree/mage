@@ -28,13 +28,12 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -86,7 +85,7 @@ class DeathPitsOfRathTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for(Effect effect : this.getEffects()) {
+        for (Effect effect : this.getEffects()) {
             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
         }
         return true;
@@ -94,6 +93,6 @@ class DeathPitsOfRathTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature is dealt damage, destroy it. It can't be regenerated";
+        return "Whenever a creature is dealt damage, destroy it. It can't be regenerated.";
     }
 }

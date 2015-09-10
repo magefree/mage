@@ -28,15 +28,13 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.Rarity;
+import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,7 +49,6 @@ public class RoilingTerrain extends CardImpl {
     public RoilingTerrain(UUID ownerId) {
         super(ownerId, 88, "Roiling Terrain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "WWK";
-
 
         // Destroy target land, then Roiling Terrain deals damage to that land's controller equal to the number of land cards in that player's graveyard.
         this.getSpellAbility().addEffect(new RoilingTerrainEffect());
@@ -69,12 +66,6 @@ public class RoilingTerrain extends CardImpl {
 }
 
 class RoilingTerrainEffect extends OneShotEffect {
-    
-    private static final FilterCard filter = new FilterCard("lands in graveyard");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
 
     public RoilingTerrainEffect() {
         super(Outcome.Sacrifice);
@@ -92,12 +83,14 @@ class RoilingTerrainEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetedLand = game.getPermanent(source.getFirstTarget());
+        Permanent targetedLand = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetedLand != null) {
-            Player controller = game.getPlayer(targetedLand.getControllerId());
-            targetedLand.destroy(id, game, true);
-            int landsInGraveyard = controller.getGraveyard().count(filter, game);
-            controller.damage(landsInGraveyard, id, game, false, true);
+            targetedLand.destroy(source.getSourceId(), game, true);
+            Player targetController = game.getPlayer(targetedLand.getControllerId());
+            if (targetController != null) {
+                int landsInGraveyard = targetController.getGraveyard().count(new FilterLandCard(), game);
+                targetController.damage(landsInGraveyard, source.getSourceId(), game, false, true);
+            }
             return true;
         }
         return false;

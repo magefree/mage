@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
-
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -39,7 +38,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class ManifestTest extends CardTestPlayerBase {
 
     /**
@@ -73,7 +71,8 @@ public class ManifestTest extends CardTestPlayerBase {
     }
 
     /**
-     * If Doomwake Giant gets manifested, it's Constellation trigger may not trigger
+     * If Doomwake Giant gets manifested, it's Constellation trigger may not
+     * trigger
      */
     @Test
     public void testETBTriggeredAbilities2() {
@@ -103,8 +102,10 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
     }
+
     /**
-     * If Doomwake Giant gets manifested, it's Constellation trigger may not trigger
+     * If Doomwake Giant gets manifested, it's Constellation trigger may not
+     * trigger
      */
     @Test
     public void testETBTriggeredAbilities3() {
@@ -115,10 +116,10 @@ public class ManifestTest extends CardTestPlayerBase {
         // Constellation - When Doomwake Giant or another enchantment enters the battlefield
         // under your control, creatures your opponents control get -1/-1 until end of turn.
         addCard(Zone.LIBRARY, playerA, "Doomwake Giant");
-        
-        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");        
+
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
-        
+
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Reality Shift", "Silvercoat Lion");
@@ -130,7 +131,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerB, "Reality Shift", 1);
-        assertExileCount("Silvercoat Lion" , 1);
+        assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
         assertPermanentCount(playerA, "", 1);
         assertPowerToughness(playerA, "", 2, 2);
@@ -138,8 +139,10 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Pillarfield Ox", 1);
         assertPowerToughness(playerB, "Pillarfield Ox", 2, 4);
     }
+
     /**
-     * If Doomwake Giant gets manifested, it's Constellation trigger may not trigger
+     * If Doomwake Giant gets manifested, it's Constellation trigger may not
+     * trigger
      */
     @Test
     public void testNylea() {
@@ -150,7 +153,7 @@ public class ManifestTest extends CardTestPlayerBase {
         // As long as your devotion to white is less than five, Nylea isn't a creature.
         // <i>(Each {G} in the mana costs of permanents you control counts towards your devotion to green.)</i>
         addCard(Zone.LIBRARY, playerA, "Nylea, God of the Hunt");
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         skipInitShuffling();
@@ -164,17 +167,17 @@ public class ManifestTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerB, "Reality Shift", 1);
-        assertExileCount("Silvercoat Lion" , 1);
+        assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
         assertPermanentCount(playerA, "", 1);
         assertPowerToughness(playerA, "", 2, 2);
 
     }
-    
+
     /*
-        Had a Foundry Street Denizen and another creature out.
-        Opponent Reality Shift'ed the other creature, manifested card was a red creature. This pumped the foundry street denizen even though it shouldn't.
-    */
+     Had a Foundry Street Denizen and another creature out.
+     Opponent Reality Shift'ed the other creature, manifested card was a red creature. This pumped the foundry street denizen even though it shouldn't.
+     */
     @Test
     public void testColorOfManifestedCardDoesNotCount() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
@@ -184,7 +187,7 @@ public class ManifestTest extends CardTestPlayerBase {
         // Gore Swine {2}{R}
         // 4/1
         addCard(Zone.LIBRARY, playerA, "Gore Swine");
-        
+
         // Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Foundry Street Denizen");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
@@ -200,16 +203,17 @@ public class ManifestTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerB, "Reality Shift", 1);
-        assertExileCount("Silvercoat Lion" , 1);
+        assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
         assertPermanentCount(playerA, "", 1);
         assertPowerToughness(playerA, "", 2, 2);
         assertPowerToughness(playerA, "Foundry Street Denizen", 1, 1);
 
-    }    
+    }
     /*
-    I casted a Silence the Believers on a manifested card. It moved to the exile zone face-down.
-    */
+     I casted a Silence the Believers on a manifested card. It moved to the exile zone face-down.
+     */
+
     @Test
     public void testCardGetsExiledFaceUp() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
@@ -224,7 +228,7 @@ public class ManifestTest extends CardTestPlayerBase {
         // Gore Swine {2}{R}
         // 4/1
         addCard(Zone.LIBRARY, playerA, "Gore Swine");
-        
+
         // Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
@@ -240,12 +244,12 @@ public class ManifestTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerB, "Reality Shift", 1);
-        assertExileCount("Silvercoat Lion" , 1);
-        assertExileCount("Gore Swine" , 1);
+        assertExileCount("Silvercoat Lion", 1);
+        assertExileCount("Gore Swine", 1);
         // no facedown creature is on the battlefield
         assertPermanentCount(playerA, "", 0);
-        
-        for (Card card :currentGame.getExile().getAllCards(currentGame)){
+
+        for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Gore Swine")) {
                 Assert.assertTrue("Gore Swine may not be face down in exile", !card.isFaceDown(currentGame));
             }
@@ -255,7 +259,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
     // Qarsi High Priest went to manifest Illusory Gains,
     // but it made me choose a target for gains, then enchanted the card to that creature.
-
     @Test
     public void testManifestAura() {
 
@@ -282,15 +285,13 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Illusory Gains", 0);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
-
         // a facedown creature is on the battlefield
         assertPermanentCount(playerB, "", 1);
 
     }
 
-    // Check if a Megamorph card is manifested and truned by their megamorph ability
+    // Check if a Megamorph card is manifested and turned face up by their megamorph ability
     // it gets the +1/+1 counter.
-
     @Test
     public void testManifestMegamorph() {
 
@@ -300,6 +301,8 @@ public class ManifestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Qarsi High Priest", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
+        // Reach (This creature can block creatures with flying.)
+        // Megamorph {5}{G}
         addCard(Zone.LIBRARY, playerB, "Aerie Bowmasters", 1);
         addCard(Zone.LIBRARY, playerB, "Mountain", 1);
 
@@ -324,10 +327,11 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
 
     }
- 
+
     /**
-     * When a Forest came manifested into play my Courser of Kruphix gained me a life.
-     * 
+     * When a Forest came manifested into play my Courser of Kruphix gained me a
+     * life.
+     *
      */
     @Test
     public void testManifestForest() {
@@ -349,7 +353,6 @@ public class ManifestTest extends CardTestPlayerBase {
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
-
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -361,41 +364,40 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "", 1);
 
-    }    
-    
-  /**
+    }
+
+    /**
      * Whisperwood Elemental - Its sacrifice ability doesn't work..
-     * 
+     *
      */
     @Test
     public void testWhisperwoodElemental() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);   
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Seismic Rupture deals 2 damage to each creature without flying.
         addCard(Zone.HAND, playerA, "Seismic Rupture", 1);
-        
+
         // At the beginning of your end step, manifest the top card of your library.
         // Sacrifice Whisperwood Elemental: Until end of turn, face-up, nontoken creatures you control gain "When this creature dies, manifest the top card of your library."
         addCard(Zone.BATTLEFIELD, playerB, "Whisperwood Elemental", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2);
 
-
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Seismic Rupture");
-        
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         // no life gain
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        
+
         assertGraveyardCount(playerA, "Seismic Rupture", 1);
         assertGraveyardCount(playerB, "Whisperwood Elemental", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 2);
 
         assertPermanentCount(playerB, "", 2);
 
-    }        
+    }
 }

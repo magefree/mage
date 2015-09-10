@@ -56,6 +56,7 @@
         <draftCube name="Ben's Cube (720 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.BensCube"/>
         <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
         <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.CubeTutor720"/>
+        <draftCube name="Jim Davis's Cube (469 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.JimDavisCube"/>
         <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MonoBlueCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2013"/>
@@ -70,8 +71,8 @@
         <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>
         <deckType name="Constructed - Modern" jar="mage-deck-constructed.jar" className="mage.deck.Modern"/>
-        <deckType name="Constructed - Vintage" jar="mage-deck-constructed.jar" className="mage.deck.Vintage"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed.jar" className="mage.deck.Legacy"/>
+        <deckType name="Constructed - Vintage" jar="mage-deck-constructed.jar" className="mage.deck.Vintage"/>
         <deckType name="Constructed - Pauper" jar="mage-deck-constructed.jar" className="mage.deck.Pauper"/>
         <deckType name="Constructed - Historical Standard" jar="mage-deck-constructed.jar" className="mage.deck.HistoricalStandard"/>
         <deckType name="Constructed - Super Standard" jar="mage-deck-constructed.jar" className="mage.deck.SuperStandard"/>

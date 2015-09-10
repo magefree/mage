@@ -67,6 +67,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.CardType;
@@ -118,6 +119,7 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.GameLog;
+import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
 import mage.watchers.common.BlockedAttackerWatcher;
@@ -873,13 +875,14 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         //20091005 - 103.3
+        int startingHandSize = 7;
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (!gameOptions.testMode || player.getLife() == 0) {
                 player.initLife(this.getLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(7, this);
+                player.drawCards(startingHandSize, this);
             }
         }
 
@@ -921,6 +924,15 @@ public abstract class GameImpl implements Game, Serializable {
             }
             saveState(false);
         } while (!mulliganPlayers.isEmpty());
+        // new scry rule
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            Player player = getPlayer(playerId);
+            if (player != null && player.getHand().size() < startingHandSize) {
+                if (player.chooseUse(Outcome.Benefit, new MessageToClient("Scry 1?", "Look at the top card of your library. You may put that card on the bottom of your library."), null, this)) {
+                    player.scry(1, null, this);
+                }
+            }
+        }
         getState().setChoosingPlayerId(null);
         Watchers watchers = state.getWatchers();
         // add default watchers
@@ -1083,15 +1095,6 @@ public abstract class GameImpl implements Game, Serializable {
         player.drawCards(numCards - deduction, this);
     }
 
-//    @Override
-//    public void quit(UUID playerId) {
-//        if (state != null) {
-//            Player player = state.getPlayer(playerId);
-//            if (player != null && player.isInGame()) {
-//                player.quit(this);
-//            }
-//        }
-//    }
     @Override
     public synchronized void timerTimeout(UUID playerId) {
         Player player = state.getPlayer(playerId);
@@ -1461,6 +1464,7 @@ public abstract class GameImpl implements Game, Serializable {
      */
     public boolean checkTriggered() {
         boolean played = false;
+        state.getTriggers().checkStateTriggers(this);
         for (UUID playerId : state.getPlayerList(state.getActivePlayerId())) {
             Player player = getPlayer(playerId);
             while (player.isInGame()) { // player can die or win caused by triggered abilities or leave the game
@@ -1524,6 +1528,9 @@ public abstract class GameImpl implements Game, Serializable {
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
         while (copiedCards.hasNext()) {
             Card card = copiedCards.next();
+            if (card instanceof SplitCardHalf) {
+                continue; // only the main card is moves, not the halves
+            }
             Zone zone = state.getZone(card.getId());
             if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
                 switch (zone) {
@@ -1886,11 +1893,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireAskPlayerEvent(UUID playerId, String message) {
+    public void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.ask(playerId, message);
+        playerQueryEventSource.ask(playerId, message.getMessage(), source, addMessageToOptions(message, null));
     }
 
     @Override
@@ -1914,19 +1921,19 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+    public void fireSelectTargetEvent(UUID playerId, MessageToClient message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, targets, required, options);
+        playerQueryEventSource.target(playerId, message.getMessage(), targets, required, addMessageToOptions(message, options));
     }
 
     @Override
-    public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
+    public void fireSelectTargetEvent(UUID playerId, MessageToClient message, Cards cards, boolean required, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, cards, required, options);
+        playerQueryEventSource.target(playerId, message.getMessage(), cards, required, addMessageToOptions(message, options));
     }
 
     /**
@@ -2692,4 +2699,19 @@ public abstract class GameImpl implements Game, Serializable {
         return enterWithCounters.get(sourceId);
     }
 
+    private Map<String, Serializable> addMessageToOptions(MessageToClient message, Map<String, Serializable> options) {
+        if (message.getSecondMessage() != null) {
+            if (options == null) {
+                options = new HashMap<>();
+            }
+            options.put("secondMessage", message.getSecondMessage());
+        }
+        if (message.getHintText() != null) {
+            if (options == null) {
+                options = new HashMap<>();
+            }
+            options.put("hintText", message.getHintText());
+        }
+        return options;
+    }
 }

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-plugins</artifactId>
-        <version>1.4.3</version>
+        <version>1.4.4</version>
     </parent>
 
     <artifactId>mage-theme-plugin</artifactId>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-client</artifactId>
-            <version>1.4.3</version>
+            <version>1.4.4</version>
         </dependency>
     </dependencies>
 

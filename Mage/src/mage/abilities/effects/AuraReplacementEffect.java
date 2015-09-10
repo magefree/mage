@@ -116,6 +116,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             }
         }
 
+        game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cuase continuous effects 
         if (targetId == null) {
             Target target = card.getSpellAbility().getTargets().get(0);
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
@@ -169,7 +170,6 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             PermanentCard permanent = new PermanentCard(card, card.getOwnerId(), game);
             game.getBattlefield().addPermanent(permanent);
             card.setZone(Zone.BATTLEFIELD, game);
-            game.applyEffects();
             boolean entered = permanent.entersBattlefield(event.getSourceId(), game, fromZone, true);
             game.applyEffects();
             if (!entered) {

@@ -28,10 +28,12 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.common.MyMainPhaseCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -61,7 +63,7 @@ public class HideawayPlayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (zone ==null || zone.isEmpty()) {
+        if (zone == null || zone.isEmpty()) {
             return false;
         }
         Card card = zone.getCards(game).iterator().next();
@@ -69,10 +71,11 @@ public class HideawayPlayEffect extends OneShotEffect {
         if (card != null && controller != null) {
             if (card.getCardType().contains(CardType.LAND)) {
                 // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
+                if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand() && MyMainPhaseCondition.getInstance().apply(game, source)) {
                     if (controller.chooseUse(Outcome.Benefit, "Play " + card.getLogName() + " from Exile?", source, game)) {
+                        // normal player.playLand(card, game) can't be used because this abilit is on the stack
                         card.setFaceDown(false, game);
-                        return controller.playLand(card, game);
+                        return controller.moveCards(card, Zone.EXILED, Zone.BATTLEFIELD, source, game);
                     }
                 } else if (!game.isSimulation()) {
                     game.informPlayer(controller, "You're not able to play the land now due to regular restrictions.");
@@ -82,7 +85,7 @@ public class HideawayPlayEffect extends OneShotEffect {
                     // The land's last ability allows you to play the removed card as part of the resolution of that ability.
                     // Timing restrictions based on the card's type are ignored (for instance, if it's a creature or sorcery).
                     // Other play restrictions are not (such as "Play [this card] only during combat").
-                    if (controller.chooseUse(Outcome.Benefit, "Cast "+ card.getLogName() + " without paying its mana cost?", source, game)) {
+                    if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
                         card.setFaceDown(false, game);
                         return controller.cast(card.getSpellAbility(), game, true);
                     }
@@ -96,4 +99,3 @@ public class HideawayPlayEffect extends OneShotEffect {
         return false;
     }
 }
-

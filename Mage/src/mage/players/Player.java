@@ -52,6 +52,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PlayerAction;
@@ -74,6 +75,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+import mage.util.MessageToClient;
 
 /**
  *
@@ -190,6 +192,10 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean getPassedUntilStackResolved();
 
     boolean getPassedAllTurns();
+
+    AbilityType getJustActivatedType();
+
+    void setJustActivatedType(AbilityType abilityType);
 
     boolean hasLost();
 
@@ -451,6 +457,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean chooseUse(Outcome outcome, String message, Ability source, Game game);
 
+    boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game);
+
     boolean choose(Outcome outcome, Choice choice, Game game);
 
     boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game);
@@ -661,6 +669,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param exileName name of exile zone (optional)
      * @param sourceId
      * @param game
+     * @param fromZone
      * @param withName
      * @return
      */
@@ -786,4 +795,6 @@ public interface Player extends MageItem, Copyable<Player> {
     void setMatchPlayer(MatchPlayer matchPlayer);
 
     MatchPlayer getMatchPlayer();
+
+    boolean scry(int value, Ability source, Game game);
 }

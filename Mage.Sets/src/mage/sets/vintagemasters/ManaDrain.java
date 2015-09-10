@@ -30,8 +30,8 @@ package mage.sets.vintagemasters;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility.PhaseSelection;
+import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
@@ -96,8 +96,8 @@ class ManaDrainCounterEffect extends OneShotEffect {
             int cmc = spell.getConvertedManaCost();
             Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(0,0,0,0,0,cmc,0), "your");
             effect.setTargetPointer(new FixedTarget(source.getControllerId()));
-            AtTheBeginOMainPhaseDelayedTriggeredAbility delayedAbility =
-                    new AtTheBeginOMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);
+            AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility =
+                    new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             delayedAbility.setSourceObject(source.getSourceObject(game), game);

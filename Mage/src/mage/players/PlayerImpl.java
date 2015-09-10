@@ -176,6 +176,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * and abilities in the stack and will pass them as well.
      */
     protected boolean passedAllTurns; // F9
+    protected AbilityType justActivatedType; // used to check if priority can be passed automatically
 
     protected int turns;
     protected int storedBookmark = -1;
@@ -317,6 +318,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passedUntilStackResolved = player.passedUntilStackResolved;
         this.dateLastAddedToStack = player.dateLastAddedToStack;
         this.passedAllTurns = player.passedAllTurns;
+        this.justActivatedType = player.justActivatedType;
 
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
@@ -440,6 +442,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.skippedAtLeastOnce = false;
         this.passedUntilStackResolved = false;
         this.passedAllTurns = false;
+        this.justActivatedType = null;
         this.canGainLife = true;
         this.canLoseLife = true;
         this.topCardRevealed = false;
@@ -841,7 +844,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (cards.size() != 0) {
             if (!anyOrder) {
                 for (UUID objectId : cards) {
-                    moveObjectToLibrary(objectId, source.getSourceId(), game, false, false);
+                    moveObjectToLibrary(objectId, source == null ? null : source.getSourceId(), game, false, false);
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
@@ -850,11 +853,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                     this.choose(Outcome.Neutral, cards, target, game);
                     UUID targetObjectId = target.getFirstTarget();
                     cards.remove(targetObjectId);
-                    moveObjectToLibrary(targetObjectId, source.getSourceId(), game, false, false);
+                    moveObjectToLibrary(targetObjectId, source == null ? null : source.getSourceId(), game, false, false);
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
-                    moveObjectToLibrary(cards.iterator().next(), source.getSourceId(), game, false, false);
+                    moveObjectToLibrary(cards.iterator().next(), source == null ? null : source.getSourceId(), game, false, false);
                 }
             }
         }
@@ -875,9 +878,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
         cards.addAll(cardsToLibrary);
         if (cards.size() != 0) {
+            UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
                 for (UUID cardId : cards) {
-                    moveObjectToLibrary(cardId, source.getSourceId(), game, true, false);
+                    moveObjectToLibrary(cardId, sourceId, game, true, false);
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
@@ -886,11 +890,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                     this.choose(Outcome.Neutral, cards, target, game);
                     UUID targetObjectId = target.getFirstTarget();
                     cards.remove(targetObjectId);
-                    moveObjectToLibrary(targetObjectId, source.getSourceId(), game, true, false);
+                    moveObjectToLibrary(targetObjectId, sourceId, game, true, false);
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
-                    moveObjectToLibrary(cards.iterator().next(), source.getSourceId(), game, true, false);
+                    moveObjectToLibrary(cards.iterator().next(), sourceId, game, true, false);
                 }
             }
         }
@@ -1129,7 +1133,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         //if player has taken an action then reset all player passed flags
+        justActivatedType = null;
         if (result) {
+            if (isHuman() && (ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED))) {
+                setJustActivatedType(ability.getAbilityType());
+            }
             game.getPlayers().resetPassed();
         }
         return result;
@@ -2975,7 +2983,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case BATTLEFIELD:
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
-                    if (putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, !card.isFaceDown(game))) {
+                    if (putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, card.isFaceDown(game))) {
                         successfulMovedCards.add(card);
                     }
                 }
@@ -2983,8 +2991,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             case LIBRARY:
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
-                    boolean withName = fromZone.equals(Zone.BATTLEFIELD) || !card.isFaceDown(game);
-                    if (moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, withName)) {
+                    boolean hideCard = fromZone.equals(Zone.HAND) || fromZone.equals(Zone.LIBRARY);
+                    if (moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, !hideCard)) {
                         successfulMovedCards.add(card);
                     }
                 }
@@ -3246,6 +3254,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public AbilityType getJustActivatedType() {
+        return justActivatedType;
+    }
+
+    @Override
+    public void setJustActivatedType(AbilityType justActivatedType) {
+        this.justActivatedType = justActivatedType;
+    }
+
+    @Override
     public void revokePermissionToSeeHandCards() {
         usersAllowedToSeeHandCards.clear();
     }
@@ -3284,4 +3302,27 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void abortReset() {
         abort = false;
     }
+
+    @Override
+    public boolean scry(int value, Ability source, Game game) {
+        game.informPlayers(getLogName() + " scries " + value);
+        Cards cards = new CardsImpl();
+        cards.addAll(getLibrary().getTopCards(game, value));
+        if (!cards.isEmpty()) {
+            String text;
+            if (cards.size() == 1) {
+                text = "card if you want to put it to the bottom of your library (Scry)";
+            } else {
+                text = "cards you want to put on the bottom of your library (Scry)";
+            }
+            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard(text));
+            chooseTarget(Outcome.Benefit, cards, target, source, game);
+            putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, source, true);
+            cards.removeAll(target.getTargets());
+            putCardsOnTopOfLibrary(cards, game, source, true);
+        }
+        game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, getId(), source == null ? null : source.getSourceId(), getId(), value, true));
+        return true;
+    }
+
 }

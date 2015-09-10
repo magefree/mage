@@ -30,7 +30,7 @@ package mage.sets.commander;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
@@ -96,8 +96,8 @@ class ScatteringStrokeEffect extends OneShotEffect {
             game.getStack().counter(spell.getId(), source.getSourceId(), game);
             if (ClashEffect.getInstance().apply(game, source)) {
                 Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(0,0,0,0,0,spell.getConvertedManaCost(),0));
-                AtTheBeginOMainPhaseDelayedTriggeredAbility delayedAbility =
-                        new AtTheBeginOMainPhaseDelayedTriggeredAbility(effect, true, TargetController.YOU, AtTheBeginOMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN);
+                AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility =
+                        new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, true, TargetController.YOU, AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN);
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 delayedAbility.setSourceObject(source.getSourceObject(game), game);

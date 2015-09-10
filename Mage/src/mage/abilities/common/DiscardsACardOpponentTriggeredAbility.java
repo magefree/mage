@@ -53,6 +53,8 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                     break;
+                case NONE:
+                    break;
                 default:
                     throw new UnsupportedOperationException(setTargetPointer.toString() + " not supported for this ability.");
             }

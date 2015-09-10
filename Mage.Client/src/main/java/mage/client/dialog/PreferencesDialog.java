@@ -135,6 +135,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_STOP_BLOCK = "stopDeclareBlockersStep";
     public static final String KEY_STOP_ALL_MAIN_PHASES = "stopOnAllMainPhases";
     public static final String KEY_STOP_ALL_END_PHASES = "stopOnAllEndPhases";
+    public static final String KEY_PASS_PRIORITY_CAST = "passPriorityCast";
+    public static final String KEY_PASS_PRIORITY_ACTIVATION = "passPriorityActivation";
+    public static final String KEY_AUTO_ORDER_TRIGGER = "autoOrderTrigger";
 
     // mana auto payment
     public static final String KEY_GAME_MANA_AUTOPAYMENT = "gameManaAutopayment";
@@ -394,6 +397,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbStopBlock = new javax.swing.JCheckBox();
         cbStopOnAllMain = new javax.swing.JCheckBox();
         cbStopOnAllEnd = new javax.swing.JCheckBox();
+        cbPassPriorityCast = new javax.swing.JCheckBox();
+        cbPassPriorityActivation = new javax.swing.JCheckBox();
+        cbAutoOrderTrigger = new javax.swing.JCheckBox();
         tabImages = new javax.swing.JPanel();
         panelCardImages = new javax.swing.JPanel();
         cbUseDefaultImageFolder = new javax.swing.JCheckBox();
@@ -629,7 +635,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(cbConfirmEmptyManaPool)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbAskMoveToGraveOrder)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
@@ -691,8 +697,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_game, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -701,7 +707,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Main", tabMain);
 
-        jLabelHeadLine.setText("Choose phases your game will stop on:");
+        jLabelHeadLine.setText("Choose phases your game will stop on if not skipped by a skip action (e.g. F6):");
 
         jLabelYourTurn.setText("Your turn");
 
@@ -722,7 +728,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jLabelEndOfTurn.setText("End of turn:");
 
         phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Stop settings"));
-        phases_stopSettings.setLayout(new java.awt.GridLayout(4, 1));
+        phases_stopSettings.setLayout(new java.awt.GridLayout(7, 1));
 
         cbStopAttack.setSelected(true);
         cbStopAttack.setText("Stop on declare attackers step if you skip steps (F4/F5/F7) and attackers are available");
@@ -765,6 +771,39 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
         phases_stopSettings.add(cbStopOnAllEnd);
+
+        cbPassPriorityCast.setText("Pass priority automatically after you have put a spell on the stack");
+        cbPassPriorityCast.setToolTipText("If activated the system passes priority automatically for you if you have put a spell on the stack.");
+        cbPassPriorityCast.setActionCommand("");
+        cbPassPriorityCast.setPreferredSize(new java.awt.Dimension(300, 25));
+        cbPassPriorityCast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPassPriorityCastActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbPassPriorityCast);
+
+        cbPassPriorityActivation.setText("Pass priority automatically after you have put an activated ability on the stack");
+        cbPassPriorityActivation.setToolTipText("If activated the system passes priority for you automatically after you have put an activated ability on the stack.");
+        cbPassPriorityActivation.setActionCommand("");
+        cbPassPriorityActivation.setPreferredSize(new java.awt.Dimension(300, 25));
+        cbPassPriorityActivation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPassPriorityActivationActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbPassPriorityActivation);
+
+        cbAutoOrderTrigger.setText("Set order for your triggers automatically if all have the same text");
+        cbAutoOrderTrigger.setToolTipText("<HTML>If activated the order to put on the stack your triggers that trigger at the same time<br/>\nis set automatically if all have the same text.");
+        cbAutoOrderTrigger.setActionCommand("");
+        cbAutoOrderTrigger.setPreferredSize(new java.awt.Dimension(300, 25));
+        cbAutoOrderTrigger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAutoOrderTriggerActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbAutoOrderTrigger);
 
         javax.swing.GroupLayout tabPhasesLayout = new javax.swing.GroupLayout(tabPhases);
         tabPhases.setLayout(tabPhasesLayout);
@@ -876,11 +915,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(jLabelEndOfTurn)
                     .addComponent(checkBoxEndTurnOthers))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(phases_stopSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(phases_stopSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        tabsPanel.addTab("Phases", tabPhases);
+        tabsPanel.addTab("Phases & Priority", tabPhases);
 
         panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images:"));
 
@@ -1699,7 +1738,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
-        // Phases
+        // Phases & Priority
         save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
         save(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
         save(prefs, dialog.checkBoxMainYou, MAIN_YOU);
@@ -1720,6 +1759,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbPassPriorityCast, KEY_PASS_PRIORITY_CAST, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "false", UPDATE_CACHE_POLICY);
 
         // images
         save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
@@ -2022,6 +2064,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbDraftLogAutoSaveActionPerformed
 
+    private void cbPassPriorityCastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPassPriorityCastActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPassPriorityCastActionPerformed
+
+    private void cbPassPriorityActivationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPassPriorityActivationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPassPriorityActivationActionPerformed
+
+    private void cbAutoOrderTriggerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAutoOrderTriggerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAutoOrderTriggerActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -2122,6 +2176,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "true");
         load(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false");
         load(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false");
+        load(prefs, dialog.cbPassPriorityCast, KEY_PASS_PRIORITY_CAST, "true", "false");
+        load(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false");
+        load(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "true");
 
     }
 
@@ -2456,7 +2513,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
-                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true")
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_CAST, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_ACTIVATION, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_ORDER_TRIGGER, "true").equals("true")
         );
     }
 
@@ -2469,6 +2529,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnBrowseImageLocation;
     private javax.swing.JCheckBox cbAllowRequestToShowHandCards;
     private javax.swing.JCheckBox cbAskMoveToGraveOrder;
+    private javax.swing.JCheckBox cbAutoOrderTrigger;
     private javax.swing.JCheckBox cbCheckForNewImages;
     private javax.swing.JCheckBox cbConfirmEmptyManaPool;
     private javax.swing.JCheckBox cbDraftLogAutoSave;
@@ -2478,6 +2539,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbEnableOtherSounds;
     private javax.swing.JCheckBox cbEnableSkipButtonsSounds;
     private javax.swing.JCheckBox cbGameLogAutoSave;
+    private javax.swing.JCheckBox cbPassPriorityActivation;
+    private javax.swing.JCheckBox cbPassPriorityCast;
     private javax.swing.JComboBox<String> cbPreferedImageLanguage;
     private javax.swing.JComboBox<ProxyType> cbProxyType;
     private javax.swing.JCheckBox cbSaveToZipFiles;

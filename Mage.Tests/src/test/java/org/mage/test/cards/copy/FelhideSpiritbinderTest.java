@@ -94,4 +94,35 @@ public class FelhideSpiritbinderTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+
+    @Test
+    public void testCopyATokenCreature() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerA, "Call of the Herd", 1);
+
+        // Inspired - Whenever Felhide Spiritbinder becomes untapped, you may pay {1}{R}.
+        // If you do, put a token onto the battlefield that's a copy of another target creature
+        // except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerB, "Felhide Spiritbinder", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call of the Herd");
+
+        attack(2, playerB, "Felhide Spiritbinder");
+
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Elephant", 1);
+        assertPermanentCount(playerB, "Elephant", 1);
+        assertAbility(playerB, "Elephant", HasteAbility.getInstance(), true);
+
+        Permanent copiedTokenElephant = getPermanent("Elephant", playerB);
+        Assert.assertEquals("Elephant has Enchantment card type", true, copiedTokenElephant.getCardType().contains(CardType.ENCHANTMENT));
+
+        assertLife(playerA, 17);
+        assertLife(playerB, 20);
+
+    }
 }

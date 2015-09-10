@@ -69,45 +69,57 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
         }
     }
 
+    public void checkStateTriggers(Game game) {
+        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
+            TriggeredAbility ability = it.next();
+            if (ability instanceof StateTriggeredAbility && ((StateTriggeredAbility) ability).canTrigger(game)) {
+                checkTrigger(ability, null, game);
+            }
+        }
+    }
+
     public void checkTriggers(GameEvent event, Game game) {
         for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
             TriggeredAbility ability = it.next();
-            if (!ability.checkEventType(event, game)) {
-                continue;
+            if (ability.checkEventType(event, game)) {
+                checkTrigger(ability, event, game);
             }
-            // for effects like when leaves battlefield or destroyed use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring or Karmic Justice)
-            MageObject object = game.getObject(ability.getSourceId());
-            if (ability.isInUseableZone(game, object, event)) {
-                if (!game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
-                    if (object != null) {
-                        boolean controllerSet = false;
-                        if (!ability.getZone().equals(Zone.COMMAND) && event.getTargetId() != null && event.getTargetId().equals(ability.getSourceId())
-                                && (event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
-                            // need to check if object was face down for dies and destroy events because the ability triggers in the new zone, zone counter -1 is used
-                            Permanent permanent = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD, ability.getSourceObjectZoneChangeCounter() - 1);
-                            if (permanent != null) {
-                                if (!ability.getWorksFaceDown() && permanent.isFaceDown(game)) {
-                                    continue;
-                                }
-                                controllerSet = true;
-                                ability.setControllerId(permanent.getControllerId());
-                            }
-                        }
-                        if (!controllerSet) {
-                            if (object instanceof Permanent) {
-                                ability.setControllerId(((Permanent) object).getControllerId());
-                            } else if (object instanceof Spell) {
-                                // needed so that cast triggered abilities have to correct controller (e.g. Ulamog, the Infinite Gyre).
-                                ability.setControllerId(((Spell) object).getControllerId());
-                            } else if (object instanceof Card) {
-                                ability.setControllerId(((Card) object).getOwnerId());
-                            }
-                        }
-                    }
+        }
+    }
 
-                    if (ability.checkTrigger(event, game)) {
-                        ability.trigger(game, ability.getControllerId());
+    private void checkTrigger(TriggeredAbility ability, GameEvent event, Game game) {
+        // for effects like when leaves battlefield or destroyed use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring or Karmic Justice)
+        MageObject object = game.getObject(ability.getSourceId());
+        if (ability.isInUseableZone(game, object, event)) {
+            if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
+                if (object != null) {
+                    boolean controllerSet = false;
+                    if (!ability.getZone().equals(Zone.COMMAND) && event != null && event.getTargetId() != null && event.getTargetId().equals(ability.getSourceId())
+                            && (event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
+                        // need to check if object was face down for dies and destroy events because the ability triggers in the new zone, zone counter -1 is used
+                        Permanent permanent = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD, ability.getSourceObjectZoneChangeCounter() - 1);
+                        if (permanent != null) {
+                            if (!ability.getWorksFaceDown() && permanent.isFaceDown(game)) {
+                                return;
+                            }
+                            controllerSet = true;
+                            ability.setControllerId(permanent.getControllerId());
+                        }
                     }
+                    if (!controllerSet) {
+                        if (object instanceof Permanent) {
+                            ability.setControllerId(((Permanent) object).getControllerId());
+                        } else if (object instanceof Spell) {
+                            // needed so that cast triggered abilities have to correct controller (e.g. Ulamog, the Infinite Gyre).
+                            ability.setControllerId(((Spell) object).getControllerId());
+                        } else if (object instanceof Card) {
+                            ability.setControllerId(((Card) object).getOwnerId());
+                        }
+                    }
+                }
+
+                if (ability.checkTrigger(event, game)) {
+                    ability.trigger(game, ability.getControllerId());
                 }
             }
         }

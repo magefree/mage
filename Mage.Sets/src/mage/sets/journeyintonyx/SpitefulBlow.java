@@ -33,10 +33,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -48,16 +46,12 @@ public class SpitefulBlow extends CardImpl {
         super(ownerId, 83, "Spiteful Blow", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "JOU";
 
-
         // Destroy target creature and target land.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new DestroyTargetEffect();
-        effect.setText("and target land");
-        effect.setTargetPointer(new SecondTargetPointer());
+        Effect effect = new DestroyTargetEffect(false, true);
+        effect.setText("Destroy target creature and target land");
         this.getSpellAbility().addEffect(effect);
-        Target target = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
     public SpitefulBlow(final SpitefulBlow card) {

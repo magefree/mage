@@ -46,6 +46,7 @@ import mage.util.CardUtil;
 public class DestroyTargetEffect extends OneShotEffect {
 
     protected boolean noRegen;
+    protected boolean multitargetHandling;
 
     public DestroyTargetEffect() {
         this(false);
@@ -57,13 +58,19 @@ public class DestroyTargetEffect extends OneShotEffect {
     }
 
     public DestroyTargetEffect(boolean noRegen) {
+        this(noRegen, false);
+    }
+
+    public DestroyTargetEffect(boolean noRegen, boolean multitargetHandling) {
         super(Outcome.DestroyPermanent);
         this.noRegen = noRegen;
+        this.multitargetHandling = multitargetHandling;
     }
 
     public DestroyTargetEffect(final DestroyTargetEffect effect) {
         super(effect);
         this.noRegen = effect.noRegen;
+        this.multitargetHandling = effect.multitargetHandling;
     }
 
     @Override
@@ -74,7 +81,7 @@ public class DestroyTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        if (source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // for Rain of Thorns
+        if (multitargetHandling && source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // Decimate
             for (Target target : source.getTargets()) {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
@@ -84,7 +91,7 @@ public class DestroyTargetEffect extends OneShotEffect {
                     }
                 }
             }
-        } else if (targetPointer.getTargets(game, source).size() > 0) {
+        } else {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {

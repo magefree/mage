@@ -29,12 +29,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,6 +40,12 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DeviantGlee extends CardImpl {
 
-    static final String rule = "and has \"{R}: This creature gains trample until end of turn";
+    static final String rule = "and has \"{R}: This creature gains trample until end of turn.\"";
 
     public DeviantGlee (UUID ownerId) {
         super(ownerId, 65, "Deviant Glee", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");

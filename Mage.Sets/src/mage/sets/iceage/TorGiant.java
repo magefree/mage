@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 public class TorGiant extends CardImpl {
 
     public TorGiant(UUID ownerId) {
-        super(ownerId, 76, "Tor Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        super(ownerId, 220, "Tor Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "ICE";
         this.subtype.add("Giant");
 

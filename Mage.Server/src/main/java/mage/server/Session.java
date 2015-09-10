@@ -163,7 +163,9 @@ public class Session {
                     userDataView.isShowAbilityPickerForced(), userDataView.isAllowRequestShowHandCards(),
                     userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
                     userDataView.getFlagName(), userDataView.askMoveToGraveOrder(), 
-                    userDataView.isManaPoolAutomatic(), userDataView.isAllowRequestShowHandCards());
+                    userDataView.isManaPoolAutomatic(), userDataView.isAllowRequestShowHandCards(),
+                    userDataView.isPassPriorityCast(), userDataView.isPassPriorityActivation(),
+                    userDataView.isAutoOrderTrigger());
                 user.setUserData(userData);
             } else {
                 if (userData.getAvatarId() == 51) { // Update special avatar if first avatar is selected

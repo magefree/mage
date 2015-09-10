@@ -25,20 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,7 +51,7 @@ import mage.util.functions.ApplyToPermanent;
  * @author Loki
  */
 public class PhyrexianMetamorph extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 
     static {
@@ -59,8 +59,8 @@ public class PhyrexianMetamorph extends CardImpl {
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)));
     }
-    
-    public PhyrexianMetamorph (UUID ownerId) {
+
+    public PhyrexianMetamorph(UUID ownerId) {
         super(ownerId, 42, "Phyrexian Metamorph", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{UP}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Shapeshifter");
@@ -71,13 +71,19 @@ public class PhyrexianMetamorph extends CardImpl {
         ApplyToPermanent phyrexianMetamorphApplier = new ApplyToPermanent() {
             @Override
             public Boolean apply(Game game, Permanent permanent) {
-                if (!permanent.getCardType().contains(CardType.ARTIFACT)) {
-                    permanent.getCardType().add(CardType.ARTIFACT);
+                return apply(game, (MageObject) permanent);
+            }
+
+            @Override
+            public Boolean apply(Game game, MageObject mageObject) {
+                if (!mageObject.getCardType().contains(CardType.ARTIFACT)) {
+                    mageObject.getCardType().add(CardType.ARTIFACT);
                 }
                 return true;
             }
+
         };
-        
+
         // {UP} ( can be paid with either {U} or 2 life.)
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
         Effect effect = new CopyPermanentEffect(filter, phyrexianMetamorphApplier);
@@ -86,7 +92,7 @@ public class PhyrexianMetamorph extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianMetamorph (final PhyrexianMetamorph card) {
+    public PhyrexianMetamorph(final PhyrexianMetamorph card) {
         super(card);
     }
 

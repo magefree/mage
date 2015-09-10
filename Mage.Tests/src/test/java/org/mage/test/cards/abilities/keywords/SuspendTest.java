@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -40,16 +41,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SuspendTest extends CardTestPlayerBase {
 
     /**
-     * Tests Epochrasite works (give suspend to a exiled card)
-     * When Epochrasite dies, exile it with three time counters on it and it gains suspend.
+     * Tests Epochrasite works (give suspend to a exiled card) When Epochrasite
+     * dies, exile it with three time counters on it and it gains suspend.
      *
      */
     @Test
     public void testEpochrasite() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.HAND, playerA, "Epochrasite",1);
-        addCard(Zone.HAND, playerB, "Lightning Bolt",1);
+        addCard(Zone.HAND, playerA, "Epochrasite", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Epochrasite");
@@ -61,11 +62,14 @@ public class SuspendTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Epochrasite", 1); // returned on turn 7 with 3 +1/+1 Counter
         assertPowerToughness(playerA, "Epochrasite", 4, 4);
+        assertAbility(playerA, "Epochrasite", HasteAbility.getInstance(), true);
 
     }
+
     /**
-     * Tests Jhoira of the Ghitu works (give suspend to a exiled card)
-     * {2}, Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend.
+     * Tests Jhoira of the Ghitu works (give suspend to a exiled card) {2},
+     * Exile a nonland card from your hand: Put four time counters on the exiled
+     * card. If it doesn't have suspend, it gains suspend.
      *
      */
     @Test
@@ -73,7 +77,7 @@ public class SuspendTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
 
-        addCard(Zone.HAND, playerA, "Silvercoat Lion",1);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Jhoira of the Ghitu", 1);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend <i>(At the beginning of your upkeep, remove a time counter from that card. When the last is removed, cast it without paying its mana cost. If it's a creature, it has haste.)</i>.");
@@ -85,11 +89,12 @@ public class SuspendTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Jhoira of the Ghitu", 1);
         assertHandCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
-        
+
     }
+
     /**
-     * Tests that a spell countered with delay goes to exile with 3 time counters
-     * and can be cast after the 3 counters are removed
+     * Tests that a spell countered with delay goes to exile with 3 time
+     * counters and can be cast after the 3 counters are removed
      *
      */
     @Test
@@ -97,13 +102,13 @@ public class SuspendTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
-        addCard(Zone.HAND, playerA, "Silvercoat Lion",1);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         // Instant {1}{U}
         // Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend. (At the beginning of its owner's upkeep, remove a counter from that card. When the last is removed, the player plays it without paying its mana cost. If it's a creature, it has haste.)
-        addCard(Zone.HAND, playerB, "Delay",1);
+        addCard(Zone.HAND, playerB, "Delay", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Delay", "Silvercoat Lion");
         setChoice(playerA, "Silvercoat Lion");
@@ -113,20 +118,21 @@ public class SuspendTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Delay", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
-        
-    }    
+
+    }
+
     @Test
     public void testDeepSeaKraken() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         // Suspend 9-{2}{U}
         // Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.
-        addCard(Zone.HAND, playerA, "Deep-Sea Kraken",1);
+        addCard(Zone.HAND, playerA, "Deep-Sea Kraken", 1);
 
         // Instant {1}{U}
         // Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend. (At the beginning of its owner's upkeep, remove a counter from that card. When the last is removed, the player plays it without paying its mana cost. If it's a creature, it has haste.)
-        addCard(Zone.HAND, playerB, "Lightning Bolt",1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
-        
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
 
@@ -135,8 +141,8 @@ public class SuspendTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertExileCount("Deep-Sea Kraken", 1);
-        
+
         assertCounterOnExiledCardCount("Deep-Sea Kraken", CounterType.TIME, 8); // -1 from spell of player B
-        
-    }       
+
+    }
 }

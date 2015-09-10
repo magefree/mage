@@ -577,6 +577,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
     }
 
+    @Override
+    public void assertCommandZoneCount(Player player, String commandZoneObjectName, int count) throws AssertionError {
+        int actualCount = 0;
+        for (CommandObject commandObject : currentGame.getState().getCommand()) {
+            if (commandObject.getControllerId().equals(player.getId()) && commandObject.getName().equals(commandZoneObjectName)) {
+                actualCount++;
+            }
+        }
+        Assert.assertEquals("(Command Zone) Card counts are not equal (" + commandZoneObjectName + ")", count, actualCount);
+    }
+
     /**
      * Assert emblem count under player's control
      *
@@ -584,6 +595,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count
      * @throws AssertionError
      */
+    @Override
     public void assertEmblemCount(Player player, int count) throws AssertionError {
         int actualCount = 0;
         for (CommandObject commandObject : currentGame.getState().getCommand()) {
@@ -765,7 +777,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertHandCount(Player player, int count) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getHand().size();
-        Assert.assertEquals("(Hand) Card counts are not equal ", count, actual);
+        Assert.assertEquals("(Hand " + player.getName() + ") Card counts are not equal ", count, actual);
     }
 
     /**
@@ -779,7 +791,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         FilterCard filter = new FilterCard();
         filter.add(new NamePredicate(cardName));
         int actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
-        Assert.assertEquals("(Hand) Card counts for card " + cardName + " are not equal ", count, actual);
+        Assert.assertEquals("(Hand) Card counts for card " + cardName + " for " + player.getName() + " are not equal ", count, actual);
     }
 
     /**

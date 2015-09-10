@@ -27,20 +27,30 @@
  */
 package mage.sets.dissension;
 
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -76,9 +86,7 @@ public class MomirVigSimicVisionary extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, true));
 
         // Whenever you cast a blue creature spell, reveal the top card of your library. If it's a creature card, put that card into your hand.
-        Effect effect2 = new RevealLibraryPutIntoHandEffect(1, new FilterCreatureCard(), false);
-        effect2.setText("reveal the top card of your library. If it's a creature card, put that card into your hand");
-        this.addAbility(new SpellCastControllerTriggeredAbility(effect2, filter2, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new MomirVigSimicVisionaryEffect(), filter2, false));
 
     }
 
@@ -89,5 +97,46 @@ public class MomirVigSimicVisionary extends CardImpl {
     @Override
     public MomirVigSimicVisionary copy() {
         return new MomirVigSimicVisionary(this);
+    }
+}
+
+class MomirVigSimicVisionaryEffect extends OneShotEffect {
+
+    public MomirVigSimicVisionaryEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "reveal the top card of your library. If it's a creature card, put that card into your hand";
+    }
+
+    public MomirVigSimicVisionaryEffect(final MomirVigSimicVisionaryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MomirVigSimicVisionaryEffect copy() {
+        return new MomirVigSimicVisionaryEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
+
+        CardsImpl cards = new CardsImpl();
+        cards.addAll(controller.getLibrary().getTopCards(game, 1));
+        controller.revealCards(sourceObject.getIdName(), cards, game);
+
+        Set<Card> cardsList = cards.getCards(game);
+        Cards cardsToHand = new CardsImpl();
+        for (Card card : cardsList) {
+            if (card.getCardType().contains(CardType.CREATURE)) {
+                cardsToHand.add(card);
+                cards.remove(card);
+            }
+        }
+        controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+        return true;
     }
 }

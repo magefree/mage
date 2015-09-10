@@ -33,7 +33,9 @@ package mage.constants;
  */
 public enum AbilityWord {
 
+    RALLY("Rally"),
     BLOODRUSH("Bloodrush"),
+    CONVERGE("Converge"),
     CONSTELLATION("Constellation"),
     FEROCIOUS("Ferocious"),
     FORMIDABLE("Formidable"),

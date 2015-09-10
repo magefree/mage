@@ -91,4 +91,9 @@ class GateToPhyrexiaAbility extends LimitedTimesPerTurnActivatedAbility {
         }
         return super.canActivate(playerId, game);
     }
+
+    @Override
+    public String getRule() {
+         return "Sacrifice a creature: Destroy target artifact. Activate this ability only during your upkeep and only once each turn.";
+    }
 }

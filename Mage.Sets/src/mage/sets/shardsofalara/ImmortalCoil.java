@@ -28,8 +28,6 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +40,11 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,7 +60,6 @@ public class ImmortalCoil extends CardImpl {
     public ImmortalCoil(UUID ownerId) {
         super(ownerId, 79, "Immortal Coil", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}{B}{B}");
         this.expansionSetCode = "ALA";
-
 
         // {tap}, Exile two cards from your graveyard: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
@@ -98,10 +100,7 @@ class ImmortalCoilAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Player player = game.getPlayer(this.getControllerId());
-        if(player != null && player.getGraveyard().size() == 0){
-            return true;
-        }
-        return false;
+        return player != null && player.getGraveyard().size() == 0;
     }
 
     @Override
@@ -130,7 +129,7 @@ class LoseGameEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) { 
+        if (player != null) {
             player.lost(game);
             return true;
         }
@@ -139,7 +138,6 @@ class LoseGameEffect extends OneShotEffect {
 }
 
 class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
-
 
     public PreventAllDamageToControllerEffect() {
         super(Duration.WhileOnBattlefield);
@@ -166,10 +164,10 @@ class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             Player player = game.getPlayer(source.getControllerId());
-            if(player != null){
-                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(damage, player.getGraveyard().size()), new FilterCard()); 
+            if (player != null) {
+                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(damage, player.getGraveyard().size()), new FilterCard());
                 if (target.choose(Outcome.Exile, source.getControllerId(), source.getSourceId(), game)) {
-                    for (UUID targetId: target.getTargets()) {
+                    for (UUID targetId : target.getTargets()) {
                         Card card = player.getGraveyard().get(targetId, game);
                         if (card != null) {
                             card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
@@ -186,7 +184,7 @@ class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId())){
+            if (event.getTargetId().equals(source.getControllerId())) {
                 return true;
             }
 

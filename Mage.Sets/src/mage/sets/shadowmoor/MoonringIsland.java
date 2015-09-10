@@ -51,13 +51,13 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
  */
 public class MoonringIsland extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("if you control two or more blue permanents");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
-    
+
     public MoonringIsland(UUID ownerId) {
         super(ownerId, 276, "Moonring Island", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "SHM";
@@ -70,17 +70,20 @@ public class MoonringIsland extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {U}, {tap}: Look at the top card of target player's library. Activate this ability only if you control two or more blue permanents.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(), new ManaCostsImpl("{U}"), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+                new LookLibraryTopCardTargetPlayerEffect(),
+                new ManaCostsImpl("{U}"),
+                new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
     }
-    
+
     public MoonringIsland(final MoonringIsland card) {
         super(card);
     }
-    
+
     @Override
     public MoonringIsland copy() {
         return new MoonringIsland(this);

@@ -13,7 +13,7 @@ import org.mage.plugins.card.utils.CardImageUtils;
 public class MagicCardsImageSource implements CardImageSource {
 
     private static CardImageSource instance = new MagicCardsImageSource();
-           
+
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
             put("BFZ", "battle-for-zendikar");
@@ -31,8 +31,8 @@ public class MagicCardsImageSource implements CardImageSource {
             put("MM2", "modern-masters-2015");
             put("PTC", "prerelease-events");
             put("DTK", "dragons-of-tarkir");
-            put("GRC","wpngateway");
-            put("MBP","media-inserts");
+            put("GRC", "wpngateway");
+            put("MBP", "media-inserts");
             put("MLP", "launch-party");
             put("WMCQ", "world-magic-cup-qualifier");
             put("GPX", "grand-prix");
@@ -40,7 +40,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("MGDC", "magic-game-day-cards");
             put("FNMP", "friday-night-magic");
             put("FRF", "fate-reforged");
-            put("C14", "commander-2014-edition");
+            put("C14", "commander-2014");
             put("KTK", "khans-of-tarkir");
             put("VMA", "vintage-masters");
             put("CNS", "conspiracy");
@@ -130,7 +130,7 @@ public class MagicCardsImageSource implements CardImageSource {
         String set = CardImageUtils.updateSet(cardSet, true);
 
         String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
-               
+
         StringBuilder url = new StringBuilder("http://magiccards.info/scans/").append(preferedLanguage).append("/");
         url.append(set.toLowerCase()).append("/").append(collectorId);
 

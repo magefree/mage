@@ -29,18 +29,13 @@ package mage.sets.scourge;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileCardsFromTopOfLibraryTargetEffect;
 import mage.abilities.keyword.MorphAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -58,8 +53,8 @@ public class RavenGuildMaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Raven Guild Master deals combat damage to a player, that player exiles the top ten cards of his or her library.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new RavenGuildMasterEffect(), false, true));
-        
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(10, "that player"), false, true));
+
         // Morph {2}{U}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}{U}")));
     }
@@ -71,38 +66,5 @@ public class RavenGuildMaster extends CardImpl {
     @Override
     public RavenGuildMaster copy() {
         return new RavenGuildMaster(this);
-    }
-}
-
-class RavenGuildMasterEffect extends OneShotEffect {
-
-    public RavenGuildMasterEffect() {
-        super(Outcome.Exile);
-        this.staticText = "that player exiles the top ten cards of his or her library";
-    }
-
-    public RavenGuildMasterEffect(final RavenGuildMasterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RavenGuildMasterEffect copy() {
-        return new RavenGuildMasterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            int count = Math.min(player.getLibrary().size(), 10);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToExile(id, "", source.getSourceId(), game);
-                }
-            }
-        return true;
-        }
-    return false;
     }
 }

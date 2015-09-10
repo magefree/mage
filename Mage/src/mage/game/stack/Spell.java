@@ -197,9 +197,11 @@ public class Spell extends StackObjImpl implements Card {
                     }
                 }
                 if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
-                    Player player = game.getPlayer(getControllerId());
-                    if (player != null) {
-                        player.moveCards(card, Zone.STACK, Zone.GRAVEYARD, ability, game);
+                    if (isCopy() == card.isCopy()) {
+                        Player player = game.getPlayer(getControllerId());
+                        if (player != null) {
+                            player.moveCards(card, Zone.STACK, Zone.GRAVEYARD, ability, game);
+                        }
                     }
                 }
                 return result;
@@ -635,6 +637,10 @@ public class Spell extends StackObjImpl implements Card {
         // These are state-based actions. See rule 704.
         if (this.isCopiedSpell() && !zone.equals(Zone.STACK)) {
             return true;
+        }
+        Card card = game.getCard(getSourceId());
+        if (card != null) {
+            return card.moveToZone(zone, sourceId, game, flag, appliedEffects);
         }
         throw new UnsupportedOperationException("Unsupported operation");
     }

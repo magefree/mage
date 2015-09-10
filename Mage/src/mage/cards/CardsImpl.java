@@ -169,10 +169,13 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Set<Card> getCards(FilterCard filter, UUID sourceId, UUID playerId, Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID card : this) {
-            boolean match = filter.match(game.getCard(card), sourceId, playerId, game);
-            if (match) {
-                cards.add(game.getCard(card));
+        for (UUID cardId : this) {
+            Card card = game.getCard(cardId);
+            if (card != null) {
+                boolean match = filter.match(card, sourceId, playerId, game);
+                if (match) {
+                    cards.add(game.getCard(cardId));
+                }
             }
         }
         return cards;
