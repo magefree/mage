@@ -116,11 +116,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             }
         }
 
-        game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cuase continuous effects 
+        game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cuase continuous effects
         if (targetId == null) {
-            Target target = card.getSpellAbility().getTargets().get(0);
+            Target target = card.getSpellAbility().getTargets().get(0).copy();
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
             if (target != null) {
+                target.setNotTarget(true); // always not target because this way it's not handled targeted
                 target.clearChosen(); // neccessary if e.g. aura is blinked multiple times
             }
             Player player = game.getPlayer(card.getOwnerId());

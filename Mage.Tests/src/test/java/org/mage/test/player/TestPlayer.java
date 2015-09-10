@@ -562,6 +562,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         if (!choices.isEmpty()) {
+            Ability source = null;
+            StackObject stackObject = game.getStack().getStackObject(sourceId);
+            if (stackObject != null) {
+                source = stackObject.getStackAbility();
+            }
             if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer)) { // player target not implemted yet
                 FilterPermanent filterPermanent;
                 if (target instanceof TargetPermanentOrPlayer) {
@@ -590,7 +595,8 @@ public class TestPlayer implements Player {
                                 continue;
                             }
                             if (permanent.getName().equals(targetName)) {
-                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), null, game)) {
+
+                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
@@ -598,7 +604,7 @@ public class TestPlayer implements Player {
                                     }
                                 }
                             } else if ((permanent.getName() + "-" + permanent.getExpansionSetCode()).equals(targetName)) {
-                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), null, game)) {
+                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
