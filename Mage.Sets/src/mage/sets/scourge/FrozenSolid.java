@@ -25,54 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class YokeOfTheDamned extends CardImpl {
+public class FrozenSolid extends mage.sets.coldsnap.FrozenSolid {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
-
-    public YokeOfTheDamned(UUID ownerId) {
-        super(ownerId, 57, "Yoke of the Damned", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "CON";
-        this.subtype.add("Aura");
-
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // When a creature dies, destroy enchanted creature.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DestroyAttachedEffect("enchanted creature"), false, filter));
-
+    public FrozenSolid(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 36;
+        this.expansionSetCode = "SCG";
     }
 
-    public YokeOfTheDamned(final YokeOfTheDamned card) {
+    public FrozenSolid(final FrozenSolid card) {
         super(card);
     }
 
     @Override
-    public YokeOfTheDamned copy() {
-        return new YokeOfTheDamned(this);
+    public FrozenSolid copy() {
+        return new FrozenSolid(this);
     }
 }

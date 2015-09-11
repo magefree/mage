@@ -29,22 +29,17 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -65,7 +60,7 @@ public class MireBlight extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When enchanted creature is dealt damage, destroy it.
-        this.addAbility(new MireBlightTriggeredAbility());
+        this.addAbility(new DamageDealtToAttachedTriggeredAbility(new DestroyAttachedEffect("it"), false));
     }
 
     public MireBlight(final MireBlight card) {
@@ -75,42 +70,5 @@ public class MireBlight extends CardImpl {
     @Override
     public MireBlight copy() {
         return new MireBlight(this);
-    }
-}
-
-class MireBlightTriggeredAbility extends TriggeredAbilityImpl {
-
-    public MireBlightTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
-    }
-
-    public MireBlightTriggeredAbility(final MireBlightTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MireBlightTriggeredAbility copy() {
-        return new MireBlightTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(sourceId);
-        UUID targetId = event.getTargetId();
-        if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(targetId));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When enchanted creature is dealt damage, destroy it.";
     }
 }
