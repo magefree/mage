@@ -81,7 +81,7 @@ public class AnafenzaTheForemost extends CardImpl {
         this.addAbility(ability);
 
         // If a creature card would be put into an opponent's graveyard from anywhere, exile it instead.
-         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnafenzaTheForemostEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnafenzaTheForemostEffect()));
     }
 
     public AnafenzaTheForemost(final AnafenzaTheForemost card) {
@@ -119,16 +119,15 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (((ZoneChangeEvent)event).getFromZone().equals(Zone.BATTLEFIELD)) {
-                Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+            if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+                Permanent permanent = ((ZoneChangeEvent) event).getTarget();
                 if (permanent != null) {
                     return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 }
-            }
-            else {
+            } else {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent)event).getFromZone(), true);
+                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
                 }
             }
         }
@@ -142,11 +141,17 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.CREATURE) &&
-                    game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) {
-                return true;
+            if (card != null && game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) { // Anafenza only cares about cards
+                if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
+                    if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+                        return true;
+                    }
+                } else if (card.getCardType().contains(CardType.CREATURE)) {
+                    return true;
+                }
             }
         }
         return false;
