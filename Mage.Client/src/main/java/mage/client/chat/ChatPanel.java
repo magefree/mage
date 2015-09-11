@@ -47,8 +47,8 @@ import mage.client.MageFrame;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_WIDTH;
 import mage.client.util.MageTableRowSorter;
-import mage.client.util.gui.TableUtil;
 import mage.client.util.audio.AudioManager;
+import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.remote.MageRemoteException;
 import mage.view.ChatMessage;
@@ -195,7 +195,7 @@ public class ChatPanel extends javax.swing.JPanel {
     }
 
     public void disconnect() {
-        if (MageFrame.getClient() != null) {
+        if (parentChatRef == null && MageFrame.getClient() != null) {
             MageFrame.getClient().leaveChat(chatId);
             MageFrame.removeChat(chatId);
         }
