@@ -361,18 +361,18 @@ public class TableManager {
         logger.debug("--------User: " + users.size() + " [userId | since | lock | name -----------------------");
         for (User user :users) {
             Session session = SessionManager.getInstance().getSession(user.getSessionId());
-            String sessionState = "N";
             if (session != null) {
+                String sessionState = "N";
                 if (session.isLocked()) {
                     sessionState = "L";
                 } else {
                     sessionState = "+";
                 }
-            }
-            logger.debug(user.getId()
+                logger.debug(user.getId()
                     + " | " + formatter.format(user.getConnectionTime())
                     + " | " + sessionState
                     + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + session.getPingInfo() + ")");
+            }
         }
         ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
