@@ -15,8 +15,12 @@ import mage.game.permanent.Permanent;
 public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DontUntapInControllersUntapStepEnchantedEffect() {
+        this("creature");
+    }
+
+    public DontUntapInControllersUntapStepEnchantedEffect(String description) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
-        staticText = "Enchanted permanent doesn't untap during its controller's untap step";
+        staticText = "Enchanted " + description + " doesn't untap during its controller's untap step";
     }
 
     public DontUntapInControllersUntapStepEnchantedEffect(final DontUntapInControllersUntapStepEnchantedEffect effect) {
@@ -40,7 +44,7 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
                 return enchanted.getLogName() + " doesn't untap during its controller's untap step (" + enchantment.getLogName() + ")";
-            }            
+            }
         }
         return null;
     }
@@ -49,7 +53,7 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {

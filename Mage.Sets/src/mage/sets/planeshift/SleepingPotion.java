@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -66,9 +65,7 @@ public class SleepingPotion extends CardImpl {
         // When Sleeping Potion enters the battlefield, tap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
         // Enchanted creature doesn't untap during its controller's untap step.
-        Effect effect = new DontUntapInControllersUntapStepEnchantedEffect();
-        effect.setText("Enchanted creature doesn't untap during its controller's untap step");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
         // When enchanted creature becomes the target of a spell or ability, sacrifice Sleeping Potion.
         this.addAbility(new BecomesTargetAttachedTriggeredAbility(new SacrificeSourceEffect()));
     }
