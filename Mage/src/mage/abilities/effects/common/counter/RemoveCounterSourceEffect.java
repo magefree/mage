@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
@@ -40,8 +39,8 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-
 public class RemoveCounterSourceEffect extends OneShotEffect {
+
     private final Counter counter;
 
     public RemoveCounterSourceEffect(Counter counter) {
@@ -57,25 +56,24 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null && p.getCounters().getCount(counter.getName()) >= counter.getCount()) {
-            p.removeCounters(counter.getName(), counter.getCount(), game);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && permanent.getCounters().getCount(counter.getName()) >= counter.getCount()) {
+            permanent.removeCounters(counter.getName(), counter.getCount(), game);
             if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
-                        .append(" counter from ").append(p.getName()).toString());
+                game.informPlayers("Removed " + counter.getCount() + " " + counter.getName() + " counter from " + permanent.getLogName());
             }
             return true;
         }
-        Card c = game.getCard(source.getSourceId());
-        if (c != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
-            c.removeCounters(counter.getName(), counter.getCount(), game);
+        Card card = game.getCard(source.getSourceId());
+        if (card != null && card.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
+            card.removeCounters(counter.getName(), counter.getCount(), game);
             if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
-                        .append(" counter from ").append(c.getName())
-                        .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
+                game.informPlayers("Removed " + counter.getCount() + " " + counter.getName()
+                        + " counter from " + card.getLogName()
+                        + " (" + card.getCounters(game).getCount(counter.getName()) + " left)");
             }
             return true;
-        }    
+        }
         return false;
     }
 
@@ -84,7 +82,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
         return new RemoveCounterSourceEffect(this);
     }
 
-     private void setText() {
+    private void setText() {
         if (counter.getCount() > 1) {
             StringBuilder sb = new StringBuilder();
             sb.append("remove ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters from {this}");

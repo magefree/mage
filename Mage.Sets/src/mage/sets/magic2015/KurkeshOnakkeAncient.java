@@ -152,7 +152,7 @@ class KurkeshOnakkeAncientEffect extends OneShotEffect {
                         if (newAbility.getTargets().size() > 0) {
                             if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
                                 newAbility.getTargets().clearChosen();
-                                if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, game) == false) {
+                                if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, false, game) == false) {
                                     return false;
                                 }
                             }
