@@ -25,44 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.visions;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
  */
-public class UnnaturalSelection extends CardImpl {
+public class RagingGorilla extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public RagingGorilla(UUID ownerId) {
+        super(ownerId, 90, "Raging Gorilla", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "VIS";
+        this.subtype.add("Ape");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Whenever Raging Gorilla blocks or becomes blocked, it gets +2/-2 until end of turn.
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(2, -2, Duration.EndOfTurn), false));
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public RagingGorilla(final RagingGorilla card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public RagingGorilla copy() {
+        return new RagingGorilla(this);
     }
 }

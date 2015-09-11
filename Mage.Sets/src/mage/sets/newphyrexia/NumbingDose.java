@@ -76,7 +76,7 @@ public class NumbingDose extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted permanent doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
 
         // At the beginning of the upkeep of enchanted permanent's controller, that player loses 1 life.
         this.addAbility(new NumbingDoseTriggeredAbility());

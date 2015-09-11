@@ -25,57 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
 
 /**
  *
- * @author Plopman
+ * @author anonymous
  */
-public class ComaVeil extends CardImpl {
+public class DuctCrawler extends mage.sets.stronghold.DuctCrawler {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+    public DuctCrawler(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 198;
+        this.expansionSetCode = "10E";
     }
 
-    public ComaVeil(UUID ownerId) {
-        super(ownerId, 36, "Coma Veil", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
-        this.expansionSetCode = "ALA";
-        this.subtype.add("Aura");
-
-
-        // Enchant artifact or creature
-        TargetPermanent auraTarget = new TargetPermanent(filter);
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        // Enchanted permanent doesn't untap during its controller's untap step.
-        EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
-        ability.addEffect(new DontUntapInControllersUntapStepEnchantedEffect("permanent"));
-        this.addAbility(ability);
-    }
-
-    public ComaVeil(final ComaVeil card) {
+    public DuctCrawler(final DuctCrawler card) {
         super(card);
     }
 
     @Override
-    public ComaVeil copy() {
-        return new ComaVeil(this);
+    public DuctCrawler copy() {
+        return new DuctCrawler(this);
     }
 }

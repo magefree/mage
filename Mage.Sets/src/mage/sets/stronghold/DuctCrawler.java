@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.stronghold;
 
-import java.util.Set;
 import java.util.UUID;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.CantBeBlockedByTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -43,26 +43,30 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author EvilGeek
+ * @author anonymous
  */
-public class UnnaturalSelection extends CardImpl {
+public class DuctCrawler extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public DuctCrawler(UUID ownerId) {
+        super(ownerId, 79, "Duct Crawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "STH";
+        this.subtype.add("Insect");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));
+        // {1}{R}: Target creature can't block Duct Crawler this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), 
+        		new ManaCostsImpl("{1}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public DuctCrawler(final DuctCrawler card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public DuctCrawler copy() {
+        return new DuctCrawler(this);
     }
 }

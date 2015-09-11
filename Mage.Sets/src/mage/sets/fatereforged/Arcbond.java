@@ -62,7 +62,7 @@ public class Arcbond extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ArcbondDelayedTriggeredAbility(), true));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ArcbondDelayedTriggeredAbility(), true, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -117,8 +117,8 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(targetObject.getSourceId()) &&
-                targetObject.getPermanentOrLKIBattlefield(game) != null) {
+        if (event.getTargetId().equals(targetObject.getSourceId())
+                && targetObject.getPermanentOrLKIBattlefield(game) != null) {
             for (Effect effect : this.getEffects()) {
                 effect.setValue("damage", event.getAmount());
             }
@@ -139,21 +139,21 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 }
 
 class ArcbondEffect extends OneShotEffect {
-    
+
     public ArcbondEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals that much damage to each other creature and each player";
     }
-    
+
     public ArcbondEffect(final ArcbondEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ArcbondEffect copy() {
         return new ArcbondEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = (Integer) this.getValue("damage");
@@ -167,7 +167,7 @@ class ArcbondEffect extends OneShotEffect {
             FilterPermanent filter = new FilterCreaturePermanent("each other creature");
             filter.add(Predicates.not(new PermanentIdPredicate(sourceId)));
             return new DamageEverythingEffect(new StaticValue(damage), filter, sourceId).apply(game, source);
-        }        
+        }
         return false;
     }
 }

@@ -25,44 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.legions;
 
-import java.util.Set;
 import java.util.UUID;
-
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
+import mage.abilities.common.CycleTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author EvilGeek
+ * @author fireshoes
  */
-public class UnnaturalSelection extends CardImpl {
+public class GempalmPolluter extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    static final private FilterPermanent filter = new FilterPermanent("Zombie");
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
+    static {
+        filter.add(new SubtypePredicate("Zombie"));
+    }
+
+    public GempalmPolluter(UUID ownerId) {
+        super(ownerId, 70, "Gempalm Avenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
+
+        // Cycling {B}{B}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}{B}")));
+
+        // When you cycle Gempalm Polluter, you may have target player lose life equal to the number of Zombies on the battlefield.
+        Effect effect = new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter));
+        effect.setText("you may have target player lose life equal to the number of Zombies on the battlefield");
+        Ability ability = new CycleTriggeredAbility(effect, true);
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public GempalmPolluter(final GempalmPolluter card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public GempalmPolluter copy() {
+        return new GempalmPolluter(this);
     }
 }

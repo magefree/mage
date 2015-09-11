@@ -25,44 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.mirage;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
  */
-public class UnnaturalSelection extends CardImpl {
+public class ChaosCharm extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+   private static final FilterPermanent filter = new FilterPermanent("Wall");
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Wall"));
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public ChaosCharm(UUID ownerId) {
+        super(ownerId, 163, "Chaos Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+        this.expansionSetCode = "MIR";
+
+        // Choose one - Destroy target Wall
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        // or Chaos Charm deals 1 damage to target creature
+        Mode mode = new Mode();
+        mode.getEffects().add(new DamageTargetEffect(1));
+        mode.getTargets().add(new TargetCreaturePermanent());
+        this.getSpellAbility().addMode(mode);
+        // or target creature gains haste until end of turn.
+        mode = new Mode();
+        mode.getEffects().add(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        mode.getTargets().add(new TargetCreaturePermanent());
+        this.getSpellAbility().addMode(mode);
+    }
+
+    public ChaosCharm(final ChaosCharm card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public ChaosCharm copy() {
+        return new ChaosCharm(this);
     }
 }

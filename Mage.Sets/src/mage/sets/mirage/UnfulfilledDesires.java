@@ -25,44 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.mirage;
 
-import java.util.Set;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
  */
-public class UnnaturalSelection extends CardImpl {
+public class UnfulfilledDesires extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public UnfulfilledDesires(UUID ownerId) {
+        super(ownerId, 345, "Unfulfilled Desires", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{B}");
+        this.expansionSetCode = "MIR";
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
+        // {1}, Pay 1 life: Draw a card, then discard a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl("{1}"));
+        ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public UnfulfilledDesires(final UnfulfilledDesires card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public UnfulfilledDesires copy() {
+        return new UnfulfilledDesires(this);
     }
 }
