@@ -30,16 +30,14 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  */
 public class YokeOfTheDamned extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     public YokeOfTheDamned(UUID ownerId) {
@@ -60,13 +58,13 @@ public class YokeOfTheDamned extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // When a creature dies, destroy enchanted creature.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DestroyEnchantedEffect(), false, filter));
-        
+        this.addAbility(new DiesCreatureTriggeredAbility(new DestroyAttachedEffect("enchanted creature"), false, filter));
+
     }
 
     public YokeOfTheDamned(final YokeOfTheDamned card) {
@@ -77,38 +75,4 @@ public class YokeOfTheDamned extends CardImpl {
     public YokeOfTheDamned copy() {
         return new YokeOfTheDamned(this);
     }
-}
-
-class DestroyEnchantedEffect extends OneShotEffect {
-
-    public DestroyEnchantedEffect() {
-        super(Outcome.Detriment);
-        staticText = "destroy enchanted creature";
-    }
-
-    public DestroyEnchantedEffect(final DestroyEnchantedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DestroyEnchantedEffect copy() {
-        return new DestroyEnchantedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            UUID uuid = getTargetPointer().getFirst(game, source);
-            Permanent creature = game.getPermanent(uuid);
-            if (creature == null) {
-                creature = game.getPermanent(enchantment.getAttachedTo());
-            }
-            if (creature != null) {
-                return creature.destroy(source.getSourceId(), game, false);
-            }
-        }
-        return false;
-    }
-
 }

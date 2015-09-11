@@ -25,44 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.mirage;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
  */
-public class UnnaturalSelection extends CardImpl {
+public class IvoryCharm extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public IvoryCharm(UUID ownerId) {
+        super(ownerId, 227, "Ivory Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "MIR";
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Choose one - All creatures get -2/-0 until end of turn
+        this.getSpellAbility().addEffect(new BoostAllEffect(-2, 0, Duration.EndOfTurn));
+        // or tap target creature
+        Mode mode = new Mode();
+        mode.getEffects().add(new TapTargetEffect());
+        mode.getTargets().add(new TargetCreaturePermanent());
+        this.getSpellAbility().addMode(mode);
+        // or prevent the next 1 damage that would be dealt to target creature or player this turn.
+        mode = new Mode();
+        mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1));
+        mode.getTargets().add(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addMode(mode);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public IvoryCharm(final IvoryCharm card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public IvoryCharm copy() {
+        return new IvoryCharm(this);
     }
 }

@@ -29,24 +29,22 @@ package mage.sets.planechase2012;
 
 import java.util.UUID;
 
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -76,7 +74,7 @@ public class QuietDisrepair extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, choose one - Destroy enchanted permanent; or you gain 2 life.
-        ability = new BeginningOfUpkeepTriggeredAbility(new QuietDisrepairDestroyEffect(), TargetController.YOU, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new DestroyAttachedEffect("enchanted permanent"), TargetController.YOU, false);
         Mode mode = new Mode();
         mode.getEffects().add(new GainLifeEffect(2));
         ability.addMode(mode);
@@ -90,37 +88,5 @@ public class QuietDisrepair extends CardImpl {
     @Override
     public QuietDisrepair copy() {
         return new QuietDisrepair(this);
-    }
-}
-
-class QuietDisrepairDestroyEffect extends OneShotEffect {
-
-    public QuietDisrepairDestroyEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy enchanted permanent";
-    }
-
-    public QuietDisrepairDestroyEffect(final QuietDisrepairDestroyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public QuietDisrepairDestroyEffect copy() {
-        return new QuietDisrepairDestroyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null) {
-            enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        if (enchantment != null) {
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null) {
-                return enchanted.destroy(source.getSourceId(), game, false);
-            }
-        }
-        return false;
     }
 }

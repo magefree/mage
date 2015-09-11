@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
@@ -59,8 +58,8 @@ public class Standardize extends CardImpl {
         this.expansionSetCode = "ONS";
 
         // Choose a creature type other than Wall. Each creature becomes that type until end of turn.
-       
-        this.getSpellAbility().addEffect(new BecomesChosenNonWallCreatureTypeTargetEffect());
+
+        this.getSpellAbility().addEffect(new StandardizeEffect());
     }
 
     public Standardize(final Standardize card) {
@@ -77,19 +76,19 @@ public class Standardize extends CardImpl {
 
 class StandardizeEffect extends OneShotEffect {
 
-	public StandardizeEffect() {
-		super(Outcome.BoostCreature);
-		staticText = "choose a creature type other than wall, each creature's type becomes that type until end of turn";
-	
-	}
-	
-	public StandardizeEffect(final StandardizeEffect effect) {
-		super(effect);
-	}
+    public StandardizeEffect() {
+        super(Outcome.BoostCreature);
+        staticText = "choose a creature type other than wall, each creature's type becomes that type until end of turn";
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
+    }
+
+    public StandardizeEffect(final StandardizeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         String chosenType = "";
         if (player != null && permanent != null) {
@@ -111,14 +110,13 @@ class StandardizeEffect extends OneShotEffect {
                 game.addEffect(effect, source);
                 return true;
             }
-            
+
         }
         return false;
-	}
+    }
 
-	@Override
-	public Effect copy() {
-		return new StandardizeEffect(this);
-	}
-
+    @Override
+    public Effect copy() {
+        return new StandardizeEffect(this);
+    }
 }

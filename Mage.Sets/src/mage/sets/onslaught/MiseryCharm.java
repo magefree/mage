@@ -27,48 +27,60 @@
  */
 package mage.sets.onslaught;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
  */
-public class Imagecrafter extends CardImpl {
+public class MiseryCharm extends CardImpl {
 
-    public Imagecrafter(UUID ownerId) {
-        super(ownerId, 87, "Imagecrafter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "ONS";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private static final FilterPermanent filter1 = new FilterPermanent("Cleric");
+    private static final FilterCard filter2 = new FilterCard("Cleric card from your graveyard");
 
-        // {tap}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter1.add(new SubtypePredicate("Cleric"));
+        filter2.add(new SubtypePredicate("Cleric"));
     }
 
-    public Imagecrafter(final Imagecrafter card) {
+    public MiseryCharm(UUID ownerId) {
+        super(ownerId, 158, "Misery Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
+        this.expansionSetCode = "ONS";
+
+        // Choose one - Destroy target Cleric
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter1));
+        // or return target Cleric card from your graveyard to your hand
+        Mode mode = new Mode();
+        mode.getEffects().add(new ReturnToHandTargetEffect());
+        mode.getTargets().add(new TargetCardInYourGraveyard(filter2));
+        this.getSpellAbility().addMode(mode);
+        // or target player loses 2 life.
+        mode = new Mode();
+        mode.getEffects().add(new LoseLifeTargetEffect(2));
+        mode.getTargets().add(new TargetPlayer());
+        this.getSpellAbility().addMode(mode);
+    }
+
+    public MiseryCharm(final MiseryCharm card) {
         super(card);
     }
 
     @Override
-    public Imagecrafter copy() {
-        return new Imagecrafter(this);
+    public MiseryCharm copy() {
+        return new MiseryCharm(this);
     }
-
 }
