@@ -34,6 +34,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -44,11 +45,9 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -97,28 +96,21 @@ class SeanceEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
-            if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true)) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(card);
-
-                if (!token.hasSubtype("Spirit")) {
-                    token.getSubtype().add("Spirit");
-                }
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-                for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
-                    Permanent tokenPermanent = game.getPermanent(tokenId);
-                    if (tokenPermanent != null) {
-                        ExileTargetEffect exileEffect = new ExileTargetEffect();
-                        exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
-                    }
+            if (controller.moveCards(card, null, Zone.EXILED, source, game)) {
+                PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                effect.setAdditionalSubType("Spirit");
+                effect.apply(game, source);
+                for (Permanent addedToken : effect.getAddedPermanent()) {
+                    ExileTargetEffect exileEffect = new ExileTargetEffect();
+                    exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                    game.addDelayedTriggeredAbility(delayedAbility);
                 }
             }
-
             return true;
         }
 

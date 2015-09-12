@@ -29,30 +29,22 @@ package mage.sets.dragonsmaze;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
-import mage.util.CardUtil;
 import mage.util.functions.AbilityApplier;
 
 /**
@@ -78,9 +70,11 @@ public class ProgenitorMimic extends CardImpl {
         // You may have Progenitor Mimic enter the battlefield as a copy of any creature on the battlefield
         // except it gains "At the beginning of your upkeep, if this creature isn't a token,
         // put a token onto the battlefield that's a copy of this creature."
+        Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
+        effect.setText("put a token onto the battlefield that's a copy of this creature");
         AbilityApplier applier = new AbilityApplier(
                 new ConditionalTriggeredAbility(
-                        new BeginningOfUpkeepTriggeredAbility(new ProgenitorMimicCopyEffect(), TargetController.YOU, false),
+                        new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false),
                         new SourceMatchesFilterCondition(filter),
                         "At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.")
         );
@@ -98,57 +92,5 @@ public class ProgenitorMimic extends CardImpl {
     @Override
     public ProgenitorMimic copy() {
         return new ProgenitorMimic(this);
-    }
-}
-
-class ProgenitorMimicCopyEffect extends OneShotEffect {
-
-    public ProgenitorMimicCopyEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "put a token onto the battlefield that's a copy of this creature";
-    }
-
-    public ProgenitorMimicCopyEffect(final ProgenitorMimicCopyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ProgenitorMimicCopyEffect copy() {
-        return new ProgenitorMimicCopyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent copyFromPermanent = null;
-        // handle copies of copies
-        for (Effect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
-            if (effect instanceof CopyEffect) {
-                CopyEffect copyEffect = (CopyEffect) effect;
-                // there is another copy effect that our targetPermanent copies stats from
-                if (copyEffect.getSourceId().equals(source.getSourceId())) {
-                    MageObject oldBluePrint = ((CopyEffect) effect).getTarget();
-                    if (oldBluePrint instanceof Permanent) {
-                        // copy it and apply the applier if any
-                        copyFromPermanent = (Permanent) oldBluePrint;
-                    }
-                }
-            }
-        }
-        if (copyFromPermanent == null) {
-            // if it was no copy of copy take the target itself
-            copyFromPermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
-
-        if (copyFromPermanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(copyFromPermanent); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            Permanent newPermanentToken = game.getPermanent(token.getLastAddedToken());
-            if (newPermanentToken != null) {
-                game.copyPermanent(copyFromPermanent, newPermanentToken, source, null);
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -27,6 +27,7 @@
  */
 package mage.sets.thedark;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -36,12 +37,14 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -53,10 +56,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -113,22 +115,22 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-        if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            Permanent permanentToken = game.getPermanent(token.getLastAddedToken());
-            game.getState().setValue(source.getSourceId() + "_token", permanentToken);
-            Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice Dance of Many");
-            sacrificeEffect.setTargetPointer(new FixedTarget(game.getPermanent(source.getSourceId()).getId()));
-            LeavesBattlefieldTriggeredAbility triggerAbility = new LeavesBattlefieldTriggeredAbility(sacrificeEffect, false);
-            ContinuousEffect effect = new GainAbilityTargetEffect(triggerAbility, Duration.WhileOnBattlefield);
-            effect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            game.addEffect(effect, source);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (permanent != null && sourceObject != null) {
+
+            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            effect.apply(game, source);
+            game.getState().setValue(source.getSourceId() + "_token", effect.getAddedPermanent());
+            for (Permanent addedToken : effect.getAddedPermanent()) {
+                Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice Dance of Many");
+                sacrificeEffect.setTargetPointer(new FixedTarget(sourceObject, game));
+                LeavesBattlefieldTriggeredAbility triggerAbility = new LeavesBattlefieldTriggeredAbility(sacrificeEffect, false);
+                ContinuousEffect continuousEffect = new GainAbilityTargetEffect(triggerAbility, Duration.WhileOnBattlefield);
+                continuousEffect.setTargetPointer(new FixedTarget(addedToken, game));
+                game.addEffect(continuousEffect, source);
+            }
             return true;
         }
         return false;
@@ -153,11 +155,17 @@ class DanceOfManyExileTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent tokenPermanent = (Permanent) game.getState().getValue(source.getSourceId() + "_token");
-        if (tokenPermanent != null) {
-            Effect effect = new ExileTargetEffect();
-            effect.setTargetPointer(new FixedTarget(tokenPermanent.getId()));
-            return effect.apply(game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            List<Permanent> tokenPermanents = (List<Permanent>) game.getState().getValue(source.getSourceId() + "_token");
+            if (tokenPermanents != null) {
+                Cards cards = new CardsImpl();
+                for (Permanent permanent : tokenPermanents) {
+                    cards.add(permanent);
+                }
+                controller.moveCards(cards, null, Zone.EXILED, source, game);
+                return true;
+            }
         }
         return false;
     }

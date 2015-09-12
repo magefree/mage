@@ -29,28 +29,21 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.game.permanent.token.EmptyToken;
-import mage.util.CardUtil;
 
 /**
  *
@@ -63,7 +56,7 @@ public class MirrorSigilSergeant extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
-    
+
     private static final String rule = "At the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of Mirror-Sigil Sergeant onto the battlefield.";
 
     public MirrorSigilSergeant(UUID ownerId) {
@@ -79,7 +72,9 @@ public class MirrorSigilSergeant extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of Mirror-Sigil Sergeant onto the battlefield.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MirrorSigilSergeantEffect(), TargetController.YOU, true);
+        Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
+        effect.setText("you may put a token that's a copy of {this} onto the battlefield");
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
 
     }
@@ -91,43 +86,5 @@ public class MirrorSigilSergeant extends CardImpl {
     @Override
     public MirrorSigilSergeant copy() {
         return new MirrorSigilSergeant(this);
-    }
-}
-
-class MirrorSigilSergeantEffect extends OneShotEffect {
-
-    public MirrorSigilSergeantEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "put a token that's a copy of {this} onto the battlefield";
-    }
-
-    public MirrorSigilSergeantEffect(final MirrorSigilSergeantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MirrorSigilSergeantEffect copy() {
-        return new MirrorSigilSergeantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        UUID targetId = source.getSourceId();
-        if (targetId != null && player != null) {
-            MageObject target = game.getPermanent(targetId);
-            if (target == null) {
-                target = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            }
-            if (target != null) {
-                if (target instanceof Permanent) {
-                    EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from((Permanent) target);
-                    token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

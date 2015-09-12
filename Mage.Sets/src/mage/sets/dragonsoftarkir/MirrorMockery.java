@@ -35,6 +35,7 @@ import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
@@ -43,11 +44,9 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -105,16 +104,13 @@ class MirrorMockeryEffect extends OneShotEffect {
         }
         Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
         if (enchanted != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(enchanted);
-
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-            for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
+            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+            effect.setTargetPointer(new FixedTarget(enchanted, game));
+            effect.apply(game, source);
+            for (Permanent addedToken : effect.getAddedPermanent()) {
+                if (addedToken != null) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                    exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());

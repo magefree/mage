@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -47,10 +48,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -111,25 +110,20 @@ class KikiJikiMirrorBreakerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-
-            token.addAbility(HasteAbility.getInstance());
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
-            sacrificeEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            effect.apply(game, source);
+            for (Permanent addedToken : effect.getAddedPermanent()) {
+                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
+                sacrificeEffect.setTargetPointer(new FixedTarget(addedToken.getId()));
+                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                game.addDelayedTriggeredAbility(delayedAbility);
+            }
             return true;
         }
 

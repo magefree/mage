@@ -27,8 +27,13 @@
  */
 package org.mage.test.cards.copy;
 
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -134,4 +139,54 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     *
+     * Kiki-Jiki, Mirror Breaker tokens are not entering with haste...
+     *
+     * I just tried to reproduce this but I was not able--
+     *
+     * In the game in question I used a card (Body Double) to target a card in a
+     * graveyard (don't remember the name) and copy it
+     *
+     * I then used Kiki to copy Body Double that copied a graveyard card of my
+     * opponent---that copy did not have haste...
+     */
+    @Test
+    public void testCopyBodyDouble() {
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Kiki-Jiki, Mirror Breaker", 1);
+        // {T}: Draw two cards. Target opponent gains control of Humble Defector. Activate this ability only during your turn.
+        addCard(Zone.HAND, playerB, "Body Double", 1); // {4}{U}
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Body Double");
+        setChoice(playerB, "Silvercoat Lion");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.");
+
+        attack(2, playerB, "Silvercoat Lion");
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 2); // one from Body Double and one from Kiki
+
+        Permanent kikiCopy = null;
+        for (Permanent permanent : currentGame.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), currentGame)) {
+            if (permanent.getName().equals("Silvercoat Lion") && (permanent instanceof PermanentToken)) {
+                kikiCopy = permanent;
+                break;
+            }
+        }
+        if (kikiCopy != null) {
+            Assert.assertEquals("Has to have haste", kikiCopy.getAbilities(currentGame).containsClass(HasteAbility.class), true);
+        } else {
+            Assert.assertEquals("Silvercoat Lion copied by Kiki is missing", kikiCopy != null, true);
+        }
+
+        assertLife(playerA, 18);
+        assertLife(playerB, 20);
+
+    }
 }

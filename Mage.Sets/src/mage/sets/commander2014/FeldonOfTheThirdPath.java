@@ -36,8 +36,8 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -47,10 +47,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -105,19 +103,12 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
-            EmptyToken token = new EmptyToken();
-            // TODO: This fails if a card will be copied, that uses adjustTargets() method.
-            CardUtil.copyTo(token).from(card);
-
-            if (!token.getCardType().contains(CardType.ARTIFACT)) {
-                token.getCardType().add(CardType.ARTIFACT);
-            }
-            token.addAbility(HasteAbility.getInstance());
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            Permanent permanent = game.getPermanent(token.getLastAddedToken());
-            if (permanent != null) {
+            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), CardType.ARTIFACT, true);
+            effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
+            effect.apply(game, source);
+            for (Permanent addedToken : effect.getAddedPermanent()) {
                 SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
-                sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
+                sacrificeEffect.setTargetPointer(new FixedTarget(addedToken, game));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());

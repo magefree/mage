@@ -57,6 +57,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         }
         // A copy contains only the attributes of the basic card or basic Token that's the base of the permanent
         // else gained abililies would be copied too.
+
         MageObject sourceObj = source;
         if (source instanceof PermanentToken) {
             sourceObj = ((PermanentToken) source).getToken();
