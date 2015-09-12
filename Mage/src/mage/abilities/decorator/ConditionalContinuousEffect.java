@@ -1,5 +1,8 @@
 package mage.abilities.decorator;
 
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
@@ -24,7 +27,6 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     protected Condition baseCondition;
     protected Condition condition;
     protected boolean initDone = false;
-
 
     public ConditionalContinuousEffect(ContinuousEffect effect, Condition condition, String text) {
         this(effect, null, condition, text);
@@ -61,7 +63,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     public boolean isDiscarded() {
         return this.discarded || effect.isDiscarded() || (otherwiseEffect != null && otherwiseEffect.isDiscarded());
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         if (baseCondition instanceof LockedInCondition) {
@@ -70,7 +72,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
             condition = baseCondition;
         }
         effect.setTargetPointer(this.targetPointer);
-        effect.init(source, game);        
+        effect.init(source, game);
         if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             otherwiseEffect.init(source, game);
@@ -134,4 +136,13 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     public ConditionalContinuousEffect copy() {
         return new ConditionalContinuousEffect(this);
     }
+
+    @Override
+    public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
+        if (effect != null) {
+            return effect.isDependentTo(allEffectsInLayer);
+        }
+        return super.isDependentTo(allEffectsInLayer);
+    }
+
 }

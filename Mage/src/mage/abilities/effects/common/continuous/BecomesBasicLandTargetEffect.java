@@ -40,6 +40,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.choices.Choice;
 import mage.choices.ChoiceBasicLandType;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -73,6 +74,21 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, boolean loseOther, String... landNames) {
         super(duration, Outcome.Detriment);
         this.landTypes.addAll(Arrays.asList(landNames));
+        if (landTypes.contains("Mountain")) {
+            dependencyTypes.add(DependencyType.BecomeMountain);
+        }
+        if (landTypes.contains("Forest")) {
+            dependencyTypes.add(DependencyType.BecomeForest);
+        }
+        if (landTypes.contains("Swamp")) {
+            dependencyTypes.add(DependencyType.BecomeSwamp);
+        }
+        if (landTypes.contains("Island")) {
+            dependencyTypes.add(DependencyType.BecomeIsland);
+        }
+        if (landTypes.contains("Plains")) {
+            dependencyTypes.add(DependencyType.BecomePlains);
+        }
         this.chooseLandType = chooseLandType;
         this.staticText = setText();
         this.loseOther = loseOther;
