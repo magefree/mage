@@ -114,16 +114,14 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     if (player.getLibrary().size() > 0) {
-                        Card card = player.getLibrary().getFromTop(game);                        
+                        Card card = player.getLibrary().getFromTop(game);
                         String exileKey = playerId.toString() + CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()).toString();
                         UUID exileId = exileIds.get(exileKey);
                         if (exileId == null) {
                             exileId = UUID.randomUUID();
                             exileIds.put(exileKey, exileId);
                         }
-                        player.moveCardToExileWithInfo(card, exileId, 
-                                new StringBuilder(sourceObject.getIdName() +" (").append(player.getLogName()).append(")").toString(),
-                                source.getSourceId(), game, Zone.LIBRARY, true);
+                        player.moveCardsToExile(card, source, game, false, exileId, sourceObject.getIdName() + " (" + player.getName() + ")");
                         card.setFaceDown(true, game);
                     }
                 }
@@ -172,7 +170,7 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
                     if (exileId != null) {
                         ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                         if (exileZone != null) {
-                            for(Card card: exileZone.getCards(game)) {
+                            for (Card card : exileZone.getCards(game)) {
                                 card.setFaceDown(false, game);
                                 if (CardUtil.isPermanentCard(card)) {
                                     player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
