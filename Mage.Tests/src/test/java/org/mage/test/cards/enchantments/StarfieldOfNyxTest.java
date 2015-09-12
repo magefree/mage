@@ -30,6 +30,8 @@ package org.mage.test.cards.enchantments;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -48,7 +50,7 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
      *
      */
     @Test
-    public void testBaneAlleyBroker() {
+    public void testCloudform() {
         // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
         // Whenever one or more artifact creatures you control deal combat damage to a player, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Thopter Spy Network", 2); // {2}{U}{U}  - added to come to 5 enchantments on the battlefield
@@ -78,4 +80,46 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Cloudform", 2);
     }
 
+    /**
+     * Regarding Starfield of Nyx: I tried to bring back a Singing Bell Strike
+     * to enchant Silumgar, the Drifting Death. I chose the Aura, but instead of
+     * enchanting Silumgar, it stayed in the graveyard. This shouldn't be the
+     * case, because Auras only target when they're cast as spells.
+     */
+    @Test
+    public void testHexproof() {
+        // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
+        // Whenever one or more artifact creatures you control deal combat damage to a player, draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
+        // As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in
+        // addition to its other types and has base power and base toughness each equal to its converted mana cost.
+        addCard(Zone.HAND, playerA, "Starfield of Nyx"); // "{4}{W}"
+        // Enchant creature
+        // When Singing Bell Strike enters the battlefield, tap enchanted creature.
+        // Enchanted creature doesn't untap during its controller's untap step.
+        // Enchanted creature has "{6}: Untap this creature."
+        addCard(Zone.GRAVEYARD, playerA, "Singing Bell Strike");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silumgar, the Drifting Death", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Starfield of Nyx");
+
+        addTarget(playerA, "Singing Bell Strike");
+        setChoice(playerA, "Silumgar, the Drifting Death");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Starfield of Nyx", 1);
+        assertPermanentCount(playerA, "Singing Bell Strike", 1);
+
+        Permanent enchantment = getPermanent("Singing Bell Strike", playerA);
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent enchanted = currentGame.getPermanent(enchantment.getAttachedTo());
+            Assert.assertEquals("Silumgar was enchanted", enchanted.getName().equals("Silumgar, the Drifting Death"), true);
+        } else {
+            Assert.assertEquals("Singing Bell Strike not on the battlefield", false, true);
+        }
+    }
 }
