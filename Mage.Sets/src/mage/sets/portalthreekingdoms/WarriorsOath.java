@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
@@ -35,24 +35,24 @@ import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class FinalFortune extends CardImpl {
+public class WarriorsOath extends CardImpl {
 
-    public FinalFortune(UUID ownerId) {
-        super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "7ED";
+    public WarriorsOath(UUID ownerId) {
+        super(ownerId, 124, "Warrior's Oath", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}");
+        this.expansionSetCode = "PTK";
 
         // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
     }
 
-    public FinalFortune(final FinalFortune card) {
+    public WarriorsOath(final WarriorsOath card) {
         super(card);
     }
 
     @Override
-    public FinalFortune copy() {
-        return new FinalFortune(this);
+    public WarriorsOath copy() {
+        return new WarriorsOath(this);
     }
 }
