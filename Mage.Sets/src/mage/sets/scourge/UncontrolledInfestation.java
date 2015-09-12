@@ -25,57 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.sets.scourge;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author LoneFox
  */
-public class Betrayal extends CardImpl {
+public class UncontrolledInfestation extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    static{
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
-    public Betrayal(UUID ownerId) {
-        super(ownerId, 26, "Betrayal", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "VIS";
+    public UncontrolledInfestation(UUID ownerId) {
+        super(ownerId, 108, "Uncontrolled Infestation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        this.expansionSetCode = "SCG";
         this.subtype.add("Aura");
 
-        // Enchant creature an opponent controls
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        // Enchant nonbasic land
+        TargetPermanent auraTarget = new TargetLandPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted creature becomes tapped, you draw a card.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature"));
+        // When enchanted land becomes tapped, destroy it.
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedEffect("it"), "enchanted land"));
     }
 
-    public Betrayal(final Betrayal card) {
+    public UncontrolledInfestation(final UncontrolledInfestation card) {
         super(card);
     }
 
     @Override
-    public Betrayal copy() {
-        return new Betrayal(this);
+    public UncontrolledInfestation copy() {
+        return new UncontrolledInfestation(this);
     }
 }
