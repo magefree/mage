@@ -25,12 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -39,36 +42,37 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class ContaminatedBond extends CardImpl {
+public class PoolingVenom extends CardImpl {
 
-    public ContaminatedBond(UUID ownerId) {
-        super(ownerId, 120, "Contaminated Bond", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "9ED";
+    public PoolingVenom(UUID ownerId) {
+        super(ownerId, 74, "Pooling Venom", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "FUT";
         this.subtype.add("Aura");
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        // Enchant land
+        TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
-        // Whenever enchanted creature attacks or blocks, its controller loses 3 life.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(3)));
+        // Whenever enchanted land becomes tapped, its controller loses 2 life.
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));
+        // {3}{B}: Destroy enchanted land.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAttachedEffect("enchanted land"), new ManaCostsImpl("{3}{B}")));
     }
 
-    public ContaminatedBond(final ContaminatedBond card) {
+    public PoolingVenom(final PoolingVenom card) {
         super(card);
     }
 
     @Override
-    public ContaminatedBond copy() {
-        return new ContaminatedBond(this);
+    public PoolingVenom copy() {
+        return new PoolingVenom(this);
     }
 }
