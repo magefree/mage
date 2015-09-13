@@ -28,24 +28,19 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.Ability;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -53,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BrinkOfDisaster extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("creature or land");
 
     static {
         filter.add(Predicates.or(
@@ -68,12 +63,14 @@ public class BrinkOfDisaster extends CardImpl {
 
 
         // Enchant creature or land
-        TargetPermanent auraTarget = new TargetPermanent();
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
         // When enchanted permanent becomes tapped, destroy it.
-        this.addAbility(new EnchantedBecomesTappedTriggeredAbility(new DestroyTargetEffect()));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedEffect("it"), "enchanted permanent"));
     }
 
     public BrinkOfDisaster(final BrinkOfDisaster card) {
@@ -83,43 +80,5 @@ public class BrinkOfDisaster extends CardImpl {
     @Override
     public BrinkOfDisaster copy() {
         return new BrinkOfDisaster(this);
-    }
-}
-
-class EnchantedBecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
-
-    public EnchantedBecomesTappedTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public EnchantedBecomesTappedTriggeredAbility(final EnchantedBecomesTappedTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EnchantedBecomesTappedTriggeredAbility copy() {
-        return new EnchantedBecomesTappedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchant = game.getPermanent(sourceId);
-        if (enchant != null && enchant.getAttachedTo() != null) {
-            if (event.getTargetId().equals(enchant.getAttachedTo())) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(enchant.getAttachedTo()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When enchanted permanent becomes tapped, destroy it.";
     }
 }

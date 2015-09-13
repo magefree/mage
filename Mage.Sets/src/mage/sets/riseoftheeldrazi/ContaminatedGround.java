@@ -29,11 +29,10 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -41,13 +40,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author Loki
@@ -69,9 +63,9 @@ public class ContaminatedGround extends CardImpl {
 
         // Enchanted land is a Swamp.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Swamp")));
-        
+
         // Whenever enchanted land becomes tapped, its controller loses 2 life.
-        this.addAbility(new ContaminatedGroundAbility());
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));
     }
 
     public ContaminatedGround(final ContaminatedGround card) {
@@ -81,46 +75,5 @@ public class ContaminatedGround extends CardImpl {
     @Override
     public ContaminatedGround copy() {
         return new ContaminatedGround(this);
-    }
-}
-
-class ContaminatedGroundAbility extends TriggeredAbilityImpl {
-    ContaminatedGroundAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
-    }
-
-    ContaminatedGroundAbility(final ContaminatedGroundAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent source = game.getPermanent(this.sourceId);
-        if (source != null && source.getAttachedTo().equals(event.getTargetId())) {
-            Permanent attached = game.getPermanent(source.getAttachedTo());
-            if (attached != null) {
-
-                for (Effect e : getEffects()) {
-                    e.setTargetPointer(new FixedTarget(attached.getControllerId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ContaminatedGroundAbility copy() {
-        return new ContaminatedGroundAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land becomes tapped, its controller loses 2 life.";
     }
 }

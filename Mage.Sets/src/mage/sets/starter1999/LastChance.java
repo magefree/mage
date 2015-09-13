@@ -25,55 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
-
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+package mage.sets.starter1999;
 
 import java.util.UUID;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
+public class LastChance extends mage.sets.masterseditioniv.LastChance {
 
-
-public class SinisterPossession extends CardImpl {
-
-    public SinisterPossession(UUID ownerId) {
-        super(ownerId, 29, "Sinister Possession", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.subtype.add("Aura");
-        this.expansionSetCode = "DGM";
-
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseLife));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // Whenever enchanted creature attacks or blocks, it's controller loses 2 life.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(2)));
+    public LastChance(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 110;
+        this.expansionSetCode = "S99";
     }
 
-    public SinisterPossession(final SinisterPossession card) {
+    public LastChance(final LastChance card) {
         super(card);
     }
 
     @Override
-    public SinisterPossession copy() {
-        return new SinisterPossession(this);
+    public LastChance copy() {
+        return new LastChance(this);
     }
 }

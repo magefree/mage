@@ -25,60 +25,91 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.scourge;
 
-import mage.constants.Zone;
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LoneFox
  */
-public class BecomesTappedAttachedTriggeredAbility extends TriggeredAbilityImpl {
+public class FatalMutation extends CardImpl {
 
-    private final String description;
+    public FatalMutation(UUID ownerId) {
+        super(ownerId, 66, "Fatal Mutation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Aura");
 
-    public BecomesTappedAttachedTriggeredAbility(Effect effect, String description) {
-        this(effect, description, false);
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // When enchanted creature is turned face up, destroy it. It can't be regenerated.
+        this.addAbility(new FatalMutationAbility(new DestroyAttachedEffect("it", true)));
     }
 
-    public BecomesTappedAttachedTriggeredAbility(Effect effect, String description, boolean isOptional) {
-        super(Zone.BATTLEFIELD, effect, isOptional);
-        this.description = description;
-    }
-
-    public BecomesTappedAttachedTriggeredAbility(final BecomesTappedAttachedTriggeredAbility ability) {
-        super(ability);
-        this.description = ability.description;
+    public FatalMutation(final FatalMutation card) {
+        super(card);
     }
 
     @Override
-    public BecomesTappedAttachedTriggeredAbility copy() {
-        return new BecomesTappedAttachedTriggeredAbility(this);
+    public FatalMutation copy() {
+        return new FatalMutation(this);
+    }
+}
+
+class FatalMutationAbility extends TriggeredAbilityImpl {
+
+    public FatalMutationAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, false);
+    }
+
+    public FatalMutationAbility(final FatalMutationAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public FatalMutationAbility copy() {
+        return new FatalMutationAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED;
+        return event.getType() == GameEvent.EventType.TURNEDFACEUP;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
-        if(enchantment == null) {
-            return false;
+        Permanent attachment = game.getPermanent(this.getSourceId());
+        if(attachment != null && event.getTargetId().equals(attachment.getAttachedTo())) {
+            return true;
         }
-        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-        return enchanted != null && event.getTargetId().equals(enchanted.getId());
+        return false;
+
     }
 
     @Override
     public String getRule() {
-        return "Whenever " + description + " becomes tapped, " + super.getRule();
+        return "Whenever enchanted creature is turned face up, " + super.getRule();
     }
+
 }
+

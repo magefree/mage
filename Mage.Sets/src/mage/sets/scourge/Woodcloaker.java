@@ -25,34 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class FinalFortune extends CardImpl {
+public class Woodcloaker extends CardImpl {
 
-    public FinalFortune(UUID ownerId) {
-        super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "7ED";
+    public Woodcloaker(UUID ownerId) {
+        super(ownerId, 134, "Woodcloaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Elf");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-        this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
+        // Morph {2}{G}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}{G}")));
+        // When Woodcloaker is turned face up, target creature gains trample until end of turn.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public FinalFortune(final FinalFortune card) {
+    public Woodcloaker(final Woodcloaker card) {
         super(card);
     }
 
     @Override
-    public FinalFortune copy() {
-        return new FinalFortune(this);
+    public Woodcloaker copy() {
+        return new Woodcloaker(this);
     }
 }

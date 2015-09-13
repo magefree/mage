@@ -25,34 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class FinalFortune extends CardImpl {
+public class UncontrolledInfestation extends CardImpl {
 
-    public FinalFortune(UUID ownerId) {
-        super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "7ED";
+    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 
-        // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-        this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
+    static{
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
-    public FinalFortune(final FinalFortune card) {
+    public UncontrolledInfestation(UUID ownerId) {
+        super(ownerId, 108, "Uncontrolled Infestation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Aura");
+
+        // Enchant nonbasic land
+        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // When enchanted land becomes tapped, destroy it.
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedEffect("it"), "enchanted land"));
+    }
+
+    public UncontrolledInfestation(final UncontrolledInfestation card) {
         super(card);
     }
 
     @Override
-    public FinalFortune copy() {
-        return new FinalFortune(this);
+    public UncontrolledInfestation copy() {
+        return new UncontrolledInfestation(this);
     }
 }

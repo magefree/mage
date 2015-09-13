@@ -25,34 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.MageInt;
+import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class FinalFortune extends CardImpl {
+public class AvenFarseer extends CardImpl {
 
-    public FinalFortune(UUID ownerId) {
-        super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "7ED";
+    public AvenFarseer(UUID ownerId) {
+        super(ownerId, 3, "Aven Farseer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Bird");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-        this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever a permanent is turned face up, put a +1/+1 counter on Aven Farseer.
+        this.addAbility(new TurnedFaceUpAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterPermanent("a permanent")));
     }
 
-    public FinalFortune(final FinalFortune card) {
+    public AvenFarseer(final AvenFarseer card) {
         super(card);
     }
 
     @Override
-    public FinalFortune copy() {
-        return new FinalFortune(this);
+    public AvenFarseer copy() {
+        return new AvenFarseer(this);
     }
 }

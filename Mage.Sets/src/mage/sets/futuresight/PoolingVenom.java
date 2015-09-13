@@ -25,34 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
+import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class FinalFortune extends CardImpl {
+public class PoolingVenom extends CardImpl {
 
-    public FinalFortune(UUID ownerId) {
-        super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "7ED";
+    public PoolingVenom(UUID ownerId) {
+        super(ownerId, 74, "Pooling Venom", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "FUT";
+        this.subtype.add("Aura");
 
-        // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-        this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
+        // Enchant land
+        TargetPermanent auraTarget = new TargetLandPermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Whenever enchanted land becomes tapped, its controller loses 2 life.
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));
+        // {3}{B}: Destroy enchanted land.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAttachedEffect("enchanted land"), new ManaCostsImpl("{3}{B}")));
     }
 
-    public FinalFortune(final FinalFortune card) {
+    public PoolingVenom(final PoolingVenom card) {
         super(card);
     }
 
     @Override
-    public FinalFortune copy() {
-        return new FinalFortune(this);
+    public PoolingVenom copy() {
+        return new PoolingVenom(this);
     }
 }

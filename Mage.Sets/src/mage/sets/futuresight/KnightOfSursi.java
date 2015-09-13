@@ -25,34 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.MageInt;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.FlankingAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class FinalFortune extends CardImpl {
+public class KnightOfSursi extends CardImpl {
 
-    public FinalFortune(UUID ownerId) {
-        super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "7ED";
+    public KnightOfSursi(UUID ownerId) {
+        super(ownerId, 10, "Knight of Sursi", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "FUT";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-        this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // flanking
+        this.addAbility(new FlankingAbility());
+        // Suspend 3-{W}
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{W}"), this));
     }
 
-    public FinalFortune(final FinalFortune card) {
+    public KnightOfSursi(final KnightOfSursi card) {
         super(card);
     }
 
     @Override
-    public FinalFortune copy() {
-        return new FinalFortune(this);
+    public KnightOfSursi copy() {
+        return new KnightOfSursi(this);
     }
 }

@@ -64,7 +64,7 @@ public class LustForWar extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes tapped, Lust for War deals 3 damage to that creature's controller.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(3), false));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(3), "enchanted creature"));
 
         // Enchanted creature attacks each turn if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

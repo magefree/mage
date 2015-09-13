@@ -25,50 +25,66 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.futuresight;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class ContaminatedBond extends CardImpl {
+public class LlanowarMentor extends CardImpl {
 
-    public ContaminatedBond(UUID ownerId) {
-        super(ownerId, 120, "Contaminated Bond", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Aura");
+    public LlanowarMentor(UUID ownerId) {
+        super(ownerId, 131, "Llanowar Mentor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "FUT";
+        this.subtype.add("Elf");
+        this.subtype.add("Spellshaper");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // {G}, {tap}, Discard a card: Put a 1/1 green Elf Druid creature token named Llanowar Elves onto the battlefield. It has "{tap}: Add {G} to your mana pool."
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LlanowarElvesToken()), new ManaCostsImpl("{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
-
-        // Whenever enchanted creature attacks or blocks, its controller loses 3 life.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(3)));
     }
 
-    public ContaminatedBond(final ContaminatedBond card) {
+    public LlanowarMentor(final LlanowarMentor card) {
         super(card);
     }
 
     @Override
-    public ContaminatedBond copy() {
-        return new ContaminatedBond(this);
+    public LlanowarMentor copy() {
+        return new LlanowarMentor(this);
+    }
+}
+
+class LlanowarElvesToken extends Token {
+
+    public LlanowarElvesToken() {
+        super("Llanowar Elves", "1/1 green Elf Druid creature token named Llanowar Elves with \"{T}: Add {G} to your mana pool.\"");
+        this.setOriginalExpansionSetCode("FUT");
+        cardType.add(CardType.CREATURE);
+        color.setGreen(true);
+        subtype.add("Elf");
+        subtype.add("Druid");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+
+        this.addAbility(new GreenManaAbility());
     }
 }

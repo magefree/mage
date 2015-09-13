@@ -25,34 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.MageInt;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class FinalFortune extends CardImpl {
+public class RootElemental extends CardImpl {
 
-    public FinalFortune(UUID ownerId) {
-        super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "7ED";
+    public RootElemental(UUID ownerId) {
+        super(ownerId, 127, "Root Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Elemental");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(5);
 
-        // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-        this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
+        // Morph {5}{G}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}{G}")));
+        // When Root Elemental is turned face up, you may put a creature card from your hand onto the battlefield.
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new PutPermanentOnBattlefieldEffect(new FilterCreatureCard("a creature card"))));
     }
 
-    public FinalFortune(final FinalFortune card) {
+    public RootElemental(final RootElemental card) {
         super(card);
     }
 
     @Override
-    public FinalFortune copy() {
-        return new FinalFortune(this);
+    public RootElemental copy() {
+        return new RootElemental(this);
     }
 }

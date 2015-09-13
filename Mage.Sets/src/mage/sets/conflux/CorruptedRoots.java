@@ -29,26 +29,18 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -56,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CorruptedRoots extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest or Plains");
+    private static final FilterPermanent filter = new FilterPermanent("Forest or Plains");
 
     static {
         filter.add(Predicates.or(
@@ -69,17 +61,15 @@ public class CorruptedRoots extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Aura");
 
-
         // Enchant Forest or Plains
-        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // Whenever enchanted land becomes tapped, its controller loses 2 life.
-        this.addAbility(new CorruptedRootsTriggeredAbility());
-
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));
     }
 
     public CorruptedRoots(final CorruptedRoots card) {
@@ -89,46 +79,5 @@ public class CorruptedRoots extends CardImpl {
     @Override
     public CorruptedRoots copy() {
         return new CorruptedRoots(this);
-    }
-}
-
-class CorruptedRootsTriggeredAbility extends TriggeredAbilityImpl {
-
-    CorruptedRootsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
-    }
-
-    CorruptedRootsTriggeredAbility(final CorruptedRootsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.sourceId);
-        if (enchantment != null && enchantment.getAttachedTo().equals(event.getTargetId())) {
-            Permanent attached = game.getPermanent(enchantment.getAttachedTo());
-            if (attached != null) {
-                for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(attached.getControllerId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public CorruptedRootsTriggeredAbility copy() {
-        return new CorruptedRootsTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land becomes tapped, its controller loses 2 life.";
     }
 }

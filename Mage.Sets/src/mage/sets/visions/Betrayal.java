@@ -67,7 +67,7 @@ public class Betrayal extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Whenever enchanted creature becomes tapped, you draw a card.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature"));
     }
 
     public Betrayal(final Betrayal card) {
