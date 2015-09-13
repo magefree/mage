@@ -34,7 +34,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -72,10 +75,13 @@ public class MysticEnforcer extends CardImpl {
         Ability thresholdAbility = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
-                    new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
-                    new CardsInControllerGraveCondition(7),
-                    "<i>Threshold</i> - {this} gets +3/+3 as long as seven or more cards are in your graveyard"
+                        new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
+                        new CardsInControllerGraveCondition(7),
+                        "<i>Threshold</i> - {this} gets +3/+3 as long as seven or more cards are in your graveyard"
                 ));
+        Effect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
+        effect.setText("and has flying");
+        thresholdAbility.addEffect(effect);
         this.addAbility(thresholdAbility);
     }
 
