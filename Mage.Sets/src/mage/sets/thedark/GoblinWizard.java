@@ -68,7 +68,7 @@ public class GoblinWizard extends CardImpl {
     
     public GoblinWizard(UUID ownerId) {
         //Can't find the card ID....?
-        super(ownerId, 9001, "Goblin Wizard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        super(ownerId, 66, "Goblin Wizard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.RARE;
         
