@@ -144,7 +144,7 @@ public class GameView implements Serializable {
                             stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));
                             checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                         } else {
-                            logger.fatal("Object can't be cast to StackAbility: " + object.getName() + " " + object.toString());
+                            logger.fatal("Object can't be cast to StackAbility: " + object.getName() + " " + object.toString() + " " + object.getClass().toString());
                         }
                     }
                 } else {

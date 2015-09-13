@@ -29,11 +29,8 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,8 +38,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -66,7 +66,6 @@ public class SarkhanTheMad extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Sarkhan");
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(7)), false));
-
 
         this.addAbility(new LoyaltyAbility(new SarkhanTheMadRevealAndDrawEffect(), 0));
 
@@ -94,29 +93,28 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
 
     private static final String effectText = "Reveal the top card of your library and put it into your hand.  {this} deals damage to himself equal to that card's converted mana cost";
 
-    SarkhanTheMadRevealAndDrawEffect ( ) {
+    SarkhanTheMadRevealAndDrawEffect() {
         super(Outcome.DrawCard);
         staticText = effectText;
     }
 
-    SarkhanTheMadRevealAndDrawEffect ( SarkhanTheMadRevealAndDrawEffect effect ) {
+    SarkhanTheMadRevealAndDrawEffect(SarkhanTheMadRevealAndDrawEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().removeFromTop(game);
-            Permanent permanent = game.getPermanent(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            Card card = controller.getLibrary().getFromTop(game);
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (card != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                permanent.damage(card.getManaCost().convertedManaCost(), this.getId(), game, false, false);
-                Cards cards = new CardsImpl();
-                cards.add(card);
-                player.revealCards("Sarkhan the Mad", cards, game);
-                return true;
+                controller.moveCards(card, null, Zone.HAND, source, game);
+                sourcePermanent.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, false);
+                controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             }
+            return true;
         }
         return false;
     }
@@ -132,19 +130,19 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
 
     private static final String effectText = "Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield";
 
-    SarkhanTheMadSacEffect ( ) {
+    SarkhanTheMadSacEffect() {
         super(Outcome.Sacrifice);
         staticText = effectText;
     }
 
-    SarkhanTheMadSacEffect ( SarkhanTheMadSacEffect effect ) {
+    SarkhanTheMadSacEffect(SarkhanTheMadSacEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
-        if ( permanent != null ) {
+        if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             permanent.sacrifice(this.getId(), game);
             Token dragonToken = new DragonToken();
@@ -171,12 +169,12 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
         filter.add(new SubtypePredicate("Dragon"));
     }
 
-    SarkhanTheMadDragonDamageEffect ( ) {
+    SarkhanTheMadDragonDamageEffect() {
         super(Outcome.Damage);
         staticText = effectText;
     }
 
-    SarkhanTheMadDragonDamageEffect ( SarkhanTheMadDragonDamageEffect effect ) {
+    SarkhanTheMadDragonDamageEffect(SarkhanTheMadDragonDamageEffect effect) {
         super(effect);
     }
 
@@ -184,8 +182,8 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> dragons = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         Player player = game.getPlayer(source.getTargets().getFirstTarget());
-        if ( player != null && dragons != null && !dragons.isEmpty() ) {
-            for ( Permanent dragon : dragons ) {
+        if (player != null && dragons != null && !dragons.isEmpty()) {
+            for (Permanent dragon : dragons) {
                 player.damage(dragon.getPower().getValue(), dragon.getId(), game, true, false);
             }
             return true;
@@ -202,7 +200,8 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
 }
 
 class DragonToken extends mage.game.permanent.token.DragonToken {
-    DragonToken ( ) {
+
+    DragonToken() {
         super();
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
