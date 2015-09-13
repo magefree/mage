@@ -25,61 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.mageobject;
+package mage.sets.dissension;
 
-import mage.MageObject;
-import mage.abilities.Abilities;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.cards.Card;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author BursegSardaukar
  */
-public class AbilityPredicate implements Predicate<MageObject> {
+public class MagewrightsStone extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that has an ability with {T} in its cost");
+    
+    static {
+        filter.add(new AbilityPredicate(SimpleActivatedAbility.class));
+    }
+    
+    public MagewrightsStone(UUID ownerId) {
+        super(ownerId, 162, "Magewright's Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "DIS";
 
-    private final Class<?> abilityClass;
+        // {1}, {tap}: Untap target creature that has an activated ability with {T} in its cost.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{1}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
 
-    public AbilityPredicate(Class<?> abilityClass) {
-        this.abilityClass = abilityClass;
+    public MagewrightsStone(final MagewrightsStone card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        Abilities<Ability> abilities;
-        if (input instanceof Card){
-            abilities = ((Card)input).getAbilities(game);
-        } else {
-            abilities = input.getAbilities();
-        }
-        
-        for (Ability ability : abilities) {
-            if (abilityClass.equals(ability.getClass())) {
-                //Burseg Hack: Magewright's Stone [DIS] specifically looks for activated ability containing {T}
-                //As of 9/13/2015, no other AbilityPredicate is filtering for SimpleActivatedAbility 
-                if (abilityClass.equals(SimpleActivatedAbility.class) && ability.getCosts().size() > 0){
-                    for (Cost cost : ability.getCosts()) {
-                        if (cost instanceof TapSourceCost) {
-                            return true;
-                        }
-                    }
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Ability(" + abilityClass.toString() + ')';
+    public MagewrightsStone copy() {
+        return new MagewrightsStone(this);
     }
 }
