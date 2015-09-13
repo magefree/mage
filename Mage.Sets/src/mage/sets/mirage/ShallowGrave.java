@@ -44,6 +44,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -57,10 +58,9 @@ public class ShallowGrave extends CardImpl {
         super(ownerId, 39, "Shallow Grave", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "MIR";
 
-
         // Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ShallowGraveEffect());
-        
+
     }
 
     public ShallowGrave(final ShallowGrave card) {
@@ -74,46 +74,49 @@ public class ShallowGrave extends CardImpl {
 }
 
 class ShallowGraveEffect extends OneShotEffect {
-    
+
     public ShallowGraveEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step";
     }
-    
+
     public ShallowGraveEffect(final ShallowGraveEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ShallowGraveEffect copy() {
         return new ShallowGraveEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card lastCreatureCard = null;
-            for (Card card :controller.getGraveyard().getCards(game)) {
+            for (Card card : controller.getGraveyard().getCards(game)) {
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     lastCreatureCard = card;
-                }                
+                }
             }
             if (lastCreatureCard != null) {
                 if (controller.putOntoBattlefieldWithInfo(lastCreatureCard, game, Zone.GRAVEYARD, source.getSourceId())) {
-                    FixedTarget fixedTarget = new FixedTarget(lastCreatureCard.getId());
-                    // Gains Haste
-                    ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    hasteEffect.setTargetPointer(fixedTarget);
-                    game.addEffect(hasteEffect, source);
-                    // Exile it at end of turn
-                    ExileTargetEffect exileEffect = new ExileTargetEffect(null,"",Zone.BATTLEFIELD);
-                    exileEffect.setTargetPointer(fixedTarget);
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    Permanent returnedCreature = game.getPermanent(lastCreatureCard.getId());
+                    if (returnedCreature != null) {
+                        FixedTarget fixedTarget = new FixedTarget(returnedCreature, game);
+                        // Gains Haste
+                        ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                        hasteEffect.setTargetPointer(fixedTarget);
+                        game.addEffect(hasteEffect, source);
+                        // Exile it at end of turn
+                        ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+                        exileEffect.setTargetPointer(fixedTarget);
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
                 }
             }
             return true;
