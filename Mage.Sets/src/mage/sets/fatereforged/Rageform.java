@@ -28,15 +28,11 @@
 package mage.sets.fatereforged;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesAuraAttachToManifestSourceEffect;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;

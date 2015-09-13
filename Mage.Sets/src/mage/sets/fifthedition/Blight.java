@@ -29,23 +29,16 @@ package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -65,9 +58,9 @@ public class Blight extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // When enchanted land becomes tapped, destroy it.
-        this.addAbility(new BlightTriggeredAbility());
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedEffect("it"), "enchanted land"));
     }
 
     public Blight(final Blight card) {
@@ -77,45 +70,5 @@ public class Blight extends CardImpl {
     @Override
     public Blight copy() {
         return new Blight(this);
-    }
-}
-
-class BlightTriggeredAbility extends TriggeredAbilityImpl {
-    BlightTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
-    }
-
-    BlightTriggeredAbility(final BlightTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.sourceId);
-        if (enchantment != null && enchantment.getAttachedTo().equals(event.getTargetId())) {
-            Permanent attached = game.getPermanent(enchantment.getAttachedTo());
-            if (attached != null) {
-                for (Effect e : getEffects()) {
-                    e.setTargetPointer(new FixedTarget(attached.getId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public BlightTriggeredAbility copy() {
-        return new BlightTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "When enchanted land becomes tapped, destroy it.";
     }
 }

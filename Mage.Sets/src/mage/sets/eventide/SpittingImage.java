@@ -30,6 +30,7 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -45,7 +46,7 @@ import mage.util.CardUtil;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class SpittingImage extends CardImpl {
 
@@ -54,12 +55,12 @@ public class SpittingImage extends CardImpl {
         this.expansionSetCode = "EVE";
 
         // Put a token that's a copy of target creature onto the battlefield.
-        this.getSpellAbility().addEffect(new SpittingImageEffect());
+        this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+
         // Retrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
         this.addAbility(new RetraceAbility(this));
-        
+
     }
 
     public SpittingImage(final SpittingImage card) {

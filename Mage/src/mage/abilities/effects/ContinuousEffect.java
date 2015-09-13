@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
@@ -72,6 +73,8 @@ public interface ContinuousEffect extends Effect {
     List<MageObjectReference> getAffectedObjects();
 
     Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer);
+
+    Set<DependencyType> getDependencyTypes();
 
     @Override
     void newId();

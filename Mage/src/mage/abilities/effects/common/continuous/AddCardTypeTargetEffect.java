@@ -25,14 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.DependencyType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -40,12 +44,15 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
-    
+
     private final CardType addedCardType;
 
     public AddCardTypeTargetEffect(CardType addedCardType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedCardType = addedCardType;
+        if (addedCardType.equals(CardType.ENCHANTMENT)) {
+            dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
+        }
     }
 
     public AddCardTypeTargetEffect(final AddCardTypeTargetEffect effect) {
@@ -56,7 +63,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID targetId :targetPointer.getTargets(game, source)) {
+        for (UUID targetId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
                 if (!target.getCardType().contains(addedCardType)) {

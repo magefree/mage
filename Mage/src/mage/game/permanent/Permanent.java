@@ -347,4 +347,5 @@ public interface Permanent extends Card, Controllable {
     int getCreateOrder();
 
     void setCreateOrder(int createOrder);
+
 }

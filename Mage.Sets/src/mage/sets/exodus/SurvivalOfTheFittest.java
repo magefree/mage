@@ -28,16 +28,15 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,9 +48,9 @@ import mage.target.common.TargetCardInLibrary;
  * @author jeffwadsworth
  */
 public class SurvivalOfTheFittest extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("creature card");
-    
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -59,7 +58,6 @@ public class SurvivalOfTheFittest extends CardImpl {
     public SurvivalOfTheFittest(UUID ownerId) {
         super(ownerId, 129, "Survival of the Fittest", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "EXO";
-
 
         // {G}, Discard a creature card: Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new ColoredManaCost(ColoredManaSymbol.G));

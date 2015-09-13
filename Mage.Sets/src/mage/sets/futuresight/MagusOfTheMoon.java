@@ -35,6 +35,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -86,6 +87,7 @@ public class MagusOfTheMoon extends CardImpl {
         MagusOfTheMoonEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Detriment);
             this.staticText = "Nonbasic lands are Mountains";
+            dependencyTypes.add(DependencyType.BecomeMountain);
         }
 
         MagusOfTheMoonEffect(final MagusOfTheMoonEffect effect) {

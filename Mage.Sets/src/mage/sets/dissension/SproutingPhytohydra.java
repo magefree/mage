@@ -30,7 +30,8 @@ package mage.sets.dissension;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.PutTokenOntoBattlefieldCopySource;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -54,7 +55,9 @@ public class SproutingPhytohydra extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Whenever Sprouting Phytohydra is dealt damage, you may put a token that's a copy of Sprouting Phytohydra onto the battlefield.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new PutTokenOntoBattlefieldCopySource(), false));
+        Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
+        effect.setText("you may put a token that's a copy of {this} onto the battlefield");
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, effect, true));
     }
 
     public SproutingPhytohydra(final SproutingPhytohydra card) {

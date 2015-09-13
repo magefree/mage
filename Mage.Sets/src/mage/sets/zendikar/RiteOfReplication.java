@@ -28,21 +28,14 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -59,8 +52,8 @@ public class RiteOfReplication extends CardImpl {
 
         // Put a token that's a copy of target creature onto the battlefield. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new RiteOfReplicationEffect(5),
-                new RiteOfReplicationEffect(1), KickedCondition.getInstance(),
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new PutTokenOntoBattlefieldCopyTargetEffect(null, null, false, 5),
+                new PutTokenOntoBattlefieldCopyTargetEffect(), KickedCondition.getInstance(),
                 "Put a token that's a copy of target creature onto the battlefield. If {this} was kicked, put five of those tokens onto the battlefield instead"));
     }
 
@@ -71,40 +64,5 @@ public class RiteOfReplication extends CardImpl {
     @Override
     public RiteOfReplication copy() {
         return new RiteOfReplication(this);
-    }
-}
-
-class RiteOfReplicationEffect extends OneShotEffect {
-
-    private final int amount;
-
-    public RiteOfReplicationEffect(int amount) {
-        super(Outcome.PutCreatureInPlay);
-        this.amount = amount;
-    }
-
-    public RiteOfReplicationEffect(final RiteOfReplicationEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public RiteOfReplicationEffect copy() {
-        return new RiteOfReplicationEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-        if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-            token.putOntoBattlefield(amount, game, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-        return false;
     }
 }

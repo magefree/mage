@@ -27,6 +27,7 @@
  */
 package mage.sets.urzasdestiny;
 
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +38,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import static mage.constants.Layer.PTChangingEffects_7;
@@ -51,7 +53,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.shadowmoor.EnchantedEvening;
 
 /**
  *
@@ -82,10 +83,12 @@ public class Opalescence extends CardImpl {
 class OpalescenceEffect extends ContinuousEffectImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Each other non-Aura enchantment");
+    private static final EnumSet checkDependencyTypes;
 
     static {
         filter.add(Predicates.not(new SubtypePredicate("Aura")));
         filter.add(new AnotherPredicate());
+        checkDependencyTypes = EnumSet.of(DependencyType.AuraAddingRemoving, DependencyType.EnchantmentAddingRemoving);
     }
 
     public OpalescenceEffect() {
@@ -140,11 +143,13 @@ class OpalescenceEffect extends ContinuousEffectImpl {
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
         Set<UUID> dependentTo = null;
         for (ContinuousEffect effect : allEffectsInLayer) {
-            if (EnchantedEvening.class.equals(effect.getClass().getEnclosingClass())) {
-                if (dependentTo == null) {
-                    dependentTo = new HashSet<>();
+            for (DependencyType dependencyType : effect.getDependencyTypes()) {
+                if (checkDependencyTypes.contains(dependencyType)) {
+                    if (dependentTo == null) {
+                        dependentTo = new HashSet<>();
+                    }
+                    dependentTo.add(effect.getId());
                 }
-                dependentTo.add(effect.getId());
             }
         }
         return dependentTo;

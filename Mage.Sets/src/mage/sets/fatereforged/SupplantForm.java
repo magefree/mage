@@ -28,18 +28,13 @@
 package mage.sets.fatereforged;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -54,7 +49,9 @@ public class SupplantForm extends CardImpl {
         // Return target creature to its owner's hand. You put a token onto the battlefield that's a copy of that creature.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SupplantFormEffect());
+        Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+        effect.setText("You put a token onto the battlefield that's a copy of that creature");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public SupplantForm(final SupplantForm card) {
@@ -64,34 +61,5 @@ public class SupplantForm extends CardImpl {
     @Override
     public SupplantForm copy() {
         return new SupplantForm(this);
-    }
-}
-
-class SupplantFormEffect extends OneShotEffect {
-
-    public SupplantFormEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "You put a token onto the battlefield that's a copy of that creature";
-    }
-
-    public SupplantFormEffect(final SupplantFormEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SupplantFormEffect copy() {
-        return new SupplantFormEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (targetPermanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(targetPermanent);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-        return false;
     }
 }

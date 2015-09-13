@@ -50,9 +50,9 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
  */
 public class Encrust extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-    
+
     static {
         filter.add(Predicates.or(
         new CardTypePredicate(CardType.CREATURE),
@@ -71,9 +71,9 @@ public class Encrust extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect());
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent"));
         Effect effect = new CantActivateAbilitiesAttachedEffect();
         effect.setText("and its activated abilities can't be activated");
         ability.addEffect(effect);

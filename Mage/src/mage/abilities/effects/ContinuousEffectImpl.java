@@ -28,6 +28,7 @@
 package mage.abilities.effects;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -39,6 +40,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.AbilityType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Layer;
@@ -69,6 +71,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected boolean affectedObjectsSet = false;
     protected List<MageObjectReference> affectedObjectList = new ArrayList<>();
     protected boolean temporary = false;
+    protected EnumSet<DependencyType> dependencyTypes;
 
     // until your next turn
     protected int startingTurn;
@@ -79,6 +82,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.duration = duration;
         this.order = 0;
         this.effectType = EffectType.CONTINUOUS;
+        this.dependencyTypes = EnumSet.noneOf(DependencyType.class);
     }
 
     public ContinuousEffectImpl(Duration duration, Layer layer, SubLayer sublayer, Outcome outcome) {
@@ -100,6 +104,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.temporary = effect.temporary;
         this.startingTurn = effect.startingTurn;
         this.startingControllerId = effect.startingControllerId;
+        this.dependencyTypes = effect.dependencyTypes;
     }
 
     @Override
@@ -254,6 +259,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
         return null;
+    }
+
+    @Override
+    public EnumSet<DependencyType> getDependencyTypes() {
+        return dependencyTypes;
     }
 
 }

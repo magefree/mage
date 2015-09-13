@@ -60,7 +60,7 @@ public class Insolence extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Whenever enchanted creature becomes tapped, Insolence deals 2 damage to that creature's controller.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(2), false));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(2), "enchanted creature"));
     }
 
     public Insolence(final Insolence card) {

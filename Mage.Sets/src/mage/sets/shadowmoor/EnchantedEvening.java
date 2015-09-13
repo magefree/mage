@@ -34,6 +34,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -80,6 +81,7 @@ public class EnchantedEvening extends CardImpl {
             super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
             this.addedCardType = addedCardType;
             this.filter = filter;
+            this.dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
         }
 
         public EnchangedEveningEffect(final EnchangedEveningEffect effect) {

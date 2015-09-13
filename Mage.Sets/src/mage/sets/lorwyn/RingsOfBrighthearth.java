@@ -57,7 +57,7 @@ public class RingsOfBrighthearth extends CardImpl {
         this.expansionSetCode = "LRW";
 
         // Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
-        this.addAbility(new RingsOfBrighthearthTriggeredAbility());        
+        this.addAbility(new RingsOfBrighthearthTriggeredAbility());
     }
 
     public RingsOfBrighthearth(final RingsOfBrighthearth card) {
@@ -71,15 +71,15 @@ public class RingsOfBrighthearth extends CardImpl {
 }
 
 class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     RingsOfBrighthearthTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RingsOfBrighthearthEffect(), false);
     }
-    
+
     RingsOfBrighthearthTriggeredAbility(final RingsOfBrighthearthTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public RingsOfBrighthearthTriggeredAbility copy() {
         return new RingsOfBrighthearthTriggeredAbility(this);
@@ -89,7 +89,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ACTIVATED_ABILITY;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
@@ -102,7 +102,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.";
@@ -110,21 +110,21 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class RingsOfBrighthearthEffect extends OneShotEffect {
-    
+
     RingsOfBrighthearthEffect() {
         super(Outcome.Benefit);
         this.staticText = ", you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.";
     }
-    
+
     RingsOfBrighthearthEffect(final RingsOfBrighthearthEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public RingsOfBrighthearthEffect copy() {
         return new RingsOfBrighthearthEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -142,7 +142,7 @@ class RingsOfBrighthearthEffect extends OneShotEffect {
                         if (newAbility.getTargets().size() > 0) {
                             if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
                                 newAbility.getTargets().clearChosen();
-                                if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, game) == false) {
+                                if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, false, game) == false) {
                                     return false;
                                 }
                             }

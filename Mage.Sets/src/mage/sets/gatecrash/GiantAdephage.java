@@ -28,22 +28,13 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
-import mage.util.CardUtil;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -63,7 +54,7 @@ public class GiantAdephage extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Giant Adephage deals combat damage to a player, put a token onto the battlefield that is a copy of Giant Adephage.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GiantAdephageCopyEffect(), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new PutTokenOntoBattlefieldCopySourceEffect(), false));
 
     }
 
@@ -74,42 +65,5 @@ public class GiantAdephage extends CardImpl {
     @Override
     public GiantAdephage copy() {
         return new GiantAdephage(this);
-    }
-}
-
-class GiantAdephageCopyEffect extends OneShotEffect {
-
-    public GiantAdephageCopyEffect() {
-        super(Outcome.Copy);
-        this.staticText = "put a token onto the battlefield that is a copy of Giant Adephage";
-    }
-
-    public GiantAdephageCopyEffect(final GiantAdephageCopyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GiantAdephageCopyEffect copy() {
-        return new GiantAdephageCopyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject thisCard = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (thisCard != null && thisCard instanceof Permanent) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from((Permanent)thisCard);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
-        } else { // maybe it's token
-            Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-            if (permanent != null) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(permanent);
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -37,6 +37,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -47,9 +48,9 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -175,9 +176,9 @@ class SoulFoundryEffect extends OneShotEffect {
                 Card imprinted = game.getCard(soulFoundry.getImprinted().get(0));
                 if (imprinted != null
                         && game.getState().getZone(imprinted.getId()).equals(Zone.EXILED)) {
-                    EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(imprinted);
-                    return token.putOntoBattlefield(1, game, source.getSourceId(), controller.getId());
+                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    effect.setTargetPointer(new FixedTarget(imprinted.getId(), imprinted.getZoneChangeCounter(game)));
+                    return effect.apply(game, source);
                 }
             }
         }

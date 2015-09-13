@@ -41,6 +41,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
@@ -53,7 +54,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.futuresight.MagusOfTheMoon;
 
 /**
  *
@@ -133,7 +133,7 @@ public class Conversion extends CardImpl {
             Set<UUID> dependentTo = null;
             for (ContinuousEffect effect : allEffectsInLayer) {
                 // http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/286046-conversion-magus-of-the-moon
-                if (MagusOfTheMoon.class.equals(effect.getClass().getEnclosingClass())) {
+                if (effect.getDependencyTypes().contains(DependencyType.BecomeMountain)) {
                     if (dependentTo == null) {
                         dependentTo = new HashSet<>();
                     }

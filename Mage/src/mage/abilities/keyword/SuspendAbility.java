@@ -328,7 +328,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When the last time counter is removed from this card, if it's removed from the game, " + super.getRule();
+        return "When the last time counter is removed from this card ({this}), if it's removed from the game, " + super.getRule();
     }
 
     @Override
@@ -436,7 +436,7 @@ class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbili
     public SuspendBeginningOfUpkeepTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
                 SuspendedCondition.getInstance(),
-                "At the beginning of your upkeep, if this card is suspended, remove a time counter from it.");
+                "At the beginning of your upkeep, if this card ({this}) is suspended, remove a time counter from it.");
         this.setRuleVisible(false);
 
     }

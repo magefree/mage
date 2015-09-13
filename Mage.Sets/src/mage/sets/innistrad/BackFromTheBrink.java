@@ -28,24 +28,23 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
+import mage.abilities.Ability;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.costs.CostImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.game.permanent.token.EmptyToken;
+import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -57,9 +56,10 @@ public class BackFromTheBrink extends CardImpl {
         super(ownerId, 44, "Back from the Brink", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
         this.expansionSetCode = "ISD";
 
-
         // Exile a creature card from your graveyard and pay its mana cost: Put a token onto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery.
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BackFromTheBrinkEffect(), new BackFromTheBrinkCost()));
+        Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+        effect.setText("Put a token onto the battlefield that's a copy of that card");
+        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, effect, new BackFromTheBrinkCost()));
 
     }
 
@@ -73,40 +73,12 @@ public class BackFromTheBrink extends CardImpl {
     }
 }
 
-class BackFromTheBrinkEffect extends OneShotEffect {
-
-    public BackFromTheBrinkEffect () {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "Put a token onto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery";
-    }
-
-    public BackFromTheBrinkEffect(final BackFromTheBrinkEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(this.targetPointer.getFirst(game, source));
-        if (card != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BackFromTheBrinkEffect copy() {
-        return new BackFromTheBrinkEffect(this);
-    }
-
-}
-
 class BackFromTheBrinkCost extends CostImpl {
 
     public BackFromTheBrinkCost() {
-        this.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        Target target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
+        target.setNotTarget(true);
+        this.addTarget(target);
         this.text = "Exile a creature card from your graveyard and pay its mana cost";
     }
 
@@ -127,10 +99,10 @@ class BackFromTheBrinkCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
-            Player player = game.getPlayer(controllerId);
-            if (player != null) {
-                Card card = player.getGraveyard().get(targets.getFirstTarget(), game);
-                if (card != null && card.moveToZone(Zone.EXILED, sourceId, game, false)) {
+            Player controller = game.getPlayer(controllerId);
+            if (controller != null) {
+                Card card = controller.getGraveyard().get(targets.getFirstTarget(), game);
+                if (card != null && controller.moveCards(card, null, Zone.EXILED, ability, game)) {
                     ability.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
                     paid = card.getManaCost().pay(ability, game, sourceId, controllerId, noMana);
                 }
