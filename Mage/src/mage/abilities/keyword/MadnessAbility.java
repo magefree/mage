@@ -1,8 +1,11 @@
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
@@ -13,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
@@ -52,6 +54,11 @@ public class MadnessAbility extends StaticAbility {
     @Override
     public MadnessAbility copy() {
         return new MadnessAbility(this);
+    }
+    
+    public static Condition GetCondition()
+    {
+        return MadnessCondition.getInstance();
     }
 
     @Override
@@ -117,10 +124,11 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
  * If not, the card goes to the graveyard.
  */
 class MadnessTriggeredAbility extends TriggeredAbilityImpl {
-    
+    //This array holds the Id's of all of the cards that activated madness
+    private static ArrayList<UUID> activatedIds = new ArrayList<UUID>(); 
     MadnessTriggeredAbility(ManaCosts<ManaCost> madnessCost ) {
         super(Zone.EXILED, new MadnessCastEffect(madnessCost), true);
-        this.setRuleVisible(false);        
+        this.setRuleVisible(false); 
     }
 
     MadnessTriggeredAbility(final MadnessTriggeredAbility ability) {
@@ -152,12 +160,31 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
                     // if cast was not successfull, the card is moved to graveyard
                     owner.moveCards(card, Zone.EXILED, Zone.GRAVEYARD, this, game);
                 }
-            }              
+            }    
             return false;
         }
+        activatedIds.add(getSourceId());
         return true;
     }
 
+    @Override
+    public boolean isActivated()
+    {
+        //Look through the list of activated Ids and see if the current source's Id is one of them
+        for(UUID currentId : activatedIds)
+        {
+            if(currentId.equals(getSourceId()))
+            {
+                //Remove the current source from the list, so if the card is somehow recast without
+                //paying the madness cost, this will return false
+                activatedIds.remove(currentId);
+                return true;
+            }
+        }
+        //If the current source's Id was not found, return false
+        return false;
+    }
+    
     @Override
     public String getRule() {
         return "When this card is exiled this way, " + super.getRule();
@@ -208,4 +235,36 @@ class MadnessCastEffect extends OneShotEffect {
     public MadnessCastEffect copy() {
         return new MadnessCastEffect(this);
     }
+}
+
+class MadnessCondition implements Condition {
+
+    private static MadnessCondition fInstance = null;
+
+    private MadnessCondition() {
+    }
+
+    public static Condition getInstance() {
+        if (fInstance == null) {
+            fInstance = new MadnessCondition();
+        }
+
+        return fInstance;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            for (Ability ability : card.getAbilities()) {
+                if (ability instanceof MadnessTriggeredAbility) {
+                    if (((MadnessTriggeredAbility) ability).isActivated()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }
