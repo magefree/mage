@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author emerald000
+ * @author BursegSardaukar
  */
 public class LastDitchEffort extends CardImpl {
 

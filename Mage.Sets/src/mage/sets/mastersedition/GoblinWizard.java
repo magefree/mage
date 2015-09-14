@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author LevelX2
+ * @author BursegSardaukar
  */
 public class GoblinWizard extends mage.sets.thedark.GoblinWizard {
 
