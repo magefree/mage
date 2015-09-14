@@ -29,26 +29,16 @@ package mage.sets.urzaslegacy;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.common.PayVariableLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.EntwineAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetCard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
