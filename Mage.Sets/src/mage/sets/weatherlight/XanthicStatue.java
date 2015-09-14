@@ -68,7 +68,7 @@ public class XanthicStatue extends CardImpl {
 class XanthicStatueCreature extends Token {
 
     public XanthicStatueCreature() {
-        super("Xanthic Statue", "an 8/8 Golem artifact creature with trample");
+        super("Xanthic Statue", "8/8 Golem artifact creature with trample");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         power = new MageInt(8);
