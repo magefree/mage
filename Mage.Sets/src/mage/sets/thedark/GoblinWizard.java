@@ -56,9 +56,9 @@ import mage.target.TargetPermanent;
  */
 public class GoblinWizard extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("a Goblin permanent card");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin");
     private static final FilterCard protectionFilter = new FilterCard("white");
-    private static final FilterPermanent goblinCard = new FilterPermanent("a Goblin permanent card");
+    private static final FilterPermanent goblinCard = new FilterPermanent("Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));
@@ -67,8 +67,7 @@ public class GoblinWizard extends CardImpl {
     }
     
     public GoblinWizard(UUID ownerId) {
-        //Can't find the card ID....?
-        super(ownerId, 66, "Goblin Wizard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        super(ownerId, 68, "Goblin Wizard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.RARE;
         

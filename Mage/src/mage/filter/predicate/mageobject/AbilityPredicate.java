@@ -30,9 +30,6 @@ package mage.filter.predicate.mageobject;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.cards.Card;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -60,19 +57,7 @@ public class AbilityPredicate implements Predicate<MageObject> {
         
         for (Ability ability : abilities) {
             if (abilityClass.equals(ability.getClass())) {
-                //Burseg Hack: Magewright's Stone [DIS] specifically looks for activated ability containing {T}
-                //As of 9/13/2015, no other AbilityPredicate is filtering for ActivatedAbilityImpl 
-                //if (abilityClass.equals(SimpleActivatedAbility.class) && ability.getCosts().size() > 0){
-                if((ability instanceof ActivatedAbilityImpl) && ability.getCosts().size() > 0){
-                    for (Cost cost : ability.getCosts()) {
-                        if (cost instanceof TapSourceCost) {
-                            return true;
-                        }
-                    }
-                    return false;
-                } else {
-                    return true;
-                }
+                return true;
             }
         }
         return false;
