@@ -485,7 +485,12 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         updateGameStatePriority("chooseTarget(5)", game);
         while (!abort) {
-            boolean required = target.isRequired(source);
+            boolean required;
+            if (target.isRequiredExplicitlySet()) {
+                required = target.isRequired();
+            } else {
+                required = target.isRequired(source);
+            }
             // if there is no cards to select from, then add possibility to cancel choosing action
             if (cards == null) {
                 required = false;

@@ -28,11 +28,10 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -42,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class IdyllicTutor extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("enchantment");
+    private static final FilterCard filter = new FilterCard("an enchantment");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
@@ -51,7 +50,6 @@ public class IdyllicTutor extends CardImpl {
     public IdyllicTutor(UUID ownerId) {
         super(ownerId, 12, "Idyllic Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "MOR";
-
 
         // Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
