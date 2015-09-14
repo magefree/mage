@@ -49,18 +49,19 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Leathios
  */
 public class AegisOfTheMeek extends CardImpl {
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
-    
-     static {
+
+    static {
         filter.add(new PowerPredicate(Filter.ComparisonType.Equal, 1));
         filter.add(new ToughnessPredicate(Filter.ComparisonType.Equal, 1));
     }
-     
+
     public AegisOfTheMeek(UUID ownerId) {
         super(ownerId, 282, "Aegis of the Meek", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "ICE";
 
-        // {1}, {tap}: Target 1/1 creature gets +1/+2 until end of turn.
+        // {1}, {T}: Target 1/1 creature gets +1/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

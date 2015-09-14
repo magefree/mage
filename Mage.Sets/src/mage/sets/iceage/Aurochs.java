@@ -49,12 +49,12 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 public class Aurochs extends CardImpl {
 
     private static final FilterAttackingCreature filter1 = new FilterAttackingCreature("other attacking Aurochs");
-    
+
     static {
         filter1.add(new SubtypePredicate("Aurochs"));
         filter1.add(new AnotherPredicate());
     }
-    
+
     public Aurochs(UUID ownerId) {
         super(ownerId, 113, "Aurochs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "ICE";

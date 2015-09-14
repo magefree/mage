@@ -68,6 +68,7 @@ public class SoldeviMachinist extends CardImpl {
 }
 
 class SoldeviMachinistManaBuilder extends ConditionalManaBuilder {
+
     @Override
     public ConditionalMana build(Object... options) {
         return new ArtifactCastConditionalMana(this.mana);

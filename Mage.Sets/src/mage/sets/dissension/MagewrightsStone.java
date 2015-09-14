@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -52,18 +52,18 @@ import mage.target.common.TargetCreaturePermanent;
  * @author BursegSardaukar
  */
 public class MagewrightsStone extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that has an ability with {T} in its cost");
-    
+
     static {
         filter.add(new HasAbilityWithTapSymbolPredicate());
     }
-    
+
     public MagewrightsStone(UUID ownerId) {
         super(ownerId, 162, "Magewright's Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "DIS";
 
-        // {1}, {tap}: Untap target creature that has an activated ability with {T} in its cost.
+        // {1}, {T}: Untap target creature that has an activated ability with {T} in its cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
@@ -80,27 +80,19 @@ public class MagewrightsStone extends CardImpl {
     }
 }
 
-/**
- *
- * @author North
- */
 class HasAbilityWithTapSymbolPredicate implements Predicate<MageObject> {
-
-    public HasAbilityWithTapSymbolPredicate() {
-
-    }
 
     @Override
     public boolean apply(MageObject input, Game game) {
         Abilities<Ability> abilities;
-        if (input instanceof Card){
-            abilities = ((Card)input).getAbilities(game);
+        if (input instanceof Card) {
+            abilities = ((Card) input).getAbilities(game);
         } else {
             abilities = input.getAbilities();
         }
-        
+
         for (Ability ability : abilities) {
-            if((ability instanceof ActivatedAbilityImpl) && ability.getCosts().size() > 0){
+            if (ability.getAbilityType().equals(AbilityType.ACTIVATED) && !ability.getCosts().isEmpty()) {
                 for (Cost cost : ability.getCosts()) {
                     if (cost instanceof TapSourceCost) {
                         return true;
@@ -113,6 +105,6 @@ class HasAbilityWithTapSymbolPredicate implements Predicate<MageObject> {
 
     @Override
     public String toString() {
-        return "Ability contains {T} symbol.";
+        return "activated ability with {T} in its cost";
     }
 }
