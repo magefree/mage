@@ -30,13 +30,19 @@ package mage.sets.masterseditioniv;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
+import mage.MageObject;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.abilities.mana.conditional.ArtifactCastConditionalMana;
+import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.game.Game;
 
 /**
  *
@@ -71,11 +77,39 @@ class SoldeviMachinistManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public ConditionalMana build(Object... options) {
-        return new ArtifactCastConditionalMana(this.mana);
+        return new ArtifactAbilityConditionalMana(this.mana);
     }
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast artifact spells";
+        return "Spend this mana only to activate abilities of artifacts";
+    }
+}
+
+class ArtifactAbilityConditionalMana extends ConditionalMana {
+
+    public ArtifactAbilityConditionalMana(Mana mana) {
+        super(mana);
+        staticText = "Spend this mana only to activate abilities of artifacts";
+        addCondition(new ArtifactAbilityManaCondition());
+    }
+}
+
+class ArtifactAbilityManaCondition extends ManaCondition implements Condition {
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (source != null && source.getAbilityType().equals(AbilityType.ACTIVATED)) {
+            MageObject object = game.getObject(source.getSourceId());
+            if (object != null && object.getCardType().contains(CardType.ARTIFACT)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source, UUID originalId) {
+        return apply(game, source);
     }
 }
