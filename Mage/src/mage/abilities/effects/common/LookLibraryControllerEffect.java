@@ -108,12 +108,12 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         if (source instanceof SpellAbility) {
             Card sourceCard = game.getCard(source.getSourceId());
             if (sourceCard != null) {
-                windowName = sourceCard.getName();
+                windowName = sourceCard.getIdName();
             }
         } else {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null) {
-                windowName = sourcePermanent.getName();
+                windowName = sourcePermanent.getIdName();
             }
         }
 
