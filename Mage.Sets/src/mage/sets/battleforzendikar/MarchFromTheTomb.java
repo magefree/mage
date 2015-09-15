@@ -35,7 +35,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
@@ -84,27 +83,6 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
-        int cmcLeft = 8;
-        for (UUID targetId : this.getTargets()) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                cmcLeft -= card.getManaCost().convertedManaCost();
-            }
-        }
-        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, cards, game);
-        Set<UUID> leftPossibleTargets = new HashSet<>();
-        for (UUID targetId : possibleTargets) {
-            Card card = game.getCard(targetId);
-            if (card != null && card.getManaCost().convertedManaCost() <= cmcLeft) {
-                leftPossibleTargets.add(targetId);
-            }
-        }
-        setTargetName("any number of target Ally creature cards with total converted mana cost of 8 or less (" + cmcLeft + " left) from your graveyard");
-        return leftPossibleTargets;
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int cmcLeft = 8;
         for (UUID targetId : this.getTargets()) {
@@ -123,11 +101,6 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
         }
         setTargetName("any number of target Ally creature cards with total converted mana cost of 8 or less (" + cmcLeft + " left) from your graveyard");
         return leftPossibleTargets;
-    }
-
-    @Override
-    public boolean canTarget(UUID objectId, Ability source, Game game) {
-        return this.canTarget(source.getControllerId(), objectId, source, game);
     }
 
     @Override
