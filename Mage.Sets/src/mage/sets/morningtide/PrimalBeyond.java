@@ -46,7 +46,6 @@ import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -54,25 +53,24 @@ import mage.target.common.TargetCardInHand;
  * @author TGower
  */
 public class PrimalBeyond extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("a Elemental card from your hand");
-    
+
     static {
         filter.add(new SubtypePredicate("Elemental"));
     }
 
-
     public PrimalBeyond(UUID ownerId) {
         super(ownerId, 149, "Primal Beyond", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "MOR";
-        
+
         // As Primal Beyond enters the battlefield, you may reveal an Elemental card from your hand. If you don't, Primal Beyond enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Elemental card from your hand. If you don't, {this} enters the battlefield tapped"));
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.
-                Ability ability = new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new PrimalBeyondManaBuilder(), true);
-                this.addAbility(ability);
+        Ability ability = new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new PrimalBeyondManaBuilder(), true);
+        this.addAbility(ability);
     }
 
     public PrimalBeyond(final PrimalBeyond card) {
@@ -84,7 +82,6 @@ public class PrimalBeyond extends CardImpl {
         return new PrimalBeyond(this);
     }
 }
-
 
 class PrimalBeyondManaBuilder extends ConditionalManaBuilder {
 
@@ -113,9 +110,6 @@ class PrimalBeyondManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.hasSubtype("Elemental")) {
-            return true;
-        }
-        return false;
+        return object != null && object.hasSubtype("Elemental");
     }
 }

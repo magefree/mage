@@ -41,6 +41,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.abilities.mana.builder.SubtypeCastManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -71,7 +72,7 @@ public class SliverHive extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a Sliver spell.
-        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new SliverHiveManaBuilder(), true));
+        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new SubtypeCastManaBuilder("Sliver"), true));
 
         // {5}, {T}: Put a 1/1 colorless Sliver creature token onto the battlefield. Activate this ability only if you control a Sliver.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliverToken()), new TapSourceCost(),
