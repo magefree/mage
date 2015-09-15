@@ -34,9 +34,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -67,8 +69,10 @@ public class TheloniteDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{G}, {tap}, Sacrifice a creature: Forests you control become 2/3 creatures until end of turn. They're still lands.
+        ContinuousEffect effect = new BecomesCreatureAllEffect(new TheloniteDruidLandToken(), "Forests", filter, Duration.EndOfTurn);
+        effect.getDependencyTypes().add(DependencyType.BecomeForest);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BecomesCreatureAllEffect(new TheloniteDruidLandToken(), "Forests", filter, Duration.EndOfTurn),
+                effect,
                 new ManaCostsImpl("{1}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
@@ -86,6 +90,7 @@ public class TheloniteDruid extends CardImpl {
 }
 
 class TheloniteDruidLandToken extends Token {
+
     public TheloniteDruidLandToken() {
         super("", "2/3 creatures");
         cardType.add(CardType.CREATURE);

@@ -28,23 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
+import mage.abilities.effects.common.CipherEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CipherEffect;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -53,17 +45,17 @@ import mage.util.CardUtil;
 public class StolenIdentity extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     public StolenIdentity(UUID ownerId) {
         super(ownerId, 53, "Stolen Identity", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "GTC";
 
-
         // Put a token onto the battlefield that's a copy of target artifact or creature.
-        this.getSpellAbility().addEffect(new StolenIdentityEffect());
+        this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // Cipher
         this.getSpellAbility().addEffect(new CipherEffect());
@@ -76,44 +68,5 @@ public class StolenIdentity extends CardImpl {
     @Override
     public StolenIdentity copy() {
         return new StolenIdentity(this);
-    }
-}
-
-
-class StolenIdentityEffect extends OneShotEffect {
-    
-
-    
-    public StolenIdentityEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a token onto the battlefield that's a copy of target artifact or creature";
-    }
-
-    public StolenIdentityEffect(final StolenIdentityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StolenIdentityEffect copy() {
-        return new StolenIdentityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-
-        if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            
-            return true;
-        }
-
-        return false;
     }
 }

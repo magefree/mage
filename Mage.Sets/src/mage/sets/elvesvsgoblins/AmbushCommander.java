@@ -34,10 +34,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -71,12 +73,13 @@ public class AmbushCommander extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Forests you control are 1/1 green Elf creatures that are still lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new AmbushCommanderToken(),
-            "lands", filter2, Duration.WhileOnBattlefield)));
+        ContinuousEffect effect = new BecomesCreatureAllEffect(new AmbushCommanderToken(), "lands", filter2, Duration.WhileOnBattlefield);
+        effect.getDependencyTypes().add(DependencyType.BecomeForest);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // {1}{G}, Sacrifice an Elf: Target creature gets +3/+3 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3,3, Duration.EndOfTurn),
-            new ManaCostsImpl("{1}{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn),
+                new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -92,6 +95,7 @@ public class AmbushCommander extends CardImpl {
 }
 
 class AmbushCommanderToken extends Token {
+
     public AmbushCommanderToken() {
         super("Elf", "1/1 green Elf creatures");
         subtype.add("Elf");

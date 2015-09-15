@@ -383,7 +383,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         while (!abort) {
             Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), abilityControllerId, game);
-            boolean required = target.isRequired(source);
+            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
             if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
@@ -485,7 +485,12 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         updateGameStatePriority("chooseTarget(5)", game);
         while (!abort) {
-            boolean required = target.isRequired(source);
+            boolean required;
+            if (target.isRequiredExplicitlySet()) {
+                required = target.isRequired();
+            } else {
+                required = target.isRequired(source);
+            }
             // if there is no cards to select from, then add possibility to cancel choosing action
             if (cards == null) {
                 required = false;
@@ -715,21 +720,23 @@ public class HumanPlayer extends PlayerImpl {
                 if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
                     return ability;
                 }
-                if (triggerAutoOrderNameFirst.contains(ability.getRule())) {
+                MageObject object = game.getObject(ability.getSourceId());
+                String rule = ability.getRule(object != null ? object.getName() : null);
+                if (triggerAutoOrderNameFirst.contains(rule)) {
                     return ability;
                 }
                 if (triggerAutoOrderAbilityLast.contains(ability.getOriginalId())) {
                     abilityOrderLast = ability;
                     continue;
                 }
-                if (triggerAutoOrderNameLast.contains(ability.getRule())) {
+                if (triggerAutoOrderNameLast.contains(rule)) {
                     abilityOrderLast = ability;
                     continue;
                 }
                 if (autoOrderUse) {
                     if (autoOrderRuleText == null) {
-                        autoOrderRuleText = ability.getRule();
-                    } else if (!ability.getRule().equals(autoOrderRuleText)) {
+                        autoOrderRuleText = rule;
+                    } else if (!rule.equals(autoOrderRuleText)) {
                         autoOrderUse = false;
                     }
                 }

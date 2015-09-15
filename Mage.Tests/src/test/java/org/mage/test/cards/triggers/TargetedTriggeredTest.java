@@ -64,4 +64,29 @@ public class TargetedTriggeredTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Kira, Great Glass-Spinner", 1);
     }
 
+    /**
+     * With Ashenmoor Liege on the battlefield, my opponent casts Claustrophobia
+     * on it without losing 4hp.
+     */
+    @Test
+    public void testAshenmoorLiege() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Claustrophobia"); // {1}{U}{U}
+
+        // Other black creatures you control get +1/+1.
+        // Other red creatures you control get +1/+1.
+        // Whenever Ashenmoor Liege becomes the target of a spell or ability an opponent controls, that player loses 4 life.
+        addCard(Zone.BATTLEFIELD, playerB, "Ashenmoor Liege", 1);  // 4/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Claustrophobia", "Ashenmoor Liege");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 16);
+
+        assertPermanentCount(playerA, "Claustrophobia", 1);
+        assertPowerToughness(playerB, "Ashenmoor Liege", 4, 1);
+    }
+
 }

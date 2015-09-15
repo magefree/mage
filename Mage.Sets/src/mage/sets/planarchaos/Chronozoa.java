@@ -34,7 +34,8 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.CopyCardEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VanishingSacrificeAbility;
@@ -47,14 +48,11 @@ import mage.counters.CounterType;
 /**
  *
  * @author Gal Lerman
-
+ *
  */
 public class Chronozoa extends CardImpl {
 
-  private static final int timeCounters = 3;
-  private static final int numCopies = 2;
-
-  public Chronozoa(UUID ownerId) {
+    public Chronozoa(UUID ownerId) {
         super(ownerId, 37, "Chronozoa", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "PLC";
         this.subtype.add("Illusion");
@@ -64,15 +62,17 @@ public class Chronozoa extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Vanishing 3
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(timeCounters)));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
         ability.setRuleVisible(false);
         this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(timeCounters));
+        this.addAbility(new VanishingUpkeepAbility(3));
         this.addAbility(new VanishingSacrificeAbility());
         // When Chronozoa is put into a graveyard from play, if it had no time counters on it, put two tokens into play that are copies of it.
-        this.addAbility(new ConditionalTriggeredAbility(new DiesCreatureTriggeredAbility(new CopyCardEffect(this, numCopies), false),
-            new LastTimeCounterRemovedCondition(),
-            "When {this} dies, if it had no time counters on it, put two tokens that are copies of it onto the battlefield."));
+        Effect effect = new PutTokenOntoBattlefieldCopySourceEffect(2);
+        effect.setText("put two tokens into play that are copies of it");
+        this.addAbility(new ConditionalTriggeredAbility(new DiesCreatureTriggeredAbility(effect, false),
+                new LastTimeCounterRemovedCondition(),
+                "When {this} dies, if it had no time counters on it, put two tokens that are copies of it onto the battlefield."));
     }
 
     public Chronozoa(final Chronozoa card) {

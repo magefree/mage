@@ -28,19 +28,10 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.turn.TurnMod;
-import mage.players.Player;
 
 /**
  *
@@ -52,9 +43,8 @@ public class FinalFortune extends CardImpl {
         super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
         this.expansionSetCode = "7ED";
 
-
         // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-        this.getSpellAbility().addEffect(new FinalFortuneEffect());
+        this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
     }
 
     public FinalFortune(final FinalFortune card) {
@@ -65,104 +55,4 @@ public class FinalFortune extends CardImpl {
     public FinalFortune copy() {
         return new FinalFortune(this);
     }
-}
-
-class FinalFortuneEffect extends OneShotEffect {
-
-    public FinalFortuneEffect() {
-        super(Outcome.AIDontUseIt);
-        this.staticText = "Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.";
-    }
-    
-    public FinalFortuneEffect(final FinalFortuneEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FinalFortuneEffect copy() {
-        return new FinalFortuneEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // Take an extra turn after this one
-        TurnMod extraTurn = new TurnMod(source.getControllerId(), false);
-        game.getState().getTurnMods().add(extraTurn);
-        
-        FinalFortuneLoseDelayedTriggeredAbility delayedTriggeredAbility = new FinalFortuneLoseDelayedTriggeredAbility();
-        delayedTriggeredAbility.setSourceId(source.getSourceId());
-        delayedTriggeredAbility.setControllerId(source.getControllerId());
-        delayedTriggeredAbility.setConnectedTurnMod(extraTurn.getId());
-        game.addDelayedTriggeredAbility(delayedTriggeredAbility);
-        
-        return true;
-    }
-    
-}
-
-class FinalFortuneLoseDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-    private UUID connectedTurnMod;
-
-    public FinalFortuneLoseDelayedTriggeredAbility() {
-        super(new FinalFortuneLoseEffect(), Duration.EndOfGame);
-    }
-
-    public FinalFortuneLoseDelayedTriggeredAbility(final FinalFortuneLoseDelayedTriggeredAbility ability) {
-        super(ability);
-        this.connectedTurnMod = ability.connectedTurnMod;
-    }
-
-    @Override
-    public FinalFortuneLoseDelayedTriggeredAbility copy() {
-        return new FinalFortuneLoseDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_TURN_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return connectedTurnMod != null && connectedTurnMod.equals(game.getState().getTurnId());
-    }
-
-    public void setConnectedTurnMod(UUID connectedTurnMod) {
-        this.connectedTurnMod = connectedTurnMod;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of that turn's end step, you lose the game";
-    }
-    
-}
-
-class FinalFortuneLoseEffect extends OneShotEffect {
-
-    public FinalFortuneLoseEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "You lose the game";
-    }
-    
-    public FinalFortuneLoseEffect(final FinalFortuneLoseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FinalFortuneLoseEffect copy() {
-        return new FinalFortuneLoseEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.lost(game);
-            return true;
-        }
-        return false;
-    }
-    
 }

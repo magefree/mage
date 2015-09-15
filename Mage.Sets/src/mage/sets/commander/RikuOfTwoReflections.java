@@ -30,11 +30,13 @@ package mage.sets.commander;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -48,11 +50,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -62,6 +61,7 @@ public class RikuOfTwoReflections extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
     private static final FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("another nontoken creature");
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
@@ -85,12 +85,10 @@ public class RikuOfTwoReflections extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new RikuOfTwoReflectionsCopyEffect(), new ManaCostsImpl("{U}{R}")), filter, false, true));
 
         // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new RikuOfTwoReflectionsCopyTokenEffect(),filterPermanent, false, SetTargetPointer.PERMANENT,
-                "Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield.",
-                true);
-        ability.addCost(new ManaCostsImpl("{G}{U}"));
-        this.addAbility(ability);
+        Effect effect = new DoIfCostPaid(new PutTokenOntoBattlefieldCopyTargetEffect(),
+                new ManaCostsImpl("{G}{U}"), "Put a token that's a copy of that creature onto the battlefield?");
+        effect.setText("you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield");
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT, null));
     }
 
     public RikuOfTwoReflections(final RikuOfTwoReflections card) {
@@ -137,34 +135,5 @@ class RikuOfTwoReflectionsCopyEffect extends OneShotEffect {
     @Override
     public RikuOfTwoReflectionsCopyEffect copy() {
         return new RikuOfTwoReflectionsCopyEffect(this);
-    }
-}
-
-class RikuOfTwoReflectionsCopyTokenEffect extends OneShotEffect {
-
-    public RikuOfTwoReflectionsCopyTokenEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "put a token that's a copy of that creature onto the battlefield";
-    }
-
-    public RikuOfTwoReflectionsCopyTokenEffect(final RikuOfTwoReflectionsCopyTokenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RikuOfTwoReflectionsCopyTokenEffect copy() {
-        return new RikuOfTwoReflectionsCopyTokenEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-        return false;
     }
 }

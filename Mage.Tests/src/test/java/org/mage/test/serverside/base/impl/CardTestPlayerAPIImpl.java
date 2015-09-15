@@ -574,7 +574,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
-        Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Battlefield) Card counts for " + player.getName() + " are not equal (" + cardName + ")", count, actualCount);
     }
 
     @Override

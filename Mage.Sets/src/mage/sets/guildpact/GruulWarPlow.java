@@ -28,10 +28,6 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +36,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.Token;
@@ -52,7 +51,11 @@ public class GruulWarPlow extends CardImpl {
     public GruulWarPlow(UUID ownerId) {
         super(ownerId, 151, "Gruul War Plow", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "GPT";
+
+        // Creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+
+        // {1}{R}{G}: Gruul War Plow becomes a 4/4 Juggernaut artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GruulWarPlowToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{G}")));
     }
 
@@ -67,6 +70,7 @@ public class GruulWarPlow extends CardImpl {
 }
 
 class GruulWarPlowToken extends Token {
+
     GruulWarPlowToken() {
         super("Juggernaut", "4/4 Juggernaut artifact creature");
         cardType.add(CardType.CREATURE);

@@ -30,22 +30,17 @@ package mage.sets.limitedalpha;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -67,7 +62,9 @@ public class PsychicVenom extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller.
-        this.addAbility(new PsychicVenomAbility());
+        Effect effect = new DamageAttachedControllerEffect(2);
+        effect.setText("{this} deals 2 damage to that land's controller");
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(effect, "enchanted land"));
     }
 
     public PsychicVenom(final PsychicVenom card) {
@@ -77,45 +74,5 @@ public class PsychicVenom extends CardImpl {
     @Override
     public PsychicVenom copy() {
         return new PsychicVenom(this);
-    }
-}
-
-class PsychicVenomAbility extends TriggeredAbilityImpl {
-    PsychicVenomAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that land's controller"));
-    }
-
-    PsychicVenomAbility(final PsychicVenomAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent source = game.getPermanent(this.sourceId);
-        if (source != null && source.getAttachedTo().equals(event.getTargetId())) {
-            Permanent attached = game.getPermanent(source.getAttachedTo());
-            if (attached != null) {
-                for (Effect e : getEffects()) {
-                    e.setTargetPointer(new FixedTarget(attached.getControllerId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public PsychicVenomAbility copy() {
-        return new PsychicVenomAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land becomes tapped, " + super.getRule();
     }
 }

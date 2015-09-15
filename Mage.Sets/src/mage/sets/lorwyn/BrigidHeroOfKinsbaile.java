@@ -39,11 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -68,7 +64,7 @@ public class BrigidHeroOfKinsbaile extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // {t}: Brigid, Hero of Kinsbaile deals 2 damage to each attacking or blocking creature target player controls.
+        // {T}: Brigid, Hero of Kinsbaile deals 2 damage to each attacking or blocking creature target player controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrigidHeroOfKinsbaileEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -87,16 +83,6 @@ public class BrigidHeroOfKinsbaile extends CardImpl {
 
 class BrigidHeroOfKinsbaileEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent("each attacking or blocking creature target player controls");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(Predicates.or(
-                new AttackingPredicate(),
-                new BlockingPredicate()));
-
-    }
-
     public BrigidHeroOfKinsbaileEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to each attacking or blocking creature target player controls";
@@ -108,12 +94,10 @@ class BrigidHeroOfKinsbaileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, targetPlayer.getId(), game)) {
-                if (creature != null) {
-                    creature.damage(2, source.getSourceId(), game, false, true);
-                }
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterAttackingOrBlockingCreature(), targetPlayer.getId(), game)) {
+                creature.damage(2, source.getSourceId(), game, false, true);
             }
             return true;
         }

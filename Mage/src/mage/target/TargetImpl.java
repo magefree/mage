@@ -536,4 +536,9 @@ public abstract class TargetImpl implements Target {
         }
     }
 
+    @Override
+    public boolean isRequiredExplicitlySet() {
+        return requiredExplicitlySet;
+    }
+
 }

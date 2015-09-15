@@ -48,6 +48,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -77,13 +78,12 @@ public class Necromancy extends CardImpl {
         super(ownerId, 14, "Necromancy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "VIS";
 
-
         // You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastSourceAsThoughItHadFlashEffect(this, Duration.EndOfGame, true)));        
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastSourceAsThoughItHadFlashEffect(this, Duration.EndOfGame, true)));
         this.addAbility(new CastAtInstantTimeTriggeredAbility());
-    
-        // When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." 
-        // Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. 
+
+        // When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy."
+        // Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it.
         // When Necromancy leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new NecromancyReAttachEffect(), false),
@@ -91,7 +91,7 @@ public class Necromancy extends CardImpl {
                 "When {this} enters the battlefield, if it's on the battlefield,  it becomes an Aura with \"enchant creature put onto the battlefield with {this}.\" Put target creature card from a graveyard onto the battlefield under your control and attach {this} to it.");
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new NecromancyLeavesBattlefieldTriggeredEffect(), false));     
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new NecromancyLeavesBattlefieldTriggeredEffect(), false));
     }
 
     public Necromancy(final Necromancy card) {
@@ -104,7 +104,6 @@ public class Necromancy extends CardImpl {
     }
 }
 
-
 class CastSourceAsThoughItHadFlashEffect extends AsThoughEffectImpl {
 
     private final boolean sacrificeIfCastAsInstant;
@@ -114,7 +113,6 @@ class CastSourceAsThoughItHadFlashEffect extends AsThoughEffectImpl {
         this.sacrificeIfCastAsInstant = sacrificeIfCastAsInstant;
         staticText = "You may cast {this} as though it had flash";
     }
-
 
     public CastSourceAsThoughItHadFlashEffect(final CastSourceAsThoughItHadFlashEffect effect) {
         super(effect);
@@ -139,6 +137,7 @@ class CastSourceAsThoughItHadFlashEffect extends AsThoughEffectImpl {
 }
 
 class CastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
+
     public CastAtInstantTimeTriggeredAbility() {
         super(Zone.STACK, new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new SacrificeSourceEffect())));
     }
@@ -176,21 +175,21 @@ class CastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class NecromancyReAttachEffect extends OneShotEffect {
-    
+
     public NecromancyReAttachEffect() {
         super(Outcome.Benefit);
         this.staticText = "it becomes an Aura with \"enchant creature put onto the battlefield with {this}\"";
     }
-    
+
     public NecromancyReAttachEffect(final NecromancyReAttachEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public NecromancyReAttachEffect copy() {
         return new NecromancyReAttachEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -211,27 +210,27 @@ class NecromancyReAttachEffect extends OneShotEffect {
             }
             return true;
         }
-        
+
         return false;
     }
 }
-        
+
 class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
-    
+
     public NecromancyLeavesBattlefieldTriggeredEffect() {
         super(Outcome.Benefit);
         this.staticText = "enchanted creature's controller sacrifices it";
     }
-    
+
     public NecromancyLeavesBattlefieldTriggeredEffect(final NecromancyLeavesBattlefieldTriggeredEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public NecromancyLeavesBattlefieldTriggeredEffect copy() {
         return new NecromancyLeavesBattlefieldTriggeredEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -252,7 +251,7 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
 class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
     private final static Ability newAbility = new EnchantAbility("creature put onto the battlefield with Necromancy");
-    
+
     static {
         newAbility.setRuleAtTheTop(true);
     }
@@ -263,8 +262,8 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
         super(Duration.Custom, Outcome.AddAbility);
         staticText = "it becomes an Aura with \"enchant creature put onto the battlefield with {this}\"";
         this.target = target;
+        dependencyTypes.add(DependencyType.AuraAddingRemoving);
     }
-
 
     public NecromancyChangeAbilityEffect(final NecromancyChangeAbilityEffect effect) {
         super(effect);
@@ -275,7 +274,7 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
     public NecromancyChangeAbilityEffect copy() {
         return new NecromancyChangeAbilityEffect(this);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
@@ -301,8 +300,8 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
                         permanent.getSpellAbility().getTargets().add(target);
                     }
             }
-            return true;            
-        }   
+            return true;
+        }
         this.discard();
         return false;
     }
@@ -316,5 +315,5 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
     public boolean hasLayer(Layer layer) {
         return Layer.AbilityAddingRemovingEffects_6.equals(layer) || Layer.TypeChangingEffects_4.equals(layer);
     }
-        
+
 }

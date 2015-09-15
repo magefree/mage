@@ -69,8 +69,8 @@ public class PersistTest extends CardTestPlayerBase {
         // Persist
         addCard(Zone.BATTLEFIELD, playerA, "Safehold Elite");
 
-        // Exile target card from a graveyard. You gain 3 life.
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        // Exile target card from a graveyard. You gain 3 life.
         addCard(Zone.HAND, playerB, "Shadowfeed", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);

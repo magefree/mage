@@ -36,6 +36,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,11 +47,9 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -113,16 +112,13 @@ class FlamerushRiderEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true);
-            for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    Effect effect = new ExileTargetEffect();
-                    effect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect), false).apply(game, source);
-                }
+            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            effect.apply(game, source);
+            for (Permanent addedToken : effect.getAddedPermanent()) {
+                Effect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
+                new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), false).apply(game, source);
             }
             return true;
         }

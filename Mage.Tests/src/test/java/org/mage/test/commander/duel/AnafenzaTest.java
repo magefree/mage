@@ -139,4 +139,37 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
         assertLife(playerB, 40);
     }
 
+    // Anafenza + Animated permanents
+    @Test
+    public void testAnafenzaExileAnimatedPermanents() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // {0}: Tap all lands you control. Chimeric Idol becomes a 3/3 Turtle artifact creature until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Chimeric Idol");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+
+        // Whenever Anafenza, the Foremost attacks, put a +1/+1 counter on another target tapped creature you control.
+        // If a creature card would be put into an opponent's graveyard from anywhere, exile it instead.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anafenza, the Foremost"); // 4/4
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{0}: Tap all lands you control");
+
+        attack(2, playerB, "Chimeric Idol");
+        block(2, playerA, "Anafenza, the Foremost", "Chimeric Idol");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 40);
+        assertLife(playerB, 40);
+
+        assertExileCount("Chimeric Idol", 1);
+        assertGraveyardCount(playerB, "Chimeric Idol", 0);
+        assertPermanentCount(playerB, "Chimeric Idol", 0);
+
+        assertTappedCount("Mountain", true, 3);
+
+    }
 }

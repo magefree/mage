@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import java.util.UUID;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.CreateSpecialActionEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -76,25 +76,25 @@ public class LicidAbility extends ActivatedAbilityImpl {
 }
 
 class LicidEffect extends OneShotEffect {
-    
+
     private final ManaCost specialActionCost;
-    
+
     LicidEffect(ManaCost specialActionCost) {
         super(Outcome.Neutral);
         this.specialActionCost = specialActionCost;
         this.staticText = "{this} loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay " + specialActionCost.getText() + " to end this effect";
     }
-    
+
     LicidEffect(final LicidEffect effect) {
         super(effect);
         this.specialActionCost = effect.specialActionCost;
     }
-    
+
     @Override
     public LicidEffect copy() {
         return new LicidEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent licid = (Permanent) source.getSourceObjectIfItStillExists(game);
@@ -113,15 +113,16 @@ class LicidEffect extends OneShotEffect {
 }
 
 class LicidContinuousEffect extends ContinuousEffectImpl {
-    
+
     private final UUID messageId;
-    
+
     LicidContinuousEffect(UUID messageId) {
         super(Duration.Custom, Outcome.Neutral);
         this.messageId = messageId;
+        dependencyTypes.add(DependencyType.AuraAddingRemoving);
     }
 
-    LicidContinuousEffect(LicidContinuousEffect ability) {
+    LicidContinuousEffect(final LicidContinuousEffect ability) {
         super(ability);
         this.messageId = ability.messageId;
     }
@@ -201,28 +202,28 @@ class LicidSpecialAction extends SpecialAction {
 }
 
 class LicidSpecialActionEffect extends OneShotEffect {
-    
+
     private final UUID messageId;
     private final UUID generatingSpecialActionId;
-    
+
     LicidSpecialActionEffect(UUID messageId, UUID generatingSpecialActionId, String licidName) {
         super(Outcome.Neutral);
         this.messageId = messageId;
         this.generatingSpecialActionId = generatingSpecialActionId;
         this.staticText = "End " + licidName + " Effect";
     }
-    
+
     LicidSpecialActionEffect(final LicidSpecialActionEffect effect) {
         super(effect);
         this.messageId = effect.messageId;
         this.generatingSpecialActionId = effect.generatingSpecialActionId;
     }
-    
+
     @Override
     public LicidSpecialActionEffect copy() {
         return new LicidSpecialActionEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         new RemoveSpecialActionEffect(this.generatingSpecialActionId).apply(game, source);
