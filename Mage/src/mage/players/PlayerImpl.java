@@ -877,7 +877,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean putCardsOnTopOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
         Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
         cards.addAll(cardsToLibrary);
-        if (cards.size() != 0) {
+        if (!cards.isEmpty()) {
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
                 for (UUID cardId : cards) {
