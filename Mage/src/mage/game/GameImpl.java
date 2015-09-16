@@ -347,12 +347,12 @@ public abstract class GameImpl implements Game, Serializable {
         MageObject object;
         if (state.getBattlefield().containsPermanent(objectId)) {
             object = state.getBattlefield().getPermanent(objectId);
-            state.setZone(objectId, Zone.BATTLEFIELD);
+            state.setZone(objectId, Zone.BATTLEFIELD); // why is this neccessary?
             return object;
         }
         for (StackObject item : state.getStack()) {
             if (item.getId().equals(objectId)) {
-                state.setZone(objectId, Zone.STACK);
+                state.setZone(objectId, Zone.STACK); // why is this neccessary?
                 return item;
             }
             if (item.getSourceId().equals(objectId) && item instanceof Spell) {
@@ -361,7 +361,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         for (CommandObject commandObject : state.getCommand()) {
-            if (commandObject instanceof Commander && commandObject.getId().equals(objectId)) {
+            if (commandObject.getId().equals(objectId)) {
                 return commandObject;
             }
         }
@@ -369,11 +369,11 @@ public abstract class GameImpl implements Game, Serializable {
         object = getCard(objectId);
 
         if (object == null) {
-            for (CommandObject commandObject : state.getCommand()) {
-                if (commandObject.getId().equals(objectId)) {
-                    return commandObject;
-                }
-            }
+//            for (CommandObject commandObject : state.getCommand()) {
+//                if (commandObject.getId().equals(objectId)) {
+//                    return commandObject;
+//                }
+//            }
             // can be an ability of a sacrificed Token trying to get it's source object
             object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
@@ -427,6 +427,29 @@ public abstract class GameImpl implements Game, Serializable {
             if (commandObject.getId().equals(objectId)) {
                 return commandObject;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public UUID getOwnerId(UUID objectId) {
+        return getOwnerId(getObject(objectId));
+    }
+
+    @Override
+    public UUID getOwnerId(MageObject object) {
+        if (object instanceof Card) {
+            return ((Card) object).getOwnerId();
+        }
+        if (object instanceof Spell) {
+            return ((Spell) object).getOwnerId();
+        }
+        if (object instanceof StackObject) {
+            // maybe this is not correct in all cases?
+            return ((StackObject) object).getControllerId();
+        }
+        if (object instanceof CommandObject) {
+            return ((CommandObject) object).getControllerId();
         }
         return null;
     }

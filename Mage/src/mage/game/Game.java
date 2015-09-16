@@ -107,6 +107,10 @@ public interface Game extends MageItem, Serializable {
 
     UUID getControllerId(UUID objectId);
 
+    UUID getOwnerId(UUID objectId);
+
+    UUID getOwnerId(MageObject object);
+
     Permanent getPermanent(UUID permanentId);
 
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
