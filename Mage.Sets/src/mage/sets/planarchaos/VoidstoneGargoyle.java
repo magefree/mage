@@ -28,8 +28,6 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,6 +40,11 @@ import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -110,9 +113,9 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect {
             String cardName = cardChoice.getChoice();
             game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
             game.getState().setValue(source.getSourceId().toString(), cardName);
-            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"), game);
+            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName + "]"), game);
             return true;
-        }        
+        }
         return false;
     }
 
@@ -148,7 +151,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast a card with that name (" + mageObject.getLogName() + ").";
+            return "You can't cast a card with that name (" + mageObject.getIdName() + ").";
         }
         return null;
     }

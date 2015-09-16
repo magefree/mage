@@ -58,7 +58,6 @@ public class Moonhold extends CardImpl {
         super(ownerId, 143, "Moonhold", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R/W}");
         this.expansionSetCode = "EVE";
 
-
         // Target player can't play land cards this turn if {R} was spent to cast Moonhold and can't play creature cards this turn if {W} was spent to cast it.
         ContinuousRuleModifyingEffect effect = new MoonholdEffect();
         ContinuousRuleModifyingEffect effect2 = new MoonholdEffect2();
@@ -109,7 +108,7 @@ class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "you can't play land cards this turn (" + mageObject.getLogName() + ").";
+            return "you can't play land cards this turn (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -152,7 +151,7 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't play creature cards this turn (" + mageObject.getLogName() + ").";
+            return "You can't play creature cards this turn (" + mageObject.getIdName() + ").";
         }
         return null;
     }

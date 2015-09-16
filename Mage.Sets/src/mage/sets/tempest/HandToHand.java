@@ -92,7 +92,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "During combat, players can't cast instant spells or activate abilities that aren't mana abilities (" + mageObject.getLogName() + ").";
+            return "During combat, players can't cast instant spells or activate abilities that aren't mana abilities (" + mageObject.getIdName() + ").";
         }
         return null;
     }

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
@@ -52,11 +51,10 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-
-
 public class RenderSilent extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("multicolored permanent");
+
     static {
         filter.add(new MulticoloredPredicate());
     }
@@ -64,7 +62,6 @@ public class RenderSilent extends CardImpl {
     public RenderSilent(UUID ownerId) {
         super(ownerId, 96, "Render Silent", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}");
         this.expansionSetCode = "DGM";
-
 
         // Counter target spell. Its controller can't cast spells this turn.
         this.getSpellAbility().addEffect(new RenderSilentCounterEffect());
@@ -139,7 +136,7 @@ class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast spells this turn (" + mageObject.getLogName() + ").";
+            return "You can't cast spells this turn (" + mageObject.getIdName() + ").";
         }
         return null;
     }
