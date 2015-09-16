@@ -84,7 +84,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         if (affectedObjectsSet) {
             // Added boosts of activated or triggered abilities exist independent from the source they are created by
             // so a continuous effect for the permanent itself with the attachment is created
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
             }
