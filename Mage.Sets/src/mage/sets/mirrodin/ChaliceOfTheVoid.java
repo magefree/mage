@@ -29,12 +29,11 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -58,7 +57,7 @@ public class ChaliceOfTheVoid extends CardImpl {
         this.expansionSetCode = "MRD";
 
         // Chalice of the Void enters the battlefield with X charge counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new ChaliceOfTheVoidEffect(), "with X charge counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
         // Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
         this.addAbility(new ChaliceOfTheVoidTriggeredAbility());
@@ -71,39 +70,6 @@ public class ChaliceOfTheVoid extends CardImpl {
     @java.lang.Override
     public ChaliceOfTheVoid copy() {
         return new ChaliceOfTheVoid(this);
-    }
-}
-
-class ChaliceOfTheVoidEffect extends OneShotEffect {
-
-    public ChaliceOfTheVoidEffect() {
-        super(Outcome.Benefit);
-    }
-
-    public ChaliceOfTheVoidEffect(final ChaliceOfTheVoidEffect effect) {
-        super(effect);
-    }
-
-    @java.lang.Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.CHARGE.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @java.lang.Override
-    public ChaliceOfTheVoidEffect copy() {
-        return new ChaliceOfTheVoidEffect(this);
     }
 }
 

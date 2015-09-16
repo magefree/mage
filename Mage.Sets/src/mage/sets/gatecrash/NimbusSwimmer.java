@@ -29,18 +29,13 @@ package mage.sets.gatecrash;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -59,7 +54,7 @@ public class NimbusSwimmer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Nimbus Swimmer enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new NimbusSwimmerEffect(), true));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
     public NimbusSwimmer(final NimbusSwimmer card) {
@@ -69,39 +64,5 @@ public class NimbusSwimmer extends CardImpl {
     @Override
     public NimbusSwimmer copy() {
         return new NimbusSwimmer(this);
-    }
-}
-
-class NimbusSwimmerEffect extends OneShotEffect {
-
-    public NimbusSwimmerEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with X +1/+1 counters on it";
-    }
-
-    public NimbusSwimmerEffect(final NimbusSwimmerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public NimbusSwimmerEffect copy() {
-        return new NimbusSwimmerEffect(this);
     }
 }

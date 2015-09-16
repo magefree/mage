@@ -29,18 +29,12 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -56,7 +50,7 @@ public class EndlessOne extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Endless One enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new EndlessOneEffect(), "with X +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
     public EndlessOne(final EndlessOne card) {
@@ -66,39 +60,5 @@ public class EndlessOne extends CardImpl {
     @Override
     public EndlessOne copy() {
         return new EndlessOne(this);
-    }
-}
-
-class EndlessOneEffect extends OneShotEffect {
-
-    public EndlessOneEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with X +1/+1 counters on it";
-    }
-
-    public EndlessOneEffect(final EndlessOneEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public EndlessOneEffect copy() {
-        return new EndlessOneEffect(this);
     }
 }

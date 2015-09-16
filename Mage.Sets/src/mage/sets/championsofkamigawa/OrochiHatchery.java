@@ -29,23 +29,18 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SnakeToken;
 
 /**
@@ -58,7 +53,7 @@ public class OrochiHatchery extends CardImpl {
         this.expansionSetCode = "CHK";
 
         // Orochi Hatchery enters the battlefield with X charge counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new OrochiHatcheryEffect(), "with X charge counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
         // {5}, {T}: Put a 1/1 green Snake creature token onto the battlefield for each charge counter on Orochi Hatchery.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken(), new CountersCount(CounterType.CHARGE)), new GenericManaCost(5));
@@ -75,37 +70,4 @@ public class OrochiHatchery extends CardImpl {
         return new OrochiHatchery(this);
     }
 
-}
-
-class OrochiHatcheryEffect extends OneShotEffect {
-
-    public OrochiHatcheryEffect() {
-        super(Outcome.Benefit);
-    }
-
-    public OrochiHatcheryEffect(final OrochiHatcheryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.CHARGE.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public OrochiHatcheryEffect copy() {
-        return new OrochiHatcheryEffect(this);
-    }
 }

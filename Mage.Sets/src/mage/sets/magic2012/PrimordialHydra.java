@@ -30,14 +30,13 @@ package mage.sets.magic2012;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -67,8 +66,13 @@ public class PrimordialHydra extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        this.addAbility(new EntersBattlefieldAbility(new PrimordialHydraEntersEffect(), "{this} enters the battlefield with X +1/+1 counters on it"));
+        // Primordial Hydra enters the battlefield with X +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
+
+        // At the beginning of your upkeep, double the number of +1/+1 counters on Primordial Hydra.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PrimordialHydraDoubleEffect(), TargetController.YOU, false));
+
+        // Primordial Hydra has trample as long as it has ten or more +1/+1 counters on it.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new SourceHasCounterCondition(CounterType.P1P1, 10), staticText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
@@ -81,39 +85,6 @@ public class PrimordialHydra extends CardImpl {
     @Override
     public PrimordialHydra copy() {
         return new PrimordialHydra(this);
-    }
-}
-
-class PrimordialHydraEntersEffect extends OneShotEffect {
-
-    public PrimordialHydraEntersEffect() {
-        super(Outcome.BoostCreature);
-    }
-
-    public PrimordialHydraEntersEffect(final PrimordialHydraEntersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public PrimordialHydraEntersEffect copy() {
-        return new PrimordialHydraEntersEffect(this);
     }
 }
 
