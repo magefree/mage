@@ -25,46 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class Earthquake extends CardImpl {
+public class Bullwhip extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
+    public Bullwhip(UUID ownerId) {
+        super(ownerId, 126, "Bullwhip", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "STH";
 
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        // {2}, {tap}: Bullwhip deals 1 damage to target creature. That creature attacks this turn if able.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}"));
+        Effect effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);
+        effect.setText("that creature attacks this turn if able");
+        ability.addEffect(effect);
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Earthquake(UUID ownerId) {
-        super(ownerId, 134, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "M10";
-
-        // Hurricane deals X damage to each creature with flying and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));
-    }
-
-    public Earthquake(final Earthquake card) {
+    public Bullwhip(final Bullwhip card) {
         super(card);
     }
 
     @Override
-    public Earthquake copy() {
-        return new Earthquake(this);
+    public Bullwhip copy() {
+        return new Bullwhip(this);
     }
 }

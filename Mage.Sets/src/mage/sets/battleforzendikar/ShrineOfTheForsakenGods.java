@@ -28,60 +28,53 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
+import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class AllyEncampment extends CardImpl {
+public class ShrineOfTheForsakenGods extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an Ally spell");
+    private static final FilterSpell filter = new FilterSpell("colorless spells");
 
     static {
         filter.add(new ColorlessPredicate());
     }
 
-    public AllyEncampment(UUID ownerId) {
-        super(ownerId, 228, "Ally Encampment", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public ShrineOfTheForsakenGods(UUID ownerId) {
+        super(ownerId, 245, "Shrine of the Forsaken Gods", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "BFZ";
 
         // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T} Add one mana of any color to your mana pool. Spend this mana only to cast an Ally spell.
-        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(filter), true));
-
-        // {1}, {T}, Sacrifice Ally Encampment: Return target Ally you control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("Ally", "Ally you control")));
-        this.addAbility(ability);
+        // {T}: Add {2} to your mana pool. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.
+        this.addAbility(new ActivateIfConditionManaAbility(
+                Zone.BATTLEFIELD,
+                new AddConditionalColorlessManaEffect(2, new ConditionalSpellManaBuilder(filter)),
+                new TapSourceCost(),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent("you control seven or more lands"), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 6)));
     }
 
-    public AllyEncampment(final AllyEncampment card) {
+    public ShrineOfTheForsakenGods(final ShrineOfTheForsakenGods card) {
         super(card);
     }
 
     @Override
-    public AllyEncampment copy() {
-        return new AllyEncampment(this);
+    public ShrineOfTheForsakenGods copy() {
+        return new ShrineOfTheForsakenGods(this);
     }
 }

@@ -75,7 +75,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         if (zEvent.getFromZone() == Zone.BATTLEFIELD
                 && zEvent.getToZone() == Zone.GRAVEYARD) {
             if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
-                if(onlyToControllerGraveyard && !this.getControllerId().equals(zEvent.getPlayerId())) {
+                if(onlyToControllerGraveyard && !this.getControllerId().equals(game.getOwnerId(zEvent.getTargetId()))) {
                     return false;
                 }
                 if (setTargetPointer) {

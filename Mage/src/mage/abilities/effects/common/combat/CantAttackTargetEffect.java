@@ -28,9 +28,10 @@
 
 package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -63,4 +64,15 @@ public class CantAttackTargetEffect extends RestrictionEffect {
         return new CantAttackTargetEffect(this);
     }
 
+    @Override
+    public String getText(Mode mode) {
+        if(staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        String text = "target " + mode.getTargets().get(0).getTargetName() + " can't attack";
+        if(this.duration == Duration.EndOfTurn) {
+            text += " this turn";
+        }
+        return text;
+    }
 }

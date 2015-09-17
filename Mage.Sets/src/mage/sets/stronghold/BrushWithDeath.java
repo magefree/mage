@@ -25,46 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class Earthquake extends CardImpl {
+public class BrushWithDeath extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
+    public BrushWithDeath(UUID ownerId) {
+        super(ownerId, 2, "Brush with Death", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        this.expansionSetCode = "STH";
 
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        // Buyback {2}{B}{B}
+        this.addAbility(new BuybackAbility("{2}{B}{B}"));
+        // Target opponent loses 2 life. You gain 2 life.
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Earthquake(UUID ownerId) {
-        super(ownerId, 134, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "M10";
-
-        // Hurricane deals X damage to each creature with flying and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));
-    }
-
-    public Earthquake(final Earthquake card) {
+    public BrushWithDeath(final BrushWithDeath card) {
         super(card);
     }
 
     @Override
-    public Earthquake copy() {
-        return new Earthquake(this);
+    public BrushWithDeath copy() {
+        return new BrushWithDeath(this);
     }
 }

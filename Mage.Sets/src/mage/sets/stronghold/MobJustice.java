@@ -25,46 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class Earthquake extends CardImpl {
+public class MobJustice extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
+    public MobJustice(UUID ownerId) {
+        super(ownerId, 90, "Mob Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        this.expansionSetCode = "STH";
 
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        // Mob Justice deals damage to target player equal to the number of creatures you control.
+        Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()));
+        effect.setText("{this} deals damage to target player equal to the number of creatures you control");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Earthquake(UUID ownerId) {
-        super(ownerId, 134, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "M10";
-
-        // Hurricane deals X damage to each creature with flying and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));
-    }
-
-    public Earthquake(final Earthquake card) {
+    public MobJustice(final MobJustice card) {
         super(card);
     }
 
     @Override
-    public Earthquake copy() {
-        return new Earthquake(this);
+    public MobJustice copy() {
+        return new MobJustice(this);
     }
 }

@@ -28,14 +28,13 @@
 package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.ConditionalMana;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
-import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.abilities.mana.conditional.ArtifactCastConditionalMana;
+import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterArtifactSpell;
 
 /**
  *
@@ -48,7 +47,8 @@ public class MishrasWorkshop extends CardImpl {
         this.expansionSetCode = "VMA";
 
         // {tap}: Add {3} to your mana pool. Spend this mana only to cast artifact spells.
-        this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 3, new MishrasWorkshopManaBuilder()));
+        this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 3,
+                new ConditionalSpellManaBuilder(new FilterArtifactSpell("artifact spells"))));
 
     }
 
@@ -59,17 +59,5 @@ public class MishrasWorkshop extends CardImpl {
     @Override
     public MishrasWorkshop copy() {
         return new MishrasWorkshop(this);
-    }
-}
-
-class MishrasWorkshopManaBuilder extends ConditionalManaBuilder {
-    @Override
-    public ConditionalMana build(Object... options) {
-        return new ArtifactCastConditionalMana(this.mana);
-    }
-
-    @Override
-    public String getRule() {
-        return "Spend this mana only to cast artifact spells";
     }
 }
