@@ -3183,7 +3183,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (card.moveToExile(exileId, exileName, sourceId, game)) {
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard) {
-                    card = game.getCard(card.getId());
+                    // in case it's face down or name was changed by copying from other permanent
+                    Card basicCard = game.getCard(card.getId());
+                    if (basicCard != null) {
+                        card = basicCard;
+                    } else {
+                        logger.error("Couldn't get the card object for the PermanenCard named " + card.getName());
+                    }
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() : "a card face down") + " "
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") + "to the exile zone");
