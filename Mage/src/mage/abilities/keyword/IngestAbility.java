@@ -31,7 +31,7 @@ public class IngestAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Ingest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)";
+        return "Ingest <i>(Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)</i>";
     }
 
     @Override
