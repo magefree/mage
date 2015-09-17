@@ -47,10 +47,10 @@ import mage.game.stack.Spell;
  *
  * @author fireshoes
  */
-public class BeastcallerExpert extends CardImpl {
+public class BeastcallerSavant extends CardImpl {
 
-    public BeastcallerExpert(UUID ownerId) {
-        super(ownerId, 170, "Beastcaller Expert", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
+    public BeastcallerSavant(UUID ownerId) {
+        super(ownerId, 170, "Beastcaller Savant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
@@ -62,24 +62,24 @@ public class BeastcallerExpert extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast creature spells.
-        this.addAbility(new ConditionalAnyColorManaAbility(1, new BeastcallerExpertManaBuilder()));
+        this.addAbility(new ConditionalAnyColorManaAbility(1, new BeastcallerSavantManaBuilder()));
     }
 
-    public BeastcallerExpert(final BeastcallerExpert card) {
+    public BeastcallerSavant(final BeastcallerSavant card) {
         super(card);
     }
 
     @Override
-    public BeastcallerExpert copy() {
-        return new BeastcallerExpert(this);
+    public BeastcallerSavant copy() {
+        return new BeastcallerSavant(this);
     }
 }
 
-class BeastcallerExpertManaBuilder extends ConditionalManaBuilder {
+class BeastcallerSavantManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public ConditionalMana build(Object... options) {
-        return new BeastcallerExpertConditionalMana(this.mana);
+        return new BeastcallerSavantConditionalMana(this.mana);
     }
 
     @Override
@@ -88,16 +88,16 @@ class BeastcallerExpertManaBuilder extends ConditionalManaBuilder {
     }
 }
 
-class BeastcallerExpertConditionalMana extends ConditionalMana {
+class BeastcallerSavantConditionalMana extends ConditionalMana {
 
-    public BeastcallerExpertConditionalMana(Mana mana) {
+    public BeastcallerSavantConditionalMana(Mana mana) {
         super(mana);
         this.staticText = "Spend this mana only to cast creature spells";
-        addCondition(new BeastcallerExpertManaCondition());
+        addCondition(new BeastcallerSavantManaCondition());
     }
 }
 
-class BeastcallerExpertManaCondition implements Condition {
+class BeastcallerSavantManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
