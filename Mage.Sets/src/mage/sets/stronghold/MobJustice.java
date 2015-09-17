@@ -25,64 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.stronghold;
 
-package mage.abilities.effects.common.combat;
-
-import mage.constants.Duration;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.RequirementEffect;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class AttacksIfAbleTargetEffect extends RequirementEffect {
+public class MobJustice extends CardImpl {
 
-    public AttacksIfAbleTargetEffect(Duration duration) {
-        super(duration);
+    public MobJustice(UUID ownerId) {
+        super(ownerId, 90, "Mob Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        this.expansionSetCode = "STH";
+
+        // Mob Justice deals damage to target player equal to the number of creatures you control.
+        Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()));
+        effect.setText("{this} deals damage to target player equal to the number of creatures you control");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public AttacksIfAbleTargetEffect(final AttacksIfAbleTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AttacksIfAbleTargetEffect copy() {
-        return new AttacksIfAbleTargetEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
-        return false;
+    public MobJustice(final MobJustice card) {
+        super(card);
     }
 
     @Override
-    public boolean mustAttack(Game game) {
-        return true;
+    public MobJustice copy() {
+        return new MobJustice(this);
     }
-
-    @Override
-    public boolean mustBlock(Game game) {
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        if (this.duration == Duration.EndOfTurn) {
-            return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName()).append(" attacks this turn if able").toString();
-        }
-        else {
-            return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName()).append(" attacks each turn if able").toString();
-        }
-    }
-
 }

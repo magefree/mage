@@ -25,64 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.stronghold;
 
-package mage.abilities.effects.common.combat;
-
-import mage.constants.Duration;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.RequirementEffect;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class AttacksIfAbleTargetEffect extends RequirementEffect {
+public class Bullwhip extends CardImpl {
 
-    public AttacksIfAbleTargetEffect(Duration duration) {
-        super(duration);
+    public Bullwhip(UUID ownerId) {
+        super(ownerId, 126, "Bullwhip", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "STH";
+
+        // {2}, {tap}: Bullwhip deals 1 damage to target creature. That creature attacks this turn if able.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}"));
+        Effect effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);
+        effect.setText("that creature attacks this turn if able");
+        ability.addEffect(effect);
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public AttacksIfAbleTargetEffect(final AttacksIfAbleTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AttacksIfAbleTargetEffect copy() {
-        return new AttacksIfAbleTargetEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
-        return false;
+    public Bullwhip(final Bullwhip card) {
+        super(card);
     }
 
     @Override
-    public boolean mustAttack(Game game) {
-        return true;
+    public Bullwhip copy() {
+        return new Bullwhip(this);
     }
-
-    @Override
-    public boolean mustBlock(Game game) {
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        if (this.duration == Duration.EndOfTurn) {
-            return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName()).append(" attacks this turn if able").toString();
-        }
-        else {
-            return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName()).append(" attacks each turn if able").toString();
-        }
-    }
-
 }
