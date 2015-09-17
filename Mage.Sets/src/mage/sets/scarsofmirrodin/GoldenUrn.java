@@ -30,23 +30,20 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -58,7 +55,7 @@ public class GoldenUrn extends CardImpl {
         super(ownerId, 158, "Golden Urn", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "SOM";
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, true));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoldenUrnEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CountersCount(CounterType.CHARGE)), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -70,37 +67,6 @@ public class GoldenUrn extends CardImpl {
     @Override
     public GoldenUrn copy() {
         return new GoldenUrn(this);
-    }
-
-}
-
-class GoldenUrnEffect extends OneShotEffect {
-    public GoldenUrnEffect() {
-        super(Outcome.GainLife);
-        staticText = "You gain life equal to the number of charge counters on {this}";
-    }
-
-    public GoldenUrnEffect(final GoldenUrnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        if (p == null) {
-            p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        if (p != null && player != null) {
-            player.gainLife(p.getCounters().getCount(CounterType.CHARGE), game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public GoldenUrnEffect copy() {
-        return new GoldenUrnEffect(this);
     }
 
 }

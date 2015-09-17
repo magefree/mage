@@ -25,51 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2010;
+package mage.sets.stronghold;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class Weakness extends CardImpl {
+public class SpikeSoldier extends CardImpl {
 
-    public Weakness(UUID ownerId) {
-        super(ownerId, 121, "Weakness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Aura");
+    public SpikeSoldier(UUID ownerId) {
+        super(ownerId, 69, "Spike Soldier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "STH";
+        this.subtype.add("Spike");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // Spike Soldier enters the battlefield with three +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
+        // {2}, Remove a +1/+1 counter from Spike Soldier: Put a +1/+1 counter on target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{2}"));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        // Enchanted creature gets -2/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, -1, Duration.WhileOnBattlefield)));
+        // Remove a +1/+1 counter from Spike Soldier: Spike Soldier gets +2/+2 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn),
+            new RemoveCountersSourceCost(CounterType.P1P1.createInstance())));
     }
 
-    public Weakness(final Weakness card) {
+    public SpikeSoldier(final SpikeSoldier card) {
         super(card);
     }
 
     @Override
-    public Weakness copy() {
-        return new Weakness(this);
+    public SpikeSoldier copy() {
+        return new SpikeSoldier(this);
     }
 }

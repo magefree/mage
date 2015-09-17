@@ -28,18 +28,17 @@
 package mage.sets.stronghold;
 
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
+import mage.abilities.effects.common.UntapAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -53,9 +52,9 @@ public class IntruderAlarm extends CardImpl {
 
 
         // Creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent("Creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent("creatures"))));
         // Whenever a creature enters the battlefield, untap all creatures.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllCreatureEffect(), new FilterCreaturePermanent()));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllEffect(new FilterCreaturePermanent("creatures")), new FilterCreaturePermanent("a creature")));
     }
 
     public IntruderAlarm(final IntruderAlarm card) {
@@ -66,34 +65,4 @@ public class IntruderAlarm extends CardImpl {
     public IntruderAlarm copy() {
         return new IntruderAlarm(this);
     }
-}
-
-class UntapAllCreatureEffect extends OneShotEffect {
-
-    public UntapAllCreatureEffect() {
-        super(Outcome.Untap);
-        staticText = "untap all creatures";
-    }
-
-    public UntapAllCreatureEffect(final UntapAllCreatureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Permanent land: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-                land.untap(game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public UntapAllCreatureEffect copy() {
-        return new UntapAllCreatureEffect(this);
-    }
-
 }
