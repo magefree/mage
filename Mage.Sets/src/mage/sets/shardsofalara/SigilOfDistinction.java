@@ -28,14 +28,11 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -44,8 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  * @author Loki
@@ -58,7 +53,7 @@ public class SigilOfDistinction extends CardImpl {
         this.subtype.add("Equipment");
 
         // Sigil of Distinction enters the battlefield with X charge counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new SigilOfDistinctionEffect(), "{this} enters the battlefield with X charge counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
         // Equipped creature gets +1/+1 for each charge counter on Sigil of Distinction.
         BoostEquippedEffect effect = new BoostEquippedEffect(new CountersCount(CounterType.CHARGE), new CountersCount(CounterType.CHARGE));
@@ -76,39 +71,5 @@ public class SigilOfDistinction extends CardImpl {
     @Override
     public SigilOfDistinction copy() {
         return new SigilOfDistinction(this);
-    }
-}
-
-class SigilOfDistinctionEffect extends OneShotEffect {
-
-    public SigilOfDistinctionEffect() {
-        super(Outcome.Benefit);
-    }
-
-    public SigilOfDistinctionEffect(final SigilOfDistinctionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.CHARGE.createInstance(amount), game);
-                    return true;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public SigilOfDistinctionEffect copy() {
-        return new SigilOfDistinctionEffect(this);
     }
 }

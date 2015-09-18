@@ -63,7 +63,7 @@ public class Seizures extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Whenever enchanted creature becomes tapped, Seizures deals 3 damage to that creature's controller unless that player pays {3}.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new SeizuresEffect(), false));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new SeizuresEffect(), "enchanted creature"));
     }
 
     public Seizures(final Seizures card) {

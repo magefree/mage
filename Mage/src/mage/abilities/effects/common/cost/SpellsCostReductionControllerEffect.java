@@ -56,17 +56,16 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
     private final boolean upTo;
     private ManaCosts<ManaCost> manaCostsToReduce = null;
 
-
     public SpellsCostReductionControllerEffect(FilterCard filter, ManaCosts<ManaCost> manaCostsToReduce) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = 0;
         this.manaCostsToReduce = manaCostsToReduce;
         this.upTo = false;
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage()).append(" you cast cost ");
-        for (String manaSymbol :manaCostsToReduce.getSymbols()) {
+        for (String manaSymbol : manaCostsToReduce.getSymbols()) {
             sb.append(manaSymbol);
         }
         sb.append(" less to cast. This effect reduces only the amount of colored mana you pay.");
@@ -81,8 +80,8 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
-        this.upTo = upTo;        
-        this.staticText = filter.getMessage() + " you cast cost " + (upTo ?"up to " :"") + "{" +amount + "} less to cast";
+        this.upTo = upTo;
+        this.staticText = filter.getMessage() + " you cast cost " + (upTo ? "up to " : "") + "{" + amount + "} less to cast";
     }
 
     protected SpellsCostReductionControllerEffect(final SpellsCostReductionControllerEffect effect) {
@@ -95,28 +94,28 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        if (manaCostsToReduce != null){
+        if (manaCostsToReduce != null) {
             CardUtil.adjustCost((SpellAbility) abilityToModify, manaCostsToReduce, false);
         } else {
             if (upTo) {
                 Mana mana = abilityToModify.getManaCostsToPay().getMana();
                 int reduceMax = mana.getColorless();
-                if (reduceMax > 2){
+                if (reduceMax > 2) {
                     reduceMax = 2;
                 }
                 if (reduceMax > 0) {
                     Player controller = game.getPlayer(abilityToModify.getControllerId());
-                    if (controller == null){                    
+                    if (controller == null) {
                         return false;
                     }
                     ChoiceImpl choice = new ChoiceImpl(true);
                     Set<String> set = new LinkedHashSet<>();
-                    for(int i = 0; i <= reduceMax; i++){
+                    for (int i = 0; i <= reduceMax; i++) {
                         set.add(String.valueOf(i));
                     }
                     choice.setChoices(set);
                     choice.setMessage("Reduce cost of " + filter);
-                    if(controller.choose(Outcome.Benefit, choice, game)){
+                    if (controller.choose(Outcome.Benefit, choice, game)) {
                         int reduce = Integer.parseInt(choice.getChoice());
                         CardUtil.reduceCost(abilityToModify, reduce);
                     }
@@ -134,11 +133,11 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
-                    return this.filter.match(spell, game);
+                    return this.filter.match(spell, source.getSourceId(), source.getControllerId(), game);
                 } else {
                     // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
                     Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                    return sourceCard != null && this.filter.match(sourceCard, game);
+                    return sourceCard != null && this.filter.match(sourceCard, source.getSourceId(), source.getControllerId(), game);
                 }
             }
         }

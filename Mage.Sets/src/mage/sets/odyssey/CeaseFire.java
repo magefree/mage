@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -55,11 +54,10 @@ public class CeaseFire extends CardImpl {
         super(ownerId, 14, "Cease-Fire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ODY";
 
-
         // Target player can't cast creature spells this turn.
         this.getSpellAbility().addEffect(new CeaseFireEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -77,6 +75,7 @@ public class CeaseFire extends CardImpl {
 class CeaseFireEffect extends ContinuousRuleModifyingEffectImpl {
 
     private static final FilterSpell filter = new FilterSpell();
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -104,7 +103,7 @@ class CeaseFireEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast creature spells this turn (" + mageObject.getLogName() + ").";
+            return "You can't cast creature spells this turn (" + mageObject.getIdName() + ").";
         }
         return null;
     }

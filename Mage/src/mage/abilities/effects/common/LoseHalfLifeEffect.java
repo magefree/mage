@@ -13,7 +13,7 @@ public class LoseHalfLifeEffect extends OneShotEffect {
 
     public LoseHalfLifeEffect() {
         super(Outcome.LoseLife);
-        staticText = "You lose half your life, rounded up";
+        staticText = "you lose half your life, rounded up";
     }
 
     public LoseHalfLifeEffect(final LoseHalfLifeEffect effect) {

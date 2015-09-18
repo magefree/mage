@@ -36,7 +36,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -45,7 +44,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -131,23 +129,10 @@ class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID ownerId = null;
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            ownerId = card.getOwnerId();
-        }
-        if (ownerId == null) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            if (permanent != null) {
-                ownerId = permanent.getOwnerId();
-            }
-        }
-        Player player = game.getPlayer(ownerId);
-        if (player != null) {
-            for (Card cardToMove : player.getGraveyard().getCards(game)) {
-                cardToMove.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
-            player.shuffleLibrary(game);
+        Player owner = game.getPlayer(game.getOwnerId(source.getSourceId()));
+        if (owner != null) {
+            owner.moveCards(owner.getGraveyard(), null, Zone.LIBRARY, source, game);
+            owner.shuffleLibrary(game);
             return true;
         }
         return false;

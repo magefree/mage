@@ -424,7 +424,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      */
     private void logBlockerInfo(Player defender, Game game) {
         boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no ned to sow the attacked player
-        for (CombatGroup group : this.getGroups()) {
+        for (CombatGroup group : game.getCombat().getGroups()) {
             if (group.defendingPlayerId.equals(defender.getId())) {
                 if (!shownDefendingPlayer) {
                     game.informPlayers("Attacked player: " + defender.getLogName());

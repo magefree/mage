@@ -27,21 +27,24 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.effects.ContinuousEffect;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -53,7 +56,6 @@ public class StolenGoods extends CardImpl {
     public StolenGoods(UUID ownerId) {
         super(ownerId, 78, "Stolen Goods", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "AVR";
-
 
         // Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
         this.getSpellAbility().addEffect(new StolenGoodsEffect());
@@ -96,14 +98,13 @@ class StolenGoodsEffect extends OneShotEffect {
             do {
                 card = library.removeFromTop(game);
                 if (card != null) {
-                    opponent.moveCardToExileWithInfo(card, source.getSourceId(),  sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                    opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                 }
             } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
 
             if (card != null) {
-                opponent.revealCards("Card to cast", new CardsImpl(card), game);
                 ContinuousEffect effect = new StolenGoodsCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
+                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                 game.addEffect(effect, source);
             }
             return true;
@@ -135,7 +136,8 @@ class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (getTargetPointer().getFirst(game, source).equals(sourceId) && affectedControllerId.equals(source.getControllerId())) {
+        if (sourceId != null && sourceId.equals(getTargetPointer().getFirst(game, source))
+                && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(sourceId);
             if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                 Player player = game.getPlayer(affectedControllerId);

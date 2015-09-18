@@ -347,12 +347,12 @@ public abstract class GameImpl implements Game, Serializable {
         MageObject object;
         if (state.getBattlefield().containsPermanent(objectId)) {
             object = state.getBattlefield().getPermanent(objectId);
-            state.setZone(objectId, Zone.BATTLEFIELD);
+            state.setZone(objectId, Zone.BATTLEFIELD); // why is this neccessary?
             return object;
         }
         for (StackObject item : state.getStack()) {
             if (item.getId().equals(objectId)) {
-                state.setZone(objectId, Zone.STACK);
+                state.setZone(objectId, Zone.STACK); // why is this neccessary?
                 return item;
             }
             if (item.getSourceId().equals(objectId) && item instanceof Spell) {
@@ -361,7 +361,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         for (CommandObject commandObject : state.getCommand()) {
-            if (commandObject instanceof Commander && commandObject.getId().equals(objectId)) {
+            if (commandObject.getId().equals(objectId)) {
                 return commandObject;
             }
         }
@@ -369,11 +369,11 @@ public abstract class GameImpl implements Game, Serializable {
         object = getCard(objectId);
 
         if (object == null) {
-            for (CommandObject commandObject : state.getCommand()) {
-                if (commandObject.getId().equals(objectId)) {
-                    return commandObject;
-                }
-            }
+//            for (CommandObject commandObject : state.getCommand()) {
+//                if (commandObject.getId().equals(objectId)) {
+//                    return commandObject;
+//                }
+//            }
             // can be an ability of a sacrificed Token trying to get it's source object
             object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
@@ -427,6 +427,29 @@ public abstract class GameImpl implements Game, Serializable {
             if (commandObject.getId().equals(objectId)) {
                 return commandObject;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public UUID getOwnerId(UUID objectId) {
+        return getOwnerId(getObject(objectId));
+    }
+
+    @Override
+    public UUID getOwnerId(MageObject object) {
+        if (object instanceof Card) {
+            return ((Card) object).getOwnerId();
+        }
+        if (object instanceof Spell) {
+            return ((Spell) object).getOwnerId();
+        }
+        if (object instanceof StackObject) {
+            // maybe this is not correct in all cases?
+            return ((StackObject) object).getControllerId();
+        }
+        if (object instanceof CommandObject) {
+            return ((CommandObject) object).getControllerId();
         }
         return null;
     }
@@ -851,28 +874,53 @@ public abstract class GameImpl implements Game, Serializable {
         Player choosingPlayer = null;
         if (choosingPlayerId != null) {
             choosingPlayer = this.getPlayer(choosingPlayerId);
+            if (choosingPlayer != null && !choosingPlayer.isInGame()) {
+                choosingPlayer = null;
+            }
         }
         if (choosingPlayer == null) {
             choosingPlayerId = pickChoosingPlayer();
+            if (choosingPlayerId == null) {
+                return;
+            }
             choosingPlayer = getPlayer(choosingPlayerId);
+        }
+        if (choosingPlayer == null) {
+            return;
         }
         getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
         if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
             startingPlayerId = targetPlayer.getTargets().get(0);
-            Player startingPlayer = state.getPlayer(startingPlayerId);
-            StringBuilder message = new StringBuilder(choosingPlayer.getLogName()).append(" chooses that ");
-            if (choosingPlayer.getId().equals(startingPlayerId)) {
-                message.append("he or she");
-            } else {
-                message.append(startingPlayer.getLogName());
-            }
-            message.append(" takes the first turn");
-
-            this.informPlayers(message.toString());
-        } else {
-            // not possible to choose starting player, stop here
+        } else if (getState().getPlayers().size() < 3) {
+            // not possible to choose starting player, choosing player has probably conceded, so stop here
             return;
         }
+        if (startingPlayerId == null) {
+            // choose any available player as starting player
+            for (Player player : state.getPlayers().values()) {
+                if (player.isInGame()) {
+                    startingPlayerId = player.getId();
+                    break;
+                }
+            }
+            if (startingPlayerId == null) {
+                return;
+            }
+        }
+        Player startingPlayer = state.getPlayer(startingPlayerId);
+        if (startingPlayer == null) {
+            logger.debug("Starting player not found. playerId:" + startingPlayerId);
+            return;
+        }
+        StringBuilder message = new StringBuilder(choosingPlayer.getLogName()).append(" chooses that ");
+        if (choosingPlayer.getId().equals(startingPlayerId)) {
+            message.append("he or she");
+        } else {
+            message.append(startingPlayer.getLogName());
+        }
+        message.append(" takes the first turn");
+
+        this.informPlayers(message.toString());
 
         //20091005 - 103.3
         int startingHandSize = 7;
@@ -980,6 +1028,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
+
     }
 
     protected UUID findWinnersAndLosers() {
@@ -1014,9 +1063,17 @@ public abstract class GameImpl implements Game, Serializable {
 
     protected UUID pickChoosingPlayer() {
         UUID[] players = getPlayers().keySet().toArray(new UUID[0]);
-        UUID playerId = players[rnd.nextInt(players.length)];
-        fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
-        return playerId;
+        UUID playerId;
+        while (!hasEnded()) {
+            playerId = players[rnd.nextInt(players.length)];
+            Player player = getPlayer(playerId);
+            if (player != null && player.isInGame()) {
+                fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
+                return player.getId();
+            }
+        }
+        logger.debug("Game was not possible to pick a choosing player.  GameId:" + getId());
+        return null;
     }
 
     @Override

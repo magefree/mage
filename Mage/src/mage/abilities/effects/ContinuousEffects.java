@@ -1225,13 +1225,17 @@ public class ContinuousEffects implements Serializable {
         for (ReplacementEffect effect : replacementEffects) {
             HashSet<Ability> abilities = replacementEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (ability.getSourceId().equals(sourceId)) {
-                    if (controllerFound == null || controllerFound == ability.getControllerId()) {
-                        controllerFound = ability.getControllerId();
-                    } else {
-                        // not unique controller - No solution yet
-                        return null;
+                if (ability.getSourceId() != null) {
+                    if (ability.getSourceId().equals(sourceId)) {
+                        if (controllerFound == null || controllerFound == ability.getControllerId()) {
+                            controllerFound = ability.getControllerId();
+                        } else {
+                            // not unique controller - No solution yet
+                            return null;
+                        }
                     }
+                } else {
+                    logger.warn("Ability without sourceId:" + ability.getRule());
                 }
             }
         }

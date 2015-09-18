@@ -29,22 +29,16 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -60,7 +54,7 @@ public class Krakilin extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Krakilin enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new KrakilinEffect()));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // {1}{G}: Regenerate Krakilin.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
@@ -73,39 +67,5 @@ public class Krakilin extends CardImpl {
     @Override
     public Krakilin copy() {
         return new Krakilin(this);
-    }
-}
-
-class KrakilinEffect extends OneShotEffect {
-
-    public KrakilinEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with X +1/+1 counters on it";
-    }
-
-    public KrakilinEffect(final KrakilinEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public KrakilinEffect copy() {
-        return new KrakilinEffect(this);
     }
 }

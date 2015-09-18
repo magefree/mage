@@ -56,7 +56,7 @@ public class Solfatara extends CardImpl {
         // Target player can't play land cards this turn.
         this.getSpellAbility().addEffect(new SolfataraEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
+
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
@@ -73,7 +73,7 @@ public class Solfatara extends CardImpl {
 }
 
 class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
-   
+
     public SolfataraEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Target player can't play land cards this turn.";
@@ -97,7 +97,7 @@ class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't play lands this turn (" + mageObject.getLogName() + ").";
+            return "You can't play lands this turn (" + mageObject.getIdName() + ").";
         }
         return null;
     }

@@ -31,11 +31,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,36 +58,37 @@ public class GoblinWizard extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin");
     private static final FilterCard protectionFilter = new FilterCard("white");
-    private static final FilterPermanent goblinCard = new FilterPermanent("Goblin");
+    private static final FilterPermanent goblinPermanent = new FilterPermanent("Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));
-        goblinCard.add(new SubtypePredicate("Goblin"));
+        goblinPermanent.add(new SubtypePredicate("Goblin"));
         protectionFilter.add(new ColorPredicate(ObjectColor.WHITE));
     }
-    
+
     public GoblinWizard(UUID ownerId) {
         super(ownerId, 68, "Goblin Wizard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.RARE;
-        
+
         this.subtype.add("Goblin");
         this.subtype.add("Wizard");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
- 
+
         // {tap}: You may put a Goblin permanent card from your hand onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutPermanentOnBattlefieldEffect(filter),
                 new TapSourceCost()));
-    
+
         // {R}: Target Goblin gains protection from white until end of turn.
-        Ability ability = new mage.abilities.common.SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ProtectionAbility(protectionFilter), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
-        Target target = new TargetPermanent(goblinCard);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(new ProtectionAbility(protectionFilter), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Target target = new TargetPermanent(goblinPermanent);
         ability.addTarget(target);
         this.addAbility(ability);
-        
+
     }
 
     public GoblinWizard(final GoblinWizard card) {

@@ -75,7 +75,7 @@ public class PardicMiner extends CardImpl {
 }
 
 class PardicMinerEffect extends ContinuousRuleModifyingEffectImpl {
-   
+
     public PardicMinerEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Target player can't play lands this turn.";
@@ -99,7 +99,7 @@ class PardicMinerEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't play lands this turn (" + mageObject.getLogName() + ").";
+            return "You can't play lands this turn (" + mageObject.getIdName() + ").";
         }
         return null;
     }

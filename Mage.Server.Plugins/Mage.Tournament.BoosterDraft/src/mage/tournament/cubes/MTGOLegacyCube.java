@@ -37,7 +37,7 @@ import mage.game.draft.DraftCube;
 public class MTGOLegacyCube extends DraftCube {
 
     public MTGOLegacyCube() {
-        super("MTGO Legacy Cube (600 cards)"); 
+        super("MTGO Legacy Cube (600 cards)");
         cubeCards.add(new CardIdentity("Accorder Paladin",""));
         cubeCards.add(new CardIdentity("Abrupt Decay",""));
         cubeCards.add(new CardIdentity("Acidic Slime",""));
@@ -638,6 +638,5 @@ public class MTGOLegacyCube extends DraftCube {
         cubeCards.add(new CardIdentity("Yosei, the Morning Star",""));
         cubeCards.add(new CardIdentity("Young Pyromancer",""));
         cubeCards.add(new CardIdentity("Zealous Conscripts",""));
-
     }
 }

@@ -54,7 +54,7 @@ public class LastDitchEffort extends CardImpl {
 
         // Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new LastDitchEffortEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(1));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public LastDitchEffort(final LastDitchEffort card) {
@@ -68,21 +68,21 @@ public class LastDitchEffort extends CardImpl {
 }
 
 class LastDitchEffortEffect extends OneShotEffect {
-    
+
     LastDitchEffortEffect() {
         super(Outcome.Damage);
-        this.staticText = "Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to target creature or player.";
+        this.staticText = "Sacrifice any number of creatures. {this} deals that much damage to target creature or player";
     }
-    
+
     LastDitchEffortEffect(final LastDitchEffortEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public LastDitchEffortEffect copy() {
         return new LastDitchEffortEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -109,7 +109,6 @@ class LastDitchEffortEffect extends OneShotEffect {
                 if (opponent != null) {
                     opponent.damage(damage, source.getSourceId(), game, false, true);
                 }
-                return true;
             }
             return true;
         }
