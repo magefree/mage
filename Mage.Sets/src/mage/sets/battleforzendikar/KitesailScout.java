@@ -41,7 +41,7 @@ import mage.constants.Rarity;
 public class KitesailScout extends CardImpl {
 
     public KitesailScout(UUID ownerId) {
-        super(ownerId, 033, "Kitesail Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        super(ownerId, 33, "Kitesail Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Kor");
         this.subtype.add("Scout");

@@ -29,41 +29,38 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class OnduChampion extends CardImpl {
+public class CourierGriffin extends CardImpl {
 
-    public OnduChampion(UUID ownerId) {
-        super(ownerId, 149, "Ondu Champion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+    public CourierGriffin(UUID ownerId) {
+        super(ownerId, 21, "Courier Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "BFZ";
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
-        this.power = new MageInt(4);
+        this.subtype.add("Griffin");
+        this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // <i>Rally</i> — Whenever Ondu Champion or another Ally enters the battlefield under your control, creatures you control gain trample until end of turn.
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")), false));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Courier Griffin enters the battlefield, you gain 2 life.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));
     }
 
-    public OnduChampion(final OnduChampion card) {
+    public CourierGriffin(final CourierGriffin card) {
         super(card);
     }
 
     @Override
-    public OnduChampion copy() {
-        return new OnduChampion(this);
+    public CourierGriffin copy() {
+        return new CourierGriffin(this);
     }
 }

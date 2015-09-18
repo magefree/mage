@@ -28,42 +28,36 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class OnduChampion extends CardImpl {
+public class UnifiedFront extends CardImpl {
 
-    public OnduChampion(UUID ownerId) {
-        super(ownerId, 149, "Ondu Champion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+    public UnifiedFront(UUID ownerId) {
+        super(ownerId, 53, "Unified Front", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "BFZ";
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
 
-        // <i>Rally</i> — Whenever Ondu Champion or another Ally enters the battlefield under your control, creatures you control gain trample until end of turn.
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")), false));
+        // <i>Converge</i> — Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast Unified Front.
+        getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        Effect effect = new CreateTokenEffect(new KorAllyToken(), ColorsOfManaSpentToCastCount.getInstance());
+        getSpellAbility().addEffect(effect);
     }
 
-    public OnduChampion(final OnduChampion card) {
+    public UnifiedFront(final UnifiedFront card) {
         super(card);
     }
 
     @Override
-    public OnduChampion copy() {
-        return new OnduChampion(this);
+    public UnifiedFront copy() {
+        return new UnifiedFront(this);
     }
 }

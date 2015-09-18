@@ -29,41 +29,47 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class OnduChampion extends CardImpl {
+public class KorCastigator extends CardImpl {
 
-    public OnduChampion(UUID ownerId) {
-        super(ownerId, 149, "Ondu Champion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "BFZ";
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Eldrazi Scions");
 
-        // <i>Rally</i> — Whenever Ondu Champion or another Ally enters the battlefield under your control, creatures you control gain trample until end of turn.
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")), false));
+    static {
+        filter.add(new SubtypePredicate("Eldrazi"));
+        filter.add(new SubtypePredicate("Scion"));
     }
 
-    public OnduChampion(final OnduChampion card) {
+    public KorCastigator(UUID ownerId) {
+        super(ownerId, 35, "Kor Castigator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "BFZ";
+        this.subtype.add("Kor");
+        this.subtype.add("Wizard");
+        this.subtype.add("Ally");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
+
+        // Kor Castigator can't be blocked by Eldrazi Scions.
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+    }
+
+    public KorCastigator(final KorCastigator card) {
         super(card);
     }
 
     @Override
-    public OnduChampion copy() {
-        return new OnduChampion(this);
+    public KorCastigator copy() {
+        return new KorCastigator(this);
     }
 }

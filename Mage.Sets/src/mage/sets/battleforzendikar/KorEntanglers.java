@@ -29,41 +29,51 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class OnduChampion extends CardImpl {
+public class KorEntanglers extends CardImpl {
 
-    public OnduChampion(UUID ownerId) {
-        super(ownerId, 149, "Ondu Champion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "BFZ";
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
-        // <i>Rally</i> — Whenever Ondu Champion or another Ally enters the battlefield under your control, creatures you control gain trample until end of turn.
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")), false));
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public OnduChampion(final OnduChampion card) {
+    public KorEntanglers(UUID ownerId) {
+        super(ownerId, 36, "Kor Entanglers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        this.expansionSetCode = "BFZ";
+        this.subtype.add("Kor");
+        this.subtype.add("Soldier");
+        this.subtype.add("Ally");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // <i>Rally</i> — Whenever Kor Entanglers or another Ally enters the battlefield under your control, tap target creature an opponent controls.
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+
+    }
+
+    public KorEntanglers(final KorEntanglers card) {
         super(card);
     }
 
     @Override
-    public OnduChampion copy() {
-        return new OnduChampion(this);
+    public KorEntanglers copy() {
+        return new KorEntanglers(this);
     }
 }

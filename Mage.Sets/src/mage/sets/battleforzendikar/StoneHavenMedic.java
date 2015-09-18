@@ -29,41 +29,42 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class OnduChampion extends CardImpl {
+public class StoneHavenMedic extends CardImpl {
 
-    public OnduChampion(UUID ownerId) {
-        super(ownerId, 149, "Ondu Champion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+    public StoneHavenMedic(UUID ownerId) {
+        super(ownerId, 51, "Stone Haven Medic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "BFZ";
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
-        this.power = new MageInt(4);
+        this.subtype.add("Kor");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // <i>Rally</i> — Whenever Ondu Champion or another Ally enters the battlefield under your control, creatures you control gain trample until end of turn.
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")), false));
+        // {W}, {T}: You gain 1 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public OnduChampion(final OnduChampion card) {
+    public StoneHavenMedic(final StoneHavenMedic card) {
         super(card);
     }
 
     @Override
-    public OnduChampion copy() {
-        return new OnduChampion(this);
+    public StoneHavenMedic copy() {
+        return new StoneHavenMedic(this);
     }
 }

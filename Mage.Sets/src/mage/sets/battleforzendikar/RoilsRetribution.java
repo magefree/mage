@@ -28,42 +28,34 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
  * @author LevelX2
  */
-public class OnduChampion extends CardImpl {
+public class RoilsRetribution extends CardImpl {
 
-    public OnduChampion(UUID ownerId) {
-        super(ownerId, 149, "Ondu Champion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+    public RoilsRetribution(UUID ownerId) {
+        super(ownerId, 45, "Roil's Retribution", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
         this.expansionSetCode = "BFZ";
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
-        this.subtype.add("Ally");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
 
-        // <i>Rally</i> — Whenever Ondu Champion or another Ally enters the battlefield under your control, creatures you control gain trample until end of turn.
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")), false));
+        // Roil's Retribution deals 5 damage divided as you choose among any number of target attacking or blocking creatures.
+        this.getSpellAbility().addEffect(new DamageMultiEffect(5));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, new FilterAttackingOrBlockingCreature("attacking or blocking creatures")));
     }
 
-    public OnduChampion(final OnduChampion card) {
+    public RoilsRetribution(final RoilsRetribution card) {
         super(card);
     }
 
     @Override
-    public OnduChampion copy() {
-        return new OnduChampion(this);
+    public RoilsRetribution copy() {
+        return new RoilsRetribution(this);
     }
 }

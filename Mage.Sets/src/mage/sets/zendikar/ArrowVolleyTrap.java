@@ -35,8 +35,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -45,23 +44,16 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class ArrowVolleyTrap extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
-
-    static {
-        filter.add(new AttackingPredicate());
-    }
-
     public ArrowVolleyTrap(UUID ownerId) {
         super(ownerId, 2, "Arrow Volley Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
         this.expansionSetCode = "ZEN";
-
 
         // If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new ArrowVolleyTrapAlternativeCost());
 
         // Arrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, new FilterAttackingCreature("attacking creatures")));
 
     }
 

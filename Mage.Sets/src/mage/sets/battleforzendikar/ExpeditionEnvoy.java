@@ -40,7 +40,7 @@ import mage.constants.Rarity;
 public class ExpeditionEnvoy extends CardImpl {
 
     public ExpeditionEnvoy(UUID ownerId) {
-        super(ownerId, 024, "Expedition Envoy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        super(ownerId, 24, "Expedition Envoy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Human");
         this.subtype.add("Scout");

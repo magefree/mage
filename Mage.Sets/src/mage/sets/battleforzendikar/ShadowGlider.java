@@ -41,7 +41,7 @@ import mage.constants.Rarity;
 public class ShadowGlider extends CardImpl {
 
     public ShadowGlider(UUID ownerId) {
-        super(ownerId, 047, "Shadow Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        super(ownerId, 47, "Shadow Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Kor");
         this.subtype.add("Soldier");

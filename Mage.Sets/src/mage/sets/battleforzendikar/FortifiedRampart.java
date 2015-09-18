@@ -41,7 +41,7 @@ import mage.constants.Rarity;
 public class FortifiedRampart extends CardImpl {
 
     public FortifiedRampart(UUID ownerId) {
-        super(ownerId, 027, "Fortified Rampart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 27, "Fortified Rampart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Wall");
         this.power = new MageInt(0);
