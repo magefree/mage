@@ -36,12 +36,14 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
-import mage.abilities.mana.builder.SubtypeCastManaBuilder;
+import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -49,6 +51,12 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX2
  */
 public class AllyEncampment extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("an Ally spell");
+
+    static {
+        filter.add(new ColorlessPredicate());
+    }
 
     public AllyEncampment(UUID ownerId) {
         super(ownerId, 228, "Ally Encampment", Rarity.RARE, new CardType[]{CardType.LAND}, "");
@@ -58,7 +66,7 @@ public class AllyEncampment extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T} Add one mana of any color to your mana pool. Spend this mana only to cast an Ally spell.
-        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new SubtypeCastManaBuilder("Ally"), true));
+        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(filter), true));
 
         // {1}, {T}, Sacrifice Ally Encampment: Return target Ally you control to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(1));

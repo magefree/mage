@@ -25,28 +25,27 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.mana;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.constants.Zone;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.constants.Zone;
 import mage.game.Game;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class ActivateIfConditionManaAbility extends ManaAbility {
 
     private final Condition condition;
 
     public ActivateIfConditionManaAbility(Zone zone, BasicManaEffect effect, Cost cost, Condition condition) {
+        super(zone, effect, cost);
+        this.netMana.add(effect.getMana());
+        this.condition = condition;
+    }
+
+    public ActivateIfConditionManaAbility(Zone zone, AddConditionalColorlessManaEffect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.netMana.add(effect.getMana());
         this.condition = condition;
@@ -75,7 +74,7 @@ public class ActivateIfConditionManaAbility extends ManaAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder(super.getRule()).append(" Activate this ability only if ").append(condition.toString()).append(".").toString() ;
+        return new StringBuilder(super.getRule()).append(" Activate this ability only if ").append(condition.toString()).append(".").toString();
     }
 
     @Override

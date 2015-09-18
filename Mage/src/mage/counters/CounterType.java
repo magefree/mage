@@ -41,6 +41,7 @@ public enum CounterType {
     BLAZE("blaze"),
     BRIBERY("bribery"),
     CHARGE("charge"),
+    CRYSTAL("crystal"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESPAIR("despair"),

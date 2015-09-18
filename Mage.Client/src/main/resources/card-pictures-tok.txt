@@ -1,5 +1,17 @@
-#Generate|TOK:BFZ|Eldrazi Scion|
-#Generate|TOK:BFZ|Elemental|
+#Generate|TOK:BFZ|Dragon|
+#Generate|TOK:BFZ|Eldrazi|
+#Generate|TOK:BFZ|Eldrazi Scion 1|
+#Generate|TOK:BFZ|Eldrazi Scion 2|
+#Generate|TOK:BFZ|Eldrazi Scion 3|
+#Generate|TOK:BFZ|Elemental 1|
+#Generate|TOK:BFZ|Elemental 2|
+#Generate|TOK:BFZ|Knight Ally|
+#Generate|TOK:BFZ|Kor Ally|
+#Generate|TOK:BFZ|Octopus|
+#Generate|TOK:BFZ|Plant|
+#|Generate|EMBLEM!:BFZ|Emblem Gideon, Ally of Zendikar|
+#|Generate|EMBLEM!:BFZ|Emblem Kiora, Master of the Depths|
+#|Generate|EMBLEM!:BFZ|Emblem Ob Nixilis Reignited|
 
 #Generate|TOK:DDP|Eldrazi Spawn 1|
 #Generate|TOK:DDP|Eldrazi Spawn 2|
