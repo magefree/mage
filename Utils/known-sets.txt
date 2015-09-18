@@ -101,6 +101,7 @@ Morningtide|morningtide|
 Nemesis|nemesis|
 New Phyrexia|newphyrexia|
 Ninth Edition|ninthedition|
+Oath of the Gatewatch|oathofthegatewatch|
 Odyssey|odyssey|
 Onslaught|onslaught|
 Planar Chaos|planarchaos|
@@ -147,3 +148,4 @@ World Magic Cup Qualifier|worldmagiccupqualifier|
 Worldwake|worldwake|
 WPN Gateway|wpngateway|
 Zendikar|zendikar|
+Zendikar Expeditions|zendikarexpeditions|

@@ -110,6 +110,7 @@ MTGO Vanguard|VGO|
 New Phyrexia|NPH|
 Ninth Edition|9ED|
 Nemesis|NMS|
+Oath of the Gatewatch|OGW|
 Odyssey|ODY|
 Onslaught|ONS|
 Prophecy|PCY|
@@ -161,3 +162,4 @@ World Magic Cup Qualifier|WMCQ|
 Worldwake|WWK|
 WPN Gateway|GRC|
 Zendikar|ZEN|
+Zendikar Expeditions|EXP|
