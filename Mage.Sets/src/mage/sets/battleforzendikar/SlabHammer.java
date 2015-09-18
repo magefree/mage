@@ -25,52 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ArgentumArmor extends CardImpl {
+public class SlabHammer extends CardImpl {
 
-    public ArgentumArmor(UUID ownerId) {
-        super(ownerId, 137, "Argentum Armor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "SOM";
+    public SlabHammer(UUID ownerId) {
+        super(ownerId, 227, "Slab Hammer", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "BFZ";
         this.subtype.add("Equipment");
 
-        // Equipped creature gets +6/+6.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(6, 6)));
-
-        // Whenever equipped creature attacks, destroy target permanent.
-        Ability ability = new AttacksAttachedTriggeredAbility(new DestroyTargetEffect());
+        // Whenever equipped creature attacks, you may return a land you control to its owner's hand. If you do, the creature gets +2/+2 until end of turn.
+        Ability ability = new AttacksAttachedTriggeredAbility(
+                new DoIfCostPaid(new BoostEquippedEffect(2, 2, Duration.EndOfTurn),
+                        new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent())),
+                        "Return a land you control to its owner's hand? (giving +2/+2 to the equipped creature)"));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
-        // Equip {6}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(6)));
+        // Equip {2}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+
     }
 
-    public ArgentumArmor(final ArgentumArmor card) {
+    public SlabHammer(final SlabHammer card) {
         super(card);
     }
 
     @Override
-    public ArgentumArmor copy() {
-        return new ArgentumArmor(this);
+    public SlabHammer copy() {
+        return new SlabHammer(this);
     }
 }

@@ -57,7 +57,7 @@ public class BlightedGorge extends CardImpl {
         // {4}{R}, {T}, Sacrifice Blighted Gorge: Blighted Gorge deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(2),
-                new ManaCostsImpl<>("{3}{R}"));
+                new ManaCostsImpl<>("{4}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());

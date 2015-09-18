@@ -25,52 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ArgentumArmor extends CardImpl {
+public class BlightedFen extends CardImpl {
 
-    public ArgentumArmor(UUID ownerId) {
-        super(ownerId, 137, "Argentum Armor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Equipment");
+    public BlightedFen(UUID ownerId) {
+        super(ownerId, 230, "Blighted Fen", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "BFZ";
 
-        // Equipped creature gets +6/+6.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(6, 6)));
+        // {T}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
 
-        // Whenever equipped creature attacks, destroy target permanent.
-        Ability ability = new AttacksAttachedTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent());
+        // {4}{B}, {T}, Sacrifice Blighted Fen: Target opponent sacrifices a creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent"),
+                new ManaCostsImpl<>("{4}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-
-        // Equip {6}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(6)));
     }
 
-    public ArgentumArmor(final ArgentumArmor card) {
+    public BlightedFen(final BlightedFen card) {
         super(card);
     }
 
     @Override
-    public ArgentumArmor copy() {
-        return new ArgentumArmor(this);
+    public BlightedFen copy() {
+        return new BlightedFen(this);
     }
 }
