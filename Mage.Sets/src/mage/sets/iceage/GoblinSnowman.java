@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.iceage;
 
 import java.util.UUID;
 
@@ -33,48 +33,50 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
+import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.common.FilterAttackingCreature;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BursegSardaukar
  */
-public class MoggSquad extends CardImpl {
+public class GoblinSnowman extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public MoggSquad(UUID ownerId) {
-        super(ownerId, 192, "Mogg Squad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "TMP";
+    public GoblinSnowman(UUID ownerId) {
+        super(ownerId, 191, "Goblin Snowman", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "ICE";
         this.subtype.add("Goblin");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        //Whenever Goblin Snowman blocks, prevent all combat damage that would be dealt to and dealt by it this turn.
+        this.addAbility(new BlocksTriggeredAbility(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn), false));
+        this.addAbility(new BlocksTriggeredAbility(new PreventCombatDamageToSourceEffect(Duration.EndOfTurn), false));
         
-        DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new MultipliedValue(amount, -1), new MultipliedValue(amount, -1), Duration.WhileOnBattlefield));
-        this.addAbility(ability);
+        //{T}: Goblin Snowman deals 1 damage to target creature it's blocking.
+        FilterAttackingCreature filter = new FilterAttackingCreature("creature it's blocking");
+        filter.add(new BlockingByPredicate(this.getId()));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability, new BlockedByWatcher());
     }
 
-    public MoggSquad(final MoggSquad card) {
+    public GoblinSnowman(final GoblinSnowman card) {
         super(card);
     }
 
     @Override
-    public MoggSquad copy() {
-        return new MoggSquad(this);
+    public GoblinSnowman copy() {
+        return new GoblinSnowman(this);
     }
 }

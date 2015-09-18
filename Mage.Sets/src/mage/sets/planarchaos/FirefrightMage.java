@@ -25,56 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BursegSardaukar
  */
-public class MoggSquad extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
+public class FirefrightMage extends CardImpl {
+    
+    private final static FilterCreaturePermanent notArtifactOrRed = new FilterCreaturePermanent("except by artifact creatures and/or white creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        notArtifactOrRed.add(Predicates.not(
+                Predicates.or(
+                        new CardTypePredicate(CardType.ARTIFACT),
+                        new ColorPredicate(ObjectColor.RED)
+                )
+        ));
     }
 
-    public MoggSquad(UUID ownerId) {
-        super(ownerId, 192, "Mogg Squad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "TMP";
+    public FirefrightMage(UUID ownerId) {
+        super(ownerId, 99, "Firefright Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "PLC";
         this.subtype.add("Goblin");
+        this.subtype.add("Spellshaper");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        
-        DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new MultipliedValue(amount, -1), new MultipliedValue(amount, -1), Duration.WhileOnBattlefield));
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        //{1} {R}, {T}, Discard a card: Target creature can't be blocked this turn except by artifact creatures and/or red creatures.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(notArtifactOrRed, Duration.EndOfTurn),   new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public MoggSquad(final MoggSquad card) {
+    public FirefrightMage(final FirefrightMage card) {
         super(card);
     }
 
     @Override
-    public MoggSquad copy() {
-        return new MoggSquad(this);
+    public FirefrightMage copy() {
+        return new FirefrightMage(this);
     }
 }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.ravnica;
 
 import java.util.UUID;
 
@@ -33,48 +33,50 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author BursegSardaukar
  */
-public class MoggSquad extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public MoggSquad(UUID ownerId) {
-        super(ownerId, 192, "Mogg Squad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "TMP";
+public class GoblinFireFiend extends CardImpl {
+    
+    public GoblinFireFiend(UUID ownerId) {
+        super(ownerId, 127, "Goblin Fire Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "RAV";
         this.subtype.add("Goblin");
+        this.subtype.add("Berserker");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
         
-        DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new MultipliedValue(amount, -1), new MultipliedValue(amount, -1), Duration.WhileOnBattlefield));
+        //Haste
+        this.addAbility(HasteAbility.getInstance());
+        
+        //Goblin Fire Fiend must be blocked if able.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect()));
+        
+        //{R}: Goblin Fire Fiend gets +1/+0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new StaticValue(1), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
         this.addAbility(ability);
     }
 
-    public MoggSquad(final MoggSquad card) {
+    public GoblinFireFiend(final GoblinFireFiend card) {
         super(card);
     }
 
     @Override
-    public MoggSquad copy() {
-        return new MoggSquad(this);
+    public GoblinFireFiend copy() {
+        return new GoblinFireFiend(this);
     }
 }

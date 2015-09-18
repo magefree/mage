@@ -25,56 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author BursegSardaukar
  */
-public class MoggSquad extends CardImpl {
+public class GoblinSnowman extends mage.sets.iceage.GoblinSnowman {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
-
-    static {
-        filter.add(new AnotherPredicate());
+    public GoblinSnowman(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 64;
+        this.expansionSetCode = "ICE";
     }
 
-    public MoggSquad(UUID ownerId) {
-        super(ownerId, 192, "Mogg Squad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Goblin");
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        
-        DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new MultipliedValue(amount, -1), new MultipliedValue(amount, -1), Duration.WhileOnBattlefield));
-        this.addAbility(ability);
-    }
-
-    public MoggSquad(final MoggSquad card) {
+    public GoblinSnowman(final GoblinSnowman card) {
         super(card);
     }
 
     @Override
-    public MoggSquad copy() {
-        return new MoggSquad(this);
+    public GoblinSnowman copy() {
+        return new GoblinSnowman(this);
     }
 }

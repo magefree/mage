@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.guildpact;
 
 import java.util.UUID;
 
@@ -33,48 +33,50 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
  * @author BursegSardaukar
  */
-public class MoggSquad extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public MoggSquad(UUID ownerId) {
-        super(ownerId, 192, "Mogg Squad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "TMP";
+public class RabbleRouser extends CardImpl {
+    
+    private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures");
+    
+    public RabbleRouser(UUID ownerId) {
+        super(ownerId, 73, "Rabble-Rouser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "GPT";
         this.subtype.add("Goblin");
+        this.subtype.add("Shaman");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        
-        DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new MultipliedValue(amount, -1), new MultipliedValue(amount, -1), Duration.WhileOnBattlefield));
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        //Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)
+        this.addAbility(new BloodthirstAbility(1));
+
+        //{R}, {T}: Attacking creatures get +X/+0 until end of turn, where X is Rabble-Rouser's power.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(new SourcePermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, filter, false), new ManaCostsImpl("{R}"));
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public MoggSquad(final MoggSquad card) {
+    public RabbleRouser(final RabbleRouser card) {
         super(card);
     }
 
     @Override
-    public MoggSquad copy() {
-        return new MoggSquad(this);
+    public RabbleRouser copy() {
+        return new RabbleRouser(this);
     }
 }
