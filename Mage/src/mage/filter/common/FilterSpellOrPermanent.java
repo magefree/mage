@@ -91,6 +91,14 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
         return this.spellFilter;
     }
 
+    public void setPermanentFilter(FilterPermanent permanentFilter) {
+        this.permanentFilter = permanentFilter;
+    }
+
+    public void setSpellFilter(FilterSpell spellFilter) {
+        this.spellFilter = spellFilter;
+    }
+
     @Override
     public FilterSpellOrPermanent copy() {
         return new FilterSpellOrPermanent(this);
