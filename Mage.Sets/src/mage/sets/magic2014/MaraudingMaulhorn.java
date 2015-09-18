@@ -29,7 +29,6 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.Effect;
@@ -38,10 +37,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -68,9 +65,6 @@ public class MaraudingMaulhorn extends CardImpl {
                 new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control a creature named Advocate of the Beast");
-
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new AttackedThisTurnWatcher());
-
     }
 
     public MaraudingMaulhorn(final MaraudingMaulhorn card) {
