@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInExile;
 public class RuinProcessor extends CardImpl {
 
     public RuinProcessor(UUID ownerId) {
-        super(ownerId, 12, "Ruin Processor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{7}");
+        super(ownerId, 12, "Ruin Processor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{7}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Eldrazi");
         this.subtype.add("Processor");

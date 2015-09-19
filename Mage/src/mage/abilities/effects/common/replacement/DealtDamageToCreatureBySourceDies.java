@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.replacement;
 
 import mage.abilities.Ability;
@@ -47,11 +46,10 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-
 public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
 
     public DealtDamageToCreatureBySourceDies(Card card, Duration duration) {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
+        super(duration, Outcome.Exile);
         if (card.getCardType().contains(CardType.CREATURE)) {
             staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
         } else {
@@ -75,7 +73,7 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null) {
             return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
@@ -90,7 +88,7 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+        ZoneChangeEvent zce = (ZoneChangeEvent) event;
         if (zce.isDiesEvent()) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
             if (watcher != null) {
