@@ -58,7 +58,7 @@ public class MindRaker extends CardImpl {
 
         // When Mind Raker enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, each opponent discards a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(new DiscardEachPlayerEffect(TargetController.OPPONENT), new ExileOpponentsCardFromExileToGraveyardCost(true)), true));
+                new DoIfCostPaid(new DiscardEachPlayerEffect(TargetController.OPPONENT), new ExileOpponentsCardFromExileToGraveyardCost(true)), false));
     }
 
     public MindRaker(final MindRaker card) {

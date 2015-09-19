@@ -50,7 +50,7 @@ public class LavastepRaider extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
         // {2}{R}: Lavastep Raider gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")));
