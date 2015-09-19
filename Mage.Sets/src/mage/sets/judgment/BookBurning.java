@@ -28,6 +28,7 @@
 package mage.sets.judgment;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -36,8 +37,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
@@ -54,7 +53,6 @@ public class BookBurning extends CardImpl {
         // Any player may have Book Burning deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new BookBurningMillEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
     }
 
     public BookBurning(final BookBurning card) {
@@ -68,52 +66,41 @@ public class BookBurning extends CardImpl {
 }
 
 class BookBurningMillEffect extends OneShotEffect {
-    
-        public BookBurningMillEffect() {
+
+    public BookBurningMillEffect() {
         super(Outcome.Detriment);
-        staticText = "Any player may have {source} deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard.";
+        staticText = "Any player may have {source} deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard";
     }
-    
-        public BookBurningMillEffect(final BookBurningMillEffect effect) {
+
+    public BookBurningMillEffect(final BookBurningMillEffect effect) {
         super(effect);
     }
-        
+
     @Override
     public BookBurningMillEffect copy() {
         return new BookBurningMillEffect(this);
     }
-    
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        StackObject spell = null;
-        for(StackObject object : game.getStack()){
-            if(object instanceof Spell && object.getSourceId().equals(source.getSourceId())){
-                spell = object;
-            }
-        }
-        if(spell != null){
-            boolean MillCards = true;
-            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)){
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null) {
+            boolean millCards = true;
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 6 damage to you?", source, game)){
-                    MillCards = false;
+                if (player != null && player.chooseUse(Outcome.Detriment, "Have " + sourceObject.getLogName() + " deal 6 damage to you?", source, game)) {
+                    millCards = false;
                     player.damage(6, source.getSourceId(), game, false, true);
-                    game.informPlayers(player.getLogName() + " has " + spell.getLogName() + " deal 6 to him or her");
+                    game.informPlayers(player.getLogName() + " has " + sourceObject.getLogName() + " deal 6 damage to him or her");
                 }
             }
-            if (MillCards) {
-                UUID targetPlayer = getTargetPointer().getFirst(game, source);
+            if (millCards) {
+                Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
                 if (targetPlayer != null) {
-                    Player player = game.getPlayer(targetPlayer);
-                    player.moveCards(player.getLibrary().getTopCards(game, 6), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, 6), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
-            }          
-            return MillCards;
+            }
+            return true;
         }
         return false;
     }
