@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BoneSplinters extends CardImpl {
+public class VampiricRites extends CardImpl {
 
-    public BoneSplinters(UUID ownerId) {
-        super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ALA";
+    public VampiricRites(UUID ownerId) {
+        super(ownerId, 124, "Vampiric Rites", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
+        this.expansionSetCode = "BFZ";
 
-        // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        // Destroy target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // {1}{B}, Sacrifice a creature: You gain 1 life and draw a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl<>("{1}{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        Effect effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("and draw a card");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public BoneSplinters(final BoneSplinters card) {
+    public VampiricRites(final VampiricRites card) {
         super(card);
     }
 
     @Override
-    public BoneSplinters copy() {
-        return new BoneSplinters(this);
+    public VampiricRites copy() {
+        return new VampiricRites(this);
     }
 }

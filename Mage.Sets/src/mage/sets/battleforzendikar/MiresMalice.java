@@ -25,41 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BoneSplinters extends CardImpl {
+public class MiresMalice extends CardImpl {
 
-    public BoneSplinters(UUID ownerId) {
-        super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ALA";
+    public MiresMalice(UUID ownerId) {
+        super(ownerId, 117, "Mire's Malice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "BFZ";
 
-        // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        // Destroy target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // Target opponent discards two cards.
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
+        this.getSpellAbility().addTarget(new TargetOpponent());
+        // Awaken 3 - {5}{B}
+        this.addAbility(new AwakenAbility(this, 3, "{5}{B}"));
     }
 
-    public BoneSplinters(final BoneSplinters card) {
+    public MiresMalice(final MiresMalice card) {
         super(card);
     }
 
     @Override
-    public BoneSplinters copy() {
-        return new BoneSplinters(this);
+    public MiresMalice copy() {
+        return new MiresMalice(this);
     }
 }

@@ -25,41 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.GainLifeControllerTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BoneSplinters extends CardImpl {
+public class BloodbondVampire extends CardImpl {
 
-    public BoneSplinters(UUID ownerId) {
-        super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ALA";
+    public BloodbondVampire(UUID ownerId) {
+        super(ownerId, 104, "Bloodbond Vampire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "BFZ";
+        this.subtype.add("Vampire");
+        this.subtype.add("Shaman");
+        this.subtype.add("Ally");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        // Destroy target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // Whenever you gain life, put a +1/+1 counter on Bloodbond Vampire.
+        this.addAbility(new GainLifeControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public BoneSplinters(final BoneSplinters card) {
+    public BloodbondVampire(final BloodbondVampire card) {
         super(card);
     }
 
     @Override
-    public BoneSplinters copy() {
-        return new BoneSplinters(this);
+    public BloodbondVampire copy() {
+        return new BloodbondVampire(this);
     }
 }

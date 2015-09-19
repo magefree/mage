@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BoneSplinters extends CardImpl {
+public class KalastriaHealer extends CardImpl {
 
-    public BoneSplinters(UUID ownerId) {
-        super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ALA";
+    public KalastriaHealer(UUID ownerId) {
+        super(ownerId, 114, "Kalastria Healer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "BFZ";
+        this.subtype.add("Vampire");
+        this.subtype.add("Cleric");
+        this.subtype.add("Ally");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        // Destroy target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // <i>Rally</i> - Whenever Kalastria Healer or another Ally enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(1), false);
+        Effect effect = new GainLifeEffect(1);
+        effect.setText("and you gain 1 life");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public BoneSplinters(final BoneSplinters card) {
+    public KalastriaHealer(final KalastriaHealer card) {
         super(card);
     }
 
     @Override
-    public BoneSplinters copy() {
-        return new BoneSplinters(this);
+    public KalastriaHealer copy() {
+        return new KalastriaHealer(this);
     }
 }

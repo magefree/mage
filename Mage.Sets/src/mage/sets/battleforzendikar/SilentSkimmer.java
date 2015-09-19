@@ -25,41 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.keyword.DevoidAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.SetTargetPointer;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BoneSplinters extends CardImpl {
+public class SilentSkimmer extends CardImpl {
 
-    public BoneSplinters(UUID ownerId) {
-        super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ALA";
+    public SilentSkimmer(UUID ownerId) {
+        super(ownerId, 96, "Silent Skimmer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "BFZ";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Drone");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
 
-        // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        // Destroy target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // Devoid
+        Ability ability = new DevoidAbility(this.color);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever Silent Skimmer attacks, defending player loses 2 life.
+        this.addAbility(new AttacksTriggeredAbility(new LoseLifeTargetEffect(2), false,
+                "Whenever {this} attacks, defending player loses 2 life", SetTargetPointer.PLAYER));
+
     }
 
-    public BoneSplinters(final BoneSplinters card) {
+    public SilentSkimmer(final SilentSkimmer card) {
         super(card);
     }
 
     @Override
-    public BoneSplinters copy() {
-        return new BoneSplinters(this);
+    public SilentSkimmer copy() {
+        return new SilentSkimmer(this);
     }
 }

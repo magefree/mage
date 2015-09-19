@@ -25,41 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.EldraziScionToken;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BoneSplinters extends CardImpl {
+public class CarrierThrall extends CardImpl {
 
-    public BoneSplinters(UUID ownerId) {
-        super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ALA";
+    public CarrierThrall(UUID ownerId) {
+        super(ownerId, 106, "Carrier Thrall", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "BFZ";
+        this.subtype.add("Vampire");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        // Destroy target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // When Carrier Thrall dies, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature. Add {1} to your mana pool."
+        Effect effect = new CreateTokenEffect(new EldraziScionToken());
+        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {1} to your mana pool.\"");
+        this.addAbility(new DiesTriggeredAbility(effect, false));
+
     }
 
-    public BoneSplinters(final BoneSplinters card) {
+    public CarrierThrall(final CarrierThrall card) {
         super(card);
     }
 
     @Override
-    public BoneSplinters copy() {
-        return new BoneSplinters(this);
+    public CarrierThrall copy() {
+        return new CarrierThrall(this);
     }
 }

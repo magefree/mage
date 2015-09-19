@@ -47,10 +47,10 @@ public class PainfulTruths extends CardImpl {
         super(ownerId, 120, "Painful Truths", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "BFZ";
 
-        // <i>Converge</i> - Draw X cards and lose X life, where X is the number of colors of mana spent to cast Painful Truths.
+        // <i>Converge</i> - You draw X cards and lose X life, where X is the number of colors of mana spent to cast Painful Truths.
         getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
         Effect effect = new DrawCardSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
-        effect.setText("Draw X cards");
+        effect.setText("You draw X cards");
         getSpellAbility().addEffect(effect);
         effect = new LoseLifeSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
         effect.setText("and lose X life, where X is the number of colors of mana spent to cast {this}");

@@ -30,6 +30,7 @@ package mage.sets.battleforzendikar;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.common.LandfallAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -59,7 +60,9 @@ public class RetreatToHagra extends CardImpl {
         // or Each opponent loses 1 life and you gain 1 life.
         Mode mode = new Mode();
         mode.getEffects().add(new LoseLifeOpponentsEffect(1));
-        mode.getEffects().add(new GainLifeEffect(1));
+        Effect effect = new GainLifeEffect(1);
+        effect.setText("and you gain 1 life");
+        mode.getEffects().add(effect);
         ability.addMode(mode);
         this.addAbility(ability);
     }

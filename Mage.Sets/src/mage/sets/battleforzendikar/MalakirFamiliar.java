@@ -25,41 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.GainLifeControllerTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BoneSplinters extends CardImpl {
+public class MalakirFamiliar extends CardImpl {
 
-    public BoneSplinters(UUID ownerId) {
-        super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ALA";
+    public MalakirFamiliar(UUID ownerId) {
+        super(ownerId, 116, "Malakir Familiar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "BFZ";
+        this.subtype.add("Bat");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        // Destroy target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Deahtouch
+        this.addAbility(DeathtouchAbility.getInstance());
+        // Whenever you gain life, Malakir Familiar gets +1/+1 until end of turn.
+        this.addAbility(new GainLifeControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
+
     }
 
-    public BoneSplinters(final BoneSplinters card) {
+    public MalakirFamiliar(final MalakirFamiliar card) {
         super(card);
     }
 
     @Override
-    public BoneSplinters copy() {
-        return new BoneSplinters(this);
+    public MalakirFamiliar copy() {
+        return new MalakirFamiliar(this);
     }
 }
