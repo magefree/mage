@@ -40,7 +40,6 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -55,7 +54,6 @@ public class Syncopate extends CardImpl {
     public Syncopate(UUID ownerId) {
         super(ownerId, 54, "Syncopate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "RTR";
-
 
         // Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
         this.getSpellAbility().addEffect(new SyncopateCounterUnlessPaysEffect());
@@ -90,27 +88,19 @@ class SyncopateCounterUnlessPaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            Player player = game.getPlayer(spell.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (spell != null && (spell instanceof Spell) && sourceObject != null) {
             Player controller = game.getPlayer(source.getControllerId());
-            if (player != null && controller != null) {
-                
+            if (controller != null) {
                 int amount = source.getManaCostsToPay().getX();
                 if (amount > 0) {
                     GenericManaCost cost = new GenericManaCost(amount);
                     if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
-                        
                         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
                         if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()))) {
-                            game.informPlayers("Syncopate: cost wasn't payed - countering " + stackObject.getName());
-                            if (stackObject instanceof Spell) {
-                                game.rememberLKI(source.getFirstTarget(), Zone.STACK, (Spell) stackObject);
-                            }
-                            game.getStack().remove(stackObject);
-                            MageObject card = game.getObject(stackObject.getSourceId());
-                            if (card instanceof Card) {
-                                ((Card) card).moveToZone(Zone.EXILED, source.getSourceId(), game, false);
-                            }
+                            game.informPlayers(sourceObject.getIdName() + ": cost wasn't payed - countering " + stackObject.getName());
+                            game.rememberLKI(source.getFirstTarget(), Zone.STACK, (Spell) stackObject);
+                            controller.moveCards((Spell) spell, null, Zone.EXILED, source, game);
                             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()));
                             return true;
                         }

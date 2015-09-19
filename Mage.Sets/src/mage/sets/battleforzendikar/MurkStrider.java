@@ -31,23 +31,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.common.ExileOpponentsCardFromExileToGraveyardCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -68,7 +58,8 @@ public class MurkStrider extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // When Murk Strider enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, return target creature to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MurkStriderEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DoIfCostPaid(new ReturnToHandTargetEffect(), new ExileOpponentsCardFromExileToGraveyardCost(true)), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -80,45 +71,5 @@ public class MurkStrider extends CardImpl {
     @Override
     public MurkStrider copy() {
         return new MurkStrider(this);
-    }
-}
-
-class MurkStriderEffect extends OneShotEffect {
-
-    private final static FilterCard filter = new FilterCard("card an opponent owns from exile");
-
-    static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
-    }
-
-    public MurkStriderEffect() {
-        super(Outcome.Discard);
-        this.staticText = "you may put a card an opponent owns from exile into that player's graveyard. If you do, return target creature to its owner's hand.";
-    }
-
-    public MurkStriderEffect(final MurkStriderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MurkStriderEffect copy() {
-        return new MurkStriderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInExile(1, 1, filter, null);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Cards cardsToGraveyard = new CardsImpl(target.getTargets());
-                    controller.moveCards(cardsToGraveyard, null, Zone.GRAVEYARD, source, game);
-                    return new ReturnToHandTargetEffect().apply(game, source);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

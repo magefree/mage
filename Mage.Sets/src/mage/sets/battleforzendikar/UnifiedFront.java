@@ -49,6 +49,7 @@ public class UnifiedFront extends CardImpl {
         // <i>Converge</i> — Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast Unified Front.
         getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
         Effect effect = new CreateTokenEffect(new KorAllyToken(), ColorsOfManaSpentToCastCount.getInstance());
+        effect.setText("Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast {this}");
         getSpellAbility().addEffect(effect);
     }
 

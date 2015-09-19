@@ -28,6 +28,7 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -50,7 +51,9 @@ public class TurnAgainst extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // Devoid
-        this.addAbility(new DevoidAbility(this.color));
+        Ability ability = new DevoidAbility(this.color);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

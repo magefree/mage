@@ -759,9 +759,7 @@ public abstract class AbilityImpl implements Ability {
                 sbRule.append(": ");
             }
         }
-        if (abilityWord != null) {
-            sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> &mdash; "));
-        }
+
         String ruleStart = sbRule.toString();
         String text = modes.getText();
         String rule;
@@ -778,6 +776,9 @@ public abstract class AbilityImpl implements Ability {
             }
         } else {
             rule = ruleStart;
+        }
+        if (abilityWord != null) {
+            rule = "<i>" + abilityWord + "</i> &mdash; " + Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
         }
         return rule;
     }

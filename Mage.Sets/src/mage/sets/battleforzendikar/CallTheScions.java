@@ -28,6 +28,7 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -47,7 +48,9 @@ public class CallTheScions extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // Devoid
-        this.addAbility(new DevoidAbility(this.color));
+        Ability ability = new DevoidAbility(this.color);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
         // Put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: add {1} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2);
         effect.setText("put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have \"Sacrifice this creature: Add {1} to your mana pool.\"");

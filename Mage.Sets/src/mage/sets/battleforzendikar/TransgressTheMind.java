@@ -28,6 +28,7 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -56,7 +57,9 @@ public class TransgressTheMind extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // Devoid
-        this.addAbility(new DevoidAbility(this.color));
+        Ability ability = new DevoidAbility(this.color);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
         // Target player reveals his or her hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
         Effect effect = new ExileCardYouChooseTargetOpponentEffect(filter);

@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -54,6 +55,7 @@ public class ExertInfluence extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // <i>Converge</i>-Gain control of target creature if its power is less than or equal to the number of colors spent to cast Exert Influence.
+        getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
         getSpellAbility().addEffect(new ExertInfluenceEffect());
         getSpellAbility().addTarget(new TargetCreaturePermanent());
 
@@ -73,7 +75,7 @@ class ExertInfluenceEffect extends OneShotEffect {
 
     public ExertInfluenceEffect() {
         super(Outcome.GainControl);
-        this.staticText = "<i>Converge</i>-Gain control of target creature if its power is less than or equal to the number of colors spent to cast {this}";
+        this.staticText = "Gain control of target creature if its power is less than or equal to the number of colors spent to cast {this}";
     }
 
     public ExertInfluenceEffect(final ExertInfluenceEffect effect) {

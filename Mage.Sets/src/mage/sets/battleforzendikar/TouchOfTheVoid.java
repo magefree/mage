@@ -28,6 +28,7 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
@@ -50,7 +51,9 @@ public class TouchOfTheVoid extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // Devoid
-        this.addAbility(new DevoidAbility(this.color));
+        Ability ability = new DevoidAbility(this.color);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
         // Touch of the Void deals 3 damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

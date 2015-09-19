@@ -68,7 +68,9 @@ public class UnnaturalAggression extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // Devoid
-        this.addAbility(new DevoidAbility(this.color));
+        Ability ability = new DevoidAbility(this.color);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
         // Target creature you control fights target creature an opponent controls.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

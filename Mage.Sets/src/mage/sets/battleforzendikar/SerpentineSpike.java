@@ -55,7 +55,9 @@ public class SerpentineSpike extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // Devoid
-        this.addAbility(new DevoidAbility(this.color));
+        Ability ability = new DevoidAbility(this.color);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
         // Serpentine Spike deals 2 damage to target creature, 3 damage to another target creature, and 4 damage to a third target creature. If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new SerpentineSpikeEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (2 damage)")));

@@ -31,24 +31,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.common.ExileOpponentsCardFromExileToGraveyardCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -69,7 +59,8 @@ public class WastelandStrangler extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // When Wasteland Strangler enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, target creature gets -3/-3 until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new WastelandStranglerEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DoIfCostPaid(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ExileOpponentsCardFromExileToGraveyardCost(true)), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -81,45 +72,5 @@ public class WastelandStrangler extends CardImpl {
     @Override
     public WastelandStrangler copy() {
         return new WastelandStrangler(this);
-    }
-}
-
-class WastelandStranglerEffect extends OneShotEffect {
-
-    private final static FilterCard filter = new FilterCard("card an opponent owns from exile");
-
-    static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
-    }
-
-    public WastelandStranglerEffect() {
-        super(Outcome.Discard);
-        this.staticText = "you may put a card an opponent owns from exile into that player's graveyard. If you do, target creature gets -3/-3 until end of turn.";
-    }
-
-    public WastelandStranglerEffect(final WastelandStranglerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WastelandStranglerEffect copy() {
-        return new WastelandStranglerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInExile(1, 1, filter, null);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Cards cardsToGraveyard = new CardsImpl(target.getTargets());
-                    controller.moveCards(cardsToGraveyard, null, Zone.GRAVEYARD, source, game);
-                    game.addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), source);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

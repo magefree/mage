@@ -29,23 +29,13 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.common.ExileOpponentsCardFromExileToGraveyardCost;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInExile;
 
 /**
  *
@@ -62,7 +52,8 @@ public class RuinProcessor extends CardImpl {
         this.toughness = new MageInt(8);
 
         // When you cast Ruin Processor, you may put a card an opponent owns from exile into that player's graveyard. If you do, you gain 5 life.
-        this.addAbility(new CastSourceTriggeredAbility(new RuinProcessorEffect()));
+        this.addAbility(new CastSourceTriggeredAbility(
+                new DoIfCostPaid(new GainLifeEffect(5), new ExileOpponentsCardFromExileToGraveyardCost(true)), true));
 
     }
 
@@ -73,46 +64,5 @@ public class RuinProcessor extends CardImpl {
     @Override
     public RuinProcessor copy() {
         return new RuinProcessor(this);
-    }
-}
-
-class RuinProcessorEffect extends OneShotEffect {
-
-    private final static FilterCard filter = new FilterCard("card an opponent owns from exile");
-
-    static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
-    }
-
-    public RuinProcessorEffect() {
-        super(Outcome.Discard);
-        this.staticText = "you may put a card an opponent owns from exile into that player's graveyard. If you do, you gain 5 life";
-    }
-
-    public RuinProcessorEffect(final RuinProcessorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RuinProcessorEffect copy() {
-        return new RuinProcessorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInExile(1, 1, filter, null);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Cards cardsToGraveyard = new CardsImpl(target.getTargets());
-                    controller.moveCards(cardsToGraveyard, null, Zone.GRAVEYARD, source, game);
-                    controller.gainLife(5, game);
-                    return true;
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

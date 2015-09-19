@@ -30,6 +30,7 @@ package mage.sets.battleforzendikar;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -53,9 +54,11 @@ public class IncubatorDrone extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
-        
+
         // Whenever Incubator Drone enters the battlefield, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziScionToken())));
+        Effect effect = new CreateTokenEffect(new EldraziScionToken());
+        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {1} to your mana pool.\"");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
     public IncubatorDrone(final IncubatorDrone card) {
