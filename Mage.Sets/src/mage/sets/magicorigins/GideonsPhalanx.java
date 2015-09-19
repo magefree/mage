@@ -28,7 +28,6 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -37,13 +36,12 @@ import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KnightToken;
 
 /**
  *
@@ -56,7 +54,7 @@ public class GideonsPhalanx extends CardImpl {
         this.expansionSetCode = "ORI";
 
         // Put four 2/2 white Knight creature tokens with vigilance onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GideonsPhalanxKnightToken(), 4));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(), 4));
 
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
         Effect effect = new ConditionalOneShotEffect(
@@ -73,19 +71,5 @@ public class GideonsPhalanx extends CardImpl {
     @Override
     public GideonsPhalanx copy() {
         return new GideonsPhalanx(this);
-    }
-}
-
-class GideonsPhalanxKnightToken extends Token {
-
-    public GideonsPhalanxKnightToken() {
-        super("Knight", "2/2 white Knight creature tokens with vigilance");
-        this.setOriginalExpansionSetCode("ORI");
-        cardType.add(CardType.CREATURE);
-        color.setColor(ObjectColor.WHITE);
-        subtype.add("Knight");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(VigilanceAbility.getInstance());
     }
 }

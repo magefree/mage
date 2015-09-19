@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SoldierToken;
 
 /**
  *
@@ -55,7 +55,7 @@ public class EvangelOfHeliod extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Evangel of Heliod enters the battlefield, put a number of 1/1 white Soldier creature tokens onto the battlefield equal to your devotion to white.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EvangelOfHeliodSoldierToken(), new DevotionCount(ColoredManaSymbol.W))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), new DevotionCount(ColoredManaSymbol.W))));
     }
 
     public EvangelOfHeliod(final EvangelOfHeliod card) {
@@ -66,18 +66,4 @@ public class EvangelOfHeliod extends CardImpl {
     public EvangelOfHeliod copy() {
         return new EvangelOfHeliod(this);
     }
-}
-
-class EvangelOfHeliodSoldierToken extends Token {
-
-    public EvangelOfHeliodSoldierToken() {
-        super("Soldier", "1/1 white Soldier creature tokens");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-
 }

@@ -29,13 +29,12 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.InsectInfectToken;
 
 /**
  *
@@ -48,7 +47,7 @@ public class CarrionCall extends CardImpl {
         this.expansionSetCode = "SOM";
 
         // Put two 1/1 green Insect creature tokens with infect onto the battlefield. (They deal damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new CarrionCallInsectToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectInfectToken(), 2));
     }
 
     public CarrionCall (final CarrionCall card) {
@@ -60,19 +59,3 @@ public class CarrionCall extends CardImpl {
         return new CarrionCall(this);
     }
 }
-
-class CarrionCallInsectToken extends Token {
-    
-    public CarrionCallInsectToken() {
-        super("Insect", "1/1 green Insect creature tokens with infect");
-        setOriginalExpansionSetCode("SOM");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Insect");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        
-        addAbility(InfectAbility.getInstance());
-    }
-}
-    
