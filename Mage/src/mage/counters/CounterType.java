@@ -94,7 +94,6 @@ public enum CounterType {
     TOWER("tower"),
     VELOCITY("velocity"),
     VERSE("verse"),
-    VILE("vile"),
     VITALITY("vitality"),
     WISH("wish");
 
