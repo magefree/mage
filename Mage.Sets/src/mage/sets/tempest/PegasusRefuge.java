@@ -25,43 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.constants.Zone;
 import mage.game.permanent.token.PegasusToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PegasusStampede extends CardImpl {
+public class PegasusRefuge extends CardImpl {
 
-    public PegasusStampede(UUID ownerId) {
-        super(ownerId, 14, "Pegasus Stampede", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "EXO";
+    public PegasusRefuge(UUID ownerId) {
+        super(ownerId, 247, "Pegasus Refuge", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
+        this.expansionSetCode = "TMP";
 
-        // Buyback-Sacrifice a land.
-        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(1,1, new FilterControlledLandPermanent(), true))));
-
-        // Put a 1/1 white Pegasus creature token with flying onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken()));
+        // {2}, Discard a card: Put a 1/1 white Pegasus creature token with flying onto the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PegasusToken()), new ManaCostsImpl("{2}"));
+        ability.addCost(new DiscardCardCost());
+        this.addAbility(ability);
     }
 
-    public PegasusStampede(final PegasusStampede card) {
+    public PegasusRefuge(final PegasusRefuge card) {
         super(card);
     }
 
     @Override
-    public PegasusStampede copy() {
-        return new PegasusStampede(this);
+    public PegasusRefuge copy() {
+        return new PegasusRefuge(this);
     }
 }
