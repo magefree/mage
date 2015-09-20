@@ -28,48 +28,38 @@
 package mage.sets.thedark;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.DynamicManaAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author Luna Skyrise
+ * @author LoneFox
  */
-public class CityOfShadows extends CardImpl {
+public class Drowned extends CardImpl {
 
-    public CityOfShadows(UUID ownerId) {
-        super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public Drowned(UUID ownerId) {
+        super(ownerId, 23, "Drowned", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "DRK";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
-        this.addAbility(ability);
-
-        // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
-                "Add {X} to your mana pool, where X is the number of storage counters on {this}");
-        this.addAbility(ability);
+        // {B}: Regenerate Drowned.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public CityOfShadows(final CityOfShadows card) {
+    public Drowned(final Drowned card) {
         super(card);
     }
 
     @Override
-    public CityOfShadows copy() {
-        return new CityOfShadows(this);
+    public Drowned copy() {
+        return new Drowned(this);
     }
 }

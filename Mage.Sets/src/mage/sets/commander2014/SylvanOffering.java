@@ -41,6 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.SpiritWhiteToken;
+import mage.game.permanent.token.ElfToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
@@ -149,28 +150,13 @@ class SylvanOfferingEffect2 extends OneShotEffect {
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
                 int xValue = source.getManaCostsToPay().getX();
-                Effect effect = new CreateTokenTargetEffect(new SylvanOfferingElfWarriorToken(), xValue);
+                Effect effect = new CreateTokenTargetEffect(new ElfToken(), xValue);
                 effect.setTargetPointer(new FixedTarget(opponent.getId()));
                 effect.apply(game, source);
-                new CreateTokenEffect(new SylvanOfferingElfWarriorToken(), xValue).apply(game, source);
+                new CreateTokenEffect(new ElfToken(), xValue).apply(game, source);
                 return true;
             }
         }
         return false;
-    }
-}
-
-class SylvanOfferingElfWarriorToken extends Token {
-
-    public SylvanOfferingElfWarriorToken() {
-        super("Elf Warrior", "1/1 green Elf Warrior creature token");
-        setOriginalExpansionSetCode("C14");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Elf");
-        subtype.add("Warrior");
-        color.setGreen(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
     }
 }

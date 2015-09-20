@@ -84,7 +84,7 @@ public class DanceOfMany extends CardImpl {
         // When Dance of Many leaves the battlefield, exile the token.
         // When the token leaves the battlefield, sacrifice Dance of Many.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new DanceOfManyExileTokenEffect(), false);
-        ability2.addEffect(new InfoEffect("When the token leaves the battlfield, sacrifice {this}"));
+        ability2.addEffect(new InfoEffect("When the token leaves the battlefield, sacrifice {this}"));
         this.addAbility(ability2);
 
         // At the beginning of your upkeep, sacrifice Dance of Many unless you pay {U}{U}.

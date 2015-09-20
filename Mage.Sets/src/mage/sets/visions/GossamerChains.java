@@ -25,51 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.visions;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.DynamicManaAbility;
+import mage.abilities.costs.common.ReturnToHandSourceCost;
+import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.UnblockedPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Luna Skyrise
+ * @author LoneFox
  */
-public class CityOfShadows extends CardImpl {
+public class GossamerChains extends CardImpl {
 
-    public CityOfShadows(UUID ownerId) {
-        super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DRK";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creature");
 
-        // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
-        this.addAbility(ability);
+    static {
+        filter.add(new UnblockedPredicate());
+    }
 
-        // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
-                "Add {X} to your mana pool, where X is the number of storage counters on {this}");
+    public GossamerChains(UUID ownerId) {
+        super(ownerId, 106, "Gossamer Chains", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
+        this.expansionSetCode = "VIS";
+
+        // Return Gossamer Chains to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageByTargetEffect(Duration.EndOfTurn, true), new ReturnToHandSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    public CityOfShadows(final CityOfShadows card) {
+    public GossamerChains(final GossamerChains card) {
         super(card);
     }
 
     @Override
-    public CityOfShadows copy() {
-        return new CityOfShadows(this);
+    public GossamerChains copy() {
+        return new GossamerChains(this);
     }
 }

@@ -48,7 +48,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -56,14 +56,14 @@ import mage.target.common.TargetControlledPermanent;
  * @author LevelX2
  */
 public class ThopterSquadron extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Thopter");
-    
+
     static {
         filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate("Thopter"));
     }
-    
+
     public ThopterSquadron(UUID ownerId) {
         super(ownerId, 286, "Thopter Squadron", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.expansionSetCode = "VMA";
@@ -75,16 +75,16 @@ public class ThopterSquadron extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Thopter Squadron enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
-        
+
         // {1}, Remove a +1/+1 counter from Thopter Squadron: Put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield. Activate this ability only any time you could cast a sorcery.
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterSquadronThopterToken(), 1), new GenericManaCost(1));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken(), 1), new GenericManaCost(1));
         firstAbility.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(firstAbility);
-        
+
         // {1}, Sacrifice another Thopter: Put a +1/+1 counter on Thopter Squadron. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        
+
     }
 
     public ThopterSquadron(final ThopterSquadron card) {
@@ -95,17 +95,4 @@ public class ThopterSquadron extends CardImpl {
     public ThopterSquadron copy() {
         return new ThopterSquadron(this);
     }
-}
-
-class ThopterSquadronThopterToken extends Token {
-    public ThopterSquadronThopterToken() {
-        super("Thopter", "1/1 colorless Thopter artifact creature token with flying");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
 }

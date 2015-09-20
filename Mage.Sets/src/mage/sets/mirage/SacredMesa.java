@@ -35,7 +35,6 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -43,7 +42,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PegasusToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -51,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  * @author emerald000
  */
 public class SacredMesa extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pegasus");
     static {
         filter.add(new SubtypePredicate("Pegasus"));
@@ -61,12 +60,11 @@ public class SacredMesa extends CardImpl {
         super(ownerId, 241, "Sacred Mesa", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "MIR";
 
-
         // At the beginning of your upkeep, sacrifice Sacred Mesa unless you sacrifice a Pegasus.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter))), TargetController.YOU, false));
-        
+
         // {1}{W}: Put a 1/1 white Pegasus creature token with flying onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SacredMesaPegasusToken()), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PegasusToken()), new ManaCostsImpl<>("{1}{W}")));
     }
 
     public SacredMesa(final SacredMesa card) {
@@ -76,18 +74,5 @@ public class SacredMesa extends CardImpl {
     @Override
     public SacredMesa copy() {
         return new SacredMesa(this);
-    }
-}
-
-class SacredMesaPegasusToken extends Token {
-    
-    SacredMesaPegasusToken() {
-        super("Pegasus", "1/1 white Pegasus creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Pegasus");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
     }
 }

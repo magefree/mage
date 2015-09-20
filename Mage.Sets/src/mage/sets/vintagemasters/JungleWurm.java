@@ -25,41 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.ReboundAbility;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.KorSoldierToken;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class NomadsAssembly extends CardImpl {
+public class JungleWurm extends mage.sets.mirage.JungleWurm {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
-    public NomadsAssembly(UUID ownerId) {
-        super(ownerId, 39, "Nomads' Assembly", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "ROE";
-
-
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), new PermanentsOnBattlefieldCount(filter)));
-        this.addAbility(new ReboundAbility());
+    public JungleWurm(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 217;
+        this.expansionSetCode = "VMA";
     }
 
-    public NomadsAssembly(final NomadsAssembly card) {
+    public JungleWurm(final JungleWurm card) {
         super(card);
     }
 
     @Override
-    public NomadsAssembly copy() {
-        return new NomadsAssembly(this);
+    public JungleWurm copy() {
+        return new JungleWurm(this);
     }
 }
