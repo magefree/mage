@@ -28,18 +28,12 @@
 package mage.sets.torment;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.Ability;
-import mage.game.Game;
-
 /**
  *
  * @author tomd1990
@@ -54,7 +48,7 @@ public class SonicSeizure extends CardImpl {
         this.getSpellAbility().addCost(new DiscardCardCost(true));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Sonic Seizure deals 3 damage to target creature or player.        
-        this.getSpellAbility().addEffect(new SonicSeizureEffect());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 
     public SonicSeizure(final SonicSeizure card) {
@@ -67,36 +61,3 @@ public class SonicSeizure extends CardImpl {
     }
 }
 
-
-class SonicSeizureEffect extends OneShotEffect {
-    
-    public SonicSeizureEffect() {
-        super(Outcome.Damage);
-        staticText = "{source} deals 3 damage to target creature or player.";
-    }
-        
-    public SonicSeizureEffect(final SonicSeizureEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public SonicSeizureEffect copy() {
-        return new SonicSeizureEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObject(game);
-        if(sourceObject != null) {
-            DiscardCardCost cost = (DiscardCardCost) source.getCosts().get(0);
-            if (cost != null) {
-                DamageTargetEffect dmg = new DamageTargetEffect(3);
-                dmg.apply(game, source);
-            }
-            return true;
-        }
-        return false;
-    }
-    
-    
-}
