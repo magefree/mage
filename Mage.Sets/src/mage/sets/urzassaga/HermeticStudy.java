@@ -25,51 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileTargetCost;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.DynamicManaAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
-
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 /**
  *
- * @author Luna Skyrise
+ * @author LoneFox
  */
-public class CityOfShadows extends CardImpl {
+public class HermeticStudy extends CardImpl {
 
-    public CityOfShadows(UUID ownerId) {
-        super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DRK";
+    public HermeticStudy(UUID ownerId) {
+        super(ownerId, 78, "Hermetic Study", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Aura");
 
-        // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
-        // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
-                "Add {X} to your mana pool, where X is the number of storage counters on {this}");
-        this.addAbility(ability);
+        // Enchanted creature has "{tap}: This creature deals 1 damage to target creature or player."
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield,
+            "Enchanted creature has \"{T}: This creature deals 1 damage to target creature or player.\"")));
     }
 
-    public CityOfShadows(final CityOfShadows card) {
+    public HermeticStudy(final HermeticStudy card) {
         super(card);
     }
 
     @Override
-    public CityOfShadows copy() {
-        return new CityOfShadows(this);
+    public HermeticStudy copy() {
+        return new HermeticStudy(this);
     }
 }

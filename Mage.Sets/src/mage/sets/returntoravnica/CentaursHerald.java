@@ -29,8 +29,6 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,8 +37,10 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CentaurToken;
 
 /**
  *
@@ -58,7 +58,7 @@ public class CentaursHerald extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}, Sacrifice Centaur's Herald: Put a 3/3 green Centaur creature token onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaursHeraldToken()), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken()), new ManaCostsImpl("{2}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -70,17 +70,5 @@ public class CentaursHerald extends CardImpl {
     @Override
     public CentaursHerald copy() {
         return new CentaursHerald(this);
-    }
-    
-    private class CentaursHeraldToken extends Token {
-
-        public CentaursHeraldToken() {
-            super("Centaur", "3/3 green Centaur creature token");
-            cardType.add(CardType.CREATURE);
-            color.setGreen(true);
-            subtype.add("Centaur");
-            power = new MageInt(3);
-            toughness = new MageInt(3);
-        }
     }
 }

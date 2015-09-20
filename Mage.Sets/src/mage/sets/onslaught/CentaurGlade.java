@@ -28,7 +28,6 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CentaurToken;
 
 /**
  *
@@ -59,16 +58,5 @@ public class CentaurGlade extends CardImpl {
     @Override
     public CentaurGlade copy() {
         return new CentaurGlade(this);
-    }
-}
-
-class CentaurToken extends Token {
-    CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
     }
 }

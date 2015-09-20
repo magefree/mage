@@ -28,13 +28,12 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.game.permanent.token.GoblinToken;
 
 /**
  *
@@ -45,7 +44,6 @@ public class GoblinOffensive extends CardImpl {
     public GoblinOffensive(UUID ownerId) {
         super(ownerId, 192, "Goblin Offensive", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{R}{R}");
         this.expansionSetCode = "USG";
-
 
         // Put X 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), new ManacostVariableValue()));
@@ -58,16 +56,5 @@ public class GoblinOffensive extends CardImpl {
     @Override
     public GoblinOffensive copy() {
         return new GoblinOffensive(this);
-    }
-}
-
-class GoblinToken extends Token {
-    public GoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Goblin");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

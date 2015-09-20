@@ -28,48 +28,40 @@
 package mage.sets.thedark;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.DynamicManaAbility;
+import mage.ObjectColor;
+import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author Luna Skyrise
+ * @author LoneFox
  */
-public class CityOfShadows extends CardImpl {
+public class Riptide extends CardImpl {
 
-    public CityOfShadows(UUID ownerId) {
-        super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DRK";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures");
 
-        // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
-        this.addAbility(ability);
-
-        // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
-                "Add {X} to your mana pool, where X is the number of storage counters on {this}");
-        this.addAbility(ability);
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public CityOfShadows(final CityOfShadows card) {
+    public Riptide(UUID ownerId) {
+        super(ownerId, 34, "Riptide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "DRK";
+
+        // Tap all blue creatures.
+        this.getSpellAbility().addEffect(new TapAllEffect(filter));
+    }
+
+    public Riptide(final Riptide card) {
         super(card);
     }
 
     @Override
-    public CityOfShadows copy() {
-        return new CityOfShadows(this);
+    public Riptide copy() {
+        return new Riptide(this);
     }
 }

@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.game.permanent.token.BeastToken;
 
 /**
  *
- * @author Luna Skyrise
+ * @author LoneFox
  */
-public class CityOfShadows extends CardImpl {
+public class MidsummerRevel extends CardImpl {
 
-    public CityOfShadows(UUID ownerId) {
-        super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DRK";
+    public MidsummerRevel(UUID ownerId) {
+        super(ownerId, 268, "Midsummer Revel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
+        this.expansionSetCode = "USG";
 
-        // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
-        this.addAbility(ability);
-
-        // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
-                "Add {X} to your mana pool, where X is the number of storage counters on {this}");
+        // At the beginning of your upkeep, you may put a verse counter on Midsummer Revel.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+            new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+        // {G}, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto the battlefield, where X is the number of verse counters on Midsummer Revel.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken(),
+            new CountersCount(CounterType.VERSE)), new ManaCostsImpl("{G}"));
+        ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
-    public CityOfShadows(final CityOfShadows card) {
+    public MidsummerRevel(final MidsummerRevel card) {
         super(card);
     }
 
     @Override
-    public CityOfShadows copy() {
-        return new CityOfShadows(this);
+    public MidsummerRevel copy() {
+        return new MidsummerRevel(this);
     }
 }

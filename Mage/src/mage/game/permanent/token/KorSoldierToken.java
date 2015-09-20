@@ -13,7 +13,8 @@
 *
 * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
 * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com O
+R
 * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
 * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
 * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
@@ -26,44 +27,25 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.game.permanent.token;
 
-import java.util.UUID;
+import java.util.Arrays;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.KickerAbility;
-import mage.cards.CardImpl;
-import mage.game.permanent.token.KorSoldierToken;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class ConquerorsPledge extends CardImpl {
+public class KorSoldierToken extends Token {
 
-    public ConquerorsPledge(UUID ownerId) {
-        super(ownerId, 8, "Conqueror's Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
-        this.expansionSetCode = "ZEN";
-
-
-        this.addAbility(new KickerAbility("{6}"));
-
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new KorSoldierToken(), 12),
-                new CreateTokenEffect(new KorSoldierToken(), 6), KickedCondition.getInstance(),
-                "Put six 1/1 white Kor Soldier creature tokens onto the battlefield. If {this} was kicked, put twelve of those tokens onto the battlefield instead"));
-    }
-
-    public ConquerorsPledge(final ConquerorsPledge card) {
-        super(card);
-    }
-
-    @Override
-    public ConquerorsPledge copy() {
-        return new ConquerorsPledge(this);
-    }
-
+    public KorSoldierToken() {
+        super("Kor Soldier", "1/1 white Kor Soldier creature token");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Kor");
+        subtype.add("Soldier");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        availableImageSetCodes.addAll(Arrays.asList("C14", "ZEN"));                                                                                               }
 }

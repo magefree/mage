@@ -49,6 +49,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.SoldierToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
@@ -175,23 +176,9 @@ class AkroanHorseCreateTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            Token token = new AkroanHorseSoldierToken();
+            Token token = new SoldierToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), opponentId);
         }
         return true;
     }
-}
-
-class AkroanHorseSoldierToken extends Token {
-
-    public AkroanHorseSoldierToken() {
-        super("Soldier", "1/1 white Soldier creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-
 }
