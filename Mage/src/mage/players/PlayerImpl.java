@@ -2934,6 +2934,18 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             } else {
                 Card card = game.getCard(cardId);
+                if (card == null) {
+                    Spell spell = game.getState().getStack().getSpell(cardId);
+                    if (spell != null) {
+                        if (!spell.isCopy()) {
+                            card = spell.getCard();
+                        } else {
+                            // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
+                            game.getStack().remove(spell);
+                            game.informPlayers(spell.getLogName() + " was removed from the stack");
+                        }
+                    }
+                }
                 if (card != null) {
                     cardList.add(card);
                 }
@@ -2973,6 +2985,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             case HAND:
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
+                    if (fromZone == Zone.STACK) {
+                        // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
+                        Spell spell = game.getStack().getSpell(card.getId());
+                        if (spell != null) {
+                            game.getStack().remove(spell);
+                        }
+                    }
                     boolean hideCard = fromZone.equals(Zone.LIBRARY)
                             || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
                     if (moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard)) {
