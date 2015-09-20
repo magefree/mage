@@ -36,7 +36,10 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.remote.Connection;
@@ -56,6 +59,7 @@ public class MythicspoilerComSource implements CardImageSource {
     private static CardImageSource instance;
     private static Map<String, String> setsAliases;
     private static Map<String, String> cardNameAliases;
+    private static Map<String, Set<String>> cardNameAliasesStart;
     private final Map<String, Map<String, String>> sets;
 
     public static CardImageSource getInstance() {
@@ -71,8 +75,9 @@ public class MythicspoilerComSource implements CardImageSource {
     }
 
     public MythicspoilerComSource() {
-        sets = new HashMap<>();
+        sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();
+        setsAliases.put("exp", "bfz");
         cardNameAliases = new HashMap<>();
         // set+wrong name from web side => correct card name
         cardNameAliases.put("MM2-otherwordlyjourney", "otherworldlyjourney");
@@ -81,12 +86,21 @@ public class MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("THS-soldierofpantheon", "soldierofthepantheon");
         cardNameAliases.put("THS-vulpinegolaith", "vulpinegoliath");
         cardNameAliases.put("ORI-kothopedhoarderofsouls", "kothophedsoulhoarder");
+        cardNameAliases.put("BFZ-unisonstrike", "tandemtactics");
+        cardNameAliases.put("BFZ-eldrazidevastator", "eldrazidevastator");
+        cardNameAliases.put("BFZ-kozliekschanneler", "kozilekschanneler");
+
+        cardNameAliasesStart = new HashMap<>();
+        HashSet<String> names = new HashSet<>();
+        names.add("eldrazidevastator.jpg");
+        cardNameAliasesStart.put("BFZ", names);
     }
 
     private Map<String, String> getSetLinks(String cardSet) {
         Map<String, String> setLinks = new HashMap<>();
         try {
             String setNames = setsAliases.get(cardSet.toLowerCase());
+            Set<String> aliasesStart = cardNameAliasesStart.get(cardSet);
             if (setNames == null) {
                 setNames = cardSet.toLowerCase();
             }
@@ -119,33 +133,40 @@ public class MythicspoilerComSource implements CardImageSource {
                 }
 
                 Elements cardsImages = doc.select("img[src^=cards/]"); // starts with cards/
+                for (String text : aliasesStart) {
+                    cardsImages.addAll(doc.select("img[src^=" + text + "]"));
+                }
                 if (cardsImages.isEmpty()) {
                     break;
                 }
 
                 for (Element cardsImage : cardsImages) {
                     String cardLink = cardsImage.attr("src");
+                    String cardName = null;
                     if (cardLink.startsWith("cards/") && cardLink.endsWith(".jpg")) {
-                        String cardName = cardLink.substring(6, cardLink.length() - 4);
-                        if (cardName != null && !cardName.isEmpty()) {
-                            if (cardNameAliases.containsKey(cardSet + "-" + cardName)) {
-                                cardName = cardNameAliases.get(cardSet + "-" + cardName);
-                            }
-                            if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
-                                if (!cardName.startsWith("forest")
-                                        && !cardName.startsWith("swamp")
-                                        && !cardName.startsWith("mountain")
-                                        && !cardName.startsWith("island")
-                                        && !cardName.startsWith("plains")) {
-                                    cardName = cardName.substring(0, cardName.length() - 1);
-                                }
-                            }
-                            setLinks.put(cardName, baseUrl + cardLink);
-                        }
+                        cardName = cardLink.substring(6, cardLink.length() - 4);
+                    } else if (aliasesStart.contains(cardLink)) {
+                        cardName = cardLink.substring(0, cardLink.length() - 4);;
                     }
-
+                    if (cardName != null && !cardName.isEmpty()) {
+                        if (cardNameAliases.containsKey(cardSet + "-" + cardName)) {
+                            cardName = cardNameAliases.get(cardSet + "-" + cardName);
+                        }
+                        if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
+                            if (!cardName.startsWith("forest")
+                                    && !cardName.startsWith("swamp")
+                                    && !cardName.startsWith("mountain")
+                                    && !cardName.startsWith("island")
+                                    && !cardName.startsWith("plains")) {
+                                cardName = cardName.substring(0, cardName.length() - 1);
+                            }
+                        }
+                        setLinks.put(cardName, baseUrl + cardLink);
+                    }
                 }
+
             }
+
         } catch (IOException ex) {
             System.out.println("Exception when parsing the mythicspoiler page: " + ex.getMessage());
         }

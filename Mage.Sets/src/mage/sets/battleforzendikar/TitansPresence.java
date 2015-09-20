@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TitansPresence extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card from your hand to reveal");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card from your hand");
 
     static {
         filter.add(new ColorlessPredicate());
