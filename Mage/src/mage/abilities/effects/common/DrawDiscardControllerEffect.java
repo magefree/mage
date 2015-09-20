@@ -57,10 +57,12 @@ public class DrawDiscardControllerEffect extends OneShotEffect {
         this.cardsToDraw = cardsToDraw;
         this.cardsToDiscard = cardsToDiscard;
         this.optional = optional;
-        staticText = new StringBuilder("Draw ")
+        staticText = new StringBuilder(optional ? "you may " : "")
+                .append("draw ")
                 .append(cardsToDraw == 1 ? "a" : CardUtil.numberToText(cardsToDraw))
                 .append(" card").append(cardsToDraw == 1 ? "" : "s")
-                .append(", then discard ")
+                .append(optional ? ", if you do" : ", then")
+                .append(" discard ")
                 .append(cardsToDiscard == 1 ? "a" : CardUtil.numberToText(cardsToDiscard))
                 .append(" card").append(cardsToDiscard == 1 ? "" : "s").toString();
     }

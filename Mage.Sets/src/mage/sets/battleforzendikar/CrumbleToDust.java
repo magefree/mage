@@ -28,6 +28,7 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetAndSearchGraveyardHandLibraryEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -46,11 +47,13 @@ public class CrumbleToDust extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // Devoid
-        this.addAbility(new DevoidAbility(this.color));
+        Ability ability = new DevoidAbility(this.color);
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
         // Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addTarget(new TargetNonBasicLandPermanent());
-        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","any number of cards with the same name as that land"));
+        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's", "any number of cards with the same name as that land"));
     }
 
     public CrumbleToDust(final CrumbleToDust card) {

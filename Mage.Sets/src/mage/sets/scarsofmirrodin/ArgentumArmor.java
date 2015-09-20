@@ -25,23 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 
 /**
@@ -50,18 +48,24 @@ import mage.target.TargetPermanent;
  */
 public class ArgentumArmor extends CardImpl {
 
-    public ArgentumArmor (UUID ownerId) {
+    public ArgentumArmor(UUID ownerId) {
         super(ownerId, 137, "Argentum Armor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
+
+        // Equipped creature gets +6/+6.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(6, 6)));
+
+        // Whenever equipped creature attacks, destroy target permanent.
         Ability ability = new AttacksAttachedTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
+
+        // Equip {6}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(6)));
     }
 
-    public ArgentumArmor (final ArgentumArmor card) {
+    public ArgentumArmor(final ArgentumArmor card) {
         super(card);
     }
 

@@ -29,25 +29,15 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.common.ExileOpponentsCardFromExileToGraveyardCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInExile;
 
 /**
  *
@@ -67,7 +57,8 @@ public class MindRaker extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // When Mind Raker enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, each opponent discards a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new MindRakerEffect(), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new DoIfCostPaid(new DiscardEachPlayerEffect(TargetController.OPPONENT), new ExileOpponentsCardFromExileToGraveyardCost(true)), false));
     }
 
     public MindRaker(final MindRaker card) {
@@ -77,45 +68,5 @@ public class MindRaker extends CardImpl {
     @Override
     public MindRaker copy() {
         return new MindRaker(this);
-    }
-}
-
-class MindRakerEffect extends OneShotEffect {
-
-    private final static FilterCard filter = new FilterCard("card an opponent owns from exile");
-
-    static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
-    }
-
-    public MindRakerEffect() {
-        super(Outcome.Discard);
-        this.staticText = "you may put a card an opponent owns from exile into that player's graveyard. If you do, each opponent discards a card.";
-    }
-
-    public MindRakerEffect(final MindRakerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MindRakerEffect copy() {
-        return new MindRakerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInExile(1, 1, filter, null);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Cards cardsToGraveyard = new CardsImpl(target.getTargets());
-                    controller.moveCards(cardsToGraveyard, null, Zone.GRAVEYARD, source, game);
-                    return new DiscardEachPlayerEffect(TargetController.OPPONENT).apply(game, source);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

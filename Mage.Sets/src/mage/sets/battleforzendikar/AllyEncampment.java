@@ -43,7 +43,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorlessPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -55,7 +55,7 @@ public class AllyEncampment extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Ally spell");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(new SubtypePredicate("Ally"));
     }
 
     public AllyEncampment(UUID ownerId) {

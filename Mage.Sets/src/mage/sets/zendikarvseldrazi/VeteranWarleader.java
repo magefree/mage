@@ -64,8 +64,8 @@ import mage.target.common.TargetControlledPermanent;
  * @author fireshoes
  */
 public class VeteranWarleader extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another untapped Ally");
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another untapped Ally you control");
 
     static {
         filter.add(new AnotherPredicate());
@@ -84,9 +84,9 @@ public class VeteranWarleader extends CardImpl {
         // Veteran Warleader's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(
                 new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), Duration.EndOfGame)));
-        
+
         // Tap another untapped Ally you control: Veteran Warleader gains your choice of first strike, vigilance, or trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new VeteranWarleaderEffect(), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }
 
@@ -101,6 +101,7 @@ public class VeteranWarleader extends CardImpl {
 }
 
 class VeteranWarleaderEffect extends OneShotEffect {
+
     VeteranWarleaderEffect() {
         super(Outcome.AddAbility);
         staticText = "{this} gains your choice of first strike, vigilance, or trample until end of turn";

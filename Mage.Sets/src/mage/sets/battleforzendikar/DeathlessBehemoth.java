@@ -49,6 +49,7 @@ import mage.target.common.TargetControlledPermanent;
 public class DeathlessBehemoth extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("two Eldrazi Scions");
+
     static {
         filter.add(Predicates.and(
                 new SubtypePredicate("Eldrazi"),
@@ -56,7 +57,7 @@ public class DeathlessBehemoth extends CardImpl {
     }
 
     public DeathlessBehemoth(UUID ownerId) {
-        super(ownerId, 5, "Deathless Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}");
+        super(ownerId, 5, "Deathless Behemoth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Eldrazi");
         this.power = new MageInt(6);

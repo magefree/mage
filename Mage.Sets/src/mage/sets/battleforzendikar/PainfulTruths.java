@@ -29,6 +29,7 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -46,10 +47,14 @@ public class PainfulTruths extends CardImpl {
         super(ownerId, 120, "Painful Truths", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "BFZ";
 
-        // <i>Converge</i> - Draw X cards and lose X life, where X is the number of colors of mana spent to cast Painful Truths.
+        // <i>Converge</i> - You draw X cards and lose X life, where X is the number of colors of mana spent to cast Painful Truths.
         getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
-        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance()));
-        getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance()));
+        Effect effect = new DrawCardSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
+        effect.setText("You draw X cards");
+        getSpellAbility().addEffect(effect);
+        effect = new LoseLifeSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
+        effect.setText("and lose X life, where X is the number of colors of mana spent to cast {this}");
+        getSpellAbility().addEffect(effect);
     }
 
     public PainfulTruths(final PainfulTruths card) {
