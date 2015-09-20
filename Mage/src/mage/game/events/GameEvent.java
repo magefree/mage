@@ -154,6 +154,12 @@ public class GameEvent implements Serializable {
         COUNTER,
         COUNTERED,
         DECLARING_ATTACKERS, DECLARED_ATTACKERS,
+        /* DECLARE_ATTACKER
+         REPLACE EVENT - can be used to replace attack declaration
+         targetId    id of the defending player or planeswalker attacked
+         sourceId    id of the attacking creature
+         playerId    player defining the attacking creatures
+         */
         DECLARE_ATTACKER,
         /* ATTACKER_DECLARED
          targetId    id of the defending player or planeswalker attacked
