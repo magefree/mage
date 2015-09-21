@@ -2927,7 +2927,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         Set<Card> cardList = new HashSet<>();
         for (UUID cardId : cards) {
             fromZone = game.getState().getZone(cardId);
-            if (fromZone.equals(Zone.BATTLEFIELD)) {
+            if (Zone.BATTLEFIELD.equals(fromZone)) {
                 Permanent permanent = game.getPermanent(cardId);
                 if (permanent != null) {
                     cardList.add(permanent);
