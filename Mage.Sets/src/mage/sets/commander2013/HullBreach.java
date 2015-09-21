@@ -38,7 +38,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetpointer.SecondTargetPointer;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -62,12 +62,11 @@ public class HullBreach extends CardImpl {
         this.getSpellAbility().addMode(mode);
         // or destroy target artifact and target enchantment.
         mode = new Mode();
-        Effect effect = new DestroyTargetEffect();
-        effect.setTargetPointer(new SecondTargetPointer());
+        Effect effect = new DestroyTargetEffect(false, true);
         effect.setText("destroy target artifact and target enchantment");
         mode.getEffects().add(effect);
         mode.getTargets().add(new TargetArtifactPermanent());
-        mode.getTargets().add(new TargetPermanent(new FilterEnchantmentPermanent()));
+        mode.getTargets().add(new TargetEnchantmentPermanent());
         this.getSpellAbility().addMode(mode);
 
     }
