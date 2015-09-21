@@ -55,7 +55,7 @@ public class MakindiPatrol extends CardImpl {
 
         // <i>Rally</i> — Whenever Makindi Patrol or another Ally enters the battlefield under your control, creatures you control gain vigilance until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")), false));
+                new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures")), false));
     }
 
     public MakindiPatrol(final MakindiPatrol card) {
