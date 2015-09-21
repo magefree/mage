@@ -28,8 +28,7 @@
 package mage.client.util;
 
 import java.util.Comparator;
-import java.util.List;
-import mage.ObjectColor;
+import mage.utils.CardUtil;
 import mage.view.CardView;
 
 /**
@@ -40,16 +39,7 @@ public class CardViewColorIdentityComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView o1, CardView o2) {
-        return sortValue(o1.getManaCost(), o1.getColor()) - sortValue(o2.getManaCost(), o2.getColor());
-    }
-
-    static public int sortValue(List<String> manaCost, ObjectColor color) {
-        int hash = 3;
-        hash = 23 * hash + (color.isWhite() || manaCost.contains("{W}") ? 1 : 0);
-        hash = 23 * hash + (color.isBlue() || manaCost.contains("{U}") ? 1 : 0);
-        hash = 23 * hash + (color.isBlack() || manaCost.contains("{B}") ? 1 : 0);
-        hash = 23 * hash + (color.isRed() || manaCost.contains("{R}") ? 1 : 0);
-        hash = 23 * hash + (color.isGreen() || manaCost.contains("{G}") ? 1 : 0);
-        return hash;
+        return CardUtil.getColorIdentitySortValue(o1.getManaCost(), o1.getColor(), o1.getRules())
+                - CardUtil.getColorIdentitySortValue(o2.getManaCost(), o2.getColor(), o2.getRules());
     }
 }
