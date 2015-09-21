@@ -25,58 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package org.mage.test.cards.abilities.oneshot.exile;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.game.permanent.token.Token;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Bitterblossom extends CardImpl {
+public class CelestialPurgeTest extends CardTestPlayerBase {
 
-    public Bitterblossom(UUID ownerId) {
-        super(ownerId, 58, "Bitterblossom", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "MOR";
-        this.subtype.add("Faerie");
+    /**
+     * I activated Celestial Purge trying to targeting a Bitterblossom but i
+     * couldn't so please fix that bug
+     */
+    @Test
+    public void testExileWorks() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // Exile target black or red permanent.
+        addCard(Zone.HAND, playerA, "Celestial Purge");
 
         // At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying onto the battlefield.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false);
-        ability.addEffect(new CreateTokenEffect(new FaerieToken(), 1));
-        this.addAbility(ability);
-    }
+        addCard(Zone.BATTLEFIELD, playerB, "Bitterblossom");
 
-    public Bitterblossom(final Bitterblossom card) {
-        super(card);
-    }
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Celestial Purge", "Bitterblossom");
 
-    @Override
-    public Bitterblossom copy() {
-        return new Bitterblossom(this);
-    }
-}
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
 
-class FaerieToken extends Token {
+        assertLife(playerA, 20);
+        assertLife(playerB, 19);
 
-    FaerieToken() {
-        super("Faerie Rogue", "1/1 black Faerie Rogue creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Faerie");
-        subtype.add("Rogue");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+        assertGraveyardCount(playerA, "Celestial Purge", 1);
+
+        assertExileCount("Bitterblossom", 1);
+        assertPermanentCount(playerB, "Faerie Rogue", 1);
+
     }
 }
