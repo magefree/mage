@@ -133,8 +133,10 @@ public class MythicspoilerComSource implements CardImageSource {
                 }
 
                 Elements cardsImages = doc.select("img[src^=cards/]"); // starts with cards/
-                for (String text : aliasesStart) {
-                    cardsImages.addAll(doc.select("img[src^=" + text + "]"));
+                if (!aliasesStart.isEmpty()) {
+                    for (String text : aliasesStart) {
+                        cardsImages.addAll(doc.select("img[src^=" + text + "]"));
+                    }
                 }
                 if (cardsImages.isEmpty()) {
                     break;
