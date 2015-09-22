@@ -28,7 +28,6 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -47,7 +46,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WolfToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -90,18 +89,5 @@ public class RaisedByWolves extends CardImpl {
     @Override
     public RaisedByWolves copy() {
         return new RaisedByWolves(this);
-    }
-}
-
-class WolfToken extends Token {
-
-    public WolfToken() {
-        super("Wolf", "2/2 green Wolf creature token");
-        this.setOriginalExpansionSetCode("BNG");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Wolf");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

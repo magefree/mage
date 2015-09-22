@@ -935,7 +935,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param step
      * @param player
      * @param cardName
-     * @param targetName
+     * @param targetName for modal spells add the mode to the name e.g.
+     * "mode=2SilvercoatLion^mode3=PillarfieldOx"
      * @param spellOnStack
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack) {

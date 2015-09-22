@@ -32,7 +32,7 @@ import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
@@ -58,7 +58,7 @@ public class InfuseWithTheElements extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // That creature gains trample until end of turn.
-        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("That creature gains trample until end of turn");
         this.getSpellAbility().addEffect(effect);
     }

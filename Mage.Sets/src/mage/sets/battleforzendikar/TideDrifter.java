@@ -39,7 +39,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -50,7 +49,6 @@ public class TideDrifter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other colorless creatures you control");
 
     static {
-        filter.add(new AnotherPredicate());
         filter.add(new ColorlessPredicate());
     }
 
@@ -65,7 +63,7 @@ public class TideDrifter extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // Other colorless creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
 
     }
 

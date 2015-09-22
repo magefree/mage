@@ -46,9 +46,8 @@ import mage.target.targetpointer.SecondTargetPointer;
 public class GripOfDesolation extends CardImpl {
 
     public GripOfDesolation(UUID ownerId) {
-        super(ownerId, 94, "Grip of Desolation", Rarity.UNCOMMON, new CardType[]{}, "{4}{B}{B}");
+        super(ownerId, 94, "Grip of Desolation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
         this.expansionSetCode = "BFZ";
-        this.supertype.add("Intant");
 
         // Devoid
         Ability ability = new DevoidAbility(this.color);

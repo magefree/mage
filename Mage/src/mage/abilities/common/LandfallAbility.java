@@ -44,6 +44,7 @@ import mage.target.targetpointer.FixedTarget;
 public class LandfallAbility extends TriggeredAbilityImpl {
 
     protected SetTargetPointer setTargetPointer;
+    protected Permanent triggeringLand;
 
     public LandfallAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, optional);
@@ -61,6 +62,7 @@ public class LandfallAbility extends TriggeredAbilityImpl {
     public LandfallAbility(final LandfallAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
+        this.triggeringLand = ability.triggeringLand;
     }
 
     @Override
@@ -74,6 +76,7 @@ public class LandfallAbility extends TriggeredAbilityImpl {
         if (permanent != null
                 && permanent.getCardType().contains(CardType.LAND)
                 && permanent.getControllerId().equals(this.controllerId)) {
+            triggeringLand = permanent;
             if (setTargetPointer.equals(SetTargetPointer.PERMANENT)) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent, game));
@@ -94,4 +97,7 @@ public class LandfallAbility extends TriggeredAbilityImpl {
         return new LandfallAbility(this);
     }
 
+    public Permanent getTriggeringPermanent() {
+        return triggeringLand;
+    }
 }

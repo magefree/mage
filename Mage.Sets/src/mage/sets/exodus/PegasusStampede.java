@@ -32,12 +32,11 @@ import mage.MageInt;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BuybackAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PegasusToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -52,7 +51,7 @@ public class PegasusStampede extends CardImpl {
 
         // Buyback-Sacrifice a land.
         this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(1,1, new FilterControlledLandPermanent(), true))));
-        
+
         // Put a 1/1 white Pegasus creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken()));
     }
@@ -64,18 +63,5 @@ public class PegasusStampede extends CardImpl {
     @Override
     public PegasusStampede copy() {
         return new PegasusStampede(this);
-    }
-}
-
-class PegasusToken extends Token {
-    
-    PegasusToken() {
-        super("Pegasus", "1/1 white Pegasus creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Pegasus");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
     }
 }

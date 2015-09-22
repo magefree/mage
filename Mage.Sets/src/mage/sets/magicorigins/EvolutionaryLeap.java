@@ -96,7 +96,7 @@ class EvolutionaryLeapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && controller.getLibrary().size() > 0) {        
+        if (controller != null && controller.getLibrary().size() > 0) {
             Cards cards = new CardsImpl();
             Library library = controller.getLibrary();
             Card card = null;
@@ -108,19 +108,24 @@ class EvolutionaryLeapEffect extends OneShotEffect {
             } while (library.size() > 0 && card != null && !filter.match(card, game));
             // reveal cards
             if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getName(), cards, game);
-            }
-            // put creature card in hand
-             controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
-            // remove it from revealed card list
-            cards.remove(card);
-            // Put the rest on the bottom of your library in a random order
-            while (cards.size() > 0) {
-                card = cards.getRandom(game);
-                if (card != null) {
+                controller.revealCards(sourceObject.getIdName(), cards, game);
+                if (filter.match(card, game)) {
+                    // put creature card in hand
+                    controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                    // remove it from revealed card list
                     cards.remove(card);
-                    controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, false, false);
                 }
+                // Put the rest on the bottom of your library in a random order
+                Cards randomOrder = new CardsImpl();
+                while (cards.size() > 0) {
+                    card = cards.getRandom(game);
+                    if (card != null) {
+                        cards.remove(card);
+                        randomOrder.add(card);
+                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, false, false);
+                    }
+                }
+                controller.putCardsOnBottomOfLibrary(randomOrder, game, source, false);
             }
             return true;
         }

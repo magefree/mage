@@ -43,6 +43,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.token.CitizenToken;
 import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.Token;
@@ -151,17 +152,6 @@ class CreateSelectedTokenEffect extends OneShotEffect {
         }
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
-    }
-}
-
-class CitizenToken extends Token {
-    public CitizenToken() {
-        super("Citizen", "1/1 white Citizen creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Citizen");
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }
 
