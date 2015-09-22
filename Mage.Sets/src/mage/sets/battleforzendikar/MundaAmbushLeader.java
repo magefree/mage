@@ -40,10 +40,12 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 
 /**
  *
@@ -79,7 +81,7 @@ public class MundaAmbushLeader extends CardImpl {
 
 class MundaAmbushLeaderEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("Ally cards");
+    private static final FilterCard filter = new FilterCard("Ally cards to reveal and put on top of your libraray");
 
     static {
         filter.add(new SubtypePredicate("Ally"));
@@ -107,12 +109,16 @@ class MundaAmbushLeaderEffect extends OneShotEffect {
             Cards allCards = new CardsImpl();
             allCards.addAll(controller.getLibrary().getTopCards(game, 4));
             controller.lookAtCards(sourceObject.getIdName(), allCards, game);
-            Cards allyCards = new CardsImpl();
-            allyCards.addAll(allCards.getCards(filter, source.getSourceId(), source.getControllerId(), game));
-            if (!allyCards.isEmpty()) {
-                controller.revealCards(sourceObject.getIdName(), allyCards, game, true);
-                allCards.removeAll(allyCards);
-                controller.putCardsOnTopOfLibrary(allyCards, game, source, true);
+            if (!allCards.isEmpty()) {
+                Cards cardsToReveal = new CardsImpl();
+                TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, new FilterCard("Ally cards to put on top of your libraray"));
+                controller.chooseTarget(outcome, allCards, target, source, game);
+                cardsToReveal.addAll(target.getTargets());
+                if (!cardsToReveal.isEmpty()) {
+                    controller.revealCards(sourceObject.getIdName(), cardsToReveal, game, true);
+                    allCards.removeAll(cardsToReveal);
+                }
+                controller.putCardsOnTopOfLibrary(cardsToReveal, game, source, true);
             }
             if (!allCards.isEmpty()) {
                 controller.putCardsOnBottomOfLibrary(allCards, game, source, true);
