@@ -31,6 +31,7 @@ package mage.server;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.Serializable;
+import java.net.BindException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Locale;
@@ -195,7 +196,11 @@ public class ServerMain implements MageServer {
             instance = new ServerMain(adminPassword, testMode);
             server = new Server(instance);
             server.start(config.getPort(), config.isUseSSL());
-        } catch (Exception ex) {
+        }
+        catch (BindException ex) {
+            logger.fatal("Failed to start server - " + config.getServerName() + " : check that another server is not already running", ex);
+        }
+        catch (Exception ex) {
             logger.fatal("Failed to start server - " + config.getServerName(), ex);
         }
 
