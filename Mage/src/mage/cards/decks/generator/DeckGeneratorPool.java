@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.client.deck.generator;
+package mage.cards.decks.generator;
 
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -34,6 +34,7 @@ import mage.cards.repository.CardInfo;
 import mage.constants.ColoredManaSymbol;
 
 import java.util.*;
+import mage.cards.decks.Deck;
 
 /**
  *

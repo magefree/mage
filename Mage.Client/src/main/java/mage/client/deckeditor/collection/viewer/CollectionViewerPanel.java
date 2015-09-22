@@ -45,7 +45,7 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.sets.ConstructedFormats;
+import mage.cards.ConstructedFormats;
 import org.apache.log4j.Logger;
 
 

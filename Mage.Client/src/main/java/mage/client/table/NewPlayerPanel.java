@@ -38,8 +38,11 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
+import mage.cards.decks.Deck;
+import mage.cards.decks.generator.DeckGenerator;
 import mage.client.MageFrame;
-import mage.client.deck.generator.DeckGenerator;
+import mage.client.deck.generator.DeckGeneratorDialog;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.util.Config;
 
 /**
@@ -49,7 +52,7 @@ import mage.client.util.Config;
 public class NewPlayerPanel extends javax.swing.JPanel {
 
     private final JFileChooser fcSelectDeck;
-
+    
     /** Creates new form NewPlayerPanel */
     public NewPlayerPanel() {
         initComponents();
@@ -94,7 +97,14 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     }
 
     protected void generateDeck() {
-        String path = DeckGenerator.generateDeck();
+        
+        DeckGeneratorDialog genDialog = new DeckGeneratorDialog();
+        Deck deck = DeckGenerator.generateDeck(genDialog.getOptions());
+        String path = genDialog.saveDeck(deck);
+        // If the deck couldn't be generated or the user cancelled, repopulate the deck selection with its cached value
+        if (path == null) {
+            path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, null);
+        }
         if (path != null) {
             this.txtPlayerDeck.setText(path);
             MageFrame.getPreferences().put("defaultDeckPath", path);

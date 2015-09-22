@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.client.deck.generator;
+package mage.cards.decks.generator;
 
 /**
  * Stores a range of converted mana costs (CMC) for use in deck generation.

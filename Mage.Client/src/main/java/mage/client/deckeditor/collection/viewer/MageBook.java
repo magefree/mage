@@ -43,7 +43,7 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.Command;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
-import mage.client.util.sets.ConstructedFormats;
+import mage.cards.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.constants.Rarity;
 import mage.view.CardView;

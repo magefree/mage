@@ -27,20 +27,29 @@
  */
 package mage.client.deck.generator;
 
-import mage.cards.Sets;
-import mage.cards.decks.Deck;
-import mage.client.MageFrame;
-import mage.client.dialog.PreferencesDialog;
-import mage.client.util.gui.ColorsChooser;
-import mage.client.util.sets.ConstructedFormats;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import mage.cards.ConstructedFormats;
+import mage.cards.Sets;
+import mage.cards.decks.Deck;
+import mage.cards.decks.generator.DeckOptions;
+import mage.client.MageFrame;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.util.gui.ColorsChooser;
 
 /**
  *
@@ -195,6 +204,10 @@ public class DeckGeneratorDialog {
         return null;
     }
 
+    public DeckOptions getOptions() {
+        return new DeckOptions(getSelectedColors(), getSelectedFormat(), getDeckSize(), isSingleton(), useArtifacts(), useNonBasicLand());
+    }
+    
     public String getSelectedFormat() {
         return (String) cbSets.getSelectedItem();
     }

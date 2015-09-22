@@ -1,4 +1,4 @@
-package mage.client.util.sets;
+package mage.cards;
 
 import java.util.ArrayList;
 import java.util.Calendar;

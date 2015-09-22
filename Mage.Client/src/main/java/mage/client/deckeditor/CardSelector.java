@@ -64,7 +64,7 @@ import mage.client.cards.CardGrid;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
-import mage.client.util.sets.ConstructedFormats;
+import mage.cards.ConstructedFormats;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;

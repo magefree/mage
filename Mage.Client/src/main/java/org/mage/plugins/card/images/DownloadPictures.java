@@ -47,7 +47,7 @@ import javax.swing.JProgressBar;
 import mage.cards.repository.CardInfo;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.util.sets.ConstructedFormats;
+import mage.cards.ConstructedFormats;
 import mage.remote.Connection;
 import static mage.remote.Connection.ProxyType.HTTP;
 import static mage.remote.Connection.ProxyType.SOCKS;
