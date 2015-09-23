@@ -39,7 +39,7 @@ import mage.MageInt;
 public class CatToken extends Token {
 
     public CatToken() {
-        super("Demon", "2/2 white Cat creature token");
+        super("Cat", "2/2 white Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Cat");
