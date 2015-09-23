@@ -41,7 +41,7 @@ import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoatToken;
 
 /**
  *
@@ -100,17 +100,5 @@ class ChromaSpringjackShepherdCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "";
-    }
-}
-
-class GoatToken extends Token {
-
-    public GoatToken() {
-        super("Goat", "a 0/1 white Goat creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Goat");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
     }
 }
