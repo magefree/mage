@@ -173,8 +173,8 @@ class KioraRevealEffect extends OneShotEffect {
 
             if (!cards.isEmpty()) {
                 player.revealCards(sourceObject.getName(), cards, game);
-                if ((creatureCardFound || landCardFound) 
-                        && player.chooseUse(Outcome.DrawCard, 
+                if ((creatureCardFound || landCardFound)
+                        && player.chooseUse(Outcome.DrawCard,
                                 "Put a creature card and/or a land card into your hand?", source, game)) {
                     TargetCard target = new TargetCard(Zone.PICK, new FilterCreatureCard("creature card to put into your hand"));
                     if (creatureCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
@@ -208,12 +208,13 @@ class KioraMasterOfTheDepthsEmblem extends Emblem {
 
     public KioraMasterOfTheDepthsEmblem() {
         this.setName("EMBLEM: Kiora, Master of the Depths");
-        
+
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.COMMAND,
                 new KioraFightEffect(), filter, true, SetTargetPointer.PERMANENT,
                 "Whenever a creature enters the battlefield under your control, you may have it fight target creature.");
         ability.addTarget(new TargetCreaturePermanent());
         this.getAbilities().add(ability);
+        this.setExpansionSetCodeForImage("BFZ");
     }
 }
 
