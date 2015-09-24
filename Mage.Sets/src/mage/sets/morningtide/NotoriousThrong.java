@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ProwlCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
@@ -61,7 +62,9 @@ public class NotoriousThrong extends CardImpl {
         this.getSpellAbility().addEffect(new NotoriousThrongEffect());
         this.getSpellAbility().addWatcher(new AmountOfDamageAPlayerReceivedThisTurnWatcher());
         // If Notorious Throng's prowl cost was paid, take an extra turn after this one.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new AddExtraTurnControllerEffect(), ProwlCondition.getInstance()));
+        Effect effect = new ConditionalOneShotEffect(new AddExtraTurnControllerEffect(), ProwlCondition.getInstance());
+        effect.setText("If {this}'s prowl cost was paid, take an extra turn after this one.");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public NotoriousThrong(final NotoriousThrong card) {
@@ -78,7 +81,7 @@ class NotoriousThrongEffect extends OneShotEffect {
 
     public NotoriousThrongEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn.";
+        staticText = "Put X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn";
     }
 
     public NotoriousThrongEffect(NotoriousThrongEffect effect) {
