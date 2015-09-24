@@ -49,6 +49,15 @@ public class WarriorToken extends Token {
         availableImageSetCodes.addAll(Arrays.asList("KTK", "DTK"));
     }
 
+    public WarriorToken(final WarriorToken token) {
+        super(token);
+    }
+
+    @Override
+        public WarriorToken copy() {
+        return new WarriorToken(this);
+    }
+
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);

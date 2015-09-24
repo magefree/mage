@@ -48,6 +48,15 @@ public class HumanToken extends Token {
         availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP"));
     }
 
+    public HumanToken(final HumanToken token) {
+        super(token);
+    }
+
+    @Override
+        public HumanToken copy() {
+        return new HumanToken(this);
+    }
+
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);

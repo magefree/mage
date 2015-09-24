@@ -50,6 +50,15 @@ public class DemonToken extends Token {
         availableImageSetCodes.addAll(Arrays.asList("INN", "AVR", "C14", "ORI"));
     }
 
+    public DemonToken(final DemonToken token) {
+        super(token);
+    }
+
+    @Override
+        public DemonToken copy() {
+        return new DemonToken(this);
+    }
+
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
