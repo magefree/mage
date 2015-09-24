@@ -27,6 +27,8 @@
  */
 package mage.sets.commander2013;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -50,7 +52,6 @@ public class TemptWithDiscovery extends CardImpl {
     public TemptWithDiscovery(UUID ownerId) {
         super(ownerId, 174, "Tempt with Discovery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "C13";
-
 
         // Tempting offer - Search your library for a land card and put it onto the battlefield.
         // Each opponent may search his or her library for a land card and put it onto the battlefield.
@@ -89,12 +90,14 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            Set<UUID> playersShuffle = new LinkedHashSet<>();
+            playersShuffle.add(controller.getId());
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
             if (controller.searchLibrary(target, game)) {
-                for (UUID cardId: target.getTargets()) {
+                for (UUID cardId : target.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), controller.getId());
+                        controller.moveCards(card, null, Zone.BATTLEFIELD, source, game);
                     }
                 }
             }
@@ -105,11 +108,12 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
                     if (opponent.chooseUse(outcome, "Search your library for a land card and put it onto the battlefield?", source, game)) {
                         target.clearChosen();
                         opponentsUsedSearch++;
+                        playersShuffle.add(playerId);
                         if (opponent.searchLibrary(target, game)) {
-                            for (UUID cardId: target.getTargets()) {
+                            for (UUID cardId : target.getTargets()) {
                                 Card card = game.getCard(cardId);
                                 if (card != null) {
-                                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), opponent.getId());
+                                    opponent.moveCards(card, null, Zone.BATTLEFIELD, source, game);
                                 }
                             }
                         }
@@ -119,17 +123,23 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
             if (opponentsUsedSearch > 0) {
                 target = new TargetCardInLibrary(0, opponentsUsedSearch, new FilterLandCard());
                 if (controller.searchLibrary(target, game)) {
-                    for (UUID cardId: target.getTargets()) {
+                    for (UUID cardId : target.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {
-                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), controller.getId());
+                            controller.moveCards(card, null, Zone.BATTLEFIELD, source, game);
                         }
                     }
                 }
             }
+            for (UUID playerId : playersShuffle) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.shuffleLibrary(game);
+                }
+            }
             return true;
         }
-        
+
         return false;
     }
 }
