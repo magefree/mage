@@ -150,17 +150,16 @@ class KioraRevealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject != null && player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+        if (sourceObject != null && controller != null) {
+            Cards cards = new CardsImpl(Zone.LIBRARY);
+            cards.addAll(controller.getLibrary().getTopCards(game, 4));
             boolean creatureCardFound = false;
             boolean landCardFound = false;
-            int count = Math.min(player.getLibrary().size(), 4);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
+            for (UUID cardId : cards) {
+                Card card = game.getCard(cardId);
                 if (card != null) {
-                    game.setZone(card.getId(), Zone.PICK);
                     cards.add(card);
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         creatureCardFound = true;
@@ -172,30 +171,30 @@ class KioraRevealEffect extends OneShotEffect {
             }
 
             if (!cards.isEmpty()) {
-                player.revealCards(sourceObject.getName(), cards, game);
+                controller.revealCards(sourceObject.getName(), cards, game);
                 if ((creatureCardFound || landCardFound)
-                        && player.chooseUse(Outcome.DrawCard,
+                        && controller.chooseUse(Outcome.DrawCard,
                                 "Put a creature card and/or a land card into your hand?", source, game)) {
                     TargetCard target = new TargetCard(Zone.PICK, new FilterCreatureCard("creature card to put into your hand"));
-                    if (creatureCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
+                    if (creatureCardFound && controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
                             cards.remove(card);
-                            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                            controller.moveCards(card, null, Zone.HAND, source, game);
                         }
                     }
 
-                    target = new TargetCard(Zone.PICK, new FilterLandCard("land card to put into your hand"));
-                    if (landCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
+                    target = new TargetCard(Zone.LIBRARY, new FilterLandCard("land card to put into your hand"));
+                    if (landCardFound && controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
                             cards.remove(card);
-                            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                            controller.moveCards(card, null, Zone.HAND, source, game);
                         }
                     }
                 }
             }
-            player.moveCards(cards, Zone.PICK, Zone.GRAVEYARD, source, game);
+            controller.moveCards(cards, null, Zone.GRAVEYARD, source, game);
             return true;
         }
         return false;
