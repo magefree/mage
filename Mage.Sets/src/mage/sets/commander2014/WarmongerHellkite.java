@@ -62,7 +62,7 @@ public class WarmongerHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // All creatures attack each combat if able.
-        Effect effect = new AttacksIfAbleAllEffect(new FilterCreaturePermanent("creatures"));
+        Effect effect = new AttacksIfAbleAllEffect(new FilterCreaturePermanent("creatures"), Duration.WhileOnBattlefield, true);
         effect.setText("All creatures attack each combat if able");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

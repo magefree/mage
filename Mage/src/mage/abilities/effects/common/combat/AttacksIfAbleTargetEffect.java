@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.RequirementEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -56,10 +55,7 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override
@@ -79,8 +75,7 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect {
         }
         if (this.duration == Duration.EndOfTurn) {
             return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName()).append(" attacks this turn if able").toString();
-        }
-        else {
+        } else {
             return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName()).append(" attacks each turn if able").toString();
         }
     }
