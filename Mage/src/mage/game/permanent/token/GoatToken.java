@@ -43,7 +43,7 @@ public class GoatToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Goat");
-        power = new MageInt(1);
+        power = new MageInt(0);
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("EVE", "M13", "M14", "C14"));
     }
