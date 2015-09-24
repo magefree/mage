@@ -40,7 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 public class DemonToken extends Token {
 
     public DemonToken() {
-        super("Demon", "1/1 black Demon creature token with flying");
+        super("Demon", "5/5 black Demon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Demon");
