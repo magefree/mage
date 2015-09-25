@@ -157,7 +157,7 @@ public class Session {
             } else {
                 user.getUserData().update(userData);
             }
-            if (user.getUserData().getAvatarId() == 51) {
+            if (user.getUserData().getAvatarId() == 11) {
                 user.getUserData().setAvatarId(updateAvatar(user.getName()));
             }
             return true;

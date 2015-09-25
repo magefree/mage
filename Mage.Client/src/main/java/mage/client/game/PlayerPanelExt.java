@@ -63,6 +63,7 @@ import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.DEFAULT_AVATAR_ID;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Command;
 import mage.client.util.ImageHelper;
@@ -92,7 +93,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private static final int AVATAR_COUNT = 77;
 
-    private static final String DEFAULT_AVATAR_PATH = "/avatars/51.jpg";
+    private static final String DEFAULT_AVATAR_PATH = "/avatars/" + DEFAULT_AVATAR_ID + ".jpg";
 
     private static final int PANEL_WIDTH = 94;
     private static final int PANEL_HEIGHT = 242;
