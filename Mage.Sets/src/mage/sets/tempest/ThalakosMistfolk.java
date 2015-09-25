@@ -25,52 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FatefulHourCondition;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PutOnLibrarySourceEffect;
+import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.HumanToken;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class ThrabenDoomsayer extends CardImpl {
+public class ThalakosMistfolk extends CardImpl {
 
-    public ThrabenDoomsayer(UUID ownerId) {
-        super(ownerId, 25, "Thraben Doomsayer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "DKA";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-
+    public ThalakosMistfolk(UUID ownerId) {
+        super(ownerId, 93, "Thalakos Mistfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Thalakos");
+        this.subtype.add("Illusion");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // {tap}: Put a 1/1 white Human creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()), new TapSourceCost()));
-        // Fateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true),
-                FatefulHourCondition.getInstance(), "As long as you have 5 or less life, other creatures you control get +2/+2")));
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
+        // {U}: Put Thalakos Mistfolk on top of its owner's library.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl("{U}")));
     }
 
-    public ThrabenDoomsayer(final ThrabenDoomsayer card) {
+    public ThalakosMistfolk(final ThalakosMistfolk card) {
         super(card);
     }
 
     @Override
-    public ThrabenDoomsayer copy() {
-        return new ThrabenDoomsayer(this);
+    public ThalakosMistfolk copy() {
+        return new ThalakosMistfolk(this);
     }
 }

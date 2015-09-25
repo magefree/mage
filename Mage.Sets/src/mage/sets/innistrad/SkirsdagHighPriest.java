@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DemonToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -109,20 +109,5 @@ class SkirsdagHighPriestCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         this.paid = true;
         return paid;
-    }
-}
-
-class DemonToken extends Token {
-
-    DemonToken() {
-        super("Demon", "5/5 black Demon creature token with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Demon");
-
-        color.setBlack(true);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-
-        addAbility(FlyingAbility.getInstance());
     }
 }

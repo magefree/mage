@@ -25,52 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FatefulHourCondition;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.HumanToken;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class ThrabenDoomsayer extends CardImpl {
+public class CutthroatIlDal extends CardImpl {
 
-    public ThrabenDoomsayer(UUID ownerId) {
-        super(ownerId, 25, "Thraben Doomsayer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "DKA";
+    public CutthroatIlDal(UUID ownerId) {
+        super(ownerId, 64, "Cutthroat il-Dal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "FUT";
         this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Hellbent - Cutthroat il-Dal has shadow as long as you have no cards in hand.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.WhileOnBattlefield),                                                                                                            HellbentCondition.getInstance(),
+            "<i>Hellbent</i> - {this} has shadow as long as you have no cards in hand")));                                                                                                   }
 
-        // {tap}: Put a 1/1 white Human creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()), new TapSourceCost()));
-        // Fateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true),
-                FatefulHourCondition.getInstance(), "As long as you have 5 or less life, other creatures you control get +2/+2")));
-    }
-
-    public ThrabenDoomsayer(final ThrabenDoomsayer card) {
+    public CutthroatIlDal(final CutthroatIlDal card) {
         super(card);
     }
 
     @Override
-    public ThrabenDoomsayer copy() {
-        return new ThrabenDoomsayer(this);
+    public CutthroatIlDal copy() {
+        return new CutthroatIlDal(this);
     }
 }

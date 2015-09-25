@@ -25,52 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FatefulHourCondition;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.ShadowAbility;
+import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.permanent.token.HumanToken;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class ThrabenDoomsayer extends CardImpl {
+public class InfiltratorIlKor extends CardImpl {
 
-    public ThrabenDoomsayer(UUID ownerId) {
-        super(ownerId, 25, "Thraben Doomsayer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "DKA";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+    public InfiltratorIlKor(UUID ownerId) {
+        super(ownerId, 37, "Infiltrator il-Kor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "FUT";
+        this.subtype.add("Kor");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {tap}: Put a 1/1 white Human creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()), new TapSourceCost()));
-        // Fateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true),
-                FatefulHourCondition.getInstance(), "As long as you have 5 or less life, other creatures you control get +2/+2")));
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
+        // Suspend 2-{1}{U}
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{1}{U}"), this));
     }
 
-    public ThrabenDoomsayer(final ThrabenDoomsayer card) {
+    public InfiltratorIlKor(final InfiltratorIlKor card) {
         super(card);
     }
 
     @Override
-    public ThrabenDoomsayer copy() {
-        return new ThrabenDoomsayer(this);
+    public InfiltratorIlKor copy() {
+        return new InfiltratorIlKor(this);
     }
 }

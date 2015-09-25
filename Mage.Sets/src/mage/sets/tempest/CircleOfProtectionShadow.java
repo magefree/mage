@@ -25,52 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.FatefulHourCondition;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
+import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.HumanToken;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author anonymous
+ * @author LoneFox
  */
-public class ThrabenDoomsayer extends CardImpl {
+public class CircleOfProtectionShadow extends CardImpl {
 
-    public ThrabenDoomsayer(UUID ownerId) {
-        super(ownerId, 25, "Thraben Doomsayer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "DKA";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature of your choice with shadow");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {tap}: Put a 1/1 white Human creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()), new TapSourceCost()));
-        // Fateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true),
-                FatefulHourCondition.getInstance(), "As long as you have 5 or less life, other creatures you control get +2/+2")));
+    static {
+        filter.add(new AbilityPredicate(ShadowAbility.class));
     }
 
-    public ThrabenDoomsayer(final ThrabenDoomsayer card) {
+    public CircleOfProtectionShadow(UUID ownerId) {
+        super(ownerId, 224, "Circle of Protection: Shadow", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "TMP";
+
+        // {1}: The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
+        Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
+        effect.setText("The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("1")));
+    }
+
+    public CircleOfProtectionShadow(final CircleOfProtectionShadow card) {
         super(card);
     }
 
     @Override
-    public ThrabenDoomsayer copy() {
-        return new ThrabenDoomsayer(this);
+    public CircleOfProtectionShadow copy() {
+        return new CircleOfProtectionShadow(this);
     }
 }

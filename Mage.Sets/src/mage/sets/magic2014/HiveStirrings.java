@@ -28,12 +28,11 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SliverToken;
 
 /**
  *
@@ -45,10 +44,8 @@ public class HiveStirrings extends CardImpl {
         super(ownerId, 21, "Hive Stirrings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "M14";
 
-
         // Put two 1/1 colorless Sliver creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SliverToken(), 2));
-        
     }
 
     public HiveStirrings(final HiveStirrings card) {
@@ -58,15 +55,5 @@ public class HiveStirrings extends CardImpl {
     @Override
     public HiveStirrings copy() {
         return new HiveStirrings(this);
-    }
-}
-
-class SliverToken extends Token {
-    SliverToken() {
-        super("Sliver", "a 1/1 colorless Sliver creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Sliver");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

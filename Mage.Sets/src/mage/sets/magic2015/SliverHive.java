@@ -51,7 +51,7 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SliverToken;
 
 /**
  *
@@ -132,17 +132,5 @@ class SliverHiveManaCondition extends CreatureCastManaCondition {
             }
         }
         return false;
-    }
-}
-
-class SliverToken extends Token {
-
-    SliverToken() {
-        super("Sliver", "1/1 colorless Sliver creature token");
-        setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Sliver");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

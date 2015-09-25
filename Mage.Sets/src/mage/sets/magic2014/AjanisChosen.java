@@ -43,6 +43,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.CatToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -56,7 +57,7 @@ public class AjanisChosen extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
-    
+
     public AjanisChosen(UUID ownerId) {
         super(ownerId, 2, "Ajani's Chosen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "M14";
@@ -122,17 +123,4 @@ class AjanisChosenEffect extends OneShotEffect {
         return false;
     }
 
-}
-
-
-class CatToken extends Token {
-    public CatToken() {
-        super("Cat", "2/2 white Cat creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-
-        subtype.add("Cat");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
 }

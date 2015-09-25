@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HumanToken;
 
 /**
  *
@@ -64,17 +64,5 @@ public class VoiceOfTheProvinces extends CardImpl {
     @Override
     public VoiceOfTheProvinces copy() {
         return new VoiceOfTheProvinces(this);
-    }
-}
-
-class HumanToken extends Token {
-    public HumanToken() {
-        super("Human", "1/1 white Human creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Human");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }
