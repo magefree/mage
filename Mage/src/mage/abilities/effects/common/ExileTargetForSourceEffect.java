@@ -84,6 +84,10 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if(staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
         if (mode.getTargets().isEmpty()) {
             return "Exile it";
         } else {
