@@ -25,21 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -66,7 +65,7 @@ public class SoratamiMirrorMage extends CardImpl {
 
         // {3}, Return three lands you control to their owner's hand: Return target creature to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
-        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(3, 3, filter, false)));
+        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(3, 3, filter, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -30,7 +30,7 @@ package mage.sets.battleforzendikar;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -57,7 +57,7 @@ public class SlabHammer extends CardImpl {
         // Whenever equipped creature attacks, you may return a land you control to its owner's hand. If you do, the creature gets +2/+2 until end of turn.
         Ability ability = new AttacksAttachedTriggeredAbility(
                 new DoIfCostPaid(new BoostEquippedEffect(2, 2, Duration.EndOfTurn),
-                        new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent())),
+                        new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent())),
                         "Return a land you control to its owner's hand? (giving +2/+2 to the equipped creature)"));
         this.addAbility(ability);
 
