@@ -33,10 +33,12 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -44,6 +46,7 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -99,10 +102,15 @@ class GreenwardenOfMurasaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller != null && sourceObject != null && targetCard != null) {
             if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return card from your graveyard to your hand?", source, game)) {
                 new ExileSourceEffect().apply(game, source);
-                return new ReturnToHandTargetEffect().apply(game, source);
+                // Setting the fixed target prevents to return Greenwarden of Murasa itself (becuase it's exiled meanwhile),
+                // but of course you can target it as the ability triggers I guess
+                Effect effect = new ReturnToHandTargetEffect();
+                effect.setTargetPointer(new FixedTarget(targetCard.getId(), targetCard.getZoneChangeCounter(game)));
+                return effect.apply(game, source);
             }
             return true;
         }

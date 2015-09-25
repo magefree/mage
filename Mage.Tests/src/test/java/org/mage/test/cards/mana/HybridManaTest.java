@@ -25,45 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package org.mage.test.cards.mana;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class MakindiPatrol extends CardImpl {
+public class HybridManaTest extends CardTestPlayerBase {
 
-    public MakindiPatrol(UUID ownerId) {
-        super(ownerId, 39, "Makindi Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "BFZ";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.subtype.add("Ally");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+    @Test
+    public void testCastReaperKingMonoHybrid() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
-        // <i>Rally</i> — Whenever Makindi Patrol or another Ally enters the battlefield under your control, creatures you control gain vigilance until end of turn.
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures")), false));
+        // Other Scarecrow creatures you control get +1/+1.
+        // Whenever another Scarecrow enters the battlefield under your control, destroy target permanent.
+        addCard(Zone.HAND, playerA, "Reaper King", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reaper King");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Reaper King", 1);
+
     }
 
-    public MakindiPatrol(final MakindiPatrol card) {
-        super(card);
-    }
-
-    @Override
-    public MakindiPatrol copy() {
-        return new MakindiPatrol(this);
-    }
 }

@@ -40,6 +40,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -63,7 +64,7 @@ public class FumikoTheLowblood extends CardImpl {
         // Creatures your opponents control attack each turn if able.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter)), new AttackedThisTurnWatcher());
 
     }
 

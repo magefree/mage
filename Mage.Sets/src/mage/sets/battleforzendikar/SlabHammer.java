@@ -41,7 +41,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -60,7 +59,6 @@ public class SlabHammer extends CardImpl {
                 new DoIfCostPaid(new BoostEquippedEffect(2, 2, Duration.EndOfTurn),
                         new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent())),
                         "Return a land you control to its owner's hand? (giving +2/+2 to the equipped creature)"));
-        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
         // Equip {2}

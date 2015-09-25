@@ -25,45 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package org.mage.test.cards.abilities.oneshot.exile;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class MakindiPatrol extends CardImpl {
+public class CelestialPurgeTest extends CardTestPlayerBase {
 
-    public MakindiPatrol(UUID ownerId) {
-        super(ownerId, 39, "Makindi Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "BFZ";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.subtype.add("Ally");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+    /**
+     * I activated Celestial Purge trying to targeting a Bitterblossom but i
+     * couldn't so please fix that bug
+     */
+    @Test
+    public void testExileWorks() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // Exile target black or red permanent.
+        addCard(Zone.HAND, playerA, "Celestial Purge");
 
-        // <i>Rally</i> — Whenever Makindi Patrol or another Ally enters the battlefield under your control, creatures you control gain vigilance until end of turn.
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures")), false));
-    }
+        // At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying onto the battlefield.
+        addCard(Zone.BATTLEFIELD, playerB, "Bitterblossom");
 
-    public MakindiPatrol(final MakindiPatrol card) {
-        super(card);
-    }
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Celestial Purge", "Bitterblossom");
 
-    @Override
-    public MakindiPatrol copy() {
-        return new MakindiPatrol(this);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 19);
+
+        assertGraveyardCount(playerA, "Celestial Purge", 1);
+
+        assertExileCount("Bitterblossom", 1);
+        assertPermanentCount(playerB, "Faerie Rogue", 1);
+
     }
 }

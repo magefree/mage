@@ -106,7 +106,9 @@ class OblivionSowerEffect extends OneShotEffect {
             Cards exiledLands = new CardsImpl();
             exiledLands.addAll(exiledCards.getCards(filter, source.getSourceId(), controller.getId(), game));
             if (!exiledLands.isEmpty() && controller.chooseUse(outcome, "Put lands into play?", source, game)) {
-                FilterCard filterToPlay = new FilterCard("Lands owned by " + targetPlayer.getName() + " to put into play under your control");
+                FilterCard filterToPlay = new FilterCard("land"
+                        + (exiledLands.size() > 1 ? "s" : "") + " from exile owned by "
+                        + targetPlayer.getName() + " to put into play under your control");
                 TargetCard targetCards = new TargetCard(0, exiledLands.size(), Zone.EXILED, filterToPlay);
                 if (controller.chooseTarget(outcome, exiledLands, targetCards, source, game)) {
                     controller.moveCards(new CardsImpl(targetCards.getTargets()), null, Zone.BATTLEFIELD, source, game);

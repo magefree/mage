@@ -148,7 +148,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         if (targetName != null && targetName.length() > 0) {
             return targetName + " doesn't untap during its controller's next untap step";
         } else {
-            return "Target " + (mode == null ? "creature" : mode.getTargets().get(0).getTargetName()) + " doesn't untap during its controller's next untap step";
+            return "target " + (mode == null ? "creature" : mode.getTargets().get(0).getTargetName()) + " doesn't untap during its controller's next untap step";
         }
     }
 

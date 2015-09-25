@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import java.util.ArrayList;
@@ -46,8 +45,7 @@ import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 /**
- * All opponents have to sacrifice [amount] permanents
- * that match the [filter].
+ * All opponents have to sacrifice [amount] permanents that match the [filter].
  *
  * @author LevelX2
  */
@@ -59,6 +57,7 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
     public SacrificeOpponentsEffect(FilterPermanent filter) {
         this(1, filter);
     }
+
     public SacrificeOpponentsEffect(int amount, FilterPermanent filter) {
         this(new StaticValue(amount), filter);
     }
@@ -87,12 +86,14 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
         filter.add(new ControllerPredicate(TargetController.YOU));
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {                
+            if (player != null) {
                 int numTargets = Math.min(amount.calculate(game, source, this), game.getBattlefield().countAll(filter, player.getId(), game));
-                TargetPermanent target = new TargetPermanent(numTargets, numTargets, filter, true);
-                if (target.canChoose(player.getId(), game)) {
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
-                    perms.addAll(target.getTargets());
+                if (numTargets > 0) {
+                    TargetPermanent target = new TargetPermanent(numTargets, numTargets, filter, true);
+                    if (target.canChoose(player.getId(), game)) {
+                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        perms.addAll(target.getTargets());
+                    }
                 }
             }
         }
