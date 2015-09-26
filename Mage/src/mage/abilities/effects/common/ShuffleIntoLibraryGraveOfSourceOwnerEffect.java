@@ -25,50 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
-import mage.abilities.effects.common.CastSourceTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ShuffleIntoLibraryGraveOfSourceOwnerEffect;
-import mage.abilities.keyword.AnnihilatorAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class KozilekButcherOfTruth extends CardImpl {
+public class ShuffleIntoLibraryGraveOfSourceOwnerEffect extends OneShotEffect {
 
-    public KozilekButcherOfTruth(UUID ownerId) {
-        super(ownerId, 6, "Kozilek, Butcher of Truth", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{10}");
-        this.expansionSetCode = "ROE";
-        this.supertype.add("Legendary");
-        this.subtype.add("Eldrazi");
-        this.power = new MageInt(12);
-        this.toughness = new MageInt(12);
-
-        // When you cast Kozilek, Butcher of Truth, draw four cards.
-        this.addAbility(new CastSourceTriggeredAbility(new DrawCardSourceControllerEffect(4)));
-
-        // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
-        this.addAbility(new AnnihilatorAbility(4));
-
-        // When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibraryGraveOfSourceOwnerEffect(), false));
+    public ShuffleIntoLibraryGraveOfSourceOwnerEffect() {
+        super(Outcome.Benefit);
+        staticText = "its owner shuffles his or her graveyard into his or her library";
     }
 
-    public KozilekButcherOfTruth(final KozilekButcherOfTruth card) {
-        super(card);
+    public ShuffleIntoLibraryGraveOfSourceOwnerEffect(final ShuffleIntoLibraryGraveOfSourceOwnerEffect effect) {
+        super(effect);
     }
 
     @Override
-    public KozilekButcherOfTruth copy() {
-        return new KozilekButcherOfTruth(this);
+    public boolean apply(Game game, Ability source) {
+        UUID ownerId = game.getOwnerId(source.getSourceId());
+        if (ownerId == null) {
+            return false;
+        }
+        Player owner = game.getPlayer(ownerId);
+        if (owner != null) {
+            owner.moveCards(owner.getGraveyard(), null, Zone.LIBRARY, source, game);
+            owner.shuffleLibrary(game);
+            return true;
+        }
+        return false;
     }
 
+    @Override
+    public ShuffleIntoLibraryGraveOfSourceOwnerEffect copy() {
+        return new ShuffleIntoLibraryGraveOfSourceOwnerEffect(this);
+    }
 }

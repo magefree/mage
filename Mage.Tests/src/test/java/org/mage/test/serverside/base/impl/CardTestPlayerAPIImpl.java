@@ -858,7 +858,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
 
-        Assert.assertEquals("(Graveyard) Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Graveyard " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
     }
 
     /**
