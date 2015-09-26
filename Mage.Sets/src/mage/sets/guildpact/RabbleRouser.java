@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -51,7 +52,7 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class RabbleRouser extends CardImpl {
     
-    private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures");
+    final static private String rule = "Attacking creatures get +X/+0 until end of turn, where X is Rabble-Rouser's power.";
     
     public RabbleRouser(UUID ownerId) {
         super(ownerId, 73, "Rabble-Rouser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -66,7 +67,8 @@ public class RabbleRouser extends CardImpl {
         this.addAbility(new BloodthirstAbility(1));
 
         //{R}, {T}: Attacking creatures get +X/+0 until end of turn, where X is Rabble-Rouser's power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(new SourcePermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, filter, false), new ManaCostsImpl("{R}"));
+        DynamicValue amount = new SourcePermanentPowerCount();
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(amount, new StaticValue(0), Duration.EndOfTurn, new FilterAttackingCreature(), false, rule), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

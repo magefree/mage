@@ -49,9 +49,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class BoggartSpriteChaser extends CardImpl {
 
-    final static private String rule = "{this} flying as long as you control a Faerie";
+    final static private String rule = "{this} has flying as long as you control a Faerie";
     
-    private static final FilterPermanent filter = new FilterPermanent("a Faerie");
+    private static final FilterPermanent filter = new FilterPermanent("Faerie");
 
     static {
         filter.add(new SubtypePredicate("Faerie"));

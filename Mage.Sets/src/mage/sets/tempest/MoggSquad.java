@@ -35,8 +35,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -64,8 +64,8 @@ public class MoggSquad extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         
-        DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new MultipliedValue(amount, -1), new MultipliedValue(amount, -1), Duration.WhileOnBattlefield));
+        DynamicValue amount = new SignInversionDynamicValue(new PermanentsOnBattlefieldCount(filter));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

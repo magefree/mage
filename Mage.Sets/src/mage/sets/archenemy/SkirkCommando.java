@@ -82,7 +82,7 @@ class SkirkCommandoEffect extends OneShotEffect {
 
     public SkirkCommandoEffect() {
         super(Outcome.Damage);
-        staticText = "it deals 2 damage to target creature that player controls";
+        staticText = "have it deal 2 damage to target creature that player controls";
     }
 
     public SkirkCommandoEffect(final SkirkCommandoEffect effect) {

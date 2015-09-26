@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  */
 public class QuillSlingerBoggart extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Kithkin spell");
+    private static final FilterSpell filter = new FilterSpell("a Kithkin spell");
 
     static {
         filter.add(new SubtypePredicate("Kithkin"));

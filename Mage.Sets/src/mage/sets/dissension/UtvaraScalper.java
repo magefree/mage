@@ -25,57 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.dissension;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  *
  * @author BursegSardaukar
  */
-public class GoblinFireFiend extends CardImpl {
+public class UtvaraScalper extends CardImpl {
     
-    public GoblinFireFiend(UUID ownerId) {
-        super(ownerId, 127, "Goblin Fire Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "RAV";
+    public UtvaraScalper(UUID ownerId) {
+        super(ownerId, 76, "Utvara Scalper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "DIS";
         this.subtype.add("Goblin");
-        this.subtype.add("Berserker");
+        this.subtype.add("Scout");
 
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        
-        //Haste
-        this.addAbility(HasteAbility.getInstance());
-        
-        //Goblin Fire Fiend must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect()));
-        
-        //{R}: Goblin Fire Fiend gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new StaticValue(1), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
-        this.addAbility(ability);
+        this.toughness = new MageInt(2);
+
+        //Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        //Utvara Scalper attacks each turn if able
+        this.addAbility(new AttacksEachTurnStaticAbility());
     }
 
-    public GoblinFireFiend(final GoblinFireFiend card) {
+    public UtvaraScalper(final UtvaraScalper card) {
         super(card);
     }
 
     @Override
-    public GoblinFireFiend copy() {
-        return new GoblinFireFiend(this);
+    public UtvaraScalper copy() {
+        return new UtvaraScalper(this);
     }
 }

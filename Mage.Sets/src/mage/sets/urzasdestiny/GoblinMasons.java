@@ -25,57 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.urzasdestiny;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author BursegSardaukar
  */
-public class GoblinFireFiend extends CardImpl {
+public class GoblinMasons extends CardImpl {
     
-    public GoblinFireFiend(UUID ownerId) {
-        super(ownerId, 127, "Goblin Fire Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Goblin");
-        this.subtype.add("Berserker");
+    private static final FilterPermanent filter = new FilterPermanent("Wall");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        
-        //Haste
-        this.addAbility(HasteAbility.getInstance());
-        
-        //Goblin Fire Fiend must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect()));
-        
-        //{R}: Goblin Fire Fiend gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new StaticValue(1), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Wall"));
     }
 
-    public GoblinFireFiend(final GoblinFireFiend card) {
+    
+    public GoblinMasons(UUID ownerId) {
+        super(ownerId, 86, "Goblin Masons", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "UDS";
+        this.subtype.add("Goblin");
+
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        //When Goblin Masons dies, destroy target Wall
+        DiesTriggeredAbility ability = new DiesTriggeredAbility(new DestroyTargetEffect(), false);
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    
+    }
+
+    public GoblinMasons(final GoblinMasons card) {
         super(card);
     }
 
     @Override
-    public GoblinFireFiend copy() {
-        return new GoblinFireFiend(this);
+    public GoblinMasons copy() {
+        return new GoblinMasons(this);
     }
 }
