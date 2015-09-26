@@ -28,14 +28,12 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.game.permanent.token.BirdToken;
 
 /**
  *
@@ -46,7 +44,6 @@ public class EyesInTheSkies extends CardImpl {
     public EyesInTheSkies(UUID ownerId) {
         super(ownerId, 10, "Eyes in the Skies", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "RTR";
-
 
         // Put a 1/1 white Bird creature token with flying onto the battlefield, then populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)
@@ -61,18 +58,6 @@ public class EyesInTheSkies extends CardImpl {
     @Override
     public EyesInTheSkies copy() {
         return new EyesInTheSkies(this);
-    }
-    private class BirdToken extends Token {
-
-        public BirdToken() {
-            super("Bird", "1/1 white Bird creature token with flying");
-            cardType.add(CardType.CREATURE);
-            color.setWhite(true);
-            subtype.add("Bird");
-            power = new MageInt(1);
-            toughness = new MageInt(1);
-            addAbility(FlyingAbility.getInstance());
-        }
     }
 }
 
