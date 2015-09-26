@@ -34,13 +34,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SoldierTokenWithHaste;
 
 /**
  *
@@ -54,17 +53,14 @@ public class SunhomeGuildmage extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-        
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        
         //{1}{R}{W}: Creatures you control get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{W}")));
-        
+
         //{2}{R}{W}: Put a 1/1 red and white Soldier creature token with haste onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{2}{R}{W}")));
-        
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierTokenWithHaste()), new ManaCostsImpl("{2}{R}{W}")));
     }
 
     public SunhomeGuildmage(final SunhomeGuildmage card) {
@@ -75,21 +71,4 @@ public class SunhomeGuildmage extends CardImpl {
     public SunhomeGuildmage copy() {
         return new SunhomeGuildmage(this);
     }
-}
-
-
-class SoldierToken extends Token {
-
-    public SoldierToken() {
-        super("Soldier", "1/1 red and white Soldier creature token with haste");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        color.setRed(true);
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        
-        this.addAbility(HasteAbility.getInstance());
-    }
-
 }

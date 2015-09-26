@@ -28,20 +28,17 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.counters.Counter;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.counters.CounterType;
+import mage.game.permanent.token.SoldierTokenWithHaste;
 
 /**
 *
@@ -55,7 +52,9 @@ public class AssembleTheLegion extends CardImpl {
 
 
        // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.
-       this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AssembleTheLegionEffect(), TargetController.YOU, false));
+       Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.MUSTER.createInstance()), TargetController.YOU, false);
+       ability.addEffect(new CreateTokenEffect(new SoldierTokenWithHaste(), new CountersCount(CounterType.MUSTER)));
+       this.addAbility(ability);
     }
 
     public AssembleTheLegion(final AssembleTheLegion card) {
@@ -65,48 +64,5 @@ public class AssembleTheLegion extends CardImpl {
     @Override
     public AssembleTheLegion copy() {
        return new AssembleTheLegion(this);
-    }
-}
-
-class AssembleTheLegionEffect extends OneShotEffect {
-    private static final String MUSTER_COUNTER_NAME = "Muster";
-
-    public AssembleTheLegionEffect() {
-       super(Outcome.Copy);
-       this.staticText = "put a muster counter on {this}. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on {this}";
-    }
-
-    public AssembleTheLegionEffect(final AssembleTheLegionEffect effect) {
-       super(effect);
-    }
-
-    @Override
-    public AssembleTheLegionEffect copy() {
-       return new AssembleTheLegionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-       /* 1/24/2013: If Assemble the Legion isn’t on the battlefield when its ability resolves,
-        * use the number of muster counters it had when it was last on the battlefield to
-        * determine how many Soldier tokens to put onto the battlefield.
-        */
-
-       Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-       int amountCounters = 0;
-       if (sourcePermanent == null) {
-           Permanent lki = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-           if (lki != null) {
-               amountCounters = lki.getCounters().getCount(MUSTER_COUNTER_NAME);
-           }
-       } else {
-           new AddCountersSourceEffect(new Counter(MUSTER_COUNTER_NAME),false).apply(game, source);
-           amountCounters = sourcePermanent.getCounters().getCount(MUSTER_COUNTER_NAME);
-           
-       }
-       if (amountCounters > 0) {
-           return new CreateTokenEffect(new SoldierToken(), amountCounters).apply(game, source);
-       }
-       return false;
     }
 }
