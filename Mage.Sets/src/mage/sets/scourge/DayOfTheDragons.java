@@ -28,17 +28,19 @@
 package mage.sets.scourge;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -46,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DragonToken2;
 
 /**
  *
@@ -106,7 +108,7 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
                     }
                 }
             }
-            DragonToken token = new DragonToken();
+            DragonToken2 token = new DragonToken2();
             token.putOntoBattlefield(creaturesExiled, game, source.getSourceId(), source.getControllerId());
             return true;
         }
@@ -161,18 +163,5 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect {
     @Override
     public DayOfTheDragonsLeavesEffect copy() {
         return new DayOfTheDragonsLeavesEffect(this);
-    }
-}
-
-class DragonToken extends Token {
-
-    public DragonToken() {
-        super("Dragon", "5/5 red Dragon creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        addAbility(FlyingAbility.getInstance());
     }
 }

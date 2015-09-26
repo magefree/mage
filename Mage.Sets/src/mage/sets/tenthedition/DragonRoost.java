@@ -28,18 +28,15 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DragonToken2;
 
 /**
  *
@@ -63,16 +60,3 @@ public class DragonRoost extends CardImpl {
         return new DragonRoost(this);
     }
 }
-
-class DragonToken2 extends Token {
-    DragonToken2() {
-        super("Dragon", "5/5 red Dragon creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        addAbility(FlyingAbility.getInstance());
-    }
-}
-
