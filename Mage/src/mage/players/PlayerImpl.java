@@ -2926,6 +2926,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        if (cards.isEmpty()) {
+            return true;
+        }
         Set<Card> cardList = new HashSet<>();
         for (UUID cardId : cards) {
             fromZone = game.getState().getZone(cardId);
