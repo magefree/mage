@@ -40,7 +40,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -51,7 +50,6 @@ public class RuinationGuide extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other colorless creatures you control");
 
     static {
-        filter.add(new AnotherPredicate());
         filter.add(new ColorlessPredicate());
     }
 
@@ -68,7 +66,7 @@ public class RuinationGuide extends CardImpl {
         // Ingest
         this.addAbility(new IngestAbility());
         // Other colorless creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
     }
 
     public RuinationGuide(final RuinationGuide card) {

@@ -25,21 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.client.util;
 
 import java.util.Comparator;
+import mage.utils.CardUtil;
 import mage.view.CardView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardViewColorDetailedComparator implements Comparator<CardView> {
+public class CardViewColorIdentityComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView o1, CardView o2) {
-        return o1.getColor().hashCode() - o2.getColor().hashCode();
+        return CardUtil.getColorIdentitySortValue(o1.getManaCost(), o1.getColor(), o1.getRules())
+                - CardUtil.getColorIdentitySortValue(o2.getManaCost(), o2.getColor(), o2.getRules());
     }
-
 }

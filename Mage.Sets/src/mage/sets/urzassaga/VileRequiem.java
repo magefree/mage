@@ -71,11 +71,11 @@ public class VileRequiem extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on Vile Requiem.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.VILE.createInstance(), true ), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true ), TargetController.YOU, true));
         // {1}{B}, Sacrifice Vile Requiem: Destroy up to X target nonblack creatures, where X is the number of verse counters on Vile Requiem. They can't be regenerated.
         Effect effect = new DestroyTargetEffect(true);
         effect.setText("Destroy up to X target nonblack creatures, where X is the number of verse counters on {this}. They can't be regenerated");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));        
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(0,0,filter, false));
         this.addAbility(ability);
@@ -88,7 +88,7 @@ public class VileRequiem extends CardImpl {
         if (ability.getOriginalId().equals(originalId)) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
             if (sourcePermanent != null) {
-                int numberCounters = sourcePermanent.getCounters().getCount(CounterType.VILE);
+                int numberCounters = sourcePermanent.getCounters().getCount(CounterType.VERSE);
                 ability.getTargets().clear();
                 FilterCreaturePermanent newFilter = filter.copy();
                 newFilter.setMessage(new StringBuilder("up to ").append(CardUtil.numberToText(numberCounters)).append(" target nonblack creatures").toString());

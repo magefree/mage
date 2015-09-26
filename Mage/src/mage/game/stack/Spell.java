@@ -171,6 +171,7 @@ public class Spell extends StackObjImpl implements Card {
             int index = 0;
             result = false;
             boolean legalParts = false;
+            boolean notTargeted = true;
             // check for legal parts
             for (SpellAbility spellAbility : this.spellAbilities) {
                 // if muliple modes are selected, and there are modes with targets, then at least one mode has to have a legal target or
@@ -178,10 +179,15 @@ public class Spell extends StackObjImpl implements Card {
                 // If all targets are illegal when the spell tries to resolve, the spell is countered and none of its effects happen.
                 // If at least one target is still legal at that time, the spell resolves, but an illegal target can't perform any actions
                 // or have any actions performed on it.
-                legalParts |= spellAbilityHasLegalParts(spellAbility, game);
+                // if only a spliced spell has targets and all targets ar illegal, the complete spell is countered
+                if (hasTargets(spellAbility, game)) {
+                    notTargeted = false;
+                    legalParts |= spellAbilityHasLegalParts(spellAbility, game);
+                }
+
             }
             // resolve if legal parts
-            if (legalParts) {
+            if (notTargeted || legalParts) {
                 for (SpellAbility spellAbility : this.spellAbilities) {
                     if (spellAbilityHasLegalParts(spellAbility, game)) {
                         for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
@@ -259,6 +265,21 @@ public class Spell extends StackObjImpl implements Card {
             updateOptionalCosts(0);
             result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId, false, faceDown);
             return result;
+        }
+    }
+
+    private boolean hasTargets(SpellAbility spellAbility, Game game) {
+        if (spellAbility.getModes().getSelectedModes().size() > 1) {
+            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                spellAbility.getModes().setActiveMode(modeId);
+                if (!spellAbility.getTargets().isEmpty()) {
+                    return true;
+                }
+
+            }
+            return false;
+        } else {
+            return !spellAbility.getTargets().isEmpty();
         }
     }
 

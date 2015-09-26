@@ -83,12 +83,12 @@ class OnduRisingTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARE_ATTACKER;
+        return event.getType() == EventType.ATTACKER_DECLARED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanent(event.getSourceId());
         if (permanent != null) {
             for (Effect effect : getEffects()) {
                 effect.setTargetPointer(new FixedTarget(permanent, game));
