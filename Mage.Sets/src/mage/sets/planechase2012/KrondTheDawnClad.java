@@ -28,8 +28,6 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -37,7 +35,10 @@ import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -52,18 +53,18 @@ public class KrondTheDawnClad extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Archon");
 
-
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Flying
+        // Flying, vigilance
         this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.
         Ability ability = new ConditionalTriggeredAbility(
                 new AttacksTriggeredAbility(new ExileTargetEffect(), false),
                 new EnchantedCondition(),
-                "Whenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.");
+                "Whenever {this} attacks, if it's enchanted, exile target permanent.");
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

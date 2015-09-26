@@ -25,12 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.BlackManaAbility;
@@ -45,12 +43,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
@@ -93,7 +85,7 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                         break;
                     case AbilityAddingRemovingEffects_6:
                         permanent.removeAllAbilities(source.getSourceId(), game);
-                        for (String landType : landTypes)  {
+                        for (String landType : landTypes) {
                             switch (landType) {
                                 case "Swamp":
                                     permanent.addAbility(new BlackManaAbility(), source.getSourceId(), game);
@@ -134,8 +126,8 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
     private String setText() {
         StringBuilder sb = new StringBuilder("Enchanted land is a ");
         int i = 1;
-        for (String landType : landTypes)  {
-            if (i >1) {
+        for (String landType : landTypes) {
+            if (i > 1) {
                 if (i == landTypes.size()) {
                     sb.append(" and ");
                 } else {
