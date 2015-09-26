@@ -30,12 +30,10 @@ package mage.sets.scourge;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
-
+import mage.game.permanent.token.BeastToken2;
 
 /**
  *
@@ -47,9 +45,8 @@ public class HuntingPack extends CardImpl {
         super(ownerId, 121, "Hunting Pack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{G}{G}");
         this.expansionSetCode = "SCG";
 
-
         // Put a 4/4 green Beast creature token onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new HuntingPackToken(), 1));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2(), 1));
         // Storm
         this.addAbility(new StormAbility());
     }
@@ -61,17 +58,5 @@ public class HuntingPack extends CardImpl {
     @Override
     public HuntingPack copy() {
         return new HuntingPack(this);
-    }
-}
-
-class HuntingPackToken extends Token {
-
-    public HuntingPackToken() {
-        super("Beast", "4/4 green Beast creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Beast");
-        this.color.setGreen(true);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
     }
 }

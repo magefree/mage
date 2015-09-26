@@ -28,21 +28,19 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BeastToken2;
 import mage.watchers.Watcher;
 
 /**
@@ -62,7 +60,7 @@ public class BalothCageTrap extends CardImpl {
         this.getSpellAbility().addWatcher(new BalothCageTrapWatcher());
 
         // Put a 4/4 green Beast creature token onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastGreenToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
     }
 
     public BalothCageTrap(final BalothCageTrap card) {
@@ -138,17 +136,5 @@ class BalothCageTrapAlternativeCost extends AlternativeCostImpl {
     @Override
     public String getText() {
         return "If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost";
-    }
-}
-
-class BeastGreenToken extends Token {
-
-    public BeastGreenToken() {
-        super("Beast", "4/4 green Beast creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Beast");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
     }
 }
