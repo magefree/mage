@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -61,12 +62,14 @@ public class Triskelavus extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Triskelavus enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
-        
+
         // {1}, Remove a +1/+1 counter from Triskelavus: Put a 1/1 colorless Triskelavite artifact creature token with flying onto the battlefield. It has "Sacrifice this creature: This creature deals 1 damage to target creature or player."
-         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TriskelaviteToken()), new RemoveCountersSourceCost(CounterType.P1P1.createInstance())));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TriskelaviteToken()), new GenericManaCost(1));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
+        this.addAbility(ability);
     }
 
     public Triskelavus(final Triskelavus card) {
@@ -93,7 +96,7 @@ class TriskelaviteToken extends Token {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        
+
         addAbility(FlyingAbility.getInstance());
     }
 }
