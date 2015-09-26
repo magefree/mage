@@ -28,12 +28,10 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -42,7 +40,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinTokenWithHaste;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
@@ -62,7 +60,7 @@ public class GoblinAssault extends CardImpl {
         this.expansionSetCode = "ALA";
 
         // At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinAssaultToken()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste()), TargetController.YOU, false));
 
         // Goblin creatures attack each turn if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter, Duration.WhileOnBattlefield)), new AttackedThisTurnWatcher());
@@ -75,19 +73,5 @@ public class GoblinAssault extends CardImpl {
     @Override
     public GoblinAssault copy() {
         return new GoblinAssault(this);
-    }
-}
-
-class GoblinAssaultToken extends Token {
-
-    public GoblinAssaultToken() {
-        super("Goblin", "1/1 red Goblin creature token with haste");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Goblin");
-
-        color.setRed(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(HasteAbility.getInstance());
     }
 }
