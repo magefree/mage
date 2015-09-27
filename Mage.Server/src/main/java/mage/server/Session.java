@@ -43,7 +43,6 @@ import mage.remote.Connection;
 import mage.remote.DisconnectReason;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
-import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 
 /**
@@ -155,17 +154,9 @@ public class Session {
         this.userId = user.getId();
     }
 
-    public boolean setUserData(User user, UserDataView userDataView) {
+    public boolean setUserData(User user, UserData userData) {
         if (user != null) {
-            UserData userData = user.getUserData();
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
-                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(),
-                        userDataView.isShowAbilityPickerForced(), userDataView.isAllowRequestShowHandCards(),
-                        userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
-                        userDataView.getFlagName(), userDataView.askMoveToGraveOrder(),
-                        userDataView.isManaPoolAutomatic(), userDataView.isAllowRequestShowHandCards(),
-                        userDataView.isPassPriorityCast(), userDataView.isPassPriorityActivation(),
-                        userDataView.isAutoOrderTrigger());
                 user.setUserData(userData);
             } else {
                 user.getUserData().update(userData);

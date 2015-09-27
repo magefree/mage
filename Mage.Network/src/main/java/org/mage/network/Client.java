@@ -19,18 +19,20 @@ import java.util.Set;
 import java.util.UUID;
 import javax.net.ssl.SSLException;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.ExpansionInfo;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.ServerState;
+import mage.players.net.UserData;
 import mage.remote.Connection;
 import mage.utils.MageVersion;
 import mage.view.DraftPickView;
 import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.TournamentView;
-import mage.view.UserDataView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.PingMessageHandler;
@@ -46,9 +48,9 @@ import org.mage.network.messages.MessageType;
  * @author BetaSteward
  */
 public class Client {
-    
+
     private static final Logger logger = Logger.getLogger(Client.class);
-    
+
     private static final int IDLE_PING_TIME = 30;
     private static final int IDLE_TIMEOUT = 60;
 
@@ -56,9 +58,9 @@ public class Client {
 //    private final MessageHandler h;
     private final ClientMessageHandler clientMessageHandler;
     private final ClientRegisteredMessageHandler clientRegisteredMessageHandler;
-    
+
     private final ClientExceptionHandler exceptionHandler;
-    
+
     private SslContext sslCtx;
     private Channel channel;
     private String username;
@@ -66,18 +68,18 @@ public class Client {
     private int port;
 
     private static final EventLoopGroup group = new NioEventLoopGroup();
-    
+
     public Client(MageClient client) {
         this.client = client;
 //        h = new MessageHandler();
         clientMessageHandler = new ClientMessageHandler(client);
         clientRegisteredMessageHandler = new ClientRegisteredMessageHandler();
-        
+
         exceptionHandler = new ClientExceptionHandler(this);
     }
-    
+
     public boolean connect(Connection connection, MageVersion version) {
-        
+
         this.username = connection.getUsername();
         this.host = connection.getHost();
         this.port = connection.getPort();
@@ -88,21 +90,20 @@ public class Client {
             } else {
                 sslCtx = null;
             }
-            Bootstrap b = new Bootstrap();
-            b.group(group)
-                .channel(NioSocketChannel.class)
-                .handler(new ClientInitializer());
-            
+            Bootstrap bootstrap = new Bootstrap();
+            bootstrap.group(group)
+                    .channel(NioSocketChannel.class)
+                    .handler(new ClientInitializer());
+
             clientRegisteredMessageHandler.setConnection(connection);
             clientRegisteredMessageHandler.setVersion(version);
-            channel = b.connect(host, port).sync().channel();
+            channel = bootstrap.connect(host, port).sync().channel();
             ServerState state = clientRegisteredMessageHandler.registerClient();
             if (state.isValid()) {
                 client.clientRegistered(state);
                 client.connected(connection.getUsername() + "@" + host + ":" + port + " ");
                 return true;
-            }
-            else {
+            } else {
                 disconnect(false);
             }
         } catch (SSLException | InterruptedException ex) {
@@ -117,13 +118,12 @@ public class Client {
 
         @Override
         public void initChannel(SocketChannel ch) throws Exception {
-            
+
             if (sslCtx != null) {
                 ch.pipeline().addLast(sslCtx.newHandler(ch.alloc(), host, port));
             }
-            ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
+            ch.pipeline().addLast(new ObjectDecoder(10 * 1024 * 1024, ClassResolvers.cacheDisabled(null)));
             ch.pipeline().addLast(new ObjectEncoder());
-
             ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(IDLE_TIMEOUT, IDLE_PING_TIME, 0));
             ch.pipeline().addLast("heartbeatHandler", new HeartbeatHandler());
             ch.pipeline().addLast("pingMessageHandler", new PingMessageHandler());
@@ -135,27 +135,27 @@ public class Client {
             ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
     }
-    
+
     public void disconnect(boolean error) {
-        
+
         try {
             channel.disconnect().sync();
             client.disconnected(error);
-        } 
-        catch (InterruptedException ex) {
+        } catch (InterruptedException ex) {
             logger.fatal("Error disconnecting", ex);
-        } 
+        }
 //        finally {
 //            group.shutdownGracefully();
 //        }
     }
-    
+
     public boolean isConnected() {
-        if (channel != null)
+        if (channel != null) {
             return channel.isActive();
+        }
         return false;
     }
-    
+
     public void sendChatMessage(UUID chatId, String message) {
         clientMessageHandler.sendMessage(chatId, message);
     }
@@ -163,7 +163,7 @@ public class Client {
     public void joinChat(UUID chatId) {
         clientMessageHandler.joinChat(chatId);
     }
-    
+
     public void leaveChat(UUID chatId) {
         clientMessageHandler.leaveChat(chatId);
     }
@@ -201,6 +201,24 @@ public class Client {
             return clientMessageHandler.getCards();
         } catch (Exception ex) {
             logger.error("Error getting cards", ex);
+        }
+        return null;
+    }
+
+    public List<CardInfo> getMissingCardsData(List<String> cards) {
+        try {
+            return clientMessageHandler.getMissingCardsData(cards);
+        } catch (Exception ex) {
+            logger.error("Error getting missing card data from server", ex);
+        }
+        return null;
+    }
+
+    public List<ExpansionInfo> getMissingExpansionsData(List<String> setCodes) {
+        try {
+            return clientMessageHandler.getMissingExpansionData(setCodes);
+        } catch (Exception ex) {
+            logger.error("Error getting missing expansion set data", ex);
         }
         return null;
     }
@@ -280,9 +298,9 @@ public class Client {
         return null;
     }
 
-    public void setPreferences(UserDataView view) {
+    public void setPreferences(UserData userData) {
         try {
-            clientMessageHandler.setPreferences(view);
+            clientMessageHandler.setPreferences(userData);
         } catch (Exception ex) {
             logger.error("Error updating preferences", ex);
         }
@@ -373,7 +391,7 @@ public class Client {
             logger.error("Error quitting tournament", ex);
         }
     }
-    
+
     public TournamentView getTournament(UUID tournamentId) {
         try {
             return clientMessageHandler.getTournament(tournamentId);

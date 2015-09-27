@@ -146,6 +146,17 @@ public enum ExpansionRepository {
         return new ArrayList<>();
     }
 
+    public List<ExpansionInfo> getMissingExpansions(List<String> setCodes) {
+        try {
+            QueryBuilder<ExpansionInfo, Object> queryBuilder = expansionDao.queryBuilder();
+            queryBuilder.where().not().in("code", setCodes);
+
+            return expansionDao.query(queryBuilder.prepare());
+        } catch (SQLException ex) {
+        }
+        return new ArrayList<>();
+    }
+
     public List<String> getAllSetNames() {
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();

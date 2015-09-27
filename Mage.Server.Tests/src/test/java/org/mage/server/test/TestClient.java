@@ -9,6 +9,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.choices.Choice;
 import mage.game.match.MatchOptions;
 import mage.interfaces.ServerState;
+import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
@@ -24,7 +25,6 @@ import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.RoomView;
 import mage.view.TableView;
-import mage.view.UserDataView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.Client;
@@ -38,16 +38,16 @@ import org.mage.network.messages.MessageType;
 public class TestClient implements MageClient {
 
     protected static final Logger logger = Logger.getLogger(TestClient.class);
-    
+
     private Client client;
     private ServerState serverState;
     private String userName;
     private boolean joinedTableFired = false;
-    
+
     public TestClient() {
         client = new Client(this);
     }
-    
+
     public boolean connect(String userName) {
         this.userName = userName;
         Connection connection = new Connection();
@@ -56,18 +56,18 @@ public class TestClient implements MageClient {
         connection.setSSL(true);
         connection.setUsername(userName);
         connection.setForceDBComparison(false);
-        connection.setUserData(new UserDataView(UserGroup.PLAYER, 51, false, false, false, new UserSkipPrioritySteps(), "world", false, false, false, false, false, false));
+        connection.setUserData(new UserData(UserGroup.PLAYER, 10, false, false, false, new UserSkipPrioritySteps(), "world", false, false, false, false, false, false));
         return client.connect(connection, MageVersion.getCurrent());
     }
-    
+
     public void disconnect(boolean error) {
         client.disconnect(error);
     }
-    
+
     public boolean isConnected() {
         return client.isConnected();
     }
-    
+
     @Override
     public void connected(String message) {
     }
@@ -86,7 +86,7 @@ public class TestClient implements MageClient {
         UUID mainRoomId = client.getServerState().getMainRoomId();
         client.joinChat(client.getRoomChatId(mainRoomId));
     }
-    
+
     public void sendChatMessage(UUID chatId, String message) {
         client.sendChatMessage(chatId, message);
     }
@@ -115,7 +115,7 @@ public class TestClient implements MageClient {
     public void joinedTable(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
         joinedTableFired = true;
     }
-    
+
     public boolean isJoinedTableFired() {
         return joinedTableFired;
     }
@@ -188,19 +188,19 @@ public class TestClient implements MageClient {
     public List<String> getServerMessages() {
         return client.getServerMessages();
     }
-    
+
     public UUID getMainRoomId() {
         return serverState.getMainRoomId();
     }
-    
+
     public RoomView getRoom(UUID roomId) {
         return client.getRoom(roomId);
     }
-    
+
     public TableView createTable(UUID roomId, MatchOptions options) {
         return client.createTable(roomId, options);
     }
-    
+
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deck, String password) {
         return client.joinTable(roomId, tableId, playerName, playerType, skill, deck, password);
     }

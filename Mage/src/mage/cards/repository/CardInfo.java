@@ -30,20 +30,18 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import org.apache.log4j.Logger;
 
@@ -52,7 +50,7 @@ import org.apache.log4j.Logger;
  * @author North
  */
 @DatabaseTable(tableName = "card")
-public class CardInfo {
+public class CardInfo implements Serializable {
 
     private static final int MAX_RULE_LENGTH = 700;
 
@@ -144,13 +142,13 @@ public class CardInfo {
         this.setManaCosts(card.getManaCost().getSymbols());
 
         int length = 0;
-        for (String rule :card.getRules()) {
+        for (String rule : card.getRules()) {
             length += rule.length();
         }
         if (length > MAX_RULE_LENGTH) {
             length = 0;
             ArrayList<String> shortRules = new ArrayList<>();
-            for (String rule :card.getRules()) {
+            for (String rule : card.getRules()) {
                 if (length + rule.length() + 3 <= MAX_RULE_LENGTH) {
                     shortRules.add(rule);
                     length += rule.length() + 3;

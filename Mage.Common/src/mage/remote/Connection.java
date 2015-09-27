@@ -34,8 +34,7 @@ import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
-import mage.players.net.UserSkipPrioritySteps;
-import mage.view.UserDataView;
+import mage.players.net.UserData;
 
 /**
  *
@@ -56,7 +55,7 @@ public class Connection implements Serializable {
     private int clientCardDatabaseVersion;
     private boolean forceDBComparison;
 
-    private UserDataView userData;
+    private UserData userData;
 
 //    private int avatarId;
 //    private boolean showAbilityPickerForced;
@@ -64,8 +63,6 @@ public class Connection implements Serializable {
 //    private boolean confirmEmptyManaPool;
 //    private String flagName;
 //    private UserSkipPrioritySteps userSkipPrioritySteps;
-
-
     public ProxyType getProxyType() {
         return proxyType;
     }
@@ -118,11 +115,11 @@ public class Connection implements Serializable {
     public boolean isSSL() {
         return this.ssl;
     }
-    
+
     public void setSSL(boolean ssl) {
         this.ssl = ssl;
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -189,11 +186,11 @@ public class Connection implements Serializable {
         return null;
     }
 
-    public void setUserData(UserDataView userData) {
-        this.userData= userData;
+    public void setUserData(UserData userData) {
+        this.userData = userData;
     }
-    
-    public UserDataView getUserData() {
+
+    public UserData getUserData() {
         return userData;
     }
 

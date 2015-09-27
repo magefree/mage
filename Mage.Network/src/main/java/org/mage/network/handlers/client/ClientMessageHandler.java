@@ -9,15 +9,17 @@ import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.ExpansionInfo;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.players.net.UserData;
 import mage.view.DraftPickView;
 import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.TournamentView;
-import mage.view.UserDataView;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.messages.ClientMessage;
@@ -26,7 +28,9 @@ import org.mage.network.messages.requests.ChatRoomIdRequest;
 import org.mage.network.messages.requests.CheatRequest;
 import org.mage.network.messages.requests.CreateTableRequest;
 import org.mage.network.messages.requests.CreateTournamentRequest;
+import org.mage.network.messages.requests.GetCardInfoRequest;
 import org.mage.network.messages.requests.GetCardsRequest;
+import org.mage.network.messages.requests.GetExpansionInfoRequest;
 import org.mage.network.messages.requests.GetRoomRequest;
 import org.mage.network.messages.requests.GetTournamentChatIdRequest;
 import org.mage.network.messages.requests.GetTournamentRequest;
@@ -68,7 +72,7 @@ import org.mage.network.messages.requests.WatchTournamentTableRequest;
  * @author BetaSteward
  */
 public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMessage> {
-    
+
     private final MageClient client;
     private ChannelHandlerContext ctx;
     private final BlockingQueue<Boolean> booleanQueue = new LinkedBlockingQueue<>();
@@ -78,8 +82,10 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     private final BlockingQueue<TournamentView> tournamentViewQueue = new LinkedBlockingQueue<>();
     private final BlockingQueue<DraftPickView> draftPickViewQueue = new LinkedBlockingQueue<>();
     private final BlockingQueue<List<String>> stringListQueue = new LinkedBlockingQueue<>();
+    private final BlockingQueue<List<CardInfo>> cardInfoListQueue = new LinkedBlockingQueue<>();
+    private final BlockingQueue<List<ExpansionInfo>> expansionInfoListQueue = new LinkedBlockingQueue<>();
 
-    public ClientMessageHandler (MageClient client) {
+    public ClientMessageHandler(MageClient client) {
         this.client = client;
     }
 
@@ -87,13 +93,13 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         this.ctx = ctx;
         super.channelActive(ctx);
-    }    
-    
+    }
+
     @Override
     public void messageReceived(ChannelHandlerContext ctx, ClientMessage msg) {
         msg.handleMessage(this);
     }
-        
+
     public List<String> getServerMessages() throws Exception {
         stringListQueue.clear();
         ctx.writeAndFlush(new ServerMessagesRequest()).addListener(WriteListener.getInstance());
@@ -104,6 +110,18 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         stringListQueue.clear();
         ctx.writeAndFlush(new GetCardsRequest()).addListener(WriteListener.getInstance());
         return stringListQueue.take();
+    }
+
+    public List<CardInfo> getMissingCardsData(List<String> cards) throws Exception {
+        cardInfoListQueue.clear();
+        ctx.writeAndFlush(new GetCardInfoRequest(cards)).addListener(WriteListener.getInstance());
+        return cardInfoListQueue.take();
+    }
+
+    public List<ExpansionInfo> getMissingExpansionData(List<String> setCodes) throws Exception {
+        expansionInfoListQueue.clear();
+        ctx.writeAndFlush(new GetExpansionInfoRequest(setCodes)).addListener(WriteListener.getInstance());
+        return expansionInfoListQueue.take();
     }
 
     public UUID getChatRoomId(UUID roomId) throws Exception {
@@ -129,13 +147,13 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         ctx.writeAndFlush(new TableWaitingRequest(roomId, tableId)).addListener(WriteListener.getInstance());
         return tableViewQueue.take();
     }
-    
+
     public boolean joinTable(UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws Exception {
         booleanQueue.clear();
         ctx.writeAndFlush(new JoinTableRequest(roomId, tableId, name, playerType, skill, deckList, password)).addListener(WriteListener.getInstance());
         return booleanQueue.take();
     }
-    
+
     public boolean joinTournamentTable(UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws Exception {
         booleanQueue.clear();
         ctx.writeAndFlush(new JoinTournamentTableRequest(roomId, tableId, name, playerType, skill, deckList, password)).addListener(WriteListener.getInstance());
@@ -197,11 +215,11 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     public void joinChat(UUID chatId) {
         ctx.writeAndFlush(new JoinChatRequest(chatId)).addListener(WriteListener.getInstance());
     }
-    
+
     public void leaveChat(UUID chatId) {
         ctx.writeAndFlush(new LeaveChatRequest(chatId)).addListener(WriteListener.getInstance());
     }
-    
+
     public void sendMessage(UUID chatId, String message) {
         ctx.writeAndFlush(new ChatMessageRequest(chatId, message)).addListener(WriteListener.getInstance());
     }
@@ -213,11 +231,11 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     public void swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws Exception {
         ctx.writeAndFlush(new SwapSeatRequest(roomId, tableId, seatNum1, seatNum2)).addListener(WriteListener.getInstance());
     }
-    
+
     public MageClient getClient() {
         return client;
     }
-    
+
     public void receiveBoolean(boolean b) {
         booleanQueue.offer(b);
     }
@@ -233,12 +251,11 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     public void receiveTableView(TableView view) {
         if (view == null) {
             tableViewQueue.offer(TableView.emptyTableView);
-        }
-        else {
+        } else {
             tableViewQueue.offer(view);
         }
     }
-    
+
     public void receiveTournamentView(TournamentView view) {
         tournamentViewQueue.offer(view);
     }
@@ -249,6 +266,14 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
 
     public void receiveStringList(List<String> list) {
         stringListQueue.offer(list);
+    }
+
+    public void receiveCardInfoList(List<CardInfo> list) {
+        cardInfoListQueue.offer(list);
+    }
+
+    public void receiveExpansionInfoList(List<ExpansionInfo> list) {
+        expansionInfoListQueue.offer(list);
     }
 
     public void sendPlayerUUID(UUID gameId, UUID id) {
@@ -275,8 +300,8 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         ctx.writeAndFlush(new PlayerActionRequest(action, gameId, data)).addListener(WriteListener.getInstance());
     }
 
-    public void setPreferences(UserDataView view) {
-        ctx.writeAndFlush(new SetPreferencesRequest(view)).addListener(WriteListener.getInstance());
+    public void setPreferences(UserData userData) {
+        ctx.writeAndFlush(new SetPreferencesRequest(userData)).addListener(WriteListener.getInstance());
     }
 
     public TableView createTournamentTable(UUID roomId, TournamentOptions options) throws Exception {

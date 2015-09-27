@@ -1,30 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.client;
 
 import java.awt.AlphaComposite;
@@ -374,7 +374,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: "
                 + version == null ? "<not available>" : version.toString() + "  Server: "
-                + ((client != null && client.isConnected()) ? serverState.getVersion().toString():"<not connected>"));
+                        + ((client != null && client.isConnected()) ? serverState.getVersion().toString() : "<not connected>"));
     }
 
     private void addTooltipContainer() {
@@ -653,7 +653,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             @Override
             public void run() {
                 try {
-                    for(Component component :desktopPane.getComponents()) {
+                    for (Component component : desktopPane.getComponents()) {
                         if (component instanceof GamePane
                                 && ((GamePane) component).getGameId().equals(gameId)) {
                             setActive((GamePane) component);
@@ -722,9 +722,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             @Override
             public void run() {
                 try {
-                    for(Component component :desktopPane.getComponents()) {
-                        if (component instanceof TournamentPane &&
-                            ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
+                    for (Component component : desktopPane.getComponents()) {
+                        if (component instanceof TournamentPane
+                                && ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
                             setActive((TournamentPane) component);
                             return;
                         }
@@ -776,24 +776,24 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
         long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
         if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
-            List<String> classNames = client.getCards(); //CardRepository.instance.getClassNames();
-            List<CardInfo> cards = CardRepository.instance.getMissingCards(classNames);
-            CardRepository.instance.addCards(cards);
+            List<String> classNames = CardRepository.instance.getClassNames();
+            List<CardInfo> cardInfoList = client.getMissingCardsData(classNames);
+            CardRepository.instance.addCards(cardInfoList);
             CardRepository.instance.setContentVersion(serverState.getCardsContentVersion());
-            logger.info("Updating client cards DB - existing cards: " + classNames.size() + " new cards: " + cards.size() +
-                    " content versions - server: " + serverState.getCardsContentVersion() + " client: " + cardDBVersion);
+            logger.info("Updating client cards DB - existing cards: " + classNames.size() + " new cards: " + cardInfoList.size()
+                    + " content versions - server: " + serverState.getCardsContentVersion() + " client: " + cardDBVersion);
         }
 
         long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
         if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
             List<String> setCodes = ExpansionRepository.instance.getSetCodes();
-            List<ExpansionInfo> expansions = getMissingExpansionData(setCodes);
+            List<ExpansionInfo> expansions = client.getMissingExpansionsData(setCodes);
             for (ExpansionInfo expansion : expansions) {
                 ExpansionRepository.instance.add(expansion);
             }
             ExpansionRepository.instance.setContentVersion(serverState.getExpansionsContentVersion());
-            logger.info("Updating client expansions DB - existing sets: " + setCodes.size() + " new sets: " + expansions.size()+
-                    " content versions - server: " + serverState.getExpansionsContentVersion() + " client: " + expansionDBVersion);
+            logger.info("Updating client expansions DB - existing sets: " + setCodes.size() + " new sets: " + expansions.size()
+                    + " content versions - server: " + serverState.getExpansionsContentVersion() + " client: " + expansionDBVersion);
         }
     }
 
@@ -841,7 +841,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             setUserPrefsToConnection(connection);
 
             logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
-            if (connect(connection)) {  
+            if (connect(connection)) {
                 return true;
             } else {
                 showMessage("Error Connecting", "Unable to connect to server");
@@ -1109,7 +1109,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.tablesPane.hideTables();
     }
 
-    public void showGames(final boolean setActive) {        
+    public void showGames(final boolean setActive) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -1125,7 +1125,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     if (topPanebefore != null) {
                         setActive(topPanebefore);
                     }
-                }        
+                }
             }
         });
     }
@@ -1399,20 +1399,20 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     @Override
     public void disconnected(final boolean errorCall) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    setStatusText("Not connected");
-                    disableButtons();
-                    hideGames();
-                    hideTables();
-                    if (errorCall && JOptionPane.showConfirmDialog(MageFrame.this, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        if (performConnect()) {
-                            enableButtons();
-                        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                setStatusText("Not connected");
+                disableButtons();
+                hideGames();
+                hideTables();
+                if (errorCall && JOptionPane.showConfirmDialog(MageFrame.this, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (performConnect()) {
+                        enableButtons();
                     }
                 }
-            });
+            }
+        });
     }
 
     public void showMessage(final String title, final String message) {
@@ -1437,8 +1437,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void inform(String title, String message, MessageType type) {
         if (type == MessageType.ERROR) {
             showError(title, message);
-        }
-        else {
+        } else {
             showMessage(title, message);
         }
     }
@@ -1698,13 +1697,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             sideboard(deck, tableId, time);
         }
     }
-    
+
     @Override
     public void construct(UUID tableId, DeckView deckView, int time) {
         Deck deck = DeckUtil.construct(deckView);
         construct(deck, tableId, time);
     }
-
 
     protected void sideboard(Deck deck, UUID tableId, int time) {
         showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);

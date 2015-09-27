@@ -11,9 +11,9 @@ import org.mage.network.messages.responses.UUIDResponse;
  * @author BetaSteward
  */
 public class ChatRoomIdRequest extends ServerRequest {
-    
-    private UUID roomId;
-    
+
+    private final UUID roomId;
+
     public ChatRoomIdRequest(UUID roomId) {
         this.roomId = roomId;
     }

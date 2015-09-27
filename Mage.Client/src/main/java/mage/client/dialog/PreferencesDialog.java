@@ -69,7 +69,6 @@ import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
-import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 
 /**
@@ -2722,8 +2721,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
-    public static UserDataView getUserData() {
-        return new UserDataView(UserGroup.PLAYER,
+    public static UserData getUserData() {
+        return new UserData(UserGroup.PLAYER,
                 PreferencesDialog.selectedAvatarId,
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),

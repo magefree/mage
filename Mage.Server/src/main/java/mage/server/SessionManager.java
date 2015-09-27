@@ -27,14 +27,14 @@
  */
 package mage.server;
 
-import mage.remote.DisconnectReason;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.players.net.UserData;
 import mage.remote.Connection;
+import mage.remote.DisconnectReason;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
-import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.mage.network.messages.MessageType;
 
@@ -70,18 +70,18 @@ public class SessionManager {
         Session session = new Session(sessionId);
         sessions.put(sessionId, session);
         session.setHost(host);
-            String returnMessage = session.registerUser(connection);
-            if (returnMessage == null) {
-                LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, connection.getUsername(), session.getHost(), sessionId);
+        String returnMessage = session.registerUser(connection);
+        if (returnMessage == null) {
+            LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, connection.getUsername(), session.getHost(), sessionId);
 
-                logger.info(connection.getUsername() + " joined server");
-                logger.debug("- userId:    " + session.getUserId());
-                logger.debug("- sessionId: " + sessionId);
-                logger.debug("- host:      " + session.getHost());
-                return true;
-            }
-            logger.debug(connection.getUsername() + " not registered: " + returnMessage);
-            ServerMain.getInstance().informClient(sessionId, "Connection Error", returnMessage, MessageType.ERROR);
+            logger.info(connection.getUsername() + " joined server");
+            logger.debug("- userId:    " + session.getUserId());
+            logger.debug("- sessionId: " + sessionId);
+            logger.debug("- host:      " + session.getHost());
+            return true;
+        }
+        logger.debug(connection.getUsername() + " not registered: " + returnMessage);
+        ServerMain.getInstance().informClient(sessionId, "Connection Error", returnMessage, MessageType.ERROR);
         return false;
     }
 
@@ -96,10 +96,10 @@ public class SessionManager {
         return false;
     }
 
-    public boolean setUserData(String sessionId, UserDataView userDataView) {
+    public boolean setUserData(String sessionId, UserData userData) {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            session.setUserData(UserManager.getInstance().getUser(session.getUserId()), userDataView);
+            session.setUserData(UserManager.getInstance().getUser(session.getUserId()), userData);
             return true;
         }
         return false;

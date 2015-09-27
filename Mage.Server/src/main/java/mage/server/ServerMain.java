@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.server;
 
 import java.io.File;
@@ -39,8 +38,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
+import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
 import mage.constants.ManaType;
@@ -52,6 +53,7 @@ import mage.game.match.MatchType;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.ServerState;
+import mage.players.net.UserData;
 import mage.remote.Connection;
 import mage.remote.DisconnectReason;
 import mage.server.draft.CubeFactory;
@@ -87,7 +89,6 @@ import mage.view.GameView;
 import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.TournamentView;
-import mage.view.UserDataView;
 import mage.view.UserRequestMessage;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
@@ -124,19 +125,19 @@ public class ServerMain implements MageServer {
         this.testMode = testMode;
         ServerMessagesUtil.getInstance().getMessages();
         state = new ServerState(
-                    GameFactory.getInstance().getGameTypes(),
-                    TournamentFactory.getInstance().getTournamentTypes(),
-                    PlayerFactory.getInstance().getPlayerTypes().toArray(new String[PlayerFactory.getInstance().getPlayerTypes().size()]),
-                    DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[DeckValidatorFactory.getInstance().getDeckTypes().size()]),
-                    CubeFactory.getInstance().getDraftCubes().toArray(new String[CubeFactory.getInstance().getDraftCubes().size()]),
-                    testMode,
-                    ServerMain.getVersion(),
-                    CardRepository.instance.getContentVersionConstant(),
-                    ExpansionRepository.instance.getContentVersionConstant(),
-                    GamesRoomManager.getInstance().getMainRoomId()
-            );
+                GameFactory.getInstance().getGameTypes(),
+                TournamentFactory.getInstance().getTournamentTypes(),
+                PlayerFactory.getInstance().getPlayerTypes().toArray(new String[PlayerFactory.getInstance().getPlayerTypes().size()]),
+                DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[DeckValidatorFactory.getInstance().getDeckTypes().size()]),
+                CubeFactory.getInstance().getDraftCubes().toArray(new String[CubeFactory.getInstance().getDraftCubes().size()]),
+                testMode,
+                ServerMain.getVersion(),
+                CardRepository.instance.getContentVersionConstant(),
+                ExpansionRepository.instance.getContentVersionConstant(),
+                GamesRoomManager.getInstance().getMainRoomId()
+        );
     }
-    
+
     public static void main(String[] args) {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         logger.info("Starting MAGE server version " + version);
@@ -145,20 +146,18 @@ public class ServerMain implements MageServer {
         String adminPassword = "";
         boolean testMode = false;
         boolean fastDbMode = false;
-        
-        for (String arg: args) {
+
+        for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
                 testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
-            }
-            else if (arg.startsWith(adminPasswordArg)) {
+            } else if (arg.startsWith(adminPasswordArg)) {
                 adminPassword = arg.replace(adminPasswordArg, "");
                 adminPassword = SystemUtil.sanitize(adminPassword);
-            }
-            else if (arg.startsWith(fastDBModeArg)) {
+            } else if (arg.startsWith(fastDBModeArg)) {
                 fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
             }
         }
-        
+
         logger.info("Loading cards...");
         if (fastDbMode) {
             CardScanner.scanned = true;
@@ -169,19 +168,19 @@ public class ServerMain implements MageServer {
 
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.getInstance();
-        for (GamePlugin plugin: config.getGameTypes()) {
+        for (GamePlugin plugin : config.getGameTypes()) {
             GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
-        for (GamePlugin plugin: config.getTournamentTypes()) {
+        for (GamePlugin plugin : config.getTournamentTypes()) {
             TournamentFactory.getInstance().addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
         }
-        for (Plugin plugin: config.getPlayerTypes()) {
+        for (Plugin plugin : config.getPlayerTypes()) {
             PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
         }
-        for (Plugin plugin: config.getDraftCubes()) {
+        for (Plugin plugin : config.getDraftCubes()) {
             CubeFactory.getInstance().addDraftCube(plugin.getName(), loadPlugin(plugin));
         }
-        for (Plugin plugin: config.getDeckTypes()) {
+        for (Plugin plugin : config.getDeckTypes()) {
             DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
         }
 
@@ -190,17 +189,15 @@ public class ServerMain implements MageServer {
         logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());
         logger.info("Config - min user name l.: " + config.getMinUserNameLength());
         logger.info("Config - max user name l.: " + config.getMaxUserNameLength());
-        logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "True":"false"));
-        
+        logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "True" : "false"));
+
         try {
             instance = new ServerMain(adminPassword, testMode);
             server = new Server(instance);
             server.start(config.getPort(), config.isUseSSL());
-        }
-        catch (BindException ex) {
+        } catch (BindException ex) {
             logger.fatal("Failed to start server - " + config.getServerName() + " : check that another server is not already running", ex);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             logger.fatal("Failed to start server - " + config.getServerName(), ex);
         }
 
@@ -209,9 +206,9 @@ public class ServerMain implements MageServer {
     public static ServerMain getInstance() {
         return instance;
     }
-    
+
     @Override
-    public boolean registerClient(final Connection connection, final String sessionId, final MageVersion version, final String host)  {
+    public boolean registerClient(final Connection connection, final String sessionId, final MageVersion version, final String host) {
         if (version.compareTo(ServerMain.getVersion()) != 0) {
             logger.info("MageVersionException: userName=" + connection.getUsername() + ", version=" + version);
             LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, connection.getUsername(), version.toString(), ServerMain.getVersion().toString(), sessionId);
@@ -223,8 +220,8 @@ public class ServerMain implements MageServer {
     }
 
     @Override
-    public void setPreferences(final String sessionId, final UserDataView userDataView) {
-        SessionManager.getInstance().setUserData(sessionId, userDataView);
+    public void setPreferences(final String sessionId, final UserData userData) {
+        SessionManager.getInstance().setUserData(sessionId, userData);
     }
 //
 //    @Override
@@ -243,6 +240,7 @@ public class ServerMain implements MageServer {
 //        return false;
 //    }
 //
+
     @Override
     public TableView createTable(final String sessionId, final UUID roomId, final MatchOptions options) {
         UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
@@ -252,7 +250,7 @@ public class ServerMain implements MageServer {
             if (user != null) {
                 logger.debug("TABLE created - tableId: " + table.getTableId() + " " + table.getTableName());
                 logger.debug("- " + user.getName() + " userId: " + user.getId());
-                logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));                        
+                logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));
             }
         }
         LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
@@ -299,7 +297,7 @@ public class ServerMain implements MageServer {
         if (userId == null) {
             logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
             return false;
-        }                
+        }
         boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(userId, tableId, name, playerType, skill, deckList, password);
         return ret;
     }
@@ -312,11 +310,11 @@ public class ServerMain implements MageServer {
             if (user != null) {
                 logger.trace("join tourn. tableId: " + tableId + " " + name);
             }
-        }                
+        }
         if (userId == null) {
             logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
             return false;
-        }                 
+        }
         boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(userId, tableId, name, playerType, skill, deckList, password);
         return ret;
     }
@@ -325,8 +323,9 @@ public class ServerMain implements MageServer {
     public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) {
         UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
         boolean ret = TableManager.getInstance().submitDeck(userId, tableId, deckList);
-        if (ret)
+        if (ret) {
             logger.debug("Session " + sessionId + " submitted deck");
+        }
         return ret;
     }
 
@@ -394,7 +393,6 @@ public class ServerMain implements MageServer {
 //    public boolean ping(String sessionId, String pingInfo) {
 //        return SessionManager.getInstance().extendUserSession(sessionId, pingInfo);
 //    }
-
     public void pingClient(String sessionId) {
         server.pingClient(sessionId);
     }
@@ -469,30 +467,32 @@ public class ServerMain implements MageServer {
 //            handleException(ex);
 //        }
 //    }
-
     @Override
     public void receiveChatMessage(final UUID chatId, final String sessionId, final String message) {
         User user = SessionManager.getInstance().getUser(sessionId);
-        if (user != null)
+        if (user != null) {
             ChatManager.getInstance().broadcast(chatId, user, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE);
+        }
     }
-    
+
     public void sendChatMessage(String sessionId, UUID chatId, ChatMessage message) {
         server.sendChatMessage(sessionId, chatId, message);
     }
-    
+
     @Override
     public void joinChat(final UUID chatId, final String sessionId) {
         Session session = SessionManager.getInstance().getSession(sessionId);
-        if (session != null)
+        if (session != null) {
             ChatManager.getInstance().joinChat(chatId, session.getUserId());
+        }
     }
 
     @Override
     public void leaveChat(final UUID chatId, final String sessionId) {
         Session session = SessionManager.getInstance().getSession(sessionId);
-        if (session != null)
+        if (session != null) {
             ChatManager.getInstance().leaveChat(chatId, session.getUserId());
+        }
     }
 
 //    @Override
@@ -585,7 +585,6 @@ public class ServerMain implements MageServer {
 //        }
 //        return null;
 //    }
-
     @Override
     public UUID getTournamentChatId(UUID tournamentId) {
         return TournamentManager.getInstance().getChatId(tournamentId);
@@ -599,7 +598,7 @@ public class ServerMain implements MageServer {
             user.sendPlayerUUID(gameId, data);
         } else {
             logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-        }                 
+        }
     }
 
     @Override
@@ -609,7 +608,7 @@ public class ServerMain implements MageServer {
             user.sendPlayerString(gameId, data);
         } else {
             logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-        }                  
+        }
     }
 
     @Override
@@ -629,7 +628,7 @@ public class ServerMain implements MageServer {
             user.sendPlayerBoolean(gameId, data);
         } else {
             logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-        }                
+        }
     }
 
     @Override
@@ -647,8 +646,8 @@ public class ServerMain implements MageServer {
         Session session = SessionManager.getInstance().getSession(sessionId);
         if (session != null) {
             return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick, hiddenCards);
-        } else{
-            logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+        } else {
+            logger.error("Session not found sessionId: " + sessionId + "  draftId:" + draftId);
         }
         return null;
     }
@@ -658,8 +657,8 @@ public class ServerMain implements MageServer {
         Session session = SessionManager.getInstance().getSession(sessionId);
         if (session != null) {
             DraftManager.getInstance().sendCardMark(draftId, session.getUserId(), cardPick);
-        } else{
-            logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+        } else {
+            logger.error("Session not found sessionId: " + sessionId + "  draftId:" + draftId);
         }
     }
 
@@ -668,8 +667,8 @@ public class ServerMain implements MageServer {
         Session session = SessionManager.getInstance().getSession(sessionId);
         if (session != null) {
             GameManager.getInstance().quitMatch(gameId, session.getUserId());
-        } else{
-            logger.error("Session not found sessionId: "+ sessionId + "  gameId:" +gameId);
+        } else {
+            logger.error("Session not found sessionId: " + sessionId + "  gameId:" + gameId);
         }
     }
 
@@ -678,8 +677,8 @@ public class ServerMain implements MageServer {
         Session session = SessionManager.getInstance().getSession(sessionId);
         if (session != null) {
             TournamentManager.getInstance().quit(tournamentId, session.getUserId());
-        }else{
-            logger.error("Session not found sessionId: "+ sessionId + "  tournamentId:" + tournamentId);
+        } else {
+            logger.error("Session not found sessionId: " + sessionId + "  tournamentId:" + tournamentId);
         }
     }
 
@@ -687,7 +686,7 @@ public class ServerMain implements MageServer {
     public void quitDraft(final UUID draftId, final String sessionId) {
         Session session = SessionManager.getInstance().getSession(sessionId);
         if (session == null) {
-            logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+            logger.error("Session not found sessionId: " + sessionId + "  draftId:" + draftId);
             return;
         }
         UUID tableId = DraftManager.getInstance().getControllerByDraftId(draftId).getTableId();
@@ -702,12 +701,12 @@ public class ServerMain implements MageServer {
     public void sendPlayerAction(final PlayerAction playerAction, final UUID gameId, final String sessionId, final Serializable data) {
         Session session = SessionManager.getInstance().getSession(sessionId);
         if (session == null) {
-            logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
+            logger.error("Session not found sessionId: " + sessionId + "  gameId:" + gameId);
             return;
         }
         GameManager.getInstance().sendPlayerAction(playerAction, gameId, session.getUserId(), data);
     }
-      
+
     @Override
     public void watchTable(final String sessionId, final UUID roomId, final UUID tableId) {
         UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
@@ -719,7 +718,6 @@ public class ServerMain implements MageServer {
         UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
         TableManager.getInstance().watchTable(userId, tableId);
     }
-
 
     @Override
     public void stopWatching(final UUID gameId, final String sessionId) {
@@ -824,8 +822,6 @@ public class ServerMain implements MageServer {
 //            }
 //        });
 //     }
-
-
 //    @Override
 //    public GameView getGameView(final UUID gameId, final String sessionId, final UUID playerId) throws MageException {
 //         return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<GameView>() {
@@ -836,7 +832,6 @@ public class ServerMain implements MageServer {
 //             }
 //        });
 //    }
-
 //    /**
 //     * Get user data for admin console
 //     *
@@ -859,12 +854,11 @@ public class ServerMain implements MageServer {
 //        }, true);
 //    }
 //
-
     @Override
     public void disconnect(String sessionId, DisconnectReason reason) {
         SessionManager.getInstance().disconnect(sessionId, reason);
     }
-    
+
 //    @Override
 //    public void disconnectUser(final String sessionId, final String userSessionId) throws MageException {
 //        execute("disconnectUser", sessionId, new Action() {
@@ -884,13 +878,12 @@ public class ServerMain implements MageServer {
 //            }
 //        });
 //    }
-
 //    /**
-//     * Admin console - Remove table 
-//     * 
+//     * Admin console - Remove table
+//     *
 //     * @param sessionId
 //     * @param tableId
-//     * @throws MageException 
+//     * @throws MageException
 //     */
 //    @Override
 //    public void removeTable(final String sessionId, final UUID tableId) throws MageException {
@@ -903,10 +896,19 @@ public class ServerMain implements MageServer {
 //        });
 //    }
 //
-    
     @Override
     public List<String> getCards() {
         return CardRepository.instance.getClassNames();
+    }
+
+    @Override
+    public List<CardInfo> getMissingCardData(List<String> cards) {
+        return CardRepository.instance.getMissingCards(cards);
+    }
+
+    @Override
+    public List<ExpansionInfo> getMissingExpansionData(List<String> setCodes) {
+        return ExpansionRepository.instance.getMissingExpansions(setCodes);
     }
 
     @Override
@@ -923,7 +925,6 @@ public class ServerMain implements MageServer {
 //             }
 //        });
 //    }
-
     @Override
     public void sendFeedbackMessage(final String sessionId, final String title, final String type, final String message, final String email) {
         if (title != null && message != null) {
@@ -952,7 +953,6 @@ public class ServerMain implements MageServer {
 //            }, true);
 //        }
 //    }
-    
     @Override
     public void receiveBroadcastMessage(String title, String message, String sessionId) {
         if (SessionManager.getInstance().isAdmin(sessionId)) {
@@ -967,7 +967,7 @@ public class ServerMain implements MageServer {
     public void informClient(String sessionId, String title, String message, MessageType type) {
         server.informClient(sessionId, title, message, type);
     }
-    
+
 //    protected void execute(final String actionName, final String sessionId, final Action action, boolean checkAdminRights) throws MageException {
 //        if (checkAdminRights) {
 //            if (!SessionManager.getInstance().isAdmin(sessionId)) {
@@ -998,14 +998,13 @@ public class ServerMain implements MageServer {
 //                    }
 //                );
 //            }
-//            catch (Exception ex) {                
+//            catch (Exception ex) {
 //                handleException(sessionId, ex);
 //            }
 //        } else {
 //            LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, actionName, sessionId);
 //        }
 //    }
-
 //    protected <T> T executeWithResult(String actionName, final String sessionId, final ActionWithResult<T> action, boolean checkAdminRights) throws MageException {
 //        if (checkAdminRights) {
 //            if (!SessionManager.getInstance().isAdmin(sessionId)) {
@@ -1015,7 +1014,6 @@ public class ServerMain implements MageServer {
 //        }
 //        return executeWithResult(actionName, sessionId, action);
 //    }
-
     //TODO: also run in threads with future task
 //    protected <T> T executeWithResult(String actionName, final String sessionId, final ActionWithResult<T> action) throws MageException {
 //        if (SessionManager.getInstance().isValidSession(sessionId)) {
@@ -1029,7 +1027,6 @@ public class ServerMain implements MageServer {
 //        }
 //        return action.negativeResult();
 //    }
-
 //    @Override
 //    public List<ExpansionInfo> getMissingExpansionData(List<String> codes) {
 //        List<ExpansionInfo> result = new ArrayList<>();
@@ -1045,7 +1042,6 @@ public class ServerMain implements MageServer {
 //    public List<CardInfo> getMissingCardsData(List<String> classNames) {
 //        return CardRepository.instance.getMissingCards(classNames);
 //    }
-
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
@@ -1078,7 +1074,7 @@ public class ServerMain implements MageServer {
             logger.debug("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
-            logger.warn("Tournament type not found:" + plugin.getName() + " / "+ plugin.getJar() + " - check plugin folder", ex);
+            logger.warn("Tournament type not found:" + plugin.getName() + " / " + plugin.getJar() + " - check plugin folder", ex);
         } catch (MalformedURLException | InstantiationException | IllegalAccessException ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
@@ -1091,15 +1087,14 @@ public class ServerMain implements MageServer {
             directory.mkdirs();
         }
         File[] files = directory.listFiles(
-            new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.endsWith(".game");
+                new FilenameFilter() {
+                    @Override
+                    public boolean accept(File dir, String name) {
+                        return name.endsWith(".game");
+                    }
                 }
-            }
         );
-        for (File file : files)
-        {
+        for (File file : files) {
             file.delete();
         }
     }

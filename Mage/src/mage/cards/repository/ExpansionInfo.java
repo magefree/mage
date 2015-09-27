@@ -3,6 +3,7 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import java.io.Serializable;
 import java.util.Date;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
@@ -12,7 +13,7 @@ import mage.constants.SetType;
  * @author North
  */
 @DatabaseTable(tableName = "expansion")
-public class ExpansionInfo {
+public class ExpansionInfo implements Serializable {
 
     @DatabaseField(unique = true)
     protected String name;
