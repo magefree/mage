@@ -157,64 +157,64 @@ public class GameController implements GameCallback {
 
     private void init() {
         game.addTableEventListener(
-            new Listener<TableEvent> () {
-                @Override
-                public void event(TableEvent event) {
-                    try {
-                        PriorityTimer timer;
-                        UUID playerId;
-                        switch (event.getEventType()) {
-                            case UPDATE:
-                                updateGame();
-                                break;
-                            case INFO:
-                                ChatManager.getInstance().inform(chatId, event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME);
-                                logger.trace(game.getId() + " " + event.getMessage());
-                                break;
-                            case STATUS:
-                                ChatManager.getInstance().inform(chatId, event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME);
-                                logger.trace(game.getId() + " " + event.getMessage());
-                                break;
-                            case ERROR:
-                                error(event.getMessage(), event.getException());
-                                break;
-                            case END_GAME_INFO:
-                                endGameInfo();
-                                break;
-                            case INIT_TIMER:
-                                final UUID initPlayerId = event.getPlayerId();
-                                if (initPlayerId == null) {
-                                    throw new MageException("INIT_TIMER: playerId can't be null");
-                                }
-                                createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
-                                break;
-                            case RESUME_TIMER:
-                                playerId = event.getPlayerId();
-                                if (playerId == null) {
-                                    throw new MageException("RESUME_TIMER: playerId can't be null");
-                                }
-                                timer = timers.get(playerId);
-                                if (timer == null) {
-                                    Player player = game.getState().getPlayer(playerId);
-                                    if (player != null) {
-                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
-                                    } else {
-                                        throw new MageException("RESUME_TIMER: player can't be null");
+                new Listener<TableEvent>() {
+                    @Override
+                    public void event(TableEvent event) {
+                        try {
+                            PriorityTimer timer;
+                            UUID playerId;
+                            switch (event.getEventType()) {
+                                case UPDATE:
+                                    updateGame();
+                                    break;
+                                case INFO:
+                                    ChatManager.getInstance().inform(chatId, event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME);
+                                    logger.trace(game.getId() + " " + event.getMessage());
+                                    break;
+                                case STATUS:
+                                    ChatManager.getInstance().inform(chatId, event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME);
+                                    logger.trace(game.getId() + " " + event.getMessage());
+                                    break;
+                                case ERROR:
+                                    error(event.getMessage(), event.getException());
+                                    break;
+                                case END_GAME_INFO:
+                                    endGameInfo();
+                                    break;
+                                case INIT_TIMER:
+                                    final UUID initPlayerId = event.getPlayerId();
+                                    if (initPlayerId == null) {
+                                        throw new MageException("INIT_TIMER: playerId can't be null");
                                     }
-                                }
-                                timer.resume();
-                                break;
-                            case PAUSE_TIMER:
-                                playerId = event.getPlayerId();
-                                if (playerId == null) {
-                                    throw new MageException("PAUSE_TIMER: playerId can't be null");
-                                }
-                                timer = timers.get(playerId);
-                                if (timer == null) {
-                                    throw new MageException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
-                                }
-                                timer.pause();
-                                break;
+                                    createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
+                                    break;
+                                case RESUME_TIMER:
+                                    playerId = event.getPlayerId();
+                                    if (playerId == null) {
+                                        throw new MageException("RESUME_TIMER: playerId can't be null");
+                                    }
+                                    timer = timers.get(playerId);
+                                    if (timer == null) {
+                                        Player player = game.getState().getPlayer(playerId);
+                                        if (player != null) {
+                                            timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
+                                        } else {
+                                            throw new MageException("RESUME_TIMER: player can't be null");
+                                        }
+                                    }
+                                    timer.resume();
+                                    break;
+                                case PAUSE_TIMER:
+                                    playerId = event.getPlayerId();
+                                    if (playerId == null) {
+                                        throw new MageException("PAUSE_TIMER: playerId can't be null");
+                                    }
+                                    timer = timers.get(playerId);
+                                    if (timer == null) {
+                                        throw new MageException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
+                                    }
+                                    timer.pause();
+                                    break;
                             }
                         } catch (MageException ex) {
                             logger.fatal("Table event listener error ", ex);
@@ -375,7 +375,11 @@ public class GameController implements GameCallback {
                             logger.debug("Player " + player.getName() + " (disconnected) has joined gameId: " + game.getId());
                         }
                         Session session = SessionManager.getInstance().getSession(user.getSessionId());
-                        ChatManager.getInstance().broadcast(chatId, user, session.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+                        if (session != null) {
+                            ChatManager.getInstance().broadcast(chatId, user, session.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+                        } else {
+                            logger.debug("Player " + player.getName() + " - not possible to get session  gameId: " + game.getId());
+                        }
                         if (user.getSecondsDisconnected() > 240) {
                             // Cancel player join possibility lately after 4 minutes
                             logger.debug("Player " + player.getName() + " - canceled game (after 240 seconds) gameId: " + game.getId());
@@ -407,12 +411,12 @@ public class GameController implements GameCallback {
         if (allJoined()) {
             joinWaitingExecutor.shutdownNow();
             ThreadExecutor.getInstance().getCallExecutor().execute(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        startGame();
-                    }
-                });
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            startGame();
+                        }
+                    });
         }
     }
 
@@ -1072,13 +1076,13 @@ public class GameController implements GameCallback {
         }
         cancelTimeout();
         futureTimeout = timeoutIdleExecutor.schedule(new Runnable() {
-                @Override
-                public void run() {
-                    idleTimeout(playerId);
-                }
-            },
-            ServerMain.getInstance().isTestMode() ? 3600 :ConfigSettings.getInstance().getMaxSecondsIdle(),
-            TimeUnit.SECONDS
+            @Override
+            public void run() {
+                idleTimeout(playerId);
+            }
+        },
+                ServerMain.getInstance().isTestMode() ? 3600 : ConfigSettings.getInstance().getMaxSecondsIdle(),
+                TimeUnit.SECONDS
         );
     }
 
