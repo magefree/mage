@@ -63,15 +63,15 @@ import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.DEFAULT_AVATAR_ID;
-import static mage.client.dialog.PreferencesDialog.MAX_AVATAR_ID;
-import static mage.client.dialog.PreferencesDialog.MIN_AVATAR_ID;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Command;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
+import static mage.constants.Constants.DEFAULT_AVATAR_ID;
+import static mage.constants.Constants.MAX_AVATAR_ID;
+import static mage.constants.Constants.MIN_AVATAR_ID;
 import mage.constants.ManaType;
 import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
@@ -241,8 +241,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
-            if (id <= 0 || !(id >= 1000) || (id <= MIN_AVATAR_ID && id > MAX_AVATAR_ID)) {
-                id = PreferencesDialog.DEFAULT_AVATAR_ID;
+            if (!(id >= 1000) && (id <= 0 || (id <= MIN_AVATAR_ID && id > MAX_AVATAR_ID))) {
+                id = DEFAULT_AVATAR_ID;
             }
             if (id != avatarId) {
                 avatarId = id;

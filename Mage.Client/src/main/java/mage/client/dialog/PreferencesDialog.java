@@ -61,6 +61,9 @@ import mage.client.MageFrame;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import static mage.constants.Constants.DEFAULT_AVATAR_ID;
+import static mage.constants.Constants.MAX_AVATAR_ID;
+import static mage.constants.Constants.MIN_AVATAR_ID;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
@@ -262,9 +265,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static String PHASE_ON = "on";
     public static String PHASE_OFF = "off";
 
-    public static final int MIN_AVATAR_ID = 10;
-    public static final int MAX_AVATAR_ID = 32;
-    public static final int DEFAULT_AVATAR_ID = 10;
     private static final Map<Integer, JPanel> panels = new HashMap<>();
 
     private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
