@@ -36,9 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.MageException;
 import mage.constants.Constants;
-import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.remote.Connection;
@@ -66,7 +64,6 @@ public class Session {
     private final static int PING_CYCLES = 10;
     private final LinkedList<Long> pingTime = new LinkedList<>();
     private String pingInfo = "";
-        
 
     private final ReentrantLock lock;
 
@@ -132,7 +129,7 @@ public class Session {
         this.userId = user.getId();
 
         setUserData(user, connection.getUserData());
-        
+
         if (reconnect) { // must be connected to receive the message
             UUID chatId = GamesRoomManager.getInstance().getRoom(GamesRoomManager.getInstance().getMainRoomId()).getChatId();
             if (chatId != null) {
@@ -163,12 +160,12 @@ public class Session {
             UserData userData = user.getUserData();
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
                 userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(),
-                    userDataView.isShowAbilityPickerForced(), userDataView.isAllowRequestShowHandCards(),
-                    userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
-                    userDataView.getFlagName(), userDataView.askMoveToGraveOrder(), 
-                    userDataView.isManaPoolAutomatic(), userDataView.isAllowRequestShowHandCards(),
-                    userDataView.isPassPriorityCast(), userDataView.isPassPriorityActivation(),
-                    userDataView.isAutoOrderTrigger());
+                        userDataView.isShowAbilityPickerForced(), userDataView.isAllowRequestShowHandCards(),
+                        userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
+                        userDataView.getFlagName(), userDataView.askMoveToGraveOrder(),
+                        userDataView.isManaPoolAutomatic(), userDataView.isAllowRequestShowHandCards(),
+                        userDataView.isPassPriorityCast(), userDataView.isPassPriorityActivation(),
+                        userDataView.isAutoOrderTrigger());
                 user.setUserData(userData);
             } else {
                 user.getUserData().update(userData);
@@ -185,13 +182,12 @@ public class Session {
         return false;
     }
 
-    private void updateAvatar(String userName, UserData userData) {
+    private int updateAvatar(String userName) {
         //TODO: move to separate class
         //TODO: add for checking for private key
         switch (userName) {
             case "North":
-                userData.setAvatarId(1006);
-                break;
+                return 1006;
             case "BetaSteward":
                 return 1008;
             case "Bandit":
@@ -295,7 +291,7 @@ public class Session {
 
     public void recordPingTime(long milliSeconds) {
         pingTime.add(milliSeconds);
-        String lastPing = milliSeconds > 0 ? milliSeconds+"ms" : "<1ms";
+        String lastPing = milliSeconds > 0 ? milliSeconds + "ms" : "<1ms";
         if (pingTime.size() > PING_CYCLES) {
             pingTime.poll();
         }
@@ -304,7 +300,7 @@ public class Session {
             sum += time;
         }
         long avg = sum / pingTime.size();
-        pingInfo = lastPing + " (Av: " + (avg > 0 ? avg + "ms":"<1ms")+")";
+        pingInfo = lastPing + " (Av: " + (avg > 0 ? avg + "ms" : "<1ms") + ")";
     }
 
     public String getPingInfo() {
