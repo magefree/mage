@@ -58,8 +58,8 @@ import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
 /**
- import mage.constants.Outcome;
-*
+ * import mage.constants.Outcome;
+ *
  * @author LevelX2
  */
 public class Mindreaver extends CardImpl {
@@ -77,10 +77,10 @@ public class Mindreaver extends CardImpl {
         Ability ability = new HeroicAbility(new MindreaverExileEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
-        // {U}{U}, Sacrifice Mindreaver: Counter target spell with the same name as a card exiled with mindreaver.
+
+        // {U}{U}, Sacrifice Mindreaver: Counter target spell with the same name as a card exiled with Mindreaver.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
-        FilterSpell filter = new FilterSpell("spell with the same name as a card exiled with mindreaver");
+        FilterSpell filter = new FilterSpell("spell with the same name as a card exiled with {this}");
         filter.add(new MindreaverNamePredicate(this.getId()));
         ability.addTarget(new TargetSpell(filter));
         ability.addCost(new SacrificeSourceCost());
@@ -116,12 +116,13 @@ class MindreaverExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
+        MageObject sourceObject = source.getSourceObject(game);
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (opponent != null) {
+        if (opponent != null && sourceObject != null) {
             for (int i = 0; i < 3; i++) {
                 Card card = opponent.getLibrary().getFromTop(game);
                 if (card != null) {
-                    card.moveToExile(exileId, "Mindreaver", source.getSourceId(), game);
+                    card.moveToExile(exileId, sourceObject.getIdName(), source.getSourceId(), game);
                 }
             }
         }
@@ -130,29 +131,29 @@ class MindreaverExileEffect extends OneShotEffect {
 }
 
 class MindreaverNamePredicate implements Predicate<MageObject> {
-    
+
     private final UUID sourceId;
-    
+
     public MindreaverNamePredicate(UUID sourceId) {
         this.sourceId = sourceId;
     }
-    
+
     @Override
     public boolean apply(MageObject input, Game game) {
         Set<String> cardNames = new HashSet<String>();
         UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
         ExileZone exileZone = game.getExile().getExileZone(exileId);
         if (exileZone != null) {
-            for(Card card : exileZone.getCards(game)) {
+            for (Card card : exileZone.getCards(game)) {
                 cardNames.add(card.getName());
             }
         }
-        // If a player names a card, the player may name either half of a split card, but not both. 
+        // If a player names a card, the player may name either half of a split card, but not both.
         // A split card has the chosen name if one of its two names matches the chosen name.
         if (input instanceof SplitCard) {
-            return cardNames.contains(((SplitCard)input).getLeftHalfCard().getName()) || cardNames.contains(((SplitCard)input).getRightHalfCard().getName());
-        } else if (input instanceof Spell && ((Spell)input).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)){
-            SplitCard card = (SplitCard) ((Spell)input).getCard();
+            return cardNames.contains(((SplitCard) input).getLeftHalfCard().getName()) || cardNames.contains(((SplitCard) input).getRightHalfCard().getName());
+        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+            SplitCard card = (SplitCard) ((Spell) input).getCard();
             return cardNames.contains(card.getLeftHalfCard().getName()) || cardNames.contains(card.getRightHalfCard().getName());
         } else {
             return cardNames.contains(input.getName());

@@ -424,7 +424,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      */
     private void logBlockerInfo(Player defender, Game game) {
         boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no ned to sow the attacked player
-        for (CombatGroup group : this.getGroups()) {
+        for (CombatGroup group : game.getCombat().getGroups()) {
             if (group.defendingPlayerId.equals(defender.getId())) {
                 if (!shownDefendingPlayer) {
                     game.informPlayers("Attacked player: " + defender.getLogName());
@@ -927,15 +927,15 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public boolean declareAttacker(UUID attackerId, UUID defenderId, UUID playerId, Game game) {
-        Permanent attacker = game.getPermanent(attackerId);
+    public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
+        Permanent attacker = game.getPermanent(creatureId);
         if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
             if (!attacker.isTapped()) {
                 attacker.tap(game);
             }
         }
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
-            return addAttackerToCombat(attackerId, defenderId, game);
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, creatureId, playerId))) {
+            return addAttackerToCombat(creatureId, defenderId, game);
         }
         return false;
     }

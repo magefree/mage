@@ -1,37 +1,36 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 
 /*
  * CardsList.java
  *
  * Created on Dec 18, 2009, 10:40:12 AM
  */
-
 package mage.client.cards;
 
 import java.awt.Color;
@@ -59,7 +58,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
 import static mage.client.constants.Constants.SortBy.CASTING_COST;
 import static mage.client.constants.Constants.SortBy.COLOR;
-import static mage.client.constants.Constants.SortBy.COLOR_DETAILED;
+import static mage.client.constants.Constants.SortBy.COLOR_IDENTITY;
 import static mage.client.constants.Constants.SortBy.RARITY;
 import mage.client.deckeditor.SortSetting;
 import mage.client.deckeditor.table.TableModel;
@@ -67,7 +66,7 @@ import mage.client.deckeditor.table.UpdateCountsCallback;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardViewColorComparator;
-import mage.client.util.CardViewColorDetailedComparator;
+import mage.client.util.CardViewColorIdentityComparator;
 import mage.client.util.CardViewCostComparator;
 import mage.client.util.CardViewNameComparator;
 import mage.client.util.CardViewRarityComparator;
@@ -86,7 +85,7 @@ import org.mage.card.arcane.CardPanel;
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsList extends javax.swing.JPanel implements MouseListener, ICardGrid {
-   
+
     protected CardEventSource cardEventSource = new CardEventSource();
     private Dimension cardDimension;
     private CardsView cards;
@@ -98,8 +97,10 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     private TableModel mainModel;
     private JTable mainTable;
     private ICardGrid currentView;
-        
-    /** Creates new form Cards */
+
+    /**
+     * Creates new form Cards
+     */
     public CardsList() {
         initComponents();
         makeTransparent();
@@ -115,22 +116,22 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             mainModel.removeTableModelListener(mainTable);
             mainModel.clear();
         }
-        if(cardArea != null) {
-            for(MouseListener ml: cardArea.getMouseListeners()) {
+        if (cardArea != null) {
+            for (MouseListener ml : cardArea.getMouseListeners()) {
                 cardArea.removeMouseListener(ml);
             }
         }
-        if(mainTable != null) {
-            for(MouseListener ml: mainTable.getMouseListeners()) {
+        if (mainTable != null) {
+            for (MouseListener ml : mainTable.getMouseListeners()) {
                 mainTable.removeMouseListener(ml);
             }
         }
         if (currentView != null) {
             currentView.clearCardEventListeners();
         }
-        for (Component comp :cardArea.getComponents()) {
-            if (comp instanceof CardPanel) {                
-                ((CardPanel)comp).cleanUp();
+        for (Component comp : cardArea.getComponents()) {
+            if (comp instanceof CardPanel) {
+                ((CardPanel) comp).cleanUp();
             }
         }
         mageCards.clear();
@@ -208,20 +209,20 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             // activate spinner for card number change
             mainModel.setNumberEditable(true);
             TableColumnModel tcm = mainTable.getColumnModel();
-            TableColumn tc = tcm.getColumn(0);            
+            TableColumn tc = tcm.getColumn(0);
             tc.setMaxWidth(55);
             tc.setMinWidth(55);
             tc.setPreferredWidth(55);
-            tc.setCellEditor(new TableSpinnerEditor(this));            
+            tc.setCellEditor(new TableSpinnerEditor(this));
         }
     }
-    
+
     public void handleSetNumber(int number) {
         if (mainTable.getSelectedRowCount() == 1) {
             mainModel.setNumber(mainTable.getSelectedRow(), number);
-        }        
+        }
     }
-    
+
     public void handleDoubleClick() {
         if (mainTable.getSelectedRowCount() > 0) {
             int[] n = mainTable.getSelectedRows();
@@ -232,7 +233,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             }
         }
     }
-    
+
     public void handleAltDoubleClick() {
         if (mainTable.getSelectedRowCount() > 0) {
             int[] n = mainTable.getSelectedRows();
@@ -243,7 +244,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             }
         }
     }
-    
+
     public ICardGrid getMainModel() {
         return mainModel;
     }
@@ -255,7 +256,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         }
         return list;
     }
-
 
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
         int selectedRow = -1;
@@ -270,7 +270,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         chkPiles.setSelected(sortSetting.isPilesToggle());
         currentView.loadCards(showCards, sortSetting, bigCard, gameId);
         if (selectedRow >= 0) {
-            selectedRow = Math.min(selectedRow, mainTable.getRowCount()-1);
+            selectedRow = Math.min(selectedRow, mainTable.getRowCount() - 1);
             if (selectedRow >= 0) {
                 mainTable.setRowSelectionInterval(selectedRow, selectedRow);
             }
@@ -281,7 +281,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         if (cards == null) {
             cards = new CardsView();
         }
-           currentView.loadCards(cards, sortSetting, bigCard, gameId);
+        currentView.loadCards(cards, sortSetting, bigCard, gameId);
     }
 
     @Override
@@ -295,22 +295,21 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         Comparator<CardView> comparator = null;
         Map<UUID, MageCard> oldMageCards = mageCards;
         mageCards = new LinkedHashMap<>();
-        
+
         //Find card view
-        for(UUID uuid : cards.keySet()){
-            if(oldMageCards.containsKey(uuid)){
+        for (UUID uuid : cards.keySet()) {
+            if (oldMageCards.containsKey(uuid)) {
                 mageCards.put(uuid, oldMageCards.get(uuid));
                 oldMageCards.remove(uuid);
-            }
-            else{
+            } else {
                 mageCards.put(uuid, addCard(cards.get(uuid), bigCard, gameId));
             }
         }
         //Remove unused cards
-        for(MageCard card : oldMageCards.values()){
+        for (MageCard card : oldMageCards.values()) {
             cardArea.remove(card);
         }
-        
+
         if (cards != null && cards.size() > 0) {
             Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
             List<CardView> sortedCards = new ArrayList<>(cards.values());
@@ -324,25 +323,25 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 case COLOR:
                     comparator = new CardViewColorComparator();
                     break;
-                case COLOR_DETAILED:
-                    comparator = new CardViewColorDetailedComparator();
+                case COLOR_IDENTITY:
+                    comparator = new CardViewColorIdentityComparator();
                     break;
                 case CASTING_COST:
                     comparator = new CardViewCostComparator();
                     break;
             }
-            if(comparator != null){
+            if (comparator != null) {
                 Collections.sort(sortedCards, new CardViewNameComparator());
                 Collections.sort(sortedCards, comparator);
             }
             CardView lastCard = null;
-            for (CardView card: sortedCards) {
+            for (CardView card : sortedCards) {
                 if (sortSetting.isPilesToggle()) {
                     if (lastCard == null) {
                         lastCard = card;
                     }
-                    if(comparator != null){
-                        if(comparator.compare(card, lastCard) > 0){
+                    if (comparator != null) {
+                        if (comparator.compare(card, lastCard) > 0) {
                             curColumn++;
                             maxRow = Math.max(maxRow, curRow);
                             curRow = 0;
@@ -350,7 +349,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                     }
                     rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
                     setCardBounds(mageCards.get(card.getId()), rectangle);
-                    
+
                     curRow++;
                     lastCard = card;
                 } else {
@@ -368,21 +367,21 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         maxRow = Math.max(maxRow, curRow);
         maxColumn = Math.max(maxColumn, curColumn);
         updateCounts();
-        cardArea.setPreferredSize(new Dimension((maxColumn+1) * Config.dimensions.frameWidth, Config.dimensions.frameHeight + maxRow*20));
+        cardArea.setPreferredSize(new Dimension((maxColumn + 1) * Config.dimensions.frameWidth, Config.dimensions.frameHeight + maxRow * 20));
         cardArea.revalidate();
         this.revalidate();
         this.repaint();
         this.setVisible(true);
     }
-    
-    private void updateCounts(){
+
+    private void updateCounts() {
         int landCount = 0;
         int creatureCount = 0;
         int sorceryCount = 0;
         int instantCount = 0;
         int enchantmentCount = 0;
-        for (CardView card: cards.values()) {
-           if (card.getCardTypes().contains(CardType.LAND)) {
+        for (CardView card : cards.values()) {
+            if (card.getCardTypes().contains(CardType.LAND)) {
                 landCount++;
             }
             if (card.getCardTypes().contains(CardType.CREATURE)) {
@@ -398,7 +397,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 enchantmentCount++;
             }
         }
-        
+
         int count = cards != null ? cards.size() : 0;
         this.lblCount.setText(Integer.toString(count));
         this.lblCreatureCount.setText(Integer.toString(creatureCount));
@@ -418,7 +417,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         cardImg.addMouseListener(this);
         return cardImg;
     }
-    
 
     private void setCardBounds(MageCard card, Rectangle rectangle) {
         card.setBounds(rectangle);
@@ -456,10 +454,10 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mainModel.clearCardEventListeners();
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -678,9 +676,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         currentView = mainModel;
         panelCardArea.setViewportView(mainTable);
         cbSortBy.setEnabled(false);
-        chkPiles.setEnabled(false); 
+        chkPiles.setEnabled(false);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_VIEW, "listView");
-        redrawCards();        
+        redrawCards();
     }//GEN-LAST:event_jToggleListViewActionPerformed
 
     private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
@@ -698,8 +696,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         panelCardArea.setViewportView(cardArea);
         cbSortBy.setEnabled(true);
         chkPiles.setEnabled(true);
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_VIEW, "cardView");  
-        redrawCards();    
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_VIEW, "cardView");
+        redrawCards();
     }//GEN-LAST:event_jToggleCardViewActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -725,28 +723,26 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getClickCount() >= 1 && !e.isConsumed()) {            
+        if (e.getClickCount() >= 1 && !e.isConsumed()) {
             Object obj = e.getSource();
             if (e.getClickCount() == 2) {
                 e.consume();
                 if (obj instanceof Card) {
                     if (e.isAltDown()) {
-                        cardEventSource.altDoubleClick(((Card)obj).getOriginal(), "alt-double-click");
-                    }
-                    else {
-                        cardEventSource.doubleClick(((Card)obj).getOriginal(), "double-click");
+                        cardEventSource.altDoubleClick(((Card) obj).getOriginal(), "alt-double-click");
+                    } else {
+                        cardEventSource.doubleClick(((Card) obj).getOriginal(), "double-click");
                     }
                 } else if (obj instanceof MageCard) {
                     if (e.isAltDown()) {
-                        cardEventSource.altDoubleClick(((MageCard)obj).getOriginal(), "alt-double-click");
-                    }
-                    else {
-                        cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "double-click");
+                        cardEventSource.altDoubleClick(((MageCard) obj).getOriginal(), "alt-double-click");
+                    } else {
+                        cardEventSource.doubleClick(((MageCard) obj).getOriginal(), "double-click");
                     }
                 }
             }
             if (obj instanceof MageCard) {
-                checkMenu(e, ((MageCard)obj).getOriginal());
+                checkMenu(e, ((MageCard) obj).getOriginal());
             } else {
                 checkMenu(e, null);
             }
@@ -758,14 +754,14 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         if (!e.isConsumed()) {
             Object obj = e.getSource();
             if (obj instanceof MageCard) {
-                checkMenu(e, ((MageCard)obj).getOriginal());
+                checkMenu(e, ((MageCard) obj).getOriginal());
             } else {
                 checkMenu(e, null);
             }
         }
     }
 
-    private void checkMenu(MouseEvent Me, SimpleCardView card){
+    private void checkMenu(MouseEvent Me, SimpleCardView card) {
         if (Me.isPopupTrigger()) {
             Me.consume();
             cardEventSource.showPopupMenuEvent(card, Me.getComponent(), Me.getX(), Me.getY(), "show-popup-menu");

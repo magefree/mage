@@ -44,27 +44,26 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class SelkieHedgeMage extends CardImpl {
-    
+
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forests");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("Islands");
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new SubtypePredicate("Forests"));
-        filter2.add(new SubtypePredicate("Islands"));
+        filter.add(new SubtypePredicate("Forest"));
+        filter2.add(new SubtypePredicate("Island"));
         filter3.add(new TappedPredicate());
     }
-    
-    private String rule1 = "When {this} enters the battlefield, if you control two or more Forests, you may gain 3 life.";
-    private String rule2 = "When {this} enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.";
+
+    private final String rule1 = "When {this} enters the battlefield, if you control two or more Forests, you may gain 3 life.";
+    private final String rule2 = "When {this} enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.";
 
     public SelkieHedgeMage(UUID ownerId) {
         super(ownerId, 158, "Selkie Hedge-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G/U}");
@@ -80,12 +79,12 @@ public class SelkieHedgeMage extends CardImpl {
         // When Selkie Hedge-Mage enters the battlefield, if you control two or more Forests, you may gain 3 life.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule1);
         this.addAbility(ability);
-        
+
         // When Selkie Hedge-Mage enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.
         Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
         ability2.addTarget(new TargetPermanent(filter3));
         this.addAbility(ability2);
-        
+
     }
 
     public SelkieHedgeMage(final SelkieHedgeMage card) {

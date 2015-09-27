@@ -94,7 +94,7 @@ class WarpWorldEffect extends OneShotEffect {
             return false;
         }
         Map<UUID, Set<Card>> permanentsOwned = new HashMap<>();
-        Collection<Permanent> permanents = game.getBattlefield().getAllPermanents();
+        Collection<Permanent> permanents = game.getBattlefield().getAllActivePermanents();
         for (Permanent permanent : permanents) {
             Set<Card> set = permanentsOwned.get(permanent.getOwnerId());
             if (set == null) {

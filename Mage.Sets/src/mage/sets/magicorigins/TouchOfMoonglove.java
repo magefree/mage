@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -86,7 +86,7 @@ public class TouchOfMoonglove extends CardImpl {
 class TouchOfMoongloveAddTriggerEffect extends OneShotEffect {
 
     public TouchOfMoongloveAddTriggerEffect() {
-        super(Outcome.Damage);
+        super(Outcome.LoseLife);
         this.staticText = "Whenever a creature dealt damage by that creature this turn dies, its controller loses 2 life";
     }
 
@@ -118,7 +118,7 @@ class TouchOfMoongloveDelayedTriggeredAbility extends DelayedTriggeredAbility {
     private final MageObjectReference creatureToCheck;
 
     public TouchOfMoongloveDelayedTriggeredAbility(MageObjectReference creatureToCheck) {
-        super(new DamageTargetEffect(2), Duration.EndOfTurn, false);
+        super(new LoseLifeTargetEffect(2), Duration.EndOfTurn, false);
         this.creatureToCheck = creatureToCheck;
     }
 

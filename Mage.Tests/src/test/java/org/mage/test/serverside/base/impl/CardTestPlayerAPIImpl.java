@@ -574,7 +574,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
-        Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Battlefield) Card counts for " + player.getName() + " are not equal (" + cardName + ")", count, actualCount);
     }
 
     @Override
@@ -858,7 +858,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
 
-        Assert.assertEquals("(Graveyard) Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Graveyard " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
     }
 
     /**
@@ -935,7 +935,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param step
      * @param player
      * @param cardName
-     * @param targetName
+     * @param targetName for modal spells add the mode to the name e.g.
+     * "mode=2SilvercoatLion^mode3=PillarfieldOx"
      * @param spellOnStack
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack) {

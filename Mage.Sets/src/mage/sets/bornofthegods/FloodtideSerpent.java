@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysSourceEffect;
@@ -71,7 +71,7 @@ public class FloodtideSerpent extends CardImpl {
 
         // Floodtide Serpent can't attack unless you return an enchantment you control to its owner's hand <i>(This cost is paid as attackers are declared.)</i>
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysSourceEffect(
-                new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)), PayCostToAttackBlockEffectImpl.RestrictType.ATTACK)));
+                new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)), PayCostToAttackBlockEffectImpl.RestrictType.ATTACK)));
 
     }
 
@@ -106,7 +106,7 @@ class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
-            ReturnToHandTargetPermanentCost attackCost = new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter));
+            ReturnToHandChosenControlledPermanentCost attackCost = new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter));
             if (attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game)
                     && player.chooseUse(Outcome.Neutral, "Return an enchantment you control to hand to attack?", source, game)) {
                 if (attackCost.pay(source, game, source.getSourceId(), event.getPlayerId(), true)) {

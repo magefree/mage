@@ -36,11 +36,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class UlamogTheInfiniteGyreTest extends CardTestPlayerBase {
 
     /**
-     * Tests if Ulamog, the Infinite Gyre is countered its triggered ability resolves anyway
+     * Tests if Ulamog, the Infinite Gyre is countered its triggered ability
+     * resolves anyway
      */
     @Test
     public void testDisabledEffectOnChangeZone() {
@@ -57,11 +57,57 @@ public class UlamogTheInfiniteGyreTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        
         assertHandCount(playerA, "Ulamog, the Infinite Gyre", 0);
         assertPermanentCount(playerA, "Ulamog, the Infinite Gyre", 0);
         assertGraveyardCount(playerB, "Counterspell", 1);
         assertPermanentCount(playerB, "Island", 1);
     }
 
+    /**
+     * If one of the big eldrazi is under the control of someone that is not its
+     * owner when it goes to the graveyard, it's ability doesn't trigger
+     * correctly.
+     */
+    @Test
+    public void testControlledByOtherPlayer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 15);
+        // When you cast Kozilek, Butcher of Truth, draw four cards.
+        // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
+        // When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        addCard(Zone.HAND, playerA, "Kozilek, Butcher of Truth"); // {10}
+        // Destroy target creature.
+        // Spell mastery - If there are two or more instant and/or sorcery cards in your graveyard, you gain 2 life.
+        addCard(Zone.HAND, playerA, "Unholy Hunger"); // {3}{B}{B}
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+        addCard(Zone.HAND, playerB, "Control Magic", 1);
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kozilek, Butcher of Truth");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Control Magic", "Kozilek, Butcher of Truth");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Unholy Hunger", "Kozilek, Butcher of Truth");
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Kozilek, Butcher of Truth", 0);
+        assertPermanentCount(playerB, "Kozilek, Butcher of Truth", 0);
+
+        assertLife(playerA, 20);
+
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertHandCount(playerB, "Control Magic", 0);
+        assertGraveyardCount(playerB, "Control Magic", 1);
+
+        assertGraveyardCount(playerA, "Kozilek, Butcher of Truth", 0);
+
+        assertHandCount(playerA, "Kozilek, Butcher of Truth", 0);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 0);
+
+        assertGraveyardCount(playerA, "Unholy Hunger", 0);
+
+        assertHandCount(playerA, 4);
+
+    }
 }

@@ -104,7 +104,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             int cmc = 0;
-            for (UUID playerId :controller.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     if (player.getLibrary().size() > 0) {
@@ -137,12 +137,12 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
     public NayaSoulbeastReplacementEffect(final NayaSoulbeastReplacementEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());
@@ -152,7 +152,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Object object = this.getValue("NayaSoulbeastCounters");
         if (object instanceof Integer) {
-            int amount = ((Integer)object);
+            int amount = ((Integer) object);
             new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)).apply(game, source);
         }
         return false;

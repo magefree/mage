@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,28 +20,26 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.counter;
-
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.counters.Counter;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
@@ -54,7 +52,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
     private DynamicValue amount;
 
     public AddCountersTargetEffect(Counter counter) {
-        this(counter, counter.getName().equals(CounterType.M1M1.getName()) ? Outcome.UnboostCreature: Outcome.Benefit);
+        this(counter, counter.getName().equals(CounterType.M1M1.getName()) ? Outcome.UnboostCreature : Outcome.Benefit);
     }
 
     public AddCountersTargetEffect(Counter counter, DynamicValue amount) {
@@ -94,10 +92,10 @@ public class AddCountersTargetEffect extends OneShotEffect {
                         int before = permanent.getCounters().getCount(counter.getName());
                         permanent.addCounters(newCounter, game);
                         int numberAdded = permanent.getCounters().getCount(counter.getName()) - before;
-                        affectedTargets ++;
+                        affectedTargets++;
                         if (!game.isSimulation()) {
-                            game.informPlayers(sourceObject.getLogName() +": "+ controller.getLogName()+ " puts " +
-                                numberAdded + " " + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
+                            game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                                    + numberAdded + " " + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
                         }
                     }
                 } else {
@@ -106,14 +104,14 @@ public class AddCountersTargetEffect extends OneShotEffect {
                         Counter newCounter = counter.copy();
                         newCounter.add(amount.calculate(game, source, this));
                         player.addCounters(newCounter, game);
-                        affectedTargets ++;
+                        affectedTargets++;
                         if (!game.isSimulation()) {
-                            game.informPlayers(sourceObject.getLogName() +": " + controller.getLogName() + " puts " +
-                                    counter.getCount() + " " + counter.getName().toLowerCase() + " counter on " + player.getLogName());
-                        }                        
+                            game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                                    + counter.getCount() + " " + counter.getName().toLowerCase() + " counter on " + player.getLogName());
+                        }
                     }
                 }
-            }  
+            }
             return affectedTargets > 0;
         }
         return false;
@@ -131,8 +129,11 @@ public class AddCountersTargetEffect extends OneShotEffect {
         } else {
             sb.append("a ");
         }
-        sb.append(counter.getName().toLowerCase()).append(" counter on ");
-
+        sb.append(counter.getName().toLowerCase()).append(" counter");
+        if (counter.getCount() > 1) {
+            sb.append("s");
+        }
+        sb.append(" on ");
 
         // TODO: add normal text infrastructure for target pointers
         if (mode.getTargets().size() > 0) {
@@ -154,6 +155,5 @@ public class AddCountersTargetEffect extends OneShotEffect {
     public AddCountersTargetEffect copy() {
         return new AddCountersTargetEffect(this);
     }
-
 
 }

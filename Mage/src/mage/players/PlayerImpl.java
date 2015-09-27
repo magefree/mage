@@ -877,7 +877,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean putCardsOnTopOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
         Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
         cards.addAll(cardsToLibrary);
-        if (cards.size() != 0) {
+        if (!cards.isEmpty()) {
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
                 for (UUID cardId : cards) {
@@ -1136,7 +1136,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         justActivatedType = null;
         if (result) {
             if (isHuman() && (ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED))) {
-                setJustActivatedType(ability.getAbilityType());
+                if (ability.isUsesStack()) { // if the ability does not use the stack (e.g. Suspend) auto pass would go to next phase unintended
+                    setJustActivatedType(ability.getAbilityType());
+                }
             }
             game.getPlayers().resetPassed();
         }
@@ -2924,16 +2926,31 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        if (cards.isEmpty()) {
+            return true;
+        }
         Set<Card> cardList = new HashSet<>();
         for (UUID cardId : cards) {
             fromZone = game.getState().getZone(cardId);
-            if (fromZone.equals(Zone.BATTLEFIELD)) {
+            if (Zone.BATTLEFIELD.equals(fromZone)) {
                 Permanent permanent = game.getPermanent(cardId);
                 if (permanent != null) {
                     cardList.add(permanent);
                 }
             } else {
                 Card card = game.getCard(cardId);
+                if (card == null) {
+                    Spell spell = game.getState().getStack().getSpell(cardId);
+                    if (spell != null) {
+                        if (!spell.isCopy()) {
+                            card = spell.getCard();
+                        } else {
+                            // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
+                            game.getStack().remove(spell);
+                            game.informPlayers(spell.getLogName() + " was removed from the stack");
+                        }
+                    }
+                }
                 if (card != null) {
                     cardList.add(card);
                 }
@@ -2973,6 +2990,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             case HAND:
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
+                    if (fromZone == Zone.STACK) {
+                        // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
+                        Spell spell = game.getStack().getSpell(card.getId());
+                        if (spell != null) {
+                            game.getStack().remove(spell);
+                        }
+                    }
                     boolean hideCard = fromZone.equals(Zone.LIBRARY)
                             || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
                     if (moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard)) {
@@ -3183,7 +3207,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (card.moveToExile(exileId, exileName, sourceId, game)) {
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard) {
-                    card = game.getCard(card.getId());
+                    // in case it's face down or name was changed by copying from other permanent
+                    Card basicCard = game.getCard(card.getId());
+                    if (basicCard != null) {
+                        card = basicCard;
+                    } else {
+                        logger.error("Couldn't get the card object for the PermanenCard named " + card.getName());
+                    }
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() : "a card face down") + " "
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") + "to the exile zone");

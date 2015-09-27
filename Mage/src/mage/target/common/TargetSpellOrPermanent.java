@@ -1,5 +1,5 @@
 /*
- *  
+ *
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -25,7 +25,7 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
+ *
  */
 package mage.target.common;
 
@@ -51,7 +51,6 @@ import mage.target.TargetImpl;
 public class TargetSpellOrPermanent extends TargetImpl {
 
     protected FilterSpellOrPermanent filter;
-    protected FilterPermanent filterPermanent;
 
     public TargetSpellOrPermanent() {
         this(1, 1);
@@ -62,28 +61,28 @@ public class TargetSpellOrPermanent extends TargetImpl {
     }
 
     public TargetSpellOrPermanent(int minNumTargets, int maxNumTargets) {
-        this.minNumberOfTargets = minNumTargets;
-        this.maxNumberOfTargets = maxNumTargets;
-        this.zone = Zone.ALL;
-        this.filter = new FilterSpellOrPermanent();
-        this.targetName = filter.getMessage();
-        this.filterPermanent = new FilterPermanent();
+        this(minNumTargets, maxNumTargets, false);
     }
 
     public TargetSpellOrPermanent(int minNumTargets, int maxNumTargets, boolean notTarget) {
-        this(minNumTargets, maxNumTargets);
+        this(minNumTargets, maxNumTargets, new FilterSpellOrPermanent(), notTarget);
         this.notTarget = notTarget;
     }
 
-    public TargetSpellOrPermanent(int minNumTargets, int maxNumTargets, FilterSpellOrPermanent filter,boolean notTarget) {
-        this(minNumTargets, maxNumTargets);
+    public TargetSpellOrPermanent(int minNumTargets, int maxNumTargets, FilterSpellOrPermanent filter, boolean notTarget) {
+        super(notTarget);
+        this.minNumberOfTargets = minNumTargets;
+        this.maxNumberOfTargets = maxNumTargets;
+        this.zone = Zone.ALL;
+        this.targetName = filter.getMessage();
         this.notTarget = notTarget;
         this.filter = filter;
+        this.targetName = filter.getMessage();
     }
+
     public TargetSpellOrPermanent(final TargetSpellOrPermanent target) {
         super(target);
         this.filter = target.filter.copy();
-        this.filterPermanent = target.filterPermanent.copy();
     }
 
     @Override
@@ -92,7 +91,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
     }
 
     public FilterPermanent getPermanentFilter() {
-        return this.filterPermanent;
+        return this.filter.getPermanentFilter();
     }
 
     public void setFilter(FilterSpellOrPermanent filter) {
@@ -118,13 +117,15 @@ public class TargetSpellOrPermanent extends TargetImpl {
         if (permanent != null) {
             if (source != null) {
                 MageObject targetSource = game.getObject(source.getSourceId());
-                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
+                        && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
             } else {
                 return filter.match(permanent, game);
             }
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null) {
+        if (spell != null
+                && !source.getSourceId().equals(id)) { // 114.4. A spell or ability on the stack is an illegal target for itself.
             return filter.match(spell, game);
         }
         return false;
@@ -136,28 +137,32 @@ public class TargetSpellOrPermanent extends TargetImpl {
     }
 
     /**
-     * Checks if there are enough {@link mage.game.permanent.Permanent} or {@link mage.game.stack.Spell} that can be chosen.  Should only be used
-     * for Ability targets since this checks for protection, shroud etc.
+     * Checks if there are enough {@link mage.game.permanent.Permanent} or
+     * {@link mage.game.stack.Spell} that can be chosen. Should only be used for
+     * Ability targets since this checks for protection, shroud etc.
      *
      * @param sourceId - the target event source
      * @param sourceControllerId - controller of the target event source
      * @param game
-     * @return - true if enough valid {@link mage.game.permanent.Permanent} or {@link mage.game.stack.Spell} exist
+     * @return - true if enough valid {@link mage.game.permanent.Permanent} or
+     * {@link mage.game.stack.Spell} exist
      */
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
-        for (StackObject stackObject: game.getStack()) {
+        for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null && filter.match(spell, sourceId, sourceControllerId, game)) {
+            if (spell != null
+                    && !sourceId.equals(spell.getSourceId())
+                    && filter.match(spell, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
                 }
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -169,26 +174,29 @@ public class TargetSpellOrPermanent extends TargetImpl {
     }
 
     /**
-     * Checks if there are enough {@link mage.game.permanent.Permanent} or {@link mage.game.stack.Spell} that can be selected.  Should not be used
+     * Checks if there are enough {@link mage.game.permanent.Permanent} or
+     * {@link mage.game.stack.Spell} that can be selected. Should not be used
      * for Ability targets since this does not check for protection, shroud etc.
      *
      * @param sourceControllerId - controller of the select event
      * @param game
-     * @return - true if enough valid {@link mage.game.permanent.Permanent} or {@link mage.game.stack.Spell} exist
+     * @return - true if enough valid {@link mage.game.permanent.Permanent} or
+     * {@link mage.game.stack.Spell} exist
      */
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         int count = 0;
-                for (StackObject stackObject: game.getStack()) {
+        for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
+            if (spell != null
+                    && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
                 }
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game) && filter.match(permanent, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -203,13 +211,15 @@ public class TargetSpellOrPermanent extends TargetImpl {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
-                for (StackObject stackObject: game.getStack()) {
+        for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
+            if (spell != null
+                    && !sourceId.equals(spell.getSourceId())
+                    && filter.match(spell, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(spell.getId());
             }
         }
-                for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -220,13 +230,14 @@ public class TargetSpellOrPermanent extends TargetImpl {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-                for (StackObject stackObject: game.getStack()) {
+        for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
+            if (spell != null
+                    && filter.match(spell, null, sourceControllerId, game)) {
                 possibleTargets.add(spell.getId());
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -237,12 +248,11 @@ public class TargetSpellOrPermanent extends TargetImpl {
     @Override
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder();
-        for (UUID targetId: getTargets()) {
+        for (UUID targetId : getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 sb.append(permanent.getLogName()).append(" ");
-            }
-            else {
+            } else {
                 Spell spell = game.getStack().getSpell(targetId);
                 sb.append(spell.getLogName()).append(" ");
             }

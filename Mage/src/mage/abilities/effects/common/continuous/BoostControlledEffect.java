@@ -81,7 +81,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
      * @param power
      * @param toughness
      * @param duration
-     * @param filter
+     * @param filter AnotherPredicate is not working, you need to use the
+     * excludeSource option
      * @param lockedIn if true, power and toughness will be calculated only
      * once, when the ability resolves
      * @param excludeSource

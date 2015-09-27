@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KithkinToken;
 
 /**
  *
@@ -57,10 +57,9 @@ public class PatrolSignaler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {untap}: Put a 1/1 white Kithkin Soldier creature token onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KithkinSoldierToken()), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KithkinToken()), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
-        
     }
 
     public PatrolSignaler(final PatrolSignaler card) {
@@ -71,18 +70,4 @@ public class PatrolSignaler extends CardImpl {
     public PatrolSignaler copy() {
         return new PatrolSignaler(this);
     }
-}
-
-class KithkinSoldierToken extends Token {
-
-    public KithkinSoldierToken() {
-        super("Kithkin Soldier", "1/1 white Kithkin Soldier creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-
 }

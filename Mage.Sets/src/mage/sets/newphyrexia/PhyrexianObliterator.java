@@ -58,7 +58,10 @@ public class PhyrexianObliterator extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Trample
         this.addAbility(TrampleAbility.getInstance());
+
+        // Whenever a source deals damage to Phyrexian Obliterator, that source's controller sacrifices that many permanents.
         this.addAbility(new PhyrexianObliteratorTriggeredAbility());
     }
 
@@ -73,6 +76,7 @@ public class PhyrexianObliterator extends CardImpl {
 }
 
 class PhyrexianObliteratorTriggeredAbility extends TriggeredAbilityImpl {
+
     PhyrexianObliteratorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 0, ""));
     }

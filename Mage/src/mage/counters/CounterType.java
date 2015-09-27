@@ -41,6 +41,7 @@ public enum CounterType {
     BLAZE("blaze"),
     BRIBERY("bribery"),
     CHARGE("charge"),
+    CRYSTAL("crystal"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESPAIR("despair"),
@@ -80,6 +81,7 @@ public enum CounterType {
     POISON("poison"),
     PRESSURE("pressure"),
     QUEST("quest"),
+    SHELL("shell"),
     SHIELD("shield"),
     SHRED("shred"),
     SLIME("slime"),
@@ -92,7 +94,6 @@ public enum CounterType {
     TOWER("tower"),
     VELOCITY("velocity"),
     VERSE("verse"),
-    VILE("vile"),
     VITALITY("vitality"),
     WISH("wish");
 

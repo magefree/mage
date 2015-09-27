@@ -28,14 +28,18 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.token.HumanToken;
 import mage.game.stack.Spell;
 
 /**
@@ -47,7 +51,6 @@ public class IncreasingDevotion extends CardImpl {
     public IncreasingDevotion(UUID ownerId) {
         super(ownerId, 11, "Increasing Devotion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "DKA";
-
 
         // Put five 1/1 white Human creature tokens onto the battlefield. If Increasing Devotion was cast from a graveyard, put ten of those tokens onto the battlefield instead.
         this.getSpellAbility().addEffect(new IncreasingDevotionEffect());

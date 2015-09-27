@@ -49,7 +49,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoatToken;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
@@ -59,10 +59,10 @@ import mage.target.common.TargetControlledPermanent;
  * @author jeffwadsworth
  */
 public class TradingPost extends CardImpl {
-    
+
     final static FilterControlledPermanent filter = new FilterControlledPermanent("creature");
     final static FilterControlledPermanent filter2 = new FilterControlledPermanent("artifact");
-    
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter2.add(new CardTypePredicate(CardType.ARTIFACT));
@@ -77,26 +77,26 @@ public class TradingPost extends CardImpl {
         ability1.addCost(new TapSourceCost());
         ability1.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability1);
-        
+
         // {1}, {tap}, Pay 1 life: Put a 0/1 white Goat creature token onto the battlefield.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoatToken()), new GenericManaCost(1));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new PayLifeCost(1));
         this.addAbility(ability2);
-        
+
         // {1}, {tap}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.
         Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
         ability3.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card in your graveyard")));
         ability3.addCost(new TapSourceCost());
         ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability3);
-        
+
         // {1}, {tap}, Sacrifice an artifact: Draw a card.
         Ability ability4 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability4.addCost(new TapSourceCost());
         ability4.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
         this.addAbility(ability4);
-        
+
     }
 
     public TradingPost(final TradingPost card) {
@@ -106,17 +106,5 @@ public class TradingPost extends CardImpl {
     @Override
     public TradingPost copy() {
         return new TradingPost(this);
-    }
-}
-
-class GoatToken extends Token {
-    public GoatToken() {
-        super("Goat", "a 0/1 white Goat creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Goat");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
     }
 }

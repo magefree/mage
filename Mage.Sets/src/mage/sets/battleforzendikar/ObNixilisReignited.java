@@ -60,20 +60,24 @@ public class ObNixilisReignited extends CardImpl {
         this.expansionSetCode = "BFZ";
         this.subtype.add("Nixilis");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));   
-        
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+
         // +1: You draw a card and you lose 1 life.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
-        ability1.addEffect(new LoseLifeSourceControllerEffect(1));
+        Effect effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("You draw a card");
+        LoyaltyAbility ability1 = new LoyaltyAbility(effect, 1);
+        effect = new LoseLifeSourceControllerEffect(1);
+        effect.setText("and you lose 1 life");
+        ability1.addEffect(effect);
         this.addAbility(ability1);
-        
+
         // -3: Destroy target creature.
         LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -3);
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
-        
+
         // -8: Target opponent gets an emblem with "Whenever a player draws a card, you lose 2 life."
-        Effect effect = new GetEmblemTargetPlayerEffect(new ObNixilisReignitedEmblem());
+        effect = new GetEmblemTargetPlayerEffect(new ObNixilisReignitedEmblem());
         effect.setText("Target opponent gets an emblem with \"Whenever a player draws a card, you lose 2 life.\"");
         LoyaltyAbility ability3 = new LoyaltyAbility(effect, -8);
         ability3.addTarget(new TargetOpponent());
@@ -94,12 +98,13 @@ class ObNixilisReignitedEmblem extends Emblem {
 
     public ObNixilisReignitedEmblem() {
         setName("EMBLEM: Ob Nixilis Reignited");
-        
+
         this.getAbilities().add(new ObNixilisEmblemTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
+        this.setExpansionSetCodeForImage("BFZ");
     }
 }
 
-class ObNixilisEmblemTriggeredAbility  extends TriggeredAbilityImpl {
+class ObNixilisEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     public ObNixilisEmblemTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.COMMAND, effect, optional);

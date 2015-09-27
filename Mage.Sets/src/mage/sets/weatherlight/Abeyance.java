@@ -55,7 +55,7 @@ public class Abeyance extends CardImpl {
         // Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
         this.getSpellAbility().addEffect(new AbeyanceEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -95,7 +95,7 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast instant or sorcery spells or activate abilities that aren't mana abilities this turn (" + mageObject.getLogName() + ").";
+            return "You can't cast instant or sorcery spells or activate abilities that aren't mana abilities this turn (" + mageObject.getIdName() + ").";
         }
         return null;
     }

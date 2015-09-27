@@ -93,3 +93,5 @@ Mage.Client/serverlist.txt
 /Mage.Server.Tests/target/
 /Mage.Server.Tests/db
 /Mage.Server.Tests/*.log
+Mage.Client/serverlist.txt
+/bin/

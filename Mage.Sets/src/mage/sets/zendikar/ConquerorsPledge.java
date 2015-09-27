@@ -37,7 +37,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KorSoldierToken;
 
 /**
  *
@@ -64,20 +64,6 @@ public class ConquerorsPledge extends CardImpl {
     @Override
     public ConquerorsPledge copy() {
         return new ConquerorsPledge(this);
-    }
-
-}
-
-class KorSoldierToken extends Token {
-
-    public KorSoldierToken() {
-        super("Kor Soldier", "1/1 white Kor Soldier creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Kor");
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 
 }

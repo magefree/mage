@@ -36,6 +36,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mage.MageException;
+import mage.constants.Constants;
+import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.remote.Connection;
@@ -168,15 +171,14 @@ public class Session {
                     userDataView.isAutoOrderTrigger());
                 user.setUserData(userData);
             } else {
-                if (userData.getAvatarId() == 51) { // Update special avatar if first avatar is selected
-                    updateAvatar(user.getName(), userData);
-                }
-                userData.setAvatarId(userDataView.getAvatarId());                
-                userData.setShowAbilityPickerForced(userDataView.isShowAbilityPickerForced());
-                userData.setAllowRequestShowHandCards(userDataView.isAllowRequestShowHandCards());
-                userData.setUserSkipPrioritySteps(userDataView.getUserSkipPrioritySteps());
-                userData.setConfirmEmptyManaPool(userDataView.confirmEmptyManaPool());
-                userData.setAskMoveToGraveOrder(userDataView.askMoveToGraveOrder());
+                user.getUserData().update(userData);
+            }
+            if (user.getUserData().getAvatarId() < Constants.MIN_AVATAR_ID
+                    || user.getUserData().getAvatarId() > Constants.MAX_AVATAR_ID) {
+                user.getUserData().setAvatarId(Constants.DEFAULT_AVATAR_ID);
+            }
+            if (user.getUserData().getAvatarId() == 11) {
+                user.getUserData().setAvatarId(updateAvatar(user.getName()));
             }
             return true;
         }
@@ -187,31 +189,17 @@ public class Session {
         //TODO: move to separate class
         //TODO: add for checking for private key
         switch (userName) {
-            case "nantuko":
-                userData.setAvatarId(1000);
-                break;
             case "North":
                 userData.setAvatarId(1006);
                 break;
             case "BetaSteward":
-                userData.setAvatarId(1008);
-                break;
-            case "loki":
-                userData.setAvatarId(1012);
-                break;
-            case "Ayrat":
-                userData.setAvatarId(1018);
-                break;
+                return 1008;
             case "Bandit":
-                userData.setAvatarId(1020);
-                break;
-            default:
-                userData.setAvatarId(51);
-                break;
-            case "Wehk":
-                userData.setAvatarId(66);
-                break;
+                return 1020;
+            case "fireshoes":
+                return 1021;
         }
+        return 11;
     }
 
     public String getId() {

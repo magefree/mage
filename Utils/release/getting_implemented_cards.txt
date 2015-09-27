@@ -22,10 +22,16 @@ git log 23039572f2206ade860f5835e9b85e82a9c4b2a1..HEAD --diff-filter=A --name-st
 
 
 since 1.4.4.v0
-git log 0a458707ddaaa5e7e82ab06d17633084f67077c1..23039572f2206ade860f5835e9b85e82a9c4b2a1 --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+git log 0a458707ddaaa5e7e82ab06d17633084f67077c1..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 
 since 1.4.4.v3
-git log 3d8494edb5c0fddcb972758f7d983b8b66a9651e..0a458707ddaaa5e7e82ab06d17633084f67077c1 --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+git log 3d8494edb5c0fddcb972758f7d983b8b66a9651e..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.4.v4
+git log 513a574ae98aff3d7820e5411a8e5f2a6506e69c..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.4.v6
+git log 7650f53dee0b4d480d2a63befed72b6c8197e752..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 
 3. Copy added_cards.txt to trunk\Utils folder
 4. Run script:

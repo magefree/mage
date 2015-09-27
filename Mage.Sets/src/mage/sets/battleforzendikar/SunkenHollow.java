@@ -47,15 +47,15 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  * @author fireshoes
  */
 public class SunkenHollow extends CardImpl {
-    
+
     private static final FilterLandPermanent filter = new FilterLandPermanent();
-    
+
     static {
         filter.add(new SupertypePredicate("Basic"));
     }
 
     public SunkenHollow(UUID ownerId) {
-        super(ownerId, 248, "Sunken Hollow", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        super(ownerId, 249, "Sunken Hollow", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Island");
         this.subtype.add("Swamp");

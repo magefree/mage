@@ -31,20 +31,17 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -68,7 +65,7 @@ public class ProteanHydra extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Protean Hydra enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new ProteanHydraEffect1(), "with X +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProteanHydraEffect2()));
@@ -85,41 +82,6 @@ public class ProteanHydra extends CardImpl {
     @Override
     public ProteanHydra copy() {
         return new ProteanHydra(this);
-    }
-
-    class ProteanHydraEffect1 extends OneShotEffect {
-
-        public ProteanHydraEffect1() {
-            super(Outcome.BoostCreature);
-            staticText = "{this} enters the battlefield with X +1/+1 counters on it";
-        }
-
-        public ProteanHydraEffect1(final ProteanHydraEffect1 effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-                if (spellAbility != null
-                        && spellAbility.getSourceId().equals(source.getSourceId())
-                        && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                    int amount = spellAbility.getManaCostsToPay().getX();
-                    if (amount > 0) {
-                        permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                    }
-                }
-            }
-            return true;
-        }
-
-        @Override
-        public ProteanHydraEffect1 copy() {
-            return new ProteanHydraEffect1(this);
-        }
-
     }
 
     class ProteanHydraEffect2 extends PreventionEffectImpl {

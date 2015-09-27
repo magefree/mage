@@ -25,12 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +36,11 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,21 +53,26 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Enslave extends CardImpl {
 
-    public Enslave (UUID ownerId) {
+    public Enslave(UUID ownerId) {
         super(ownerId, 58, "Enslave", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+
+        // At the beginning of your upkeep, enchanted creature deals 1 damage to its owner.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new EnslaveEffect(), TargetController.YOU, false, false));
     }
 
-    public Enslave (final Enslave card) {
+    public Enslave(final Enslave card) {
         super(card);
     }
 
@@ -77,6 +84,7 @@ public class Enslave extends CardImpl {
 }
 
 class EnslaveEffect extends OneShotEffect {
+
     EnslaveEffect() {
         super(Outcome.Damage);
         staticText = "enchanted creature deals 1 damage to its owner";
@@ -88,13 +96,13 @@ class EnslaveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null) {
-            Permanent attached = game.getPermanent(sourcePermanent.getAttachedTo());
+            Permanent attached = game.getPermanentOrLKIBattlefield(sourcePermanent.getAttachedTo());
             if (attached != null) {
                 Player owner = game.getPlayer(attached.getOwnerId());
                 if (owner != null) {
-                    owner.damage(1, source.getSourceId(), game, false, true);
+                    owner.damage(1, attached.getId(), game, false, true);
                     return true;
                 }
             }

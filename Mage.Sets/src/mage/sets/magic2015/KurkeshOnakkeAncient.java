@@ -101,13 +101,15 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (source != null && source.getCardType().contains(CardType.ARTIFACT)) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
-                Effect effect = this.getEffects().get(0);
-                effect.setValue("stackAbility", stackAbility.getStackAbility());
-                return true;
+        if (event.getPlayerId().equals(getControllerId())) {
+            Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (source != null && source.getCardType().contains(CardType.ARTIFACT)) {
+                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+                if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
+                    Effect effect = this.getEffects().get(0);
+                    effect.setValue("stackAbility", stackAbility.getStackAbility());
+                    return true;
+                }
             }
         }
         return false;
@@ -115,7 +117,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}.  If you do, copy that ability.  You may choose new targets for the copy.";
+        return "Whenever you activate an ability of an artifact, if it isn't a mana ability" + super.getRule();
     }
 }
 
@@ -123,7 +125,7 @@ class KurkeshOnakkeAncientEffect extends OneShotEffect {
 
     KurkeshOnakkeAncientEffect() {
         super(Outcome.Benefit);
-        this.staticText = ", you may pay {R}.  If you do, copy that ability.  You may choose new targets for the copy.";
+        this.staticText = ", you may pay {R}. If you do, copy that ability. You may choose new targets for the copy";
     }
 
     KurkeshOnakkeAncientEffect(final KurkeshOnakkeAncientEffect effect) {

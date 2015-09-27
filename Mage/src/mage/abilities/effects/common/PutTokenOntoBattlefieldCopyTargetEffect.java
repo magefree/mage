@@ -58,6 +58,8 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private final int number;
     private List<Permanent> addedTokenPermanents;
     private String additionalSubType;
+    private boolean tapped;
+    private boolean attacking;
 
     public PutTokenOntoBattlefieldCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -76,6 +78,10 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this(playerId, additionalCardType, gainsHaste, 1);
     }
 
+    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number) {
+        this(playerId, additionalCardType, gainsHaste, number, false, false);
+    }
+
     /**
      *
      * @param playerId null the token is controlled/owned by the controller of
@@ -84,13 +90,15 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
      * @param gainsHaste the token gains haste
      * @param number number of tokens to put into play
      */
-    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number) {
+    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
         this.additionalCardType = additionalCardType;
         this.gainsHaste = gainsHaste;
         this.addedTokenPermanents = new ArrayList<>();
         this.number = number;
+        this.tapped = tapped;
+        this.attacking = attacking;
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(final PutTokenOntoBattlefieldCopyTargetEffect effect) {
@@ -101,6 +109,8 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
         this.number = effect.number;
         this.additionalSubType = effect.additionalSubType;
+        this.tapped = effect.tapped;
+        this.attacking = effect.attacking;
     }
 
     @Override
@@ -149,7 +159,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
                 token.getSubtype().add(additionalSubType);
             }
         }
-        token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId);
+        token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId, tapped, attacking);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
@@ -170,7 +180,15 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Put a token onto the battlefield that's a copy of target ");
+        sb.append("Put a token onto the battlefield ");
+        if (tapped && !attacking) {
+            sb.append("tapped ");
+        } else if (!tapped && attacking) {
+            sb.append("attacking ");
+        } else if (tapped && attacking) {
+            sb.append("tapped and attacking ");
+        }
+        sb.append("that's a copy of target ");
         if (mode.getTargets() != null) {
             sb.append(mode.getTargets().get(0).getTargetName());
         }

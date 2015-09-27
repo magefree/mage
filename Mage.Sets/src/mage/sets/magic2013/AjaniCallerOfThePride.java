@@ -46,7 +46,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CatToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -89,17 +89,5 @@ public class AjaniCallerOfThePride extends CardImpl {
     @Override
     public AjaniCallerOfThePride copy() {
         return new AjaniCallerOfThePride(this);
-    }
-}
-
-class CatToken extends Token {
-
-    public CatToken() {
-        super("Cat", "2/2 white Cat creature tokens");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Cat");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

@@ -37,6 +37,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.Game;
@@ -56,9 +57,9 @@ public class RosheenMeanderer extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {tap}: Add {4} to your mana pool. Spend this mana only on costs that contain {X}.
+        // {T}: Add {4} to your mana pool. Spend this mana only on costs that contain {X}.
         this.addAbility(new RosheenMeandererManaAbility());
-        
+
     }
 
     public RosheenMeanderer(final RosheenMeanderer card) {
@@ -75,7 +76,7 @@ class RosheenMeandererManaAbility extends BasicManaAbility {
 
     RosheenMeandererManaAbility() {
         super(new BasicManaEffect(new RosheenMeandererConditionalMana()));
-        this.netMana.add(new Mana(0,0,0,0,0,4,0));
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 4, 0));
     }
 
     RosheenMeandererManaAbility(RosheenMeandererManaAbility ability) {
@@ -98,10 +99,16 @@ class RosheenMeandererConditionalMana extends ConditionalMana {
 }
 
 class RosheenMeandererManaCondition implements Condition {
+
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
-        return object != null 
-                && object.getManaCost().getText().contains("X");
+        if (AbilityType.SPELL.equals(source.getAbilityType())) {
+            MageObject object = game.getObject(source.getSourceId());
+            return object != null
+                    && object.getManaCost().getText().contains("X");
+
+        } else {
+            return source.getManaCosts().getText().contains("X");
+        }
     }
 }

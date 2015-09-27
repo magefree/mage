@@ -31,17 +31,14 @@ import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -60,7 +57,7 @@ public class AstralCornucopia extends CardImpl {
         this.expansionSetCode = "BNG";
 
         // Astral Cornucopia enters the battlefield with X charge counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AstralCornucopiaEffect(), "with X charge counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
         // {T}: Choose a color. Add one mana of that color to your mana pool for each charge counter on Astral Cornucopia.
         this.addAbility(new AstralCornucopiaManaAbility());
@@ -73,39 +70,6 @@ public class AstralCornucopia extends CardImpl {
     @Override
     public AstralCornucopia copy() {
         return new AstralCornucopia(this);
-    }
-}
-
-class AstralCornucopiaEffect extends OneShotEffect {
-
-    public AstralCornucopiaEffect() {
-        super(Outcome.Benefit);
-    }
-
-    public AstralCornucopiaEffect(final AstralCornucopiaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.CHARGE.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public AstralCornucopiaEffect copy() {
-        return new AstralCornucopiaEffect(this);
     }
 }
 

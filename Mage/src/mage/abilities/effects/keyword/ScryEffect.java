@@ -71,7 +71,7 @@ public class ScryEffect extends OneShotEffect {
     }
 
     private void setText() {
-        StringBuilder sb = new StringBuilder("Scry ").append(scryNumber);
+        StringBuilder sb = new StringBuilder("scry ").append(scryNumber);
         if (scryNumber == 1) {
             sb.append(". <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>");
         } else {

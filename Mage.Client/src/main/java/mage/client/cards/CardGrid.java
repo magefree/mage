@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,7 +20,7 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
@@ -31,7 +31,6 @@
  *
  * Created on 30-Mar-2010, 9:25:40 PM
  */
-
 package mage.client.cards;
 
 import java.awt.Component;
@@ -54,6 +53,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.mage.card.arcane.CardPanel;
@@ -82,7 +82,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     public void clear() {
-        for(MouseListener ml: this.getMouseListeners()) {
+        for (MouseListener ml : this.getMouseListeners()) {
             this.removeMouseListener(ml);
         }
         this.clearCardEventListeners();
@@ -101,7 +101,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         this.bigCard = bigCard;
         this.gameId = gameId;
         if (merge) {
-            for (CardView card: showCards.values()) {
+            for (CardView card : showCards.values()) {
                 if (!cards.containsKey(card.getId())) {
                     addCard(card, bigCard, gameId, drawImage);
                 }
@@ -115,7 +115,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             }
         } else {
             this.clearCards();
-            for (CardView card: showCards.values()) {
+            for (CardView card : showCards.values()) {
                 addCard(card, bigCard, gameId, drawImage);
             }
         }
@@ -144,7 +144,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         int curRow = 0;
         if (cards.size() > 0) {
             Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-            List<MageCard> sortedCards = new ArrayList<MageCard>(cards.values());
+            List<MageCard> sortedCards = new ArrayList<>(cards.values());
             switch (sortSetting.getSortBy()) {
                 case NAME:
                     Collections.sort(sortedCards, new CardNameComparator());
@@ -155,15 +155,16 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                 case COLOR:
                     Collections.sort(sortedCards, new CardColorComparator());
                     break;
-                case COLOR_DETAILED:
-                    Collections.sort(sortedCards, new CardColorDetailedComparator());
+                case COLOR_IDENTITY:
+                    Collections.sort(sortedCards, new CardColorDetailedIdentity());
                     break;
                 case CASTING_COST:
                     Collections.sort(sortedCards, new CardCostComparator());
                     break;
+
             }
             MageCard lastCard = null;
-            for (MageCard cardImg: sortedCards) {
+            for (MageCard cardImg : sortedCards) {
                 if (sortSetting.isPilesToggle()) {
                     if (lastCard == null) {
                         lastCard = cardImg;
@@ -187,8 +188,9 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                                 curRow = 0;
                             }
                             break;
-                        case COLOR_DETAILED:
-                            if (cardImg.getOriginal().getColor().hashCode() !=  lastCard.getOriginal().getColor().hashCode()) {
+                        case COLOR_IDENTITY:
+                            if (CardUtil.getColorIdentitySortValue(cardImg.getOriginal().getManaCost(), cardImg.getOriginal().getColor(), cardImg.getOriginal().getRules())
+                                    != CardUtil.getColorIdentitySortValue(lastCard.getOriginal().getManaCost(), lastCard.getOriginal().getColor(), lastCard.getOriginal().getRules())) {
                                 curColumn++;
                                 curRow = 0;
                             }
@@ -206,8 +208,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                     moveToFront(cardImg);
                     curRow++;
                     lastCard = cardImg;
-                }
-                else {
+                } else {
                     rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
                     cardImg.setBounds(rectangle);
                     cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
@@ -221,15 +222,15 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             }
         }
         resizeArea();
-           revalidate();
-           repaint();
+        revalidate();
+        repaint();
     }
 
     private void clearCards() {
         // remove possible mouse listeners, preventing gc
-        for (MageCard mageCard: cards.values()) {
+        for (MageCard mageCard : cards.values()) {
             if (mageCard instanceof CardPanel) {
-                ((CardPanel)mageCard).cleanUp();
+                ((CardPanel) mageCard).cleanUp();
             }
         }
         this.cards.clear();
@@ -237,7 +238,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     private void removeAllCardImg() {
-        for (Component comp: getComponents()) {
+        for (Component comp : getComponents()) {
             if (comp instanceof Card || comp instanceof MageCard) {
                 remove(comp);
             }
@@ -245,14 +246,14 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     private void removeCardImg(UUID cardId) {
-        for (Component comp: getComponents()) {
+        for (Component comp : getComponents()) {
             if (comp instanceof Card) {
-                if (((Card)comp).getCardId().equals(cardId)) {
+                if (((Card) comp).getCardId().equals(cardId)) {
                     remove(comp);
                     comp = null;
                 }
             } else if (comp instanceof MageCard) {
-                if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
+                if (((MageCard) comp).getOriginal().getId().equals(cardId)) {
                     remove(comp);
                     comp = null;
                 }
@@ -275,10 +276,10 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         cardEventSource.clearListeners();
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -296,10 +297,8 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2 && !e.isConsumed()) {
@@ -322,22 +321,26 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
 
     private void resizeArea() {
         Dimension area = new Dimension(0, 0);
         Dimension size = getPreferredSize();
 
-        for (Component comp: getComponents()) {
+        for (Component comp : getComponents()) {
             Rectangle r = comp.getBounds();
             if (r.x + r.width > area.width) {
                 area.width = r.x + r.width;
@@ -348,13 +351,13 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         }
         if (size.height != area.height || size.width != area.width) {
             setPreferredSize(area);
-       }
+        }
     }
 
     @Override
     public void refresh() {
         revalidate();
-           repaint();
+        repaint();
     }
 
     @Override
@@ -379,8 +382,7 @@ class CardRarityComparator implements Comparator<MageCard> {
         int val = o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
         if (val == 0) {
             return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-        }
-        else {
+        } else {
             return val;
         }
     }
@@ -394,8 +396,7 @@ class CardCostComparator implements Comparator<MageCard> {
         int val = Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
         if (val == 0) {
             return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-        }
-        else {
+        } else {
             return val;
         }
     }
@@ -409,23 +410,22 @@ class CardColorComparator implements Comparator<MageCard> {
         int val = o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
         if (val == 0) {
             return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-        }
-        else {
+        } else {
             return val;
         }
     }
 
 }
 
-class CardColorDetailedComparator implements Comparator<MageCard> {
+class CardColorDetailedIdentity implements Comparator<MageCard> {
 
     @Override
     public int compare(MageCard o1, MageCard o2) {
-        int val = o1.getOriginal().getColor().hashCode() - o2.getOriginal().getColor().hashCode();
+        int val = CardUtil.getColorIdentitySortValue(o1.getOriginal().getManaCost(), o1.getOriginal().getColor(), o1.getOriginal().getRules())
+                - CardUtil.getColorIdentitySortValue(o2.getOriginal().getManaCost(), o2.getOriginal().getColor(), o2.getOriginal().getRules());
         if (val == 0) {
             return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-        }
-        else {
+        } else {
             return val;
         }
     }
