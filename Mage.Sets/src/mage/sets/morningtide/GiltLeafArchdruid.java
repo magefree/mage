@@ -50,6 +50,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -60,11 +61,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class GiltLeafArchdruid extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a Druid spell");
-    
+
     static {
         filterSpell.add(new SubtypePredicate("Druid"));
     }
-    
+
     public GiltLeafArchdruid(UUID ownerId) {
         super(ownerId, 124, "Gilt-Leaf Archdruid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "MOR";
@@ -76,6 +77,7 @@ public class GiltLeafArchdruid extends CardImpl {
 
         // Whenever you cast a Druid spell, you may draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filterSpell, true));
+
         // Tap seven untapped Druids you control: Gain control of all lands target player controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlAllLandsEffect(Duration.EndOfGame), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, new FilterControlledCreaturePermanent("Druid", "Druids you control"), true)));
         ability.addTarget(new TargetPlayer());
@@ -109,14 +111,17 @@ class GainControlAllLandsEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (targetPointer != null) {
-            for(Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), targetPointer.getFirst(game, source), game)){
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        if (targetPlayer != null && targetPlayer.isInGame()) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), targetPointer.getFirst(game, source), game)) {
                 if (permanent != null) {
                     permanent.changeControllerId(source.getControllerId(), game);
                 }
             }
+        } else {
+            discard();
         }
-        return false;
+        return true;
     }
 
     @Override
