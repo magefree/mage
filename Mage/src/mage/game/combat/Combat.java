@@ -525,6 +525,10 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 // has cost to block to pay so remove this attacker
                                 continue;
                             }
+                            if (!getDefendingPlayerId(attackingCreatureId, game).equals(possibleBlocker.getControllerId())) {
+                                // Creature can't block if not the controller or a planeswalker of the controller of the possible blocker is attacked
+                                continue;
+                            }
                             if (creatureMustBlockAttackers.containsKey(possibleBlocker.getId())) {
                                 creatureMustBlockAttackers.get(possibleBlocker.getId()).add(attackingCreatureId);
                             } else {
@@ -728,6 +732,10 @@ public class Combat implements Serializable, Copyable<Combat> {
             Permanent creatureForcedToBlock = game.getPermanent(entry.getKey());
             if (creatureForcedToBlock == null) {
                 break;
+            }
+            if (!creatureForcedToBlock.getControllerId().equals(player.getId())) {
+                // ignore creatures controlled by other players
+                continue;
             }
 
 //            // check if creature has to pay a cost to block so it's not mandatory to block
@@ -1133,10 +1141,10 @@ public class Combat implements Serializable, Copyable<Combat> {
         return defenderId;
     }
 
-    public UUID getDefendingPlayerId(UUID attackerId, Game game) {
+    public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game) {
         UUID defenderId = null;
         for (CombatGroup group : groups) {
-            if (group.getAttackers().contains(attackerId)) {
+            if (group.getAttackers().contains(attackingCreatureId)) {
                 defenderId = group.getDefenderId();
                 if (group.defenderIsPlaneswalker) {
                     Permanent permanent = game.getPermanent(defenderId);
