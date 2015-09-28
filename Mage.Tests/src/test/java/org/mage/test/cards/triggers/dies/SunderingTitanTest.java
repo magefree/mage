@@ -25,46 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package org.mage.test.cards.triggers.dies;
 
-import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class Compost extends CardImpl {
+public class SunderingTitanTest extends CardTestPlayerBase {
 
-    private static final FilterCard filter = new FilterCard("a black card");
+    /**
+     * the card Sundering Titan doesn't trigger for the aposing player
+     *
+     */
+    @Test
+    public void testComesIntoTriggeredAbility() {
+        // // When Sundering Titan enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
+        addCard(Zone.HAND, playerA, "Sundering Titan"); // {8}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sundering Titan");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Sundering Titan", 1);
+        assertGraveyardCount(playerA, "Swamp", 1);
+        assertGraveyardCount(playerA, "Forest", 1);
+        assertGraveyardCount(playerA, "Island", 1);
+
+        assertGraveyardCount(playerB, "Mountain", 1);
+        assertGraveyardCount(playerB, "Plains", 1);
+
     }
 
-    public Compost(UUID ownerId) {
-        super(ownerId, 235, "Compost", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "7ED";
-
-        // Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
-        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), true, filter, TargetController.OPPONENT));
-    }
-
-    public Compost(final Compost card) {
-        super(card);
-    }
-
-    @Override
-    public Compost copy() {
-        return new Compost(this);
-    }
 }
