@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.copy;
 
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -61,4 +62,61 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Silvercoat Lion", 1);
     }
 
+    @Test
+    public void ZadaHedronGrinderBoost() {
+        // Target creature gets +3/+3 and gains flying until end of turn.
+        addCard(Zone.HAND, playerA, "Angelic Blessing", 1); // {2}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angelic Blessing", "Zada, Hedron Grinder");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Angelic Blessing", 1);
+        assertPowerToughness(playerA, "Pillarfield Ox", 5, 7);
+        assertAbility(playerA, "Pillarfield Ox", FlyingAbility.getInstance(), true);
+        assertPowerToughness(playerA, "Zada, Hedron Grinder", 6, 6);
+        assertAbility(playerA, "Zada, Hedron Grinder", FlyingAbility.getInstance(), true);
+
+        assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
+        assertAbility(playerB, "Silvercoat Lion", FlyingAbility.getInstance(), false);
+    }
+
+    @Test
+    public void ZadaHedronGrinderBoostWithCharm() {
+        // Choose two -
+        // • Counter target spell.
+        // • Return target permanent to its owner's hand.
+        // • Tap all creatures your opponents control.
+        // • Draw a card.
+        addCard(Zone.HAND, playerA, "Cryptic Command", 1); // {2}{U}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Command", "mode=2Zada, Hedron Grinder");
+        setModeChoice(playerA, "2"); // Return target permanent to its owner's hand
+        setModeChoice(playerA, "4"); // Draw a card
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
+
+        assertGraveyardCount(playerA, "Cryptic Command", 1);
+        assertPermanentCount(playerA, "Zada, Hedron Grinder", 0);
+        assertPermanentCount(playerA, "Pillarfield Ox", 0);
+        assertHandCount(playerA, 4); // 2 draw + 2 creatures returned to hand
+    }
 }
