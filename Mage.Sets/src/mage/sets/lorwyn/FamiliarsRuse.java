@@ -27,16 +27,15 @@
  */
 package mage.sets.lorwyn;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import java.util.UUID;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
@@ -48,7 +47,10 @@ public class FamiliarsRuse extends CardImpl {
         super(ownerId, 64, "Familiar's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "LRW";
 
-        this.getSpellAbility().addCost(new ReturnToHandTargetPermanentCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("creature"),false)));
+        // As an additional cost to cast Familiar's Ruse, return a creature you control to its owner's hand.
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(
+                new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("creature"), true)));
+        // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }

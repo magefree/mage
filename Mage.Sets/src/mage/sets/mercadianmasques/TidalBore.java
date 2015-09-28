@@ -29,7 +29,7 @@ package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,7 +58,7 @@ public class TidalBore extends CardImpl {
         this.expansionSetCode = "MMQ";
 
         // You may return an Island you control to its owner's hand rather than pay Tidal Bore's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter))));
         // You may tap or untap target creature.
         this.getSpellAbility().addEffect(new MayTapOrUntapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

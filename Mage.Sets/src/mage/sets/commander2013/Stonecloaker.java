@@ -32,14 +32,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -60,8 +60,8 @@ public class Stonecloaker extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Stonecloaker enters the battlefield, return a creature you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent()), true);
+
         this.addAbility(ability);
         // When Stonecloaker enters the battlefield, exile target card from a graveyard.
         ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(), false);

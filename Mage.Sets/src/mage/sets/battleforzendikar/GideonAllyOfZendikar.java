@@ -60,7 +60,7 @@ public class GideonAllyOfZendikar extends CardImpl {
         super(ownerId, 29, "Gideon, Ally of Zendikar", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.expansionSetCode = "BFZ";
         this.subtype.add("Gideon");
-        
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Until end of turn, Gideon, Ally of Zendikar becomes a 5/5 Human Soldier Ally creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
@@ -69,7 +69,7 @@ public class GideonAllyOfZendikar extends CardImpl {
         effect.setText("Prevent all damage that would be dealt to him this turn");
         ability.addEffect(effect);
         this.addAbility(ability);
-        
+
         // 0: Put a 2/2 white Knight Ally creature token onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new KnightAllyToken()), 0));
 
@@ -94,6 +94,7 @@ class GideonAllyOfZendikarEmblem extends Emblem {
         BoostControlledEffect effect = new BoostControlledEffect(1, 1, Duration.EndOfGame);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
         this.getAbilities().add(ability);
+        this.setExpansionSetCodeForImage("BFZ");
     }
 }
 
@@ -107,8 +108,8 @@ class GideonAllyOfZendikarToken extends Token {
         subtype.add("Ally");
         power = new MageInt(5);
         toughness = new MageInt(5);
-        
-        addAbility(IndestructibleAbility.getInstance());        
+
+        addAbility(IndestructibleAbility.getInstance());
     }
 }
 

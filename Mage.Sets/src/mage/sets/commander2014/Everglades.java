@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -53,7 +53,7 @@ public class Everglades extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Swamp");
 
-    static{
+    static {
         filter.add(new SubtypePredicate("Swamp"));
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -66,10 +66,10 @@ public class Everglades extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Everglades enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(1, 1, filter, true)))));
 
         // {tap}: Add {1}{B} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 1, 1,0 ), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 1, 1, 0), new TapSourceCost()));
 
     }
 

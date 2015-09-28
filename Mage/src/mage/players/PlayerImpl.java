@@ -1136,7 +1136,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         justActivatedType = null;
         if (result) {
             if (isHuman() && (ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED))) {
-                setJustActivatedType(ability.getAbilityType());
+                if (ability.isUsesStack()) { // if the ability does not use the stack (e.g. Suspend) auto pass would go to next phase unintended
+                    setJustActivatedType(ability.getAbilityType());
+                }
             }
             game.getPlayers().resetPassed();
         }
@@ -2924,6 +2926,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        if (cards.isEmpty()) {
+            return true;
+        }
         Set<Card> cardList = new HashSet<>();
         for (UUID cardId : cards) {
             fromZone = game.getState().getZone(cardId);

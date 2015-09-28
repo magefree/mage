@@ -29,7 +29,6 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
@@ -65,7 +64,7 @@ public class ChasmSkulker extends CardImpl {
 
         // Whenever you draw a card, put a +1/+1 counter on Chasm Skulker.
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-        
+
         // When Chasm Skulker dies, put X 1/1 blue Squid creature tokens with islandwalk onto the battlefield, where X is the number of +1/+1 counters on Chasm Skulker.
         this.addAbility(new DiesTriggeredAbility(new ChasmSkulkerEffect(), false));
     }

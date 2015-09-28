@@ -28,12 +28,11 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WarriorToken;
 
 /**
  *
@@ -47,7 +46,7 @@ public class TakeUpArms extends CardImpl {
 
 
         // Put three 1/1 white Warrior creature tokens onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new TakeUpArmsToken(), 3));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), 3));
     }
 
     public TakeUpArms(final TakeUpArms card) {
@@ -57,19 +56,5 @@ public class TakeUpArms extends CardImpl {
     @Override
     public TakeUpArms copy() {
         return new TakeUpArms(this);
-    }
-}
-
-class TakeUpArmsToken extends Token {
-
-    TakeUpArmsToken() {
-        super("Warrior", "1/1 white Warrior creature token");
-        this.setOriginalExpansionSetCode("KTK");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Warrior");
-
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

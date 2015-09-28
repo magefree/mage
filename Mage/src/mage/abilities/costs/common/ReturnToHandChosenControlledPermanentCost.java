@@ -40,9 +40,10 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetPermanentCost extends CostImpl {
+public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
 
-    public ReturnToHandTargetPermanentCost(TargetControlledPermanent target) {
+    public ReturnToHandChosenControlledPermanentCost(TargetControlledPermanent target) {
+        target.setNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
             this.text = new StringBuilder("return ").append(target.getMaxNumberOfTargets()).append(" ").append(target.getTargetName()).append(" you control to its owner's hand").toString();
@@ -51,7 +52,7 @@ public class ReturnToHandTargetPermanentCost extends CostImpl {
         }
     }
 
-    public ReturnToHandTargetPermanentCost(ReturnToHandTargetPermanentCost cost) {
+    public ReturnToHandChosenControlledPermanentCost(ReturnToHandChosenControlledPermanentCost cost) {
         super(cost);
     }
 
@@ -78,8 +79,8 @@ public class ReturnToHandTargetPermanentCost extends CostImpl {
     }
 
     @Override
-    public ReturnToHandTargetPermanentCost copy() {
-        return new ReturnToHandTargetPermanentCost(this);
+    public ReturnToHandChosenControlledPermanentCost copy() {
+        return new ReturnToHandChosenControlledPermanentCost(this);
     }
 
 }

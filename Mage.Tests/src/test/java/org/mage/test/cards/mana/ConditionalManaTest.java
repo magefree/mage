@@ -36,7 +36,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
@@ -47,11 +46,11 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         // Target player gains 7 life.
         addCard(Zone.HAND, playerA, "Heroes' Reunion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heroes' Reunion", playerA);        
-        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heroes' Reunion", playerA);
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertGraveyardCount(playerA, "Heroes' Reunion", 1);
         assertHandCount(playerA, "Heroes' Reunion", 0); // player A could not cast it
         assertLife(playerA, 27);
@@ -63,16 +62,16 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         playerA.addChoice("White");
         playerA.addChoice("White");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertHandCount(playerA, "Silvercoat Lion", 1); // player A could not cast Silvercoat Lion because the conditional mana is not available
     }
-    
+
     @Test
     public void testWorkingWithReflectingPool() {
         addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1);
@@ -80,13 +79,13 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Silvercoat Lion", 1); 
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
-    
+
     @Test
     public void testWorkingWithReflectingPool2() {
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // can create white mana without restriction from the Hive
@@ -98,10 +97,48 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setChoice(playerA, "White");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-                
-        assertPermanentCount(playerA, "Silvercoat Lion", 1); 
-    }    
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+    }
+
+    /**
+     * I wasunable to use "Rosheen Meanderer" ability to pay for "Candelabra of
+     * Tawnos" ability even thought it has "X" on its cost
+     */
+    @Test
+    public void testRosheenMeandererUsingAbility() {
+        // Flying
+        addCard(Zone.HAND, playerB, "Snapping Drake", 2); // {3}{U}
+        // {T}: Add {4} to your mana pool. Spend this mana only on costs that contain {X}.
+        addCard(Zone.BATTLEFIELD, playerB, "Rosheen Meanderer", 1);
+        // {X}, {T}: Untap X target lands.
+        addCard(Zone.BATTLEFIELD, playerB, "Candelabra of Tawnos", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake");
+
+        activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {4}");
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X},{T}: Untap");
+        setChoice(playerB, "X=4");
+        addTarget(playerB, "Island");
+        addTarget(playerB, "Island");
+        addTarget(playerB, "Island");
+        addTarget(playerB, "Island");
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Snapping Drake");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Island", true, 4);
+        assertTappedCount("Rosheen Meanderer", true, 1);
+        assertTappedCount("Candelabra of Tawnos", true, 1);
+
+        assertPermanentCount(playerB, "Snapping Drake", 2);
+    }
 }

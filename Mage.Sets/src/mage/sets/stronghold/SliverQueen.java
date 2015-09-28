@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SliverToken;
 
 /**
  *
@@ -64,16 +64,5 @@ public class SliverQueen extends CardImpl {
     @Override
     public SliverQueen copy() {
         return new SliverQueen(this);
-    }
-}
-
-class SliverToken extends Token {
-
-    public SliverToken() {
-        super("Sliver", "1/1 colorless Sliver creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Sliver");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }
