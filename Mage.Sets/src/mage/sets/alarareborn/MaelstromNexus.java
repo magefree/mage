@@ -27,21 +27,28 @@
  */
 package mage.sets.alarareborn;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 /**
@@ -55,7 +62,7 @@ public class MaelstromNexus extends CardImpl {
         this.expansionSetCode = "ARB";
 
         // The first spell you cast each turn has cascade.
-        this.addAbility(new MaelstromNexusTriggeredAbility(), new FirstSpellCastThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaelstromNexusGainCascadeFirstSpellEffect()), new FirstSpellCastThisTurnWatcher());
 
     }
 
@@ -69,52 +76,51 @@ public class MaelstromNexus extends CardImpl {
     }
 }
 
-class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl {
+class MaelstromNexusGainCascadeFirstSpellEffect extends ContinuousEffectImpl {
 
-    public MaelstromNexusTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CascadeEffect());
+    private Ability cascadeAbility = new CascadeAbility();
+
+    public MaelstromNexusGainCascadeFirstSpellEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        staticText = "The first spell you cast each turn has cascade";
     }
 
-    public MaelstromNexusTriggeredAbility(MaelstromNexusTriggeredAbility ability) {
-        super(ability);
+    public MaelstromNexusGainCascadeFirstSpellEffect(final MaelstromNexusGainCascadeFirstSpellEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    public MaelstromNexusGainCascadeFirstSpellEffect copy() {
+        return new MaelstromNexusGainCascadeFirstSpellEffect(this);
     }
 
-
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        FirstSpellCastThisTurnWatcher watcher = (FirstSpellCastThisTurnWatcher) game.getState().getWatchers().get("FirstSpellCastThisTurn", this.getSourceId());
-        if (spell != null
-                && watcher != null
-                && watcher.conditionMet()) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getSourceId()));
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (StackObject stackObject : game.getStack()) {
+                // only spells cast, so no copies of spells
+                if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
+                    Spell spell = (Spell) stackObject;
+                    FirstSpellCastThisTurnWatcher watcher = (FirstSpellCastThisTurnWatcher) game.getState().getWatchers().get("FirstSpellCastThisTurn");
+                    if (watcher != null && spell.getId().equals(watcher.getIdOfFirstCastSpell(source.getControllerId()))) {
+                        game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
+                    }
+                }
+            }
             return true;
         }
         return false;
-    }
-
-    @Override
-    public MaelstromNexusTriggeredAbility copy() {
-        return new MaelstromNexusTriggeredAbility(this);
-    }
-    
-    @Override
-    public String getRule() {
-        return "The first spell you cast each turn has cascade.";
     }
 }
 
 class FirstSpellCastThisTurnWatcher extends Watcher {
 
-    int spellCount = 0;
+    Map<UUID, UUID> playerFirstSpellCast = new HashMap<>();
+    Map<UUID, UUID> playerFirstCastSpell = new HashMap<>();
 
     public FirstSpellCastThisTurnWatcher() {
-        super("FirstSpellCastThisTurn", WatcherScope.CARD);
+        super("FirstSpellCastThisTurn", WatcherScope.GAME);
     }
 
     public FirstSpellCastThisTurnWatcher(final FirstSpellCastThisTurnWatcher watcher) {
@@ -123,16 +129,18 @@ class FirstSpellCastThisTurnWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId() == controllerId) {
-            Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell != null) {
-                spellCount++;
-                if (spellCount == 1) {
-                    condition = true;
-                } else {
-                    condition = false;
+        switch (event.getType()) {
+            case SPELL_CAST:
+            case CAST_SPELL:
+                Spell spell = (Spell) game.getObject(event.getTargetId());
+                if (spell != null && !playerFirstSpellCast.containsKey(spell.getControllerId())) {
+                    if (event.getType().equals(EventType.SPELL_CAST)) {
+                        playerFirstSpellCast.put(spell.getControllerId(), spell.getId());
+                    } else if (event.getType().equals(EventType.CAST_SPELL)) {
+                        playerFirstCastSpell.put(spell.getControllerId(), spell.getId());
+                    }
+
                 }
-            }
         }
     }
 
@@ -144,28 +152,15 @@ class FirstSpellCastThisTurnWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        spellCount = 0;
-    }
-}
-
-class CascadeEffect extends OneShotEffect {
-
-    public CascadeEffect() {
-        super(Outcome.PutCardInPlay);
+        playerFirstSpellCast.clear();
+        playerFirstCastSpell.clear();
     }
 
-    public CascadeEffect(CascadeEffect effect) {
-        super(effect);
+    public UUID getIdOfFirstCastSpell(UUID playerId) {
+        if (playerFirstSpellCast.get(playerId) == null) {
+            return playerFirstCastSpell.get(playerId);
+        } else {
+            return playerFirstSpellCast.get(playerId);
+        }
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return CascadeAbility.applyCascade(outcome, game, source);
-    }
-
-    @Override
-    public CascadeEffect copy() {
-        return new CascadeEffect(this);
-    }
-
 }
