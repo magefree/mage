@@ -58,7 +58,7 @@ public class FungalShambler extends CardImpl {
         // Whenever Fungal Shambler deals damage to an opponent, you draw a card and that opponent discards a card.
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("you draw a card");
-        Ability ability = new DealsDamageToOpponentTriggeredAbility(effect, false);
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(effect, false, false, true);
         effect = new DiscardTargetEffect(1);
         effect.setText("and that opponent discards a card");
         ability.addEffect(effect);

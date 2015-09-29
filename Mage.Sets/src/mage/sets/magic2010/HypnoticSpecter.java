@@ -54,7 +54,7 @@ public class HypnoticSpecter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Hypnotic Specter deals damage to an opponent, that player discards a card at random.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1, true)));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1, true), false, false, true));
     }
 
     public HypnoticSpecter(final HypnoticSpecter card) {
