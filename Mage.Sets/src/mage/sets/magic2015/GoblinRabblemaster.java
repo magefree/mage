@@ -38,7 +38,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -49,7 +48,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinTokenWithHaste;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
@@ -83,7 +82,7 @@ public class GoblinRabblemaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new AttackedThisTurnWatcher());
 
         // At the beginning of combat on your turn, put a 1/1 red Goblin creature token with haste onto the battlefield.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new GoblinToken()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste()), TargetController.YOU, false));
 
         // When Goblin Rabblemaster attacks, it gets +1/+0 until end of turn for each other attacking Goblin.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(attackingFilter), new StaticValue(0), Duration.EndOfTurn, true), false));
@@ -97,19 +96,4 @@ public class GoblinRabblemaster extends CardImpl {
     public GoblinRabblemaster copy() {
         return new GoblinRabblemaster(this);
     }
-}
-
-class GoblinToken extends Token {
-
-    public GoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token with haste");
-        this.setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Goblin");
-        color.setRed(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(HasteAbility.getInstance());
-    }
-
 }

@@ -53,7 +53,7 @@ public class WeiNightRaiders extends CardImpl {
         // Horsemanship
         this.addAbility(HorsemanshipAbility.getInstance());
         // Whenever Wei Night Raiders deals damage to an opponent, that player discards a card.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1), false));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1), false, false, true));
     }
 
     public WeiNightRaiders(final WeiNightRaiders card) {

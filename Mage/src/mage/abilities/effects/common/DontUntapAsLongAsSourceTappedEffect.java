@@ -26,42 +26,43 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.game.permanent.token.BeastToken2;
+import mage.abilities.Ability;
+import mage.abilities.condition.common.SourceTappedCondition;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepTargetEffect;
+import mage.constants.Duration;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class RampagingBaloths extends CardImpl {
 
-    public RampagingBaloths(UUID ownerId) {
-        super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Beast");
+public class DontUntapAsLongAsSourceTappedEffect extends ConditionalContinuousRuleModifyingEffect {
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), true));
+    public DontUntapAsLongAsSourceTappedEffect() {
+        super(new DontUntapInControllersUntapStepTargetEffect(Duration.Custom), SourceTappedCondition.getInstance());
+        staticText = "It doesn't untap during its controller's untap step for as long as {source} remains tapped.";
     }
 
-    public RampagingBaloths(final RampagingBaloths card) {
-        super(card);
+    public DontUntapAsLongAsSourceTappedEffect(final DontUntapAsLongAsSourceTappedEffect effect) {
+        super(effect);
     }
 
     @Override
-    public RampagingBaloths copy() {
-        return new RampagingBaloths(this);
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if(event.getType() == GameEvent.EventType.UNTAP && event.getTargetId().equals(source.getSourceId())) {
+            effect.discard();
+        }
+        return super.applies(event, source, game);
     }
 
+    @Override
+    public DontUntapAsLongAsSourceTappedEffect copy() {
+        return new DontUntapAsLongAsSourceTappedEffect(this);
+    }
 }

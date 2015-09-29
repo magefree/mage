@@ -25,43 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.zendikar;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.BeastToken2;
+import mage.constants.Zone;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class RampagingBaloths extends CardImpl {
+public class MoleWorms extends CardImpl {
 
-    public RampagingBaloths(UUID ownerId) {
-        super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Beast");
+    public MoleWorms(UUID ownerId) {
+        super(ownerId, 41, "Mole Worms", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "5ED";
+        this.subtype.add("Worm");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), true));
+        // You may choose not to untap Mole Worms during your untap step.
+        this.addAbility(new SkipUntapOptionalAbility());
+        // {tap}: Tap target land. It doesn't untap during its controller's untap step for as long as Mole Worms remains tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent());
+        ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
+        this.addAbility(ability);
     }
 
-    public RampagingBaloths(final RampagingBaloths card) {
+    public MoleWorms(final MoleWorms card) {
         super(card);
     }
 
     @Override
-    public RampagingBaloths copy() {
-        return new RampagingBaloths(this);
+    public MoleWorms copy() {
+        return new MoleWorms(this);
     }
-
 }

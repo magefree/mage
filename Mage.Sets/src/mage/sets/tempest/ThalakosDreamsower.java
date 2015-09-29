@@ -25,43 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.zendikar;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
+import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.BeastToken2;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class RampagingBaloths extends CardImpl {
+public class ThalakosDreamsower extends CardImpl {
 
-    public RampagingBaloths(UUID ownerId) {
-        super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Beast");
+    public ThalakosDreamsower(UUID ownerId) {
+        super(ownerId, 92, "Thalakos Dreamsower", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Thalakos");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), true));
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
+        // You may choose not to untap Thalakos Dreamsower during your untap step.
+        this.addAbility(new SkipUntapOptionalAbility());
+        // Whenever Thalakos Dreamsower deals damage to an opponent, tap target creature. That creature doesn't untap during its controller's untap step for as long as Thalakos Dreamsower remains tapped.
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new TapTargetEffect(), false);
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
+        this.addAbility(ability);
     }
 
-    public RampagingBaloths(final RampagingBaloths card) {
+    public ThalakosDreamsower(final ThalakosDreamsower card) {
         super(card);
     }
 
     @Override
-    public RampagingBaloths copy() {
-        return new RampagingBaloths(this);
+    public ThalakosDreamsower copy() {
+        return new ThalakosDreamsower(this);
     }
-
 }

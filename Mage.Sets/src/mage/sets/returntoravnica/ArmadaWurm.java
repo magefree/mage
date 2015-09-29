@@ -38,7 +38,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WurmToken2;
 
 /**
  *
@@ -59,7 +59,7 @@ public class ArmadaWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Armada Wurm enters the battlefield, put a 5/5 green Wurm creature token with trample onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ArmadaWurmToken()), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WurmToken2()), false));
 
     }
 
@@ -70,19 +70,5 @@ public class ArmadaWurm extends CardImpl {
     @Override
     public ArmadaWurm copy() {
         return new ArmadaWurm(this);
-    }
-
-    private class ArmadaWurmToken extends Token {
-
-        private ArmadaWurmToken() {
-            super("Wurm", "a 5/5 green Wurm creature token with trample");
-            cardType.add(CardType.CREATURE);
-            color.setGreen(true);
-            subtype.add("Wurm");
-            power = new MageInt(5);
-            toughness = new MageInt(5);
-            addAbility(TrampleAbility.getInstance());
-        }
-
     }
 }

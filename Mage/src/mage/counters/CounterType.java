@@ -71,6 +71,7 @@ public enum CounterType {
     M1M1(new BoostCounter(-1, -1).name),
     M2M2(new BoostCounter(-2, -2).name),
     MINING("mining"),
+    MUSTER("muster"),
     P1P0(new BoostCounter(1, 0).name),
     P1P1(new BoostCounter(1, 1).name),
     P2P2(new BoostCounter(2, 2).name),

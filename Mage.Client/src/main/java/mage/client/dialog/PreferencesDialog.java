@@ -2565,6 +2565,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String defaultValue) {
         String prop = prefs.get(propName, defaultValue);
         checkBox.setSelected(prop.equals(yesValue));
+        updateCache(propName, prop);
     }
 
     private static void load(Preferences prefs, JTextField field, String propName, String defaultValue) {

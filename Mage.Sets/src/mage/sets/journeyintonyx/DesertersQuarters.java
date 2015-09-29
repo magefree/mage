@@ -29,21 +29,16 @@ package mage.sets.journeyintonyx;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -60,12 +55,11 @@ public class DesertersQuarters extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {6}, T: Tap target creature. It doesn't untap during its controller's untap step for as long as Deserter's Quarters remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DesertersQuartersTapTargetEffect(), new GenericManaCost(6));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(6));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         this.addAbility(ability);
-
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DesertersQuartersRestrictionEffect()));
     }
 
     public DesertersQuarters(final DesertersQuarters card) {
@@ -76,80 +70,4 @@ public class DesertersQuarters extends CardImpl {
     public DesertersQuarters copy() {
         return new DesertersQuarters(this);
     }
-}
-
-class DesertersQuartersTapTargetEffect extends TapTargetEffect {
-
-    public DesertersQuartersTapTargetEffect() {
-        super();
-        staticText = "Tap target creature. It doesn't untap during its controller's untap step for as long as {this} remains tapped";
-    }
-
-    public DesertersQuartersTapTargetEffect(final DesertersQuartersTapTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            sourcePermanent.clearConnectedCards("DesertersQuarters");
-        }
-        for (UUID target : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(target);
-            if (sourcePermanent != null) {
-                sourcePermanent.addConnectedCard("DesertersQuarters", permanent.getId());
-            }
-            if (permanent != null) {
-                permanent.tap(game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public DesertersQuartersTapTargetEffect copy() {
-        return new DesertersQuartersTapTargetEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return staticText;
-    }
-}
-
-class DesertersQuartersRestrictionEffect extends RestrictionEffect {
-
-    public DesertersQuartersRestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public DesertersQuartersRestrictionEffect(final DesertersQuartersRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent rustTick = game.getPermanent(source.getSourceId());
-        if (rustTick != null && rustTick.isTapped()) {
-            if (rustTick.getConnectedCards("DesertersQuarters").size() > 0) {
-                UUID target = rustTick.getConnectedCards("DesertersQuarters").get(0);
-                if (target != null && target.equals(permanent.getId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public DesertersQuartersRestrictionEffect copy() {
-        return new DesertersQuartersRestrictionEffect(this);
-    }
-
 }
