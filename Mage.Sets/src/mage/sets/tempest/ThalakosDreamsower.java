@@ -25,61 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.sets.tempest;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class AmberPrison extends CardImpl {
+public class ThalakosDreamsower extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
+    public ThalakosDreamsower(UUID ownerId) {
+        super(ownerId, 92, "Thalakos Dreamsower", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Thalakos");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
-    }
-
-    public AmberPrison(UUID ownerId) {
-        super(ownerId, 257, "Amber Prison", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "MIR";
-
-        // You may choose not to untap Amber Prison during your untap step.
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
+        // You may choose not to untap Thalakos Dreamsower during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
-
-        // {4}, {tap}: Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as Amber Prison remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(true), new GenericManaCost(4));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        // Whenever Thalakos Dreamsower deals damage to an opponent, tap target creature. That creature doesn't untap during its controller's untap step for as long as Thalakos Dreamsower remains tapped.
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new TapTargetEffect(true), false);
+        ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         this.addAbility(ability);
     }
 
-    public AmberPrison(final AmberPrison card) {
+    public ThalakosDreamsower(final ThalakosDreamsower card) {
         super(card);
     }
 
     @Override
-    public AmberPrison copy() {
-        return new AmberPrison(this);
+    public ThalakosDreamsower copy() {
+        return new ThalakosDreamsower(this);
     }
 }

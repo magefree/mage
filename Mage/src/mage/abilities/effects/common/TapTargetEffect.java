@@ -28,15 +28,14 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-
-import java.util.UUID;
 import mage.util.CardUtil;
 
 /**
@@ -44,17 +43,31 @@ import mage.util.CardUtil;
  */
 public class TapTargetEffect extends OneShotEffect {
 
+    private final boolean connectSource;
+
     public TapTargetEffect() {
-        super(Outcome.Tap);
+        this(null, false);
+    }
+
+    public TapTargetEffect(boolean connectSource) {
+        this(null, connectSource);
     }
 
     public TapTargetEffect(String text) {
-        this();
-        this.staticText = text;
+        this(text, false);
+    }
+
+    public TapTargetEffect(String text, boolean connectSource) {
+        super(Outcome.Tap);
+        this.connectSource = connectSource;
+        if(text != null) {
+            this.staticText = text;
+        }
     }
 
     public TapTargetEffect(final TapTargetEffect effect) {
         super(effect);
+        this.connectSource = effect.connectSource;
     }
 
     @Override
@@ -68,6 +81,12 @@ public class TapTargetEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
                 permanent.tap(game);
+                if(connectSource) {
+                    Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                    if(sourcePermanent != null) {
+                        sourcePermanent.addConnectedCard(sourcePermanent.getName(), permanent.getId());
+                    }
+                }
             }
         }
         return true;
