@@ -102,12 +102,15 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
                 boolean targetsSource = false;
-                for (Target target : spell.getSpellAbility().getTargets()) {
-                    for (UUID targetId : target.getTargets()) {
-                        if (targetId.equals(getSourceId())) {
-                            targetsSource = true;
-                        } else {
-                            return false;
+                for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
+                    spell.getSpellAbility().getModes().setActiveMode(modeId);
+                    for (Target target : spell.getSpellAbility().getTargets()) {
+                        for (UUID targetId : target.getTargets()) {
+                            if (targetId.equals(getSourceId())) {
+                                targetsSource = true;
+                            } else {
+                                return false;
+                            }
                         }
                     }
                 }
@@ -157,10 +160,15 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (spell != null && controller != null) {
             Target usedTarget = null;
-            for (Target target : spell.getSpellAbility().getTargets()) {
-                if (target.getFirstTarget().equals(source.getSourceId())) {
-                    usedTarget = target.copy();
-                    usedTarget.clearChosen();
+            setUsedTarget:
+            for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
+                spell.getSpellAbility().getModes().setActiveMode(modeId);
+                for (Target target : spell.getSpellAbility().getTargets()) {
+                    if (target.getFirstTarget().equals(source.getSourceId())) {
+                        usedTarget = target.copy();
+                        usedTarget.clearChosen();
+                        break setUsedTarget;
+                    }
                 }
             }
             if (usedTarget == null) {
@@ -169,11 +177,15 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
             for (Permanent creature : game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 if (!creature.getId().equals(source.getSourceId()) && usedTarget.canTarget(source.getControllerId(), creature.getId(), source, game)) {
                     Spell copy = spell.copySpell();
-                    for (Target target : spell.getSpellAbility().getTargets()) {
-                        if (target.getClass().equals(usedTarget.getClass()) && target.getMessage().equals(usedTarget.getMessage())) {
-                            target.clearChosen();
-                            target.add(creature.getId(), game);
-                            break;
+                    setTarget:
+                    for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
+                        copy.getSpellAbility().getModes().setActiveMode(modeId);
+                        for (Target target : copy.getSpellAbility().getTargets()) {
+                            if (target.getClass().equals(usedTarget.getClass()) && target.getMessage().equals(usedTarget.getMessage())) {
+                                target.clearChosen();
+                                target.add(creature.getId(), game);
+                                break setTarget;
+                            }
                         }
                     }
                     copy.setControllerId(source.getControllerId());
