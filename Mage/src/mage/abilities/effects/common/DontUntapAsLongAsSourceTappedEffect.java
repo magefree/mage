@@ -30,20 +30,22 @@ package mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.condition.common.SourceTappedCondition;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepTargetEffect;
 import mage.constants.Duration;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.events.GameEvent;
 
 /**
  *
  * @author LoneFox
  */
 
-public class DontUntapAsLongAsSourceTappedEffect extends RestrictionEffect {
+public class DontUntapAsLongAsSourceTappedEffect extends ConditionalContinuousRuleModifyingEffect {
 
     public DontUntapAsLongAsSourceTappedEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(new DontUntapInControllersUntapStepTargetEffect(Duration.Custom), SourceTappedCondition.getInstance());
         staticText = "It doesn't untap during its controller's untap step for as long as {source} remains tapped.";
     }
 
@@ -52,23 +54,11 @@ public class DontUntapAsLongAsSourceTappedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if(sourcePermanent != null && sourcePermanent.isTapped()) {
-            String name = sourcePermanent.getName();
-            if(sourcePermanent.getConnectedCards(name).size() > 0) {
-                UUID target = sourcePermanent.getConnectedCards(name).get(0);
-                if(target != null && target.equals(permanent.getId())) {
-                    return true;
-                }
-            }
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if(event.getType() == GameEvent.EventType.UNTAP && event.getTargetId().equals(source.getSourceId())) {
+            effect.discard();
         }
-        return false;
-    }
-
-    @Override
-    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
-        return false;
+        return super.applies(event, source, game);
     }
 
     @Override
