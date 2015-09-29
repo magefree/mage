@@ -59,7 +59,7 @@ public class RustTick extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {1}, {tap}: Tap target artifact. It doesn't untap during its controller's untap step for as long as Rust Tick remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(true), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());

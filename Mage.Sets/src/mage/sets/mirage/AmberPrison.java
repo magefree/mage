@@ -67,7 +67,7 @@ public class AmberPrison extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {4}, {tap}: Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as Amber Prison remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(true), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());

@@ -68,7 +68,7 @@ public class WhipVine1 extends CardImpl {
         // You may choose not to untap Whip Vine during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {tap}: Tap target creature with flying blocked by Whip Vine. That creature doesn't untap during its controller's untap step for as long as Whip Vine remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying blocked by {this}");
         filter.add(new AbilityPredicate(FlyingAbility.class));
         filter.add(new BlockedByIdPredicate(this.getId()));

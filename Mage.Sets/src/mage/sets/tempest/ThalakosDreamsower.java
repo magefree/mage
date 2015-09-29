@@ -59,7 +59,7 @@ public class ThalakosDreamsower extends CardImpl {
         // You may choose not to untap Thalakos Dreamsower during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // Whenever Thalakos Dreamsower deals damage to an opponent, tap target creature. That creature doesn't untap during its controller's untap step for as long as Thalakos Dreamsower remains tapped.
-        Ability ability = new DealsDamageToOpponentTriggeredAbility(new TapTargetEffect(true), false);
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new TapTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         this.addAbility(ability);

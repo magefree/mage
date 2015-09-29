@@ -43,23 +43,12 @@ import mage.util.CardUtil;
  */
 public class TapTargetEffect extends OneShotEffect {
 
-    private final boolean connectSource;
-
     public TapTargetEffect() {
-        this(null, false);
-    }
-
-    public TapTargetEffect(boolean connectSource) {
-        this(null, connectSource);
+        super(Outcome.Tap);
     }
 
     public TapTargetEffect(String text) {
-        this(text, false);
-    }
-
-    public TapTargetEffect(String text, boolean connectSource) {
         super(Outcome.Tap);
-        this.connectSource = connectSource;
         if(text != null) {
             this.staticText = text;
         }
@@ -67,7 +56,6 @@ public class TapTargetEffect extends OneShotEffect {
 
     public TapTargetEffect(final TapTargetEffect effect) {
         super(effect);
-        this.connectSource = effect.connectSource;
     }
 
     @Override
@@ -81,12 +69,6 @@ public class TapTargetEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
                 permanent.tap(game);
-                if(connectSource) {
-                    Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-                    if(sourcePermanent != null) {
-                        sourcePermanent.addConnectedCard(sourcePermanent.getName(), permanent.getId());
-                    }
-                }
             }
         }
         return true;

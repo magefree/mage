@@ -57,7 +57,7 @@ public class ManaLeech extends CardImpl {
         // You may choose not to untap Mana Leech during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {tap}: Tap target land. It doesn't untap during its controller's untap step for as long as Mana Leech remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         this.addAbility(ability);
