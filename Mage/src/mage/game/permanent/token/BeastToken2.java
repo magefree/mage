@@ -26,43 +26,42 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.game.permanent.token;
 
-import java.util.UUID;
+import java.util.Arrays;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.game.permanent.token.BirdToken;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class EmeriaAngel extends CardImpl {
+public class BeastToken2 extends Token {
 
-    public EmeriaAngel(UUID ownerId) {
-        super(ownerId, 11, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Angel");
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BirdToken()), true));
+    public BeastToken2() {
+        super("Beast", "4/4 green Beast creature token");
+        cardType.add(CardType.CREATURE);
+        color.setGreen(true);
+        subtype.add("Beast");
+        power = new MageInt(4);
+        toughness = new MageInt(4);
+        availableImageSetCodes.addAll(Arrays.asList("ZEN", "C14", "DDD"));
     }
 
-    public EmeriaAngel(final EmeriaAngel card) {
-        super(card);
+    public BeastToken2(final BeastToken2 token) {
+        super(token);
     }
 
     @Override
-    public EmeriaAngel copy() {
-        return new EmeriaAngel(this);
+        public BeastToken2 copy() {
+        return new BeastToken2(this);
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+        if(getOriginalExpansionSetCode().equals("C14") || getOriginalExpansionSetCode().equals("DDD")) {
+            this.setTokenType(2);
+        }
+    }
 }

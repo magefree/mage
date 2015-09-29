@@ -25,43 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.zendikar;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.game.permanent.token.BeastToken2;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class RampagingBaloths extends CardImpl {
+public class WhipVine2 extends WhipVine1 {
 
-    public RampagingBaloths(UUID ownerId) {
-        super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Beast");
-
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), true));
+    public WhipVine2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 90;
     }
 
-    public RampagingBaloths(final RampagingBaloths card) {
+    public WhipVine2(final WhipVine2 card) {
         super(card);
     }
 
     @Override
-    public RampagingBaloths copy() {
-        return new RampagingBaloths(this);
+    public WhipVine2 copy() {
+        return new WhipVine2(this);
     }
-
 }

@@ -28,15 +28,14 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-
-import java.util.UUID;
 import mage.util.CardUtil;
 
 /**
@@ -49,8 +48,10 @@ public class TapTargetEffect extends OneShotEffect {
     }
 
     public TapTargetEffect(String text) {
-        this();
-        this.staticText = text;
+        super(Outcome.Tap);
+        if(text != null) {
+            this.staticText = text;
+        }
     }
 
     public TapTargetEffect(final TapTargetEffect effect) {

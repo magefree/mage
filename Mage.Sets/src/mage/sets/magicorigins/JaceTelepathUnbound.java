@@ -57,7 +57,7 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
@@ -88,7 +88,7 @@ public class JaceTelepathUnbound extends CardImpl {
 
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
         ability = new LoyaltyAbility(new JaceTelepathUnboundEffect(), -3);
-        ability.addTarget(new TargetCardInGraveyard(new FilterInstantOrSorceryCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
         this.addAbility(ability);
 
         // -9: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".

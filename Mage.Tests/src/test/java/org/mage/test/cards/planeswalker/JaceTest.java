@@ -25,39 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.planeswalker;
 
-package mage.sets.dragonsmaze;
-
-import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.game.permanent.token.WurmToken2;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
+public class JaceTest extends CardTestPlayerBase {
 
+    @Test
+    public void TelepathUnboundSecondAbility() {
+        // +1: Up to one target creature gets -2/-0 until your next turn.
+        // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
+        // -9: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Telepath Unbound"); // starts with 7 Loyality counters
 
-public class AdventOfTheWurm extends CardImpl {
+        // As an additional cost to cast Magmatic Insight, discard a land card.
+        // Draw two cards.
+        addCard(Zone.GRAVEYARD, playerA, "Magmatic Insight");// {R}
+        addCard(Zone.HAND, playerA, "Plains");
 
-    public AdventOfTheWurm(UUID ownerId) {
-        super(ownerId, 51, "Advent of the Wurm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}{W}");
-        this.expansionSetCode = "DGM";
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
-        // Put a 5/5 green Wurm creature token with trample onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken2()));
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-3: You may cast target instant", "Magmatic Insight");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Magmatic Insight");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Jace, Telepath Unbound", 1);
+        assertCounterCount("Jace, Telepath Unbound", CounterType.LOYALTY, 2);  // 5 - 3 = 2
+
+        assertExileCount("Magmatic Insight", 1);
+
+        assertHandCount(playerA, 2);
+
     }
 
-    public AdventOfTheWurm(final AdventOfTheWurm card) {
-        super(card);
-    }
-
-    @Override
-    public AdventOfTheWurm copy() {
-        return new AdventOfTheWurm(this);
-    }
 }

@@ -28,16 +28,15 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.permanent.token.DragonToken2;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -90,27 +89,12 @@ class DeathByDragonsEffect extends OneShotEffect {
         if (controller != null) {
             for (UUID playerId : controller.getInRange()) {
                 if (!playerId.equals(this.getTargetPointer().getFirst(game, source))) {
-                    Token token = new DragonToken();
+                    Token token = new DragonToken2();
                     token.putOntoBattlefield(1, game, source.getSourceId(), playerId);
                 }
             }
             return true;
         }
         return false;
-    }
-}
-
-class DragonToken extends Token {
-
-    public DragonToken() {
-        super("Dragon", "5/5 red Dragon creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        addAbility(FlyingAbility.getInstance());
-        // set a set with correct token image
-        this.setOriginalExpansionSetCode("WWK");
     }
 }

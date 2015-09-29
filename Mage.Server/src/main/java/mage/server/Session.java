@@ -92,15 +92,15 @@ public class Session {
             return "User name Admin already in use";
         }
         if (userName.length() > ConfigSettings.getInstance().getMaxUserNameLength()) {
-            return new StringBuilder("User name may not be longer than ").append(ConfigSettings.getInstance().getMaxUserNameLength()).append(" characters").toString();
+            return "User name may not be longer than " + ConfigSettings.getInstance().getMaxUserNameLength() + " characters";
         }
         if (userName.length() < ConfigSettings.getInstance().getMinUserNameLength()) {
-            return new StringBuilder("User name may not be shorter than ").append(ConfigSettings.getInstance().getMinUserNameLength()).append(" characters").toString();
+            return "User name may not be shorter than " + ConfigSettings.getInstance().getMinUserNameLength() + " characters";
         }
         Pattern p = Pattern.compile(ConfigSettings.getInstance().getUserNamePattern(), Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(userName);
         if (m.find()) {
-            return new StringBuilder("User name '").append(userName).append("' includes not allowed characters: use a-z, A-Z and 0-9").toString();
+            return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
         }
         User user = UserManager.getInstance().createUser(userName, host);
         boolean reconnect = false;
@@ -118,11 +118,11 @@ public class Session {
                     SessionManager.getInstance().disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
                 }
             } else {
-                return new StringBuilder("User name ").append(userName).append(" already in use (or your IP address changed)").toString();
+                return "User name " + userName + " already in use (or your IP address changed)";
             }
         }
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
-            return new StringBuilder("Error connecting ").append(userName).toString();
+            return "Error connecting " + userName;
         }
         this.userId = user.getId();
         if (reconnect) { // must be connected to receive the message
