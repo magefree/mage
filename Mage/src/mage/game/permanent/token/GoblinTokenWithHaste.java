@@ -26,43 +26,20 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.game.permanent.token;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.game.permanent.token.BirdToken;
+import mage.abilities.keyword.HasteAbility;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class EmeriaAngel extends CardImpl {
 
-    public EmeriaAngel(UUID ownerId) {
-        super(ownerId, 11, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Angel");
+// Currently there are no separate images for this, let's use the same ones as the regular Goblin token.
+public class GoblinTokenWithHaste extends GoblinToken {
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BirdToken()), true));
+    public GoblinTokenWithHaste() {
+        super();
+        addAbility(HasteAbility.getInstance());
     }
-
-    public EmeriaAngel(final EmeriaAngel card) {
-        super(card);
-    }
-
-    @Override
-    public EmeriaAngel copy() {
-        return new EmeriaAngel(this);
-    }
-
 }

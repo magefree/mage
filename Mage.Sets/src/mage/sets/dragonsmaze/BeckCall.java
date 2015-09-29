@@ -39,9 +39,10 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.BirdToken;
 
 
 

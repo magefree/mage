@@ -51,7 +51,7 @@ public class ZhangLiaoHeroOfHefei extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Zhang Liao, Hero of Hefei deals damage to an opponent, that opponent discards a card.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1), false));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1), false, false, true));
     }
 
     public ZhangLiaoHeroOfHefei(final ZhangLiaoHeroOfHefei card) {

@@ -37,7 +37,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WurmToken2;
 
 /**
  *
@@ -55,10 +55,10 @@ public class WorldspineWurm extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // When Worldspine Wurm dies, put three 5/5 green Wurm creature tokens with trample onto the battlefield.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new WorldspineWurmToken(), 3)));
-        
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new WurmToken2(), 3)));
+
         // When Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
@@ -70,19 +70,5 @@ public class WorldspineWurm extends CardImpl {
     @Override
     public WorldspineWurm copy() {
         return new WorldspineWurm(this);
-    }
-}
-
-class WorldspineWurmToken extends Token {
-
-    public WorldspineWurmToken() {
-        super("Wurm", "5/5 green Wurm creature tokens with trample");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Wurm");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        
-        this.addAbility(TrampleAbility.getInstance());
     }
 }

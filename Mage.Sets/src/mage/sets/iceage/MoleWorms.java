@@ -25,39 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.dragonsmaze;
+package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.game.permanent.token.WurmToken2;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
+public class MoleWorms extends mage.sets.fifthedition.MoleWorms {
 
-
-public class AdventOfTheWurm extends CardImpl {
-
-    public AdventOfTheWurm(UUID ownerId) {
-        super(ownerId, 51, "Advent of the Wurm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}{W}");
-        this.expansionSetCode = "DGM";
-
-        // Put a 5/5 green Wurm creature token with trample onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken2()));
+    public MoleWorms(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 40;
+        this.expansionSetCode = "ICE";
     }
 
-    public AdventOfTheWurm(final AdventOfTheWurm card) {
+    public MoleWorms(final MoleWorms card) {
         super(card);
     }
 
     @Override
-    public AdventOfTheWurm copy() {
-        return new AdventOfTheWurm(this);
+    public MoleWorms copy() {
+        return new MoleWorms(this);
     }
 }

@@ -25,43 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.zendikar;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.BeastToken2;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class RampagingBaloths extends CardImpl {
+public class SandSquid extends CardImpl {
 
-    public RampagingBaloths(UUID ownerId) {
-        super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "ZEN";
+    public SandSquid(UUID ownerId) {
+        super(ownerId, 96, "Sand Squid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Squid");
         this.subtype.add("Beast");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), true));
+        // Islandwalk
+        this.addAbility(new IslandwalkAbility());
+        // You may choose not to untap Sand Squid during your untap step.
+        this.addAbility(new SkipUntapOptionalAbility());
+        // {tap}: Tap target creature. That creature doesn't untap during its controller's untap step for as long as Sand Squid remains tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
+        this.addAbility(ability);
     }
 
-    public RampagingBaloths(final RampagingBaloths card) {
+    public SandSquid(final SandSquid card) {
         super(card);
     }
 
     @Override
-    public RampagingBaloths copy() {
-        return new RampagingBaloths(this);
+    public SandSquid copy() {
+        return new SandSquid(this);
     }
-
 }
