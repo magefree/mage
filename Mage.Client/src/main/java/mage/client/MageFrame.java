@@ -831,7 +831,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             connection.setUsername(userName);
             connection.setHost(server);
             connection.setPort(port);
-            connection.setSSL(true);
+            connection.setSSL(false);
             connection.setProxyType(proxyType);
             connection.setProxyHost(proxyServer);
             connection.setProxyPort(proxyPort);

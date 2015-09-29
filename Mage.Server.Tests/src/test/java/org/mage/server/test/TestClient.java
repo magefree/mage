@@ -53,7 +53,7 @@ public class TestClient implements MageClient {
         Connection connection = new Connection();
         connection.setHost("localhost");
         connection.setPort(17171);
-        connection.setSSL(true);
+        connection.setSSL(false);
         connection.setUsername(userName);
         connection.setForceDBComparison(false);
         connection.setUserData(new UserData(UserGroup.PLAYER, 10, false, false, false, new UserSkipPrioritySteps(), "world", false, false, false, false, false, false));
