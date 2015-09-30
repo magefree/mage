@@ -68,4 +68,26 @@ public class DrawTriggeredTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Consecrated Sphinx does not trigger when "Edric, Spymaster of Trest" lets
+     * my opponent draw cards.
+     */
+    @Test
+    public void EdricSpymasterOfTrestTest() {
+        // Flying
+        // Whenever an opponent draws a card, you may draw two cards.
+        addCard(Zone.BATTLEFIELD, playerA, "Consecrated Sphinx", 1);
+
+        // Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.
+        addCard(Zone.BATTLEFIELD, playerB, "Edric, Spymaster of Trest", 1);
+
+        attack(2, playerB, "Edric, Spymaster of Trest");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerB, 2); // 1 from start of turn and 1 from Edric
+        assertHandCount(playerA, 4); // 2 * 2 from Sphinx = 4
+
+    }
 }
