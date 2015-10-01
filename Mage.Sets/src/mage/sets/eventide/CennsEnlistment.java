@@ -28,14 +28,11 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
-import mage.constants.TimingRule;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.KithkinToken;
 
 /**
@@ -50,7 +47,7 @@ public class CennsEnlistment extends CardImpl {
 
         // Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KithkinToken(), 2));
-        
+
         // Retrace
         this.addAbility(new RetraceAbility(this));
     }
