@@ -28,20 +28,14 @@
 package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.ConditionalMana;
 import mage.MageInt;
-import mage.MageObject;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
-import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.filter.common.FilterCreatureSpell;
 
 /**
  *
@@ -62,7 +56,7 @@ public class BeastcallerSavant extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast creature spells.
-        this.addAbility(new ConditionalAnyColorManaAbility(1, new BeastcallerSavantManaBuilder()));
+        this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(new FilterCreatureSpell("creature spells"))));
     }
 
     public BeastcallerSavant(final BeastcallerSavant card) {
@@ -72,36 +66,5 @@ public class BeastcallerSavant extends CardImpl {
     @Override
     public BeastcallerSavant copy() {
         return new BeastcallerSavant(this);
-    }
-}
-
-class BeastcallerSavantManaBuilder extends ConditionalManaBuilder {
-
-    @Override
-    public ConditionalMana build(Object... options) {
-        return new BeastcallerSavantConditionalMana(this.mana);
-    }
-
-    @Override
-    public String getRule() {
-        return "Spend this mana only to cast creature spells";
-    }
-}
-
-class BeastcallerSavantConditionalMana extends ConditionalMana {
-
-    public BeastcallerSavantConditionalMana(Mana mana) {
-        super(mana);
-        this.staticText = "Spend this mana only to cast creature spells";
-        addCondition(new BeastcallerSavantManaCondition());
-    }
-}
-
-class BeastcallerSavantManaCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject object = source.getSourceObject(game);
-        return object != null && (object instanceof Spell) && object.getCardType().contains(CardType.CREATURE);
     }
 }

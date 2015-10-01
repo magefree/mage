@@ -975,7 +975,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark, ability.getRule());
+                restoreState(bookmark, ability.getRule(), game);
             }
         }
         return false;
@@ -1029,7 +1029,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // putOntoBattlefield retured false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldorian Outpost).
             // But that would undo the effect completely,
             // what makes no real sense. So it makes no sense to generally do a restorState here.
-            // game.restoreState(bookmark);
+            // restoreState(bookmark, card.getName(), game);
         }
         return false;
     }
@@ -1039,15 +1039,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             int bookmark = game.bookmarkState();
             if (ability.activate(game, false)) {
                 if (ability.resolve(game)) {
-                    if (ability.isUndoPossible() && (storedBookmark == -1 || storedBookmark > bookmark)) { // e.g. usefull for undo Nykthos, Shrine to Nyx
-                        setStoredBookmark(bookmark);
+                    if (ability.isUndoPossible()) {
+                        if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. usefull for undo Nykthos, Shrine to Nyx
+                            setStoredBookmark(bookmark);
+                        }
                     } else {
                         resetStoredBookmark(game);
                     }
                     return true;
                 }
             }
-            game.restoreState(bookmark, ability.getRule());
+            restoreState(bookmark, ability.getRule(), game);
         }
         return false;
     }
@@ -1068,7 +1070,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark, ability.getRule());
+                restoreState(bookmark, ability.getRule(), game);
             }
         } else {
             int bookmark = game.bookmarkState();
@@ -1078,7 +1080,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game);
                 return true;
             }
-            game.restoreState(bookmark, ability.getRule());
+            restoreState(bookmark, ability.getRule(), game);
         }
         return false;
     }
@@ -1098,9 +1100,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            game.restoreState(bookmark, action.getRule());
+            restoreState(bookmark, action.getRule(), game);
         }
         return false;
+    }
+
+    private void restoreState(int bookmark, String text, Game game) {
+        game.restoreState(bookmark, text);
+        if (storedBookmark >= bookmark) {
+            resetStoredBookmark(game);
+        }
     }
 
     @Override
@@ -1175,7 +1184,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return true;
             }
         }
-        game.restoreState(bookmark, source.getRule()); // why restore is needed here?
+        restoreState(bookmark, source.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack)
         return false;
     }
 
