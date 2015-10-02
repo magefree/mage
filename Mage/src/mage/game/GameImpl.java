@@ -1465,6 +1465,7 @@ public abstract class GameImpl implements Game, Serializable {
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
+            // Too early, becuase no targets set yet !!!!!!!!!!!
             for (Effect effect : newAbility.getEffects()) {
                 effect.getTargetPointer().init(this, newAbility);
             }
