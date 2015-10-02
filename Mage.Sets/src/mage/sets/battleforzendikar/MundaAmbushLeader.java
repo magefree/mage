@@ -81,7 +81,7 @@ public class MundaAmbushLeader extends CardImpl {
 
 class MundaAmbushLeaderEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("Ally cards to reveal and put on top of your libraray");
+    private static final FilterCard filter = new FilterCard("Ally cards to reveal and put on top of your library");
 
     static {
         filter.add(new SubtypePredicate("Ally"));
@@ -111,7 +111,7 @@ class MundaAmbushLeaderEffect extends OneShotEffect {
             controller.lookAtCards(sourceObject.getIdName(), allCards, game);
             if (!allCards.isEmpty()) {
                 Cards cardsToReveal = new CardsImpl();
-                TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, new FilterCard("Ally cards to put on top of your libraray"));
+                TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
                 controller.chooseTarget(outcome, allCards, target, source, game);
                 cardsToReveal.addAll(target.getTargets());
                 if (!cardsToReveal.isEmpty()) {

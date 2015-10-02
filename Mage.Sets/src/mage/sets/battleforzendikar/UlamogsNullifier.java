@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.FlashAbility;
@@ -78,9 +77,7 @@ public class UlamogsNullifier extends CardImpl {
 
         // When Ulamog's Nullifier enters the battlefield, you may put two cards your opponents own
         // from exile into their owners' graveyards. If you do, counter target spell.
-        Effect effect = new UlamogsNullifierEffect();
-        effect.setText("you may put two cards your opponents own from exile into their owners' graveyards. If you do, ");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new UlamogsNullifierEffect(), true);
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
@@ -105,7 +102,7 @@ class UlamogsNullifierEffect extends OneShotEffect {
 
     public UlamogsNullifierEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, ";
+        this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, counter target spell.";
     }
 
     public UlamogsNullifierEffect(final UlamogsNullifierEffect effect) {
