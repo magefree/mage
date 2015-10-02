@@ -116,7 +116,8 @@ class KillSuitCultistEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if(permanent != null) {
-            return permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source.getSourceId(), game, false);
+            return true;
         }
         return false;
     }
