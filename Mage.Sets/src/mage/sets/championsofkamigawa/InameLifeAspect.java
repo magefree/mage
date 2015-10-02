@@ -28,20 +28,18 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.costs.common.ExileSourceFromGraveCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -107,8 +105,11 @@ class InameLifeAspectEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit cards?", source, game)) {
+                Effect effect = new ReturnToHandTargetEffect();
+                effect.setTargetPointer(getTargetPointer());
+                effect.getTargetPointer().init(game, source);
                 new ExileSourceEffect().apply(game, source);
-                return new ReturnToHandTargetEffect().apply(game, source);
+                return effect.apply(game, source);
             }
             return true;
         }
