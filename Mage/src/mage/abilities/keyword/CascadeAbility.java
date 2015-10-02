@@ -92,8 +92,20 @@ public class CascadeAbility extends TriggeredAbilityImpl {
         return new CascadeAbility(this);
     }
 
-    // moved to static method because it's called also from class {link} MaelstromNexus
-    public static boolean applyCascade(Outcome outcome, Game game, Ability source) {
+}
+
+class CascadeEffect extends OneShotEffect {
+
+    public CascadeEffect() {
+        super(Outcome.PutCardInPlay);
+    }
+
+    public CascadeEffect(CascadeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         Card card;
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
@@ -117,7 +129,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
                 }
             }
         }
-        // Mobe the remaining cards to the buttom of the libraray in a random order
+        // Move the remaining cards to the buttom of the library in a random order
         Cards cardsFromExile = new CardsImpl();
         Cards cardsToLibrary = new CardsImpl();
         cardsFromExile.addAll(exile);
@@ -126,56 +138,8 @@ public class CascadeAbility extends TriggeredAbilityImpl {
             cardsFromExile.remove(card.getId());
             cardsToLibrary.add(card);
         }
-        player.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, true);
+        player.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
         return true;
-    }
-}
-
-// !!! Changes to the cascade effect here have to be copied to the cascadeEffect of Maelstrom Nexus card eventually.
-// There is a functional copy of this effect
-class CascadeEffect extends OneShotEffect {
-
-    public CascadeEffect() {
-        super(Outcome.PutCardInPlay);
-    }
-
-    public CascadeEffect(CascadeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return CascadeAbility.applyCascade(outcome, game, source);
-//        Card card;
-//        Player player = game.getPlayer(source.getControllerId());
-//        if (player == null) {
-//            return false;
-//        }
-//        ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
-//        int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
-//        do {
-//            card = player.getLibrary().getFromTop(game);
-//            if (card == null) {
-//                break;
-//            }
-//            player.moveCardToExileWithInfo(card, exile.getId(), exile.getName(), source.getSourceId(), game, Zone.LIBRARY);
-//        } while (player.isInGame() && card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
-//
-//        if (card != null) {
-//            if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
-//                if(player.cast(card.getSpellAbility(), game, true)){
-//                    exile.remove(card.getId());
-//                }
-//            }
-//        }
-//
-//        while (exile.size() > 0) {
-//            card = exile.getRandom(game);
-//            exile.remove(card.getId());
-//            player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, false, false);
-//        }
-//
-//        return true;
     }
 
     @Override
