@@ -50,7 +50,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoatToken;
 import mage.players.Player;
 
 /**
@@ -134,19 +134,5 @@ class SpringjackPastureEffect extends OneShotEffect {
     @Override
     public SpringjackPastureEffect copy() {
         return new SpringjackPastureEffect(this);
-    }
-}
-
-class GoatToken extends Token {
-
-    public GoatToken() {
-        super("Goat", "0/1 white Goat creature token");
-        setOriginalExpansionSetCode("EVE");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Goat");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
     }
 }

@@ -29,7 +29,6 @@ package mage.sets.avacynrestored;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -38,7 +37,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DemonToken;
 
 import java.util.UUID;
 
@@ -53,7 +52,6 @@ public class DemonicRising extends CardImpl {
         super(ownerId, 94, "Demonic Rising", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "AVR";
 
-
         // At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new DemonToken()), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, OneControlledCreatureCondition.getInstance(), ruleText));
@@ -66,17 +64,5 @@ public class DemonicRising extends CardImpl {
     @Override
     public DemonicRising copy() {
         return new DemonicRising(this);
-    }
-}
-
-class DemonToken extends Token {
-    public DemonToken() {
-        super("Demon", "a 5/5 black Demon creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Demon");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        addAbility(FlyingAbility.getInstance());
     }
 }

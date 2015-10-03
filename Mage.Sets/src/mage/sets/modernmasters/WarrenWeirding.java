@@ -47,6 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.GoblinRogueToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -83,9 +84,11 @@ public class WarrenWeirding extends CardImpl {
 class WarrenWeirdingEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent();
+
     static {
         filterGoblin.add(new SubtypePredicate("Goblin"));
     }
+
     WarrenWeirdingEffect ( ) {
         super(Outcome.Sacrifice);
         staticText = "Target player sacrifices a creature. If a Goblin is sacrificed this way, that player puts two 1/1 black Goblin Rogue creature tokens onto the battlefield, and those tokens gain haste until end of turn";
@@ -113,7 +116,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
                 permanent.sacrifice(source.getSourceId(), game);
                 if (filterGoblin.match(permanent, game)) {
                     for (int i = 0; i < 2; i++) {
-                        Token token = new WarrenWeirdingBlackGoblinRogueToken();
+                        Token token = new GoblinRogueToken();
                         Effect effect = new CreateTokenTargetEffect(token);
                         effect.setTargetPointer(new FixedTarget(player.getId()));
                         if (effect.apply(game, source)) {
@@ -137,16 +140,4 @@ class WarrenWeirdingEffect extends OneShotEffect {
         return new WarrenWeirdingEffect(this);
     }
 
-}
-
-class WarrenWeirdingBlackGoblinRogueToken extends Token {
-    WarrenWeirdingBlackGoblinRogueToken() {
-        super("Goblin Rogue", "1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Goblin");
-        subtype.add("Rogue");
-        power.setValue(1);
-        toughness.setValue(1);
-    }
 }

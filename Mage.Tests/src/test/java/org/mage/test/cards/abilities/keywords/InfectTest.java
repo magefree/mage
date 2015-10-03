@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.InfectAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -123,6 +124,48 @@ public class InfectTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
+
+    }
+
+    /**
+     * Phyrexian Obliterator is enchanted with Corrupted Conscience and Enslave
+     *
+     * on upkeep Phyrexian Obliterator does 1 damage to its owner but this
+     * damage was NOT infect damage and it should have been
+     */
+    @Test
+    public void GainedInfectByEnchantment() {
+        // Trample
+        // Whenever a source deals damage to Phyrexian Obliterator, that source's controller sacrifices that many permanents.
+        addCard(Zone.BATTLEFIELD, playerB, "Phyrexian Obliterator");
+
+        // Enchant creature
+        // You control enchanted creature.
+        // Enchanted creature has infect. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+        addCard(Zone.HAND, playerA, "Corrupted Conscience"); // Enchantment {3}{U}{U}
+        // Enchant creature
+        // You control enchanted creature.
+        // At the beginning of your upkeep, enchanted creature deals 1 damage to its owner.
+        addCard(Zone.HAND, playerA, "Enslave"); // Enchantment {4}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 9);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Corrupted Conscience", "Phyrexian Obliterator");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enslave", "Phyrexian Obliterator");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Phyrexian Obliterator", 1);
+        assertPermanentCount(playerA, "Corrupted Conscience", 1);
+        assertPermanentCount(playerA, "Enslave", 1);
+
+        assertAbility(playerA, "Phyrexian Obliterator", InfectAbility.getInstance(), true);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertCounterCount(playerB, CounterType.POISON, 1);
 
     }
 

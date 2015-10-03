@@ -345,7 +345,6 @@ public abstract class TargetImpl implements Target {
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
         Set<UUID> illegalTargets = new HashSet<>();
-//        int replacedTargets = 0;
         for (UUID targetId : targets.keySet()) {
             Card card = game.getCard(targetId);
             if (card != null) {
@@ -367,12 +366,17 @@ public abstract class TargetImpl implements Target {
         for (UUID targetId : illegalTargets) {
             targets.remove(targetId);
         }
-//        if (replacedTargets > 0 && replacedTargets == targets.size()) {
-//            return false;
-//        }
-        if (getNumberOfTargets() == 0 && targets.isEmpty()) {
-            return true;
+        if (targets.isEmpty()) {
+            // If all targets that were set before are illegal now, the target is no longer legal
+            if (!illegalTargets.isEmpty()) {
+                return false;
+            }
+            // if no targets have to be set and no targets are set, that's legal
+            if (getNumberOfTargets() == 0) {
+                return true;
+            }
         }
+
         return targets.size() > 0;
     }
 

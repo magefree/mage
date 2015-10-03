@@ -28,15 +28,14 @@
 package mage.sets.ravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -56,8 +55,7 @@ public class ChordOfCalling extends CardImpl {
         super(ownerId, 156, "Chord of Calling", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}{G}");
         this.expansionSetCode = "RAV";
 
-
-        // Convoke
+        // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
         this.addAbility(new ConvokeAbility());
 
         // Search your library for a creature card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
@@ -97,7 +95,7 @@ class ChordofCallingSearchEffect extends OneShotEffect {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xCost + 1));
-        TargetCardInLibrary target = new TargetCardInLibrary(0,1,filter);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);

@@ -28,22 +28,20 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinTokenWithHaste;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -51,15 +49,21 @@ import mage.game.permanent.token.Token;
  */
 public class GoblinAssault extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
+
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
+    }
+
     public GoblinAssault(UUID ownerId) {
         super(ownerId, 101, "Goblin Assault", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ALA";
 
-
         // At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinAssaultToken()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste()), TargetController.YOU, false));
+
         // Goblin creatures attack each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinAssaultEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter, Duration.WhileOnBattlefield)), new AttackedThisTurnWatcher());
     }
 
     public GoblinAssault(final GoblinAssault card) {
@@ -69,61 +73,5 @@ public class GoblinAssault extends CardImpl {
     @Override
     public GoblinAssault copy() {
         return new GoblinAssault(this);
-    }
-}
-
-
-class GoblinAssaultEffect extends RequirementEffect {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
-    }
-    
-    public GoblinAssaultEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Goblin creatures attack each turn if able";
-    }
-
-    public GoblinAssaultEffect(final GoblinAssaultEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GoblinAssaultEffect copy() {
-        return new GoblinAssaultEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean mustAttack(Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean mustBlock(Game game) {
-        return false;
-    }
-
-}
-
-class GoblinAssaultToken extends Token {
-
-    public GoblinAssaultToken() {
-        super("Goblin", "1/1 red Goblin creature token with haste");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Goblin");
-
-        color.setRed(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(HasteAbility.getInstance());
     }
 }

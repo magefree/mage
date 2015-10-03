@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
@@ -47,18 +46,22 @@ import mage.game.events.GameEvent.EventType;
  */
 public class ConsecratedSphinx extends CardImpl {
 
-    public ConsecratedSphinx (UUID ownerId) {
+    public ConsecratedSphinx(UUID ownerId) {
         super(ownerId, 21, "Consecrated Sphinx", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // Whenever an opponent draws a card, you may draw two cards.
         this.addAbility(new ConsecratedSphinxTriggeredAbility());
     }
 
-    public ConsecratedSphinx (final ConsecratedSphinx card) {
+    public ConsecratedSphinx(final ConsecratedSphinx card) {
         super(card);
     }
 
@@ -70,6 +73,7 @@ public class ConsecratedSphinx extends CardImpl {
 }
 
 class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl {
+
     ConsecratedSphinxTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), true);
     }
@@ -95,6 +99,6 @@ class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent draws a card, you may draw two cards";
+        return "Whenever an opponent draws a card, you may draw two cards.";
     }
 }

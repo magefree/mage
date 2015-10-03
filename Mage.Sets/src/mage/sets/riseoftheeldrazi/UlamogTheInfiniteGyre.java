@@ -30,22 +30,15 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ShuffleIntoLibraryGraveOfSourceOwnerEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -64,13 +57,16 @@ public class UlamogTheInfiniteGyre extends CardImpl {
         this.toughness = new MageInt(10);
 
         // When you cast Ulamog, the Infinite Gyre, destroy target permanent.
-        this.addAbility(new UlamogTheInfiniteGyreDestroyOnCastAbility());
+        Ability ability = new CastSourceTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
+
         // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
         this.addAbility(new AnnihilatorAbility(4));
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
         // When Ulamog is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new UlamogTheInfiniteGyreEnterGraveyardEffect(), false));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibraryGraveOfSourceOwnerEffect(), false));
     }
 
     public UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {
@@ -80,66 +76,5 @@ public class UlamogTheInfiniteGyre extends CardImpl {
     @Override
     public UlamogTheInfiniteGyre copy() {
         return new UlamogTheInfiniteGyre(this);
-    }
-}
-
-class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl {
-
-    UlamogTheInfiniteGyreDestroyOnCastAbility() {
-        super(Zone.STACK, new DestroyTargetEffect());
-        this.addTarget(new TargetPermanent());
-    }
-
-    UlamogTheInfiniteGyreDestroyOnCastAbility(UlamogTheInfiniteGyreDestroyOnCastAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = (Spell) game.getObject(event.getTargetId());
-        return this.getSourceId().equals(spell.getSourceId());
-    }
-
-    @Override
-    public UlamogTheInfiniteGyreDestroyOnCastAbility copy() {
-        return new UlamogTheInfiniteGyreDestroyOnCastAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you cast {this}, " + super.getRule();
-    }
-}
-
-class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect {
-
-    UlamogTheInfiniteGyreEnterGraveyardEffect() {
-        super(Outcome.Benefit);
-        staticText = "its owner shuffles his or her graveyard into his or her library";
-    }
-
-    UlamogTheInfiniteGyreEnterGraveyardEffect(UlamogTheInfiniteGyreEnterGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player owner = game.getPlayer(game.getOwnerId(source.getSourceId()));
-        if (owner != null) {
-            owner.moveCards(owner.getGraveyard(), null, Zone.LIBRARY, source, game);
-            owner.shuffleLibrary(game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public UlamogTheInfiniteGyreEnterGraveyardEffect copy() {
-        return new UlamogTheInfiniteGyreEnterGraveyardEffect(this);
     }
 }

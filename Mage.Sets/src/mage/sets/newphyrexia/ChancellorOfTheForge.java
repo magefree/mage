@@ -35,7 +35,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -45,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinTokenWithHaste;
 
 /**
  *
@@ -73,7 +72,7 @@ public class ChancellorOfTheForge extends CardImpl {
 
         // When Chancellor of the Forge enters the battlefield, put X 1/1 red Goblin creature tokens with haste onto the battlefield, where X is the number of creatures you control.
         DynamicValue value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), value), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste(), value), false));
     }
 
     public ChancellorOfTheForge(final ChancellorOfTheForge card) {
@@ -89,7 +88,7 @@ public class ChancellorOfTheForge extends CardImpl {
 class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     ChancellorOfTheForgeDelayedTriggeredAbility () {
-        super(new CreateTokenEffect(new GoblinToken()));
+        super(new CreateTokenEffect(new GoblinTokenWithHaste()));
     }
 
     ChancellorOfTheForgeDelayedTriggeredAbility(ChancellorOfTheForgeDelayedTriggeredAbility ability) {
@@ -108,17 +107,5 @@ class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbilit
     @Override
     public ChancellorOfTheForgeDelayedTriggeredAbility copy() {
         return new ChancellorOfTheForgeDelayedTriggeredAbility(this);
-    }
-}
-
-class GoblinToken extends Token {
-    public GoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token with haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Goblin");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(HasteAbility.getInstance());
     }
 }

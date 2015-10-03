@@ -29,30 +29,20 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CastSourceTriggeredAbility;
+import mage.abilities.effects.common.ShuffleIntoLibraryGraveOfSourceOwnerEffect;
+import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
-import mage.game.turn.TurnMod;
-import mage.players.Player;
-
 
 /**
  * @author Loki
@@ -72,17 +62,18 @@ public class EmrakulTheAeonsTorn extends CardImpl {
         this.subtype.add("Eldrazi");
         this.power = new MageInt(15);
         this.toughness = new MageInt(15);
-        
+
         // Emrakul, the Aeons Torn can't be countered.
         this.addAbility(new CantBeCounteredAbility());
-        // When you cast Emrakul, take an extra turn after this one.   
-        this.addAbility(new EmrakulTheAeonsTornOnCastAbility());
+        // When you cast Emrakul, take an extra turn after this one.
+        this.addAbility(new CastSourceTriggeredAbility(new AddExtraTurnControllerEffect()));
+
         // Flying, protection from colored spells, annihilator 6
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new ProtectionAbility(filter));
         this.addAbility(new AnnihilatorAbility(6));
         // When Emrakul is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new EmrakulTheAeonsTornEffect(), false));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibraryGraveOfSourceOwnerEffect(), false));
     }
 
     public EmrakulTheAeonsTorn(final EmrakulTheAeonsTorn card) {
@@ -92,91 +83,5 @@ public class EmrakulTheAeonsTorn extends CardImpl {
     @Override
     public EmrakulTheAeonsTorn copy() {
         return new EmrakulTheAeonsTorn(this);
-    }
-}
-class EmrakulTheAeonsTornOnCastAbility extends TriggeredAbilityImpl {
-
-    private static final String abilityText = "When you cast {this}, take an extra turn after this one";
-
-    EmrakulTheAeonsTornOnCastAbility() {
-        super(Zone.STACK, new EmrakulExtraTurnEffect());
-    }
-
-    EmrakulTheAeonsTornOnCastAbility(EmrakulTheAeonsTornOnCastAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = (Spell) game.getObject(event.getTargetId());
-        return this.getSourceId().equals(spell.getSourceId());
-    }
-
-    @Override
-    public EmrakulTheAeonsTornOnCastAbility copy() {
-        return new EmrakulTheAeonsTornOnCastAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return abilityText;
-    }
-}
-
-class EmrakulTheAeonsTornEffect extends OneShotEffect {
-
-    EmrakulTheAeonsTornEffect() {
-        super(Outcome.Benefit);
-        staticText = "its owner shuffles his or her graveyard into his or her library";
-    }
-
-    EmrakulTheAeonsTornEffect(final EmrakulTheAeonsTornEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Card card: player.getGraveyard().getCards(game)) {
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }                           
-            player.shuffleLibrary(game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public EmrakulTheAeonsTornEffect copy() {
-        return new EmrakulTheAeonsTornEffect(this);
-    }
-}
-
-class EmrakulExtraTurnEffect extends OneShotEffect {
-
-    EmrakulExtraTurnEffect() {
-        super(Outcome.ExtraTurn);
-        staticText = "take an extra turn after this one";
-    }
-
-    EmrakulExtraTurnEffect(final EmrakulExtraTurnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
-        return true;
-    }
-
-    @Override
-    public EmrakulExtraTurnEffect copy() {
-        return new EmrakulExtraTurnEffect(this);
     }
 }

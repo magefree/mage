@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinRogueToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -64,7 +64,7 @@ public class WeirdingShaman extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new goblinRogueToken(), 2), new ManaCostsImpl("{3}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinRogueToken(), 2), new ManaCostsImpl("{3}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
@@ -76,17 +76,5 @@ public class WeirdingShaman extends CardImpl {
     @Override
     public WeirdingShaman copy() {
         return new WeirdingShaman(this);
-    }
-}
-
-class goblinRogueToken extends Token {
-    goblinRogueToken() {
-        super("Goblin", "1/1 black Goblin Rogue creature tokens");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Goblin");
-        subtype.add("Rogue");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

@@ -51,6 +51,7 @@ public class SacrificeTargetCost extends CostImpl {
         this.addTarget(target);
         target.setNotTarget(true); // sacrifice is never targeted
         this.text = "sacrifice " + target.getTargetName();
+        target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
     public SacrificeTargetCost(TargetControlledPermanent target, boolean noText) {

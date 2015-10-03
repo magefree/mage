@@ -36,6 +36,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mage.MageException;
+import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
@@ -91,15 +92,15 @@ public class Session {
             return "User name Admin already in use";
         }
         if (userName.length() > ConfigSettings.getInstance().getMaxUserNameLength()) {
-            return new StringBuilder("User name may not be longer than ").append(ConfigSettings.getInstance().getMaxUserNameLength()).append(" characters").toString();
+            return "User name may not be longer than " + ConfigSettings.getInstance().getMaxUserNameLength() + " characters";
         }
         if (userName.length() < ConfigSettings.getInstance().getMinUserNameLength()) {
-            return new StringBuilder("User name may not be shorter than ").append(ConfigSettings.getInstance().getMinUserNameLength()).append(" characters").toString();
+            return "User name may not be shorter than " + ConfigSettings.getInstance().getMinUserNameLength() + " characters";
         }
         Pattern p = Pattern.compile(ConfigSettings.getInstance().getUserNamePattern(), Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(userName);
         if (m.find()) {
-            return new StringBuilder("User name '").append(userName).append("' includes not allowed characters: use a-z, A-Z and 0-9").toString();
+            return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
         }
         User user = UserManager.getInstance().createUser(userName, host);
         boolean reconnect = false;
@@ -117,11 +118,11 @@ public class Session {
                     SessionManager.getInstance().disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
                 }
             } else {
-                return new StringBuilder("User name ").append(userName).append(" already in use (or your IP address changed)").toString();
+                return "User name " + userName + " already in use (or your IP address changed)";
             }
         }
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
-            return new StringBuilder("Error connecting ").append(userName).toString();
+            return "Error connecting " + userName;
         }
         this.userId = user.getId();
         if (reconnect) { // must be connected to receive the message
@@ -157,7 +158,11 @@ public class Session {
             } else {
                 user.getUserData().update(userData);
             }
-            if (user.getUserData().getAvatarId() == 51) {
+            if (user.getUserData().getAvatarId() < Constants.MIN_AVATAR_ID
+                    || user.getUserData().getAvatarId() > Constants.MAX_AVATAR_ID) {
+                user.getUserData().setAvatarId(Constants.DEFAULT_AVATAR_ID);
+            }
+            if (user.getUserData().getAvatarId() == 11) {
                 user.getUserData().setAvatarId(updateAvatar(user.getName()));
             }
             return true;
@@ -169,22 +174,16 @@ public class Session {
         //TODO: move to separate class
         //TODO: add for checking for private key
         switch (userName) {
-            case "nantuko":
-                return 1000;
             case "North":
                 return 1006;
             case "BetaSteward":
                 return 1008;
-            case "loki":
-                return 1012;
-            case "Ayrat":
-                return 1018;
             case "Bandit":
                 return 1020;
-            case "Wehk":
-                return 66;
+            case "fireshoes":
+                return 1021;
         }
-        return 51;
+        return 11;
     }
 
     public String getId() {

@@ -38,12 +38,11 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DragonToken2;
 
 /**
  *
@@ -67,7 +66,7 @@ public class DragonmasterOutcast extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, if you control six or more lands, put a 5/5 red Dragon creature token with flying onto the battlefield.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new DragonToken(), 1), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new DragonToken2(), 1), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 5), "At the beginning of your upkeep, if you control six or more lands, put a 5/5 red Dragon creature token with flying onto the battlefield."));
     }
 
@@ -78,18 +77,5 @@ public class DragonmasterOutcast extends CardImpl {
     @Override
     public DragonmasterOutcast copy() {
         return new DragonmasterOutcast(this);
-    }
-}
-
-class DragonToken extends Token {
-
-    public DragonToken() {
-        super("Dragon", "5/5 red Dragon creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        addAbility(FlyingAbility.getInstance());
     }
 }

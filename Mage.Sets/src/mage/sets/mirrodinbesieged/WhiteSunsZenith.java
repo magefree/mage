@@ -29,7 +29,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -37,7 +36,7 @@ import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CatToken;
 
 /**
  *
@@ -60,18 +59,5 @@ public class WhiteSunsZenith extends CardImpl {
     @Override
     public WhiteSunsZenith copy() {
         return new WhiteSunsZenith(this);
-    }
-}
-
-class CatToken extends Token {
-    public CatToken() {
-        super("Cat", "2/2 white Cat creature token");
-        setOriginalExpansionSetCode("SOM");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Cat");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

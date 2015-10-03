@@ -197,4 +197,32 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+
+    /**
+     * My opponent cast Lightning Bolt, targeting me. I redirected it to my
+     * Spellskite. The log window said Spellskite was an invalid target (though
+     * it should be valid). Spellskite still appeared to be targeted and took
+     * the damage, so just a log issue I guess.
+     */
+    @Test
+    public void testRedirectBolt() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Lightning Bolt");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+    }
 }

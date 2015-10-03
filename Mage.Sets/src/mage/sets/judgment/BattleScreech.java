@@ -28,12 +28,10 @@
 package mage.sets.judgment;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -42,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BirdToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -78,21 +76,4 @@ public class BattleScreech extends CardImpl {
     public BattleScreech copy() {
         return new BattleScreech(this);
     }
-}
-
-class BirdToken extends Token {
-
-    public BirdToken() {
-        super("Bird", "1/1 white Bird creature tokens with flying");
-        this.setOriginalExpansionSetCode("BNG");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Bird");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
 }

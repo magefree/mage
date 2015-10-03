@@ -62,7 +62,7 @@ public class NicolBolas extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}{B}{R}")), TargetController.YOU, false));
 
         // Whenever Nicol Bolas deals damage to an opponent, that player discards his or her hand.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardHandTargetEffect("that player"), false));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardHandTargetEffect("that player"), false, false, true));
     }
 
     public NicolBolas(final NicolBolas card) {

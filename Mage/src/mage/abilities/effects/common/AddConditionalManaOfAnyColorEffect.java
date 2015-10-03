@@ -59,9 +59,9 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
         this.manaBuilder = manaBuilder;
         this.oneChoice = oneChoice;
         //
-        staticText = "Add " + amount + " mana of " +
-                (oneChoice ? "any one color":"in any combination of colors") +
-                " to your mana pool. "  + manaBuilder.getRule();
+        staticText = "Add " + amount + " mana of "
+                + (oneChoice ? "any one color" : "in any combination of colors")
+                + " to your mana pool. " + manaBuilder.getRule();
     }
 
     public AddConditionalManaOfAnyColorEffect(final AddConditionalManaOfAnyColorEffect effect) {
@@ -85,7 +85,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
 
         int value = amount.calculate(game, source, this);
         boolean result = false;
-        ChoiceColor choice = new ChoiceColor();
+        ChoiceColor choice = new ChoiceColor(false);
         for (int i = 0; i < value; i++) {
             if (!choice.isChosen()) {
                 if (!controller.choose(outcome, choice, game)) {
@@ -114,7 +114,6 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
                 choice.clearChoice();
             }
         }
-
 
         return result;
     }

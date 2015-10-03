@@ -41,7 +41,7 @@ import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -63,7 +63,7 @@ public class DromarTheBanisher extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever Dromar, the Banisher deals combat damage to a player, you may pay {2}{U}. If you do, choose a color, then return all creatures of that color to their owners' hands.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new DromarTheBanisherEffect(), new ManaCostsImpl("{2}{U}")), false));
     }
@@ -79,30 +79,30 @@ public class DromarTheBanisher extends CardImpl {
 }
 
 class DromarTheBanisherEffect extends OneShotEffect {
-    
+
     DromarTheBanisherEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "choose a color, then return all creatures of that color to their owners' hands.";
     }
-    
+
     DromarTheBanisherEffect(final DromarTheBanisherEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DromarTheBanisherEffect copy() {
         return new DromarTheBanisherEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());        
+        Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             ChoiceColor choice = new ChoiceColor();
             player.choose(outcome, choice, game);
             if (choice.getColor() != null) {
-                game.informPlayers(new StringBuilder(player.getLogName()).append(" chooses ").append(choice.getColor()).toString());
-                FilterPermanent filter = new FilterPermanent();
+                game.informPlayers(player.getLogName() + " chooses " + choice.getChoice());
+                FilterCreaturePermanent filter = new FilterCreaturePermanent();
                 filter.add(new ColorPredicate(choice.getColor()));
                 new ReturnToHandFromBattlefieldAllEffect(filter).apply(game, source);
                 return true;

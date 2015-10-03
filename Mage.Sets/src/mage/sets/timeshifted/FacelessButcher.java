@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
@@ -56,8 +57,8 @@ public class FacelessButcher extends CardImpl {
     static {
          filter.add(new AnotherPredicate());
     }
-    
-    
+
+
     public FacelessButcher(UUID ownerId) {
         super(ownerId, 43, "Faceless Butcher", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "TSB";
@@ -65,10 +66,12 @@ public class FacelessButcher extends CardImpl {
         this.subtype.add("Horror");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-  
+
 
         // When Faceless Butcher enters the battlefield, exile target creature other than Faceless Butcher.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
+        Effect effect = new ExileTargetForSourceEffect();
+        effect.setText("exile target creature other than {this}");
+        Ability ability1 = new EntersBattlefieldTriggeredAbility(effect, false);
         Target target = new TargetPermanent(filter);
         ability1.addTarget(target);
         this.addAbility(ability1);
@@ -76,7 +79,7 @@ public class FacelessButcher extends CardImpl {
         // When Faceless Butcher leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
         this.addAbility(ability2);
-    
+
     }
 
     public FacelessButcher(final FacelessButcher card) {

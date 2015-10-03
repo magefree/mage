@@ -117,13 +117,15 @@ public class TargetSpellOrPermanent extends TargetImpl {
         if (permanent != null) {
             if (source != null) {
                 MageObject targetSource = game.getObject(source.getSourceId());
-                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
+                        && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
             } else {
                 return filter.match(permanent, game);
             }
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null) {
+        if (spell != null
+                && !source.getSourceId().equals(id)) { // 114.4. A spell or ability on the stack is an illegal target for itself.
             return filter.match(spell, game);
         }
         return false;
@@ -151,7 +153,9 @@ public class TargetSpellOrPermanent extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null && filter.match(spell, sourceId, sourceControllerId, game)) {
+            if (spell != null
+                    && !sourceId.equals(spell.getSourceId())
+                    && filter.match(spell, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -184,7 +188,8 @@ public class TargetSpellOrPermanent extends TargetImpl {
         int count = 0;
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
+            if (spell != null
+                    && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -208,7 +213,9 @@ public class TargetSpellOrPermanent extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
+            if (spell != null
+                    && !sourceId.equals(spell.getSourceId())
+                    && filter.match(spell, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(spell.getId());
             }
         }
@@ -225,7 +232,8 @@ public class TargetSpellOrPermanent extends TargetImpl {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
+            if (spell != null
+                    && filter.match(spell, null, sourceControllerId, game)) {
                 possibleTargets.add(spell.getId());
             }
         }

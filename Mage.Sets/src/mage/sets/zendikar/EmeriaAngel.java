@@ -36,7 +36,7 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BirdToken;
 
 /**
  *
@@ -65,17 +65,4 @@ public class EmeriaAngel extends CardImpl {
         return new EmeriaAngel(this);
     }
 
-}
-
-class BirdToken extends Token {
-
-    public BirdToken() {
-        super("Bird", "1/1 white Bird creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Bird");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
-    }
 }

@@ -54,7 +54,7 @@ public class MortuaryMire extends CardImpl {
 
         // When Mortuary Mire enters the battlefield, you may put target creature card from your graveyard on top of your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.addAbility(ability);
 
         // {T}: Add {B} to your mana pool.

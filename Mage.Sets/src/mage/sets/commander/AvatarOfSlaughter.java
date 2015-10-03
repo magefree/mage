@@ -41,6 +41,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -62,7 +63,7 @@ public class AvatarOfSlaughter extends CardImpl {
         effect = new AttacksIfAbleAllEffect(new FilterCreaturePermanent("creatures"));
         effect.setText("and attack each turn if able");
         ability.addEffect(effect);
-        this.addAbility(ability);        
+        this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 
     public AvatarOfSlaughter(final AvatarOfSlaughter card) {

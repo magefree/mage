@@ -48,18 +48,19 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
  * @author fireshoes
  */
 public class InciteWar extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-   }
+    }
 
     public InciteWar(UUID ownerId) {
         super(ownerId, 96, "Incite War", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
@@ -68,12 +69,13 @@ public class InciteWar extends CardImpl {
         // Choose one - Creatures target player controls attack this turn if able;
         this.getSpellAbility().addEffect(new InciteWarMustAttackEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
+        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
+
         // or creatures you control gain first strike until end of turn.
         Mode mode = new Mode();
         mode.getEffects().add(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter));
         this.getSpellAbility().getModes().addMode(mode);
-        
+
         // Entwine {2}
         this.addAbility(new EntwineAbility("{2}"));
     }
@@ -91,7 +93,7 @@ public class InciteWar extends CardImpl {
 class InciteWarMustAttackEffect extends OneShotEffect {
 
     public InciteWarMustAttackEffect() {
-         super(Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Creatures target player control attack this turn if able";
     }
 

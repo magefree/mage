@@ -55,7 +55,7 @@ public class HydraOmnivore extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Whenever Hydra Omnivore deals combat damage to an opponent, it deals that much damage to each other opponent.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new HydraOmnivoreEffect(), false, true));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new HydraOmnivoreEffect(), false, true, true));
     }
 
     public HydraOmnivore(final HydraOmnivore card) {

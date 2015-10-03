@@ -41,6 +41,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -57,7 +58,10 @@ public class ReaperOfSheoldred extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
+        // Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
         this.addAbility(InfectAbility.getInstance());
+
+        // Whenever a source deals damage to Reaper of Sheoldred, that source's controller gets a poison counter.
         this.addAbility(new ReaperOfSheoldredTriggeredAbility());
     }
 
@@ -72,6 +76,7 @@ public class ReaperOfSheoldred extends CardImpl {
 }
 
 class ReaperOfSheoldredTriggeredAbility extends TriggeredAbilityImpl {
+
     ReaperOfSheoldredTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.POISON.createInstance()));
     }
@@ -93,10 +98,16 @@ class ReaperOfSheoldredTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            UUID controller = game.getControllerId(event.getSourceId());
+            if (controller != null) {
+                Player player = game.getPlayer(controller);
+                if (player != null) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(player.getId()));
+                    }
+                    return true;
+                }
             }
-            return true;
         }
         return false;
     }

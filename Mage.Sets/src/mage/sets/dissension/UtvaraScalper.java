@@ -28,33 +28,30 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author BursegSardaukar
+ * @author LoneFox
  */
 public class UtvaraScalper extends CardImpl {
-    
+
     public UtvaraScalper(UUID ownerId) {
         super(ownerId, 76, "Utvara Scalper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "DIS";
         this.subtype.add("Goblin");
         this.subtype.add("Scout");
-
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        //Flying
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-
-        //Utvara Scalper attacks each turn if able
+        // Utvara Scalper attacks each turn if able.
         this.addAbility(new AttacksEachTurnStaticAbility());
     }
 

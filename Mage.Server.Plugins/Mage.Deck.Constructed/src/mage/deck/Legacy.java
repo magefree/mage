@@ -46,7 +46,6 @@ public class Legacy extends Constructed {
         banned.add("Balance");
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
-        banned.add("Black Vise");
         banned.add("Brago's Favor");
         banned.add("Bronze Tablet");
         banned.add("Channel");
@@ -56,6 +55,7 @@ public class Legacy extends Constructed {
         banned.add("Demonic Attorney");
         banned.add("Demonic Consultation");
         banned.add("Demonic Tutor");
+        banned.add("Dig Through Time");
         banned.add("Double Stroke");
         banned.add("Earthcraft");
         banned.add("Falling Star");
@@ -104,7 +104,7 @@ public class Legacy extends Constructed {
         banned.add("Timmerian Fiends");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
-        banned.add("Treasure Cruise"); //  banned effective January 23, 2015
+        banned.add("Treasure Cruise");
         banned.add("Unexpected Potential");
         banned.add("Vampiric Tutor");
         banned.add("Wheel of Fortune");

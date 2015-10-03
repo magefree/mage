@@ -64,11 +64,12 @@ public class DuelCommander extends Commander {
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
-        banned.add("Mystical Tutor"); // banned effective July 17, 2015
+        banned.add("Mystical Tutor");
         banned.add("Natural Order");
         banned.add("Necropotence");
         banned.add("Oath of Druids");
         banned.add("Protean Hulk");
+        banned.add("Sensei's Divining Top");
         banned.add("Serra Ascendant");
         banned.add("Shahrazad");
         banned.add("Sol Ring");

@@ -1176,7 +1176,7 @@ public abstract class GameImpl implements Game, Serializable {
     public synchronized void concede(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            logger.debug(new StringBuilder("Player ").append(player.getName()).append(" concedes game ").append(this.getId()));
+            logger.debug("Player " + player.getName() + " concedes game " + this.getId());
             fireInformEvent(player.getLogName() + " has conceded.");
             player.concede(this);
         }
@@ -1465,6 +1465,7 @@ public abstract class GameImpl implements Game, Serializable {
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
+            // Too early, becuase no targets set yet !!!!!!!!!!!
             for (Effect effect : newAbility.getEffects()) {
                 effect.getTargetPointer().init(this, newAbility);
             }

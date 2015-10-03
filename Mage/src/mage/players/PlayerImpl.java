@@ -962,8 +962,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 setCastSourceIdWithAlternateMana(null, null);
+                GameEvent event = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
+                game.fireEvent(event);
                 if (spell.activate(game, noMana)) {
-                    GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
+                    event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
                     event.setZone(fromZone);
                     game.fireEvent(event);
                     if (!game.isSimulation()) {
@@ -973,7 +975,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark, ability.getRule());
+                restoreState(bookmark, ability.getRule(), game);
             }
         }
         return false;
@@ -1027,7 +1029,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // putOntoBattlefield retured false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldorian Outpost).
             // But that would undo the effect completely,
             // what makes no real sense. So it makes no sense to generally do a restorState here.
-            // game.restoreState(bookmark);
+            // restoreState(bookmark, card.getName(), game);
         }
         return false;
     }
@@ -1037,15 +1039,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             int bookmark = game.bookmarkState();
             if (ability.activate(game, false)) {
                 if (ability.resolve(game)) {
-                    if (ability.isUndoPossible() && (storedBookmark == -1 || storedBookmark > bookmark)) { // e.g. usefull for undo Nykthos, Shrine to Nyx
-                        setStoredBookmark(bookmark);
+                    if (ability.isUndoPossible()) {
+                        if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. usefull for undo Nykthos, Shrine to Nyx
+                            setStoredBookmark(bookmark);
+                        }
                     } else {
                         resetStoredBookmark(game);
                     }
                     return true;
                 }
             }
-            game.restoreState(bookmark, ability.getRule());
+            restoreState(bookmark, ability.getRule(), game);
         }
         return false;
     }
@@ -1066,7 +1070,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark, ability.getRule());
+                restoreState(bookmark, ability.getRule(), game);
             }
         } else {
             int bookmark = game.bookmarkState();
@@ -1076,7 +1080,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game);
                 return true;
             }
-            game.restoreState(bookmark, ability.getRule());
+            restoreState(bookmark, ability.getRule(), game);
         }
         return false;
     }
@@ -1096,9 +1100,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            game.restoreState(bookmark, action.getRule());
+            restoreState(bookmark, action.getRule(), game);
         }
         return false;
+    }
+
+    private void restoreState(int bookmark, String text, Game game) {
+        game.restoreState(bookmark, text);
+        if (storedBookmark >= bookmark) {
+            resetStoredBookmark(game);
+        }
     }
 
     @Override
@@ -1136,7 +1147,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         justActivatedType = null;
         if (result) {
             if (isHuman() && (ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED))) {
-                setJustActivatedType(ability.getAbilityType());
+                if (ability.isUsesStack()) { // if the ability does not use the stack (e.g. Suspend) auto pass would go to next phase unintended
+                    setJustActivatedType(ability.getAbilityType());
+                }
             }
             game.getPlayers().resetPassed();
         }
@@ -1171,7 +1184,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return true;
             }
         }
-        game.restoreState(bookmark, source.getRule()); // why restore is needed here?
+        restoreState(bookmark, source.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack)
         return false;
     }
 
@@ -2924,6 +2937,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        if (cards.isEmpty()) {
+            return true;
+        }
         Set<Card> cardList = new HashSet<>();
         for (UUID cardId : cards) {
             fromZone = game.getState().getZone(cardId);

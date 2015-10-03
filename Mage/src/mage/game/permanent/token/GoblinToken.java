@@ -39,7 +39,8 @@ public class GoblinToken extends Token {
 
     public GoblinToken() {
         super("Goblin", "1/1 red Goblin creature token");
-        availableImageSetCodes.addAll(Arrays.asList("SOM", "M10", "C14", "KTK", "EVG", "DTK", "ORI", "DDG"));
+        availableImageSetCodes.addAll(Arrays.asList("10E", "ALA", "SOM", "M10", "NPH", "M13", "RTR",
+            "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN"));
 
         cardType.add(CardType.CREATURE);
         subtype.add("Goblin");

@@ -100,6 +100,7 @@ class ObNixilisReignitedEmblem extends Emblem {
         setName("EMBLEM: Ob Nixilis Reignited");
 
         this.getAbilities().add(new ObNixilisEmblemTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
+        this.setExpansionSetCodeForImage("BFZ");
     }
 }
 

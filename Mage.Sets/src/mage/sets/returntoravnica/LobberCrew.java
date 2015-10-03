@@ -30,8 +30,8 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -41,16 +41,20 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
 /**
  *
  * @author LevelX2
  */
 public class LobberCrew extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
+
+    static {
+        filter.add(new MulticoloredPredicate());
+    }
 
     public LobberCrew (UUID ownerId) {
         super(ownerId, 99, "Lobber Crew", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -66,7 +70,7 @@ public class LobberCrew extends CardImpl {
         // {T}: Lobber Crew deals 1 damage to each opponent.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost()));
         // Whenever you cast a multicolored spell, untap Lobber Crew.
-        this.addAbility(new LobberCrewTriggeredAbility());
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));
     }
 
     public LobberCrew (final LobberCrew card) {
@@ -76,39 +80,5 @@ public class LobberCrew extends CardImpl {
     @Override
     public LobberCrew copy() {
         return new LobberCrew(this);
-    }
-}
-
-class LobberCrewTriggeredAbility extends TriggeredAbilityImpl {
-    public LobberCrewTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new UntapSourceEffect());
-    }
-
-    public LobberCrewTriggeredAbility(final LobberCrewTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LobberCrewTriggeredAbility copy() {
-        return new LobberCrewTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.getColor(game).isMulticolored() && event.getPlayerId().equals(getControllerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a multicolored spell, untap {this}.";
     }
 }

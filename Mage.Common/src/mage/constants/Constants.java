@@ -67,6 +67,10 @@ public final class Constants {
 
     public static final double SCALE_FACTOR = 0.5;
 
+    public static final int MIN_AVATAR_ID = 10;
+    public static final int MAX_AVATAR_ID = 32;
+    public static final int DEFAULT_AVATAR_ID = 10;
+
     /**
      * Time each player has during the game to play using his\her priority.
      */

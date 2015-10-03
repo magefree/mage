@@ -29,16 +29,14 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -47,13 +45,20 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Pyroconvergence extends CardImpl {
 
+    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
+
+    static {
+        filter.add(new MulticoloredPredicate());
+    }
+
     public Pyroconvergence(UUID ownerId) {
         super(ownerId, 103, "Pyroconvergence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "RTR";
 
-
         // Whenever you cast a multicolored spell, Pyroconvergence deals 2 damage to target creature or player.
-        this.addAbility(new PyroconvergenceTriggeredAbility());
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(2), filter, false);
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
     public Pyroconvergence(final Pyroconvergence card) {
@@ -63,37 +68,5 @@ public class Pyroconvergence extends CardImpl {
     @Override
     public Pyroconvergence copy() {
         return new Pyroconvergence(this);
-    }
-}
-class PyroconvergenceTriggeredAbility extends TriggeredAbilityImpl {
-    public PyroconvergenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
-        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
-        this.addTarget(target);
-    }
-
-    public PyroconvergenceTriggeredAbility(final PyroconvergenceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PyroconvergenceTriggeredAbility copy() {
-        return new PyroconvergenceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getColor(game).isMulticolored() && event.getPlayerId().equals(getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a multicolored spell, {this} deals 2 damage to target creature or player.";
     }
 }

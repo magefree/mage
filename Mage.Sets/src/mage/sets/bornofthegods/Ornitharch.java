@@ -40,7 +40,7 @@ import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BirdToken;
 
 /**
  *
@@ -63,7 +63,7 @@ public class Ornitharch extends CardImpl {
         // When Ornitharch enters the battlefield, if tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken(), 2), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield."));        
+                "When {this} enters the battlefield, if its tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield."));
     }
 
     public Ornitharch(final Ornitharch card) {
@@ -74,21 +74,4 @@ public class Ornitharch extends CardImpl {
     public Ornitharch copy() {
         return new Ornitharch(this);
     }
-}
-
-class BirdToken extends Token {
-
-    public BirdToken() {
-        super("Bird", "1/1 white Bird creature tokens with flying");
-        this.setOriginalExpansionSetCode("BNG");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Bird");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
 }

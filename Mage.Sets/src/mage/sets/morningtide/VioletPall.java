@@ -28,18 +28,16 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.FaerieRogueToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -61,7 +59,7 @@ public class VioletPall extends CardImpl {
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new VioletPallFaerieToken(), 1));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieRogueToken(), 1));
     }
 
     public VioletPall(final VioletPall card) {
@@ -71,19 +69,5 @@ public class VioletPall extends CardImpl {
     @Override
     public VioletPall copy() {
         return new VioletPall(this);
-    }
-}
-
-class VioletPallFaerieToken extends Token {
-
-    VioletPallFaerieToken() {
-        super("Faerie Rogue", "1/1 black Faerie Rogue creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Faerie");
-        subtype.add("Rogue");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

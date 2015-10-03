@@ -29,7 +29,7 @@ package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -54,7 +54,7 @@ public class Thwart extends CardImpl {
 
         // You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.
         AlternativeCostSourceAbility ability;   
-        ability = new AlternativeCostSourceAbility(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(3, 3, filter, true)));
+        ability = new AlternativeCostSourceAbility(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(3, 3, filter, true)));
         this.addAbility(ability);
         
         // Counter target spell.

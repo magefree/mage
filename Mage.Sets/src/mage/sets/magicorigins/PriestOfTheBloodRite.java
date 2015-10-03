@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DemonToken;
 
 /**
  *
@@ -68,21 +68,5 @@ public class PriestOfTheBloodRite extends CardImpl {
     @Override
     public PriestOfTheBloodRite copy() {
         return new PriestOfTheBloodRite(this);
-    }
-}
-
-class DemonToken extends Token {
-
-    DemonToken() {
-        super("Demon", "5/5 black Demon creature token with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Demon");
-        setOriginalExpansionSetCode("ORI");
-
-        color.setBlack(true);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-
-        addAbility(FlyingAbility.getInstance());
     }
 }

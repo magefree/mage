@@ -105,11 +105,11 @@ class GreenwardenOfMurasaEffect extends OneShotEffect {
         Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && sourceObject != null && targetCard != null) {
             if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return card from your graveyard to your hand?", source, game)) {
-                new ExileSourceEffect().apply(game, source);
                 // Setting the fixed target prevents to return Greenwarden of Murasa itself (becuase it's exiled meanwhile),
                 // but of course you can target it as the ability triggers I guess
                 Effect effect = new ReturnToHandTargetEffect();
                 effect.setTargetPointer(new FixedTarget(targetCard.getId(), targetCard.getZoneChangeCounter(game)));
+                new ExileSourceEffect().apply(game, source);
                 return effect.apply(game, source);
             }
             return true;
