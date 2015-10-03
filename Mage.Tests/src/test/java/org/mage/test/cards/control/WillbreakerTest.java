@@ -36,55 +36,38 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class ItThatBetraysTest extends CardTestPlayerBase {
+public class WillbreakerTest extends CardTestPlayerBase {
 
     /**
-     * https://github.com/magefree/mage/issues/796
+     * http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=17664&start=120#p186736
      *
-     * When an opponent sacrifices a fetchland and you have an It That Betrays
-     * in play, sacrificing the fetchland that comes under your control from its
-     * ability returns it to play under your control, allowing you to fetch
-     * infinite lands.
+     * I tried to activate Retribution of the Ancients while I only controlled
+     * Nantuko Husk and Willbreaker without +1/+1 counters on them. The program
+     * didn't let me activate the RotA, even though the creature you choose
+     * doesn't need to have any counters on it (X can be 0, doesn't say
+     * otherwise on the card and it isn't a target requirement). It asked me to
+     * pay B, then choose a creature I controlled, which I did... and then
+     * nothing happened.
      *
      */
     @Test
-    public void testPermanentControlEffect() {
-        addCard(Zone.BATTLEFIELD, playerA, "Flooded Strand", 1);
+    public void testRetributionOfTheAncientsZeroCounter() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        // {B}, Remove X +1/+1 counters from among creatures you control: Target creature gets -X/-X until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Retribution of the Ancients", 1); // Enchantment {B}
+        // Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control Willbreaker.
+        addCard(Zone.BATTLEFIELD, playerA, "Willbreaker", 1);
 
-        addCard(Zone.BATTLEFIELD, playerB, "It That Betrays");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life, Sacrifice");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}, Pay 1 life, Sacrifice");
-
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        assertLife(playerA, 19);
-        assertLife(playerB, 19);
-
-        // Going to graveyard if player B sacrifices it
-        assertGraveyardCount(playerA, "Flooded Strand", 1);
-    }
-
-    //It That Betrays doesn't care what zone the card is when the effect resolves. It will return the card regardless.
-    @Test
-    public void testExileItThatBetraysEffect() {
-        addCard(Zone.BATTLEFIELD, playerA, "Flooded Strand", 1);
-
-        addCard(Zone.BATTLEFIELD, playerA, "Rest in Peace", 1);
-
-        addCard(Zone.BATTLEFIELD, playerB, "It That Betrays");
-
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life, Sacrifice");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B},Remove", "Silvercoat Lion");
+        setChoice(playerA, "X=0");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 19);
-        assertLife(playerB, 20);
-
-        // Player B now controls a Flooded Strand, even though it went to exile
-        assertPermanentCount(playerB, "Flooded Strand", 1);
+        assertPermanentCount(playerA, "Willbreaker", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
 
 }

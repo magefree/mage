@@ -157,8 +157,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             xValue = controller.announceXCost(getMinValue(source, game), getMaxValue(source, game),
-                    new StringBuilder("Announce the number of ").append(actionText).toString(),
-                    game, source, this);
+                    "Announce the number of " + actionText, game, source, this);
         }
         return xValue;
     }

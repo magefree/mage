@@ -84,6 +84,9 @@ public class RemoveCounterCost extends CostImpl {
         int countersRemoved = 0;
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
+            if (countersToRemove == 0) { // Can happen when used for X costs where X = 0;
+                return paid = true;
+            }
             target.clearChosen();
             if (target.choose(Outcome.UnboostCreature, controllerId, sourceId, game)) {
                 for (UUID targetId : target.getTargets()) {
