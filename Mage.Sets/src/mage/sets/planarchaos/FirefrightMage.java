@@ -35,10 +35,12 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -54,17 +56,16 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FirefrightMage extends CardImpl {
     
-    private final static FilterCreaturePermanent notArtifactOrRed = new FilterCreaturePermanent("except by artifact creatures and/or white creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by artifact creatures and/or red creatures");
 
     static {
-        notArtifactOrRed.add(Predicates.not(
+        filter.add(Predicates.not(
                 Predicates.or(
-                        new CardTypePredicate(CardType.ARTIFACT),
-                        new ColorPredicate(ObjectColor.RED)
-                )
-        ));
+                        Predicates.and(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)),
+                        Predicates.and(new CardTypePredicate(CardType.CREATURE), new ColorPredicate(ObjectColor.RED)
+                        ))));
     }
-
+    
     public FirefrightMage(UUID ownerId) {
         super(ownerId, 99, "Firefright Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "PLC";
@@ -75,7 +76,7 @@ public class FirefrightMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         //{1} {R}, {T}, Discard a card: Target creature can't be blocked this turn except by artifact creatures and/or red creatures.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(notArtifactOrRed, Duration.EndOfTurn),   new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn)), Duration.EndOfTurn),new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetCreaturePermanent());
