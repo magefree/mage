@@ -64,7 +64,7 @@ public class TraitorsRoar extends CardImpl {
         this.getSpellAbility().addEffect(new TraitorsRoarEffect());
 
         // Conspire
-        this.addAbility(new ConspireAbility(this));
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
 
     }
 

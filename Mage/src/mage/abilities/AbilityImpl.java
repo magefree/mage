@@ -445,20 +445,28 @@ public abstract class AbilityImpl implements Ability {
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
         boolean alternativeCostisUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent) && !(this instanceof FlashbackAbility)) {
-            for (Ability ability : sourceObject.getAbilities()) {
-                // if cast for noMana no Alternative costs are allowed
-                if (!noMana && ability instanceof AlternativeSourceCosts) {
-                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                    if (alternativeSpellCosts.isAvailable(this, game)) {
-                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                            // only one alternative costs may be activated
-                            alternativeCostisUsed = true;
-                            break;
+            Abilities<Ability> abilities = null;
+            if (sourceObject instanceof Card) {
+                abilities = ((Card) sourceObject).getAbilities(game);
+            } else {
+                sourceObject.getAbilities();
+            }
+            if (abilities != null) {
+                for (Ability ability : abilities) {
+                    // if cast for noMana no Alternative costs are allowed
+                    if (!noMana && ability instanceof AlternativeSourceCosts) {
+                        AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                        if (alternativeSpellCosts.isAvailable(this, game)) {
+                            if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                                // only one alternative costs may be activated
+                                alternativeCostisUsed = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if (ability instanceof OptionalAdditionalSourceCosts) {
-                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+                    if (ability instanceof OptionalAdditionalSourceCosts) {
+                        ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+                    }
                 }
             }
             // controller specific alternate spell costs

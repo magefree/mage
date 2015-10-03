@@ -52,7 +52,7 @@ public class GhastlyDiscovery extends CardImpl {
         this.getSpellAbility().addEffect(new GhastlyDiscoveryEffect());
 
         // Conspire
-        this.addAbility(new ConspireAbility(this));
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.NONE));
     }
 
     public GhastlyDiscovery(final GhastlyDiscovery card) {
