@@ -370,6 +370,7 @@ public class TestPlayer implements Player {
                     }
                     for (Ability ability : computerPlayer.getPlayable(game, true)) {
                         if (ability.toString().startsWith(groups[0])) {
+                            int bookmark = game.bookmarkState();
                             Ability newAbility = ability.copy();
                             if (groups.length > 1 && !groups[1].equals("target=NO_TARGET")) {
                                 if (!addTargets(newAbility, groups, game)) {
@@ -377,9 +378,13 @@ public class TestPlayer implements Player {
                                     break;
                                 }
                             }
-                            computerPlayer.activateAbility((ActivatedAbility) newAbility, game);
-                            actions.remove(action);
-                            return true;
+                            if (computerPlayer.activateAbility((ActivatedAbility) newAbility, game)) {
+                                actions.remove(action);
+                                return true;
+                            } else {
+                                game.restoreState(bookmark, ability.getRule());
+                            }
+
                         }
                     }
                 } else if (action.getAction().startsWith("manaActivate:")) {
