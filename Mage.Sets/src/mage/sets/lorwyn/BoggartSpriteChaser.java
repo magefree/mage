@@ -29,9 +29,11 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceWhileControlsEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,21 +43,12 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author BursegSardaukar
  */
 public class BoggartSpriteChaser extends CardImpl {
-
-    final static private String rule = "{this} has flying as long as you control a Faerie";
-    
-    private static final FilterPermanent filter = new FilterPermanent("Faerie");
-
-    static {
-        filter.add(new SubtypePredicate("Faerie"));
-    }
 
     public BoggartSpriteChaser(UUID ownerId) {
         super(ownerId, 156, "Boggart Sprite-Chaser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -67,8 +60,15 @@ public class BoggartSpriteChaser extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you control a Faerie, Boggart Sprite-Chaser gets +1/+1 and has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), rule)));
+        FilterPermanent filter = new FilterPermanent("Faerie", "Faerie");
+        Effect effect = new BoostSourceWhileControlsEffect(filter, 1, 1);
+        effect.setText("As long as you control a Faerie, {this} gets +1/+1");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability.addEffect(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
+                new PermanentsOnTheBattlefieldCondition(filter), "and has flying"));
+        this.addAbility(ability);
+
     }
 
     public BoggartSpriteChaser(final BoggartSpriteChaser card) {

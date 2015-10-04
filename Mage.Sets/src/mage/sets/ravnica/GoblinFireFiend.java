@@ -32,11 +32,9 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -49,7 +47,7 @@ import mage.constants.Zone;
  * @author BursegSardaukar
  */
 public class GoblinFireFiend extends CardImpl {
-    
+
     public GoblinFireFiend(UUID ownerId) {
         super(ownerId, 127, "Goblin Fire Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "RAV";
@@ -58,16 +56,15 @@ public class GoblinFireFiend extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         //Haste
         this.addAbility(HasteAbility.getInstance());
-        
+
         //Goblin Fire Fiend must be blocked if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect()));
-        
+
         //{R}: Goblin Fire Fiend gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new StaticValue(1), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
     public GoblinFireFiend(final GoblinFireFiend card) {

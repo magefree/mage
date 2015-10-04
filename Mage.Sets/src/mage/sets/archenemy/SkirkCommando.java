@@ -28,21 +28,18 @@
 package mage.sets.archenemy;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author BursegSardaukar
  */
 public class SkirkCommando extends CardImpl {
-    
+
     public SkirkCommando(UUID ownerId) {
         super(ownerId, 47, "Skirk Commando", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "ARC";
@@ -59,13 +56,13 @@ public class SkirkCommando extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        
+
         //Whenever Skirk Commando deals combat damage to a player, you may have it deal 2 damage to target creature that player controls.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkirkCommandoEffect(), true, true));
-        
+        this.addAbility(new SkirkCommandoTriggeredAbility());
+
         //Morph {2}{R} (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}")));
-        
+
     }
 
     public SkirkCommando(final SkirkCommando card) {
@@ -78,37 +75,29 @@ public class SkirkCommando extends CardImpl {
     }
 }
 
-class SkirkCommandoEffect extends OneShotEffect {
+class SkirkCommandoTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
 
-    public SkirkCommandoEffect() {
-        super(Outcome.Damage);
-        staticText = "have it deal 2 damage to target creature that player controls";
+    public SkirkCommandoTriggeredAbility() {
+        super(new DamageTargetEffect(2), true, false);
+
     }
 
-    public SkirkCommandoEffect(final SkirkCommandoEffect effect) {
-        super(effect);
+    public SkirkCommandoTriggeredAbility(SkirkCommandoTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + player.getLogName() + " controls");
-            filter.add(new ControllerIdPredicate(player.getId()));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Damage, source.getControllerId(), source.getSourceId(), game)) {
-                UUID creature = target.getFirstTarget();
-                if (creature != null) {
-                    game.getPermanent(creature).damage(2, source.getSourceId(), game, false, true);
-                    return true;
-                }
-            }
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (super.checkTrigger(event, game)) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that player controls");
+            filter.add(new ControllerIdPredicate(event.getPlayerId()));
+            addTarget(new TargetCreaturePermanent(filter));
         }
         return false;
     }
 
     @Override
-    public SkirkCommandoEffect copy() {
-        return new SkirkCommandoEffect(this);
+    public SkirkCommandoTriggeredAbility copy() {
+        return new SkirkCommandoTriggeredAbility(this);
     }
 }

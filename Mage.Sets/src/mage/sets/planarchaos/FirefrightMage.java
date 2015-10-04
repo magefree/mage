@@ -28,21 +28,18 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByAllTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author BursegSardaukar
  */
 public class FirefrightMage extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by artifact creatures and/or red creatures");
 
     static {
@@ -65,7 +62,7 @@ public class FirefrightMage extends CardImpl {
                         Predicates.and(new CardTypePredicate(CardType.CREATURE), new ColorPredicate(ObjectColor.RED)
                         ))));
     }
-    
+
     public FirefrightMage(UUID ownerId) {
         super(ownerId, 99, "Firefright Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "PLC";
@@ -75,8 +72,8 @@ public class FirefrightMage extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //{1} {R}, {T}, Discard a card: Target creature can't be blocked this turn except by artifact creatures and/or red creatures.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn)), Duration.EndOfTurn),new ManaCostsImpl("{1}{R}"));
+        //{1}{R}, {T}, Discard a card: Target creature can't be blocked this turn except by artifact creatures and/or red creatures.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetCreaturePermanent());
