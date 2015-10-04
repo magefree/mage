@@ -25,42 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
+
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author LoneFox
+ * @author BursegSardaukar
  */
-public class UtvaraScalper extends CardImpl {
+public class MoggSquad extends CardImpl {
 
-    public UtvaraScalper(UUID ownerId) {
-        super(ownerId, 76, "Utvara Scalper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "DIS";
-        this.subtype.add("Goblin");
-        this.subtype.add("Scout");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Utvara Scalper attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+    static {
+        filter.add(new AnotherPredicate());
     }
 
-    public UtvaraScalper(final UtvaraScalper card) {
+    public MoggSquad(UUID ownerId) {
+        super(ownerId, 192, "Mogg Squad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Goblin");
+
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        
+        DynamicValue amount = new SignInversionDynamicValue(new PermanentsOnBattlefieldCount(filter));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
+        this.addAbility(ability);
+    }
+
+    public MoggSquad(final MoggSquad card) {
         super(card);
     }
 
     @Override
-    public UtvaraScalper copy() {
-        return new UtvaraScalper(this);
+    public MoggSquad copy() {
+        return new MoggSquad(this);
     }
 }

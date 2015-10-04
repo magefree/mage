@@ -25,42 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
- * @author LoneFox
+ * @author BursegSardaukar
  */
-public class UtvaraScalper extends CardImpl {
+public class GoblinSnowman extends mage.sets.iceage.GoblinSnowman {
 
-    public UtvaraScalper(UUID ownerId) {
-        super(ownerId, 76, "Utvara Scalper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "DIS";
-        this.subtype.add("Goblin");
-        this.subtype.add("Scout");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Utvara Scalper attacks each turn if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+    public GoblinSnowman(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 64;
+        this.expansionSetCode = "ICE";
     }
 
-    public UtvaraScalper(final UtvaraScalper card) {
+    public GoblinSnowman(final GoblinSnowman card) {
         super(card);
     }
 
     @Override
-    public UtvaraScalper copy() {
-        return new UtvaraScalper(this);
+    public GoblinSnowman copy() {
+        return new GoblinSnowman(this);
     }
 }
