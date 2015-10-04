@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public class GoblinSnowman extends mage.sets.iceage.GoblinSnowman {
     public GoblinSnowman(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 64;
-        this.expansionSetCode = "ICE";
+        this.expansionSetCode = "TSB";
     }
 
     public GoblinSnowman(final GoblinSnowman card) {
