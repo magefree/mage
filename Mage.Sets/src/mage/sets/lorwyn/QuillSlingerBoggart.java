@@ -61,7 +61,7 @@ public class QuillSlingerBoggart extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a player casts a Kithkin spell, you may have target player lose 1 life.
-        Ability ability = new SpellCastAllTriggeredAbility(new LoseLifeTargetEffect(2), filter, true);
+        Ability ability = new SpellCastAllTriggeredAbility(new LoseLifeTargetEffect(1), filter, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

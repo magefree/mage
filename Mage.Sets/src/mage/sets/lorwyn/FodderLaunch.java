@@ -36,6 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -70,7 +71,7 @@ public class FodderLaunch extends CardImpl {
         //Target creature gets -5/-5 until end of turn. Fodder Launch deals 5 damage to that creature's controller.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new FodderLaunchEffect());
+        this.getSpellAbility().addEffect(new DamageTargetControllerEffect(5));
     }
 
     public FodderLaunch(final FodderLaunch card) {
@@ -82,36 +83,4 @@ public class FodderLaunch extends CardImpl {
         return new FodderLaunch(this);
     }
 
-}
-
-class FodderLaunchEffect extends OneShotEffect {
-
-    public FodderLaunchEffect() {
-        super(Outcome.Damage);
-        this.staticText = "Target creature gets -5/-5 until end of turn. Fodder Launch deals 5 damage to that creature's controller.";
-    }
-
-    public FodderLaunchEffect(final FodderLaunchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FodderLaunchEffect copy() {
-        return new FodderLaunchEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (targetCreature != null) {
-                Player controllerOfTargetCreature = game.getPlayer(targetCreature.getControllerId());
-                controllerOfTargetCreature.damage(5, source.getSourceId(), game, false, true);
-                return true;
-            }
-        }   
-        return false;
-    }
 }
