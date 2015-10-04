@@ -79,7 +79,6 @@ class SkirkCommandoTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredA
 
     public SkirkCommandoTriggeredAbility() {
         super(new DamageTargetEffect(2), true, false);
-
     }
 
     public SkirkCommandoTriggeredAbility(SkirkCommandoTriggeredAbility ability) {
@@ -99,5 +98,10 @@ class SkirkCommandoTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredA
     @Override
     public SkirkCommandoTriggeredAbility copy() {
         return new SkirkCommandoTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player, you may have it deal 2 damage to target creature that player controls.";
     }
 }
