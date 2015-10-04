@@ -25,41 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.abilities.condition.common;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
+public class ThoughtLash extends mage.sets.masterseditionii.ThoughtLash {
 
-public class OpponentControllsMoreCondition implements Condition {
-
-    private final FilterPermanent filter;
-
-    public OpponentControllsMoreCondition(FilterPermanent filter) {
-        this.filter = filter;
+    public ThoughtLash(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 58;
+        this.expansionSetCode = "ALL";
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int numLands = game.getBattlefield().countAll(filter, source.getControllerId(), game);
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            if (numLands < game.getBattlefield().countAll(filter, opponentId, game)) {
-                return true;
-            }
-        }
-        return false;
+
+    public ThoughtLash(final ThoughtLash card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return "an opponent controls more " + filter.getMessage() +" than you";
+    public ThoughtLash copy() {
+        return new ThoughtLash(this);
     }
 }

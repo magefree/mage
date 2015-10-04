@@ -185,6 +185,7 @@ public class GameEvent implements Serializable {
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
         FLIP_COIN, COIN_FLIPPED, SCRY, FATESEAL,
+        DIDNT_PAY_CUMULATIVE_UPKEEP,
         //permanent events
         ENTERS_THE_BATTLEFIELD,
         TAP, TAPPED, TAPPED_FOR_MANA,
@@ -241,7 +242,6 @@ public class GameEvent implements Serializable {
         //combat events
         COMBAT_DAMAGE_APPLIED,
         SELECTED_ATTACKER, SELECTED_BLOCKER;
-
     }
 
     public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {

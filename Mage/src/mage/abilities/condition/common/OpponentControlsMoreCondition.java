@@ -25,59 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+
+package mage.abilities.condition.common;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.OpponentControlsMoreCondition;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author LevelX2
  */
-public class WeatheredWayfarer extends CardImpl {
 
-    public WeatheredWayfarer(UUID ownerId) {
-        super(ownerId, 59, "Weathered Wayfarer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "ONS";
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
-        this.subtype.add("Cleric");
+public class OpponentControlsMoreCondition implements Condition {
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private final FilterPermanent filter;
 
-        // {W}, {tap}: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library. Activate this ability only if an opponent controls more lands than you.
-        Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true, true),
-                new ManaCostsImpl("{W}"),
-                new OpponentControlsMoreCondition(new FilterLandPermanent("lands")));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    public OpponentControlsMoreCondition(FilterPermanent filter) {
+        this.filter = filter;
     }
-
-    public WeatheredWayfarer(final WeatheredWayfarer card) {
-        super(card);
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int numLands = game.getBattlefield().countAll(filter, source.getControllerId(), game);
+        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+            if (numLands < game.getBattlefield().countAll(filter, opponentId, game)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public WeatheredWayfarer copy() {
-        return new WeatheredWayfarer(this);
+    public String toString() {
+        return "an opponent controls more " + filter.getMessage() +" than you";
     }
 }

@@ -25,50 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.sets.visions;
 
 import java.util.UUID;
-import mage.abilities.condition.common.OpponentControlsMoreCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GiftOfEstates extends CardImpl {
-    
-    private static final FilterCard filter = new FilterCard("Plains cards");
-    
-    static {
-        filter.add(new SubtypePredicate("Plains"));
-    }
-    
+public class Tithe extends CardImpl {
 
-    public GiftOfEstates(UUID ownerId) {
-        super(ownerId, 73, "Gift of Estates", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "C14";
+    public Tithe(UUID ownerId) {
+        super(ownerId, 84, "Tithe", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "VIS";
 
-
-        // If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, and put them into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, filter), true),
-                new OpponentControlsMoreCondition(new FilterLandPermanent("lands"))));
+        // Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards and put them into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new TitheEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public GiftOfEstates(final GiftOfEstates card) {
+    public Tithe(final Tithe card) {
         super(card);
     }
 
     @Override
-    public GiftOfEstates copy() {
-        return new GiftOfEstates(this);
+    public Tithe copy() {
+        return new Tithe(this);
+    }
+}
+
+class TitheEffect extends OneShotEffect {
+    
+    private static final FilterCard filter = new FilterCard("Plains");
+    static {
+        filter.add(new SubtypePredicate("Plains"));
+    }
+    
+    TitheEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards and put them into your hand. Then shuffle your library";
+    }
+    
+    TitheEffect(final TitheEffect effect) {
+        super(effect);
+    }
+    
+    @Override
+    public TitheEffect copy() {
+        return new TitheEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int numYourLands = game.getBattlefield().countAll(new FilterLandPermanent(), source.getControllerId(), game);
+        int numOpponentLands = game.getBattlefield().countAll(new FilterLandPermanent(), this.getTargetPointer().getFirst(game, source), game);
+        new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, (numOpponentLands > numYourLands ? 2 : 1), filter), true).apply(game, source);
+        return true;
     }
 }
