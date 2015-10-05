@@ -875,16 +875,15 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public boolean putCardsOnTopOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
-        Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
-        cards.addAll(cardsToLibrary);
-        if (!cards.isEmpty()) {
+        if (!cardsToLibrary.isEmpty()) {
+            Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
                 for (UUID cardId : cards) {
                     moveObjectToLibrary(cardId, sourceId, game, true, false);
                 }
             } else {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
                 target.setRequired(true);
                 while (isInGame() && cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
