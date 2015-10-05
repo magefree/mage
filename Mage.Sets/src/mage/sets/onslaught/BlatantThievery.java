@@ -27,7 +27,12 @@
  */
 package mage.sets.onslaught;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,10 +44,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -63,19 +66,12 @@ public class BlatantThievery extends CardImpl {
     public BlatantThievery(final BlatantThievery card) {
         super(card);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
-            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    FilterPermanent filter = new FilterPermanent("permanent controlled by " + opponent.getName());
-                    filter.add(new ControllerIdPredicate(opponentId));
-                    ability.addTarget(new TargetPermanent(filter));
-                }
-            }
+            ability.addTarget(new BlatantThieveryTarget(game.getOpponents(ability.getControllerId()).size()));
         }
     }
 
@@ -86,28 +82,128 @@ public class BlatantThievery extends CardImpl {
 }
 
 class BlatantThieveryEffect extends OneShotEffect {
-    
+
     BlatantThieveryEffect() {
         super(Outcome.GainControl);
         this.staticText = "For each opponent, gain control of target permanent that player controls";
     }
-    
+
     BlatantThieveryEffect(final BlatantThieveryEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public BlatantThieveryEffect copy() {
         return new BlatantThieveryEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Target target : source.getTargets()) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
-            effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+            effect.setTargetPointer(new FixedTarget(targetId));
             game.addEffect(effect, source);
         }
         return true;
+    }
+}
+
+class BlatantThieveryTarget extends TargetPermanent {
+
+    Map<UUID, UUID> targetOpponent = new HashMap<>();
+
+    public BlatantThieveryTarget(int opponents) {
+        super(opponents, opponents, new FilterPermanent("a permanent for each opponent"), false);
+    }
+
+    public BlatantThieveryTarget(final BlatantThieveryTarget target) {
+        super(target);
+        this.targetOpponent.putAll(target.targetOpponent);
+    }
+
+    @Override
+    public boolean canTarget(UUID controllerId, UUID objectId, Ability source, Game game) {
+        Permanent targetObject = game.getPermanent(objectId);
+        if (targetObject == null || !game.getOpponents(source.getControllerId()).contains(targetObject.getControllerId())) {
+            return false;
+        }
+        // If a permanent changes controller after being targeted but before this spell resolves, you won't gain control of that permanent.
+        if (targetOpponent.containsKey(objectId)) {
+            if (!targetOpponent.get(objectId).equals(targetObject.getControllerId())) {
+                return false;
+            }
+        } else {
+            // if already a target from this opponent exists, another can't be target
+            if (targetOpponent.values().contains(targetObject.getControllerId())) {
+                return false;
+            }
+        }
+        return super.canTarget(controllerId, objectId, source, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        Set<UUID> opponents = new HashSet<>();
+        for (UUID targetId : getTargets()) {
+            Permanent oldTargets = game.getPermanent(targetId);
+            if (oldTargets != null) {
+                opponents.add(oldTargets.getControllerId());
+            }
+        }
+        Set<UUID> possibleTargets = new HashSet<>();
+        MageObject mageObject = game.getObject(sourceId);
+        if (mageObject == null) {
+            return possibleTargets;
+        }
+        for (UUID opponentId : game.getOpponents(sourceControllerId)) {
+            if (opponents.contains(opponentId)) {
+                // Target for this opponent already selected
+                continue;
+            }
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponentId)) {
+                if (permanent.canBeTargetedBy(mageObject, sourceControllerId, game)) {
+                    possibleTargets.add(permanent.getId());
+                }
+            }
+        }
+        return possibleTargets;
+    }
+
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        for (UUID opponentId : game.getOpponents(sourceControllerId)) {
+            boolean targetAvailable = false;
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponentId)) {
+                if (!targets.containsKey(permanent.getId())) {
+                    MageObject mageObject = game.getObject(sourceId);
+                    if (mageObject != null && permanent.canBeTargetedBy(mageObject, sourceControllerId, game)) {
+                        targetAvailable = true;
+                        break;
+                    }
+
+                } else {
+                    targetAvailable = true;
+                    break;
+                }
+            }
+            if (!targetAvailable) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void addTarget(UUID objectId, int amount, Ability source, Game game, boolean skipEvent) {
+        Permanent targetObject = game.getPermanent(objectId);
+        if (targetObject != null) {
+            targetOpponent.put(objectId, targetObject.getControllerId());
+        }
+        super.addTarget(objectId, amount, source, game, skipEvent);
+    }
+
+    @Override
+    public BlatantThieveryTarget copy() {
+        return new BlatantThieveryTarget(this);
     }
 }

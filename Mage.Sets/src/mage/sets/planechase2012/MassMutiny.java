@@ -28,11 +28,6 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -41,6 +36,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -60,20 +59,20 @@ public class MassMutiny extends CardImpl {
         super(ownerId, 48, "Mass Mutiny", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "PC2";
 
-        this.getSpellAbility().addEffect(new MassMutinyEffect());
         // For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
+        this.getSpellAbility().addEffect(new MassMutinyEffect());
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
                     ability.getTargets().clear();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature from opponent " + opponent.getLogName());
                     filter.add(new ControllerIdPredicate(opponentId));
-                    TargetCreaturePermanent target = new TargetCreaturePermanent(0,1, filter,false);
+                    TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
                     ability.addTarget(target);
                 }
             }
@@ -89,7 +88,6 @@ public class MassMutiny extends CardImpl {
         return new MassMutiny(this);
     }
 }
-
 
 class MassMutinyEffect extends OneShotEffect {
 
@@ -110,7 +108,7 @@ class MassMutinyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (Target target: source.getTargets()) {
+        for (Target target : source.getTargets()) {
             if (target instanceof TargetCreaturePermanent) {
                 Permanent targetCreature = game.getPermanent(target.getFirstTarget());
                 if (targetCreature != null) {
