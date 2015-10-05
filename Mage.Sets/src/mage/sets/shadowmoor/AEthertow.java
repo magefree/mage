@@ -58,7 +58,7 @@ public class AEthertow extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Conspire
-        this.addAbility(new ConspireAbility(this));
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
     public AEthertow(final AEthertow card) {

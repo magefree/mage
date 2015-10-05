@@ -1,21 +1,23 @@
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
 /**
  * "When enchanted/equipped creature dies" triggered ability
+ *
  * @author Loki
  */
 public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     private String attachedDescription;
     private boolean diesRuleText;
-    
+
     public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription) {
         this(effect, attachedDescription, false);
     }
@@ -29,7 +31,6 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         this.attachedDescription = attachedDescription;
         this.diesRuleText = diesRuleText;
     }
-
 
     public DiesAttachedTriggeredAbility(final DiesAttachedTriggeredAbility ability) {
         super(ability);
@@ -49,9 +50,21 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent)event).isDiesEvent()) {
+        if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            boolean triggered = false;
             if (zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
+                triggered = true;
+            } else {
+                // If both (attachment and attached went to graveyard at the same time, the attachemnets can be already removed from the attached object.)
+                // So check here with the LKI of the enchantment
+                Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
+                if (attachment != null && attachment.getAttachedTo().equals(zEvent.getTargetId())
+                        && attachment.getAttachedToZoneChangeCounter() == zEvent.getTarget().getZoneChangeCounter(game)) {
+                    triggered = true;
+                }
+            }
+            if (triggered) {
                 for (Effect effect : getEffects()) {
                     effect.setValue("attachedTo", zEvent.getTarget());
                 }

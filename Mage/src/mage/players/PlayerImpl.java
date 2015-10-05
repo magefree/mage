@@ -1104,7 +1104,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
-    private void restoreState(int bookmark, String text, Game game) {
+    protected void restoreState(int bookmark, String text, Game game) {
         game.restoreState(bookmark, text);
         if (storedBookmark >= bookmark) {
             resetStoredBookmark(game);

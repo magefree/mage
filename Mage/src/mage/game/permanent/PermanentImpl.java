@@ -115,6 +115,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected HashSet<MageObjectReference> dealtDamageByThisTurn;
     protected UUID attachedTo;
+    protected int attachedToZoneChangeCounter;
     protected UUID pairedCard;
     protected Counters counters;
     protected List<Counter> markedDamage;
@@ -172,6 +173,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         this.counters = permanent.counters.copy();
         this.attachedTo = permanent.attachedTo;
+        this.attachedToZoneChangeCounter = permanent.attachedToZoneChangeCounter;
         this.minBlockedBy = permanent.minBlockedBy;
         this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
@@ -677,6 +679,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public int getAttachedToZoneChangeCounter() {
+        return attachedToZoneChangeCounter;
+    }
+
+    @Override
     public void addConnectedCard(String key, UUID connectedCard) {
         if (this.connectedCards.containsKey(key)) {
             this.connectedCards.get(key).add(connectedCard);
@@ -712,6 +719,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         this.attachedTo = permanentId;
+        this.attachedToZoneChangeCounter = game.getState().getZoneChangeCounter(permanentId);
         for (Ability ability : this.getAbilities()) {
             for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();

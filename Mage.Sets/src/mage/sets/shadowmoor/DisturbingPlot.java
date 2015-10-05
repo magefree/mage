@@ -51,7 +51,7 @@ public class DisturbingPlot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
 
         // Conspire
-        this.addAbility(new ConspireAbility(this));
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
 
     }
 

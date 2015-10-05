@@ -43,16 +43,15 @@ import mage.cards.CardImpl;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.filter.predicate.permanent.BlockedByIdPredicate;
 
 /**
  *
@@ -75,7 +74,7 @@ public class TinderWall extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(2)), new SacrificeSourceCost()));
         // {R}, Sacrifice Tinder Wall: Tinder Wall deals 2 damage to target creature it's blocking.
         FilterAttackingCreature filter = new FilterAttackingCreature("creature it's blocking");
-        filter.add(new BlockingByPredicate(this.getId()));
+        filter.add(new BlockedByIdPredicate(this.getId()));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new SacrificeSourceCost());
@@ -92,10 +91,9 @@ public class TinderWall extends CardImpl {
     }
 }
 
-
 class BlockedByWatcher extends Watcher {
 
-    public List<UUID> blockedByWatcher = new ArrayList<UUID>();
+    public List<UUID> blockedByWatcher = new ArrayList<>();
 
     public BlockedByWatcher() {
         super("BlockedByWatcher", WatcherScope.CARD);
@@ -126,32 +124,4 @@ class BlockedByWatcher extends Watcher {
         blockedByWatcher.clear();
     }
 
-}
-
-class BlockingByPredicate implements Predicate<Permanent> {
-
-    private UUID source;
-    
-    public BlockingByPredicate(UUID source) {
-        this.source = source;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        BlockedByWatcher watcher = (BlockedByWatcher) game.getState().getWatchers().get("BlockedByWatcher", source);
-        
-        for(UUID uuid :watcher.blockedByWatcher){
-            Permanent creature = game.getPermanent(uuid);
-            if(creature != null && creature.getId().equals(input.getId())){
-                return true;
-            }
-        }
-        return false;
-        
-    }
-
-    @Override
-    public String toString() {
-        return "creature it's blocking";
-    }
 }

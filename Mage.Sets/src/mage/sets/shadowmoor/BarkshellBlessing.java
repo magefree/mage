@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  */
 public class BarkshellBlessing extends CardImpl {
-    
+
     public BarkshellBlessing(UUID ownerId) {
         super(ownerId, 224, "Barkshell Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G/W}");
         this.expansionSetCode = "SHM";
@@ -51,13 +51,13 @@ public class BarkshellBlessing extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
 
         // Conspire
-        this.addAbility(new ConspireAbility(this));
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
-    
+
     public BarkshellBlessing(final BarkshellBlessing card) {
         super(card);
     }
-    
+
     @Override
     public BarkshellBlessing copy() {
         return new BarkshellBlessing(this);

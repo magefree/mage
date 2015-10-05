@@ -100,7 +100,10 @@ public class MythicspoilerComSource implements CardImageSource {
         Map<String, String> setLinks = new HashMap<>();
         try {
             String setNames = setsAliases.get(cardSet.toLowerCase());
-            Set<String> aliasesStart = cardNameAliasesStart.get(cardSet);
+            Set<String> aliasesStart = new HashSet<>();
+            if (cardNameAliasesStart.containsKey(cardSet)) {
+                aliasesStart.addAll(cardNameAliasesStart.get(cardSet));
+            }
             if (setNames == null) {
                 setNames = cardSet.toLowerCase();
             }
