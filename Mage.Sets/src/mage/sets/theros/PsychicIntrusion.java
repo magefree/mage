@@ -38,11 +38,13 @@ import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
@@ -58,7 +60,6 @@ public class PsychicIntrusion extends CardImpl {
     public PsychicIntrusion(UUID ownerId) {
         super(ownerId, 200, "Psychic Intrusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");
         this.expansionSetCode = "THS";
-
 
         // Target opponent reveals his or her hand. You choose a nonland card from that player's graveyard or hand and exile it.
         // You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color
@@ -135,7 +136,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 if (card != null) {
                     // move card to exile
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(),  source.getSourceId(), game, fromHand ? Zone.HAND:Zone.GRAVEYARD, true);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, fromHand ? Zone.HAND : Zone.GRAVEYARD, true);
                     // allow to cast the card
                     ContinuousEffect effect = new PsychicIntrusionCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
@@ -178,13 +179,13 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
                 return true;
-            }            
+            }
         } else {
-            if (((FixedTarget)getTargetPointer()).getTarget().equals(objectId)) {
+            if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
                 // object has moved zone so effect can be discarted
                 this.discard();
             }
-        }            
+        }
         return false;
     }
 }
@@ -212,18 +213,23 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(((FixedTarget)getTargetPointer()).getTarget()) 
-                && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget)getTargetPointer()).getZoneChangeCounter() +1) {
-            
-            if (affectedControllerId.equals(source.getControllerId())) {                
+        return true; // not used for mana thought as effects
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game, ManaType manaType, ManaPoolItem mana) {
+        if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
+                && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
+
+            if (affectedControllerId.equals(source.getControllerId())) {
                 // if the card moved from exile to spell the zone change counter is increased by 1
-                if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget)getTargetPointer()).getZoneChangeCounter() +1) {
+                if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
                     return true;
                 }
-            }            
-            
+            }
+
         } else {
-            if (((FixedTarget)getTargetPointer()).getTarget().equals(objectId)) {
+            if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
                 // object has moved zone so effect can be discarted
                 this.discard();
             }

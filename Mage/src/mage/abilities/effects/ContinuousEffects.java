@@ -55,6 +55,7 @@ import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Layer;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubLayer;
@@ -70,6 +71,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import org.apache.log4j.Logger;
@@ -527,6 +529,26 @@ public class ContinuousEffects implements Serializable {
     }
 
     public boolean asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
+        for (AsThoughEffect effect : asThoughEffectsList) {
+            HashSet<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if (affectedAbility == null) {
+                    if (effect.applies(objectId, ability, controllerId, game)) {
+                        return true;
+                    }
+                } else {
+                    if (effect.applies(objectId, affectedAbility, ability, game)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+
+    }
+
+    public boolean asThoughMana(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game, ManaType manaType, ManaPoolItem mana) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         for (AsThoughEffect effect : asThoughEffectsList) {
             HashSet<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
