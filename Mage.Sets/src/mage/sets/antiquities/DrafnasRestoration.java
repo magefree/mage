@@ -40,14 +40,11 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -135,30 +132,9 @@ class DrafnasRestorationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (controller != null && targetPlayer != null) {
-            Cards cards = new CardsImpl(source.getTargets().get(1).getTargets()); // prevent possible ConcurrentModificationException
-            cards.addAll(source.getTargets().get(1).getTargets());
-            if (!cards.isEmpty()) {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of the library (last one chosen will be topmost)"));
-                target.setRequired(true);
-                while (controller.isInGame() && cards.size() > 1) {
-                    controller.choose(Outcome.Neutral, cards, target, game);
-                    UUID targetId = target.getFirstTarget();
-                    cards.remove(targetId);
-                    target.clearChosen();
-                    Card card = targetPlayer.getGraveyard().get(targetId, game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.GRAVEYARD, Zone.LIBRARY, source, game);
-                    }
-                }
-                if (cards.size() == 1) {
-                    Card card = targetPlayer.getGraveyard().get(cards.iterator().next(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.GRAVEYARD, Zone.LIBRARY, source, game);
-                    }
-                }
-            }
+        if (controller != null) {
+            Cards cards = new CardsImpl(source.getTargets().get(1).getTargets());
+            controller.putCardsOnTopOfLibrary(cards, game, source, true);
             return true;
         }
         return false;
