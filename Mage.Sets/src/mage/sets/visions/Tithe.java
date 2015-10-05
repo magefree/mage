@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
 public class Tithe extends CardImpl {
 
     public Tithe(UUID ownerId) {
-        super(ownerId, 84, "Tithe", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
+        super(ownerId, 123, "Tithe", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "VIS";
 
         // Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards and put them into your hand. Then shuffle your library.
@@ -68,26 +68,26 @@ public class Tithe extends CardImpl {
 }
 
 class TitheEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterCard("Plains");
     static {
         filter.add(new SubtypePredicate("Plains"));
     }
-    
+
     TitheEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards and put them into your hand. Then shuffle your library";
     }
-    
+
     TitheEffect(final TitheEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public TitheEffect copy() {
         return new TitheEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         int numYourLands = game.getBattlefield().countAll(new FilterLandPermanent(), source.getControllerId(), game);
