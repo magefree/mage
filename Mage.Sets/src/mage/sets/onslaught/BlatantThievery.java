@@ -203,6 +203,12 @@ class BlatantThieveryTarget extends TargetPermanent {
     }
 
     @Override
+    public void remove(UUID id) {
+        super.remove(id);
+        targetOpponent.remove(id);
+    }
+
+    @Override
     public BlatantThieveryTarget copy() {
         return new BlatantThieveryTarget(this);
     }
