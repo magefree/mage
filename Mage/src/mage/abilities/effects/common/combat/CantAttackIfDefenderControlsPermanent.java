@@ -49,7 +49,7 @@ public class CantAttackIfDefenderControlsPermanent extends RestrictionEffect {
     public CantAttackIfDefenderControlsPermanent(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield);
         this.filter = filter;
-        staticText = new StringBuilder("{this} can't attack unless defending player controls ").append(filter.getMessage()).toString();
+        staticText = new StringBuilder("{this} can't attack if defending player controls ").append(filter.getMessage()).toString();
     }
 
     public CantAttackIfDefenderControlsPermanent(final CantAttackIfDefenderControlsPermanent effect) {
@@ -71,12 +71,12 @@ public class CantAttackIfDefenderControlsPermanent extends RestrictionEffect {
             if (permanent != null) {
                 defendingPlayerId = permanent.getControllerId();
             } else {
-                return false;
+                return true;
             }
         } else {
             defendingPlayerId = defenderId;
         }
-        if (defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) == 0) {
+        if (defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) > 0) {
             return false;
         }
         return true;
