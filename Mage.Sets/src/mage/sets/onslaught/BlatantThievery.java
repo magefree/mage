@@ -30,17 +30,21 @@ package mage.sets.onslaught;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -53,9 +57,7 @@ public class BlatantThievery extends CardImpl {
         this.expansionSetCode = "ONS";
 
         // For each opponent, gain control of target permanent that player controls.
-        Effect effect = new GainControlTargetEffect(Duration.EndOfGame);
-        effect.setText("For each opponent, gain control of target permanent that player controls");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new BlatantThieveryEffect());
     }
 
     public BlatantThievery(final BlatantThievery card) {
@@ -80,5 +82,32 @@ public class BlatantThievery extends CardImpl {
     @Override
     public BlatantThievery copy() {
         return new BlatantThievery(this);
+    }
+}
+
+class BlatantThieveryEffect extends OneShotEffect {
+    
+    BlatantThieveryEffect() {
+        super(Outcome.GainControl);
+        this.staticText = "For each opponent, gain control of target permanent that player controls";
+    }
+    
+    BlatantThieveryEffect(final BlatantThieveryEffect effect) {
+        super(effect);
+    }
+    
+    @Override
+    public BlatantThieveryEffect copy() {
+        return new BlatantThieveryEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Target target : source.getTargets()) {
+            ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
+            effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+            game.addEffect(effect, source);
+        }
+        return true;
     }
 }
