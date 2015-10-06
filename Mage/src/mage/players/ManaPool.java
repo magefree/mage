@@ -38,7 +38,6 @@ import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.TurnPhase;
@@ -64,13 +63,6 @@ public class ManaPool implements Serializable {
     private ManaType unlockedManaType; // type of mana that was selected to pay manually
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
-
-    private enum SpendType {
-
-        NORMAL,
-        ANY,
-        COLORLESS
-    }
 
     public ManaPool(UUID playerId) {
         this.playerId = playerId;
@@ -145,37 +137,23 @@ public class ManaPool implements Serializable {
                 // no mana added beyond the stock so don't auto pay this
                 continue;
             }
-            SpendType spendType = getSpendType(ability, game, manaType, mana);
-            if (!SpendType.COLORLESS.equals(spendType) || ManaType.COLORLESS.equals(manaType)) {
-                if (mana.get(manaType) > 0 || (spendType.equals(SpendType.ANY) && mana.count() > 0)) {
-                    GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
-                    event.setData(mana.getOriginalId().toString());
-                    game.fireEvent(event);
-                    if (!SpendType.NORMAL.equals(spendType)) {
-                        mana.removeAny();
-                    } else {
-                        mana.remove(manaType);
-                    }
-                    if (mana.count() == 0) { // so no items with count 0 stay in list
-                        manaItems.remove(mana);
-                    }
-                    lockManaType(); // pay only one mana if mana payment is set to manually
-                    return true;
+            ManaType usableManaType = game.getContinuousEffects().asThoughMana(manaType, mana, ability.getSourceId(), ability, ability.getControllerId(), game);
+            if (usableManaType == null) {
+                continue;
+            }
+            if (mana.get(usableManaType) > 0) {
+                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
+                event.setData(mana.getOriginalId().toString());
+                game.fireEvent(event);
+                mana.remove(usableManaType);
+                if (mana.count() == 0) { // so no items with count 0 stay in list
+                    manaItems.remove(mana);
                 }
+                lockManaType(); // pay only one mana if mana payment is set to manually
+                return true;
             }
         }
         return false;
-    }
-
-    // check if any mana can be spend to cast the mana cost of an ability
-    private SpendType getSpendType(Ability ability, Game game, ManaType manaType, ManaPoolItem mana) {
-        if (game.getContinuousEffects().asThoughMana(ability.getSourceId(), AsThoughEffectType.SPEND_ANY_MANA, ability, ability.getControllerId(), game, manaType, mana)) {
-            return SpendType.ANY;
-        }
-        if (game.getContinuousEffects().asThoughMana(ability.getSourceId(), AsThoughEffectType.SPEND_COLORLESS_MANA, ability, ability.getControllerId(), game, manaType, mana)) {
-            return SpendType.COLORLESS;
-        }
-        return SpendType.NORMAL;
     }
 
     public int get(ManaType manaType) {

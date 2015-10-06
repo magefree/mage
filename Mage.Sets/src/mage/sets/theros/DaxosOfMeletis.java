@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -183,10 +184,10 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl {
     }
 }
 
-class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl {
+class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     public DaxosOfMeletisSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_ANY_MANA, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
@@ -206,14 +207,16 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return true; // not used for mana thought as effects
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game, ManaType manaType, ManaPoolItem mana) {
         return source.getControllerId().equals(affectedControllerId)
                 && objectId == ((FixedTarget) getTargetPointer()).getTarget()
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
+                && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
                 && game.getState().getZone(objectId).equals(Zone.STACK);
     }
+
+    @Override
+    public ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
+    }
+
 }

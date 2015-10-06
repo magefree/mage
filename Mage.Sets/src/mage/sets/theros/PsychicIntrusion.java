@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -190,10 +191,10 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
     }
 }
 
-class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl {
+class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     public PsychicIntrusionSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_ANY_MANA, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
@@ -213,11 +214,6 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return true; // not used for mana thought as effects
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game, ManaType manaType, ManaPoolItem mana) {
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
 
@@ -235,5 +231,10 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
     }
 }

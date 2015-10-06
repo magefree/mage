@@ -34,6 +34,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -170,10 +171,10 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
     }
 }
 
-class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl {
+class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     public ManaCanBeSpentAsAnyColorEffect() {
-        super(AsThoughEffectType.SPEND_ANY_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Players may spend mana as though it were mana of any color";
     }
 
@@ -184,12 +185,13 @@ class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return true; // not used for mana thought as effects
+        Player controller = game.getPlayer(source.getControllerId());
+        return controller != null && controller.getInRange().contains(affectedControllerId);
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game, ManaType manaType, ManaPoolItem mana) {
-        return true;
+    public ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
     }
 
     @Override

@@ -33,6 +33,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
@@ -146,7 +147,6 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
     public CelestialDawnToWhiteEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "Nonland cards you own that aren't on the battlefield, spells you control, and nonland permanents you control are white";
-        staticText = "All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors";
     }
 
     @Override
@@ -213,10 +213,10 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
 
 }
 
-class CelestialDawnSpendAnyManaEffect extends AsThoughEffectImpl {
+class CelestialDawnSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     public CelestialDawnSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_ANY_MANA, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
         staticText = "You may spend white mana as though it were mana of any color";
     }
 
@@ -236,22 +236,22 @@ class CelestialDawnSpendAnyManaEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return true; // not used for mana thought as effects
+        return affectedControllerId.equals(source.getControllerId());
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game, ManaType manaType, ManaPoolItem mana) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            return mana.getWhite() > 0;
+    public ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        if (mana.getWhite() > 0) {
+            return ManaType.WHITE;
         }
-        return false;
+        return null;
     }
 }
 
-class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl {
+class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     public CelestialDawnSpendColorlessManaEffect() {
-        super(AsThoughEffectType.SPEND_COLORLESS_MANA, Duration.Custom, Outcome.Detriment);
+        super(AsThoughEffectType.SPEND_ONLY_MANA, Duration.Custom, Outcome.Detriment);
         staticText = "You may spend other mana only as though it were colorless mana";
     }
 
@@ -271,14 +271,14 @@ class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return true; // not used for mana thought as effects
+        return affectedControllerId.equals(source.getControllerId());
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game, ManaType manaType, ManaPoolItem mana) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            return mana.getWhite() == 0;
+    public ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        if (mana.getWhite() == 0 && !ManaType.COLORLESS.equals(manaType)) {
+            return null;
         }
-        return false;
+        return manaType;
     }
 }

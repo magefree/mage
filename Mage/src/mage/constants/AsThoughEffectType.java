@@ -19,7 +19,7 @@ public enum AsThoughEffectType {
     HEXPROOF,
     PAY,
     LOOK_AT_FACE_DOWN,
-    SPEND_ANY_MANA,
-    SPEND_COLORLESS_MANA,
+    SPEND_OTHER_MANA,
+    SPEND_ONLY_MANA,
     TARGET
 }

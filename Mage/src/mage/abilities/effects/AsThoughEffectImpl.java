@@ -32,10 +32,8 @@ import mage.abilities.Ability;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
-import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 
 /**
  *
@@ -59,11 +57,6 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game) {
         return applies(objectId, source, affectedAbility.getControllerId(), game);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game, ManaType manaType, ManaPoolItem mana) {
-        return false;
     }
 
     @Override

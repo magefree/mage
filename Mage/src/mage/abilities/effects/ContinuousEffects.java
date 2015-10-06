@@ -548,24 +548,35 @@ public class ContinuousEffects implements Serializable {
 
     }
 
-    public boolean asThoughMana(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game, ManaType manaType, ManaPoolItem mana) {
-        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
+    public ManaType asThoughMana(ManaType manaType, ManaPoolItem mana, UUID objectId, Ability affectedAbility, UUID controllerId, Game game) {
+        // First check existing only effects
+        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game);
         for (AsThoughEffect effect : asThoughEffectsList) {
-            HashSet<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
+            HashSet<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_ONLY_MANA).getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (affectedAbility == null) {
-                    if (effect.applies(objectId, ability, controllerId, game)) {
-                        return true;
-                    }
-                } else {
-                    if (effect.applies(objectId, affectedAbility, ability, game)) {
-                        return true;
+                if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
+                        || effect.applies(objectId, affectedAbility, ability, game)) {
+                    if (((AsThoughManaEffect) effect).getAsThoughtManaType(manaType, mana, controllerId, ability, game) == null) {
+                        return null;
                     }
                 }
             }
         }
-        return false;
-
+        // then check effects that allow to use other mana types to pay the current mana type to pay
+        asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_OTHER_MANA, game);
+        for (AsThoughEffect effect : asThoughEffectsList) {
+            HashSet<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_OTHER_MANA).getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
+                        || effect.applies(objectId, affectedAbility, ability, game)) {
+                    ManaType usableManaType = ((AsThoughManaEffect) effect).getAsThoughtManaType(manaType, mana, controllerId, ability, game);
+                    if (usableManaType != null) {
+                        return usableManaType;
+                    }
+                }
+            }
+        }
+        return manaType;
     }
 
     /**

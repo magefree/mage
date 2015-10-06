@@ -30,9 +30,7 @@ package mage.abilities.effects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.AsThoughEffectType;
-import mage.constants.ManaType;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 
 /**
  *
@@ -43,8 +41,6 @@ public interface AsThoughEffect extends ContinuousEffect {
     boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game);
 
     boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game);
-
-    boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game, ManaType manaType, ManaPoolItem mana);
 
     AsThoughEffectType getAsThoughEffectType();
 
