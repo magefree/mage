@@ -240,7 +240,7 @@ class CelestialDawnSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     }
 
     @Override
-    public ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         if (mana.getWhite() > 0) {
             return ManaType.WHITE;
         }
@@ -275,7 +275,7 @@ class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implement
     }
 
     @Override
-    public ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         if (mana.getWhite() == 0 && !ManaType.COLORLESS.equals(manaType)) {
             return null;
         }

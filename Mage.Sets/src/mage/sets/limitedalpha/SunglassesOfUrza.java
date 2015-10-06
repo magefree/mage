@@ -85,7 +85,7 @@ class SunglassesOfUrzaManaAsThoughtEffect extends AsThoughEffectImpl implements 
     }
 
     @Override
-    public ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         if (mana.getWhite() > 0 && ManaType.RED.equals(manaType)) {
             return ManaType.WHITE;
         }

@@ -556,7 +556,7 @@ public class ContinuousEffects implements Serializable {
             for (Ability ability : abilities) {
                 if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
                         || effect.applies(objectId, affectedAbility, ability, game)) {
-                    if (((AsThoughManaEffect) effect).getAsThoughtManaType(manaType, mana, controllerId, ability, game) == null) {
+                    if (((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game) == null) {
                         return null;
                     }
                 }
@@ -569,7 +569,7 @@ public class ContinuousEffects implements Serializable {
             for (Ability ability : abilities) {
                 if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
                         || effect.applies(objectId, affectedAbility, ability, game)) {
-                    ManaType usableManaType = ((AsThoughManaEffect) effect).getAsThoughtManaType(manaType, mana, controllerId, ability, game);
+                    ManaType usableManaType = ((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game);
                     if (usableManaType != null) {
                         return usableManaType;
                     }

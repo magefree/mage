@@ -40,6 +40,6 @@ import mage.players.ManaPoolItem;
 public interface AsThoughManaEffect extends AsThoughEffect {
 
     // return a mana type that can be used to pay a mana cost instead of the normally needed mana type
-    ManaType getAsThoughtManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game);
+    ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game);
 
 }
