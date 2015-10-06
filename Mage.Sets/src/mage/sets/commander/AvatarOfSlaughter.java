@@ -57,7 +57,7 @@ public class AvatarOfSlaughter extends CardImpl {
         this.toughness = new MageInt(8);
 
         // All creatures have double strike and attack each turn if able.
-        Effect effect = new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
+        Effect effect = new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("creatures"));
         effect.setText("All creatures have double strike");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new AttacksIfAbleAllEffect(new FilterCreaturePermanent("creatures"));
