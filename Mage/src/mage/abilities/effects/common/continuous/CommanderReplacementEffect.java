@@ -108,6 +108,12 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 }
             case GRAVEYARD:
             case EXILED:
+                if (((ZoneChangeEvent) event).getFromZone().equals(Zone.STACK)) {
+                    Spell spell = game.getStack().getSpell(event.getTargetId());
+                    if (spell != null && commanderId.equals(spell.getSourceId())) {
+                        return true;
+                    }
+                }
                 if (commanderId.equals(event.getTargetId())) {
                     return true;
                 }
