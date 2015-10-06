@@ -44,13 +44,16 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.constants.Duration;
 import mage.abilities.keyword.ProtectionAbility;
-
 /**
  *
  * @author tomd1990
  */
 public class HellBentRaider extends CardImpl {
     private static final FilterCard protectionFilter = new FilterCard("White");
+    
+    static {
+        protectionFilter.add(new ColorPredicate(ObjectColor.WHITE));    
+    }
     
     public HellBentRaider(UUID ownerId) {
         super(ownerId, 101, "Hell-Bent Raider", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
@@ -65,7 +68,6 @@ public class HellBentRaider extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Discard a card at random: Hell-Bent Raider gains protection from white until end of turn.
-        protectionFilter.add(new ColorPredicate(ObjectColor.WHITE)); 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilitySourceEffect( new ProtectionAbility(protectionFilter), Duration.EndOfTurn),
                 new DiscardCardCost(true));
