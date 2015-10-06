@@ -39,6 +39,7 @@ public enum CounterType {
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),
+    BOUNTY("bounty"),
     BRIBERY("bribery"),
     CARRION("carrion"),
     CHARGE("charge"),
