@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.abilities.effects.Effect;
 
 /**
  *
@@ -56,10 +57,19 @@ public class PardicLancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Discard a card at random: Pardic Lancer gets +1/+0 and gains first strike until end of turn.
+<<<<<<< HEAD
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
         new BoostSourceEffect(1, 0, Duration.EndOfTurn),
         new DiscardCardCost(true));
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+=======
+        Effect effect = new BoostSourceEffect(1,0,Duration.EndOfTurn);
+        effect.setText("{this} gets +1/+0");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardCardCost(true));
+        effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains first strike until end of turn");
+        ability.addEffect(effect);
+>>>>>>> 739895c... Fixed
         this.addAbility(ability);
     }
 
