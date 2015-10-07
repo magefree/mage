@@ -25,56 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.tempest;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.filter.FilterStackObject;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
+public class FugitiveDruid extends CardImpl {
 
-    private final FilterStackObject filter;
+    private static final FilterSpell filter = new FilterSpell("an Aura spell");
 
-    public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, new FilterStackObject("a spell or ability"));
+    static {
+        filter.add(new SubtypePredicate("Aura"));
     }
 
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        super(Zone.BATTLEFIELD, effect);
-        this.filter = filter.copy();
+    public FugitiveDruid(UUID ownerId) {
+        super(ownerId, 123, "Fugitive Druid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // Whenever Fugitive Druid becomes the target of an Aura spell, you draw a card.
+        this.addAbility(new BecomesTargetTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
-    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
-        super(ability);
-        this.filter = ability.filter.copy();
-    }
-
-    @Override
-    public BecomesTargetTriggeredAbility copy() {
-        return new BecomesTargetTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
+    public FugitiveDruid(final FugitiveDruid card) {
+        super(card);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
+    public FugitiveDruid copy() {
+        return new FugitiveDruid(this);
     }
 }
