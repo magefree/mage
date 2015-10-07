@@ -95,7 +95,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                 if (object != null) {
                     boolean controllerSet = false;
                     if (!ability.getZone().equals(Zone.COMMAND) && event != null && event.getTargetId() != null && event.getTargetId().equals(ability.getSourceId())
-                            && (event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
+                            && (event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT) || event.getType().equals(EventType.SACRIFICED_PERMANENT))) {
                         // need to check if object was face down for dies and destroy events because the ability triggers in the new zone, zone counter -1 is used
                         Permanent permanent = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD, ability.getSourceObjectZoneChangeCounter() - 1);
                         if (permanent != null) {

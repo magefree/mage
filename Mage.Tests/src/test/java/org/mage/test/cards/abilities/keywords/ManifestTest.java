@@ -400,4 +400,56 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "", 2);
 
     }
+
+    /**
+     * I sacrificed a manifested face-down Smothering Abomination to Nantuko
+     * Husk and it made me draw a card.
+     *
+     */
+    @Test
+    public void testDiesTriggeredAbilitiesOfManifestedCreatures() {
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+
+        // Sacrifice a creature: Nantuko Husk gets +2/+2 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Nantuko Husk", 1);
+
+        // {1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library.
+        addCard(Zone.BATTLEFIELD, playerB, "Qarsi High Priest", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        // Devoid
+        // Flying
+        // At the beginning of your upkeep, sacrifice a creature
+        // Whenever you sacrifice a creature, draw a card.
+        addCard(Zone.LIBRARY, playerB, "Mountain", 1);
+        addCard(Zone.LIBRARY, playerB, "Smothering Abomination", 1);
+        addCard(Zone.LIBRARY, playerB, "Mountain", 1);
+
+        skipInitShuffling();
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        setChoice(playerB, "Silvercoat Lion");
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice a creature");
+        setChoice(playerB, "");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerB, "Qarsi High Priest", 1);
+        assertPermanentCount(playerB, "Nantuko Husk", 1);
+
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Smothering Abomination", 1);
+
+        assertPowerToughness(playerB, "Nantuko Husk", 4, 4);
+
+        assertHandCount(playerB, "Mountain", 1);
+
+    }
 }

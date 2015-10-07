@@ -113,4 +113,3 @@ class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever you sacrifice a creature, " + super.getRule();
     }
 }
-
