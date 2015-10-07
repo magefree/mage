@@ -25,56 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.prophecy;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterStackObject;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
+public class MagetasBoon extends CardImpl {
 
-    private final FilterStackObject filter;
+    public MagetasBoon(UUID ownerId) {
+        super(ownerId, 14, "Mageta's Boon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Aura");
 
-    public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, new FilterStackObject("a spell or ability"));
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Enchanted creature gets +1/+2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
     }
 
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        super(Zone.BATTLEFIELD, effect);
-        this.filter = filter.copy();
-    }
-
-    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
-        super(ability);
-        this.filter = ability.filter.copy();
-    }
-
-    @Override
-    public BecomesTargetTriggeredAbility copy() {
-        return new BecomesTargetTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
+    public MagetasBoon(final MagetasBoon card) {
+        super(card);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
+    public MagetasBoon copy() {
+        return new MagetasBoon(this);
     }
 }

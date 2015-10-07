@@ -25,56 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.mastersedition;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.filter.FilterStackObject;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.counters.CounterType;
+import mage.watchers.common.CreaturesDiedWatcher;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
+public class KhabalGhoul extends CardImpl {
 
-    private final FilterStackObject filter;
+    public KhabalGhoul(UUID ownerId) {
+        super(ownerId, 75, "Khabal Ghoul", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "MED";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, new FilterStackObject("a spell or ability"));
+        // At the beginning of each end step, put a +1/+1 counter on Khabal Ghoul for each creature that died this turn.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
+            new CreaturesDiedThisTurnCount(), true), TargetController.ANY, false), new CreaturesDiedWatcher());
     }
 
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        super(Zone.BATTLEFIELD, effect);
-        this.filter = filter.copy();
-    }
-
-    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
-        super(ability);
-        this.filter = ability.filter.copy();
-    }
-
-    @Override
-    public BecomesTargetTriggeredAbility copy() {
-        return new BecomesTargetTriggeredAbility(this);
+    public KhabalGhoul(final KhabalGhoul card) {
+        super(card);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
+    public KhabalGhoul copy() {
+        return new KhabalGhoul(this);
     }
 }

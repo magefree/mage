@@ -25,56 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.prophecy;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterStackObject;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
+public class SpiketailDrake extends CardImpl {
 
-    private final FilterStackObject filter;
+    public SpiketailDrake(UUID ownerId) {
+        super(ownerId, 48, "Spiketail Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Drake");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-    public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, new FilterStackObject("a spell or ability"));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Sacrifice Spiketail Drake: Counter target spell unless its controller pays {3}.
+         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl("{3}")), new SacrificeSourceCost());                                                         ability.addTarget(new TargetSpell());                                                              this.addAbility(ability);
     }
 
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        super(Zone.BATTLEFIELD, effect);
-        this.filter = filter.copy();
-    }
-
-    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
-        super(ability);
-        this.filter = ability.filter.copy();
-    }
-
-    @Override
-    public BecomesTargetTriggeredAbility copy() {
-        return new BecomesTargetTriggeredAbility(this);
+    public SpiketailDrake(final SpiketailDrake card) {
+        super(card);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
+    public SpiketailDrake copy() {
+        return new SpiketailDrake(this);
     }
 }

@@ -25,56 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.morningtide;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.filter.FilterStackObject;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
+public class WeedPrunerPoplar extends CardImpl {
 
-    private final FilterStackObject filter;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
 
-    public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, new FilterStackObject("a spell or ability"));
+    static {
+        filter.add(new AnotherPredicate());
     }
 
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        super(Zone.BATTLEFIELD, effect);
-        this.filter = filter.copy();
+    public WeedPrunerPoplar(UUID ownerId) {
+        super(ownerId, 83, "Weed-Pruner Poplar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "MOR";
+        this.subtype.add("Treefolk");
+        this.subtype.add("Assassin");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // At the beginning of your upkeep, target creature other than Weed-Pruner Poplar gets -1/-1 until end of turn.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), TargetController.YOU, false);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
-    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
-        super(ability);
-        this.filter = ability.filter.copy();
-    }
-
-    @Override
-    public BecomesTargetTriggeredAbility copy() {
-        return new BecomesTargetTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
+    public WeedPrunerPoplar(final WeedPrunerPoplar card) {
+        super(card);
     }
 
     @Override
-    public String getRule() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
+    public WeedPrunerPoplar copy() {
+        return new WeedPrunerPoplar(this);
     }
 }

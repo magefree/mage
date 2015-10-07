@@ -25,56 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.prophecy;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.filter.FilterStackObject;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
+import java.util.UUID;
+import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
+public class HeightenedAwareness extends CardImpl {
 
-    private final FilterStackObject filter;
+    public HeightenedAwareness(UUID ownerId) {
+        super(ownerId, 37, "Heightened Awareness", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
+        this.expansionSetCode = "PCY";
 
-    public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, new FilterStackObject("a spell or ability"));
+        // As Heightened Awareness enters the battlefield, discard your hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardHandControllerEffect()));
+        // At the beginning of your draw step, draw an additional card.
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1),
+            TargetController.YOU, false));
     }
 
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        super(Zone.BATTLEFIELD, effect);
-        this.filter = filter.copy();
-    }
-
-    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
-        super(ability);
-        this.filter = ability.filter.copy();
-    }
-
-    @Override
-    public BecomesTargetTriggeredAbility copy() {
-        return new BecomesTargetTriggeredAbility(this);
+    public HeightenedAwareness(final HeightenedAwareness card) {
+        super(card);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
+    public HeightenedAwareness copy() {
+        return new HeightenedAwareness(this);
     }
 }

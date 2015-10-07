@@ -25,56 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.abilities.dynamicvalue.common;
 
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.filter.FilterStackObject;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
+import mage.watchers.common.CreaturesDiedWatcher;
 
 /**
- *
- * @author North
+ * @author LoneFox
  */
-public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
+public class CreaturesDiedThisTurnCount implements DynamicValue {
 
-    private final FilterStackObject filter;
-
-    public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, new FilterStackObject("a spell or ability"));
-    }
-
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        super(Zone.BATTLEFIELD, effect);
-        this.filter = filter.copy();
-    }
-
-    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
-        super(ability);
-        this.filter = ability.filter.copy();
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        CreaturesDiedWatcher watcher = (CreaturesDiedWatcher)game.getState().getWatchers().get("CreaturesDiedWatcher");
+        if (watcher != null) {
+            return watcher.getAmountOfCreaturesDiesThisTurn();
+        }
+        return 0;
     }
 
     @Override
-    public BecomesTargetTriggeredAbility copy() {
-        return new BecomesTargetTriggeredAbility(this);
+    public CreaturesDiedThisTurnCount copy() {
+        return new CreaturesDiedThisTurnCount();
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
+    public String toString() {
+        return "X";
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
+    public String getMessage() {
+        return "creature that died this turn";
     }
 
-    @Override
-    public String getRule() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
-    }
 }
