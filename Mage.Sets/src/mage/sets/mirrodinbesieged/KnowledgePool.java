@@ -59,8 +59,10 @@ public class KnowledgePool extends CardImpl {
     public KnowledgePool(UUID ownerId) {
         super(ownerId, 111, "Knowledge Pool", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "MBS";
+
         // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of his or her library
         this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false));
+
         // Whenever a player casts a spell from his or her hand, that player exiles it. If the player does, he or she may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
         this.addAbility(new KnowledgePoolAbility());
     }
