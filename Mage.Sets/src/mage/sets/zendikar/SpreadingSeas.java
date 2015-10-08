@@ -55,13 +55,16 @@ public class SpreadingSeas extends CardImpl {
 
         this.subtype.add("Aura");
 
+        // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
+        // When Spreading Seas enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+
         // Enchanted land is an Island.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Island")));
 
