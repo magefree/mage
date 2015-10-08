@@ -27,12 +27,13 @@
  */
 package mage.sets.judgment;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -41,9 +42,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -55,9 +53,9 @@ public class DeathWish extends CardImpl {
         super(ownerId, 64, "Death Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "JUD";
 
-
         // You may choose a card you own from outside the game and put it into your hand. You lose half your life, rounded up. Exile Death Wish.
         this.getSpellAbility().addEffect(new DeathWishEffect());
+        this.getSpellAbility().addEffect(new ExileSourceEffect());
     }
 
     public DeathWish(final DeathWish card) {
@@ -74,12 +72,9 @@ class DeathWishEffect extends OneShotEffect {
 
     private static final String choiceText = "Choose a card you own from outside the game, and put it into your hand";
 
-    private static final FilterCard filter = new FilterCard("card");
-
-
     public DeathWishEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You may choose a card you own from outside the game, reveal that card, and put it into your hand. Exile Death Wish";
+        this.staticText = "You may choose a card you own from outside the game, reveal that card, and put it into your hand. You lose half your life, rounded up";
     }
 
     public DeathWishEffect(final DeathWishEffect effect) {
@@ -93,48 +88,30 @@ class DeathWishEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            while (player.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                Cards cards = player.getSideboard();
-                if(cards.isEmpty()) {
-                    game.informPlayer(player, "You have no cards outside the game.");
-                    break;
-                }
-
-                Set<Card> filtered = cards.getCards(filter, game);
-                if (filtered.isEmpty()) {
-                    game.informPlayer(player, "You have no " + filter.getMessage() + " outside the game.");
-                    break;
-                }
-
-                Cards filteredCards = new CardsImpl();
-                for (Card card : filtered) {
-                    filteredCards.add(card.getId());
-                }
-
-                TargetCard target = new TargetCard(Zone.PICK, filter);
-                if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
-                    Card card = player.getSideboard().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
+                Cards cards = controller.getSideboard();
+                if (cards.isEmpty()) {
+                    game.informPlayer(controller, "You have no cards outside the game.");
+                } else {
+                    TargetCard target = new TargetCard(Zone.OUTSIDE, new FilterCard());
+                    if (controller.choose(Outcome.Benefit, cards, target, game)) {
+                        Card card = controller.getSideboard().get(target.getFirstTarget(), game);
+                        if (card != null) {
+                            controller.moveCards(card, null, Zone.HAND, source, game);
+                        }
                     }
                 }
             }
-            
-            int amount = (player.getLife() + 1)/2;
-            if(amount > 0)
-            {
-                player.loseLife(amount, game);
+
+            int amount = (controller.getLife() + 1) / 2;
+            if (amount > 0) {
+                controller.loseLife(amount, game);
             }
-            
-            Card cardToExile = game.getCard(source.getSourceId());
-            if(cardToExile != null)
-            {
-                cardToExile.moveToExile(null, "", source.getSourceId(), game);
-            }
+            return true;
         }
-        return true;
+        return false;
     }
 
 }
