@@ -107,6 +107,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
                 if (player.chooseUse(Outcome.Benefit, "Pay " + totalCost.getText() + "?", source, game)) {
                     totalCost.clearPaid();
                     if (totalCost.payOrRollback(source, game, source.getSourceId(), source.getControllerId())) {
+                        game.fireEvent(new GameEvent(EventType.PAID_CUMULATIVE_UPKEEP, permanent.getId(), permanent.getId(), player.getId(), ageCounter, false));
                         return true;
                     }
                 }
@@ -122,6 +123,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
                     totalCost.clearPaid();
                     int bookmark = game.bookmarkState();
                     if (totalCost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                        game.fireEvent(new GameEvent(EventType.PAID_CUMULATIVE_UPKEEP, permanent.getId(), permanent.getId(), player.getId(), ageCounter, false));
                         return true;
                     } else {
                         game.restoreState(bookmark, source.getRule());
