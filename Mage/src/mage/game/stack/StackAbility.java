@@ -238,6 +238,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
+    public Effects getAllEffects() {
+        return ability.getAllEffects();
+    }
+
+    @Override
     public Effects getEffects(Game game, EffectType effectType) {
         return ability.getEffects(game, effectType);
     }
