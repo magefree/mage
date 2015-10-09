@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities;
 
 import java.io.Serializable;
@@ -54,48 +53,54 @@ import mage.target.Targets;
 import mage.watchers.Watcher;
 
 /**
- * Practically everything in the game is started from an Ability.  This
- * interface describes what an Ability is composed of at the highest level.
+ * Practically everything in the game is started from an Ability. This interface
+ * describes what an Ability is composed of at the highest level.
  */
 public interface Ability extends Controllable, Serializable {
 
     /**
      * Gets the globally unique id of the ability contained within the game.
-     * 
-     * @return A {@link java.util.UUID} which the game will use to store and retrieve
-     * the exact instance of this ability.
+     *
+     * @return A {@link java.util.UUID} which the game will use to store and
+     * retrieve the exact instance of this ability.
      */
     @Override
     UUID getId();
 
     /**
      * Assigns a new {@link java.util.UUID}
-     * 
-     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility, mage.game.Game)
-     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
-     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+     *
+     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
+     * mage.game.Game)
+     * @see
+     * mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see
+     * mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newId();
 
     /**
      * Assigns a new {@link java.util.UUID}
-     * 
-     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility, mage.game.Game)
-     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
-     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+     *
+     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
+     * mage.game.Game)
+     * @see
+     * mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see
+     * mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newOriginalId();
 
     /**
      * Gets the {@link AbilityType} of this ability.
-     * 
+     *
      * @return The {@link AbilityType type} of this ability.
      */
     AbilityType getAbilityType();
 
     /**
      * Gets the id of the player in control of this ability.
-     * 
+     *
      * @return The {@link java.util.UUID} of the controlling player.
      */
     @Override
@@ -103,28 +108,29 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Sets the id of the controller of this ability.
-     * 
+     *
      * @param controllerId The {@link java.util.UUID} of the controller.
      */
     void setControllerId(UUID controllerId);
 
     /**
      * Gets the id of the object which put this ability in motion.
-     * 
-     * @return The {@link java.util.UUID} of the object this ability is associated with.
+     *
+     * @return The {@link java.util.UUID} of the object this ability is
+     * associated with.
      */
     UUID getSourceId();
 
     /**
      * Sets the id of the object which this ability orignates from.
-     * 
+     *
      * @param sourceID {@link java.util.UUID} the source id to set.
      */
     void setSourceId(UUID sourceID);
 
     /**
      * Gets all {@link Costs} associated with this ability.
-     * 
+     *
      * @return All {@link Costs} associated with this ability.
      */
     Costs<Cost> getCosts();
@@ -132,25 +138,25 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Adds a {@link Cost} to this ability that must be paid before this ability
      * is activated.
-     * 
+     *
      * @param cost The {@link Cost} to add.
      */
     void addCost(Cost cost);
 
     /**
-     * Gets all {@link ManaCosts} associated with this ability.  These returned
+     * Gets all {@link ManaCosts} associated with this ability. These returned
      * costs should never be modified as they represent the base costs before
      * any modifications.
-     * 
+     *
      * @return All {@link ManaCosts} that must be paid.
      */
     ManaCosts<ManaCost> getManaCosts();
 
     /**
      * Gets all the {@link ManaCosts} that must be paid before activating this
-     * ability.  These costs should be modified by any modification effects currently
-     * present within the game state.
-     * 
+     * ability. These costs should be modified by any modification effects
+     * currently present within the game state.
+     *
      * @return All {@link ManaCosts} that must be paid.
      */
     ManaCosts<ManaCost> getManaCostsToPay();
@@ -158,51 +164,60 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Adds a {@link ManaCost} to this ability that must be paid before this
      * ability is activated.
-     * 
+     *
      * @param cost The {@link ManaCost} to add.
      */
     void addManaCost(ManaCost cost);
 
     /**
      * Gets all {@link AlternativeCost} associated with this ability.
-     * 
-     * @return All {@link AlternativeCost}'s that can be paid instead of the {@link ManaCosts}
+     *
+     * @return All {@link AlternativeCost}'s that can be paid instead of the
+     * {@link ManaCosts}
      */
     List<AlternativeCost> getAlternativeCosts();
 
     /**
      * Adds an {@link AlternativeCost} this ability that may be paid instead of
      * any other cost.
-     * 
+     *
      * @param cost The {@link AlternativeCost} to add.
      */
     void addAlternativeCost(AlternativeCost cost);
 
     /**
      * TODO Method is unused, keep it around?
-     * 
-     * Gets all costs that are optional to this ability.  These costs can be paid
+     *
+     * Gets all costs that are optional to this ability. These costs can be paid
      * in addition to other costs to have other effects put into place.
-     * 
+     *
      * @return All {@link Costs} that can be paid above and beyond other costs.
      */
     Costs<Cost> getOptionalCosts();
 
     /**
      * Adds a {@link Cost} that is optional to this ability.
-     * 
+     *
      * @param cost The {@link Cost} to add to the optional costs.
      */
     void addOptionalCost(Cost cost);
 
     /**
-     * Retrieves the effects that are put into the place by the resolution of this
-     * ability.
-     * 
+     * Retrieves the effects that are put into the place by the resolution of
+     * this ability.
+     *
      * @return All {@link Effects} that will be put into place by the resolution
      * of this ability.
      */
     Effects getEffects();
+
+    /**
+     * Retrieves all effects of an ability. That means effects from all modes
+     * event those modes that are not seleced (yet).
+     *
+     * @return All {@link Effects} of this ability.
+     */
+    Effects getAllEffects();
 
     /**
      * Retrieves the effects of the specified {@link EffectType type} that are
@@ -216,26 +231,28 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Adds an effect to this ability.
-     * 
+     *
      * @param effect The {@link Effect} to add.
      */
     void addEffect(Effect effect);
 
     /**
-     * Retrieves all targets that must be satisfied before this ability is
+     * Retrieves all targets that must be satisfied before this ability is put
+     * onto the stack.
+     *
+     * @return All {@link Targets} that must be satisfied before this ability is
      * put onto the stack.
-     * 
-     * @return All {@link Targets} that must be satisfied before this ability is put onto
-     * the stack.
      */
     Targets getTargets();
 
     /**
-     * Retrieves the {@link Target} located at the 0th index in the {@link Targets}.
-     * A call to the method is equivalent to {@link #getTargets()}.get(0).getFirstTarget().
-     * 
-     * @return The {@link java.util.UUID} of the first target within the targets list.
-     * 
+     * Retrieves the {@link Target} located at the 0th index in the
+     * {@link Targets}. A call to the method is equivalent to
+     * {@link #getTargets()}.get(0).getFirstTarget().
+     *
+     * @return The {@link java.util.UUID} of the first target within the targets
+     * list.
+     *
      * @see mage.target.Target
      */
     UUID getFirstTarget();
@@ -243,53 +260,54 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Adds a target to this ability that must be satisfied before this ability
      * is put onto the stack.
-     * 
+     *
      * @param target The {@link Target} to add.
      */
     void addTarget(Target target);
 
     /**
      * Choices
-     * 
-     * @return 
+     *
+     * @return
      */
     Choices getChoices();
 
     /**
      * TODO: Javadoc me
-     * 
-     * @param choice 
+     *
+     * @param choice
      */
     void addChoice(Choice choice);
 
     /**
      * Retrieves the {@link Zone} that this ability is active within.
-     * 
-     * @return 
+     *
+     * @return
      */
     Zone getZone();
 
     /**
      * Retrieves whether or not this abilities activation will use the stack.
-     * 
-     * @return 
+     *
+     * @return
      */
     boolean isUsesStack();
 
     /**
      * Retrieves a human readable string representing what the ability states it
-     * accomplishes.  This call is equivalent to {@link #getRule(boolean) getRule(false)}
-     * 
+     * accomplishes. This call is equivalent to
+     * {@link #getRule(boolean) getRule(false)}
+     *
      * @return A human readable string representing what the ability states it
      * accomplishes
      */
     String getRule();
 
     /**
-     * Retrieves a human readable string including any costs associated with this
-     * ability if the all parameter is true, and just the abilities rule text if
-     * the all parameter is false.
-     * 
+     * Retrieves a human readable string including any costs associated with
+     * this ability if the all parameter is true, and just the abilities rule
+     * text if the all parameter is false.
+     *
      * @param all True if costs are desired in the output, false otherwise.
      * @return
      */
@@ -297,51 +315,60 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Retrieves the rule associated with the given source.
-     * 
+     *
      * @param source
-     * @return 
+     * @return
      */
     String getRule(String source);
 
     /**
      * Activates this ability prompting the controller to pay any mandatory
      * {@link Costs} or {@link AlternativeCost} associated with this ability.
-     * 
-     * @param game A reference the {@link Game} for which this ability should be activated within.
+     *
+     * @param game A reference the {@link Game} for which this ability should be
+     * activated within.
      * @param noMana Whether or not {@link ManaCosts} have to be paid.
      * @return True if this ability was successfully activated.
-     * 
-     * @see mage.players.PlayerImpl#cast(mage.abilities.SpellAbility, mage.game.Game, boolean)
-     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility, mage.game.Game)
-     * @see mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility, mage.game.Game)
+     *
+     * @see mage.players.PlayerImpl#cast(mage.abilities.SpellAbility,
+     * mage.game.Game, boolean)
+     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
+     * mage.game.Game)
+     * @see
+     * mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility,
+     * mage.game.Game)
      */
     boolean activate(Game game, boolean noMana);
 
     boolean isActivated();
-    
+
     /**
-     * Resolves this ability and puts any effects it produces into play.  This
-     * method should only be called if the {@link #activate(mage.game.Game, boolean)}
-     * method returned true.
-     * 
+     * Resolves this ability and puts any effects it produces into play. This
+     * method should only be called if the
+     * {@link #activate(mage.game.Game, boolean)} method returned true.
+     *
      * @param game The {@link Game} for which this ability resolves within.
      * @return Whether or not this ability successfully resolved.
-     * 
-     * @see mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility, mage.game.Game)
-     * @see mage.players.PlayerImpl#specialAction(mage.abilities.SpecialAction, mage.game.Game)
+     *
+     * @see
+     * mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility,
+     * mage.game.Game)
+     * @see mage.players.PlayerImpl#specialAction(mage.abilities.SpecialAction,
+     * mage.game.Game)
      */
     boolean resolve(Game game);
 
     /**
      * Used to reset the state of this ability.
-     * 
-     * @param game 
+     *
+     * @param game
      */
     void reset(Game game);
 
     /**
-     * Overridden by triggered abilities with intervening if clauses - rule 20110715 - 603.4
-     * 
+     * Overridden by triggered abilities with intervening if clauses - rule
+     * 20110715 - 603.4
+     *
      * @param game
      * @return Whether or not the intervening if clause is satisfied
      */
@@ -349,7 +376,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Creates a fresh copy of this ability.
-     * 
+     *
      * @return A new copy of this ability.
      */
     Ability copy();
@@ -364,43 +391,47 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Gets the list of sub-abilities associated with this ability.
-     * @return 
+     *
+     * @return
      */
     List<Ability> getSubAbilities();
 
     /**
      * Adds a sub-ability to this ability.
-     * 
+     *
      * @param ability The {@link Ability} to add.
      */
     void addSubAbility(Ability ability);
 
     List<Watcher> getWatchers();
+
     void addWatcher(Watcher watcher);
-    
+
     /**
      * Returns true if this abilities source is in the zone for the ability
-     * 
+     *
      * @param game
      * @param source
      * @param event
-     * @return 
+     * @return
      */
     boolean isInUseableZone(Game game, MageObject source, GameEvent event);
 
     /**
-     * Returns true if the source object has currently the ability 
-     * (e.g. The object can have lost all or some abilities for some time  (e.g. Turn to Frog)
-     * 
+     * Returns true if the source object has currently the ability (e.g. The
+     * object can have lost all or some abilities for some time (e.g. Turn to
+     * Frog)
+     *
      * @param game
      * @param source
      * @param event
-     * @return 
+     * @return
      */
     boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
 
     /**
-     * Returns true if this ability has to be shown as topmost of all the rules of the object
+     * Returns true if this ability has to be shown as topmost of all the rules
+     * of the object
      *
      * @return
      */
@@ -415,10 +446,9 @@ public interface Ability extends Controllable, Serializable {
      */
     void setRuleAtTheTop(boolean ruleAtTheTop);
 
-    
     /**
-     * Returns true if this ability has to work also with face down object
-     * (set to not visible normally).
+     * Returns true if this ability has to work also with face down object (set
+     * to not visible normally).
      *
      * @return
      */
@@ -439,20 +469,20 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     boolean getRuleVisible();
-    
 
     /**
      * Sets the value for the ruleVisible attribute
      *
-     * true = rule will be shown for the card / permanent
-     * false = rule won't be shown
+     * true = rule will be shown for the card / permanent false = rule won't be
+     * shown
      *
      * @param ruleVisible
      */
     void setRuleVisible(boolean ruleVisible);
 
     /**
-     * Returns true if the additional costs of the abilitiy should be visible on the tooltip text
+     * Returns true if the additional costs of the abilitiy should be visible on
+     * the tooltip text
      *
      * @return
      */
@@ -461,35 +491,34 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Sets the value for the additional costs rule attribute
      *
-     * true = rule will be shown for the card / permanent
-     * false = rule won't be shown
+     * true = rule will be shown for the card / permanent false = rule won't be
+     * shown
      *
      * @param ruleAdditionalCostsVisible
      */
     void setAdditionalCostsRuleVisible(boolean ruleAdditionalCostsVisible);
 
-    
     /**
      * Get the originalId of the ability
-     * 
+     *
      * @return originalId
      */
     UUID getOriginalId();
-    
+
     /**
-     * Sets the ability word for the given ability.
-     * An ability word is a word that, in essence, groups, and reminds players of, cards 
-     * that have a common functionality and does not imply any particular rules.
-     * 
+     * Sets the ability word for the given ability. An ability word is a word
+     * that, in essence, groups, and reminds players of, cards that have a
+     * common functionality and does not imply any particular rules.
+     *
      * --- Not usable yet for rule text generation of triggered abilities ---
-     * 
-     * @param abilityWord 
+     *
+     * @param abilityWord
      */
     void setAbilityWord(AbilityWord abilityWord);
 
     /**
-     * Creates the message about the ability casting/triggering/activating to post in the game log
-     * before the ability resolves.
+     * Creates the message about the ability casting/triggering/activating to
+     * post in the game log before the ability resolves.
      *
      * @param game
      * @return
@@ -497,46 +526,46 @@ public interface Ability extends Controllable, Serializable {
     String getGameLogMessage(Game game);
 
     /**
-     * Used to deactivate cost modification logic of ability activation for some special handling
-     * (e.g. FlashbackAbility gets cost modifiaction twice because of how it's handled now)
+     * Used to deactivate cost modification logic of ability activation for some
+     * special handling (e.g. FlashbackAbility gets cost modifiaction twice
+     * because of how it's handled now)
      *
      * @param active execute no cost modification
      */
     void setCostModificationActive(boolean active);
 
     boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
-    
+
     /**
-     * Sets the object that actually existed while a ability triggerd or
-     * an ability was activated.
-     * 
-     * @param mageObject 
-     * @param game 
+     * Sets the object that actually existed while a ability triggerd or an
+     * ability was activated.
+     *
+     * @param mageObject
+     * @param game
      */
     void setSourceObject(MageObject mageObject, Game game);
-    
+
     /**
-     * Returns the object that actually existed while a ability triggerd or 
-     * an ability was activated.
-     * If not set yet, the current object will be retrieved from the game.
-     * 
+     * Returns the object that actually existed while a ability triggerd or an
+     * ability was activated. If not set yet, the current object will be
+     * retrieved from the game.
+     *
      * @param game
-     * @return 
+     * @return
      */
     MageObject getSourceObject(Game game);
 
     int getSourceObjectZoneChangeCounter();
-    
+
     /**
-     * Returns the object that actually existed while a ability triggerd or 
-     * an ability was activated only if it has not changed zone meanwhile.
-     * If not set yet, the current object will be retrieved from the game.
-     * 
+     * Returns the object that actually existed while a ability triggerd or an
+     * ability was activated only if it has not changed zone meanwhile. If not
+     * set yet, the current object will be retrieved from the game.
+     *
      * @param game
-     * @return 
+     * @return
      */
-    
     MageObject getSourceObjectIfItStillExists(Game game);
-    
+
     String getTargetDescription(Targets targets, Game game);
 }

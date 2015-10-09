@@ -682,6 +682,15 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public Effects getAllEffects() {
+        Effects allEffects = new Effects();
+        for (Mode mode : getModes().values()) {
+            allEffects.addAll(mode.getEffects());
+        }
+        return allEffects;
+    }
+
+    @Override
     public Effects getEffects(Game game, EffectType effectType) {
         Effects typedEffects = new Effects();
         for (Effect effect : getEffects()) {
