@@ -28,6 +28,7 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -112,19 +113,18 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().size() > 0) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null && controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
                 return false;
             }
-            CardsImpl cards = new CardsImpl();
-            cards.add(card);
-            controller.revealCards("Nissa, Sage Animist", cards, game);
+            controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
+            Zone targetZone = Zone.HAND;
             if (card.getCardType().contains(CardType.LAND)) {
-                return controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-            } else {
-                return controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                targetZone = Zone.BATTLEFIELD;
             }
+            return controller.moveCards(card, null, targetZone, source, game);
         }
         return true;
     }
