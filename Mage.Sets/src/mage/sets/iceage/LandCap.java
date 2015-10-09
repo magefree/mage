@@ -55,7 +55,7 @@ import mage.counters.CounterType;
 public class LandCap extends CardImpl {
 
     public LandCap(UUID ownerId) {
-        super(ownerId, 319, "Land Cap", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        super(ownerId, 338, "Land Cap", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ICE";
 
         // Land Cap doesn't untap during your untap step if it has a depletion counter on it.
