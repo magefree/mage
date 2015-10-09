@@ -44,23 +44,35 @@ public class TransformTest extends CardTestPlayerBase {
 
         addCard(Zone.LIBRARY, playerA, "Forest");
 
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         // When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.
         // Whenever a land enters the battlefield under your control, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
 
         addCard(Zone.HAND, playerA, "Nissa, Vastwood Seer");
 
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
+        // {G}{G}, Sacrifice Rootrunner: Put target land on top of its owner's library.
+        addCard(Zone.BATTLEFIELD, playerB, "Rootrunner"); // {2}{G}{G}
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer");
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{G}{G}", "Swamp");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+1: Reveal");
+
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Forest", 7);
+        assertGraveyardCount(playerB, "Rootrunner", 1);
 
         assertPermanentCount(playerA, "Nissa, Vastwood Seer", 0);
         assertPermanentCount(playerA, "Nissa, Sage Animist", 1);
-        assertCounterCount("Nissa, Sage Animist", CounterType.LOYALTY, 3);
+
+        assertCounterCount("Nissa, Sage Animist", CounterType.LOYALTY, 4);
+        assertPermanentCount(playerA, "Forest", 6);
+        assertPermanentCount(playerA, "Swamp", 1);
+
     }
 
     @Test
