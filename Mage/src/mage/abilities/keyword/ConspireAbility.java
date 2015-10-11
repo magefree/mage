@@ -113,8 +113,9 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
                 reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it  and you may choose a new targets for the copy.)";
                 break;
         }
-        conspireCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderText,
-                new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
+        Cost cost = new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true));
+        cost.setText("");
+        conspireCost = new OptionalAdditionalCostImpl(keywordText, " ", reminderText, cost);
         addSubAbility(new ConspireTriggeredAbility(conspireId));
     }
 

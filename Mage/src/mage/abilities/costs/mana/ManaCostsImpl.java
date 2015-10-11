@@ -51,6 +51,7 @@ import mage.util.ManaUtil;
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
 
     protected UUID id;
+    protected String text = null;
 
     private static Map<String, ManaCosts> costs = new HashMap<>();
 
@@ -373,7 +374,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
     public String getText() {
+        if (text != null) {
+            return text;
+        }
         if (this.size() == 0) {
             return "";
         }

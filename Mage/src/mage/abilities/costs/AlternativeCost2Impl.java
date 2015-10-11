@@ -25,20 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs;
 
 import mage.game.Game;
 
 /**
  * Alternative costs
- * 
+ *
  * @author LevelX2
- * 
+ *
  * @param <T>
  */
-
-public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends CostsImpl<Cost> implements AlternativeCost2 {
+public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends CostsImpl<Cost> implements AlternativeCost2 {
 
     protected String name;
     protected String reminderText;
@@ -72,6 +70,7 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
     public String getName() {
         return this.name;
     }
+
     /**
      * Returns the complete text for the addional cost or if onlyCost is true
      * only the pure text for the included native cost
@@ -84,7 +83,7 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
         if (onlyCost) {
             return getText();
         } else {
-            return new StringBuffer(name != null ? name: "").append(delimiter != null ? delimiter: "").append(getText()).toString();
+            return (name != null ? name : "") + (delimiter != null ? delimiter : "") + getText();
         }
     }
 
@@ -103,19 +102,19 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
     }
 
     /**
-     * Returns a text suffix for the game log, that can be added to
-     * the cast message.
+     * Returns a text suffix for the game log, that can be added to the cast
+     * message.
      *
-     * @param position - if there are multiple costs, it's the postion the cost is set (starting with 0)
+     * @param position - if there are multiple costs, it's the postion the cost
+     * is set (starting with 0)
      * @return
      */
     @Override
     public String getCastSuffixMessage(int position) {
-        StringBuilder sb = new StringBuilder(position > 0 ? " and ":"").append(" with ");
+        StringBuilder sb = new StringBuilder(position > 0 ? " and " : "").append(" with ");
         sb.append(name);
-        return  sb.toString();
+        return sb.toString();
     }
-
 
     /**
      * If the player intends to pay the cost, the cost will be activated
@@ -124,7 +123,9 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
     @Override
     public void activate() {
         activated = true;
-    };
+    }
+
+    ;
 
     /**
      * Reset the activate and count information
@@ -142,9 +143,11 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
      * @return
      */
     @Override
-    public boolean isActivated(Game game){
+    public boolean isActivated(Game game) {
         return activated;
-    };
+    }
+
+    ;
 
     @Override
     public AlternativeCost2Impl copy() {

@@ -37,8 +37,8 @@ import mage.target.Targets;
 
 public class OrCost implements Cost {
 
-    private Cost firstCost;
-    private Cost secondCost;
+    private final Cost firstCost;
+    private final Cost secondCost;
     private String description;
     // which cost was slected to pay
     private Cost selectedCost;
@@ -59,6 +59,11 @@ public class OrCost implements Cost {
     @Override
     public UUID getId() {
         throw new RuntimeException("Not supported method");
+    }
+
+    @Override
+    public void setText(String text) {
+        this.description = text;
     }
 
     @Override

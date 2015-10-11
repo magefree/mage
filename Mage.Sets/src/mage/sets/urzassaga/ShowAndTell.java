@@ -122,12 +122,5 @@ class ShowAndTellEffect extends OneShotEffect {
             }
         }
         return controller.moveCards(cardsToPutIntoPlay, Zone.BATTLEFIELD, source, game, false, false, true, null);
-//        for (Card card : cardsToPutIntoPlay) {
-//            Player player = game.getPlayer(card.getOwnerId());
-//            if (player != null) {
-//                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-//            }
-//        }
-        // return true;
     }
 }

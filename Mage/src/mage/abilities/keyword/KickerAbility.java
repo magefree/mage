@@ -85,8 +85,8 @@ import mage.players.Player;
 public class KickerAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     protected static final String KICKER_KEYWORD = "Kicker";
-    protected static final String KICKER_REMINDER_MANA = "(You may pay an additional {cost} as you cast this spell.)";
-    protected static final String KICKER_REMINDER_COST = "(You may {cost} in addition to any other costs as you cast this spell.)";
+    protected static final String KICKER_REMINDER_MANA = "You may pay an additional {cost} as you cast this spell.";
+    protected static final String KICKER_REMINDER_COST = "You may {cost} in addition to any other costs as you cast this spell.";
 
     protected Map<String, Integer> activations = new HashMap<>(); // zoneChangeCounter, activations
 

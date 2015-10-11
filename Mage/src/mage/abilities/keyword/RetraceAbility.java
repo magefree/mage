@@ -28,6 +28,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
@@ -44,7 +45,9 @@ public class RetraceAbility extends SpellAbility {
     public RetraceAbility(Card card) {
         super(card.getManaCost(), card.getName() + " with retrace", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE);
         this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
-        this.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
+        Cost cost = new DiscardTargetCost(new TargetCardInHand(new FilterLandCard()));
+        cost.setText("");
+        this.addCost(cost);
         this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
         this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
         this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
