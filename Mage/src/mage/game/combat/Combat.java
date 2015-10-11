@@ -663,7 +663,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             if (mayBlock) {
                                 if (controller.isHuman()) {
                                     if (!game.isSimulation()) {
-                                        game.informPlayer(controller, "Creature should block this turn: " + creature.getLogName());
+                                        game.informPlayer(controller, "Creature should block this turn: " + creature.getIdName());
                                     }
                                 } else {
                                     Player defender = game.getPlayer(creature.getControllerId());
