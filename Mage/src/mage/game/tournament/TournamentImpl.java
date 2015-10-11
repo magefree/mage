@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.tournament;
 
 import java.util.ArrayList;
@@ -114,7 +113,7 @@ public abstract class TournamentImpl implements Tournament {
         }
         synchronized (this) {
             this.notifyAll();
-        }        
+        }
     }
 
     @Override
@@ -209,7 +208,7 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     protected void playRound(Round round) {
-        for (TournamentPairing pair: round.getPairs()) {
+        for (TournamentPairing pair : round.getPairs()) {
             playMatch(pair);
         }
         updateResults(); // show points from byes
@@ -227,7 +226,7 @@ public abstract class TournamentImpl implements Tournament {
 
     protected List<TournamentPlayer> getActivePlayers() {
         List<TournamentPlayer> activePlayers = new ArrayList<>();
-        for (TournamentPlayer player: players.values()) {
+        for (TournamentPlayer player : players.values()) {
             if (!player.isEliminated()) {
                 activePlayers.add(player);
             }
@@ -240,13 +239,13 @@ public abstract class TournamentImpl implements Tournament {
      */
     @Override
     public void updateResults() {
-        for (TournamentPlayer player: players.values()) {
+        for (TournamentPlayer player : players.values()) {
             player.setResults("");
             player.setPoints(0);
             player.setStateInfo("");
         }
-        for (Round round: rounds) {
-            for (TournamentPairing pair: round.getPairs()) {
+        for (Round round : rounds) {
+            for (TournamentPairing pair : round.getPairs()) {
                 Match match = pair.getMatch();
                 if (match != null && match.hasEnded()) {
                     TournamentPlayer tp1 = pair.getPlayer1();
@@ -276,9 +275,9 @@ public abstract class TournamentImpl implements Tournament {
                     tp2.setResults(addRoundResult(round.getRoundNumber(), pair, tp2, tp1));
 
                     // Add points
-                    if (mp2.hasQuit() || mp1.getWins() > mp2.getWins()) {
+                    if ((!mp1.hasQuit() && mp1.getWins() > mp2.getWins()) || mp2.hasQuit()) {
                         tp1.setPoints(tp1.getPoints() + 3);
-                    } else if (mp1.hasQuit() || mp1.getWins() < mp2.getWins()) {
+                    } else if ((!mp2.hasQuit() && mp1.getWins() < mp2.getWins()) || mp1.hasQuit()) {
                         tp2.setPoints(tp2.getPoints() + 3);
                     } else {
                         tp1.setPoints(tp1.getPoints() + 1);
@@ -299,7 +298,7 @@ public abstract class TournamentImpl implements Tournament {
         playerResult.append(getMatchResultString(tournamentPlayer, opponentPlayer, pair.getMatch()));
         return playerResult.toString();
     }
-    
+
     private static String getMatchResultString(TournamentPlayer p1, TournamentPlayer p2, Match match) {
         MatchPlayer mp1 = match.getPlayer(p1.getPlayer().getId());
         MatchPlayer mp2 = match.getPlayer(p2.getPlayer().getId());
@@ -307,22 +306,22 @@ public abstract class TournamentImpl implements Tournament {
         matchResult.append(p2.getPlayer().getName());
         matchResult.append(" [").append(mp1.getWins());
         if (mp1.hasQuit()) {
-            matchResult.append(mp1.getPlayer().hasIdleTimeout()? "I" :(mp1.getPlayer().hasTimerTimeout()?"T":"Q"));
+            matchResult.append(mp1.getPlayer().hasIdleTimeout() ? "I" : (mp1.getPlayer().hasTimerTimeout() ? "T" : "Q"));
         }
         if (match.getDraws() > 0) {
             matchResult.append("-").append(match.getDraws());
         }
         matchResult.append("-").append(mp2.getWins());
         if (mp2.hasQuit()) {
-            matchResult.append(mp2.getPlayer().hasIdleTimeout()? "I" :(mp2.getPlayer().hasTimerTimeout()?"T":"Q"));
-        }                
+            matchResult.append(mp2.getPlayer().hasIdleTimeout() ? "I" : (mp2.getPlayer().hasTimerTimeout() ? "T" : "Q"));
+        }
         matchResult.append("] ");
         return matchResult.toString();
     }
-    
+
     @Override
     public boolean isDoneConstructing() {
-        for (TournamentPlayer player: this.players.values()) {
+        for (TournamentPlayer player : this.players.values()) {
             if (!player.isDoneConstructing()) {
                 return false;
             }
@@ -332,7 +331,7 @@ public abstract class TournamentImpl implements Tournament {
 
     @Override
     public boolean allJoined() {
-        for (TournamentPlayer player: this.players.values()) {
+        for (TournamentPlayer player : this.players.values()) {
             if (!player.isJoined()) {
                 return false;
             }
@@ -358,27 +357,26 @@ public abstract class TournamentImpl implements Tournament {
     public void construct() {
         tableEventSource.fireTableEvent(EventType.CONSTRUCT);
         if (!isAbort()) {
-            for (final TournamentPlayer player: players.values()) {
+            for (final TournamentPlayer player : players.values()) {
 
                 player.setConstructing();
                 new Thread(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            player.getPlayer().construct(TournamentImpl.this, player.getDeck());
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                player.getPlayer().construct(TournamentImpl.this, player.getDeck());
+                            }
                         }
-                    }
                 ).start();
             }
             // add autosubmit trigger
-            
-            
-            synchronized(this) {
+
+            synchronized (this) {
                 while (!isDoneConstructing()) {
                     try {
                         this.wait();
                     } catch (InterruptedException ex) {
-                        
+
                     }
                 }
             }
@@ -387,7 +385,7 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     protected void openBoosters() {
-        for (TournamentPlayer player: this.players.values()) {
+        for (TournamentPlayer player : this.players.values()) {
             player.setDeck(new Deck());
             if (options.getLimitedOptions().getDraftCube() != null) {
                 DraftCube cube = options.getLimitedOptions().getDraftCube();
@@ -395,7 +393,7 @@ public abstract class TournamentImpl implements Tournament {
                     player.getDeck().getSideboard().addAll(cube.createBooster());
                 }
             } else {
-                for (ExpansionSet set: sets) {
+                for (ExpansionSet set : sets) {
                     player.getDeck().getSideboard().addAll(set.createBooster());
                 }
             }
@@ -406,7 +404,7 @@ public abstract class TournamentImpl implements Tournament {
 
     public void resetBufferedCards() {
         HashSet<ExpansionSet> setsDone = new HashSet<>();
-        for(ExpansionSet set: sets) {
+        for (ExpansionSet set : sets) {
             if (!setsDone.contains(set)) {
                 set.removeSavedCards();
                 setsDone.add(set);
@@ -454,7 +452,7 @@ public abstract class TournamentImpl implements Tournament {
     protected void winners() {
         List<TournamentPlayer> winners = new ArrayList<>();
         int pointsWinner = 1; // with less than 1 point you can't win
-        for(TournamentPlayer tournamentPlayer: this.getPlayers()) {
+        for (TournamentPlayer tournamentPlayer : this.getPlayers()) {
             if (pointsWinner < tournamentPlayer.getPoints()) {
                 winners.clear();
                 winners.add(tournamentPlayer);
@@ -464,14 +462,14 @@ public abstract class TournamentImpl implements Tournament {
             }
         }
         // set winner state for the players with the most points > 0
-        for (TournamentPlayer tournamentPlayer: winners) {
+        for (TournamentPlayer tournamentPlayer : winners) {
             tournamentPlayer.setStateInfo("Winner");
         }
     }
 
     @Override
     public void cleanUpOnTournamentEnd() {
-        for(TournamentPlayer tournamentPlayer: players.values()) {
+        for (TournamentPlayer tournamentPlayer : players.values()) {
             tournamentPlayer.CleanUpOnTournamentEnd();
         }
     }
@@ -508,7 +506,6 @@ public abstract class TournamentImpl implements Tournament {
     public void setStartTime() {
         this.startTime = new Date();
     }
-
 
     @Override
     public void setStepStartTime(Date stepStartTime) {
