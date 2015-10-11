@@ -34,7 +34,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
@@ -50,7 +49,7 @@ import mage.counters.CounterType;
 
 /**
  *
- * @author anonymous
+ * @author Luna Skyrise
  */
 public class LandCap extends CardImpl {
 
@@ -59,15 +58,15 @@ public class LandCap extends CardImpl {
         this.expansionSetCode = "ICE";
 
         // Land Cap doesn't untap during your untap step if it has a depletion counter on it.
-        Effect effect = new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(),
-                new SourceHasCounterCondition(CounterType.DEPLETION, 0));
+        Effect effect = new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(false, true),
+                new SourceHasCounterCondition(CounterType.DEPLETION, 1, Integer.MAX_VALUE));
         effect.setText("{this} doesn't untap during your untap step if it has a depletion counter on it");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);
         // At the beginning of your upkeep, remove a depletion counter from Land Cap.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), TargetController.YOU, false);
         this.addAbility(ability2);
-        // {tap}: Add {W} or {U} to your mana pool. Put a depletion counter on Land Cap.
+        // {T}: Add {W} or {U} to your mana pool. Put a depletion counter on Land Cap.
         Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new TapSourceCost());
         ability3.addEffect(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance()));
         this.addAbility(ability3);

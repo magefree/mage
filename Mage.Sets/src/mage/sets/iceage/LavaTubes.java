@@ -49,7 +49,7 @@ import mage.counters.CounterType;
 
 /**
  *
- * @author anonymous
+ * @author Luna Skyrise
  */
 public class LavaTubes extends CardImpl {
 
@@ -58,8 +58,8 @@ public class LavaTubes extends CardImpl {
         this.expansionSetCode = "ICE";
 
         // Lava Tubes doesn't untap during your untap step if it has a depletion counter on it.
-        Effect effect = new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(),
-                new SourceHasCounterCondition(CounterType.DEPLETION, 0));
+        Effect effect = new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(false, true),
+                new SourceHasCounterCondition(CounterType.DEPLETION, 1, Integer.MAX_VALUE));
         effect.setText("{this} doesn't untap during your untap step if it has a depletion counter on it");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);
