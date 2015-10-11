@@ -46,8 +46,8 @@ public abstract class TournamentSwiss extends TournamentImpl {
     }
 
     @Override
-    protected void runTournament() {        
-        for (Map.Entry<UUID, TournamentPlayer> entry: players.entrySet()) {
+    protected void runTournament() {
+        for (Map.Entry<UUID, TournamentPlayer> entry : players.entrySet()) {
             if (entry.getValue().getPlayer().autoLoseGame()) {
                 entry.getValue().setEliminated();
                 entry.getValue().setResults("Auto Eliminated");
@@ -57,7 +57,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
         while (this.getActivePlayers().size() > 1 && this.getNumberRounds() > this.getRounds().size()) {
             // check if some player got killed / disconnected meanwhile and update their state
             tableEventSource.fireTableEvent(TableEvent.EventType.CHECK_STATE_PLAYERS);
-            // Swiss pairing 
+            // Swiss pairing
             Round round = createRoundSwiss();
             playRound(round);
         }
@@ -70,8 +70,9 @@ public abstract class TournamentSwiss extends TournamentImpl {
         List<TournamentPlayer> roundPlayers = getActivePlayers();
         // sort players by tournament points
         Collections.sort(roundPlayers, new Comparator<TournamentPlayer>() {
-            @Override public int compare(TournamentPlayer p1, TournamentPlayer p2) {
-                return  p2.getPoints() - p1.getPoints();
+            @Override
+            public int compare(TournamentPlayer p1, TournamentPlayer p2) {
+                return p2.getPoints() - p1.getPoints();
             }
 
         });
@@ -80,9 +81,9 @@ public abstract class TournamentSwiss extends TournamentImpl {
             TournamentPlayer player1 = roundPlayers.get(0);
             roundPlayers.remove(0);
             TournamentPlayer playerForPossibleSecondPairing = null;
-            for (TournamentPlayer player2: roundPlayers) {
+            for (TournamentPlayer player2 : roundPlayers) {
                 if (alreadyPaired(player1, player2)) {
-                    // if laready paired but equal ponts -> remember if second pairing is needed
+                    // if already paired but equal points -> remember if second pairing is needed
                     if (playerForPossibleSecondPairing == null) {
                         playerForPossibleSecondPairing = player2;
                     }
@@ -126,7 +127,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
 
     protected boolean alreadyPaired(TournamentPlayer player1, TournamentPlayer player2) {
         for (Round round : rounds) {
-            for (TournamentPairing pairing: round.getPairs()) {
+            for (TournamentPairing pairing : round.getPairs()) {
                 if (pairing.getPlayer1().equals(player1) || pairing.getPlayer2().equals(player1)) {
                     if (pairing.getPlayer1().equals(player2) || pairing.getPlayer2().equals(player2)) {
                         return true;

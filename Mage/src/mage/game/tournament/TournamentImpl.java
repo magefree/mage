@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -187,15 +188,16 @@ public abstract class TournamentImpl implements Tournament {
         Round round = new Round(rounds.size() + 1, this);
         rounds.add(round);
         List<TournamentPlayer> roundPlayers = getActivePlayers();
+
+        // search the player with a bye last round
+        List<TournamentPlayer> playerWithByes = getTournamentPlayersWithBye(roundPlayers);
+
         while (roundPlayers.size() > 1) {
-            int i = rnd.nextInt(roundPlayers.size());
-            TournamentPlayer player1 = roundPlayers.get(i);
-            roundPlayers.remove(i);
-            i = rnd.nextInt(roundPlayers.size());
-            TournamentPlayer player2 = roundPlayers.get(i);
-            roundPlayers.remove(i);
+            TournamentPlayer player1 = getNextAvailablePlayer(roundPlayers, playerWithByes);
+            TournamentPlayer player2 = getNextAvailablePlayer(roundPlayers, playerWithByes);
             round.addPairing(new TournamentPairing(player1, player2));
         }
+
         if (roundPlayers.size() > 0) {
             // player free round - add to bye players of this round
             TournamentPlayer player1 = roundPlayers.get(0);
@@ -205,6 +207,37 @@ public abstract class TournamentImpl implements Tournament {
             updateResults();
         }
         return round;
+    }
+
+    private TournamentPlayer getNextAvailablePlayer(List<TournamentPlayer> roundPlayers, List<TournamentPlayer> playerWithByes) {
+        TournamentPlayer nextPlayer;
+        if (playerWithByes.isEmpty()) {
+            int i = rnd.nextInt(roundPlayers.size());
+            nextPlayer = roundPlayers.get(i);
+            roundPlayers.remove(i);
+        } else { // prefer players with byes to pair
+            Iterator<TournamentPlayer> iterator = playerWithByes.iterator();
+            nextPlayer = iterator.next();
+            iterator.remove();
+            roundPlayers.remove(nextPlayer);
+        }
+        return nextPlayer;
+    }
+
+    private List<TournamentPlayer> getTournamentPlayersWithBye(List<TournamentPlayer> roundPlayers) {
+        List<TournamentPlayer> playersWithBye = new ArrayList<>();
+        if (rounds.size() > 1) {
+            for (int i = rounds.size() - 2; i >= 0; i--) {
+                Round oldRound = rounds.get(i);
+                if (oldRound != null && !oldRound.getPlayerByes().isEmpty()) {
+                    TournamentPlayer tournamentPlayerWithBye = oldRound.getPlayerByes().iterator().next();
+                    if (roundPlayers.contains(tournamentPlayerWithBye)) {
+                        playersWithBye.add(tournamentPlayerWithBye);
+                    }
+                }
+            }
+        }
+        return playersWithBye;
     }
 
     protected void playRound(Round round) {
