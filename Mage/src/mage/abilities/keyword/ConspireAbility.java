@@ -158,10 +158,11 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(getControllerId());
             if (player != null) {
                 resetConspire(ability, game);
-                if (player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
+                if (conspireCost.canPay(ability, getSourceId(), getControllerId(), game)
+                        && player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
                     activateConspire(ability, game);
                     for (Iterator it = ((Costs) conspireCost).iterator(); it.hasNext();) {
                         Cost cost = (Cost) it.next();

@@ -92,10 +92,10 @@ public class OblivionRingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Jace Beleren");
         addCard(Zone.HAND, playerA, "Revoke Existence");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-1: Target player draws one card", playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-1: Target player draws a card", playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Revoke Existence", "Oblivion Ring");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-1: Target player draws one card", playerA);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-1: Target player draws a card", playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
