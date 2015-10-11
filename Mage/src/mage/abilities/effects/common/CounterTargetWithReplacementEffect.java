@@ -28,7 +28,6 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -56,7 +55,8 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
     /**
      *
      * @param targetZone
-     * @param flag use to specify when moving card to library <ul><li>true = put on top</li><li>false = put on bottom</li></ul>
+     * @param flag use to specify when moving card to library <ul><li>true = put
+     * on top</li><li>false = put on bottom</li></ul>
      */
     public CounterTargetWithReplacementEffect(Zone targetZone, boolean flag) {
         super(Outcome.Detriment);
@@ -83,33 +83,14 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
         if (controller != null) {
             StackObject stackObject = game.getStack().getStackObject(objectId);
             if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-                boolean spell = false;
                 if (stackObject instanceof Spell) {
-                    game.rememberLKI(objectId, Zone.STACK, stackObject);
-                    spell = true;
-                }
-                game.getStack().remove(stackObject);
-                if (spell && !((Spell) stackObject).isCopiedSpell()) {
-                    MageObject mageObject = game.getObject(stackObject.getSourceId());
-                    if (mageObject instanceof Card) {
-                        Card card = (Card) mageObject;
-                        switch (targetZone) {
-                            case LIBRARY:
-                                controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.STACK, flag, true);
-                                break;
-                            case EXILED:
-                                controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.STACK, true);
-                                break;
-                            default:
-                                controller.moveCards(card, Zone.STACK, targetZone, source, game);
-                        }                        
-                    } else {
-                        return false;
-                    }
+                    controller.moveCards((Card) stackObject, null, targetZone, source, game);
+                } else {
+                    game.getStack().remove(stackObject);
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
                 return true;
-            }            
+            }
         }
         return false;
     }

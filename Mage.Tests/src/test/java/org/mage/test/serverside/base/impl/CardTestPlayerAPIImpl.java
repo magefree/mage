@@ -283,7 +283,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 if (card == null) {
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
-                PermanentCard p = new PermanentCard(card, null, currentGame);
+                PermanentCard p = new PermanentCard(card, player.getId(), currentGame);
                 p.setTapped(tapped);
                 getBattlefieldCards(player).add(p);
             }

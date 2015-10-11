@@ -60,7 +60,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                 // So check here with the LKI of the enchantment
                 Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
                 if (attachment != null && attachment.getAttachedTo().equals(zEvent.getTargetId())
-                        && attachment.getAttachedToZoneChangeCounter() == zEvent.getTarget().getZoneChangeCounter(game)) {
+                        && attachment.getAttachedToZoneChangeCounter() == zEvent.getTarget().getZoneChangeCounter(game) - 1) {
                     triggered = true;
                 }
             }

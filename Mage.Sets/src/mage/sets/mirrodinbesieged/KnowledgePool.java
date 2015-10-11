@@ -44,6 +44,7 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
@@ -100,7 +101,8 @@ class KnowledgePoolEffect1 extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.moveCardsToExile(player.getLibrary().getTopCards(game, 3), source, game, true,
-                        CardUtil.getObjectExileZoneId(game, sourceObject), sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ")");
+                        CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()),
+                        sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ")");
             }
         }
         return true;
@@ -168,7 +170,8 @@ class KnowledgePoolEffect2 extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && spell != null && sourceObject != null) {
-            UUID exileZoneId = CardUtil.getObjectExileZoneId(game, sourceObject);
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
+            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
             if (controller.moveCardsToExile(spell, source, game, true, exileZoneId, sourceObject.getIdName())) {
                 Player player = game.getPlayer(spell.getControllerId());
                 if (player != null && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with " + sourceObject.getLogName() + " without paying that card's mana cost?", source, game)) {

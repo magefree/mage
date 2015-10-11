@@ -554,7 +554,7 @@ public class TestPlayer implements Player {
         if (!choices.isEmpty()) {
             for (String choice : choices) {
                 for (int index = 0; index < rEffects.size(); index++) {
-                    if (choice.equals(rEffects.get(index))) {
+                    if (choice.equals(rEffects.get(Integer.toString(index)))) {
                         choices.remove(choice);
                         return index;
                     }
@@ -1949,6 +1949,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean scry(int value, Ability source, Game game) {
         return computerPlayer.scry(value, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+        return computerPlayer.moveCards(cards, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }
 
     public void setAIPlayer(boolean AIPlayer) {

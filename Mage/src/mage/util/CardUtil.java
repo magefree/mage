@@ -483,23 +483,6 @@ public class CardUtil {
         return getExileZoneId(getCardZoneString(SOURCE_EXILE_ZONE_TEXT, sourceId, game, previous), game);
     }
 
-    public static UUID getObjectExileZoneId(Game game, MageObject mageObject) {
-        return getObjectExileZoneId(game, mageObject, false);
-    }
-
-    public static UUID getObjectExileZoneId(Game game, MageObject mageObject, boolean previous) {
-        int zoneChangeCounter = 0;
-        if (mageObject instanceof Permanent) {
-            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter(game);
-        } else if (mageObject instanceof Card) {
-            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter(game);
-        }
-        if (zoneChangeCounter > 0 && previous) {
-            zoneChangeCounter--;
-        }
-        return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT, mageObject.getId(), game, zoneChangeCounter, false), game);
-    }
-
     public static UUID getExileZoneId(Game game, UUID objectId, int zoneChangeCounter) {
         return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT, objectId, game, zoneChangeCounter, false), game);
     }

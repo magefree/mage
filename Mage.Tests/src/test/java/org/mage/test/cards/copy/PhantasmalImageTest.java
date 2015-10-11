@@ -202,6 +202,9 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
         addCard(Zone.HAND, playerA, "Phantasmal Image");
+
+        // As Lurebound Scarecrow enters the battlefield, choose a color.
+        // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
         addCard(Zone.HAND, playerA, "Lurebound Scarecrow");
 
         setChoice(playerA, "Green");
@@ -324,7 +327,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Veil of Secrecy", "Frost Titan"); // so it's no longer targetable 
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Veil of Secrecy", "Frost Titan"); // so it's no longer targetable
         setChoice(playerB, "Frost Titan");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terror", "Frost Titan"); // of player Bs Phantasmal Image copying Frost Titan
@@ -346,7 +349,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     }
 
     // I've casted a Phantasmal Image targeting opponent's Wurmcoil Engine
-    // When my Phantasmal Image died, it didn't triggered the Wurmcoil Engine's last ability 
+    // When my Phantasmal Image died, it didn't triggered the Wurmcoil Engine's last ability
     // (When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with deathtouch and
     // a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.)
     @Test
@@ -418,31 +421,39 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     }
 
     /**
-     *                    Action
-     *      Game State 1 -----------------> Game State 2
-     *      (On 'field)     (Move to GY)    (In graveyard)
-     *      
-     *  LTB abilities such as Persist are expceptional in that they trigger based on their existence and 
-     *  state of objects before the event (Game State 1, when the card is on the battlefield) rather than 
-     *  after (Game State 2, when the card is in the graveyard). It doesn't matter that the LTB ability
-     *  doesn't exist in Game State 2. [CR 603.6d]
-     * 
-     *  603.6d Normally, objects that exist immediately after an event are checked to see if the event matched any trigger conditions. 
-     *  Continuous effects that exist at that time are used to determine what the trigger conditions are and what the objects involved 
-     *  in the event look like. However, some triggered abilities must be treated specially. Leaves-the-battlefield abilities, abilities
-     *  that trigger when a permanent phases out, abilities that trigger when an object that all players can see is put into a hand or 
-     *  library, abilities that trigger specifically when an object becomes unattached, abilities that trigger when a player loses control 
-     *  of an object, and abilities that trigger when a player planeswalks away from a plane will trigger based on their existence, and 
-     *  the appearance of objects, prior to the event rather than afterward. The game has to “look back in time” to determine if these abilities trigger.
-     * 
-     *  Example: Two creatures are on the battlefield along with an artifact that has the ability “Whenever a creature dies, you gain 1 life.” 
-     *  Someone plays a spell that destroys all artifacts, creatures, and enchantments. The artifact’s ability triggers twice, even though 
-     *  the artifact goes to its owner’s graveyard at the same time as the creatures.
-     * 
+     * Action Game State 1 -----------------> Game State 2 (On 'field) (Move to
+     * GY) (In graveyard)
+     *
+     * LTB abilities such as Persist are expceptional in that they trigger based
+     * on their existence and state of objects before the event (Game State 1,
+     * when the card is on the battlefield) rather than after (Game State 2,
+     * when the card is in the graveyard). It doesn't matter that the LTB
+     * ability doesn't exist in Game State 2. [CR 603.6d]
+     *
+     * 603.6d Normally, objects that exist immediately after an event are
+     * checked to see if the event matched any trigger conditions. Continuous
+     * effects that exist at that time are used to determine what the trigger
+     * conditions are and what the objects involved in the event look like.
+     * However, some triggered abilities must be treated specially.
+     * Leaves-the-battlefield abilities, abilities that trigger when a permanent
+     * phases out, abilities that trigger when an object that all players can
+     * see is put into a hand or library, abilities that trigger specifically
+     * when an object becomes unattached, abilities that trigger when a player
+     * loses control of an object, and abilities that trigger when a player
+     * planeswalks away from a plane will trigger based on their existence, and
+     * the appearance of objects, prior to the event rather than afterward. The
+     * game has to “look back in time” to determine if these abilities trigger.
+     *
+     * Example: Two creatures are on the battlefield along with an artifact that
+     * has the ability “Whenever a creature dies, you gain 1 life.” Someone
+     * plays a spell that destroys all artifacts, creatures, and enchantments.
+     * The artifact’s ability triggers twice, even though the artifact goes to
+     * its owner’s graveyard at the same time as the creatures.
+     *
      */
     @Test
     public void testPersist() {
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);        
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         // When Kitchen Finks enters the battlefield, you gain 2 life.
         // Persist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
         addCard(Zone.HAND, playerA, "Kitchen Finks");
@@ -452,21 +463,20 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        
+
         // You may have Phantasmal Image enter the battlefield as a copy of any creature
         // on the battlefield, except it's an Illusion in addition to its other types and
-        // it gains "When this creature becomes the target of a spell or ability, sacrifice it."        
+        // it gains "When this creature becomes the target of a spell or ability, sacrifice it."
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kitchen Finks"); 
-        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kitchen Finks");
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
         setChoice(playerB, "Kitchen Finks");
-        
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Kitchen Finks");
         setChoice(playerB, "Kitchen Finks");
-        
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -480,13 +490,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Phantasmal Image", 0);
         assertGraveyardCount(playerB, "Phantasmal Image", 0);
         assertPermanentCount(playerB, "Kitchen Finks", 1);
-        assertPowerToughness(playerB,  "Kitchen Finks", 2, 1);
+        assertPowerToughness(playerB, "Kitchen Finks", 2, 1);
 
     }
- 
+
     @Test
     public void testUndying() {
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         addCard(Zone.HAND, playerA, "Butcher Ghoul");
 
@@ -495,21 +505,20 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        
+
         // You may have Phantasmal Image enter the battlefield as a copy of any creature
         // on the battlefield, except it's an Illusion in addition to its other types and
-        // it gains "When this creature becomes the target of a spell or ability, sacrifice it."        
+        // it gains "When this creature becomes the target of a spell or ability, sacrifice it."
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Butcher Ghoul"); 
-        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Butcher Ghoul");
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
         setChoice(playerB, "Butcher Ghoul");
-        
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Butcher Ghoul");
         setChoice(playerB, "Butcher Ghoul");
-        
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -523,29 +532,25 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Phantasmal Image", 0);
         assertGraveyardCount(playerB, "Phantasmal Image", 0);
         assertPermanentCount(playerB, "Butcher Ghoul", 1);
-        assertPowerToughness(playerB,  "Butcher Ghoul", 2, 2);
+        assertPowerToughness(playerB, "Butcher Ghoul", 2, 2);
 
     }
 
     /**
      * 12:29: Attacker: Wurmcoil Engine [466] (6/6) blocked by Wurmcoil Engine
-     * [4ed] (6/6) 
-     * 12:29: yespair gains 6 life 
-     * 12:29: HipSomHap gains 6 life
-     * 12:29: Wurmcoil Engine [4ed] died 
-     * 12:29: Ability triggers: Wurmcoil Engine [4ed] - When Wurmcoil Engine [4ed] dies, put a a 3/3 colorless
+     * [4ed] (6/6) 12:29: yespair gains 6 life 12:29: HipSomHap gains 6 life
+     * 12:29: Wurmcoil Engine [4ed] died 12:29: Ability triggers: Wurmcoil
+     * Engine [4ed] - When Wurmcoil Engine [4ed] dies, put a a 3/3 colorless
      * Wurm artifact creature token with deathtouch onto the battlefield. Put a
      * a 3/3 colorless Wurm artifact creature token with lifelink onto the
-     * battlefield. 
-     * 12:29: Phantasmal Image [466] died 
-     * 12:29: HipSomHap puts a Wurm [7d0] token onto the battlefield 
-     * 12:29: HipSomHap puts a Wurm [186] token onto the battlefield
+     * battlefield. 12:29: Phantasmal Image [466] died 12:29: HipSomHap puts a
+     * Wurm [7d0] token onto the battlefield 12:29: HipSomHap puts a Wurm [186]
+     * token onto the battlefield
      *
      * To the best of my knowledge, the Phantasmal Image [466], which entered
      * the battlefield as a Wurmcoil Engine, should grant tokens through the
      * Dies-trigger as well, right?
      */
-
     @Test
     public void testDiesTriggered2() {
         addCard(Zone.BATTLEFIELD, playerB, "Wurmcoil Engine");
@@ -570,5 +575,5 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wurm", 2);
         assertPermanentCount(playerB, "Wurm", 2);
 
-    }    
+    }
 }

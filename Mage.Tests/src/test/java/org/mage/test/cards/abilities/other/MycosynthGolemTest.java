@@ -51,8 +51,10 @@ public class MycosynthGolemTest extends CardTestPlayerBase {
     public void testSpellsAffinity() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        // Affinity for artifacts
+        // Artifact creature spells you cast have affinity for artifacts.
         addCard(Zone.BATTLEFIELD, playerA, "Mycosynth Golem");
-        addCard(Zone.HAND, playerA, "Alpha Myr");
+        addCard(Zone.HAND, playerA, "Alpha Myr"); // Creature - Myr  2/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Myr");
 
