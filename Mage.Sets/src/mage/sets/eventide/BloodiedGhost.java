@@ -29,13 +29,13 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -48,12 +48,15 @@ public class BloodiedGhost extends CardImpl {
         super(ownerId, 83, "Bloodied Ghost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W/B}{W/B}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Spirit");
-
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()), "Bloodied Ghost gets a -1/-1 counter"));
+
+        // Bloodied Ghost enters the battlefield with a -1/-1 counter on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()),
+            "with a -1/-1 counter on it."));
     }
 
     public BloodiedGhost (final BloodiedGhost card) {
