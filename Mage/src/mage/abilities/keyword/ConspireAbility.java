@@ -68,7 +68,7 @@ import mage.target.common.TargetControlledPermanent;
  * 702.77b If a spell has multiple instances of conspire, each is paid separately and triggers
  * based on its own payment, not any other instance of conspire. *
  *
- * @author jeffwadsworth heavily based off the replicate keyword by LevelX
+ * @author LevelX
  */
 public class ConspireAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
