@@ -28,24 +28,21 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -70,10 +67,12 @@ public class GrotagSiegeRunner extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Sacrifice Grotag Siege-Runner: Destroy target creature with defender. Grotag Siege-Runner deals 2 damage to that creature's controller.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
         ability.addCost(new SacrificeSourceCost());
+        Effect effect = new DamageTargetControllerEffect(2);
+        effect.setText("{this} deals 2 damage to that creature's controller");
+        ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new GrotageSiegeRunnerEffect());
         this.addAbility(ability);
     }
 
@@ -84,33 +83,5 @@ public class GrotagSiegeRunner extends CardImpl {
     @Override
     public GrotagSiegeRunner copy() {
         return new GrotagSiegeRunner(this);
-    }
-}
-
-class GrotageSiegeRunnerEffect extends OneShotEffect {
-
-    public GrotageSiegeRunnerEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals 2 damage to that creature's controller";
-    }
-
-    public GrotageSiegeRunnerEffect(final GrotageSiegeRunnerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GrotageSiegeRunnerEffect copy() {
-        return new GrotageSiegeRunnerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (permanent != null) {
-            Player controller = game.getPlayer(permanent.getControllerId());
-            controller.damage(2, source.getSourceId(), game, false, true);
-            return true;
-        }
-        return false;
     }
 }
