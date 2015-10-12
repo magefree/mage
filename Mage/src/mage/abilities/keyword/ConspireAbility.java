@@ -113,8 +113,9 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
                 reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it  and you may choose a new targets for the copy.)";
                 break;
         }
-        conspireCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderText,
-                new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
+        Cost cost = new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true));
+        cost.setText("");
+        conspireCost = new OptionalAdditionalCostImpl(keywordText, " ", reminderText, cost);
         addSubAbility(new ConspireTriggeredAbility(conspireId));
     }
 
@@ -157,10 +158,11 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(getControllerId());
             if (player != null) {
                 resetConspire(ability, game);
-                if (player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
+                if (conspireCost.canPay(ability, getSourceId(), getControllerId(), game)
+                        && player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
                     activateConspire(ability, game);
                     for (Iterator it = ((Costs) conspireCost).iterator(); it.hasNext();) {
                         Cost cost = (Cost) it.next();

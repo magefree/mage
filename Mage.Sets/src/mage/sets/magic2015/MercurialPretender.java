@@ -29,6 +29,7 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -96,15 +97,15 @@ class MercurialPretenderCopyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (player != null && sourceObject != null) {
             Target target = new TargetPermanent(new FilterControlledCreaturePermanent());
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source,
+                    game.copyPermanent(copyFromPermanent, sourceObject.getId(), source,
                             // {2}{U}{U}: Return this creature to its owner's hand.
                             new AbilityApplier(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}")))
                     );

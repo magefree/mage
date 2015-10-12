@@ -16,7 +16,10 @@ public class ProteanHydraTest extends CardTestPlayerBase {
     @Test
     public void testEnteringWithCounters() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
-        addCard(Zone.HAND, playerA, "Protean Hydra");
+        // Protean Hydra enters the battlefield with X +1/+1 counters on it.
+        // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
+        // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.
+        addCard(Zone.HAND, playerA, "Protean Hydra"); // CREATURE - {X}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Protean Hydra");
 

@@ -221,14 +221,14 @@ public class Spell extends StackObjImpl implements Card {
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
-                boolean bestow = this.getSpellAbility() instanceof BestowAbility;
+                boolean bestow = ability instanceof BestowAbility;
                 if (bestow) {
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
                     card.getSubtype().add("Aura");
                 }
-                if (card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId)) {
+                if (card.putOntoBattlefield(game, Zone.STACK, ability.getSourceId(), controllerId)) {
                     if (bestow) {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
@@ -238,8 +238,6 @@ public class Spell extends StackObjImpl implements Card {
                             ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
                             ((PermanentCard) permanent).getCard().getSubtype().remove("Aura");
                         }
-                        card.getCardType().add(CardType.CREATURE);
-                        card.getSubtype().remove("Aura");
                     }
                     return ability.resolve(game);
                 }
@@ -251,7 +249,7 @@ public class Spell extends StackObjImpl implements Card {
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (this.getSpellAbility() instanceof BestowAbility) {
                 updateOptionalCosts(0);
-                result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId);
+                result = card.putOntoBattlefield(game, Zone.STACK, ability.getSourceId(), controllerId);
                 return result;
             } else {
                 //20091005 - 608.2b
@@ -263,7 +261,7 @@ public class Spell extends StackObjImpl implements Card {
             }
         } else {
             updateOptionalCosts(0);
-            result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId, false, faceDown);
+            result = card.putOntoBattlefield(game, Zone.STACK, ability.getSourceId(), controllerId, false, faceDown);
             return result;
         }
     }
@@ -647,6 +645,11 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
+    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+        return card.removeFromZone(game, fromZone, sourceId);
+    }
+
+    @Override
     public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
         return moveToZone(zone, sourceId, game, flag, null);
     }
@@ -845,6 +848,11 @@ public class Spell extends StackObjImpl implements Card {
 
     public boolean isCountered() {
         return countered;
+    }
+
+    @Override
+    public void checkForCountersToAdd(Permanent permanent, Game game) {
+        throw new UnsupportedOperationException("Not supported for Spell");
     }
 
 }

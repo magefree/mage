@@ -27,6 +27,8 @@
  */
 package mage.sets.magic2014;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -48,7 +50,6 @@ public class RiseOfTheDarkRealms extends CardImpl {
     public RiseOfTheDarkRealms(UUID ownerId) {
         super(ownerId, 111, "Rise of the Dark Realms", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
         this.expansionSetCode = "M14";
-
 
         // Put all creature cards from all graveyards onto the battlefield under your control.
         this.getSpellAbility().addEffect(new RiseOfTheDarkRealmsEffect());
@@ -78,17 +79,23 @@ class RiseOfTheDarkRealmsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        for (UUID playerId: controller.getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (Card card: player.getGraveyard().getCards(game)) {
-                    if (card.getCardType().contains(CardType.CREATURE)) {
-                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+        if (controller != null) {
+
+            Set<Card> creatureCards = new LinkedHashSet<>();
+            for (UUID playerId : controller.getInRange()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    for (Card card : player.getGraveyard().getCards(game)) {
+                        if (card.getCardType().contains(CardType.CREATURE)) {
+                            creatureCards.add(card);
+                        }
                     }
                 }
             }
+            controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

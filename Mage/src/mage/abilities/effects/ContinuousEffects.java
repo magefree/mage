@@ -1147,18 +1147,18 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
-    private void setControllerForEffect(ContinuousEffectsList<?> effects, UUID cardId, UUID controllerId) {
+    private void setControllerForEffect(ContinuousEffectsList<?> effects, UUID sourceId, UUID controllerId) {
         for (Effect effect : effects) {
             HashSet<Ability> abilities = effects.getAbility(effect.getId());
             if (abilities != null) {
                 for (Ability ability : abilities) {
                     if (ability.getSourceId() != null) {
-                        if (ability.getSourceId().equals(cardId)) {
+                        if (ability.getSourceId().equals(sourceId)) {
                             ability.setControllerId(controllerId);
                         }
                     } else {
                         if (!ability.getZone().equals(Zone.COMMAND)) {
-                            logger.fatal(new StringBuilder("No sourceId Ability: ").append(ability));
+                            logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
                         }
                     }
                 }

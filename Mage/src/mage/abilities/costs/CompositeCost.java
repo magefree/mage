@@ -1,14 +1,14 @@
 package mage.abilities.costs;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Targets;
 
-import java.util.UUID;
-
 public class CompositeCost implements Cost {
-    private Cost firstCost;
-    private Cost secondCost;
+
+    private final Cost firstCost;
+    private final Cost secondCost;
     private String description;
 
     public CompositeCost(Cost firstCost, Cost secondCost, String description) {
@@ -26,6 +26,11 @@ public class CompositeCost implements Cost {
     @Override
     public UUID getId() {
         throw new RuntimeException("Not supported method");
+    }
+
+    @Override
+    public void setText(String text) {
+        this.description = text;
     }
 
     @Override

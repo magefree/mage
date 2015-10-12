@@ -98,15 +98,15 @@ class SakashimaTheImpostorCopyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (player != null && sourceObject != null) {
             Target target = new TargetPermanent(new FilterCreaturePermanent());
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
+                    game.copyPermanent(copyFromPermanent, sourceObject.getId(), source, new ApplyToPermanent() {
                         @Override
                         public Boolean apply(Game game, Permanent permanent) {
                             if (!permanent.getSupertype().contains("Legendary")) {

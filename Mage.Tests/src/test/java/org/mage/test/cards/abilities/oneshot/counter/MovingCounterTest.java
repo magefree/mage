@@ -36,7 +36,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class MovingCounterTest extends CardTestPlayerBase {
 
     /**
@@ -51,12 +50,11 @@ public class MovingCounterTest extends CardTestPlayerBase {
 
         // Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
         addCard(Zone.HAND, playerA, "Bioshift", 1);
-        
-        // Protean Hydra enters the battlefield with X +1/+1 counters on it.        
-        // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
-        // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.        
-        addCard(Zone.HAND, playerA, "Protean Hydra", 1);
 
+        // Protean Hydra enters the battlefield with X +1/+1 counters on it.
+        // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
+        // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.
+        addCard(Zone.HAND, playerA, "Protean Hydra", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Protean Hydra");
         setChoice(playerA, "X=4");
@@ -67,14 +65,45 @@ public class MovingCounterTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Bioshift", 1);
-        
-        assertPermanentCount(playerA, "Silvercoat Lion", 1);        
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 4, 4); // added 2 counters
 
-        assertPermanentCount(playerA, "Protean Hydra", 1);        
+        assertPermanentCount(playerA, "Protean Hydra", 1);
         assertPowerToughness(playerA, "Protean Hydra", 6, 6); // started with 4, removed 2, added 4 at end = 6
-        
 
     }
 
+    /**
+     * I'm having an issue when using Bioshift to move only a portion of
+     * counters to another creature. When I attempt to do this, it moves all of
+     * the counters (and in some cases with my Simic deck) kills the creature.
+     */
+    @Test
+    public void testFateTransfer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        // Noxious Hatchling enters the battlefield with four -1/-1 counters on it.
+        // Wither (This deals damage to creatures in the form of -1/-1 counters.)
+        // Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.
+        // Whenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
+        addCard(Zone.HAND, playerA, "Noxious Hatchling", 1);// 6/6
+        addCard(Zone.BATTLEFIELD, playerA, "Ruin Processor", 1); // Creature 7/8
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        // Move all counters from target creature onto another target creature.
+        addCard(Zone.HAND, playerB, "Fate Transfer", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Noxious Hatchling");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Fate Transfer", "Noxious Hatchling^Ruin Processor");
+
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Fate Transfer", 1);
+
+        assertPowerToughness(playerA, "Noxious Hatchling", 6, 6);
+
+        assertPowerToughness(playerA, "Ruin Processor", 3, 4);
+
+    }
 }

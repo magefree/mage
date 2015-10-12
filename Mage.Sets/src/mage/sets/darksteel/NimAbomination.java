@@ -29,20 +29,22 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.SourceTappedCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class NimAbomination extends CardImpl {
 
@@ -55,7 +57,7 @@ public class NimAbomination extends CardImpl {
 
         // At the beginning of your end step, if Nim Abomination is untapped, you lose 3 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(3),
-            TargetController.YOU, new InvertCondition(new SourceTappedCondition()), false));
+                TargetController.YOU, new SourceUntappedCondition(), false));
     }
 
     public NimAbomination(final NimAbomination card) {
@@ -65,5 +67,28 @@ public class NimAbomination extends CardImpl {
     @Override
     public NimAbomination copy() {
         return new NimAbomination(this);
+    }
+}
+
+class SourceUntappedCondition implements Condition {
+
+    private static final SourceUntappedCondition fInstance = new SourceUntappedCondition();
+
+    public static SourceUntappedCondition getInstance() {
+        return fInstance;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return !permanent.isTapped();
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "if {this} is untapped";
     }
 }

@@ -31,9 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -83,12 +81,12 @@ class CantBeEquippedSourceEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     public CantBeEquippedSourceEffect() {
-       super(Duration.WhileOnBattlefield, Outcome.Neutral);
-       staticText = "{this} can't be equipped";
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        staticText = "{this} can't be equipped";
     }
-  
+
     @Override
-    public ContinuousEffect copy() {
+    public CantBeEquippedSourceEffect copy() {
         return new CantBeEquippedSourceEffect(this);
     }
 
@@ -96,14 +94,14 @@ class CantBeEquippedSourceEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ATTACH;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-           Permanent permanent = game.getPermanent(event.getSourceId());
-           if(permanent != null && permanent.getSubtype().contains("Equipment")){
-            return true;
-           }
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && permanent.getSubtype().contains("Equipment")) {
+                return true;
+            }
         }
         return false;
     }

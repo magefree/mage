@@ -49,6 +49,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.common.GemstoneCavernsAbility;
@@ -77,6 +78,7 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -1402,12 +1404,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
-        return copyPermanent(Duration.Custom, copyFromPermanent, copyToPermanent, source, applier);
+    public Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier) {
+        return copyPermanent(Duration.Custom, copyFromPermanent, copyToPermanentId, source, applier);
     }
 
     @Override
-    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
+    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier) {
         Permanent newBluePrint = null;
         // handle copies of copies
         for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
@@ -1440,7 +1442,7 @@ public abstract class GameImpl implements Game, Serializable {
             applier.apply(this, newBluePrint);
         }
 
-        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanent.getId());
+        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
         newEffect.newId();
         newEffect.setApplier(applier);
         Ability newAbility = source.copy();
@@ -1686,11 +1688,22 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                 } else {
+                    SpellAbility spellAbility = perm.getSpellAbility();
                     if (perm.getSpellAbility().getTargets().isEmpty()) {
+                        for (Ability ability : perm.getAbilities(this)) {
+                            if ((ability instanceof SpellAbility)
+                                    && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
+                                    && !ability.getTargets().isEmpty()) {
+                                spellAbility = (SpellAbility) ability;
+                                break;
+                            }
+                        }
+                    }
+                    if (spellAbility.getTargets().isEmpty()) {
                         Permanent enchanted = this.getPermanent(perm.getAttachedTo());
                         logger.error("Aura without target: " + perm.getName() + " attached to " + (enchanted == null ? " null" : enchanted.getName()));
                     } else {
-                        Target target = perm.getSpellAbility().getTargets().get(0);
+                        Target target = spellAbility.getTargets().get(0);
                         if (target instanceof TargetPermanent) {
                             Permanent attachedTo = getPermanent(perm.getAttachedTo());
                             if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
@@ -1706,7 +1719,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     }
                                 }
                             } else {
-                                Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                                Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (auraFilter instanceof FilterControlledCreaturePermanent) {
                                     if (!((FilterControlledCreaturePermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
                                             || attachedTo.cantBeEnchantedBy(perm, this)) {
@@ -1737,7 +1750,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     somethingHappened = true;
                                 }
                             } else {
-                                Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                                Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
                                     if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;

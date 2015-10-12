@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 public interface Card extends MageObject {
 
@@ -64,6 +65,8 @@ public interface Card extends MageObject {
     String getExpansionSetCode();
 
     String getTokenSetCode();
+
+    void checkForCountersToAdd(Permanent permanent, Game game);
 
     void setFaceDown(boolean value, Game game);
 
@@ -124,6 +127,8 @@ public interface Card extends MageObject {
     boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects);
 
     boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
+
+    boolean removeFromZone(Game game, Zone fromZone, UUID sourceId);
 
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
 

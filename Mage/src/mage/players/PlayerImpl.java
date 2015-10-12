@@ -113,6 +113,7 @@ import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -671,8 +672,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean removeFromHand(Card card, Game game) {
-        hand.remove(card);
-        return true;
+        return hand.remove(card.getId());
     }
 
     @Override
@@ -3000,13 +3000,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             case HAND:
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
-                    if (fromZone == Zone.STACK) {
-                        // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
-                        Spell spell = game.getStack().getSpell(card.getId());
-                        if (spell != null) {
-                            game.getStack().remove(spell);
-                        }
-                    }
+//                    if (fromZone == Zone.STACK) {
+//                        // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
+//                        Spell spell = game.getStack().getSpell(card.getId());
+//                        if (spell != null) {
+//                            game.getStack().remove(spell);
+//                        }
+//                    }
                     boolean hideCard = fromZone.equals(Zone.LIBRARY)
                             || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
                     if (moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard)) {
@@ -3034,6 +3034,69 @@ public abstract class PlayerImpl implements Player, Serializable {
             default:
                 throw new UnsupportedOperationException("to Zone not supported yet");
         }
+        game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
+        return successfulMovedCards.size() > 0;
+    }
+
+    @Override
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+        if (cards.isEmpty()) {
+            return true;
+        }
+        Set<Card> successfulMovedCards = new LinkedHashSet<>();
+        Zone fromZone = null;
+        switch (toZone) {
+            case BATTLEFIELD:
+                List<Permanent> permanents = new ArrayList<>();
+                List<Permanent> permanentsEntered = new ArrayList<>();
+                for (Card card : cards) {
+                    UUID controllingPlayerId = byOwner ? card.getOwnerId() : source.getControllerId();
+                    fromZone = game.getState().getZone(card.getId());
+                    if (faceDown) {
+                        card.setFaceDown(true, game);
+                    }
+                    ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), controllingPlayerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
+                    if (!game.replaceEvent(event)) {
+                        // get permanent
+                        Permanent permanent = new PermanentCard(card, controllingPlayerId, game);
+                        permanents.add(permanent);
+                        card.checkForCountersToAdd(permanent, game);
+                        permanent.setTapped(tapped);
+                        permanent.setFaceDown(faceDown, game);
+                    }
+                    if (faceDown) {
+                        card.setFaceDown(false, game);
+                    }
+                }
+                game.setScopeRelevant(true);
+                for (Permanent permanent : permanents) {
+                    fromZone = game.getState().getZone(permanent.getId());
+                    if (permanent.entersBattlefield(source.getSourceId(), game, fromZone, true)) {
+                        permanentsEntered.add(permanent);
+                    }
+                }
+                game.setScopeRelevant(false);
+                game.applyEffects();
+                for (Permanent permanent : permanentsEntered) {
+                    fromZone = game.getState().getZone(permanent.getId());
+                    if (((Card) permanent).removeFromZone(game, fromZone, source.getSourceId())) {
+                        permanent.updateZoneChangeCounter(game);
+                        // make sure the controller of all continuous effects of this card are switched to the current controller
+                        game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
+                        game.addPermanent(permanent);
+                        permanent.setZone(Zone.BATTLEFIELD, game);
+                        // check if there are counters to add to the permanent (e.g. from non replacement effects like Persist)
+
+                        game.setScopeRelevant(true);
+                        successfulMovedCards.add(permanent);
+                        game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), fromZone, Zone.BATTLEFIELD));
+                    }
+                }
+                break;
+            default:
+                throw new UnsupportedOperationException("to Zone not supported yet");
+        }
+
         game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
         return successfulMovedCards.size() > 0;
     }

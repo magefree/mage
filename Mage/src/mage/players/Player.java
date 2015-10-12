@@ -635,6 +635,20 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
+    /**
+     *
+     * @param cards
+     * @param toZone
+     * @param source
+     * @param game
+     * @param tapped tha cards are tapped on the battlefield
+     * @param faceDown the cards are face down in the to zone
+     * @param byOwner the card is moved (or put onto battlefield) by the owner
+     * of the card (instead of the controller of the source)
+     * @return
+     */
+    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
+
     boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
     boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);

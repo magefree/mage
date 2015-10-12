@@ -46,7 +46,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.EmptyApplyToPermanent;
 
-
 /**
  *
  * @author North
@@ -142,7 +141,7 @@ class RenegadeDoppelgangerEffect extends OneShotEffect {
             return false;
         }
 
-        game.copyPermanent(Duration.EndOfTurn, targetCreature, permanent, source, new EmptyApplyToPermanent());
+        game.copyPermanent(Duration.EndOfTurn, targetCreature, permanent.getId(), source, new EmptyApplyToPermanent());
         return false;
     }
 }

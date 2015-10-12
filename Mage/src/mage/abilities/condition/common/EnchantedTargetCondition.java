@@ -1,8 +1,6 @@
-
 package mage.abilities.condition.common;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.CardType;
@@ -15,8 +13,8 @@ import mage.target.Target;
  * @author Jeff
  */
 public class EnchantedTargetCondition implements Condition {
-    
-    private static EnchantedTargetCondition fInstance = new EnchantedTargetCondition();
+
+    private static final EnchantedTargetCondition fInstance = new EnchantedTargetCondition();
 
     public static Condition getInstance() {
         return fInstance;

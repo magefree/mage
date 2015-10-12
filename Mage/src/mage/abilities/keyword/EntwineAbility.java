@@ -59,7 +59,7 @@ import mage.players.Player;
 public class EntwineAbility extends StaticAbility implements OptionalAdditionalModeSourceCosts {
 
     private static final String keywordText = "Entwine";
-    private static final String reminderText = "<i> (Choose both if you pay the entwine cost.)</i>";
+    private static final String reminderText = "Choose both if you pay the entwine cost.";
     protected OptionalAdditionalCost additionalCost;
 
     public EntwineAbility(String manaString) {

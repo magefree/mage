@@ -27,6 +27,8 @@
  */
 package mage.sets.scarsofmirrodin;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -115,13 +117,15 @@ class GenesisWaveEffect extends OneShotEffect {
             target1.setRequired(false);
 
             controller.choose(Outcome.PutCardInPlay, cards, target1, game);
+            Set<Card> toBattlefield = new LinkedHashSet<>();
             for (UUID cardId : target1.getTargets()) {
                 Card card = cards.get(cardId, game);
                 if (card != null) {
                     cards.remove(card);
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    toBattlefield.add(card);
                 }
             }
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, false, null);
             controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
         return true;
