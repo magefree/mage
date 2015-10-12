@@ -25,41 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
+import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
+import mage.constants.Zone;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class SmashToSmithereens extends CardImpl {
+public class HomaridWarrior1 extends CardImpl {
 
-    public SmashToSmithereens(UUID ownerId) {
-        super(ownerId, 107, "Smash to Smithereens", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "SHM";
+    public HomaridWarrior1(UUID ownerId) {
+        super(ownerId, 44, "Homarid Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Homarid");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(3);
-        effect.setText("{this} deals 3 damage to that artifact's controller");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        // {U}: Homarid Warrior gains shroud until end of turn and doesn't untap during your next untap step. Tap Homarid Warrior.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
+            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}"));
+        Effect effect = new DontUntapInControllersNextUntapStepSourceEffect();
+        effect.setText("and doesn't untap during your next untap step");
+        ability.addEffect(effect);
+        ability.addEffect(new TapSourceEffect());
+        this.addAbility(ability);
     }
 
-    public SmashToSmithereens(final SmashToSmithereens card) {
+    public HomaridWarrior1(final HomaridWarrior1 card) {
         super(card);
     }
 
     @Override
-    public SmashToSmithereens copy() {
-        return new SmashToSmithereens(this);
+    public HomaridWarrior1 copy() {
+        return new HomaridWarrior1(this);
     }
 }

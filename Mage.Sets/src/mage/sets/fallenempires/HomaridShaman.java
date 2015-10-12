@@ -25,41 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class SmashToSmithereens extends CardImpl {
+public class HomaridShaman extends CardImpl {
 
-    public SmashToSmithereens(UUID ownerId) {
-        super(ownerId, 107, "Smash to Smithereens", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "SHM";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 
-        // Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(3);
-        effect.setText("{this} deals 3 damage to that artifact's controller");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public SmashToSmithereens(final SmashToSmithereens card) {
+    public HomaridShaman(UUID ownerId) {
+        super(ownerId, 42, "Homarid Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Homarid");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // {U}: Tap target green creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{U}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public HomaridShaman(final HomaridShaman card) {
         super(card);
     }
 
     @Override
-    public SmashToSmithereens copy() {
-        return new SmashToSmithereens(this);
+    public HomaridShaman copy() {
+        return new HomaridShaman(this);
     }
 }

@@ -25,41 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
+import mage.constants.Zone;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class SmashToSmithereens extends CardImpl {
+public class VodalianMage1 extends CardImpl {
 
-    public SmashToSmithereens(UUID ownerId) {
-        super(ownerId, 107, "Smash to Smithereens", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "SHM";
+    public VodalianMage1(UUID ownerId) {
+        super(ownerId, 59, "Vodalian Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(3);
-        effect.setText("{this} deals 3 damage to that artifact's controller");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        // {U}, {tap}: Counter target spell unless its controller pays {1}.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl("{1}")),
+            new ManaCostsImpl("{U}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetSpell());
+        this.addAbility(ability);
     }
 
-    public SmashToSmithereens(final SmashToSmithereens card) {
+    public VodalianMage1(final VodalianMage1 card) {
         super(card);
     }
 
     @Override
-    public SmashToSmithereens copy() {
-        return new SmashToSmithereens(this);
+    public VodalianMage1 copy() {
+        return new VodalianMage1(this);
     }
 }

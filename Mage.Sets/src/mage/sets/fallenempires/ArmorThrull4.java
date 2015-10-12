@@ -25,42 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Loki
+ * @author LoneFox
  */
-public class MeltTerrain extends CardImpl {
+public class ArmorThrull4 extends mage.sets.masterseditionii.ArmorThrull {
 
-    public MeltTerrain (UUID ownerId) {
-        super(ownerId, 97, "Melt Terrain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "SOM";
-
-        // Destroy target land. Melt Terrain deals 2 damage to that land's controller.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(2);
-        effect.setText("{this} deals 2 damage to that land's controller");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetLandPermanent());
+    public ArmorThrull4(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 4;
+        this.expansionSetCode = "FEM";
     }
 
-    public MeltTerrain (final MeltTerrain card) {
+    public ArmorThrull4(final ArmorThrull4 card) {
         super(card);
     }
 
     @Override
-    public MeltTerrain copy() {
-        return new MeltTerrain(this);
+    public ArmorThrull4 copy() {
+        return new ArmorThrull4(this);
     }
 }

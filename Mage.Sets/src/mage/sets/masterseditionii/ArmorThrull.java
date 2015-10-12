@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class SmashToSmithereens extends CardImpl {
+public class ArmorThrull extends CardImpl {
 
-    public SmashToSmithereens(UUID ownerId) {
-        super(ownerId, 107, "Smash to Smithereens", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "SHM";
+    public ArmorThrull(UUID ownerId) {
+        super(ownerId, 77, "Armor Thrull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "ME2";
+        this.subtype.add("Thrull");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(3);
-        effect.setText("{this} deals 3 damage to that artifact's controller");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        // {T}, Sacrifice Armor Thrull: Put a +1/+2 counter on target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P2.createInstance()), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public SmashToSmithereens(final SmashToSmithereens card) {
+    public ArmorThrull(final ArmorThrull card) {
         super(card);
     }
 
     @Override
-    public SmashToSmithereens copy() {
-        return new SmashToSmithereens(this);
+    public ArmorThrull copy() {
+        return new ArmorThrull(this);
     }
 }

@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
+import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author jonubuu
+ * @author LoneFox
  */
-public class SmashToSmithereens extends CardImpl {
+public class CombatMedic extends CardImpl {
 
-    public SmashToSmithereens(UUID ownerId) {
-        super(ownerId, 107, "Smash to Smithereens", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "SHM";
+    public CombatMedic(UUID ownerId) {
+        super(ownerId, 9, "Combat Medic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "ME2";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
 
-        // Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(3);
-        effect.setText("{this} deals 3 damage to that artifact's controller");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        // {1}{W}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}{W}"));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public SmashToSmithereens(final SmashToSmithereens card) {
+    public CombatMedic(final CombatMedic card) {
         super(card);
     }
 
     @Override
-    public SmashToSmithereens copy() {
-        return new SmashToSmithereens(this);
+    public CombatMedic copy() {
+        return new CombatMedic(this);
     }
 }

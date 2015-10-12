@@ -28,23 +28,15 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -54,20 +46,20 @@ import mage.target.common.TargetLandPermanent;
 public class Cryoclasm extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains or Island");
+
     static {
-        filter.add(Predicates.or(
-                new SubtypePredicate("Plains"),
-                new SubtypePredicate("Island")));
+        filter.add(Predicates.or(new SubtypePredicate("Plains"), new SubtypePredicate("Island")));
     }
 
     public Cryoclasm(UUID ownerId) {
         super(ownerId, 195, "Cryoclasm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "10E";
 
-
         // Destroy target Plains or Island. Cryoclasm deals 3 damage to that land's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new CryoclasmEffect());
+        Effect effect = new DamageTargetControllerEffect(3);
+        effect.setText("{this} deals 3 damage to that land's controller");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
 
     }
@@ -79,38 +71,5 @@ public class Cryoclasm extends CardImpl {
     @Override
     public Cryoclasm copy() {
         return new Cryoclasm(this);
-    }
-}
-
-class CryoclasmEffect extends OneShotEffect {
-
-    public CryoclasmEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals 3 damage to that land's controller";
-    }
-
-    public CryoclasmEffect(final CryoclasmEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CryoclasmEffect copy() {
-        return new CryoclasmEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        if (targetId != null) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-            if (permanent != null) {
-                Player controller = game.getPlayer(permanent.getControllerId());
-                if (controller != null) {
-                    controller.damage(3, source.getSourceId(), game, false, false);
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
