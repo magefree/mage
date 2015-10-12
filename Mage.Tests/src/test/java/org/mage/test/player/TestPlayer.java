@@ -814,6 +814,30 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        if (!targets.isEmpty()) {
+            for (String targetDefinition : targets) {
+                String[] targetList = targetDefinition.split("\\^");
+                boolean targetFound = false;
+                for (String targetName : targetList) {
+                    for (Card card : cards.getCards(game)) {
+                        if (card.getName().equals(targetName)) {
+                            target.add(card.getId(), game);
+                            targetFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (targetFound) {
+                    targets.remove(targetDefinition);
+                    return true;
+                }
+            }
+        }
+        return computerPlayer.chooseTarget(outcome, cards, target, source, game);
+    }
+
+    @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         if (!choices.isEmpty()) {
             for (TriggeredAbility ability : abilities) {
@@ -1889,11 +1913,6 @@ public class TestPlayer implements Player {
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
         return computerPlayer.choose(outcome, cards, target, game);
-    }
-
-    @Override
-    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
 
     @Override
