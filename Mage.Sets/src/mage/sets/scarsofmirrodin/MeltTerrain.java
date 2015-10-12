@@ -29,18 +29,12 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -53,8 +47,11 @@ public class MeltTerrain extends CardImpl {
         super(ownerId, 97, "Melt Terrain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "SOM";
 
+        // Destroy target land. Melt Terrain deals 2 damage to that land's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new MeltTerrainEffect());
+        Effect effect = new DamageTargetControllerEffect(2);
+        effect.setText("{this} deals 2 damage to that land's controller");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
@@ -66,37 +63,4 @@ public class MeltTerrain extends CardImpl {
     public MeltTerrain copy() {
         return new MeltTerrain(this);
     }
-
-}
-
-class MeltTerrainEffect extends OneShotEffect {
-    MeltTerrainEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals 2 damage to that land's controller";
-    }
-
-    MeltTerrainEffect(final MeltTerrainEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = game.getBattlefield().getPermanent(source.getFirstTarget());
-        if (p == null) {
-            p = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-        if (p != null) {
-            Player player = game.getPlayer(p.getControllerId());
-            if (player != null) {
-                player.damage(2, source.getSourceId(), game, false, true);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public MeltTerrainEffect copy() {
-        return new MeltTerrainEffect(this);
-    }
-
 }
