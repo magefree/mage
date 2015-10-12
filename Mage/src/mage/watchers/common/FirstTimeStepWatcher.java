@@ -34,8 +34,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
 /**
- * The wachter checks if a specific phase event has already happened during the
- * current turn. If not it returns false, otheriwsed true.
+ * The watcher checks if a specific phase event has already happened during the
+ * current turn. If not it returns false, otherwise true.
  *
  * @author LevelX2
  */
