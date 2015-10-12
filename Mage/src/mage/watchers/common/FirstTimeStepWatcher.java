@@ -25,42 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.watchers.common;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.game.permanent.token.SaprolingToken;
+import mage.constants.WatcherScope;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.watchers.Watcher;
 
 /**
+ * The wachter checks if a specific phase event has already happened during the
+ * current turn. If not it returns false, otheriwsed true.
  *
- * @author Loki
+ * @author LevelX2
  */
-public class VerdantForce extends CardImpl {
+public class FirstTimeStepWatcher extends Watcher {
 
-    public VerdantForce(UUID ownerId) {
-        super(ownerId, 157, "Verdant Force", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}{G}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Elemental");
+    private final EventType eventType;
 
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
-
-        // At the beginning of each upkeep, put a 1/1 green Saproling creature token onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), TargetController.ANY, false));
+    public FirstTimeStepWatcher(EventType eventType) {
+        super(eventType.toString() + FirstTimeStepWatcher.class.getName(), WatcherScope.GAME);
+        this.eventType = eventType;
     }
 
-    public VerdantForce(final VerdantForce card) {
-        super(card);
+    public FirstTimeStepWatcher(final FirstTimeStepWatcher watcher) {
+        super(watcher);
+        this.eventType = watcher.eventType;
     }
 
     @Override
-    public VerdantForce copy() {
-        return new VerdantForce(this);
+    public FirstTimeStepWatcher copy() {
+        return new FirstTimeStepWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == eventType) {
+            condition = true;
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
     }
 }
