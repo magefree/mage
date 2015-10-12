@@ -47,6 +47,7 @@ import mage.game.turn.UpkeepStep;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.FirstTimeStepWatcher;
 
 /**
  *
@@ -59,15 +60,14 @@ public class ParadoxHaze extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Aura");
 
-
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        
+
         // At the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step.
-        this.addAbility(new ParadoxHazeTriggeredAbility());
+        this.addAbility(new ParadoxHazeTriggeredAbility(), new FirstTimeStepWatcher(EventType.UPKEEP_STEP_POST));
     }
 
     public ParadoxHaze(final ParadoxHaze card) {
@@ -81,18 +81,15 @@ public class ParadoxHaze extends CardImpl {
 }
 
 class ParadoxHazeTriggeredAbility extends TriggeredAbilityImpl {
-    
-    protected int lastTriggerTurnNumber;
-    
+
     ParadoxHazeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ParadoxHazeEffect(), false);
     }
-    
+
     ParadoxHazeTriggeredAbility(final ParadoxHazeTriggeredAbility ability) {
         super(ability);
-        lastTriggerTurnNumber = ability.lastTriggerTurnNumber;
     }
-    
+
     @Override
     public ParadoxHazeTriggeredAbility copy() {
         return new ParadoxHazeTriggeredAbility(this);
@@ -102,21 +99,23 @@ class ParadoxHazeTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.UPKEEP_STEP_PRE;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(this.sourceId);
+        Permanent permanent = game.getPermanent(getSourceId());
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getAttachedTo());
-            if (player != null && game.getActivePlayerId().equals(player.getId()) && lastTriggerTurnNumber != game.getTurnNum()) {
-                lastTriggerTurnNumber = game.getTurnNum();
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                return true;
+            if (player != null && game.getActivePlayerId().equals(player.getId())) {
+                FirstTimeStepWatcher watcher = (FirstTimeStepWatcher) game.getState().getWatchers().get(EventType.UPKEEP_STEP_POST.toString() + FirstTimeStepWatcher.class.getName());
+                if (watcher != null && !watcher.conditionMet()) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
+                    return true;
+                }
             }
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "At the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step.";
@@ -124,21 +123,21 @@ class ParadoxHazeTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class ParadoxHazeEffect extends OneShotEffect {
-    
+
     ParadoxHazeEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player gets an additional upkeep step after this step";
     }
-    
+
     ParadoxHazeEffect(final ParadoxHazeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ParadoxHazeEffect copy() {
         return new ParadoxHazeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         game.getState().getTurnMods().add(new TurnMod(this.getTargetPointer().getFirst(game, source), new UpkeepStep(), null));
