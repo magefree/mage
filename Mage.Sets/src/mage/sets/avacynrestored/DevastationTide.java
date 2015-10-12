@@ -27,20 +27,23 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MiracleAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
+import mage.players.Player;
 
 /**
  *
@@ -51,7 +54,6 @@ public class DevastationTide extends CardImpl {
     public DevastationTide(UUID ownerId) {
         super(ownerId, 48, "Devastation Tide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "AVR";
-
 
         // Return all nonland permanents to their owners' hands.
         this.getSpellAbility().addEffect(new DevastationTideEffect());
@@ -83,10 +85,17 @@ class DevastationTideEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Set<Card> cardsToHand = new LinkedHashSet<>();
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                cardsToHand.add((Card) permanent);
+            }
+            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+            return true;
+
         }
-        return true;
+        return false;
     }
 
     @Override
