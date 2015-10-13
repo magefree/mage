@@ -28,6 +28,7 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
@@ -88,17 +89,20 @@ class DashHopesCounterSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(source.getSourceId());
-        if (spell != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null) {
             PayLifeCost cost = new PayLifeCost(5);
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 Player player = game.getPlayer(playerId);
                 cost.clearPaid();
                 if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                        && player.chooseUse(outcome, "Pay 5 life to counter " + spell.getIdName() + "?", source, game)) {
+                        && player.chooseUse(outcome, "Pay 5 life to counter " + sourceObject.getIdName() + "?", source, game)) {
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
-                        game.informPlayers(player.getLogName() + " pays 5 life to counter " + spell.getIdName() + ".");
-                        game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                        game.informPlayers(player.getLogName() + " pays 5 life to counter " + sourceObject.getIdName() + ".");
+                        Spell spell = game.getStack().getSpell(source.getSourceId());
+                        if (spell != null) {
+                            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                        }
                     }
                 }
             }

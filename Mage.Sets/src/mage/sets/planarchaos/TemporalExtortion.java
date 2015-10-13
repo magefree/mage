@@ -28,6 +28,7 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
@@ -85,15 +86,18 @@ class TemporalExtortionCounterSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(source.getSourceId());
-        if (spell != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null) {
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 Player player = game.getPlayer(playerId);
-                if (player.chooseUse(outcome, "Pay half your life, rounded up to counter " + spell.getIdName() + "?", source, game)) {
+                if (player.chooseUse(outcome, "Pay half your life, rounded up to counter " + sourceObject.getIdName() + "?", source, game)) {
                     Integer amount = (int) Math.ceil(player.getLife() / 2f);
                     player.loseLife(amount, game);
-                    game.informPlayers(player.getLogName() + " pays half his or her life, rounded up to counter " + spell.getIdName() + ".");
-                    game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                    game.informPlayers(player.getLogName() + " pays half his or her life, rounded up to counter " + sourceObject.getIdName() + ".");
+                    Spell spell = game.getStack().getSpell(source.getSourceId());
+                    if (spell != null) {
+                        game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                    }
                 }
             }
             return true;

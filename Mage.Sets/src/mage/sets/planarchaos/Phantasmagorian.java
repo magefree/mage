@@ -29,6 +29,7 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,7 +45,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -81,7 +81,7 @@ public class Phantasmagorian extends CardImpl {
 class CounterSourceEffect extends OneShotEffect {
 
     public CounterSourceEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.AIDontUseIt);
     }
 
     public CounterSourceEffect(final CounterSourceEffect effect) {
@@ -95,25 +95,20 @@ class CounterSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        StackObject spell = null;
-        for (StackObject objet : game.getStack()) {
-            if (objet instanceof Spell && objet.getSourceId().equals(source.getSourceId())) {
-                spell = objet;
-            }
-        }
-        if (spell != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null) {
             DiscardTargetCost cost = new DiscardTargetCost(new TargetCardInHand(3, 3, new FilterCard()));
-            for (UUID uuid : game.getPlayerList()) {
-                Player player = game.getPlayer(uuid);
+            for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
+                Player player = game.getPlayer(playerId);
                 cost.clearPaid();
                 if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                        && player.chooseUse(Outcome.Detriment, "Discard three cards to counter " + spell.getName() + "?", source, game)) {
-
-                    if (cost.pay(source, game, source.getSourceId(), uuid, false)) {
-                        game.informPlayers(player.getLogName() + " discards 3 cards to counter " + spell.getName() + ".");
-                        game.getStack().counter(spell.getId(), source.getSourceId(), game);
-                        return true;
+                        && player.chooseUse(outcome, "Discard three cards to counter " + sourceObject.getIdName() + "?", source, game)) {
+                    if (cost.pay(source, game, source.getSourceId(), playerId, false)) {
+                        game.informPlayers(player.getLogName() + " discards 3 cards to counter " + sourceObject.getIdName() + ".");
+                        Spell spell = game.getStack().getSpell(source.getSourceId());
+                        if (spell != null) {
+                            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                        }
                     }
                 }
             }
