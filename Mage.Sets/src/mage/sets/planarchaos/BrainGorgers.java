@@ -30,90 +30,79 @@ package mage.sets.planarchaos;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class Phantasmagorian extends CardImpl {
+public class BrainGorgers extends CardImpl {
 
-    public Phantasmagorian(UUID ownerId) {
-        super(ownerId, 77, "Phantasmagorian", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
+    public BrainGorgers(UUID ownerId) {
+        super(ownerId, 65, "Brain Gorgers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "PLC";
-        this.subtype.add("Horror");
+        this.subtype.add("Zombie");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        // When you cast Brain Gorgers, any player may sacrifice a creature. If a player does, counter Brain Gorgers.
+        this.addAbility(new CastSourceTriggeredAbility(new BrainGorgersCounterSourceEffect()));
 
-        // When you cast Phantasmagorian, any player may discard three cards. If a player does, counter Phantasmagorian.
-        this.addAbility(new CastSourceTriggeredAbility(new CounterSourceEffect()));
-        // Discard three cards: Return Phantasmagorian from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new DiscardTargetCost(new TargetCardInHand(3, 3, new FilterCard("three cards")))));
+        // Madness {1}{B}
+        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{1}{B}")));
     }
 
-    public Phantasmagorian(final Phantasmagorian card) {
+    public BrainGorgers(final BrainGorgers card) {
         super(card);
     }
 
     @Override
-    public Phantasmagorian copy() {
-        return new Phantasmagorian(this);
+    public BrainGorgers copy() {
+        return new BrainGorgers(this);
     }
 }
 
-class CounterSourceEffect extends OneShotEffect {
+class BrainGorgersCounterSourceEffect extends OneShotEffect {
 
-    public CounterSourceEffect() {
-        super(Outcome.Detriment);
+    public BrainGorgersCounterSourceEffect() {
+        super(Outcome.AIDontUseIt);
+        staticText = "any player may sacrifice a creature. If a player does, counter {source}";
     }
 
-    public CounterSourceEffect(final CounterSourceEffect effect) {
+    public BrainGorgersCounterSourceEffect(final BrainGorgersCounterSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public CounterSourceEffect copy() {
-        return new CounterSourceEffect(this);
+    public BrainGorgersCounterSourceEffect copy() {
+        return new BrainGorgersCounterSourceEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        StackObject spell = null;
-        for (StackObject objet : game.getStack()) {
-            if (objet instanceof Spell && objet.getSourceId().equals(source.getSourceId())) {
-                spell = objet;
-            }
-        }
+        Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
-            DiscardTargetCost cost = new DiscardTargetCost(new TargetCardInHand(3, 3, new FilterCard()));
-            for (UUID uuid : game.getPlayerList()) {
-                Player player = game.getPlayer(uuid);
+            SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+            for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 cost.clearPaid();
+                Player player = game.getPlayer(playerId);
                 if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                        && player.chooseUse(Outcome.Detriment, "Discard three cards to counter " + spell.getName() + "?", source, game)) {
-
-                    if (cost.pay(source, game, source.getSourceId(), uuid, false)) {
-                        game.informPlayers(player.getLogName() + " discards 3 cards to counter " + spell.getName() + ".");
+                        && player.chooseUse(outcome, "Sacrifice a creature to counter " + spell.getIdName() + "?", source, game)) {
+                    if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                        game.informPlayers(player.getLogName() + " sacrifices a creature to counter " + spell.getIdName() + ".");
                         game.getStack().counter(spell.getId(), source.getSourceId(), game);
-                        return true;
                     }
                 }
             }
@@ -122,11 +111,4 @@ class CounterSourceEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "any player may discard three cards. If a player does, counter {source}";
-    }
 }
