@@ -59,7 +59,8 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                 // If both (attachment and attached went to graveyard at the same time, the attachemnets can be already removed from the attached object.)
                 // So check here with the LKI of the enchantment
                 Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
-                if (attachment != null && attachment.getAttachedTo().equals(zEvent.getTargetId())
+                if (attachment != null
+                        && zEvent.getTargetId().equals(attachment.getAttachedTo())
                         && attachment.getAttachedToZoneChangeCounter() == zEvent.getTarget().getZoneChangeCounter(game) - 1) {
                     triggered = true;
                 }
