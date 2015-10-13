@@ -61,7 +61,7 @@ public class BlindingPowder extends CardImpl {
         // Equipped creature has "Unattach Blinding Powder: Prevent all combat damage that would be dealt to this creature this turn."
         Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all combat damage that would be dealt to this creature this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new BlindingPowderUnattachCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new BlindingPowderUnattachCost(getName(), getId()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));
@@ -79,28 +79,32 @@ public class BlindingPowder extends CardImpl {
 
 class BlindingPowderUnattachCost extends CostImpl {
 
-    public BlindingPowderUnattachCost() {
-        this.text = "Unattach Blinding Powder";
+    protected UUID sourceEquipmentId;
+
+    public BlindingPowderUnattachCost(String name, UUID sourceId) {
+        this.text = "Unattach " + name;
+        this.sourceEquipmentId = sourceId;
     }
 
     public BlindingPowderUnattachCost(final BlindingPowderUnattachCost cost) {
         super(cost);
+        this.sourceEquipmentId = cost.sourceEquipmentId;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            for (UUID attachmentId :permanent.getAttachments()) {
+            for (UUID attachmentId : permanent.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getName().equals("Blinding Powder")) {
+                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
                     paid = permanent.removeAttachment(attachmentId, game);
                     if (paid) {
                         break;
                     }
                 }
             }
-            
+
         }
         return paid;
     }
@@ -109,9 +113,9 @@ class BlindingPowderUnattachCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            for (UUID attachmentId :permanent.getAttachments()) {
+            for (UUID attachmentId : permanent.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getName().equals("Blinding Powder")) {
+                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
                     return true;
                 }
             }
