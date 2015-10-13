@@ -916,11 +916,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
         if (!game.replaceEvent(event)) {
             if (fireEvent) {
-                if (sourceId == null) { // play lands
-                    game.fireEvent(event);
-                } else { // from effects
-                    game.addSimultaneousEvent(event);
-                }
+                game.addSimultaneousEvent(event);
             }
             return true;
         }

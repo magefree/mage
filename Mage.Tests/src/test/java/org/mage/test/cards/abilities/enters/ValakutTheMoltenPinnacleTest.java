@@ -26,13 +26,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.enters;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -40,17 +37,15 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
 
     /**
-     * Valakut, the Molten Pinnacle
-     * Land
-     * Valakut, the Molten Pinnacle enters the battlefield tapped.
-     * Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
-     *  {T}: Add {R} to your mana pool.
+     * Valakut, the Molten Pinnacle Land Valakut, the Molten Pinnacle enters the
+     * battlefield tapped. Whenever a Mountain enters the battlefield under your
+     * control, if you control at least five other Mountains, you may have
+     * Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
+     * {T}: Add {R} to your mana pool.
      */
-
     @Test
     public void onlyFourMountainsNoDamage() {
 
@@ -85,13 +80,11 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 17);
 
-
     }
 
-        // Scapeshift {2}{G}{G}
-        // Sorcery
-        // Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle your library.
-
+    // Scapeshift {2}{G}{G}
+    // Sorcery
+    // Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle your library.
     @Test
     public void sixEnterWithScapeshiftDamageToPlayerB() {
 
@@ -112,7 +105,6 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 2); // 6 * 3 damage = 18
-
 
     }
 
@@ -166,4 +158,36 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
         assertLife(playerB, 2); // 6 * 3 damage = 18
 
     }
+
+    /**
+     * Some lands aren't triggering Valakut, the Molten Pinnacle with Prismatic
+     * Omen and 6+ lands in play. So far I've noticed that Misty Rainforest and
+     * basic Island did not trigger Valakut, but an additional copy of Valakut
+     * did.
+     */
+    @Test
+    public void withPrismaticOmen() {
+        // Valakut, the Molten Pinnacle enters the battlefield tapped.
+        // Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains,
+        // you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
+        // {T}: Add {R} to your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Valakut, the Molten Pinnacle");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+
+        addCard(Zone.HAND, playerA, "Forest", 1);
+
+        // Lands you control are every basic land type in addition to their other types.
+        addCard(Zone.BATTLEFIELD, playerA, "Prismatic Omen");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+
+    }
+
 }

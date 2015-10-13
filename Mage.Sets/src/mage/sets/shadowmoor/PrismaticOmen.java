@@ -30,13 +30,6 @@ package mage.sets.shadowmoor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -48,6 +41,13 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,7 +61,6 @@ public class PrismaticOmen extends CardImpl {
     public PrismaticOmen(UUID ownerId) {
         super(ownerId, 126, "Prismatic Omen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "SHM";
-
 
         // Lands you control are every basic land type in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandTypeAllEffect("Swamp", "Mountain", "Forest", "Island", "Plains")));
@@ -109,11 +108,11 @@ class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
                         Mana mana = new Mana();
-                        for (Ability ability : land.getAbilities()){
+                        for (Ability ability : land.getAbilities()) {
                             if (ability instanceof BasicManaAbility) {
-                                for (Mana netMana: ((BasicManaAbility)ability ).getNetMana(game)) {
+                                for (Mana netMana : ((BasicManaAbility) ability).getNetMana(game)) {
                                     mana.add(netMana);
-                                }                
+                                }
                             }
                         }
                         if (mana.getGreen() == 0 && landTypes.contains("Forest")) {
