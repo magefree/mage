@@ -66,7 +66,7 @@ import mage.target.targetpointer.FixedTarget;
  * Each Assassin token's triggered ability will trigger whenever it deals combat
  * damage to any player, including you.
  *
- * 
+ *
  * @author LevelX2
  */
 public class VraskaTheUnseen extends CardImpl {
@@ -76,11 +76,10 @@ public class VraskaTheUnseen extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Vraska");
 
-
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         // +1: Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature.
-        this.addAbility(new LoyaltyAbility(new VraskaTheUnseenGainAbilityEffect(new VraskaTheUnseenTriggeredAbility()),1));
+        this.addAbility(new LoyaltyAbility(new VraskaTheUnseenGainAbilityEffect(new VraskaTheUnseenTriggeredAbility()), 1));
 
         // -3: Destroy target nonland permanent.
         LoyaltyAbility ability = new LoyaltyAbility(new DestroyTargetEffect(), -3);
@@ -100,7 +99,6 @@ public class VraskaTheUnseen extends CardImpl {
         return new VraskaTheUnseen(this);
     }
 }
-
 
 class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
@@ -142,8 +140,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (startingTurn != 0 && game.getTurnNum() != startingTurn)
-        {
+        if (startingTurn != 0 && game.getTurnNum() != startingTurn) {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
                 return true;
             }
@@ -153,6 +150,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 }
 
 class AssassinToken extends Token {
+
     AssassinToken() {
         super("Assassin", "1/1 black Assassin creature tokens with \"Whenever this creature deals combat damage to a player, that player loses the game.\"");
         cardType.add(CardType.CREATURE);
@@ -160,7 +158,7 @@ class AssassinToken extends Token {
         subtype.add("Assassin");
         power = new MageInt(1);
         toughness = new MageInt(1);
-        addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(),false, true));
+        addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
     }
 }
 
@@ -186,7 +184,7 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedPlaneswalkerEvent) event).isCombatDamage() && event.getTargetId() == sourceId) {
+        if (((DamagedPlaneswalkerEvent) event).isCombatDamage() && getSourceId().equals(event.getTargetId())) {
             Permanent sourceOfDamage = game.getPermanent(event.getSourceId());
             if (sourceOfDamage != null && sourceOfDamage.getCardType().contains(CardType.CREATURE)) {
                 Effect effect = this.getEffects().get(0);

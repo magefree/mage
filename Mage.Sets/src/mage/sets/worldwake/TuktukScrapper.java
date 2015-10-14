@@ -100,7 +100,7 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
-            if (permanent.getId() == this.getSourceId()) {
+            if (permanent.getId().equals(this.getSourceId())) {
                 return true;
             }
             if (permanent.hasSubtype("Ally")

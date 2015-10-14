@@ -28,11 +28,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -42,6 +37,11 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,7 +50,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
@@ -156,29 +155,22 @@ class WrexialReplacementEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getTargetId() == cardid) {
-            return true;
-        }
-        return false;
+        return zEvent.getToZone() == Zone.GRAVEYARD
+                && ((ZoneChangeEvent) event).getTargetId().equals(cardid);
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         UUID eventObject = ((ZoneChangeEvent) event).getTargetId();
         StackObject card = game.getStack().getStackObject(eventObject);
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            if (card instanceof Spell) {
-                game.rememberLKI(card.getId(), Zone.STACK, (Spell) card);
-            }
             if (card instanceof Card) {
-                controller.moveCardToExileWithInfo((Card)card, null, "", source.getSourceId(), game, game.getState().getZone(event.getTargetId()), true);
-                return true;
+                return controller.moveCards((Card) card, null, Zone.EXILED, source, game);
             }
         }
         return false;

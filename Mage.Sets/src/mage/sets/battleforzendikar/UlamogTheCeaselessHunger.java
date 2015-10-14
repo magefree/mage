@@ -67,10 +67,10 @@ public class UlamogTheCeaselessHunger extends CardImpl {
 
         // When you cast Ulamog, the Ceaseless Hunger, exile two target permanents.
         this.addAbility(new UlamogExilePermanentsOnCastAbility());
-        
+
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
-        
+
         // Whenever Ulamog attacks, defending player exiles the top twenty cards of his or her library.
         Effect effect = new UlamogExileLibraryEffect();
         effect.setText("defending player exiles the top twenty cards of his or her library");
@@ -139,18 +139,20 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ATTACKER_DECLARED;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
-        if (sourcePermanent != null && event.getSourceId() == this.getSourceId()) {
+        if (sourcePermanent != null
+                && event.getSourceId() != null
+                && event.getSourceId().equals(this.getSourceId())) {
             UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
             this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
             return true;
-            }
-        return false;
         }
-    
+        return false;
+    }
+
     @Override
     public String getRule() {
         return new StringBuilder("Whenever {this} attacks, ").append(super.getRule()).toString();
@@ -184,8 +186,8 @@ class UlamogExileLibraryEffect extends OneShotEffect {
                     card.moveToExile(null, null, source.getSourceId(), game);
                 }
             }
-        return true;
+            return true;
         }
-    return false;
+        return false;
     }
 }

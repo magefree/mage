@@ -1246,7 +1246,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = preventionEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (ability.getSourceId().equals(sourceId)) {
-                    if (controllerFound == null || controllerFound == ability.getControllerId()) {
+                    if (controllerFound == null || controllerFound.equals(ability.getControllerId())) {
                         controllerFound = ability.getControllerId();
                     } else {
                         // not unique controller - No solution yet
@@ -1260,7 +1260,7 @@ public class ContinuousEffects implements Serializable {
             for (Ability ability : abilities) {
                 if (ability.getSourceId() != null) {
                     if (ability.getSourceId().equals(sourceId)) {
-                        if (controllerFound == null || controllerFound == ability.getControllerId()) {
+                        if (controllerFound == null || controllerFound.equals(ability.getControllerId())) {
                             controllerFound = ability.getControllerId();
                         } else {
                             // not unique controller - No solution yet

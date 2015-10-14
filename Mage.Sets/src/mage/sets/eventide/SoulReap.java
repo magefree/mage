@@ -32,7 +32,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -59,26 +58,25 @@ import mage.watchers.Watcher;
  * @author jeffwadsworth
  */
 public class SoulReap extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nongreen creature");
-    
+
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
     }
-    
+
     private String rule = "Its controller loses 3 life if you've cast another black spell this turn";
 
     public SoulReap(UUID ownerId) {
         super(ownerId, 44, "Soul Reap", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "EVE";
 
-
         // Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SoulReapEffect(), new CastBlackSpellThisTurnCondition(), rule));
         this.getSpellAbility().addWatcher(new SoulReapWatcher(this.getId()));
-        
+
     }
 
     public SoulReap(final SoulReap card) {
@@ -106,7 +104,7 @@ class CastBlackSpellThisTurnCondition implements Condition {
 class SoulReapWatcher extends Watcher {
 
     private static final FilterSpell filter = new FilterSpell();
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
@@ -134,7 +132,7 @@ class SoulReapWatcher extends Watcher {
             return;
         }
         if (event.getType() == EventType.SPELL_CAST
-                && controllerId == event.getPlayerId()) {
+                && controllerId.equals(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (!spell.getSourceId().equals(cardId) && filter.match(spell, game)) {
                 condition = true;

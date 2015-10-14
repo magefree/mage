@@ -507,8 +507,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 break;
             case EXILED:
                 if (game.getExile().getCard(getId(), game) != null) {
-                    game.getExile().removeCard(this, game);
-                    removed = true;
+                    removed = game.getExile().removeCard(this, game);
+
                 }
                 break;
             case STACK:
@@ -552,8 +552,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + "]");
                 break;
         }
-        game.rememberLKI(objectId, fromZone, lkiObject != null ? lkiObject : this);
-        if (!removed) {
+        if (removed) {
+            game.rememberLKI(objectId, fromZone, lkiObject != null ? lkiObject : this);
+        } else {
             logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
         }
         return removed;

@@ -60,10 +60,10 @@ public class ThoughtLash extends CardImpl {
 
         // Cumulative upkeep - Exile the top card of your library.
         this.addAbility(new CumulativeUpkeepAbility(new ExileFromTopOfLibraryCost(1)));
-        
+
         // When a player doesn't pay Thought Lash's cumulative upkeep, that player exiles all cards from his or her library.
         this.addAbility(new ThoughtLashTriggeredAbility());
-        
+
         // Exile the top card of your library: Prevent the next 1 damage that would be dealt to you this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThoughtLashPreventionEffect(), new ExileFromTopOfLibraryCost(1)));
     }
@@ -79,30 +79,30 @@ public class ThoughtLash extends CardImpl {
 }
 
 class ThoughtLashTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     ThoughtLashTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ThoughtLashExileLibraryEffect(), false);
     }
-    
+
     ThoughtLashTriggeredAbility(final ThoughtLashTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public ThoughtLashTriggeredAbility copy() {
         return new ThoughtLashTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DIDNT_PAY_CUMULATIVE_UPKEEP;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId() == this.getSourceId();
+        return event.getSourceId() != null && event.getSourceId().equals(this.getSourceId());
     }
-    
+
     @Override
     public String getRule() {
         return "When a player doesn't pay {this}'s cumulative upkeep, that player exiles all cards from his or her library.";
@@ -110,21 +110,21 @@ class ThoughtLashTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class ThoughtLashExileLibraryEffect extends OneShotEffect {
-    
+
     ThoughtLashExileLibraryEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player exiles all cards from his or her library";
     }
-    
+
     ThoughtLashExileLibraryEffect(final ThoughtLashExileLibraryEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ThoughtLashExileLibraryEffect copy() {
         return new ThoughtLashExileLibraryEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

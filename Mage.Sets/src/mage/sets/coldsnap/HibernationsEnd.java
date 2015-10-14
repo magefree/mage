@@ -44,8 +44,8 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -98,7 +98,7 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId() == this.getSourceId();
+        return event.getSourceId() != null && event.getSourceId().equals(this.getSourceId());
     }
 
     @Override
@@ -127,7 +127,7 @@ class HibernationsEndEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if(sourcePermanent != null && player != null) {
+        if (sourcePermanent != null && player != null) {
             int newConvertedCost = sourcePermanent.getCounters().getCount("age");
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
@@ -138,4 +138,3 @@ class HibernationsEndEffect extends OneShotEffect {
         return false;
     }
 }
-

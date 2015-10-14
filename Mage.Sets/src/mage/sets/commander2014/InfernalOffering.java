@@ -61,10 +61,9 @@ public class InfernalOffering extends CardImpl {
         super(ownerId, 24, "Infernal Offering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "C14";
 
-
         // Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards.
         this.getSpellAbility().addEffect(new InfernalOfferingSacrificeEffect());
-        
+
         // Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from his or her graveyard to the battlefield.
         this.getSpellAbility().addEffect(new InfernalOfferingReturnEffect());
     }
@@ -80,21 +79,21 @@ public class InfernalOffering extends CardImpl {
 }
 
 class InfernalOfferingSacrificeEffect extends OneShotEffect {
-    
+
     InfernalOfferingSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards";
     }
-    
+
     InfernalOfferingSacrificeEffect(final InfernalOfferingSacrificeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public InfernalOfferingSacrificeEffect copy() {
         return new InfernalOfferingSacrificeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -106,7 +105,7 @@ class InfernalOfferingSacrificeEffect extends OneShotEffect {
                 //Choose creatures to sacrifice
                 Map<UUID, UUID> toSacrifice = new HashMap<>(2);
                 for (UUID playerId : player.getInRange()) {
-                    if (playerId == player.getId() || playerId == opponent.getId()) {
+                    if (playerId.equals(player.getId()) || playerId.equals(opponent.getId())) {
                         target = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
                         if (target.choose(Outcome.Sacrifice, playerId, source.getControllerId(), game)) {
                             toSacrifice.put(playerId, target.getFirstTarget());
@@ -138,21 +137,21 @@ class InfernalOfferingSacrificeEffect extends OneShotEffect {
 }
 
 class InfernalOfferingReturnEffect extends OneShotEffect {
-    
+
     InfernalOfferingReturnEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from his or her graveyard to the battlefield";
     }
-    
+
     InfernalOfferingReturnEffect(final InfernalOfferingReturnEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public InfernalOfferingReturnEffect copy() {
         return new InfernalOfferingReturnEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
