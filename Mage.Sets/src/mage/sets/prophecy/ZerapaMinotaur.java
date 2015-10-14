@@ -25,57 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.sets.prophecy;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
-import mage.target.TargetSpell;
 
 /**
  *
- * @author TaVSt
+ * @author LoneFox
  */
-public class HydromorphGuardian extends CardImpl {
+public class ZerapaMinotaur extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
+    public ZerapaMinotaur(UUID ownerId) {
+        super(ownerId, 108, "Zerapa Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Minotaur");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-    static {
-        filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
-    }
-
-    public HydromorphGuardian(UUID ownerId) {
-        super(ownerId, 39, "Hydromorph Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "TOR";
-        this.subtype.add("Elemental");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetSpell(filter));
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+        // {2}: Zerapa Minotaur loses first strike until end of turn. Any player may activate this ability.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(
+            FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}"));
+        ability.setMayActivate(TargetController.ANY);
+        ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
     }
 
-    public HydromorphGuardian(final HydromorphGuardian card) {
+    public ZerapaMinotaur(final ZerapaMinotaur card) {
         super(card);
     }
 
     @Override
-    public HydromorphGuardian copy() {
-        return new HydromorphGuardian(this);
+    public ZerapaMinotaur copy() {
+        return new ZerapaMinotaur(this);
     }
 }

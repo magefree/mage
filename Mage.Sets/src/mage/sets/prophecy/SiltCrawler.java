@@ -25,57 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.sets.prophecy;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
-import mage.target.TargetSpell;
+import mage.filter.common.FilterControlledLandPermanent;
 
 /**
  *
- * @author TaVSt
+ * @author LoneFox
  */
-public class HydromorphGuardian extends CardImpl {
+public class SiltCrawler extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
+    public SiltCrawler(UUID ownerId) {
+        super(ownerId, 123, "Silt Crawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Beast");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-    static {
-        filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
+        // When Silt Crawler enters the battlefield, tap all lands you control.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(new FilterControlledLandPermanent("lands you control")), false));
     }
 
-    public HydromorphGuardian(UUID ownerId) {
-        super(ownerId, 39, "Hydromorph Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "TOR";
-        this.subtype.add("Elemental");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetSpell(filter));
-        this.addAbility(ability);
-    }
-
-    public HydromorphGuardian(final HydromorphGuardian card) {
+    public SiltCrawler(final SiltCrawler card) {
         super(card);
     }
 
     @Override
-    public HydromorphGuardian copy() {
-        return new HydromorphGuardian(this);
+    public SiltCrawler copy() {
+        return new SiltCrawler(this);
     }
 }

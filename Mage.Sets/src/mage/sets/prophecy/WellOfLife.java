@@ -25,57 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
-import mage.target.TargetSpell;
+import mage.constants.TargetController;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
  *
- * @author TaVSt
+ * @author LoneFox
  */
-public class HydromorphGuardian extends CardImpl {
+public class WellOfLife extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public HydromorphGuardian(UUID ownerId) {
-        super(ownerId, 39, "Hydromorph Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "TOR";
-        this.subtype.add("Elemental");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    public WellOfLife(UUID ownerId) {
+        super(ownerId, 141, "Well of Life", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "PCY";
 
-        // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetSpell(filter));
-        this.addAbility(ability);
+        // At the beginning of your end step, if you control no untapped lands, you gain 2 life.
+        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
+            new GainLifeEffect(2), TargetController.YOU, false), new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
+            "At the beginning of your end step, if you control no untapped lands, you gain 2 life."));
     }
 
-    public HydromorphGuardian(final HydromorphGuardian card) {
+    public WellOfLife(final WellOfLife card) {
         super(card);
     }
 
     @Override
-    public HydromorphGuardian copy() {
-        return new HydromorphGuardian(this);
+    public WellOfLife copy() {
+        return new WellOfLife(this);
     }
 }

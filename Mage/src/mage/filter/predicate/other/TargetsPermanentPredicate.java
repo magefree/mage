@@ -25,46 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.filter.predicate.other;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
-import mage.target.TargetSpell;
+import mage.MageObject;
+import mage.abilities.Mode;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
+import mage.target.Target;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class Intervene extends CardImpl {
+public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets a creature");
+    private final FilterPermanent targetFilter;
 
-    static {
-        filter.add(new TargetsPermanentPredicate(new FilterCreaturePermanent()));
-    }
-
-    public Intervene(UUID ownerId) {
-        super(ownerId, 33, "Intervene", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "ULG";
-
-
-        // Counter target spell that targets a creature.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-    }
-
-    public Intervene(final Intervene card) {
-        super(card);
+    public TargetsPermanentPredicate(FilterPermanent targetFilter) {
+        this.targetFilter = targetFilter;
     }
 
     @Override
-    public Intervene copy() {
-        return new Intervene(this);
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        StackObject object = game.getStack().getStackObject(input.getObject().getId());
+        if(object != null) {
+            for(UUID modeId : object.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = object.getStackAbility().getModes().get(modeId);
+                for(Target target : mode.getTargets()) {
+                    for(UUID targetId : target.getTargets()) {
+                        Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+                        if(permanent != null) {
+                            return targetFilter.match(permanent, input.getSourceId(), input.getPlayerId(), game);
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "that targets " + targetFilter.getMessage();
     }
 }

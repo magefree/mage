@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -46,9 +47,9 @@ import mage.target.TargetSpell;
 
 /**
  *
- * @author TaVSt
+ * @author LoneFox
  */
-public class HydromorphGuardian extends CardImpl {
+public class HydromorphGull extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
 
@@ -56,26 +57,29 @@ public class HydromorphGuardian extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
     }
 
-    public HydromorphGuardian(UUID ownerId) {
-        super(ownerId, 39, "Hydromorph Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+    public HydromorphGull(UUID ownerId) {
+        super(ownerId, 40, "Hydromorph Gull", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "TOR";
         this.subtype.add("Elemental");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.subtype.add("Bird");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {U}, Sacrifice Hydromorph Gull: Counter target spell that targets one or more creatures you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }
 
-    public HydromorphGuardian(final HydromorphGuardian card) {
+    public HydromorphGull(final HydromorphGull card) {
         super(card);
     }
 
     @Override
-    public HydromorphGuardian copy() {
-        return new HydromorphGuardian(this);
+    public HydromorphGull copy() {
+        return new HydromorphGull(this);
     }
 }
