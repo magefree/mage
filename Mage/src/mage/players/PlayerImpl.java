@@ -3015,13 +3015,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 break;
             case BATTLEFIELD:
-                for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
-                    if (putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, card.isFaceDown(game))) {
-                        successfulMovedCards.add(card);
-                    }
-                }
-                break;
+                return moveCards(cards, toZone, source, game, false, false, false, null);
             case LIBRARY:
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
