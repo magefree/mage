@@ -30,6 +30,7 @@ package mage.sets.fifthedition;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -44,6 +45,7 @@ import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -110,8 +112,10 @@ class SylvanLibraryEffect extends OneShotEffect {
                 }
                 int numberOfTargets = Math.min(2, cards.size());
                 if (numberOfTargets > 0) {
-                    TargetCardInHand target = new TargetCardInHand(numberOfTargets, new FilterCard(numberOfTargets + " cards of cards drawn this turn"));
-                    controller.chooseTarget(outcome, cards, target, source, game);
+                    FilterCard filter = new FilterCard(numberOfTargets + " cards of cards drawn this turn");
+                    filter.add(new CardIdPredicate(cards));
+                    TargetCardInHand target = new TargetCardInHand(numberOfTargets, filter);
+                    controller.choose(outcome, target, source.getSourceId(), game);
 
                     Cards cardsPutBack = new CardsImpl();
                     for (UUID cardId : target.getTargets()) {
@@ -188,5 +192,32 @@ class CardsDrawnThisTurnWatcher extends Watcher {
     @Override
     public CardsDrawnThisTurnWatcher copy() {
         return new CardsDrawnThisTurnWatcher(this);
+    }
+}
+
+
+class CardIdPredicate implements Predicate<MageObject> {
+
+    private final Cards cardsId;
+
+    public CardIdPredicate(Cards cardsId) {
+        this.cardsId = cardsId;
+    }
+
+    @Override
+    public boolean apply(MageObject input, Game game) {
+       for(UUID uuid : cardsId)
+        {
+            if(uuid.equals(input.getId()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "CardsId";
     }
 }
