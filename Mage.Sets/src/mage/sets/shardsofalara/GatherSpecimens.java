@@ -52,10 +52,8 @@ public class GatherSpecimens extends CardImpl {
         super(ownerId, 45, "Gather Specimens", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{U}");
         this.expansionSetCode = "ALA";
 
-
         // If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
         this.getSpellAbility().addEffect(new GatherSpecimensReplacementEffect());
-
     }
 
     public GatherSpecimens(final GatherSpecimens card) {
@@ -114,7 +112,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -122,5 +120,5 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
             event.setPlayerId(controller.getId());
         }
         return false;
-    }    
+    }
 }

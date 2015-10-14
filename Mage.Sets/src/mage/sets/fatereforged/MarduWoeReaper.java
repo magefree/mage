@@ -99,7 +99,7 @@ class MarduWoeReaperTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getId() == this.getSourceId() || permanent.hasSubtype("Warrior"))) {
+            if (permanent != null && (permanent.getId().equals(this.getSourceId()) || permanent.hasSubtype("Warrior"))) {
                 return true;
             }
         }
@@ -113,21 +113,21 @@ class MarduWoeReaperTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class MarduWoeReaperEffect extends OneShotEffect {
-    
+
     MarduWoeReaperEffect() {
         super(Outcome.GainLife);
         this.staticText = "you may exile target creature card from a graveyard. If you do, you gain 1 life";
     }
-    
+
     MarduWoeReaperEffect(final MarduWoeReaperEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public MarduWoeReaperEffect copy() {
         return new MarduWoeReaperEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());

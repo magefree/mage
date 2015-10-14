@@ -67,11 +67,11 @@ public class HotheadedGiant extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        
+
         // Hotheaded Giant enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
         Condition condition = new CastRedSpellThisTurnCondition();
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), new InvertCondition(condition), ""), "with two -1/-1 counters on it unless you've cast another red spell this turn"), new HotHeadedGiantWatcher(this.getId()));
-        
+
     }
 
     public HotheadedGiant(final HotheadedGiant card) {
@@ -99,6 +99,7 @@ class CastRedSpellThisTurnCondition implements Condition {
 class HotHeadedGiantWatcher extends Watcher {
 
     private static final FilterSpell filter = new FilterSpell();
+
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
@@ -126,7 +127,7 @@ class HotHeadedGiantWatcher extends Watcher {
             return;
         }
         if (event.getType() == EventType.SPELL_CAST
-                && controllerId == event.getPlayerId()) {
+                && controllerId.equals(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (!spell.getSourceId().equals(cardId) && filter.match(spell, game)) {
                 condition = true;

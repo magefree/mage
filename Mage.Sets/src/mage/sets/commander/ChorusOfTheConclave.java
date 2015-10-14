@@ -135,7 +135,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId() == source.getControllerId()) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             MageObject spellObject = game.getObject(event.getSourceId());
             if (spellObject != null) {
                 return spellObject.getCardType().contains(CardType.CREATURE);

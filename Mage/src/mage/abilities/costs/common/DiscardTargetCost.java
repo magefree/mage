@@ -68,7 +68,7 @@ public class DiscardTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         this.cards.clear();
-        this.targets.clear();
+        this.targets.clearChosen();;
         Player player = game.getPlayer(controllerId);
         if (player == null) {
             return false;

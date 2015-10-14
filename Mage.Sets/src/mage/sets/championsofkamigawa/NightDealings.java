@@ -25,14 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,7 +39,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterNonlandCard;
@@ -61,7 +59,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class NightDealings extends CardImpl {
 
-    public NightDealings (UUID ownerId) {
+    public NightDealings(UUID ownerId) {
         super(ownerId, 132, "Night Dealings", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
 
@@ -74,7 +72,7 @@ public class NightDealings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NightDealings (final NightDealings card) {
+    public NightDealings(final NightDealings card) {
         super(card);
     }
 
@@ -82,7 +80,6 @@ public class NightDealings extends CardImpl {
     public NightDealings copy() {
         return new NightDealings(this);
     }
-
 
     private class NightDealingsTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -106,17 +103,17 @@ public class NightDealings extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            // to another player    
+            // to another player
             if (this.getControllerId() != event.getTargetId()) {
                 // a source you control
                 UUID sourceControllerId = game.getControllerId(event.getSourceId());
-                if (sourceControllerId != null && sourceControllerId == this.getControllerId()) {
+                if (sourceControllerId != null && sourceControllerId.equals(this.getControllerId())) {
                     // save amount of damage to effect
                     this.getEffects().get(0).setValue("damageAmount", event.getAmount());
                     return true;
                 }
             }
-           return false;
+            return false;
         }
 
         @Override
@@ -181,9 +178,9 @@ public class NightDealings extends CardImpl {
             int cmc = 0;
             for (Cost cost : source.getCosts()) {
                 if (cost instanceof RemoveVariableCountersSourceCost) {
-                    cmc = ((RemoveVariableCountersSourceCost)cost).getAmount();
+                    cmc = ((RemoveVariableCountersSourceCost) cost).getAmount();
                 }
-            } 
+            }
 
             FilterNonlandCard filter = new FilterNonlandCard("nonland card with converted mana cost X = " + cmc);
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
@@ -192,8 +189,8 @@ public class NightDealings extends CardImpl {
             if (player.searchLibrary(target, game)) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);    
-                    
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+
                     String name = "Reveal";
                     Cards cards = new CardsImpl();
                     cards.add(card);

@@ -90,6 +90,7 @@ public class OblivionRingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, "Oblivion Ring");
         addCard(Zone.BATTLEFIELD, playerA, "Jace Beleren");
+        // Exile target artifact or enchantment.
         addCard(Zone.HAND, playerA, "Revoke Existence");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-1: Target player draws a card", playerA);
@@ -100,7 +101,10 @@ public class OblivionRingTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
+        assertExileCount("Oblivion Ring", 1);
+        assertGraveyardCount(playerA, "Revoke Existence", 1);
         assertPermanentCount(playerA, "Oblivion Ring", 0);
+        assertGraveyardCount(playerA, "Jace Beleren", 0);
         assertPermanentCount(playerA, "Jace Beleren", 1); // returns back
         assertHandCount(playerA, 2); // can use ability twice
     }

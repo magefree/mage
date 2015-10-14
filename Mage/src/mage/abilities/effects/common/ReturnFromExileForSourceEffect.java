@@ -101,7 +101,11 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
             }
             ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
-                controller.moveCards(exile, null, returnToZone, source, game);
+                if (returnToZone.equals(Zone.BATTLEFIELD)) {
+                    controller.moveCards(exile.getCards(game), returnToZone, source, game, false, false, true, null);
+                } else {
+                    controller.moveCards(exile, null, returnToZone, source, game);
+                }
             }
             return true;
         }

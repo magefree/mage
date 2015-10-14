@@ -184,7 +184,7 @@ public class GameView implements Serializable {
         }
         if (isPlayer) {
             // has only to be set for active palyer with priority (e.g. pay mana by delve or Quenchable Fire special action)
-            if (state.getPriorityPlayerId() == createdForPlayerId && createdForPlayer != null) {
+            if (createdForPlayer != null && createdForPlayerId.equals(state.getPriorityPlayerId())) {
                 this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId(), createdForPlayer.isInPayManaMode()).size() > 0;
             }
         } else {

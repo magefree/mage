@@ -3052,7 +3052,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), controllingPlayerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
                     if (!game.replaceEvent(event)) {
                         // get permanent
-                        Permanent permanent = new PermanentCard(card, controllingPlayerId, game);
+                        Permanent permanent = new PermanentCard(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
                         permanents.add(permanent);
                         card.checkForCountersToAdd(permanent, game);
                         permanent.setTapped(tapped);
