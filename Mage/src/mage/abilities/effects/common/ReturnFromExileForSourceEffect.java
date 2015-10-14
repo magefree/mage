@@ -30,7 +30,6 @@ package mage.abilities.effects.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import static mage.constants.Zone.BATTLEFIELD;
@@ -102,16 +101,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
             }
             ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
-                if (returnToZone.equals(Zone.BATTLEFIELD)) {
-                    for (Card card : exile.getCards(game)) {
-                        Player owner = game.getPlayer(card.getOwnerId());
-                        if (owner != null) {
-                            owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
-                        }
-                    }
-                } else {
-                    controller.moveCards(exile, Zone.EXILED, returnToZone, source, game);
-                }
+                controller.moveCards(exile, null, returnToZone, source, game);
             }
             return true;
         }
