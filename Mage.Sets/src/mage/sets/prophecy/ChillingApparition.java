@@ -29,7 +29,7 @@ package mage.sets.prophecy;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
@@ -55,7 +55,7 @@ public class ChillingApparition extends CardImpl {
         // {B}: Regenerate Chilling Apparition.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
         // Whenever Chilling Apparition deals combat damage to a player, that player discards a card.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1), false, true, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
     }
 
     public ChillingApparition(final ChillingApparition card) {
