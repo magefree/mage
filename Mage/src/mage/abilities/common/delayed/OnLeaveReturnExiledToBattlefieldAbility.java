@@ -112,7 +112,7 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
             if (exileZone != null) {
                 ExileZone exile = game.getExile().getExileZone(exileZone);
                 if (exile != null) {
-                    controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.EXILED, source, game, false, false, true, null);
+                    controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.BATTLEFIELD, source, game, false, false, true, null);
                 }
                 return true;
             }
