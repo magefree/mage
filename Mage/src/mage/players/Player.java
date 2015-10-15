@@ -635,6 +635,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
+    boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
+
     /**
      *
      * @param cards
@@ -646,6 +648,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param byOwner the card is moved (or put onto battlefield) by the owner
      * of the card and if target zone is battlefield controlls the permanent
      * (instead of the controller of the source)
+     * @param appliedEffects
      * @return
      */
     boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);

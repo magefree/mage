@@ -25,50 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package org.mage.test.cards.copy;
 
-import mage.abilities.StaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class AsEntersBattlefieldAbility extends StaticAbility {
+public class InfiniteReflectionTest extends CardTestPlayerBase {
 
-    public AsEntersBattlefieldAbility(Effect effect) {
-        super(Zone.ALL, new EntersBattlefieldEffect(effect));
+    /**
+     *
+     */
+    @Test
+    public void testCopyAsEnters() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 9);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+//        addCard(Zone.BATTLEFIELD, playerA, "Birds of Paradise", 1);
+//        addCard(Zone.HAND, playerA, "Nantuko Husk", 1);// {2}{B}
+        addCard(Zone.GRAVEYARD, playerA, "Pillarfield Ox", 1);
+        // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
+        addCard(Zone.HAND, playerA, "Reanimate", 1); // {B}
+
+        // Enchant creature
+        // When Infinite Reflection enters the battlefield attached to a creature, each other nontoken creature you control becomes a copy of that creature.
+        // Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
+        addCard(Zone.HAND, playerA, "Infinite Reflection", 1); // {5}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infinite Reflection", "Silvercoat Lion");
+//        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nantuko Husk");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Pillarfield Ox");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
     }
 
-    public AsEntersBattlefieldAbility(Effect effect, String text) {
-        super(Zone.ALL, new EntersBattlefieldEffect(effect, text));
-    }
-
-    public AsEntersBattlefieldAbility(AsEntersBattlefieldAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public void addEffect(Effect effect) {
-        if (!getEffects().isEmpty()) {
-            Effect entersEffect = this.getEffects().get(0);
-            if (entersEffect instanceof EntersBattlefieldEffect) {
-                ((EntersBattlefieldEffect) entersEffect).addEffect(effect);
-                return;
-            }
-        }
-        super.addEffect(effect);
-    }
-
-    @Override
-    public AsEntersBattlefieldAbility copy() {
-        return new AsEntersBattlefieldAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "As {this} enters the battlefield, " + super.getRule();
-    }
 }

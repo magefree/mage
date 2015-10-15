@@ -25,10 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.ChoiceColor;
 import mage.constants.Outcome;
@@ -56,6 +56,9 @@ public class ChooseColorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        }
         if (controller != null && permanent != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
@@ -65,7 +68,7 @@ public class ChooseColorEffect extends OneShotEffect {
                 }
             }
             if (!game.isSimulation()) {
-                game.informPlayers(permanent.getLogName()+": "+controller.getLogName()+" has chosen "+choice.getChoice());
+                game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
             }
             game.getState().setValue(source.getSourceId() + "_color", choice.getColor());
             permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
