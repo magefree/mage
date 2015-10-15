@@ -29,6 +29,7 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -71,7 +72,10 @@ public class NameACardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        if (sourceObject == null) {
+            game.getObject(source.getSourceId());
+        }
         if (controller != null && sourceObject != null) {
             Choice cardChoice = new ChoiceImpl();
             switch (typeOfName) {
