@@ -64,15 +64,17 @@ public class SurestrikeTrident extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature has first strike and "{tap}, Unattach Surestrike Trident: This creature deals damage equal to its power to target player."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
         DynamicValue xValue = new SourcePermanentPowerCount();
         Effect effect = new DamageTargetEffect(xValue);
         effect.setText("This creature deals damage equal to its power to target player");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
-        ability.addCost(new SurestrikeTridentUnattachCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        gainedAbility.addTarget(new TargetPlayer());
+        gainedAbility.addCost(new SurestrikeTridentUnattachCost(getName(), getId()));
+        effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
+        effect.setText("and \"{T}, Unattach {this}: This creature deals damage equal to its power to target player.\"");
+        ability.addEffect(effect);
+        this.addAbility(ability);
         
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(4)));
@@ -90,21 +92,25 @@ public class SurestrikeTrident extends CardImpl {
 
 class SurestrikeTridentUnattachCost extends CostImpl {
 
-    public SurestrikeTridentUnattachCost() {
-        this.text = "Unattach Surestrike Trident";
+    protected UUID sourceEquipmentId;
+
+    public SurestrikeTridentUnattachCost(String name, UUID sourceId) {
+        this.text = "Unattach " + name;
+        this.sourceEquipmentId = sourceId;
     }
 
     public SurestrikeTridentUnattachCost(final SurestrikeTridentUnattachCost cost) {
         super(cost);
+        this.sourceEquipmentId = cost.sourceEquipmentId;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            for (UUID attachmentId :permanent.getAttachments()) {
+            for (UUID attachmentId : permanent.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getName().equals("Surestrike Trident")) {
+                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
                     paid = permanent.removeAttachment(attachmentId, game);
                     if (paid) {
                         break;
@@ -120,9 +126,9 @@ class SurestrikeTridentUnattachCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            for (UUID attachmentId :permanent.getAttachments()) {
+            for (UUID attachmentId : permanent.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getName().equals("Surestrike Trident") ) {
+                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
                     return true;
                 }
             }
