@@ -27,6 +27,7 @@
  */
 package mage.sets.conflux;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -34,16 +35,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public class Nyxathid extends CardImpl {
         this.toughness = new MageInt(7);
 
         // As Nyxathid enters the battlefield, choose an opponent.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponent()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
 
         // Nyxathid gets -1/-1 for each card in the chosen player's hand.
         DynamicValue chosenPlayerHand = new SignInversionDynamicValue(new CardsInChosenPlayerHandCount());
@@ -78,48 +79,12 @@ public class Nyxathid extends CardImpl {
     }
 }
 
-class ChooseOpponent extends OneShotEffect {
-
-    public ChooseOpponent() {
-        super(Outcome.Neutral);
-        this.staticText = "choose an opponent";
-    }
-
-    public ChooseOpponent(final ChooseOpponent effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChooseOpponent copy() {
-        return new ChooseOpponent(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            TargetOpponent target = new TargetOpponent();
-            target.setNotTarget(true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Player chosenPlayer = game.getPlayer(target.getFirstTarget());
-                if (chosenPlayer != null) {
-                    game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                    game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-}
-
 class CardsInChosenPlayerHandCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {
-            UUID playerId = (UUID) game.getState().getValue(sourceAbility.getSourceId() + "_player");
+            UUID playerId = (UUID) game.getState().getValue(sourceAbility.getSourceId() + ChooseOpponentEffect.VALUE_KEY);
             Player chosenPlayer = game.getPlayer(playerId);
             if (chosenPlayer != null) {
                 return chosenPlayer.getHand().size();

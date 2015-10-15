@@ -33,9 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -46,8 +45,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-
 
 /**
  *
@@ -61,7 +58,7 @@ public class HallOfTriumph extends CardImpl {
         this.supertype.add("Legendary");
 
         // As Hall of Triumph enters the battlefield choose a color.
-        this.addAbility(new AsEntersBattlefieldAbility(new HallOfTriumphEffect()));        
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // Creatures you control of the chosen color get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HallOfTriumphBoostControlledEffect()));
     }
@@ -74,45 +71,6 @@ public class HallOfTriumph extends CardImpl {
     public HallOfTriumph copy() {
         return new HallOfTriumph(this);
     }
-}
-
-class HallOfTriumphEffect extends OneShotEffect {
-
-    public HallOfTriumphEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "choose a color";
-    }
-
-    public HallOfTriumphEffect(final HallOfTriumphEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            colorChoice.setMessage("Choose color");
-            while (!player.choose(Outcome.BoostCreature, colorChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            if (colorChoice.getChoice() != null) {
-                game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
-                game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
-                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>", game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public HallOfTriumphEffect copy() {
-        return new HallOfTriumphEffect(this);
-    }
-
 }
 
 class HallOfTriumphBoostControlledEffect extends ContinuousEffectImpl {
@@ -137,7 +95,7 @@ class HallOfTriumphBoostControlledEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (color != null) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (perm.getColor(game).shares(color)) {
                     perm.addPower(1);
                     perm.addToughness(1);

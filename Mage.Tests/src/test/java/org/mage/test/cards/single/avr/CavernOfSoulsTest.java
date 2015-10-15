@@ -33,8 +33,9 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests "Cavern of Souls" with "Human" creature type chosen.
-     * Then tests casting Azure Drake (should fail) and Elite Vanguard (should be ok as it has "Human" subtype)
+     * Tests "Cavern of Souls" with "Human" creature type chosen. Then tests
+     * casting Azure Drake (should fail) and Elite Vanguard (should be ok as it
+     * has "Human" subtype)
      */
     @Test
     public void testNoCastBecauseOfCreatureType() {
@@ -87,6 +88,9 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
     @Test
     public void testDrakeCantBeCountered() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // As Cavern of Souls enters the battlefield, choose a creature type.
+        // {T}: Add {1} to your mana pool.
+        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
         addCard(Zone.HAND, playerA, "Cavern of Souls");
         addCard(Zone.HAND, playerA, "Azure Drake");
 
@@ -108,6 +112,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Azure Drake", 0);
         assertPermanentCount(playerA, "Azure Drake", 1);
     }
+
     /**
      * Tests spell can be countered if cast with colorless mana from Cavern
      */
@@ -136,59 +141,59 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Azure Drake", 1);
         assertPermanentCount(playerA, "Azure Drake", 0);
     }
-    
+
     /**
-     * Tests conditional mana from Cavern in pool will still work if Cavern got back to hand and is played again with other creature type
+     * Tests conditional mana from Cavern in pool will still work if Cavern got
+     * back to hand and is played again with other creature type
      */
     @Test
     public void testConditionlManaWorksIfCavernIsReplayed() {
         addCard(Zone.HAND, playerA, "Cavern of Souls");
         addCard(Zone.HAND, playerA, "Gladecover Scout"); // Elf costing {G}
         // addCard(Zone.HAND, playerA, "Fume Spitter"); // Horror costing {B}
-        
+
         // Instant - {U}{U} - Return target permanent to its owner's hand.
         addCard(Zone.HAND, playerB, "Boomerang");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
         setChoice(playerA, "Elf");
-        
+
         // getting green mana for Elf into pool
         activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
-        setChoice(playerA, "Green");        
-        
+        setChoice(playerA, "Green");
+
         // return cavern to hand
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Boomerang", "Cavern of Souls");
-        
+
         // playing the cavern again choose different creature type
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
         setChoice(playerA, "Horror");
 
-        // the green mana usable for Elf should be in the mana pool 
+        // the green mana usable for Elf should be in the mana pool
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gladecover Scout");
 
         activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
-        setChoice(playerA, "Black");        
+        setChoice(playerA, "Black");
 
-        // the black mana usable for Horror should be in the mana pool 
+        // the black mana usable for Horror should be in the mana pool
         // castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Fume Spitter");
-
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        
         assertGraveyardCount(playerB, "Boomerang", 1);
         assertPermanentCount(playerA, "Cavern of Souls", 1);
-        
+
         // Check the elf was cast
         assertPermanentCount(playerA, "Gladecover Scout", 1);
         // Check Horror on the Battlefield
         // assertPermanentCount(playerA, "Fume Spitter", 1);
-    }    
+    }
 
     /**
-     * Return to the Ranks cannot be countered if mana produced by Cavern of Souls
-     * was used to pay X. Can be bug also for all other spells with X in their cost, not sure.
+     * Return to the Ranks cannot be countered if mana produced by Cavern of
+     * Souls was used to pay X. Can be bug also for all other spells with X in
+     * their cost, not sure.
      *
      */
     @Test
@@ -205,12 +210,11 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Counterspell");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
-
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
         setChoice(playerA, "Drake");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Return to the Ranks", "Silvercoat Lion");
         setChoice(playerA, "X=1");
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Return to the Ranks");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -223,11 +227,12 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
 
     }
-    
+
     /**
-     * Cavern of Souls can produce any colour of mana with its second ability when Contamination is in play.
+     * Cavern of Souls can produce any colour of mana with its second ability
+     * when Contamination is in play.
      */
-   @Test
+    @Test
     public void testUseWithConversionInPlay() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.HAND, playerA, "Cavern of Souls");
@@ -235,8 +240,6 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Desert Drake");
 
         addCard(Zone.BATTLEFIELD, playerB, "Contamination", 1);
-        
-
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
         setChoice(playerA, "Drake");
@@ -249,5 +252,5 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Desert Drake", 0);
 
     }
-        
+
 }

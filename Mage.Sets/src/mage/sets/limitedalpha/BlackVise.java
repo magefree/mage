@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -40,9 +41,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -55,7 +54,7 @@ public class BlackVise extends CardImpl {
         this.expansionSetCode = "LEA";
 
         // As Black Vise enters the battlefield, choose an opponent.
-        this.addAbility(new AsEntersBattlefieldAbility(new BlackViseChooseOpponent()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
         // At the beginning of the chosen player's upkeep, Black Vise deals X damage to that player, where X is the number of cards in his or her hand minus 4.
         this.addAbility(new BlackViseTriggeredAbility());
     }
@@ -67,42 +66,6 @@ public class BlackVise extends CardImpl {
     @Override
     public BlackVise copy() {
         return new BlackVise(this);
-    }
-}
-
-class BlackViseChooseOpponent extends OneShotEffect {
-
-    public BlackViseChooseOpponent() {
-        super(Outcome.Neutral);
-        this.staticText = "choose an opponent";
-    }
-
-    public BlackViseChooseOpponent(final BlackViseChooseOpponent effect) {
-        super(effect);
-    }
-
-    @Override
-    public BlackViseChooseOpponent copy() {
-        return new BlackViseChooseOpponent(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            TargetOpponent target = new TargetOpponent();
-            target.setNotTarget(true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Player chosenPlayer = game.getPlayer(target.getFirstTarget());
-                if (chosenPlayer != null) {
-                    game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                    game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
 
@@ -128,12 +91,12 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(game.getState().getValue(getSourceId().toString() + "_player"));
+        return event.getPlayerId().equals(game.getState().getValue(getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
 
     @Override
     public String getRule() {
-        return new StringBuilder("At the beginning of the chosen player's upkeep, ").append(super.getRule()).toString();
+        return "At the beginning of the chosen player's upkeep, " + super.getRule();
     }
 }
 
@@ -155,7 +118,7 @@ class BlackViseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + "_player");
+        UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
         Player chosenPlayer = game.getPlayer(playerId);
         if (chosenPlayer != null) {
             int damage = chosenPlayer.getHand().size() - 4;

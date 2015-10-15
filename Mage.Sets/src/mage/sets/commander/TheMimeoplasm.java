@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.Card;
@@ -80,27 +81,27 @@ public class TheMimeoplasm extends CardImpl {
 }
 
 class TheMimeoplasmEffect extends OneShotEffect {
-    
+
     TheMimeoplasmEffect() {
         super(Outcome.Copy);
     }
-    
+
     TheMimeoplasmEffect(final TheMimeoplasmEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public TheMimeoplasmEffect copy() {
         return new TheMimeoplasmEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
         if (controller != null && permanent != null) {
             if (new CardsInAllGraveyardsCount(new FilterCreatureCard()).calculate(game, source, this) >= 2) {
-                if (controller.chooseUse(Outcome.Benefit, "Do you want to exile two creature cards from graveyards?", source, game)) {                    
+                if (controller.chooseUse(Outcome.Benefit, "Do you want to exile two creature cards from graveyards?", source, game)) {
                     TargetCardInGraveyard targetCopy = new TargetCardInGraveyard(new FilterCreatureCard("creature card to become a copy of"));
                     TargetCardInGraveyard targetCounters = new TargetCardInGraveyard(new FilterCreatureCard("creature card to determine amount of additional +1/+1 counters"));
                     if (controller.choose(Outcome.Copy, targetCopy, source.getSourceId(), game)) {
@@ -122,7 +123,7 @@ class TheMimeoplasmEffect extends OneShotEffect {
                     }
                 }
             }
-            return true;            
+            return true;
         }
         return false;
     }

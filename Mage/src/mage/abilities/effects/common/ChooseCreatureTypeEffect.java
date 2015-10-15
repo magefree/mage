@@ -27,7 +27,9 @@
  */
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -42,7 +44,6 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
 public class ChooseCreatureTypeEffect extends OneShotEffect {
 
     public ChooseCreatureTypeEffect(Outcome outcome) {
@@ -57,8 +58,11 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
+        MageObject mageObject = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        if (mageObject == null) {
+            mageObject = game.getObject(source.getSourceId());
+        }
+        if (controller != null && mageObject != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
@@ -68,10 +72,12 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
                 }
             }
             if (!game.isSimulation()) {
-                game.informPlayers(permanent.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
+                game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
             }
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
+            game.getState().setValue(mageObject.getId() + "_type", typeChoice.getChoice());
+            if (mageObject instanceof Permanent) {
+                ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
+            }
         }
         return false;
     }
