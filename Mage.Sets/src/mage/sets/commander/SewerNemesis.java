@@ -35,7 +35,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChoosePlayerEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
@@ -47,9 +47,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -67,7 +65,7 @@ public class SewerNemesis extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Sewer Nemesis enters the battlefield, choose a player.
-        this.addAbility(new AsEntersBattlefieldAbility(new SewerNemesisChoosePlayerEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Detriment)));
         // Sewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetOpponentsGraveyardCount(), Duration.WhileOnBattlefield)));
         // Whenever the chosen player casts a spell, that player puts the top card of his or her library into his or her graveyard.
@@ -85,42 +83,8 @@ public class SewerNemesis extends CardImpl {
     }
 }
 
-class SewerNemesisChoosePlayerEffect extends OneShotEffect {
-
-    public SewerNemesisChoosePlayerEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "choose a player";
-    }
-
-    public SewerNemesisChoosePlayerEffect(final SewerNemesisChoosePlayerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SewerNemesisChoosePlayerEffect copy() {
-        return new SewerNemesisChoosePlayerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            TargetPlayer target = new TargetPlayer(1,1,true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Player chosenPlayer = game.getPlayer(target.getFirstTarget());
-                if (chosenPlayer != null) {
-                    game.informPlayers(permanent.getLogName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                    game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-}
-
 class CardsInTargetOpponentsGraveyardCount implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {

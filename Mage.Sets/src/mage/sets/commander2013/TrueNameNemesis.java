@@ -30,9 +30,8 @@ package mage.sets.commander2013;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChoosePlayerEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -44,18 +43,19 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.players.Player;
-import mage.target.TargetPlayer;
 
 /**
- * Protection from a player is a new variant of the protection ability. It means the following:
- * -- True-Name Nemesis can’t be the target of spells or abilities controlled by the chosen player.
- * -- True-Name Nemesis can’t be enchanted by Auras or equipped by Equipment controlled
- *    by the chosen player. (The same is true for Fortifications controlled by the chosen player,
- *    if True-Name Nemesis becomes a land.)
- * -- True-Name Nemesis can’t be blocked by creatures controlled by the chosen player.
- * -- All damage that would be dealt to True-Name Nemesis by sources controlled by the chosen player
- *    is prevented. (The same is true for sources owned by the chosen player that don’t have controllers.)
+ * Protection from a player is a new variant of the protection ability. It means
+ * the following: -- True-Name Nemesis can’t be the target of spells or
+ * abilities controlled by the chosen player. -- True-Name Nemesis can’t be
+ * enchanted by Auras or equipped by Equipment controlled by the chosen player.
+ * (The same is true for Fortifications controlled by the chosen player, if
+ * True-Name Nemesis becomes a land.) -- True-Name Nemesis can’t be blocked by
+ * creatures controlled by the chosen player. -- All damage that would be dealt
+ * to True-Name Nemesis by sources controlled by the chosen player is prevented.
+ * (The same is true for sources owned by the chosen player that don’t have
+ * controllers.)
+ *
  * @author LevelX2
  */
 public class TrueNameNemesis extends CardImpl {
@@ -70,7 +70,7 @@ public class TrueNameNemesis extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As True-Name Nemesis enters the battlefield, choose a player.
-        this.addAbility(new AsEntersBattlefieldAbility(new TrueNameNemesisChoosePlayerEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Protect)));
         // True-Name Nemesis has protection from the chosen player.
         this.addAbility(new ProtectionFromPlayerAbility());
     }
@@ -82,42 +82,6 @@ public class TrueNameNemesis extends CardImpl {
     @Override
     public TrueNameNemesis copy() {
         return new TrueNameNemesis(this);
-    }
-}
-
-class TrueNameNemesisChoosePlayerEffect extends OneShotEffect {
-
-    public TrueNameNemesisChoosePlayerEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "choose a player";
-    }
-
-    public TrueNameNemesisChoosePlayerEffect(final TrueNameNemesisChoosePlayerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TrueNameNemesisChoosePlayerEffect copy() {
-        return new TrueNameNemesisChoosePlayerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            TargetPlayer target = new TargetPlayer(1,1,true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Player chosenPlayer = game.getPlayer(target.getFirstTarget());
-                if (chosenPlayer != null) {
-                    game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                    game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
-                    permanent.addInfo("chosen player", "<i>Chosen player: " + chosenPlayer.getLogName() + "</i>", game);
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
 
