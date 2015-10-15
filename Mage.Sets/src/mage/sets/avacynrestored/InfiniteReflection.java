@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -141,7 +142,7 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         return permanent != null && permanent.getControllerId().equals(source.getControllerId())
                 && permanent.getCardType().contains(CardType.CREATURE)
                 && !(permanent instanceof PermanentToken);
@@ -149,7 +150,7 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        MageObject toCopyToObject = game.getObject(event.getTargetId());
+        MageObject toCopyToObject = ((EntersTheBattlefieldEvent) event).getTarget();
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && toCopyToObject != null && sourcePermanent.getAttachedTo() != null) {
             Permanent toCopyFromPermanent = game.getPermanent(sourcePermanent.getAttachedTo());
