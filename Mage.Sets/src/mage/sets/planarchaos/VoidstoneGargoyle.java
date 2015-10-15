@@ -34,7 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
@@ -69,7 +71,7 @@ public class VoidstoneGargoyle extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // As Voidstone Gargoyle enters the battlefield, name a nonland card.
-        this.addAbility(new AsEntersBattlefieldAbility(new VoidstoneGargoyleChooseCardEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
         // The named card can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleReplacementEffect1()));
         // Activated abilities of sources with the chosen name can't be activated.
@@ -100,7 +102,7 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
         if (controller != null && permanent != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
@@ -160,7 +162,8 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
+            if (object != null
+                    && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }
         }
@@ -203,7 +206,7 @@ class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffec
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ACTIVATE_ABILITY) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
+            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }
         }
