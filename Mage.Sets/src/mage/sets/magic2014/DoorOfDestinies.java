@@ -33,12 +33,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -57,7 +54,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 
 /**
  *
@@ -70,7 +66,8 @@ public class DoorOfDestinies extends CardImpl {
         this.expansionSetCode = "M14";
 
         // As Door of Destinies enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
+
         // Whenever you cast a spell of the chosen type, put a charge counter on Door of Destinies.
         this.addAbility(new AddCounterAbility());
         // Creatures you control of the chosen type get +1/+1 for each charge counter on Door of Destinies.
@@ -85,44 +82,6 @@ public class DoorOfDestinies extends CardImpl {
     public DoorOfDestinies copy() {
         return new DoorOfDestinies(this);
     }
-}
-
-class ChooseCreatureTypeEffect extends OneShotEffect {
-
-    public ChooseCreatureTypeEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "choose a creature type";
-    }
-
-    public ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice().toString() + "</i>", game);
-        }
-        return false;
-    }
-
-    @Override
-    public ChooseCreatureTypeEffect copy() {
-        return new ChooseCreatureTypeEffect(this);
-    }
-
 }
 
 class AddCounterAbility extends TriggeredAbilityImpl {

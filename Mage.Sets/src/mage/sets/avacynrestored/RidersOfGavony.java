@@ -27,27 +27,28 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -66,7 +67,7 @@ public class RidersOfGavony extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // As Riders of Gavony enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new RidersOfGavonyEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Protect)));
 
         // Human creatures you control have protection from creatures of the chosen type.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RidersOfGavonyGainAbilityControlledEffect()));
@@ -80,46 +81,6 @@ public class RidersOfGavony extends CardImpl {
     public RidersOfGavony copy() {
         return new RidersOfGavony(this);
     }
-}
-
-class RidersOfGavonyEffect extends OneShotEffect {
-
-    public RidersOfGavonyEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "choose a creature type";
-    }
-
-    public RidersOfGavonyEffect(final RidersOfGavonyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            if (typeChoice.getChoice() != null) {
-                game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-                game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-                permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>", game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public RidersOfGavonyEffect copy() {
-        return new RidersOfGavonyEffect(this);
-    }
-
 }
 
 class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
@@ -154,13 +115,13 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
                 if (subtype != null) {
-                    protectionFilter = new FilterPermanent(subtype+"s");
+                    protectionFilter = new FilterPermanent(subtype + "s");
                     protectionFilter.add(new SubtypePredicate(subtype));
                 }
             }
         }
         if (protectionFilter != null) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 perm.addAbility(new ProtectionAbility(protectionFilter), source.getSourceId(), game);
             }
             return true;
