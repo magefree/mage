@@ -27,6 +27,8 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,17 +41,17 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.target.Target;
-import mage.target.TargetSpell;
+import mage.target.TargetObject;
+import mage.target.Targets;
 
 /**
  *
@@ -57,19 +59,14 @@ import mage.target.TargetSpell;
  */
 public class NotOfThisWorld extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets a permanent you control");
-
-    static {
-        filter.add(new TargetsPermanentPredicate(new FilterControlledPermanent()));
-    }
-
     public NotOfThisWorld(UUID ownerId) {
         super(ownerId, 8, "Not of This World", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Eldrazi");
 
         // Counter target spell or ability that targets a permanent you control.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(
+                new TargetStackObjectTargetingControlledPermanent());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         // Not of This World costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(7, NotOfThisWorldCondition.getInstance())));
@@ -83,6 +80,92 @@ public class NotOfThisWorld extends CardImpl {
     public NotOfThisWorld copy() {
         return new NotOfThisWorld(this);
     }
+}
+
+class TargetStackObjectTargetingControlledPermanent extends TargetObject {
+
+    public TargetStackObjectTargetingControlledPermanent() {
+        this.minNumberOfTargets = 1;
+        this.maxNumberOfTargets = 1;
+        this.zone = Zone.STACK;
+        this.targetName = "spell or ability that targets a permanent you control";
+    }
+
+    public TargetStackObjectTargetingControlledPermanent(final TargetStackObjectTargetingControlledPermanent target) {
+        super(target);
+    }
+
+    @Override
+    public Filter getFilter() {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        StackObject stackObject = game.getStack().getStackObject(id);
+        if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        return canChoose(sourceControllerId, game);
+    }
+
+    @Override
+    public boolean canChoose(UUID sourceControllerId, Game game) {
+        for (StackObject stackObject : game.getStack()) {
+            if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
+                Targets objectTargets = stackObject.getStackAbility().getTargets();
+                if (!objectTargets.isEmpty()) {
+                    for (Target target : objectTargets) {
+                        for (UUID targetId : target.getTargets()) {
+                            Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
+                            if (targetedPermanent != null && targetedPermanent.getControllerId().equals(sourceControllerId)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId,
+            Game game) {
+        return possibleTargets(sourceControllerId, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        for (StackObject stackObject : game.getStack()) {
+            if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
+                Targets objectTargets = stackObject.getStackAbility().getTargets();
+                if (!objectTargets.isEmpty()) {
+                    for (Target target : objectTargets) {
+                        for (UUID targetId : target.getTargets()) {
+                            Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
+                            if (targetedPermanent != null && targetedPermanent.getControllerId().equals(sourceControllerId)) {
+                                possibleTargets.add(stackObject.getId());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return possibleTargets;
+    }
+
+    @Override
+    public TargetStackObjectTargetingControlledPermanent copy() {
+        return new TargetStackObjectTargetingControlledPermanent(this);
+    }
+
 }
 
 class NotOfThisWorldCondition implements Condition {

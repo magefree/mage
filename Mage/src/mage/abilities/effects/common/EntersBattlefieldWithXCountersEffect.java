@@ -59,6 +59,9 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        }
         if (permanent != null) {
             SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
             if (spellAbility != null
