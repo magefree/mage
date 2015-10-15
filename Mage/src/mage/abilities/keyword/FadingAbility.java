@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
@@ -61,7 +60,7 @@ class FadingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             int amount = permanent.getCounters().getCount(CounterType.FADE);
             if (amount > 0) {
