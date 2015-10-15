@@ -876,7 +876,9 @@ public class ContinuousEffects implements Serializable {
                 }
             }
             // Must be called here for some effects to be able to work correctly
-            // TODO: add info which effects need that call
+            // For example: Vesuva copying a Dark Depth (VesuvaTest:testDarkDepth)
+            // This call should be removed if possible as replacement effects of EntersTheBattlefield events
+            // do no longer work correctly because the entering permanents are not yet on the battlefield (before they were).
             game.applyEffects();
         } while (true);
         return caught;

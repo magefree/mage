@@ -73,7 +73,7 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), tapped);
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
                 }
             }
             return true;

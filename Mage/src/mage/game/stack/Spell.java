@@ -167,6 +167,10 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean resolve(Game game) {
         boolean result;
+        Player controller = game.getPlayer(getControllerId());
+        if (controller == null) {
+            return false;
+        }
         if (this.getCardType().contains(CardType.INSTANT) || this.getCardType().contains(CardType.SORCERY)) {
             int index = 0;
             result = false;
@@ -261,6 +265,7 @@ public class Spell extends StackObjImpl implements Card {
             }
         } else {
             updateOptionalCosts(0);
+//            return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
             result = card.putOntoBattlefield(game, Zone.STACK, ability.getSourceId(), controllerId, false, faceDown);
             return result;
         }

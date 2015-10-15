@@ -1022,7 +1022,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId));
                 game.fireInformEvent(getLogName() + " plays " + card.getLogName());
                 // game.removeBookmark(bookmark);
-                resetStoredBookmark(game);
+                resetStoredBookmark(game); // prevent undo after playing a land
                 return true;
             }
             // putOntoBattlefield retured false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldorian Outpost).
@@ -2998,22 +2998,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
                 break;
             case HAND:
-                for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
-//                    if (fromZone == Zone.STACK) {
-//                        // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
-//                        Spell spell = game.getStack().getSpell(card.getId());
-//                        if (spell != null) {
-//                            game.getStack().remove(spell);
-//                        }
-//                    }
-                    boolean hideCard = fromZone.equals(Zone.LIBRARY)
-                            || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
-                    if (moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard)) {
-                        successfulMovedCards.add(card);
-                    }
-                }
-                break;
             case BATTLEFIELD:
                 return moveCards(cards, toZone, source, game, false, false, false, null);
             case LIBRARY:
@@ -3030,6 +3014,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
         return successfulMovedCards.size() > 0;
+    }
+
+    @Override
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+        Set<Card> cardList = new HashSet<>();
+        if (card != null) {
+            cardList.add(card);
+        }
+        return moveCards(cardList, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }
 
     @Override
@@ -3070,7 +3063,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 game.setScopeRelevant(false);
-                game.applyEffects();
                 for (Permanent permanent : permanentsEntered) {
                     fromZone = game.getState().getZone(permanent.getId());
                     if (((Card) permanent).removeFromZone(game, fromZone, source.getSourceId())) {
@@ -3084,6 +3076,17 @@ public abstract class PlayerImpl implements Player, Serializable {
                         game.setScopeRelevant(true);
                         successfulMovedCards.add(permanent);
                         game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), fromZone, Zone.BATTLEFIELD));
+                    }
+                }
+                game.applyEffects();
+                break;
+            case HAND:
+                for (Card card : cards) {
+                    fromZone = game.getState().getZone(card.getId());
+                    boolean hideCard = fromZone.equals(Zone.LIBRARY)
+                            || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
+                    if (moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard)) {
+                        successfulMovedCards.add(card);
                     }
                 }
                 break;
