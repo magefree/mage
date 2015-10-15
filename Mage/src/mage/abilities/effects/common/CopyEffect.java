@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,14 +20,12 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
-
 
 import java.util.UUID;
 import mage.MageObject;
@@ -56,39 +54,42 @@ public class CopyEffect extends ContinuousEffectImpl {
     /**
      * Object we copy from
      */
-    private MageObject target;
-    
-    private UUID sourceId;
+    private MageObject copyFromObject;
+
+    private UUID copyToObjectId;
     private ApplyToPermanent applier;
-    
-    public CopyEffect(MageObject target, UUID sourceId) {
-        this(Duration.Custom, target, sourceId);
+
+    public CopyEffect(MageObject copyFromObject, UUID copyToObjectId) {
+        this(Duration.Custom, copyFromObject, copyToObjectId);
     }
-    
-    public CopyEffect(Duration duration, MageObject target, UUID sourceId) {
+
+    public CopyEffect(Duration duration, MageObject copyFromObject, UUID copyToObjectId) {
         super(duration, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
-        this.target = target;        
-        this.sourceId = sourceId;
+        this.copyFromObject = copyFromObject;
+        this.copyToObjectId = copyToObjectId;
     }
 
     public CopyEffect(final CopyEffect effect) {
         super(effect);
-        this.target = effect.target.copy();
-        this.sourceId = effect.sourceId;
+        this.copyFromObject = effect.copyFromObject.copy();
+        this.copyToObjectId = effect.copyToObjectId;
         this.applier = effect.applier;
     }
 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (!(target instanceof Permanent) && (target instanceof Card)) {
-            this.target = new PermanentCard((Card)target, source.getControllerId(), game);
+        if (!(copyFromObject instanceof Permanent) && (copyFromObject instanceof Card)) {
+            this.copyFromObject = new PermanentCard((Card) copyFromObject, source.getControllerId(), game);
         }
-        affectedObjectList.add(new MageObjectReference(getSourceId(), game));
+
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (affectedObjectList.isEmpty()) {
+            affectedObjectList.add(new MageObjectReference(getSourceId(), game));
+        }
         Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
@@ -99,31 +100,31 @@ public class CopyEffect extends ContinuousEffectImpl {
             }
         }
         permanent.setCopy(true);
-        permanent.setName(target.getName());
-        permanent.getColor(game).setColor(target.getColor(game));
+        permanent.setName(copyFromObject.getName());
+        permanent.getColor(game).setColor(copyFromObject.getColor(game));
         permanent.getManaCost().clear();
-        permanent.getManaCost().add(target.getManaCost());
+        permanent.getManaCost().add(copyFromObject.getManaCost());
         permanent.getCardType().clear();
-        for (CardType type: target.getCardType()) {
+        for (CardType type : copyFromObject.getCardType()) {
             permanent.getCardType().add(type);
         }
         permanent.getSubtype().clear();
-        for (String type: target.getSubtype()) {
+        for (String type : copyFromObject.getSubtype()) {
             permanent.getSubtype().add(type);
         }
         permanent.getSupertype().clear();
-        for (String type: target.getSupertype()) {
+        for (String type : copyFromObject.getSupertype()) {
             permanent.getSupertype().add(type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);
-        for (Ability ability: target.getAbilities()) {
-             permanent.addAbility(ability, getSourceId(), game, false); // no new Id so consumed replacement effects are known while new continuousEffects.apply happen.
+        for (Ability ability : copyFromObject.getAbilities()) {
+            permanent.addAbility(ability, getSourceId(), game, false); // no new Id so consumed replacement effects are known while new continuousEffects.apply happen.
         }
-        permanent.getPower().setValue(target.getPower().getValue());
-        permanent.getToughness().setValue(target.getToughness().getValue());
-        if (target instanceof Permanent) {
-            Permanent targetPermanent = (Permanent) target;
+        permanent.getPower().setValue(copyFromObject.getPower().getValue());
+        permanent.getToughness().setValue(copyFromObject.getToughness().getValue());
+        if (copyFromObject instanceof Permanent) {
+            Permanent targetPermanent = (Permanent) copyFromObject;
             permanent.setTransformed(targetPermanent.isTransformed());
             permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
             permanent.setFlipCard(targetPermanent.isFlipCard());
@@ -131,13 +132,13 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
 
         // to get the image of the copied permanent copy number und expansionCode
-        if (target instanceof PermanentCard) {
-            permanent.setCardNumber(((PermanentCard) target).getCard().getCardNumber());
-            permanent.setExpansionSetCode(((PermanentCard) target).getCard().getExpansionSetCode());
-        } else if (target instanceof PermanentToken || target instanceof Card) {
-            permanent.setCardNumber(((Card) target).getCardNumber());
-            permanent.setExpansionSetCode(((Card) target).getExpansionSetCode());
-        }        
+        if (copyFromObject instanceof PermanentCard) {
+            permanent.setCardNumber(((PermanentCard) copyFromObject).getCard().getCardNumber());
+            permanent.setExpansionSetCode(((PermanentCard) copyFromObject).getCard().getExpansionSetCode());
+        } else if (copyFromObject instanceof PermanentToken || copyFromObject instanceof Card) {
+            permanent.setCardNumber(((Card) copyFromObject).getCardNumber());
+            permanent.setExpansionSetCode(((Card) copyFromObject).getExpansionSetCode());
+        }
         return true;
     }
 
@@ -147,15 +148,15 @@ public class CopyEffect extends ContinuousEffectImpl {
     }
 
     public MageObject getTarget() {
-        return target;
+        return copyFromObject;
     }
 
     public void setTarget(MageObject target) {
-        this.target = target;
+        this.copyFromObject = target;
     }
 
     public UUID getSourceId() {
-        return sourceId;
+        return copyToObjectId;
     }
 
     public ApplyToPermanent getApplier() {
@@ -165,5 +166,5 @@ public class CopyEffect extends ContinuousEffectImpl {
     public void setApplier(ApplyToPermanent applier) {
         this.applier = applier;
     }
-       
+
 }

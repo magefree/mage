@@ -25,46 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.copy;
 
-package mage.sets.scarsofmirrodin;
-
-import java.util.UUID;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
-import mage.target.TargetSpell;
-
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author ayratn
+ *
+ * @author LevelX2
  */
-public class TurnAside extends CardImpl {
+public class InfiniteReflectionTest extends CardTestPlayerBase {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets a permanent you control");
+    /**
+     *
+     */
+    @Test
+    public void testCopyAsEnters() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 9);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+//        addCard(Zone.BATTLEFIELD, playerA, "Birds of Paradise", 1);
+//        addCard(Zone.HAND, playerA, "Nantuko Husk", 1);// {2}{B}
+        addCard(Zone.GRAVEYARD, playerA, "Pillarfield Ox", 1);
+        // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
+        addCard(Zone.HAND, playerA, "Reanimate", 1); // {B}
 
-    static {
-        filter.add(new TargetsPermanentPredicate(new FilterControlledPermanent()));
+        // Enchant creature
+        // When Infinite Reflection enters the battlefield attached to a creature, each other nontoken creature you control becomes a copy of that creature.
+        // Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
+        addCard(Zone.HAND, playerA, "Infinite Reflection", 1); // {5}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infinite Reflection", "Silvercoat Lion");
+//        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nantuko Husk");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Pillarfield Ox");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
     }
 
-    public TurnAside(UUID ownerId) {
-        super(ownerId, 49, "Turn Aside", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "SOM";
-
-        // Counter target spell that targets a permanent you control.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
-    }
-
-    public TurnAside(final TurnAside card) {
-        super(card);
-    }
-
-    @Override
-    public TurnAside copy() {
-        return new TurnAside(this);
-    }
 }

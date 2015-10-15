@@ -34,6 +34,7 @@ import mage.abilities.condition.Condition;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
@@ -51,6 +52,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
     protected Condition condition;
     protected boolean optional;
 
+    public static final String ENTERING_PERMANENT = "enteringPermanent";
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
     public EntersBattlefieldEffect(Effect baseEffect) {
@@ -112,7 +114,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
             if (controller == null || object == null) {
                 return false;
             }
-            if (!controller.chooseUse(outcome, new StringBuilder("Use effect of ").append(object.getLogName()).append("?").toString(), source, game)) {
+            if (!controller.chooseUse(outcome, "Use effect of " + object.getLogName() + "?", source, game)) {
                 return false;
             }
         }
@@ -131,6 +133,8 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
                     if (spell != null) {
                         effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
                     }
+                    // Because the permanent is not on the battlefield yet, it has to be taken from the event
+                    effect.setValue(ENTERING_PERMANENT, ((EntersTheBattlefieldEvent) event).getTarget());
                     effect.apply(game, source);
                 }
             }

@@ -25,61 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.filter.predicate.other;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.choices.ChoiceColor;
-import mage.constants.Outcome;
+import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Mode;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
+import mage.game.stack.StackObject;
+import mage.target.Target;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class ChooseColorEffect extends OneShotEffect {
+public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
 
-    public ChooseColorEffect(Outcome outcome) {
-        super(outcome);
-        staticText = "choose a color";
-    }
+    private final FilterPermanent targetFilter;
 
-    public ChooseColorEffect(final ChooseColorEffect effect) {
-        super(effect);
+    public TargetsPermanentPredicate(FilterPermanent targetFilter) {
+        this.targetFilter = targetFilter;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
-        }
-        if (controller != null && permanent != null) {
-            ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(outcome, choice, game);
-                if (!controller.canRespond()) {
-                    return false;
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        StackObject object = game.getStack().getStackObject(input.getObject().getId());
+        if(object != null) {
+            for(UUID modeId : object.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = object.getStackAbility().getModes().get(modeId);
+                for(Target target : mode.getTargets()) {
+                    for(UUID targetId : target.getTargets()) {
+                        Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+                        if(permanent != null && targetFilter.match(permanent, input.getSourceId(), input.getPlayerId(), game)) {
+                            return true;
+                        }
+                    }
                 }
             }
-            if (!game.isSimulation()) {
-                game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
-            }
-            game.getState().setValue(source.getSourceId() + "_color", choice.getColor());
-            permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
-            return true;
         }
         return false;
     }
 
     @Override
-    public ChooseColorEffect copy() {
-        return new ChooseColorEffect(this);
+    public String toString() {
+        return "that targets " + targetFilter.getMessage();
     }
-
 }

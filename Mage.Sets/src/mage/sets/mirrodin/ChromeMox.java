@@ -99,7 +99,7 @@ class ChromeMoxEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player.getHand().size() > 0) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            player.choose(Outcome.Benefit, player.getHand(), target, game);
+            player.choose(Outcome.Benefit, target, source.getSourceId(), game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 card.moveToExile(getId(), "Chrome Mox (Imprint)", source.getSourceId(), game);

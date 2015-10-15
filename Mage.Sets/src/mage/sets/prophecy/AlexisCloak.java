@@ -25,57 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
-import mage.target.TargetSpell;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author TaVSt
+ * @author LoneFox
  */
-public class HydromorphGuardian extends CardImpl {
+public class AlexisCloak extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
+    public AlexisCloak(UUID ownerId) {
+        super(ownerId, 29, "Alexi's Cloak", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Aura");
 
-    static {
-        filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
-    }
-
-    public HydromorphGuardian(UUID ownerId) {
-        super(ownerId, 39, "Hydromorph Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "TOR";
-        this.subtype.add("Elemental");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetSpell(filter));
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        // Enchanted creature has shroud.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public HydromorphGuardian(final HydromorphGuardian card) {
+    public AlexisCloak(final AlexisCloak card) {
         super(card);
     }
 
     @Override
-    public HydromorphGuardian copy() {
-        return new HydromorphGuardian(this);
+    public AlexisCloak copy() {
+        return new AlexisCloak(this);
     }
 }

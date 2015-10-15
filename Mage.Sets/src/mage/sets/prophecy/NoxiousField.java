@@ -25,57 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
-import mage.target.TargetSpell;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author TaVSt
+ * @author LoneFox
  */
-public class HydromorphGuardian extends CardImpl {
+public class NoxiousField extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
+    public NoxiousField(UUID ownerId) {
+        super(ownerId, 70, "Noxious Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Aura");
 
-    static {
-        filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
-    }
-
-    public HydromorphGuardian(UUID ownerId) {
-        super(ownerId, 39, "Hydromorph Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "TOR";
-        this.subtype.add("Elemental");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetSpell(filter));
+        // Enchant land
+        TargetPermanent auraTarget = new TargetLandPermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        // Enchanted land has "{tap}: This land deals 1 damage to each creature and each player."
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new TapSourceCost());
+        Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
+        effect.setText("Enchanted land has \"{T}: This land deals 1 damage to each creature and each player.\"");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public HydromorphGuardian(final HydromorphGuardian card) {
+    public NoxiousField(final NoxiousField card) {
         super(card);
     }
 
     @Override
-    public HydromorphGuardian copy() {
-        return new HydromorphGuardian(this);
+    public NoxiousField copy() {
+        return new NoxiousField(this);
     }
 }

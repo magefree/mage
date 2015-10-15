@@ -25,57 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.sets.prophecy;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
-import mage.target.TargetSpell;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
  *
- * @author TaVSt
+ * @author LoneFox
  */
-public class HydromorphGuardian extends CardImpl {
+public class ScoriaCat extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public HydromorphGuardian(UUID ownerId) {
-        super(ownerId, 39, "Hydromorph Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "TOR";
-        this.subtype.add("Elemental");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    public ScoriaCat(UUID ownerId) {
+        super(ownerId, 101, "Scoria Cat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Cat");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetSpell(filter));
-        this.addAbility(ability);
+        // Scoria Cat gets +3/+3 as long as you control no untapped lands.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+            new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
+            new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
+            "{this} gets +3/+3 as long as you control no untapped lands")));
     }
 
-    public HydromorphGuardian(final HydromorphGuardian card) {
+    public ScoriaCat(final ScoriaCat card) {
         super(card);
     }
 
     @Override
-    public HydromorphGuardian copy() {
-        return new HydromorphGuardian(this);
+    public ScoriaCat copy() {
+        return new ScoriaCat(this);
     }
 }
