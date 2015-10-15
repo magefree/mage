@@ -28,17 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +59,7 @@ public class TabletOfTheGuilds extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TabletOfTheGuildsEntersBattlefieldEffect()));
 
         // Whenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
-       this.addAbility(new SpellCastControllerTriggeredAbility(new TabletOfTheGuildsGainLifeEffect(), new FilterSpell("a spell"), false, true ));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new TabletOfTheGuildsGainLifeEffect(), new FilterSpell("a spell"), false, true));
     }
 
     public TabletOfTheGuilds(final TabletOfTheGuilds card) {
@@ -86,7 +86,7 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
         if (player != null && permanent != null) {
             String colors;
             ChoiceColor colorChoice = new ChoiceColor();
@@ -101,7 +101,7 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
 
             colorChoice.getChoices().remove(colorChoice.getChoice());
             colorChoice.setMessage("Choose the second color");
-            while (!player.choose(Outcome.GainLife, colorChoice, game)  && player.canRespond()) {
+            while (!player.choose(Outcome.GainLife, colorChoice, game) && player.canRespond()) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }
             game.getState().setValue(permanent.getId() + "_color2", colorChoice.getColor().toString());

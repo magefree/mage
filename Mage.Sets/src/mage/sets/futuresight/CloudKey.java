@@ -11,6 +11,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
@@ -23,6 +24,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -73,8 +75,11 @@ class CloudKeyChooseTypeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null && controller != null) {
+        MageObject mageObject = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        if (mageObject == null) {
+            mageObject = game.getObject(source.getSourceId());
+        }
+        if (mageObject != null && controller != null) {
             ChoiceImpl choices = new ChoiceImpl(true);
             choices.setMessage("Choose a spell type");
             choices.getChoices().add(CardType.ARTIFACT.toString());
@@ -82,9 +87,12 @@ class CloudKeyChooseTypeEffect extends OneShotEffect {
             choices.getChoices().add(CardType.ENCHANTMENT.toString());
             choices.getChoices().add(CardType.INSTANT.toString());
             choices.getChoices().add(CardType.SORCERY.toString());
-            if(controller.choose(Outcome.Neutral, choices, game)) {
-                game.informPlayers(sourceObject.getLogName() + ": chosen spell type is " + choices.getChoice());
+            if (controller.choose(Outcome.Neutral, choices, game)) {
+                game.informPlayers(mageObject.getLogName() + ": chosen spell type is " + choices.getChoice());
                 game.getState().setValue(source.getSourceId().toString() + "_CloudKey", choices.getChoice());
+                if (mageObject instanceof Permanent) {
+                    ((Permanent) mageObject).addInfo("chosenCardType", CardUtil.addToolTipMarkTags("Chosen card type: " + choices.getChoice()), game);
+                }
                 return true;
             }
         }
@@ -129,4 +137,3 @@ class CloudKeyCostModificationEffect extends CostModificationEffectImpl {
         return false;
     }
 }
-

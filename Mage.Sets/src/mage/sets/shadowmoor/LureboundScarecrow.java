@@ -32,9 +32,11 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,7 +58,7 @@ public class LureboundScarecrow extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As Lurebound Scarecrow enters the battlefield, choose a color.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
 
         // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
         this.addAbility(new LureboundScarecrowTriggeredAbility());

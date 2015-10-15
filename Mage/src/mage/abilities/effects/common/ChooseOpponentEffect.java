@@ -13,27 +13,29 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
-public class ChoosePlayerEffect extends OneShotEffect {
+public class ChooseOpponentEffect extends OneShotEffect {
 
-    public ChoosePlayerEffect(Outcome outcome) {
+    public static String VALUE_KEY = "_opponent";
+
+    public ChooseOpponentEffect(Outcome outcome) {
         super(outcome);
-        this.staticText = "choose a player";
+        this.staticText = "choose an opponent";
     }
 
-    public ChoosePlayerEffect(final ChoosePlayerEffect effect) {
+    public ChooseOpponentEffect(final ChooseOpponentEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChoosePlayerEffect copy() {
-        return new ChoosePlayerEffect(this);
+    public ChooseOpponentEffect copy() {
+        return new ChooseOpponentEffect(this);
     }
 
     @Override
@@ -44,14 +46,14 @@ public class ChoosePlayerEffect extends OneShotEffect {
             mageObject = game.getObject(source.getSourceId());
         }
         if (controller != null && mageObject != null) {
-            TargetPlayer target = new TargetPlayer(1, 1, true);
+            TargetOpponent target = new TargetOpponent(true);
             if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {
                     game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                    game.getState().setValue(mageObject.getId() + "_player", target.getFirstTarget());
+                    game.getState().setValue(mageObject.getId() + VALUE_KEY, target.getFirstTarget());
                     if (mageObject instanceof Permanent) {
-                        ((Permanent) mageObject).addInfo("chosen player", CardUtil.addToolTipMarkTags("Chosen player: " + chosenPlayer.getLogName()), game);
+                        ((Permanent) mageObject).addInfo("chosen opponent", CardUtil.addToolTipMarkTags("Chosen player: " + chosenPlayer.getLogName()), game);
                     }
                     return true;
                 }
