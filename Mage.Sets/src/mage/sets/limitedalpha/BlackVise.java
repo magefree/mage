@@ -103,7 +103,7 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
 class BlackViseEffect extends OneShotEffect {
 
     public BlackViseEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         this.staticText = "{this} deals X damage to that player, where X is the number of cards in his or her hand minus 4";
     }
 
