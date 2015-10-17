@@ -47,7 +47,7 @@ public enum AbilityWord {
     HELLBENT("Hellbent"),
     HEROIC("Heroic"),
     IMPRINT("Imprint"),
-    INSPIRED("Inspided"),
+    INSPIRED("Inspired"),
     JOIN_FORCES("Join forces"),
     KINSHIP("Kinship"),
     LANDFALL("Landfall"),
