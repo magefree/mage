@@ -958,6 +958,10 @@ public abstract class AbilityImpl implements Ability {
             if (object instanceof Permanent) {
                 return false;
             } else {
+                Permanent permanent = game.getPermanentEntering(getSourceId());
+                if (permanent != null && permanent.getAbilities().contains(this)) {
+                    return true;
+                }
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
                 if (otherAbilities == null || !otherAbilities.contains(this)) {

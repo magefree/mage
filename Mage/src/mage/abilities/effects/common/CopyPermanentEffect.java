@@ -73,7 +73,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         this.applier = applier;
         this.filter = filter;
         this.useTargetOfAbility = useTarget;
-        this.staticText = "You may have {this} enter the battlefield as a copy of any " + filter.getMessage() + " on the battlefield";
+        this.staticText = "as a copy of any " + filter.getMessage() + " on the battlefield";
     }
 
     public CopyPermanentEffect(final CopyPermanentEffect effect) {
@@ -87,7 +87,10 @@ public class CopyPermanentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
+        if (sourceObject == null) {
+            sourceObject = game.getObject(source.getSourceId());
+        }
         if (player != null && sourceObject != null) {
             Permanent copyFromPermanent = null;
             if (useTargetOfAbility) {

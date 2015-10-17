@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -95,7 +94,7 @@ class CankerAbominationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent cankerAbomination = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        Permanent cankerAbomination = game.getPermanentEntering(source.getSourceId());
         if (controller != null && cankerAbomination != null) {
             Target target = new TargetOpponent();
             target.setNotTarget(true);

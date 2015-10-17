@@ -65,10 +65,9 @@ public class AquamorphEntity extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Aquamorph Entity enters the battlefield or is turned face up, it becomes your choice of 5/1 or 1/5.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AquamorphEntityReplacementEffect());
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new AquamorphEntityReplacementEffect());
         ability.setWorksFaceDown(true);
         this.addAbility(ability);
-
 
         // Morph {2}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
@@ -83,7 +82,6 @@ public class AquamorphEntity extends CardImpl {
         return new AquamorphEntity(this);
     }
 }
-
 
 class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
@@ -101,7 +99,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
+        switch (event.getType()) {
             case ENTERS_THE_BATTLEFIELD:
             case TURNFACEUP:
                 return true;
@@ -114,7 +112,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             if (event.getTargetId().equals(source.getSourceId())) {
-                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
                 if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                     return true;
                 }
@@ -135,7 +133,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose what the creature becomes to");
@@ -143,7 +141,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
             choice.getChoices().add(choice15);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                while(!choice.isChosen()) {
+                while (!choice.isChosen()) {
                     controller.choose(Outcome.Neutral, choice, game);
                     if (!controller.canRespond()) {
                         return false;
@@ -168,7 +166,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-        
+
     }
 
     @Override

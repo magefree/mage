@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Torpor Orb:
- *   Creatures entering the battlefield don't cause abilities to trigger.
+ * Torpor Orb: Creatures entering the battlefield don't cause abilities to
+ * trigger.
  *
  * @author noxx
  */
@@ -15,7 +15,10 @@ public class TorporOrbTest extends CardTestPlayerBase {
 
     @Test
     public void testWallOfOmens() {
+        // Creatures entering the battlefield don't cause abilities to trigger.
         addCard(Zone.BATTLEFIELD, playerA, "Torpor Orb");
+        // Defender
+        // When Wall of Omens enters the battlefield, draw a card.
         addCard(Zone.HAND, playerA, "Wall of Omens");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
@@ -33,7 +36,8 @@ public class TorporOrbTest extends CardTestPlayerBase {
     }
 
     /**
-     * Treacherous Pit-Dweller doesnt function properly with Torpor Orb and Hushwing Gryff
+     * Treacherous Pit-Dweller doesnt function properly with Torpor Orb and
+     * Hushwing Gryff
      */
     @Test
     public void testPitTweller() {
@@ -42,8 +46,8 @@ public class TorporOrbTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        
-        attack(2, playerB, "Treacherous Pit-Dweller");        
+
+        attack(2, playerB, "Treacherous Pit-Dweller");
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -53,9 +57,9 @@ public class TorporOrbTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
-        
+
         assertPermanentCount(playerB, "Treacherous Pit-Dweller", 1);
-        assertPowerToughness(playerB, "Treacherous Pit-Dweller", 5,4);
+        assertPowerToughness(playerB, "Treacherous Pit-Dweller", 5, 4);
     }
-    
+
 }

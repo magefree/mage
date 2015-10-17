@@ -76,10 +76,10 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         this.addDashCost(manaString);
         Ability ability = new EntersBattlefieldAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
-                DashedCondition.getInstance(), false, "", "");
+                DashedCondition.getInstance(), "", "");
         ability.addEffect(new DashAddDelayedTriggeredAbilityEffect());
         addSubAbility(ability);
-        
+
     }
 
     public DashAbility(final DashAbility ability) {
@@ -226,16 +226,18 @@ class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("return the dashed creature from the battlefield to its owner's hand");
-        effect.setTargetPointer(new FixedTarget(source.getSourceId()));
-        // init target pointer now because the dashed creature will only be returned from current zone
-        effect.getTargetPointer().init(game, source);
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        if (game.getPermanentEntering(source.getSourceId()) != null) {
+            Effect effect = new ReturnToHandTargetEffect();
+            effect.setText("return the dashed creature from the battlefield to its owner's hand");
+            // init target pointer now because the dashed creature will only be returned from battlefield zone (now in entering state so zone change counter is not raised yet)
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+            delayedAbility.setSourceId(source.getSourceId());
+            delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
+            game.addDelayedTriggeredAbility(delayedAbility);
+            return true;
+        }
         return false;
     }
 }

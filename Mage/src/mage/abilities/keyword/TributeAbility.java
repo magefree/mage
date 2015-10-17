@@ -30,7 +30,6 @@ package mage.abilities.keyword;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Outcome;
@@ -51,7 +50,7 @@ public class TributeAbility extends EntersBattlefieldAbility {
     private int tributeValue;
 
     public TributeAbility(int tributeValue) {
-        super(new TributeEffect(tributeValue), false);
+        super(new TributeEffect(tributeValue));
         this.tributeValue = tributeValue;
     }
 
@@ -98,7 +97,7 @@ class TributeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             UUID opponentId;
             if (game.getOpponents(controller.getId()).size() == 1) {

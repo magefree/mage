@@ -176,6 +176,9 @@ public abstract class GameImpl implements Game, Serializable {
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
     protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
 
+    // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
+    protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
+
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
@@ -244,6 +247,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.lki.putAll(game.lki);
         this.lkiExtended.putAll(game.lkiExtended);
         this.shortLivingLKI.putAll(game.shortLivingLKI);
+        this.permanentsEntering.putAll(game.permanentsEntering);
         if (logger.isDebugEnabled()) {
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
@@ -499,6 +503,16 @@ public abstract class GameImpl implements Game, Serializable {
             permanent = (Permanent) this.getLastKnownInformation(permanentId, Zone.BATTLEFIELD);
         }
         return permanent;
+    }
+
+    @Override
+    public Permanent getPermanentEntering(UUID permanentId) {
+        return permanentsEntering.get(permanentId);
+    }
+
+    @Override
+    public Map<UUID, Permanent> getPermanentsEntering() {
+        return permanentsEntering;
     }
 
     @Override
@@ -891,7 +905,7 @@ public abstract class GameImpl implements Game, Serializable {
             return;
         }
         getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
-        if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
+        if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
             startingPlayerId = targetPlayer.getTargets().get(0);
         } else if (getState().getPlayers().size() < 3) {
             // not possible to choose starting player, choosing player has probably conceded, so stop here
@@ -2539,8 +2553,10 @@ public abstract class GameImpl implements Game, Serializable {
                 card.setZone(Zone.BATTLEFIELD, this);
                 card.setOwnerId(ownerId);
                 PermanentCard permanent = new PermanentCard(card.getCard(), ownerId, this);
-                getBattlefield().addPermanent(permanent);
+                getPermanentsEntering().put(permanent.getId(), permanent);
                 permanent.entersBattlefield(permanent.getId(), this, Zone.OUTSIDE, false);
+                getBattlefield().addPermanent(permanent);
+                getPermanentsEntering().remove(permanent.getId());
                 ((PermanentImpl) permanent).removeSummoningSickness();
                 if (card.isTapped()) {
                     permanent.setTapped(true);

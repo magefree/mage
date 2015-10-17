@@ -13,14 +13,16 @@ public class FathomMageTest extends CardTestPlayerBase {
     /**
      * Fathom Mage - Creature — Human Wizard 1/1, 2UG
      *
-     * Evolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
-     * Whenever a +1/+1 counter is placed on Fathom Mage, you may draw a card.
+     * Evolve (Whenever a creature enters the battlefield under your control, if
+     * that creature has greater power or toughness than this creature, put a
+     * +1/+1 counter on this creature.) Whenever a +1/+1 counter is placed on
+     * Fathom Mage, you may draw a card.
      *
-
+     *
      */
     @Test
     public void testDrawCardsAddedCounters() {
-         // card draw triggered ability will trigger once for each of those counters from Blessings of Nature.
+        // card draw triggered ability will trigger once for each of those counters from Blessings of Nature.
 
         addCard(Zone.HAND, playerA, "Blessings of Nature");
         addCard(Zone.BATTLEFIELD, playerA, "Fathom Mage", 1);
@@ -38,14 +40,14 @@ public class FathomMageTest extends CardTestPlayerBase {
 
     @Test
     public void testDrawCardsEntersTheBattlefield() {
-         // card draw triggered ability will trigger once for each of those counters from Master Biomancer.
+        // card draw triggered ability will trigger once for each of those counters from Master Biomancer.
 
         addCard(Zone.HAND, playerA, "Fathom Mage");
         addCard(Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fathom Mage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fathom Mage"); // {2}{G}{U}
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

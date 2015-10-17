@@ -28,16 +28,16 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.ExtortAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -51,7 +51,6 @@ public class BlindObedience extends CardImpl {
     public BlindObedience(UUID ownerId) {
         super(ownerId, 6, "Blind Obedience", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "GTC";
-
 
         // Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         this.addAbility(new ExtortAbility());
@@ -72,6 +71,7 @@ public class BlindObedience extends CardImpl {
 }
 
 class BlindObedienceTapEffect extends ReplacementEffectImpl {
+
     BlindObedienceTapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Artifacts and creatures your opponents control enter the battlefield tapped";
@@ -83,22 +83,22 @@ class BlindObedienceTapEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
+        Permanent target = game.getPermanentEntering(event.getTargetId());
         if (target != null) {
             target.setTapped(true);
         }
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
+            Permanent permanent = game.getPermanentEntering(event.getTargetId());
             if (permanent != null && (permanent.getCardType().contains(CardType.CREATURE) || permanent.getCardType().contains(CardType.ARTIFACT))) {
                 return true;
             }

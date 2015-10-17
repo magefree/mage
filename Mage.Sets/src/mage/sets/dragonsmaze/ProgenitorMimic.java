@@ -30,18 +30,16 @@ package mage.sets.dragonsmaze;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -72,17 +70,16 @@ public class ProgenitorMimic extends CardImpl {
         // put a token onto the battlefield that's a copy of this creature."
         Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
         effect.setText("put a token onto the battlefield that's a copy of this creature");
+
         AbilityApplier applier = new AbilityApplier(
                 new ConditionalTriggeredAbility(
                         new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false),
                         new SourceMatchesFilterCondition(filter),
                         "At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.")
         );
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new EntersBattlefieldEffect(new CopyPermanentEffect(applier),
-                        "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains \"At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.\"",
-                        true)));
+        effect = new CopyPermanentEffect();
+        effect.setText("as a copy of any creature on the battlefield except it gains \"At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.\"");
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(applier), true));
     }
 
     public ProgenitorMimic(final ProgenitorMimic card) {

@@ -27,15 +27,11 @@
  */
 package mage.sets.commander2014;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -43,7 +39,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -55,7 +50,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -80,8 +74,7 @@ public class NahiriTheLithomancer extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Nahiri");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +2: Put a 1/1 white Kor Soldier creature token onto the battlefield. You may attach an Equipment you control to it.
         this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerFirstAbilityEffect(), 2));
@@ -111,6 +104,7 @@ public class NahiriTheLithomancer extends CardImpl {
 class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Equipment you control");
+
     static {
         filter.add(new SubtypePredicate("Equipment"));
     }
@@ -139,8 +133,8 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
                 if (tokenPermanent != null) {
                     //TODO: Make sure the Equipment can legally enchant the token, preferably on targetting.
                     Target target = new TargetControlledPermanent(0, 1, filter, true);
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
-                        controller.chooseUse(outcome, "Attach an Equipment you control to the created Token?", source, game)) {
+                    if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                            && controller.chooseUse(outcome, "Attach an Equipment you control to the created Token?", source, game)) {
                         if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
                             Permanent equipmentPermanent = game.getPermanent(target.getFirstTarget());
                             if (equipmentPermanent != null) {
@@ -164,6 +158,7 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
 class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("an Equipment");
+
     static {
         filter.add(new SubtypePredicate("Equipment"));
     }
@@ -193,8 +188,7 @@ class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
                 if (card != null) {
                     controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
                 }
-            }
-            else {
+            } else {
                 Target target = new TargetCardInYourGraveyard(0, 1, filter);
                 target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), game);
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);

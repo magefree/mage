@@ -64,7 +64,7 @@ public class SageOfFables extends CardImpl {
 
         // Each other Wizard creature you control enters the battlefield with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SageOfFablesReplacementEffect()));
-        
+
         // {2}, Remove a +1/+1 counter from a creature you control: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.P1P1));
@@ -91,16 +91,16 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
     SageOfFablesReplacementEffect(SageOfFablesReplacementEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
-        return creature != null && creature.getControllerId().equals(source.getControllerId()) 
+        Permanent creature = game.getPermanentEntering(event.getTargetId());
+        return creature != null && creature.getControllerId().equals(source.getControllerId())
                 && creature.getCardType().contains(CardType.CREATURE)
                 && creature.getSubtype().contains("Wizard")
                 && !event.getTargetId().equals(source.getSourceId());
@@ -113,13 +113,12 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
+        Permanent creature = game.getPermanentEntering(event.getTargetId());
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), game);
         }
         return false;
     }
-
 
     @Override
     public SageOfFablesReplacementEffect copy() {

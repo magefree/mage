@@ -51,7 +51,6 @@ public class FlourishingDefenses extends CardImpl {
         super(ownerId, 114, "Flourishing Defenses", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
         this.expansionSetCode = "SHM";
 
-
         // Whenever a -1/-1 counter is placed on a creature, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
         this.addAbility(new FlourishingDefensesTriggeredAbility());
 
@@ -91,7 +90,10 @@ class FlourishingDefensesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.M1M1.getName())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent == null) {
+                permanent = game.getPermanentEntering(event.getTargetId());
+            }
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }
         }

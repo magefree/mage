@@ -30,7 +30,6 @@ package mage.abilities.effects.common.continuous;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -94,7 +93,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (affectedObjectsSet) {
-            Permanent permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+            Permanent permanent = game.getPermanentEntering(source.getSourceId());
             if (permanent != null) {
                 affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1, game));
             } else {

@@ -59,7 +59,7 @@ public class PalaceSiege extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // As Palace Siege enters the battlefield, choose Khans or Dragons.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?","Khans", "Dragons"),null, true,
+        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?","Khans", "Dragons"),null,
                 "As {this} enters the battlefield, choose Khans or Dragons.",""));
         
         // * Khans - At the beginning of your upkeep, return target creature card from your graveyard to your hand.

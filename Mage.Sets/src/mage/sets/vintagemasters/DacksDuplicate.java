@@ -30,15 +30,15 @@ package mage.sets.vintagemasters;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.DethroneAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
@@ -58,11 +58,9 @@ public class DacksDuplicate extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Dack's Duplicate enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new EntersBattlefieldEffect(new CopyPermanentEffect(new DacksDuplicateApplyToPermanent()),
-                        "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone",
-                        true)));
+        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new DacksDuplicateApplyToPermanent());
+        effect.setText("as a copy of any creature on the battlefield except it gains haste and dethrone");
+        this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
     public DacksDuplicate(final DacksDuplicate card) {

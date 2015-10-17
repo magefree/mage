@@ -28,12 +28,15 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -47,7 +50,7 @@ public class OrbOfDreams extends CardImpl {
     public OrbOfDreams(UUID ownerId) {
         super(ownerId, 156, "Orb of Dreams", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "BOK";
-        
+
         // Permanents enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrbOfDreamsEffect()));
     }
@@ -60,7 +63,7 @@ public class OrbOfDreams extends CardImpl {
     public OrbOfDreams copy() {
         return new OrbOfDreams(this);
     }
-    
+
     private class OrbOfDreamsEffect extends ReplacementEffectImpl {
 
         OrbOfDreamsEffect() {
@@ -79,23 +82,22 @@ public class OrbOfDreams extends CardImpl {
 
         @Override
         public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
+            Permanent permanent = game.getPermanentEntering(event.getTargetId());
             if (permanent != null) {
                 permanent.setTapped(true);
             }
             return false;
         }
-    
+
         @Override
         public boolean checksEventType(GameEvent event, Game game) {
             return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
         }
-    
+
         @Override
         public boolean applies(GameEvent event, Ability source, Game game) {
             return true;
         }
 
-    } 
+    }
 }
-

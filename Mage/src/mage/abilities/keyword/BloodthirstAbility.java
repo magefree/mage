@@ -2,7 +2,6 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -56,7 +55,7 @@ class BloodthirstEffect extends OneShotEffect {
     BloodthirstEffect(int amount) {
         super(Outcome.BoostCreature);
         this.amount = amount;
-        staticText = new StringBuilder("this permanent comes into play with ").append(this.amount).append(" +1/+1 counters on it").toString();
+        staticText = "this permanent comes into play with " + this.amount + " +1/+1 counters on it";
     }
 
     BloodthirstEffect(final BloodthirstEffect effect) {
@@ -70,10 +69,9 @@ class BloodthirstEffect extends OneShotEffect {
         if (player != null) {
             BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get("DamagedOpponents", source.getControllerId());
             if (watcher != null && watcher.conditionMet()) {
-                Permanent permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+                Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {
                     permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-
                 }
             }
             return true;

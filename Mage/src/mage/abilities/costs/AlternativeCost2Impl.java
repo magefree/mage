@@ -125,8 +125,6 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
         activated = true;
     }
 
-    ;
-
     /**
      * Reset the activate and count information
      *

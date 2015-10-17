@@ -28,17 +28,15 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,8 +56,7 @@ public class RalZarek extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Ral");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Tap target permanent, then untap another target permanent.
         LoyaltyAbility ability1 = new LoyaltyAbility(new RalZarekTapUntapEffect(), 1);
@@ -86,7 +83,6 @@ public class RalZarek extends CardImpl {
     }
 }
 
-
 class RalZarekTapUntapEffect extends OneShotEffect {
 
     public RalZarekTapUntapEffect() {
@@ -112,10 +108,10 @@ class RalZarekTapUntapEffect extends OneShotEffect {
                 i++;
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    if (i==1) {
+                    if (i == 1) {
                         permanent.tap(game);
                     }
-                    if (i==2) {
+                    if (i == 2) {
                         permanent.untap(game);
                     }
                 }
@@ -146,7 +142,7 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (int i=0; i<5; i++) {
+            for (int i = 0; i < 5; i++) {
                 if (controller.flipCoin(game)) {
                     game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
                 }

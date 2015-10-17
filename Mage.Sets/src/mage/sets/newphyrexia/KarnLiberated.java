@@ -34,11 +34,10 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -47,7 +46,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -72,7 +70,7 @@ public class KarnLiberated extends CardImpl {
         super(ownerId, 1, "Karn Liberated", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{7}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Karn");
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
         // +4: Target player exiles a card from his or her hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, this.getIdName(), new FilterCard()), 4);

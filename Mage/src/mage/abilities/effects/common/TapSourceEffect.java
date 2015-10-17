@@ -28,7 +28,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -66,7 +65,7 @@ public class TapSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
-            permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+            permanent = game.getPermanentEntering(source.getSourceId());
         }
         if (permanent != null) {
             if (withoutTrigger) {

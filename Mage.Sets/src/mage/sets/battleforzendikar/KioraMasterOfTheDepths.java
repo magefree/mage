@@ -32,13 +32,12 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -48,7 +47,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandCard;
@@ -73,7 +71,7 @@ public class KioraMasterOfTheDepths extends CardImpl {
         this.expansionSetCode = "BFZ";
         this.subtype.add("Kiora");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Untap up to one target creature and up to one target land.
         LoyaltyAbility ability1 = new LoyaltyAbility(new KioraUntapEffect(), 1);

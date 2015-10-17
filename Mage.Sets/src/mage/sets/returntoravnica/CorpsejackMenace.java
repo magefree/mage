@@ -28,30 +28,30 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *  http://www.wizards.com/magic/magazine/article.aspx?x=mtg/faq/rtr
+ * http://www.wizards.com/magic/magazine/article.aspx?x=mtg/faq/rtr
  *
- *  If a creature you control would enter the battlefield with a number of +1/+1
- *  counters on it, it enters with twice that many instead.
+ * If a creature you control would enter the battlefield with a number of +1/+1
+ * counters on it, it enters with twice that many instead.
  *
- *  If you control two Corpsejack Menaces, the number of +1/+1 counters placed
- *  is four times the original number. Three Corpsejack Menaces multiplies the
- *  original number by eight, and so on.
+ * If you control two Corpsejack Menaces, the number of +1/+1 counters placed is
+ * four times the original number. Three Corpsejack Menaces multiplies the
+ * original number by eight, and so on.
  *
  * @author LevelX2
  */
@@ -80,8 +80,8 @@ public class CorpsejackMenace extends CardImpl {
     }
 }
 
-
 class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
+
     CorpsejackMenaceReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If one or more +1/+1 counters would be placed on a creature you control, twice that many +1/+1 counters are placed on it instead";
@@ -93,24 +93,30 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent p = game.getPermanent(event.getTargetId());
-        if (p != null) {
-            p.addCounters(CounterType.P1P1.createInstance(event.getAmount()*2), game, event.getAppliedEffects());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
+        if (permanent != null) {
+            permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount() * 2), game, event.getAppliedEffects());
         }
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ADD_COUNTERS;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getData().equals(CounterType.P1P1.getName())) {
-            Permanent target = game.getPermanent(event.getTargetId());
-            if (target != null && target.getControllerId().equals(source.getControllerId())
-                               && target.getCardType().contains(CardType.CREATURE)) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent == null) {
+                permanent = game.getPermanentEntering(event.getTargetId());
+            }
+            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
+                    && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }
         }

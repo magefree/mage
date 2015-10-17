@@ -108,7 +108,7 @@ class ModularStaticAbility extends StaticAbility {
     private String ruleText;
 
     public ModularStaticAbility(int amount) {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
+        super(Zone.ALL, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
         ruleText = "This enters the battlefield with " + CardUtil.numberToText(amount, "a") + " +1/+1 counter" + (amount != 1 ? "s" : "") + " on it.";
         this.setRuleVisible(false);
     }

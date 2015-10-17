@@ -773,6 +773,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean addAttachment(UUID permanentId, Game game) {
         if (!this.attachments.contains(permanentId)) {
             Permanent aura = game.getPermanent(permanentId);
+            if (aura == null) {
+                aura = game.getPermanentEntering(permanentId);
+            }
             if (aura != null) {
                 if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ENCHANT_PLAYER, playerId, permanentId, aura.getControllerId()))) {
                     this.attachments.add(permanentId);
@@ -1016,8 +1019,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId))) {
             // int bookmark = game.bookmarkState();
-            Zone zone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, zone, null, playerId)) {
+            if (moveCards(card, Zone.BATTLEFIELD, playLandAbility, game, false, false, false, null)) {
                 landsPlayed++;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId));
                 game.fireInformEvent(getLogName() + " plays " + card.getLogName());
@@ -2980,40 +2982,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        if (cards.isEmpty()) {
-            return true;
-        }
-        Set<Card> successfulMovedCards = new LinkedHashSet<>();
-        switch (toZone) {
-            case EXILED:
-                for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
-                    boolean withName = (fromZone.equals(Zone.BATTLEFIELD) || fromZone.equals(Zone.STACK)) || !card.isFaceDown(game);
-                    if (moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, withName)) {
-                        successfulMovedCards.add(card);
-                    }
-                }
-                break;
-            case GRAVEYARD:
-                successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
-                break;
-            case HAND:
-            case BATTLEFIELD:
-                return moveCards(cards, toZone, source, game, false, false, false, null);
-            case LIBRARY:
-                for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
-                    boolean hideCard = fromZone.equals(Zone.HAND) || fromZone.equals(Zone.LIBRARY);
-                    if (moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, !hideCard)) {
-                        successfulMovedCards.add(card);
-                    }
-                }
-                break;
-            default:
-                throw new UnsupportedOperationException("to Zone not supported yet");
-        }
-        game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
-        return successfulMovedCards.size() > 0;
+        return moveCards(cards, toZone, source, game, false, false, false, null);
+    }
+
+    @Override
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game) {
+        return moveCards(card, toZone, source, game, false, false, false, null);
     }
 
     @Override
@@ -3026,6 +3000,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean moveCards(Cards cards, Zone toZone, Ability source, Game game) {
+        return moveCards(cards.getCards(game), toZone, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game) {
+        return moveCards(cards, toZone, source, game, false, false, false, null);
+    }
+
+    @Override
     public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
         if (cards.isEmpty()) {
             return true;
@@ -3033,7 +3017,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         Set<Card> successfulMovedCards = new LinkedHashSet<>();
         Zone fromZone = null;
         switch (toZone) {
-            case BATTLEFIELD:
+            case GRAVEYARD:
+                fromZone = game.getState().getZone(cards.iterator().next().getId());
+                successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
+                break;
+            case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
                 List<Permanent> permanents = new ArrayList<>();
                 List<Permanent> permanentsEntered = new ArrayList<>();
                 for (Card card : cards) {
@@ -3047,6 +3035,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         // get permanent
                         Permanent permanent = new PermanentCard(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
                         permanents.add(permanent);
+                        game.getPermanentsEntering().put(permanent.getId(), permanent);
                         card.checkForCountersToAdd(permanent, game);
                         permanent.setTapped(tapped);
                         permanent.setFaceDown(faceDown, game);
@@ -3060,6 +3049,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     fromZone = game.getState().getZone(permanent.getId());
                     if (permanent.entersBattlefield(source.getSourceId(), game, fromZone, true)) {
                         permanentsEntered.add(permanent);
+                    } else {
+                        game.getPermanentsEntering().remove(permanent.getId());
                     }
                 }
                 game.setScopeRelevant(false);
@@ -3071,11 +3062,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                         game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
                         game.addPermanent(permanent);
                         permanent.setZone(Zone.BATTLEFIELD, game);
-                        // check if there are counters to add to the permanent (e.g. from non replacement effects like Persist)
-
+                        game.getPermanentsEntering().remove(permanent.getId());
                         game.setScopeRelevant(true);
                         successfulMovedCards.add(permanent);
                         game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), fromZone, Zone.BATTLEFIELD));
+                        if (!game.isSimulation()) {
+                            game.informPlayers(this.getLogName() + " puts " + (faceDown ? "a card face down " : permanent.getLogName())
+                                    + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
+                        }
+                    } else {
+                        game.getPermanentsEntering().remove(permanent.getId());
                     }
                 }
                 game.applyEffects();
@@ -3090,8 +3086,26 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 break;
+            case EXILED:
+                for (Card card : cards) {
+                    fromZone = game.getState().getZone(card.getId());
+                    boolean withName = (fromZone.equals(Zone.BATTLEFIELD) || fromZone.equals(Zone.STACK)) || !card.isFaceDown(game);
+                    if (moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, withName)) {
+                        successfulMovedCards.add(card);
+                    }
+                }
+                break;
+            case LIBRARY:
+                for (Card card : cards) {
+                    fromZone = game.getState().getZone(card.getId());
+                    boolean hideCard = fromZone.equals(Zone.HAND) || fromZone.equals(Zone.LIBRARY);
+                    if (moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, !hideCard)) {
+                        successfulMovedCards.add(card);
+                    }
+                }
+                break;
             default:
-                throw new UnsupportedOperationException("to Zone not supported yet");
+                throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
         }
 
         game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
@@ -3293,16 +3307,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         return result;
     }
 
+    @Deprecated
     @Override
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
         return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, false, false);
     }
 
+    @Deprecated
     @Override
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
         return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped, false);
     }
 
+    @Deprecated
     @Override
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
         boolean result = false;

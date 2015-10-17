@@ -28,11 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,7 +35,12 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -125,9 +125,8 @@ class OmenMachineEffect2 extends OneShotEffect {
             if (card != null) {
                 player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 if (card.getCardType().contains(CardType.LAND)) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
-                }
-                else {
+                    player.moveCards(card, Zone.BATTLEFIELD, source, game);
+                } else {
                     if (card.getSpellAbility().canChooseTarget(game)) {
                         player.cast(card.getSpellAbility(), game, true);
                     }

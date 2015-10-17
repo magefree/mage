@@ -28,16 +28,18 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -74,6 +76,7 @@ public class UrabraskTheHidden extends CardImpl {
 }
 
 class UrabraskTheHiddenEffect extends ReplacementEffectImpl {
+
     UrabraskTheHiddenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Creatures your opponents control enter the battlefield tapped";
@@ -85,7 +88,7 @@ class UrabraskTheHiddenEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
+        Permanent target = game.getPermanentEntering(event.getTargetId());
         if (target != null) {
             target.setTapped(true);
         }
@@ -96,18 +99,17 @@ class UrabraskTheHiddenEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+            Permanent permanent = game.getPermanentEntering(event.getTargetId());
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }
         }
         return false;
     }
-
 
     @Override
     public UrabraskTheHiddenEffect copy() {

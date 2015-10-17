@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -97,7 +96,7 @@ class ArsenalThresherEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Permanent arsenalThresher = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        Permanent arsenalThresher = game.getPermanentEntering(source.getSourceId());
         FilterArtifactCard filter = new FilterArtifactCard();
         filter.add(new AnotherCardPredicate());
         if (controller.chooseUse(Outcome.Benefit, "Do you want to reveal other artifacts in your hand?", source, game)) {

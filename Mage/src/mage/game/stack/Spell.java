@@ -232,7 +232,7 @@ public class Spell extends StackObjImpl implements Card {
                     card.getCardType().remove(CardType.CREATURE);
                     card.getSubtype().add("Aura");
                 }
-                if (card.putOntoBattlefield(game, Zone.STACK, ability.getSourceId(), controllerId)) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     if (bestow) {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
@@ -253,8 +253,7 @@ public class Spell extends StackObjImpl implements Card {
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (this.getSpellAbility() instanceof BestowAbility) {
                 updateOptionalCosts(0);
-                result = card.putOntoBattlefield(game, Zone.STACK, ability.getSourceId(), controllerId);
-                return result;
+                return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
             } else {
                 //20091005 - 608.2b
                 if (!game.isSimulation()) {
@@ -265,9 +264,7 @@ public class Spell extends StackObjImpl implements Card {
             }
         } else {
             updateOptionalCosts(0);
-//            return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
-            result = card.putOntoBattlefield(game, Zone.STACK, ability.getSourceId(), controllerId, false, faceDown);
-            return result;
+            return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
         }
     }
 

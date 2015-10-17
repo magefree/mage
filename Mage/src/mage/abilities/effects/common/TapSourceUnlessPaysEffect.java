@@ -29,8 +29,8 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,8 +59,8 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        if (permanent == null && source.getAbilityType().equals(AbilityType.STATIC)) {
+            permanent = game.getPermanentEntering(source.getSourceId());
         }
         if (player != null && permanent != null) {
             if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)

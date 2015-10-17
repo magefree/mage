@@ -27,26 +27,23 @@
  */
 package mage.sets.zendikar;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.counters.CounterType;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -59,8 +56,7 @@ public class SorinMarkov extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Sorin");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +2: Sorin Markov deals 2 damage to target creature or player and you gain 2 life.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(2), 2);

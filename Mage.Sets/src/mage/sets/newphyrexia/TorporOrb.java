@@ -40,6 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -77,23 +78,24 @@ class TorporOrbEffect extends ContinuousRuleModifyingEffectImpl {
     TorporOrbEffect(final TorporOrbEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Ability ability = (Ability) getValue("targetAbility");
         if (ability != null && AbilityType.TRIGGERED.equals(ability.getAbilityType())) {
-            Permanent p = game.getPermanent(event.getTargetId());
-            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }
         }
         return false;
     }
+
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(event.getSourceId());
@@ -103,7 +105,7 @@ class TorporOrbEffect extends ContinuousRuleModifyingEffectImpl {
         }
         return null;
     }
-    
+
     @Override
     public TorporOrbEffect copy() {
         return new TorporOrbEffect(this);

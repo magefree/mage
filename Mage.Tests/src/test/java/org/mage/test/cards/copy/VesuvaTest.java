@@ -92,7 +92,6 @@ public class VesuvaTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerB, "Dark Depths", 1);
-        assertPermanentCount(playerA, "Vesuva", 0);
         assertPermanentCount(playerA, "Dark Depths", 1);
 
         Permanent darkDepth = getPermanent("Dark Depths", playerA);

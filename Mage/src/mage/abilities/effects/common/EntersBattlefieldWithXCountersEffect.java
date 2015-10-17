@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
@@ -60,13 +61,15 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
-            permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+            if (permanent == null && source.getAbilityType().equals(AbilityType.STATIC)) {
+                permanent = game.getPermanentEntering(source.getSourceId());
+            }
         }
         if (permanent != null) {
             SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
             if (spellAbility != null
                     && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
+                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                 if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast
                     int amount = spellAbility.getManaCostsToPay().getX();
                     if (amount > 0) {

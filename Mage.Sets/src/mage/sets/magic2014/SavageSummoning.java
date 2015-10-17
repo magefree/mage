@@ -314,7 +314,7 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
+        Permanent creature = game.getPermanentEntering(event.getTargetId());
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), game);
         }

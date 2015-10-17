@@ -533,10 +533,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         if (flag) {
             Assert.assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities().containsRule(ability));
+                    + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
         } else {
             Assert.assertFalse("Card shouldn't have such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities().containsRule(ability));
+                    + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
         }
     }
 
@@ -574,7 +574,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
-        Assert.assertEquals("(Battlefield) Card counts for " + player.getName() + " are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Battlefield) Permanents counts for " + player.getName() + " are not equal (" + cardName + ")", count, actualCount);
     }
 
     @Override

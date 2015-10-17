@@ -66,7 +66,7 @@ public class PrimalPlasma extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Primal Plasma enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalPlasmaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new PrimalPlasmaReplacementEffect()));
     }
 
     public PrimalPlasma(final PrimalPlasma card) {
@@ -102,7 +102,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
             if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                 return true;
             }
@@ -117,7 +117,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose what " + permanent.getIdName() + " becomes to");

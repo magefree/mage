@@ -25,23 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.magic2012;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -55,22 +52,21 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ChandraTheFirebrand extends CardImpl {
 
-    public ChandraTheFirebrand (UUID ownerId) {
+    public ChandraTheFirebrand(UUID ownerId) {
         super(ownerId, 124, "Chandra, the Firebrand", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
         this.expansionSetCode = "M12";
         this.subtype.add("Chandra");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Chandra, the Firebrand deals 1 damage to target creature or player.
-
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
         ability1.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability1);
 
         // -2: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
-        Effect effect =  new CreateDelayedTriggeredAbilityEffect(new ChandraTheFirebrandAbility());
-        effect .setText("When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy");
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new ChandraTheFirebrandAbility());
+        effect.setText("When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy");
         this.addAbility(new LoyaltyAbility(effect, -2));
 
         // -6: Chandra, the Firebrand deals 6 damage to each of up to six target creatures and/or players
@@ -79,7 +75,7 @@ public class ChandraTheFirebrand extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public ChandraTheFirebrand (final ChandraTheFirebrand card) {
+    public ChandraTheFirebrand(final ChandraTheFirebrand card) {
         super(card);
     }
 
@@ -91,6 +87,7 @@ public class ChandraTheFirebrand extends CardImpl {
 }
 
 class ChandraTheFirebrandAbility extends DelayedTriggeredAbility {
+
     ChandraTheFirebrandAbility() {
         super(new CopyTargetSpellEffect(), Duration.EndOfTurn);
     }
@@ -111,11 +108,11 @@ class ChandraTheFirebrandAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-         if (event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
                 for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
                 return true;
             }

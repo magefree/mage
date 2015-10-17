@@ -30,8 +30,7 @@ package mage.sets.jacevsvraska;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.Card;
@@ -40,10 +39,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
@@ -63,11 +60,7 @@ public class BodyDouble extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Body Double enter the battlefield as a copy of any creature card in a graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new BodyDoubleCopyEffect(),
-                "You may have {this} enter the battlefield as a copy of any creature card in a graveyard",
-                true));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAbility(new BodyDoubleCopyEffect(), true));
 
     }
 
@@ -85,7 +78,7 @@ class BodyDoubleCopyEffect extends OneShotEffect {
 
     public BodyDoubleCopyEffect() {
         super(Outcome.Copy);
-        this.staticText = "You may have {this} enter the battlefield as a copy of any creature card in a graveyard";
+        this.staticText = "as a copy of any creature card in a graveyard";
     }
 
     public BodyDoubleCopyEffect(final BodyDoubleCopyEffect effect) {
@@ -95,8 +88,7 @@ class BodyDoubleCopyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
+        if (player != null) {
             Target target = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
             target.setNotTarget(true);
             if (target.canChoose(source.getControllerId(), game)) {

@@ -27,10 +27,36 @@
  */
 package mage.util.functions;
 
+import mage.MageObject;
+import mage.constants.CardType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
 /**
  *
  * @author LevelX2
  */
-public class CardTypeApplier {
+public class CardTypeApplier extends ApplyToPermanent {
 
+    private final CardType cardType;
+
+    public CardTypeApplier(CardType cardType) {
+        this.cardType = cardType;
+    }
+
+    @Override
+    public Boolean apply(Game game, Permanent permanent) {
+        if (!permanent.getCardType().contains(cardType)) {
+            permanent.getCardType().add(cardType);
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean apply(Game game, MageObject mageObject) {
+        if (!mageObject.getCardType().contains(cardType)) {
+            mageObject.getCardType().add(cardType);
+        }
+        return true;
+    }
 }

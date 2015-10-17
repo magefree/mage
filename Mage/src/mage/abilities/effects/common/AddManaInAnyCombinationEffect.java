@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import java.util.ArrayList;
@@ -62,17 +61,17 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         this.amount = amount;
         this.staticText = setText();
     }
-    
+
     public AddManaInAnyCombinationEffect(int amount, String text) {
         this(amount);
         this.staticText = text;
     }
-    
+
     public AddManaInAnyCombinationEffect(int amount, String text, ColoredManaSymbol... coloredManaSymbols) {
         this(amount, coloredManaSymbols);
         this.staticText = text;
     }
-    
+
     public AddManaInAnyCombinationEffect(DynamicValue amount, String text, ColoredManaSymbol... coloredManaSymbols) {
         this(amount, coloredManaSymbols);
         this.staticText = text;
@@ -92,13 +91,13 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null){
+        if (player != null) {
             Mana mana = new Mana();
             int amountOfManaLeft = amount.calculate(game, source, this);
 
             while (amountOfManaLeft > 0 && player.canRespond()) {
-                for (ColoredManaSymbol coloredManaSymbol: manaSymbols) {
-                    int number = player.getAmount(0, amountOfManaLeft, new StringBuilder("How many ").append(coloredManaSymbol.name()).append(" mana?").toString(), game);
+                for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
+                    int number = player.getAmount(0, amountOfManaLeft, "How many " + coloredManaSymbol.getColorName() + " mana?", game);
                     if (number > 0) {
                         for (int i = 0; i < number; i++) {
                             mana.add(new Mana(coloredManaSymbol));
@@ -111,7 +110,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                 }
             }
             checkToFirePossibleEvents(mana, game, source);
-            player.getManaPool().addMana(mana, game, source);            
+            player.getManaPool().addMana(mana, game, source);
             return true;
         }
         return false;
@@ -130,7 +129,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             sb.append("colors");
         } else {
             int i = 0;
-            for (ColoredManaSymbol coloredManaSymbol: manaSymbols) {
+            for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
                 i++;
                 if (i > 1) {
                     sb.append(" and/or ");

@@ -59,7 +59,7 @@ public class SkyriderElf extends CardImpl {
         // <i>Converge</i>-Skyrider Elf enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
-                null, true, "<i>Converge</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.", null));
+                null, "<i>Converge</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.", null));
 
     }
 

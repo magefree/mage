@@ -27,25 +27,24 @@
  */
 package mage.sets.darkascension;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.counters.CounterType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,8 +54,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -77,8 +74,7 @@ public class SorinLordOfInnistrad extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Sorin");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VampireToken()), 1));
@@ -103,6 +99,7 @@ public class SorinLordOfInnistrad extends CardImpl {
 }
 
 class VampireToken extends Token {
+
     VampireToken() {
         super("Vampire", "a 1/1 black Vampire creature token with lifelink");
         cardType.add(CardType.CREATURE);
@@ -142,7 +139,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetId: source.getTargets().get(0).getTargets()) {
+        for (UUID targetId : source.getTargets().get(0).getTargets()) {
             Permanent perm = game.getPermanent(targetId);
             if (perm != null) {
                 perm.destroy(source.getSourceId(), game, false);
@@ -150,7 +147,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (UUID targetId: source.getTargets().get(0).getTargets()) {
+            for (UUID targetId : source.getTargets().get(0).getTargets()) {
                 if (game.getState().getZone(targetId) == Zone.GRAVEYARD) {
                     Card card = game.getCard(targetId);
                     if (card != null) {

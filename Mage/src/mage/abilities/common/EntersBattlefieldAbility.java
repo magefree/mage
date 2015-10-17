@@ -40,44 +40,50 @@ import mage.constants.Zone;
 public class EntersBattlefieldAbility extends StaticAbility {
 
     protected String abilityRule;
+    protected boolean optional;
 
     public EntersBattlefieldAbility(Effect effect) {
-        this(effect, true);
+        this(effect, false);
     }
 
     /**
      *
      * @param effect effect that happens when the permanent enters the
-     * battlefield
-     * @param showRule show the rule for this ability
+     * battlefiely
+     * @param optional
      */
-    public EntersBattlefieldAbility(Effect effect, Boolean showRule) {
-        this(effect, null, showRule, null, null);
+    public EntersBattlefieldAbility(Effect effect, boolean optional) {
+        this(effect, optional, null, null, null);
     }
 
     public EntersBattlefieldAbility(Effect effect, String effectText) {
-        this(effect, null, true, null, effectText);
+        this(effect, null, null, effectText);
+    }
+
+    public EntersBattlefieldAbility(Effect effect, Condition condition, String abilityRule, String effectText) {
+        this(effect, false, condition, abilityRule, effectText);
     }
 
     /**
      *
      * @param effect effect that happens when the permanent enters the
      * battlefield
+     * @param optional
      * @param condition only if this condition is true, the effect will happen
-     * @param ruleVisible show the rule for this ability
      * @param abilityRule rule for this ability (no text from effects will be
      * added)
      * @param effectText this text will be used for the EnterBattlefieldEffect
      */
-    public EntersBattlefieldAbility(Effect effect, Condition condition, Boolean ruleVisible, String abilityRule, String effectText) {
-        super(Zone.ALL, new EntersBattlefieldEffect(effect, condition, effectText));
-        this.setRuleVisible(ruleVisible);
+    public EntersBattlefieldAbility(Effect effect, boolean optional, Condition condition, String abilityRule, String effectText) {
+        super(Zone.ALL, new EntersBattlefieldEffect(effect, condition, effectText, true, optional));
         this.abilityRule = abilityRule;
+        this.optional = optional;
     }
 
     public EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
         super(ability);
         this.abilityRule = ability.abilityRule;
+        this.optional = ability.optional;
     }
 
     @Override
@@ -99,12 +105,9 @@ public class EntersBattlefieldAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        if (!ruleVisible) {
-            return "";
-        }
         if (abilityRule != null && !abilityRule.isEmpty()) {
             return abilityRule;
         }
-        return "{this} enters the battlefield " + super.getRule();
+        return (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") + " the battlefield " + super.getRule();
     }
 }

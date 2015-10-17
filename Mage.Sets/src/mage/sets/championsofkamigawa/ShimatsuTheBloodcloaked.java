@@ -28,13 +28,16 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -61,7 +64,7 @@ public class ShimatsuTheBloodcloaked extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Shimatsu the Bloodcloaked enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShimatsuTheBloodcloakedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ShimatsuTheBloodcloakedEffect()));
     }
 
     public ShimatsuTheBloodcloaked(final ShimatsuTheBloodcloaked card) {
@@ -75,16 +78,16 @@ public class ShimatsuTheBloodcloaked extends CardImpl {
 }
 
 class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
-    
+
     public ShimatsuTheBloodcloakedEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        super(Duration.EndOfGame, Outcome.BoostCreature);
         this.staticText = "As {this} enters the battlefield, sacrifice any number of permanents. {this} enters the battlefield with that many +1/+1 counters on it";
     }
-    
+
     public ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ShimatsuTheBloodcloakedEffect copy() {
         return new ShimatsuTheBloodcloakedEffect(this);
@@ -94,15 +97,15 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId());        
+        return event.getTargetId().equals(source.getSourceId());
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
+        Permanent creature = game.getPermanentEntering(event.getTargetId());
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledPermanent(), true);
@@ -112,8 +115,8 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
             controller.chooseTarget(Outcome.Detriment, target, source, game);
             if (target.getTargets().size() > 0) {
                 int sacrificedCreatures = target.getTargets().size();
-                game.informPlayers(new StringBuilder(controller.getLogName()).append(" sacrifices ").append(sacrificedCreatures).append(" creatures for ").append(creature.getName()).toString());
-                for (UUID targetId: target.getTargets()) {
+                game.informPlayers(controller.getLogName() + " sacrifices " + sacrificedCreatures + " creatures for " + creature.getLogName());
+                for (UUID targetId : target.getTargets()) {
                     Permanent targetCreature = game.getPermanent(targetId);
                     if (targetCreature == null || !targetCreature.sacrifice(source.getSourceId(), game)) {
                         return false;
@@ -124,5 +127,5 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-     
+
 }

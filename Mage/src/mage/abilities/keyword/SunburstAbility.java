@@ -31,7 +31,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SunburstCount;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.CardType;
@@ -89,7 +88,7 @@ class SunburstEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null) {
             Counter counter;
             if (permanent.getCardType().contains(CardType.CREATURE)) {

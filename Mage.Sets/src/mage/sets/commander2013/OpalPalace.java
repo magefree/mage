@@ -74,7 +74,7 @@ public class OpalPalace extends CardImpl {
         ability = new SimpleStaticAbility(Zone.ALL, new OpalPalaceEntersBattlefieldEffect());
         ability.setRuleVisible(false);
         this.addAbility(ability);
-        
+
     }
 
     public OpalPalace(final OpalPalace card) {
@@ -91,10 +91,10 @@ class OpalPalaceWatcher extends Watcher {
 
     public List<UUID> commanderId = new ArrayList<>();
     private final String originalId;
-    
+
     public OpalPalaceWatcher(String originalId) {
         super("ManaPaidFromOpalPalaceWatcher", WatcherScope.CARD);
-        this.originalId = originalId;        
+        this.originalId = originalId;
     }
 
     public OpalPalaceWatcher(final OpalPalaceWatcher watcher) {
@@ -116,16 +116,16 @@ class OpalPalaceWatcher extends Watcher {
                 if (spell != null) {
                     Card card = spell.getCard();
                     if (card != null) {
-                        for (UUID playerId :game.getPlayerList()) {
+                        for (UUID playerId : game.getPlayerList()) {
                             Player player = game.getPlayer(playerId);
                             if (player != null) {
                                 if (player.getCommanderId() != null && player.getCommanderId().equals(card.getId())) {
                                     commanderId.add(card.getId());
                                     break;
                                 }
-                            }                            
+                            }
                         }
-                    }                   
+                    }
                 }
             }
         }
@@ -153,19 +153,19 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         OpalPalaceWatcher watcher = (OpalPalaceWatcher) game.getState().getWatchers().get("ManaPaidFromOpalPalaceWatcher", source.getSourceId());
-        return watcher != null &&
-                watcher.commanderId.contains(event.getTargetId());
+        return watcher != null
+                && watcher.commanderId.contains(event.getTargetId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentEntering(event.getTargetId());
         if (permanent != null) {
-            Integer castCount = (Integer)game.getState().getValue(permanent.getId() + "_castCount");
+            Integer castCount = (Integer) game.getState().getValue(permanent.getId() + "_castCount");
             if (castCount != null && castCount > 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(castCount), game);
             }

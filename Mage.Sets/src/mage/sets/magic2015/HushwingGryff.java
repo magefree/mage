@@ -108,7 +108,7 @@ class HushwingGryffEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Ability ability = (Ability) getValue("targetAbility");
         if (ability != null && AbilityType.TRIGGERED.equals(ability.getAbilityType())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
+            Permanent permanent = game.getPermanentEntering(event.getTargetId());
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }

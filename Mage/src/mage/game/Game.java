@@ -115,6 +115,10 @@ public interface Game extends MageItem, Serializable {
 
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
 
+    Permanent getPermanentEntering(UUID permanentId);
+
+    Map<UUID, Permanent> getPermanentsEntering();
+
     Map<Zone, HashMap<UUID, MageObject>> getLKI();
 
     Card getCard(UUID cardId);

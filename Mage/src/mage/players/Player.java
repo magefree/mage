@@ -629,15 +629,26 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @return
      */
+    @Deprecated
     boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
+    @Deprecated
     boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
 
+    @Deprecated
     boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(Card card, Zone toZone, Ability source, Game game);
 
     boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
 
+    boolean moveCards(Cards cards, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
+
     /**
+     * Iniversal method to move cards from one zone to another. Do not mix
+     * objects from different from zones to move.
      *
      * @param cards
      * @param toZone
@@ -740,6 +751,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param sourceId
      * @return
      */
+    @Deprecated
     boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId);
 
     /**

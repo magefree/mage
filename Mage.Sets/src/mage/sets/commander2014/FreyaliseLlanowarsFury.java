@@ -32,19 +32,17 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -56,6 +54,7 @@ import mage.target.TargetPermanent;
 public class FreyaliseLlanowarsFury extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterGreen = new FilterControlledCreaturePermanent("green creature you control");
+
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
     }
@@ -65,8 +64,8 @@ public class FreyaliseLlanowarsFury extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Freyalise");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
-        
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+
         // +2: Put a 1/1 green Elf Druid creature token onto the battlefield with "{T}: Add {G} to your mana pool."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FreyaliseLlanowarsFuryToken()), 2));
         // -2: Destroy target artifact or enchantment.

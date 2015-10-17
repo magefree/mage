@@ -25,14 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.MageObjectReference;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -40,8 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
@@ -61,7 +59,7 @@ public class OtherworldlyJourney extends CardImpl {
         super(ownerId, 37, "Otherworldly Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        
+
         // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new OtherworldlyJourneyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -82,7 +80,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
 
     private static final String effectText = "Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it";
 
-    OtherworldlyJourneyEffect ( ) {
+    OtherworldlyJourneyEffect() {
         super(Outcome.Benefit);
         staticText = effectText;
     }
@@ -102,12 +100,12 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
                     Card card = game.getCard(permanent.getId());
                     if (card != null) {
                         //create delayed triggered ability
-                        DelayedTriggeredAbility delayedAbility = 
-                                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OtherworldlyJourneyReturnFromExileEffect(new MageObjectReference(card, game)));
+                        DelayedTriggeredAbility delayedAbility
+                                = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OtherworldlyJourneyReturnFromExileEffect(new MageObjectReference(card, game)));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);                    
+                        game.addDelayedTriggeredAbility(delayedAbility);
                     }
                 }
                 return true;
@@ -126,6 +124,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
 class OtherworldlyJourneyReturnFromExileEffect extends OneShotEffect {
 
     MageObjectReference objectToReturn;
+
     public OtherworldlyJourneyReturnFromExileEffect(MageObjectReference objectToReturn) {
         super(Outcome.PutCardInPlay);
         this.objectToReturn = objectToReturn;
@@ -148,19 +147,18 @@ class OtherworldlyJourneyReturnFromExileEffect extends OneShotEffect {
         if (card != null && objectToReturn.refersTo(card, game)) {
             Player owner = game.getPlayer(card.getOwnerId());
             if (owner != null) {
-                game.addEffect(new OtherworldlyJourneyEntersBattlefieldEffect(objectToReturn), source);                
-                owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                game.addEffect(new OtherworldlyJourneyEntersBattlefieldEffect(objectToReturn), source);
+                owner.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
         }
         return true;
     }
 }
 
-
 class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
-    
+
     MageObjectReference objectToReturn;
-    
+
     public OtherworldlyJourneyEntersBattlefieldEffect(MageObjectReference objectToReturn) {
         super(Duration.Custom, Outcome.BoostCreature);
         this.objectToReturn = objectToReturn;
@@ -187,7 +185,7 @@ class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentEntering(event.getTargetId());
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(), game);
             discard(); // use only once

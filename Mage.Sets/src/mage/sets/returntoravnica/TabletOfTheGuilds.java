@@ -32,7 +32,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -86,7 +85,7 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (player != null && permanent != null) {
             String colors;
             ChoiceColor colorChoice = new ChoiceColor();

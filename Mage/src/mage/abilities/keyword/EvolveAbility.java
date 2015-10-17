@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -44,46 +43,53 @@ import mage.target.targetpointer.FixedTarget;
  * FAQ 2013/01/11
  *
  * 702.98. Evolve
- * 
- * 702.98a Evolve is a triggered ability. "Evolve" means "Whenever a creature enters
- * the battlefield under your control, if that creature's power is greater than this
- * creature's power and/or that creature's toughness is greater than this creature's
- * toughness, put a +1/+1 counter on this creature."
  *
- * 702.98b If a creature has multiple instances of evolve, each triggers separately
- * 
+ * 702.98a Evolve is a triggered ability. "Evolve" means "Whenever a creature
+ * enters the battlefield under your control, if that creature's power is
+ * greater than this creature's power and/or that creature's toughness is
+ * greater than this creature's toughness, put a +1/+1 counter on this
+ * creature."
+ *
+ * 702.98b If a creature has multiple instances of evolve, each triggers
+ * separately
+ *
  * Rulings
- * 
- * When comparing the stats of the two creatures, you always compare power to power and toughness to toughness.
- * Whenever a creature enters the battlefield under your control, check its power and toughness against 
- * the power and toughness of the creature with evolve. If neither stat of the new creature is greater, 
- * evolve won't trigger at all. For example, if you control a 2/3 creature with evolve and a 2/2 creature
- * enters the battlefield under your control, you won't have the opportunity to cast a spell like Giant Growth
- * to make the 2/2 creature large enough to cause evolve to trigger.
- * If evolve triggers, the stat comparison will happen again when the ability tries to resolve. If 
- * neither stat of the new creature is greater, the ability will do nothing. If the creature that
- * entered the battlefield leaves the battlefield before evolve tries to resolve, use its last known
- * power and toughness to compare the stats.
- * If a creature enters the battlefield with +1/+1 counters on it, consider those counters when determining
- * if evolve will trigger. For example, a 1/1 creature that enters the battlefield with two +1/+1 counters 
- * on it will cause the evolve ability of a 2/2 creature to trigger.
- * If multiple creatures enter the battlefield at the same time, evolve may trigger multiple times, although the stat 
- * comparison will take place each time one of those abilities tries to resolve. For example, if you control a 2/2 
- * creature with evolve and two 3/3 creatures enter the battlefield, evolve will trigger twice. The first ability 
- * will resolve and put a +1/+1 counter on the creature with evolve. When the second ability tries to resolve, 
- * neither the power nor the toughness of the new creature is greater than that of the creature with evolve, 
- * so that ability does nothing.
- * When comparing the stats as the evolve ability resolves, it's possible that the stat that's greater changes 
- * from power to toughness or vice versa. If this happens, the ability will still resolve and you'll put a +1/+1
- * counter on the creature with evolve. For example, if you control a 2/2 creature with evolve and a 1/3 creature
- * enters the battlefield under your control, it toughness is greater so evolve will trigger. In response, the 1/3
- * creature gets +2/-2. When the evolve trigger tries to resolve, its power is greater. You'll put a +1/+1
- * counter on the creature with evolve. 
- * 
+ *
+ * When comparing the stats of the two creatures, you always compare power to
+ * power and toughness to toughness. Whenever a creature enters the battlefield
+ * under your control, check its power and toughness against the power and
+ * toughness of the creature with evolve. If neither stat of the new creature is
+ * greater, evolve won't trigger at all. For example, if you control a 2/3
+ * creature with evolve and a 2/2 creature enters the battlefield under your
+ * control, you won't have the opportunity to cast a spell like Giant Growth to
+ * make the 2/2 creature large enough to cause evolve to trigger. If evolve
+ * triggers, the stat comparison will happen again when the ability tries to
+ * resolve. If neither stat of the new creature is greater, the ability will do
+ * nothing. If the creature that entered the battlefield leaves the battlefield
+ * before evolve tries to resolve, use its last known power and toughness to
+ * compare the stats. If a creature enters the battlefield with +1/+1 counters
+ * on it, consider those counters when determining if evolve will trigger. For
+ * example, a 1/1 creature that enters the battlefield with two +1/+1 counters
+ * on it will cause the evolve ability of a 2/2 creature to trigger. If multiple
+ * creatures enter the battlefield at the same time, evolve may trigger multiple
+ * times, although the stat comparison will take place each time one of those
+ * abilities tries to resolve. For example, if you control a 2/2 creature with
+ * evolve and two 3/3 creatures enter the battlefield, evolve will trigger
+ * twice. The first ability will resolve and put a +1/+1 counter on the creature
+ * with evolve. When the second ability tries to resolve, neither the power nor
+ * the toughness of the new creature is greater than that of the creature with
+ * evolve, so that ability does nothing. When comparing the stats as the evolve
+ * ability resolves, it's possible that the stat that's greater changes from
+ * power to toughness or vice versa. If this happens, the ability will still
+ * resolve and you'll put a +1/+1 counter on the creature with evolve. For
+ * example, if you control a 2/2 creature with evolve and a 1/3 creature enters
+ * the battlefield under your control, it toughness is greater so evolve will
+ * trigger. In response, the 1/3 creature gets +2/-2. When the evolve trigger
+ * tries to resolve, its power is greater. You'll put a +1/+1 counter on the
+ * creature with evolve.
+ *
  * @author LevelX2
  */
-
-
 public class EvolveAbility extends TriggeredAbilityImpl {
 
     public EvolveAbility() {
@@ -169,4 +175,3 @@ class EvolveEffect extends OneShotEffect {
         return false;
     }
 }
-

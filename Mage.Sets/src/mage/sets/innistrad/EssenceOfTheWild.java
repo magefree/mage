@@ -28,19 +28,17 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.CopyEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -89,21 +87,18 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent perm = game.getPermanent(event.getTargetId());
+        Permanent perm = game.getPermanentEntering(event.getTargetId());
         return perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId());
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            perm = perm.copy();
-            perm.reset(game);
-            perm.assignNewId();
-            game.addEffect(new EssenceOfTheWildCopyEffect(perm, event.getTargetId()), source);
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject != null) {
+            game.addEffect(new CopyEffect(Duration.Custom, sourceObject, event.getTargetId()), source);
         }
         return false;
     }
@@ -111,62 +106,6 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
     @Override
     public EssenceOfTheWildEffect copy() {
         return new EssenceOfTheWildEffect(this);
-    }
-
-}
-
-class EssenceOfTheWildCopyEffect extends ContinuousEffectImpl {
-
-    private final Permanent essence;
-    private final UUID targetId;
-
-    public EssenceOfTheWildCopyEffect(Permanent essence, UUID targetId) {
-        super(Duration.EndOfGame, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
-        this.essence = essence;
-        this.targetId = targetId;
-    }
-
-    public EssenceOfTheWildCopyEffect(final EssenceOfTheWildCopyEffect effect) {
-        super(effect);
-        this.essence = effect.essence.copy();
-        this.targetId = effect.targetId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null) {
-            permanent.setName(essence.getName());
-            permanent.getColor(game).setColor(essence.getColor(game));
-            permanent.getManaCost().clear();
-            permanent.getManaCost().add(essence.getManaCost());
-            permanent.getCardType().clear();
-            for (CardType type: essence.getCardType()) {
-                permanent.getCardType().add(type);
-            }
-            permanent.getSubtype().clear();
-            for (String type: essence.getSubtype()) {
-                permanent.getSubtype().add(type);
-            }
-            permanent.getSupertype().clear();
-            for (String type: essence.getSupertype()) {
-                permanent.getSupertype().add(type);
-            }
-            permanent.getAbilities().clear();
-            for (Ability ability: essence.getAbilities()) {
-                 permanent.addAbility(ability, game);
-            }
-            permanent.getPower().setValue(essence.getPower().getValue());
-            permanent.getToughness().setValue(essence.getToughness().getValue());
-
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public EssenceOfTheWildCopyEffect copy() {
-        return new EssenceOfTheWildCopyEffect(this);
     }
 
 }

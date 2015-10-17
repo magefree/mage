@@ -7,7 +7,6 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -39,7 +38,7 @@ public class ChoosePlayerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
             mageObject = game.getObject(source.getSourceId());
         }

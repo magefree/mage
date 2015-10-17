@@ -68,7 +68,6 @@ public class WarNameAspirant extends CardImpl {
         // <i>Raid</i> - War-Name Aspirant enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false),
                 RaidCondition.getInstance(),
-                true,
                 "<i>Raid</i> - {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn",
                 "{this} enters the battlefield with a +1/+1 counter"),
                 new PlayerAttackedWatcher());

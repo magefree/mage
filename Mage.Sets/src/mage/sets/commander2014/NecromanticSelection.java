@@ -71,7 +71,6 @@ public class NecromanticSelection extends CardImpl {
         super(ownerId, 26, "Necromantic Selection", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");
         this.expansionSetCode = "C14";
 
-
         // Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection.
         this.getSpellAbility().addEffect(new NecromanticSelectionEffect());
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
@@ -110,7 +109,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
             Cards cards = new CardsImpl();
-            for(Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {
                 permanent.destroy(source.getSourceId(), game, false);
                 if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
                     cards.add(permanent);
@@ -118,7 +117,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
             }
             FilterCard filter = new FilterCreatureCard("creature card put into a graveyard with " + sourceObject.getLogName());
             ArrayList<Predicate<MageObject>> cardIdPredicates = new ArrayList<>();
-            for(UUID cardId: cards) {
+            for (UUID cardId : cards) {
                 cardIdPredicates.add(new CardIdPredicate(cardId));
             }
             filter.add(Predicates.or(cardIdPredicates));
@@ -126,7 +125,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
             if (controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     ContinuousEffect effect = new NecromanticSelectionContinuousEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

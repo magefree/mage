@@ -52,8 +52,9 @@ import mage.game.permanent.Permanent;
  * @author emerald000
  */
 public class BramblewoodParagon extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Each creature you control with a +1/+1 counter on it");
+
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
@@ -68,15 +69,15 @@ public class BramblewoodParagon extends CardImpl {
 
         // Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BramblewoodParagonReplacementEffect()));
-        
+
         // Each creature you control with a +1/+1 counter on it has trample.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, 
+                Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(
-                        TrampleAbility.getInstance(), 
-                        Duration.WhileOnBattlefield, 
+                        TrampleAbility.getInstance(),
+                        Duration.WhileOnBattlefield,
                         filter)));
-        
+
     }
 
     public BramblewoodParagon(final BramblewoodParagon card) {
@@ -99,16 +100,16 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
     BramblewoodParagonReplacementEffect(BramblewoodParagonReplacementEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
-        return creature != null && creature.getControllerId().equals(source.getControllerId()) 
+        Permanent creature = game.getPermanentEntering(event.getTargetId());
+        return creature != null && creature.getControllerId().equals(source.getControllerId())
                 && creature.getCardType().contains(CardType.CREATURE)
                 && creature.hasSubtype("Warrior")
                 && !event.getTargetId().equals(source.getSourceId());
@@ -116,13 +117,12 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
+        Permanent creature = game.getPermanentEntering(event.getTargetId());
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), game);
         }
         return false;
     }
-
 
     @Override
     public BramblewoodParagonReplacementEffect copy() {

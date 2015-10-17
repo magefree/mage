@@ -58,7 +58,7 @@ public class ImposingSovereign extends CardImpl {
 
         // Creatures your opponents control enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ImposingSovereignEffect()));
-        
+
     }
 
     public ImposingSovereign(final ImposingSovereign card) {
@@ -72,7 +72,7 @@ public class ImposingSovereign extends CardImpl {
 }
 
 class ImposingSovereignEffect extends ReplacementEffectImpl {
-    
+
     ImposingSovereignEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Creatures your opponents control enter the battlefield tapped";
@@ -84,7 +84,7 @@ class ImposingSovereignEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
+        Permanent target = game.getPermanentEntering(event.getTargetId());
         if (target != null) {
             target.tap(game);
         }
@@ -95,11 +95,11 @@ class ImposingSovereignEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
+            Permanent permanent = game.getPermanentEntering(event.getTargetId());
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }

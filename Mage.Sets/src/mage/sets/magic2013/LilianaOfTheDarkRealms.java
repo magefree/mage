@@ -28,6 +28,18 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -36,20 +48,6 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -78,8 +76,7 @@ public class LilianaOfTheDarkRealms extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Liliana");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), 1));

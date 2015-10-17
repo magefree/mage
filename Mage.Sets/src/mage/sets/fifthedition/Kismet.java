@@ -79,26 +79,25 @@ class KismetEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
+        Permanent target = game.getPermanentEntering(event.getTargetId());
         if (target != null) {
             target.setTapped(true);
         }
         return false;
     }
 
-
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getCardType().contains(CardType.ARTIFACT) || 
-                                      permanent.getCardType().contains(CardType.CREATURE) || 
-                                      permanent.getCardType().contains(CardType.LAND))) {
+            if (permanent != null && (permanent.getCardType().contains(CardType.ARTIFACT)
+                    || permanent.getCardType().contains(CardType.CREATURE)
+                    || permanent.getCardType().contains(CardType.LAND))) {
                 return true;
             }
         }

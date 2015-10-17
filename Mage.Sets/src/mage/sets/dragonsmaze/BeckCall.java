@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
@@ -39,12 +38,10 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BirdToken;
-
-
 
 public class BeckCall extends SplitCard {
 
@@ -58,7 +55,7 @@ public class BeckCall extends SplitCard {
 
         // Call
         // Put four 1/1 white Bird creature tokens with flying onto the battlefield.
-        getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(),4));
+        getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 4));
 
     }
 
@@ -94,10 +91,7 @@ class BeckTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            return true;
-        }
-        return false;
+        return filter.match(permanent, getSourceId(), getControllerId(), game);
     }
 
     @Override
