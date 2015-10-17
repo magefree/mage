@@ -82,13 +82,9 @@ class BraidOfFireCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Player player = game.getPlayer(controllerId);
-        if (player != null) {
-            return true;
-        }
-        return false;
+        return game.getPlayer(controllerId) != null;
     }
-    
+
     @Override
     public BraidOfFireCost copy() {
         return new BraidOfFireCost(this);

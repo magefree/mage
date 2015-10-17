@@ -36,18 +36,17 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
@@ -63,7 +62,7 @@ public class SurestrikeTrident extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Equipment");
 
-        // Equipped creature has first strike and "{tap}, Unattach Surestrike Trident: This creature deals damage equal to its power to target player."
+        // Equipped creature has first strike and "{T}, Unattach Surestrike Trident: This creature deals damage equal to its power to target player."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
         DynamicValue xValue = new SourcePermanentPowerCount();
         Effect effect = new DamageTargetEffect(xValue);
@@ -75,7 +74,7 @@ public class SurestrikeTrident extends CardImpl {
         effect.setText("and \"{T}, Unattach {this}: This creature deals damage equal to its power to target player.\"");
         ability.addEffect(effect);
         this.addAbility(ability);
-        
+
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(4)));
     }
@@ -117,7 +116,7 @@ class SurestrikeTridentUnattachCost extends CostImpl {
                     }
                 }
             }
-            
+
         }
         return paid;
     }
