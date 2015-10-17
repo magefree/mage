@@ -25,33 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.masterseditionii;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.game.Game;
-import mage.watchers.Watcher;
+import java.util.UUID;
 
 /**
- * @author nantuko
+ *
+ * @author LoneFox
  */
-public class MorbidCondition implements Condition {
+public class JuniperOrderAdvocate extends mage.sets.alliances.JuniperOrderAdvocate {
 
-    private static final MorbidCondition fInstance = new MorbidCondition();
+    public JuniperOrderAdvocate(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 20;
+        this.expansionSetCode = "ME2";
+    }
 
-    public static Condition getInstance() {
-        return fInstance;
+    public JuniperOrderAdvocate(final JuniperOrderAdvocate card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("Morbid");
-        return watcher.conditionMet();
+    public JuniperOrderAdvocate copy() {
+        return new JuniperOrderAdvocate(this);
     }
-
-    @Override
-    public String toString() {
-        return "if a creature died this turn";
-    }
-
 }

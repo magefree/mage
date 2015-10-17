@@ -42,6 +42,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -94,7 +95,7 @@ class MasterBiomancerEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanentEntering(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null && creature.getControllerId().equals(source.getControllerId())
                 && creature.getCardType().contains(CardType.CREATURE)
                 && !event.getTargetId().equals(source.getSourceId());
@@ -103,7 +104,7 @@ class MasterBiomancerEntersBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        Permanent creature = game.getPermanentEntering(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (sourceCreature != null && creature != null) {
             int power = sourceCreature.getPower().getValue();
             if (power > 0) {

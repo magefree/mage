@@ -25,33 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.timeshifted;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.game.Game;
-import mage.watchers.Watcher;
+import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
- * @author nantuko
+ *
+ * @author LoneFox
  */
-public class MorbidCondition implements Condition {
+public class AvoidFate extends mage.sets.legends.AvoidFate {
 
-    private static final MorbidCondition fInstance = new MorbidCondition();
+    public AvoidFate(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 73;
+        this.expansionSetCode = "TSB";
+        this.rarity = Rarity.SPECIAL;
+    }
 
-    public static Condition getInstance() {
-        return fInstance;
+    public AvoidFate(final AvoidFate card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("Morbid");
-        return watcher.conditionMet();
+    public AvoidFate copy() {
+        return new AvoidFate(this);
     }
-
-    @Override
-    public String toString() {
-        return "if a creature died this turn";
-    }
-
 }

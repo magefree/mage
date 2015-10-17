@@ -33,19 +33,37 @@ package mage.constants;
  */
 public enum AbilityWord {
 
-    RALLY("Rally"),
+    BATTALION("Battalion"),
     BLOODRUSH("Bloodrush"),
-    CONVERGE("Converge"),
+    CHANNEL("Channel"),
+    CHROMA("Chroma"),
     CONSTELLATION("Constellation"),
+    CONVERGE("Converge"),
+    DOMAIN("Domain"),
+    FATEFUL_HOUR("Fateful hour"),
     FEROCIOUS("Ferocious"),
     FORMIDABLE("Formidable"),
     GRANDEUR("Grandeur"),
     HELLBENT("Hellbent"),
     HEROIC("Heroic"),
+    IMPRINT("Imprint"),
+    INSPIRED("Inspired"),
+    JOIN_FORCES("Join forces"),
+    KINSHIP("Kinship"),
     LANDFALL("Landfall"),
+    LIEUTENANT("Lieutenant"),
     METALCRAFT("Metalcraft"),
+    MORBID("Morbid"),
     PARLEY("Parley"),
-    RAID("Raid");
+    RADIANCE("Radiance"),
+    RAID("Raid"),
+    RALLY("Rally"),
+    SPELL_MASTERY("Spell mastery"),
+    STRIVE("Strive"),
+    SWEEP("Sweep"),
+    TEMPTING_OFFER("Tempting offer"),
+    THRESHOLD("Threshold"),
+    WILL_OF_THE_COUNCIL("Will of the council");
 
     private final String text;
 
