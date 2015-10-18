@@ -7,11 +7,12 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Tests the effect:
- *   - Exile target creature you control, then return that card to the battlefield under your control
+ * Tests the effect: - Exile target creature you control, then return that card
+ * to the battlefield under your control
  *
- * This effect grants you permanent control over the returned creature.
- * So you mail steal opponent's creature with "Act of Treason" and then use this effect for permanent control effect.
+ * This effect grants you permanent control over the returned creature. So you
+ * mail steal opponent's creature with "Act of Treason" and then use this effect
+ * for permanent control effect.
  *
  * @author noxx
  */
@@ -67,7 +68,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         Assert.assertTrue("player A should play with top card revealed", playerA.isTopCardRevealed());
         Assert.assertFalse("player B should play NOT with top card revealed", playerB.isTopCardRevealed());
     }
-    
+
     @Test
     public void testVillainousWealthExilesBoost() {
         // Villainous Wealth {X}{B}{G}{U}
@@ -76,14 +77,14 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         // their mana costs.
         addCard(Zone.HAND, playerA, "Villainous Wealth");
         addCard(Zone.HAND, playerA, "Master of Pearls");
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         // Secret Plans {G}{U}
         // Face-down creatures you control get +0/+1.
-        // Whenever a permanent you control is turned face up, draw a card. 
+        // Whenever a permanent you control is turned face up, draw a card.
         addCard(Zone.LIBRARY, playerB, "Secret Plans");
         skipInitShuffling(); // to keep this card on top of library
 
@@ -101,9 +102,50 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         assertExileCount(playerB, 2);
         assertExileCount("Secret Plans", 0);
         assertPermanentCount(playerA, "Secret Plans", 1);
-        
+
         assertPermanentCount(playerA, "", 1);
-        assertPowerToughness(playerA, "", 2, 3);        
-    }    
+        assertPowerToughness(playerA, "", 2, 3);
+    }
+
+    /**
+     * My opponent cast Villainous Wealth and took control of my Sylvan Library.
+     * On his next turn, when Sylvan Library's trigger resolved, he kept the two
+     * extra cards without paying life.
+     */
+    @Test
+    public void testVillainousWealthExilesSylvanLibrary() {
+        // Villainous Wealth {X}{B}{G}{U}
+        // Target opponent exiles the top X cards of his or her library. You may cast any number
+        // of nonland cards with converted mana cost X or less from among them without paying
+        // their mana costs.
+        addCard(Zone.HAND, playerA, "Villainous Wealth");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // At the beginning of your draw step, you may draw two additional cards.
+        // If you do, choose two cards in your hand drawn this turn.
+        // For each of those cards, pay 4 life or put the card on top of your library.
+        addCard(Zone.LIBRARY, playerB, "Sylvan Library");
+        skipInitShuffling(); // to keep this card on top of library
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
+        setChoice(playerA, "X=3");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sylvan Library");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Villainous Wealth", 1);
+        assertExileCount(playerB, 2);
+        assertExileCount("Sylvan Library", 0);
+        assertPermanentCount(playerA, "Sylvan Library", 1);
+
+        assertHandCount(playerB, 1);
+        assertHandCount(playerA, 3);
+        assertLife(playerA, 12);
+        assertLife(playerB, 20);
+
+    }
 
 }
