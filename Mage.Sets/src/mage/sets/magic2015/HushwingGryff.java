@@ -43,6 +43,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -108,7 +109,7 @@ class HushwingGryffEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Ability ability = (Ability) getValue("targetAbility");
         if (ability != null && AbilityType.TRIGGERED.equals(ability.getAbilityType())) {
-            Permanent permanent = game.getPermanentEntering(event.getTargetId());
+            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }

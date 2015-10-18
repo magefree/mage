@@ -198,7 +198,7 @@ class XenagosExileEffect extends OneShotEffect {
                 for (UUID targetId : target1.getTargets()) {
                     Card card = cards.get(targetId, game);
                     if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                        player.moveCards(card, Zone.EXILED, source, game);
                     }
                 }
             }

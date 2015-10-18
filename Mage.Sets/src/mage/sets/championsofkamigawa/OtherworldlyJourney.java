@@ -44,6 +44,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -185,7 +186,7 @@ class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentEntering(event.getTargetId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(), game);
             discard(); // use only once

@@ -63,7 +63,7 @@ public class LivingEnd extends CardImpl {
         // Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures
         // he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new LivingEndEffect());
-        
+
     }
 
     public LivingEnd(final LivingEnd card) {
@@ -98,16 +98,16 @@ class LivingEndEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             // move creature cards from graveyard to exile
-            for (UUID playerId: controller.getInRange()){
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card :player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+                    for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
                         controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                 }
             }
             // sacrifice all creatures
-            for (Permanent permanent :game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
             // put exiled cards to battlefield
@@ -116,7 +116,7 @@ class LivingEndEffect extends OneShotEffect {
                 for (Card card : exileZone.getCards(game)) {
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                        player.moveCards(card, Zone.EXILED, source, game);
                     }
                 }
             }

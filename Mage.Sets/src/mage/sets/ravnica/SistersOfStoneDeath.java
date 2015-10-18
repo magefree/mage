@@ -118,18 +118,18 @@ class SistersOfStoneDeathEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         CardsImpl cardsInExile = new CardsImpl();
         TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null) {
-                LinkedList<UUID> cards = new LinkedList<UUID>(exile);
+                LinkedList<UUID> cards = new LinkedList<>(exile);
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     cardsInExile.add(card);
                 }
-                if (you.choose(Outcome.PutCreatureInPlay, cardsInExile, target, game)) {
+                if (controller.choose(Outcome.PutCreatureInPlay, cardsInExile, target, game)) {
                     Card chosenCard = game.getCard(target.getFirstTarget());
-                    return you.putOntoBattlefieldWithInfo(chosenCard, game, Zone.EXILED, source.getSourceId());
+                    return controller.moveCards(chosenCard, Zone.EXILED, source, game);
                 }
             }
         }

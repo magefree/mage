@@ -40,6 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -90,13 +91,13 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent perm = game.getPermanentEntering(event.getTargetId());
+        Permanent perm = ((EntersTheBattlefieldEvent) event).getTarget();
         return perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = ((EntersTheBattlefieldEvent) event).getTarget();
         if (sourceObject != null) {
             game.addEffect(new CopyEffect(Duration.Custom, sourceObject, event.getTargetId()), source);
         }

@@ -47,6 +47,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -163,7 +164,7 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentEntering(event.getTargetId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
             Integer castCount = (Integer) game.getState().getValue(permanent.getId() + "_castCount");
             if (castCount != null && castCount > 0) {

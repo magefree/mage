@@ -173,7 +173,7 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
                             for (Card card : exileZone.getCards(game)) {
                                 card.setFaceDown(false, game);
                                 if (CardUtil.isPermanentCard(card)) {
-                                    player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                                    player.moveCards(card, Zone.EXILED, source, game);
                                 }
                             }
                         }

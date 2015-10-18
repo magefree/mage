@@ -43,6 +43,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
 /**
  *
  * @author Plopman
@@ -52,7 +53,6 @@ public class LivingDeath extends CardImpl {
     public LivingDeath(UUID ownerId) {
         super(ownerId, 36, "Living Death", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "TMP";
-
 
         // Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new LivingDeathEffect());
@@ -67,6 +67,7 @@ public class LivingDeath extends CardImpl {
         return new LivingDeath(this);
     }
 }
+
 class LivingDeathEffect extends OneShotEffect {
 
     public LivingDeathEffect() {
@@ -89,16 +90,16 @@ class LivingDeathEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             // move creature cards from graveyard to exile
-            for (UUID playerId: controller.getInRange()){
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card :player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+                    for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
                         controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                 }
             }
             // sacrifice all creatures
-            for (Permanent permanent :game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
             // put exiled cards to battlefield
@@ -107,6 +108,7 @@ class LivingDeathEffect extends OneShotEffect {
                 for (Card card : exileZone.getCards(game)) {
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player != null) {
+                        player.moveCards(card, Zone.EXILED, source, game);
                         player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
                     }
                 }

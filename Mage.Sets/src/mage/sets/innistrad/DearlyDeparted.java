@@ -41,6 +41,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -92,7 +93,7 @@ class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentEntering(event.getTargetId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype("Human")) {
             return true;
         }
@@ -101,7 +102,7 @@ class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanentEntering(event.getTargetId());
+        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
             target.addCounters(CounterType.P1P1.createInstance(), game);
         }

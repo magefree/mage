@@ -111,7 +111,7 @@ class MasterBiomancerEntersBattlefieldEffect extends ReplacementEffectImpl {
                 creature.addCounters(CounterType.P1P1.createInstance(power), game);
             }
             ContinuousEffect effect = new AddCardSubTypeTargetEffect("Mutant", Duration.Custom);
-            effect.setTargetPointer(new FixedTarget(creature.getId()));
+            effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1));
             game.addEffect(effect, source);
         }
         return false;

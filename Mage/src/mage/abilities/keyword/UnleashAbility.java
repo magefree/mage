@@ -37,6 +37,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -97,10 +98,10 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanentEntering(source.getSourceId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
-            if (controller.chooseUse(outcome, "Unleash " + creature.getName() + "?", source, game)) {
+            if (controller.chooseUse(outcome, "Unleash " + creature.getLogName() + "?", source, game)) {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " unleashes " + creature.getName());
                 }

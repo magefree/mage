@@ -152,7 +152,7 @@ class WorldgorgerDragonLeavesEffect extends OneShotEffect {
                 for (UUID cardId : exile) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                        controller.moveCards(card, Zone.EXILED, source, game);
                     }
                 }
                 return true;

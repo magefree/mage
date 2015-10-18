@@ -45,6 +45,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -101,7 +102,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            Permanent sourcePermanent = game.getPermanentEntering(event.getTargetId());
+            Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                 return true;
             }
@@ -116,7 +117,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentEntering(event.getTargetId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose what " + permanent.getIdName() + " becomes to");

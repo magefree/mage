@@ -39,6 +39,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -116,7 +117,7 @@ public class DevourEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
+            Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
             game.getState().setValue(sourcePermanent.getId().toString() + "devoured", null);
             return true;
         }
@@ -130,7 +131,7 @@ public class DevourEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanentEntering(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             Target target = new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter, true);

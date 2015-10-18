@@ -50,6 +50,7 @@ import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.Commander;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -314,7 +315,7 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanentEntering(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), game);
         }

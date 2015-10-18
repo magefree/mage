@@ -41,6 +41,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -105,7 +106,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanentEntering(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledPermanent(), true);

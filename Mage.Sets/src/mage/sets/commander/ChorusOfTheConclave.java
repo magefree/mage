@@ -46,6 +46,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -193,7 +194,7 @@ class ChorusOfTheConclaveReplacementEffect2 extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanentEntering(event.getSourceId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Map<String, Integer> spellX = (Map<String, Integer>) game.getState().getValue("spellX" + source.getSourceId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && creature != null && spellX != null) {
