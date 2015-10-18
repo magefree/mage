@@ -93,14 +93,8 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null) {
-            permanent = game.getPermanentEntering(event.getTargetId());
-        }
-        if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount() * 2), game, event.getAppliedEffects());
-        }
-        return true;
+        event.setAmount(event.getAmount() * 2);
+        return false;
     }
 
     @Override

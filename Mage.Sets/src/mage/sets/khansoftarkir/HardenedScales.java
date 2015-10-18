@@ -53,7 +53,6 @@ public class HardenedScales extends CardImpl {
         super(ownerId, 133, "Hardened Scales", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "KTK";
 
-
         // If one or more +1/+1 counters would be placed on a creature you control, that many plus one +1/+1 counters are placed on it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HardenedScalesEffect()));
 
@@ -70,6 +69,7 @@ public class HardenedScales extends CardImpl {
 }
 
 class HardenedScalesEffect extends ReplacementEffectImpl {
+
     HardenedScalesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If one or more +1/+1 counters would be placed on a creature you control, that many plus one +1/+1 counters are placed on it instead";
@@ -86,17 +86,20 @@ class HardenedScalesEffect extends ReplacementEffectImpl {
         return false;
     }
 
-    @Override    
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ADD_COUNTERS;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getData().equals(CounterType.P1P1.getName())) {
-            Permanent target = game.getPermanent(event.getTargetId());
-            if (target != null && target.getControllerId().equals(source.getControllerId())
-                               && target.getCardType().contains(CardType.CREATURE)) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent == null) {
+                permanent = game.getPermanentEntering(event.getTargetId());
+            }
+            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
+                    && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }
         }

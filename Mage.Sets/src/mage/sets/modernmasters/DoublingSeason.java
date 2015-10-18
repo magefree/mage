@@ -113,6 +113,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 }
 
 class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
+
     DoublingSeasonCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead";
@@ -128,15 +129,18 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
         return false;
     }
 
-    @Override    
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ADD_COUNTERS;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
-        if (target != null && target.getControllerId().equals(source.getControllerId())) {
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
+        if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
             return true;
         }
         return false;
