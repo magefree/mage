@@ -86,13 +86,15 @@ public class ManifestEffect extends OneShotEffect {
                 }
                 MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, newSource.getSourceId(), false, true);
+
+            }
+            controller.moveCards(cards, Zone.BATTLEFIELD, source, game, false, true, false, null);
+            for (Card card : cards) {
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                     permanent.setManifested(true);
                 }
             }
-            game.applyEffects(); // to apply before ETB triggered or replace Effects are executed
             return true;
         }
         return false;

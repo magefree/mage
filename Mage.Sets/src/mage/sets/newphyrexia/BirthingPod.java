@@ -28,9 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -40,7 +37,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -61,7 +60,6 @@ public class BirthingPod extends CardImpl {
         super(ownerId, 104, "Birthing Pod", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{GP}");
         this.expansionSetCode = "NPH";
 
-
         // {1}{GP}, {tap}, Sacrifice a creature: Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BirthingPodEffect(), new ManaCostsImpl("{1}{GP}"));
         ability.addCost(new TapSourceCost());
@@ -80,6 +78,7 @@ public class BirthingPod extends CardImpl {
 }
 
 class BirthingPodEffect extends OneShotEffect {
+
     BirthingPodEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library";
@@ -101,22 +100,18 @@ class BirthingPodEffect extends OneShotEffect {
                 break;
             }
         }
-        Player player = game.getPlayer(source.getControllerId());
-        if (sacrificedPermanent != null && player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (sacrificedPermanent != null && controller != null) {
             int newConvertedCost = sacrificedPermanent.getManaCost().convertedManaCost() + 1;
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
             filter.add(new CardTypePredicate(CardType.CREATURE));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (player.searchLibrary(target, game)) {
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
-                    if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-                    }
-                }
+            if (controller.searchLibrary(target, game)) {
+                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

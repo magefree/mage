@@ -98,7 +98,7 @@ public class CopyPermanentEffect extends OneShotEffect {
             } else {
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(source.getControllerId(), game)) {
+                if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                     player.choose(Outcome.Copy, target, source.getSourceId(), game);
                     copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 }

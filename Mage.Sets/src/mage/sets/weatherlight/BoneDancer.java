@@ -92,15 +92,15 @@ class BoneDancerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player defendingPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if(controller != null && defendingPlayer != null) {
+        if (controller != null && defendingPlayer != null) {
             Card lastCreatureCard = null;
-            for(Card card : defendingPlayer.getGraveyard().getCards(game)) {
-                if(card.getCardType().contains(CardType.CREATURE)) {
+            for (Card card : defendingPlayer.getGraveyard().getCards(game)) {
+                if (card.getCardType().contains(CardType.CREATURE)) {
                     lastCreatureCard = card;
                 }
             }
-            if(lastCreatureCard != null) {
-                return controller.putOntoBattlefieldWithInfo(lastCreatureCard, game, Zone.GRAVEYARD, source.getSourceId());
+            if (lastCreatureCard != null) {
+                controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

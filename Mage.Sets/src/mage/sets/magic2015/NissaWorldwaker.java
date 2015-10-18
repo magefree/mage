@@ -51,6 +51,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -121,26 +122,30 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, new FilterBasicLandCard());
-        if (player.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
+                    Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        if (player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId())) {
-                            ContinuousEffect effect = new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), false, true, Duration.Custom);
-                            effect.setTargetPointer(new FixedTarget(card.getId()));
-                            game.addEffect(effect, source);
+                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                            Permanent land = game.getPermanent(card.getId());
+                            if (land != null) {
+                                ContinuousEffect effect = new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), false, true, Duration.Custom);
+                                effect.setTargetPointer(new FixedTarget(land, game));
+                                game.addEffect(effect, source);
+
+                            }
                         }
                     }
                 }
             }
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return true;
     }
 }

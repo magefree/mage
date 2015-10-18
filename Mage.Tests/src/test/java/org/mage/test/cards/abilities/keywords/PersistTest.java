@@ -195,8 +195,7 @@ public class PersistTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Glen Elendra Archmage", 1);
         assertPowerToughness(playerB, "Glen Elendra Archmage", 1, 1);
-        assertPermanentCount(playerA, "Glen Elendra Archmage", 1);
-        assertPowerToughness(playerA, "Glen Elendra Archmage", 1, 1);
+        assertGraveyardCount(playerA, "Clever Impersonator", 1);
     }
 
     @Test

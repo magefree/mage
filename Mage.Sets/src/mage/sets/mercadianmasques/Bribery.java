@@ -27,7 +27,6 @@
  */
 package mage.sets.mercadianmasques;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -91,13 +90,8 @@ class BriberyEffect extends OneShotEffect {
         if (controller != null && opponent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 1, new FilterCreatureCard("creature card"));
             if (controller.searchLibrary(target, game, opponent.getId())) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
-                    Card card = opponent.getLibrary().getCard(targetId, game);
-                    if (card != null) {
-                        controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-                    }
-                }
+                Card card = opponent.getLibrary().getCard(target.getFirstTarget(), game);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
             opponent.shuffleLibrary(game);
             return true;

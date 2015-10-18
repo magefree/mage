@@ -96,7 +96,7 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("At the beginning of the chosen player's upkeep, ").append(super.getRule()).toString();
+        return "At the beginning of the chosen player's upkeep, " + super.getRule();
     }
 
 }
@@ -119,7 +119,7 @@ class TheRackEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID playerId = (UUID) game.getState().getValue(new StringBuilder(source.getSourceId().toString()).append("_player").toString());
+        UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + "_player");
         Player chosenPlayer = game.getPlayer(playerId);
         if (chosenPlayer != null) {
             int damage = 3 - chosenPlayer.getHand().size();

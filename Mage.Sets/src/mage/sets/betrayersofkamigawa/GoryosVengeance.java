@@ -110,12 +110,12 @@ class GoryosVengeanceEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         // Haste
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(effect, source);
                         // Exile it at end of turn
                         Effect exileEffect = new ExileTargetEffect("Exile " + permanent.getName() + " at the beginning of the next end step");

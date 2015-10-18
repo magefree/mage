@@ -62,7 +62,6 @@ public class QuestForUlasTemple extends CardImpl {
         super(ownerId, 35, "Quest for Ula's Temple", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "WWK";
 
-
         // At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for Ula's Temple.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new QuestForUlasTempleEffect(), TargetController.YOU, true));
 
@@ -140,7 +139,7 @@ class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-public boolean checkTrigger(GameEvent event, Game game) {
+    public boolean checkTrigger(GameEvent event, Game game) {
         Permanent quest = game.getPermanent(super.getSourceId());
         return quest != null && quest.getCounters().getCount(CounterType.QUEST) >= 3;
     }
@@ -178,12 +177,10 @@ class QuestForUlasTempleEffect2 extends OneShotEffect {
         if (controller != null) {
             TargetCardInHand target = new TargetCardInHand(filter);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    &&controller.chooseUse(Outcome.PutCreatureInPlay, query, source, game)) {
+                    && controller.chooseUse(Outcome.PutCreatureInPlay, query, source, game)) {
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                    }
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

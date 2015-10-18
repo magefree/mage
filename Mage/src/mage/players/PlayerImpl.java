@@ -3025,7 +3025,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 List<Permanent> permanents = new ArrayList<>();
                 List<Permanent> permanentsEntered = new ArrayList<>();
                 for (Card card : cards) {
-                    UUID controllingPlayerId = byOwner ? card.getOwnerId() : source.getControllerId();
+                    UUID controllingPlayerId = byOwner ? card.getOwnerId() : getId();
                     fromZone = game.getState().getZone(card.getId());
                     if (faceDown) {
                         card.setFaceDown(true, game);
@@ -3301,34 +3301,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() : "a card face down") + " "
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") + "to the exile zone");
-            }
-            result = true;
-        }
-        return result;
-    }
-
-    @Deprecated
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
-        return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, false, false);
-    }
-
-    @Deprecated
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
-        return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped, false);
-    }
-
-    @Deprecated
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
-        boolean result = false;
-        if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped, facedown)) {
-            if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder(this.getLogName())
-                        .append(" puts ").append(facedown ? "a card face down " : card.getLogName())
-                        .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
-                        .append("onto the Battlefield").toString());
             }
             result = true;
         }

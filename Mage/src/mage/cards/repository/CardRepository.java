@@ -61,7 +61,7 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
-    private static final long CARD_DB_VERSION = 41;
+    private static final long CARD_DB_VERSION = 42;
     // raise this if new cards were added to the server
     private static final long CARD_CONTENT_VERSION = 40;
 

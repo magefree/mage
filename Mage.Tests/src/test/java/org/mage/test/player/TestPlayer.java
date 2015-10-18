@@ -1800,21 +1800,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped, facedown);
-    }
-
-    @Override
     public boolean hasOpponent(UUID playerToCheckId, Game game) {
         return computerPlayer.hasOpponent(playerToCheckId, game);
     }

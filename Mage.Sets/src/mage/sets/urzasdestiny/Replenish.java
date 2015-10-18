@@ -27,17 +27,15 @@
  */
 package mage.sets.urzasdestiny;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterEnchantmentCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -50,7 +48,6 @@ public class Replenish extends CardImpl {
     public Replenish(UUID ownerId) {
         super(ownerId, 15, "Replenish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "UDS";
-
 
         // Return all enchantment cards from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReplenishEffect());
@@ -67,36 +64,27 @@ public class Replenish extends CardImpl {
 }
 
 class ReplenishEffect extends OneShotEffect {
-    
+
     ReplenishEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Return all enchantment cards from your graveyard to the battlefield";
     }
-    
+
     ReplenishEffect(final ReplenishEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ReplenishEffect copy() {
         return new ReplenishEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            List<Card> cards = new ArrayList<>(0);
-            for (UUID cardId : player.getGraveyard()) {
-                Card card = game.getCard(cardId);
-                if (card != null && card.getCardType().contains(CardType.ENCHANTMENT)) {
-                    cards.add(card);
-                }
-            }
-            for (Card card : cards) {
-                player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
-            }
-            return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            return controller.moveCards(controller.getGraveyard().getCards(new FilterEnchantmentCard(), source.getSourceId(),
+                    source.getControllerId(), game), Zone.BATTLEFIELD, source, game);
         }
         return false;
     }

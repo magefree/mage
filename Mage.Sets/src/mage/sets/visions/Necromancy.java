@@ -196,13 +196,11 @@ class NecromancyReAttachEffect extends OneShotEffect {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         Card cardInGraveyard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && enchantment != null && cardInGraveyard != null) {
-            // put card into play
-            controller.putOntoBattlefieldWithInfo(cardInGraveyard, game, Zone.GRAVEYARD, source.getSourceId());
+            controller.moveCards(cardInGraveyard, Zone.BATTLEFIELD, source, game);
             Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());
-
             if (enchantedCreature != null) {
                 enchantedCreature.addAttachment(enchantment.getId(), game);
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Necromancy");
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with " + enchantment.getIdName());
                 filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
                 Target target = new TargetCreaturePermanent(filter);
                 target.addTarget(enchantedCreature.getId(), source, game);

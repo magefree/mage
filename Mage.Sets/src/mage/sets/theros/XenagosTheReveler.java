@@ -38,7 +38,6 @@ import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -179,28 +178,19 @@ class XenagosExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl(Zone.EXILED);
-            int count = Math.min(player.getLibrary().size(), 7);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().getFromTop(game);
-                cards.add(card);
-                card.moveToExile(null, null, source.getSourceId(), game);
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards exiledCards = new CardsImpl();
+            exiledCards.addAll(controller.getLibrary().getTopCards(game, 7));
+            controller.moveCards(exiledCards, Zone.EXILED, source, game);
             FilterCard filter = new FilterCard("creature and/or land cards to put onto the battlefield");
             filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
                     new CardTypePredicate(CardType.LAND)));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.EXILED, filter);
-            if (cards.size() > 0
+            if (exiledCards.size() > 0
                     && target1.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && player.choose(Outcome.PutCardInPlay, cards, target1, game)) {
-                for (UUID targetId : target1.getTargets()) {
-                    Card card = cards.get(targetId, game);
-                    if (card != null) {
-                        player.moveCards(card, Zone.EXILED, source, game);
-                    }
-                }
+                    && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, game)) {
+                controller.moveCards(new CardsImpl(target1.getTargets()), Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

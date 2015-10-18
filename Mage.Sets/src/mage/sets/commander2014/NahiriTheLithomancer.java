@@ -186,14 +186,14 @@ class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
                 controller.choose(outcome, target, source.getSourceId(), game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             } else {
                 Target target = new TargetCardInYourGraveyard(0, 1, filter);
                 target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), game);
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

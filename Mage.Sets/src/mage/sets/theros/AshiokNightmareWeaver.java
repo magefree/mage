@@ -167,16 +167,14 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
         if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
             if (controller.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null && controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
-                    // why is this change of controller neccessary?
+                if (card != null
+                        && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
-                        permanent.changeControllerId(source.getControllerId(), game);
+                        ContinuousEffectImpl effect = new AshiokNightmareWeaverAddTypeEffect();
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                        game.addEffect(effect, source);
                     }
-
-                    ContinuousEffectImpl effect = new AshiokNightmareWeaverAddTypeEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
                     return true;
                 }
             }

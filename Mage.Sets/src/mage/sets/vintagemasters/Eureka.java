@@ -53,7 +53,6 @@ public class Eureka extends CardImpl {
         super(ownerId, 208, "Eureka", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "VMA";
 
-
         // Starting with you, each player may put a permanent card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
         this.getSpellAbility().addEffect(new EurekaEffect());
     }
@@ -108,7 +107,7 @@ class EurekaEffect extends OneShotEffect {
                         if (target.chooseTarget(outcome, currentPlayer.getId(), source, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
-                                currentPlayer.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                                currentPlayer.moveCards(card, Zone.BATTLEFIELD, source, game);
                                 firstInactivePlayer = null;
                             }
                         }

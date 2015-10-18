@@ -27,6 +27,9 @@
  */
 package mage.sets.tempest;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -39,7 +42,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -89,27 +91,31 @@ class LivingDeathEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
+            Map<UUID, Set<Card>> exiledCards = new HashMap<>();
             // move creature cards from graveyard to exile
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
-                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
+                    Set<Card> cardsPlayer = player.getGraveyard().getCards(new FilterCreatureCard(), game);
+                    if (!cardsPlayer.isEmpty()) {
+                        exiledCards.put(player.getId(), cardsPlayer);
+                        player.moveCards(cardsPlayer, Zone.EXILED, source, game);
                     }
                 }
             }
+            game.applyEffects();
             // sacrifice all creatures
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
+            game.applyEffects();
             // put exiled cards to battlefield
-            ExileZone exileZone = game.getState().getExile().getExileZone(source.getSourceId());
-            if (exileZone != null) {
-                for (Card card : exileZone.getCards(game)) {
-                    Player player = game.getPlayer(card.getOwnerId());
-                    if (player != null) {
-                        player.moveCards(card, Zone.EXILED, source, game);
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    Set<Card> cardsPlayer = exiledCards.get(playerId);
+                    if (cardsPlayer != null && !cardsPlayer.isEmpty()) {
+                        player.moveCards(cardsPlayer, Zone.BATTLEFIELD, source, game, false, false, false, null);
                     }
                 }
             }

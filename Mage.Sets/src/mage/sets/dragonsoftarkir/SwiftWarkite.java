@@ -122,7 +122,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
                 controller.choose(outcome, target, source.getSourceId(), game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    if (controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
+                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                         Permanent creature = game.getPermanent(card.getId());
                         if (creature != null) {
                             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
@@ -143,7 +143,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
                 target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), game);
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     Permanent creature = game.getPermanent(card.getId());
                     if (creature != null) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);

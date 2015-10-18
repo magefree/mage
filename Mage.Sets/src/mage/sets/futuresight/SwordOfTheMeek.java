@@ -70,7 +70,7 @@ public class SwordOfTheMeek extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1,2,Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2, Duration.WhileOnBattlefield)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
         // Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
@@ -108,7 +108,7 @@ class SwordOfTheMeekEffect extends OneShotEffect {
         Card equipment = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (equipment != null && controller != null && game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
-            controller.putOntoBattlefieldWithInfo(equipment, game, Zone.GRAVEYARD, source.getSourceId());
+            controller.moveCards(equipment, Zone.BATTLEFIELD, source, game);
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 return permanent.addAttachment(equipment.getId(), game);

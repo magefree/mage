@@ -27,16 +27,14 @@
  */
 package mage.sets.morningtide;
 
-import java.util.List;
 import java.util.UUID;
-
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
@@ -56,7 +54,6 @@ public class Scapeshift extends CardImpl {
         super(ownerId, 136, "Scapeshift", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "MOR";
 
-
         // Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ScapeshiftEffect());
     }
@@ -71,12 +68,11 @@ public class Scapeshift extends CardImpl {
     }
 }
 
-
 class ScapeshiftEffect extends OneShotEffect {
 
     public ScapeshiftEffect() {
         super(Outcome.Neutral);
-        staticText  = "Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle your library";
+        staticText = "Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle your library";
     }
 
     public ScapeshiftEffect(final ScapeshiftEffect effect) {
@@ -90,35 +86,29 @@ class ScapeshiftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null){
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         int amount = 0;
         TargetControlledPermanent sacrificeLand = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledLandPermanent("lands you control"), true);
-        if(player.chooseTarget(Outcome.Sacrifice, sacrificeLand, source, game)){
-            for(Object uuid : sacrificeLand.getTargets()){
-                Permanent land = game.getPermanent((UUID)uuid);
-                if(land != null){
+        if (controller.chooseTarget(Outcome.Sacrifice, sacrificeLand, source, game)) {
+            for (Object uuid : sacrificeLand.getTargets()) {
+                Permanent land = game.getPermanent((UUID) uuid);
+                if (land != null) {
                     land.sacrifice(source.getSourceId(), game);
                     amount++;
                 }
             }
         }
         TargetCardInLibrary target = new TargetCardInLibrary(amount, new FilterLandCard("lands"));
-        if (player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
-                    if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getControllerId(), true);
-                    }
-                }
-            }
-            player.shuffleLibrary(game);
+        if (controller.searchLibrary(target, game)) {
+            controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
+                    Zone.BATTLEFIELD, source, game, true, false, false, null);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
     }
 

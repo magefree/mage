@@ -35,8 +35,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -154,12 +154,7 @@ class UginTheSpiritDragonEffect3 extends OneShotEffect {
             controller.drawCards(7, game);
             TargetCardInHand target = new TargetCardInHand(0, 7, new FilterPermanentCard("permanent cards"));
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
-                for (UUID targetId : target.getTargets()) {
-                    Card card = game.getCard(targetId);
-                    if (card != null) {
-                        controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getControllerId());
-                    }
-                }
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

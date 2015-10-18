@@ -35,7 +35,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -109,8 +108,7 @@ class MagisterOfWorthVoteEffect extends OneShotEffect {
                     if (player.chooseUse(Outcome.DestroyPermanent, "Choose grace?", source, game)) {
                         graceCount++;
                         game.informPlayers(player.getLogName() + " has chosen: grace");
-                    }
-                    else {
+                    } else {
                         condemnationCount++;
                         game.informPlayers(player.getLogName() + " has chosen: condemnation");
                     }
@@ -130,7 +128,7 @@ class MagisterOfWorthVoteEffect extends OneShotEffect {
 class MagisterOfWorthDestroyEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("creatures other than {this}");
-    
+
     static {
         filter.add(new AnotherPredicate());
     }
@@ -175,12 +173,10 @@ class MagisterOfWorthReturnFromGraveyardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card :player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
-                            player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
-                    }
+                    player.moveCards(player.getGraveyard().getCards(new FilterCreatureCard(), game), Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

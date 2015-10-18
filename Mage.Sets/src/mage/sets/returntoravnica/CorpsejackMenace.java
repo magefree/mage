@@ -40,7 +40,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -96,7 +95,7 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null) {
-            permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+            permanent = game.getPermanentEntering(event.getTargetId());
         }
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount() * 2), game, event.getAppliedEffects());
@@ -112,7 +111,7 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getData().equals(CounterType.P1P1.getName())) {
-            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+            Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }

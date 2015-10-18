@@ -27,9 +27,7 @@
  */
 package mage.sets.magic2010;
 
-import java.util.Set;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -130,13 +128,12 @@ class HiveMindEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell;
         spell = game.getStack().getSpell(((FixedTarget) getTargetPointer()).getTarget());
-        if (spell == null) { // if spell e.g. was countered 
+        if (spell == null) { // if spell e.g. was countered
             spell = (Spell) game.getLastKnownInformation(((FixedTarget) getTargetPointer()).getTarget(), Zone.STACK);
         }
         Player player = game.getPlayer(source.getControllerId());
         if (spell != null && player != null) {
-            Set<UUID> players = player.getInRange();
-            for (UUID playerId : players) {
+            for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
                 if (!playerId.equals(spell.getControllerId())) {
                     Spell copy = spell.copySpell();
                     copy.setControllerId(playerId);

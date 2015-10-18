@@ -112,44 +112,40 @@ class KheruLichLordEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards cards = new CardsImpl();
-            for (Card card : controller.getGraveyard().getCards(new FilterCreatureCard(), source.getSourceId(), source.getControllerId(), game)) {
-                cards.add(card.getId());
-            }
-
-            if (cards.size() > 0) {
-                Card card = cards.getRandom(game);
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+            cards.addAll(controller.getGraveyard().getCards(new FilterCreatureCard(), source.getSourceId(), source.getControllerId(), game));
+            Card card = cards.getRandom(game);
+            if (card != null) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
+                    FixedTarget fixedTarget = new FixedTarget(permanent, game);
                     ContinuousEffect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(fixedTarget);
                     game.addEffect(effect, source);
 
                     effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(fixedTarget);
                     game.addEffect(effect, source);
 
                     effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(fixedTarget);
                     game.addEffect(effect, source);
 
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    exileEffect.setTargetPointer(fixedTarget);
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
                     delayedAbility.setSourceObject(source.getSourceObject(game), game);
                     game.addDelayedTriggeredAbility(delayedAbility);
 
-                    KheruLichLordReplacementEffect replacementEffect = new  KheruLichLordReplacementEffect();
-                    replacementEffect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    KheruLichLordReplacementEffect replacementEffect = new KheruLichLordReplacementEffect();
+                    replacementEffect.setTargetPointer(fixedTarget);
                     game.addEffect(replacementEffect, source);
-
                 }
             }
             return true;
         }
-
 
         return false;
     }
@@ -183,11 +179,11 @@ class KheruLichLordReplacementEffect extends ReplacementEffectImpl {
         return true;
     }
 
-    @Override    
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE

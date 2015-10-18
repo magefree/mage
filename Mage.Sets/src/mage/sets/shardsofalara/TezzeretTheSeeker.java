@@ -107,8 +107,8 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
@@ -123,15 +123,15 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, cmc + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
-        if (player.searchLibrary(target, game)) {
-            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (controller.searchLibrary(target, game)) {
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
     }
 }

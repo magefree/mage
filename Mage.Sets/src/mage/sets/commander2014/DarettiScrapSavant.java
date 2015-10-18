@@ -164,7 +164,7 @@ class DarettiSacrificeEffect extends OneShotEffect {
                 if (artifact != null && artifact.sacrifice(source.getSourceId(), game)) {
                     Card card = game.getCard(getTargetPointer().getFirst(game, source));
                     if (card != null) {
-                        return controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                        return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                 }
             }

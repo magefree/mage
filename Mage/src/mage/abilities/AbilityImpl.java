@@ -952,16 +952,15 @@ public abstract class AbilityImpl implements Ability {
         // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
         // so will use the sourceId of the object itself that came as a parameter if it is not null
         if (object == null) {
-            object = game.getObject(getSourceId());
+            object = game.getPermanentEntering(getSourceId());
+            if (object == null) {
+                object = game.getObject(getSourceId());
+            }
         }
         if (object != null && !object.getAbilities().contains(this)) {
             if (object instanceof Permanent) {
                 return false;
             } else {
-                Permanent permanent = game.getPermanentEntering(getSourceId());
-                if (permanent != null && permanent.getAbilities().contains(this)) {
-                    return true;
-                }
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
                 if (otherAbilities == null || !otherAbilities.contains(this)) {

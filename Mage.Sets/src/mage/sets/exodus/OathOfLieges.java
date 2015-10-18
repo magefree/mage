@@ -65,7 +65,7 @@ public class OathOfLieges extends CardImpl {
         this.expansionSetCode = "EXO";
 
         // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
-        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false, Outcome.PutLandInPlay);
+        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false, true, Outcome.PutLandInPlay, true);
         effect.setText("that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, true);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));

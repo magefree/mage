@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -238,7 +239,8 @@ public class UndyingTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Tatterkite", 1);
         assertPermanentCount(playerA, "Mikaeus, the Unhallowed", 1);
-        assertPowerToughness(playerA, "Tatterkite", 3, 2);
+        assertCounterCount("Tatterkite", CounterType.P1P1, 1);
+        assertPowerToughness(playerA, "Tatterkite", 4, 3);
 
     }
 
