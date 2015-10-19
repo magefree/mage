@@ -161,6 +161,7 @@ public class BigCard extends JComponent {
     }
 
     public void addJXPanel(UUID cardId, JXPanel jxPanel) {
+        this.cardId = cardId;
         bigImage = null;
         synchronized (this) {
             if (this.panel != null) { remove(this.panel); }
