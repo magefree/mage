@@ -40,7 +40,6 @@ public class SilverMyr extends mage.sets.mirrodin.SilverMyr {
         super(ownerId);
         this.cardNumber = 126;
         this.expansionSetCode = "HOP";
-        this.subtype.add("Myr");
     }
 
     public SilverMyr (final SilverMyr card) {
