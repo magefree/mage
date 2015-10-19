@@ -2317,15 +2317,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-
-            ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
-            if (abilityOptions.size() == 0) {
-                return true;
-            } else {
-                for (Mana mana : abilityOptions) {
-                    for (Mana avail : available) {
-                        if (mana.enough(avail)) {
-                            return true;
+            boolean canBeCastRegularly = true;
+            if (copy instanceof SpellAbility && copy.getManaCosts().isEmpty() && copy.getCosts().isEmpty()) {
+                // 117.6. Some mana costs contain no mana symbols. This represents an unpayable cost...
+                // 117.6a (...) If an alternative cost is applied to an unpayable cost,
+                // including an effect that allows a player to cast a spell without paying its mana cost, the alternative cost may be paid.
+                canBeCastRegularly = false;
+            }
+            if (canBeCastRegularly) {
+                ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
+                if (abilityOptions.size() == 0) {
+                    return true;
+                } else {
+                    for (Mana mana : abilityOptions) {
+                        for (Mana avail : available) {
+                            if (mana.enough(avail)) {
+                                return true;
+                            }
                         }
                     }
                 }

@@ -35,7 +35,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 
 /**
  *
@@ -47,11 +46,10 @@ public class FutureSight extends CardImpl {
         super(ownerId, 84, "Future Sight", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}{U}");
         this.expansionSetCode = "ONS";
 
-
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
         // You may play the top card of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterCard())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect()));
     }
 
     public FutureSight(final FutureSight card) {
