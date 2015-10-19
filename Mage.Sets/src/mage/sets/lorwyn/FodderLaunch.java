@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class FodderLaunch extends CardImpl {
 
     public FodderLaunch(UUID ownerId) {
-        super(ownerId, 114, "Fodder Launch", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        super(ownerId, 114, "Fodder Launch", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Goblin");
 

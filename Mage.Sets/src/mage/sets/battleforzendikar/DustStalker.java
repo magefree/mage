@@ -59,8 +59,7 @@ public class DustStalker extends CardImpl {
     public DustStalker(UUID ownerId) {
         super(ownerId, 202, "Dust Stalker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
         this.expansionSetCode = "BFZ";
-        this.supertype.add("Creautre");
-        this.supertype.add("Eldrazi");
+        this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

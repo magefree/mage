@@ -43,6 +43,7 @@ public class PensiveMinotaur extends CardImpl {
         super(ownerId, 105, "Pensive Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Minotaur");
+        this.subtype.add("Warrior");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
