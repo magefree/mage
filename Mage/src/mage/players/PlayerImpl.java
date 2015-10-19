@@ -3097,7 +3097,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case LIBRARY:
                 for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
+                    if (card instanceof Spell) {
+                        fromZone = game.getState().getZone(((Spell) card).getSourceId());
+                    } else {
+                        fromZone = game.getState().getZone(card.getId());
+                    }
                     boolean hideCard = fromZone.equals(Zone.HAND) || fromZone.equals(Zone.LIBRARY);
                     if (moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, !hideCard)) {
                         successfulMovedCards.add(card);
