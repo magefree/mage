@@ -62,7 +62,7 @@ public class MinamoSightbender extends CardImpl {
         this.subtype.add("Wizard");
 
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl("{X}"));
