@@ -52,7 +52,7 @@ public class VoiceOfLaw extends CardImpl {
     }
 
     public VoiceOfLaw(UUID ownerId) {
-        super(ownerId, 55, "Voice Of Law", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        super(ownerId, 55, "Voice of Law", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "USG";
         this.subtype.add("Angel");
 
