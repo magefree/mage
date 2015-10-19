@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
 public class AjanisPridemate extends CardImpl {
 
     public AjanisPridemate(UUID ownerId) {
-        super(ownerId, 3, "Ajani's Pridemate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "1}{W}");
+        super(ownerId, 3, "Ajani's Pridemate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "M11";
         this.subtype.add("Cat");
         this.subtype.add("Soldier");

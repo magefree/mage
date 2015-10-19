@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
 public class Sunder extends CardImpl {
 
     public Sunder(UUID ownerId) {
-        super(ownerId, 101, "Sunder", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
+        super(ownerId, 101, "Sunder", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "USG";
 
         // Return all lands to their owners' hands.
