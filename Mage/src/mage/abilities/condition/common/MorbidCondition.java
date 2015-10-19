@@ -49,4 +49,9 @@ public class MorbidCondition implements Condition {
         return watcher.conditionMet();
     }
 
+    @Override
+    public String toString() {
+        return "if a creature died this turn";
+    }
+
 }

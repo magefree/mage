@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class EnduringIdeal extends CardImpl {
 
@@ -54,13 +54,12 @@ public class EnduringIdeal extends CardImpl {
         super(ownerId, 9, "Enduring Ideal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
         this.expansionSetCode = "SOK";
 
-
         // Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new EnduringIdealEffect());
-        
+
         // Epic
         this.getSpellAbility().addEffect(new EpicEffect());
-        
+
     }
 
     public EnduringIdeal(final EnduringIdeal card) {
@@ -74,9 +73,9 @@ public class EnduringIdeal extends CardImpl {
 }
 
 class EnduringIdealEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterCard();
-    
+
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
@@ -93,16 +92,16 @@ class EnduringIdealEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            you.searchLibrary(target, game);
+            controller.searchLibrary(target, game);
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard == null) {
                 applied = false;
-            } else{
-                applied = you.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
-                you.shuffleLibrary(game);
+            } else {
+                applied = controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
+                controller.shuffleLibrary(game);
             }
         }
         return applied;

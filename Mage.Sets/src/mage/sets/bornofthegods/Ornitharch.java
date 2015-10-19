@@ -29,7 +29,6 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;

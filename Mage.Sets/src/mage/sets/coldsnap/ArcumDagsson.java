@@ -56,8 +56,9 @@ import mage.target.common.TargetCardInLibrary;
  * @author emerald000
  */
 public class ArcumDagsson extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterArtifactPermanent("artifact creature");
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -88,26 +89,27 @@ public class ArcumDagsson extends CardImpl {
 }
 
 class ArcumDagssonEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterArtifactCard("noncreature artifact card");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     ArcumDagssonEffect() {
         super(Outcome.Removal);
         this.staticText = "Target artifact creature's controller sacrifices it. That player may search his or her library for a noncreature artifact card, put it onto the battlefield, then shuffle his or her library";
     }
-    
+
     ArcumDagssonEffect(final ArcumDagssonEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ArcumDagssonEffect copy() {
         return new ArcumDagssonEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent artifactCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
@@ -120,7 +122,7 @@ class ArcumDagssonEffect extends OneShotEffect {
                     if (player.searchLibrary(target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                            player.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
                     }
                     player.shuffleLibrary(game);

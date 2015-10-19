@@ -117,7 +117,7 @@ class ImpromptuRaidEffect extends OneShotEffect {
                     controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                     return true;
                 }
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId())) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);

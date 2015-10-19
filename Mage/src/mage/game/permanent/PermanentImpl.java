@@ -647,6 +647,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, controllerId))) {
                 this.attachments.add(permanentId);
                 Permanent attachment = game.getPermanent(permanentId);
+                if (attachment == null) {
+                    attachment = game.getPermanentEntering(permanentId);
+                }
                 if (attachment != null) {
                     attachment.attachTo(objectId, game);
                     game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, controllerId));

@@ -31,12 +31,11 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -48,7 +47,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -73,7 +71,7 @@ public class AshiokNightmareWeaver extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Ashiok");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +2: Exile the top three cards of target opponent's library.
         LoyaltyAbility ability = new LoyaltyAbility(new AshiokNightmareWeaverExileEffect(), 2);
@@ -169,16 +167,14 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
         if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
             if (controller.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null && controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
-                    // why is this change of controller neccessary?
+                if (card != null
+                        && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
-                        permanent.changeControllerId(source.getControllerId(), game);
+                        ContinuousEffectImpl effect = new AshiokNightmareWeaverAddTypeEffect();
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                        game.addEffect(effect, source);
                     }
-
-                    ContinuousEffectImpl effect = new AshiokNightmareWeaverAddTypeEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
                     return true;
                 }
             }

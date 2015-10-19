@@ -69,7 +69,7 @@ public class OutpostSiege extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // As Outpost Siege enters the battlefield, choose Khans or Dragons.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null, true,
+        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
                 "As {this} enters the battlefield, choose Khans or Dragons.", ""));
 
         // * Khans - At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.

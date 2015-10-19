@@ -29,6 +29,8 @@ package mage.sets.fatereforged;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -96,15 +98,18 @@ class GhastlyConscriptionEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
             ArrayList<Card> cardsToManifest = new ArrayList<>();
-            for(Card card: targetPlayer.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+            for (Card card : targetPlayer.getGraveyard().getCards(new FilterCreatureCard(), game)) {
                 cardsToManifest.add(card);
                 controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+            }
+            if (cardsToManifest.isEmpty()) {
+                return true;
             }
             Collections.shuffle(cardsToManifest);
             game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
-            for (Card card: cardsToManifest) {
+            for (Card card : cardsToManifest) {
                 ManaCosts manaCosts = null;
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     manaCosts = card.getSpellAbility().getManaCosts();
@@ -112,13 +117,12 @@ class GhastlyConscriptionEffect extends OneShotEffect {
                         manaCosts = new ManaCostsImpl("{0}");
                     }
                 }
-                MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) +1, game);
+                MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId(), false, true)) {
-                    game.informPlayers(new StringBuilder(controller.getLogName())
-                            .append(" puts facedown card from exile onto the battlefield").toString());
-                }
             }
+            Set<Card> toBattlefield = new LinkedHashSet();
+            toBattlefield.addAll(cardsToManifest);
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, true, false, null);
             return true;
         }
         return false;

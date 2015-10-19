@@ -65,7 +65,6 @@ public class OathOfDruids extends CardImpl {
         super(ownerId, 115, "Oath of Druids", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "EXO";
 
-
         // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is his or her opponent. The first player may reveal cards from the top of his or her library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, true);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
@@ -136,32 +135,32 @@ class OathOfDruidsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = game.getObject(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || sourceObject == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Cards revealed = new CardsImpl();
         Card creatureCard = null;
         Cards nonCreatureCards = new CardsImpl();
         //The first player may reveal cards from the top of his or her library
-        while (creatureCard == null && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().removeFromTop(game);
+        while (creatureCard == null && controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().removeFromTop(game);
             revealed.add(card);
-            // until he or she reveals a creature card. 
+            // until he or she reveals a creature card.
             if (card.getCardType().contains(CardType.CREATURE)) {
                 creatureCard = card;
             } else {
                 nonCreatureCards.add(card);
             }
         }
-        player.revealCards(sourceObject.getName(), revealed, game);
+        controller.revealCards(sourceObject.getIdName(), revealed, game);
 
         //If he or she does, that player puts that card onto the battlefield
         if (creatureCard != null) {
-            player.putOntoBattlefieldWithInfo(creatureCard, game, Zone.LIBRARY, source.getSourceId());
+            controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);
         }
         // and all other cards revealed this way into his or her graveyard
-        player.moveCards(nonCreatureCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+        controller.moveCards(nonCreatureCards, Zone.GRAVEYARD, source, game);
         return true;
     }
 

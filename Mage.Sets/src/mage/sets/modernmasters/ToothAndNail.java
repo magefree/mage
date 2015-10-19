@@ -33,8 +33,8 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.EntwineAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -102,13 +102,8 @@ class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
 
         TargetCardInHand target = new TargetCardInHand(0, 2, new FilterCreatureCard("creature cards"));
         if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-            for (UUID targetId : target.getTargets()) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), false);
-                }
-            }
-            return true;
+            return controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game),
+                    Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
         return false;
     }

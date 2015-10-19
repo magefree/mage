@@ -96,7 +96,7 @@ public class CyclingTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Decree of Pain");
         // Protection from black
         // Cycling {2} ({2}, Discard this card: Draw a card.)
-        addCard(Zone.BATTLEFIELD, playerB, "Disciple Of Grace");
+        addCard(Zone.BATTLEFIELD, playerB, "Disciple of Grace");
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling {3}{B}{B}");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cycling {2}");
@@ -108,7 +108,7 @@ public class CyclingTest extends CardTestPlayerBase {
         assertHandCount(playerB, 0);        
         
         assertGraveyardCount(playerA, "Decree of Pain", 1);
-        assertPermanentCount(playerB, "Disciple Of Grace", 1);       
+        assertPermanentCount(playerB, "Disciple of Grace", 1);
 
     }
     

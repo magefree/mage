@@ -30,7 +30,6 @@ package mage.sets.conspiracy;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -114,14 +113,13 @@ class ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect extends OneShotE
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Target target = new TargetCardInGraveyard(new FilterCreatureCard());
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && player.chooseTarget(outcome, target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                    && controller.chooseTarget(outcome, target, source, game)) {
+                return controller.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

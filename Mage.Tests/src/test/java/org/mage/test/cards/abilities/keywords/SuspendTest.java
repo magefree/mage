@@ -49,6 +49,8 @@ public class SuspendTest extends CardTestPlayerBase {
     public void testEpochrasite() {
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.
+        // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
         addCard(Zone.HAND, playerA, "Epochrasite", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);

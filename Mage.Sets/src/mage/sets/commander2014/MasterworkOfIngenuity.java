@@ -28,14 +28,11 @@
 package mage.sets.commander2014;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -45,6 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author LevelX2
  */
 public class MasterworkOfIngenuity extends CardImpl {
+
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
@@ -58,12 +56,7 @@ public class MasterworkOfIngenuity extends CardImpl {
         this.subtype.add("Equipment");
 
         // You may have Masterwork of Ingenuity enter the battlefield as a copy of any Equipment on the battlefield.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new CopyPermanentEffect(filter),
-                "You may have {this} enter the battlefield as a copy of any Equipment on the battlefield",
-                true));
-        this.addAbility(ability);
-
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(filter), true));
     }
 
     public MasterworkOfIngenuity(final MasterworkOfIngenuity card) {

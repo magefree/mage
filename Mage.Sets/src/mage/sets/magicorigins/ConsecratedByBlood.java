@@ -66,7 +66,7 @@ public class ConsecratedByBlood extends CardImpl {
     }
 
     public ConsecratedByBlood(UUID ownerId) {
-        super(ownerId, 87, "Consecrated By Blood", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
+        super(ownerId, 87, "Consecrated by Blood", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "ORI";
         this.subtype.add("Aura");
 

@@ -35,7 +35,6 @@ import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -86,40 +85,36 @@ public class YisanTheWandererBard extends CardImpl {
 }
 
 class YisanTheWandererBardEffect extends OneShotEffect {
-    
+
     public YisanTheWandererBardEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for a creature card with converted mana cost equal to the number of verse counters on {this}, put it onto the battlefield, then shuffle your library";
     }
-    
+
     public YisanTheWandererBardEffect(final YisanTheWandererBardEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public YisanTheWandererBardEffect copy() {
         return new YisanTheWandererBardEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent != null && player != null) {
+        if (sourcePermanent != null && controller != null) {
             int newConvertedCost = sourcePermanent.getCounters().getCount("verse");
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
             filter.add(new CardTypePredicate(CardType.CREATURE));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (player.searchLibrary(target, game)) {
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
-                    if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-                    }
-                }
+            if (controller.searchLibrary(target, game)) {
+                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

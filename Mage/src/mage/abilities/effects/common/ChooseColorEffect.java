@@ -27,8 +27,8 @@
  */
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.ChoiceColor;
 import mage.constants.Outcome;
@@ -55,11 +55,11 @@ public class ChooseColorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+        MageObject mageObject = game.getPermanentEntering(source.getSourceId());
+        if (mageObject == null) {
+            mageObject = game.getObject(source.getSourceId());
         }
-        if (controller != null && permanent != null) {
+        if (controller != null && mageObject != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
                 controller.choose(outcome, choice, game);
@@ -68,10 +68,12 @@ public class ChooseColorEffect extends OneShotEffect {
                 }
             }
             if (!game.isSimulation()) {
-                game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
+                game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
             }
-            game.getState().setValue(source.getSourceId() + "_color", choice.getColor());
-            permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
+            game.getState().setValue(mageObject.getId() + "_color", choice.getColor());
+            if (mageObject instanceof Permanent) {
+                ((Permanent) mageObject).addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
+            }
             return true;
         }
         return false;

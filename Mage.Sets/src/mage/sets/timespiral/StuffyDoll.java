@@ -35,6 +35,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChoosePlayerEffect;
 import mage.abilities.effects.common.DamageSelfEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -45,10 +46,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
-
 
 /**
  *
@@ -64,7 +62,7 @@ public class StuffyDoll extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As Stuffy Doll enters the battlefield, choose a player.
-        this.addAbility(new AsEntersBattlefieldAbility(new StuffyDollChoosePlayerEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Damage)));
         // Stuffy Doll is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
         // Whenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.
@@ -80,41 +78,6 @@ public class StuffyDoll extends CardImpl {
     @Override
     public StuffyDoll copy() {
         return new StuffyDoll(this);
-    }
-}
-
-class StuffyDollChoosePlayerEffect extends OneShotEffect {
-
-    public StuffyDollChoosePlayerEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "choose a player";
-    }
-
-    public StuffyDollChoosePlayerEffect(final StuffyDollChoosePlayerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StuffyDollChoosePlayerEffect copy() {
-        return new StuffyDollChoosePlayerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            TargetPlayer target = new TargetPlayer();
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Player chosenPlayer = game.getPlayer(target.getFirstTarget());
-                if (chosenPlayer != null) {
-                    game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                    game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
 
@@ -179,4 +142,3 @@ class StuffyDollGainLifeEffect extends OneShotEffect {
         return true;
     }
 }
-

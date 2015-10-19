@@ -25,18 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -44,17 +43,19 @@ import mage.cards.CardImpl;
  */
 public class StompingGround extends CardImpl {
 
-    public StompingGround (UUID ownerId) {
+    public StompingGround(UUID ownerId) {
         super(ownerId, 165, "Stomping Ground", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "GPT";
         this.subtype.add("Mountain");
         this.subtype.add("Forest");
+
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Stomping Ground enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)),
+                "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
     }
 
-    public StompingGround (final StompingGround card) {
+    public StompingGround(final StompingGround card) {
         super(card);
     }
 

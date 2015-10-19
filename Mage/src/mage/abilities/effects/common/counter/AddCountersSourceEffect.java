@@ -30,9 +30,9 @@ package mage.abilities.effects.common.counter;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
@@ -115,8 +115,8 @@ public class AddCountersSourceEffect extends OneShotEffect {
                 }
             } else {
                 Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent == null) {
-                    permanent = (Permanent) getValue(EntersBattlefieldEffect.ENTERING_PERMANENT);
+                if (permanent == null && source.getAbilityType().equals(AbilityType.STATIC)) {
+                    permanent = game.getPermanentEntering(source.getSourceId());
                 }
                 if (permanent != null) {
                     if (counter != null) {

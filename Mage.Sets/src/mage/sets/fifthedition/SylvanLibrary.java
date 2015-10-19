@@ -27,7 +27,9 @@
  */
 package mage.sets.fifthedition;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -64,7 +66,8 @@ public class SylvanLibrary extends CardImpl {
         this.expansionSetCode = "5ED";
 
         // At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true), new CardsDrawnThisTurnWatcher());
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true),
+                new CardsDrawnThisTurnWatcher());
 
     }
 
@@ -99,11 +102,11 @@ class SylvanLibraryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.drawCards(2, game);
-            CardsDrawnThisTurnWatcher watcher = (CardsDrawnThisTurnWatcher) game.getState().getWatchers().get("CardsDrawnThisTurnWatcher", source.getControllerId());
+            CardsDrawnThisTurnWatcher watcher = (CardsDrawnThisTurnWatcher) game.getState().getWatchers().get("CardsDrawnThisTurnWatcher");
             if (watcher != null) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : controller.getHand()) {
-                    if (watcher.getCardsDrawnThisTurn().contains(cardId)) {
+                    if (watcher.getCardsDrawnThisTurn(controller.getId()).contains(cardId)) {
                         Card card = game.getCard(cardId);
                         if (card != null) {
                             cards.add(card);
@@ -161,26 +164,31 @@ class SylvanLibraryEffect extends OneShotEffect {
 
 class CardsDrawnThisTurnWatcher extends Watcher {
 
-    private final Set<UUID> cardsDrawnThisTurn = new HashSet<UUID>();
+    private final Map<UUID, Set<UUID>> cardsDrawnThisTurn = new HashMap<>();
 
     public CardsDrawnThisTurnWatcher() {
-        super("CardsDrawnThisTurnWatcher", WatcherScope.PLAYER);
+        super("CardsDrawnThisTurnWatcher", WatcherScope.GAME);
     }
 
     public CardsDrawnThisTurnWatcher(final CardsDrawnThisTurnWatcher watcher) {
         super(watcher);
-        this.cardsDrawnThisTurn.addAll(watcher.cardsDrawnThisTurn);
+        this.cardsDrawnThisTurn.putAll(watcher.cardsDrawnThisTurn);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD && event.getPlayerId().equals(this.getControllerId())) {
-            cardsDrawnThisTurn.add(event.getTargetId());
+        if (event.getType() == GameEvent.EventType.DREW_CARD) {
+            if (!cardsDrawnThisTurn.containsKey(event.getPlayerId())) {
+                Set<UUID> cardsDrawn = new LinkedHashSet<>();
+                cardsDrawnThisTurn.put(event.getPlayerId(), cardsDrawn);
+            }
+            Set<UUID> cardsDrawn = cardsDrawnThisTurn.get(event.getPlayerId());
+            cardsDrawn.add(event.getTargetId());
         }
     }
 
-    public Set<UUID> getCardsDrawnThisTurn() {
-        return cardsDrawnThisTurn;
+    public Set<UUID> getCardsDrawnThisTurn(UUID playerId) {
+        return cardsDrawnThisTurn.get(playerId);
     }
 
     @Override
@@ -195,7 +203,6 @@ class CardsDrawnThisTurnWatcher extends Watcher {
     }
 }
 
-
 class CardIdPredicate implements Predicate<MageObject> {
 
     private final Cards cardsId;
@@ -206,10 +213,8 @@ class CardIdPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-       for(UUID uuid : cardsId)
-        {
-            if(uuid.equals(input.getId()))
-            {
+        for (UUID uuid : cardsId) {
+            if (uuid.equals(input.getId())) {
                 return true;
             }
         }

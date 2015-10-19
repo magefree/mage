@@ -28,7 +28,6 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -37,7 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -93,7 +95,7 @@ class FootstepsOfTheGoryoEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         // Sacrifice it at end of turn
@@ -104,11 +106,10 @@ class FootstepsOfTheGoryoEffect extends OneShotEffect {
                         delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceObject(source.getSourceObject(game), game);
                         game.addDelayedTriggeredAbility(delayedAbility);
-                        return true;
-
                     }
                 }
             }
+            return true;
         }
         return false;
     }

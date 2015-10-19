@@ -31,14 +31,13 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
@@ -46,7 +45,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -64,7 +62,7 @@ public class TeferiTemporalArchmage extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Teferi");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
@@ -96,7 +94,6 @@ public class TeferiTemporalArchmage extends CardImpl {
 class TeferiTemporalArchmageEmblem extends Emblem {
 
     // "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
-
     public TeferiTemporalArchmageEmblem() {
         this.setName("EMBLEM: Teferi, Temporal Archmage");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TeferiTemporalArchmageAsThoughEffect()));

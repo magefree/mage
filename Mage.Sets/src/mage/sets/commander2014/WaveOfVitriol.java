@@ -28,12 +28,15 @@
 package mage.sets.commander2014;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -86,9 +89,9 @@ class WaveOfVitriolEffect extends OneShotEffect {
                         new CardTypePredicate(CardType.LAND),
                         Predicates.not(new SupertypePredicate("Basic"))
                 )
-
         ));
     }
+
     public WaveOfVitriolEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each player sacrifices all artifacts, enchantments, and nonbasic lands he or she controls. For each land sacrificed this way, its controller may search his or her library for a basic land card and put it onto the battlefield tapped. Then each player who searched his or her library this way shuffles it";
@@ -108,11 +111,11 @@ class WaveOfVitriolEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Map<Player, Integer> sacrificedLands = new HashMap<>();
-            for(UUID playerId: controller.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int count = 0;
-                    for(Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
                         if (permanent.sacrifice(source.getSourceId(), game) && permanent.getCardType().contains(CardType.LAND)) {
                             count++;
                         }
@@ -123,25 +126,19 @@ class WaveOfVitriolEffect extends OneShotEffect {
                 }
             }
             game.getState().handleSimultaneousEvent(game);
-            for(Map.Entry<Player, Integer> entry: sacrificedLands.entrySet()) {
+            Cards toBattlefield = new CardsImpl();
+            Set<Player> playersToShuffle = new LinkedHashSet<>();
+            for (Map.Entry<Player, Integer> entry : sacrificedLands.entrySet()) {
                 if (entry.getKey().chooseUse(Outcome.PutLandInPlay, "Search your library for up to " + entry.getValue() + " basic lands?", source, game)) {
                     Target target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
                     entry.getKey().chooseTarget(outcome, target, source, game);
-                    for(UUID targetId: target.getTargets()) {
-                        Card card = game.getCard(targetId);
-                        if (card != null) {
-                            entry.getKey().putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
-                        }
-                    }
-                    entry.getKey().shuffleLibrary(game);
-                } else {
-                    entry.setValue(0);
+                    toBattlefield.addAll(target.getTargets());
+                    playersToShuffle.add(entry.getKey());
                 }
             }
-            for(Map.Entry<Player, Integer> entry: sacrificedLands.entrySet()) {
-                if (entry.getValue() > 0) {
-                    entry.getKey().shuffleLibrary(game);
-                }
+            controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
+            for (Player player : playersToShuffle) {
+                player.shuffleLibrary(game);
             }
 
             return true;

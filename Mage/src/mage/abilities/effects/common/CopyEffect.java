@@ -33,6 +33,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -54,10 +55,10 @@ public class CopyEffect extends ContinuousEffectImpl {
     /**
      * Object we copy from
      */
-    private MageObject copyFromObject;
+    protected MageObject copyFromObject;
 
-    private UUID copyToObjectId;
-    private ApplyToPermanent applier;
+    protected UUID copyToObjectId;
+    protected ApplyToPermanent applier;
 
     public CopyEffect(MageObject copyFromObject, UUID copyToObjectId) {
         this(Duration.Custom, copyFromObject, copyToObjectId);
@@ -82,14 +83,23 @@ public class CopyEffect extends ContinuousEffectImpl {
         if (!(copyFromObject instanceof Permanent) && (copyFromObject instanceof Card)) {
             this.copyFromObject = new PermanentCard((Card) copyFromObject, source.getControllerId(), game);
         }
-
+        Permanent permanent = game.getPermanent(copyToObjectId);
+        if (permanent != null) {
+            affectedObjectList.add(new MageObjectReference(permanent, game));
+        } else if (source.getAbilityType().equals(AbilityType.STATIC)) {
+            // for replacement effects that let a permanent enter the battlefield as a copy of another permanent we need to apply that copy
+            // before the permanent is added to the battlefield
+            permanent = game.getPermanentEntering(copyToObjectId);
+            if (permanent != null) {
+                copyToPermanent(permanent, game, source);
+                // set reference to the permanent later on the battlefield so we have to add already one to the zone change counter
+                affectedObjectList.add(new MageObjectReference(permanent.getId(), game.getState().getZoneChangeCounter(copyToObjectId) + 1, game));
+            }
+        }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (affectedObjectList.isEmpty()) {
-            affectedObjectList.add(new MageObjectReference(getSourceId(), game));
-        }
         Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
@@ -99,6 +109,10 @@ public class CopyEffect extends ContinuousEffectImpl {
                 return false;
             }
         }
+        return copyToPermanent(permanent, game, source);
+    }
+
+    protected boolean copyToPermanent(Permanent permanent, Game game, Ability source) {
         permanent.setCopy(true);
         permanent.setName(copyFromObject.getName());
         permanent.getColor(game).setColor(copyFromObject.getColor(game));

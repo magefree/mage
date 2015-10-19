@@ -46,6 +46,7 @@ import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -99,11 +100,13 @@ class RallyTheAncestorsEffect extends OneShotEffect {
             FilterCreatureCard filter = new FilterCreatureCard();
             filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
+            player.moveCards(cards, Zone.BATTLEFIELD, source, game);
             for (Card card : cards) {
                 if (card != null) {
-                    if (player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null) {
                         Effect exileEffect = new ExileTargetEffect("Exile those creatures at the beginning of your next upkeep");
-                        exileEffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                        exileEffect.setTargetPointer(new FixedTarget(permanent, game));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(exileEffect);
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());

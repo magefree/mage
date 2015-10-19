@@ -1,5 +1,5 @@
 /*
-/*
+ /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -60,7 +60,7 @@ public class FathomMage extends CardImpl {
         // Evolve (Whenever a creature enters the battlefield under your control, if that creature
         // has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
         this.addAbility(new EvolveAbility());
-        
+
         //Whenever a +1/+1 counter is placed on Fathom Mage, you may draw a card.
         this.addAbility(new FathomMageTriggeredAbility());
     }
@@ -75,11 +75,10 @@ public class FathomMage extends CardImpl {
     }
 }
 
-
 class FathomMageTriggeredAbility extends TriggeredAbilityImpl {
 
     public FathomMageTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
+        super(Zone.ALL, new DrawCardSourceControllerEffect(1), true);
     }
 
     public FathomMageTriggeredAbility(FathomMageTriggeredAbility ability) {

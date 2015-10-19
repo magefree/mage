@@ -47,8 +47,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-
-
 /**
  *
  * @author LevelX2
@@ -59,15 +57,14 @@ public class SeeTheUnwritten extends CardImpl {
         super(ownerId, 149, "See the Unwritten", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
         this.expansionSetCode = "KTK";
 
-
         // Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard.
         // <i>Ferocious</i> - If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SeeTheUnwrittenEffect(1),
-                new SeeTheUnwrittenEffect(2), 
+                new SeeTheUnwrittenEffect(2),
                 new InvertCondition(FerociousCondition.getInstance()),
-                "Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard." +
-                 "<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one"       ));
+                "Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard."
+                + "<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one"));
     }
 
     public SeeTheUnwritten(final SeeTheUnwritten card) {
@@ -89,9 +86,9 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
     public SeeTheUnwrittenEffect(int numberOfCardsToPutIntoPlay) {
         super(Outcome.DrawCard);
         this.numberOfCardsToPutIntoPlay = numberOfCardsToPutIntoPlay;
-        this.staticText = "Reveal the top eight cards of your library. You may put " +
-                (numberOfCardsToPutIntoPlay == 1 ? "a creature card":"two creature cards") +
-                " from among them onto the battlefield. Put the rest into your graveyard";
+        this.staticText = "Reveal the top eight cards of your library. You may put "
+                + (numberOfCardsToPutIntoPlay == 1 ? "a creature card" : "two creature cards")
+                + " from among them onto the battlefield. Put the rest into your graveyard";
     }
 
     public SeeTheUnwrittenEffect(final SeeTheUnwrittenEffect effect) {
@@ -126,24 +123,24 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getName(), cards, game);
                 if (creatureCardsFound > 0 && controller.chooseUse(outcome, "Put creature(s) into play?", source, game)) {
-                    int cardsToChoose = Math.min(numberOfCardsToPutIntoPlay, creatureCardsFound); 
+                    int cardsToChoose = Math.min(numberOfCardsToPutIntoPlay, creatureCardsFound);
                     TargetCard target = new TargetCard(cardsToChoose, cardsToChoose, Zone.LIBRARY, filter);
                     if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
-                        for(UUID creatureId: target.getTargets()) {
+                        for (UUID creatureId : target.getTargets()) {
                             Card card = game.getCard(creatureId);
                             if (card != null) {
                                 cards.remove(card);
-                                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                             }
                         }
 
                     }
                 }
-                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                
+                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
             return true;
         }
         return false;
     }
-    
+
 }

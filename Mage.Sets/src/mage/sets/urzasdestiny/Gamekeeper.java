@@ -77,8 +77,6 @@ public class Gamekeeper extends CardImpl {
 
 class GamekeeperEffect extends OneShotEffect {
 
-
-
     public GamekeeperEffect() {
         super(Outcome.Benefit);
         staticText = "reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and put all other cards revealed this way into your graveyard";
@@ -98,15 +96,13 @@ class GamekeeperEffect extends OneShotEffect {
             while (controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     break;
                 }
                 revealedCards.add(card);
             }
-            controller.revealCards("Gamekeeper", revealedCards, game);
-            for (Card card: revealedCards.getCards(game)) {
-                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-            }
+            controller.revealCards(sourceObject.getIdName(), revealedCards, game);
+            controller.moveCards(revealedCards, Zone.GRAVEYARD, source, game);
             return true;
         }
         return false;

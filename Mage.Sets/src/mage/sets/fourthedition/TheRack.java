@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -40,9 +41,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -55,7 +54,7 @@ public class TheRack extends CardImpl {
         this.expansionSetCode = "4ED";
 
         // As The Rack enters the battlefield, choose an opponent.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponent()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
         // At the beginning of the chosen player's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
         this.addAbility(new TheRackTriggeredAbility());
     }
@@ -71,7 +70,6 @@ public class TheRack extends CardImpl {
 }
 
 class TheRackTriggeredAbility extends TriggeredAbilityImpl {
-
 
     public TheRackTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TheRackEffect(), false);
@@ -93,50 +91,14 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals((UUID) game.getState().getValue(new StringBuilder(this.getSourceId().toString()).append("_player").toString()));
+        return event.getPlayerId().equals((UUID) game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
 
     @Override
     public String getRule() {
-        return new StringBuilder("At the beginning of the chosen player's upkeep, ").append(super.getRule()).toString();
+        return "At the beginning of the chosen player's upkeep, " + super.getRule();
     }
 
-}
-
-class ChooseOpponent extends OneShotEffect {
-
-    public ChooseOpponent() {
-        super(Outcome.Neutral);
-        this.staticText = "choose an opponent";
-    }
-
-    public ChooseOpponent(final ChooseOpponent effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChooseOpponent copy() {
-        return new ChooseOpponent(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            TargetOpponent target = new TargetOpponent();
-            target.setNotTarget(true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Player chosenPlayer = game.getPlayer(target.getFirstTarget());
-                if (chosenPlayer != null) {
-                    game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                    game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 }
 
 class TheRackEffect extends OneShotEffect {
@@ -157,7 +119,7 @@ class TheRackEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID playerId = (UUID) game.getState().getValue(new StringBuilder(source.getSourceId().toString()).append("_player").toString());
+        UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + "_player");
         Player chosenPlayer = game.getPlayer(playerId);
         if (chosenPlayer != null) {
             int damage = 3 - chosenPlayer.getHand().size();

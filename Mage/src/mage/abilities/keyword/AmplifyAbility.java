@@ -39,13 +39,13 @@ import mage.constants.Zone;
 public class AmplifyAbility extends SimpleStaticAbility {
 
     public AmplifyAbility(AmplifyFactor amplifyFactor) {
-        super(Zone.BATTLEFIELD, new AmplifyEffect(amplifyFactor));
+        super(Zone.ALL, new AmplifyEffect(amplifyFactor));
     }
-    
+
     public AmplifyAbility(final AmplifyAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public AmplifyAbility copy() {
         return new AmplifyAbility(this);

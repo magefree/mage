@@ -180,7 +180,7 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
             // return it only from the own exile zone
             if (currentZone != null && currentZone.size() > 0) {
                 Player owner = game.getPlayer(card.getOwnerId());
-                if (owner != null && owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
+                if (owner != null && owner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     return true;
                 }
             }

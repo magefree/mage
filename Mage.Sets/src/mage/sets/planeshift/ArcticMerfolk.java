@@ -61,8 +61,7 @@ public class ArcticMerfolk extends CardImpl {
         // If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                KickedCondition.getInstance(),
-                true,"If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.",""));
+                KickedCondition.getInstance(),"If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.",""));
     }
 
     public ArcticMerfolk(final ArcticMerfolk card) {

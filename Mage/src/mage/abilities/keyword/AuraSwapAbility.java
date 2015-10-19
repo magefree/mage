@@ -104,9 +104,9 @@ class AuraSwapEffect extends OneShotEffect {
                 if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                     Card auraInHand = game.getCard(target.getFirstTarget());
                     if (auraInHand != null) {
-                        controller.putOntoBattlefieldWithInfo(auraInHand, game, Zone.HAND, source.getSourceId());
+                        controller.moveCards(auraInHand, Zone.BATTLEFIELD, source, game);
                         enchantedPermanent.addAttachment(auraInHand.getId(), game);
-                        controller.moveCards(auraPermanent, null, Zone.HAND, source, game);
+                        controller.moveCards(auraPermanent, Zone.HAND, source, game);
                         return true;
                     }
                 }

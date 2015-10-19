@@ -27,18 +27,19 @@
  */
 package mage.sets.innistrad;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -46,10 +47,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -62,17 +59,16 @@ public class LilianaOfTheVeil extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Liliana");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Each player discards a card.
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(), 1));
-        
+
         // -2: Target player sacrifices a creature.
         LoyaltyAbility ability = new LoyaltyAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"), -2);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
         // -6: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.
         ability = new LoyaltyAbility(new LilianaOfTheVeilEffect(), -6);
         ability.addTarget(new TargetPlayer());
@@ -124,7 +120,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect {
                 }
             }
             List<Permanent> pile2 = new ArrayList<>();
-            for (Permanent p: game.getBattlefield().getAllActivePermanents(targetPlayer.getId())) {
+            for (Permanent p : game.getBattlefield().getAllActivePermanents(targetPlayer.getId())) {
                 if (!pile1.contains(p)) {
                     pile2.add(p);
                 }

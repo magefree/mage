@@ -31,13 +31,12 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.HexproofAbility;
@@ -50,7 +49,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -70,7 +68,7 @@ public class DomriRade extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Domri");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand.
         this.addAbility(new LoyaltyAbility(new DomriRadeEffect1(), 1));
@@ -138,7 +136,6 @@ class DomriRadeEffect1 extends OneShotEffect {
 class DomriRadeEmblem extends Emblem {
 
     // "Creatures you control have double strike, trample, hexproof and haste."
-
     public DomriRadeEmblem() {
         this.setName("EMBLEM: Domri Rade");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");

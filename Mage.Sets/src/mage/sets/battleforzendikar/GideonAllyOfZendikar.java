@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,14 +39,12 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.command.Emblem;
 import mage.game.permanent.token.Token;
 
@@ -61,7 +59,7 @@ public class GideonAllyOfZendikar extends CardImpl {
         this.expansionSetCode = "BFZ";
         this.subtype.add("Gideon");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Until end of turn, Gideon, Ally of Zendikar becomes a 5/5 Human Soldier Ally creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         LoyaltyAbility ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonAllyOfZendikarToken(), "planeswalker", Duration.EndOfTurn), 1);

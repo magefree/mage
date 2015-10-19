@@ -25,7 +25,6 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.keyword;
 
 import java.util.UUID;
@@ -46,22 +45,19 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
-
-public class TributeAbility extends EntersBattlefieldAbility{
+public class TributeAbility extends EntersBattlefieldAbility {
 
     private int tributeValue;
 
-    public TributeAbility(int tributeValue){
-        super(new TributeEffect(tributeValue), false);
+    public TributeAbility(int tributeValue) {
+        super(new TributeEffect(tributeValue));
         this.tributeValue = tributeValue;
     }
 
-    public TributeAbility(final TributeAbility ability){
+    public TributeAbility(final TributeAbility ability) {
         super(ability);
         this.tributeValue = ability.tributeValue;
     }
-
 
     @Override
     public EntersBattlefieldAbility copy() {
@@ -81,7 +77,7 @@ public class TributeAbility extends EntersBattlefieldAbility{
 
 class TributeEffect extends OneShotEffect {
 
-    private int tributeValue;
+    private final int tributeValue;
 
     public TributeEffect(int tributeValue) {
         super(Outcome.Detriment);
@@ -101,7 +97,7 @@ class TributeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             UUID opponentId;
             if (game.getOpponents(controller.getId()).size() == 1) {
@@ -117,16 +113,18 @@ class TributeEffect extends OneShotEffect {
                     StringBuilder sb = new StringBuilder("Pay tribute to ");
                     sb.append(sourcePermanent.getName());
                     sb.append(" (add ").append(CardUtil.numberToText(tributeValue)).append(" +1/+1 counter");
-                    sb.append(tributeValue > 1 ? "s":"").append(" to it)?");
+                    sb.append(tributeValue > 1 ? "s" : "").append(" to it)?");
                     if (opponent.chooseUse(outcome, sb.toString(), source, game)) {
-                        if (!game.isSimulation())
+                        if (!game.isSimulation()) {
                             game.informPlayers(opponent.getLogName() + " pays tribute to " + sourcePermanent.getLogName());
+                        }
                         game.getState().setValue("tributeValue" + source.getSourceId(), "yes");
                         return new AddCountersSourceEffect(CounterType.P1P1.createInstance(tributeValue), true).apply(game, source);
                     } else {
-                        if (!game.isSimulation())
+                        if (!game.isSimulation()) {
                             game.informPlayers(opponent.getLogName() + " does not pay tribute to " + sourcePermanent.getLogName());
-                        game.getState().setValue("tributeValue"+ source.getSourceId(), "no");
+                        }
+                        game.getState().setValue("tributeValue" + source.getSourceId(), "no");
                     }
                     return true;
                 }

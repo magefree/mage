@@ -37,7 +37,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -108,23 +107,20 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player == null || sourceObject == null) {
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        if (player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards(sourceObject.getName(), cards, game);
-
+        if (controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
+            controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             if (card != null) {
                 if (filter.match(card, game)) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
-                    player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 }
             }
         }

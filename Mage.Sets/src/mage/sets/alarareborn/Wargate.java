@@ -28,14 +28,13 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterPermanentCard;
@@ -54,10 +53,6 @@ public class Wargate extends CardImpl {
         super(ownerId, 129, "Wargate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{W}{U}");
         this.expansionSetCode = "ARB";
 
-
-
-
-
         // Search your library for a permanent card with converted mana cost X or less, put it onto the battlefield, then shuffle your library.
         this.getSpellAbility().addEffect(new WargateEffect());
     }
@@ -72,8 +67,8 @@ public class Wargate extends CardImpl {
     }
 }
 
-
 class WargateEffect extends OneShotEffect {
+
     WargateEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Search your library for a permanent card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";
@@ -97,7 +92,7 @@ class WargateEffect extends OneShotEffect {
             if (target.getTargets().size() > 0) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
         }

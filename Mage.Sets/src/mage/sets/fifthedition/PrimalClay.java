@@ -45,6 +45,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -65,7 +66,7 @@ public class PrimalClay extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Primal Clay enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalPlasmaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new PrimalPlasmaReplacementEffect()));
     }
 
     public PrimalClay(final PrimalClay card) {
@@ -101,7 +102,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                 return true;
             }
@@ -116,7 +117,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose what " + permanent.getIdName() + " becomes to");

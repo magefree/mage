@@ -48,10 +48,9 @@ public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player;
-        if(useTargetController) {
+        if (useTargetController) {
             player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        }
-        else {
+        } else {
             player = game.getPlayer(source.getControllerId());
         }
         String choiceText = "Put " + filter.getMessage() + " from your hand onto the battlefield?";
@@ -63,23 +62,21 @@ public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
         if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                return true;
+                return player.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }
-        return false;
+        return true;
     }
 
     @Override
     public String getText(Mode mode) {
-        if(this.staticText != null && !this.staticText.isEmpty()) {
+        if (this.staticText != null && !this.staticText.isEmpty()) {
             return staticText;
         }
 
-        if(useTargetController) {
+        if (useTargetController) {
             return "that player may put " + filter.getMessage() + " from his or her hand onto the battlefield";
-        }
-        else {
+        } else {
             return "you may put " + filter.getMessage() + " from your hand onto the battlefield";
         }
     }

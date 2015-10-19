@@ -29,6 +29,7 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -36,7 +37,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -94,25 +94,23 @@ class ZoologistEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        if (player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards("Zoologist", cards, game);
-
+        if (controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
+            controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             if (card != null) {
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
-                    player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 }
             }
         }
-        return false;
+        return true;
     }
 }

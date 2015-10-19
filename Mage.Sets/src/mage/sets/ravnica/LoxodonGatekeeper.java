@@ -30,19 +30,19 @@ package mage.sets.ravnica;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-
 
 /**
  *
@@ -75,6 +75,7 @@ public class LoxodonGatekeeper extends CardImpl {
 }
 
 class LoxodonGatekeeperTapEffect extends ReplacementEffectImpl {
+
     LoxodonGatekeeperTapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Artifacts, creatures, and lands your opponents control enter the battlefield tapped";
@@ -86,26 +87,26 @@ class LoxodonGatekeeperTapEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
+        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
             target.setTapped(true);
         }
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null &&
-                   (permanent.getCardType().contains(CardType.CREATURE) ||
-                    permanent.getCardType().contains(CardType.LAND) ||
-                    permanent.getCardType().contains(CardType.ARTIFACT))) {
+            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+            if (permanent != null
+                    && (permanent.getCardType().contains(CardType.CREATURE)
+                    || permanent.getCardType().contains(CardType.LAND)
+                    || permanent.getCardType().contains(CardType.ARTIFACT))) {
                 return true;
             }
         }

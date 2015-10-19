@@ -139,7 +139,7 @@ public class WorldheartPhoenix extends CardImpl {
                 SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
                 if (spellAbility != null
                         && spellAbility.getSourceId().equals(source.getSourceId())
-                        && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
+                        && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                     // TODO: No perfect solution because there could be other effects that allow to cast the card for this mana cost
                     if (spellAbility.getManaCosts().getText().equals("{W}{U}{B}{R}{G}")) {
                         permanent.addCounters(CounterType.P1P1.createInstance(2), game);

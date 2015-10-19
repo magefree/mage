@@ -53,7 +53,7 @@ public class AlloyGolem extends CardImpl {
         // As Alloy Golem enters the battlefield, choose a color.
         // Alloy Golem is the chosen color.
         this.addAbility(new EntersBattlefieldAbility(new BecomesColorSourceEffect(Duration.WhileOnBattlefield),
-            null, true, "As {this} enters the battlefield, choose a color.\n{this} is the chosen color.", ""));
+            null, "As {this} enters the battlefield, choose a color.\n{this} is the chosen color.", ""));
     }
 
     public AlloyGolem(final AlloyGolem card) {

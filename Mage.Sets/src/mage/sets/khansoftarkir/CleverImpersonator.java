@@ -29,13 +29,11 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 
 /**
@@ -53,10 +51,7 @@ public class CleverImpersonator extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new EntersBattlefieldEffect(new CopyPermanentEffect(new FilterNonlandPermanent()),
-                        "You may have {this} enter the battlefield as a copy of any nonland permanent on the battlefield",
-                        true)));
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(new FilterNonlandPermanent()), true));
     }
 
     public CleverImpersonator(final CleverImpersonator card) {

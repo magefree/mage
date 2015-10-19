@@ -27,18 +27,17 @@
  */
 package mage.sets.magic2010;
 
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.LinkedHashSet;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -51,7 +50,6 @@ public class OpenTheVaults extends CardImpl {
     public OpenTheVaults(UUID ownerId) {
         super(ownerId, 21, "Open the Vaults", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "M10";
-
 
         // Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control.
         this.getSpellAbility().addEffect(new OpenTheVaultsEffect());
@@ -85,33 +83,21 @@ class OpenTheVaultsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            LinkedList<Card> enchantments = new LinkedList<Card>();
-            LinkedList<Card> artifacts = new LinkedList<Card>();
-
-            Set<UUID> playerIds = player.getInRange();
-            playerIds.add(player.getId());
-
-            for (UUID playerId : playerIds) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            LinkedHashSet<Card> cardsToReturn = new LinkedHashSet<>();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Cards graveyard = game.getPlayer(playerId).getGraveyard();
                 for (UUID cardId : graveyard) {
                     Card card = game.getCard(cardId);
-                    if (card != null && card.getCardType().contains(CardType.ENCHANTMENT)) {
-                        enchantments.add(card);
-                    }
-                    if (card != null && card.getCardType().contains(CardType.ARTIFACT)) {
-                        artifacts.add(card);
+                    if (card != null
+                            && (card.getCardType().contains(CardType.ENCHANTMENT) || card.getCardType().contains(CardType.ARTIFACT))) {
+                        cardsToReturn.add(card);
                     }
                 }
             }
-
-            for (Card card : enchantments) {
-                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), card.getOwnerId());
-            }
-            for (Card card : artifacts) {
-                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), card.getOwnerId());
-            }
+            controller.moveCards(cardsToReturn, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            return true;
         }
         return false;
     }

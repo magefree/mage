@@ -28,11 +28,6 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
@@ -107,18 +107,20 @@ class AEtherVialEffect extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, count));
         String choiceText = "Put a " + filter.getMessage() + " from your hand onto the battlefield?";
 
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getHand().count(filter, game) == 0
-                || !player.chooseUse(this.outcome, choiceText, source, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
+        }
+        if (controller.getHand().count(filter, game) == 0
+                || !controller.chooseUse(this.outcome, choiceText, source, game)) {
+            return true;
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(this.outcome, target, source.getSourceId(), game)) {
+        if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                return true;
+                return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }
         return false;

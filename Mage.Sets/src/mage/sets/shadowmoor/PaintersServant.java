@@ -35,10 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -68,7 +67,7 @@ public class PaintersServant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As Painter's Servant enters the battlefield, choose a color.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
 
         // All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PaintersServantEffect()));
@@ -82,40 +81,6 @@ public class PaintersServant extends CardImpl {
     public PaintersServant copy() {
         return new PaintersServant(this);
     }
-}
-
-class ChooseColorEffect extends OneShotEffect {
-
-    public ChooseColorEffect() {
-        super(Outcome.Detriment);
-        staticText = "choose a color";
-    }
-
-    public ChooseColorEffect(final ChooseColorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                game.informPlayers(new StringBuilder(permanent.getName()).append(": ").append(player.getLogName()).append(" has chosen ").append(colorChoice.getChoice()).toString());
-                game.getState().setValue(source.getSourceId() + "_color", colorChoice.getColor());
-                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>", game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ChooseColorEffect copy() {
-        return new ChooseColorEffect(this);
-    }
-
 }
 
 class PaintersServantEffect extends ContinuousEffectImpl {
@@ -175,10 +140,10 @@ class PaintersServantEffect extends ContinuousEffectImpl {
         }
         return false;
     }
-    
+
     protected static void setCardColor(Card card, String colorString, Game game) {
         ObjectColor color = game.getState().getCreateCardAttribute(card).getColor();
-        switch (colorString) {            
+        switch (colorString) {
             case "W":
                 color.setWhite(true);
                 break;

@@ -36,7 +36,6 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.keyword.FadingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -60,10 +59,9 @@ public class ParallaxWave extends CardImpl {
         super(ownerId, 17, "Parallax Wave", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "NMS";
 
-
         // Fading 5
         this.addAbility(new FadingAbility(5, this));
-        
+
         // Remove a fade counter from Parallax Wave: Exile target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new RemoveCountersSourceCost(CounterType.FADE.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
@@ -103,21 +101,16 @@ class ParallaxWaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (sourceObject != null && controller != null) {
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
             UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
             if (exileZoneId != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
                 if (exileZone != null) {
-                    for (Card card: exileZone.getCards(game)) {
-                        Player player = game.getPlayer(card.getOwnerId());
-                        if (player != null) {
-                            player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
-                        }
-                    }
-                    exileZone.clear();
+                    return controller.moveCards(exileZone.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
                 }
-                return true;                
+                return true;
             }
         }
         return false;

@@ -28,37 +28,31 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author LevelX2
  */
 public class ZameckGuildmage extends CardImpl {
-
-    private static final String ruleText = "This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it";
 
     public ZameckGuildmage(UUID ownerId) {
         super(ownerId, 209, "Zameck Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{U}");
@@ -69,9 +63,8 @@ public class ZameckGuildmage extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-
         // {G}{U}: This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), ruleText), new ManaCostsImpl("{G}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.ALL, new ZameckGuildmageEntersBattlefieldEffect(), new ManaCostsImpl("{G}{U}")));
 
         // {G}{U}, Remove a +1/+1 counter from a creature you control: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{G}{U}"));
@@ -89,25 +82,15 @@ public class ZameckGuildmage extends CardImpl {
     }
 }
 
-class EntersBattlefieldEffect extends ReplacementEffectImpl {
+class ZameckGuildmageEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    protected Effects baseEffects = new Effects();
-    protected String text;
-
-    public EntersBattlefieldEffect(Effect baseEffect, String text) {
-        super(Duration.EndOfTurn, baseEffect.getOutcome());
-        this.baseEffects.add(baseEffect);
-        this.text = text;
+    public ZameckGuildmageEntersBattlefieldEffect() {
+        super(Duration.EndOfTurn, Outcome.BoostCreature);
+        this.staticText = "This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    public EntersBattlefieldEffect(EntersBattlefieldEffect effect) {
+    public ZameckGuildmageEntersBattlefieldEffect(ZameckGuildmageEntersBattlefieldEffect effect) {
         super(effect);
-        this.baseEffects = effect.baseEffects.copy();
-        this.text = effect.text;
-    }
-
-    public void addEffect(Effect effect) {
-        baseEffects.add(effect);
     }
 
     @Override
@@ -117,11 +100,8 @@ class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+        return permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE);
     }
 
     @Override
@@ -131,23 +111,15 @@ class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        for (Effect effect: baseEffects) {
-            Permanent target = game.getPermanent(event.getTargetId());
-            if (target != null) {
-                effect.setTargetPointer(new FixedTarget(target.getId()));
-                effect.apply(game, source);
-            }
+        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (target != null) {
+            target.addCounters(CounterType.P1P1.createInstance(), game);
         }
         return false;
     }
 
     @Override
-    public String getText(Mode mode) {
-        return (text == null || text.isEmpty()) ? baseEffects.getText(mode) : text;
-    }
-
-    @Override
-    public EntersBattlefieldEffect copy() {
-        return new EntersBattlefieldEffect(this);
+    public ZameckGuildmageEntersBattlefieldEffect copy() {
+        return new ZameckGuildmageEntersBattlefieldEffect(this);
     }
 }

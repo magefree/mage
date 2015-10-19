@@ -56,12 +56,11 @@ public class EternalDominion extends CardImpl {
         super(ownerId, 36, "Eternal Dominion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{U}{U}{U}");
         this.expansionSetCode = "SOK";
 
-
         // Search target opponent's library for an artifact, creature, enchantment, or land card.
         // Put that card onto the battlefield under your control. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new EternalDominionEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        
+
         // Epic
         this.getSpellAbility().addEffect(new EpicEffect());
 
@@ -78,9 +77,9 @@ public class EternalDominion extends CardImpl {
 }
 
 class EternalDominionEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterCard("an artifact, creature, enchantment, or land card");
-    
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
@@ -101,13 +100,13 @@ class EternalDominionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
         Player opponent = game.getPlayer(source.getFirstTarget());
-        Player you = game.getPlayer(source.getControllerId());
-        if (opponent != null && you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (opponent != null && controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            you.searchLibrary(target, game, opponent.getId());
+            controller.searchLibrary(target, game, opponent.getId());
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard != null) {
-                applied = you.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
+                applied = controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
             }
             opponent.shuffleLibrary(game);
         }

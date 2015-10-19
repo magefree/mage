@@ -39,6 +39,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -58,7 +59,7 @@ public class ImposingSovereign extends CardImpl {
 
         // Creatures your opponents control enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ImposingSovereignEffect()));
-        
+
     }
 
     public ImposingSovereign(final ImposingSovereign card) {
@@ -72,7 +73,7 @@ public class ImposingSovereign extends CardImpl {
 }
 
 class ImposingSovereignEffect extends ReplacementEffectImpl {
-    
+
     ImposingSovereignEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Creatures your opponents control enter the battlefield tapped";
@@ -84,7 +85,7 @@ class ImposingSovereignEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
+        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
             target.tap(game);
         }
@@ -95,11 +96,11 @@ class ImposingSovereignEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
+            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }

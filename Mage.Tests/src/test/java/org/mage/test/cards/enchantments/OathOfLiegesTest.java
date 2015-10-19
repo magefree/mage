@@ -78,6 +78,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Oath of Lieges", 1);
+        assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerB, "Plains", 2);
     }
 

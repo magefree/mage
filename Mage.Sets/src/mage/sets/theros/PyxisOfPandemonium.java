@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -161,8 +163,8 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
             } else {
                 return true;
             }
-
-            for (UUID playerId : controller.getInRange()) {
+            Cards cardsToBringIntoPlay = new CardsImpl();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     String exileKey = playerId.toString() + CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()).toString();
@@ -173,13 +175,14 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
                             for (Card card : exileZone.getCards(game)) {
                                 card.setFaceDown(false, game);
                                 if (CardUtil.isPermanentCard(card)) {
-                                    player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                                    cardsToBringIntoPlay.add(card);
                                 }
                             }
                         }
                     }
                 }
             }
+            controller.moveCards(cardsToBringIntoPlay.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
             return true;
         }
         return false;

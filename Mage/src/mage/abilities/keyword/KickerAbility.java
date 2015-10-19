@@ -203,7 +203,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         if (zcc == 0) {
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         }
-        if (zcc > 0 && (source.getAbilityType().equals(AbilityType.TRIGGERED) || source.getAbilityType().equals(AbilityType.STATIC))) {
+        if (zcc > 0 && (source.getAbilityType().equals(AbilityType.TRIGGERED))) {
             --zcc;
         }
         return String.valueOf(zcc) + ((kickerCosts.size() > 1) ? costText : "");

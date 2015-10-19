@@ -28,14 +28,11 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -44,9 +41,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author jeffwadsworth
  */
 public class SculptingSteel extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("artifact");
-    
+
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
@@ -56,11 +53,7 @@ public class SculptingSteel extends CardImpl {
         this.expansionSetCode = "10E";
 
         // You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new CopyPermanentEffect(filter),
-                "You may have {this} enter the battlefield as a copy of any artifact on the battlefield",
-                true));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(filter), true));
     }
 
     public SculptingSteel(final SculptingSteel card) {

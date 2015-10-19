@@ -71,7 +71,10 @@ public class NameACardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
+        if (sourceObject == null) {
+            game.getObject(source.getSourceId());
+        }
         if (controller != null && sourceObject != null) {
             Choice cardChoice = new ChoiceImpl();
             switch (typeOfName) {

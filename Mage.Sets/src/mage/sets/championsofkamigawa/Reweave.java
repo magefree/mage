@@ -28,6 +28,7 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
@@ -57,7 +58,6 @@ public class Reweave extends CardImpl {
         super(ownerId, 82, "Reweave", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-
 
         // Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of his or her library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles his or her library.
         this.getSpellAbility().addEffect(new ReweaveEffect());
@@ -97,9 +97,10 @@ class ReweaveEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {        
-        Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
-        if (permanent != null) {
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (permanent != null && sourceObject != null) {
             if (permanent.sacrifice(source.getSourceId(), game)) {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null) {
@@ -122,11 +123,11 @@ class ReweaveEffect extends OneShotEffect {
                                     }
                                 }
                             } while (!cardFound && library.size() > 0);
-                            permanentController.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                            permanentController.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
 
                         if (cards.size() > 0) {
-                            permanentController.revealCards("Reweave", cards, game);
+                            permanentController.revealCards(sourceObject.getIdName(), cards, game);
                             if (cardFound && card != null) {
                                 cards.remove(card);
                             }
@@ -137,7 +138,7 @@ class ReweaveEffect extends OneShotEffect {
                     return true;
                 }
                 return false;
-            }            
+            }
         }
         return true;
     }

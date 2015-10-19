@@ -96,14 +96,14 @@ class SneakAttackEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
                 TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-                if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        if (player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
+                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null) {
                                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);

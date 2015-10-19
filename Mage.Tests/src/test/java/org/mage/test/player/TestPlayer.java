@@ -1800,21 +1800,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped, facedown);
-    }
-
-    @Override
     public boolean hasOpponent(UUID playerToCheckId, Game game) {
         return computerPlayer.hasOpponent(playerToCheckId, game);
     }
@@ -1971,8 +1956,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game) {
+        return computerPlayer.moveCards(card, toZone, source, game);
+    }
+
+    @Override
     public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
         return computerPlayer.moveCards(card, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
+    }
+
+    @Override
+    public boolean moveCards(Cards cards, Zone toZone, Ability source, Game game) {
+        return computerPlayer.moveCards(cards, toZone, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game) {
+        return computerPlayer.moveCards(cards, toZone, source, game);
     }
 
     @Override

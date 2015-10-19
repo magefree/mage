@@ -34,7 +34,6 @@ import mage.abilities.condition.Condition;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
@@ -52,7 +51,6 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
     protected Condition condition;
     protected boolean optional;
 
-    public static final String ENTERING_PERMANENT = "enteringPermanent";
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
     public EntersBattlefieldEffect(Effect baseEffect) {
@@ -65,10 +63,6 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     public EntersBattlefieldEffect(Effect baseEffect, String text, boolean optional) {
         this(baseEffect, null, text, true, optional);
-    }
-
-    public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text) {
-        this(baseEffect, condition, text, true, false);
     }
 
     public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional) {
@@ -126,18 +120,16 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
             }
         }
         for (Effect effect : baseEffects) {
-            if (source.activate(game, false)) {
-                if (effect instanceof ContinuousEffect) {
-                    game.addEffect((ContinuousEffect) effect, source);
-                } else {
-                    if (spell != null) {
-                        effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
-                    }
-                    // Because the permanent is not on the battlefield yet, it has to be taken from the event
-                    effect.setValue(ENTERING_PERMANENT, ((EntersTheBattlefieldEvent) event).getTarget());
-                    effect.apply(game, source);
+            // if (source.activate(game, false)) { // Why is this needed????
+            if (effect instanceof ContinuousEffect) {
+                game.addEffect((ContinuousEffect) effect, source);
+            } else {
+                if (spell != null) {
+                    effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
                 }
+                effect.apply(game, source);
             }
+            // }
         }
         return false;
     }

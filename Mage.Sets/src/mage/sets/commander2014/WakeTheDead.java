@@ -37,8 +37,9 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -148,26 +149,22 @@ class WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEff
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    if (player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), false)) {
-                        Permanent permanent = game.getPermanent(source.getSourceId());
-                        if (permanent != null) {
-                            permanent.changeControllerId(source.getControllerId(), game);
-                            Effect effect = new SacrificeTargetEffect("Sacrifice those creatures at the beginning of the next end step", source.getControllerId());
-                            effect.setTargetPointer(new FixedTarget(permanent, game));
-                            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-                            delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setControllerId(source.getControllerId());
-                            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                            game.addDelayedTriggeredAbility(delayedAbility);
-                        }
-
-                    }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
+            controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
+            for (UUID targetId : cards) {
+                Permanent creature = game.getPermanent(targetId);
+                if (creature != null) {
+                    Effect effect = new SacrificeTargetEffect("Sacrifice those creatures at the beginning of the next end step", source.getControllerId());
+                    effect.setTargetPointer(new FixedTarget(creature, game));
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                    game.addDelayedTriggeredAbility(delayedAbility);
                 }
+
             }
             return true;
         }

@@ -89,7 +89,7 @@ public class BloodcrazedHoplite extends CardImpl {
 class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
 
     public BloodcrazedHopliteTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), true);
+        super(Zone.ALL, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), true);
     }
 
     public BloodcrazedHopliteTriggeredAbility(BloodcrazedHopliteTriggeredAbility ability) {

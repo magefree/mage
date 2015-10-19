@@ -29,6 +29,12 @@ package mage.sets.newphyrexia;
 
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -36,19 +42,9 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -60,9 +56,8 @@ public class Xenograft extends CardImpl {
         super(ownerId, 51, "Xenograft", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
         this.expansionSetCode = "NPH";
 
-
         // As Xenograft enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new XenograftEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Detriment)));
         // Each creature you control is the chosen type in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new XenograftAddSubtypeEffect()));
     }
@@ -74,43 +69,6 @@ public class Xenograft extends CardImpl {
     @Override
     public Xenograft copy() {
         return new Xenograft(this);
-    }
-}
-
-class XenograftEffect extends OneShotEffect {
-
-    public XenograftEffect() {
-        super(Outcome.DrawCard);
-        staticText = "choose a creature type";
-    }
-
-    public XenograftEffect(final XenograftEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            game.getState().setValue(source.getSourceId() + "_XenograftType", typeChoice.getChoice());
-            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice().toString() + "</i>", game);
-        }
-        return false;
-    }
-
-    @Override
-    public XenograftEffect copy() {
-        return new XenograftEffect(this);
     }
 }
 
@@ -127,7 +85,7 @@ class XenograftAddSubtypeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String subtype = (String) game.getState().getValue(source.getSourceId() + "_XenograftType");
+        String subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
         if (subtype != null) {
             List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
             for (Permanent permanent : permanents) {

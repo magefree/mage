@@ -32,14 +32,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -48,11 +47,9 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.command.Emblem;
 import mage.game.permanent.token.Token;
-
 
 /**
  *
@@ -65,8 +62,7 @@ public class SorinSolemnVisitor extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Sorin");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Until your next turn, creatures you control get +1/+0 and gain lifelink.
         Effect effect = new BoostControlledEffect(1, 0, Duration.UntilYourNextTurn, new FilterCreaturePermanent());
@@ -94,18 +90,22 @@ public class SorinSolemnVisitor extends CardImpl {
         return new SorinSolemnVisitor(this);
     }
 }
+
 /**
- * Emblem: "At the beginning of each opponent's upkeep, that player sacrifices a creature."
+ * Emblem: "At the beginning of each opponent's upkeep, that player sacrifices a
+ * creature."
  */
 class SorinEmblem extends Emblem {
+
     public SorinEmblem() {
         this.setName("EMBLEM: Sorin, Solemn Visitor");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new SacrificeEffect(new FilterCreaturePermanent(),1 ,"that player"), TargetController.OPPONENT, false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player"), TargetController.OPPONENT, false, true);
         this.getAbilities().add(ability);
     }
 }
 
 class SorinSolemnVisitorVampireToken extends Token {
+
     SorinSolemnVisitorVampireToken() {
         super("Vampire", "a 2/2 black Vampire creature token with flying");
         setOriginalExpansionSetCode("KTK");

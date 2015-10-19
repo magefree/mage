@@ -76,7 +76,7 @@ public class FrontierSiege extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // As Frontier Siege enters the battlefield, choose Khans or Dragons.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null, true,
+        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
                 "As {this} enters the battlefield, choose Khans or Dragons.", ""));
 
         // * Khans - At the beginning of each of your main phases, add {G}{G} to your mana pool.

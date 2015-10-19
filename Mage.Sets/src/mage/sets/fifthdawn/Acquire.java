@@ -1,5 +1,6 @@
 package mage.sets.fifthdawn;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,16 +16,14 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
  * @author andyfries
  */
-public class Acquire extends CardImpl{
+public class Acquire extends CardImpl {
+
     public Acquire(UUID ownerId) {
         super(ownerId, 21, "Acquire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "5DN";
-
 
         // Search target opponent's library for an artifact card and put that card onto the battlefield under your control.
         // Then that player shuffles his or her library.
@@ -68,7 +67,7 @@ class AcquireEffect extends OneShotEffect {
             controller.searchLibrary(target, game, opponent.getId());
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard != null) {
-                controller.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
+                controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
             }
             opponent.shuffleLibrary(game);
             return true;
@@ -81,4 +80,3 @@ class AcquireEffect extends OneShotEffect {
         return new AcquireEffect(this);
     }
 }
-

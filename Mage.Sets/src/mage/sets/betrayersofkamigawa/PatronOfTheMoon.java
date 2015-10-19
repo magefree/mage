@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.OfferingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -100,13 +100,8 @@ class PatronOfTheMoonEffect extends OneShotEffect {
         if (controller != null) {
             TargetCard target = new TargetCardInHand(0, 2, new FilterLandCard("up to two land cards to put onto the battlefield tapped"));
             controller.chooseTarget(outcome, controller.getHand(), target, source, game);
-            for (UUID cardId : target.getTargets()) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), true);
-                }
-            }
-            return true;
+            return controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
+                    Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
         return false;
     }

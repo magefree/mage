@@ -52,7 +52,6 @@ public class Exhume extends CardImpl {
         super(ownerId, 134, "Exhume", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "USG";
 
-
         // Each player puts a creature card from his or her graveyard onto the battlefield.
         this.getSpellAbility().addEffect(new ExhumeEffect());
     }
@@ -90,17 +89,17 @@ class ExhumeEffect extends OneShotEffect {
             return false;
         }
 
-        for (UUID playerId : controller.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
                 filterCreatureCard.add(new OwnerIdPredicate(playerId));
                 TargetCardInGraveyard target = new TargetCardInGraveyard(filterCreatureCard);
-                if (target.canChoose(playerId, game) &&
-                        player.chooseTarget(outcome, target, source, game)) {
+                if (target.canChoose(playerId, game)
+                        && player.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                        player.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                 }
             }

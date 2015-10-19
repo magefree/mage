@@ -30,19 +30,18 @@ package mage.sets.avacynrestored;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -50,7 +49,6 @@ import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -71,8 +69,7 @@ public class TamiyoTheMoonSage extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Tamiyo");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Tap target permanent. It doesn't untap during its controller's next untap step.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);
@@ -130,7 +127,8 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
 }
 
 /**
- * Emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
+ * Emblem with "You have no maximum hand size" and "Whenever a card is put into
+ * your graveyard from anywhere, you may return it to your hand."
  */
 class TamiyoTheMoonSageEmblem extends Emblem {
 
