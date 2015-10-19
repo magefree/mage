@@ -53,7 +53,7 @@ public class VoiceOfGrace extends CardImpl {
     }
 
     public VoiceOfGrace(UUID ownerId) {
-        super(ownerId, 54, "Voice Of Grace", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        super(ownerId, 54, "Voice of Grace", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "USG";
         this.subtype.add("Angel");
 

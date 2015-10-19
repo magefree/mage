@@ -32,7 +32,7 @@ public class ArenaOfTheAncients extends CardImpl {
     }
     
     public ArenaOfTheAncients(UUID ownerId) {
-        super(ownerId, 215, "Arena Of The Ancients", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        super(ownerId, 215, "Arena of the Ancients", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "LEG";
         
         // When Arena of the Ancients enters the battlefield, tap all Legendary creatures

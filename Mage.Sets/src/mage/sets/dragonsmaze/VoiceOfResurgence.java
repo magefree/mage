@@ -104,7 +104,7 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        // Voice Of Resurgence Dies
+        // Voice of Resurgence Dies
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && getSourceId().equals(event.getTargetId())) {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
             return zce.getFromZone().equals(Zone.BATTLEFIELD) && zce.getToZone().equals(Zone.GRAVEYARD);
