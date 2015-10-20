@@ -28,11 +28,11 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.PreventionEffectData;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.RedirectionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -59,7 +58,6 @@ public class WardOfPiety extends CardImpl {
         super(ownerId, 28, "Ward of Piety", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -84,10 +82,12 @@ public class WardOfPiety extends CardImpl {
     }
 }
 
-class WardOfPietyPreventDamageTargetEffect extends PreventionEffectImpl {
+class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
+
+    protected MageObjectReference redirectToObject;
 
     public WardOfPietyPreventDamageTargetEffect() {
-        super(Duration.EndOfTurn, 1, false, true);
+        super(Duration.EndOfTurn, 1, true);
         staticText = "The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead";
     }
 
@@ -106,31 +106,17 @@ class WardOfPietyPreventDamageTargetEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        PreventionEffectData preventionData = preventDamageAction(event, source, game);
-        // deal damage now
-        if (preventionData.getPreventedDamage() > 0) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " damage to " + permanent.getLogName() + " instead");
-                // keep the original source id as it is redirecting
-                permanent.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
-            }
-            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-            if (player != null) {
-                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " damage to " + player.getLogName() + " instead");
-                // keep the original source id as it is redirecting
-                player.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
-            }
-        }
-        return false;
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        redirectToObject = new MageObjectReference(source.getTargets().get(0).getFirstTarget(), game);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
+            if (redirectToObject.equals(new MageObjectReference(source.getTargets().get(0).getFirstTarget(), game))) {
+                redirectTarget = source.getTargets().get(0);
                 return true;
             }
         }

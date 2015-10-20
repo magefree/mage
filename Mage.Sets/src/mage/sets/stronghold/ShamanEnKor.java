@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RedirectionEffect;
+import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -67,7 +68,8 @@ public class ShamanEnKor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {0}: The next 1 damage that would be dealt to Shaman en-Kor this turn is dealt to target creature you control instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorRedirectFromItselfEffect(), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, true), new GenericManaCost(0));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
@@ -84,32 +86,6 @@ public class ShamanEnKor extends CardImpl {
     @Override
     public ShamanEnKor copy() {
         return new ShamanEnKor(this);
-    }
-}
-
-class ShamanEnKorRedirectFromItselfEffect extends RedirectionEffect {
-
-    ShamanEnKorRedirectFromItselfEffect() {
-        super(Duration.EndOfTurn, 1, true);
-        staticText = "The next 1 damage that would be dealt to {this} this turn is dealt to target creature you control instead.";
-    }
-
-    ShamanEnKorRedirectFromItselfEffect(final ShamanEnKorRedirectFromItselfEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ShamanEnKorRedirectFromItselfEffect copy() {
-        return new ShamanEnKorRedirectFromItselfEffect(this);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            this.redirectTarget = source.getTargets().get(0);
-            return true;
-        }
-        return false;
     }
 }
 
