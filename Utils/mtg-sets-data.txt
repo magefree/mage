@@ -25,6 +25,7 @@ Chronicles|CHR|
 Clash Pack|CLASH|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
+Commander 2015|C15|
 Conflux|CON|
 Coldsnap|CSP|
 Dark Ascension|DKA|

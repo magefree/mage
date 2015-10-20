@@ -99,6 +99,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("BTD", "Beatdown Box Set");
         setsAliases.put("C13", "Commander 2013 Edition");
         setsAliases.put("C14", "Commander 2014");
+        setsAliases.put("C15", "Commander 2015");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
         setsAliases.put("CMD", "Magic: The Gathering-Commander");

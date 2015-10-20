@@ -53,6 +53,7 @@ public enum CounterType {
     DOOM("doom"),
     ELIXIR("elixir"),
     EON("eon"),
+    EXPERIENCE("experience"),
     EYEBALL("eyeball"),
     FADE("fade"),
     FATE("fate"),
