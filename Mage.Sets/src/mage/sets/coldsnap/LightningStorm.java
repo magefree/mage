@@ -29,6 +29,7 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -59,7 +60,6 @@ public class LightningStorm extends CardImpl {
         super(ownerId, 89, "Lightning Storm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
         this.expansionSetCode = "CSP";
 
-
         // Lightning Storm deals X damage to target creature or player, where X is 3 plus the number of charge counters on it.
         Effect effect = new DamageTargetEffect(new LightningStormCountCondition(CounterType.CHARGE));
         effect.setText("{this} deals X damage to target creature or player, where X is 3 plus the number of charge counters on it");
@@ -67,7 +67,7 @@ public class LightningStorm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Discard a land card: Put two charge counters on Lightning Storm. You may choose a new target for it. Any player may activate this ability but only if Lightning Storm is on the stack.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.STACK,
-                new LightningStormAddCounterEffect() ,
+                new LightningStormAddCounterEffect(),
                 new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability but only if {this} is on the stack"));
@@ -85,6 +85,7 @@ public class LightningStorm extends CardImpl {
 }
 
 class LightningStormCountCondition implements DynamicValue {
+
     private final CounterType counter;
 
     public LightningStormCountCondition(CounterType counter) {
@@ -141,7 +142,7 @@ class LightningStormAddCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
             spell.addCounters(CounterType.CHARGE.createInstance(2), game);
-            return spell.chooseNewTargets(game, source.getControllerId(), false, false, null);
+            return spell.chooseNewTargets(game, ((ActivatedAbilityImpl) source).getActivatorId(), false, false, null);
         }
         return false;
     }
