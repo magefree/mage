@@ -30,8 +30,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.PreventionEffectData;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -69,91 +68,65 @@ public class HarmsWay extends CardImpl {
     }
 }
 
-class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
-    
-    private final TargetSource target;
-    
+class HarmsWayPreventDamageTargetEffect extends RedirectionEffect {
+
+    private final TargetSource damageSource;
+
     public HarmsWayPreventDamageTargetEffect() {
-        super(Duration.EndOfTurn, 2, false, true);
+        super(Duration.EndOfTurn, 2, true);
         staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead";
-        this.target = new TargetSource();
+        this.damageSource = new TargetSource();
     }
 
     public HarmsWayPreventDamageTargetEffect(final HarmsWayPreventDamageTargetEffect effect) {
         super(effect);
-        this.target = effect.target.copy();
+        this.damageSource = effect.damageSource.copy();
     }
 
     @Override
     public HarmsWayPreventDamageTargetEffect copy() {
         return new HarmsWayPreventDamageTargetEffect(this);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
         super.init(source, game);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        PreventionEffectData preventionData = preventDamageAction(event, source, game);
-        // deal damage now
-        if (preventionData.getPreventedDamage() > 0) {
-            UUID redirectTo = source.getFirstTarget();
-            Permanent permanent = game.getPermanent(redirectTo);
-            if (permanent != null) {
-                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + permanent.getLogName() + " instead");
-                // keep the original source id as it is redirecting
-                permanent.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
-                discard();
-            }
-            Player player = game.getPlayer(redirectTo);
-            if (player != null) {
-                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + player.getLogName() + " instead");
-                // keep the original source id as it is redirecting
-                player.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
-                discard();
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        // check source
+        MageObject object = game.getObject(event.getSourceId());
+        if (object == null) {
+            game.informPlayers("Couldn't find source of damage");
+            return false;
+        }
+
+        if (!object.getId().equals(damageSource.getFirstTarget())
+                && (!(object instanceof Spell) || !((Spell) object).getSourceId().equals(damageSource.getFirstTarget()))) {
+            return false;
+        }
+        this.redirectTarget = source.getTargets().get(0);
+
+        // check target
+        //   check permanent first
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null) {
+            if (permanent.getControllerId().equals(source.getControllerId())) {
+                // it's your permanent
+                return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            // check source
-            MageObject object = game.getObject(event.getSourceId());
-            if (object == null) {
-                game.informPlayers("Couldn't find source of damage");
-                return false;
-            }
-
-            if (!object.getId().equals(target.getFirstTarget())
-                    && (!(object instanceof Spell) || !((Spell) object).getSourceId().equals(target.getFirstTarget()))) {
-                return false;
-            }
-
-            // check target
-            //   check permanent first
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                if (permanent.getControllerId().equals(source.getControllerId())) {
-                    // it's your permanent
-                    return true;
-                }
-            }
-            //   check player
-            Player player = game.getPlayer(event.getTargetId());
-            if (player != null) {
-                if (player.getId().equals(source.getControllerId())) {
-                    // it is you
-                    return true;
-                }
+        //   check player
+        Player player = game.getPlayer(event.getTargetId());
+        if (player != null) {
+            if (player.getId().equals(source.getControllerId())) {
+                // it is you
+                return true;
             }
         }
         return false;
     }
 
 }
-
