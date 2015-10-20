@@ -30,23 +30,19 @@ package mage.sets.visions;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.common.SacrificeIfCastAtInstantTimeTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextCleanupDelayedTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffect;
 import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
@@ -59,10 +55,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
@@ -79,8 +72,8 @@ public class Necromancy extends CardImpl {
         this.expansionSetCode = "VIS";
 
         // You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastSourceAsThoughItHadFlashEffect(this, Duration.EndOfGame, true)));
-        this.addAbility(new CastAtInstantTimeTriggeredAbility());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame)));
+        this.addAbility(new SacrificeIfCastAtInstantTimeTriggeredAbility());
 
         // When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy."
         // Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it.
@@ -104,75 +97,6 @@ public class Necromancy extends CardImpl {
     }
 }
 
-class CastSourceAsThoughItHadFlashEffect extends AsThoughEffectImpl {
-
-    private final boolean sacrificeIfCastAsInstant;
-
-    public CastSourceAsThoughItHadFlashEffect(Card card, Duration duration, boolean sacrificeIfCastAsInstant) {
-        super(AsThoughEffectType.CAST_AS_INSTANT, duration, Outcome.Benefit);
-        this.sacrificeIfCastAsInstant = sacrificeIfCastAsInstant;
-        staticText = "You may cast {this} as though it had flash";
-    }
-
-    public CastSourceAsThoughItHadFlashEffect(final CastSourceAsThoughItHadFlashEffect effect) {
-        super(effect);
-        this.sacrificeIfCastAsInstant = effect.sacrificeIfCastAsInstant;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public CastSourceAsThoughItHadFlashEffect copy() {
-        return new CastSourceAsThoughItHadFlashEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID affectedSpellId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getSourceId().equals(affectedSpellId);
-    }
-
-}
-
-class CastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public CastAtInstantTimeTriggeredAbility() {
-        super(Zone.STACK, new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new SacrificeSourceEffect())));
-    }
-
-    public CastAtInstantTimeTriggeredAbility(final CastAtInstantTimeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CastAtInstantTimeTriggeredAbility copy() {
-        return new CastAtInstantTimeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        // The sacrifice occurs only if you cast it using its own ability. If you cast it using some other
-        // effect (for instance, if it gained flash from Vedalken Orrery), then it won't be sacrificed.
-        // CHECK
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.getSourceId().equals(getSourceId())) {
-            return !(game.isMainPhase() && game.getActivePlayerId().equals(event.getPlayerId()) && game.getStack().size() == 1);
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
-    }
-}
 
 class NecromancyReAttachEffect extends OneShotEffect {
 
@@ -245,6 +169,7 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
         return false;
     }
 }
+
 
 class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
