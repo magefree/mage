@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -57,7 +58,9 @@ public class OrcishCannoneers extends CardImpl {
 
         // {tap}: Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());                                                                                         ability.addTarget(new TargetCreatureOrPlayer());
-        ability.addEffect(new DamageControllerEffect(3));
+        Effect effect = new DamageControllerEffect(3);
+        effect.setText("and 3 damage to you");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
