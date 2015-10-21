@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
@@ -80,7 +79,7 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        String sourceLogName = source != null ? game.getObject(source.getSourceId()).getLogName() + ": " : "";
         DamageEvent damageEvent = (DamageEvent) event;
         int restDamage = 0;
         int damageToRedirect = event.getAmount();
@@ -94,12 +93,12 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());
         if (permanent != null) {
             permanent.damage(damageToRedirect, event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-            game.informPlayers(sourceObject.getLogName() + ": Redirected " + damageToRedirect + " damage to " + permanent.getLogName());
+            game.informPlayers(sourceLogName + "Redirected " + damageToRedirect + " damage to " + permanent.getLogName());
         } else {
             Player player = game.getPlayer(redirectTarget.getFirstTarget());
             if (player != null) {
                 player.damage(damageToRedirect, event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-                game.informPlayers(sourceObject.getLogName() + ": Redirected " + damageToRedirect + " damage to " + player.getLogName());
+                game.informPlayers(sourceLogName + "Redirected " + damageToRedirect + " damage to " + player.getLogName());
             }
         }
         if (restDamage > 0) {
