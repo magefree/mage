@@ -69,6 +69,9 @@ public class ChooseModeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent == null) {
+            sourcePermanent = game.getPermanentEntering(source.getSourceId());
+        }
         if (controller != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage(choiceMessage);
@@ -80,8 +83,9 @@ public class ChooseModeEffect extends OneShotEffect {
                 controller.choose(Outcome.Neutral, choice, game);
             }
             if (choice.isChosen()) {
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayers(new StringBuilder(sourcePermanent.getLogName()).append(": ").append(controller.getLogName()).append(" has chosen ").append(choice.getChoice()).toString());
+                }
                 game.getState().setValue(source.getSourceId() + "_modeChoice", choice.getChoice());
                 sourcePermanent.addInfo("_modeChoice", "<font color = 'blue'>Chosen mode: " + choice.getChoice() + "</font>", game);
             }
@@ -93,7 +97,7 @@ public class ChooseModeEffect extends OneShotEffect {
     private String setText() {
         StringBuilder sb = new StringBuilder("choose ");
         int count = 0;
-        for (String choice: modes) {
+        for (String choice : modes) {
             count++;
             sb.append(choice);
             if (count + 1 < modes.size()) {
