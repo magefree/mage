@@ -29,9 +29,6 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageObject;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -42,7 +39,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -91,15 +90,15 @@ class CursedScrollEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
-        if (sourceObject != null && you != null && cardName != null && !cardName.isEmpty()) {
-            if (you.getHand().size() > 0) {
+        if (sourceObject != null && controller != null && cardName != null && !cardName.isEmpty()) {
+            if (controller.getHand().size() > 0) {
                 Cards revealed = new CardsImpl();
-                Card card = you.getHand().getRandom(game);
+                Card card = controller.getHand().getRandom(game);
                 revealed.add(card);
-                you.revealCards(sourceObject.getName(), revealed, game);
+                controller.revealCards(sourceObject.getIdName(), revealed, game);
                 if (card.getName().equals(cardName)) {
                     Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
                     if (creature != null) {
