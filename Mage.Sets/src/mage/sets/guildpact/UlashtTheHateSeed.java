@@ -73,7 +73,7 @@ public class UlashtTheHateSeed extends CardImpl {
 
         // Ulasht, the Hate Seed enters the battlefield with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.
         this.addAbility(new EntersBattlefieldAbility(new UlashtTheHateSeedEffect(), "with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control."));
-        
+
         // {1}, Remove a +1/+1 counter from Ulasht: Choose one - Ulasht deals 1 damage to target creature;
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
@@ -101,7 +101,7 @@ class UlashtTheHateSeedEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filterGreen = new FilterControlledCreaturePermanent();
     private static final FilterControlledCreaturePermanent filterRed = new FilterControlledCreaturePermanent();
-    
+
     static {
         filterGreen.add(new AnotherPredicate());
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
@@ -121,7 +121,7 @@ class UlashtTheHateSeedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null && player != null) {
             int amount = game.getBattlefield().count(filterRed, source.getSourceId(), source.getControllerId(), game);
             amount += game.getBattlefield().count(filterGreen, source.getSourceId(), source.getControllerId(), game);
