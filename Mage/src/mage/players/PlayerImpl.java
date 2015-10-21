@@ -1224,8 +1224,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
                 if (ability.getZone().match(zone)) {
                     if (ability instanceof ActivatedAbility) {
-                        if (canPlay(((ActivatedAbility) ability), availableMana, object, game)) {
-//                        if (((ActivatedAbility) ability).canActivate(playerId, game)) {
+                        if (ability instanceof ManaAbility) {
+                            if (((ActivatedAbility) ability).canActivate(playerId, game)) {
+                                useable.put(ability.getId(), (ActivatedAbility) ability);
+                            }
+                        } else if (canPlay(((ActivatedAbility) ability), availableMana, object, game)) {
                             useable.put(ability.getId(), (ActivatedAbility) ability);
                         }
                     } else if (ability instanceof AlternativeSourceCosts) {

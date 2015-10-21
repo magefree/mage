@@ -47,6 +47,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
@@ -1222,7 +1223,9 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("activateAbility", game);
         if (abilities.size() == 1 && suppressAbilityPicker(abilities.values().iterator().next())) {
             ActivatedAbility ability = abilities.values().iterator().next();
-            if (ability.getTargets().size() != 0 || !(ability.getCosts().size() == 1 && ability.getCosts().get(0) instanceof SacrificeSourceCost)) {
+            if (ability.getTargets().size() != 0
+                    || !(ability.getCosts().size() == 1 && ability.getCosts().get(0) instanceof SacrificeSourceCost)
+                    || !(ability.getCosts().size() == 2 && ability.getCosts().get(0) instanceof TapSourceCost && ability.getCosts().get(0) instanceof SacrificeSourceCost)) {
                 activateAbility(ability, game);
                 return;
             }
