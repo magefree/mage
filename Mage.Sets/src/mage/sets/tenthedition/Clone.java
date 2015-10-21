@@ -50,11 +50,6 @@ public class Clone extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
-//        ;
-//        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-//                new CopyPermanentEffect(),
-//                "You may have {this} enter the battlefield as a copy of any creature on the battlefield",
-//                true));
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(), true));
     }
 
