@@ -102,7 +102,7 @@ class UnbreathingHordeEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null && player != null) {
             int amount = game.getBattlefield().countAll(filter1, source.getControllerId(), game) - 1;
             amount += player.getGraveyard().count(filter2, game);

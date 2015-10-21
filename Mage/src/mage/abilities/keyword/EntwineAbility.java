@@ -111,7 +111,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
             if (player != null) {
                 this.resetCosts();
                 if (additionalCost != null) {
-                    if (player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(additionalCost.getText(false)).append(" ?").toString(), ability, game)) {
+                    if (player.chooseUse(Outcome.Benefit, "Pay " + additionalCost.getText(false) + " ?", ability, game)) {
                         additionalCost.activate();
                         for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();

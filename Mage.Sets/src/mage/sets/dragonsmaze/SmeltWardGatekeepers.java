@@ -70,7 +70,7 @@ public class SmeltWardGatekeepers extends CardImpl {
         super(ownerId, 39, "Smelt-Ward Gatekeepers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add("Warrior");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

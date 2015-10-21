@@ -70,6 +70,8 @@ public abstract class TargetImpl implements Target {
     protected UUID targetController = null; // if null the ability controller is the targetController
     protected UUID abilityController = null; // only used if target controller != ability controller
 
+    protected int targetTag; // can be set if other target check is needed (AnotherTargetPredicate)
+
     @Override
     public abstract TargetImpl copy();
 
@@ -95,6 +97,7 @@ public abstract class TargetImpl implements Target {
         this.notTarget = target.notTarget;
         this.targetController = target.targetController;
         this.abilityController = target.abilityController;
+        this.targetTag = target.targetTag;
     }
 
     @Override
@@ -543,6 +546,22 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean isRequiredExplicitlySet() {
         return requiredExplicitlySet;
+    }
+
+    @Override
+    public int getTargetTag() {
+        return targetTag;
+    }
+
+    /**
+     * Is used to be able to check, that another target is slected within the
+     * group of targets of the ability with a target tag > 0.
+     *
+     * @param targetTag
+     */
+    @Override
+    public void setTargetTag(int targetTag) {
+        this.targetTag = targetTag;
     }
 
 }

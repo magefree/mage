@@ -115,7 +115,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         // You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.
         // You gain X life.
-        addCard(Zone.HAND, playerA, "Nourishing Shoal", 1);
+        addCard(Zone.HAND, playerA, "Nourishing Shoal", 1); // {X}{G}{G}
         addCard(Zone.HAND, playerA, "Giant Growth", 1);
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
         // Splice onto Arcane {2}{R}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class UnearthlyBlizzard extends CardImpl {
 
     public UnearthlyBlizzard(UUID ownerId) {
-        super(ownerId, 196, "Unearthly Blizzard", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        super(ownerId, 196, "Unearthly Blizzard", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 

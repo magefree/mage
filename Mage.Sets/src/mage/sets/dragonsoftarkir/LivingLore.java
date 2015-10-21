@@ -71,7 +71,7 @@ public class LivingLore extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new LivingLoreExileEffect(), "exile an instant or sorcery card from your graveyard"));
 
         // Living Lore's power and toughness are each equal to the exiled card's converted mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LivingLoreSetPowerToughnessSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new LivingLoreSetPowerToughnessSourceEffect()));
 
         // Whenever Living Lore deals combat damage, you may sacrifice it. If you do, you may cast the exiled card without paying its mana cost.
         this.addAbility(new DealsCombatDamageTriggeredAbility(new LivingLoreSacrificeEffect(), true));
@@ -106,14 +106,14 @@ class LivingLoreExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null && controller != null){
+        Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
+        if (sourcePermanent != null && controller != null) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard"));
             if (controller.chooseTarget(outcome, target, source, game)) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1);
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
+                    controller.moveCardsToExile(card, source, game, true, exileId, sourcePermanent.getIdName());
                 }
             }
             return true;
@@ -126,7 +126,7 @@ class LivingLoreExileEffect extends OneShotEffect {
 class LivingLoreSetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     public LivingLoreSetPowerToughnessSourceEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        super(Duration.Custom, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         staticText = "{this}'s power and toughness are each equal to the exiled card's converted mana cost";
     }
 
@@ -141,20 +141,23 @@ class LivingLoreSetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = source.getSourceObject(game);
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && mageObject == null && new MageObjectReference(permanent, game).refersTo(mageObject, game)) {
-            discard();
-            return false;
+        int zcc = game.getState().getZoneChangeCounter(source.getSourceId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(source.getSourceId());
+            zcc++;
         }
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        if (permanent == null) {
+            return true;
+        }
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), zcc);
         if (exileId != null) {
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone == null) {
                 return false;
             }
             Card exiledCard = null;
-            for (Card card :exileZone.getCards(game)) {
+            for (Card card : exileZone.getCards(game)) {
                 exiledCard = card;
                 break;
             }
@@ -197,7 +200,7 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
                         ExileZone exileZone = game.getExile().getExileZone(exileId);
                         Card exiledCard = null;
                         if (exileZone != null) {
-                            for (Card card :exileZone.getCards(game)) {
+                            for (Card card : exileZone.getCards(game)) {
                                 exiledCard = card;
                                 break;
                             }

@@ -52,7 +52,6 @@ public class SkirkCommando extends CardImpl {
         super(ownerId, 47, "Skirk Commando", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "ARC";
         this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

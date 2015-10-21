@@ -1217,11 +1217,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
+        ManaOptions availableMana = null;
+//        ManaOptions availableMana = getManaAvailable(game); // can only be activated if mana calculation works flawless otherwise player can't play spells they could play if calculation would work correctly
+//        availableMana.addMana(manaPool.getMana());
         for (Ability ability : object.getAbilities()) {
             if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
                 if (ability.getZone().match(zone)) {
                     if (ability instanceof ActivatedAbility) {
-                        if (((ActivatedAbility) ability).canActivate(playerId, game)) {
+                        if (canPlay(((ActivatedAbility) ability), availableMana, object, game)) {
+//                        if (((ActivatedAbility) ability).canActivate(playerId, game)) {
                             useable.put(ability.getId(), (ActivatedAbility) ability);
                         }
                     } else if (ability instanceof AlternativeSourceCosts) {
@@ -2297,6 +2301,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         return result;
     }
 
+    /**
+     *
+     * @param ability
+     * @param available if null, it won't be checked if enough mana is available
+     * @param sourceObject
+     * @param game
+     * @return
+     */
     protected boolean canPlay(ActivatedAbility ability, ManaOptions available, MageObject sourceObject, Game game) {
         if (!(ability instanceof ManaAbility)) {
             ActivatedAbility copy = ability.copy();
@@ -2317,15 +2329,26 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-
-            ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
-            if (abilityOptions.size() == 0) {
-                return true;
-            } else {
-                for (Mana mana : abilityOptions) {
-                    for (Mana avail : available) {
-                        if (mana.enough(avail)) {
-                            return true;
+            boolean canBeCastRegularly = true;
+            if (copy instanceof SpellAbility && copy.getManaCosts().isEmpty() && copy.getCosts().isEmpty()) {
+                // 117.6. Some mana costs contain no mana symbols. This represents an unpayable cost...
+                // 117.6a (...) If an alternative cost is applied to an unpayable cost,
+                // including an effect that allows a player to cast a spell without paying its mana cost, the alternative cost may be paid.
+                canBeCastRegularly = false;
+            }
+            if (canBeCastRegularly) {
+                ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
+                if (abilityOptions.size() == 0) {
+                    return true;
+                } else {
+                    if (available == null) {
+                        return true;
+                    }
+                    for (Mana mana : abilityOptions) {
+                        for (Mana avail : available) {
+                            if (mana.enough(avail)) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -2369,6 +2392,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             if (manaCosts.size() == 0) {
                                 return true;
                             } else {
+                                if (available == null) {
+                                    return true;
+                                }
                                 for (Mana mana : manaCosts.getOptions()) {
                                     for (Mana avail : available) {
                                         if (mana.enough(avail)) {
@@ -3097,7 +3123,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case LIBRARY:
                 for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
+                    if (card instanceof Spell) {
+                        fromZone = game.getState().getZone(((Spell) card).getSourceId());
+                    } else {
+                        fromZone = game.getState().getZone(card.getId());
+                    }
                     boolean hideCard = fromZone.equals(Zone.HAND) || fromZone.equals(Zone.LIBRARY);
                     if (moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, !hideCard)) {
                         successfulMovedCards.add(card);

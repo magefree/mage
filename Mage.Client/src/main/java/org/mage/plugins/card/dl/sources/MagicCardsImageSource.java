@@ -16,6 +16,7 @@ public class MagicCardsImageSource implements CardImageSource {
 
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
+            put("C15", "commander-2015");
             put("ORG", "oath-of-the-gatewatch");
             put("EXP", "zendikar-expeditions");
             put("BFZ", "battle-for-zendikar");

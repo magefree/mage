@@ -36,17 +36,23 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
  * @author fireshoes
  */
 public class Deadshot extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+
+    static {
+        filter.add(new AnotherTargetPredicate(2));
+    }
 
     public Deadshot(UUID ownerId) {
         super(ownerId, 129, "Deadshot", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
@@ -54,11 +60,15 @@ public class Deadshot extends CardImpl {
 
         // Tap target creature.
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+        TargetCreaturePermanent target = new TargetCreaturePermanent();
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
+
         // It deals damage equal to its power to another target creature.
         this.getSpellAbility().addEffect(new DeadshotDamageEffect());
-        this.getSpellAbility().addTarget(new DeadshotTargetCreaturePermanent(filter));
+        target = new TargetCreaturePermanent(filter);
+        target.setTargetTag(2);
+        this.getSpellAbility().addTarget(target);
     }
 
     public Deadshot(final Deadshot card) {
@@ -80,6 +90,7 @@ class DeadshotDamageEffect extends OneShotEffect {
 
     public DeadshotDamageEffect(final DeadshotDamageEffect effect) {
         super(effect);
+        this.setTargetPointer(new SecondTargetPointer());
     }
 
     @Override
@@ -89,10 +100,10 @@ class DeadshotDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent ownCreature = game.getPermanent(source.getFirstTarget());
+        Permanent ownCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (ownCreature != null) {
             int damage = ownCreature.getPower().getValue();
-            Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
                 targetCreature.damage(damage, ownCreature.getId(), game, false, true);
                 return true;
@@ -100,28 +111,4 @@ class DeadshotDamageEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class DeadshotTargetCreaturePermanent extends TargetCreaturePermanent {
-
-    public DeadshotTargetCreaturePermanent(FilterCreaturePermanent filter) {
-        super(filter);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        if (source.getTargets().getFirstTarget().equals(id)) {
-            return false;
-        }
-        return super.canTarget(id, source, game);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().getFirstTarget().equals(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
 }

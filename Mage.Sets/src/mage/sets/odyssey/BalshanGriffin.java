@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
 public class BalshanGriffin extends CardImpl {
 
     public BalshanGriffin(UUID ownerId) {
-        super(ownerId, 67, "Balshan Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 67, "Balshan Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "ODY";
         this.subtype.add("Griffin");
 

@@ -39,6 +39,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -60,9 +61,23 @@ public class SerpentineSpike extends CardImpl {
         this.addAbility(ability);
         // Serpentine Spike deals 2 damage to target creature, 3 damage to another target creature, and 4 damage to a third target creature. If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new SerpentineSpikeEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (2 damage)")));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (3 damage)")));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (4 damage)")));
+
+        TargetCreaturePermanent target = new TargetCreaturePermanent(new FilterCreaturePermanent("creature (2 damage)"));
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
+
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature (3 damage)");
+        filter.add(new AnotherTargetPredicate(2));
+        target = new TargetCreaturePermanent(filter);
+        target.setTargetTag(2);
+        this.getSpellAbility().addTarget(target);
+
+        filter = new FilterCreaturePermanent("another target creature (4 damage)");
+        filter.add(new AnotherTargetPredicate(3));
+        target = new TargetCreaturePermanent(filter);
+        target.setTargetTag(3);
+        this.getSpellAbility().addTarget(target);
+
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
         effect.setText("If a creature dealt damage this way would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);

@@ -73,7 +73,7 @@ public class NameACardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
         if (sourceObject == null) {
-            game.getObject(source.getSourceId());
+            sourceObject = game.getObject(source.getSourceId());
         }
         if (controller != null && sourceObject != null) {
             Choice cardChoice = new ChoiceImpl();

@@ -622,7 +622,8 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     public Spell copySpell() {
-        return new Spell(this.card.copy(), this.ability.copySpell(), this.controllerId, this.fromZone);
+        // replaced card.copy by copy (card content should no longer be changed)
+        return new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone);
     }
 
     @Override

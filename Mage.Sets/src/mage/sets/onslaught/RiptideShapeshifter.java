@@ -56,7 +56,7 @@ import mage.players.Player;
 public class RiptideShapeshifter extends CardImpl {
 
     public RiptideShapeshifter(UUID ownerId) {
-        super(ownerId, 109, "Riptide Shapeshifter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 109, "Riptide Shapeshifter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "ONS";
         this.subtype.add("Shapeshifter");
 
