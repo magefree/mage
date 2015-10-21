@@ -98,7 +98,7 @@ class PathToExileEffect extends OneShotEffect {
                 if (player.searchLibrary(target, game)) {
                     Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                        player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                     }
                 }
                 player.shuffleLibrary(game);
