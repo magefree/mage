@@ -29,6 +29,7 @@ package mage.sets.mirrodin;
 
 import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -52,6 +53,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
+import mage.util.GameLog;
 
 /**
  *
@@ -82,9 +85,11 @@ public class ChromeMox extends CardImpl {
 class ChromeMoxEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("nonartifact, nonland card");
+
     static {
         filter.add(Predicates.not(Predicates.or(new CardTypePredicate(CardType.LAND), new CardTypePredicate(CardType.ARTIFACT))));
     }
+
     public ChromeMoxEffect() {
         super(Outcome.Benefit);
         staticText = "exile a nonartifact, nonland card from your hand";
@@ -96,21 +101,29 @@ class ChromeMoxEffect extends OneShotEffect {
 
     @java.lang.Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player.getHand().size() > 0) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            player.choose(Outcome.Benefit, target, source.getSourceId(), game);
-            Card card = player.getHand().get(target.getFirstTarget(), game);
-            if (card != null) {
-                card.moveToExile(getId(), "Chrome Mox (Imprint)", source.getSourceId(), game);
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    permanent.imprint(card.getId(), game);
-                }
-                return true;
+            target.setNotTarget(true);
+            Card cardToImprint = null;
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            if (controller.getHand().size() > 0 && controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+                cardToImprint = controller.getHand().get(target.getFirstTarget(), game);
             }
+            if (sourcePermanent != null) {
+                if (cardToImprint != null) {
+                    controller.moveCardsToExile(cardToImprint, source, game, true, source.getSourceId(), sourceObject.getIdName() + " (Imprint)");
+                    sourcePermanent.imprint(cardToImprint.getId(), game);
+                    sourcePermanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + GameLog.getColoredObjectIdNameForTooltip(cardToImprint) + "]"), game);
+                } else {
+                    sourcePermanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - None]"), game);
+                }
+            }
+            return true;
+
         }
-        return true;
+        return false;
     }
 
     @java.lang.Override
@@ -118,11 +131,9 @@ class ChromeMoxEffect extends OneShotEffect {
         return new ChromeMoxEffect(this);
     }
 
-
 }
 
 class ChromeMoxManaEffect extends ManaEffect {
-
 
     ChromeMoxManaEffect() {
         super();
@@ -132,8 +143,6 @@ class ChromeMoxManaEffect extends ManaEffect {
     ChromeMoxManaEffect(ChromeMoxManaEffect effect) {
         super(effect);
     }
-
-
 
     @java.lang.Override
     public ChromeMoxManaEffect copy() {

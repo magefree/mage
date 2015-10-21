@@ -322,9 +322,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target instanceof TargetCardInHand) {
+        if (target instanceof TargetCardInHand
+                || (target.getZone().equals(Zone.HAND) && (target instanceof TargetCard))) {
             List<Card> cards = new ArrayList<>();
-            for (UUID cardId : ((TargetCardInHand) target).possibleTargets(sourceId, this.getId(), game)) {
+            for (UUID cardId : target.possibleTargets(sourceId, this.getId(), game)) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     cards.add(card);
