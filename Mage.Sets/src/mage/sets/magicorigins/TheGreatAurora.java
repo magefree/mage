@@ -147,7 +147,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                     toBattlefield.addAll(target.getTargets());
                 }
             }
-            return controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
+            return controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
         }
         return false;
     }
