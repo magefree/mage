@@ -115,9 +115,9 @@ public class ShapeAnew extends CardImpl {
             }
             targetController.revealCards(sourcePermanent.getIdName(), revealed, game);
             if (artifactCard != null) {
-                artifactCard.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), targetController.getId());
+                targetController.moveCards(artifactCard, Zone.BATTLEFIELD, source, game);
             }
-            targetController.moveCards(nonArtifactCards, null, Zone.LIBRARY, source, game);
+            targetController.putCardsOnTopOfLibrary(nonArtifactCards, game, source, false);
             targetController.shuffleLibrary(game);
             return true;
         }

@@ -128,6 +128,8 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addTarget(playerA, "Clever Impersonator");
         setChoice(playerA, "Liliana, Defiant Necromancer");
 
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+2: Each player discards a card");
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

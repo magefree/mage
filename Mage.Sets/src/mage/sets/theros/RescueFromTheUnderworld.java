@@ -57,20 +57,24 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * Once you announce you’re casting Rescue from the Underworld, no player may attempt to
- * stop you from casting the spell by removing the creature you want to sacrifice.
+ * Once you announce you’re casting Rescue from the Underworld, no player may
+ * attempt to stop you from casting the spell by removing the creature you want
+ * to sacrifice.
  *
- * If you sacrifice a creature token to cast Rescue from the Underworld, it won’t return
- * to the battlefield, although the target creature card will.
+ * If you sacrifice a creature token to cast Rescue from the Underworld, it
+ * won’t return to the battlefield, although the target creature card will.
  *
- * If either the sacrificed creature or the target creature card leaves the graveyard
- * before the delayed triggered ability resolves during your next upkeep, it won’t return.
+ * If either the sacrificed creature or the target creature card leaves the
+ * graveyard before the delayed triggered ability resolves during your next
+ * upkeep, it won’t return.
  *
- * However, if the sacrificed creature is put into another public zone instead of the graveyard,
- * perhaps because it’s your commander or because of another replacement effect, it will return
- * to the battlefield from the zone it went to.
+ * However, if the sacrificed creature is put into another public zone instead
+ * of the graveyard, perhaps because it’s your commander or because of another
+ * replacement effect, it will return to the battlefield from the zone it went
+ * to.
  *
- * Rescue from the Underworld is exiled as it resolves, not later as its delayed trigger resolves.
+ * Rescue from the Underworld is exiled as it resolves, not later as its delayed
+ * trigger resolves.
  *
  *
  * @author LevelX2
@@ -81,9 +85,8 @@ public class RescueFromTheUnderworld extends CardImpl {
         super(ownerId, 102, "Rescue from the Underworld", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "THS";
 
-
         // As an additional cost to cast Rescue from the Underworld, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), false)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), false)));
 
         // Choose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile Rescue from the Underworld.
         this.getSpellAbility().addEffect(new RescueFromTheUnderworldTextEffect());
@@ -151,15 +154,15 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
         delayedAbility.setControllerId(source.getControllerId());
         delayedAbility.setSourceObject(source.getSourceObject(game), game);
         delayedAbility.getTargets().addAll(source.getTargets());
-        for(Effect effect : delayedAbility.getEffects()) {
+        for (Effect effect : delayedAbility.getEffects()) {
             effect.getTargetPointer().init(game, source);
         }
         // add the sacrificed creature as target
-        for (Cost cost :source.getCosts()) {
+        for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacCost = (SacrificeTargetCost) cost;
                 TargetCardInGraveyard target = new TargetCardInGraveyard();
-                for(Permanent permanent : sacCost.getPermanents()) {
+                for (Permanent permanent : sacCost.getPermanents()) {
                     target.add(permanent.getId(), game);
                     delayedAbility.getTargets().add(target);
                 }
@@ -214,20 +217,12 @@ class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbi
 
 class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
 
-    private boolean tapped;
-
     public RescueFromTheUnderworldReturnEffect() {
-        this(false);
-    }
-
-    public RescueFromTheUnderworldReturnEffect(boolean tapped) {
         super(Outcome.PutCreatureInPlay);
-        this.tapped = tapped;
     }
 
     public RescueFromTheUnderworldReturnEffect(final RescueFromTheUnderworldReturnEffect effect) {
         super(effect);
-        this.tapped = effect.tapped;
     }
 
     @Override
@@ -237,39 +232,36 @@ class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        // Target card comes only back if in graveyard
-        for (UUID targetId: getTargetPointer().getTargets(game, source)) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                Player player = game.getPlayer(card.getOwnerId());
-                if (player != null) {
-                    if(card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId(), tapped)){
-                        result = true;
-                    }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            // Target card comes only back if in graveyard
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+                Card card = game.getCard(targetId);
+                if (card != null) {
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
-        }
-        // However, if the sacrificed creature is put into another public zone instead of the graveyard,
-        // perhaps because it’s your commander or because of another replacement effect, it will return
-        // to the battlefield from the zone it went to.
-        if (source.getTargets().get(1) != null) {
-            for (UUID targetId: ((Target) source.getTargets().get(1)).getTargets()) {
-                Card card = game.getCard(targetId);
-                if (card != null && !card.isFaceDown(game)) {
-                    Player player = game.getPlayer(card.getOwnerId());
-                    if (player != null) {
-                        Zone currentZone = game.getState().getZone(card.getId());
-                        if (currentZone.equals(Zone.COMMAND) || currentZone.equals(Zone.GRAVEYARD) || currentZone.equals(Zone.EXILED)) {
-                            if(card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId(), false)){
-                                result = true;
+            // However, if the sacrificed creature is put into another public zone instead of the graveyard,
+            // perhaps because it’s your commander or because of another replacement effect, it will return
+            // to the battlefield from the zone it went to.
+            if (source.getTargets().get(1) != null) {
+                for (UUID targetId : ((Target) source.getTargets().get(1)).getTargets()) {
+                    Card card = game.getCard(targetId);
+                    if (card != null && !card.isFaceDown(game)) {
+                        Player player = game.getPlayer(card.getOwnerId());
+                        if (player != null) {
+                            Zone currentZone = game.getState().getZone(card.getId());
+                            if (currentZone.equals(Zone.COMMAND) || currentZone.equals(Zone.GRAVEYARD) || currentZone.equals(Zone.EXILED)) {
+                                return player.moveCards(card, Zone.BATTLEFIELD, source, game);
                             }
                         }
                     }
                 }
             }
+            return true;
         }
-        return result;
+        return false;
+
     }
 
 }

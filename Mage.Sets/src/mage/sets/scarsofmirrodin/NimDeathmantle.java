@@ -113,18 +113,8 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // make sure card is on battlefield
-        UUID sourceId = getSourceId();
-        if (game.getPermanent(sourceId) == null) {
-            // or it is being removed
-            if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
-                return false;
-            }
-        }
-
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Permanent permanent = zEvent.getTarget();
-
         if (permanent != null
                 && permanent.getControllerId().equals(this.controllerId)
                 && zEvent.getToZone() == Zone.GRAVEYARD
@@ -159,29 +149,28 @@ class NimDeathmantleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent equipment = game.getPermanent(source.getSourceId());
-        if (player != null && equipment != null) {
-            if (player.chooseUse(Outcome.Benefit, equipment.getName() + " - Pay " + cost.getText() + "?", source, game)) {
+        if (controller != null && equipment != null) {
+            if (controller.chooseUse(Outcome.Benefit, equipment.getName() + " - Pay " + cost.getText() + "?", source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     UUID target = targetPointer.getFirst(game, source);
-                    if (target != null && equipment != null) {
+                    if (target != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
                         if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
-                            Player owner = game.getPlayer(card.getOwnerId());
-                            if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId())) {
+                            if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                                 Permanent permanent = game.getPermanent(card.getId());
                                 if (permanent != null) {
                                     permanent.addAttachment(equipment.getId(), game);
-                                    return true;
                                 }
                             }
                         }
                     }
                 }
             }
+            return true;
         }
 
         return false;
