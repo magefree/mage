@@ -614,14 +614,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count Expected count.
      */
     public void assertCounterCount(String cardName, CounterType type, int count) throws AssertionError {
+        this.assertCounterCount(null, cardName, type, count);
+    }
+
+    public void assertCounterCount(Player player, String cardName, CounterType type, int count) throws AssertionError {
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getName().equals(cardName)) {
+            if (permanent.getName().equals(cardName) && (player == null || permanent.getControllerId().equals(player.getId()))) {
                 found = permanent;
                 break;
             }
         }
-        Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
+        Assert.assertNotNull("There is no such permanent " + (player == null ? "" : "for player " + player.getName()) + " on the battlefield, cardName=" + cardName, found);
         Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters().getCount(type));
     }
 
