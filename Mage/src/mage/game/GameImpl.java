@@ -1876,7 +1876,7 @@ public abstract class GameImpl implements Game, Serializable {
                     Player controller = this.getPlayer(legend.getControllerId());
                     if (controller != null) {
                         Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                        targetLegendaryToKeep.setTargetName(new StringBuilder(legend.getName()).append(" to keep (Legendary Rule)?").toString());
+                        targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
                         controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
                         for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                             if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {

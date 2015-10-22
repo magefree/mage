@@ -24,7 +24,7 @@ public class PlanswalkerEntersWithLoyalityCountersAbility extends EntersBattlefi
     }
 
     @Override
-    public EntersBattlefieldAbility copy() {
+    public PlanswalkerEntersWithLoyalityCountersAbility copy() {
         return new PlanswalkerEntersWithLoyalityCountersAbility(this);
     }
 }
