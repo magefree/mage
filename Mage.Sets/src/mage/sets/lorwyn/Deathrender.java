@@ -33,16 +33,25 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -58,10 +67,7 @@ public class Deathrender extends CardImpl {
         // Equipped creature gets +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         // Whenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach Deathrender to it.
-        Effect effect = new PutPermanentOnBattlefieldEffect(new FilterCreatureCard());
-        Ability ability = new DiesAttachedTriggeredAbility(effect, "you may put a creature card from your hand onto the battlefield and attach Deathrender to it.");
-
-        this.addAbility(ability);
+        this.addAbility(new DiesAttachedTriggeredAbility(new DeathrenderEffect(), "equipped creature"));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
@@ -73,5 +79,43 @@ public class Deathrender extends CardImpl {
     @Override
     public Deathrender copy() {
         return new Deathrender(this);
+    }
+}
+
+class DeathrenderEffect extends OneShotEffect {
+
+    DeathrenderEffect() {
+        super(Outcome.PutCardInPlay);
+        this.staticText = "you may put a creature card from your hand onto the battlefield and attach {this} to it.";
+    }
+
+    DeathrenderEffect(final DeathrenderEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DeathrenderEffect copy() {
+        return new DeathrenderEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (controller != null) {
+            FilterCard filter = new FilterCreatureCard();
+            TargetCardInHand target = new TargetCardInHand(0, 1, filter);
+            if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                Card creatureInHand = game.getCard(target.getFirstTarget());
+                if (creatureInHand != null) {
+                    game.getState().setValue("attachTo:" + sourcePermanent.getId(), game.getPermanent(creatureInHand.getId()));
+                    if (controller.moveCards(creatureInHand, Zone.BATTLEFIELD, source, game) && sourcePermanent != null) {
+                        game.getPermanent(creatureInHand.getId()).addAttachment(sourcePermanent.getId(), game);
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }
