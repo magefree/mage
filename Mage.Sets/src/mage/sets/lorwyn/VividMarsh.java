@@ -27,21 +27,18 @@
  */
 package mage.sets.lorwyn;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
-
-import java.util.UUID;
 
 /**
  *
@@ -54,13 +51,13 @@ public class VividMarsh extends CardImpl {
         this.expansionSetCode = "LRW";
 
         // Vivid Marsh enters the battlefield tapped with two charge counters on it.
-        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "{this} enters the battlefield tapped with two charge counters on it");
-        effect.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        Ability ability = new EntersBattlefieldAbility(new TapSourceEffect(true), false, null, "{this} enters the battlefield tapped with two charge counters on it", null);
+        ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
+        this.addAbility(ability);
         // {tap}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());
         // {tap}, Remove a charge counter from Vivid Marsh: Add one mana of any color to your mana pool.
-        Ability ability = new AnyColorManaAbility();
+        ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);
     }
