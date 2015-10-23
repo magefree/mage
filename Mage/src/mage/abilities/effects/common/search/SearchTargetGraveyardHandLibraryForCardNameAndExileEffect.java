@@ -115,7 +115,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                 TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
                 if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, game)) {
-                    controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
+                    controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
                 }
                 targetPlayer.shuffleLibrary(game);
             }
