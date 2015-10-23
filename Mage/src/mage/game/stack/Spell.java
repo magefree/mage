@@ -207,11 +207,8 @@ public class Spell extends StackObjImpl implements Card {
                     }
                 }
                 if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
-                    if (isCopy() == card.isCopy()) {
-                        Player player = game.getPlayer(getControllerId());
-                        if (player != null) {
-                            player.moveCards(card, Zone.STACK, Zone.GRAVEYARD, ability, game);
-                        }
+                    if (!isCopy()) {
+                        controller.moveCards(card, Zone.GRAVEYARD, ability, game);
                     }
                 }
                 return result;

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
@@ -39,16 +38,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class IsochronScepterTest extends CardTestPlayerBase {
 
-
     /**
-     * Isochron Scepter
-     * Artifact, 2 (2)
-     * Imprint — When Isochron Scepter enters the battlefield, you may exile an 
-     * instant card with converted mana cost 2 or less from your hand.
-     * {2}, {T}: You may copy the exiled card. If you do, you may cast the copy 
-     * without paying its mana cost.
-     * 
-    */
+     * Isochron Scepter Artifact, 2 (2) Imprint — When Isochron Scepter enters
+     * the battlefield, you may exile an instant card with converted mana cost 2
+     * or less from your hand. {2}, {T}: You may copy the exiled card. If you
+     * do, you may cast the copy without paying its mana cost.
+     *
+     */
     @Test
     public void testImprint() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
@@ -64,9 +60,9 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Isochron Scepter", 1);
         assertExileCount("Lightning Bolt", 1);
         assertLife(playerB, 20);
-        
+
     }
-    
+
     @Test
     public void testCopyCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
@@ -86,7 +82,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         assertExileCount("Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 0);
         assertLife(playerB, 17);
-        
+
     }
 
     @Test
@@ -108,20 +104,33 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         assertExileCount("Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 0);
         assertLife(playerB, 20);
-        
+
     }
-    
+
+    /**
+     * Not sure if it's triggered by just casting Angel's Grace or by casting it
+     * from an Isochron Scepter, but when the bug happens neither player is able
+     * to play spells or activate abilities anymore for the rest of the game.
+     *
+     * Maybe something related to Split Second?
+     */
     @Test
     public void testAngelsGrace() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.HAND, playerA, "Isochron Scepter");
+        // Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)
+        // You can't lose the game this turn and your opponents can't win the game this turn.
+        // Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+
         addCard(Zone.HAND, playerA, "Angel's Grace");
 
-        addCard(Zone.BATTLEFIELD, playerB, "Dross Crocodile", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Dross Crocodile", 4);// 5/1
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
         addTarget(playerA, "Angel's Grace");
-        
+
         attack(2, playerB, "Dross Crocodile");
         attack(2, playerB, "Dross Crocodile");
         attack(2, playerB, "Dross Crocodile");
@@ -131,24 +140,34 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         setChoice(playerA, "Yes");
         setChoice(playerA, "Yes");
 
-        setStopAt(2, PhaseStep.END_COMBAT);
+        // Damage life loss is reduced to 0 because of Angel's Grace effect active
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+
+        // Spells can be cast again
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Dross Crocodile");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Isochron Scepter", 1);
         assertExileCount("Angel's Grace", 1);
         assertGraveyardCount(playerA, "Angel's Grace", 0);
 
         assertLife(playerA, 1);
         assertLife(playerB, 20);
 
+        assertGraveyardCount(playerB, "Lightning Bolt", 2);
+        assertGraveyardCount(playerB, "Dross Crocodile", 1);
+        assertPermanentCount(playerB, "Dross Crocodile", 3);
+        assertPermanentCount(playerA, "Isochron Scepter", 1);
+
     }
-    
+
     /**
-     * Resolving a Silence cast from exile via Isochron Scepter during my opponent's upkeep does 
-     * not prevent that opponent from casting spells that turn.
-     * 
+     * Resolving a Silence cast from exile via Isochron Scepter during my
+     * opponent's upkeep does not prevent that opponent from casting spells that
+     * turn.
+     *
      */
-    
     @Test
     public void testSilence() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
@@ -160,7 +179,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
         addTarget(playerA, "Silence");
-        
+
         activateAbility(2, PhaseStep.UPKEEP, playerA, "{2},{T}:");
         setChoice(playerA, "Yes");
         setChoice(playerA, "Yes");
@@ -175,6 +194,6 @@ public class IsochronScepterTest extends CardTestPlayerBase {
 
         assertHandCount(playerB, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 0);
-        
-    }    
+
+    }
 }
