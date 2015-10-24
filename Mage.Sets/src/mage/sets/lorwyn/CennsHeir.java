@@ -25,51 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author LoneFox
-
  */
-public class OrcishCannoneers extends CardImpl {
+public class CennsHeir extends CardImpl {
 
-    public OrcishCannoneers(UUID ownerId) {
-        super(ownerId, 205, "Orcish Cannoneers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "ICE";
-        this.subtype.add("Orc");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Kithkin");
 
-        // {tap}: Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());                                                                                         ability.addTarget(new TargetCreatureOrPlayer());
-        Effect effect = new DamageControllerEffect(3);
-        effect.setText("and 3 damage to you");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Kithkin"));
+        filter.add(new AnotherPredicate());
     }
 
-    public OrcishCannoneers(final OrcishCannoneers card) {
+    public CennsHeir(UUID ownerId) {
+        super(ownerId, 8, "Cenn's Heir", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Kithkin");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Whenever Cenn's Heir attacks, it gets +1/+1 until end of turn for each other attacking Kithkin.
+        PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(count, count, Duration.EndOfTurn, true), false));
+    }
+
+    public CennsHeir(final CennsHeir card) {
         super(card);
     }
 
     @Override
-    public OrcishCannoneers copy() {
-        return new OrcishCannoneers(this);
+    public CennsHeir copy() {
+        return new CennsHeir(this);
     }
 }

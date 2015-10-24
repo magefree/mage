@@ -46,7 +46,7 @@ public class Shatterstorm extends CardImpl {
 
 
         // Destroy all artifacts. They can't be regenerated.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent(), true));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent("artifacts"), true));
     }
 
     public Shatterstorm(final Shatterstorm card) {

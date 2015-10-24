@@ -25,45 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author hanasu
+ * @author LoneFox
  */
-public class FanaticalFever extends CardImpl {
+public class ArmorOfThorns extends mage.sets.mirage.ArmorOfThorns {
 
-    public FanaticalFever(UUID ownerId) {
-        super(ownerId, 122, "Fanatical Fever", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
-        this.expansionSetCode = "ICE";
-
-        // Target creature gets +3/+0 and gains trample until end of turn.
-        Effect effect = new BoostTargetEffect(3, 0, Duration.EndOfTurn);
-        effect.setText("Target creature gets +3/+0");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains trample until end of turn");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    public ArmorOfThorns(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 194;
+        this.expansionSetCode = "VMA";
     }
 
-    public FanaticalFever(final FanaticalFever card) {
+    public ArmorOfThorns(final ArmorOfThorns card) {
         super(card);
     }
 
     @Override
-    public FanaticalFever copy() {
-        return new FanaticalFever(this);
+    public ArmorOfThorns copy() {
+        return new ArmorOfThorns(this);
     }
 }

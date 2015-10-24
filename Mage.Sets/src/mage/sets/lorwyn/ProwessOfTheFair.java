@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.permanent.token.ElfToken;
 
 /**
  *
  * @author LoneFox
-
  */
-public class OrcishCannoneers extends CardImpl {
+public class ProwessOfTheFair extends CardImpl {
 
-    public OrcishCannoneers(UUID ownerId) {
-        super(ownerId, 205, "Orcish Cannoneers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "ICE";
-        this.subtype.add("Orc");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    private static final FilterPermanent filter = new FilterPermanent("another nontoken Elf");
 
-        // {tap}: Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());                                                                                         ability.addTarget(new TargetCreatureOrPlayer());
-        Effect effect = new DamageControllerEffect(3);
-        effect.setText("and 3 damage to you");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public OrcishCannoneers(final OrcishCannoneers card) {
+    public ProwessOfTheFair(UUID ownerId) {
+        super(ownerId, 136, "Prowess of the Fair", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Elf");
+
+        // Whenever another nontoken Elf is put into your graveyard from the battlefield, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new CreateTokenEffect(new ElfToken()),
+            true, filter, false, true));
+    }
+
+    public ProwessOfTheFair(final ProwessOfTheFair card) {
         super(card);
     }
 
     @Override
-    public OrcishCannoneers copy() {
-        return new OrcishCannoneers(this);
+    public ProwessOfTheFair copy() {
+        return new ProwessOfTheFair(this);
     }
 }

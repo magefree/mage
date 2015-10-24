@@ -25,51 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.game.permanent.token.InsectToken;
 
 /**
  *
  * @author LoneFox
-
  */
-public class OrcishCannoneers extends CardImpl {
+public class SymbioticElf extends CardImpl {
 
-    public OrcishCannoneers(UUID ownerId) {
-        super(ownerId, 205, "Orcish Cannoneers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "ICE";
-        this.subtype.add("Orc");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public SymbioticElf(UUID ownerId) {
+        super(ownerId, 288, "Symbiotic Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Elf");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // {tap}: Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());                                                                                         ability.addTarget(new TargetCreatureOrPlayer());
-        Effect effect = new DamageControllerEffect(3);
-        effect.setText("and 3 damage to you");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // When Symbiotic Elf dies, put two 1/1 green Insect creature tokens onto the battlefield.
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new InsectToken(), 2)));
     }
 
-    public OrcishCannoneers(final OrcishCannoneers card) {
+    public SymbioticElf(final SymbioticElf card) {
         super(card);
     }
 
     @Override
-    public OrcishCannoneers copy() {
-        return new OrcishCannoneers(this);
+    public SymbioticElf copy() {
+        return new SymbioticElf(this);
     }
 }

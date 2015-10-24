@@ -25,55 +25,66 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class TimeBomb extends CardImpl {
+public class LysAlanaScarblade extends CardImpl {
 
-    public TimeBomb(UUID ownerId) {
-        super(ownerId, 223, "Time Bomb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "ME2";
+    private static final FilterControlledPermanent filter1 = new FilterControlledPermanent();
+    private static final FilterCard filter2 = new FilterCard("an Elf card");
 
-        // At the beginning of your upkeep, put a time counter on Time Bomb.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(), true), TargetController.YOU, false));
+    static {
+        filter1.add(new SubtypePredicate("Elf"));
+        filter2.add(new SubtypePredicate("Elf"));
+    }
 
-        // {1}, {tap}, Sacrifice Time Bomb: Time Bomb deals damage equal to the number of time counters on it to each creature and each player.
-        Effect effect = new DamageEverythingEffect(new CountersCount(CounterType.TIME), new FilterCreaturePermanent());
-        effect.setText("{this} deals damage equal to the number of time counters on it to each creature and each player");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
+    public LysAlanaScarblade(UUID ownerId) {
+        super(ownerId, 122, "Lys Alana Scarblade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Elf");
+        this.subtype.add("Assassin");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {tap}, Discard an Elf card: Target creature gets -X/-X until end of turn, where X is the number of Elves you control.
+        SignInversionDynamicValue count = new SignInversionDynamicValue(new PermanentsOnBattlefieldCount(filter1));
+        Effect effect = new BoostTargetEffect(count, count, Duration.EndOfTurn);
+        effect.setText("target creature gets -X/-X until end of turn, where X is the number of Elves you control");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        ability.addCost(new DiscardCardCost(filter2));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public TimeBomb(final TimeBomb card) {
+    public LysAlanaScarblade(final LysAlanaScarblade card) {
         super(card);
     }
 
     @Override
-    public TimeBomb copy() {
-        return new TimeBomb(this);
+    public LysAlanaScarblade copy() {
+        return new LysAlanaScarblade(this);
     }
 }

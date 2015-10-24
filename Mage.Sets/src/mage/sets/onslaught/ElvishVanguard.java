@@ -25,55 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class TimeBomb extends CardImpl {
+public class ElvishVanguard extends CardImpl {
 
-    public TimeBomb(UUID ownerId) {
-        super(ownerId, 223, "Time Bomb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "ME2";
+    private static final FilterPermanent filter = new FilterPermanent("another Elf");
 
-        // At the beginning of your upkeep, put a time counter on Time Bomb.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(), true), TargetController.YOU, false));
-
-        // {1}, {tap}, Sacrifice Time Bomb: Time Bomb deals damage equal to the number of time counters on it to each creature and each player.
-        Effect effect = new DamageEverythingEffect(new CountersCount(CounterType.TIME), new FilterCreaturePermanent());
-        effect.setText("{this} deals damage equal to the number of time counters on it to each creature and each player");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new AnotherPredicate());
     }
 
-    public TimeBomb(final TimeBomb card) {
+    public ElvishVanguard(UUID ownerId) {
+        super(ownerId, 259, "Elvish Vanguard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Elf");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
+    }
+
+    public ElvishVanguard(final ElvishVanguard card) {
         super(card);
     }
 
     @Override
-    public TimeBomb copy() {
-        return new TimeBomb(this);
+    public ElvishVanguard copy() {
+        return new ElvishVanguard(this);
     }
 }

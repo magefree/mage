@@ -25,51 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.visions;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.SacrificeIfCastAtInstantTimeTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LoneFox
-
  */
-public class OrcishCannoneers extends CardImpl {
+public class Parapet extends CardImpl {
 
-    public OrcishCannoneers(UUID ownerId) {
-        super(ownerId, 205, "Orcish Cannoneers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "ICE";
-        this.subtype.add("Orc");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public Parapet(UUID ownerId) {
+        super(ownerId, 114, "Parapet", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "VIS";
 
-        // {tap}: Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());                                                                                         ability.addTarget(new TargetCreatureOrPlayer());
-        Effect effect = new DamageControllerEffect(3);
-        effect.setText("and 3 damage to you");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // You may cast Parapet as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame)));
+        this.addAbility(new SacrificeIfCastAtInstantTimeTriggeredAbility());
+        // Creatures you control get +0/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
     }
 
-    public OrcishCannoneers(final OrcishCannoneers card) {
+    public Parapet(final Parapet card) {
         super(card);
     }
 
     @Override
-    public OrcishCannoneers copy() {
-        return new OrcishCannoneers(this);
+    public Parapet copy() {
+        return new Parapet(this);
     }
 }
