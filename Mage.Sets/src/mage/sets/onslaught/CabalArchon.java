@@ -33,25 +33,26 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author fireshoes
  */
 public class CabalArchon extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Cleric");
-    
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cleric");
+
     static {
         filter.add(new SubtypePredicate("Cleric"));
     }
@@ -66,8 +67,10 @@ public class CabalArchon extends CardImpl {
 
         // {B}, Sacrifice a Cleric: Target player loses 2 life and you gain 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{B}"));
-        ability.addEffect(new GainLifeEffect(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        Effect effect = new GainLifeEffect(2);
+        effect.setText("and you gain 2 life");
+        ability.addEffect(effect);
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
