@@ -28,52 +28,65 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
+import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Melkhior
+ * @author LoneFox
  */
-public class WirewoodLodge extends CardImpl {
+public class PearlspearCourier extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Elf");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creature");
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
+        filter.add(new SubtypePredicate("Soldier"));
     }
 
-    public WirewoodLodge(UUID ownerId) {
-        super(ownerId, 329, "Wirewood Lodge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public PearlspearCourier(UUID ownerId) {
+        super(ownerId, 48, "Pearlspear Courier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "ONS";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // {T}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-
-        // {G}, {T}: Untap target Elf.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{G}"));
+        // You may choose not to untap Pearlspear Courier during your untap step.
+        this.addAbility(new SkipUntapOptionalAbility());
+        // {2}{W}, {tap}: Target Soldier creature gets +2/+2 and has vigilance for as long as Pearlspear Courier remains tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.getInstance(),
+            "target Soldier creature gets +2/+2"), new ManaCostsImpl("{2}{W}"));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(),
+            Duration.Custom), SourceTappedCondition.getInstance(),"and has vigilance for as long as {this} remains tapped"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    public WirewoodLodge(final WirewoodLodge card) {
+    public PearlspearCourier(final PearlspearCourier card) {
         super(card);
     }
 
     @Override
-    public WirewoodLodge copy() {
-        return new WirewoodLodge(this);
+    public PearlspearCourier copy() {
+        return new PearlspearCourier(this);
     }
 }

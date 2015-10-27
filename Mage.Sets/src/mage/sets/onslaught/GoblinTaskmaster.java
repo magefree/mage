@@ -48,8 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class GoblinTaskmaster extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin");
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creature");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));
@@ -66,7 +66,7 @@ public class GoblinTaskmaster extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-        
+
         // Morph {R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}")));
     }

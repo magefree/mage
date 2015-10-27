@@ -29,7 +29,6 @@ package mage.sets.onslaught;
 
 import java.util.Set;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -58,7 +57,6 @@ public class Standardize extends CardImpl {
         this.expansionSetCode = "ONS";
 
         // Choose a creature type other than Wall. Each creature becomes that type until end of turn.
-
         this.getSpellAbility().addEffect(new StandardizeEffect());
     }
 
@@ -78,7 +76,7 @@ class StandardizeEffect extends OneShotEffect {
 
     public StandardizeEffect() {
         super(Outcome.BoostCreature);
-        staticText = "choose a creature type other than wall, each creature's type becomes that type until end of turn";
+        staticText = "choose a creature type other than Wall. Each creature becomes that type until end of turn";
 
     }
 
@@ -93,7 +91,7 @@ class StandardizeEffect extends OneShotEffect {
         String chosenType = "";
         if (player != null && permanent != null) {
             Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type other than Wall");
+            typeChoice.setMessage("Choose a creature type other than Wall");
             Set<String> types = CardRepository.instance.getCreatureTypes();
             types.remove("Wall");
             typeChoice.setChoices(types);
