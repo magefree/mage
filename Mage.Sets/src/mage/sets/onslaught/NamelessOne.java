@@ -28,53 +28,52 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author openSrcCoder
+ * @author LoneFox
  */
-public class FeedingFrenzy extends CardImpl {
+public class NamelessOne extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("Wizards on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate("Wizard"));
     }
 
-    public FeedingFrenzy(UUID ownerId) {
-        super(ownerId, 147, "Feeding Frenzy", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+    public NamelessOne(UUID ownerId) {
+        super(ownerId, 100, "Nameless One", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "ONS";
+        this.subtype.add("Wizard");
+        this.subtype.add("Avatar");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        // Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
-        DynamicValue x = new PermanentsOnBattlefieldCount(filter, -1);
-        Effect effect = new BoostTargetEffect(x, x, Duration.EndOfTurn);
-        effect.setText("Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Nameless One's power and toughness are each equal to the number of Wizards on the battlefield.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        // Morph {2}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
-    public FeedingFrenzy(final FeedingFrenzy card) {
+    public NamelessOne(final NamelessOne card) {
         super(card);
     }
 
     @Override
-    public FeedingFrenzy copy() {
-        return new FeedingFrenzy(this);
+    public NamelessOne copy() {
+        return new NamelessOne(this);
     }
 }

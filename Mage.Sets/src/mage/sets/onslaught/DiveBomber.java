@@ -28,53 +28,49 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.constants.Zone;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author openSrcCoder
+ * @author LoneFox
  */
-public class FeedingFrenzy extends CardImpl {
+public class DiveBomber extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(new SubtypePredicate("Zombie"));
-    }
-
-    public FeedingFrenzy(UUID ownerId) {
-        super(ownerId, 147, "Feeding Frenzy", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+    public DiveBomber(UUID ownerId) {
+        super(ownerId, 26, "Dive Bomber", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "ONS";
+        this.subtype.add("Bird");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
-        DynamicValue x = new PermanentsOnBattlefieldCount(filter, -1);
-        Effect effect = new BoostTargetEffect(x, x, Duration.EndOfTurn);
-        effect.setText("Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {tap}, Sacrifice Dive Bomber: Dive Bomber deals 2 damage to target attacking or blocking creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        this.addAbility(ability);
     }
 
-    public FeedingFrenzy(final FeedingFrenzy card) {
+    public DiveBomber(final DiveBomber card) {
         super(card);
     }
 
     @Override
-    public FeedingFrenzy copy() {
-        return new FeedingFrenzy(this);
+    public DiveBomber copy() {
+        return new DiveBomber(this);
     }
 }

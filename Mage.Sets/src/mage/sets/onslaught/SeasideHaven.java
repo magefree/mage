@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SeasideHaven extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Bird");
 
     static{
         filter.add(new SubtypePredicate("Bird"));

@@ -28,53 +28,51 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author openSrcCoder
+ * @author LoneFox
  */
-public class FeedingFrenzy extends CardImpl {
+public class InformationDealer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("Wizards on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate("Zombie"));
+        filter.add(new SubtypePredicate("Wizard"));
     }
 
-    public FeedingFrenzy(UUID ownerId) {
-        super(ownerId, 147, "Feeding Frenzy", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+    public InformationDealer(UUID ownerId) {
+        super(ownerId, 88, "Information Dealer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "ONS";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
-        DynamicValue x = new PermanentsOnBattlefieldCount(filter, -1);
-        Effect effect = new BoostTargetEffect(x, x, Duration.EndOfTurn);
-        effect.setText("Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // {tap}: Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.
+        Effect effect = new LookLibraryControllerEffect(new PermanentsOnBattlefieldCount(filter));
+        effect.setText("Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost()));
     }
 
-    public FeedingFrenzy(final FeedingFrenzy card) {
+    public InformationDealer(final InformationDealer card) {
         super(card);
     }
 
     @Override
-    public FeedingFrenzy copy() {
-        return new FeedingFrenzy(this);
+    public InformationDealer copy() {
+        return new InformationDealer(this);
     }
 }

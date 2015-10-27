@@ -28,53 +28,64 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.Effect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
+import mage.abilities.condition.common.SourceTappedCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author openSrcCoder
+ * @author LoneFox
  */
-public class FeedingFrenzy extends CardImpl {
+public class FrightshroudCourier extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creature");
 
     static {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public FeedingFrenzy(UUID ownerId) {
-        super(ownerId, 147, "Feeding Frenzy", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+    public FrightshroudCourier(UUID ownerId) {
+        super(ownerId, 149, "Frightshroud Courier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "ONS";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
-        DynamicValue x = new PermanentsOnBattlefieldCount(filter, -1);
-        Effect effect = new BoostTargetEffect(x, x, Duration.EndOfTurn);
-        effect.setText("Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // You may choose not to untap Frightshroud Courier during your untap step.
+        this.addAbility(new SkipUntapOptionalAbility());
+        // {2}{B}, {tap}: Target Zombie creature gets +2/+2 and has fear for as long as Frightshroud Courier remains tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.getInstance(),
+            "target Zombie creature gets +2/+2"), new ManaCostsImpl("{2}{B}"));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(FearAbility.getInstance(),
+            Duration.Custom), SourceTappedCondition.getInstance(),"and has fear for as long as {this} remains tapped"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
-    public FeedingFrenzy(final FeedingFrenzy card) {
+    public FrightshroudCourier(final FrightshroudCourier card) {
         super(card);
     }
 
     @Override
-    public FeedingFrenzy copy() {
-        return new FeedingFrenzy(this);
+    public FrightshroudCourier copy() {
+        return new FrightshroudCourier(this);
     }
 }

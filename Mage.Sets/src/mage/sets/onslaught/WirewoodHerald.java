@@ -34,7 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class WirewoodHerald extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Elf card");
+    private static final FilterCard filter = new FilterCard("Elf card");
 
     static {
         filter.add(new SubtypePredicate("Elf"));

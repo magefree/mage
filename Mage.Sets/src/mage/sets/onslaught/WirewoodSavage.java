@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class WirewoodSavage extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Beast");
+    private static final FilterPermanent filter = new FilterPermanent("a Beast");
 
     static {
         filter.add(new SubtypePredicate("Beast"));

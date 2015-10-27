@@ -28,53 +28,39 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.CantBlockAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author openSrcCoder
+ * @author LoneFox
  */
-public class FeedingFrenzy extends CardImpl {
+public class ChargingSlateback extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(new SubtypePredicate("Zombie"));
-    }
-
-    public FeedingFrenzy(UUID ownerId) {
-        super(ownerId, 147, "Feeding Frenzy", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+    public ChargingSlateback(UUID ownerId) {
+        super(ownerId, 194, "Charging Slateback", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "ONS";
+        this.subtype.add("Beast");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
-        DynamicValue x = new PermanentsOnBattlefieldCount(filter, -1);
-        Effect effect = new BoostTargetEffect(x, x, Duration.EndOfTurn);
-        effect.setText("Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Charging Slateback can't block.
+        this.addAbility(new CantBlockAbility());
+        // Morph {4}{R}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}")));
     }
 
-    public FeedingFrenzy(final FeedingFrenzy card) {
+    public ChargingSlateback(final ChargingSlateback card) {
         super(card);
     }
 
     @Override
-    public FeedingFrenzy copy() {
-        return new FeedingFrenzy(this);
+    public ChargingSlateback copy() {
+        return new ChargingSlateback(this);
     }
 }
