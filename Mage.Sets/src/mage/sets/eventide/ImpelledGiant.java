@@ -154,13 +154,10 @@ class ImpelledGiantBoostEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent impelledGiant = game.getPermanent(source.getSourceId());
-        Permanent tappedCreature = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (tappedCreature == null) {
-            tappedCreature = (Permanent) game.getLastKnownInformation(this.targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        }
+        Permanent tappedCreature = game.getPermanentOrLKIBattlefield(this.targetPointer.getFirst(game, source));
         if (tappedCreature != null && impelledGiant != null) {
             int amount = tappedCreature.getPower().getValue();
-            impelledGiant.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, 0, Duration.EndOfTurn)), source.getSourceId(), game);
+            game.addEffect(new BoostSourceEffect(amount, 0, Duration.EndOfTurn), source);
         }
         return true;
     }
