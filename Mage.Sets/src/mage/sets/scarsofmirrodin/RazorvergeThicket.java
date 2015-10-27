@@ -54,7 +54,7 @@ public class RazorvergeThicket extends CardImpl {
         super(ownerId, 228, "Razorverge Thicket", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 4));
+        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 3));
         String abilityText = "tap it unless you control fewer than 3 lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new GreenManaAbility());
