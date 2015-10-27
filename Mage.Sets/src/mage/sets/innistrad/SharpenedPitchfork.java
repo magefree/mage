@@ -28,11 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -42,7 +37,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -53,7 +52,7 @@ public class SharpenedPitchfork extends CardImpl {
     private static final String staticText = "As long as equipped creature is a Human, it gets +1/+1";
 
     public SharpenedPitchfork(UUID ownerId) {
-        super(ownerId, 232, "Sharpened Pitchfork", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId, 232, "Sharpened Pitchfork", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Equipment");
 
