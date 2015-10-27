@@ -108,7 +108,8 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                         }
                         break;
                     case TypeChangingEffects_4:
-                        permanent.getSubtype().removeAll(allLandTypes);
+                        // subtypes are all removed by changing the subtype to a land type.
+                        permanent.getSubtype().clear();
                         permanent.getSubtype().addAll(landTypes);
                         break;
                 }
