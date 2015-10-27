@@ -3076,9 +3076,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.setScopeRelevant(true);
                 for (Permanent permanent : permanents) {
                     fromZone = game.getState().getZone(permanent.getId());
+                    // make sure the controller of all continuous effects of this card are switched to the current controller
+                    game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
                     if (permanent.entersBattlefield(source.getSourceId(), game, fromZone, true)) {
                         permanentsEntered.add(permanent);
                     } else {
+                        // revert controller to owner if permanent does not enter
+                        game.getContinuousEffects().setController(permanent.getId(), permanent.getOwnerId());
                         game.getPermanentsEntering().remove(permanent.getId());
                     }
                 }
@@ -3087,8 +3091,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     fromZone = game.getState().getZone(permanent.getId());
                     if (((Card) permanent).removeFromZone(game, fromZone, source.getSourceId())) {
                         permanent.updateZoneChangeCounter(game);
-                        // make sure the controller of all continuous effects of this card are switched to the current controller
-                        game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
                         game.addPermanent(permanent);
                         permanent.setZone(Zone.BATTLEFIELD, game);
                         game.getPermanentsEntering().remove(permanent.getId());

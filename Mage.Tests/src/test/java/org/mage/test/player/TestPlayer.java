@@ -821,7 +821,7 @@ public class TestPlayer implements Player {
                 boolean targetFound = false;
                 for (String targetName : targetList) {
                     for (Card card : cards.getCards(game)) {
-                        if (card.getName().equals(targetName)) {
+                        if (card.getName().equals(targetName) && !target.getTargets().contains(card.getId())) {
                             target.add(card.getId(), game);
                             targetFound = true;
                             break;
