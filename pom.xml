@@ -61,6 +61,7 @@
         <module>Mage.Tests</module>
         <module>Mage.Updater</module>
         <module>Mage.Stats</module>
+        <module>Mage.Verify</module>
     </modules>
 
     <repositories>
