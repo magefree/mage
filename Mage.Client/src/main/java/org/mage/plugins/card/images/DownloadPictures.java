@@ -49,8 +49,6 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
-import static mage.remote.Connection.ProxyType.HTTP;
-import static mage.remote.Connection.ProxyType.SOCKS;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -221,7 +219,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         // JOptionPane
         Object[] options = { startDownloadButton, closeButton = new JButton("Cancel") };
-        dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+        dlg = new JOptionPane(p0, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, options, options[1]);
     }
 
     public static boolean checkForNewCards(List<CardInfo> allCards) {
