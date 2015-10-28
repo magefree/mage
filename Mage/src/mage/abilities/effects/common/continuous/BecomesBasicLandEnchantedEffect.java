@@ -47,12 +47,20 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
     protected final static ArrayList<String> allLandTypes = new ArrayList<>();
 
-    static {
+    static { // 205.3i
         allLandTypes.add("Forest");
         allLandTypes.add("Swamp");
         allLandTypes.add("Plains");
         allLandTypes.add("Mountains");
         allLandTypes.add("Island");
+        allLandTypes.add("Urza's");
+        allLandTypes.add("Mine");
+        allLandTypes.add("Power-Plant");
+        allLandTypes.add("Tower");
+        allLandTypes.add("Desert");
+        allLandTypes.add("Gate");
+        allLandTypes.add("Lair");
+        allLandTypes.add("Locus");
     }
 
     protected ArrayList<String> landTypes = new ArrayList<>();
@@ -109,7 +117,7 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                         break;
                     case TypeChangingEffects_4:
                         // subtypes are all removed by changing the subtype to a land type.
-                        permanent.getSubtype().clear();
+                        permanent.getSubtype().removeAll(allLandTypes);
                         permanent.getSubtype().addAll(landTypes);
                         break;
                 }
