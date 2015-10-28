@@ -372,7 +372,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: "
-                + version == null ? "<not available>" : version.toString() + "  Server: "
+                + (version == null ? "<not available>" : version.toString()) + "  Server: "
                         + ((session != null && session.isConnected()) ? session.getVersionInfo() : "<not connected>"));
     }
 
