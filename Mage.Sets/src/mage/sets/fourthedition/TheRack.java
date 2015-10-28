@@ -119,7 +119,7 @@ class TheRackEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + "_player");
+        UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
         Player chosenPlayer = game.getPlayer(playerId);
         if (chosenPlayer != null) {
             int damage = 3 - chosenPlayer.getHand().size();
