@@ -59,9 +59,7 @@ public class DiscardTargetCost extends CostImpl {
 
     public DiscardTargetCost(DiscardTargetCost cost) {
         super(cost);
-        for (Card card : cost.cards) {
-            this.cards.add(card.copy());
-        }
+        this.cards.addAll(cost.cards);
         this.randomDiscard = cost.randomDiscard;
     }
 
@@ -84,7 +82,7 @@ public class DiscardTargetCost extends CostImpl {
                         return false;
                     }
                     player.discard(card, ability, game);
-                    this.cards.add(card.copy());
+                    this.cards.add(card);
                 }
             }
         }
@@ -96,7 +94,7 @@ public class DiscardTargetCost extends CostImpl {
     public void clearPaid() {
         super.clearPaid();
         this.cards.clear();
-        this.targets.clear();
+        this.targets.clearChosen();
     }
 
     @Override
