@@ -56,7 +56,7 @@ public class GempalmPolluter extends CardImpl {
     }
 
     public GempalmPolluter(UUID ownerId) {
-        super(ownerId, 70, "Gempalm Avenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
+        super(ownerId, 70, "Gempalm Polluter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.expansionSetCode = "LGN";
         this.subtype.add("Zombie");
         this.power = new MageInt(4);
