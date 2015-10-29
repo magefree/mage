@@ -93,7 +93,7 @@ class GriffinToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         
-        subtype.add("Soldier");
+        subtype.add("Griffin");
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
