@@ -65,7 +65,7 @@ public class QuestingPhelddagrif extends CardImpl {
     }
 
     public QuestingPhelddagrif(UUID ownerId) {
-        super(ownerId, 13, "Questing Phelddagrif", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{G}");
+        super(ownerId, 13, "Questing Phelddagrif", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
         this.expansionSetCode = "PTC";
         this.subtype.add("Phelddagrif");
         this.power = new MageInt(4);

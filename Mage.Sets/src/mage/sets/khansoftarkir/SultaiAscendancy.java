@@ -46,7 +46,7 @@ import mage.filter.FilterCard;
 public class SultaiAscendancy extends CardImpl {
 
     public SultaiAscendancy(UUID ownerId) {
-        super(ownerId, 203, "Sultai Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}{B}{U}");
+        super(ownerId, 203, "Sultai Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}{U}");
         this.expansionSetCode = "KTK";
 
 

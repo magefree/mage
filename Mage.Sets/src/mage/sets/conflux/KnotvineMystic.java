@@ -46,7 +46,7 @@ import mage.constants.Rarity;
 public class KnotvineMystic extends CardImpl{
 
     public KnotvineMystic(UUID ownerId) {
-        super(ownerId, 114, "Knotvine Mystic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{R}{G}");
+        super(ownerId, 114, "Knotvine Mystic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
         this.expansionSetCode = "CON";
 
 

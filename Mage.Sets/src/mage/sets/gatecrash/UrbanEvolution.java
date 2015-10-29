@@ -44,7 +44,7 @@ import mage.constants.Duration;
 public class UrbanEvolution extends CardImpl {
 
     public UrbanEvolution(UUID ownerId) {
-        super(ownerId, 204, "Urban Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{G}");
+        super(ownerId, 204, "Urban Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");
         this.expansionSetCode = "GTC";
 
         //Draw three cards. 
