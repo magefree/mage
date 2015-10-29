@@ -10,19 +10,17 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.util.ClassScanner;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CompareWithMtgjsonTest {
 
@@ -47,15 +45,34 @@ public class CompareWithMtgjsonTest {
 
         for (ExpansionSet set : sets) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                Set<String> tokens = findSourceTokens(setInfo.getCardClass());
                 Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                         setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                 if (card.isSplitCard()) {
-                    check(reference, ((SplitCard) card).getLeftHalfCard());
-                    check(reference, ((SplitCard) card).getRightHalfCard());
+                    check(reference, ((SplitCard) card).getLeftHalfCard(), null);
+                    check(reference, ((SplitCard) card).getRightHalfCard(), null);
                 } else {
-                    check(reference, card);
+                    check(reference, card, tokens);
                 }
             }
+        }
+    }
+
+    private static final Pattern SHORT_JAVA_STRING = Pattern.compile("(?<=\")[A-Z][a-z]+(?=\")");
+
+    private Set<String> findSourceTokens(Class c) throws IOException {
+        String path = "../Mage.Sets/src/" + c.getName().replace(".", "/") + ".java";
+        try {
+            String source = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+            Matcher matcher = SHORT_JAVA_STRING.matcher(source);
+            Set<String> tokens = new HashSet<>();
+            while (matcher.find()) {
+                tokens.add(matcher.group());
+            }
+            return tokens;
+        } catch (NoSuchFileException e) {
+            System.out.println("failed to read " + path);
+            return Collections.emptySet();
         }
     }
 
@@ -64,8 +81,31 @@ public class CompareWithMtgjsonTest {
         return decomposed.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
     }
 
-    private void check(Map<String, Map<String, Object>> reference, Card card) {
-        String name = card.getName();
+    private void check(Map<String, Map<String, Object>> reference, Card card, Set<String> tokens) {
+        Map<String, Object> ref = findReference(reference, card.getName());
+        if (ref == null) {
+            System.out.println("Missing card reference for " + card);
+            return;
+        }
+        checkAll(card, ref);
+        if (tokens != null) {
+            Map<String, Object> ref2 = null;
+            if (card.isFlipCard()) {
+                ref2 = findReference(reference, card.getFlipCardName());
+            }
+            for (String token : tokens) {
+                if (!(token.equals(card.getName())
+                        || containsInTypesOrText(ref, token)
+                        || containsInTypesOrText(ref, token.toLowerCase())
+                        || (ref2 != null && (containsInTypesOrText(ref2, token) || containsInTypesOrText(ref2, token.toLowerCase())))
+                )) {
+                    System.out.println("unexpected token " + token + " in " + card);
+                }
+            }
+        }
+    }
+
+    private Map<String, Object> findReference(Map<String, Map<String, Object>> reference, String name) {
         Map<String, Object> ref = reference.get(name);
         if (ref == null) {
             name = name.replaceFirst("\\bA[Ee]", "Æ");
@@ -75,11 +115,19 @@ public class CompareWithMtgjsonTest {
             name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
             ref = reference.get(name);
         }
-        if (ref == null) {
-            System.out.println("Missing card reference for " + card);
-            return;
-        }
-        checkAll(card, ref);
+        return ref;
+    }
+
+    private boolean containsInTypesOrText(Map<String, Object> ref, String token) {
+        return contains(ref, "types", token)
+                || contains(ref, "subtypes", token)
+                || contains(ref, "supertypes", token)
+                || ((String) ref.get("text")).contains(token);
+    }
+
+    private boolean contains(Map<String, Object> ref, String key, String value) {
+        Collection<String> options = (Collection<String>) ref.get(key);
+        return options != null && options.contains(value);
     }
 
     private void checkAll(Card card, Map<String, Object> ref) {
