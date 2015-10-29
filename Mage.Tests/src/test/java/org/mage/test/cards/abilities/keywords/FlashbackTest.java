@@ -49,76 +49,103 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
-        
+
         // Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
         addCard(Zone.GRAVEYARD, playerA, "Fracturing Gust");
 
         addCard(Zone.BATTLEFIELD, playerA, "Berserkers' Onslaught", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Darksteel Citadel", 1);
-        
 
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         setChoice(playerA, "Fracturing Gust");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {2}{G/W}{G/W}{G/W}"); // now snapcaster mage is died so -13/-13
-        
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
         assertGraveyardCount(playerA, "Berserkers' Onslaught", 1);
-        
+
         assertPermanentCount(playerB, "Darksteel Citadel", 1);
-                
+
         assertExileCount("Fracturing Gust", 1);
     }
 
     /**
      * My opponent put Iona on the battlefield using Unburial Rites, but my game
      * log didn't show me the color he has chosen.
-     * 
+     *
      */
     @Test
     public void testUnburialRites() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);
         // Return target creature card from your graveyard to the battlefield.
-        // Flashback {3}{W}        
+        // Flashback {3}{W}
         addCard(Zone.HAND, playerA, "Unburial Rites", 1); // Sorcery - {4}{B}
-        
+
         // Flying
         // As Iona, Shield of Emeria enters the battlefield, choose a color.
         // Your opponents can't cast spells of the chosen color.
         addCard(Zone.GRAVEYARD, playerA, "Iona, Shield of Emeria");
-        
+
         // As Lurebound Scarecrow enters the battlefield, choose a color.
-        // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.      
+        // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
         addCard(Zone.GRAVEYARD, playerA, "Lurebound Scarecrow"); // Enchantment - {2}{U}
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
-        addCard(Zone.HAND, playerB, "Lightning Bolt", 1); 
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
 
-       
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unburial Rites",  "Iona, Shield of Emeria");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unburial Rites", "Iona, Shield of Emeria");
         setChoice(playerA, "Red");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {3}{W}"); 
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {3}{W}");
         addTarget(playerA, "Lurebound Scarecrow");
         setChoice(playerA, "White");
-        
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt",  playerA);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Iona, Shield of Emeria", 1);
         assertPermanentCount(playerA, "Lurebound Scarecrow", 1);
-                
+
         assertHandCount(playerB, "Lightning Bolt", 1);
-                
+
         assertExileCount("Unburial Rites", 1);
     }
-    
+
+    /**
+     *
+     */
+    @Test
+    public void testFlashbackWithConverge() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
+
+        // Converge - Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast Unified Front.
+        addCard(Zone.GRAVEYARD, playerA, "Unified Front"); // {3}{W}
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {W}");
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        setChoice(playerA, "Unified Front");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {3}{W}");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Snapcaster Mage", 1);
+        assertPermanentCount(playerA, "Kor Ally", 4);
+        assertExileCount("Unified Front", 1);
+
+    }
 }
