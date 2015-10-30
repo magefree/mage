@@ -671,7 +671,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void removeBookmark(int bookmark) {
+    public void removeBookmark(int bookmark
+    ) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {

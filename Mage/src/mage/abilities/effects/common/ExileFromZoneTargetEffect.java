@@ -30,7 +30,7 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -91,16 +91,11 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
                 default:
             }
             if (target != null && target.canChoose(source.getSourceId(), player.getId(), game)) {
-                if (target.choose(Outcome.Exile, player.getId(), source.getSourceId(), game)) {
-                    for (UUID cardId : target.getTargets()) {
-                        Card card = game.getCard(cardId);
-                        if (card != null) {
-                            card.moveToExile(exileId, exileName, source.getSourceId(), game);
-                        }
-                    }
-                    return true;
+                if (target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
+                    player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, exileName);
                 }
             }
+            return true;
         }
         return false;
     }
