@@ -1193,7 +1193,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     safeToAttack = false;
                 }
                 if (safeToAttack) {
-                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
+                    // undo has to be possible e.g. if not able to pay a attack fee (e.g. Ghostly Prison)
+                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, true);
                 }
             }
         }

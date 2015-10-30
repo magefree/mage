@@ -128,6 +128,17 @@ public class Library implements Serializable {
         return game.getCard(library.peekFirst());
     }
 
+    /**
+     * Returns the bottommost card of the Library without removing it
+     *
+     * @param game
+     * @return Card
+     * @see Card
+     */
+    public Card getFromBottom(Game game) {
+        return game.getCard(library.pollLast());
+    }
+
     public void putOnTop(Card card, Game game) {
         if (card.getOwnerId().equals(playerId)) {
             card.setZone(Zone.LIBRARY, game);

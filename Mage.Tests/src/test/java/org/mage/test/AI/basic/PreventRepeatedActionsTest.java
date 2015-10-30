@@ -73,15 +73,20 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
      */
     @Test
     public void testBasaltMonolith() {
+        addCard(Zone.HAND, playerA, "Phyrexian Vault", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         // Basalt Monolith doesn't untap during your untap step.
         // {T}: Add {3} to your mana pool.
         // {3}: Untap Basalt Monolith.
-        addCard(Zone.BATTLEFIELD, playerA, "Basalt Monolith", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Basalt Monolith", 1, true);
 
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(5, PhaseStep.END_TURN);
         execute();
 
-        assertTapped("Basalt Monolith", false);
+        // {2}, {T}, Sacrifice a creature: Draw a card.
+        assertPermanentCount(playerA, "Phyrexian Vault", 1);
+        assertTapped("Basalt Monolith", true);
+        assertTappedCount("Plains", false, 3);
     }
 
     /**
