@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.view;
 
 import java.util.ArrayList;
@@ -44,6 +43,7 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class PermanentView extends CardView {
+
     private static final long serialVersionUID = 1L;
 
     private boolean tapped;
@@ -78,7 +78,7 @@ public class PermanentView extends CardView {
         }
         this.attachedTo = permanent.getAttachedTo();
         if (isToken()) {
-            original = new CardView(((PermanentToken)permanent).getToken());
+            original = new CardView(((PermanentToken) permanent).getToken());
             original.expansionSetCode = permanent.getExpansionSetCode();
             tokenSetCode = original.getTokenSetCode();
         } else {
@@ -98,7 +98,7 @@ public class PermanentView extends CardView {
                 this.alternateName = permanent.getFlipCardName();
                 this.originalName = this.getName();
             } else {
-                if (controlled   // controller may always know
+                if (controlled // controller may always know
                         || (!morphed && !manifested)) { // others don't know for morph or transformed cards
                     this.alternateName = original.getName();
                     this.originalName = this.getName();
@@ -113,11 +113,11 @@ public class PermanentView extends CardView {
                 this.nameOwner = "";
             }
         } else {
-           this.nameOwner = ""; 
+            this.nameOwner = "";
         }
-        
+
         if (permanent.isFaceDown(game) && card != null) {
-            if (controlled){
+            if (controlled) {
                 // must be a morphed or manifested card
                 for (Ability permanentAbility : permanent.getAbilities()) {
                     if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
@@ -131,17 +131,17 @@ public class PermanentView extends CardView {
                 this.displayName = card.getName();
                 this.expansionSetCode = card.getExpansionSetCode();
                 this.cardNumber = card.getCardNumber();
-            } else{
-                if (permanent.isMorphed()) {
-                        this.rules.add("If the controller has priority, he or she may turn this permanent face up." +
-                            " This is a special action; it doesnt use the stack. To do this he or she pays the morph costs," +
-                            " then turns this permanent face up.");
-                }else if (permanent.isManifested()) {
-                        this.rules.add("A manifested creature card can be turned face up any time for it's mana cost." +
-                            " A face-down card can also be turned face up for its morph cost.");
+            } else {
+                if (permanent.isManifested()) {
+                    this.rules.add("A manifested creature card can be turned face up any time for it's mana cost."
+                            + " A face-down card can also be turned face up for its morph cost.");
+                } else if (permanent.isMorphed()) {
+                    this.rules.add("If the controller has priority, he or she may turn this permanent face up."
+                            + " This is a special action; it doesnt use the stack. To do this he or she pays the morph costs,"
+                            + " then turns this permanent face up.");
                 }
             }
-        } 
+        }
         // determines if shown in it's own column
         if (permanent.getAttachedTo() != null) {
             attachedToPermanent = game.getPermanent(permanent.getAttachedTo()) != null;
@@ -170,7 +170,7 @@ public class PermanentView extends CardView {
         return phasedIn;
     }
 
-    public boolean hasSummoningSickness(){
+    public boolean hasSummoningSickness() {
         return summoningSickness;
     }
 
@@ -209,6 +209,7 @@ public class PermanentView extends CardView {
     public boolean isMorphed() {
         return morphed;
     }
+
     public boolean isManifested() {
         return manifested;
     }
