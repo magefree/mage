@@ -73,7 +73,8 @@ public class MWSDeckImporter extends DeckImporter {
                 if (!cards.isEmpty()) {
                     cardInfo = cards.get(new Random().nextInt(cards.size()));
                 }
-            } else {
+            } 
+            if (cardInfo == null) {
                 cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
             }
 
