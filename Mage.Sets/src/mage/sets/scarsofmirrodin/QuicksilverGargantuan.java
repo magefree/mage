@@ -29,21 +29,16 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.util.functions.ApplyToPermanent;
 
 /**
  * @author ayratn
@@ -58,11 +53,8 @@ public class QuicksilverGargantuan extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        Ability ability = new EntersBattlefieldAbility(new QuicksilverGargantuanCopyEffect(),
+        Ability ability = new EntersBattlefieldAbility(new CopyPermanentEffect(new QuicksilverGargantuanApplyToPermanent()),
                 "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7");
-        Target target = new TargetCreaturePermanent();
-        target.setNotTarget(true);
-        ability.addTarget(target);
         this.addAbility(ability);
     }
 
@@ -74,57 +66,22 @@ public class QuicksilverGargantuan extends CardImpl {
     public QuicksilverGargantuan copy() {
         return new QuicksilverGargantuan(this);
     }
+}
 
-    private class QuicksilverGargantuanCopyEffect extends ContinuousEffectImpl {
+class QuicksilverGargantuanApplyToPermanent extends ApplyToPermanent {
 
-        public QuicksilverGargantuanCopyEffect() {
-            super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
-            staticText = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
-        }
+    @Override
+    public Boolean apply(Game game, Permanent permanent) {
+        permanent.getPower().initValue(7);
+        permanent.getToughness().initValue(7);
+        return true;
+    }
 
-        public QuicksilverGargantuanCopyEffect(final QuicksilverGargantuanCopyEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Card card = game.getCard(source.getFirstTarget());
-            Permanent permanent = game.getPermanentEntering(source.getSourceId());
-            if (permanent == null) {
-                permanent = game.getPermanent(source.getSourceId());
-            }
-            if (permanent != null) {
-                permanent.setName(card.getName());
-                permanent.getColor(game).setColor(card.getColor(game));
-                permanent.getManaCost().clear();
-                permanent.getManaCost().add(card.getManaCost());
-                permanent.getCardType().clear();
-                for (CardType type : card.getCardType()) {
-                    permanent.getCardType().add(type);
-                }
-                permanent.getSubtype().clear();
-                for (String type : card.getSubtype()) {
-                    permanent.getSubtype().add(type);
-                }
-                permanent.getSupertype().clear();
-                for (String type : card.getSupertype()) {
-                    permanent.getSupertype().add(type);
-                }
-                permanent.setExpansionSetCode(card.getExpansionSetCode());
-                permanent.getAbilities().clear();
-                for (Ability ability : card.getAbilities()) {
-                    permanent.addAbility(ability, game);
-                }
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public QuicksilverGargantuanCopyEffect copy() {
-            return new QuicksilverGargantuanCopyEffect(this);
-        }
-
+    @Override
+    public Boolean apply(Game game, MageObject mageObject) {
+        mageObject.getPower().initValue(7);
+        mageObject.getToughness().initValue(7);
+        return true;
     }
 
 }
