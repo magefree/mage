@@ -129,7 +129,9 @@ public abstract class GameCommanderImpl extends GameImpl {
                     if (!mulliganedCards.containsKey(playerId)) {
                         mulliganedCards.put(playerId, new CardsImpl());
                     }
-                    card.moveToExile(null, "", null, this);
+                    player.getHand().remove(card);
+                    getExile().add(card);
+                    getState().setZone(card.getId(), Zone.EXILED);
                     card.setFaceDown(true, this);
                     mulliganedCards.get(playerId).add(card);
                 }
@@ -168,7 +170,9 @@ public abstract class GameCommanderImpl extends GameImpl {
         if (player != null && mulliganedCards.containsKey(playerId)) {
             for (Card card : mulliganedCards.get(playerId).getCards(this)) {
                 if (card != null) {
-                    card.moveToZone(Zone.LIBRARY, null, this, false);
+                    getExile().removeCard(card, this);
+                    player.getLibrary().putOnTop(card, this);
+                    getState().setZone(card.getId(), Zone.LIBRARY);
                     card.setFaceDown(false, this);
                 }
             }

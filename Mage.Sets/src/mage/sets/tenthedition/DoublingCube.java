@@ -36,7 +36,6 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -57,7 +56,7 @@ public class DoublingCube extends CardImpl {
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new DoublingCubeEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
     }
 
     public DoublingCube(final DoublingCube card) {
@@ -83,11 +82,11 @@ class DoublingCubeEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        ManaPool pool = you.getManaPool();
+        ManaPool pool = controller.getManaPool();
         int blackMana = pool.getBlack();
         int whiteMana = pool.getWhite();
         int blueMana = pool.getBlue();
@@ -105,10 +104,9 @@ class DoublingCubeEffect extends ManaEffect {
         return null;
     }
 
-
     @Override
     public DoublingCubeEffect copy() {
         return new DoublingCubeEffect(this);
     }
 
- }
+}

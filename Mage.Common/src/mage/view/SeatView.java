@@ -30,6 +30,7 @@ package mage.view;
 import java.io.Serializable;
 import java.util.UUID;
 import mage.game.Seat;
+import mage.players.net.UserData;
 
 /**
  *
@@ -48,7 +49,11 @@ public class SeatView implements Serializable {
         if (seat.getPlayer() != null) {
             this.playerId = seat.getPlayer().getId();
             this.playerName = seat.getPlayer().getName();
-            this.flagName = seat.getPlayer().getUserData().getFlagName();
+            if (seat.getPlayer().getUserData() == null) {
+                this.flagName = UserData.getDefaultFlagName();
+            } else {
+                this.flagName = seat.getPlayer().getUserData().getFlagName();
+            }
         } else {
             // Empty seat
             this.playerName = "";

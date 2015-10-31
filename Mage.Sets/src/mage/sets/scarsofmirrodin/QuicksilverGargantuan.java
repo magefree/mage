@@ -25,27 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 import mage.target.Target;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author ayratn
@@ -60,7 +58,7 @@ public class QuicksilverGargantuan extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        Ability ability = new EntersBattlefieldAbility(new QuicksilverGargantuanCopyEffect(), 
+        Ability ability = new EntersBattlefieldAbility(new QuicksilverGargantuanCopyEffect(),
                 "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7");
         Target target = new TargetCreaturePermanent();
         target.setNotTarget(true);
@@ -81,7 +79,7 @@ public class QuicksilverGargantuan extends CardImpl {
 
         public QuicksilverGargantuanCopyEffect() {
             super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
-            staticText =  "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
+            staticText = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
         }
 
         public QuicksilverGargantuanCopyEffect(final QuicksilverGargantuanCopyEffect effect) {
@@ -91,30 +89,35 @@ public class QuicksilverGargantuan extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Card card = game.getCard(source.getFirstTarget());
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            permanent.setName(card.getName());
-            permanent.getColor(game).setColor(card.getColor(game));
-            permanent.getManaCost().clear();
-            permanent.getManaCost().add(card.getManaCost());
-            permanent.getCardType().clear();
-            for (CardType type : card.getCardType()) {
-                permanent.getCardType().add(type);
+            Permanent permanent = game.getPermanentEntering(source.getSourceId());
+            if (permanent == null) {
+                permanent = game.getPermanent(source.getSourceId());
             }
-            permanent.getSubtype().clear();
-            for (String type : card.getSubtype()) {
-                permanent.getSubtype().add(type);
+            if (permanent != null) {
+                permanent.setName(card.getName());
+                permanent.getColor(game).setColor(card.getColor(game));
+                permanent.getManaCost().clear();
+                permanent.getManaCost().add(card.getManaCost());
+                permanent.getCardType().clear();
+                for (CardType type : card.getCardType()) {
+                    permanent.getCardType().add(type);
+                }
+                permanent.getSubtype().clear();
+                for (String type : card.getSubtype()) {
+                    permanent.getSubtype().add(type);
+                }
+                permanent.getSupertype().clear();
+                for (String type : card.getSupertype()) {
+                    permanent.getSupertype().add(type);
+                }
+                permanent.setExpansionSetCode(card.getExpansionSetCode());
+                permanent.getAbilities().clear();
+                for (Ability ability : card.getAbilities()) {
+                    permanent.addAbility(ability, game);
+                }
+                return true;
             }
-            permanent.getSupertype().clear();
-            for (String type : card.getSupertype()) {
-                permanent.getSupertype().add(type);
-            }
-            permanent.setExpansionSetCode(card.getExpansionSetCode());
-            permanent.getAbilities().clear();
-            for (Ability ability : card.getAbilities()) {
-                permanent.addAbility(ability, game);
-            }
-
-            return true;
+            return false;
         }
 
         @Override

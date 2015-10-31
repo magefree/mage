@@ -28,11 +28,6 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +36,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,6 +49,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -84,7 +84,8 @@ public class IsochronScepter extends CardImpl {
 class IsochronScepterImprintEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("instant card with converted mana cost 2 or less from your hand");
-    static  {
+
+    static {
         filter.add(new CardTypePredicate(CardType.INSTANT));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
     }
@@ -109,7 +110,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getIdName() +" (Imprint)", source.getSourceId(), game, Zone.HAND, true);
+                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)", source.getSourceId(), game, Zone.HAND, true);
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
@@ -121,7 +122,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
             return true;
         }
         return false;
-        
+
     }
 
     @java.lang.Override
@@ -158,10 +159,14 @@ class IsochronScepterCopyEffect extends OneShotEffect {
                     if (controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append("?").toString(), source, game)) {
                         Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                         if (copiedCard != null) {
-                            game.getExile().add(source.getSourceId(), "",copiedCard);
+                            game.getExile().add(source.getSourceId(), "", copiedCard);
                             game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                             if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
-                                controller.cast(copiedCard.getSpellAbility(), game, true);
+                                if (copiedCard.getSpellAbility() != null) {
+                                    controller.cast(copiedCard.getSpellAbility(), game, true);
+                                } else {
+                                    Logger.getLogger(IsochronScepterCopyEffect.class).error("Isochron Scepter: spell ability == null " + copiedCard.getName());
+                                }
                             }
                         }
                     }

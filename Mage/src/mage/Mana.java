@@ -259,7 +259,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     @Override
     public String toString() {
-        StringBuilder sbMana = threadLocalBuilder.get();
+        StringBuilder sbMana = new StringBuilder();
         if (colorless > 0) {
             sbMana.append("{").append(Integer.toString(colorless)).append("}");
         }
