@@ -133,7 +133,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         // Converge - Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast Unified Front.
         addCard(Zone.GRAVEYARD, playerA, "Unified Front"); // {3}{W}
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {W}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         setChoice(playerA, "Unified Front");
