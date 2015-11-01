@@ -322,9 +322,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target instanceof TargetCardInHand) {
+        if (target instanceof TargetCardInHand
+                || (target.getZone().equals(Zone.HAND) && (target instanceof TargetCard))) {
             List<Card> cards = new ArrayList<>();
-            for (UUID cardId : ((TargetCardInHand) target).possibleTargets(sourceId, this.getId(), game)) {
+            for (UUID cardId : target.possibleTargets(sourceId, this.getId(), game)) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     cards.add(card);
@@ -1135,7 +1136,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected boolean playManaHandling(Ability ability, ManaCost unpaid, Game game) {
 //        log.info("paying for " + unpaid.getText());
-        boolean spendAnyMana = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_ANY_MANA, ability, ability.getControllerId(), game);
+        boolean spendAnyMana = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
         ManaCost cost;
         List<Permanent> producers;
         if (unpaid instanceof ManaCosts) {
