@@ -47,6 +47,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
@@ -905,6 +906,15 @@ public class HumanPlayer extends PlayerImpl {
                                     attackedDefender, attacker.getId(), attacker.getControllerId()), game)) {
                         continue;
                     }
+                    // if attacker needs a specific defender to attack so select that one instead
+                    if (game.getCombat().getCreaturesForcedToAttack().containsKey(attacker.getId())) {
+                        Set<UUID> possibleDefenders = game.getCombat().getCreaturesForcedToAttack().get(attacker.getId());
+                        if (!possibleDefenders.isEmpty() && !possibleDefenders.contains(attackedDefender)) {
+                            declareAttacker(attacker.getId(), possibleDefenders.iterator().next(), game, false);
+                            continue;
+                        }
+                    }
+                    // attack selected default defender
                     declareAttacker(attacker.getId(), attackedDefender, game, false);
                 }
             } else if (response.getBoolean() != null) {
@@ -926,14 +936,18 @@ public class HumanPlayer extends PlayerImpl {
                             } else {
                                 Permanent creature = game.getPermanent(creatureId);
                                 if (creature != null) {
-                                    sb.append(creature.getName()).append(" ");
+                                    sb.append(creature.getIdName()).append(" ");
                                 }
                             }
 
                         }
                         if (game.getCombat().getMaxAttackers() > forcedAttackers) {
-                            game.informPlayer(this, sb.insert(0, " more attacker(s) that are forced to attack.\nCreatures forced to attack: ")
-                                    .insert(0, Math.min(game.getCombat().getMaxAttackers() - forcedAttackers, game.getCombat().getCreaturesForcedToAttack().size() - forcedAttackers))
+                            int requireToAttack = Math.min(game.getCombat().getMaxAttackers() - forcedAttackers, game.getCombat().getCreaturesForcedToAttack().size() - forcedAttackers);
+                            String message = (requireToAttack == 1 ? " more attacker that is " : " more attackers that are ")
+                                    + "forced to attack.\nCreature"
+                                    + (requireToAttack == 1 ? "" : "s") + " forced to attack: ";
+                            game.informPlayer(this, sb.insert(0, message)
+                                    .insert(0, requireToAttack)
                                     .insert(0, "You have to attack with ").toString());
                             continue;
                         }
@@ -989,7 +1003,7 @@ public class HumanPlayer extends PlayerImpl {
             possibleDefender = defenders;
         }
         if (possibleDefender.size() == 1) {
-            declareAttacker(attackerId, defenders.iterator().next(), game, true);
+            declareAttacker(attackerId, possibleDefender.iterator().next(), game, true);
             return true;
         } else {
             TargetDefender target = new TargetDefender(possibleDefender, attackerId);
@@ -1209,7 +1223,9 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("activateAbility", game);
         if (abilities.size() == 1 && suppressAbilityPicker(abilities.values().iterator().next())) {
             ActivatedAbility ability = abilities.values().iterator().next();
-            if (ability.getTargets().size() != 0 || !(ability.getCosts().size() == 1 && ability.getCosts().get(0) instanceof SacrificeSourceCost)) {
+            if (ability.getTargets().size() != 0
+                    || !(ability.getCosts().size() == 1 && ability.getCosts().get(0) instanceof SacrificeSourceCost)
+                    || !(ability.getCosts().size() == 2 && ability.getCosts().get(0) instanceof TapSourceCost && ability.getCosts().get(0) instanceof SacrificeSourceCost)) {
                 activateAbility(ability, game);
                 return;
             }
