@@ -71,7 +71,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
         if (super.checkEventType(event, game)) {
             return ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD) && ((ZoneChangeEvent) event).getToZone().equals(Zone.GRAVEYARD);
         }
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return false;
     }
 
     @Override

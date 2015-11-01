@@ -27,11 +27,11 @@
  */
 package mage.abilities.effects.common;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -44,7 +44,11 @@ import mage.game.permanent.Permanent;
 public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DontUntapInControllersUntapStepSourceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
+        this(false, true);
+    }
+
+    public DontUntapInControllersUntapStepSourceEffect(boolean messageToUser, boolean messageToLog) {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, messageToUser, messageToLog);
         staticText = "{this} doesn't untap during your untap step";
     }
 
@@ -78,4 +82,5 @@ public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleM
         }
         return false;
     }
+
 }

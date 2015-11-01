@@ -44,14 +44,14 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-
 public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
 
     Duration duration;
+
     /**
      * This effect let the controller choose one or more colors the target will
-     * become to.
-     * Use effect.setText() if case you use a targetPointer, otherwise the rule text will be empty.
+     * become to. Use effect.setText() if case you use a targetPointer,
+     * otherwise the rule text will be empty.
      *
      * @param duration
      */
@@ -81,8 +81,9 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
                 if (!controller.canRespond()) {
                     return false;
                 }
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayers(target.getName() + ": " + controller.getLogName() + " has chosen " + choiceColor.getChoice());
+                }
                 if (choiceColor.getColor().isBlack()) {
                     sb.append("B");
                 } else if (choiceColor.getColor().isBlue()) {
@@ -119,7 +120,7 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() > 0) {
             sb.append("target ");
-            sb.append(mode.getTargets().get(0).getMessage());
+            sb.append(mode.getTargets().get(0).getFilter().getMessage());
             sb.append(" becomes the color or colors of your choice");
             if (duration.toString().length() > 0) {
                 sb.append(" ").append(duration.toString());

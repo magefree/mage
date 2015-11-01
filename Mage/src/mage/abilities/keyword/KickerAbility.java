@@ -85,8 +85,8 @@ import mage.players.Player;
 public class KickerAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     protected static final String KICKER_KEYWORD = "Kicker";
-    protected static final String KICKER_REMINDER_MANA = "(You may pay an additional {cost} as you cast this spell.)";
-    protected static final String KICKER_REMINDER_COST = "(You may {cost} in addition to any other costs as you cast this spell.)";
+    protected static final String KICKER_REMINDER_MANA = "You may pay an additional {cost} as you cast this spell.";
+    protected static final String KICKER_REMINDER_COST = "You may {cost} in addition to any other costs as you cast this spell.";
 
     protected Map<String, Integer> activations = new HashMap<>(); // zoneChangeCounter, activations
 
@@ -203,7 +203,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         if (zcc == 0) {
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         }
-        if (zcc > 0 && (source.getAbilityType().equals(AbilityType.TRIGGERED) || source.getAbilityType().equals(AbilityType.STATIC))) {
+        if (zcc > 0 && (source.getAbilityType().equals(AbilityType.TRIGGERED))) {
             --zcc;
         }
         return String.valueOf(zcc) + ((kickerCosts.size() > 1) ? costText : "");

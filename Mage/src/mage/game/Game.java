@@ -115,6 +115,10 @@ public interface Game extends MageItem, Serializable {
 
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
 
+    Permanent getPermanentEntering(UUID permanentId);
+
+    Map<UUID, Permanent> getPermanentsEntering();
+
     Map<Zone, HashMap<UUID, MageObject>> getLKI();
 
     Card getCard(UUID cardId);
@@ -364,14 +368,14 @@ public interface Game extends MageItem, Serializable {
      * This version supports copying of copies of any depth.
      *
      * @param copyFromPermanent
-     * @param copyToPermanent
+     * @param copyToPermanentId
      * @param source
      * @param applier
      * @return
      */
-    Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
+    Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier);
 
-    Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
+    Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier);
 
     Card copyCard(Card cardToCopy, Ability source, UUID newController);
 

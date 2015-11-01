@@ -39,11 +39,11 @@ import mage.constants.Zone;
 public class AsEntersBattlefieldAbility extends StaticAbility {
 
     public AsEntersBattlefieldAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));
+        super(Zone.ALL, new EntersBattlefieldEffect(effect));
     }
 
     public AsEntersBattlefieldAbility(Effect effect, String text) {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, text));
+        super(Zone.ALL, new EntersBattlefieldEffect(effect, text));
     }
 
     public AsEntersBattlefieldAbility(AsEntersBattlefieldAbility ability) {
@@ -59,10 +59,9 @@ public class AsEntersBattlefieldAbility extends StaticAbility {
                 return;
             }
         }
-        super.addEffect(effect); 
+        super.addEffect(effect);
     }
 
-    
     @Override
     public AsEntersBattlefieldAbility copy() {
         return new AsEntersBattlefieldAbility(this);

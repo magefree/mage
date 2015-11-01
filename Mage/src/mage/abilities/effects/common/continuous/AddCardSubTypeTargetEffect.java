@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -42,7 +41,7 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
-     
+
     private final String addedSubType;
 
     public AddCardSubTypeTargetEffect(String addedSubType, Duration duration) {

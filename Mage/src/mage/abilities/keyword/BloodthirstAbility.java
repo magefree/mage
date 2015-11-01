@@ -12,10 +12,11 @@ import mage.util.CardUtil;
 import mage.watchers.common.BloodthirstWatcher;
 
 /**
- * 
+ *
  * @author Loki
  */
 public class BloodthirstAbility extends EntersBattlefieldAbility {
+
     private int amount;
 
     public BloodthirstAbility(int amount) {
@@ -48,12 +49,13 @@ public class BloodthirstAbility extends EntersBattlefieldAbility {
 }
 
 class BloodthirstEffect extends OneShotEffect {
+
     private final int amount;
 
     BloodthirstEffect(int amount) {
         super(Outcome.BoostCreature);
         this.amount = amount;
-        staticText =  new StringBuilder("this permanent comes into play with ").append(this.amount).append(" +1/+1 counters on it").toString();
+        staticText = "this permanent comes into play with " + this.amount + " +1/+1 counters on it";
     }
 
     BloodthirstEffect(final BloodthirstEffect effect) {
@@ -67,10 +69,9 @@ class BloodthirstEffect extends OneShotEffect {
         if (player != null) {
             BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get("DamagedOpponents", source.getControllerId());
             if (watcher != null && watcher.conditionMet()) {
-                Permanent p = game.getPermanent(source.getSourceId());
-                if (p != null) {
-                    p.addCounters(CounterType.P1P1.createInstance(amount), game);
-
+                Permanent permanent = game.getPermanentEntering(source.getSourceId());
+                if (permanent != null) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
                 }
             }
             return true;
@@ -83,4 +84,3 @@ class BloodthirstEffect extends OneShotEffect {
         return new BloodthirstEffect(this);
     }
 }
-

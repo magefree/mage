@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.constants;
 
 /**
@@ -33,5 +32,6 @@ package mage.constants;
  * @author LevelX2
  */
 public enum SetTargetPointer {
-    NONE, PLAYER, SPELL, CARD, PERMANENT;
+
+    NONE, PLAYER, SPELL, CARD, PERMANENT, ATTACHED_TO_CONTROLLER;
 }

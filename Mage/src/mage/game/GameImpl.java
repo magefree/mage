@@ -49,6 +49,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.common.GemstoneCavernsAbility;
@@ -77,6 +78,7 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -174,6 +176,9 @@ public abstract class GameImpl implements Game, Serializable {
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
     protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
 
+    // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
+    protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
+
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
@@ -242,6 +247,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.lki.putAll(game.lki);
         this.lkiExtended.putAll(game.lkiExtended);
         this.shortLivingLKI.putAll(game.shortLivingLKI);
+        this.permanentsEntering.putAll(game.permanentsEntering);
         if (logger.isDebugEnabled()) {
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
@@ -500,6 +506,16 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public Permanent getPermanentEntering(UUID permanentId) {
+        return permanentsEntering.get(permanentId);
+    }
+
+    @Override
+    public Map<UUID, Permanent> getPermanentsEntering() {
+        return permanentsEntering;
+    }
+
+    @Override
     public Card getCard(UUID cardId) {
         if (cardId == null) {
             return null;
@@ -655,7 +671,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void removeBookmark(int bookmark) {
+    public void removeBookmark(int bookmark
+    ) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {
@@ -889,7 +906,7 @@ public abstract class GameImpl implements Game, Serializable {
             return;
         }
         getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
-        if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
+        if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
             startingPlayerId = targetPlayer.getTargets().get(0);
         } else if (getState().getPlayers().size() < 3) {
             // not possible to choose starting player, choosing player has probably conceded, so stop here
@@ -1402,12 +1419,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
-        return copyPermanent(Duration.Custom, copyFromPermanent, copyToPermanent, source, applier);
+    public Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier) {
+        return copyPermanent(Duration.Custom, copyFromPermanent, copyToPermanentId, source, applier);
     }
 
     @Override
-    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
+    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier) {
         Permanent newBluePrint = null;
         // handle copies of copies
         for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
@@ -1440,7 +1457,7 @@ public abstract class GameImpl implements Game, Serializable {
             applier.apply(this, newBluePrint);
         }
 
-        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanent.getId());
+        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
         newEffect.newId();
         newEffect.setApplier(applier);
         Ability newAbility = source.copy();
@@ -1465,7 +1482,7 @@ public abstract class GameImpl implements Game, Serializable {
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
-            // Too early, becuase no targets set yet !!!!!!!!!!!
+            // Too early, because no targets set yet !!!!!!!!!!!
             for (Effect effect : newAbility.getEffects()) {
                 effect.getTargetPointer().init(this, newAbility);
             }
@@ -1686,11 +1703,22 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                 } else {
+                    SpellAbility spellAbility = perm.getSpellAbility();
                     if (perm.getSpellAbility().getTargets().isEmpty()) {
+                        for (Ability ability : perm.getAbilities(this)) {
+                            if ((ability instanceof SpellAbility)
+                                    && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
+                                    && !ability.getTargets().isEmpty()) {
+                                spellAbility = (SpellAbility) ability;
+                                break;
+                            }
+                        }
+                    }
+                    if (spellAbility.getTargets().isEmpty()) {
                         Permanent enchanted = this.getPermanent(perm.getAttachedTo());
                         logger.error("Aura without target: " + perm.getName() + " attached to " + (enchanted == null ? " null" : enchanted.getName()));
                     } else {
-                        Target target = perm.getSpellAbility().getTargets().get(0);
+                        Target target = spellAbility.getTargets().get(0);
                         if (target instanceof TargetPermanent) {
                             Permanent attachedTo = getPermanent(perm.getAttachedTo());
                             if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
@@ -1706,7 +1734,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     }
                                 }
                             } else {
-                                Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                                Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (auraFilter instanceof FilterControlledCreaturePermanent) {
                                     if (!((FilterControlledCreaturePermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
                                             || attachedTo.cantBeEnchantedBy(perm, this)) {
@@ -1737,7 +1765,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     somethingHappened = true;
                                 }
                             } else {
-                                Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                                Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
                                     if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;
@@ -1849,7 +1877,7 @@ public abstract class GameImpl implements Game, Serializable {
                     Player controller = this.getPlayer(legend.getControllerId());
                     if (controller != null) {
                         Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                        targetLegendaryToKeep.setTargetName(new StringBuilder(legend.getName()).append(" to keep (Legendary Rule)?").toString());
+                        targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
                         controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
                         for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                             if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
@@ -2526,8 +2554,10 @@ public abstract class GameImpl implements Game, Serializable {
                 card.setZone(Zone.BATTLEFIELD, this);
                 card.setOwnerId(ownerId);
                 PermanentCard permanent = new PermanentCard(card.getCard(), ownerId, this);
-                getBattlefield().addPermanent(permanent);
+                getPermanentsEntering().put(permanent.getId(), permanent);
                 permanent.entersBattlefield(permanent.getId(), this, Zone.OUTSIDE, false);
+                getBattlefield().addPermanent(permanent);
+                getPermanentsEntering().remove(permanent.getId());
                 ((PermanentImpl) permanent).removeSummoningSickness();
                 if (card.isTapped()) {
                     permanent.setTapped(true);

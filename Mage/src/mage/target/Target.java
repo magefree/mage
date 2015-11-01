@@ -151,4 +151,8 @@ public interface Target extends Serializable {
     UUID getAbilityController();
 
     Player getTargetController(Game game, UUID playerId);
+
+    int getTargetTag();
+
+    void setTargetTag(int tag);
 }

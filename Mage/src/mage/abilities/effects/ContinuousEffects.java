@@ -55,6 +55,7 @@ import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Layer;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubLayer;
@@ -70,6 +71,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import org.apache.log4j.Logger;
@@ -546,6 +548,37 @@ public class ContinuousEffects implements Serializable {
 
     }
 
+    public ManaType asThoughMana(ManaType manaType, ManaPoolItem mana, UUID objectId, Ability affectedAbility, UUID controllerId, Game game) {
+        // First check existing only effects
+        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game);
+        for (AsThoughEffect effect : asThoughEffectsList) {
+            HashSet<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_ONLY_MANA).getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
+                        || effect.applies(objectId, affectedAbility, ability, game)) {
+                    if (((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game) == null) {
+                        return null;
+                    }
+                }
+            }
+        }
+        // then check effects that allow to use other mana types to pay the current mana type to pay
+        asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_OTHER_MANA, game);
+        for (AsThoughEffect effect : asThoughEffectsList) {
+            HashSet<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_OTHER_MANA).getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
+                        || effect.applies(objectId, affectedAbility, ability, game)) {
+                    ManaType usableManaType = ((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game);
+                    if (usableManaType != null) {
+                        return usableManaType;
+                    }
+                }
+            }
+        }
+        return manaType;
+    }
+
     /**
      * Filters out asThough effects that are not active.
      *
@@ -843,8 +876,10 @@ public class ContinuousEffects implements Serializable {
                 }
             }
             // Must be called here for some effects to be able to work correctly
-            // TODO: add info which effects need that call
-            game.applyEffects();
+            // For example: Vesuva copying a Dark Depth (VesuvaTest:testDarkDepth)
+            // This call should be removed if possible as replacement effects of EntersTheBattlefield events
+            // do no longer work correctly because the entering permanents are not yet on the battlefield (before they were).
+            // game.applyEffects();
         } while (true);
         return caught;
     }
@@ -1114,18 +1149,18 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
-    private void setControllerForEffect(ContinuousEffectsList<?> effects, UUID cardId, UUID controllerId) {
+    private void setControllerForEffect(ContinuousEffectsList<?> effects, UUID sourceId, UUID controllerId) {
         for (Effect effect : effects) {
             HashSet<Ability> abilities = effects.getAbility(effect.getId());
             if (abilities != null) {
                 for (Ability ability : abilities) {
                     if (ability.getSourceId() != null) {
-                        if (ability.getSourceId().equals(cardId)) {
+                        if (ability.getSourceId().equals(sourceId)) {
                             ability.setControllerId(controllerId);
                         }
                     } else {
                         if (!ability.getZone().equals(Zone.COMMAND)) {
-                            logger.fatal(new StringBuilder("No sourceId Ability: ").append(ability));
+                            logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
                         }
                     }
                 }
@@ -1213,7 +1248,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = preventionEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (ability.getSourceId().equals(sourceId)) {
-                    if (controllerFound == null || controllerFound == ability.getControllerId()) {
+                    if (controllerFound == null || controllerFound.equals(ability.getControllerId())) {
                         controllerFound = ability.getControllerId();
                     } else {
                         // not unique controller - No solution yet
@@ -1227,7 +1262,7 @@ public class ContinuousEffects implements Serializable {
             for (Ability ability : abilities) {
                 if (ability.getSourceId() != null) {
                     if (ability.getSourceId().equals(sourceId)) {
-                        if (controllerFound == null || controllerFound == ability.getControllerId()) {
+                        if (controllerFound == null || controllerFound.equals(ability.getControllerId())) {
                             controllerFound = ability.getControllerId();
                         } else {
                             // not unique controller - No solution yet

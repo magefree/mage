@@ -109,6 +109,8 @@ public interface Permanent extends Card, Controllable {
 
     UUID getAttachedTo();
 
+    int getAttachedToZoneChangeCounter();
+
     void attachTo(UUID permanentId, Game game);
 
     boolean addAttachment(UUID permanentId, Game game);

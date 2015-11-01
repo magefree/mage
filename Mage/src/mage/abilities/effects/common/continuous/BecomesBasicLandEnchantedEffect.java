@@ -36,7 +36,6 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -45,6 +44,24 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
+
+    protected final static ArrayList<String> allLandTypes = new ArrayList<>();
+
+    static { // 205.3i
+        allLandTypes.add("Forest");
+        allLandTypes.add("Swamp");
+        allLandTypes.add("Plains");
+        allLandTypes.add("Mountains");
+        allLandTypes.add("Island");
+        allLandTypes.add("Urza's");
+        allLandTypes.add("Mine");
+        allLandTypes.add("Power-Plant");
+        allLandTypes.add("Tower");
+        allLandTypes.add("Desert");
+        allLandTypes.add("Gate");
+        allLandTypes.add("Lair");
+        allLandTypes.add("Locus");
+    }
 
     protected ArrayList<String> landTypes = new ArrayList<>();
 
@@ -76,13 +93,6 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
                 switch (layer) {
-                    case ColorChangingEffects_5:
-                        permanent.getColor(game).setWhite(false);
-                        permanent.getColor(game).setGreen(false);
-                        permanent.getColor(game).setBlack(false);
-                        permanent.getColor(game).setBlue(false);
-                        permanent.getColor(game).setRed(false);
-                        break;
                     case AbilityAddingRemovingEffects_6:
                         permanent.removeAllAbilities(source.getSourceId(), game);
                         for (String landType : landTypes) {
@@ -106,9 +116,8 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                         }
                         break;
                     case TypeChangingEffects_4:
-                        permanent.getCardType().clear();
-                        permanent.getCardType().add(CardType.LAND);
-                        permanent.getSubtype().clear();
+                        // subtypes are all removed by changing the subtype to a land type.
+                        permanent.getSubtype().removeAll(allLandTypes);
                         permanent.getSubtype().addAll(landTypes);
                         break;
                 }

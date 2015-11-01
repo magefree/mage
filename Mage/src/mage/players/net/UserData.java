@@ -59,7 +59,7 @@ public class UserData implements Serializable {
     }
 
     public static UserData getDefaultUserDataView() {
-        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, "world.png", false, true, true, false, false, false);
+        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, getDefaultFlagName(), false, true, true, false, false, false);
     }
 
     public void setGroupId(int groupId) {
@@ -166,4 +166,7 @@ public class UserData implements Serializable {
         this.autoOrderTrigger = autoOrderTrigger;
     }
 
+    public static String getDefaultFlagName() {
+        return "world.png";
+    }
 }

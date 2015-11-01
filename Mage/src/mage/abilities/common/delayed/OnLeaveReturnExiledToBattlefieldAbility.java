@@ -27,13 +27,12 @@
  */
 package mage.abilities.common.delayed;
 
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,9 +49,9 @@ import mage.util.CardUtil;
  * Returns the exiled cards/permanents as source leaves battlefield
  *
  * Uses no stack
+ *
  * @author LevelX2
  */
-
 public class OnLeaveReturnExiledToBattlefieldAbility extends DelayedTriggeredAbility {
 
     public OnLeaveReturnExiledToBattlefieldAbility() {
@@ -108,22 +107,12 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
             UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
             if (exileZone != null) {
                 ExileZone exile = game.getExile().getExileZone(exileZone);
                 if (exile != null) {
-                    LinkedList<UUID> cards = new LinkedList<>(exile);
-                    for (UUID cardId : cards) {
-                        Card card = game.getCard(cardId);
-                        if (card != null) {
-                            Player owner = game.getPlayer(card.getOwnerId());
-                            if (owner != null && owner.isInGame()) {
-                                owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
-                            }
-                        }
-                    }
-                    exile.clear();
+                    controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.BATTLEFIELD, source, game, false, false, true, null);
                 }
                 return true;
             }

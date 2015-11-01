@@ -54,8 +54,6 @@ import static mage.constants.Zone.EXILED;
 import static mage.constants.Zone.GRAVEYARD;
 import static mage.constants.Zone.HAND;
 import static mage.constants.Zone.LIBRARY;
-import static mage.constants.Zone.OUTSIDE;
-import static mage.constants.Zone.PICK;
 import static mage.constants.Zone.STACK;
 import mage.counters.Counter;
 import mage.counters.Counters;
@@ -65,6 +63,7 @@ import mage.game.Game;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -342,55 +341,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone, appliedEffects);
         if (!game.replaceEvent(event)) {
-            if (event.getFromZone() != null) {
-                switch (event.getFromZone()) {
-                    case GRAVEYARD:
-                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
-                        break;
-                    case HAND:
-                        game.getPlayer(ownerId).removeFromHand(this, game);
-                        break;
-                    case LIBRARY:
-                        game.getPlayer(ownerId).removeFromLibrary(this, game);
-                        break;
-                    case EXILED:
-                        game.getExile().removeCard(this, game);
-                        break;
-                    case OUTSIDE:
-                        game.getPlayer(ownerId).getSideboard().remove(this);
-                        break;
-                    case COMMAND:
-                        game.getState().getCommand().remove((Commander) game.getObject(objectId));
-                        break;
-                    case STACK:
-                        StackObject stackObject = game.getStack().getSpell(getSpellAbility().getId());
-                        if (stackObject == null && (this instanceof SplitCard)) { // handle if half of Split cast is on the stack
-                            stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId());
-                            if (stackObject == null) {
-                                stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId());
-                            }
-                        }
-                        if (stackObject == null) {
-                            stackObject = game.getStack().getSpell(getId());
-                        }
-                        if (stackObject != null) {
-                            game.getStack().remove(stackObject);
-                        }
-                        break;
-                    case PICK:
-                    case BATTLEFIELD: // for sacrificing permanents or putting to library
-                        break;
-                    default:
-                        Card sourceCard = game.getCard(sourceId);
-                        logger.fatal(new StringBuilder("Invalid from zone [").append(fromZone)
-                                .append("] for card [").append(this.getName())
-                                .append("] to zone [").append(toZone)
-                                .append("] source [").append(sourceCard != null ? sourceCard.getName() : "null").append("]").toString());
-                        break;
-                }
-                game.rememberLKI(objectId, event.getFromZone(), this);
-            }
-
+            removeFromZone(game, fromZone, sourceId);
             setFaceDown(false, game);
             updateZoneChangeCounter(game);
             switch (event.getToZone()) {
@@ -454,32 +405,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Card mainCard = getMainCard();
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability.getId(), controllerId, fromZone, Zone.STACK);
         if (!game.replaceEvent(event)) {
-            if (event.getFromZone() != null) {
-                switch (event.getFromZone()) {
-                    case GRAVEYARD:
-                        game.getPlayer(ownerId).removeFromGraveyard(mainCard, game);
-                        break;
-                    case HAND:
-                        game.getPlayer(ownerId).removeFromHand(mainCard, game);
-                        break;
-                    case LIBRARY:
-                        game.getPlayer(ownerId).removeFromLibrary(mainCard, game);
-                        break;
-                    case EXILED:
-                        game.getExile().removeCard(mainCard, game);
-                        break;
-                    case OUTSIDE:
-                        game.getPlayer(ownerId).getSideboard().remove(mainCard);
-                        break;
-
-                    case COMMAND:
-                        game.getState().getCommand().remove((Commander) game.getObject(mainCard.getId()));
-                        break;
-                    default:
-                    //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
-                }
-                game.rememberLKI(mainCard.getId(), event.getFromZone(), this);
-            }
+            mainCard.removeFromZone(game, fromZone, ability.getSourceId());
             game.getStack().push(new Spell(this, ability.copy(), controllerId, event.getFromZone()));
             updateZoneChangeCounter(game);
             setZone(event.getToZone(), game);
@@ -499,36 +425,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
         if (!game.replaceEvent(event)) {
-            if (fromZone != null) {
-                switch (fromZone) {
-                    case GRAVEYARD:
-                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
-                        break;
-                    case HAND:
-                        game.getPlayer(ownerId).removeFromHand(this, game);
-                        break;
-                    case LIBRARY:
-                        game.getPlayer(ownerId).removeFromLibrary(this, game);
-                        break;
-                    case EXILED:
-                        game.getExile().removeCard(this, game);
-                        break;
-                    case STACK:
-                        StackObject stackObject = game.getStack().getSpell(getId());
-                        if (stackObject != null) {
-                            game.getStack().remove(stackObject);
-                        }
-                        break;
-                    case PICK:
-                        // nothing to do
-                        break;
-                    default:
-                        MageObject object = game.getObject(sourceId);
-                        logger.warn(new StringBuilder("moveToExile, not fully implemented: from = ").append(fromZone).append(" - ").append(object != null ? object.getName() : "null"));
-                }
-                game.rememberLKI(objectId, event.getFromZone(), this);
-            }
-
+            removeFromZone(game, fromZone, sourceId);
             if (exileId == null) {
                 game.getExile().getPermanentExile().add(this);
             } else {
@@ -568,37 +465,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             if (facedown) {
                 this.setFaceDown(false, game);
             }
-            if (fromZone != null) {
-                boolean removed = false;
-                switch (fromZone) {
-                    case GRAVEYARD:
-                        removed = game.getPlayer(ownerId).removeFromGraveyard(this, game);
-                        break;
-                    case HAND:
-                        removed = game.getPlayer(ownerId).removeFromHand(this, game);
-                        break;
-                    case LIBRARY:
-                        removed = game.getPlayer(ownerId).removeFromLibrary(this, game);
-                        break;
-                    case EXILED:
-                        game.getExile().removeCard(this, game);
-                        removed = true;
-                        break;
-                    case COMMAND:
-                        // command object (commander) is only on the stack, so no removing neccessary here
-                        removed = true;
-                        break;
-                    case PICK:
-                        removed = true;
-                        break;
-                    default:
-                        logger.warn("putOntoBattlefield, not fully implemented: fromZone=" + fromZone);
-                }
-                game.rememberLKI(objectId, event.getFromZone(), this);
-                if (!removed) {
-                    logger.warn("Couldn't find card in fromZone, card=" + getName() + ", fromZone=" + fromZone);
-                }
-            }
+            removeFromZone(game, fromZone, sourceId);
             updateZoneChangeCounter(game);
             PermanentCard permanent = new PermanentCard(this, event.getPlayerId(), game);
             // make sure the controller of all continuous effects of this card are switched to the current controller
@@ -624,7 +491,82 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return false;
     }
 
-    private void checkForCountersToAdd(PermanentCard permanent, Game game) {
+    @Override
+    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+        boolean removed = false;
+        MageObject lkiObject = null;
+        switch (fromZone) {
+            case GRAVEYARD:
+                removed = game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                break;
+            case HAND:
+                removed = game.getPlayer(ownerId).removeFromHand(this, game);
+                break;
+            case LIBRARY:
+                removed = game.getPlayer(ownerId).removeFromLibrary(this, game);
+                break;
+            case EXILED:
+                if (game.getExile().getCard(getId(), game) != null) {
+                    removed = game.getExile().removeCard(this, game);
+
+                }
+                break;
+            case STACK:
+                StackObject stackObject;
+                if (getSpellAbility() != null) {
+                    stackObject = game.getStack().getSpell(getSpellAbility().getId());
+                } else {
+                    stackObject = game.getStack().getSpell(this.getId());
+                }
+                if (stackObject == null && (this instanceof SplitCard)) { // handle if half of Split cast is on the stack
+                    stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId());
+                    if (stackObject == null) {
+                        stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId());
+                    }
+                }
+                if (stackObject == null) {
+                    stackObject = game.getStack().getSpell(getId());
+                }
+                if (stackObject != null) {
+                    removed = game.getStack().remove(stackObject);
+                    lkiObject = stackObject;
+                }
+                break;
+            case COMMAND:
+                lkiObject = (Commander) game.getObject(objectId);
+                if (lkiObject != null) {
+                    removed = game.getState().getCommand().remove((Commander) game.getObject(objectId));
+                }
+                break;
+            case OUTSIDE:
+                if (isCopy()) { // copied cards have no need to be removed from a previous zone
+                    removed = true;
+                } else if (game.getPlayer(ownerId).getSideboard().contains(this.getId())) {
+                    game.getPlayer(ownerId).getSideboard().remove(this.getId());
+                    removed = true;
+                }
+                break;
+
+            case PICK: // Pick should no longer be used
+            case BATTLEFIELD: // for sacrificing permanents or putting to library
+                removed = true;
+                break;
+            default:
+                MageObject sourceObject = game.getObject(sourceId);
+                logger.fatal("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
+                        + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + "]");
+                break;
+        }
+        if (removed) {
+            game.rememberLKI(objectId, fromZone, lkiObject != null ? lkiObject : this);
+        } else {
+            logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
+        }
+        return removed;
+    }
+
+    @Override
+    public void checkForCountersToAdd(Permanent permanent, Game game) {
         Counters countersToAdd = game.getEnterWithCounters(permanent.getId());
         if (countersToAdd != null) {
             for (Counter counter : countersToAdd.values()) {

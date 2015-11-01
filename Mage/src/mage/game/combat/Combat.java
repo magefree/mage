@@ -294,9 +294,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 // force attack only if a defender can be attacked without paying a cost
                 if (!defendersCostlessAttackable.isEmpty()) {
+                    creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
                     // No need to attack a special defender
                     if (defendersForcedToAttack.isEmpty()) {
-                        creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
                         if (defendersForcedToAttack.isEmpty()) {
                             if (defendersCostlessAttackable.size() == 1) {
                                 player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
@@ -663,7 +663,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             if (mayBlock) {
                                 if (controller.isHuman()) {
                                     if (!game.isSimulation()) {
-                                        game.informPlayer(controller, "Creature should block this turn: " + creature.getLogName());
+                                        game.informPlayer(controller, "Creature should block this turn: " + creature.getIdName());
                                     }
                                 } else {
                                     Player defender = game.getPlayer(creature.getControllerId());

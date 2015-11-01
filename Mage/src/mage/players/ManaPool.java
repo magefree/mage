@@ -38,7 +38,6 @@ import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.TurnPhase;
@@ -138,16 +137,15 @@ public class ManaPool implements Serializable {
                 // no mana added beyond the stock so don't auto pay this
                 continue;
             }
-            boolean spendAnyMana = spendAnyMana(ability, game);
-            if (mana.get(manaType) > 0 || (spendAnyMana && mana.count() > 0)) {
+            ManaType usableManaType = game.getContinuousEffects().asThoughMana(manaType, mana, ability.getSourceId(), ability, ability.getControllerId(), game);
+            if (usableManaType == null) {
+                continue;
+            }
+            if (mana.get(usableManaType) > 0) {
                 GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
                 event.setData(mana.getOriginalId().toString());
                 game.fireEvent(event);
-                if (spendAnyMana) {
-                    mana.removeAny();
-                } else {
-                    mana.remove(manaType);
-                }
+                mana.remove(usableManaType);
                 if (mana.count() == 0) { // so no items with count 0 stay in list
                     manaItems.remove(mana);
                 }
@@ -156,11 +154,6 @@ public class ManaPool implements Serializable {
             }
         }
         return false;
-    }
-
-    // check if any mana can be spend to cast the mana cost of an ability
-    private boolean spendAnyMana(Ability ability, Game game) {
-        return game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_ANY_MANA, ability, ability.getControllerId(), game);
     }
 
     public int get(ManaType manaType) {

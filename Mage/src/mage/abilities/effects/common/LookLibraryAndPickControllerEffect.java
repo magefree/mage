@@ -29,7 +29,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -128,28 +127,13 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             if (!optional || player.chooseUse(Outcome.DrawCard, getMayText(), source, game)) {
                 FilterCard pickFilter = filter.copy();
                 pickFilter.setMessage(getPickText());
-                TargetCard target = new TargetCard((upTo ? 0 : numberToPick.calculate(game, source, this)), numberToPick.calculate(game, source, this), Zone.PICK, pickFilter);
+                TargetCard target = new TargetCard((upTo ? 0 : numberToPick.calculate(game, source, this)), numberToPick.calculate(game, source, this), Zone.LIBRARY, pickFilter);
                 if (player.choose(Outcome.DrawCard, cards, target, game)) {
-                    Cards reveal = new CardsImpl();
-                    for (UUID cardId : target.getTargets()) {
-                        Card card = cards.get(cardId, game);
-                        if (card != null) {
-                            cards.remove(card);
-                            if (targetZoneLookedCards.equals(Zone.BATTLEFIELD)) {
-                                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-                            } else {
-                                card.moveToZone(targetPickedCards, source.getSourceId(), game, false);
-                                if (!game.isSimulation()) {
-                                    game.informPlayers(player.getLogName() + " moves a card to " + targetPickedCards.toString().toLowerCase());
-                                }
-                            }
-                            if (revealPickedCards) {
-                                reveal.add(card);
-                            }
-                        }
-                    }
+                    Cards pickedCards = new CardsImpl(target.getTargets());
+                    cards.removeAll(pickedCards);
+                    player.moveCards(pickedCards.getCards(game), targetPickedCards, source, game);
                     if (revealPickedCards) {
-                        player.revealCards(windowName, reveal, game);
+                        player.revealCards(windowName, pickedCards, game);
                     }
 
                 }

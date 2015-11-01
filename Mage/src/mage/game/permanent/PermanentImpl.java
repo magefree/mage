@@ -115,6 +115,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected HashSet<MageObjectReference> dealtDamageByThisTurn;
     protected UUID attachedTo;
+    protected int attachedToZoneChangeCounter;
     protected UUID pairedCard;
     protected Counters counters;
     protected List<Counter> markedDamage;
@@ -172,6 +173,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         this.counters = permanent.counters.copy();
         this.attachedTo = permanent.attachedTo;
+        this.attachedToZoneChangeCounter = permanent.attachedToZoneChangeCounter;
         this.minBlockedBy = permanent.minBlockedBy;
         this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
@@ -645,6 +647,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, controllerId))) {
                 this.attachments.add(permanentId);
                 Permanent attachment = game.getPermanent(permanentId);
+                if (attachment == null) {
+                    attachment = game.getPermanentEntering(permanentId);
+                }
                 if (attachment != null) {
                     attachment.attachTo(objectId, game);
                     game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, controllerId));
@@ -674,6 +679,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public UUID getAttachedTo() {
         return attachedTo;
+    }
+
+    @Override
+    public int getAttachedToZoneChangeCounter() {
+        return attachedToZoneChangeCounter;
     }
 
     @Override
@@ -712,6 +722,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         this.attachedTo = permanentId;
+        this.attachedToZoneChangeCounter = game.getState().getZoneChangeCounter(permanentId);
         for (Ability ability : this.getAbilities()) {
             for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
@@ -908,11 +919,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
         if (!game.replaceEvent(event)) {
             if (fireEvent) {
-                if (sourceId == null) { // play lands
-                    game.fireEvent(event);
-                } else { // from effects
-                    game.addSimultaneousEvent(event);
-                }
+                game.addSimultaneousEvent(event);
             }
             return true;
         }

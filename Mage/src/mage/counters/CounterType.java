@@ -39,8 +39,11 @@ public enum CounterType {
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),
+    BOUNTY("bounty"),
     BRIBERY("bribery"),
+    CARRION("carrion"),
     CHARGE("charge"),
+    CORPSE("corpse"),
     CRYSTAL("crystal"),
     DELAY("delay"),
     DEPLETION("depletion"),
@@ -50,6 +53,7 @@ public enum CounterType {
     DOOM("doom"),
     ELIXIR("elixir"),
     EON("eon"),
+    EXPERIENCE("experience"),
     EYEBALL("eyeball"),
     FADE("fade"),
     FATE("fate"),
@@ -72,8 +76,10 @@ public enum CounterType {
     M2M2(new BoostCounter(-2, -2).name),
     MINING("mining"),
     MUSTER("muster"),
+    P0P1(new BoostCounter(0, 1).name),
     P1P0(new BoostCounter(1, 0).name),
     P1P1(new BoostCounter(1, 1).name),
+    P1P2(new BoostCounter(1, 2).name),
     P2P2(new BoostCounter(2, 2).name),
     PAGE("page"),
     PAIN("pain"),
@@ -91,6 +97,7 @@ public enum CounterType {
     STRIFE("strife"),
     STUDY("study"),
     THEFT("theft"),
+    TIDE("tide"),
     TIME("time"),
     TOWER("tower"),
     VELOCITY("velocity"),
@@ -131,10 +138,14 @@ public enum CounterType {
      */
     public Counter createInstance(int amount) {
         switch (this) {
+            case P0P1:
+                return new BoostCounter(0, 1, amount);
             case P1P0:
                 return new BoostCounter(1, 0, amount);
             case P1P1:
                 return new BoostCounter(1, 1, amount);
+            case P1P2:
+                return new BoostCounter(1, 2, amount);
             case P2P2:
                 return new BoostCounter(2, 2, amount);
             case M1M1:

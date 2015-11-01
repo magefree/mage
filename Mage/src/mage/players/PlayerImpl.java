@@ -113,6 +113,7 @@ import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -671,8 +672,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean removeFromHand(Card card, Game game) {
-        hand.remove(card);
-        return true;
+        return hand.remove(card.getId());
     }
 
     @Override
@@ -773,6 +773,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean addAttachment(UUID permanentId, Game game) {
         if (!this.attachments.contains(permanentId)) {
             Permanent aura = game.getPermanent(permanentId);
+            if (aura == null) {
+                aura = game.getPermanentEntering(permanentId);
+            }
             if (aura != null) {
                 if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ENCHANT_PLAYER, playerId, permanentId, aura.getControllerId()))) {
                     this.attachments.add(permanentId);
@@ -875,16 +878,15 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public boolean putCardsOnTopOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
-        Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
-        cards.addAll(cardsToLibrary);
-        if (!cards.isEmpty()) {
+        if (!cardsToLibrary.isEmpty()) {
+            Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
                 for (UUID cardId : cards) {
                     moveObjectToLibrary(cardId, sourceId, game, true, false);
                 }
             } else {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
                 target.setRequired(true);
                 while (isInGame() && cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
@@ -1017,13 +1019,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId))) {
             // int bookmark = game.bookmarkState();
-            Zone zone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, zone, null, playerId)) {
+            if (moveCards(card, Zone.BATTLEFIELD, playLandAbility, game, false, false, false, null)) {
                 landsPlayed++;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId));
                 game.fireInformEvent(getLogName() + " plays " + card.getLogName());
                 // game.removeBookmark(bookmark);
-                resetStoredBookmark(game);
+                resetStoredBookmark(game); // prevent undo after playing a land
                 return true;
             }
             // putOntoBattlefield retured false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldorian Outpost).
@@ -1105,7 +1106,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
-    private void restoreState(int bookmark, String text, Game game) {
+    protected void restoreState(int bookmark, String text, Game game) {
         game.restoreState(bookmark, text);
         if (storedBookmark >= bookmark) {
             resetStoredBookmark(game);
@@ -1216,11 +1217,18 @@ public abstract class PlayerImpl implements Player, Serializable {
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
+        ManaOptions availableMana = null;
+//        ManaOptions availableMana = getManaAvailable(game); // can only be activated if mana calculation works flawless otherwise player can't play spells they could play if calculation would work correctly
+//        availableMana.addMana(manaPool.getMana());
         for (Ability ability : object.getAbilities()) {
             if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
                 if (ability.getZone().match(zone)) {
                     if (ability instanceof ActivatedAbility) {
-                        if (((ActivatedAbility) ability).canActivate(playerId, game)) {
+                        if (ability instanceof ManaAbility) {
+                            if (((ActivatedAbility) ability).canActivate(playerId, game)) {
+                                useable.put(ability.getId(), (ActivatedAbility) ability);
+                            }
+                        } else if (canPlay(((ActivatedAbility) ability), availableMana, object, game)) {
                             useable.put(ability.getId(), (ActivatedAbility) ability);
                         }
                     } else if (ability instanceof AlternativeSourceCosts) {
@@ -2296,6 +2304,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         return result;
     }
 
+    /**
+     *
+     * @param ability
+     * @param available if null, it won't be checked if enough mana is available
+     * @param sourceObject
+     * @param game
+     * @return
+     */
     protected boolean canPlay(ActivatedAbility ability, ManaOptions available, MageObject sourceObject, Game game) {
         if (!(ability instanceof ManaAbility)) {
             ActivatedAbility copy = ability.copy();
@@ -2316,15 +2332,26 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-
-            ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
-            if (abilityOptions.size() == 0) {
-                return true;
-            } else {
-                for (Mana mana : abilityOptions) {
-                    for (Mana avail : available) {
-                        if (mana.enough(avail)) {
-                            return true;
+            boolean canBeCastRegularly = true;
+            if (copy instanceof SpellAbility && copy.getManaCosts().isEmpty() && copy.getCosts().isEmpty()) {
+                // 117.6. Some mana costs contain no mana symbols. This represents an unpayable cost...
+                // 117.6a (...) If an alternative cost is applied to an unpayable cost,
+                // including an effect that allows a player to cast a spell without paying its mana cost, the alternative cost may be paid.
+                canBeCastRegularly = false;
+            }
+            if (canBeCastRegularly) {
+                ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
+                if (abilityOptions.size() == 0) {
+                    return true;
+                } else {
+                    if (available == null) {
+                        return true;
+                    }
+                    for (Mana mana : abilityOptions) {
+                        for (Mana avail : available) {
+                            if (mana.enough(avail)) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -2368,6 +2395,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             if (manaCosts.size() == 0) {
                                 return true;
                             } else {
+                                if (available == null) {
+                                    return true;
+                                }
                                 for (Mana mana : manaCosts.getOptions()) {
                                     for (Mana avail : available) {
                                         if (mana.enough(avail)) {
@@ -2981,11 +3011,112 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        return moveCards(cards, toZone, source, game, false, false, false, null);
+    }
+
+    @Override
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game) {
+        return moveCards(card, toZone, source, game, false, false, false, null);
+    }
+
+    @Override
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+        Set<Card> cardList = new HashSet<>();
+        if (card != null) {
+            cardList.add(card);
+        }
+        return moveCards(cardList, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
+    }
+
+    @Override
+    public boolean moveCards(Cards cards, Zone toZone, Ability source, Game game) {
+        return moveCards(cards.getCards(game), toZone, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game) {
+        return moveCards(cards, toZone, source, game, false, false, false, null);
+    }
+
+    @Override
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
         if (cards.isEmpty()) {
             return true;
         }
         Set<Card> successfulMovedCards = new LinkedHashSet<>();
+        Zone fromZone = null;
         switch (toZone) {
+            case GRAVEYARD:
+                fromZone = game.getState().getZone(cards.iterator().next().getId());
+                successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
+                break;
+            case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
+                List<Permanent> permanents = new ArrayList<>();
+                List<Permanent> permanentsEntered = new ArrayList<>();
+                for (Card card : cards) {
+                    UUID controllingPlayerId = byOwner ? card.getOwnerId() : getId();
+                    fromZone = game.getState().getZone(card.getId());
+                    if (faceDown) {
+                        card.setFaceDown(true, game);
+                    }
+                    ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), controllingPlayerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
+                    if (!game.replaceEvent(event)) {
+                        // get permanent
+                        Permanent permanent = new PermanentCard(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
+                        permanents.add(permanent);
+                        game.getPermanentsEntering().put(permanent.getId(), permanent);
+                        card.checkForCountersToAdd(permanent, game);
+                        permanent.setTapped(tapped);
+                        permanent.setFaceDown(faceDown, game);
+                    }
+                    if (faceDown) {
+                        card.setFaceDown(false, game);
+                    }
+                }
+                game.setScopeRelevant(true);
+                for (Permanent permanent : permanents) {
+                    fromZone = game.getState().getZone(permanent.getId());
+                    // make sure the controller of all continuous effects of this card are switched to the current controller
+                    game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
+                    if (permanent.entersBattlefield(source.getSourceId(), game, fromZone, true)) {
+                        permanentsEntered.add(permanent);
+                    } else {
+                        // revert controller to owner if permanent does not enter
+                        game.getContinuousEffects().setController(permanent.getId(), permanent.getOwnerId());
+                        game.getPermanentsEntering().remove(permanent.getId());
+                    }
+                }
+                game.setScopeRelevant(false);
+                for (Permanent permanent : permanentsEntered) {
+                    fromZone = game.getState().getZone(permanent.getId());
+                    if (((Card) permanent).removeFromZone(game, fromZone, source.getSourceId())) {
+                        permanent.updateZoneChangeCounter(game);
+                        game.addPermanent(permanent);
+                        permanent.setZone(Zone.BATTLEFIELD, game);
+                        game.getPermanentsEntering().remove(permanent.getId());
+                        game.setScopeRelevant(true);
+                        successfulMovedCards.add(permanent);
+                        game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), fromZone, Zone.BATTLEFIELD));
+                        if (!game.isSimulation()) {
+                            game.informPlayers(this.getLogName() + " puts " + (faceDown ? "a card face down " : permanent.getLogName())
+                                    + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
+                        }
+                    } else {
+                        game.getPermanentsEntering().remove(permanent.getId());
+                    }
+                }
+                game.applyEffects();
+                break;
+            case HAND:
+                for (Card card : cards) {
+                    fromZone = game.getState().getZone(card.getId());
+                    boolean hideCard = fromZone.equals(Zone.LIBRARY)
+                            || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
+                    if (moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard)) {
+                        successfulMovedCards.add(card);
+                    }
+                }
+                break;
             case EXILED:
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
@@ -2995,37 +3126,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 break;
-            case GRAVEYARD:
-                successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
-                break;
-            case HAND:
-                for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
-                    if (fromZone == Zone.STACK) {
-                        // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
-                        Spell spell = game.getStack().getSpell(card.getId());
-                        if (spell != null) {
-                            game.getStack().remove(spell);
-                        }
-                    }
-                    boolean hideCard = fromZone.equals(Zone.LIBRARY)
-                            || (card.isFaceDown(game) && !fromZone.equals(Zone.STACK) && !fromZone.equals(Zone.BATTLEFIELD));
-                    if (moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, !hideCard)) {
-                        successfulMovedCards.add(card);
-                    }
-                }
-                break;
-            case BATTLEFIELD:
-                for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
-                    if (putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId(), false, card.isFaceDown(game))) {
-                        successfulMovedCards.add(card);
-                    }
-                }
-                break;
             case LIBRARY:
                 for (Card card : cards) {
-                    fromZone = game.getState().getZone(card.getId());
+                    if (card instanceof Spell) {
+                        fromZone = game.getState().getZone(((Spell) card).getSourceId());
+                    } else {
+                        fromZone = game.getState().getZone(card.getId());
+                    }
                     boolean hideCard = fromZone.equals(Zone.HAND) || fromZone.equals(Zone.LIBRARY);
                     if (moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, !hideCard)) {
                         successfulMovedCards.add(card);
@@ -3033,8 +3140,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 break;
             default:
-                throw new UnsupportedOperationException("to Zone not supported yet");
+                throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
         }
+
         game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
         return successfulMovedCards.size() > 0;
     }
@@ -3228,31 +3336,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() : "a card face down") + " "
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") + "to the exile zone");
-            }
-            result = true;
-        }
-        return result;
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
-        return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, false, false);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
-        return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped, false);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
-        boolean result = false;
-        if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped, facedown)) {
-            if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder(this.getLogName())
-                        .append(" puts ").append(facedown ? "a card face down " : card.getLogName())
-                        .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
-                        .append("onto the Battlefield").toString());
             }
             result = true;
         }

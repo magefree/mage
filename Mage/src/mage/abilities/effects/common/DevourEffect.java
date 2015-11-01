@@ -39,6 +39,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,30 +48,32 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * Effect for the DevourAbility
- * 
- *     702.81. Devour
- *       702.81a Devour is a static ability. "Devour N" means "As this object enters the battlefield, 
- *         you may sacrifice any number of creatures. This permanent enters the battlefield with N +1/+1
- *         counters on it for each creature sacrificed this way."
- *       702.81b Some objects have abilities that refer to the number of creatures the permanent devoured. 
- *        "It devoured" means "sacrificed as a result of its devour ability as it entered the battlefield." 
  *
- * 
+ * 702.81. Devour 702.81a Devour is a static ability. "Devour N" means "As this
+ * object enters the battlefield, you may sacrifice any number of creatures.
+ * This permanent enters the battlefield with N +1/+1 counters on it for each
+ * creature sacrificed this way." 702.81b Some objects have abilities that refer
+ * to the number of creatures the permanent devoured. "It devoured" means
+ * "sacrificed as a result of its devour ability as it entered the battlefield."
+ *
+ *
  * @author LevelX2
  */
 public class DevourEffect extends ReplacementEffectImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures to devour");
+
     static {
         filter.add(new AnotherPredicate());
     }
     private final DevourFactor devourFactor;
 
     public enum DevourFactor {
-        Devour1 ("Devour 1", "that many +1/+1 counters on it", 1),
-        Devour2 ("Devour 2", "twice that many +1/+1 counters on it", 2),
-        Devour3 ("Devour 3", "three times that many +1/+1 counters on it", 3),
-        DevourX ("Devour X, where X is the number of creatures devoured this way", "X +1/+1 counters on it for each of those creatures", Integer.MAX_VALUE);
+
+        Devour1("Devour 1", "that many +1/+1 counters on it", 1),
+        Devour2("Devour 2", "twice that many +1/+1 counters on it", 2),
+        Devour3("Devour 3", "three times that many +1/+1 counters on it", 3),
+        DevourX("Devour X, where X is the number of creatures devoured this way", "X +1/+1 counters on it for each of those creatures", Integer.MAX_VALUE);
 
         private final String text;
         private final String ruleText;
@@ -114,9 +117,9 @@ public class DevourEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-                game.getState().setValue(sourcePermanent.getId().toString() + "devoured", null);
-                return true;
+            Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
+            game.getState().setValue(sourcePermanent.getId().toString() + "devoured", null);
+            return true;
         }
         return false;
     }
@@ -128,7 +131,7 @@ public class DevourEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             Target target = new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter, true);
@@ -141,9 +144,10 @@ public class DevourEffect extends ReplacementEffectImpl {
                 if (target.getTargets().size() > 0) {
                     List<ArrayList<String>> cardSubtypes = new ArrayList<>();
                     int devouredCreatures = target.getTargets().size();
-                    if (!game.isSimulation())
-                        game.informPlayers(new StringBuilder(creature.getName()).append(" devours ").append(devouredCreatures).append(" creatures").toString());
-                    for (UUID targetId: target.getTargets()) {
+                    if (!game.isSimulation()) {
+                        game.informPlayers(creature.getLogName() + " devours " + devouredCreatures + " creatures");
+                    }
+                    for (UUID targetId : target.getTargets()) {
                         Permanent targetCreature = game.getPermanent(targetId);
                         if (targetCreature != null) {
                             cardSubtypes.add((ArrayList<String>) targetCreature.getSubtype());
@@ -172,7 +176,7 @@ public class DevourEffect extends ReplacementEffectImpl {
         StringBuilder sb = new StringBuilder(devourFactor.toString());
         sb.append(" <i>(As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with ");
         sb.append(devourFactor.getRuleText()).append(")</i>");
-        return  sb.toString();
+        return sb.toString();
     }
 
     public List<ArrayList<String>> getSubtypes(Game game, UUID permanentId) {

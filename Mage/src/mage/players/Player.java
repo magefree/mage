@@ -629,11 +629,40 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @return
      */
+    @Deprecated
     boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
+    @Deprecated
     boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
 
+    @Deprecated
     boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(Card card, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
+
+    boolean moveCards(Cards cards, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
+
+    /**
+     * Iniversal method to move cards from one zone to another. Do not mix
+     * objects from different from zones to move.
+     *
+     * @param cards
+     * @param toZone
+     * @param source
+     * @param game
+     * @param tapped tha cards are tapped on the battlefield
+     * @param faceDown the cards are face down in the to zone
+     * @param byOwner the card is moved (or put onto battlefield) by the owner
+     * of the card and if target zone is battlefield controlls the permanent
+     * (instead of the controller of the source)
+     * @param appliedEffects
+     * @return
+     */
+    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
 
     boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
@@ -711,45 +740,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName);
-
-    /**
-     * Uses putOntoBattlefield and posts also a info message about in the game
-     * log
-     *
-     * @param card
-     * @param game
-     * @param fromZone
-     * @param sourceId
-     * @return
-     */
-    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId);
-
-    /**
-     * Uses putOntoBattlefield and posts also a info message about in the game
-     * log
-     *
-     * @param card
-     * @param game
-     * @param fromZone
-     * @param sourceId
-     * @param tapped the card enters the battlefield tapped
-     * @return
-     */
-    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped);
-
-    /**
-     * Uses putOntoBattlefield and posts also a info message about in the game
-     * log
-     *
-     * @param card
-     * @param game
-     * @param fromZone
-     * @param sourceId
-     * @param tapped the card enters the battlefield tapped
-     * @param facedown the card enters the battlefield facedown
-     * @return
-     */
-    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown);
 
     /**
      * Checks if the playerToCheckId is from an opponent in range

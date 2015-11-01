@@ -445,25 +445,36 @@ public abstract class AbilityImpl implements Ability {
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
         boolean alternativeCostisUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent) && !(this instanceof FlashbackAbility)) {
-            for (Ability ability : sourceObject.getAbilities()) {
-                // if cast for noMana no Alternative costs are allowed
-                if (!noMana && ability instanceof AlternativeSourceCosts) {
-                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                    if (alternativeSpellCosts.isAvailable(this, game)) {
-                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                            // only one alternative costs may be activated
-                            alternativeCostisUsed = true;
-                            break;
+            Abilities<Ability> abilities = null;
+            if (sourceObject instanceof Card) {
+                abilities = ((Card) sourceObject).getAbilities(game);
+            } else {
+                sourceObject.getAbilities();
+            }
+            if (abilities != null) {
+                for (Ability ability : abilities) {
+                    // if cast for noMana no Alternative costs are allowed
+                    if (!noMana && ability instanceof AlternativeSourceCosts) {
+                        AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                        if (alternativeSpellCosts.isAvailable(this, game)) {
+                            if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                                // only one alternative costs may be activated
+                                alternativeCostisUsed = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if (ability instanceof OptionalAdditionalSourceCosts) {
-                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+                    if (ability instanceof OptionalAdditionalSourceCosts) {
+                        ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+                    }
                 }
             }
             // controller specific alternate spell costs
             if (!noMana && !alternativeCostisUsed) {
-                if (this.getAbilityType().equals(AbilityType.SPELL)) {
+                if (this.getAbilityType().equals(AbilityType.SPELL)
+                        // 117.9a Only one alternative cost can be applied to any one spell as it’s being cast.
+                        // So an alternate spell ability can't be paid with Omniscience
+                        && !((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
                     for (AlternativeSourceCosts alternativeSourceCosts : controller.getAlternativeSourceCosts()) {
                         if (alternativeSourceCosts.isAvailable(this, game)) {
                             if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
@@ -671,6 +682,15 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Effects getEffects() {
         return modes.getMode().getEffects();
+    }
+
+    @Override
+    public Effects getAllEffects() {
+        Effects allEffects = new Effects();
+        for (Mode mode : getModes().values()) {
+            allEffects.addAll(mode.getEffects());
+        }
+        return allEffects;
     }
 
     @Override
@@ -935,7 +955,10 @@ public abstract class AbilityImpl implements Ability {
         // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
         // so will use the sourceId of the object itself that came as a parameter if it is not null
         if (object == null) {
-            object = game.getObject(getSourceId());
+            object = game.getPermanentEntering(getSourceId());
+            if (object == null) {
+                object = game.getObject(getSourceId());
+            }
         }
         if (object != null && !object.getAbilities().contains(this)) {
             if (object instanceof Permanent) {

@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.watchers.common;
 
-package mage.abilities.condition.common;
-
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.FilterPermanent;
+import mage.constants.WatcherScope;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.watchers.Watcher;
 
 /**
+ * The watcher checks if a specific phase event has already happened during the
+ * current turn. If not it returns false, otherwise true.
  *
  * @author LevelX2
  */
+public class FirstTimeStepWatcher extends Watcher {
 
-public class OpponentControllsMoreCondition implements Condition {
+    private final EventType eventType;
 
-    private final FilterPermanent filter;
-
-    public OpponentControllsMoreCondition(FilterPermanent filter) {
-        this.filter = filter;
+    public FirstTimeStepWatcher(EventType eventType) {
+        super(eventType.toString() + FirstTimeStepWatcher.class.getName(), WatcherScope.GAME);
+        this.eventType = eventType;
     }
-    
+
+    public FirstTimeStepWatcher(final FirstTimeStepWatcher watcher) {
+        super(watcher);
+        this.eventType = watcher.eventType;
+    }
+
     @Override
-    public boolean apply(Game game, Ability source) {
-        int numLands = game.getBattlefield().countAll(filter, source.getControllerId(), game);
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            if (numLands < game.getBattlefield().countAll(filter, opponentId, game)) {
-                return true;
-            }
+    public FirstTimeStepWatcher copy() {
+        return new FirstTimeStepWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == eventType) {
+            condition = true;
         }
-        return false;
     }
 
     @Override
-    public String toString() {
-        return "an opponent controls more " + filter.getMessage() +" than you";
+    public void reset() {
+        super.reset();
     }
 }
