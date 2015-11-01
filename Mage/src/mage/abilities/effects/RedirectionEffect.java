@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
@@ -46,36 +45,67 @@ import mage.target.Target;
 public abstract class RedirectionEffect extends ReplacementEffectImpl {
 
     protected Target redirectTarget;
+    protected int amountToRedirect;
+    protected boolean oneUsage;
 
     public RedirectionEffect(Duration duration) {
+        this(duration, Integer.MAX_VALUE, false);
+    }
+
+    public RedirectionEffect(Duration duration, int amountToRedirect, boolean oneUsage) {
         super(duration, Outcome.RedirectDamage);
         this.effectType = EffectType.REDIRECTION;
+        this.amountToRedirect = amountToRedirect;
+        this.oneUsage = oneUsage;
     }
 
     public RedirectionEffect(final RedirectionEffect effect) {
         super(effect);
         this.redirectTarget = effect.redirectTarget;
+        this.amountToRedirect = effect.amountToRedirect;
+        this.oneUsage = effect.oneUsage;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
+                return true;
+        }
+        return false;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        DamageEvent damageEvent = (DamageEvent)event;
+        String sourceLogName = source != null ? game.getObject(source.getSourceId()).getLogName() + ": " : "";
+        DamageEvent damageEvent = (DamageEvent) event;
+        int restDamage = 0;
+        int damageToRedirect = event.getAmount();
+        if (damageEvent.getAmount() > amountToRedirect) {
+            restDamage = damageEvent.getAmount() - amountToRedirect;
+            damageToRedirect = amountToRedirect;
+        }
+        if (damageToRedirect > 0 && oneUsage) {
+            this.discard();
+        }
         Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-            return true;
+            permanent.damage(damageToRedirect, event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+            game.informPlayers(sourceLogName + "Redirected " + damageToRedirect + " damage to " + permanent.getLogName());
+        } else {
+            Player player = game.getPlayer(redirectTarget.getFirstTarget());
+            if (player != null) {
+                player.damage(damageToRedirect, event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                game.informPlayers(sourceLogName + "Redirected " + damageToRedirect + " damage to " + player.getLogName());
+            }
         }
-        Player player = game.getPlayer(redirectTarget.getFirstTarget());
-        if (player != null) {
-            player.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-            return true;
+        if (restDamage > 0) {
+            damageEvent.setAmount(restDamage);
+            return false;
         }
-        return false;
+        return true;
     }
 
 }

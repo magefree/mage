@@ -28,13 +28,13 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.UrzaTerrainValue;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -43,7 +43,8 @@ import mage.cards.CardImpl;
 public class UrzasPowerPlant extends CardImpl {
     public UrzasPowerPlant(UUID ownerId) {
         super(ownerId, 448, "Urza's Power Plant", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.subtype.add("Urza's Power-Plant");
+        this.subtype.add("Urza's");
+        this.subtype.add("Power-Plant");
         this.expansionSetCode = "5ED";
 
         // {T}: Add {1} to your mana pool. If you control an Urza's Mine and an Urza's Tower, add {2} to your mana pool instead.

@@ -29,23 +29,20 @@ package mage.sets.commander2013;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
 
 /**
  *
@@ -65,11 +62,17 @@ public class OloroAgelessAscetic extends CardImpl {
 
         // At the beginning of your upkeep, you gain 2 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(2), TargetController.YOU, false));
+
         // Whenever you gain life, you may pay {1}. If you do, draw a card and each opponent loses 1 life.
-        this.addAbility(new GainLifeControllerTriggeredAbility(new DoIfCostPaid(new OloroAgelessAsceticEffect(), new GenericManaCost(1)),false));
+        DoIfCostPaid effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Effect effectToAdd = new LoseLifeOpponentsEffect(1);
+        effectToAdd.setText("and each opponent loses 1 life");
+        effect.addEffect(effectToAdd);
+        this.addAbility(new GainLifeControllerTriggeredAbility(effect, false));
+
         // At the beginning of your upkeep, if Oloro, Ageless Ascetic is in the command zone, you gain 2 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND,
-                new GainLifeEffect(new StaticValue(2), "if Oloro, Ageless Ascetic is in the command zone, you gain 2 life"),TargetController.YOU, false));
+                new GainLifeEffect(new StaticValue(2), "if {this} is in the command zone, you gain 2 life"), TargetController.YOU, false));
     }
 
     public OloroAgelessAscetic(final OloroAgelessAscetic card) {
@@ -79,29 +82,5 @@ public class OloroAgelessAscetic extends CardImpl {
     @Override
     public OloroAgelessAscetic copy() {
         return new OloroAgelessAscetic(this);
-    }
-}
-
-class OloroAgelessAsceticEffect extends OneShotEffect {
-
-    public OloroAgelessAsceticEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "draw a card and each opponent loses 1 life";
-    }
-
-    public OloroAgelessAsceticEffect(final OloroAgelessAsceticEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OloroAgelessAsceticEffect copy() {
-        return new OloroAgelessAsceticEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        new DrawCardSourceControllerEffect(1).apply(game, source);
-        new DamagePlayersEffect(1, TargetController.OPPONENT).apply(game, source);
-        return false;
     }
 }

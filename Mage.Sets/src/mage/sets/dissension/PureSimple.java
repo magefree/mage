@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dissension;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.cards.SplitCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -45,30 +45,26 @@ import mage.target.TargetPermanent;
  */
 public class PureSimple extends SplitCard {
 
-    private static final FilterPermanent filterAura = new FilterPermanent("aura");
-    private static final FilterPermanent filterEquipment = new FilterPermanent("equipment");
+    private static final FilterPermanent filterDestroy = new FilterPermanent("Auras and Equipment");
     private static final FilterPermanent filterMulticolor = new FilterPermanent("multicolor permanent");
-    
+
     static {
-        filterAura.add(new SubtypePredicate("Aura"));
-        filterEquipment.add(new SubtypePredicate("Equipment"));
+        filterDestroy.add(Predicates.or(new SubtypePredicate("Aura"), new SubtypePredicate("Equipment")));
         filterMulticolor.add(new MulticoloredPredicate());
     }
-    
+
     public PureSimple(UUID ownerId) {
         super(ownerId, 154, "Pure", "Simple", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{G}", "{1}{G}{W}", true);
         this.expansionSetCode = "DIS";
 
         // Pure
-        // Destroy all Auras
-        getLeftHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(filterAura));
-        // and Equipment.
-        getLeftHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(filterEquipment));
+        // Destroy target multicolored permanent.
+        getLeftHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filterMulticolor));
 
         // Simple
-        // Destroy target multicolored permanent.
-        getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(filterMulticolor));
+        // Destroy all Auras and Equipment.
+        getRightHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(filterDestroy));
     }
 
     public PureSimple(final PureSimple card) {

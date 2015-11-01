@@ -29,14 +29,13 @@ package mage.sets.stronghold;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.PreventionEffectData;
-import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RedirectionEffect;
+import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -44,11 +43,10 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetSource;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -70,12 +68,13 @@ public class ShamanEnKor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {0}: The next 1 damage that would be dealt to Shaman en-Kor this turn is dealt to target creature you control instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorPreventionEffect(), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, true), new GenericManaCost(0));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
-        
+
         // {1}{W}: The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to Shaman en-Kor instead.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorReplacementEffect(), new ManaCostsImpl("{1}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorRedirectFromTargetEffect(), new ManaCostsImpl("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -90,129 +89,43 @@ public class ShamanEnKor extends CardImpl {
     }
 }
 
-class ShamanEnKorPreventionEffect extends PreventionEffectImpl {
-    
-    ShamanEnKorPreventionEffect() {
-        super(Duration.EndOfTurn, 1, false);
-        staticText = "The next 1 damage that would be dealt to {this} this turn is dealt to target creature you control instead.";
-    }
-    
-    ShamanEnKorPreventionEffect(final ShamanEnKorPreventionEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public ShamanEnKorPreventionEffect copy() {
-        return new ShamanEnKorPreventionEffect(this);
-    }
-    
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        PreventionEffectData preventionResult = preventDamageAction(event, source, game);
-        if (preventionResult.getPreventedDamage() > 0) {
-            Permanent redirectTo = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (redirectTo != null) {
-                game.informPlayers("Dealing " + preventionResult.getPreventedDamage() + " to " + redirectTo.getName() + " instead.");
-                DamageEvent damageEvent = (DamageEvent) event;
-                redirectTo.damage(preventionResult.getPreventedDamage(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-            }
-        }
-        return false;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return game.getPermanent(getTargetPointer().getFirst(game, source)) != null;
-            }
-        }
-        return false;
-    }
-}
+class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
 
-class ShamanEnKorReplacementEffect extends ReplacementEffectImpl {
-    
-    protected TargetSource targetSource;
+    protected MageObjectReference sourceObject;
 
-    ShamanEnKorReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.RedirectDamage);
+    ShamanEnKorRedirectFromTargetEffect() {
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
         staticText = "The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to {this} instead";
     }
 
-    ShamanEnKorReplacementEffect(final ShamanEnKorReplacementEffect effect) {
+    ShamanEnKorRedirectFromTargetEffect(final ShamanEnKorRedirectFromTargetEffect effect) {
         super(effect);
-        targetSource = effect.targetSource;
+        sourceObject = effect.sourceObject;
     }
 
     @Override
     public void init(Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        TargetSource target = new TargetSource();
-        target.setNotTarget(true);
         if (player != null) {
+            TargetSource target = new TargetSource();
             target.choose(Outcome.PreventDamage, player.getId(), source.getSourceId(), game);
-            this.targetSource = target;
+            this.sourceObject = new MageObjectReference(target.getFirstTarget(), game);
+        } else {
+            discard();
         }
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DAMAGE_CREATURE;
     }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used) {
-            if (targetSource != null) {
-                if (event.getSourceId().equals(targetSource.getFirstTarget())) {
-                    // check source
-                    MageObject object = game.getObject(event.getSourceId());
-                    if (object == null) {
-                        game.informPlayers("Couldn't find source of damage");
-                        return false;
-                    }
-                    else {
-                        if (event.getTargetId().equals(source.getFirstTarget())) {
-                            Permanent permanent = game.getPermanent(source.getFirstTarget());
-                            if (permanent != null) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        DamageEvent damageEvent = (DamageEvent)event;
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            // get name of old target
-            Permanent targetPermanent = game.getPermanent(event.getTargetId());
-            StringBuilder message = new StringBuilder();
-            message.append(sourcePermanent.getName()).append(": gets ");
-            message.append(damageEvent.getAmount()).append(" damage redirected from ");
-            if (targetPermanent != null) {
-                message.append(targetPermanent.getName());
-            }
-            else {
-                Player targetPlayer = game.getPlayer(event.getTargetId());
-                if (targetPlayer != null) {
-                    message.append(targetPlayer.getLogName());
-                }
-                else {
-                    message.append("unknown");
-                }
-            }
-            game.informPlayers(message.toString());
-            // redirect damage
-            this.used = true;
-            sourcePermanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-            return true;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (sourceObject.equals(new MageObjectReference(event.getSourceId(), game))) {
+            redirectTarget = new TargetPermanent();
+            redirectTarget.add(source.getSourceId(), game);
+            return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
         }
         return false;
     }
@@ -223,7 +136,7 @@ class ShamanEnKorReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public ShamanEnKorReplacementEffect copy() {
-        return new ShamanEnKorReplacementEffect(this);
+    public ShamanEnKorRedirectFromTargetEffect copy() {
+        return new ShamanEnKorRedirectFromTargetEffect(this);
     }
 }

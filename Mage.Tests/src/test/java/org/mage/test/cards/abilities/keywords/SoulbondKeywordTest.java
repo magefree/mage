@@ -88,14 +88,18 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests Soulbond effect disabling whenever Soulbond creature changes its controller
+     * Tests Soulbond effect disabling whenever Soulbond creature changes its
+     * controller
      */
     @Test
     public void testChangeControllerForSoulbondCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        // Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)
+        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
         addCard(Zone.HAND, playerA, "Trusted Forcemage");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
+        // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. (It can attack and Tap this turn.)
         addCard(Zone.HAND, playerB, "Act of Treason");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
@@ -115,12 +119,15 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests Soulbond effect disabling when paired creture changes its controller
+     * Tests Soulbond effect disabling when paired creture changes its
+     * controller
      */
     @Test
     public void testChangeControllerForAnotherCreature() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // 2,1
+        // Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)
+        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
+        addCard(Zone.HAND, playerA, "Trusted Forcemage"); // 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
         addCard(Zone.HAND, playerB, "Act of Treason");
@@ -141,8 +148,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests Soulbond effect disabling when Soulbond creature changes its controller and then returns back.
-     * Effect should not be restored.
+     * Tests Soulbond effect disabling when Soulbond creature changes its
+     * controller and then returns back. Effect should not be restored.
      */
     @Test
     public void testChangeControllerAndGettingBack() {
@@ -166,7 +173,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests that stealing creature will allow to use Soulbond ability on controller's creature
+     * Tests that stealing creature will allow to use Soulbond ability on
+     * controller's creature
      */
     @Test
     public void testSoulbondWorksOnControllerSide() {
@@ -243,7 +251,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests that it is possible to animate land and pair it on next coming Soulbond creature
+     * Tests that it is possible to animate land and pair it on next coming
+     * Soulbond creature
      */
     @Test
     public void testPairOnAnimatedLand() {
@@ -263,7 +272,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests no effect whether land was animated after Soulbond creature has entered the battlefield
+     * Tests no effect whether land was animated after Soulbond creature has
+     * entered the battlefield
      */
     @Test
     public void testPairOnPostAnimatedLand() {
@@ -302,7 +312,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests that after loosing first pair it is possible to pair creature with another one
+     * Tests that after loosing first pair it is possible to pair creature with
+     * another one
      */
     @Test
     public void testRebondOnNextCreature() {
@@ -357,6 +368,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     public void testExileAndReturnBack() {
         addCard(Zone.HAND, playerA, "Elite Vanguard");
         addCard(Zone.HAND, playerA, "Cloudshift");
+        // Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)
+        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
         addCard(Zone.BATTLEFIELD, playerA, "Trusted Forcemage");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
@@ -375,6 +388,6 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         Permanent trustedForcemange = getPermanent("Trusted Forcemage", playerA.getId());
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
         Assert.assertEquals(trustedForcemange.getPairedCard(), null);
-        Assert.assertEquals(eliteVanguard.getPairedCard(),null);
+        Assert.assertEquals(eliteVanguard.getPairedCard(), null);
     }
 }

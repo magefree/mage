@@ -110,7 +110,7 @@ class ScrollRackEffect extends OneShotEffect {
             }
             // Put that many cards from the top of your library into your hand.
             if (amountExiled > 0) {
-                controller.moveCards(controller.getLibrary().getTopCards(game, amountExiled), null, Zone.HAND, source, game, false);
+                controller.moveCards(controller.getLibrary().getTopCards(game, amountExiled), Zone.HAND, source, game);
             }
             // Then look at the exiled cards and put them on top of your library in any order
             controller.putCardsOnTopOfLibrary(game.getExile().getExileZone(source.getSourceId()), game, source, true);

@@ -27,8 +27,6 @@
  */
 package mage.sets.alliances;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -100,10 +98,7 @@ class PhyrexianDevourerStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(getSourceId());
-        if(permanent != null && permanent.getPower().getValue() >= 7){
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.getPower().getValue() >= 7;
     }
 
     @Override
@@ -134,9 +129,9 @@ class PhyrexianDevourerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = null;
-            for (Cost cost: source.getCosts()) {
+            for (Cost cost : source.getCosts()) {
                 if (cost instanceof ExileTopCardLibraryCost) {
-                    card = ((ExileTopCardLibraryCost)cost).getCard();
+                    card = ((ExileTopCardLibraryCost) cost).getCard();
                 }
             }
             if (card != null) {
@@ -170,7 +165,7 @@ class ExileTopCardLibraryCost extends CostImpl {
         if (controller != null) {
             card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                paid = controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.LIBRARY, true);
+                paid = controller.moveCards(card, null, Zone.EXILED, ability, game);
             }
         }
         return paid;

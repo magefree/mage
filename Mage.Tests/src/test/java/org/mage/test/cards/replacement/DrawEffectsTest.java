@@ -82,4 +82,32 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         assertHandCount(playerB, 1);
     }
 
+    /**
+     * Notion thief and Reforge the Soul - opponent got 0 cards - ok but I got
+     * only 7 cards (should be 14)
+     */
+    @Test
+    public void testNotionThief2() {
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 3);
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        // Flash
+        // If an opponent would draw a card except the first one he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Notion Thief", 1);
+        // Each player discards his or her hand, then draws seven cards.
+        // Miracle {1}{R}
+        addCard(Zone.HAND, playerA, "Reforge the Soul", 1);
+
+        addCard(Zone.HAND, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reforge the Soul");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Reforge the Soul", 1);
+        assertGraveyardCount(playerB, "Mountain", 1);
+        assertHandCount(playerA, 14);
+        assertHandCount(playerB, 0);
+    }
 }

@@ -28,24 +28,18 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -63,10 +57,10 @@ public class SavagebornHydra extends CardImpl {
 
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
-        
+
         // Savageborn Hydra enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new SavageBornHydraEffect(), true));
-        
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
+
         // {1}{RG}: Put a +1/+1 counter on Savageborn Hydra. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R/G}")));
     }
@@ -78,39 +72,5 @@ public class SavagebornHydra extends CardImpl {
     @Override
     public SavagebornHydra copy() {
         return new SavagebornHydra(this);
-    }
-}
-
-class SavageBornHydraEffect extends OneShotEffect {
-
-    public SavageBornHydraEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "with X +1/+1 counters on it";
-    }
-
-    public SavageBornHydraEffect(final SavageBornHydraEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Object obj = getValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
-                int amount = ((SpellAbility)obj).getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public SavageBornHydraEffect copy() {
-        return new SavageBornHydraEffect(this);
     }
 }

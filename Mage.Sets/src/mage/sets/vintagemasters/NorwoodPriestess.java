@@ -62,7 +62,7 @@ public class NorwoodPriestess extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: You may put a green creature card from your hand onto the battlefield. Activate this ability only during your turn, before attackers are declared.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new NorwoodPriestessEffect(), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
         this.addAbility(ability);
     }
@@ -80,9 +80,9 @@ public class NorwoodPriestess extends CardImpl {
 class NorwoodPriestessEffect extends OneShotEffect {
 
     private static final String choiceText = "Put a green creature card from your hand onto the battlefield?";
-    
+
     private static final FilterCreatureCard filter = new FilterCreatureCard("a green creature card");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
@@ -103,17 +103,16 @@ class NorwoodPriestessEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || !controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
             return false;
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                return true;
+                return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }
         return false;

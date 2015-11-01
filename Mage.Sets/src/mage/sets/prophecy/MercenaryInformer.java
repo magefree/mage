@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicates;
@@ -55,7 +56,7 @@ import mage.target.TargetPermanent;
  */
 public class MercenaryInformer extends CardImpl {
     
-    private static final FilterStackObject filterBlack = new FilterStackObject("black spells or abilities from black sources");
+    private static final FilterObject filterBlack = new FilterStackObject("black spells or abilities from black sources");
     private static final FilterPermanent filterMercenary = new FilterPermanent("nontoken Mercenary");
 
     static {

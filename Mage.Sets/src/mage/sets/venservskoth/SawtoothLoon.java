@@ -35,12 +35,13 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -58,8 +59,8 @@ public class SawtoothLoon extends CardImpl {
 
     static {
         Predicates.or(
-            new ColorPredicate(ObjectColor.WHITE),
-            new ColorPredicate(ObjectColor.BLUE));
+                new ColorPredicate(ObjectColor.WHITE),
+                new ColorPredicate(ObjectColor.BLUE));
     }
 
     public SawtoothLoon(UUID ownerId) {
@@ -110,21 +111,15 @@ class SawtoothLoonEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.drawCards(2, game);
-            putOnLibrary(controller, source, game);
-            putOnLibrary(controller, source, game);
+            TargetCardInHand target = new TargetCardInHand(2, 2, new FilterCard());
+            controller.chooseTarget(Outcome.Detriment, target, source, game);
+            Cards cardsToLibrary = new CardsImpl(target.getTargets());
+            if (!cardsToLibrary.isEmpty()) {
+                controller.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
+            }
             return true;
         }
         return false;
     }
 
-    private boolean putOnLibrary(Player player, Ability source, Game game) {
-        TargetCardInHand target = new TargetCardInHand();
-        player.chooseTarget(Outcome.ReturnToHand, target, source, game);
-        Card card = player.getHand().get(target.getFirstTarget(), game);
-        if (card != null) {
-            player.getHand().remove(card);
-            player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, false, false);
-        }
-        return true;
-    }
 }

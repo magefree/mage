@@ -28,29 +28,19 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.util.functions.CardTypeApplier;
 
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class CopyArtifact extends CardImpl {
 
@@ -58,13 +48,10 @@ public class CopyArtifact extends CardImpl {
         super(ownerId, 54, "Copy Artifact", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "LEA";
 
-
         // You may have Copy Artifact enter the battlefield as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new CopyArtifactEffect(),
-                "You may have {this} enter the battlefield as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types",
-                true));
-        this.addAbility(ability);
+        Effect effect = new CopyPermanentEffect(new FilterArtifactPermanent(), new CardTypeApplier(CardType.ENCHANTMENT));
+        effect.setText("as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types");
+        this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
     public CopyArtifact(final CopyArtifact card) {
@@ -75,55 +62,4 @@ public class CopyArtifact extends CardImpl {
     public CopyArtifact copy() {
         return new CopyArtifact(this);
     }
-}
-
-class CopyArtifactEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
-    public CopyArtifactEffect() {
-        super(Outcome.Copy);
-    }
-
-    public CopyArtifactEffect(final CopyArtifactEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            Target target = new TargetPermanent(filter);
-            target.setNotTarget(true);
-            if (target.canChoose(source.getControllerId(), game)) {
-                player.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
-                if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
-                        @Override
-                        public Boolean apply(Game game, Permanent permanent) {
-                            if (!permanent.getCardType().contains(CardType.ENCHANTMENT)) {
-                                permanent.getCardType().add(CardType.ENCHANTMENT);
-                            }
-                            return true;
-                        }
-                    });
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public CopyArtifactEffect copy() {
-        return new CopyArtifactEffect(this);
-    }
-
 }

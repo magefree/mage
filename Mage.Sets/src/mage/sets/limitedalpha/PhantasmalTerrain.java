@@ -28,13 +28,12 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
@@ -42,7 +41,6 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -52,7 +50,6 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -72,10 +69,10 @@ public class PhantasmalTerrain extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        
+
         // As Phantasmal Terrain enters the battlefield, choose a basic land type.
-        this.addAbility(new AsEntersBattlefieldAbility(new PhantasmalTerrainChooseEffect()));
-        
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral)));
+
         // Enchanted land is the chosen type.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantasmalTerrainContinuousEffect()));
     }
@@ -90,52 +87,13 @@ public class PhantasmalTerrain extends CardImpl {
     }
 }
 
-class PhantasmalTerrainChooseEffect extends OneShotEffect {
-
-    public PhantasmalTerrainChooseEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "choose a basic land type";
-    }
-    
-    public PhantasmalTerrainChooseEffect(final PhantasmalTerrainChooseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PhantasmalTerrainChooseEffect copy() {
-        return new PhantasmalTerrainChooseEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null && controller != null) {
-            ChoiceImpl choices = new ChoiceImpl(true);
-            choices.setMessage("Choose basic land type");
-            choices.getChoices().add("Forest");
-            choices.getChoices().add("Plains");
-            choices.getChoices().add("Mountain");
-            choices.getChoices().add("Island");
-            choices.getChoices().add("Swamp");
-            if (controller.choose(Outcome.Neutral, choices, game)) {
-                game.informPlayers(sourceObject.getLogName() + ": chosen basic land type is " + choices.getChoice());
-                game.getState().setValue(source.getSourceId().toString() + "_PhantasmalTerrain", choices.getChoice());
-                return true;
-            }
-        }
-        return false;
-    }
-    
-}
-
 class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
 
-    public PhantasmalTerrainContinuousEffect(){
+    public PhantasmalTerrainContinuousEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "enchanted land is the chosen type";
     }
-    
+
     public PhantasmalTerrainContinuousEffect(final PhantasmalTerrainContinuousEffect effect) {
         super(effect);
     }
@@ -148,7 +106,7 @@ class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_PhantasmalTerrain");
+        String choice = (String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY);
         if (enchantment != null && enchantment.getAttachedTo() != null && choice != null) {
             Permanent land = game.getPermanent(enchantment.getAttachedTo());
             if (land != null) {
@@ -195,5 +153,5 @@ class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
     }
-    
+
 }

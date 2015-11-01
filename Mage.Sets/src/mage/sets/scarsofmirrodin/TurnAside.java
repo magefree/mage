@@ -28,40 +28,35 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
+import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.filter.Filter;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.target.TargetObject;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.other.TargetsPermanentPredicate;
+import mage.target.TargetSpell;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.target.Target;
 
 /**
  * @author ayratn
  */
 public class TurnAside extends CardImpl {
 
-    private static FilterSpell filter = new FilterSpell("spell that targets a permanent you control");
+    private final static FilterSpell filter = new FilterSpell("spell that targets a permanent you control");
+
+    static {
+        filter.add(new TargetsPermanentPredicate(new FilterControlledPermanent()));
+    }
 
     public TurnAside(UUID ownerId) {
         super(ownerId, 49, "Turn Aside", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "SOM";
 
-
         // Counter target spell that targets a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new CustomTargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
     public TurnAside(final TurnAside card) {
@@ -71,110 +66,5 @@ public class TurnAside extends CardImpl {
     @Override
     public TurnAside copy() {
         return new TurnAside(this);
-    }
-
-    private class CustomTargetSpell extends TargetObject {
-
-        protected FilterSpell filter;
-
-        public CustomTargetSpell() {
-            this(1, 1, new FilterSpell());
-        }
-
-        public CustomTargetSpell(FilterSpell filter) {
-            this(1, 1, filter);
-        }
-
-        public CustomTargetSpell(int numTargets, FilterSpell filter) {
-            this(numTargets, numTargets, filter);
-        }
-
-        public CustomTargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
-            this.minNumberOfTargets = minNumTargets;
-            this.maxNumberOfTargets = maxNumTargets;
-            this.zone = Zone.STACK;
-            this.filter = filter;
-            this.targetName = filter.getMessage();
-        }
-
-        public CustomTargetSpell(final CustomTargetSpell target) {
-            super(target);
-            this.filter = target.filter.copy();
-        }
-
-        @Override
-        public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-            return canChoose(sourceControllerId, game);
-        }
-
-        @Override
-        public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-            return possibleTargets(sourceControllerId, game);
-        }
-
-        @Override
-        public boolean canTarget(UUID id, Ability source, Game game) {
-            if (super.canTarget(id, source, game)) {
-                if (targetsMyPermanent(id, source.getControllerId(), game)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public boolean canChoose(UUID sourceControllerId, Game game) {
-            int count = 0;
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject, game)) {
-                    if (targetsMyPermanent(stackObject.getId(), sourceControllerId, game)) {
-                        count++;
-                        if (count >= this.minNumberOfTargets)
-                            return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-            Set<UUID> possibleTargets = new HashSet<UUID>();
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject, game)) {
-                    if (targetsMyPermanent(stackObject.getId(), sourceControllerId, game)) {
-
-                        possibleTargets.add(stackObject.getId());
-                    }
-                }
-            }
-            return possibleTargets;
-        }
-
-        @Override
-        public Filter getFilter() {
-            return filter;
-        }
-
-        private boolean targetsMyPermanent(UUID id, UUID controllerId, Game game) {
-            StackObject spell = game.getStack().getStackObject(id);
-            if (spell != null) {
-                Ability ability = spell.getStackAbility();
-                for (Target target : ability.getTargets()) {
-                    for (UUID permanentId : target.getTargets()) {
-                        Permanent permanent = game.getPermanent(permanentId);
-                        if (permanent != null && permanent.getControllerId().equals(controllerId)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public CustomTargetSpell copy() {
-            return new CustomTargetSpell(this);
-        }
     }
 }

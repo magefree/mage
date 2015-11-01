@@ -52,6 +52,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PlayerAction;
@@ -74,6 +75,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+import mage.util.MessageToClient;
 
 /**
  *
@@ -179,6 +181,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void resetPassed();
 
+    void resetPlayerPassedActions();
+
     boolean getPassedTurn();
 
     boolean getPassedUntilEndOfTurn();
@@ -188,6 +192,10 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean getPassedUntilStackResolved();
 
     boolean getPassedAllTurns();
+
+    AbilityType getJustActivatedType();
+
+    void setJustActivatedType(AbilityType abilityType);
 
     boolean hasLost();
 
@@ -400,7 +408,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void skip();
 
     // priority, undo, ...
-    void sendPlayerAction(PlayerAction passPriorityAction, Game game);
+    void sendPlayerAction(PlayerAction passPriorityAction, Game game, Object data);
 
     int getStoredBookmark();
 
@@ -448,6 +456,8 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean chooseMulligan(Game game);
 
     boolean chooseUse(Outcome outcome, String message, Ability source, Game game);
+
+    boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game);
 
     boolean choose(Outcome outcome, Choice choice, Game game);
 
@@ -564,8 +574,9 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param card
      * @param game
+     * @return player looked at the card
      */
-    void revealFaceDownCard(Card card, Game game);
+    boolean lookAtFaceDownCard(Card card, Game game);
 
     /**
      * Set seconds left to play the game.
@@ -618,17 +629,42 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @return
      */
+    @Deprecated
     boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
-
+    @Deprecated
     boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
-
+    @Deprecated
     boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName);
+    boolean moveCards(Card card, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
+
+    boolean moveCards(Cards cards, Zone toZone, Ability source, Game game);
+
+    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
+
+    /**
+     * Iniversal method to move cards from one zone to another. Do not mix
+     * objects from different from zones to move.
+     *
+     * @param cards
+     * @param toZone
+     * @param source
+     * @param game
+     * @param tapped tha cards are tapped on the battlefield
+     * @param faceDown the cards are face down in the to zone
+     * @param byOwner the card is moved (or put onto battlefield) by the owner
+     * of the card and if target zone is battlefield controlls the permanent
+     * (instead of the controller of the source)
+     * @param appliedEffects
+     * @return
+     */
+    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
+
+    boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
     boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
@@ -662,6 +698,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param exileName name of exile zone (optional)
      * @param sourceId
      * @param game
+     * @param fromZone
      * @param withName
      * @return
      */
@@ -686,9 +723,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param fromZone if null, this info isn't postet
-     * @return
+     * @return Set<Cards> that were successful moved to graveyard
      */
-    boolean moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
+    Set<Card> moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to
@@ -703,45 +740,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName);
-
-    /**
-     * Uses putOntoBattlefield and posts also a info message about in the game
-     * log
-     *
-     * @param card
-     * @param game
-     * @param fromZone
-     * @param sourceId
-     * @return
-     */
-    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId);
-
-    /**
-     * Uses putOntoBattlefield and posts also a info message about in the game
-     * log
-     *
-     * @param card
-     * @param game
-     * @param fromZone
-     * @param sourceId
-     * @param tapped the card enters the battlefield tapped
-     * @return
-     */
-    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped);
-
-    /**
-     * Uses putOntoBattlefield and posts also a info message about in the game
-     * log
-     *
-     * @param card
-     * @param game
-     * @param fromZone
-     * @param sourceId
-     * @param tapped the card enters the battlefield tapped
-     * @param facedown the card enters the battlefield facedown
-     * @return
-     */
-    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown);
 
     /**
      * Checks if the playerToCheckId is from an opponent in range
@@ -787,4 +785,6 @@ public interface Player extends MageItem, Copyable<Player> {
     void setMatchPlayer(MatchPlayer matchPlayer);
 
     MatchPlayer getMatchPlayer();
+
+    boolean scry(int value, Ability source, Game game);
 }

@@ -30,17 +30,14 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
 /**
  *
@@ -48,17 +45,23 @@ import mage.game.stack.Spell;
  */
 public class GloryscaleViashino extends CardImpl {
 
+    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
+
+    static {
+        filter.add(new MulticoloredPredicate());
+    }
+
     public GloryscaleViashino (UUID ownerId) {
         super(ownerId, 120, "Gloryscale Viashino", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Viashino");
         this.subtype.add("Soldier");
 
-
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new GloryscaleViashinoAbility());
+
+        // Whenever you cast a multicolored spell, Gloryscale Viashino gets +3/+3 until end of turn.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), filter, false));
     }
 
     public GloryscaleViashino (final GloryscaleViashino card) {
@@ -68,37 +71,5 @@ public class GloryscaleViashino extends CardImpl {
     @Override
     public GloryscaleViashino copy() {
         return new GloryscaleViashino(this);
-    }
-
-}
-
-class GloryscaleViashinoAbility extends TriggeredAbilityImpl {
-    public GloryscaleViashinoAbility() {
-        super(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn));
-    }
-
-    public GloryscaleViashinoAbility(final GloryscaleViashinoAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GloryscaleViashinoAbility copy() {
-        return new GloryscaleViashinoAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getColor(game).isMulticolored() && event.getPlayerId().equals(getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a multicolored spell, {this} gets +3/+3 until end of turn.";
     }
 }

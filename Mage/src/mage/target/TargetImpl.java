@@ -70,6 +70,8 @@ public abstract class TargetImpl implements Target {
     protected UUID targetController = null; // if null the ability controller is the targetController
     protected UUID abilityController = null; // only used if target controller != ability controller
 
+    protected int targetTag; // can be set if other target check is needed (AnotherTargetPredicate)
+
     @Override
     public abstract TargetImpl copy();
 
@@ -95,6 +97,7 @@ public abstract class TargetImpl implements Target {
         this.notTarget = target.notTarget;
         this.targetController = target.targetController;
         this.abilityController = target.abilityController;
+        this.targetTag = target.targetTag;
     }
 
     @Override
@@ -345,7 +348,6 @@ public abstract class TargetImpl implements Target {
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
         Set<UUID> illegalTargets = new HashSet<>();
-//        int replacedTargets = 0;
         for (UUID targetId : targets.keySet()) {
             Card card = game.getCard(targetId);
             if (card != null) {
@@ -367,12 +369,17 @@ public abstract class TargetImpl implements Target {
         for (UUID targetId : illegalTargets) {
             targets.remove(targetId);
         }
-//        if (replacedTargets > 0 && replacedTargets == targets.size()) {
-//            return false;
-//        }
-        if (getNumberOfTargets() == 0 && targets.isEmpty()) {
-            return true;
+        if (targets.isEmpty()) {
+            // If all targets that were set before are illegal now, the target is no longer legal
+            if (!illegalTargets.isEmpty()) {
+                return false;
+            }
+            // if no targets have to be set and no targets are set, that's legal
+            if (getNumberOfTargets() == 0) {
+                return true;
+            }
         }
+
         return targets.size() > 0;
     }
 
@@ -534,6 +541,27 @@ public abstract class TargetImpl implements Target {
         } else {
             return game.getPlayer(playerId);
         }
+    }
+
+    @Override
+    public boolean isRequiredExplicitlySet() {
+        return requiredExplicitlySet;
+    }
+
+    @Override
+    public int getTargetTag() {
+        return targetTag;
+    }
+
+    /**
+     * Is used to be able to check, that another target is slected within the
+     * group of targets of the ability with a target tag > 0.
+     *
+     * @param targetTag
+     */
+    @Override
+    public void setTargetTag(int targetTag) {
+        this.targetTag = targetTag;
     }
 
 }

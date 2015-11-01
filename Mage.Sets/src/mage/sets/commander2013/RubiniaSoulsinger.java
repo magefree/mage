@@ -92,9 +92,9 @@ class RubiniaSoulsingerCondition implements Condition {
             controllerId = source.getControllerId();
         }
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null){
-            if (permanent.isTapped()){
-                return controllerId == source.getControllerId();
+        if (permanent != null) {
+            if (permanent.isTapped()) {
+                return controllerId.equals(source.getControllerId());
             }
         }
         return false;

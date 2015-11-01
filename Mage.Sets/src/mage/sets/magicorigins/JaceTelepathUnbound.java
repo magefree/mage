@@ -30,7 +30,7 @@ package mage.sets.magicorigins;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -40,7 +40,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
@@ -49,7 +48,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -57,7 +55,7 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
@@ -77,7 +75,7 @@ public class JaceTelepathUnbound extends CardImpl {
         this.nightCard = true;
         this.canTransform = true;
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: Up to one target creature gets -2/-0 until your next turn.
         Effect effect = new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn);
@@ -88,7 +86,7 @@ public class JaceTelepathUnbound extends CardImpl {
 
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
         ability = new LoyaltyAbility(new JaceTelepathUnboundEffect(), -3);
-        ability.addTarget(new TargetCardInGraveyard(new FilterInstantOrSorceryCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
         this.addAbility(ability);
 
         // -9: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".

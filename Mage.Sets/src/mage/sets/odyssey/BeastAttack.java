@@ -28,7 +28,6 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -37,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BeastToken2;
 
 /**
  *
@@ -49,10 +48,9 @@ public class BeastAttack extends CardImpl {
         super(ownerId, 230, "Beast Attack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}{G}");
         this.expansionSetCode = "ODY";
 
-
         // Put a 4/4 green Beast creature token onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken_44()));
-        
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
+
         // Flashback {2}{G}{G}{G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}{G}{G}"), TimingRule.INSTANT));
     }
@@ -65,19 +63,4 @@ public class BeastAttack extends CardImpl {
     public BeastAttack copy() {
         return new BeastAttack(this);
     }
-}
-
-class BeastToken_44 extends Token {
-    
-  public BeastToken_44() {
-        super("Beast", "4/4 green Beast creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Beast");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        // to get an image for the token
-        this.setOriginalExpansionSetCode("ZEN");
-    }
-        
 }

@@ -34,7 +34,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -66,7 +65,7 @@ public class MyrServitor extends CardImpl {
                 SourceOnBattlefieldCondition.getInstance(),
                 "At the beginning of your upkeep, if {this} is on the battlefield, each player returns all cards named Myr Servitor from his or her graveyard to the battlefield"
         ));
-        
+
     }
 
     public MyrServitor(final MyrServitor card) {
@@ -80,39 +79,38 @@ public class MyrServitor extends CardImpl {
 }
 
 class MyrServitorReturnEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterCard("cards named Myr Servitor");
-    
+
     static {
         filter.add(new NamePredicate("Myr Servitor"));
     }
-    
+
     public MyrServitorReturnEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "if {this} is on the battlefield, each player returns all cards named Myr Servitor from his or her graveyard to the battlefield";
     }
-    
+
     public MyrServitorReturnEffect(final MyrServitorReturnEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public MyrServitorReturnEffect copy() {
         return new MyrServitorReturnEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card: player.getGraveyard().getCards(filter, game)) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
-                    }
+                    controller.moveCards(player.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
                 }
             }
+            return true;
         }
         return false;
     }

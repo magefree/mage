@@ -40,11 +40,13 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
@@ -57,7 +59,6 @@ public class EndlessHorizons extends CardImpl {
     public EndlessHorizons(UUID ownerId) {
         super(ownerId, 4, "Endless Horizons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "EVE";
-
 
         // When Endless Horizons enters the battlefield, search your library for any number of Plains cards and exile them. Then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EndlessHorizonsEffect(), false));
@@ -122,34 +123,41 @@ class EndlessHorizonsEffect extends SearchEffect {
     }
 }
 
-    class EndlessHorizonsEffect2 extends OneShotEffect {
+class EndlessHorizonsEffect2 extends OneShotEffect {
 
-        public EndlessHorizonsEffect2() {
-            super(Outcome.ReturnToHand);
-            this.staticText = "you may put a card you own exiled with {this} into your hand";
-        }
+    public EndlessHorizonsEffect2() {
+        super(Outcome.ReturnToHand);
+        this.staticText = "you may put a card you own exiled with {this} into your hand";
+    }
 
-        public EndlessHorizonsEffect2(final EndlessHorizonsEffect2 effect) {
-            super(effect);
-        }
+    public EndlessHorizonsEffect2(final EndlessHorizonsEffect2 effect) {
+        super(effect);
+    }
 
-        @Override
-        public EndlessHorizonsEffect2 copy() {
-            return new EndlessHorizonsEffect2(this);
-        }
+    @Override
+    public EndlessHorizonsEffect2 copy() {
+        return new EndlessHorizonsEffect2(this);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
             if (exZone != null) {
-                for (Card card : exZone.getCards(game)) {
-                    if (card.getOwnerId() == source.getControllerId()) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                        break; // only one
-                    }
+                Card card = null;
+                if (exZone.size() > 1) {
+                    TargetCard target = new TargetCard(Zone.EXILED, new FilterCard());
+                    controller.choose(outcome, exZone, target, game);
+                    card = game.getCard(target.getFirstTarget());
+                } else {
+                    card = exZone.getRandom(game);
                 }
+                controller.moveCards(card, null, Zone.HAND, source, game);
             }
             return true;
         }
-    
+        return false;
+    }
+
 }

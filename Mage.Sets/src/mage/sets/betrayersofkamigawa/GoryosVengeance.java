@@ -70,7 +70,6 @@ public class GoryosVengeance extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-
         // Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GoryosVengeanceEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
@@ -111,16 +110,16 @@ class GoryosVengeanceEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         // Haste
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(effect, source);
                         // Exile it at end of turn
-                        Effect exileEffect = new ExileTargetEffect(new StringBuilder("Exile ").append(permanent.getName()).append(" at the beginning of the next end step").toString());
-                        exileEffect.setTargetPointer(new FixedTarget(card.getId()));
+                        Effect exileEffect = new ExileTargetEffect("Exile " + permanent.getName() + " at the beginning of the next end step");
+                        exileEffect.setTargetPointer(new FixedTarget(permanent, game));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());

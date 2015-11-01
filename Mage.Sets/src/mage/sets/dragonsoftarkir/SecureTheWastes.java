@@ -28,13 +28,12 @@
 package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WarriorToken;
 
 /**
  *
@@ -47,7 +46,7 @@ public class SecureTheWastes extends CardImpl {
         this.expansionSetCode = "DTK";
 
         // Put X 1/1 white Warrior creature tokens onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SecureTheWastesToken(), new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), new ManacostVariableValue()));
     }
 
     public SecureTheWastes(final SecureTheWastes card) {
@@ -57,19 +56,5 @@ public class SecureTheWastes extends CardImpl {
     @Override
     public SecureTheWastes copy() {
         return new SecureTheWastes(this);
-    }
-}
-
-class SecureTheWastesToken extends Token {
-
-    SecureTheWastesToken() {
-        super("Warrior", "1/1 white Warrior creature token");
-        this.setOriginalExpansionSetCode("DTK");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Warrior");
-
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

@@ -80,7 +80,7 @@ class TreefolkToken extends Token {
             super("Treefolk", "5/6 green Treefolk creature");
             cardType.add(CardType.CREATURE);
             this.color.setGreen(true);
-            subtype.add("Spirit");
+            subtype.add("Treefolk");
             power = new MageInt(5);
             toughness = new MageInt(6);
         }

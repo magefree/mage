@@ -56,7 +56,10 @@ public abstract class ExpansionSet implements Serializable {
     protected String blockName;
     protected boolean hasBoosters = false;
     protected int numBoosterSpecial;
+
     protected int numBoosterLands;
+    protected int ratioBoosterSpecialLand = 0; // if > 0 basic lands are replaced with speical land in the ratio every X land is replaced by special land
+
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
     protected int numBoosterRare;
@@ -150,9 +153,14 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         if (numBoosterLands > 0) {
+            List<CardInfo> specialLands = getSpecialLand();
             List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
             for (int i = 0; i < numBoosterLands; i++) {
-                addToBooster(booster, basicLands);
+                if (ratioBoosterSpecialLand > 0 && rnd.nextInt(ratioBoosterSpecialLand) == 1 && specialLands != null) {
+                    addToBooster(booster, specialLands);
+                } else {
+                    addToBooster(booster, basicLands);
+                }
             }
         }
         List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
@@ -317,6 +325,10 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public List<CardInfo> getSpecialBonus() {
+        return null;
+    }
+
+    public List<CardInfo> getSpecialLand() {
         return null;
     }
 

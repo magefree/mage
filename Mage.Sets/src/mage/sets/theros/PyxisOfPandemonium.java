@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -114,16 +116,14 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     if (player.getLibrary().size() > 0) {
-                        Card card = player.getLibrary().getFromTop(game);                        
+                        Card card = player.getLibrary().getFromTop(game);
                         String exileKey = playerId.toString() + CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()).toString();
                         UUID exileId = exileIds.get(exileKey);
                         if (exileId == null) {
                             exileId = UUID.randomUUID();
                             exileIds.put(exileKey, exileId);
                         }
-                        player.moveCardToExileWithInfo(card, exileId, 
-                                new StringBuilder(sourceObject.getIdName() +" (").append(player.getLogName()).append(")").toString(),
-                                source.getSourceId(), game, Zone.LIBRARY, true);
+                        player.moveCardsToExile(card, source, game, false, exileId, sourceObject.getIdName() + " (" + player.getName() + ")");
                         card.setFaceDown(true, game);
                     }
                 }
@@ -163,8 +163,8 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
             } else {
                 return true;
             }
-
-            for (UUID playerId : controller.getInRange()) {
+            Cards cardsToBringIntoPlay = new CardsImpl();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     String exileKey = playerId.toString() + CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()).toString();
@@ -172,16 +172,17 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
                     if (exileId != null) {
                         ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                         if (exileZone != null) {
-                            for(Card card: exileZone.getCards(game)) {
+                            for (Card card : exileZone.getCards(game)) {
                                 card.setFaceDown(false, game);
                                 if (CardUtil.isPermanentCard(card)) {
-                                    player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                                    cardsToBringIntoPlay.add(card);
                                 }
                             }
                         }
                     }
                 }
             }
+            controller.moveCards(cardsToBringIntoPlay.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
             return true;
         }
         return false;

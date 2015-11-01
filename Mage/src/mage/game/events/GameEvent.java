@@ -154,6 +154,12 @@ public class GameEvent implements Serializable {
         COUNTER,
         COUNTERED,
         DECLARING_ATTACKERS, DECLARED_ATTACKERS,
+        /* DECLARE_ATTACKER
+         REPLACE EVENT - can be used to replace attack declaration
+         targetId    id of the defending player or planeswalker attacked
+         sourceId    id of the attacking creature
+         playerId    player defining the attacking creatures
+         */
         DECLARE_ATTACKER,
         /* ATTACKER_DECLARED
          targetId    id of the defending player or planeswalker attacked
@@ -179,6 +185,8 @@ public class GameEvent implements Serializable {
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
         FLIP_COIN, COIN_FLIPPED, SCRY, FATESEAL,
+        PAID_CUMULATIVE_UPKEEP,
+        DIDNT_PAY_CUMULATIVE_UPKEEP,
         //permanent events
         ENTERS_THE_BATTLEFIELD,
         TAP, TAPPED, TAPPED_FOR_MANA,
@@ -235,7 +243,6 @@ public class GameEvent implements Serializable {
         //combat events
         COMBAT_DAMAGE_APPLIED,
         SELECTED_ATTACKER, SELECTED_BLOCKER;
-
     }
 
     public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {

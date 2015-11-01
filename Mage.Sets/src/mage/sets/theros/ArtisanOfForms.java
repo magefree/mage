@@ -29,6 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -78,10 +79,19 @@ public class ArtisanOfForms extends CardImpl {
 class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
 
     @Override
+    public Boolean apply(Game game, MageObject mageObject) {
+        Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
+        effect.setText("have {this} become a copy of target creature and gain this ability");
+        mageObject.getAbilities().add(new HeroicAbility(effect, true));
+        return true;
+    }
+
+    @Override
     public Boolean apply(Game game, Permanent permanent) {
         Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
         effect.setText("have {this} become a copy of target creature and gain this ability");
         permanent.addAbility(new HeroicAbility(effect, true), game);
         return true;
     }
+
 }

@@ -294,9 +294,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 // force attack only if a defender can be attacked without paying a cost
                 if (!defendersCostlessAttackable.isEmpty()) {
+                    creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
                     // No need to attack a special defender
                     if (defendersForcedToAttack.isEmpty()) {
-                        creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
                         if (defendersForcedToAttack.isEmpty()) {
                             if (defendersCostlessAttackable.size() == 1) {
                                 player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
@@ -424,7 +424,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      */
     private void logBlockerInfo(Player defender, Game game) {
         boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no ned to sow the attacked player
-        for (CombatGroup group : this.getGroups()) {
+        for (CombatGroup group : game.getCombat().getGroups()) {
             if (group.defendingPlayerId.equals(defender.getId())) {
                 if (!shownDefendingPlayer) {
                     game.informPlayers("Attacked player: " + defender.getLogName());
@@ -523,6 +523,10 @@ public class Combat implements Serializable, Copyable<Combat> {
                             if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
                                     GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, attackingCreatureId, possibleBlocker.getId(), possibleBlocker.getControllerId()), game)) {
                                 // has cost to block to pay so remove this attacker
+                                continue;
+                            }
+                            if (!getDefendingPlayerId(attackingCreatureId, game).equals(possibleBlocker.getControllerId())) {
+                                // Creature can't block if not the controller or a planeswalker of the controller of the possible blocker is attacked
                                 continue;
                             }
                             if (creatureMustBlockAttackers.containsKey(possibleBlocker.getId())) {
@@ -659,7 +663,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             if (mayBlock) {
                                 if (controller.isHuman()) {
                                     if (!game.isSimulation()) {
-                                        game.informPlayer(controller, "Creature should block this turn: " + creature.getLogName());
+                                        game.informPlayer(controller, "Creature should block this turn: " + creature.getIdName());
                                     }
                                 } else {
                                     Player defender = game.getPlayer(creature.getControllerId());
@@ -728,6 +732,10 @@ public class Combat implements Serializable, Copyable<Combat> {
             Permanent creatureForcedToBlock = game.getPermanent(entry.getKey());
             if (creatureForcedToBlock == null) {
                 break;
+            }
+            if (!creatureForcedToBlock.getControllerId().equals(player.getId())) {
+                // ignore creatures controlled by other players
+                continue;
             }
 
 //            // check if creature has to pay a cost to block so it's not mandatory to block
@@ -927,15 +935,15 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public boolean declareAttacker(UUID attackerId, UUID defenderId, UUID playerId, Game game) {
-        Permanent attacker = game.getPermanent(attackerId);
+    public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
+        Permanent attacker = game.getPermanent(creatureId);
         if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
             if (!attacker.isTapped()) {
                 attacker.tap(game);
             }
         }
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
-            return addAttackerToCombat(attackerId, defenderId, game);
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, creatureId, playerId))) {
+            return addAttackerToCombat(creatureId, defenderId, game);
         }
         return false;
     }
@@ -1133,10 +1141,10 @@ public class Combat implements Serializable, Copyable<Combat> {
         return defenderId;
     }
 
-    public UUID getDefendingPlayerId(UUID attackerId, Game game) {
+    public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game) {
         UUID defenderId = null;
         for (CombatGroup group : groups) {
-            if (group.getAttackers().contains(attackerId)) {
+            if (group.getAttackers().contains(attackingCreatureId)) {
                 defenderId = group.getDefenderId();
                 if (group.defenderIsPlaneswalker) {
                     Permanent permanent = game.getPermanent(defenderId);

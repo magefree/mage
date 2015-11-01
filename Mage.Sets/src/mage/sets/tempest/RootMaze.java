@@ -38,6 +38,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -67,6 +68,7 @@ public class RootMaze extends CardImpl {
 }
 
 class RootMazeEffect extends ReplacementEffectImpl {
+
     RootMazeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Artifacts and lands enter the battlefield tapped";
@@ -78,21 +80,21 @@ class RootMazeEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = game.getPermanent(event.getTargetId());
+        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
             target.setTapped(true);
         }
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         return permanent != null && (permanent.getCardType().contains(CardType.LAND) || permanent.getCardType().contains(CardType.ARTIFACT));
     }
 

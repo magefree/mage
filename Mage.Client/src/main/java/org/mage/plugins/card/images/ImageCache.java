@@ -25,8 +25,8 @@ import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
- * that the images may be garbage collected when they are not needed any more, but will
- * be kept as long as possible.
+ * that the images may be garbage collected when they are not needed any more,
+ * but will be kept as long as possible.
  *
  * Key format: "<cardname>#<setname>#<type>#<collectorID>#<param>"
  *
@@ -46,8 +46,7 @@ public class ImageCache {
     private static final Map<String, BufferedImage> imageCache;
 
     /**
-     * Common pattern for keys.
-     * Format: "<cardname>#<setname>#<collectorID>"
+     * Common pattern for keys. Format: "<cardname>#<setname>#<collectorID>"
      */
     private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)");
 
@@ -104,16 +103,16 @@ public class ImageCache {
                                 thumbnailFile = new TFile(thumbnailPath);
                             } catch (Exception ex) {
                             }
-                            boolean exists =false;
+                            boolean exists = false;
                             if (thumbnailFile != null) {
                                 try {
                                     exists = thumbnailFile.exists();
-                                } catch(Exception ex) {
+                                } catch (Exception ex) {
                                     exists = false;
                                 }
                             }
                             if (exists) {
-                                log.debug("loading thumbnail for " + key + ", path="+thumbnailPath);
+                                log.debug("loading thumbnail for " + key + ", path=" + thumbnailPath);
                                 return loadImage(thumbnailFile);
                             } else {
                                 BufferedImage image = loadImage(file);
@@ -187,30 +186,15 @@ public class ImageCache {
     }
 
     public static BufferedImage getThumbnail(CardView card) {
-        String key = getKey(card) + "#thumb";
-        if (card.getUsesVariousArt()) {
-            key += "#usesVariousArt";
-        }
-        // log.debug("#key: " + key);
-        return getImage(key);
+        return getImage(getKey(card, card.getName(), "#thumb"));
     }
 
     public static BufferedImage getImageOriginal(CardView card) {
-        String key = getKey(card);
-        if (card.getUsesVariousArt()) {
-            key += "#usesVariousArt";
-        }
-        // log.warn("#key: " + key);
-        return getImage(key);
+        return getImage(getKey(card, card.getName(), ""));
     }
 
     public static BufferedImage getImageOriginalAlternateName(CardView card) {
-        String key = getKeyAlternateName(card, card.getAlternateName());
-        if (card.getUsesVariousArt()) {
-            key += "#usesVariousArt";
-        }
-        // log.warn("#key: " + key);
-        return getImage(key);
+        return getImage(getKey(card, card.getAlternateName(), ""));
     }
 
     /**
@@ -230,7 +214,7 @@ public class ImageCache {
             if (ex.getCause() instanceof NullPointerException) {
                 return null;
             }
-            log.error(ex,ex);
+            log.error(ex, ex);
             return null;
         }
     }
@@ -238,32 +222,25 @@ public class ImageCache {
     /**
      * Returns the map key for a card, without any suffixes for the image size.
      */
-    private static String getKey(CardView card) {
-        StringBuilder sb = new StringBuilder(card.getName()).append("#");
-        sb.append(card.getExpansionSetCode()).append("#");
-        sb.append(card.getType()).append("#");
-        sb.append(card.getCardNumber()).append("#");
-        sb.append(card.getTokenSetCode() == null ? "":card.getTokenSetCode());
-        return sb.toString();
+    private static String getKey(CardView card, String name, String suffix) {
+        return name + "#" + card.getExpansionSetCode() + "#" + card.getType() + "#" + card.getCardNumber() + "#"
+                + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
+                + suffix
+                + (card.getUsesVariousArt() ? "#usesVariousArt" : "");
+
     }
 
-    /**
-     * Returns the map key for the flip image of a card, without any suffixes for the image size.
-     */
-    private static String getKeyAlternateName(CardView card, String alternateName) {
-        StringBuilder sb = new StringBuilder(alternateName).append("#");
-        sb.append(card.getExpansionSetCode()).append("#");
-        sb.append(card.getType()).append("#");
-        sb.append(card.getCardNumber()).append("#");
-        sb.append(card.getTokenSetCode() == null ? "":card.getTokenSetCode());
-        return sb.toString();
-    }
-
+//    /**
+//     * Returns the map key for the flip image of a card, without any suffixes for the image size.
+//     */
+//    private static String getKeyAlternateName(CardView card, String alternateName) {
+//        return alternateName + "#" + card.getExpansionSetCode() + "#" +card.getType()+ "#" + card.getCardNumber() + "#"
+//                + (card.getTokenSetCode() == null ? "":card.getTokenSetCode());
+//    }
     /**
      * Load image from file
      *
-     * @param file
-     *            file to load image from
+     * @param file file to load image from
      * @return {@link BufferedImage}
      */
     public static BufferedImage loadImage(TFile file) {
@@ -297,7 +274,7 @@ public class ImageCache {
                 ImageIO.write(image, "jpg", outputStream);
             }
         } catch (IOException e) {
-            log.error(e,e);
+            log.error(e, e);
             imageFile.delete();
         }
         return image;
@@ -305,6 +282,7 @@ public class ImageCache {
 
     /**
      * Returns an image scaled to the size given
+     *
      * @param original
      * @return
      */
@@ -344,6 +322,7 @@ public class ImageCache {
     /**
      * Returns an image scaled to the size appropriate for the card picture
      * panel
+     *
      * @param original
      * @param sizeNeed
      * @return
@@ -356,6 +335,7 @@ public class ImageCache {
 
     /**
      * Returns the image appropriate to display the card in the picture panel
+     *
      * @param card
      * @param width
      * @param height
@@ -365,11 +345,7 @@ public class ImageCache {
         if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {
             return getThumbnail(card);
         }
-        String key = getKey(card);
-        if (card.getUsesVariousArt()) {
-            key += "#usesVariousArt";
-        }
-        // log.warn("getImage: " + key);
+        String key = getKey(card, card.getName(), "");
         BufferedImage original = getImage(key);
         if (original == null) {
             log.debug(key + " not found");

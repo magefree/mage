@@ -113,14 +113,13 @@ class PeregrinationEffect extends OneShotEffect {
                     TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
                     controller.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
-
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                     revealed.remove(card);
                     card = revealed.getCards(game).iterator().next();
-                    controller.moveCards(card, null, Zone.HAND, source, game);
+                    controller.moveCards(card, Zone.HAND, source, game);
                 } else if (target.getTargets().size() == 1) {
                     Card card = revealed.getCards(game).iterator().next();
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                 }
 
             }

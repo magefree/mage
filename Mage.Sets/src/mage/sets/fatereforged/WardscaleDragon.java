@@ -58,11 +58,10 @@ public class WardscaleDragon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // As long as Wardscale Dragon is attacking, defending player can't cast spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardscaleDragonRuleEffect()));
-        
-        
+
     }
 
     public WardscaleDragon(final WardscaleDragon card) {
@@ -105,7 +104,7 @@ class WardscaleDragonRuleEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && sourcePermanent.isAttacking()) {
-            return event.getPlayerId() == game.getCombat().getDefendingPlayerId(sourcePermanent.getId(), game);                
+            return event.getPlayerId().equals(game.getCombat().getDefendingPlayerId(sourcePermanent.getId(), game));
         }
         return false;
     }

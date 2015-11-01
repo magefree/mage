@@ -31,12 +31,11 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -48,7 +47,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -73,8 +71,7 @@ public class AshiokNightmareWeaver extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Ashiok");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +2: Exile the top three cards of target opponent's library.
         LoyaltyAbility ability = new LoyaltyAbility(new AshiokNightmareWeaverExileEffect(), 2);
@@ -121,14 +118,9 @@ class AshiokNightmareWeaverExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && opponent != null && controller != null) {
-            UUID exileZone = CardUtil.getObjectExileZoneId(game, sourceObject);
+            UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileZone != null) {
-                for (int i = 0; i < 3; i++) {
-                    Card card = opponent.getLibrary().getFromTop(game);
-                    if (card != null) {
-                        controller.moveCardToExileWithInfo(card, exileZone, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                    }
-                }
+                controller.moveCardsToExile(opponent.getLibrary().getTopCards(game, 3), source, game, true, exileZone, sourceObject.getIdName());
                 return true;
             }
         }
@@ -167,25 +159,22 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
             }
         }
 
-        FilterCard filter = new FilterCreatureCard(new StringBuilder("creature card with converted mana cost {").append(cmc).append("} exiled with Ashiok, Nightmare Weaver").toString());
+        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost {" + cmc + "} exiled with " + sourceObject.getIdName());
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
-        
-        Target target = new TargetCardInExile(filter, CardUtil.getObjectExileZoneId(game, sourceObject));
 
+        Target target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
 
         if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
             if (controller.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null && controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
-                    // why is this change of controller neccessary?
+                if (card != null
+                        && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
-                        permanent.changeControllerId(source.getControllerId(), game);
+                        ContinuousEffectImpl effect = new AshiokNightmareWeaverAddTypeEffect();
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                        game.addEffect(effect, source);
                     }
-                    
-                    ContinuousEffectImpl effect = new AshiokNightmareWeaverAddTypeEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
                     return true;
                 }
             }
@@ -267,7 +256,7 @@ class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
         if (exileId == null) {
             return false;
         }
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
                 Cards cards = new CardsImpl();
@@ -280,7 +269,7 @@ class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
                 }
                 cards.clear();
                 cards.addAll(opponent.getGraveyard());
-                for (UUID cardId :cards) {
+                for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.GRAVEYARD, true);

@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2012;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -38,14 +39,18 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -97,30 +102,32 @@ class SuturedGhoulEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player.getGraveyard().size() > 0) {
-
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        if (controller.getGraveyard().size() > 0) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard"));
-            if (player.chooseTarget(Outcome.Benefit, target, source, game)) {
+            if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 int count = 0;
                 for (UUID uuid : target.getTargets()) {
-                    Card card = player.getGraveyard().get(uuid, game);
+                    Card card = controller.getGraveyard().get(uuid, game);
                     if (card != null) {
-                        card.moveToExile(getId(), "Sutured Ghoul", source.getSourceId(), game);
-                        if (permanent != null) {
-                            permanent.imprint(card.getId(), game);
-                            count++;
-                        }
+                        card.moveToExile(getId(), permanent.getIdName(), source.getSourceId(), game);
+                        permanent.imprint(card.getId(), game);
+                        count++;
                     }
                 }
+                Cards cardsToExile = new CardsImpl(target.getTargets());
+                controller.moveCards(cardsToExile, null, Zone.EXILED, source, game);
 
                 String msg = count == 1 ? "1 card" : count + "cards";
-                game.informPlayers("Sutured Ghoul: " + player.getLogName() + " exiled " + msg);
+                game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " exiled " + msg);
             }
 
         } else {
-            game.informPlayers("Sutured Ghoul: No cards in graveyard.");
+            game.informPlayers(permanent.getLogName() + ": No cards in graveyard.");
         }
         return true;
     }
@@ -147,7 +154,7 @@ class SuturedGhoulPowerCount implements DynamicValue {
         int amount = 0;
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
         if (permanent != null) {
-            for (UUID uuid: permanent.getImprinted()) {
+            for (UUID uuid : permanent.getImprinted()) {
                 Card card = game.getCard(uuid);
                 if (card != null) {
                     amount += card.getPower().getValue();
@@ -189,7 +196,7 @@ class SuturedGhoulToughnessCount implements DynamicValue {
         int amount = 0;
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
         if (permanent != null) {
-            for (UUID uuid: permanent.getImprinted()) {
+            for (UUID uuid : permanent.getImprinted()) {
                 Card card = game.getCard(uuid);
                 if (card != null) {
                     amount += card.getToughness().getValue();
@@ -214,5 +221,3 @@ class SuturedGhoulToughnessCount implements DynamicValue {
         return "the total toughness of the exiled cards";
     }
 }
-
-

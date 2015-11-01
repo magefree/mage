@@ -31,14 +31,13 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
@@ -46,12 +45,10 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -65,21 +62,20 @@ public class TeferiTemporalArchmage extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Teferi");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
                 new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false), 1));
 
         // -1: Untap up to four target permanents.
-        LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new UntapTargetEffect(), -1); 
-        loyaltyAbility.addTarget(new TargetPermanent(0,4, new FilterPermanent(), false));
+        LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new UntapTargetEffect(), -1);
+        loyaltyAbility.addTarget(new TargetPermanent(0, 4, new FilterPermanent(), false));
         this.addAbility(loyaltyAbility);
 
         // -10: You get an emblem with "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TeferiTemporalArchmageEmblem()), -10));
-        
+
         // Teferi, Temporal Archmage can be your commander.
         this.addAbility(CanBeYourCommanderAbility.getInstance());
 
@@ -96,6 +92,7 @@ public class TeferiTemporalArchmage extends CardImpl {
 }
 
 class TeferiTemporalArchmageEmblem extends Emblem {
+
     // "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
     public TeferiTemporalArchmageEmblem() {
         this.setName("EMBLEM: Teferi, Temporal Archmage");
@@ -113,7 +110,6 @@ class TeferiTemporalArchmageAsThoughEffect extends AsThoughEffectImpl {
     public TeferiTemporalArchmageAsThoughEffect(final TeferiTemporalArchmageAsThoughEffect effect) {
         super(effect);
     }
-
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -135,7 +131,7 @@ class TeferiTemporalArchmageAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return false; // Not used 
+        return false; // Not used
     }
 
 }

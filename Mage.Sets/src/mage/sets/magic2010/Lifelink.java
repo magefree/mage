@@ -40,10 +40,6 @@ public class Lifelink extends mage.sets.magic2012.Lifelink {
         super(ownerId);
         this.cardNumber = 18;
         this.expansionSetCode = "M10";
-        this.subtype.add("Aura");
-
-        this.color.setWhite(true);
-
     }
 
     public Lifelink (final Lifelink card) {

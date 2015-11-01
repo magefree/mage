@@ -59,18 +59,17 @@ public class EndlessWhispers extends CardImpl {
         super(ownerId, 49, "Endless Whispers", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "5DN";
 
-
         // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step."
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceToBattlefieldEffect());
         Effect effect = new CreateDelayedTriggeredAbilityEffect(delayedAbility, true);
         effect.setText("choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step");
         Ability gainAbility = new DiesTriggeredAbility(effect);
         gainAbility.addTarget(new TargetOpponent());
-        
+
         effect = new GainAbilityAllEffect(gainAbility, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Each creature"));
         effect.setText("Each creature has \"When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-    
+
     }
 
     public EndlessWhispers(final EndlessWhispers card) {
@@ -85,18 +84,17 @@ public class EndlessWhispers extends CardImpl {
 
 class ReturnSourceToBattlefieldEffect extends OneShotEffect {
 
-
     public ReturnSourceToBattlefieldEffect() {
         this(false);
     }
 
     public ReturnSourceToBattlefieldEffect(boolean tapped) {
         super(Outcome.PutCreatureInPlay);
-        setText();
+        staticText = "That player puts this card from its owner's graveyard onto the battlefield under his or her control";
     }
+
     public ReturnSourceToBattlefieldEffect(boolean tapped, boolean ownerControl) {
         super(Outcome.PutCreatureInPlay);
-        setText();
     }
 
     public ReturnSourceToBattlefieldEffect(final ReturnSourceToBattlefieldEffect effect) {
@@ -112,24 +110,19 @@ class ReturnSourceToBattlefieldEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (!game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
             return false;
-        }        
+        }
         Card card = game.getCard(source.getSourceId());
         if (card == null) {
             return false;
         }
-        
+
         Player player = game.getPlayer(source.getFirstTarget());
-   
-        if (player == null) {            
+
+        if (player == null) {
             return false;
-        }        
-        
-        return player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), false);
-    }
+        }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder("That player puts this card from its owner's graveyard onto the battlefield under his or her control");
-
+        return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
     }
 
 }

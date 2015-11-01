@@ -60,7 +60,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;        
+        this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
@@ -73,8 +73,11 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                && zEvent.getToZone() == Zone.GRAVEYARD) {                
+                && zEvent.getToZone() == Zone.GRAVEYARD) {
             if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
+                if(onlyToControllerGraveyard && !this.getControllerId().equals(game.getOwnerId(zEvent.getTargetId()))) {
+                    return false;
+                }
                 if (setTargetPointer) {
                     for (Effect effect :this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));

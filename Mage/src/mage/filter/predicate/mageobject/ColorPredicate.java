@@ -46,7 +46,7 @@ public class ColorPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return input.getColor(game).contains(color);
+        return color != null && input.getColor(game).contains(color);
     }
 
     @Override

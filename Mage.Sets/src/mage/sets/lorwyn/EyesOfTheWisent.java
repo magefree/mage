@@ -86,6 +86,7 @@ class EyesOfTheWisentElementalToken extends Token {
         subtype.add("Elemental");
         power = new MageInt(4);
         toughness = new MageInt(4);
+        setTokenType(1);
     }
 
 }

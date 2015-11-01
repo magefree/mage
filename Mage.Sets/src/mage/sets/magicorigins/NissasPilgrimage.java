@@ -113,11 +113,12 @@ class NissasPilgrimageEffect extends OneShotEffect {
                     Card card = cards.getRandom(game);
                     if (card != null) {
                         cards.remove(card);
-                        controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
-                        controller.moveCards(cards, Zone.LIBRARY, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                        controller.moveCards(cards, Zone.HAND, source, game);
                     }
                 }
             }
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

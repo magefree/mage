@@ -60,9 +60,6 @@ public class Thraximundar extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Assassin");
 
-
-
-        
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
@@ -116,7 +113,8 @@ class ThraximundarTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId() == this.getSourceId()) {
+        if (event.getSourceId() != null
+                && event.getSourceId().equals(this.getSourceId())) {
             UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
             this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
             return true;

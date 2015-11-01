@@ -65,7 +65,7 @@ import mage.util.CardUtil;
 public class HideawayAbility extends StaticAbility {
 
     public HideawayAbility() {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect(true)));
+        super(Zone.ALL, new EntersBattlefieldEffect(new TapSourceEffect(true)));
         Ability ability = new EntersBattlefieldTriggeredAbility(new HideawayExileEffect(), false);
         ability.setRuleVisible(false);
         addSubAbility(ability);
@@ -115,17 +115,17 @@ class HideawayExileEffect extends OneShotEffect {
         if (hideawaySource == null || controller == null) {
             return false;
         }
-        
+
         Cards cards = new CardsImpl(Zone.LIBRARY);
-        cards.addAll(controller.getLibrary().getTopCards(game, 4));        
+        cards.addAll(controller.getLibrary().getTopCards(game, 4));
         if (cards.size() > 0) {
             TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
             if (controller.choose(Outcome.Detriment, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), 
-                            "Hideaway (" + hideawaySource.getIdName() +")", source.getSourceId(), game, Zone.LIBRARY, false);
+                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source),
+                            "Hideaway (" + hideawaySource.getIdName() + ")", source.getSourceId(), game, Zone.LIBRARY, false);
                     card.setFaceDown(true, game);
                 }
             }
@@ -139,7 +139,7 @@ class HideawayExileEffect extends OneShotEffect {
 class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
 
     public HideawayLookAtFaceDownCardEffect() {
-        super(AsThoughEffectType.REVEAL_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }
 
@@ -159,7 +159,7 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (game.getState().getZone(objectId) != Zone.EXILED 
+        if (game.getState().getZone(objectId) != Zone.EXILED
                 || !game.getState().getCardState(objectId).isFaceDown()) {
             return false;
         }
@@ -180,4 +180,3 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
         return false;
     }
 }
-

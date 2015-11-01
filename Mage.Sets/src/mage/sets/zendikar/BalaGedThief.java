@@ -29,24 +29,20 @@ package mage.sets.zendikar;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -69,15 +65,9 @@ public class BalaGedThief extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        FilterPermanent filter = new FilterPermanent("Bala Ged Thief or another Ally");
-        filter.add(Predicates.or(
-                new CardIdPredicate(this.getId()),
-                new SubtypePredicate("Ally")));
-
         // Whenever Bala Ged Thief or another Ally enters the battlefield under your control, target player reveals a number of cards from his or her hand equal to the number of Allies you control. You choose one of them. That player discards that card.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BalaGedThiefEffect(), filter, false);
-        TargetPlayer target = new TargetPlayer();
-        ability.addTarget(target);
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new BalaGedThiefEffect(), false);
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

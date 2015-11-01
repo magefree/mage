@@ -28,12 +28,12 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -49,6 +49,8 @@ public class StaunchDefenders extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
+        // When Staunch Defenders enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
     }
 

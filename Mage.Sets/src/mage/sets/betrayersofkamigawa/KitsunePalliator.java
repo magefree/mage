@@ -39,8 +39,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,12 +49,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 public class KitsunePalliator extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai you control");
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate("Samurai"));
-    }
 
     public KitsunePalliator(UUID ownerId) {
         super(ownerId, 14, "Kitsune Palliator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

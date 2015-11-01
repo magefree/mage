@@ -28,7 +28,7 @@
 package mage.sets.commander2014;
 
 import java.util.UUID;
-import mage.abilities.condition.common.OpponentControllsMoreCondition;
+import mage.abilities.condition.common.OpponentControlsMoreCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -60,7 +60,7 @@ public class GiftOfEstates extends CardImpl {
         // If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, filter), true),
-                new OpponentControllsMoreCondition(new FilterLandPermanent("lands"))));
+                new OpponentControlsMoreCondition(new FilterLandPermanent("lands"))));
     }
 
     public GiftOfEstates(final GiftOfEstates card) {

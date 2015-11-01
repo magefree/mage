@@ -53,6 +53,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
+import mage.players.net.UserData;
 import mage.target.Target;
 import org.apache.log4j.Logger;
 
@@ -75,6 +76,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
+        this.userData = UserData.getDefaultUserDataView();
     }
 
     public SimulatedPlayer2(final SimulatedPlayer2 player) {

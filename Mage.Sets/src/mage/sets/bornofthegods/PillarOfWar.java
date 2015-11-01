@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -60,7 +60,7 @@ public class PillarOfWar extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // As long as Pillar of War is enchanted, it can attack as though it didn't have defender.
         Effect effect = new ConditionalAsThoughEffect(
-                new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
+                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 new EnchantedCondition());
         effect.setText("As long as {this} is enchanted, it can attack as though it didn't have defender");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        

@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
 import mage.cards.Card;
@@ -58,8 +59,8 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
         dispatcher.removeAllListener();
     }
 
-    public void ask(UUID playerId, String message) {
-        dispatcher.fireEvent(PlayerQueryEvent.askEvent(playerId, message));
+    public void ask(UUID playerId, String message, Ability source, Map<String, Serializable> options) {
+        dispatcher.fireEvent(PlayerQueryEvent.askEvent(playerId, message, source, options));
     }
 
     public void select(UUID playerId, String message) {

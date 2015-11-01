@@ -29,24 +29,15 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChangeATargetOfTargetSpellAbilityToSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetStackObject;
-import mage.target.Targets;
 
 /**
  *
@@ -62,7 +53,7 @@ public class Spellskite extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {UP}: Change a target of target spell or ability to Spellskite.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpellskiteEffect(), new ManaCostsImpl("{UP}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeATargetOfTargetSpellAbilityToSourceEffect(), new ManaCostsImpl("{UP}"));
         ability.addTarget(new TargetStackObject());
         this.addAbility(ability);
     }
@@ -75,93 +66,4 @@ public class Spellskite extends CardImpl {
     public Spellskite copy() {
         return new Spellskite(this);
     }
-}
-
-class SpellskiteEffect extends OneShotEffect {
-
-    public SpellskiteEffect() {
-        super(Outcome.Neutral);
-        staticText = "Change a target of target spell or ability to {this}";
-    }
-
-    public SpellskiteEffect(final SpellskiteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (stackObject != null && sourceObject != null) {
-            Targets targets;
-            Ability sourceAbility;
-            MageObject oldTarget = null;
-            if (stackObject instanceof Spell) {
-                Spell spell = (Spell)stackObject;
-                sourceAbility = spell.getSpellAbility();
-                targets = spell.getSpellAbility().getTargets();
-            } else if (stackObject instanceof StackAbility) {
-                StackAbility stackAbility = (StackAbility)stackObject;
-                sourceAbility = stackAbility;
-                targets = stackAbility.getTargets();
-            } else {
-                return false;
-            }
-            boolean twoTimesTarget = false;
-            if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
-                Target target = targets.get(0);
-                if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
-                    oldTarget = game.getObject(targets.getFirstTarget());
-                    target.clearChosen();
-                    // The source is still the spell on the stack
-                    target.addTarget(source.getSourceId(), stackObject.getStackAbility(), game);
-                }                
-            } else {
-                Player player = game.getPlayer(source.getControllerId());
-                for (Target target: targets) {
-                    for (UUID targetId: target.getTargets()) {
-                        MageObject object = game.getObject(targetId);
-                        String name;
-                        if (object == null) {
-                            Player targetPlayer = game.getPlayer(targetId);
-                            name = targetPlayer.getLogName();
-                        } else {
-                            name = object.getName();
-                        }
-                        if (!targetId.equals(source.getSourceId()) && target.getTargets().contains(source.getSourceId())) {
-                            // you can't change this target to Spellskite because Spellskite is already another targetId of that target.
-                            twoTimesTarget = true;
-                            continue;
-                        }
-                        if (name != null && player.chooseUse(Outcome.Neutral, new StringBuilder("Change target from ").append(name).append(" to ").append(sourceObject.getName()).append("?").toString(), source, game)) {
-                            if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
-                                oldTarget = game.getObject(targets.getFirstTarget());
-                                target.remove(targetId);
-                                // The source is still the spell on the stack
-                                target.addTarget(source.getSourceId(), stackObject.getStackAbility(), game);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            if (oldTarget != null) {
-                game.informPlayers(sourceObject.getLogName() + ": Changed target of " +stackObject.getLogName() + " from " + oldTarget.getLogName() + " to " + sourceObject.getLogName());
-            } else {
-                if (twoTimesTarget) {
-                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its not valid to target it twice for " + stackObject.getName());
-                } else {
-                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getName());
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public SpellskiteEffect copy() {
-        return new SpellskiteEffect(this);
-    }
-
 }

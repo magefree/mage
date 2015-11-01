@@ -27,6 +27,8 @@
  */
 package mage.sets.commander2013;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -54,8 +56,7 @@ public class IncendiaryCommand extends CardImpl {
         super(ownerId, 113, "Incendiary Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "C13";
 
-
-        // Choose two - 
+        // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
         // Incendiary Command deals 4 damage to target player;
@@ -107,14 +108,21 @@ class IncendiaryCommandDrawEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            Map<UUID, Integer> cardsToDraw = new HashMap<>();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int cards = player.getHand().size();
-                    if (cards > 0) {
-                        player.discard(cards, source, game);
-                        player.drawCards(cards, game);
+                    int cardsInHand = player.getHand().size();
+                    player.discard(cardsInHand, false, source, game);
+                    if (cardsInHand > 0) {
+                        cardsToDraw.put(playerId, cardsInHand);
                     }
+                }
+            }
+            for (UUID playerId : cardsToDraw.keySet()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.drawCards(cardsToDraw.get(playerId), game);
                 }
             }
             return true;

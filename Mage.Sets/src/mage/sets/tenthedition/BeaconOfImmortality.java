@@ -87,9 +87,9 @@ class BeaconOfImmortalityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            int amount = game.getLife();
+            int amount = player.getLife();
             if (amount < 0) {
-                player.loseLife(amount, game);
+                player.loseLife(-amount, game);
                 return true;
             }
             if (amount > 0) {

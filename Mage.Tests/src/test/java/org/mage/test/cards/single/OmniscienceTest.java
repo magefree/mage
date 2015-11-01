@@ -192,4 +192,104 @@ public class OmniscienceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Pillarfield Ox", 1);
     }
 
+    /**
+     * If another effect (e.g. Future Sight) allows you to cast nonland cards
+     * from zones other than your hand, Xmage incorrectly lets you cast those
+     * cards without paying their mana costs. Omniscience only lets you cast
+     * spells from your hand without paying their mana costs.
+     */
+    @Test
+    public void testCastingWithFutureSight() {
+        // You may cast nonland cards from your hand without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
+        // Play with the top card of your library revealed.
+        // You may play the top card of your library.
+        addCard(Zone.BATTLEFIELD, playerA, "Future Sight", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 1);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertTapped("Plains", true); // plains have to be tapped because {2} have to be paid
+    }
+
+    /**
+     * If a spell has an additional cost (optional or mandatory, e.g. Entwine),
+     * Omniscience incorrectly allows you cast the spell as if that cost had
+     * been paid without paying that spell's mana cost. 117.9d If an alternative
+     * cost is being paid to cast a spell, any additional costs, cost increases,
+     * and cost reductions that affect that spell are applied to that
+     * alternative cost. (See rule 601.2f.)
+     */
+    @Test
+    public void testCastingWithCyclonicRiftWithOverload() {
+        // You may cast nonland cards from your hand without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        // Choose one - Barbed Lightning deals 3 damage to target creature; or Barbed Lightning deals 3 damage to target player.
+        // Entwine {2} (Choose both if you pay the entwine cost.)
+        addCard(Zone.HAND, playerA, "Barbed Lightning", 1);
+
+        // Creature - 3/3 Swampwalk
+        addCard(Zone.BATTLEFIELD, playerB, "Bog Wraith", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning", "Bog Wraith");
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Barbed Lightning", 1);
+        assertGraveyardCount(playerB, "Bog Wraith", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+
+        assertTapped("Plains", true); // plains have to be tapped because {2} from Entwine have to be paid
+    }
+
+    /**
+     * If a spell has an unpayable cost (e.g. Ancestral Vision, which has no
+     * mana cost), Omniscience should allow you to cast that spell without
+     * paying its mana cost. In the case of Ancestral Vision, for example, Xmage
+     * only gives you the option to suspend Ancestral Vision. 117.6a If an
+     * unpayable cost is increased by an effect or an additional cost is
+     * imposed, the cost is still unpayable. If an alternative cost is applied
+     * to an unpayable cost, including an effect that allows a player to cast a
+     * spell without paying its mana cost, the alternative cost may be paid.
+     */
+    @Test
+    public void testCastingUnpayableCost() {
+        // You may cast nonland cards from your hand without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
+
+        // Suspend 4-{U}
+        // Target player draws three cards.
+        addCard(Zone.HAND, playerA, "Ancestral Vision", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision", playerA);
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Ancestral Vision", 1);
+
+        assertHandCount(playerA, 3);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+    }
+
 }

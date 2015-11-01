@@ -74,6 +74,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -147,6 +148,7 @@ import mage.target.common.TargetDiscard;
 import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.common.TargetSpellOrPermanent;
 import mage.util.Copier;
+import mage.util.MessageToClient;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
@@ -161,7 +163,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are availble
-    protected boolean ALLOW_INTERRUPT = true; // change this for test / debugging purposes to false to switch off interrupts while debugging
+    protected boolean ALLOW_INTERRUPT = true;     // change this for test / debugging purposes to false to switch off interrupts while debugging
 
     private transient Map<Mana, Card> unplayable = new TreeMap<>();
     private transient List<Card> playableNonInstant = new ArrayList<>();
@@ -320,9 +322,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target instanceof TargetCardInHand) {
+        if (target instanceof TargetCardInHand
+                || (target.getZone().equals(Zone.HAND) && (target instanceof TargetCard))) {
             List<Card> cards = new ArrayList<>();
-            for (UUID cardId : ((TargetCardInHand) target).possibleTargets(sourceId, this.getId(), game)) {
+            for (UUID cardId : target.possibleTargets(sourceId, this.getId(), game)) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     cards.add(card);
@@ -522,8 +525,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
             if (outcome.isGood()) {
-                ArrayList<Card> cardsInHand = new ArrayList<>(hand.getCards(game));
-                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() > target.getTargets().size()) {
+                Cards cards = new CardsImpl(target.possibleTargets(source.getSourceId(), getId(), game));
+                ArrayList<Card> cardsInHand = new ArrayList<>(cards.getCards(game));
+                while (!target.isChosen()
+                        && target.possibleTargets(source.getSourceId(), getId(), game).size() > 0
+                        && target.getMaxNumberOfTargets() > target.getTargets().size()) {
                     Card card = pickBestCard(cardsInHand, null, target, source, game);
                     if (card != null) {
                         if (target.canTarget(getId(), card.getId(), source, game)) {
@@ -684,17 +690,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        if (target instanceof TargetCardInHand) {
-            List<Card> cards = new ArrayList<>();
-            cards.addAll(this.hand.getCards(game));
-            while (!target.isChosen() && !cards.isEmpty()) {
-                Card pick = pickTarget(cards, outcome, target, source, game);
-                if (pick != null) {
-                    target.addTarget(pick.getId(), source, game);
-                }
-            }
-            return target.isChosen();
-        }
         if (target instanceof TargetSpell) {
             if (game.getStack().size() > 0) {
                 Iterator<StackObject> it = game.getStack().iterator();
@@ -709,6 +704,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
         if (target instanceof TargetSpellOrPermanent) {
+            // TODO: Also check if a spell should be selected
             List<Permanent> targets;
             boolean outcomeTargets = true;
             if (outcome.isGood()) {
@@ -720,10 +716,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = threats(null, source == null ? null : source.getSourceId(), ((TargetSpellOrPermanent) target).getPermanentFilter(), game, target.getTargets());
                 Collections.reverse(targets);
                 outcomeTargets = false;
-                //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
-                if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                if (((TargetSpellOrPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
                     if (!outcomeTargets || target.getMaxNumberOfTargets() <= target.getTargets().size()) {
                         return true;
@@ -1141,7 +1136,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected boolean playManaHandling(Ability ability, ManaCost unpaid, Game game) {
 //        log.info("paying for " + unpaid.getText());
-        boolean spendAnyMana = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_ANY_MANA, ability, ability.getControllerId(), game);
+        boolean spendAnyMana = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
         ManaCost cost;
         List<Permanent> producers;
         if (unpaid instanceof ManaCosts) {
@@ -1330,6 +1325,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+    }
+
+    @Override
+    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
         log.debug("chooseUse: " + outcome.isGood());
         // Be proactive! Always use abilities, the evaluation function will decide if it's good or not
         // Otherwise some abilities won't be used by AI like LoseTargetEffect that has "bad" outcome

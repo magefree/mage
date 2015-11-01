@@ -38,7 +38,9 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,13 +55,10 @@ public class MayaelsAria extends CardImpl {
         super(ownerId, 121, "Mayael's Aria", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{G}{W}");
         this.expansionSetCode = "ARB";
 
-
-
-
-
-        // At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater. Then you gain 10 life if you control a creature with power 10 or greater. Then you win the game if you control a creature with power 20 or greater.
+        // At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater.
+        // Then you gain 10 life if you control a creature with power 10 or greater.
+        // Then you win the game if you control a creature with power 20 or greater.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MayaelsAriaEffect(), TargetController.YOU, false));
-        
     }
 
     public MayaelsAria(final MayaelsAria card) {
@@ -90,31 +89,32 @@ class MayaelsAriaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean condition1 = false;
-        boolean condition2 = false;
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
+        // put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater.
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            if (creature.getPower().getValue() > 4) {
-                condition1 = true;
-            }
-            if (creature.getPower().getValue() > 9) {
-                condition2 = true;
-            }
-            if (creature.getPower().getValue() > 19) {
-                you.won(game);
-            }
-        }
-        if (condition1) {
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
+        if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 creature.addCounters(CounterType.P1P1.createInstance(), game);
             }
         }
-        if (condition2) {
-            you.gainLife(10, game);
+        game.applyEffects(); // needed because otehrwise the +1/+1 counters wouldn't be taken into account
+
+        // Then you gain 10 life if you control a creature with power 10 or greater.
+        filter = new FilterCreaturePermanent();
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 9));
+        if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
+            controller.gainLife(10, game);
+        }
+
+        // Then you win the game if you control a creature with power 20 or greater.
+        filter = new FilterCreaturePermanent();
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 19));
+        if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
+            controller.won(game);
         }
         return true;
     }

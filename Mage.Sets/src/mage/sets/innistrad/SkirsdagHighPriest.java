@@ -30,21 +30,20 @@ package mage.sets.innistrad;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DemonToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -69,9 +68,10 @@ public class SkirsdagHighPriest extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morbid - {tap}, Tap two untapped creatures you control: Put a 5/5 black Demon creature token with flying onto the battlefield. Activate this ability only if a creature died this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DemonToken()), new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2,2,filter, false)));
-        ability.addCost(new SkirsdagHighPriestCost());
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DemonToken()),
+            new TapSourceCost(), MorbidCondition.getInstance());
+        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
+        ability.setAbilityWord(AbilityWord.MORBID);
         this.addAbility(ability);
     }
 
@@ -82,47 +82,5 @@ public class SkirsdagHighPriest extends CardImpl {
     @Override
     public SkirsdagHighPriest copy() {
         return new SkirsdagHighPriest(this);
-    }
-}
-
-class SkirsdagHighPriestCost extends CostImpl {
-
-    public SkirsdagHighPriestCost() {
-        this.text = "Activate this ability only if a creature died this turn";
-    }
-
-    public SkirsdagHighPriestCost(final SkirsdagHighPriestCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public SkirsdagHighPriestCost copy() {
-        return new SkirsdagHighPriestCost(this);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return game.getState().getWatchers().get("Morbid").conditionMet();
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        this.paid = true;
-        return paid;
-    }
-}
-
-class DemonToken extends Token {
-
-    DemonToken() {
-        super("Demon", "5/5 black Demon creature token with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Demon");
-
-        color.setBlack(true);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-
-        addAbility(FlyingAbility.getInstance());
     }
 }

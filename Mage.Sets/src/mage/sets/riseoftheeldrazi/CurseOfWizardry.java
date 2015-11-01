@@ -29,13 +29,11 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -45,7 +43,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -57,9 +54,8 @@ public class CurseOfWizardry extends CardImpl {
         super(ownerId, 104, "Curse of Wizardry", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "ROE";
 
-
         // As Curse of Wizardry enters the battlefield, choose a color.
-        this.addAbility(new AsEntersBattlefieldAbility(new CurseOfWizardryChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // Whenever a player casts a spell of the chosen color, that player loses 1 life.
         this.addAbility(new CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility());
@@ -73,38 +69,6 @@ public class CurseOfWizardry extends CardImpl {
     @Override
     public CurseOfWizardry copy() {
         return new CurseOfWizardry(this);
-    }
-}
-
-class CurseOfWizardryChooseColorEffect extends OneShotEffect {
-
-    public CurseOfWizardryChooseColorEffect() {
-        super(Outcome.Detriment);
-        staticText = "choose a color";
-    }
-
-    public CurseOfWizardryChooseColorEffect(final CurseOfWizardryChooseColorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent curseOfWizardry = game.getPermanent(source.getSourceId());
-        if (player != null && curseOfWizardry != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Detriment, colorChoice, game)) {
-                game.informPlayers(curseOfWizardry.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
-                game.getState().setValue(curseOfWizardry.getId() + "_color", colorChoice.getColor());
-                curseOfWizardry.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>", game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public CurseOfWizardryChooseColorEffect copy() {
-        return new CurseOfWizardryChooseColorEffect(this);
     }
 }
 

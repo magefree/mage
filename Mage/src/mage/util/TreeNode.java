@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.util;
 
 import java.util.ArrayList;
@@ -34,14 +33,16 @@ import java.util.List;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class TreeNode<T> {
+
     protected T data;
     protected List<TreeNode<T>> children;
 
     public TreeNode() {
         super();
-        children = new ArrayList<TreeNode<T>>();
+        children = new ArrayList<>();
     }
 
     public TreeNode(T data) {
@@ -70,7 +71,7 @@ public class TreeNode<T> {
     }
 
     public void addChild(T child) {
-        children.add(new TreeNode<T>(child));
+        children.add(new TreeNode<>(child));
     }
 
     public void addChildAt(int index, TreeNode<T> child) throws IndexOutOfBoundsException {
@@ -93,7 +94,7 @@ public class TreeNode<T> {
         return this.data;
     }
 
-    public void setData(T data) {
+    private void setData(T data) {
         this.data = data;
     }
 
@@ -116,10 +117,7 @@ public class TreeNode<T> {
             return false;
         }
         final TreeNode<T> other = (TreeNode<T>) obj;
-        if (this.data != other.data && (this.data == null || !this.data.equals(other.data))) {
-            return false;
-        }
-        return true;
+        return !(this.data != other.data && (this.data == null || !this.data.equals(other.data)));
     }
 
 }

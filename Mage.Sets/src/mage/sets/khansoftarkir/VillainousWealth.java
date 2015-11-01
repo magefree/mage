@@ -103,11 +103,12 @@ class VillainousWealthEffect extends OneShotEffect {
             if (player != null) {
                 Cards cardsToExile = new CardsImpl();
                 cardsToExile.addAll(player.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
-                controller.moveCards(cardsToExile, null, Zone.EXILED, source, game, true);
+                controller.moveCards(cardsToExile, null, Zone.EXILED, source, game);
                 if (controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + mageObject.getLogName() + "  without paying its mana cost?", source, game)) {
                     OuterLoop:
                     while (cardsToExile.count(filter, game) > 0) {
                         TargetCardInExile target = new TargetCardInExile(0, 1, filter, exileId, false);
+                        target.setNotTarget(true);
                         while (cardsToExile.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {

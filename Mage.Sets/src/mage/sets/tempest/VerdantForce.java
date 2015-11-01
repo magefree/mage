@@ -28,13 +28,12 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -51,6 +50,8 @@ public class VerdantForce extends CardImpl {
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
+
+        // At the beginning of each upkeep, put a 1/1 green Saproling creature token onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), TargetController.ANY, false));
     }
 

@@ -29,19 +29,16 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -57,7 +54,10 @@ public class WickerWarcrawler extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Wicker Warcrawler attacks or blocks, put a -1/-1 counter on it at end of combat.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new WickerWarcrawlerEffect(), false));
+        Effect effect = new AddCountersSourceEffect(CounterType.M1M1.createInstance(), true);
+        effect.setText("put a -1/-1 counter on it at end of combat");
+        DelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(ability, false, false), false));
 
     }
 
@@ -68,37 +68,5 @@ public class WickerWarcrawler extends CardImpl {
     @Override
     public WickerWarcrawler copy() {
         return new WickerWarcrawler(this);
-    }
-}
-
-class WickerWarcrawlerEffect extends OneShotEffect {
-
-    WickerWarcrawlerEffect() {
-        super(Outcome.Detriment);
-        staticText = "put a -1/-1 counter on {this} at the end of combat";
-    }
-
-    WickerWarcrawlerEffect(final WickerWarcrawlerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent wickerWarcrawler = game.getPermanent(source.getSourceId());
-        if (wickerWarcrawler != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(source.getSourceId()));
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public WickerWarcrawlerEffect copy() {
-        return new WickerWarcrawlerEffect(this);
     }
 }

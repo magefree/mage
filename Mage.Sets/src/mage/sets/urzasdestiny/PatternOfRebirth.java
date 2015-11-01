@@ -32,12 +32,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayTargetPlayerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -54,7 +55,6 @@ public class PatternOfRebirth extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -63,9 +63,9 @@ public class PatternOfRebirth extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, that creature's controller may search his or her library for a creature card and put that card onto the battlefield. If that player does, he or she shuffles his or her library.
-        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard()), false, true, Outcome.PutCreatureInPlay);
+        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(new FilterCreatureCard()), false, true, Outcome.PutCreatureInPlay);
         effect.setText("that creature's controller may search his or her library for a creature card and put that card onto the battlefield. If that player does, he or she shuffles his or her library");
-        this.addAbility(new DiesAttachedTriggeredAbility(effect, "enchanted creature", true, true));
+        this.addAbility(new DiesAttachedTriggeredAbility(effect, "enchanted creature", true, true, SetTargetPointer.ATTACHED_TO_CONTROLLER));
 
     }
 

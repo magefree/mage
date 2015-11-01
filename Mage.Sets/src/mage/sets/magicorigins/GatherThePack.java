@@ -28,6 +28,7 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -83,12 +84,14 @@ class GatherThePackEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl(Zone.LIBRARY);
         cards.addAll(controller.getLibrary().getTopCards(game, 5));
         if (!cards.isEmpty()) {
+            controller.revealCards(sourceObject.getIdName(), cards, game);
             int creatures = cards.count(new FilterCreatureCard(), source.getSourceId(), source.getControllerId(), game);
             if (creatures > 0) {
                 int max = 1;

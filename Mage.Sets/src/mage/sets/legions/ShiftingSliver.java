@@ -29,10 +29,8 @@ package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -47,12 +45,12 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author cbt33
  */
 public class ShiftingSliver extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Slivers");
     private static final FilterCreaturePermanent filterBlockedBy = new FilterCreaturePermanent("except by Slivers");
-    
+
     static {
-        filterCreatures.add(Predicates.not(new SubtypePredicate("Sliver")));
+        filterCreatures.add(new SubtypePredicate("Sliver"));
         filterBlockedBy.add(Predicates.not(new SubtypePredicate("Sliver")));
     }
 

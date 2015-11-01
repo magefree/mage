@@ -34,12 +34,15 @@ import mage.MageObject;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class SpellStack extends ArrayDeque<StackObject> {
+
+    private static final Logger logger = Logger.getLogger(SpellStack.class);
 
     protected Date dateLastAdded;
 
@@ -61,18 +64,21 @@ public class SpellStack extends ArrayDeque<StackObject> {
             top.resolve(game);
         } finally {
             if (top != null) {
-                this.remove(top);
+                if (contains(top)) {
+                    logger.warn("StackObject was still on the stack after resoving" + top.getName());
+                    this.remove(top);
+                }
             }
         }
     }
 
-    public void remove(StackObject object) {
+    public boolean remove(StackObject object) {
         for (StackObject spell : this) {
             if (spell.getId().equals(object.getId())) {
-                super.remove(spell);
-                return;
+                return super.remove(spell);
             }
         }
+        return false;
     }
 
     public boolean counter(UUID objectId, UUID sourceId, Game game) {

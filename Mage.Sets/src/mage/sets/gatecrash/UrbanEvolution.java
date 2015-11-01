@@ -44,18 +44,14 @@ import mage.constants.Duration;
 public class UrbanEvolution extends CardImpl {
 
     public UrbanEvolution(UUID ownerId) {
-        super(ownerId, 204, "Urban Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{G}");
+        super(ownerId, 204, "Urban Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");
         this.expansionSetCode = "GTC";
-        this.subtype.add("Wizard");
 
-        
         //Draw three cards. 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         
         //You may play an additional land this turn.
         this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
-        
-
     }
 
     public UrbanEvolution(final UrbanEvolution card) {

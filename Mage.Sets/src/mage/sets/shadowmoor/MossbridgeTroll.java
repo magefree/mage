@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author jeffwadsworth
  */
 public class MossbridgeTroll extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
@@ -78,7 +78,7 @@ public class MossbridgeTroll extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(20, 20, Duration.EndOfTurn), new MossbridgeTrollCost());
         ability.setAdditionalCostsRuleVisible(false);
         this.addAbility(ability);
-               
+
     }
 
     public MossbridgeTroll(final MossbridgeTroll card) {
@@ -115,10 +115,11 @@ class MossbridgeTrollReplacementEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DESTROY_PERMANENT;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId() == source.getSourceId();
+        return event.getTargetId() != null
+                && event.getTargetId().equals(source.getSourceId());
     }
 
     @Override
@@ -150,7 +151,7 @@ class MossbridgeTrollCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         int sumPower = 0;
         if (targets.choose(Outcome.Tap, controllerId, sourceId, game)) {
-            for (UUID targetId: targets.get(0).getTargets()) {
+            for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null && permanent.tap(game)) {
                     sumPower += permanent.getPower().getValue();
@@ -165,7 +166,7 @@ class MossbridgeTrollCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         int sumPower = 0;
-        for (Permanent permanent :game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controllerId, game)) {
             if (!permanent.getId().equals(sourceId)) {
                 sumPower += permanent.getPower().getValue();
             }
@@ -178,4 +179,3 @@ class MossbridgeTrollCost extends CostImpl {
         return new MossbridgeTrollCost(this);
     }
 }
-

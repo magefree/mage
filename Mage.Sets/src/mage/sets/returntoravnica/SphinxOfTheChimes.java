@@ -61,7 +61,7 @@ public class SphinxOfTheChimes extends CardImpl {
     public SphinxOfTheChimes(UUID ownerId) {
         super(ownerId, 52, "Sphinx of the Chimes", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "RTR";
-        this.subtype.add("Bird");
+        this.subtype.add("Sphinx");
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

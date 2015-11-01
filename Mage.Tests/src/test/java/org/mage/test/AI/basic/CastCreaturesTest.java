@@ -52,6 +52,10 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
 
+    /**
+     * This test fails sometimes, probably because two plains are tapped for the
+     * first creature
+     */
     @Test
     public void testSimpleCast2() {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
@@ -98,6 +102,35 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
         assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerA, "Fireshrieker", 0);
         assertPermanentCount(playerA, "Blazing Specter", 1);
+    }
+
+    @Test
+    public void testSimpleCast5() {
+        addCard(Zone.HAND, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 3);
+        addCard(Zone.HAND, playerA, "Soul Warden");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Plains", 1);
+        assertPermanentCount(playerA, "Soul Warden", 1);
+    }
+
+    @Test
+    public void testSimpleCast6() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.HAND, playerA, "Pillarfield Ox", 1);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Plains", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
 
     @Test

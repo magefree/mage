@@ -31,6 +31,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.EnchantAbility;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
@@ -56,9 +57,9 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements Sou
         newAbility = new EnchantAbility(target.getTargetName());
         newAbility.setRuleAtTheTop(true);
         staticText = "it becomes an Aura with enchant " + target.getTargetName();
+        dependencyTypes.add(DependencyType.AuraAddingRemoving);
 
     }
-
 
     public BecomesAuraSourceEffect(final BecomesAuraSourceEffect effect) {
         super(effect);

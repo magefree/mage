@@ -55,6 +55,7 @@ public class MatsuTribeBirdstalker extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Snake");
         this.subtype.add("Warrior");
+        this.subtype.add("Archer");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

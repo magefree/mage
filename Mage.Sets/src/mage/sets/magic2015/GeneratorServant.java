@@ -77,7 +77,7 @@ public class GeneratorServant extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         ability.getEffects().get(0).setText("Add {2} to your mana pool. If that mana is spent on a creature spell, it gains haste until end of turn.");
         this.addAbility(ability);
-        
+
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GeneratorServantHasteEffect()), new GeneratorServantWatcher());
     }
 
@@ -94,11 +94,11 @@ public class GeneratorServant extends CardImpl {
 class GeneratorServantWatcher extends Watcher {
 
     public List<UUID> creatures = new ArrayList<>();
-    
+
     public GeneratorServantWatcher() {
         super("GeneratorServantWatcher", WatcherScope.CARD);
     }
-    
+
     public GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
         super(watcher);
         this.creatures.addAll(watcher.creatures);
@@ -108,13 +108,13 @@ class GeneratorServantWatcher extends Watcher {
     public GeneratorServantWatcher copy() {
         return new GeneratorServantWatcher(this);
     }
-    
+
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
             MageObject target = game.getObject(event.getTargetId());
-            MageObject source = game.getObject(this.getSourceId());
-            if (event.getSourceId() == this.getSourceId() && target != null && target.getCardType().contains(CardType.CREATURE) && event.getFlag()) {
+            if (event.getSourceId() != null
+                    && event.getSourceId().equals(this.getSourceId()) && target != null && target.getCardType().contains(CardType.CREATURE) && event.getFlag()) {
                 if (target instanceof Spell) {
                     this.creatures.add(((Spell) target).getCard().getId());
                 }
@@ -127,7 +127,7 @@ class GeneratorServantWatcher extends Watcher {
         super.reset();
         creatures.clear();
     }
-    
+
 }
 
 class GeneratorServantHasteEffect extends ContinuousEffectImpl {
@@ -135,7 +135,7 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
     public GeneratorServantHasteEffect() {
         super(Duration.EndOfGame, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
-    
+
     public GeneratorServantHasteEffect(final GeneratorServantHasteEffect effect) {
         super(effect);
     }
@@ -144,7 +144,7 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
     public ContinuousEffect copy() {
         return new GeneratorServantHasteEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         GeneratorServantWatcher watcher = (GeneratorServantWatcher) game.getState().getWatchers().get("GeneratorServantWatcher", source.getSourceId());
@@ -158,5 +158,5 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
         }
         return false;
     }
-    
+
 }

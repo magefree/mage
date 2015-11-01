@@ -67,7 +67,7 @@ public class ErhnamDjinn extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep.
-        GainAbilityTargetEffect effect = new GainAbilityTargetEffect(new ForestwalkAbility(), Duration.Custom,
+        GainAbilityTargetEffect effect = new GainAbilityTargetEffect(new ForestwalkAbility(false), Duration.Custom,
         "target non-Wall creature an opponent controls gains forestwalk until your next upkeep");
         effect.setDurationToPhase(PhaseStep.UPKEEP);
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false);

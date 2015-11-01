@@ -30,22 +30,17 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -54,6 +49,7 @@ import mage.game.permanent.Permanent;
 public class MistcutterHydra extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("from blue");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
@@ -73,7 +69,7 @@ public class MistcutterHydra extends CardImpl {
         // protection from blue
         this.addAbility(new ProtectionAbility(filter));
         // Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new MistcutterHydraEffect()));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
     public MistcutterHydra(final MistcutterHydra card) {
@@ -83,39 +79,5 @@ public class MistcutterHydra extends CardImpl {
     @Override
     public MistcutterHydra copy() {
         return new MistcutterHydra(this);
-    }
-}
-
-class MistcutterHydraEffect extends OneShotEffect {
-
-    public MistcutterHydraEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with X +1/+1 counters on it";
-    }
-
-    public MistcutterHydraEffect(final MistcutterHydraEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Object obj = getValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
-                int amount = ((SpellAbility)obj).getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public MistcutterHydraEffect copy() {
-        return new MistcutterHydraEffect(this);
     }
 }

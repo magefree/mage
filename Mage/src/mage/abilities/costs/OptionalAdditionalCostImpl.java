@@ -50,7 +50,7 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         this.activated = false;
         this.name = name;
         this.delimiter = delimiter;
-        this.reminderText = new StringBuilder("<i>").append(reminderText).append("</i>").toString();
+        this.reminderText = "<i>(" + reminderText + ")</i>";
         this.activatedCounter = 0;
         this.add((Cost) cost);
     }
@@ -81,7 +81,7 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         if (onlyCost) {
             return getText();
         } else {
-            return new StringBuffer(name).append(delimiter).append(getText()).toString();
+            return name + delimiter + getText();
         }
     }
 

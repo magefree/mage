@@ -99,7 +99,7 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
         ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null && chosenColor != null) {
-            return "You can't cast " + chosenColor.toString() +" spells (" + mageObject.getLogName() + ").";
+            return "You can't cast " + chosenColor.toString() + " spells (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -107,11 +107,11 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }    
-    
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId()) ) {
+        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
             // spell is not on the stack yet, so we have to check the card
             Card card = game.getCard(event.getSourceId());

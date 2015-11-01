@@ -32,20 +32,18 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -60,17 +58,12 @@ import mage.target.common.TargetLandPermanent;
  */
 public class UtopiaSprawl extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest", "Forest");
 
-    static {
-        filter.add(new SubtypePredicate("Forest"));
-    }
-    
     public UtopiaSprawl(UUID ownerId) {
         super(ownerId, 99, "Utopia Sprawl", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "DIS";
         this.subtype.add("Aura");
-
 
         // Enchant Forest
         TargetPermanent auraTarget = new TargetLandPermanent(filter);
@@ -79,7 +72,7 @@ public class UtopiaSprawl extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // As Utopia Sprawl enters the battlefield, choose a color.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
         // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to his or her mana pool.
         this.addAbility(new UtopiaSprawlTriggeredAbility());
     }
@@ -94,42 +87,8 @@ public class UtopiaSprawl extends CardImpl {
     }
 }
 
-class ChooseColorEffect extends OneShotEffect {
-
-    public ChooseColorEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "choose a color";
-    }
-
-    public ChooseColorEffect(final ChooseColorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
-                game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
-                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>", game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ChooseColorEffect copy() {
-        return new ChooseColorEffect(this);
-    }
-
-}
-
 class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
 
-   
     public UtopiaSprawlTriggeredAbility() {
         super(Zone.BATTLEFIELD, new UtopiaSprawlEffect());
     }
@@ -146,10 +105,7 @@ class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-            return true;
-        }
-        return false;
+        return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
     }
 
     @Override
@@ -159,10 +115,9 @@ class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to his or her mana pool";
+        return "Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to his or her mana pool.";
     }
 }
-
 
 class UtopiaSprawlEffect extends ManaEffect {
 
@@ -178,9 +133,9 @@ class UtopiaSprawlEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if(enchantment != null){
+        if (enchantment != null) {
             Permanent land = game.getPermanent(enchantment.getAttachedTo());
-            if(land != null){
+            if (land != null) {
                 Player player = game.getPlayer(land.getControllerId());
                 if (player != null) {
                     player.getManaPool().addMana(getMana(game, source), game, source);

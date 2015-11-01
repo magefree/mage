@@ -30,16 +30,14 @@ package mage.sets.ravnica;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
@@ -58,13 +56,8 @@ public class CopyEnchantment extends CardImpl {
         super(ownerId, 42, "Copy Enchantment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "RAV";
 
-
         // You may have Copy Enchantment enter the battlefield as a copy of any enchantment on the battlefield.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new CopyEnchantmentEffect(new FilterEnchantmentPermanent()),
-                "You may have {this} enter the battlefield as a copy of any enchantment on the battlefield",
-                true));
-        this.addAbility(ability);        
+        this.addAbility(new EntersBattlefieldAbility(new CopyEnchantmentEffect(new FilterEnchantmentPermanent("any enchantment")), true));
     }
 
     public CopyEnchantment(final CopyEnchantment card) {
@@ -82,15 +75,15 @@ class CopyEnchantmentEffect extends CopyPermanentEffect {
     public CopyEnchantmentEffect(FilterPermanent filter) {
         super(filter, new EmptyApplyToPermanent());
     }
-    
+
     public CopyEnchantmentEffect(final CopyEnchantmentEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             if (super.apply(game, source)) {
                 Permanent permanentToCopy = getBluePrintPermanent();
@@ -98,9 +91,10 @@ class CopyEnchantmentEffect extends CopyPermanentEffect {
                     if (permanentToCopy.getSubtype().contains("Aura")) {
                         Target target = getBluePrintPermanent().getSpellAbility().getTargets().get(0);
                         Outcome auraOutcome = Outcome.BoostCreature;
-                        Ability: for (Ability ability: getBluePrintPermanent().getAbilities()) {
+                        Ability:
+                        for (Ability ability : getBluePrintPermanent().getAbilities()) {
                             if (ability instanceof SpellAbility) {
-                                for (Effect effect: ability.getEffects()) {
+                                for (Effect effect : ability.getEffects()) {
                                     if (effect instanceof AttachEffect) {
                                         auraOutcome = effect.getOutcome();
                                         break Ability;
@@ -108,6 +102,7 @@ class CopyEnchantmentEffect extends CopyPermanentEffect {
                                 }
                             }
                         }
+                        target.setNotTarget(true);
                         if (controller.choose(auraOutcome, target, source.getSourceId(), game)) {
                             UUID targetId = target.getFirstTarget();
                             Permanent targetPermanent = game.getPermanent(targetId);
@@ -127,10 +122,10 @@ class CopyEnchantmentEffect extends CopyPermanentEffect {
         }
         return false;
     }
-    
+
     @Override
     public CopyEnchantmentEffect copy() {
         return new CopyEnchantmentEffect(this);
     }
-    
+
 }

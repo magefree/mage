@@ -34,13 +34,12 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -50,7 +49,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -73,8 +71,7 @@ public class DackFayden extends CardImpl {
         this.expansionSetCode = "CNS";
         this.subtype.add("Dack");
 
-        
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Target player draws two cards, then discards two cards.
         LoyaltyAbility ability = new LoyaltyAbility(new DrawCardTargetEffect(2), 1);
@@ -83,14 +80,14 @@ public class DackFayden extends CardImpl {
         ability.addEffect(effect);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
         // -2: Gain control of target artifact.
         effect = new GainControlTargetEffect(Duration.EndOfGame, true);
         effect.setText("Gain control of target artifact");
         ability = new LoyaltyAbility(effect, -2);
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
-        
+
         // -6: You get an emblem with "Whenever you cast a spell that targets one or more permanents, gain control of those permanents."
         effect = new GetEmblemEffect(new DackFaydenEmblem());
         effect.setText("You get an emblem with \"Whenever you cast a spell that targets one or more permanents, gain control of those permanents.\"");
@@ -109,7 +106,7 @@ public class DackFayden extends CardImpl {
 }
 
 class DackFaydenEmblem extends Emblem {
-    
+
     DackFaydenEmblem() {
         this.setName("EMBLEM: Dack Fayden");
         this.getAbilities().add(new DackFaydenEmblemTriggeredAbility());
@@ -117,15 +114,15 @@ class DackFaydenEmblem extends Emblem {
 }
 
 class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     DackFaydenEmblemTriggeredAbility() {
         super(Zone.COMMAND, new DackFaydenEmblemEffect(), false);
     }
-    
+
     DackFaydenEmblemTriggeredAbility(final DackFaydenEmblemTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public DackFaydenEmblemTriggeredAbility copy() {
         return new DackFaydenEmblemTriggeredAbility(this);
@@ -135,7 +132,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.SPELL_CAST;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean returnValue = false;
@@ -175,7 +172,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
         }
         return returnValue;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever you cast a spell that targets one or more permanents, gain control of those permanents.";
@@ -183,24 +180,24 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class DackFaydenEmblemEffect extends ContinuousEffectImpl {
-    
+
     protected List<UUID> permanents;
-    
+
     DackFaydenEmblemEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = "gain control of those permanents";
     }
-    
+
     DackFaydenEmblemEffect(final DackFaydenEmblemEffect effect) {
         super(effect);
         this.permanents = effect.permanents;
     }
-    
+
     @Override
     public DackFaydenEmblemEffect copy() {
         return new DackFaydenEmblemEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID permanentId : this.permanents) {
@@ -211,7 +208,7 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
         }
         return true;
     }
-    
+
     public void setPermanents(List<UUID> targettedPermanents) {
         this.permanents = new ArrayList<>(targettedPermanents);
     }

@@ -385,6 +385,12 @@ public class DeckGeneratorPool
         if(spellSize < nonLandSize) {
 
             int spellsNeeded = nonLandSize-spellSize;
+
+            // If we haven't got enough spells in reserve to fulfil the amount we need, we can't continue.
+            if(reserveSpells.size() < spellsNeeded) {
+                throw new IllegalStateException("Not enough cards found to generate deck. Please try again");
+            }
+
             List<Card> spellsToAdd = new ArrayList<>(spellsNeeded);
 
             // Initial reservoir
@@ -401,7 +407,6 @@ public class DeckGeneratorPool
             // Add randomly selected spells needed
             deckCards.addAll(spellsToAdd);
         }
-
         // More spells than needed
         else if(spellSize > (deckSize - landCount)) {
 
@@ -410,8 +415,11 @@ public class DeckGeneratorPool
                 deckCards.remove(random.nextInt(deckCards.size()));
             }
         }
-        if(deckCards.size() != nonLandSize)
+
+        // Not strictly necessary as we check when adding cards, but worth double checking anyway.
+        if(deckCards.size() != nonLandSize) {
             throw new IllegalStateException("Not enough cards found to generate deck. Please try again");
+        }
 
         // Return the fixed amount
         return deckCards;

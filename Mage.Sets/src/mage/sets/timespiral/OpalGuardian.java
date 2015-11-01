@@ -86,7 +86,7 @@ class OpalGuardianGargoyle extends Token {
     public OpalGuardianGargoyle() {
         super("Gargoyle", "a 3/4 Gargoyle creature with flying and protection from red");
         cardType.add(CardType.CREATURE);
-        subtype.add("Knight");
+        subtype.add("Gargoyle");
         power = new MageInt(3);
         toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

@@ -28,17 +28,15 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -62,11 +60,10 @@ public class NissaRevane extends CardImpl {
     }
 
     public NissaRevane(UUID ownerId) {
-        super(ownerId, 170, "Nissa Revane", Rarity.MYTHIC, new CardType[]{ CardType.PLANESWALKER }, "{2}{G}{G}");
+        super(ownerId, 170, "Nissa Revane", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Nissa");
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), false));
-
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, nissasChosenFilter)), 1);
         this.addAbility(ability1);

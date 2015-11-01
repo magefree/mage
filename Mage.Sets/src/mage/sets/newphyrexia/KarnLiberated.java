@@ -34,11 +34,10 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -47,7 +46,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -72,7 +70,7 @@ public class KarnLiberated extends CardImpl {
         super(ownerId, 1, "Karn Liberated", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{7}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Karn");
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
         // +4: Target player exiles a card from his or her hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, this.getIdName(), new FilterCard()), 4);
@@ -141,12 +139,17 @@ class KarnLiberatedEffect extends OneShotEffect {
                 if (card.getOwnerId().equals(player.getId()) && !card.isCopy() // no copies
                         && !player.getSideboard().contains(card.getId())
                         && !cards.contains(card)) { // not the exiled cards
-                    player.getLibrary().putOnTop(card, game);
+                    if (card.getId().equals(player.getCommanderId())) {
+                        card.moveToZone(Zone.COMMAND, null, game, true);
+                    } else {
+                        player.getLibrary().putOnTop(card, game);
+                    }
                 }
             }
             player.init(game);
         }
         for (Card card : cards) {
+            game.getState().setZone(card.getId(), Zone.EXILED);
             if (CardUtil.isPermanentCard(card) && !card.getSubtype().contains("Aura")) {
                 game.getExile().add(exileId, sourceObject.getIdName(), card);
             }
@@ -211,16 +214,21 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exile = game.getExile().getExileZone(exileId);
-        if (exile != null) {
-            Cards cards = new CardsImpl(); // needed because putOntoTheBattlefield removes from exile
-            cards.addAll(exile);
-            for (Card card : cards.getCards(game)) {
-                card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
-                Permanent permanent = game.getPermanent(card.getId());
-                ((PermanentImpl) permanent).removeSummoningSickness();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ExileZone exile = game.getExile().getExileZone(exileId);
+            if (exile != null) {
+                // Creatures put onto the battlefield due to Karn's ability will have been under their controller's control continuously
+                // since the beginning of the first turn. They can attack and their activated abilities with {T} in the cost can be activated.
+                Cards cards = new CardsImpl(); // needed because putOntoTheBattlefield removes from exile
+                cards.addAll(exile);
+                controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
+                for (Card card : cards.getCards(game)) {
+                    Permanent permanent = game.getPermanent(card.getId());
+                    ((PermanentImpl) permanent).removeSummoningSickness();
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

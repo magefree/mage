@@ -70,4 +70,64 @@ public class GainProtectionTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Elite Vanguard", 6, 5);
     }
 
+    @Test
+    public void testGainProtectionByEnchantment() {
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
+        // Flying
+        // When Brago, King Eternal deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control.
+        addCard(Zone.BATTLEFIELD, playerB, "Brago, King Eternal");
+        // Enchant creature
+        // When Pentarch Ward enters the battlefield, draw a card.
+        // As Pentarch Ward enters the battlefield, choose a color.
+        // Enchanted creature has protection from the chosen color. This effect doesn't remove Pentarch Ward.
+        addCard(Zone.HAND, playerB, "Pentarch Ward");// "{2}{W}"
+        // Enchant creature
+        // Enchanted creature gets +1/+1 and has "Whenever this creature attacks, tap target creature defending player controls."
+        addCard(Zone.HAND, playerB, "Grasp of the Hieromancer");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Pentarch Ward", "Brago, King Eternal");
+        setChoice(playerB, "White");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Grasp of the Hieromancer", "Brago, King Eternal");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Pentarch Ward", 1);
+        assertHandCount(playerB, "Grasp of the Hieromancer", 1);
+        assertHandCount(playerB, 3);
+    }
+
+    /**
+     * Pentarch Ward on Brago naming white. Brago combat trigger resolves
+     * blinking Pentarch Ward. Brago retains protection from white even though
+     * Pentarch Ward is now exiled, making him unable to be re-enchanted by
+     * Pentarch Ward.
+     */
+    @Test
+    public void testGainLooseProtectionByEnchantment() {
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
+        // Flying
+        // When Brago, King Eternal deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control.
+        addCard(Zone.BATTLEFIELD, playerB, "Brago, King Eternal");
+        // Enchant creature
+        // When Pentarch Ward enters the battlefield, draw a card.
+        // As Pentarch Ward enters the battlefield, choose a color.
+        // Enchanted creature has protection from the chosen color. This effect doesn't remove Pentarch Ward.
+        addCard(Zone.HAND, playerB, "Pentarch Ward");// "{2}{W}"
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Pentarch Ward", "Brago, King Eternal");
+        setChoice(playerB, "White");
+
+        attack(2, playerB, "Brago, King Eternal");
+        addTarget(playerB, "Pentarch Ward");
+        addTarget(playerB, "Brago, King Eternal");
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerA, 18);
+        assertPermanentCount(playerB, "Pentarch Ward", 1);
+        assertHandCount(playerB, 3);
+    }
 }

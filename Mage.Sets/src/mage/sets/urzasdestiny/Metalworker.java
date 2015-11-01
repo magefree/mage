@@ -28,11 +28,8 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,6 +38,9 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
@@ -76,18 +76,14 @@ public class Metalworker extends CardImpl {
     }
 }
 
-
 class MetalworkerManaEffect extends ManaEffect {
 
-    
     private static final FilterCard filter = new FilterArtifactCard();
-    
+
     public MetalworkerManaEffect() {
         super();
         staticText = "Reveal any number of artifact cards in your hand. Add {2} to your mana pool for each card revealed this way";
     }
-
-
 
     public MetalworkerManaEffect(final MetalworkerManaEffect effect) {
         super(effect);
@@ -100,35 +96,35 @@ class MetalworkerManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        if (player.getHand().count(filter, game) > 0) {
+        if (controller.getHand().count(filter, game) > 0) {
             TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-            if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
-                for(UUID uuid : target.getTargets()){
-                    cards.add(player.getHand().get(uuid, game));
-                }
-                player.revealCards("Revealed card", cards, game);
-                Mana mana = Mana.ColorlessMana(target.getTargets().size()*2);
+            if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+                Cards cards = new CardsImpl(target.getTargets());
+                controller.revealCards(sourceObject.getIdName(), cards, game);
+                Mana mana = Mana.ColorlessMana(target.getTargets().size() * 2);
                 checkToFirePossibleEvents(mana, game, source);
-                player.getManaPool().addMana(mana, game, source);
-
+                controller.getManaPool().addMana(mana, game, source);
             }
-        } 
-
-        
+        }
         return true;
     }
 
     @Override
     public Mana getMana(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int artifactsHand = controller.getHand().count(filter, game);
+            if (artifactsHand > 0) {
+                return Mana.ColorlessMana(artifactsHand * 2);
+            }
+        }
         return null;
     }
-
 
 }

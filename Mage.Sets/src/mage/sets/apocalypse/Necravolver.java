@@ -64,12 +64,12 @@ public class Necravolver extends CardImpl {
         this.addAbility(kickerAbility);
         // If Necravolver was kicked with its {1}{G} kicker, it enters the battlefield with two +1/+1 counters on it and with trample.
         Ability ability = new  EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-            new KickedCostCondition("{1}{G}"), true, "If {this} was kicked with its {1}{G} kicker, it enters the battlefield with two +1/+1 counters on it and with trample.", "");
+            new KickedCostCondition("{1}{G}"), "If {this} was kicked with its {1}{G} kicker, it enters the battlefield with two +1/+1 counters on it and with trample.", "");
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
         // If Necravolver was kicked with its {W} kicker, it enters the battlefield with a +1/+1 counter on it and with "Whenever Necravolver deals damage, you gain that much life."
         ability = new  EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            new KickedCostCondition("{W}"), true, "If {this} was kicked with its {W} kicker, it enters the battlefield with a +1/+1 counter on it and with \"Whenever {this} deals damage, you gain that much life.\"", "");
+            new KickedCostCondition("{W}"), "If {this} was kicked with its {W} kicker, it enters the battlefield with a +1/+1 counter on it and with \"Whenever {this} deals damage, you gain that much life.\"", "");
         ability.addEffect(new GainAbilitySourceEffect(new DealsDamageGainLifeSourceTriggeredAbility(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }

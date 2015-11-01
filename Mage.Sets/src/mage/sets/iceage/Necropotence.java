@@ -115,7 +115,7 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you discards a card, " + super.getRule();
+        return "Whenever you discard a card, " + super.getRule();
     }
 }
 
@@ -143,10 +143,10 @@ class NecropotenceEffect extends OneShotEffect {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, false)) {
                     card.setFaceDown(true, game);
-                    Effect returnToHandeffect = new ReturnToHandTargetEffect(false);
-                    returnToHandeffect.setText("put that face down card into your hand");
-                    returnToHandeffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandeffect, TargetController.YOU);
+                    Effect returnToHandEffect = new ReturnToHandTargetEffect(false);
+                    returnToHandEffect.setText("put that face down card into your hand");
+                    returnToHandEffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandEffect, TargetController.YOU);
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
                     delayedAbility.setSourceObject(source.getSourceObject(game), game);

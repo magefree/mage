@@ -28,14 +28,18 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.SetPlayerLifeAllEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,9 +54,12 @@ public class SwayOfTheStars extends CardImpl {
         super(ownerId, 54, "Sway of the Stars", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{U}{U}");
         this.expansionSetCode = "BOK";
 
-
         // Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7.
         this.getSpellAbility().addEffect(new SwayOfTheStarsEffect());
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText(", then draws seven cards");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new SetPlayerLifeAllEffect(7));
 
     }
 
@@ -65,7 +72,6 @@ public class SwayOfTheStars extends CardImpl {
         return new SwayOfTheStars(this);
     }
 }
-
 
 class SwayOfTheStarsEffect extends OneShotEffect {
 
@@ -80,24 +86,19 @@ class SwayOfTheStarsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-        }
-
-        for (UUID playerId: sourcePlayer.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card card: player.getHand().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }                    
-                for (Card card: player.getGraveyard().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }                   
+                player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                player.moveCards(player.getGraveyard(), Zone.GRAVEYARD, Zone.LIBRARY, source, game);
+                FilterPermanent filter = new FilterPermanent();
+                filter.add(new OwnerIdPredicate(playerId));
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), game)) {
+                    permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                }
                 player.shuffleLibrary(game);
-                player.drawCards(7, game);
-                player.setLife(7, game);
             }
         }
         return true;

@@ -36,13 +36,13 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
@@ -103,12 +103,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         UUID targetId = null;
         MageObject sourceObject = game.getObject(sourceId);
         boolean enchantCardInGraveyard = false;
-        if (sourceObject instanceof Spell) {
-            if (fromZone.equals(Zone.EXILED)) {
-                // cast from exile (e.g. Neightveil Spector) -> no replacement
-                return false;
-            }
-        }
+//        if (sourceObject instanceof Spell) {
+//            if (fromZone.equals(Zone.EXILED)) {
+//                // cast from exile (e.g. Neightveil Spector) -> no replacement
+//                return false;
+//            }
+//        }
         if (sourceObject instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) sourceObject;
             if (!stackAbility.getEffects().isEmpty()) {
@@ -116,25 +116,36 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             }
         }
 
+        game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cuase continuous effects
         if (targetId == null) {
-            Target target = card.getSpellAbility().getTargets().get(0);
-            enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
-            if (target != null) {
-                target.clearChosen(); // neccessary if e.g. aura is blinked multiple times
-            }
-            Player player = game.getPlayer(card.getOwnerId());
-            Outcome auraOutcome = Outcome.BoostCreature;
-            Ability:
-            for (Ability ability : card.getAbilities()) {
-                if (ability instanceof SpellAbility) {
-                    for (Effect effect : ability.getEffects()) {
-                        if (effect instanceof AttachEffect) {
-                            auraOutcome = effect.getOutcome();
-                            break Ability;
-                        }
+            SpellAbility spellAbility = card.getSpellAbility();
+            if (spellAbility.getTargets().isEmpty()) {
+                for (Ability ability : card.getAbilities(game)) {
+                    if ((ability instanceof SpellAbility)
+                            && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
+                            && !ability.getTargets().isEmpty()) {
+                        spellAbility = (SpellAbility) ability;
+                        break;
                     }
                 }
             }
+            if (spellAbility.getTargets().isEmpty()) {
+                return false;
+            }
+            Target target = spellAbility.getTargets().get(0).copy();
+            Outcome auraOutcome = Outcome.BoostCreature;
+            for (Effect effect : spellAbility.getEffects()) {
+                if (effect instanceof AttachEffect) {
+                    auraOutcome = effect.getOutcome();
+                    break;
+                }
+            }
+            enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
+            if (target != null) {
+                target.setNotTarget(true); // always not target because this way it's not handled targeted
+                target.clearChosen(); // neccessary if e.g. aura is blinked multiple times
+            }
+            Player player = game.getPlayer(card.getOwnerId());
             if (target != null && player != null && player.choose(auraOutcome, target, card.getId(), game)) {
                 targetId = target.getFirstTarget();
             }
@@ -149,45 +160,27 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
         Player targetPlayer = game.getPlayer(targetId);
         if (targetCard != null || targetPermanent != null || targetPlayer != null) {
-            switch (fromZone) {
-                case EXILED:
-                    game.getExile().removeCard(card, game);
-                    break;
-                case GRAVEYARD:
-                    game.getPlayer(card.getOwnerId()).removeFromGraveyard(card, game);
-                    break;
-                case HAND:
-                    game.getPlayer(card.getOwnerId()).removeFromHand(card, game);
-                    break;
-                case LIBRARY:
-                    game.getPlayer(card.getOwnerId()).removeFromLibrary(card, game);
-                    break;
-                default:
-            }
-            game.rememberLKI(card.getId(), fromZone, card);
-
+            card.removeFromZone(game, fromZone, sourceId);
+            card.updateZoneChangeCounter(game);
             PermanentCard permanent = new PermanentCard(card, card.getOwnerId(), game);
             game.getBattlefield().addPermanent(permanent);
             card.setZone(Zone.BATTLEFIELD, game);
-            game.applyEffects();
-            boolean entered = permanent.entersBattlefield(event.getSourceId(), game, fromZone, true);
-            game.applyEffects();
-            if (!entered) {
-                return false;
-            }
-            game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
+            if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)) {
+                if (targetCard != null) {
+                    permanent.attachTo(targetCard.getId(), game);
+                } else if (targetPermanent != null) {
+                    targetPermanent.addAttachment(permanent.getId(), game);
+                } else if (targetPlayer != null) {
+                    targetPlayer.addAttachment(permanent.getId(), game);
+                }
+                game.applyEffects();
 
-            if (targetCard != null) {
-                permanent.attachTo(targetCard.getId(), game);
+                game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
+                return true;
             }
-            if (targetPermanent != null) {
-                targetPermanent.addAttachment(permanent.getId(), game);
-            }
-            if (targetPlayer != null) {
-                targetPlayer.addAttachment(permanent.getId(), game);
-            }
+
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -198,7 +191,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
-                && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.HAND))) {
+                && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.STACK))) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")) {
                 return true;

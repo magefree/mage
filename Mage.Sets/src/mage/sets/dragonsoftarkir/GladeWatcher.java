@@ -33,8 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
@@ -61,7 +60,7 @@ public class GladeWatcher extends CardImpl {
         // <i>Formidable</i> - {G}: Glade Watcher can attack this turn as though it didn't have defender. Activate this ability only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),
+                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"),
                 FormidableCondition.getInstance());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);

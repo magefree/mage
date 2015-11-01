@@ -27,23 +27,21 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
@@ -57,13 +55,19 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private final UUID playerId;
     private final CardType additionalCardType;
     private boolean gainsHaste;
-    private Permanent addedTokenPermanent;
+    private final int number;
+    private List<Permanent> addedTokenPermanents;
+    private String additionalSubType;
+    private boolean tapped;
+    private boolean attacking;
 
     public PutTokenOntoBattlefieldCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
         this.playerId = null;
         this.additionalCardType = null;
-        this.addedTokenPermanent = null;
+        this.addedTokenPermanents = new ArrayList<>();
+        this.number = 1;
+        this.additionalSubType = null;
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId) {
@@ -71,11 +75,30 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste) {
+        this(playerId, additionalCardType, gainsHaste, 1);
+    }
+
+    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number) {
+        this(playerId, additionalCardType, gainsHaste, number, false, false);
+    }
+
+    /**
+     *
+     * @param playerId null the token is controlled/owned by the controller of
+     * the source ability
+     * @param additionalCardType the token gains tis card types in addition
+     * @param gainsHaste the token gains haste
+     * @param number number of tokens to put into play
+     */
+    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
         this.additionalCardType = additionalCardType;
         this.gainsHaste = gainsHaste;
-        this.addedTokenPermanent = null;
+        this.addedTokenPermanents = new ArrayList<>();
+        this.number = number;
+        this.tapped = tapped;
+        this.attacking = attacking;
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(final PutTokenOntoBattlefieldCopyTargetEffect effect) {
@@ -83,16 +106,21 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.playerId = effect.playerId;
         this.additionalCardType = effect.additionalCardType;
         this.gainsHaste = effect.gainsHaste;
-        this.addedTokenPermanent = effect.addedTokenPermanent;
+        this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
+        this.number = effect.number;
+        this.additionalSubType = effect.additionalSubType;
+        this.tapped = effect.tapped;
+        this.attacking = effect.attacking;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Card copyFrom;
+        ApplyToPermanent applier = new EmptyApplyToPermanent();
         if (permanent != null) {
             // handle copies of copies
             Permanent copyFromPermanent = permanent;
-            ApplyToPermanent applier = new EmptyApplyToPermanent();
             for (Effect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
                 if (effect instanceof CopyEffect) {
                     CopyEffect copyEffect = (CopyEffect) effect;
@@ -108,33 +136,37 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
                     }
                 }
             }
+            copyFrom = copyFromPermanent;
+        } else {
+            copyFrom = game.getCard(getTargetPointer().getFirst(game, source));
+        }
 
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(copyFromPermanent); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
-            if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
-                token.getCardType().add(additionalCardType);
-            }
-            if (gainsHaste) {
-                token.addAbility(HasteAbility.getInstance());
-            }
-            token.putOntoBattlefield(1, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId);
-            addedTokenPermanent = game.getPermanent(token.getLastAddedToken());
-            if (addedTokenPermanent != null) {
-                game.copyPermanent(copyFromPermanent, addedTokenPermanent, source, applier);
-                if (additionalCardType != null) {
-                    ContinuousEffect effect = new AddCardTypeTargetEffect(additionalCardType, Duration.Custom);
-                    effect.setTargetPointer(new FixedTarget(addedTokenPermanent.getId()));
-                    game.addEffect(effect, source);
-                }
-                if (gainsHaste) {
-                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                    effect.setTargetPointer(new FixedTarget(addedTokenPermanent.getId()));
-                    game.addEffect(effect, source);
-                }
-                return true;
+        if (permanent == null && copyFrom == null) {
+            return false;
+        }
+
+        EmptyToken token = new EmptyToken();
+        CardUtil.copyTo(token).from(copyFrom); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        applier.apply(game, token);
+        if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
+            token.getCardType().add(additionalCardType);
+        }
+        if (gainsHaste) {
+            token.addAbility(HasteAbility.getInstance());
+        }
+        if (additionalSubType != null) {
+            if (token.getSubtype().contains(additionalSubType)) {
+                token.getSubtype().add(additionalSubType);
             }
         }
-        return false;
+        token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId, tapped, attacking);
+        for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                addedTokenPermanents.add(tokenPermanent);
+            }
+        }
+        return true;
     }
 
     @Override
@@ -144,8 +176,19 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
-        sb.append("Put a token onto the battlefield that's a copy of ");
+        sb.append("Put a token onto the battlefield ");
+        if (tapped && !attacking) {
+            sb.append("tapped ");
+        } else if (!tapped && attacking) {
+            sb.append("attacking ");
+        } else if (tapped && attacking) {
+            sb.append("tapped and attacking ");
+        }
+        sb.append("that's a copy of target ");
         if (mode.getTargets() != null) {
             sb.append(mode.getTargets().get(0).getTargetName());
         }
@@ -153,7 +196,11 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
 
     }
 
-    public Permanent getAddedPermanent() {
-        return addedTokenPermanent;
+    public List<Permanent> getAddedPermanent() {
+        return addedTokenPermanents;
+    }
+
+    public void setAdditionalSubType(String additionalSubType) {
+        this.additionalSubType = additionalSubType;
     }
 }

@@ -28,8 +28,9 @@
 package mage.sets.knightsvsdragons;
 
 import java.util.UUID;
-
+import mage.ObjectColor;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -46,6 +47,9 @@ public class Ghostfire extends CardImpl {
         this.expansionSetCode = "DDG";
 
         // Ghostfire is colorless.
+        this.color = new ObjectColor();
+        this.getSpellAbility().addEffect(new InfoEffect("{this} is colorless"));
+
         // Ghostfire deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

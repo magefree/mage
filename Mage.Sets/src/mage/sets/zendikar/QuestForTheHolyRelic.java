@@ -28,11 +28,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -42,6 +37,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -61,6 +60,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class QuestForTheHolyRelic extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a creature spell");
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -68,7 +68,6 @@ public class QuestForTheHolyRelic extends CardImpl {
     public QuestForTheHolyRelic(UUID ownerId) {
         super(ownerId, 33, "Quest for the Holy Relic", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "ZEN";
-
 
         // Whenever you cast a creature spell, you may put a quest counter on Quest for the Holy Relic.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), filter, true));
@@ -106,28 +105,26 @@ class QuestForTheHolyRelicEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
         FilterCard filter = new FilterCard("Equipment");
         filter.add(new SubtypePredicate("Equipment"));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player.searchLibrary(target, game)) {
-            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-            if (card != null) {
-                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+        if (controller.searchLibrary(target, game)) {
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
+            if (card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 Permanent equipment = game.getPermanent(card.getId());
-
                 Target targetCreature = new TargetControlledCreaturePermanent();
-                if (equipment != null && player.choose(Outcome.BoostCreature, targetCreature, source.getSourceId(), game)) {
+                if (equipment != null && controller.choose(Outcome.BoostCreature, targetCreature, source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
                     permanent.addAttachment(equipment.getId(), game);
                 }
             }
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return true;
     }
 }

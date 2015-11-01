@@ -167,10 +167,15 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean resolve(Game game) {
         boolean result;
+        Player controller = game.getPlayer(getControllerId());
+        if (controller == null) {
+            return false;
+        }
         if (this.getCardType().contains(CardType.INSTANT) || this.getCardType().contains(CardType.SORCERY)) {
             int index = 0;
             result = false;
             boolean legalParts = false;
+            boolean notTargeted = true;
             // check for legal parts
             for (SpellAbility spellAbility : this.spellAbilities) {
                 // if muliple modes are selected, and there are modes with targets, then at least one mode has to have a legal target or
@@ -178,10 +183,15 @@ public class Spell extends StackObjImpl implements Card {
                 // If all targets are illegal when the spell tries to resolve, the spell is countered and none of its effects happen.
                 // If at least one target is still legal at that time, the spell resolves, but an illegal target can't perform any actions
                 // or have any actions performed on it.
-                legalParts |= spellAbilityHasLegalParts(spellAbility, game);
+                // if only a spliced spell has targets and all targets ar illegal, the complete spell is countered
+                if (hasTargets(spellAbility, game)) {
+                    notTargeted = false;
+                    legalParts |= spellAbilityHasLegalParts(spellAbility, game);
+                }
+
             }
             // resolve if legal parts
-            if (legalParts) {
+            if (notTargeted || legalParts) {
                 for (SpellAbility spellAbility : this.spellAbilities) {
                     if (spellAbilityHasLegalParts(spellAbility, game)) {
                         for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
@@ -197,9 +207,8 @@ public class Spell extends StackObjImpl implements Card {
                     }
                 }
                 if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
-                    Player player = game.getPlayer(getControllerId());
-                    if (player != null) {
-                        player.moveCards(card, Zone.STACK, Zone.GRAVEYARD, ability, game);
+                    if (!isCopy()) {
+                        controller.moveCards(card, Zone.GRAVEYARD, ability, game);
                     }
                 }
                 return result;
@@ -213,14 +222,14 @@ public class Spell extends StackObjImpl implements Card {
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
-                boolean bestow = this.getSpellAbility() instanceof BestowAbility;
+                boolean bestow = ability instanceof BestowAbility;
                 if (bestow) {
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
                     card.getSubtype().add("Aura");
                 }
-                if (card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId)) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     if (bestow) {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
@@ -230,8 +239,6 @@ public class Spell extends StackObjImpl implements Card {
                             ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
                             ((PermanentCard) permanent).getCard().getSubtype().remove("Aura");
                         }
-                        card.getCardType().add(CardType.CREATURE);
-                        card.getSubtype().remove("Aura");
                     }
                     return ability.resolve(game);
                 }
@@ -243,8 +250,7 @@ public class Spell extends StackObjImpl implements Card {
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (this.getSpellAbility() instanceof BestowAbility) {
                 updateOptionalCosts(0);
-                result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId);
-                return result;
+                return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
             } else {
                 //20091005 - 608.2b
                 if (!game.isSimulation()) {
@@ -255,8 +261,22 @@ public class Spell extends StackObjImpl implements Card {
             }
         } else {
             updateOptionalCosts(0);
-            result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId, false, faceDown);
-            return result;
+            return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+        }
+    }
+
+    private boolean hasTargets(SpellAbility spellAbility, Game game) {
+        if (spellAbility.getModes().getSelectedModes().size() > 1) {
+            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                spellAbility.getModes().setActiveMode(modeId);
+                if (!spellAbility.getTargets().isEmpty()) {
+                    return true;
+                }
+
+            }
+            return false;
+        } else {
+            return !spellAbility.getTargets().isEmpty();
         }
     }
 
@@ -599,7 +619,8 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     public Spell copySpell() {
-        return new Spell(this.card.copy(), this.ability.copySpell(), this.controllerId, this.fromZone);
+        // replaced card.copy by copy (card content should no longer be changed)
+        return new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone);
     }
 
     @Override
@@ -624,6 +645,11 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
+    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+        return card.removeFromZone(game, fromZone, sourceId);
+    }
+
+    @Override
     public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
         return moveToZone(zone, sourceId, game, flag, null);
     }
@@ -635,6 +661,10 @@ public class Spell extends StackObjImpl implements Card {
         // These are state-based actions. See rule 704.
         if (this.isCopiedSpell() && !zone.equals(Zone.STACK)) {
             return true;
+        }
+        Card card = game.getCard(getSourceId());
+        if (card != null) {
+            return card.moveToZone(zone, sourceId, game, flag, appliedEffects);
         }
         throw new UnsupportedOperationException("Unsupported operation");
     }
@@ -818,6 +848,11 @@ public class Spell extends StackObjImpl implements Card {
 
     public boolean isCountered() {
         return countered;
+    }
+
+    @Override
+    public void checkForCountersToAdd(Permanent permanent, Game game) {
+        throw new UnsupportedOperationException("Not supported for Spell");
     }
 
 }

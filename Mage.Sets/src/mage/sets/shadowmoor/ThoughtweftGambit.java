@@ -50,7 +50,6 @@ public class ThoughtweftGambit extends CardImpl {
         super(ownerId, 154, "Thoughtweft Gambit", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W/U}{W/U}");
         this.expansionSetCode = "SHM";
 
-
         // Tap all creatures your opponents control and untap all creatures you control.
         this.getSpellAbility().addEffect(new ThoughtweftGambitEffect());
 
@@ -94,7 +93,7 @@ class ThoughtweftGambitEffect extends OneShotEffect {
         }
         if (controller != null) {
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                if (controller.getId() == creature.getControllerId()) {
+                if (controller.getId().equals(creature.getControllerId())) {
                     creature.untap(game);
                 }
             }

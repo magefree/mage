@@ -32,18 +32,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.PreventionEffectData;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -62,9 +57,10 @@ public class SpiritEnKor extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // {0}: The next 1 damage that would be dealt to Spirit en-Kor this turn is dealt to target creature you control instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpiritEnKorPreventionEffect(), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, true), new GenericManaCost(0));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
@@ -76,46 +72,5 @@ public class SpiritEnKor extends CardImpl {
     @Override
     public SpiritEnKor copy() {
         return new SpiritEnKor(this);
-    }
-}
-
-class SpiritEnKorPreventionEffect extends PreventionEffectImpl {
-    
-    SpiritEnKorPreventionEffect() {
-        super(Duration.EndOfTurn, 1, false);
-        staticText = "The next 1 damage that would be dealt to {this} this turn is dealt to target creature you control instead.";
-    }
-    
-    SpiritEnKorPreventionEffect(final SpiritEnKorPreventionEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public SpiritEnKorPreventionEffect copy() {
-        return new SpiritEnKorPreventionEffect(this);
-    }
-    
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        PreventionEffectData preventionResult = preventDamageAction(event, source, game);
-        if (preventionResult.getPreventedDamage() > 0) {
-            Permanent redirectTo = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (redirectTo != null) {
-                game.informPlayers("Dealing " + preventionResult.getPreventedDamage() + " to " + redirectTo.getName() + " instead.");
-                DamageEvent damageEvent = (DamageEvent) event;
-                redirectTo.damage(preventionResult.getPreventedDamage(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-            }
-        }
-        return false;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return game.getPermanent(getTargetPointer().getFirst(game, source)) != null;
-            }
-        }
-        return false;
     }
 }

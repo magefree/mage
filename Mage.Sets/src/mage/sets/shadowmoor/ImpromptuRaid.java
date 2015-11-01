@@ -52,6 +52,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -116,17 +117,20 @@ class ImpromptuRaidEffect extends OneShotEffect {
                     controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                     return true;
                 }
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId())) {
-                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
-                    SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect();
-                    sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null) {
+                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                        game.addEffect(effect, source);
+                        SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("", source.getControllerId());
+                        sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
                     return true;
                 }
             }

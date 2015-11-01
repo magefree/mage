@@ -29,23 +29,14 @@ package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChangeATargetOfTargetSpellAbilityToSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetStackObject;
-import mage.target.Targets;
 
 /**
  *
@@ -63,9 +54,9 @@ public class MizziumMeddler extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        
-        // When Mizzium Meddler enters the battlefield, change a target of target spell or ability to Mizzium Meddler.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MizziumMeddlerEffect());
+
+        // When Mizzium Meddler enters the battlefield, you may change a target of target spell or ability to Mizzium Meddler.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ChangeATargetOfTargetSpellAbilityToSourceEffect(), true);
         ability.addTarget(new TargetStackObject());
         this.addAbility(ability);
     }
@@ -78,93 +69,4 @@ public class MizziumMeddler extends CardImpl {
     public MizziumMeddler copy() {
         return new MizziumMeddler(this);
     }
-}
-
-class MizziumMeddlerEffect extends OneShotEffect {
-
-    public MizziumMeddlerEffect() {
-        super(Outcome.Neutral);
-        staticText = "Change a target of target spell or ability to {this}";
-    }
-
-    public MizziumMeddlerEffect(final MizziumMeddlerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (stackObject != null && sourceObject != null) {
-            Targets targets;
-            Ability sourceAbility;
-            MageObject oldTarget = null;
-            if (stackObject instanceof Spell) {
-                Spell spell = (Spell)stackObject;
-                sourceAbility = spell.getSpellAbility();
-                targets = spell.getSpellAbility().getTargets();
-            } else if (stackObject instanceof StackAbility) {
-                StackAbility stackAbility = (StackAbility)stackObject;
-                sourceAbility = stackAbility;
-                targets = stackAbility.getTargets();
-            } else {
-                return false;
-            }
-            boolean twoTimesTarget = false;
-            if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
-                Target target = targets.get(0);
-                if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
-                    oldTarget = game.getObject(targets.getFirstTarget());
-                    target.clearChosen();
-                    // The source is still the spell on the stack
-                    target.addTarget(source.getSourceId(), stackObject.getStackAbility(), game);
-                }                
-            } else {
-                Player player = game.getPlayer(source.getControllerId());
-                for (Target target: targets) {
-                    for (UUID targetId: target.getTargets()) {
-                        MageObject object = game.getObject(targetId);
-                        String name;
-                        if (object == null) {
-                            Player targetPlayer = game.getPlayer(targetId);
-                            name = targetPlayer.getLogName();
-                        } else {
-                            name = object.getName();
-                        }
-                        if (!targetId.equals(source.getSourceId()) && target.getTargets().contains(source.getSourceId())) {
-                            // you can't change this target to MizziumMeddler because MizziumMeddler is already another targetId of that target.
-                            twoTimesTarget = true;
-                            continue;
-                        }
-                        if (name != null && player.chooseUse(Outcome.Neutral, new StringBuilder("Change target from ").append(name).append(" to ").append(sourceObject.getName()).append("?").toString(), source, game)) {
-                            if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
-                                oldTarget = game.getObject(targets.getFirstTarget());
-                                target.remove(targetId);
-                                // The source is still the spell on the stack
-                                target.addTarget(source.getSourceId(), stackObject.getStackAbility(), game);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            if (oldTarget != null) {
-                game.informPlayers(sourceObject.getLogName() + ": Changed target of " +stackObject.getLogName() + " from " + oldTarget.getLogName() + " to " + sourceObject.getLogName());
-            } else {
-                if (twoTimesTarget) {
-                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its not valid to target it twice for " + stackObject.getName());
-                } else {
-                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getName());
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public MizziumMeddlerEffect copy() {
-        return new MizziumMeddlerEffect(this);
-    }
-
 }

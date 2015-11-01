@@ -41,15 +41,17 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SliverToken;
 
 /**
  *
@@ -58,9 +60,14 @@ import mage.game.permanent.token.Token;
 public class SliverHive extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Sliver");
+    private static final FilterSpell filterSpell = new FilterSpell("a Sliver spell");
+
+    static {
+    }
 
     static {
         filter.add(new SubtypePredicate("Sliver"));
+        filterSpell.add(new SubtypePredicate("Sliver"));
     }
 
     public SliverHive(UUID ownerId) {
@@ -71,7 +78,7 @@ public class SliverHive extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a Sliver spell.
-        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new SliverHiveManaBuilder(), true));
+        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(filterSpell), true));
 
         // {5}, {T}: Put a 1/1 colorless Sliver creature token onto the battlefield. Activate this ability only if you control a Sliver.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliverToken()), new TapSourceCost(),
@@ -125,17 +132,5 @@ class SliverHiveManaCondition extends CreatureCastManaCondition {
             }
         }
         return false;
-    }
-}
-
-class SliverToken extends Token {
-
-    SliverToken() {
-        super("Sliver", "1/1 colorless Sliver creature token");
-        setOriginalExpansionSetCode("M15");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Sliver");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

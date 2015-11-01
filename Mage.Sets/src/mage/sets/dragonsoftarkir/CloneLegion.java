@@ -30,6 +30,7 @@ package mage.sets.dragonsoftarkir;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -37,10 +38,9 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -91,9 +91,9 @@ class CloneLegionEffect extends OneShotEffect {
         if (controller != null && targetPlayer != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), targetPlayer.getId(), game)) {
                 if (permanent != null) {
-                    EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(permanent);
-                    token.putOntoBattlefield(1, game, source.getSourceId(), controller.getId());
+                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    effect.apply(game, source);
                 }
             }
             return true;

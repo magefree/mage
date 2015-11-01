@@ -33,11 +33,13 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -52,14 +54,11 @@ public class ScarscaleRitual extends CardImpl {
         this.expansionSetCode = "SHM";
 
         // As an additional cost to cast Scarscale Ritual, put a -1/-1 counter on a creature you control.
-        Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
-        this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addCost(new ScarscaleRitualCost());
-        
+
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
-        
+
     }
 
     public ScarscaleRitual(final ScarscaleRitual card) {
@@ -84,7 +83,7 @@ class ScarscaleRitualCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        for (Permanent permanent :game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controllerId, game)) {
             return permanent != null;
         }
         return false;
@@ -92,10 +91,18 @@ class ScarscaleRitualCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        Permanent permanent = game.getPermanent(ability.getFirstTarget());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(), game);
-            this.paid = true;
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller != null) {
+            Target target = new TargetControlledCreaturePermanent();
+            target.setNotTarget(true);
+            controller.chooseTarget(Outcome.UnboostCreature, target, ability, game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent != null) {
+                permanent.addCounters(CounterType.M1M1.createInstance(), game);
+                game.informPlayers(controller.getLogName() + " puts a -1/-1 counter on " + permanent.getLogName());
+                this.paid = true;
+            }
+
         }
         return paid;
     }

@@ -49,9 +49,9 @@ public class GleefulSabotage extends CardImpl {
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
-        
+
         // Conspire
-        this.addAbility(new ConspireAbility(this));
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
     public GleefulSabotage(final GleefulSabotage card) {

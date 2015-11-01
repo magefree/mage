@@ -28,16 +28,14 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -46,7 +44,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CatToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -64,12 +62,12 @@ public class AjaniCallerOfThePride extends CardImpl {
 
     @Override
     public void build() {
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
         // +1: Put a +1/+1 counter on up to one target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on up to one target creature");
         Ability ability = new LoyaltyAbility(effect, 1);
-        ability.addTarget(new TargetCreaturePermanent(0,1));
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
         // -3: Target creature gains flying and double strike until end of turn.
         Effects effects = new Effects();
@@ -89,17 +87,5 @@ public class AjaniCallerOfThePride extends CardImpl {
     @Override
     public AjaniCallerOfThePride copy() {
         return new AjaniCallerOfThePride(this);
-    }
-}
-
-class CatToken extends Token {
-
-    public CatToken() {
-        super("Cat", "2/2 white Cat creature tokens");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Cat");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

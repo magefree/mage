@@ -32,9 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -98,19 +96,18 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Set<UUID> lands = new HashSet<>();
         if (controller != null && sourcePermanent != null) {
-            for (String landName : new String[] {"Forest","Island","Mountain","Plains","Swamp"}) {
-                FilterLandPermanent filter = new FilterLandPermanent(new StringBuilder(landName).append(" to destroy").toString());
+            for (String landName : new String[]{"Forest", "Island", "Mountain", "Plains", "Swamp"}) {
+                FilterLandPermanent filter = new FilterLandPermanent(landName + " to destroy");
                 filter.add(new SubtypePredicate(landName));
-                Target target = new TargetLandPermanent(1,1, filter, true);
+                Target target = new TargetLandPermanent(1, 1, filter, true);
                 if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                     controller.chooseTarget(outcome, target, source, game);
                     lands.add(target.getFirstTarget());
                 }
-
             }
             if (!lands.isEmpty()) {
                 int destroyedLands = 0;
-                for (UUID landId: lands) {
+                for (UUID landId : lands) {
                     Permanent land = game.getPermanent(landId);
                     if (land != null) {
                         if (land.destroy(source.getSourceId(), game, false)) {
@@ -118,9 +115,9 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect {
                         }
                     }
                 }
-                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(": ").append(destroyedLands).append(destroyedLands > 1 ? " lands were destroyed":"land was destroyed").toString());
+                game.informPlayers(sourcePermanent.getLogName() + ": " + destroyedLands + (destroyedLands > 1 ? " lands were" : "land was") + " destroyed");
             }
-
+            return true;
         }
         return false;
     }

@@ -89,6 +89,9 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                 case EXILED:
                 case GRAVEYARD:
                     sourceObject = game.getCard(ability.getSourceId());
+                    if (sourceObject == null) {
+                        sourceObject = game.getPermanent(ability.getSourceId());
+                    }
                     isCard = true;
                     break;
                 case BATTLEFIELD:
@@ -152,6 +155,9 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                         for (UUID uuid : abilityTargets) {
                             MageObject mageObject = game.getObject(uuid);
                             if (mageObject != null) {
+                                if ((mageObject instanceof Card) && ((Card) mageObject).isFaceDown(game)) {
+                                    continue;
+                                }
                                 names.add(GameLog.getColoredObjectIdNameForTooltip(mageObject));
                             }
                         }

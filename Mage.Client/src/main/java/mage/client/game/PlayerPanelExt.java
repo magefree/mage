@@ -69,6 +69,9 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
+import static mage.constants.Constants.DEFAULT_AVATAR_ID;
+import static mage.constants.Constants.MAX_AVATAR_ID;
+import static mage.constants.Constants.MIN_AVATAR_ID;
 import mage.constants.ManaType;
 import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
@@ -92,7 +95,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private static final int AVATAR_COUNT = 77;
 
-    private static final String DEFAULT_AVATAR_PATH = "/avatars/51.jpg";
+    private static final String DEFAULT_AVATAR_PATH = "/avatars/" + DEFAULT_AVATAR_ID + ".jpg";
 
     private static final int PANEL_WIDTH = 94;
     private static final int PANEL_HEIGHT = 242;
@@ -238,8 +241,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
-            if (id <= 0) {
-                id = PreferencesDialog.DEFAULT_AVATAR_ID;
+            if (!(id >= 1000) && (id <= 0 || (id <= MIN_AVATAR_ID && id > MAX_AVATAR_ID))) {
+                id = DEFAULT_AVATAR_ID;
             }
             if (id != avatarId) {
                 avatarId = id;

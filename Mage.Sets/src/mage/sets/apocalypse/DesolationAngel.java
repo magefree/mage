@@ -25,13 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +37,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -79,6 +78,7 @@ public class DesolationAngel extends CardImpl {
 }
 
 class DesolationAngelEntersBattlefieldEffect extends OneShotEffect {
+
     DesolationAngelEntersBattlefieldEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy all lands you control. If it was kicked, destroy all lands instead";
@@ -93,8 +93,8 @@ class DesolationAngelEntersBattlefieldEffect extends OneShotEffect {
         Card p = game.getCard(source.getSourceId());
         boolean kicked = KickedCondition.getInstance().apply(game, source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            if ((!kicked && permanent.getControllerId() == source.getControllerId())
-               || kicked) {
+            if ((!kicked && permanent.getControllerId().equals(source.getControllerId()))
+                    || kicked) {
                 permanent.destroy(source.getSourceId(), game, false);
             }
         }

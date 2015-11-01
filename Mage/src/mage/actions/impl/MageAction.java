@@ -24,7 +24,7 @@ public abstract class MageAction {
      * Set or change action score.
      *
      * @param scorePlayer Set player.
-     * @param score       Set score value.
+     * @param score Set score value.
      */
     protected void setScore(Player scorePlayer, int score) {
         this.scorePlayer = scorePlayer;
@@ -32,9 +32,8 @@ public abstract class MageAction {
     }
 
     /**
-     * Get game score for the {@link Player}.
-     * Value depends on the owner of this action.
-     * In case player and owner differ, negative value is returned.
+     * Get game score for the {@link Player}. Value depends on the owner of this
+     * action. In case player and owner differ, negative value is returned.
      *
      * @param player
      * @return
@@ -54,6 +53,7 @@ public abstract class MageAction {
      * Execute action.
      *
      * @param game Game context.
+     * @return
      */
     public abstract int doAction(final Game game);
 

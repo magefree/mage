@@ -237,6 +237,7 @@ public abstract class AbilityImpl implements Ability {
                  */
                 if (effect.applyEffectsAfter()) {
                     game.applyEffects();
+                    game.getState().getTriggers().checkStateTriggers(game);
                 }
             }
         }
@@ -334,7 +335,7 @@ public abstract class AbilityImpl implements Ability {
             if (sourceObject != null && !this.getAbilityType().equals(AbilityType.TRIGGERED)) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
-            if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
+            if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, noMana, game) == false) {
                 if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
                     game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
                 }
@@ -444,25 +445,36 @@ public abstract class AbilityImpl implements Ability {
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
         boolean alternativeCostisUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent) && !(this instanceof FlashbackAbility)) {
-            for (Ability ability : sourceObject.getAbilities()) {
-                // if cast for noMana no Alternative costs are allowed
-                if (!noMana && ability instanceof AlternativeSourceCosts) {
-                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                    if (alternativeSpellCosts.isAvailable(this, game)) {
-                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                            // only one alternative costs may be activated
-                            alternativeCostisUsed = true;
-                            break;
+            Abilities<Ability> abilities = null;
+            if (sourceObject instanceof Card) {
+                abilities = ((Card) sourceObject).getAbilities(game);
+            } else {
+                sourceObject.getAbilities();
+            }
+            if (abilities != null) {
+                for (Ability ability : abilities) {
+                    // if cast for noMana no Alternative costs are allowed
+                    if (!noMana && ability instanceof AlternativeSourceCosts) {
+                        AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                        if (alternativeSpellCosts.isAvailable(this, game)) {
+                            if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                                // only one alternative costs may be activated
+                                alternativeCostisUsed = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if (ability instanceof OptionalAdditionalSourceCosts) {
-                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+                    if (ability instanceof OptionalAdditionalSourceCosts) {
+                        ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+                    }
                 }
             }
             // controller specific alternate spell costs
             if (!noMana && !alternativeCostisUsed) {
-                if (this.getAbilityType().equals(AbilityType.SPELL)) {
+                if (this.getAbilityType().equals(AbilityType.SPELL)
+                        // 117.9a Only one alternative cost can be applied to any one spell as it’s being cast.
+                        // So an alternate spell ability can't be paid with Omniscience
+                        && !((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
                     for (AlternativeSourceCosts alternativeSourceCosts : controller.getAlternativeSourceCosts()) {
                         if (alternativeSourceCosts.isAvailable(this, game)) {
                             if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
@@ -673,6 +685,15 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public Effects getAllEffects() {
+        Effects allEffects = new Effects();
+        for (Mode mode : getModes().values()) {
+            allEffects.addAll(mode.getEffects());
+        }
+        return allEffects;
+    }
+
+    @Override
     public Effects getEffects(Game game, EffectType effectType) {
         Effects typedEffects = new Effects();
         for (Effect effect : getEffects()) {
@@ -758,23 +779,28 @@ public abstract class AbilityImpl implements Ability {
                 sbRule.append(": ");
             }
         }
-        if (abilityWord != null) {
-            sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> &mdash; "));
-        }
+
+        String ruleStart = sbRule.toString();
         String text = modes.getText();
+        String rule;
         if (!text.isEmpty()) {
-            if (sbRule.length() > 1) {
-                String end = sbRule.substring(sbRule.length() - 2).trim();
+            if (ruleStart.length() > 1) {
+                String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    sbRule.append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
+                    rule = ruleStart + Character.toUpperCase(text.charAt(0)) + text.substring(1);
                 } else {
-                    sbRule.append(text);
+                    rule = ruleStart + text;
                 }
             } else {
-                sbRule.append(text);
+                rule = ruleStart + text;
             }
+        } else {
+            rule = ruleStart;
         }
-        return sbRule.toString();
+        if (abilityWord != null) {
+            rule = "<i>" + abilityWord + "</i> &mdash; " + Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+        }
+        return rule;
     }
 
     @Override
@@ -929,7 +955,10 @@ public abstract class AbilityImpl implements Ability {
         // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
         // so will use the sourceId of the object itself that came as a parameter if it is not null
         if (object == null) {
-            object = game.getObject(getSourceId());
+            object = game.getPermanentEntering(getSourceId());
+            if (object == null) {
+                object = game.getObject(getSourceId());
+            }
         }
         if (object != null && !object.getAbilities().contains(this)) {
             if (object instanceof Permanent) {

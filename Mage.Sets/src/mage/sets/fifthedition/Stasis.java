@@ -28,8 +28,6 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,6 +35,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -48,9 +52,8 @@ import mage.players.Player;
 public class Stasis extends CardImpl {
 
     public Stasis(UUID ownerId) {
-        super(ownerId, 28, "Stasis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        super(ownerId, 127, "Stasis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "5ED";
-
 
         // Players skip their untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapStepEffect()));
@@ -89,8 +92,8 @@ class SkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        return event.getType() == GameEvent.EventType.UNTAP_STEP 
-                && controller != null 
+        return event.getType() == GameEvent.EventType.UNTAP_STEP
+                && controller != null
                 && controller.getInRange().contains(event.getPlayerId());
     }
 }

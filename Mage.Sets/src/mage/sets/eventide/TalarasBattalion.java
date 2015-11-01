@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -159,7 +158,7 @@ class TalarasBattalionWatcher extends Watcher {
             return;
         }
         if (event.getType() == EventType.SPELL_CAST
-                && controllerId == event.getPlayerId()) {
+                && controllerId.equals(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (!spell.getSourceId().equals(cardId) && filter.match(spell, game)) {
                 condition = true;

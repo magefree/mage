@@ -44,7 +44,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinRogueToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -70,7 +70,7 @@ public class MarshFlitter extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Marsh Flitter enters the battlefield, put two 1/1 black Goblin Rogue creature tokens onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BlackGoblinRogueToken(), 2), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinRogueToken(), 2), false));
         // Sacrifice a Goblin: Marsh Flitter has base power and toughness 3/3 until end of turn.
         Effect effect = new SetPowerToughnessSourceEffect(3, 3, Duration.EndOfTurn);
         effect.setText("{this} has base power and toughness 3/3 until end of turn");
@@ -86,17 +86,5 @@ public class MarshFlitter extends CardImpl {
     @Override
     public MarshFlitter copy() {
         return new MarshFlitter(this);
-    }
-}
-
-class BlackGoblinRogueToken extends Token {
-    BlackGoblinRogueToken() {
-        super("Goblin Rogue", "1/1 black Goblin Rogue creature tokens");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Goblin");
-        subtype.add("Rogue");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

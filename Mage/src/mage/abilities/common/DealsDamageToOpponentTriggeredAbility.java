@@ -31,7 +31,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -41,24 +40,30 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    boolean onlyCombat;
+    private final boolean onlyCombat, setTargetPointer;
 
     public DealsDamageToOpponentTriggeredAbility(Effect effect) {
-        this(effect, false, false);
-   }
+        this(effect, false, false, false);
+    }
 
     public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, false);
+        this(effect, optional, false, false);
     }
 
     public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional, boolean onlyCombat) {
+        this(effect, optional, onlyCombat, false);
+    }
+
+    public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional, boolean onlyCombat, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.onlyCombat = onlyCombat;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
         super(ability);
         this.onlyCombat = ability.onlyCombat;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -81,9 +86,11 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
                     return false;
                 }
             }
-            for (Effect effect : getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                effect.setValue("damage", event.getAmount());
+            if(setTargetPointer) {
+                for (Effect effect : getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setValue("damage", event.getAmount());
+                }
             }
             return true;
         }

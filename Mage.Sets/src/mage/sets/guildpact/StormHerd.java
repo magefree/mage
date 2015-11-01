@@ -31,11 +31,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PegasusToken;
 
 /**
  *
@@ -58,18 +57,5 @@ public class StormHerd extends CardImpl {
     @Override
     public StormHerd copy() {
         return new StormHerd(this);
-    }
-}
-
-class PegasusToken extends Token {
-
-    public PegasusToken() {
-        super("Pegasus", "1/1 white Pegasus creature tokens with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Pegasus");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
     }
 }

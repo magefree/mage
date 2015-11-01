@@ -29,14 +29,12 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WurmToken2;
 
 /**
  *
@@ -50,9 +48,8 @@ public class AdventOfTheWurm extends CardImpl {
         super(ownerId, 51, "Advent of the Wurm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}{W}");
         this.expansionSetCode = "DGM";
 
-
         // Put a 5/5 green Wurm creature token with trample onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken2()));
     }
 
     public AdventOfTheWurm(final AdventOfTheWurm card) {
@@ -62,22 +59,5 @@ public class AdventOfTheWurm extends CardImpl {
     @Override
     public AdventOfTheWurm copy() {
         return new AdventOfTheWurm(this);
-    }
-    
-    private class WurmToken extends Token {
-
-        private WurmToken() {
-            super("Wurm", "5/5 green Wurm creature token with trample");
-            cardType.add(CardType.CREATURE);
-            color.setGreen(true);
-            subtype.add("Wurm");
-            power = new MageInt(5);
-            toughness = new MageInt(5);
-
-            addAbility(TrampleAbility.getInstance());
-            // for image
-            setOriginalExpansionSetCode("RTR");
-        }
-
     }
 }

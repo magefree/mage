@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -59,10 +58,10 @@ public class Tatterkite extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Tatterkite can't have counters placed on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantHaveCountersSourceEffect(Duration.WhileOnBattlefield, "it")));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantHaveCountersSourceEffect(Duration.WhileOnBattlefield)));
+
     }
 
     public Tatterkite(final Tatterkite card) {
@@ -77,7 +76,7 @@ public class Tatterkite extends CardImpl {
 
 class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantHaveCountersSourceEffect(Duration duration, String objectText) {
+    public CantHaveCountersSourceEffect(Duration duration) {
         super(duration, Outcome.Detriment);
         staticText = "{this} can't have counters placed on it";
     }
@@ -92,13 +91,8 @@ class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ADD_COUNTER;
+        return event.getType() == EventType.ADD_COUNTERS;
     }
 
     @Override

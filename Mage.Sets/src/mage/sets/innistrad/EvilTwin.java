@@ -28,19 +28,20 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -55,8 +56,6 @@ import mage.util.functions.ApplyToPermanent;
  */
 public class EvilTwin extends CardImpl {
 
-
-
     public EvilTwin(UUID ownerId) {
         super(ownerId, 212, "Evil Twin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
         this.expansionSetCode = "ISD";
@@ -66,11 +65,10 @@ public class EvilTwin extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Evil Twin enter the battlefield as a copy of any creature on the battlefield except it gains "{U}{B}, {T}: Destroy target creature with the same name as this creature."
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new EntersBattlefieldEffect(new CopyPermanentEffect(new EvilTwinApplyToPermanent()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains \"{U}{B}, {T}: Destroy target creature with the same name as this creature\"",
-                true)));
+        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new EvilTwinApplyToPermanent());
+        effect.setText("a copy of any creature on the battlefield except it gains \"{U}{B}, {T}: Destroy target creature with the same name as this creature.\"");
+        this.addAbility(new EntersBattlefieldAbility(effect, true));
+
     }
 
     public EvilTwin(final EvilTwin card) {
@@ -99,6 +97,16 @@ class EvilTwinApplyToPermanent extends ApplyToPermanent {
         permanent.addAbility(ability, game);
         return true;
     }
+
+    @Override
+    public Boolean apply(Game game, MageObject mageObject) {
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        mageObject.getAbilities().add(ability);
+        return true;
+    }
+
 }
 
 class EvilTwinPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {

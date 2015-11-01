@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class KinsbaileCavalier extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Knight");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Knight creatures");
 
     static {
         filter.add(new SubtypePredicate("Knight"));

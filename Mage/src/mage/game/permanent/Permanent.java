@@ -109,6 +109,8 @@ public interface Permanent extends Card, Controllable {
 
     UUID getAttachedTo();
 
+    int getAttachedToZoneChangeCounter();
+
     void attachTo(UUID permanentId, Game game);
 
     boolean addAttachment(UUID permanentId, Game game);
@@ -347,4 +349,5 @@ public interface Permanent extends Card, Controllable {
     int getCreateOrder();
 
     void setCreateOrder(int createOrder);
+
 }

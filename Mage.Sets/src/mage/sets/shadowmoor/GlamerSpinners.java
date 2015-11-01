@@ -126,7 +126,8 @@ class GlamerSpinnersEffect extends OneShotEffect {
             LinkedList<UUID> auras = new LinkedList<>();
             auras.addAll(targetPermanent.getAttachments());
 
-            if (controller.choose(Outcome.Neutral, chosenPermanentToAttachAuras, source.getSourceId(), game)) {
+            if (chosenPermanentToAttachAuras.canChoose(source.getSourceId(), source.getControllerId(), game)
+                    && controller.choose(Outcome.Neutral, chosenPermanentToAttachAuras, source.getSourceId(), game)) {
                 Permanent permanentToAttachAuras = game.getPermanent(chosenPermanentToAttachAuras.getFirstTarget());
                 if (permanentToAttachAuras != null) {
                     for (UUID auraId : auras) {
@@ -163,7 +164,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
             }
             return true;
         }
-        
+
         return false;
     }
 }

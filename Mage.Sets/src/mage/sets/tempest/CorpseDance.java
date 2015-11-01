@@ -45,6 +45,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -57,7 +58,6 @@ public class CorpseDance extends CardImpl {
     public CorpseDance(UUID ownerId) {
         super(ownerId, 10, "Corpse Dance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "TMP";
-
 
         // Buyback {2}
         this.addAbility(new BuybackAbility("{2}"));
@@ -97,26 +97,29 @@ class CorpseDanceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card lastCreatureCard = null;
-            for (Card card :controller.getGraveyard().getCards(game)) {
+            for (Card card : controller.getGraveyard().getCards(game)) {
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     lastCreatureCard = card;
                 }
             }
             if (lastCreatureCard != null) {
-                if (controller.putOntoBattlefieldWithInfo(lastCreatureCard, game, Zone.GRAVEYARD, source.getSourceId())) {
-                    FixedTarget fixedTarget = new FixedTarget(lastCreatureCard.getId());
-                    // Gains Haste
-                    ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    hasteEffect.setTargetPointer(fixedTarget);
-                    game.addEffect(hasteEffect, source);
-                    // Exile it at end of turn
-                    ExileTargetEffect exileEffect = new ExileTargetEffect(null,"",Zone.BATTLEFIELD);
-                    exileEffect.setTargetPointer(fixedTarget);
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                if (controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game)) {
+                    Permanent creature = game.getPermanent(lastCreatureCard.getId());
+                    if (creature != null) {
+                        FixedTarget fixedTarget = new FixedTarget(creature, game);
+                        // Gains Haste
+                        ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                        hasteEffect.setTargetPointer(fixedTarget);
+                        game.addEffect(hasteEffect, source);
+                        // Exile it at end of turn
+                        ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+                        exileEffect.setTargetPointer(fixedTarget);
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
                 }
             }
             return true;

@@ -29,14 +29,12 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
@@ -56,7 +54,8 @@ public class DeathbellowRaider extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Deathbellow Raider attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new AttacksEachTurnStaticAbility());
+
         // {2}{B}: Regenerate Deathbellow Raider.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
     }

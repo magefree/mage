@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.apocalypse;
 
 import java.util.UUID;
@@ -34,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -52,7 +51,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-
 public class LifeDeath extends SplitCard {
 
     public LifeDeath(UUID ownerId) {
@@ -61,8 +59,8 @@ public class LifeDeath extends SplitCard {
 
         // Life
         // All lands you control become 1/1 creatures until end of turn. They're still lands.
-        getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureAllEffect(new LifeLandToken(), "lands", 
-                        new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureAllEffect(new LifeLandToken(), "lands",
+                new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn));
 
         // Death
         // Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
@@ -83,6 +81,7 @@ public class LifeDeath extends SplitCard {
 }
 
 class LifeLandToken extends Token {
+
     public LifeLandToken() {
         super("", "1/1 creatures");
         cardType.add(CardType.CREATURE);
@@ -115,10 +114,10 @@ class DeathEffect extends OneShotEffect {
         if (creatureCard != null && controller != null) {
             boolean result = false;
             if (game.getState().getZone(creatureCard.getId()).equals(Zone.GRAVEYARD)) {
-                result = controller.putOntoBattlefieldWithInfo(creatureCard, game, Zone.GRAVEYARD, source.getSourceId());
-            }            
+                controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);
+            }
             controller.loseLife(creatureCard.getManaCost().convertedManaCost(), game);
-            return result;
+            return true;
         }
         return false;
     }

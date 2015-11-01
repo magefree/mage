@@ -1,46 +1,39 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 
 /*
  * ConnectDialog.java
  *
  * Created on 20-Jan-2010, 9:37:07 PM
  */
-
 package mage.client.dialog;
 
-import mage.client.MageFrame;
-import mage.client.util.Config;
-import mage.remote.Connection;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -63,10 +56,17 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import mage.client.MageFrame;
+import static mage.client.dialog.PreferencesDialog.KEY_CONNECTION_URL_SERVER_LIST;
 import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_AUTO_CONNECT;
 import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
+import mage.client.util.Config;
 import mage.client.util.gui.countryBox.CountryItemEditor;
+import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -101,11 +101,11 @@ public class ConnectDialog extends MageDialog {
         this.txtUserName.setText(MageFrame.getPreferences().get("userName", ""));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get(KEY_CONNECT_AUTO_CONNECT, "false")));
         this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
-        
+
         String selectedFlag = MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world");
         // set the selected country/flag
         for (int i = 0; i < cbFlag.getItemCount(); i++) {
-            String[] name = (String[])cbFlag.getItemAt(i);
+            String[] name = (String[]) cbFlag.getItemAt(i);
             if (name[1].equals(selectedFlag)) {
                 cbFlag.setSelectedIndex(i);
                 break;
@@ -124,10 +124,9 @@ public class ConnectDialog extends MageDialog {
     }
 
     /**
-     * This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -293,7 +292,7 @@ public class ConnectDialog extends MageDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor)cbFlag.getEditor()).getImageItem());
+        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
         if (task != null && !task.isDone()) {
             task.cancel(true);
         } else {
@@ -329,7 +328,7 @@ public class ConnectDialog extends MageDialog {
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
-            MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor)cbFlag.getEditor()).getImageItem());    
+            MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
 
             ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
 
@@ -354,8 +353,8 @@ public class ConnectDialog extends MageDialog {
             }
 
             // pref settings
-            MageFrame.getInstance().setUserPrefsToConnection(connection);            
-            
+            MageFrame.getInstance().setUserPrefsToConnection(connection);
+
             logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
             task = new ConnectTask();
             task.execute();
@@ -385,7 +384,7 @@ public class ConnectDialog extends MageDialog {
                 get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 if (result) {
-                    lblStatus.setText("");                    
+                    lblStatus.setText("");
                     connected();
                     MageFrame.getInstance().showGames(false);
                 } else {
@@ -412,7 +411,6 @@ public class ConnectDialog extends MageDialog {
         this.hideDialog();
     }
 
-
     private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
         char c = evt.getKeyChar();
         if (!Character.isDigit(c)) {
@@ -428,8 +426,12 @@ public class ConnectDialog extends MageDialog {
     private void findPublicServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         BufferedReader in = null;
         try {
-            
-            URL serverListURL = new URL(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONNECTION_URL_SERVER_LIST, "http://xmage.de/files/server-list.txt"));
+            String serverUrl = PreferencesDialog.getCachedValue(KEY_CONNECTION_URL_SERVER_LIST, "http://xmage.de/files/server-list.txt");
+            if (serverUrl.contains("xmage.info/files/")) {
+                serverUrl = serverUrl.replace("xmage.info/files/", "xmage.de/files/"); // replace old URL if still saved
+                PreferencesDialog.saveValue(KEY_CONNECTION_URL_SERVER_LIST, serverUrl);
+            }
+            URL serverListURL = new URL(serverUrl);
 
             Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
             Proxy p = null;
@@ -465,12 +467,12 @@ public class ConnectDialog extends MageDialog {
             boolean URLNotFound = false;
             try {
                 in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
-            } catch (SocketTimeoutException |FileNotFoundException | UnknownHostException ex ) {
+            } catch (SocketTimeoutException | FileNotFoundException | UnknownHostException ex) {
                 logger.warn("Could not read serverlist from: " + serverListURL.toString());
                 File f = new File("serverlist.txt");
                 if (f.exists() && !f.isDirectory()) {
                     logger.info("Using buffered serverlist: serverlist.txt");
-                    URLNotFound = true;                    
+                    URLNotFound = true;
                     in = new BufferedReader(new FileReader("serverlist.txt"));
                 }
             }
@@ -518,7 +520,7 @@ public class ConnectDialog extends MageDialog {
                     JOptionPane.showMessageDialog(null, "Wrong server data format.");
                 }
             }
-            
+
         } catch (Exception ex) {
             logger.error(ex, ex);
         } finally {
@@ -538,7 +540,6 @@ public class ConnectDialog extends MageDialog {
     private void chkForceUpdateDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkForceUpdateDBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chkForceUpdateDBActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

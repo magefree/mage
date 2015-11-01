@@ -53,12 +53,11 @@ public class RiteOfPassage extends CardImpl {
         super(ownerId, 91, "Rite of Passage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "5DN";
 
-
         // Whenever a creature you control is dealt damage, put a +1/+1 counter on it.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("put a +1/+1 counter on it");
         this.addAbility(new RiteOfPassageTriggeredAbility(effect));
-        
+
     }
 
     public RiteOfPassage(final RiteOfPassage card) {
@@ -74,7 +73,7 @@ public class RiteOfPassage extends CardImpl {
 class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-    
+
     public RiteOfPassageTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
@@ -108,6 +107,6 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} is dealt damage, " + super.getRule();
+        return "Whenever a creature you control is dealt damage, " + super.getRule();
     }
 }

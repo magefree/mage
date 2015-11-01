@@ -25,21 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -50,18 +49,21 @@ public class SeachromeCoast extends CardImpl {
 
     private static FilterLandPermanent filter = new FilterLandPermanent();
 
-    public SeachromeCoast (UUID ownerId) {
+    public SeachromeCoast(UUID ownerId) {
         super(ownerId, 229, "Seachrome Coast", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 4));
+        // Seachrome Coast enters the battlefield tapped unless you control two or fewer other lands.
+        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 3));
         String abilityText = "tap it unless you control fewer than 3 lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+
+        // {T}: Add {W} or {U} to your mana pool.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
     }
 
-    public SeachromeCoast (final SeachromeCoast card) {
+    public SeachromeCoast(final SeachromeCoast card) {
         super(card);
     }
 

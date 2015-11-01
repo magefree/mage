@@ -31,14 +31,15 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.costs.common.MetalcraftCost;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -59,9 +60,13 @@ public class ArgentSphinx extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ArgentSphinxEffect(), new ManaCostsImpl("{U}"));
-        ability.addCost(new MetalcraftCost());
+
+        // Metalcraft - {U}: Exile Argent Sphinx. Return it to the battlefield under your control at the beginning of the next end step. Activate this ability only if you control three or more artifacts.
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ArgentSphinxEffect(), new ManaCostsImpl("{U}"), MetalcraftCondition.getInstance());
+        ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);
     }
 

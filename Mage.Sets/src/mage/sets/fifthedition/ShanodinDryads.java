@@ -43,6 +43,7 @@ public class ShanodinDryads extends CardImpl {
     public ShanodinDryads(UUID ownerId) {
         super(ownerId, 187, "Shanodin Dryads", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "5ED";
+        this.subtype.add("Nymph");
         this.subtype.add("Dryad");
 
         this.power = new MageInt(1);

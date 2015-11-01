@@ -62,6 +62,7 @@ public class GenjuOfTheRealm extends CardImpl {
         super(ownerId, 151, "Genju of the Realm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
+        this.supertype.add("Legendary");
 
 
         // Enchant Land

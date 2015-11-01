@@ -28,17 +28,15 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.FaerieRogueToken;
 
 /**
  *
@@ -51,10 +49,9 @@ public class Bitterblossom extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Faerie");
 
-
         // At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying onto the battlefield.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false);
-        ability.addEffect(new CreateTokenEffect(new FaerieToken(), 1));
+        ability.addEffect(new CreateTokenEffect(new FaerieRogueToken(), 1));
         this.addAbility(ability);
     }
 
@@ -65,18 +62,5 @@ public class Bitterblossom extends CardImpl {
     @Override
     public Bitterblossom copy() {
         return new Bitterblossom(this);
-    }
-}
-
-class FaerieToken extends Token {
-    FaerieToken() {
-        super("Faerie Rogue", "1/1 black Faerie Rogue creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Faerie");
-        subtype.add("Rogue");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

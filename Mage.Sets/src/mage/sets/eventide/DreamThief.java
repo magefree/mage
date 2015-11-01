@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  * @author jeffwadsworth
  */
 public class DreamThief extends CardImpl {
-    
+
     private static final String rule = "draw a card if you've cast another blue spell this turn";
 
     public DreamThief(UUID ownerId) {
@@ -70,7 +70,7 @@ public class DreamThief extends CardImpl {
 
         // When Dream Thief enters the battlefield, draw a card if you've cast another blue spell this turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new CastBlueSpellThisTurnCondition(), rule)), new DreamThiefWatcher(this.getId()));
-        
+
     }
 
     public DreamThief(final DreamThief card) {
@@ -98,6 +98,7 @@ class CastBlueSpellThisTurnCondition implements Condition {
 class DreamThiefWatcher extends Watcher {
 
     private static final FilterSpell filter = new FilterSpell();
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
@@ -125,7 +126,7 @@ class DreamThiefWatcher extends Watcher {
             return;
         }
         if (event.getType() == EventType.SPELL_CAST
-                && controllerId == event.getPlayerId()) {
+                && controllerId.equals(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (!spell.getSourceId().equals(cardId) && filter.match(spell, game)) {
                 condition = true;

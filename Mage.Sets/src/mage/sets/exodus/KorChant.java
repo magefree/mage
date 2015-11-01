@@ -35,6 +35,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
@@ -53,8 +55,15 @@ public class KorChant extends CardImpl {
 
         // All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
         this.getSpellAbility().addEffect(new KorChantEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new KorChantSecondTarget());
+        TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
+
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public KorChant(final KorChant card) {
@@ -67,33 +76,8 @@ public class KorChant extends CardImpl {
     }
 }
 
-class KorChantSecondTarget extends TargetCreaturePermanent {
-    
-    KorChantSecondTarget() {
-        super();
-        this.targetName = "another creature";
-    }
-
-    KorChantSecondTarget(final KorChantSecondTarget target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().get(0).getTargets().contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
-    public KorChantSecondTarget copy() {
-        return new KorChantSecondTarget(this);
-    }
-}
-
 class KorChantEffect extends RedirectionEffect {
-    
+
     protected TargetSource target = new TargetSource();
 
     KorChantEffect() {
@@ -121,7 +105,7 @@ class KorChantEffect extends RedirectionEffect {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(this.getTargetPointer().getFirst(game, source))

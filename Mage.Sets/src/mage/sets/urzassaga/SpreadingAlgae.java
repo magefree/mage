@@ -29,11 +29,10 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -41,15 +40,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -57,29 +50,29 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpreadingAlgae extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
+    private static final FilterPermanent filter = new FilterPermanent("Swamp");
+
     static{
         filter.add(new SubtypePredicate("Swamp"));
     }
+
     public SpreadingAlgae(UUID ownerId) {
         super(ownerId, 274, "Spreading Algae", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-
         // Enchant Swamp
-        
-        TargetPermanent auraTarget = new TargetLandPermanent();
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When enchanted land becomes tapped, destroy it.
-        this.addAbility(new SpreadingAlgaeTriggeredAbility(new DestroyTargetEffect()));
-        
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedEffect("it"), "enchanted land"));
+
         // When Spreading Algae is put into a graveyard from the battlefield, return Spreading Algae to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
-        
+
     }
 
     public SpreadingAlgae(final SpreadingAlgae card) {
@@ -90,44 +83,4 @@ public class SpreadingAlgae extends CardImpl {
     public SpreadingAlgae copy() {
         return new SpreadingAlgae(this);
     }
-}
-
-
-class SpreadingAlgaeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public SpreadingAlgaeTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public SpreadingAlgaeTriggeredAbility(final SpreadingAlgaeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SpreadingAlgaeTriggeredAbility copy() {
-        return new SpreadingAlgaeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchant = game.getPermanent(sourceId);
-        if (enchant != null && enchant.getAttachedTo() != null) {
-            if (event.getTargetId().equals(enchant.getAttachedTo())) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(enchant.getAttachedTo()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When enchanted permanent becomes tapped, destroy it.";
-    }
-
 }

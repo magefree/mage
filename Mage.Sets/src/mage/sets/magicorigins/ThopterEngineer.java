@@ -42,7 +42,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ThopterColorlessToken;
 
 /**
  *
@@ -55,7 +55,7 @@ public class ThopterEngineer extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
-    
+
     public ThopterEngineer(UUID ownerId) {
         super(ownerId, 165, "Thopter Engineer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "ORI";
@@ -65,8 +65,8 @@ public class ThopterEngineer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Thopter Engineer enters the battlefield, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterEngineerThopterToken(), 1)));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 1)));
+
          // Artifact creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
@@ -78,17 +78,5 @@ public class ThopterEngineer extends CardImpl {
     @Override
     public ThopterEngineer copy() {
         return new ThopterEngineer(this);
-    }
-}
-
-class ThopterEngineerThopterToken extends Token {
-    ThopterEngineerThopterToken() {
-        super("Thopter", "a 1/1 colorless Thopter artifact creature token with flying");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

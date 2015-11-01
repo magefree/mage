@@ -60,12 +60,11 @@ public class VesuvaTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Glimmerpost", 1);
 
-        
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimmerpost");
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Glimmerpost");
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Vesuva");
         setChoice(playerA, "Glimmerpost");
-        
+
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -75,31 +74,31 @@ public class VesuvaTest extends CardTestPlayerBase {
         assertLife(playerA, 24); // 20 + 1 + 3
         assertLife(playerB, 22); // 20 + 2
     }
-    
+
     @Test
     public void testDarkDepth() {
         // Dark Depths enters the battlefield with ten ice counters on it.
         // {3}: Remove an ice counter from Dark Depths.
         // When Dark Depths has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and "This creature is indestructible" named Marit Lage onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerB, "Dark Depths", 1);
-        
+
         // You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.
-        addCard(Zone.HAND, playerA, "Vesuva", 1);        
-        
+        addCard(Zone.HAND, playerA, "Vesuva", 1);
+
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vesuva");
         setChoice(playerA, "Dark Depths");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Dark Depths", 1);
         assertPermanentCount(playerB, "Dark Depths", 1);
-        
+        assertPermanentCount(playerA, "Dark Depths", 1);
+
         Permanent darkDepth = getPermanent("Dark Depths", playerA);
         if (darkDepth != null) {
-            Assert.assertEquals(darkDepth.getCounters().getCount("ice"), 10);
+            Assert.assertEquals(10, darkDepth.getCounters().getCount("ice"));
         }
-
+        assertTappedCount("Dark Depths", true, 1);
     }
 
 }

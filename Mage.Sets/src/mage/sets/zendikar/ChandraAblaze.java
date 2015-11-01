@@ -32,17 +32,16 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -65,8 +64,7 @@ public class ChandraAblaze extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Chandra");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player.
         LoyaltyAbility ability = new LoyaltyAbility(new ChandraAblazeEffect1(), 1);
@@ -75,7 +73,9 @@ public class ChandraAblaze extends CardImpl {
         this.addAbility(ability);
         // -2: Each player discards his or her hand, then draws three cards.
         ability = new LoyaltyAbility(new DiscardHandAllEffect(), -2);
-        ability.addEffect(new ChandraAblazeEffect4());
+        Effect effect = new DrawCardAllEffect(3);
+        effect.setText(", then draws three cards");
+        ability.addEffect(effect);
         this.addAbility(ability);
         // -7: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
         ability = new LoyaltyAbility(new ChandraAblazeEffect5(), -7);
@@ -159,23 +159,6 @@ class ChandraAblazeEffect2 extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class ChandraAblazeEffect4 extends DrawCardAllEffect {
-
-    public ChandraAblazeEffect4() {
-        super(3);
-        this.staticText = "Then draws three cards";
-    }
-
-    public ChandraAblazeEffect4(final ChandraAblazeEffect4 effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChandraAblazeEffect4 copy() {
-        return new ChandraAblazeEffect4(this);
     }
 }
 

@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -42,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -50,6 +52,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -181,10 +184,10 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl {
     }
 }
 
-class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl {
+class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     public DaxosOfMeletisSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_ANY_MANA, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
@@ -207,6 +210,13 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl {
         return source.getControllerId().equals(affectedControllerId)
                 && objectId == ((FixedTarget) getTargetPointer()).getTarget()
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
+                && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
                 && game.getState().getZone(objectId).equals(Zone.STACK);
     }
+
+    @Override
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
+    }
+
 }

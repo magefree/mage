@@ -35,6 +35,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -45,10 +46,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.util.CardUtil;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -113,13 +113,13 @@ class RhysTheRedeemedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 if (permanent.getControllerId().equals(source.getControllerId())) {
-                    EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(permanent);
-                    token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    effect.apply(game, source);
                 }
             }
             return true;

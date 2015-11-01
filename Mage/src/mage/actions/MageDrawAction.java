@@ -1,7 +1,8 @@
 package mage.actions;
 
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.UUID;
 import mage.actions.impl.MageAction;
 import mage.actions.score.ArtificialScoringSystem;
 import mage.cards.Card;
@@ -9,9 +10,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.List;
-import java.util.UUID;
 import mage.util.CardUtil;
 
 /**
@@ -39,7 +37,7 @@ public class MageDrawAction extends MageAction {
      * Draw and set action score.
      *
      * @param game Game context.
-     * @return 
+     * @return
      */
     @Override
     public int doAction(Game game) {
@@ -70,8 +68,8 @@ public class MageDrawAction extends MageAction {
     }
 
     /**
-     * Draw a card if possible (there is no replacement effect that prevent us from drawing).
-     * Fire event about card drawn.
+     * Draw a card if possible (there is no replacement effect that prevent us
+     * from drawing). Fire event about card drawn.
      *
      * @param game
      * @return

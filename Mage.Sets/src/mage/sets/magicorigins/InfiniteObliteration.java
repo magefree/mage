@@ -113,10 +113,7 @@ class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCard
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Name a creature card. ");
-        sb.append(super.getText(mode));
-        return sb.toString();
+        return "Name a creature card. " + super.getText(mode);
     }
 
 }

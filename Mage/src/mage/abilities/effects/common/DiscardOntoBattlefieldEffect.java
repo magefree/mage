@@ -34,8 +34,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -85,7 +85,7 @@ public class DiscardOntoBattlefieldEffect extends ReplacementEffectImpl {
         if (card != null) {
             Player owner = game.getPlayer(card.getOwnerId());
             if (owner != null) {
-                if (owner.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
+                if (owner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     return true;
                 }
             }

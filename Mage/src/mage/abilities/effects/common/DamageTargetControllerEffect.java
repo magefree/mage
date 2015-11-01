@@ -77,7 +77,7 @@ public class DamageTargetControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if(permanent != null) {
             Player targetController = game.getPlayer(permanent.getControllerId());
             if(targetController != null) {

@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -111,7 +111,7 @@ class HazezonTamarEntersEffect extends OneShotEffect {
         if (controller != null) {
             Effect effect = new CreateTokenEffect(new HazezonTamarSandWarrior(), new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent()));
             effect.setText("put X 1/1 Sand Warrior creature tokens that are red, green, and white onto the battlefield, where X is the number of lands you control at that time");
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             delayedAbility.setSourceObject(source.getSourceObject(game), game);

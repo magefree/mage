@@ -37,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SliverToken;
 
 /**
  *
@@ -53,12 +53,11 @@ public class BroodSliver extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a Sliver deals combat damage to a player, its controller may put a 1/1 colorless Sliver creature token onto the battlefield.       
+        // Whenever a Sliver deals combat damage to a player, its controller may put a 1/1 colorless Sliver creature token onto the battlefield.
         Effect effect = new CreateTokenTargetEffect(new SliverToken());
         effect.setText("its controller may put a 1/1 colorless Sliver creature token onto the battlefield");
-        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(effect, 
-                        new FilterCreaturePermanent("Sliver", "a Sliver"), 
-                        true, SetTargetPointer.PLAYER, true));        
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(effect,
+            new FilterCreaturePermanent("Sliver", "a Sliver"), true, SetTargetPointer.PLAYER, true));
     }
 
     public BroodSliver(final BroodSliver card) {
@@ -68,16 +67,5 @@ public class BroodSliver extends CardImpl {
     @Override
     public BroodSliver copy() {
         return new BroodSliver(this);
-    }
-}
-
-class SliverToken extends Token {
-
-    public SliverToken() {
-        super("Sliver", "1/1 colorless Sliver creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Sliver");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

@@ -33,7 +33,7 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 
 public class NotMyTurnCondition implements Condition {
-    
+
     private static final NotMyTurnCondition fInstance = new NotMyTurnCondition();
 
     public static Condition getInstance() {
@@ -47,5 +47,10 @@ public class NotMyTurnCondition implements Condition {
             return !activePlayerId.equals(source.getControllerId());
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "if it's not your turn";
     }
 }

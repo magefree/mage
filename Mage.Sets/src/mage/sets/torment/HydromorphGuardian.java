@@ -29,9 +29,7 @@ package mage.sets.torment;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -42,12 +40,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.target.Target;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.other.TargetsPermanentPredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -59,7 +53,7 @@ public class HydromorphGuardian extends CardImpl {
     private final static FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
 
     static {
-        filter.add(new HydromorphGuardianPredicate());
+        filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
     }
 
     public HydromorphGuardian(UUID ownerId) {
@@ -83,33 +77,5 @@ public class HydromorphGuardian extends CardImpl {
     @Override
     public HydromorphGuardian copy() {
         return new HydromorphGuardian(this);
-    }
-}
-
-class HydromorphGuardianPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        Spell spell = game.getStack().getSpell(input.getObject().getId());
-        if (spell != null) {
-            for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
-                Mode mode = spell.getSpellAbility().getModes().get(modeId);
-                for (Target target : mode.getTargets()) {
-                    for (UUID targetId : target.getTargets()) {
-                        Permanent permanent = game.getPermanent(targetId);
-                        if (permanent.getCardType().contains(CardType.CREATURE)
-                                && permanent.getControllerId().equals(input.getPlayerId())) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "that targets one or more creatures you control";
     }
 }

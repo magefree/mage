@@ -27,7 +27,6 @@
  */
 package mage.sets.antiquities;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -43,7 +42,6 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -56,7 +54,6 @@ public class TransmuteArtifact extends CardImpl {
     public TransmuteArtifact(UUID ownerId) {
         super(ownerId, 58, "Transmute Artifact", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}{U}");
         this.expansionSetCode = "ATQ";
-
 
         // Sacrifice an artifact. If you do, search your library for an artifact card. If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new TransmuteArtifactEffect());
@@ -73,7 +70,6 @@ public class TransmuteArtifact extends CardImpl {
 }
 
 class TransmuteArtifactEffect extends SearchEffect {
-
 
     public TransmuteArtifactEffect() {
         super(new TargetCardInLibrary(new FilterArtifactCard()), Outcome.PutCardInPlay);
@@ -95,41 +91,36 @@ class TransmuteArtifactEffect extends SearchEffect {
         if (controller == null) {
             return false;
         }
-        //Sacrifice an artifact. 
+        //Sacrifice an artifact.
         int convertedManaCost = 0;
         boolean sacrifice = false;
         TargetControlledPermanent targetArtifact = new TargetControlledPermanent(new FilterControlledArtifactPermanent());
-        if(controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)){
+        if (controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)) {
             Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
-            if(permanent != null){
+            if (permanent != null) {
                 convertedManaCost = permanent.getManaCost().convertedManaCost();
                 sacrifice = permanent.sacrifice(source.getSourceId(), game);
             }
-        }
-        else
-        {
+        } else {
             return true;
         }
-        //If you do, search your library for an artifact card. 
+        //If you do, search your library for an artifact card.
         if (sacrifice && controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
-                for (UUID cardId: target.getTargets()) {
+                for (UUID cardId : target.getTargets()) {
                     Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        //If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. 
-                        if(card.getManaCost().convertedManaCost() <= convertedManaCost){
-                            controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-                        }
-                        else
-                        {
-                            //If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. 
+                        //If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield.
+                        if (card.getManaCost().convertedManaCost() <= convertedManaCost) {
+                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                        } else {
+                            //If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield.
                             GenericManaCost cost = new GenericManaCost(card.getManaCost().convertedManaCost() - convertedManaCost);
-                            if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)){
-                                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());                                
-                            }
-                            else{
+                            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                            } else {
                                 //If you don't, put it into its owner's graveyard. Then shuffle your library
-                                controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                                controller.moveCards(card, Zone.GRAVEYARD, source, game);
                             }
                         }
                     }
@@ -141,6 +132,5 @@ class TransmuteArtifactEffect extends SearchEffect {
         controller.shuffleLibrary(game);
         return false;
     }
-
 
 }

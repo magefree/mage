@@ -53,6 +53,7 @@ public class DoIfCostPaid extends OneShotEffect {
                     effectText = effectText.substring(0, effectText.length() - 1);
                 }
                 message = getCostText() + " and " + effectText + "?";
+                message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
             } else {
                 message = chooseUseText;
             }
@@ -93,6 +94,7 @@ public class DoIfCostPaid extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
         if (costText != null
+                && !costText.toLowerCase().startsWith("put")
                 && !costText.toLowerCase().startsWith("exile")
                 && !costText.toLowerCase().startsWith("discard")
                 && !costText.toLowerCase().startsWith("sacrifice")

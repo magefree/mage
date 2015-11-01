@@ -436,29 +436,32 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     protected void resolve(SimulationNode2 node, int depth, Game game) {
-        StackObject ability = game.getStack().pop();
-        if (ability instanceof StackAbility) {
-            SearchEffect effect = getSearchEffect((StackAbility) ability);
-            if (effect != null && ability.getControllerId().equals(playerId)) {
+        StackObject stackObject = game.getStack().getFirst();
+        if (stackObject instanceof StackAbility) {
+            SearchEffect effect = getSearchEffect((StackAbility) stackObject);
+            if (effect != null && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
                 if (!target.doneChosing()) {
-                    for (UUID targetId : target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
+                    for (UUID targetId : target.possibleTargets(stackObject.getSourceId(), stackObject.getControllerId(), game)) {
                         Game sim = game.copy();
-                        StackAbility newAbility = (StackAbility) ability.copy();
+                        StackAbility newAbility = (StackAbility) stackObject.copy();
                         SearchEffect newEffect = getSearchEffect(newAbility);
                         newEffect.getTarget().addTarget(targetId, newAbility, sim);
                         sim.getStack().push(newAbility);
-                        SimulationNode2 newNode = new SimulationNode2(node, sim, depth, ability.getControllerId());
+                        SimulationNode2 newNode = new SimulationNode2(node, sim, depth, stackObject.getControllerId());
                         node.children.add(newNode);
                         newNode.getTargets().add(targetId);
-                        logger.trace("Sim search -- node#: " + SimulationNode2.getCount() + " for player: " + sim.getPlayer(ability.getControllerId()).getName());
+                        logger.trace("Sim search -- node#: " + SimulationNode2.getCount() + " for player: " + sim.getPlayer(stackObject.getControllerId()).getName());
                     }
                     return;
                 }
             }
         }
         //logger.info("simulating resolve ");
-        ability.resolve(game);
+        stackObject.resolve(game);
+        if (stackObject instanceof StackAbility) {
+            game.getStack().remove(stackObject);
+        }
         game.applyEffects();
         game.getPlayers().resetPassed();
         game.getPlayerList().setCurrent(game.getActivePlayerId());
@@ -1190,7 +1193,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     safeToAttack = false;
                 }
                 if (safeToAttack) {
-                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
+                    // undo has to be possible e.g. if not able to pay a attack fee (e.g. Ghostly Prison)
+                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, true);
                 }
             }
         }

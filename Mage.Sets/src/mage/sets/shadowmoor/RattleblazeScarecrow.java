@@ -50,9 +50,10 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
  */
 public class RattleblazeScarecrow extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a black creature");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("a red creature");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter2.add(new ColorPredicate(ObjectColor.RED));
@@ -60,7 +61,7 @@ public class RattleblazeScarecrow extends CardImpl {
 
     private static final String rule = "{this} has persist as long as you control a black creature";
     private static final String rule2 = "{this} has haste as long as you control a red creature";
-    
+
     public RattleblazeScarecrow(UUID ownerId) {
         super(ownerId, 259, "Rattleblaze Scarecrow", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.expansionSetCode = "SHM";
@@ -71,11 +72,11 @@ public class RattleblazeScarecrow extends CardImpl {
         // Rattleblaze Scarecrow has persist as long as you control a black creature.
         ContinuousEffect effect = new GainAbilitySourceEffect(new PersistAbility(), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), rule)));
-        
+
         // Rattleblaze Scarecrow has haste as long as you control a red creature.
         ContinuousEffect effect2 = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter), rule2)));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), rule2)));
+
     }
 
     public RattleblazeScarecrow(final RattleblazeScarecrow card) {

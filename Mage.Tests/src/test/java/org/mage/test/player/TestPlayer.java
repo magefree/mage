@@ -53,6 +53,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -70,6 +71,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.filter.predicate.permanent.SummoningSicknessPredicate;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.game.Table;
@@ -97,6 +99,7 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.common.TargetPermanentOrPlayer;
+import mage.util.MessageToClient;
 import org.junit.Ignore;
 
 /**
@@ -367,6 +370,7 @@ public class TestPlayer implements Player {
                     }
                     for (Ability ability : computerPlayer.getPlayable(game, true)) {
                         if (ability.toString().startsWith(groups[0])) {
+                            int bookmark = game.bookmarkState();
                             Ability newAbility = ability.copy();
                             if (groups.length > 1 && !groups[1].equals("target=NO_TARGET")) {
                                 if (!addTargets(newAbility, groups, game)) {
@@ -374,9 +378,13 @@ public class TestPlayer implements Player {
                                     break;
                                 }
                             }
-                            computerPlayer.activateAbility((ActivatedAbility) newAbility, game);
-                            actions.remove(action);
-                            return true;
+                            if (computerPlayer.activateAbility((ActivatedAbility) newAbility, game)) {
+                                actions.remove(action);
+                                return true;
+                            } else {
+                                game.restoreState(bookmark, ability.getRule());
+                            }
+
                         }
                     }
                 } else if (action.getAction().startsWith("manaActivate:")) {
@@ -476,6 +484,7 @@ public class TestPlayer implements Player {
                 FilterCreatureForCombat filter = new FilterCreatureForCombat();
                 filter.add(new NamePredicate(groups[0]));
                 filter.add(Predicates.not(new AttackingPredicate()));
+                filter.add(Predicates.not(new SummoningSicknessPredicate()));
                 Permanent attacker = findPermanent(filter, computerPlayer.getId(), game);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
@@ -545,7 +554,7 @@ public class TestPlayer implements Player {
         if (!choices.isEmpty()) {
             for (String choice : choices) {
                 for (int index = 0; index < rEffects.size(); index++) {
-                    if (choice.equals(rEffects.get(index))) {
+                    if (choice.equals(rEffects.get(Integer.toString(index)))) {
                         choices.remove(choice);
                         return index;
                     }
@@ -558,6 +567,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         if (!choices.isEmpty()) {
+            Ability source = null;
+            StackObject stackObject = game.getStack().getStackObject(sourceId);
+            if (stackObject != null) {
+                source = stackObject.getStackAbility();
+            }
             if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer)) { // player target not implemted yet
                 FilterPermanent filterPermanent;
                 if (target instanceof TargetPermanentOrPlayer) {
@@ -569,21 +583,38 @@ public class TestPlayer implements Player {
                     String[] targetList = choose2.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
+                        boolean originOnly = false;
+                        boolean copyOnly = false;
+                        if (targetName.endsWith("]")) {
+                            if (targetName.endsWith("[no copy]")) {
+                                originOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 9);
+                            }
+                            if (targetName.endsWith("[only copy]")) {
+                                copyOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 11);
+                            }
+                        }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPermanent, game)) {
                             if (target.getTargets().contains(permanent.getId())) {
                                 continue;
                             }
                             if (permanent.getName().equals(targetName)) {
-                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), null, game)) {
-                                    target.add(permanent.getId(), game);
-                                    targetFound = true;
-                                    break;
+
+                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
+                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
+                                        target.add(permanent.getId(), game);
+                                        targetFound = true;
+                                        break;
+                                    }
                                 }
                             } else if ((permanent.getName() + "-" + permanent.getExpansionSetCode()).equals(targetName)) {
-                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), null, game)) {
-                                    target.add(permanent.getId(), game);
-                                    targetFound = true;
-                                    break;
+                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
+                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
+                                        target.add(permanent.getId(), game);
+                                        targetFound = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -783,6 +814,30 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        if (!targets.isEmpty()) {
+            for (String targetDefinition : targets) {
+                String[] targetList = targetDefinition.split("\\^");
+                boolean targetFound = false;
+                for (String targetName : targetList) {
+                    for (Card card : cards.getCards(game)) {
+                        if (card.getName().equals(targetName) && !target.getTargets().contains(card.getId())) {
+                            target.add(card.getId(), game);
+                            targetFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (targetFound) {
+                    targets.remove(targetDefinition);
+                    return true;
+                }
+            }
+        }
+        return computerPlayer.chooseTarget(outcome, cards, target, source, game);
+    }
+
+    @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         if (!choices.isEmpty()) {
             for (TriggeredAbility ability : abilities) {
@@ -797,6 +852,14 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
+        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+    }
+
+    @Override
+    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
+        if (message.getMessage().equals("Scry 1?")) {
+            return false;
+        }
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
                 choices.remove(0);
@@ -807,7 +870,7 @@ public class TestPlayer implements Player {
                 return true;
             }
         }
-        return true;
+        return computerPlayer.chooseUse(outcome, message, source, game);
     }
 
     @Override
@@ -1359,6 +1422,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void resetPlayerPassedActions() {
+        computerPlayer.resetPlayerPassedActions();
+    }
+
+    @Override
     public void quit(Game game) {
         computerPlayer.quit(game);
     }
@@ -1379,8 +1447,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void sendPlayerAction(mage.constants.PlayerAction playerAction, Game game) {
-        computerPlayer.sendPlayerAction(playerAction, game);
+    public void sendPlayerAction(mage.constants.PlayerAction playerAction, Game game, Object data) {
+        computerPlayer.sendPlayerAction(playerAction, game, data);
     }
 
     @Override
@@ -1608,8 +1676,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void revealFaceDownCard(Card card, Game game) {
-        computerPlayer.revealFaceDownCard(card, game);
+    public boolean lookAtFaceDownCard(Card card, Game game) {
+        return computerPlayer.lookAtFaceDownCard(card, game);
     }
 
     @Override
@@ -1677,21 +1745,20 @@ public class TestPlayer implements Player {
         return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
     }
 
-    @Override
-    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
-        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
-    }
-
-    @Override
-    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
-        return computerPlayer.moveCards(card, fromZone, toZone, source, game);
-    }
-
-    @Override
-    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
-        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
-    }
-
+//    @Override
+//    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+//        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
+//    }
+//
+//    @Override
+//    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+//        return computerPlayer.moveCards(card, fromZone, toZone, source, game);
+//    }
+//
+//    @Override
+//    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
+//        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
+//    }
     @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
         return computerPlayer.moveCardToHandWithInfo(card, sourceId, game);
@@ -1703,12 +1770,17 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+        return computerPlayer.moveCardsToExile(card, source, game, withName, exileId, exileZoneName);
+    }
+
+    @Override
     public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
         return computerPlayer.moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
     }
 
     @Override
-    public boolean moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         return computerPlayer.moveCardsToGraveyardWithInfo(allCards, source, game, fromZone);
     }
 
@@ -1725,21 +1797,6 @@ public class TestPlayer implements Player {
     @Override
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName) {
         return computerPlayer.moveCardToExileWithInfo(card, exileId, exileName, sourceId, game, fromZone, withName);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped);
-    }
-
-    @Override
-    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
-        return computerPlayer.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped, facedown);
     }
 
     @Override
@@ -1808,6 +1865,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public AbilityType getJustActivatedType() {
+        return computerPlayer.getJustActivatedType();
+    }
+
+    @Override
+    public void setJustActivatedType(AbilityType justActivatedType) {
+        computerPlayer.setJustActivatedType(justActivatedType);
+    }
+
+    @Override
     public void cleanUpOnMatchEnd() {
         computerPlayer.cleanUpOnMatchEnd();
     }
@@ -1831,11 +1898,6 @@ public class TestPlayer implements Player {
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
         return computerPlayer.choose(outcome, cards, target, game);
-    }
-
-    @Override
-    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
 
     @Override
@@ -1886,6 +1948,36 @@ public class TestPlayer implements Player {
     @Override
     public void pickCard(List<Card> cards, Deck deck, Draft draft) {
         computerPlayer.pickCard(cards, deck, draft);
+    }
+
+    @Override
+    public boolean scry(int value, Ability source, Game game) {
+        return computerPlayer.scry(value, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game) {
+        return computerPlayer.moveCards(card, toZone, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+        return computerPlayer.moveCards(card, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
+    }
+
+    @Override
+    public boolean moveCards(Cards cards, Zone toZone, Ability source, Game game) {
+        return computerPlayer.moveCards(cards, toZone, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game) {
+        return computerPlayer.moveCards(cards, toZone, source, game);
+    }
+
+    @Override
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects) {
+        return computerPlayer.moveCards(cards, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }
 
     public void setAIPlayer(boolean AIPlayer) {

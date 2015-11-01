@@ -28,7 +28,6 @@
 package mage.sets.commander2014;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -55,7 +54,6 @@ public class ScrapMastery extends CardImpl {
     public ScrapMastery(UUID ownerId) {
         super(ownerId, 38, "Scrap Mastery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "C14";
-
 
         // Each player exiles all artifact cards from his or her graveyard, then sacrifices all artifacts he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new ScrapMasteryEffect());
@@ -91,38 +89,30 @@ class ScrapMasteryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Map<UUID, Set<UUID>> exiledCards = new HashMap<>();
+            Map<UUID, Set<Card>> exiledCards = new HashMap<>();
             // exile artifacts from graveyard
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    Set<UUID> cards = new HashSet<>();
-                    for (Card card: player.getGraveyard().getCards(new FilterArtifactCard(), game)) {
-                        cards.add(card.getId());
-                        player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                    }
+                    Set<Card> cards = player.getGraveyard().getCards(new FilterArtifactCard(), game);
+                    controller.moveCards(cards, Zone.EXILED, source, game);
                     exiledCards.put(player.getId(), cards);
                 }
             }
             // sacrifice all artifacts
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), playerId, game)) {
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), playerId, game)) {
                         permanent.sacrifice(source.getSourceId(), game);
                     }
                 }
             }
             // puts all cards he or she exiled this way onto the battlefield
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (UUID cardId: exiledCards.get(playerId)) {
-                        Card card = game.getCard(cardId);
-                        if (card != null) {
-                            player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, cardId);
-                        }
-                    }
+                    controller.moveCards(exiledCards.get(playerId), Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

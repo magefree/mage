@@ -29,7 +29,9 @@ package mage.sets.fatereforged;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
@@ -74,7 +76,7 @@ public class JeskaiInfiltrator extends CardImpl {
         Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedSourceEffect(), new OneControlledCreatureCondition());
         effect.setText("{this} can't be blocked as long as you control no other creatures");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+
         // Whenever Jeskai Infiltrator deals combat damage to a player, exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new JeskaiInfiltratorEffect(), false));
     }
@@ -90,35 +92,35 @@ public class JeskaiInfiltrator extends CardImpl {
 }
 
 class JeskaiInfiltratorEffect extends OneShotEffect {
-    
+
     JeskaiInfiltratorEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards";
     }
-    
+
     JeskaiInfiltratorEffect(final JeskaiInfiltratorEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public JeskaiInfiltratorEffect copy() {
         return new JeskaiInfiltratorEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             List<Card> cardsToManifest = new ArrayList<>(2);
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             Card sourceCard = game.getCard(source.getSourceId());
-            if (sourcePermanent != null && sourceCard != null) {                
-                player.moveCardToExileWithInfo(sourcePermanent, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+            if (sourcePermanent != null && sourceCard != null) {
+                controller.moveCardToExileWithInfo(sourcePermanent, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 cardsToManifest.add(sourceCard);
             }
-            if (sourcePermanent!= null && player.getLibrary().size() > 0) {
-                Card cardFromLibrary = player.getLibrary().removeFromTop(game);
-                player.moveCardToExileWithInfo(cardFromLibrary, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+            if (sourcePermanent != null && controller.getLibrary().size() > 0) {
+                Card cardFromLibrary = controller.getLibrary().removeFromTop(game);
+                controller.moveCardToExileWithInfo(cardFromLibrary, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 cardsToManifest.add(cardFromLibrary);
             }
             Collections.shuffle(cardsToManifest);
@@ -133,13 +135,12 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                         manaCosts = new ManaCostsImpl("{0}");
                     }
                 }
-                MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) +1, game);
-                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                                
-                if (player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId(), false, true)) {
-                    game.informPlayers(new StringBuilder(player.getLogName())
-                            .append(" puts facedown card from exile onto the battlefield").toString());
-                }
+                MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
+                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
             }
+            Set<Card> toBattlefield = new LinkedHashSet();
+            toBattlefield.addAll(cardsToManifest);
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, true, false, null);
             return true;
         }
         return false;

@@ -25,25 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-/**
- *
- * @author LevelX2
- */
-
 
 public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
 

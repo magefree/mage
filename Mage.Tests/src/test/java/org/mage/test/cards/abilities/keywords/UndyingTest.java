@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -11,7 +12,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class UndyingTest extends CardTestPlayerBase {
 
     /**
-     * Tests boost weren't be applied second time when creature back to battlefield
+     * Tests boost weren't be applied second time when creature back to
+     * battlefield
      */
     @Test
     public void testWithBoost() {
@@ -29,7 +31,8 @@ public class UndyingTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests boost weren't be applied second time when creature back to battlefield
+     * Tests boost weren't be applied second time when creature back to
+     * battlefield
      */
     @Test
     public void testWithMassBoost() {
@@ -62,7 +65,7 @@ public class UndyingTest extends CardTestPlayerBase {
         // Target creature gets -3/-3 until end of turn.
         addCard(Zone.HAND, playerA, "Last Gasp");
         // Undying Evil
-        // Target creature gains undying until end of turn. 
+        // Target creature gains undying until end of turn.
         // When it dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         addCard(Zone.HAND, playerA, "Undying Evil");
 
@@ -76,9 +79,9 @@ public class UndyingTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Elite Vanguard", 3, 2);
     }
 
-
     /**
-     * Tests "Threads of Disloyalty enchanting Strangleroot Geist: after geist died it returns to the bf under opponent's control."
+     * Tests "Threads of Disloyalty enchanting Strangleroot Geist: after geist
+     * died it returns to the bf under opponent's control."
      */
     @Test
     public void testUndyingControlledReturnsToOwner() {
@@ -105,18 +108,20 @@ public class UndyingTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertGraveyardCount(playerB, "Threads of Disloyalty", 1);        
-        assertGraveyardCount(playerA, "Lightning Bolt",1);
+        assertGraveyardCount(playerB, "Threads of Disloyalty", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertPermanentCount(playerB, "Strangleroot Geist", 0);
         assertPermanentCount(playerA, "Strangleroot Geist", 1);
         assertPowerToughness(playerA, "Strangleroot Geist", 3, 2);
     }
 
     /**
-     * Tests "Target creature with Undying will be exiled by Anafenza before it returns to battlefield
-     * 
-     * Anafenza the foremost doesn't exile an undying creature when dying at the same time as 
-     * that undying one. The undying comes back to the field when he shouldn't. 
+     * Tests "Target creature with Undying will be exiled by Anafenza before it
+     * returns to battlefield
+     *
+     * Anafenza the foremost doesn't exile an undying creature when dying at the
+     * same time as that undying one. The undying comes back to the field when
+     * he shouldn't.
      */
     @Test
     public void testReplacementEffectPreventsReturnOfUndying() {
@@ -125,7 +130,7 @@ public class UndyingTest extends CardTestPlayerBase {
         // Creature - Zombie, 1/1  {1}{B}
         // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         addCard(Zone.HAND, playerA, "Butcher Ghoul");
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt");
         // Anafenza, the Foremost
@@ -141,17 +146,18 @@ public class UndyingTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Anafenza, the Foremost", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
-        
+
         assertPermanentCount(playerA, "Butcher Ghoul", 0);
         assertExileCount("Butcher Ghoul", 1);
     }
 
     /**
-     * Tests "Target creature with Undying will be exiled by Anafenza before it returns to battlefield
-     * if both leave the battlefield at the same time
+     * Tests "Target creature with Undying will be exiled by Anafenza before it
+     * returns to battlefield if both leave the battlefield at the same time
      *
-     * Anafenza the foremost doesn't exile an undying creature when dying at the same time as
-     * that undying one. The undying comes back to the field when he shouldn't.
+     * Anafenza the foremost doesn't exile an undying creature when dying at the
+     * same time as that undying one. The undying comes back to the field when
+     * he shouldn't.
      */
     @Test
     public void testReplacementEffectPreventsReturnOfUndyingWrath() {
@@ -208,4 +214,34 @@ public class UndyingTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 4, 4);
 
     }
+
+    /**
+     * Tatterkite is getting counters on it, i have him in a edh deck with
+     * Mikaeus, the Lunarch and when Tatterkite dies it triggers the undying and
+     * he gets the +1/+1 counters
+     */
+    @Test
+    public void testUndyingMikaeusAndTatterkite() {
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        // Whenever a Human deals damage to you, destroy it.
+        // Other non-Human creatures you control get +1/+1 and have undying.
+        addCard(Zone.BATTLEFIELD, playerA, "Mikaeus, the Unhallowed", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Tatterkite", 1); // Artifact Creature - Scarecrow  2/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Tatterkite");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+
+        assertPermanentCount(playerA, "Tatterkite", 1);
+        assertPermanentCount(playerA, "Mikaeus, the Unhallowed", 1);
+        assertCounterCount("Tatterkite", CounterType.P1P1, 1);
+        assertPowerToughness(playerA, "Tatterkite", 4, 3);
+
+    }
+
 }

@@ -28,15 +28,14 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -63,7 +62,6 @@ public class Reshape extends CardImpl {
     public Reshape(UUID ownerId) {
         super(ownerId, 31, "Reshape", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
         this.expansionSetCode = "DST";
-
 
         // As an additional cost to cast Reshape, sacrifice an artifact.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
@@ -94,8 +92,8 @@ class ReshapeSearchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
@@ -104,17 +102,17 @@ class ReshapeSearchEffect extends OneShotEffect {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
-                Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
     }
 

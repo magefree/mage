@@ -40,12 +40,9 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -56,7 +53,6 @@ public class TemptWithReflections extends CardImpl {
     public TemptWithReflections(UUID ownerId) {
         super(ownerId, 60, "Tempt with Reflections", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "C13";
-
 
         // Tempting offer - Choose target creature you control. Put a token onto the battlefield that's a copy of that creature. Each opponent may put a token onto the battlefield that's a copy of that creature. For each opponent who does, put a token onto the battlefield that's a copy of that creature.
         this.getSpellAbility().addEffect(new TemptWithReflectionsEffect());
@@ -115,16 +111,16 @@ class TemptWithReflectionsEffect extends OneShotEffect {
                 player = playerList.getNext(game);
             } while (!player.getId().equals(game.getActivePlayerId()));
 
-            for (UUID playerId: playersSaidYes) {
+            for (UUID playerId : playersSaidYes) {
                 effect = new PutTokenOntoBattlefieldCopyTargetEffect(playerId);
                 effect.setTargetPointer(getTargetPointer());
-                effect.apply(game, source);                
+                effect.apply(game, source);
             }
 
             if (playersSaidYes.size() > 0) {
                 effect = new PutTokenOntoBattlefieldCopyTargetEffect();
                 effect.setTargetPointer(getTargetPointer());
-                effect.apply(game, source);                
+                effect.apply(game, source);
             }
             return true;
         }

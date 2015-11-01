@@ -48,7 +48,7 @@ import mage.game.permanent.token.ElfToken;
  * @author fireshoes
  */
 public class DwynensElite extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Elf");
 
     static {
@@ -69,7 +69,7 @@ public class DwynensElite extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
-                "When {this} enters the battlefield, if you control another Elf, put a 1/1 green Elf Warrior creature token onto the battlefield"));
+                "When {this} enters the battlefield, if you control another Elf, put a 1/1 green Elf Warrior creature token onto the battlefield."));
     }
 
     public DwynensElite(final DwynensElite card) {

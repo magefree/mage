@@ -51,6 +51,7 @@ import mage.util.ManaUtil;
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
 
     protected UUID id;
+    protected String text = null;
 
     private static Map<String, ManaCosts> costs = new HashMap<>();
 
@@ -228,30 +229,62 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof ColoredManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof HybridManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
+        // Mono Hybrid mana costs
+        // First try only to pay colored mana with the pool
+        for (ManaCost cost : this) {
+            if (!cost.isPaid() && cost instanceof MonoHybridManaCost) {
+                if (((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.W)) && pool.getWhite() > 0)
+                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.B)) && pool.getBlack() > 0)
+                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.R)) && pool.getRed() > 0)
+                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.G)) && pool.getGreen() > 0)
+                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.U)) && pool.getBlue() > 0)) {
+                    cost.assignPayment(game, ability, pool);
+                    if (pool.count() == 0) {
+                        return;
+                    }
+                }
+            }
+        }
+        // if colored didn't fit pay colorless with the mana
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof MonoHybridManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof SnowManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof GenericManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
@@ -341,7 +374,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
     public String getText() {
+        if (text != null) {
+            return text;
+        }
         if (this.size() == 0) {
             return "";
         }

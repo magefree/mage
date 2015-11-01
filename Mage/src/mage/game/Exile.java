@@ -100,19 +100,20 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     public List<Card> getAllCards(Game game) {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
         for (ExileZone exile : exileZones.values()) {
             cards.addAll(exile.getCards(game));
         }
         return cards;
     }
 
-    public void removeCard(Card card, Game game) {
+    public boolean removeCard(Card card, Game game) {
         for (ExileZone exile : exileZones.values()) {
             if (exile.contains(card.getId())) {
-                exile.remove(card);
+                return exile.remove(card.getId());
             }
         }
+        return false;
     }
 
     @Override
