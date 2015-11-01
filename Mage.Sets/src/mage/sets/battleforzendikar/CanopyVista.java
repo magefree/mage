@@ -47,9 +47,9 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  * @author fireshoes
  */
 public class CanopyVista extends CardImpl {
-    
+
     private static final FilterLandPermanent filter = new FilterLandPermanent();
-    
+
     static {
         filter.add(new SupertypePredicate("Basic"));
     }

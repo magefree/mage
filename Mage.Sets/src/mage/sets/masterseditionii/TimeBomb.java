@@ -35,6 +35,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -59,9 +60,9 @@ public class TimeBomb extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(), true), TargetController.YOU, false));
 
         // {1}, {tap}, Sacrifice Time Bomb: Time Bomb deals damage equal to the number of time counters on it to each creature and each player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageEverythingEffect(new CountersCount(CounterType.TIME), new FilterCreaturePermanent()),
-                new GenericManaCost(1));
+        Effect effect = new DamageEverythingEffect(new CountersCount(CounterType.TIME), new FilterCreaturePermanent());
+        effect.setText("{this} deals damage equal to the number of time counters on it to each creature and each player");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

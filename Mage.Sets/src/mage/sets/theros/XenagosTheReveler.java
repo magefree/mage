@@ -34,12 +34,10 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -49,7 +47,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -70,19 +67,16 @@ public class XenagosTheReveler extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Xenagos");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control.
         this.addAbility(new LoyaltyAbility(new XenagosManaEffect(), +1));
-        
+
         // 0: Put a 2/2 red and green Satyr creature token with haste onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new XenagosSatyrToken()), 0));
 
         // -6: Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.
         this.addAbility(new LoyaltyAbility(new XenagosExileEffect(), -6));
-
-
 
     }
 
@@ -115,7 +109,7 @@ class XenagosManaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null){
+        if (player != null) {
             int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
             Choice manaChoice = new ChoiceImpl();
             Set<String> choices = new LinkedHashSet<>();
@@ -124,7 +118,7 @@ class XenagosManaEffect extends OneShotEffect {
             manaChoice.setChoices(choices);
             manaChoice.setMessage("Select color of mana to add");
 
-            for (int i = 0; i < x; i++){
+            for (int i = 0; i < x; i++) {
                 Mana mana = new Mana();
                 while (!player.choose(Outcome.Benefit, manaChoice, game)) {
                     if (!player.canRespond()) {
@@ -150,7 +144,6 @@ class XenagosManaEffect extends OneShotEffect {
     }
 }
 
-
 class XenagosSatyrToken extends Token {
 
     public XenagosSatyrToken() {
@@ -166,7 +159,6 @@ class XenagosSatyrToken extends Token {
     }
 
 }
-
 
 class XenagosExileEffect extends OneShotEffect {
 
@@ -186,28 +178,19 @@ class XenagosExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl(Zone.EXILED);
-            int count = Math.min(player.getLibrary().size(), 7);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().getFromTop(game);
-                cards.add(card);
-                card.moveToExile(null, null, source.getSourceId(), game);
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards exiledCards = new CardsImpl();
+            exiledCards.addAll(controller.getLibrary().getTopCards(game, 7));
+            controller.moveCards(exiledCards, Zone.EXILED, source, game);
             FilterCard filter = new FilterCard("creature and/or land cards to put onto the battlefield");
             filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                                     new CardTypePredicate(CardType.LAND)));
+                    new CardTypePredicate(CardType.LAND)));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.EXILED, filter);
-            if (cards.size() > 0
+            if (exiledCards.size() > 0
                     && target1.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && player.choose(Outcome.PutCardInPlay, cards, target1, game)) {
-                for (UUID targetId: target1.getTargets()) {
-                    Card card = cards.get(targetId, game);
-                    if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
-                    }
-                }
+                    && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, game)) {
+                controller.moveCards(new CardsImpl(target1.getTargets()), Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

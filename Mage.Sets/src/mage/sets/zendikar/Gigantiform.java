@@ -68,7 +68,6 @@ public class Gigantiform extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
 
-
         // Kicker {4}
         this.addAbility(new KickerAbility("{4}"));
 
@@ -143,14 +142,14 @@ class GigantiformEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player != null && player.searchLibrary(target, game)) {
-            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (controller != null && controller.searchLibrary(target, game)) {
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
@@ -101,7 +101,7 @@ public class SistersOfStoneDeath extends CardImpl {
 
 class SistersOfStoneDeathEffect extends OneShotEffect {
 
-    private UUID exileId;
+    private final UUID exileId;
 
     public SistersOfStoneDeathEffect(UUID exileId) {
         super(Outcome.PutCreatureInPlay);
@@ -117,19 +117,19 @@ class SistersOfStoneDeathEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         CardsImpl cardsInExile = new CardsImpl();
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        TargetCard target = new TargetCard(Zone.EXILED, new FilterCreatureCard());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null) {
-                LinkedList<UUID> cards = new LinkedList<UUID>(exile);
+                LinkedList<UUID> cards = new LinkedList<>(exile);
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     cardsInExile.add(card);
                 }
-                if (you.choose(Outcome.PutCreatureInPlay, cardsInExile, target, game)) {
+                if (controller.choose(Outcome.PutCreatureInPlay, cardsInExile, target, game)) {
                     Card chosenCard = game.getCard(target.getFirstTarget());
-                    return you.putOntoBattlefieldWithInfo(chosenCard, game, Zone.EXILED, source.getSourceId());
+                    return controller.moveCards(chosenCard, Zone.BATTLEFIELD, source, game);
                 }
             }
         }

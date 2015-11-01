@@ -123,7 +123,7 @@ class StrionicResonatorEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Copy target ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
+        sb.append("Copy ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
         return sb.toString();
     }
 }
@@ -134,7 +134,7 @@ class TargetTriggeredAbility extends TargetObject {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
-        this.targetName = "target triggered ability";
+        this.targetName = "target triggered ability you control";
     }
 
     public TargetTriggeredAbility(final TargetTriggeredAbility target) {
@@ -148,10 +148,10 @@ class TargetTriggeredAbility extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        if (stackObject.getStackAbility() != null && stackObject.getStackAbility() instanceof TriggeredAbility) {
-            return true;
-        }
-        return false;
+        return stackObject.getStackAbility() != null
+                && (stackObject.getStackAbility() instanceof TriggeredAbility)
+                && source != null
+                && stackObject.getStackAbility().getControllerId().equals(source.getControllerId());
     }
 
     @Override
@@ -162,7 +162,9 @@ class TargetTriggeredAbility extends TargetObject {
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility() != null && stackObject.getStackAbility() instanceof TriggeredAbility && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
+            if (stackObject.getStackAbility() != null
+                    && stackObject.getStackAbility() instanceof TriggeredAbility
+                    && stackObject.getStackAbility().getControllerId().equals(sourceControllerId)) {
                 return true;
             }
         }
@@ -176,9 +178,11 @@ class TargetTriggeredAbility extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility() != null && stackObject.getStackAbility() instanceof TriggeredAbility && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
+            if (stackObject.getStackAbility() != null
+                    && stackObject.getStackAbility() instanceof TriggeredAbility
+                    && stackObject.getStackAbility().getControllerId().equals(sourceControllerId)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }

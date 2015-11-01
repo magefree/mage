@@ -131,7 +131,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
                 target1.clearChosen();
             } else {
@@ -140,11 +140,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
         } else {
             game.informPlayers("No nonland permanent card with converted mana cost " + count + " or less to choose.");
         }
-        while (cards.size() > 0) {
-            Card card = cards.get(cards.iterator().next(), game);
-            cards.remove(card);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-        }
+        controller.moveCards(cards, Zone.LIBRARY, source, game);
         controller.shuffleLibrary(game);
         return true;
     }

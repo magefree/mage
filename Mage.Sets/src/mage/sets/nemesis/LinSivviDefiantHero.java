@@ -59,16 +59,16 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author fireshoes
  */
 public class LinSivviDefiantHero extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("Rebel card from your graveyard");
-    
+
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Rebel"));
     }
-    
+
     static final String rule = "Put target Rebel card from your graveyard on the bottom of your library";
-    
+
     public LinSivviDefiantHero(UUID ownerId) {
         super(ownerId, 12, "Lin Sivvi, Defiant Hero", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.expansionSetCode = "NMS";
@@ -84,7 +84,7 @@ public class LinSivviDefiantHero extends CardImpl {
                 new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
         // {3}: Put target Rebel card from your graveyard on the bottom of your library.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false, rule), new GenericManaCost(3));
         ability.addTarget(new TargetCardInYourGraveyard(1, filter));
@@ -119,8 +119,8 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
@@ -131,15 +131,15 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
         filter.add(new SubtypePredicate("Rebel"));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
-        if (player.searchLibrary(target, game)) {
-            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (controller.searchLibrary(target, game)) {
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
     }
 }

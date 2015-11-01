@@ -28,7 +28,9 @@
 package mage.sets.urzassaga;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -102,7 +104,7 @@ class ShowAndTellEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        List<Card> cardsToPutIntoPlay = new ArrayList<>();
+        Set<Card> cardsToPutIntoPlay = new LinkedHashSet<>();
         TargetCardInHand target = new TargetCardInHand(filter);
 
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
@@ -119,12 +121,6 @@ class ShowAndTellEffect extends OneShotEffect {
                 }
             }
         }
-        for (Card card : cardsToPutIntoPlay) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-            }
-        }
-        return true;
+        return controller.moveCards(cardsToPutIntoPlay, Zone.BATTLEFIELD, source, game, false, false, true, null);
     }
 }

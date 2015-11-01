@@ -27,6 +27,9 @@
  */
 package mage.sets.magic2015;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -47,10 +50,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -145,7 +144,7 @@ class SoulOfShandalarTarget extends TargetPermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject object = game.getObject(sourceId);
 
         for (StackObject item : game.getState().getStack()) {

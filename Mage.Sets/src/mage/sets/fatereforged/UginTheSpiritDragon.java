@@ -30,19 +30,17 @@ package mage.sets.fatereforged;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
@@ -59,7 +57,6 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-
 public class UginTheSpiritDragon extends CardImpl {
 
     public UginTheSpiritDragon(UUID ownerId) {
@@ -67,7 +64,7 @@ public class UginTheSpiritDragon extends CardImpl {
         this.expansionSetCode = "FRF";
         this.subtype.add("Ugin");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(7)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
 
         // +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
         LoyaltyAbility ability = new LoyaltyAbility(new DamageTargetEffect(3), 2);
@@ -126,7 +123,7 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
         FilterPermanent filter = new FilterPermanent("permanent with converted mana cost X or less that's one or more colors");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, cmc + 1));
         filter.add(Predicates.not(new ColorlessPredicate()));
-        for(Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
         }
         return true;
@@ -157,12 +154,7 @@ class UginTheSpiritDragonEffect3 extends OneShotEffect {
             controller.drawCards(7, game);
             TargetCardInHand target = new TargetCardInHand(0, 7, new FilterPermanentCard("permanent cards"));
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
-                for (UUID targetId: target.getTargets()) {
-                    Card card = game.getCard(targetId);
-                    if (card != null) {
-                        controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getControllerId());
-                    }
-                }
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

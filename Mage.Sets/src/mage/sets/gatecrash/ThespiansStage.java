@@ -28,10 +28,6 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,6 +35,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -80,7 +79,7 @@ class ThespiansStageCopyEffect extends OneShotEffect {
 
     public ThespiansStageCopyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Thespian's Stage becomes a copy of target land and gains this ability";
+        this.staticText = "{this} becomes a copy of target land and gains this ability";
     }
 
     public ThespiansStageCopyEffect(final ThespiansStageCopyEffect effect) {
@@ -97,7 +96,7 @@ class ThespiansStageCopyEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
-            Permanent newPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent, source, new EmptyApplyToPermanent());
+            Permanent newPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
             Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThespiansStageCopyEffect(), new GenericManaCost(2));
             ability.addCost(new TapSourceCost());
             ability.addTarget(new TargetLandPermanent());

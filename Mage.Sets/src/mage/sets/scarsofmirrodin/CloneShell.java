@@ -27,8 +27,8 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -38,16 +38,15 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -161,19 +160,22 @@ class CloneShellDiesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (permanent != null) {
-            List<UUID> imprinted = permanent.getImprinted();
-            if (imprinted.size() > 0) {
-                Card imprintedCard = game.getCard(imprinted.get(0));
-                imprintedCard.setFaceDown(false, game);
-                if (imprintedCard.getCardType().contains(CardType.CREATURE)) {
-                    imprintedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+            if (permanent != null) {
+                List<UUID> imprinted = permanent.getImprinted();
+                if (imprinted.size() > 0) {
+                    Card imprintedCard = game.getCard(imprinted.get(0));
+                    imprintedCard.setFaceDown(false, game);
+                    if (imprintedCard.getCardType().contains(CardType.CREATURE)) {
+                        controller.moveCards(imprintedCard, Zone.BATTLEFIELD, source, game);
+                    }
                 }
             }
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     @Override

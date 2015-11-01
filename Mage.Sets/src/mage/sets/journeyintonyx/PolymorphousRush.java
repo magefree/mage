@@ -64,7 +64,7 @@ public class PolymorphousRush extends CardImpl {
 
         // Strive - Polymorphous Rush costs {1}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{U}"));
-        
+
         // Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
         this.getSpellAbility().addEffect(new PolymorphousRushCopyEffect());
@@ -82,21 +82,21 @@ public class PolymorphousRush extends CardImpl {
 }
 
 class PolymorphousRushCopyEffect extends OneShotEffect {
-    
+
     public PolymorphousRushCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn";
     }
-    
+
     public PolymorphousRushCopyEffect(final PolymorphousRushCopyEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PolymorphousRushCopyEffect copy() {
         return new PolymorphousRushCopyEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -107,10 +107,10 @@ class PolymorphousRushCopyEffect extends OneShotEffect {
             if (target.canChoose(source.getId(), controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
                 Permanent copyFromCreature = game.getPermanent(target.getFirstTarget());
                 if (copyFromCreature != null) {
-                    for (UUID copyToId: getTargetPointer().getTargets(game, source)) {
+                    for (UUID copyToId : getTargetPointer().getTargets(game, source)) {
                         Permanent copyToCreature = game.getPermanent(copyToId);
                         if (copyToCreature != null) {
-                            game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToCreature, source, new EmptyApplyToPermanent());
+                            game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToId, source, new EmptyApplyToPermanent());
                         }
                     }
                 }
@@ -119,4 +119,5 @@ class PolymorphousRushCopyEffect extends OneShotEffect {
         }
         return false;
     }
+
 }

@@ -27,21 +27,13 @@
  */
 package mage.sets.magic2010;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
@@ -49,10 +41,15 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -67,13 +64,12 @@ public class ConvincingMirage extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Aura");
 
-
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         // As Convincing Mirage enters the battlefield, choose a basic land type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ConvincingMirageEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral)));
         // Enchanted land is the chosen type.
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
@@ -87,42 +83,6 @@ public class ConvincingMirage extends CardImpl {
     @Override
     public ConvincingMirage copy() {
         return new ConvincingMirage(this);
-    }
-}
-
-class ConvincingMirageEffect extends OneShotEffect {
-
-    public ConvincingMirageEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "choose a basic land type";
-    }
-
-    public ConvincingMirageEffect(final ConvincingMirageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ConvincingMirageEffect copy() {
-        return new ConvincingMirageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            ChoiceImpl choices = new ChoiceImpl(true);
-            Set choicesSet = choices.getChoices();
-            choicesSet.add("Forest");
-            choicesSet.add("Plains");
-            choicesSet.add("Mountain");
-            choicesSet.add("Island");
-            choicesSet.add("Swamp");
-            if (player.choose(Outcome.Neutral, choices, game)) {
-                game.getState().setValue(source.getSourceId().toString() + "_ConvincingMirage", choices.getChoice());
-                return true;
-            }
-        }
-        return false;
     }
 }
 
@@ -145,7 +105,7 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_ConvincingMirage");
+        String choice = (String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY);
         if (enchantment != null && enchantment.getAttachedTo() != null && choice != null) {
             Permanent land = game.getPermanent(enchantment.getAttachedTo());
             if (land != null) {
@@ -160,19 +120,19 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
                         if (sublayer == SubLayer.NA) {
                             land.getAbilities().clear();
                             if (choice.equals("Forest")) {
-                                land.addAbility(new GreenManaAbility(), game);
+                                land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                             }
                             if (choice.equals("Plains")) {
-                                land.addAbility(new WhiteManaAbility(), game);
+                                land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                             }
                             if (choice.equals("Mountain")) {
-                                land.addAbility(new RedManaAbility(), game);
+                                land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                             }
                             if (choice.equals("Island")) {
-                                land.addAbility(new BlueManaAbility(), game);
+                                land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                             }
                             if (choice.equals("Swamp")) {
-                                land.addAbility(new BlackManaAbility(), game);
+                                land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                             }
                         }
                         break;

@@ -28,14 +28,14 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
@@ -46,7 +46,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,7 +67,7 @@ public class NissaSageAnimist extends CardImpl {
 
         this.nightCard = true;
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
         this.addAbility(new LoyaltyAbility(new NissaSageAnimistPlusOneEffect(), 1));
@@ -112,19 +111,18 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().size() > 0) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null && controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
                 return false;
             }
-            CardsImpl cards = new CardsImpl();
-            cards.add(card);
-            controller.revealCards("Nissa, Sage Animist", cards, game);
+            controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
+            Zone targetZone = Zone.HAND;
             if (card.getCardType().contains(CardType.LAND)) {
-                return controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-            } else {
-                return controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                targetZone = Zone.BATTLEFIELD;
             }
+            return controller.moveCards(card, null, targetZone, source, game);
         }
         return true;
     }

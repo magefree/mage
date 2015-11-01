@@ -27,24 +27,15 @@
  */
 package mage.sets.urzaslegacy;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.filter.Filter;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.target.Target;
-import mage.target.TargetObject;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.other.TargetsPermanentPredicate;
+import mage.target.TargetSpell;
 
 /**
  *
@@ -52,13 +43,19 @@ import mage.target.TargetObject;
  */
 public class Intervene extends CardImpl {
 
+    private final static FilterSpell filter = new FilterSpell("spell that targets a creature");
+
+    static {
+        filter.add(new TargetsPermanentPredicate(new FilterCreaturePermanent()));
+    }
+
     public Intervene(UUID ownerId) {
         super(ownerId, 33, "Intervene", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "ULG";
 
 
         // Counter target spell that targets a creature.
-        this.getSpellAbility().addTarget(new InterveneTargetSpell());
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
@@ -70,93 +67,4 @@ public class Intervene extends CardImpl {
     public Intervene copy() {
         return new Intervene(this);
     }
-    
-    private class InterveneTargetSpell extends TargetObject {
-
-
-        public InterveneTargetSpell() {
-            super(1, Zone.STACK);
-            this.targetName = "spell that targets a creature";
-        }
-
-        public InterveneTargetSpell(final InterveneTargetSpell target) {
-                super(target); 
-        }
-
-        @Override
-        public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-                return canChoose(sourceControllerId, game);
-        }
-
-        @Override
-        public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-                return possibleTargets(sourceControllerId, game);
-        }
-
-        @Override
-        public boolean canTarget(UUID id, Ability source, Game game) {
-                if (super.canTarget(id, source, game)) {
-                    if (targetsCreature(id, game)) {
-                        return true;
-                    }
-                }
-                return false;
-        }
-
-        @Override
-        public boolean canChoose(UUID sourceControllerId, Game game) {
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell) {
-                    if (targetsCreature(stackObject.getId(), game)) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-            Set<UUID> possibleTargets = new HashSet<UUID>();
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell) {
-                    if (targetsCreature(stackObject.getId(), game)) {
-                        possibleTargets.add(stackObject.getId());
-                    }
-                }
-            }
-            return possibleTargets;
-        }
-
-
-        private boolean targetsCreature(UUID id, Game game) {
-            StackObject spell = game.getStack().getStackObject(id);
-            if (spell != null) {
-                Ability ability = spell.getStackAbility();
-                if (ability != null && !ability.getTargets().isEmpty()) {
-                    for (Target target : ability.getTargets()) {
-                        for (UUID targetId : target.getTargets()) {
-                            Permanent permanent = game.getPermanent(targetId);
-                            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public InterveneTargetSpell copy() {
-                return new InterveneTargetSpell(this);
-        }
-
-        @Override
-        public Filter getFilter() {
-            return new FilterSpell();
-        }
-    }
 }
-
-

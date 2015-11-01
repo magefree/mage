@@ -92,12 +92,15 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
         return event.getType() == GameEvent.EventType.COUNTERS_ADDED;
     }
 
-
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.P1P1.getName())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            return (!event.getTargetId().equals(this.getSourceId())
+            if (permanent == null) {
+                permanent = game.getPermanentEntering(event.getTargetId());
+            }
+            return (permanent != null
+                    && !event.getTargetId().equals(this.getSourceId())
                     && permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.getControllerId().equals(this.getControllerId()));
         }

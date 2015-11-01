@@ -103,7 +103,7 @@ class AcademyEliteEffect1 extends OneShotEffect {
             SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
             if (spellAbility != null
                     && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) - 1 == spellAbility.getSourceObjectZoneChangeCounter()) {
+                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                 CardsInAllGraveyardsCount instantsAndSorceries = new CardsInAllGraveyardsCount(new FilterInstantOrSorceryCard("instant or sorcery cards"));
                 int instantsAndSorceriesCount = instantsAndSorceries.calculate(game, source, this);
                 if (instantsAndSorceriesCount > 0) {

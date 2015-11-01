@@ -65,6 +65,7 @@ public class ArchdemonOfGreed extends CardImpl {
         super(ownerId, 71, "Archdemon of Greed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "DKA";
         this.subtype.add("Demon");
+        this.color.setBlack(true);
 
         this.nightCard = true;
         this.canTransform = true;

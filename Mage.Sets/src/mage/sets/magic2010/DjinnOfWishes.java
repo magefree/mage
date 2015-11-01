@@ -105,7 +105,7 @@ class DjinnOfWishesEffect extends OneShotEffect {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.revealCards("Djinn Of Wishes", cards, game);
+            player.revealCards("Djinn of Wishes", cards, game);
 
             player.getLibrary().removeFromTop(game);
 

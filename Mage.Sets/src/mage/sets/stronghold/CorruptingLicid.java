@@ -25,28 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.sets.stronghold;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.LicidAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.FearAbility;
+import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author BursegSardaukar
+ * @author emerald000
  */
-public class GoblinSnowman extends mage.sets.iceage.GoblinSnowman {
+public class CorruptingLicid extends CardImpl {
 
-    public GoblinSnowman(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 64;
-        this.expansionSetCode = "ICE";
+    public CorruptingLicid(UUID ownerId) {
+        super(ownerId, 4, "Corrupting Licid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "STH";
+        this.subtype.add("Licid");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {B}, {tap}: Corrupting Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.
+        this.addAbility(new LicidAbility(new ColoredManaCost(ColoredManaSymbol.B), new ColoredManaCost(ColoredManaSymbol.B)));
+        
+        // Enchanted creature has fear.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public GoblinSnowman(final GoblinSnowman card) {
+    public CorruptingLicid(final CorruptingLicid card) {
         super(card);
     }
 
     @Override
-    public GoblinSnowman copy() {
-        return new GoblinSnowman(this);
+    public CorruptingLicid copy() {
+        return new CorruptingLicid(this);
     }
 }

@@ -53,7 +53,6 @@ public class FateTransfer extends CardImpl {
         super(ownerId, 161, "Fate Transfer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U/B}");
         this.expansionSetCode = "SHM";
 
-
         // Move all counters from target creature onto another target creature.
         this.getSpellAbility().addEffect(new FateTransferEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
@@ -96,9 +95,8 @@ class FateTransferEffect extends OneShotEffect {
                 && creatureToMoveCountersTo != null) {
             Permanent copyCreature = creatureToMoveCountersFrom.copy();
             for (Counter counter : copyCreature.getCounters().values()) {
-                Counter newCounterTest = new Counter(counter.getName(), counter.getCount());
-                creatureToMoveCountersFrom.removeCounters(newCounterTest, game);
-                creatureToMoveCountersTo.addCounters(newCounterTest, game);
+                creatureToMoveCountersFrom.removeCounters(counter, game);
+                creatureToMoveCountersTo.addCounters(counter, game);
             }
             return true;
         }

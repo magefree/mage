@@ -43,9 +43,9 @@ import mage.target.common.TargetCardInGraveyard;
  * @author jeffwadsworth
  */
 public class MineExcavation extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("artifact or enchantment card in a graveyard");
-    
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.ENCHANTMENT)));
@@ -58,9 +58,9 @@ public class MineExcavation extends CardImpl {
         // Return target artifact or enchantment card from a graveyard to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
-        
+
         // Conspire
-        this.addAbility(new ConspireAbility(this));
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
     public MineExcavation(final MineExcavation card) {

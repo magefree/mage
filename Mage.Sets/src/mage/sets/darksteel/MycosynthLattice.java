@@ -34,21 +34,24 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
-import mage.constants.Rarity;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 
 /**
@@ -79,8 +82,8 @@ public class MycosynthLattice extends CardImpl {
 }
 
 class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
-    
-    public PermanentsAreArtifactsEffect(){
+
+    public PermanentsAreArtifactsEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "All permanents are artifacts in addition to their other types";
     }
@@ -106,9 +109,8 @@ class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
     }
 }
 
-
 class EverythingIsColorlessEffect extends ContinuousEffectImpl {
-    
+
     public EverythingIsColorlessEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);
         staticText = "All cards that aren't on the battlefield, spells, and permanents are colorless";
@@ -141,7 +143,7 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     // hand
-                    for (Card card: player.getHand().getCards(game)) {
+                    for (Card card : player.getHand().getCards(game)) {
                         game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
                     }
                     // library
@@ -169,11 +171,10 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
     }
 }
 
-
-class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl {
+class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     public ManaCanBeSpentAsAnyColorEffect() {
-        super(AsThoughEffectType.SPEND_ANY_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Players may spend mana as though it were mana of any color";
     }
 
@@ -183,8 +184,14 @@ class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return true;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        return controller != null && controller.getInRange().contains(affectedControllerId);
+    }
+
+    @Override
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
     }
 
     @Override
@@ -194,5 +201,5 @@ class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl {
 
     private ManaCanBeSpentAsAnyColorEffect(ManaCanBeSpentAsAnyColorEffect effect) {
         super(effect);
-    }    
+    }
 }

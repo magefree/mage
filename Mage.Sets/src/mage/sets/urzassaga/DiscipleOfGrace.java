@@ -53,7 +53,7 @@ public class DiscipleOfGrace extends CardImpl {
     }
 
     public DiscipleOfGrace(UUID ownerId) {
-        super(ownerId, 10, "Disciple Of Grace", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 10, "Disciple of Grace", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "USG";
         this.subtype.add("Human");
         this.subtype.add("Cleric");

@@ -28,9 +28,6 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,7 +36,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -63,7 +62,8 @@ public class MoggSquad extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        
+
+        // Mogg Squad gets -1/-1 for each other creature on the battlefield.
         DynamicValue amount = new SignInversionDynamicValue(new PermanentsOnBattlefieldCount(filter));
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);

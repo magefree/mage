@@ -36,8 +36,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -92,63 +93,62 @@ class TheGreatAuroraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
 
-        Map<UUID, List<Permanent>> permanentsOwned = new HashMap<>();
-        Collection<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
-        for (Permanent permanent : permanents) {
-            List<Permanent> list = permanentsOwned.get(permanent.getOwnerId());
-            if (list == null) {
-                list = new ArrayList<>();
-                permanentsOwned.put(permanent.getOwnerId(), list);
-            }
-            list.add(permanent);
-        }
-
-        // shuffle permanents and hand cards into owner's library
-        Map<UUID, Integer> permanentsCount = new HashMap<>();
-
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int handCards = player.getHand().size();
-                player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
-                List<Permanent> list = permanentsOwned.remove(player.getId());
-                permanentsCount.put(playerId, handCards + (list != null ? list.size() : 0));
-                for (Permanent permanent : list) {
-                    player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
+            Map<UUID, List<Permanent>> permanentsOwned = new HashMap<>();
+            Collection<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
+            for (Permanent permanent : permanents) {
+                List<Permanent> list = permanentsOwned.get(permanent.getOwnerId());
+                if (list == null) {
+                    list = new ArrayList<>();
+                    permanentsOwned.put(permanent.getOwnerId(), list);
                 }
-                player.shuffleLibrary(game);
+                list.add(permanent);
             }
-        }
 
-        game.applyEffects(); // so effects from creatures that were on the battlefield won't trigger from draw or put into play
+            // shuffle permanents and hand cards into owner's library
+            Map<UUID, Integer> permanentsCount = new HashMap<>();
 
-        // Draw cards
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int count = permanentsCount.get(playerId);
-                if (count > 0) {
-                    player.drawCards(count, game);
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    int handCards = player.getHand().size();
+                    player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                    List<Permanent> list = permanentsOwned.remove(player.getId());
+                    permanentsCount.put(playerId, handCards + (list != null ? list.size() : 0));
+                    for (Permanent permanent : list) {
+                        player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
+                    }
+                    player.shuffleLibrary(game);
                 }
             }
-        }
 
-        // put lands onto the battlefield
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                TargetCard target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterLandCard("put any number of land cards from your hand onto the battlefield"));
-                player.chooseTarget(Outcome.PutLandInPlay, player.getHand(), target, source, game);
-                for (UUID cardId : target.getTargets()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), false);
+            game.applyEffects(); // so effects from creatures that were on the battlefield won't trigger from draw or put into play
+
+            // Draw cards
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    int count = permanentsCount.get(playerId);
+                    if (count > 0) {
+                        player.drawCards(count, game);
                     }
                 }
-
             }
+
+            // put lands onto the battlefield
+            Cards toBattlefield = new CardsImpl();
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    TargetCard target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterLandCard("put any number of land cards from your hand onto the battlefield"));
+                    player.chooseTarget(Outcome.PutLandInPlay, player.getHand(), target, source, game);
+                    toBattlefield.addAll(target.getTargets());
+                }
+            }
+            return controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
         }
-        return true;
+        return false;
     }
 }

@@ -36,6 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -90,8 +91,7 @@ class HallowedMoonlightEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
-            controller.moveCardToExileWithInfo(entersTheBattlefieldEvent.getTarget(), null, "",
-                    source.getSourceId(), game, entersTheBattlefieldEvent.getFromZone(), true);
+            controller.moveCards(entersTheBattlefieldEvent.getTarget(), Zone.EXILED, source, game, false, false, false, null);
             return true;
         }
         return false;

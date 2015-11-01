@@ -27,17 +27,19 @@
  */
 package mage.sets.exodus;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -51,8 +53,7 @@ public class Manabond extends CardImpl {
         super(ownerId, 113, "Manabond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "EXO";
 
-
-        // At the beginning of your end step, you may reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.
+        // At the beginning of your end step, reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new ManabondEffect(), true));
     }
 
@@ -66,12 +67,11 @@ public class Manabond extends CardImpl {
     }
 }
 
-
 class ManabondEffect extends OneShotEffect {
 
     public ManabondEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand";
+        staticText = "you may reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand";
     }
 
     public ManabondEffect(final ManabondEffect effect) {
@@ -80,24 +80,22 @@ class ManabondEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.revealCards("Manabond", player.getHand(), game);
-
-            Cards hand = player.getHand().copy();
-            for(UUID uuid : hand){
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            controller.revealCards(sourceObject.getIdName(), controller.getHand(), game);
+            Set<Card> toBattlefield = new LinkedHashSet<>();
+            for (UUID uuid : controller.getHand()) {
                 Card card = game.getCard(uuid);
-                if(card != null){
-                    if(card.getCardType().contains(CardType.LAND)){
-                        card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-                    }
-                    else{
-                        player.discard(card, source, game);
-                    }
+                if (card != null && card.getCardType().contains(CardType.LAND)) {
+                    toBattlefield.add(card);
                 }
+
             }
-            
-        }   
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            controller.discard(controller.getHand().size(), false, source, game);
+            return true;
+        }
         return false;
     }
 

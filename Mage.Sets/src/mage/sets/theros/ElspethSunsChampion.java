@@ -30,21 +30,19 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -58,6 +56,7 @@ import mage.game.permanent.token.SoldierToken;
 public class ElspethSunsChampion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or greater");
+
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
@@ -67,8 +66,7 @@ public class ElspethSunsChampion extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Elspeth");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Put three 1/1 white Soldier creature tokens onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken(), 3), 1));
@@ -95,7 +93,7 @@ class ElspethSunsChampionEmblem extends Emblem {
 
     public ElspethSunsChampionEmblem() {
         this.setName("EMBLEM: Elspeth, Sun's Champion");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(2,2, Duration.WhileOnBattlefield, filter, false));
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false));
         ability.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter));
         this.getAbilities().add(ability);
 

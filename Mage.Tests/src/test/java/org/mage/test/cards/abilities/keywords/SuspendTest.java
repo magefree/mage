@@ -49,6 +49,8 @@ public class SuspendTest extends CardTestPlayerBase {
     public void testEpochrasite() {
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.
+        // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
         addCard(Zone.HAND, playerA, "Epochrasite", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
@@ -143,6 +145,22 @@ public class SuspendTest extends CardTestPlayerBase {
         assertExileCount("Deep-Sea Kraken", 1);
 
         assertCounterOnExiledCardCount("Deep-Sea Kraken", CounterType.TIME, 8); // -1 from spell of player B
+
+    }
+
+    @Test
+    public void testAncestralVisionCantBeCastDirectly() {
+        // Suspend 4-{U}
+        // Target player draws three cards.
+        addCard(Zone.HAND, playerA, "Ancestral Vision", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision", playerA);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertHandCount(playerA, "Ancestral Vision", 1);
 
     }
 }

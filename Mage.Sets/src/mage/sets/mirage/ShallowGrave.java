@@ -100,7 +100,7 @@ class ShallowGraveEffect extends OneShotEffect {
                 }
             }
             if (lastCreatureCard != null) {
-                if (controller.putOntoBattlefieldWithInfo(lastCreatureCard, game, Zone.GRAVEYARD, source.getSourceId())) {
+                if (controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game)) {
                     Permanent returnedCreature = game.getPermanent(lastCreatureCard.getId());
                     if (returnedCreature != null) {
                         FixedTarget fixedTarget = new FixedTarget(returnedCreature, game);

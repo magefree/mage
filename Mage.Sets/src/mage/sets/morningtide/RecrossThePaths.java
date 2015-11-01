@@ -54,9 +54,9 @@ public class RecrossThePaths extends CardImpl {
         super(ownerId, 133, "Recross the Paths", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "MOR";
 
-        // Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order. 
+        // Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new RecrossThePathsEffect());
-        
+
         // Clash with an opponent. If you win, return Recross the Paths to its owner's hand.
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
@@ -96,23 +96,23 @@ class RecrossThePathsEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        
+
         Cards cards = new CardsImpl();
         Card cardFound = null;
         while (controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
-                cards.add(card);                
-                if (filter.match(card, game)){
+                cards.add(card);
+                if (filter.match(card, game)) {
                     cardFound = card;
                     break;
                 }
-            }            
+            }
         }
         if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getName(), cards, game);
+            controller.revealCards(sourceObject.getIdName(), cards, game);
             if (cardFound != null) {
-                controller.putOntoBattlefieldWithInfo(cardFound, game, Zone.LIBRARY, source.getSourceId());
+                controller.moveCards(cardFound, Zone.BATTLEFIELD, source, game);
                 cards.remove(cardFound);
             }
             controller.putCardsOnBottomOfLibrary(cards, game, source, true);

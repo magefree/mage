@@ -69,10 +69,10 @@ public class CryptChampion extends CardImpl {
 
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
-        
+
         // When Crypt Champion enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CryptChampionEffect()));
-        
+
         // When Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.R)), false), new ManaSpentToCastWatcher());
     }
@@ -88,26 +88,26 @@ public class CryptChampion extends CardImpl {
 }
 
 class CryptChampionEffect extends OneShotEffect {
-    
+
     CryptChampionEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield";
     }
-    
+
     CryptChampionEffect(final CryptChampionEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CryptChampionEffect copy() {
         return new CryptChampionEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
@@ -117,7 +117,7 @@ class CryptChampionEffect extends OneShotEffect {
                     if (target.canChoose(playerId, game) && player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                            player.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
                     }
                 }

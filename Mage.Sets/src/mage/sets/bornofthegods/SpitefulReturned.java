@@ -67,7 +67,7 @@ public class SpitefulReturned extends CardImpl {
         effect.setText("defending player loses 2 life");
         this.addAbility(new SpitefulReturnedTriggeredAbility(effect));
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
     }
 
     public SpitefulReturned(final SpitefulReturned card) {
@@ -105,7 +105,8 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
         if (sourcePermanent != null) {
             if (sourcePermanent.getCardType().contains(CardType.CREATURE)) {
-                if (event.getSourceId() == this.getSourceId()) {
+                if (event.getSourceId() != null
+                        && event.getSourceId().equals(this.getSourceId())) {
                     UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
                     return true;

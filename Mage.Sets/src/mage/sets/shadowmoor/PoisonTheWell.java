@@ -28,15 +28,12 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -50,7 +47,10 @@ public class PoisonTheWell extends CardImpl {
         this.expansionSetCode = "SHM";
 
         // Destroy target land. Poison the Well deals 2 damage to that land's controller.
-        this.getSpellAbility().addEffect(new PoisonTheWellEffect());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        Effect effect = new DamageTargetControllerEffect(2);
+        effect.setText("{this} deals 2 damage to that land's controller");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
@@ -61,36 +61,5 @@ public class PoisonTheWell extends CardImpl {
     @Override
     public PoisonTheWell copy() {
         return new PoisonTheWell(this);
-    }
-}
-
-class PoisonTheWellEffect extends OneShotEffect {
-
-    public PoisonTheWellEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target land. {this} deals 2 damage to that land's controller";
-    }
-
-    public PoisonTheWellEffect(final PoisonTheWellEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PoisonTheWellEffect copy() {
-        return new PoisonTheWellEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetedLand = game.getPermanent(source.getFirstTarget());
-        if (targetedLand != null) {
-            targetedLand.destroy(source.getSourceId(), game, true);
-            Player controller = game.getPlayer(targetedLand.getControllerId());
-            if (controller != null) {            
-                controller.damage(2, source.getSourceId(), game, false, true);
-            }
-            return true;
-        }
-        return false;
     }
 }

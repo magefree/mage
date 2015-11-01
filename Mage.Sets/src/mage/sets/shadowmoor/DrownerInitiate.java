@@ -45,12 +45,12 @@ import mage.target.TargetPlayer;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class DrownerInitiate extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("a blue spell");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
@@ -65,10 +65,10 @@ public class DrownerInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts a blue spell, you may pay {1}. If you do, target player puts the top two cards of his or her library into his or her graveyard.
-        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl("{1}")), filter, true);
+        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl("{1}")), filter, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
     }
 
     public DrownerInitiate(final DrownerInitiate card) {

@@ -29,22 +29,21 @@ package mage.sets.shardsofalara;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -95,14 +94,13 @@ class ExileAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game);
-        for (Permanent permanent: permanents) {
+        for (Permanent permanent : permanents) {
             permanent.moveToExile(source.getSourceId(), "Realm Razer", source.getSourceId(), game);
         }
         return true;
     }
 
 }
-
 
 class RealmRazerEffect extends OneShotEffect {
 
@@ -122,14 +120,11 @@ class RealmRazerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exZone = game.getExile().getExileZone(source.getSourceId());
-        if (exZone != null) {
-            for (Card card : exZone.getCards(game)) {
-                if (card != null) {
-                    if(card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId())){
-                        game.getPermanent(card.getId()).setTapped(true);
-                    }
-                }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ExileZone exZone = game.getExile().getExileZone(source.getSourceId());
+            if (exZone != null) {
+                return controller.moveCards(exZone.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
             }
             return true;
         }

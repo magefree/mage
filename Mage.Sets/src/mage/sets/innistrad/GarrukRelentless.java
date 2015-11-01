@@ -31,11 +31,10 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -60,11 +59,10 @@ public class GarrukRelentless extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Garruk");
 
-
         this.canTransform = true;
         this.secondSideCard = new GarrukTheVeilCursed(ownerId);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // When Garruk Relentless has two or fewer loyalty counters on him, transform him.
         this.addAbility(new TransformAbility());

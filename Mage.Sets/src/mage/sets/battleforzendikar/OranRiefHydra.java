@@ -60,8 +60,8 @@ public class OranRiefHydra extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
-        // <i>Landfall</i> - Whenever a land enters the battlefield under your control, put a +1/+1 counter on Oran-Rief Hydra. 
+
+        // <i>Landfall</i> - Whenever a land enters the battlefield under your control, put a +1/+1 counter on Oran-Rief Hydra.
         // If that land is a Forest, put two +1/+1 counters on Oran-Rief Hydra instead.
         this.addAbility(new OranRiefHydraTriggeredAbility());
     }
@@ -77,9 +77,9 @@ public class OranRiefHydra extends CardImpl {
 }
 
 class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
-    
-    private static final String text = "<i>Landfall</i> - Whenever a land enters the battlefield under your control, put a +1/+1 counter on Oran-Rief Hydra. "
-            + "If that land is a Forest, put two +1/+1 counters on Oran-Rief Hydra instead.";
+
+    private static final String text = "<i>Landfall</i> - Whenever a land enters the battlefield under your control, put a +1/+1 counter on {this}. "
+            + "If that land is a Forest, put two +1/+1 counters on {this} instead.";
 
     public OranRiefHydraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new OranRiefHydraEffect());
@@ -106,12 +106,13 @@ class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
                 && permanent.getCardType().contains(CardType.LAND)
                 && permanent.getControllerId().equals(getControllerId())) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent != null) 
+            if (sourcePermanent != null) {
                 for (Effect effect : getEffects()) {
-                if (effect instanceof OranRiefHydraEffect) {
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    if (effect instanceof OranRiefHydraEffect) {
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                    }
+                    return true;
                 }
-                return true;
             }
         }
         return false;

@@ -48,10 +48,10 @@ public class MemorySluice extends CardImpl {
         // Target player puts the top four cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
+
         // Conspire
-        this.addAbility(new ConspireAbility(this));
-        
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
+
     }
 
     public MemorySluice(final MemorySluice card) {

@@ -27,6 +27,8 @@
  */
 package mage.sets.judgment;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -44,10 +46,10 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -94,6 +96,7 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new AnotherPredicate());
     }
 
     public WorldgorgerDragonEntersEffect() {
@@ -110,13 +113,11 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null) {
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileId != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    if (!permanent.getId().equals(source.getSourceId())) { // Another
-                        controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
-                    }
-                }
+                Set<Card> cardsToExile = new LinkedHashSet<>();
+                cardsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
+                controller.moveCardsToExile(cardsToExile, source, game, true, exileId, sourceObject.getIdName());
                 return true;
             }
         }
@@ -145,17 +146,10 @@ class WorldgorgerDragonLeavesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
             ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exile != null) {
-                exile = exile.copy();
-                for (UUID cardId : exile) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
-                    }
-                }
-                return true;
+                return controller.moveCards(exile.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
         }
         return false;

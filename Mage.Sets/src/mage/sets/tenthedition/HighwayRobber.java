@@ -48,7 +48,6 @@ public class HighwayRobber extends CardImpl {
         super(ownerId, 150, "Highway Robber", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "10E";
         this.subtype.add("Human");
-        this.subtype.add("Rogue");
         this.subtype.add("Mercenary");
 
         this.power = new MageInt(2);

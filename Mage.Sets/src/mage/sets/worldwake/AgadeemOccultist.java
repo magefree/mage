@@ -28,9 +28,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,7 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -96,32 +95,30 @@ class AgadeemOccultistEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         int allycount = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
             if (permanent.hasSubtype("Ally")) {
                 allycount++;
             }
         }
-
         FilterCard filter = new FilterCard("creature card in an opponent's graveyard");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(1, 1, filter);
 
-        if (you != null) {
+        if (controller != null) {
             if (target.canChoose(source.getControllerId(), game)
-                    && you.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
+                    && controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         if (card.getManaCost().convertedManaCost() <= allycount) {
-                            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-                            return true;
+                            return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
                     }
                 }
             }
+            return true;
         }
         return false;
     }

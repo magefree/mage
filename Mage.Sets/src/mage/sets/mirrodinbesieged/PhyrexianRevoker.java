@@ -25,32 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -66,7 +59,7 @@ public class PhyrexianRevoker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As Phyrexian Revoker enters the battlefield, name a nonland card.
-        this.addAbility(new AsEntersBattlefieldAbility(new PhyrexianRevokerEffect1()));
+        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
 
         // Activated abilities of sources with the chosen name can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianRevokerEffect2()));
@@ -79,46 +72,6 @@ public class PhyrexianRevoker extends CardImpl {
     @Override
     public PhyrexianRevoker copy() {
         return new PhyrexianRevoker(this);
-    }
-
-}
-
-class PhyrexianRevokerEffect1 extends OneShotEffect {
-
-    public PhyrexianRevokerEffect1() {
-        super(Outcome.Detriment);
-        staticText = "name a nonland card";
-    }
-
-    public PhyrexianRevokerEffect1(final PhyrexianRevokerEffect1 effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-            cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            String cardName = cardChoice.getChoice();
-            game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
-            game.getState().setValue(source.getSourceId().toString(), cardName);
-            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"), game);
-            return true;
-        }        
-        return false;
-    }
-
-    @Override
-    public PhyrexianRevokerEffect1 copy() {
-        return new PhyrexianRevokerEffect1(this);
     }
 
 }
@@ -143,7 +96,7 @@ class PhyrexianRevokerEffect2 extends ContinuousRuleModifyingEffectImpl {
     public PhyrexianRevokerEffect2 copy() {
         return new PhyrexianRevokerEffect2(this);
     }
-    
+
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
@@ -157,7 +110,7 @@ class PhyrexianRevokerEffect2 extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ACTIVATE_ABILITY) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
+            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }
         }

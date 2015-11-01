@@ -67,7 +67,7 @@ public class ThicketElemental extends CardImpl {
         // When Thicket Elemental enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ThicketElementalEffect());
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(),
-            "When {this} enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library."));
+                "When {this} enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library."));
     }
 
     public ThicketElemental(final ThicketElemental card) {
@@ -81,8 +81,6 @@ public class ThicketElemental extends CardImpl {
 }
 
 class ThicketElementalEffect extends OneShotEffect {
-
-
 
     public ThicketElementalEffect() {
         super(Outcome.Benefit);
@@ -102,15 +100,13 @@ class ThicketElementalEffect extends OneShotEffect {
             while (controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     break;
                 }
                 revealedCards.add(card);
             }
-            controller.revealCards("ThicketElemental", revealedCards, game);
-            for (Card card: revealedCards.getCards(game)) {
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
+            controller.revealCards(sourceObject.getIdName(), revealedCards, game);
+            controller.moveCards(revealedCards, Zone.LIBRARY, source, game);
             controller.shuffleLibrary(game);
             return true;
         }

@@ -95,16 +95,16 @@ class SphinxAmbassadorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && targetPlayer != null && sourcePermanent != null) {
+        if (controller != null && targetPlayer != null && sourcePermanent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
-            player.searchLibrary(target, game, targetPlayer.getId());
+            controller.searchLibrary(target, game, targetPlayer.getId());
 
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                TreeSet<String> choices = new TreeSet<String>();
+                TreeSet<String> choices = new TreeSet<>();
                 Collection<Card> cards = game.getCards();
                 for (Card gameCard : cards) {
                     if (gameCard.getOwnerId().equals(targetPlayer.getId())) {
@@ -124,8 +124,8 @@ class SphinxAmbassadorEffect extends OneShotEffect {
 
                 game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(", named card: [").append(cardName).append("]").toString());
                 if (!card.getName().equals(cardName) && card.getCardType().contains(CardType.CREATURE)) {
-                    if (player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append(" onto the battlefield?").toString(), source, game)) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    if (controller.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append(" onto the battlefield?").toString(), source, game)) {
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                 }
             }

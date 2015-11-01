@@ -32,8 +32,8 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,6 +56,7 @@ public class SiftThroughSands extends CardImpl {
 
     private static final String rule = "If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library";
     private static final FilterCreatureCard filter = new FilterCreatureCard("a card named The Unspeakable");
+
     static {
         filter.add(new NamePredicate("The Unspeakable"));
     }
@@ -65,13 +66,12 @@ public class SiftThroughSands extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-
         // Draw two cards, then discard a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         Effect effect = new DiscardControllerEffect(1);
         effect.setText(", then discard a card");
         this.getSpellAbility().addEffect(effect);
-        
+
         // If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), new SiftThroughSandsCondition(), rule));
         this.getSpellAbility().addWatcher(new SiftThroughSandsWatcher());
@@ -125,7 +125,7 @@ class SiftThroughSandsWatcher extends Watcher {
             return;
         }
         if (event.getType() == EventType.SPELL_CAST
-                && controllerId == event.getPlayerId()) {
+                && controllerId.equals(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell.getCard().getName().equals("Peer Through Depths")) {
                 castPeerThroughDepths = true;

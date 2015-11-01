@@ -38,12 +38,12 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class VoiceOfTheWoods extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Elves you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
@@ -69,7 +69,7 @@ public class VoiceOfTheWoods extends CardImpl {
         // Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new VoiceOfTheWoodsElementalToken()),
-                new TapTargetCost(new TargetControlledCreaturePermanent(5,5, filter, false)));
+                new TapTargetCost(new TargetControlledPermanent(5,5, filter, false)));
         this.addAbility(ability);
     }
 

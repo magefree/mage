@@ -64,7 +64,7 @@ public class UlamogsDespoiler extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As Ulamog's Despoiler enters the battlefield, you may put two cards your opponents own from exile into their owners' graveyards. If you do, Ulamog's Despoiler enters the battlefield with four +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new UlamogsDespoilerEffect(), null, true,
+        this.addAbility(new EntersBattlefieldAbility(new UlamogsDespoilerEffect(), null,
                 "As {this} enters the battlefield, you may put two cards your opponents own from exile into their owners' graveyards. If you do, {this} enters the battlefield with four +1/+1 counters on it", null));
     }
 

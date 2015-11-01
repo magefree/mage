@@ -57,7 +57,7 @@ public class MizziumTransreliquat extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MizziumTransreliquatCopyEffect(), new ManaCostsImpl("{3}"));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
-        
+
         // {1}{U}{R}: Mizzium Transreliquat becomes a copy of target artifact and gains this ability.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MizziumTransreliquatCopyAndGainAbilityEffect(), new ManaCostsImpl("{1}{U}{R}"));
         ability.addTarget(new TargetArtifactPermanent());
@@ -74,12 +74,11 @@ public class MizziumTransreliquat extends CardImpl {
     }
 }
 
-
 class MizziumTransreliquatCopyEffect extends OneShotEffect {
 
     public MizziumTransreliquatCopyEffect() {
         super(Outcome.Copy);
-        this.staticText = "Mizzium Transreliquat becomes a copy of target artifact until end of turn";
+        this.staticText = "{this} becomes a copy of target artifact until end of turn";
     }
 
     public MizziumTransreliquatCopyEffect(final MizziumTransreliquatCopyEffect effect) {
@@ -96,17 +95,18 @@ class MizziumTransreliquatCopyEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
-            game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent, source, new EmptyApplyToPermanent());
+            game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
             return true;
         }
         return false;
     }
 }
+
 class MizziumTransreliquatCopyAndGainAbilityEffect extends OneShotEffect {
 
     public MizziumTransreliquatCopyAndGainAbilityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Mizzium Transreliquat becomes a copy of target artifact and gains this ability";
+        this.staticText = "{this} becomes a copy of target artifact and gains this ability";
     }
 
     public MizziumTransreliquatCopyAndGainAbilityEffect(final MizziumTransreliquatCopyAndGainAbilityEffect effect) {
@@ -123,7 +123,7 @@ class MizziumTransreliquatCopyAndGainAbilityEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
-            Permanent newPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent, source, new EmptyApplyToPermanent());
+            Permanent newPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
             Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MizziumTransreliquatCopyAndGainAbilityEffect(), new ManaCostsImpl("{1}{U}{R}"));
             ability.addTarget(new TargetArtifactPermanent());
             newPermanent.addAbility(ability, source.getSourceId(), game);

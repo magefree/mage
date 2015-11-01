@@ -97,6 +97,7 @@ class ReturnSourceFromExileToBattlefieldEffect extends OneShotEffect {
         this.tapped = tapped;
         setText();
     }
+
     public ReturnSourceFromExileToBattlefieldEffect(boolean tapped, boolean ownerControl) {
         super(Outcome.PutCreatureInPlay);
         this.tapped = tapped;
@@ -135,7 +136,7 @@ class ReturnSourceFromExileToBattlefieldEffect extends OneShotEffect {
             return false;
         }
 
-        return player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId(), tapped);
+        return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
     }
 
     private void setText() {
@@ -144,7 +145,7 @@ class ReturnSourceFromExileToBattlefieldEffect extends OneShotEffect {
             sb.append(" tapped");
         }
         if (ownerControl) {
-               sb.append(" under its owner's control");
+            sb.append(" under its owner's control");
         }
         staticText = sb.toString();
     }

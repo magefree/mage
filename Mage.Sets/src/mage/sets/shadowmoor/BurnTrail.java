@@ -48,9 +48,9 @@ public class BurnTrail extends CardImpl {
         // Burn Trail deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-                
+
         // Conspire
-        this.addAbility(new ConspireAbility(this));
+        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
     public BurnTrail(final BurnTrail card) {

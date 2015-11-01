@@ -44,6 +44,7 @@
         <tournamentType name="Sealed Swiss (Cube)" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissCubeTournamentType"/>
     </tournamentTypes>
     <draftCubes>
+        <draftCube name="Adam Styborski's Pauper Cube (411 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.AdamStyborskisPauperCube"/>
         <draftCube name="Ben's Cube (720 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.BensCube"/>
         <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
         <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor720"/>

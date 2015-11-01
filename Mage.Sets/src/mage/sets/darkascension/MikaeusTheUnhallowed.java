@@ -28,10 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +37,10 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -74,6 +74,7 @@ public class MikaeusTheUnhallowed extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
         // Whenever a Human deals damage to you, destroy it.
         this.addAbility(new MikaeusTheUnhallowedAbility());
+
         // Other non-Human creatures you control get +1/+1 and have undying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new UndyingAbility(), Duration.WhileOnBattlefield, filter, true)));
@@ -108,7 +109,6 @@ class MikaeusTheUnhallowedAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
-
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {

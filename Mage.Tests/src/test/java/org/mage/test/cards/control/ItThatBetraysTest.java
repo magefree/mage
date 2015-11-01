@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.control;
 
-import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -37,15 +36,15 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class ItThatBetraysTest extends CardTestPlayerBase {
 
     /**
      * https://github.com/magefree/mage/issues/796
      *
-     * When an opponent sacrifices a fetchland and you have an It That Betrays in play,
-     * sacrificing the fetchland that comes under your control from its ability returns
-     * it to play under your control, allowing you to fetch infinite lands.
+     * When an opponent sacrifices a fetchland and you have an It That Betrays
+     * in play, sacrificing the fetchland that comes under your control from its
+     * ability returns it to play under your control, allowing you to fetch
+     * infinite lands.
      *
      */
     @Test
@@ -62,7 +61,7 @@ public class ItThatBetraysTest extends CardTestPlayerBase {
 
         assertLife(playerA, 19);
         assertLife(playerB, 19);
-        
+
         // Going to graveyard if player B sacrifices it
         assertGraveyardCount(playerA, "Flooded Strand", 1);
     }
@@ -71,7 +70,7 @@ public class ItThatBetraysTest extends CardTestPlayerBase {
     @Test
     public void testExileItThatBetraysEffect() {
         addCard(Zone.BATTLEFIELD, playerA, "Flooded Strand", 1);
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Rest in Peace", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "It That Betrays");
@@ -83,7 +82,7 @@ public class ItThatBetraysTest extends CardTestPlayerBase {
 
         assertLife(playerA, 19);
         assertLife(playerB, 20);
-        
+
         // Player B now controls a Flooded Strand, even though it went to exile
         assertPermanentCount(playerB, "Flooded Strand", 1);
     }

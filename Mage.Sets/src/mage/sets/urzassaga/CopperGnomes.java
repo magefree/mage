@@ -94,17 +94,16 @@ class PutArtifactOnBattlefieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCardInPlay, choiceText, source, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || !controller.chooseUse(Outcome.PutCardInPlay, choiceText, source, game)) {
             return false;
         }
 
         TargetCardInHand target = new TargetCardInHand(new FilterArtifactCard());
-        if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                return true;
+                return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }
         return false;

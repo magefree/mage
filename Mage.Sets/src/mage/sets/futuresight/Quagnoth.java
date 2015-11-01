@@ -57,10 +57,10 @@ public class Quagnoth extends CardImpl {
 
         // Split second
         this.addAbility(new SplitSecondAbility());
-        
+
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
-        
+
         // When a spell or ability an opponent controls causes you to discard Quagnoth, return it to your hand.
         this.addAbility(new QuagnothTriggeredAbility());
     }
@@ -97,9 +97,13 @@ class QuagnothTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
-                StackObject.class.isInstance(game.getObject(event.getSourceId())) &&
-                getSourceId().equals(event.getTargetId());
+        if (getSourceId().equals(event.getTargetId())) {
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+            if (stackObject != null) {
+                return game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId());
+            }
+        }
+        return false;
     }
 
     @Override

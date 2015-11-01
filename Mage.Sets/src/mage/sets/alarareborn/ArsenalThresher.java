@@ -41,7 +41,6 @@ import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,7 +61,8 @@ public class ArsenalThresher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As Arsenal Thresher enters the battlefield, you may reveal any number of other artifact cards from your hand. Arsenal Thresher enters the battlefield with a +1/+1 counter on it for each card revealed this way.
-        this.addAbility(new AsEntersBattlefieldAbility(new ArsenalThresherEffect(), "you may reveal any number of other artifact cards from your hand. {this} enters the battlefield with a +1/+1 counter on it for each card revealed this way"));
+        this.addAbility(new AsEntersBattlefieldAbility(new ArsenalThresherEffect(),
+                "you may reveal any number of other artifact cards from your hand. {this} enters the battlefield with a +1/+1 counter on it for each card revealed this way"));
     }
 
     public ArsenalThresher(final ArsenalThresher card) {
@@ -92,28 +92,28 @@ class ArsenalThresherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        Permanent arsenalThresher = game.getPermanent(source.getSourceId());
+        Permanent arsenalThresher = game.getPermanentEntering(source.getSourceId());
         FilterArtifactCard filter = new FilterArtifactCard();
         filter.add(new AnotherCardPredicate());
-        if (you.chooseUse(Outcome.Benefit, "Do you want to reveal other artifacts in your hand?", source, game)) {
+        if (controller.chooseUse(Outcome.Benefit, "Do you want to reveal other artifacts in your hand?", source, game)) {
             Cards cards = new CardsImpl();
-            if (you.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
+            if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
                 TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-                if (you.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+                if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
                     for (UUID uuid : target.getTargets()) {
-                        cards.add(you.getHand().get(uuid, game));
+                        cards.add(controller.getHand().get(uuid, game));
                     }
-                    you.revealCards("Revealed cards", cards, game);
                     if (arsenalThresher != null) {
+                        controller.revealCards(arsenalThresher.getIdName(), cards, game);
                         arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), game);
-                        return true;
                     }
                 }
             }
+            return true;
         }
         return false;
     }

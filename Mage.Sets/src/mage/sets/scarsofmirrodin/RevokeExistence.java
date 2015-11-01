@@ -25,25 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
 public class RevokeExistence extends CardImpl {
+
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
@@ -52,15 +51,16 @@ public class RevokeExistence extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public RevokeExistence (UUID ownerId) {
+    public RevokeExistence(UUID ownerId) {
         super(ownerId, 18, "Revoke Existence", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "SOM";
 
+        // Exile target artifact or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public RevokeExistence (final RevokeExistence card) {
+    public RevokeExistence(final RevokeExistence card) {
         super(card);
     }
 

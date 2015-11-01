@@ -27,23 +27,20 @@
  */
 package mage.sets.magic2012;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -55,8 +52,7 @@ public class JaceMemoryAdept extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Jace");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
@@ -116,5 +112,3 @@ class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
         return new JaceMemoryAdeptEffect(this);
     }
 }
-
-

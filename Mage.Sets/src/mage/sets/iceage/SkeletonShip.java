@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SkeletonShip extends CardImpl {
 
     public SkeletonShip(UUID ownerId) {
-        super(ownerId, 379, "Skeleton Ship", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 379, "Skeleton Ship", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         this.expansionSetCode = "ICE";
         this.supertype.add("Legendary");
         this.subtype.add("Skeleton");
@@ -62,7 +62,7 @@ public class SkeletonShip extends CardImpl {
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
                 new FilterLandPermanent("Island", "no Islands"), Filter.ComparisonType.Equal, 0,
                 new SacrificeSourceEffect()));
-        
+
         // {tap}: Put a -1/-1 counter on target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

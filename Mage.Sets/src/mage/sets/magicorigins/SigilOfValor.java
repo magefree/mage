@@ -105,7 +105,9 @@ class SigilOfValorTriggeredAbility extends TriggeredAbilityImpl {
             if (game.getCombat().attacksAlone()) {
                 Permanent equipment = game.getPermanent(getSourceId());
                 UUID attackerId = game.getCombat().getAttackers().get(0);
-                if (equipment != null && equipment.getAttachedTo() == attackerId) {
+                if (equipment != null
+                        && equipment.getAttachedTo() != null
+                        && equipment.getAttachedTo().equals(attackerId)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(attackerId));
                     return true;
                 }

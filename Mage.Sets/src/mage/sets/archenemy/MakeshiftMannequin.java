@@ -44,6 +44,7 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -77,21 +78,21 @@ public class MakeshiftMannequin extends CardImpl {
 }
 
 class MakeshiftMannequinEffect extends OneShotEffect {
-    
+
     MakeshiftMannequinEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
     }
-    
+
     MakeshiftMannequinEffect(final MakeshiftMannequinEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public MakeshiftMannequinEffect copy() {
         return new MakeshiftMannequinEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -99,12 +100,14 @@ class MakeshiftMannequinEffect extends OneShotEffect {
             UUID cardId = this.getTargetPointer().getFirst(game, source);
             Card card = controller.getGraveyard().get(cardId, game);
             if (card != null) {
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+                Counters counters = new Counters();
+                counters.addCounter(CounterType.MANNEQUIN.createInstance());
+                game.setEnterWithCounters(cardId, counters);
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(cardId);
                     if (permanent != null) {
-                        permanent.addCounters(CounterType.MANNEQUIN.createInstance(), game);
                         ContinuousEffect gainedEffect = new MakeshiftMannequinGainAbilityEffect();
-                        gainedEffect.setTargetPointer(new FixedTarget(cardId));
+                        gainedEffect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(gainedEffect, source);
                     }
                 }

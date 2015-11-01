@@ -30,18 +30,16 @@ package mage.sets.battleforzendikar;
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemTargetPlayerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -60,7 +58,7 @@ public class ObNixilisReignited extends CardImpl {
         this.expansionSetCode = "BFZ";
         this.subtype.add("Nixilis");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: You draw a card and you lose 1 life.
         Effect effect = new DrawCardSourceControllerEffect(1);

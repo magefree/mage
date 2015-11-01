@@ -30,20 +30,18 @@ package mage.sets.magic2015;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
@@ -69,8 +67,7 @@ public class JaceTheLivingGuildpact extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Jace");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: Look at the top two cards of your library. Put one of them into your graveyard.
         Effect effect = new LookLibraryAndPickControllerEffect(
@@ -78,7 +75,7 @@ public class JaceTheLivingGuildpact extends CardImpl {
         effect.setText("Look at the top two cards of your library. Put one of them into your graveyard");
         this.addAbility(new LoyaltyAbility(effect, 1));
 
-        // -3: Return another target nonland permanent to its owner's hand. 
+        // -3: Return another target nonland permanent to its owner's hand.
         LoyaltyAbility ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -113,15 +110,15 @@ class JaceTheLivingGuildpactEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card: player.getHand().getCards(game)) {
+                    for (Card card : player.getHand().getCards(game)) {
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }                    
-                    for (Card card: player.getGraveyard().getCards(game)) {
+                    }
+                    for (Card card : player.getGraveyard().getCards(game)) {
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }                       
+                    }
                     player.shuffleLibrary(game);
                 }
             }

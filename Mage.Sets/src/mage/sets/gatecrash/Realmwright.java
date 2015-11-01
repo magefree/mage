@@ -29,6 +29,18 @@ package mage.sets.gatecrash;
 
 import java.util.List;
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
+import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -36,15 +48,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.mana.*;
-import mage.cards.CardImpl;
-import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -66,7 +69,7 @@ public class Realmwright extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As Realmwright enters the battlefield, choose a basic land type.
-        this.addAbility(new AsEntersBattlefieldAbility(new RealmwrightEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral)));
 
         // Lands you control are the chosen type in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RealmwrightEffect2()));
@@ -79,44 +82,6 @@ public class Realmwright extends CardImpl {
     @Override
     public Realmwright copy() {
         return new Realmwright(this);
-    }
-}
-
-class RealmwrightEffect extends OneShotEffect {
-
-    public RealmwrightEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Choose a basic land type";
-    }
-
-    public RealmwrightEffect(final RealmwrightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RealmwrightEffect copy() {
-        return new RealmwrightEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            ChoiceImpl choices = new ChoiceImpl(true);
-            choices.setMessage("Choose basic land type");
-            choices.isRequired();
-            choices.getChoices().add("Forest");
-            choices.getChoices().add("Plains");
-            choices.getChoices().add("Mountain");
-            choices.getChoices().add("Island");
-            choices.getChoices().add("Swamp");
-            if (you.choose(Outcome.Neutral, choices, game)) {
-                game.informPlayers(new StringBuilder("Realmwright: ").append(" Chosen basic land type is ").append(choices.getChoice()).toString());
-                game.getState().setValue(source.getSourceId().toString() + "_Realmwright", choices.getChoice());
-                return true;
-            }
-        }
-        return false;
     }
 }
 
@@ -140,7 +105,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player you = game.getPlayer(source.getControllerId());
         List<Permanent> lands = game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), source.getControllerId(), game);
-        String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_Realmwright");
+        String choice = (String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY);
         if (you != null && choice != null) {
             for (Permanent land : lands) {
                 if (land != null) {

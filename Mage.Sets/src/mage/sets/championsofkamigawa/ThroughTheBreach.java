@@ -106,7 +106,7 @@ class ThroughTheBreachEffect extends OneShotEffect {
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        if (controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
+                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null) {
                                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);

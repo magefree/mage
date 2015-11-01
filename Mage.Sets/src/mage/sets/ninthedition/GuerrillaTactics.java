@@ -50,7 +50,6 @@ public class GuerrillaTactics extends CardImpl {
         super(ownerId, 196, "Guerrilla Tactics", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "9ED";
 
-
         // Guerrilla Tactics deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
@@ -91,9 +90,13 @@ class GuerrillaTacticsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
-                StackObject.class.isInstance(game.getObject(event.getSourceId())) &&
-                getSourceId().equals(event.getTargetId());
+        if (getSourceId().equals(event.getTargetId())) {
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+            if (stackObject != null) {
+                return game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId());
+            }
+        }
+        return false;
     }
 
     @Override

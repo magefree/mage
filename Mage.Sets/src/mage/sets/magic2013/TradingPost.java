@@ -28,11 +28,6 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -45,10 +40,12 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.GoatToken;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
@@ -59,14 +56,6 @@ import mage.target.common.TargetControlledPermanent;
  * @author jeffwadsworth
  */
 public class TradingPost extends CardImpl {
-
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-    final static FilterControlledPermanent filter2 = new FilterControlledPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter2.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
 
     public TradingPost(UUID ownerId) {
         super(ownerId, 220, "Trading Post", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
@@ -86,15 +75,15 @@ public class TradingPost extends CardImpl {
 
         // {1}, {tap}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.
         Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
-        ability3.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card in your graveyard")));
+        ability3.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("an artifact card in your graveyard")));
         ability3.addCost(new TapSourceCost());
-        ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledCreaturePermanent("a creature"))));
         this.addAbility(ability3);
 
         // {1}, {tap}, Sacrifice an artifact: Draw a card.
         Ability ability4 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability4.addCost(new TapSourceCost());
-        ability4.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability4.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         this.addAbility(ability4);
 
     }

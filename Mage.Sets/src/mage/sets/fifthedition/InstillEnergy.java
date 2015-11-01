@@ -92,6 +92,7 @@ public class InstillEnergy extends CardImpl {
 }
 
 class CanAttackAsThoughItHadHasteEnchantedEffect extends AsThoughEffectImpl {
+
     public CanAttackAsThoughItHadHasteEnchantedEffect(Duration duration) {
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
         staticText = "Enchanted creature can attack as though it had haste";
@@ -114,7 +115,7 @@ class CanAttackAsThoughItHadHasteEnchantedEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        return enchantment != null && enchantment.getAttachedTo() != null && enchantment.getAttachedTo() == objectId;
+        return enchantment != null && enchantment.getAttachedTo() != null && enchantment.getAttachedTo().equals(objectId);
     }
 }
 

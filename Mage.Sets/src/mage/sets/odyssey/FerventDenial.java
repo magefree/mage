@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
 public class FerventDenial extends CardImpl {
 
     public FerventDenial(UUID ownerId) {
-        super(ownerId, 86, "Fervent Denial", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
+        super(ownerId, 86, "Fervent Denial", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "ODY";
 
 

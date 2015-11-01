@@ -100,13 +100,13 @@ class GrenzoDungeonWardenEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.getLibrary().size() > 0) {
-                Card card = controller.getLibrary().removeFromBottom(game);
+                Card card = controller.getLibrary().getFromBottom(game);
                 if (card != null) {
-                    controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
                         if (sourcePermanent != null && card.getPower().getValue() <= sourcePermanent.getPower().getValue()) {
-                            controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
                     }
                 }

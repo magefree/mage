@@ -25,17 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -45,6 +37,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,26 +51,20 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-/**
- *
- * @author LevelX2
- */
-
-
 public class BloodBaronOfVizkopa extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white and from black");
+
     static {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.WHITE),
                 new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public BloodBaronOfVizkopa (UUID ownerId) {
+    public BloodBaronOfVizkopa(UUID ownerId) {
         super(ownerId, 57, "Blood Baron of Vizkopa", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Vampire");
-
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -85,7 +78,7 @@ public class BloodBaronOfVizkopa extends CardImpl {
 
     }
 
-    public BloodBaronOfVizkopa (final BloodBaronOfVizkopa card) {
+    public BloodBaronOfVizkopa(final BloodBaronOfVizkopa card) {
         super(card);
     }
 
@@ -97,7 +90,7 @@ public class BloodBaronOfVizkopa extends CardImpl {
 }
 
 class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
-     
+
     public BloodBaronOfVizkopaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "As long as you have 30 or more life and an opponent has 10 or less life, {this} gets +6/+6 and has flying";
@@ -117,21 +110,21 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
         if (conditionState(source, game)) {
             Permanent creature = game.getPermanent(source.getSourceId());
             if (creature != null) {
-                    switch (layer) {
-                        case PTChangingEffects_7:
-                            if (sublayer == SubLayer.ModifyPT_7c) {
-                                creature.addPower(6);
-                                creature.addToughness(6);
-                            }
-                            break;
-                        case AbilityAddingRemovingEffects_6:
-                            if (sublayer == SubLayer.NA) {
-                                creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
-                            }
-                            break;
-                        default:
-                    }
-                    return true;
+                switch (layer) {
+                    case PTChangingEffects_7:
+                        if (sublayer == SubLayer.ModifyPT_7c) {
+                            creature.addPower(6);
+                            creature.addToughness(6);
+                        }
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == SubLayer.NA) {
+                            creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
+                        }
+                        break;
+                    default:
+                }
+                return true;
             }
         }
         return false;
@@ -140,10 +133,12 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
     protected boolean conditionState(Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.getLife() >= 30) {
-            for (UUID opponentId :player.getInRange()) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null && opponent.getLife() < 11) {
-                    return true;
+            for (UUID opponentId : player.getInRange()) {
+                if (player.hasOpponent(opponentId, game)) {
+                    Player opponent = game.getPlayer(opponentId);
+                    if (opponent != null && opponent.getLife() < 11) {
+                        return true;
+                    }
                 }
             }
         }
@@ -159,6 +154,6 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return (layer.equals(Layer.AbilityAddingRemovingEffects_6) || layer.equals(layer.PTChangingEffects_7));
 
-   }
+    }
 
 }

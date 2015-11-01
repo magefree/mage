@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  *
  * @author noxx
-
+ *
  */
 public class RestorationAngel extends CardImpl {
 
@@ -71,7 +71,7 @@ public class RestorationAngel extends CardImpl {
 
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Restoration Angel enters the battlefield, you may exile target non-Angel creature you control, then return that card to the battlefield under your control
         Ability ability = new EntersBattlefieldTriggeredAbility(new RestorationAngelEffect(), true);
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
@@ -111,11 +111,13 @@ class RestorationAngelEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null && sourcePermanent != null) {
-                controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
-                Card card = game.getCard(targetPointer.getFirst(game, source));
-                if (card != null) {
-                    Zone currentZone = game.getState().getZone(card.getId());
-                    return controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId());
+                int zcc = permanent.getZoneChangeCounter(game);
+                controller.moveCards(permanent, Zone.EXILED, source, game);
+                Card card = game.getCard(permanent.getId());
+                if (card != null
+                        && card.getZoneChangeCounter(game) == zcc + 1
+                        && game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
+                    return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
         }

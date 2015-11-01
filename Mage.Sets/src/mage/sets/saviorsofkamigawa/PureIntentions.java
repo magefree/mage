@@ -92,11 +92,12 @@ class PureIntentionsAllTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
-                StackObject.class.isInstance(game.getObject(event.getSourceId()))) {
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        if (stackObject != null
+                && game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId())) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getOwnerId().equals(getControllerId())) {
-                for(Effect effect : getEffects()) {
+                for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
                 return true;
@@ -115,7 +116,6 @@ class PureIntentionsAllTriggeredAbility extends DelayedTriggeredAbility {
         return "Whenever a spell or ability an opponent controls causes you to discard cards this turn, return those cards from your graveyard to your hand.";
     }
 }
-
 
 class PureIntentionsTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -140,9 +140,17 @@ class PureIntentionsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
-                StackObject.class.isInstance(game.getObject(event.getSourceId())) &&
-                event.getTargetId().equals(getSourceId());
+        if (getSourceId().equals(event.getTargetId())) {
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+            if (stackObject != null
+                    && game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId())) {
+                for (Effect effect : getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

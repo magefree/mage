@@ -30,7 +30,6 @@ package mage.sets.urzaslegacy;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -78,7 +77,6 @@ public class GoblinWelder extends CardImpl {
     public GoblinWelder copy() {
         return new GoblinWelder(this);
     }
-       
 
     public class GoblinWelderEffect extends OneShotEffect {
 
@@ -86,7 +84,6 @@ public class GoblinWelder extends CardImpl {
             super(Outcome.PutCardInPlay);
             staticText = "Choose target artifact a player controls and target artifact card in that player's graveyard. If both targets are still legal as this ability resolves, that player simultaneously sacrifices the artifact and returns the artifact card to the battlefield";
         }
-
 
         public GoblinWelderEffect(final GoblinWelderEffect effect) {
             super(effect);
@@ -106,7 +103,7 @@ public class GoblinWelder extends CardImpl {
                         && currentZone == Zone.GRAVEYARD
                         && card.getOwnerId().equals(artifact.getControllerId())) {
                     boolean sacrifice = artifact.sacrifice(source.getSourceId(), game);
-                    boolean putOnBF = owner.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                    boolean putOnBF = owner.moveCards(card, Zone.BATTLEFIELD, source, game);
                     if (sacrifice || putOnBF) {
                         return true;
                     }
@@ -121,7 +118,7 @@ public class GoblinWelder extends CardImpl {
         }
 
     }
-    
+
     class GoblinWelderTarget extends TargetCardInGraveyard {
 
         public GoblinWelderTarget() {
@@ -146,7 +143,6 @@ public class GoblinWelder extends CardImpl {
             }
             return false;
         }
-      
 
         @Override
         public GoblinWelderTarget copy() {

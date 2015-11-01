@@ -45,7 +45,6 @@ import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -72,11 +71,11 @@ public class AleshaWhoSmilesAtDeath extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // Whenever Alesha, Who Smiles at Death attacks, you may pay {W/B}{W/B}. If you do, return target creature card with power 2 or less from your graveyard to the battlefield tapped and attacking.
         Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new AleshaWhoSmilesAtDeathEffect(), new ManaCostsImpl("{W/B}{W/B}")), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        this.addAbility(ability);        
+        this.addAbility(ability);
     }
 
     public AleshaWhoSmilesAtDeath(final AleshaWhoSmilesAtDeath card) {
@@ -107,9 +106,8 @@ class AleshaWhoSmilesAtDeathEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId(), true)) {
-                    Permanent permanent = game.getPermanent(card.getId());
-                    game.getCombat().addAttackingCreature(permanent.getId(), game);
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
+                    game.getCombat().addAttackingCreature(card.getId(), game);
                 }
             }
             return true;

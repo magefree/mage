@@ -33,8 +33,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.OptionalAdditionalCost;
-import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -56,7 +54,7 @@ import mage.target.common.TargetOpponent;
  */
 public class BloodTribute extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Vampire you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Vampire you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
@@ -67,20 +65,18 @@ public class BloodTribute extends CardImpl {
         super(ownerId, 81, "Blood Tribute", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "ZEN";
 
-
         // Kicker - Tap an untapped Vampire you control.
-        OptionalAdditionalCost cost = new OptionalAdditionalCostImpl("Kicker-","",new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
-        this.addAbility(new KickerAbility(cost));
+        this.addAbility(new KickerAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
 
         // Target opponent loses half his or her life, rounded up.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new BloodTributeLoseLifeEffect());
-         
+
         // If Blood Tribute was kicked, you gain life equal to the life lost this way.
         Effect effect = new ConditionalOneShotEffect(
                 new BloodTributeGainLifeEffect(),
                 KickedCondition.getInstance(),
-                "If Blood Tribute was kicked, you gain life equal to the life lost this way");
+                "If {this} was kicked, you gain life equal to the life lost this way");
         this.getSpellAbility().addEffect(effect);
     }
 

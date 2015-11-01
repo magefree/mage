@@ -283,7 +283,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 if (card == null) {
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
-                PermanentCard p = new PermanentCard(card, null, currentGame);
+                PermanentCard p = new PermanentCard(card, player.getId(), currentGame);
                 p.setTapped(tapped);
                 getBattlefieldCards(player).add(p);
             }
@@ -533,10 +533,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         if (flag) {
             Assert.assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities().containsRule(ability));
+                    + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
         } else {
             Assert.assertFalse("Card shouldn't have such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities().containsRule(ability));
+                    + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
         }
     }
 
@@ -574,7 +574,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
-        Assert.assertEquals("(Battlefield) Card counts for " + player.getName() + " are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Battlefield) Permanents counts for " + player.getName() + " are not equal (" + cardName + ")", count, actualCount);
     }
 
     @Override
@@ -614,14 +614,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count Expected count.
      */
     public void assertCounterCount(String cardName, CounterType type, int count) throws AssertionError {
+        this.assertCounterCount(null, cardName, type, count);
+    }
+
+    public void assertCounterCount(Player player, String cardName, CounterType type, int count) throws AssertionError {
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getName().equals(cardName)) {
+            if (permanent.getName().equals(cardName) && (player == null || permanent.getControllerId().equals(player.getId()))) {
                 found = permanent;
                 break;
             }
         }
-        Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
+        Assert.assertNotNull("There is no such permanent " + (player == null ? "" : "for player " + player.getName()) + " on the battlefield, cardName=" + cardName, found);
         Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters().getCount(type));
     }
 
@@ -990,6 +994,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:" + ability + "$target=" + targetName);
     }
 
+    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
+        this.activateAbility(turnNum, step, player, ability, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
+    }
+
     /**
      *
      * @param turnNum
@@ -1000,13 +1008,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * NO_TARGET
      * @param spellOnStack
      */
-    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
+    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack, StackClause clause) {
         StringBuilder sb = new StringBuilder("activate:").append(ability);
         if (targetName != null && !targetName.isEmpty()) {
             sb.append("$target=").append(targetName);
         }
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
-            sb.append("$spellOnStack=").append(spellOnStack);
+            sb.append("$").append(StackClause.WHILE_ON_STACK.equals(clause) ? "" : "!").append("spellOnStack=").append(spellOnStack);
         }
         player.addAction(turnNum, step, sb.toString());
     }

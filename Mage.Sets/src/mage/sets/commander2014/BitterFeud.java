@@ -91,7 +91,7 @@ class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (controller != null && permanent != null) {
             TargetPlayer target = new TargetPlayer(2, 2, true);
             controller.chooseTarget(outcome, target, source, game);

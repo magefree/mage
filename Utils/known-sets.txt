@@ -14,6 +14,7 @@ Classic Sixth Edition|classicsixthedition|
 Coldsnap|coldsnap|
 Commander 2013 Edition|commander2013|
 Commander 2014 Edition|commander2014|
+Commander 2015|commander2015|
 Conflux|conflux|
 Dark Ascension|darkascension|
 Darksteel|darksteel|

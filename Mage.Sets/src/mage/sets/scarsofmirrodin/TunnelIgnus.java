@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.HashMap;
@@ -76,7 +75,8 @@ public class TunnelIgnus extends CardImpl {
 }
 
 class TunnelIgnusWatcher extends Watcher {
-    protected Map<UUID, Integer> counts = new HashMap<UUID, Integer>();
+
+    protected Map<UUID, Integer> counts = new HashMap<>();
 
     public TunnelIgnusWatcher() {
         super("LandPlayedCount", WatcherScope.PLAYER);
@@ -84,7 +84,7 @@ class TunnelIgnusWatcher extends Watcher {
 
     public TunnelIgnusWatcher(final TunnelIgnusWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry: watcher.counts.entrySet()) {
+        for (Entry<UUID, Integer> entry : watcher.counts.entrySet()) {
             counts.put(entry.getKey(), entry.getValue());
         }
     }
@@ -116,6 +116,7 @@ class TunnelIgnusWatcher extends Watcher {
 }
 
 class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl {
+
     TunnelIgnusTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3));
     }

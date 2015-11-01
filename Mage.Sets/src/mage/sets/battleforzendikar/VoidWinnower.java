@@ -44,6 +44,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -115,9 +116,9 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null) {
+            if (object != null && (object instanceof Spell)) {
                 // the low bit will always be set on an odd number.
-                return (object.getManaCost().convertedManaCost() & 1) == 0;
+                return (((Spell) object).getConvertedManaCost() & 1) == 0;
             }
         }
         return false;

@@ -28,9 +28,6 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,7 +39,9 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 
@@ -51,9 +50,7 @@ import mage.filter.common.FilterAttackingCreature;
  * @author BursegSardaukar
  */
 public class RabbleRouser extends CardImpl {
-    
-    final static private String rule = "Attacking creatures get +X/+0 until end of turn, where X is Rabble-Rouser's power.";
-    
+
     public RabbleRouser(UUID ownerId) {
         super(ownerId, 73, "Rabble-Rouser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "GPT";
@@ -68,7 +65,10 @@ public class RabbleRouser extends CardImpl {
 
         //{R}, {T}: Attacking creatures get +X/+0 until end of turn, where X is Rabble-Rouser's power.
         DynamicValue amount = new SourcePermanentPowerCount();
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(amount, new StaticValue(0), Duration.EndOfTurn, new FilterAttackingCreature(), false, rule), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BoostAllEffect(amount, new StaticValue(0), Duration.EndOfTurn, new FilterAttackingCreature(), false,
+                        "Attacking creatures get +X/+0 until end of turn, where X is {this}'s power"),
+                new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

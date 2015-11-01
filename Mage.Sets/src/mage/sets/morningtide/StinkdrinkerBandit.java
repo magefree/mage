@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ProwlAbility;
 import mage.constants.Duration;
@@ -44,14 +44,15 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockedPredicate;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author LoneFox
+ * @author BursegSardaukar
  */
 public class StinkdrinkerBandit extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Attacking and unblocked Rogues");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Attacking and unblocked Rogues");
     
     static {  
         filter.add(new SubtypePredicate("Rogue"));
@@ -73,7 +74,7 @@ public class StinkdrinkerBandit extends CardImpl {
         
         // Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.
         Effect effect = new BoostControlledEffect(2,1,Duration.EndOfTurn, filter);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleTriggeredAbility(Zone.BATTLEFIELD, GameEvent.EventType.DECLARED_BLOCKERS, effect, "Whenever a Rogue you control attacks and isn't blocked,");
         this.addAbility(ability);
     }
 

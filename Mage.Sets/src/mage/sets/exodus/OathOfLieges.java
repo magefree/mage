@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -46,14 +46,16 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author emerald000
  */
 public class OathOfLieges extends CardImpl {
-    
-    private static final FilterPlayer filter = new FilterPlayer();
+
+    private static final FilterPlayer filter = new FilterPlayer("player who controls more lands than you do and is his your opponent");
+
     static {
         filter.add(new OathOfLiegesPredicate());
     }
@@ -62,9 +64,8 @@ public class OathOfLieges extends CardImpl {
         super(ownerId, 11, "Oath of Lieges", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "EXO";
 
-
         // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
-        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false, Outcome.PutLandInPlay);
+        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false, true, Outcome.PutLandInPlay, true);
         effect.setText("that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, true);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
@@ -74,16 +75,21 @@ public class OathOfLieges extends CardImpl {
     public OathOfLieges(final OathOfLieges card) {
         super(card);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof BeginningOfUpkeepTriggeredAbility) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
             if (activePlayer != null) {
-                ability.setControllerId(activePlayer.getId());
                 ability.getTargets().clear();
                 TargetPlayer target = new TargetPlayer(1, 1, false, filter);
+                target.setTargetController(activePlayer.getId());
                 ability.getTargets().add(target);
+                for (Effect effect : ability.getEffects()) {
+                    if (effect instanceof SearchLibraryPutInPlayTargetPlayerEffect) {
+                        effect.setTargetPointer(new FixedTarget(activePlayer.getId()));
+                    }
+                }
             }
         }
     }

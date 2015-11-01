@@ -32,8 +32,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -55,7 +57,7 @@ public class NomadsEnKor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {0}: The next 1 damage that would be dealt to Nomads en-Kor this turn is dealt to target creature you control instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorPreventionEffect(), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, true), new GenericManaCost(0));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

@@ -28,11 +28,7 @@
 package mage.sets.weatherlight;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,6 +37,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -68,7 +68,6 @@ public class CallOfTheWild extends CardImpl {
     }
 }
 
-
 class CallOfTheWildEffect extends OneShotEffect {
 
     public CallOfTheWildEffect() {
@@ -87,22 +86,21 @@ class CallOfTheWildEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        if (player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards("Call of the Wild", cards, game);
-
+        if (controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
+                Cards cards = new CardsImpl(card);
+                controller.revealCards(sourceObject.getIdName(), cards, game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
-                    player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 }
             }
         }

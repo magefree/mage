@@ -52,13 +52,11 @@ public class Fastbond extends CardImpl {
         super(ownerId, 101, "Fastbond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "LEA";
 
-
         // You may play any number of additional lands on each of your turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield)));
         // Whenever you play a land, if it wasn't the first land you played this turn, Fastbond deals 1 damage to you.
         this.addAbility(new PlayALandTriggeredAbility());
     }
-    
 
     public Fastbond(final Fastbond card) {
         super(card);
@@ -69,7 +67,6 @@ public class Fastbond extends CardImpl {
         return new Fastbond(this);
     }
 }
-
 
 class PlayALandTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -88,14 +85,14 @@ class PlayALandTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId() == this.getControllerId();
+        return event.getPlayerId().equals(this.getControllerId());
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Player player = game.getPlayer(this.getControllerId());
-        if (player != null){
-            if (player.getLandsPlayed() != 1){
+        if (player != null) {
+            if (player.getLandsPlayed() != 1) {
                 return true;
             }
         }
@@ -111,8 +108,5 @@ class PlayALandTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever you play a land, if it wasn't the first land you played this turn, {source} deals 1 damage to you";
     }
-    
-    
+
 }
-
-

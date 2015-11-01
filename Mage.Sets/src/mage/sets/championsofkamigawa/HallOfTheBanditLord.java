@@ -69,7 +69,7 @@ public class HallOfTheBanditLord extends CardImpl {
 
         // Hall of the Bandit Lord enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // {T}, Pay 3 life: Add {1} to your mana pool. If that mana is spent on a creature spell, it gains haste.
         Mana mana = Mana.ColorlessMana;
         mana.setFlag(true);
@@ -94,12 +94,12 @@ class HallOfTheBanditLordWatcher extends Watcher {
 
     private final Ability source;
     private final List<UUID> creatures = new ArrayList<>();
-    
+
     HallOfTheBanditLordWatcher(Ability source) {
         super("HallOfTheBanditLordWatcher", WatcherScope.CARD);
         this.source = source;
     }
-    
+
     HallOfTheBanditLordWatcher(final HallOfTheBanditLordWatcher watcher) {
         super(watcher);
         this.creatures.addAll(watcher.creatures);
@@ -110,22 +110,25 @@ class HallOfTheBanditLordWatcher extends Watcher {
     public HallOfTheBanditLordWatcher copy() {
         return new HallOfTheBanditLordWatcher(this);
     }
-    
+
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.MANA_PAYED) {
             MageObject target = game.getObject(event.getTargetId());
-            if (event.getSourceId() == this.getSourceId() && target != null && target.getCardType().contains(CardType.CREATURE) && event.getFlag()) {
+            if (event.getSourceId() != null
+                    && event.getSourceId().equals(this.getSourceId())
+                    && target != null && target.getCardType().contains(CardType.CREATURE)
+                    && event.getFlag()) {
                 if (target instanceof Spell) {
                     this.creatures.add(((Spell) target).getCard().getId());
                 }
             }
         }
         if (event.getType() == EventType.COUNTERED) {
-            if (creatures.contains(event.getTargetId())) {                
+            if (creatures.contains(event.getTargetId())) {
                 creatures.remove(event.getSourceId());
-            }            
-        }        
+            }
+        }
         if (event.getType() == EventType.ZONE_CHANGE) {
             if (creatures.contains(event.getSourceId())) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
@@ -133,22 +136,22 @@ class HallOfTheBanditLordWatcher extends Watcher {
                 if (zEvent.getToZone() == Zone.STACK) {
                     creatures.remove(event.getSourceId());
                 }
-            }            
-        }        
+            }
+        }
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            if (creatures.contains(event.getSourceId())) {                
+            if (creatures.contains(event.getSourceId())) {
                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                 effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                 game.addEffect(effect, source);
                 creatures.remove(event.getSourceId());
-            }            
+            }
         }
     }
-    
+
     @Override
     public void reset() {
         super.reset();
         creatures.clear();
     }
-    
+
 }

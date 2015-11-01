@@ -58,9 +58,12 @@ public class OxiddaDaredevil extends CardImpl {
     public OxiddaDaredevil (UUID ownerId) {
         super(ownerId, 100, "Oxidda Daredevil", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "SOM";
-        this.color.setRed(true);        
+        this.subtype.add("Goblin");
+        this.subtype.add("Artificer");
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new SacrificeTargetCost(new TargetControlledPermanent(filter))));

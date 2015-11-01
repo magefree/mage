@@ -157,7 +157,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerB, "Kiki-Jiki, Mirror Breaker", 1);
-        // {T}: Draw two cards. Target opponent gains control of Humble Defector. Activate this ability only during your turn.
+        // You may have Body Double enter the battlefield as a copy of any creature card in a graveyard.
         addCard(Zone.HAND, playerB, "Body Double", 1); // {4}{U}
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Body Double");

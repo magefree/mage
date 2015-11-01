@@ -30,7 +30,7 @@ package mage.sets.magicorigins;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -40,7 +40,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
@@ -49,7 +48,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -77,7 +75,7 @@ public class JaceTelepathUnbound extends CardImpl {
         this.nightCard = true;
         this.canTransform = true;
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: Up to one target creature gets -2/-0 until your next turn.
         Effect effect = new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn);

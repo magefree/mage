@@ -195,7 +195,7 @@ class VolatileRigEffect2 extends OneShotEffect {
                 for (Permanent permanent: permanents) {
                     permanent.damage(4, source.getSourceId(), game, false, true);
                 }
-                for (UUID playerId: player.getInRange()) {
+                for (UUID playerId: game.getState().getPlayersInRange(player.getId(), game)) {
                     Player damageToPlayer = game.getPlayer(playerId);
                     if (damageToPlayer != null) {
                         damageToPlayer.damage(4, source.getSourceId(), game, false, true);
