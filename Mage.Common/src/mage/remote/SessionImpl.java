@@ -468,9 +468,7 @@ public class SessionImpl implements Session {
 
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
-            logger.info("connection to server lost - " + throwable.getMessage());
-            throwable.printStackTrace();
-
+            logger.info("connection to server lost - " + throwable.getMessage(), throwable);
             reconnect(throwable);
         }
     }
