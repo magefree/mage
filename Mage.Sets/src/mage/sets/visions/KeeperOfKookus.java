@@ -25,55 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.sets.visions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author BursegSardaukar
-
  */
-public class MoggJailer extends CardImpl {
+public class KeeperOfKookus extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature with power 2 or less");
+     private static final FilterCard filter = new FilterCard("from red");
 
     static {
-        filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.LessThan, 2), Predicates.not(new TappedPredicate())));
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
+
     
-    public MoggJailer(UUID ownerId) {
-        super(ownerId, 68, "Mogg Jailer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "PLS";
+    public KeeperOfKookus(UUID ownerId) {
+        super(ownerId, 85, "Keeper of Kookus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "VIS";
         this.subtype.add("Goblin");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
 
-        // Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
-        Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
-        effect.setText("Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Keeper of Kookus gains protection from red until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new ProtectionAbility(filter), Duration.EndOfTurn),new ManaCostsImpl("{R"));
+        this.addAbility(ability);
     }
 
-    public MoggJailer(final MoggJailer card) {
+    public KeeperOfKookus(final KeeperOfKookus card) {
         super(card);
     }
 
     @Override
-    public MoggJailer copy() {
-        return new MoggJailer(this);
+    public KeeperOfKookus copy() {
+        return new KeeperOfKookus(this);
     }
 }

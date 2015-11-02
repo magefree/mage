@@ -25,19 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.sets.iceage;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
+import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -47,33 +50,44 @@ import mage.filter.predicate.permanent.TappedPredicate;
  * @author BursegSardaukar
 
  */
-public class MoggJailer extends CardImpl {
+public class GoblinMutant extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature with power 2 or less");
-
+    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature with power 3 or greater");
+    static final private FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
+    
     static {
-        filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.LessThan, 2), Predicates.not(new TappedPredicate())));
+        filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2), Predicates.not(new TappedPredicate())));
+        filter2.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
     
-    public MoggJailer(UUID ownerId) {
-        super(ownerId, 68, "Mogg Jailer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "PLS";
+    public GoblinMutant(UUID ownerId) {
+        super(ownerId, 188, "Goblin Mutant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "ICE";
         this.subtype.add("Goblin");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(3);
 
-        // Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
+        //Trample
+        this.addAbility(TrampleAbility.getInstance());
+        
+        // Goblin Mutant can't attack if defending player controls an untapped creature with power 3 or greater.
         Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
-        effect.setText("Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.");
+        effect.setText("{this} can't attack if defending player controls an untapped creature with power 3 or greater.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        
+        //Goblin Mutant can't block creatures with power 3 or greater.
+        Effect effectBlock = new CantBlockCreaturesSourceEffect(filter2);
+        effectBlock.setText("{this} can't block creatures with power 3 or greater.");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlock));
     }
 
-    public MoggJailer(final MoggJailer card) {
+    public GoblinMutant(final GoblinMutant card) {
         super(card);
     }
 
     @Override
-    public MoggJailer copy() {
-        return new MoggJailer(this);
+    public GoblinMutant copy() {
+        return new GoblinMutant(this);
     }
 }

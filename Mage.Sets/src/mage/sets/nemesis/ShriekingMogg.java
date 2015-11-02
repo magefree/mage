@@ -25,55 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
-import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.TapAllEffect;
+import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author BursegSardaukar
-
  */
-public class MoggJailer extends CardImpl {
+public class ShriekingMogg extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature with power 2 or less");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all other creatures");
 
     static {
-        filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.LessThan, 2), Predicates.not(new TappedPredicate())));
+        filter.add(new AnotherPredicate());
     }
     
-    public MoggJailer(UUID ownerId) {
-        super(ownerId, 68, "Mogg Jailer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "PLS";
+    public ShriekingMogg(UUID ownerId) {
+        super(ownerId, 99, "Shrieking Mogg", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "NMS";
         this.subtype.add("Goblin");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
 
-        // Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
-        Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
-        effect.setText("Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        
+        // When Shrieking Mogg enters the battlefield, tap all other creatures.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter));
+        this.addAbility(ability);
     }
 
-    public MoggJailer(final MoggJailer card) {
+    public ShriekingMogg(final ShriekingMogg card) {
         super(card);
     }
 
     @Override
-    public MoggJailer copy() {
-        return new MoggJailer(this);
+    public ShriekingMogg copy() {
+        return new ShriekingMogg(this);
     }
+
 }

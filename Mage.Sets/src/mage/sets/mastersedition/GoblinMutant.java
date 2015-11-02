@@ -25,55 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.sets.mastersedition;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
  *
  * @author BursegSardaukar
-
  */
-public class MoggJailer extends CardImpl {
+public class GoblinMutant extends mage.sets.iceage.GoblinMutant {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature with power 2 or less");
-
-    static {
-        filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.LessThan, 2), Predicates.not(new TappedPredicate())));
-    }
-    
-    public MoggJailer(UUID ownerId) {
-        super(ownerId, 68, "Mogg Jailer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "PLS";
-        this.subtype.add("Goblin");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
-        Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
-        effect.setText("Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+    public GoblinMutant(UUID ownerId) {
+        super(ownerId);
+        this.expansionSetCode = "MED";
+        this.cardNumber = 96;
     }
 
-    public MoggJailer(final MoggJailer card) {
+    public GoblinMutant(final GoblinMutant card) {
         super(card);
     }
 
     @Override
-    public MoggJailer copy() {
-        return new MoggJailer(this);
+    public GoblinMutant copy() {
+        return new GoblinMutant(this);
     }
 }

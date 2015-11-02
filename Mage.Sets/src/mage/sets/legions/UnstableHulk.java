@@ -25,55 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
-import mage.cards.CardImpl;
+
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
  * @author BursegSardaukar
-
  */
-public class MoggJailer extends CardImpl {
+public class UnstableHulk extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature with power 2 or less");
-
-    static {
-        filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.LessThan, 2), Predicates.not(new TappedPredicate())));
-    }
-    
-    public MoggJailer(UUID ownerId) {
-        super(ownerId, 68, "Mogg Jailer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "PLS";
+    public UnstableHulk(UUID ownerId) {
+        super(ownerId, 115, "Unstable Hulk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "LGN";
         this.subtype.add("Goblin");
+        this.subtype.add("Mutant");
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
-        Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
-        effect.setText("Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        // Morph {3}{R}{R} 
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}{R}")));
+    
+        //When Unstable Hulk is turned face up, it gets +6/+6 and gains trample until end of turn. You skip your next turn.
+        Effect effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect);
+        effect = new BoostSourceEffect(6,6,Duration.EndOfTurn);
+        ability.addEffect(effect);
+        effect = new SkipNextTurnSourceEffect();
+        ability.addEffect(effect);
+        this.addAbility(ability);
+    
     }
 
-    public MoggJailer(final MoggJailer card) {
+    public UnstableHulk(final UnstableHulk card) {
         super(card);
     }
 
     @Override
-    public MoggJailer copy() {
-        return new MoggJailer(this);
+    public UnstableHulk copy() {
+        return new UnstableHulk(this);
     }
 }
