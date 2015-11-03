@@ -65,7 +65,7 @@ public class KalemneDiscipleOfIroas extends CardImpl {
     }
 
     public KalemneDiscipleOfIroas(UUID ownerId) {
-        super(ownerId, 999, "Kalemne, Disciple of Iroas", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
+        super(ownerId, 45, "Kalemne, Disciple of Iroas", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
         this.expansionSetCode = "C15";
         this.supertype.add("Legendary");
         this.subtype.add("Giant");
