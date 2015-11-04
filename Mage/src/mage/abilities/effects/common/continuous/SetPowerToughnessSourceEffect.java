@@ -48,13 +48,21 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
     private int toughness;
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        this(amount, duration, SubLayer.CharacteristicDefining_7a);
+    }
+
+    public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
+        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         this.amount = amount;
         staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }
 
     public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        this(power, toughness, duration, SubLayer.CharacteristicDefining_7a);
+    }
+
+    public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
+        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         staticText = "{this}'s power and toughness is " + power + "/" + toughness + " " + duration.toString();

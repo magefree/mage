@@ -328,8 +328,13 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void counter(UUID sourceId, Game game) {
+        this.counter(sourceId, game, true);
+    }
+
+    @Override
+    public void counter(UUID sourceId, Game game, boolean moveToGraveyard) {
         this.countered = true;
-        if (!isCopiedSpell()) {
+        if (!isCopiedSpell() && moveToGraveyard) {
             Player player = game.getPlayer(getControllerId());
             if (player != null) {
                 Ability counteringAbility = null;
@@ -337,7 +342,7 @@ public class Spell extends StackObjImpl implements Card {
                 if (counteringObject instanceof StackObject) {
                     counteringAbility = ((StackObject) counteringObject).getStackAbility();
                 }
-                player.moveCards(card, Zone.STACK, Zone.GRAVEYARD, counteringAbility, game);
+                player.moveCards(card, Zone.GRAVEYARD, counteringAbility, game);
             }
         }
     }
@@ -662,11 +667,7 @@ public class Spell extends StackObjImpl implements Card {
         if (this.isCopiedSpell() && !zone.equals(Zone.STACK)) {
             return true;
         }
-        Card card = game.getCard(getSourceId());
-        if (card != null) {
-            return card.moveToZone(zone, sourceId, game, flag, appliedEffects);
-        }
-        throw new UnsupportedOperationException("Unsupported operation");
+        return card.moveToZone(zone, sourceId, game, flag, appliedEffects);
     }
 
     @Override

@@ -48,6 +48,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -100,7 +101,7 @@ class GigantiformAbility extends StaticAbility {
 
     public GigantiformAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b));
         this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));
     }
 

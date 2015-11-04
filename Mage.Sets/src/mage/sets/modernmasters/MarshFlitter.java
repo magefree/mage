@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,6 +55,7 @@ import mage.target.common.TargetControlledPermanent;
 public class MarshFlitter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
+
     static {
         filter.add(new SubtypePredicate("Goblin"));
     }
@@ -72,7 +74,7 @@ public class MarshFlitter extends CardImpl {
         // When Marsh Flitter enters the battlefield, put two 1/1 black Goblin Rogue creature tokens onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinRogueToken(), 2), false));
         // Sacrifice a Goblin: Marsh Flitter has base power and toughness 3/3 until end of turn.
-        Effect effect = new SetPowerToughnessSourceEffect(3, 3, Duration.EndOfTurn);
+        Effect effect = new SetPowerToughnessSourceEffect(3, 3, Duration.EndOfTurn, SubLayer.SetPT_7b);
         effect.setText("{this} has base power and toughness 3/3 until end of turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

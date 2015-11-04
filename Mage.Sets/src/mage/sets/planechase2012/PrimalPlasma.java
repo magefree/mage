@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -152,7 +153,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
                     game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                     break;
             }
-            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom), source);
+            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
 
         }
         return false;

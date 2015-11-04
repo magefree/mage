@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -83,9 +84,9 @@ class GigantoplasmApplyToPermanent extends ApplyToPermanent {
     @Override
     public Boolean apply(Game game, Permanent permanent) {
         DynamicValue variableMana = new ManacostVariableValue();
-        Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield);
+        Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         permanent.getAbilities().add(ability);
         return true;
     }
@@ -93,9 +94,9 @@ class GigantoplasmApplyToPermanent extends ApplyToPermanent {
     @Override
     public Boolean apply(Game game, MageObject mageObject) {
         DynamicValue variableMana = new ManacostVariableValue();
-        Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield);
+        Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         mageObject.getAbilities().add(ability);
         return true;
     }

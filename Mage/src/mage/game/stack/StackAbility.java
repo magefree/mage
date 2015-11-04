@@ -122,6 +122,11 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public void counter(UUID sourceId, Game game) {
+        this.counter(sourceId, game, true);
+    }
+
+    @Override
+    public void counter(UUID sourceId, Game game, boolean moveToGraveyard) {
         //20100716 - 603.8
         if (ability instanceof StateTriggeredAbility) {
             ((StateTriggeredAbility) ability).counter(game);

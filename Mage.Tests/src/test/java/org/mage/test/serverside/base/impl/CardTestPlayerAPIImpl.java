@@ -866,6 +866,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Assert card count in player's library.
+     *
+     * @param player {@link Player} who's library should be counted.
+     * @param cardName Name of the cards that should be counted.
+     * @param count Expected count.
+     */
+    public void assertLibraryCount(Player player, String cardName, int count) throws AssertionError {
+        int actualCount = 0;
+        for (Card card : player.getLibrary().getCards(currentGame)) {
+            if (card.getName().equals(cardName)) {
+                actualCount++;
+            }
+        }
+
+        Assert.assertEquals("(Library " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
+    }
+
+    /**
      * Asserts added actions count. Usefull to make sure that all actions were
      * executed.
      *
