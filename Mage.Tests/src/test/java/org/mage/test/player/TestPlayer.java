@@ -29,7 +29,6 @@ package org.mage.test.player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,7 +93,6 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.TargetSource;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanentAmount;
@@ -638,41 +636,35 @@ public class TestPlayer implements Player {
                     }
                 }
             }
-            if (target instanceof TargetCardInGraveyard) {
-                TargetCardInGraveyard targetCardInGraveyard = ((TargetCardInGraveyard) target);
-                Set<UUID> possibleTargets = new HashSet<>();
-                for (UUID playerId : this.getInRange()) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        possibleTargets.addAll(player.getGraveyard());
-                    }
-                }
-
+            if (target instanceof TargetCard) {
+                TargetCard targetCard = ((TargetCard) target);
+                Set<UUID> possibleTargets = targetCard.possibleTargets(sourceId, target.getTargetController() == null ? getId() : target.getTargetController(), game);
                 for (String choose2 : choices) {
                     String[] targetList = choose2.split("\\^");
                     boolean targetFound = false;
-                    for (UUID targetId : possibleTargets) {
-                        MageObject targetObject = game.getObject(targetId);
-                        if (targetObject != null) {
-                            for (String targetName : targetList) {
+                    Choice:
+                    for (String targetName : targetList) {
+                        for (UUID targetId : possibleTargets) {
+                            MageObject targetObject = game.getObject(targetId);
+                            if (targetObject != null) {
                                 if (targetObject.getName().equals(targetName)) {
-                                    List<UUID> alreadyTargetted = targetCardInGraveyard.getTargets();
-                                    if (targetCardInGraveyard.canTarget(targetObject.getId(), game)) {
-                                        if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
-                                            targetCardInGraveyard.add(targetObject.getId(), game);
+                                    if (targetCard.canTarget(targetObject.getId(), game)) {
+                                        if (targetCard.getTargets() != null && !targetCard.getTargets().contains(targetObject.getId())) {
+                                            targetCard.add(targetObject.getId(), game);
                                             targetFound = true;
                                             if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
-                                                break;
+                                                break Choice;
                                             }
                                         }
                                     }
                                 }
                             }
-                            if (targetFound && targetCardInGraveyard.isChosen()) {
-                                choices.remove(choose2);
-                                return true;
-                            }
+
                         }
+                    }
+                    if (targetFound && targetCard.isChosen()) {
+                        choices.remove(choose2);
+                        return true;
                     }
                 }
             }
