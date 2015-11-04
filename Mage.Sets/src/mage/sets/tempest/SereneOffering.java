@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
@@ -35,33 +35,32 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
- * @author ayratn
+ * @author LoneFox
  */
-public class DivineOffering extends CardImpl {
+public class SereneOffering extends CardImpl {
 
-    public DivineOffering(UUID ownerId) {
-        super(ownerId, 5, "Divine Offering", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "MBS";
+    public SereneOffering(UUID ownerId) {
+        super(ownerId, 252, "Serene Offering", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "TMP";
 
-
-        // Destroy target artifact. You gain life equal to its converted mana cost.
+        // Destroy target enchantment. You gain life equal to its converted mana cost.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Effect effect = new GainLifeEffect(new TargetConvertedManaCost());
         effect.setText("You gain life equal to its converted mana cost");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
-    public DivineOffering(final DivineOffering card) {
+    public SereneOffering(final SereneOffering card) {
         super(card);
     }
 
     @Override
-    public DivineOffering copy() {
-        return new DivineOffering(this);
+    public SereneOffering copy() {
+        return new SereneOffering(this);
     }
 }
