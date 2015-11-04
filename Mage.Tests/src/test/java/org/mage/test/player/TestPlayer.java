@@ -662,9 +662,13 @@ public class TestPlayer implements Player {
 
                         }
                     }
-                    if (targetFound && targetCard.isChosen()) {
-                        choices.remove(choose2);
-                        return true;
+                    if (targetFound) {
+                        if (targetCard.isChosen()) {
+                            choices.remove(choose2);
+                            return true;
+                        } else {
+                            target.clearChosen();
+                        }
                     }
                 }
             }

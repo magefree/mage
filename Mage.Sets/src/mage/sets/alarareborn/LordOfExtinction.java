@@ -53,13 +53,11 @@ public class LordOfExtinction extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Elemental");
 
-
-        
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new LordOfExtinctionDynamicCount(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new LordOfExtinctionDynamicCount(), Duration.EndOfGame)));
     }
 
     public LordOfExtinction(final LordOfExtinction card) {
