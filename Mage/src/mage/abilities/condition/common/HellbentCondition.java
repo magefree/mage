@@ -43,4 +43,9 @@ public class HellbentCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return game.getPlayer(source.getControllerId()).getHand().size() == 0;
     }
+
+    @Override
+    public String toString() {
+        return "if you have no cards in hand";
+    }
 }
