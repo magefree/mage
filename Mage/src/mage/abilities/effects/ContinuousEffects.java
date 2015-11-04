@@ -988,6 +988,12 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect effect : layer) {
             HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
+                effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, ability, game);
+            }
+        }
+        for (ContinuousEffect effect : layer) {
+            HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
                 effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, ability, game);
             }
         }

@@ -27,17 +27,12 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
@@ -77,20 +72,9 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID objectId = source.getFirstTarget();
-        UUID sourceId = source.getSourceId();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            StackObject stackObject = game.getStack().getStackObject(objectId);
-            if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-                if (stackObject instanceof Spell) {
-                    controller.moveCards((Card) stackObject, null, targetZone, source, game);
-                } else {
-                    game.getStack().remove(stackObject);
-                }
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
-                return true;
-            }
+            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, targetZone, false, flag);
         }
         return false;
     }

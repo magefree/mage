@@ -82,6 +82,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
     }
 
     public boolean counter(UUID objectId, UUID sourceId, Game game) {
+        return counter(objectId, sourceId, game, Zone.GRAVEYARD, false, true);
+    }
+
+    public boolean counter(UUID objectId, UUID sourceId, Game game, Zone zone, boolean owner, boolean onTop) {
         // the counter logic is copied by some spells to handle replacement effects of the countered spell
         // so if logic is changed here check those spells for needed changes too
         // Concerned cards to check: Hinder, Spell Crumple
@@ -101,12 +105,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 counteredObjectName = "Ability (" + stackObject.getStackAbility().getRule(targetSourceName) + ") of " + targetSourceName;
             }
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-                if (stackObject instanceof Spell) {
-                    game.rememberLKI(objectId, Zone.STACK, (Spell) stackObject);
-                } else {
-                    this.remove(stackObject);
-                }
-                stackObject.counter(sourceId, game);
+                stackObject.counter(sourceId, game, zone, owner, onTop);
                 if (!game.isSimulation()) {
                     game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 }

@@ -44,6 +44,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
+import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -328,21 +329,32 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void counter(UUID sourceId, Game game) {
-        this.counter(sourceId, game, true);
+        this.counter(sourceId, game, Zone.GRAVEYARD, false, true);
     }
 
     @Override
-    public void counter(UUID sourceId, Game game, boolean moveToGraveyard) {
+    public void counter(UUID sourceId, Game game, Zone zone, boolean owner, boolean top) {
         this.countered = true;
-        if (!isCopiedSpell() && moveToGraveyard) {
-            Player player = game.getPlayer(getControllerId());
+        if (!isCopiedSpell()) {
+            Player player = game.getPlayer(game.getControllerId(sourceId));
+            if (player == null) {
+                player = game.getPlayer(getControllerId());
+            }
             if (player != null) {
                 Ability counteringAbility = null;
                 MageObject counteringObject = game.getObject(sourceId);
                 if (counteringObject instanceof StackObject) {
                     counteringAbility = ((StackObject) counteringObject).getStackAbility();
                 }
-                player.moveCards(card, Zone.GRAVEYARD, counteringAbility, game);
+                if (zone.equals(Zone.LIBRARY)) {
+                    if (top) {
+                        player.putCardsOnTopOfLibrary(new CardsImpl(card), game, counteringAbility, false);
+                    } else {
+                        player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, counteringAbility, false);
+                    }
+                } else {
+                    player.moveCards(card, zone, counteringAbility, game, false, false, owner, null);
+                }
             }
         }
     }

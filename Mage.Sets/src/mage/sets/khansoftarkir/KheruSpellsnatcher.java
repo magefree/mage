@@ -46,7 +46,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -70,7 +69,7 @@ public class KheruSpellsnatcher extends CardImpl {
 
         // Morph {4}{U}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{U}{U}")));
-        
+
         // When Kheru Spellthief is turned face up, counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may cast that card without paying its mana cost as long as it remains exiled.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new KheruSpellsnatcherEffect());
         ability.addTarget(new TargetSpell());
@@ -88,30 +87,29 @@ public class KheruSpellsnatcher extends CardImpl {
 }
 
 class KheruSpellsnatcherEffect extends OneShotEffect {
-    
+
     KheruSpellsnatcherEffect() {
         super(Outcome.Benefit);
         this.staticText = "counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may cast that card without paying its mana cost as long as it remains exiled";
     }
-    
+
     KheruSpellsnatcherEffect(final KheruSpellsnatcherEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public KheruSpellsnatcherEffect copy() {
         return new KheruSpellsnatcherEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         UUID objectId = targetPointer.getFirst(game, source);
         UUID sourceId = source.getSourceId();
 
         StackObject stackObject = game.getStack().getStackObject(objectId);
-        if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-            game.rememberLKI(objectId, Zone.STACK, stackObject);
-            game.getStack().remove(stackObject);
+        if (stackObject != null
+                && game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.EXILED, false, false)) {
             if (!((Spell) stackObject).isCopiedSpell()) {
                 MageObject card = game.getObject(stackObject.getSourceId());
                 if (card instanceof Card) {
@@ -121,7 +119,6 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
                     game.addEffect(effect, source);
                 }
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
             return true;
         }
         return false;
@@ -163,8 +160,7 @@ class KheruSpellsnatcherCastFromExileEffect extends AsThoughEffectImpl {
                         Player player = game.getPlayer(affectedControllerId);
                         player.setCastSourceIdWithAlternateMana(sourceId, null);
                         return true;
-                    }
-                    else {
+                    } else {
                         this.discard();
                     }
                 }
