@@ -103,10 +103,7 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         StackObject stackObject = game.getStack().getStackObject(id);
-        if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
-            return true;
-        }
-        return false;
+        return (stackObject instanceof Spell) || (stackObject instanceof StackAbility);
     }
 
     @Override
