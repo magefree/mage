@@ -105,6 +105,9 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 counteredObjectName = "Ability (" + stackObject.getStackAbility().getRule(targetSourceName) + ") of " + targetSourceName;
             }
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
+                if (!(stackObject instanceof Spell)) { // spells are removed from stack by the card movement
+                    this.remove(stackObject);
+                }
                 stackObject.counter(sourceId, game, zone, owner, onTop);
                 if (!game.isSimulation()) {
                     game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
