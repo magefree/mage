@@ -1,40 +1,65 @@
-#Generate|TOK:BFZ|Dragon|
-#Generate|TOK:BFZ|Eldrazi|
-#Generate|TOK:BFZ|Eldrazi Scion 1|
-#Generate|TOK:BFZ|Eldrazi Scion 2|
-#Generate|TOK:BFZ|Eldrazi Scion 3|
-#Generate|TOK:BFZ|Elemental 1|
-#Generate|TOK:BFZ|Elemental 2|
-#Generate|TOK:BFZ|Knight Ally|
-#Generate|TOK:BFZ|Kor Ally|
-#Generate|TOK:BFZ|Octopus|
-#Generate|TOK:BFZ|Plant|
-#|Generate|EMBLEM!:BFZ|Emblem Gideon, Ally of Zendikar|
-#|Generate|EMBLEM!:BFZ|Emblem Kiora, Master of the Depths|
-#|Generate|EMBLEM!:BFZ|Emblem Ob Nixilis Reignited|
+#Generate|TOK:C15|Angel|
+#Generate|TOK:C15|Bear|
+#Generate|TOK:C15|Beast|
+#Generate|TOK:C15|Cat|
+#Generate|TOK:C15|Dragon|
+#Generate|TOK:C15|Drake|
+#Generate|TOK:C15|Elemental Shaman|
+#Generate|TOK:C15|Elemental|
+#Generate|TOK:C15|Elephant|
+#Generate|TOK:C15|Frog Lizard|
+#Generate|TOK:C15|Germ|
+#Generate|TOK:C15|Gold|
+#Generate|TOK:C15|Knight 1|
+#Generate|TOK:C15|Knight 2|
+#Generate|TOK:C15|Lightning Rager|
+#Generate|TOK:C15|Saproling|
+#Generate|TOK:C15|Shapeshifter|
+#Generate|TOK:C15|Snake 1|
+#Generate|TOK:C15|Snake 2|
+#Generate|TOK:C15|Spider|
+#Generate|TOK:C15|Spirit 1|
+#Generate|TOK:C15|Spirit 2|
+#Generate|TOK:C15|Wolf|
+#Generate|TOK:C15|Zombie|
 
-#Generate|TOK:DDP|Eldrazi Spawn 1|
-#Generate|TOK:DDP|Eldrazi Spawn 2|
-#Generate|TOK:DDP|Eldrazi Spawn 3|
-#Generate|TOK:DDP|Hellion|
-#Generate|TOK:DDP|Plant|
+Generate|TOK:BFZ|Dragon|
+Generate|TOK:BFZ|Eldrazi|
+Generate|TOK:BFZ|Eldrazi Scion 1|
+Generate|TOK:BFZ|Eldrazi Scion 2|
+Generate|TOK:BFZ|Eldrazi Scion 3|
+Generate|TOK:BFZ|Elemental 1|
+Generate|TOK:BFZ|Elemental 2|
+Generate|TOK:BFZ|Knight Ally|
+Generate|TOK:BFZ|Kor Ally|
+Generate|TOK:BFZ|Octopus|
+Generate|TOK:BFZ|Plant|
+|Generate|EMBLEM!:BFZ|Emblem Gideon, Ally of Zendikar|
+|Generate|EMBLEM!:BFZ|Emblem Kiora, Master of the Depths|
+|Generate|EMBLEM!:BFZ|Emblem Ob Nixilis Reignited|
 
-#Generate|TOK:MM2|Eldrazi Spawn 1|
-#Generate|TOK:MM2|Eldrazi Spawn 2|
-#Generate|TOK:MM2|Eldrazi Spawn 3|
-#Generate|TOK:MM2|Elephant|
-#Generate|TOK:MM2|Faerie Rogue|
-#Generate|TOK:MM2|Germ|
-#Generate|TOK:MM2|Golem|
-#Generate|TOK:MM2|Insect|
-#Generate|TOK:MM2|Myr|
-#Generate|TOK:MM2|Saproling|
-#Generate|TOK:MM2|Snake|
-#Generate|TOK:MM2|Soldier|
-#Generate|TOK:MM2|Spirit|
-#Generate|TOK:MM2|Thrull|
-#Generate|TOK:MM2|Wolf|
-#Generate|TOK:MM2|Wurm|
+Generate|TOK:DDP|Eldrazi Spawn 1|
+Generate|TOK:DDP|Eldrazi Spawn 2|
+Generate|TOK:DDP|Eldrazi Spawn 3|
+Generate|TOK:DDP|Hellion|
+Generate|TOK:DDP|Plant|
+
+Generate|TOK:MM2|Eldrazi Spawn 1|
+Generate|TOK:MM2|Eldrazi Spawn 2|
+Generate|TOK:MM2|Eldrazi Spawn 3|
+Generate|TOK:MM2|Elephant|
+Generate|TOK:MM2|Faerie Rogue|
+Generate|TOK:MM2|Germ|
+Generate|TOK:MM2|Golem|
+Generate|TOK:MM2|Insect|
+Generate|TOK:MM2|Myr|
+Generate|TOK:MM2|Saproling|
+Generate|TOK:MM2|Snake|
+Generate|TOK:MM2|Soldier|
+Generate|TOK:MM2|Spirit|
+Generate|TOK:MM2|Thrull|
+Generate|TOK:MM2|Wolf|
+Generate|TOK:MM2|Wurm|
 
 #Generate|TOK:TPR|Goblin|
 #Generate|TOK:TPR|Pegasus|
@@ -47,20 +72,20 @@
 #Generate|TOK:TPR|Thopter|
 #Generate|TOK:TPR|Zombie|
 
-#|Generate|TOK:ORI|Ashaya, the Awoken World|
-#|Generate|TOK:ORI|Angel|
-#|Generate|TOK:ORI|Demon|
-#|Generate|TOK:ORI|Elemental|
-#|Generate|TOK:ORI|Elf Warrior|
-#|Generate|TOK:ORI|Goblin|
-#|Generate|TOK:ORI|Knight|
-#|Generate|TOK:ORI|Soldier|
-#|Generate|TOK:ORI|Thopter 1|
-#|Generate|TOK:ORI|Thopter 2|
-#|Generate|TOK:ORI|Zombie|
-#|Generate|EMBLEM!:ORI|Emblem Chandra, Roaring Flame|
-#|Generate|EMBLEM!:ORI|Emblem Jace, Telepath Unbound|
-#|Generate|EMBLEM!:ORI|Emblem Liliana, Defiant Necromancer|
+|Generate|TOK:ORI|Ashaya, the Awoken World|
+|Generate|TOK:ORI|Angel|
+|Generate|TOK:ORI|Demon|
+|Generate|TOK:ORI|Elemental|
+|Generate|TOK:ORI|Elf Warrior|
+|Generate|TOK:ORI|Goblin|
+|Generate|TOK:ORI|Knight|
+|Generate|TOK:ORI|Soldier|
+|Generate|TOK:ORI|Thopter 1|
+|Generate|TOK:ORI|Thopter 2|
+|Generate|TOK:ORI|Zombie|
+|Generate|EMBLEM!:ORI|Emblem Chandra, Roaring Flame|
+|Generate|EMBLEM!:ORI|Emblem Jace, Telepath Unbound|
+|Generate|EMBLEM!:ORI|Emblem Liliana, Defiant Necromancer|
 
 #|Generate|TOK:PTC|Angel|
 #|Generate|TOK:PTC|Avatar|

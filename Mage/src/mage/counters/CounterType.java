@@ -88,6 +88,7 @@ public enum CounterType {
     POISON("poison"),
     PRESSURE("pressure"),
     QUEST("quest"),
+    SCREAM("scream"),
     SHELL("shell"),
     SHIELD("shield"),
     SHRED("shred"),
