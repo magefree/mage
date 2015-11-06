@@ -48,18 +48,20 @@ public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
     protected Card card;
-    // protected int zoneChangeCounter;
+    // the number this permanent instance had
+    protected int zoneChangeCounter;
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName());
         // this.card = card.copy();
         this.card = card;
+        this.zoneChangeCounter = card.getZoneChangeCounter(game); // local value already set to the raised number
         init(card, game);
     }
 
     private void init(Card card, Game game) {
         copyFromCard(card);
-        // this.zoneChangeCounter = card.getZoneChangeCounter(game);
+
         /*if (card.getCardType().contains(CardType.PLANESWALKER)) {
          this.loyalty = new MageInt(card.getLoyalty().getValue());
          }*/
@@ -79,6 +81,7 @@ public class PermanentCard extends PermanentImpl {
         super(permanent);
         this.card = permanent.card.copy();
         this.maxLevelCounters = permanent.maxLevelCounters;
+        this.zoneChangeCounter = permanent.zoneChangeCounter;
     }
 
     @Override
@@ -89,7 +92,7 @@ public class PermanentCard extends PermanentImpl {
         super.reset(game);
     }
 
-    protected void copyFromCard(Card card) {
+    protected void copyFromCard(final Card card) {
         this.name = card.getName();
         this.abilities.clear();
         if (this.faceDown) {
@@ -257,12 +260,14 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public int getZoneChangeCounter(Game game) {
-        return card.getZoneChangeCounter(game);
+        // permanent value of zone change counter stays always the same without exception of update during the process of putting the permanent onto the battlefield
+        return zoneChangeCounter;
     }
 
     @Override
     public void updateZoneChangeCounter(Game game) {
         card.updateZoneChangeCounter(game);
+        zoneChangeCounter = card.getZoneChangeCounter(game);
     }
 
     @Override
