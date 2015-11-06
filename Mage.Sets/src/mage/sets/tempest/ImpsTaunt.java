@@ -25,41 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ruleModifying.CastOnlyIfYouHaveCastAnotherSpellEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
+import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class HewedStoneRetainers extends CardImpl {
+public class ImpsTaunt extends CardImpl {
 
-    public HewedStoneRetainers(UUID ownerId) {
-        super(ownerId, 161, "Hewed Stone Retainers", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "FRF";
-        this.subtype.add("Golem");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+    public ImpsTaunt(UUID ownerId) {
+        super(ownerId, 32, "Imps' Taunt", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
+        this.expansionSetCode = "TMP";
 
-        // Cast Hewed Stone Retainers only if you've cast another spell this turn.
-       this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
+        // Buyback {3}
+        this.addAbility(new BuybackAbility("{3}"));
+        // Target creature attacks this turn if able.
+        this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HewedStoneRetainers(final HewedStoneRetainers card) {
+    public ImpsTaunt(final ImpsTaunt card) {
         super(card);
     }
 
     @Override
-    public HewedStoneRetainers copy() {
-        return new HewedStoneRetainers(this);
+    public ImpsTaunt copy() {
+        return new ImpsTaunt(this);
     }
 }
-

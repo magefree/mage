@@ -25,12 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ruleModifying.CastOnlyIfYouHaveCastAnotherSpellEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -38,28 +39,29 @@ import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class HewedStoneRetainers extends CardImpl {
+public class SkyshroudCondor extends CardImpl {
 
-    public HewedStoneRetainers(UUID ownerId) {
-        super(ownerId, 161, "Hewed Stone Retainers", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "FRF";
-        this.subtype.add("Golem");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+    public SkyshroudCondor(UUID ownerId) {
+        super(ownerId, 88, "Skyshroud Condor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Bird");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Cast Hewed Stone Retainers only if you've cast another spell this turn.
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Cast Skyshroud Condor only if you've cast another spell this turn.
        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
     }
 
-    public HewedStoneRetainers(final HewedStoneRetainers card) {
+    public SkyshroudCondor(final SkyshroudCondor card) {
         super(card);
     }
 
     @Override
-    public HewedStoneRetainers copy() {
-        return new HewedStoneRetainers(this);
+    public SkyshroudCondor copy() {
+        return new SkyshroudCondor(this);
     }
 }
-

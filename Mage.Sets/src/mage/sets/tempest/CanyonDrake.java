@@ -25,41 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ruleModifying.CastOnlyIfYouHaveCastAnotherSpellEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class HewedStoneRetainers extends CardImpl {
+public class CanyonDrake extends CardImpl {
 
-    public HewedStoneRetainers(UUID ownerId) {
-        super(ownerId, 161, "Hewed Stone Retainers", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "FRF";
-        this.subtype.add("Golem");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+    public CanyonDrake(UUID ownerId) {
+        super(ownerId, 166, "Canyon Drake", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Drake");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // Cast Hewed Stone Retainers only if you've cast another spell this turn.
-       this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {1}, Discard a card at random: Canyon Drake gets +2/+0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}"));
+        ability.addCost(new DiscardCardCost(true));
+        this.addAbility(ability);
     }
 
-    public HewedStoneRetainers(final HewedStoneRetainers card) {
+    public CanyonDrake(final CanyonDrake card) {
         super(card);
     }
 
     @Override
-    public HewedStoneRetainers copy() {
-        return new HewedStoneRetainers(this);
+    public CanyonDrake copy() {
+        return new CanyonDrake(this);
     }
 }
-

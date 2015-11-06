@@ -25,51 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class GodosIrregulars extends CardImpl {
+public class FlowstoneSculpture extends mage.sets.vintagemasters.FlowstoneSculpture {
 
-    public GodosIrregulars(UUID ownerId) {
-        super(ownerId, 101, "Godo's Irregulars", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "SOK";
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {R}: Godo's Irregulars deals 1 damage to target creature blocking it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R"));
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking it");
-        filter.add(new BlockingAttackerIdPredicate(this.getId()));
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+    public FlowstoneSculpture(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 278;
+        this.expansionSetCode = "TMP";
     }
 
-    public GodosIrregulars(final GodosIrregulars card) {
+    public FlowstoneSculpture(final FlowstoneSculpture card) {
         super(card);
     }
 
     @Override
-    public GodosIrregulars copy() {
-        return new GodosIrregulars(this);
+    public FlowstoneSculpture copy() {
+        return new FlowstoneSculpture(this);
     }
 }

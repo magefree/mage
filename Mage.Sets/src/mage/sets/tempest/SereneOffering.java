@@ -25,41 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ruleModifying.CastOnlyIfYouHaveCastAnotherSpellEffect;
+import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class HewedStoneRetainers extends CardImpl {
+public class SereneOffering extends CardImpl {
 
-    public HewedStoneRetainers(UUID ownerId) {
-        super(ownerId, 161, "Hewed Stone Retainers", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "FRF";
-        this.subtype.add("Golem");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+    public SereneOffering(UUID ownerId) {
+        super(ownerId, 252, "Serene Offering", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "TMP";
 
-        // Cast Hewed Stone Retainers only if you've cast another spell this turn.
-       this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
+        // Destroy target enchantment. You gain life equal to its converted mana cost.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        Effect effect = new GainLifeEffect(new TargetConvertedManaCost());
+        effect.setText("You gain life equal to its converted mana cost");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
-    public HewedStoneRetainers(final HewedStoneRetainers card) {
+    public SereneOffering(final SereneOffering card) {
         super(card);
     }
 
     @Override
-    public HewedStoneRetainers copy() {
-        return new HewedStoneRetainers(this);
+    public SereneOffering copy() {
+        return new SereneOffering(this);
     }
 }
-

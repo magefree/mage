@@ -25,41 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ruleModifying.CastOnlyIfYouHaveCastAnotherSpellEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+package mage.abilities.effects.common.ruleModifying;
+
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class HewedStoneRetainers extends CardImpl {
 
-    public HewedStoneRetainers(UUID ownerId) {
-        super(ownerId, 161, "Hewed Stone Retainers", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "FRF";
-        this.subtype.add("Golem");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Cast Hewed Stone Retainers only if you've cast another spell this turn.
-       this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
+public class CastOnlyIfYouHaveCastAnotherSpellEffect extends ContinuousRuleModifyingEffectImpl {
+    public CastOnlyIfYouHaveCastAnotherSpellEffect() {
+       super(Duration.EndOfGame, Outcome.Detriment);
+       staticText = "Cast {this} only if you've cast another spell this turn";
     }
 
-    public HewedStoneRetainers(final HewedStoneRetainers card) {
-        super(card);
+    public CastOnlyIfYouHaveCastAnotherSpellEffect(final CastOnlyIfYouHaveCastAnotherSpellEffect effect) {
+       super(effect);
     }
 
     @Override
-    public HewedStoneRetainers copy() {
-        return new HewedStoneRetainers(this);
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+       if (event.getSourceId().equals(source.getSourceId())) {
+           CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+           if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0) {
+               return true;
+           }
+       }
+       return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+       return true;
+    }
+
+    @Override
+    public CastOnlyIfYouHaveCastAnotherSpellEffect copy() {
+       return new CastOnlyIfYouHaveCastAnotherSpellEffect(this);
     }
 }
-
