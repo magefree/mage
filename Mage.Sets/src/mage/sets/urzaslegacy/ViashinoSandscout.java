@@ -28,13 +28,14 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
@@ -54,7 +55,7 @@ public class ViashinoSandscout extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of the end step, return Viashino Sandscout to its owner's hand.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
     }
 
     public ViashinoSandscout(final ViashinoSandscout card) {
