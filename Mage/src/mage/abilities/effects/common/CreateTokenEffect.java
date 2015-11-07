@@ -29,12 +29,10 @@ package mage.abilities.effects.common;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -99,21 +97,13 @@ public class CreateTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (!expansionSetCodeChecked) {
-            updateExpansionSetCode(game, source);
+            expansionSetCodeChecked = Token.updateExpansionSetCode(game, source, token);
         }
         int value = amount.calculate(game, source, this);
         token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
         this.lastAddedTokenId = token.getLastAddedToken();
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
         return true;
-    }
-
-    private void updateExpansionSetCode(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject instanceof Card) {
-            token.setExpansionSetCodeForImage(((Card) sourceObject).getExpansionSetCode());
-        }
-        expansionSetCodeChecked = true;
     }
 
     public UUID getLastAddedTokenId() {

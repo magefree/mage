@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -237,5 +238,13 @@ public class Token extends MageObjectImpl {
                 setOriginalExpansionSetCode(code);
             }
         }
+    }
+
+    public static boolean updateExpansionSetCode(Game game, Ability source, Token token) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject instanceof Card) {
+            token.setExpansionSetCodeForImage(((Card) sourceObject).getExpansionSetCode());
+        }
+        return true;
     }
 }
