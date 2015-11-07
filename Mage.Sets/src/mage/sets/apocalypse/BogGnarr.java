@@ -31,24 +31,25 @@ package mage.sets.apocalypse;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
 
 /**
  * @author Loki
  */
 public class BogGnarr extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("a black spell");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
 
     public BogGnarr(UUID ownerId) {
         super(ownerId, 76, "Bog Gnarr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -57,7 +58,9 @@ public class BogGnarr extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new BogGnarrTriggeredAbility());
+
+        // Whenever a player casts a black spell, Bog Gnarr gets +2/+2 until end of turn.
+        this.addAbility(new SpellCastAllTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter, false));
     }
 
     public BogGnarr(final BogGnarr card) {
@@ -67,44 +70,5 @@ public class BogGnarr extends CardImpl {
     @Override
     public BogGnarr copy() {
         return new BogGnarr(this);
-    }
-
-}
-
-class BogGnarrTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCard filter = new FilterCard("a black spell");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
-    public BogGnarrTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), false);
-    }
-
-    public BogGnarrTriggeredAbility(final BogGnarrTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && filter.match(spell, game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player casts " + filter.getMessage() + ", " + super.getRule();
-    }
-
-    @Override
-    public BogGnarrTriggeredAbility copy() {
-        return new BogGnarrTriggeredAbility(this);
     }
 }

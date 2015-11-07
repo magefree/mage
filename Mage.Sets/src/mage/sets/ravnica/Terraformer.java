@@ -27,7 +27,6 @@
  */
 package mage.sets.ravnica;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,7 +40,8 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceImpl;
+import mage.choices.Choice;
+import mage.choices.ChoiceBasicLandType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -103,15 +103,9 @@ class TerraformerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            ChoiceImpl choices = new ChoiceImpl(true);
-            Set<String> choicesSet = choices.getChoices();
-            choicesSet.add("Forest");
-            choicesSet.add("Plains");
-            choicesSet.add("Mountain");
-            choicesSet.add("Island");
-            choicesSet.add("Swamp");
-            if (player.choose(Outcome.Neutral, choices, game)) {
-                game.getState().setValue(source.getSourceId().toString() + "_Terraformer", choices.getChoice());
+            Choice choice = new ChoiceBasicLandType();
+            if (player.choose(Outcome.Neutral, choice, game)) {
+                game.getState().setValue(source.getSourceId().toString() + "_Terraformer", choice.getChoice());
             }
             game.addEffect(new TerraformerContinuousEffect(), source);
             return true;

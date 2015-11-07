@@ -64,7 +64,8 @@ public class GoblinMutant extends CardImpl {
         super(ownerId, 188, "Goblin Mutant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "ICE";
         this.subtype.add("Goblin");
-        
+        this.subtype.add("Mutant");
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 
