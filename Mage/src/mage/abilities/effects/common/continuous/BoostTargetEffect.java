@@ -150,10 +150,10 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         }
         String message = null;
         String fixedPart = null;
-        if (t.equals("X")) {
+        if (t.contains("X")) {
             message = toughness.getMessage();
             fixedPart = ", where X is ";
-        } else if (p.equals("X")) {
+        } else if (p.contains("X")) {
             message = power.getMessage();
             fixedPart = ", where X is ";
         } else if (!power.getMessage().isEmpty()) {
