@@ -388,7 +388,9 @@ public class ContinuousEffects implements Serializable {
                 // for replacment effects of static abilities do not use LKI to check if to apply
                 if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-                        if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
+                        if (!game.getScopeRelevant()
+                                || effect.hasSelfScope()
+                                || !event.getTargetId().equals(ability.getSourceId())) {
                             if (effect.applies(event, ability, game)) {
                                 applicableAbilities.add(ability);
                             }

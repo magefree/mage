@@ -421,7 +421,7 @@ public interface Game extends MageItem, Serializable {
 
     void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
 
-    // controlling the behaviour of replacement effects
+    // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
 
     public boolean getScopeRelevant();

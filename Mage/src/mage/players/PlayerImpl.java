@@ -3094,7 +3094,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                         game.addPermanent(permanent);
                         permanent.setZone(Zone.BATTLEFIELD, game);
                         game.getPermanentsEntering().remove(permanent.getId());
-                        game.setScopeRelevant(true);
                         successfulMovedCards.add(permanent);
                         game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), fromZone, Zone.BATTLEFIELD));
                         if (!game.isSimulation()) {
