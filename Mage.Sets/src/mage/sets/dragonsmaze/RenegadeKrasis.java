@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
@@ -44,13 +43,10 @@ import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.stack.StackObject;
-
-
 
 public class RenegadeKrasis extends CardImpl {
 
-    public RenegadeKrasis (UUID ownerId) {
+    public RenegadeKrasis(UUID ownerId) {
         super(ownerId, 47, "Renegade Krasis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Beast");
@@ -66,7 +62,7 @@ public class RenegadeKrasis extends CardImpl {
         this.addAbility(new RenegadeKrasisTriggeredAbility());
     }
 
-    public RenegadeKrasis (final RenegadeKrasis card) {
+    public RenegadeKrasis(final RenegadeKrasis card) {
         super(card);
     }
 
@@ -80,13 +76,14 @@ public class RenegadeKrasis extends CardImpl {
 class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+
     static {
         filter.add(new AnotherPredicate());
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
     public RenegadeKrasisTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(1),filter), false);
+        super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(1), filter), false);
     }
 
     public RenegadeKrasisTriggeredAbility(final RenegadeKrasisTriggeredAbility ability) {
@@ -100,31 +97,16 @@ class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COUNTER_ADDED;
+        return event.getType() == EventType.EVOLVED_CREATURE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            Object object = game.getState().getValue("EvolveAddCounterActive");
-            if (object != null && (Boolean) object) {
-                StackObject stackObject = game.getStack().getLast();
-                if (stackObject.getStackAbility() instanceof EvolveAbility) {
-                    object = game.getState().getValue(this.getId() + "_lastUsedEvolveStackObject");
-                    if (object != null && ((UUID) object).equals(stackObject.getId())) {
-                        // this evolve was already handled before (prevents to trigger multiple times if counter from evolve is e.g. doubled)
-                        return false;
-                    }
-                    game.getState().setValue(this.getId() + "_lastUsedEvolveStackObject", stackObject.getId());
-                    return true;
-                }
-            }
-        }
-        return false;
+        return event.getTargetId().equals(getSourceId());
     }
 
     @Override
     public String getRule() {
-        return "Whenever Renegade Krasis evolves, put a +1/+1 counter on each other creature you control with a +1/+1 counter on it.";
+        return "Whenever {this} evolves, put a +1/+1 counter on each other creature you control with a +1/+1 counter on it.";
     }
 }
