@@ -70,9 +70,12 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                 Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
                 if (attachment != null
                         && zEvent.getTargetId() != null && attachment.getAttachedTo() != null
-                        && zEvent.getTargetId().equals(attachment.getAttachedTo())
-                        && attachment.getAttachedToZoneChangeCounter() == zEvent.getTarget().getZoneChangeCounter(game) - 1) {
-                    triggered = true;
+                        && zEvent.getTargetId().equals(attachment.getAttachedTo())) {
+                    Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
+                    if (attachedTo != null
+                            && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)) {  // zoneChangeCounter is stored in Permanent
+                        triggered = true;
+                    }
                 }
             }
             if (triggered) {
