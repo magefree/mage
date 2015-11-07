@@ -27,32 +27,28 @@
  */
 package mage.sets.eventide;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.EffectType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -61,7 +57,11 @@ import mage.watchers.Watcher;
  */
 public class GroundlingPouncer extends CardImpl {
 
-    private String rule = "{this} gets +1/+3 and gains flying until end of turn. Activate this ability only once each turn and only if an opponent controls a creature with flying.";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
+    }
 
     public GroundlingPouncer(UUID ownerId) {
         super(ownerId, 154, "Groundling Pouncer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G/U}");
@@ -72,12 +72,14 @@ public class GroundlingPouncer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {GU}: Groundling Pouncer gets +1/+3 and gains flying until end of turn. Activate this ability only once each turn and only if an opponent controls a creature with flying.
-        Condition condition = new GroundingPouncerCondition();
-        Effect effect = new BoostSourceEffect(1, 3, Duration.EndOfTurn);
-        Effect effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true);
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{G/U}"), condition, rule);
-        ability.addEffect(effect2);
-        this.addAbility(ability, new ActivatedAbilityUsedThisTurnWatcher());
+        Ability ability = new GroundlingPouncerAbility(
+                Zone.BATTLEFIELD,
+                new BoostSourceEffect(1, 3, Duration.EndOfTurn),
+                new ManaCostsImpl("{G/U}"),
+                new OpponentControlsPermanentCondition(filter),
+                "{G/U}: {this} gets +1/+3 and gains flying until end of turn. Activate this ability only once each turn and only if an opponent controls a creature with flying.");
+        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true));
+        this.addAbility(ability);
 
     }
 
@@ -91,69 +93,48 @@ public class GroundlingPouncer extends CardImpl {
     }
 }
 
-class GroundingPouncerCondition implements Condition {
+class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final Effects emptyEffects = new Effects();
 
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
+    private final Condition condition;
+    private final String ruleText;
+
+    public GroundlingPouncerAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
+        super(zone, effect, cost);
+        this.condition = condition;
+        this.ruleText = rule;
+    }
+
+    public GroundlingPouncerAbility(GroundlingPouncerAbility ability) {
+        super(ability);
+        this.condition = ability.condition;
+        this.ruleText = ability.ruleText;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        ActivatedAbilityUsedThisTurnWatcher watcher = (ActivatedAbilityUsedThisTurnWatcher) game.getState().getWatchers().get("ActivatedAbilityUsedThisTurn");
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            if (game.getBattlefield().countAll(filter, opponentId, game) > 0 && !watcher.getActivatedThisTurn().contains(source.getSourceId())) {
-                return true;
-            }
+    public Effects getEffects(Game game, EffectType effectType) {
+        if (!condition.apply(game, this)) {
+            return emptyEffects;
         }
-        return false;
+        return super.getEffects(game, effectType);
     }
 
     @Override
-    public String toString() {
-        return "once each turn and only if an opponent controls a flying creature";
-    }
-}
-
-class ActivatedAbilityUsedThisTurnWatcher extends Watcher {
-
-    public Set<UUID> activatedThisTurn = new HashSet<>();
-
-    public ActivatedAbilityUsedThisTurnWatcher() {
-        super("ActivatedAbilityUsedThisTurn", WatcherScope.GAME);
-    }
-
-    public ActivatedAbilityUsedThisTurnWatcher(final ActivatedAbilityUsedThisTurnWatcher watcher) {
-        super(watcher);
-        this.activatedThisTurn.addAll(watcher.activatedThisTurn);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-            if (stackObject != null) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
-                if (stackAbility != null && stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
-                    this.activatedThisTurn.add(stackAbility.getOriginalId());
-                }
-            }
+    public boolean canActivate(UUID playerId, Game game) {
+        if (!condition.apply(game, this)) {
+            return false;
         }
-    }
-
-    public Set<UUID> getActivatedThisTurn() {
-        return this.activatedThisTurn;
+        return super.canActivate(playerId, game);
     }
 
     @Override
-    public ActivatedAbilityUsedThisTurnWatcher copy() {
-        return new ActivatedAbilityUsedThisTurnWatcher(this);
+    public GroundlingPouncerAbility copy() {
+        return new GroundlingPouncerAbility(this);
     }
 
     @Override
-    public void reset() {
-        super.reset();
-        this.activatedThisTurn.clear();
+    public String getRule() {
+        return ruleText;
     }
 }
