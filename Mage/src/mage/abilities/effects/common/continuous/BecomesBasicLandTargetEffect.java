@@ -37,6 +37,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceBasicLandType;
 import mage.constants.CardType;
@@ -147,8 +148,19 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             Permanent land = game.getPermanent(targetPermanent);
             if (land != null) {
                 switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
+                    case TypeChangingEffects_4:
+                        // Attention: Cards like Unstable Frontier that use this class do not give the "Basic" supertype to the target
+                        if (!land.getCardType().contains(CardType.LAND)) {
+                            land.getCardType().add(CardType.LAND);
+                        }
+                        // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+                        // So the ability removing has to be done before Layer 6
                         land.removeAllAbilities(source.getSourceId(), game);
+                        // 305.7
+                        land.getSubtype().removeAll(CardRepository.instance.getLandTypes());
+                        land.getSubtype().addAll(landTypes);
+                        break;
+                    case AbilityAddingRemovingEffects_6:
                         for (String landType : landTypes) {
                             switch (landType) {
                                 case "Swamp":
@@ -168,14 +180,6 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                                     break;
                             }
                         }
-                        break;
-                    case TypeChangingEffects_4:
-                        // Attention: Cards like Unstable Frontier that use this class do not give the "Basic" supertype to the target
-                        if (!land.getCardType().contains(CardType.LAND)) {
-                            land.getCardType().add(CardType.LAND);
-                        }
-                        land.getSubtype().clear();
-                        land.getSubtype().addAll(landTypes);
                         break;
                 }
             }

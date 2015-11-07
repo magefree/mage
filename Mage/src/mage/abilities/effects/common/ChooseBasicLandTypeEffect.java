@@ -8,6 +8,7 @@ package mage.abilities.effects.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -45,14 +46,7 @@ public class ChooseBasicLandTypeEffect extends OneShotEffect {
             mageObject = game.getObject(source.getSourceId());
         }
         if (controller != null && mageObject != null) {
-            ChoiceImpl choices = new ChoiceImpl(true);
-            choices.setMessage("Choose basic land type");
-            choices.isRequired();
-            choices.getChoices().add("Forest");
-            choices.getChoices().add("Plains");
-            choices.getChoices().add("Mountain");
-            choices.getChoices().add("Island");
-            choices.getChoices().add("Swamp");
+            ChoiceImpl choices = new ChoiceBasicLandType();
             if (controller.choose(Outcome.Neutral, choices, game)) {
                 game.informPlayers(mageObject.getName() + ":  Chosen basic land type is " + choices.getChoice());
                 game.getState().setValue(mageObject.getId().toString() + VALUE_KEY, choices.getChoice());

@@ -43,7 +43,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -133,7 +133,7 @@ class ChainerDementiaMasterEffect extends OneShotEffect {
                 ContinuousEffectImpl effect = new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
-                effect = new BecomesSubtypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Arrays.asList("Nightmare")), false);
+                effect = new BecomesCreatureTypeTargetEffect(Duration.WhileOnBattlefield, new ArrayList<>(Arrays.asList("Nightmare")), false);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }

@@ -69,6 +69,8 @@ public enum CardRepository {
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
+    private final TreeSet<String> landTypes = new TreeSet();
+
     private CardRepository() {
         File file = new File("db");
         if (!file.exists()) {
@@ -85,7 +87,7 @@ public enum CardRepository {
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
         }
     }
 
@@ -102,7 +104,7 @@ public enum CardRepository {
                             }
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB: " + ex.getCause());
+                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
                     }
                     return null;
                 }
@@ -252,21 +254,22 @@ public enum CardRepository {
     }
 
     public Set<String> getLandTypes() {
-        TreeSet<String> subtypes = new TreeSet<>();
-        try {
-            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("subtypes");
-            qb.where().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
-            List<CardInfo> results = cardDao.query(qb.prepare());
-            for (CardInfo card : results) {
-                subtypes.addAll(card.getSubTypes());
-            }
-            // Removing Dryad because of Dryad Arbor
-            subtypes.remove("Dryad");
+        if (landTypes.isEmpty()) {
+            try {
+                QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+                qb.distinct().selectColumns("subtypes");
+                qb.where().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
+                List<CardInfo> results = cardDao.query(qb.prepare());
+                for (CardInfo card : results) {
+                    landTypes.addAll(card.getSubTypes());
+                }
+                // Removing Dryad because of Dryad Arbor
+                landTypes.remove("Dryad");
 
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
+            }
         }
-        return subtypes;
+        return landTypes;
     }
 
     public CardInfo findCard(String setCode, int cardNumber) {
@@ -391,7 +394,7 @@ public enum CardRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME + "Content");
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(CardRepository.class).error("Error getting content version from DB - ", ex);
         }
         return 0;
     }
@@ -401,7 +404,7 @@ public enum CardRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(CardRepository.class).error("Error getting content version - ", ex);
         }
     }
 

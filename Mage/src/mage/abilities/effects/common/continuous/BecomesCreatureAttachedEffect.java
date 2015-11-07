@@ -29,6 +29,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -110,7 +111,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                             switch (loseType) {
                                 case ALL:
                                 case ALL_BUT_COLOR:
-                                    permanent.getSubtype().clear();
+                                    permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
                                     break;
                             }
                             if (token.getSubtype().size() > 0) {

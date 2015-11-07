@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.repository.CardRepository;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import static mage.constants.Layer.TypeChangingEffects_4;
@@ -21,20 +22,20 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BecomesSubtypeTargetEffect extends ContinuousEffectImpl {
+public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
 
     protected ArrayList<String> subtypes = new ArrayList();
-    protected boolean loseOther;  // loses other subtypes
+    protected boolean loseOther;  // loses other creature types
 
-    public BecomesSubtypeTargetEffect(Duration duration, String subtype) {
+    public BecomesCreatureTypeTargetEffect(Duration duration, String subtype) {
         this(duration, createArrayList(subtype));
     }
 
-    public BecomesSubtypeTargetEffect(Duration duration, ArrayList<String> subtypes) {
+    public BecomesCreatureTypeTargetEffect(Duration duration, ArrayList<String> subtypes) {
         this(duration, subtypes, true);
     }
 
-    public BecomesSubtypeTargetEffect(Duration duration, ArrayList<String> subtypes, boolean loseOther) {
+    public BecomesCreatureTypeTargetEffect(Duration duration, ArrayList<String> subtypes, boolean loseOther) {
         super(duration, Outcome.Detriment);
         this.subtypes = subtypes;
         this.staticText = setText();
@@ -47,7 +48,7 @@ public class BecomesSubtypeTargetEffect extends ContinuousEffectImpl {
         return subtypes;
     }
 
-    public BecomesSubtypeTargetEffect(final BecomesSubtypeTargetEffect effect) {
+    public BecomesCreatureTypeTargetEffect(final BecomesCreatureTypeTargetEffect effect) {
         super(effect);
         this.subtypes.addAll(effect.subtypes);
         this.loseOther = effect.loseOther;
@@ -60,8 +61,8 @@ public class BecomesSubtypeTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public BecomesSubtypeTargetEffect copy() {
-        return new BecomesSubtypeTargetEffect(this);
+    public BecomesCreatureTypeTargetEffect copy() {
+        return new BecomesCreatureTypeTargetEffect(this);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class BecomesSubtypeTargetEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (loseOther) {
-                            permanent.getSubtype().clear();
+                            permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
                             permanent.getSubtype().addAll(subtypes);
                         } else {
                             for (String subtype : subtypes) {
