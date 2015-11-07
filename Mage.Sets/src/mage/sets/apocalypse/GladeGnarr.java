@@ -71,10 +71,10 @@ public class GladeGnarr extends CardImpl {
 
 class GladeGnarrTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCard filter = new FilterCard("a black spell");
+    private static final FilterCard filter = new FilterCard("a blue spell");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public GladeGnarrTriggeredAbility() {
