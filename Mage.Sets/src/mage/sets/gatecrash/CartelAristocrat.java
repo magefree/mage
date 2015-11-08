@@ -32,7 +32,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
@@ -44,19 +43,18 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
- * Gatecrash FAQ (01.2013)
- * You choose the color when the ability resolves.
+ * Gatecrash FAQ (01.2013) You choose the color when the ability resolves.
  *
  * @author LevelX2
  */
 public class CartelAristocrat extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
         filter.add(new AnotherPredicate());
     }
-    
+
     public CartelAristocrat(UUID ownerId) {
         super(ownerId, 150, "Cartel Aristocrat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{B}");
         this.expansionSetCode = "GTC";

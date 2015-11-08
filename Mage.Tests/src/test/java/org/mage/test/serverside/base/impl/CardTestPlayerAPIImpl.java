@@ -12,6 +12,7 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -141,7 +142,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     protected TestPlayer createPlayer(Game game, TestPlayer player, String name, String deckName) throws GameException {
-        player = createNewPlayer(name);
+        player = createNewPlayer(name, game.getRangeOfInfluence());
         player.setTestMode(true);
         logger.debug("Loading deck...");
         Deck deck = Deck.load(DeckImporterUtil.importDeck(deckName), false, false);
@@ -187,8 +188,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     }
 
-    protected TestPlayer createNewPlayer(String playerName) {
-        return createPlayer(playerName);
+    protected TestPlayer createNewPlayer(String playerName, RangeOfInfluence rangeOfInfluence) {
+        return createPlayer(playerName, rangeOfInfluence);
     }
 
     protected Player getPlayerFromName(String playerName, String line) {

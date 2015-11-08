@@ -1,15 +1,26 @@
 package org.mage.test.serverside.base;
 
-import mage.constants.PhaseStep;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
 import mage.game.tournament.TournamentType;
+import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.server.game.GameFactory;
 import mage.server.util.ConfigSettings;
@@ -22,20 +33,13 @@ import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.mage.test.player.TestPlayer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import mage.player.ai.ComputerPlayer;
-
 /**
  * Base class for all tests.
  *
  * @author ayratn
  */
 public abstract class MageTestPlayerBase {
+
     protected static Logger logger = Logger.getLogger(MageTestPlayerBase.class);
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
@@ -62,8 +66,7 @@ public abstract class MageTestPlayerBase {
     protected static Game currentGame = null;
 
     /**
-     * Player thats starts the game first.
-     * By default, it is ComputerA.
+     * Player thats starts the game first. By default, it is ComputerA.
      */
     protected static Player activePlayer = null;
 
@@ -72,6 +75,7 @@ public abstract class MageTestPlayerBase {
     protected PhaseStep stopAtStep = PhaseStep.UNTAP;
 
     protected enum ParserState {
+
         INIT,
         OPTIONS,
         EXPECTED
@@ -80,16 +84,11 @@ public abstract class MageTestPlayerBase {
     protected ParserState parserState;
 
     /**
-     * Expected results of the test.
-     * Read from test case in {@link String} based format:
+     * Expected results of the test. Read from test case in {@link String} based
+     * format:
      * <p/>
-     * Example:
-     * turn:1
-     * result:won:ComputerA
-     * life:ComputerA:20
-     * life:ComputerB:0
-     * battlefield:ComputerB:Tine Shrike:0
-     * graveyard:ComputerB:Tine Shrike:1
+     * Example: turn:1 result:won:ComputerA life:ComputerA:20 life:ComputerB:0
+     * battlefield:ComputerB:Tine Shrike:0 graveyard:ComputerB:Tine Shrike:1
      */
     protected List<String> expectedResults = new ArrayList<>();
 
@@ -259,7 +258,7 @@ public abstract class MageTestPlayerBase {
             logger.warn("Init string wasn't parsed: " + line);
         }
     }
-    
+
     private TestPlayer getPlayer(String name) {
         switch (name) {
             case "ComputerA":
@@ -282,7 +281,7 @@ public abstract class MageTestPlayerBase {
         handCards.put(player, hand);
         return hand;
     }
-    
+
     protected List<Card> getGraveCards(TestPlayer player) {
         if (graveyardCards.containsKey(player)) {
             return graveyardCards.get(player);
@@ -319,7 +318,6 @@ public abstract class MageTestPlayerBase {
         return command;
     }
 
-
     private void includeFrom(String line) throws FileNotFoundException {
         String[] params = line.split(" ");
         if (params.length == 2) {
@@ -340,8 +338,8 @@ public abstract class MageTestPlayerBase {
         }
     }
 
-    protected TestPlayer createPlayer(String name) {
-        return new TestPlayer(new ComputerPlayer(name, RangeOfInfluence.ONE));
+    protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
+        return new TestPlayer(new ComputerPlayer(name, rangeOfInfluence));
     }
-    
+
 }

@@ -134,6 +134,10 @@ public class Token extends MageObjectImpl {
     }
 
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking) {
+        return putOntoBattlefield(amount, game, sourceId, controllerId, tapped, attacking, null);
+    }
+
+    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -179,7 +183,7 @@ public class Token extends MageObjectImpl {
                 this.lastAddedTokenId = permanent.getId();
                 game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
                 if (attacking && game.getCombat() != null) {
-                    game.getCombat().addAttackingCreature(permanent.getId(), game);
+                    game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
                 }
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " puts a " + permanent.getLogName() + " token onto the battlefield");

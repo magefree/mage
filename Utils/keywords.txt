@@ -44,6 +44,7 @@ Miracle|cost|
 Mountaincycling|cost|
 Mountainwalk|new|
 Morph|card, cost|
+Myriad|new|
 Outlast|cost|
 Persist|new|
 Phasing|instance|
