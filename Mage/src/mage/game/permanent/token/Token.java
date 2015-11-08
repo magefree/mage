@@ -55,6 +55,7 @@ public class Token extends MageObjectImpl {
     private int tokenType;
     private int originalCardNumber;
     private String originalExpansionSetCode;
+    private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
 
     // list of set codes tokene images are available for
@@ -91,6 +92,7 @@ public class Token extends MageObjectImpl {
         if (abilities != null) {
             this.abilities = abilities.copy();
         }
+        this.expansionSetCodeChecked = false;
     }
 
     public Token(final Token token) {
@@ -101,6 +103,7 @@ public class Token extends MageObjectImpl {
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
         this.originalCardNumber = token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
+        this.expansionSetCodeChecked = token.expansionSetCodeChecked;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
     }
@@ -143,8 +146,15 @@ public class Token extends MageObjectImpl {
             return false;
         }
         lastAddedTokenIds.clear();
-        // TODO: Check this setCode handling because it makes no sense if token put into play with e.g. "Feldon of the third Path"
+
+        // moved here from CreateTokenEffect because not all cards that create tokens use CreateTokenEffect
+        // they use putOntoBattlefield directly
         Card source = game.getCard(sourceId);
+        if (!expansionSetCodeChecked) {
+            expansionSetCodeChecked = this.updateExpansionSetCode(source);
+        }
+
+        // TODO: Check this setCode handling because it makes no sense if token put into play with e.g. "Feldon of the third Path"
         String setCode;
         if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {
             setCode = this.getOriginalExpansionSetCode();
@@ -248,11 +258,11 @@ public class Token extends MageObjectImpl {
         }
     }
 
-    public static boolean updateExpansionSetCode(Game game, Ability source, Token token) {
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject instanceof Card) {
-            token.setExpansionSetCodeForImage(((Card) sourceObject).getExpansionSetCode());
+    public boolean updateExpansionSetCode(Card source) {
+        if (source == null) {
+            return false;
         }
+        this.setExpansionSetCodeForImage(source.getExpansionSetCode());
         return true;
     }
 }

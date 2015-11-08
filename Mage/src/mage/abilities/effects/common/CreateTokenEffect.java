@@ -50,7 +50,6 @@ public class CreateTokenEffect extends OneShotEffect {
     private boolean attacking;
     private UUID lastAddedTokenId;
     private ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
-    private boolean expansionSetCodeChecked;
 
     public CreateTokenEffect(Token token) {
         this(token, new StaticValue(1));
@@ -74,7 +73,6 @@ public class CreateTokenEffect extends OneShotEffect {
         this.amount = amount.copy();
         this.tapped = tapped;
         this.attacking = attacking;
-        this.expansionSetCodeChecked = false;
         setText();
     }
 
@@ -86,7 +84,6 @@ public class CreateTokenEffect extends OneShotEffect {
         this.attacking = effect.attacking;
         this.lastAddedTokenId = effect.lastAddedTokenId;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
-        this.expansionSetCodeChecked = effect.expansionSetCodeChecked;
     }
 
     @Override
@@ -96,9 +93,6 @@ public class CreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!expansionSetCodeChecked) {
-            expansionSetCodeChecked = Token.updateExpansionSetCode(game, source, token);
-        }
         int value = amount.calculate(game, source, this);
         token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
         this.lastAddedTokenId = token.getLastAddedToken();
