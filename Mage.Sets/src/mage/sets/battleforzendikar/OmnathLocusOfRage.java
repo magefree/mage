@@ -88,7 +88,7 @@ class OmnathElementalToken extends Token {
 
     OmnathElementalToken() {
         super("Elemental", "5/5 red and green Elemental creature token");
-        setTokenType(1);
+        setTokenType(2);
         setOriginalExpansionSetCode("BFZ");
         cardType.add(CardType.CREATURE);
         subtype.add("Elemental");

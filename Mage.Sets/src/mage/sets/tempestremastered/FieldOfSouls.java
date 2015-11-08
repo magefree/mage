@@ -57,7 +57,7 @@ public class FieldOfSouls extends CardImpl {
         this.expansionSetCode = "TPR";
 
         // Whenever a nontoken creature is put into your graveyard from the battlefield, put a 1/1 white Spirit creature token with flying onto the battlefield.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("KTK")), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()), false, filter));
     }
 
     public FieldOfSouls(final FieldOfSouls card) {

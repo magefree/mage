@@ -23,43 +23,43 @@
 #Generate|TOK:C15|Wolf|
 #Generate|TOK:C15|Zombie|
 
-Generate|TOK:BFZ|Dragon|
-Generate|TOK:BFZ|Eldrazi|
-Generate|TOK:BFZ|Eldrazi Scion 1|
-Generate|TOK:BFZ|Eldrazi Scion 2|
-Generate|TOK:BFZ|Eldrazi Scion 3|
-Generate|TOK:BFZ|Elemental 1|
-Generate|TOK:BFZ|Elemental 2|
-Generate|TOK:BFZ|Knight Ally|
-Generate|TOK:BFZ|Kor Ally|
-Generate|TOK:BFZ|Octopus|
-Generate|TOK:BFZ|Plant|
-|Generate|EMBLEM!:BFZ|Emblem Gideon, Ally of Zendikar|
-|Generate|EMBLEM!:BFZ|Emblem Kiora, Master of the Depths|
-|Generate|EMBLEM!:BFZ|Emblem Ob Nixilis Reignited|
+|Generate|TOK:BFZ|Dragon|
+|Generate|TOK:BFZ|Eldrazi|
+|Generate|TOK:BFZ|Eldrazi Scion 1|
+|Generate|TOK:BFZ|Eldrazi Scion 2|
+|Generate|TOK:BFZ|Eldrazi Scion 3|
+|Generate|TOK:BFZ|Elemental 1|
+|Generate|TOK:BFZ|Elemental 2|
+|Generate|TOK:BFZ|Knight Ally|
+|Generate|TOK:BFZ|Kor Ally|
+|Generate|TOK:BFZ|Octopus|
+|Generate|TOK:BFZ|Plant|
+#|Generate|EMBLEM!:BFZ|Emblem Gideon, Ally of Zendikar|
+#|Generate|EMBLEM!:BFZ|Emblem Kiora, Master of the Depths|
+#|Generate|EMBLEM!:BFZ|Emblem Ob Nixilis Reignited|
 
-Generate|TOK:DDP|Eldrazi Spawn 1|
-Generate|TOK:DDP|Eldrazi Spawn 2|
-Generate|TOK:DDP|Eldrazi Spawn 3|
-Generate|TOK:DDP|Hellion|
-Generate|TOK:DDP|Plant|
+|Generate|TOK:DDP|Eldrazi Spawn 1|
+|Generate|TOK:DDP|Eldrazi Spawn 2|
+|Generate|TOK:DDP|Eldrazi Spawn 3|
+|Generate|TOK:DDP|Hellion|
+|Generate|TOK:DDP|Plant|
 
-Generate|TOK:MM2|Eldrazi Spawn 1|
-Generate|TOK:MM2|Eldrazi Spawn 2|
-Generate|TOK:MM2|Eldrazi Spawn 3|
-Generate|TOK:MM2|Elephant|
-Generate|TOK:MM2|Faerie Rogue|
-Generate|TOK:MM2|Germ|
-Generate|TOK:MM2|Golem|
-Generate|TOK:MM2|Insect|
-Generate|TOK:MM2|Myr|
-Generate|TOK:MM2|Saproling|
-Generate|TOK:MM2|Snake|
-Generate|TOK:MM2|Soldier|
-Generate|TOK:MM2|Spirit|
-Generate|TOK:MM2|Thrull|
-Generate|TOK:MM2|Wolf|
-Generate|TOK:MM2|Wurm|
+|Generate|TOK:MM2|Eldrazi Spawn 1|
+|Generate|TOK:MM2|Eldrazi Spawn 2|
+|Generate|TOK:MM2|Eldrazi Spawn 3|
+|Generate|TOK:MM2|Elephant|
+|Generate|TOK:MM2|Faerie Rogue|
+|Generate|TOK:MM2|Germ|
+|Generate|TOK:MM2|Golem|
+|Generate|TOK:MM2|Insect|
+|Generate|TOK:MM2|Myr|
+|Generate|TOK:MM2|Saproling|
+|Generate|TOK:MM2|Snake|
+|Generate|TOK:MM2|Soldier|
+|Generate|TOK:MM2|Spirit|
+|Generate|TOK:MM2|Thrull|
+|Generate|TOK:MM2|Wolf|
+|Generate|TOK:MM2|Worm|
 
 #Generate|TOK:TPR|Goblin|
 #Generate|TOK:TPR|Pegasus|
@@ -83,9 +83,9 @@ Generate|TOK:MM2|Wurm|
 |Generate|TOK:ORI|Thopter 1|
 |Generate|TOK:ORI|Thopter 2|
 |Generate|TOK:ORI|Zombie|
-|Generate|EMBLEM!:ORI|Emblem Chandra, Roaring Flame|
-|Generate|EMBLEM!:ORI|Emblem Jace, Telepath Unbound|
-|Generate|EMBLEM!:ORI|Emblem Liliana, Defiant Necromancer|
+#|Generate|EMBLEM!:ORI|Emblem Chandra, Roaring Flame|
+#|Generate|EMBLEM!:ORI|Emblem Jace, Telepath Unbound|
+#|Generate|EMBLEM!:ORI|Emblem Liliana, Defiant Necromancer|
 
 #|Generate|TOK:PTC|Angel|
 #|Generate|TOK:PTC|Avatar|

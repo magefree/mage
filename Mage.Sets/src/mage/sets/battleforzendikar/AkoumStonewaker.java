@@ -122,5 +122,6 @@ class AkoumStonewakerElementalToken extends Token {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.setOriginalExpansionSetCode("BFZ");
+        this.setTokenType(1);
     }
 }

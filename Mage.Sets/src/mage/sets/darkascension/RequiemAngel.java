@@ -67,7 +67,7 @@ public class RequiemAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever another non-Spirit creature you control dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(expansionSetCode), 1), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 1), false, filter));
     }
 
     public RequiemAngel(final RequiemAngel card) {

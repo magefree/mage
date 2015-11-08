@@ -31,28 +31,26 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import mage.MageInt;
 import mage.constants.CardType;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author Quercitron
  */
-public class SaprolingToken extends Token {
+public class ThrullToken extends Token {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("10E", "ALA", "DDE", "DDH", "DDJ", "M12", "M13", "M14", "MM2", "MMA", "RTR"));
+        tokenImageSets.addAll(Arrays.asList("MM2"));
     }
 
-    public SaprolingToken() {
-        super("Saproling", "1/1 green Saproling creature token");
-        this.setOriginalExpansionSetCode("MMA");
+    public ThrullToken() {
+        super("Thrull", "1/1 black Thrull creature token");
         cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Saproling");
+        subtype.add("Thrull");
+        color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
 

@@ -235,7 +235,11 @@ public class Token extends MageObjectImpl {
             if (availableImageSetCodes.contains(code)) {
                 setOriginalExpansionSetCode(code);
             } else {
-                setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+                // we should not set random set if appropriate set is already used
+                if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
+                        || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
+                    setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+                }
             }
         } else {
             if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
