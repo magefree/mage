@@ -1285,11 +1285,22 @@ public class HumanPlayer extends PlayerImpl {
             MageObject obj = game.getObject(source.getSourceId());
             Map<UUID, String> modeMap = new LinkedHashMap<>();
             for (Mode mode : modes.getAvailableModes(source, game)) {
-                if (!modes.getSelectedModes().contains(mode.getId()) // show only modes not already selected
-                        && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
+                if ((!modes.getSelectedModes().contains(mode.getId()) || modes.isEachModeMoreThanOnce())// show only modes not already selected if more than once is not allowed
+                        && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and needed targets have to be available
                     String modeText = mode.getEffects().getText(mode);
                     if (obj != null) {
-                        modeText = modeText.replace("{source}", obj.getName());
+                        modeText = modeText.replace("{source}", obj.getName()).replace("{this}", obj.getName());
+                    }
+                    if (modes.isEachModeMoreThanOnce()) {
+                        int timesSelected = 0;
+                        for (UUID selectedModeId : modes.getSelectedModes()) {
+                            if (mode.getId().equals(selectedModeId)) {
+                                timesSelected++;
+                            }
+                        }
+                        if (timesSelected > 0) {
+                            modeText = "(selected " + timesSelected + "x) " + modeText;
+                        }
                     }
                     modeMap.put(mode.getId(), modeText);
                 }

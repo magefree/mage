@@ -902,6 +902,9 @@ public abstract class AbilityImpl implements Ability {
         for (Mode mode : modes.values()) {
             if (mode.getTargets().canChoose(sourceId, controllerId, game)) {
                 found++;
+                if (modes.isEachModeMoreThanOnce()) {
+                    return true;
+                }
                 if (found >= getModes().getMinModes()) {
                     return true;
                 }
@@ -1103,13 +1106,16 @@ public abstract class AbilityImpl implements Ability {
             }
         } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
             Modes spellModes = ((Spell) object).getSpellAbility().getModes();
-            int item = 0;
-            for (Mode mode : spellModes.values()) {
-                item++;
-                if (spellModes.getSelectedModes().contains(mode.getId())) {
-                    spellModes.setActiveMode(mode.getId());
-                    sb.append(" (mode ").append(item).append(")");
-                    sb.append(getTargetDescriptionForLog(getTargets(), game));
+            for (UUID modeId : spellModes.getSelectedModes()) {
+                int item = 0;
+                for (Mode mode : spellModes.values()) {
+                    item++;
+                    if (mode.getId().equals(modeId)) {
+                        spellModes.setActiveMode(mode.getId());
+                        sb.append(" (mode ").append(item).append(")");
+                        sb.append(getTargetDescriptionForLog(getTargets(), game));
+                        break;
+                    }
                 }
             }
         } else {
