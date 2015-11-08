@@ -28,15 +28,14 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -48,10 +47,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class JhoirasToolbox extends CardImpl {
 
-    private static final FilterCreaturePermanent filer = new FilterCreaturePermanent("artifact creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
-        filer.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public JhoirasToolbox(UUID ownerId) {
@@ -64,7 +63,8 @@ public class JhoirasToolbox extends CardImpl {
 
         // {2}: Regenerate target artifact creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{2}"));
-        ability.addTarget(new TargetCreaturePermanent(filer));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public JhoirasToolbox(final JhoirasToolbox card) {
