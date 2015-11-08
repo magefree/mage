@@ -28,11 +28,9 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -41,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SpiderToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -109,18 +107,5 @@ class GloomwidowsFeastEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class SpiderToken extends Token {
-
-    public SpiderToken() {
-        super("Spider", "1/2 green Spider creature token with reach");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Spider");
-        power = new MageInt(1);
-        toughness = new MageInt(2);
-        addAbility(ReachAbility.getInstance());
     }
 }
