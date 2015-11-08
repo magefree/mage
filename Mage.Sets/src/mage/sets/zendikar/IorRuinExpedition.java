@@ -27,8 +27,7 @@
  */
 package mage.sets.zendikar;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,10 +36,10 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-
-import java.util.UUID;
 
 /**
  *
@@ -52,9 +51,11 @@ public class IorRuinExpedition extends CardImpl {
         super(ownerId, 49, "Ior Ruin Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "ZEN";
 
-
+        // Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Ior Ruin Expedition.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
+
+        // Remove three quest counters from Ior Ruin Expedition and sacrifice it: Draw two cards.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
