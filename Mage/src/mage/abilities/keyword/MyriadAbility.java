@@ -59,7 +59,7 @@ class MyriadEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourceObject != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (playerId != getTargetPointer().getFirst(game, source) && controller.hasOpponent(playerId, game)) {
