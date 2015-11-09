@@ -48,8 +48,6 @@ public class RighteousConfluence extends CardImpl {
         super(ownerId, 7, "Righteous Confluence", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "C15";
 
-        // Choose three. You may choose the same mode more than once.
-        // - Put a 2/2 white Knight creature token with vigilance onto the battlefield; Exile target enchantment; You gain 5 life.
         // Choose three - You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
