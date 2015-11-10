@@ -25,56 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.sets.masterseditioniii;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.Mode;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPermanent;
 
 /**
  *
- * @author emerald000
+ * @author LoneFox
  */
-public class ActiveVolcano extends CardImpl {
+public class Cleanse extends mage.sets.legends.Cleanse {
 
-    private static final FilterPermanent filterBlue = new FilterPermanent("blue permanent");
-    private static final FilterPermanent filterIsland = new FilterPermanent("Island");
-    static {
-        filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
-        filterIsland.add(new SubtypePredicate("Island"));
+    public Cleanse(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 5;
+        this.expansionSetCode = "ME3";
     }
 
-    public ActiveVolcano(UUID ownerId) {
-        super(ownerId, 130, "Active Volcano", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "LEG";
-
-
-        // Choose one - Destroy target blue permanent;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filterBlue));
-
-        // or return target Island to its owner's hand.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filterIsland));
-        this.getSpellAbility().addMode(mode);
-    }
-
-    public ActiveVolcano(final ActiveVolcano card) {
+    public Cleanse(final Cleanse card) {
         super(card);
     }
 
     @Override
-    public ActiveVolcano copy() {
-        return new ActiveVolcano(this);
+    public Cleanse copy() {
+        return new Cleanse(this);
     }
 }
