@@ -25,41 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.unlimitededition;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BecomesTappedTriggeredAbility;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class JudgeOfCurrents extends CardImpl {
+public class Lifetap extends mage.sets.fifthedition.Lifetap {
 
-    public JudgeOfCurrents(UUID ownerId) {
-        super(ownerId, 22, "Judge of Currents", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "LRW";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever a Merfolk you control becomes tapped, you may gain 1 life.
-        this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), true, new FilterControlledCreaturePermanent("Merfolk", "a Merfolk you control")));
+    public Lifetap(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 62;
+        this.expansionSetCode = "2ED";
     }
 
-    public JudgeOfCurrents(final JudgeOfCurrents card) {
+    public Lifetap(final Lifetap card) {
         super(card);
     }
 
     @Override
-    public JudgeOfCurrents copy() {
-        return new JudgeOfCurrents(this);
+    public Lifetap copy() {
+        return new Lifetap(this);
     }
 }

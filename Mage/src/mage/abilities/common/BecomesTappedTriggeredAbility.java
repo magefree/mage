@@ -7,7 +7,7 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -16,26 +16,26 @@ import mage.game.permanent.Permanent;
  *
  * @author Jeff
  */
-public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAbilityImpl{
-    
-    FilterControlledCreaturePermanent filter;
-    
-    public BecomesTappedCreatureControlledTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterControlledCreaturePermanent("a creature you control"));
+public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl{
+
+    FilterPermanent filter;
+
+    public BecomesTappedTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, new FilterPermanent("a permanent"));
     }
-    public BecomesTappedCreatureControlledTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter) {
+    public BecomesTappedTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
     }
 
-    public BecomesTappedCreatureControlledTriggeredAbility(final BecomesTappedCreatureControlledTriggeredAbility ability) {
+    public BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
+        this.filter = ability.filter.copy();
     }
 
     @Override
-    public BecomesTappedCreatureControlledTriggeredAbility copy() {
-        return new BecomesTappedCreatureControlledTriggeredAbility(this);
+    public BecomesTappedTriggeredAbility copy() {
+        return new BecomesTappedTriggeredAbility(this);
     }
 
     @Override
@@ -52,5 +52,5 @@ public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAb
     @Override
     public String getRule() {
         return "When " + filter.getMessage() + " becomes tapped, " + super.getRule();
-    }    
+    }
 }
