@@ -132,7 +132,7 @@ class MomirEmblem extends Emblem {
         // {X}, Discard a card: Put a token into play as a copy of a random creature card with converted mana cost X. Play this ability only any time you could play a sorcery and only once each turn.
         LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.COMMAND, new MomirEffect(available), new VariableManaCost());
         ability.addCost(new DiscardCardCost());
-//        ability.setTiming(TimingRule.SORCERY);
+        ability.setTiming(TimingRule.SORCERY);
         this.getAbilities().add(ability);
 
     }

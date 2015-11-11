@@ -71,16 +71,17 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (super.canActivate(playerId, game)) {
-            ActivationInfo activationInfo = getActivationInfo(game);
-            return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < maxActivationsPerTurn;
-        }
-        return false;
+        return super.canActivate(playerId, game) && hasMoreActivationsThisTurn(game);
+    }
+
+    private boolean hasMoreActivationsThisTurn(Game game) {
+        ActivationInfo activationInfo = getActivationInfo(game);
+        return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < maxActivationsPerTurn;
     }
 
     @Override
     public boolean activate(Game game, boolean noMana) {
-        if (canActivate(this.controllerId, game)) {
+        if (hasMoreActivationsThisTurn(game)) {
             if (super.activate(game, noMana)) {
                 ActivationInfo activationInfo = getActivationInfo(game);
                 if (activationInfo == null) {
