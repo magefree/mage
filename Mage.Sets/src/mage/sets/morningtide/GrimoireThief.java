@@ -34,7 +34,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedTriggeredAbility;
+import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -65,9 +65,9 @@ import mage.util.CardUtil;
  * @author jeffwadsworth
  */
 public class GrimoireThief extends CardImpl {
-    
+
     protected static final String VALUE_PREFIX = "ExileZones";
-    
+
     public GrimoireThief(UUID ownerId) {
         super(ownerId, 35, "Grimoire Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.expansionSetCode = "MOR";
@@ -77,7 +77,7 @@ public class GrimoireThief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Grimoire Thief becomes tapped, exile the top three cards of target opponent's library face down.
-        Ability ability = new BecomesTappedTriggeredAbility(new GrimoireThiefExileEffect(), false);
+        Ability ability = new BecomesTappedSourceTriggeredAbility(new GrimoireThiefExileEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
@@ -88,13 +88,13 @@ public class GrimoireThief extends CardImpl {
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrimoireThiefCounterspellEffect(), new ManaCostsImpl("{U}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
-        
+
     }
-    
+
     public GrimoireThief(final GrimoireThief card) {
         super(card);
     }
-    
+
     @Override
     public GrimoireThief copy() {
         return new GrimoireThief(this);
@@ -102,16 +102,16 @@ public class GrimoireThief extends CardImpl {
 }
 
 class GrimoireThiefExileEffect extends OneShotEffect {
-    
+
     public GrimoireThiefExileEffect() {
         super(Outcome.Discard);
         staticText = "exile the top three cards of target opponent's library face down";
     }
-    
+
     public GrimoireThiefExileEffect(final GrimoireThiefExileEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
@@ -138,7 +138,7 @@ class GrimoireThiefExileEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
     @Override
     public GrimoireThiefExileEffect copy() {
         return new GrimoireThiefExileEffect(this);
@@ -146,26 +146,26 @@ class GrimoireThiefExileEffect extends OneShotEffect {
 }
 
 class GrimoireThiefLookEffect extends AsThoughEffectImpl {
-    
+
     public GrimoireThiefLookEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at the cards exiled with {this}";
     }
-    
+
     public GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
-    
+
     @Override
     public GrimoireThiefLookEffect copy() {
         return new GrimoireThiefLookEffect(this);
     }
-    
+
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId).equals(Zone.EXILED)) {
@@ -193,16 +193,16 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 }
 
 class GrimoireThiefCounterspellEffect extends OneShotEffect {
-    
+
     public GrimoireThiefCounterspellEffect() {
         super(Outcome.Discard);
         staticText = "Turn all cards exiled with {this} face up. Counter all spells with those names";
     }
-    
+
     public GrimoireThiefCounterspellEffect(final GrimoireThiefCounterspellEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Cards cards = new CardsImpl();
@@ -245,7 +245,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
     @Override
     public GrimoireThiefCounterspellEffect copy() {
         return new GrimoireThiefCounterspellEffect(this);

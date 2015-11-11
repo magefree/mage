@@ -38,23 +38,23 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author nantuko
  */
-public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
-    
-    public BecomesTappedTriggeredAbility(Effect effect, boolean isOptional) {
+public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
+
+    public BecomesTappedSourceTriggeredAbility(Effect effect, boolean isOptional) {
         super(Zone.BATTLEFIELD, effect, isOptional);
     }
 
-    public BecomesTappedTriggeredAbility(Effect effect) {
+    public BecomesTappedSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
+    public BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public BecomesTappedTriggeredAbility copy() {
-        return new BecomesTappedTriggeredAbility(this);
+    public BecomesTappedSourceTriggeredAbility copy() {
+        return new BecomesTappedSourceTriggeredAbility(this);
     }
 
     @Override
