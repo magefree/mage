@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.BecomesTappedTriggeredAbility;
+import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 
@@ -51,7 +51,7 @@ public class Fallowsage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Fallowsage becomes tapped, you may draw a card.
-        this.addAbility(new BecomesTappedTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public Fallowsage(final Fallowsage card) {

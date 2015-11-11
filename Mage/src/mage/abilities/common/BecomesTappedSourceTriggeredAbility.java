@@ -25,45 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.abilities.common;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
- * @author Plopman
+ * @author nantuko
  */
-public class GoblinMedics extends CardImpl {
+public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+    public BecomesTappedSourceTriggeredAbility(Effect effect, boolean isOptional) {
+        super(Zone.BATTLEFIELD, effect, isOptional);
     }
 
-    public GoblinMedics(final GoblinMedics card) {
-        super(card);
+    public BecomesTappedSourceTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+    }
+
+    public BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public BecomesTappedSourceTriggeredAbility copy() {
+        return new BecomesTappedSourceTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TAPPED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getTargetId().equals(sourceId);
+    }
+
+    @Override
+    public String getRule() {
+        return "When {this} becomes tapped, " + super.getRule();
     }
 }

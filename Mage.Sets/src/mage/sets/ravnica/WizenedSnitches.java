@@ -25,45 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.ravnica;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.Zone;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class WizenedSnitches extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
+    public WizenedSnitches(UUID ownerId) {
+        super(ownerId, 75, "Wizened Snitches", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Faerie");
+        this.subtype.add("Rogue");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Players play with the top card of their libraries revealed.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect(true)));
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public WizenedSnitches(final WizenedSnitches card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public WizenedSnitches copy() {
+        return new WizenedSnitches(this);
     }
 }

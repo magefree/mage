@@ -29,17 +29,14 @@ package mage.sets.ninthedition;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -61,8 +58,8 @@ public class ViashinoSandstalker extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of the end step, return Viashino Sandstalker to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), false));
-
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true),
+            TargetController.ANY, false));
     }
 
     public ViashinoSandstalker(final ViashinoSandstalker card) {
@@ -72,36 +69,5 @@ public class ViashinoSandstalker extends CardImpl {
     @Override
     public ViashinoSandstalker copy() {
         return new ViashinoSandstalker(this);
-    }
-}
-
-class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
-
-    public BeginningOfEndStepTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public BeginningOfEndStepTriggeredAbility(final BeginningOfEndStepTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BeginningOfEndStepTriggeredAbility copy() {
-        return new BeginningOfEndStepTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_TURN_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of the end step, return {this} to its owner's hand";
     }
 }

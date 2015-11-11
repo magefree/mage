@@ -25,45 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class StormSpirit extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    public StormSpirit(UUID ownerId) {
+        super(ownerId, 198, "Storm Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}");
+        this.expansionSetCode = "ME2";
+        this.subtype.add("Elemental");
+        this.subtype.add("Spirit");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {tap}: Storm Spirit deals 2 damage to target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public StormSpirit(final StormSpirit card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public StormSpirit copy() {
+        return new StormSpirit(this);
     }
 }

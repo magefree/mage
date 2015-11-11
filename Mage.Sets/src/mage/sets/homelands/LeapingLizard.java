@@ -25,45 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class LeapingLizard extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    public LeapingLizard(UUID ownerId) {
+        super(ownerId, 63, "Leaping Lizard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "HML";
+        this.subtype.add("Lizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        // {1}{G}: Leaping Lizard gets -0/-1 and gains flying until end of turn.
+        Effect effect = new BoostSourceEffect(0, -1, Duration.EndOfTurn);
+        effect.setText("{this} gets -0/-1");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}"));
+        effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying until end of turn");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public LeapingLizard(final LeapingLizard card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public LeapingLizard copy() {
+        return new LeapingLizard(this);
     }
 }

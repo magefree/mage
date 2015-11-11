@@ -25,45 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
+import mage.abilities.common.BecomesTappedTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class Lifetap extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    private static final FilterPermanent filter = new FilterPermanent("a Forest an opponent controls");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Forest"));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public Lifetap(UUID ownerId) {
+        super(ownerId, 99, "Lifetap", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
+        this.expansionSetCode = "5ED";
+
+        // Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
+        this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), false, filter));
+    }
+
+    public Lifetap(final Lifetap card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public Lifetap copy() {
+        return new Lifetap(this);
     }
 }

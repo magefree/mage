@@ -25,45 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.fifthdawn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class Ferropede extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
+    public Ferropede(UUID ownerId) {
+        super(ownerId, 122, "Ferropede", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "5DN";
+        this.subtype.add("Insect");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        // Ferropede is unblockable.
+        this.addAbility(new CantBeBlockedSourceAbility());
+        // Whenever Ferropede deals combat damage to a player, you may remove a counter from target permanent.
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new RemoveCounterTargetEffect(), true);
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public Ferropede(final Ferropede card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public Ferropede copy() {
+        return new Ferropede(this);
     }
 }

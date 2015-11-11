@@ -25,45 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.legends;
 
 import java.util.UUID;
+import mage.ObjectColor;
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class Cleanse extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creatures");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public Cleanse(UUID ownerId) {
+        super(ownerId, 174, "Cleanse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
+        this.expansionSetCode = "LEG";
+
+        // Destroy all black creatures.
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+    }
+
+    public Cleanse(final Cleanse card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public Cleanse copy() {
+        return new Cleanse(this);
     }
 }

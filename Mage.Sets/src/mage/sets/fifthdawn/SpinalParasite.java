@@ -25,45 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.fifthdawn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
+import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class SpinalParasite extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    public SpinalParasite(UUID ownerId) {
+        super(ownerId, 155, "Spinal Parasite", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+        this.expansionSetCode = "5DN";
+        this.subtype.add("Insect");
+        this.power = new MageInt(-1);
+        this.toughness = new MageInt(-1);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        // Sunburst
+        this.addAbility(new SunburstAbility(this));
+        // Remove two +1/+1 counters from Spinal Parasite: Remove a counter from target permanent.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(),
+            new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2)));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public SpinalParasite(final SpinalParasite card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public SpinalParasite copy() {
+        return new SpinalParasite(this);
     }
 }

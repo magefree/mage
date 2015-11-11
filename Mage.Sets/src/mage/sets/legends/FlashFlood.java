@@ -25,45 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.legends;
 
 import java.util.UUID;
+import mage.ObjectColor;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class FlashFlood extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    private static final FilterPermanent filter1 = new FilterPermanent("red permanent");
+    private static final FilterPermanent filter2 = new FilterPermanent("Mountain");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+    static {
+        filter1.add(new ColorPredicate(ObjectColor.RED));
+        filter2.add(new SubtypePredicate("Mountain"));
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public FlashFlood(UUID ownerId) {
+        super(ownerId, 57, "Flash Flood", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "LEG";
+
+        // Choose one - Destroy target red permanent;
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter1));
+        // or return target Mountain to its owner's hand.
+        Mode mode = new Mode();
+        mode.getEffects().add(new ReturnToHandTargetEffect());
+        mode.getTargets().add(new TargetPermanent(filter2));
+        this.getSpellAbility().addMode(mode);
+    }
+
+    public FlashFlood(final FlashFlood card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public FlashFlood copy() {
+        return new FlashFlood(this);
     }
 }

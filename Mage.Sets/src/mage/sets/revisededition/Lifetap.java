@@ -25,47 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.revisededition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
  */
-public class Surgespanner extends CardImpl {
+public class Lifetap extends mage.sets.fifthedition.Lifetap {
 
-    public Surgespanner(UUID ownerId) {
-        super(ownerId, 92, "Surgespanner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "LRW";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Whenever Surgespanner becomes tapped, you may pay {1}{U}. If you do, return target permanent to its owner's hand.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}")));
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
+    public Lifetap(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 63;
+        this.expansionSetCode = "3ED";
     }
 
-    public Surgespanner(final Surgespanner card) {
+    public Lifetap(final Lifetap card) {
         super(card);
     }
 
     @Override
-    public Surgespanner copy() {
-        return new Surgespanner(this);
+    public Lifetap copy() {
+        return new Lifetap(this);
     }
 }

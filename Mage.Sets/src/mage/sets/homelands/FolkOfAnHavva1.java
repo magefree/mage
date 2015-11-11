@@ -25,45 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class GoblinMedics extends CardImpl {
+public class FolkOfAnHavva1 extends CardImpl {
 
-    public GoblinMedics(UUID ownerId) {
-        super(ownerId, 79, "Goblin Medics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ULG";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
+    public FolkOfAnHavva1(UUID ownerId) {
+        super(ownerId, 58, "Folk of An-Havva", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "HML";
+        this.subtype.add("Human");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        // Whenever Folk of An-Havva blocks, it gets +2/+0 until end of turn.
+        this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public GoblinMedics(final GoblinMedics card) {
+    public FolkOfAnHavva1(final FolkOfAnHavva1 card) {
         super(card);
     }
 
     @Override
-    public GoblinMedics copy() {
-        return new GoblinMedics(this);
+    public FolkOfAnHavva1 copy() {
+        return new FolkOfAnHavva1(this);
     }
 }
