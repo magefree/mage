@@ -28,16 +28,15 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTappedTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -46,12 +45,19 @@ import mage.game.permanent.Permanent;
  */
 public class Thoughtleech extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("an Island an opponent controls");
+
+    static {
+        filter.add(new SubtypePredicate("Island"));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
+
     public Thoughtleech(UUID ownerId) {
         super(ownerId, 274, "Thoughtleech", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
         this.expansionSetCode = "7ED";
 
         // Whenever an Island an opponent controls becomes tapped, you may gain 1 life.
-        this.addAbility(new ThoughtleechTriggeredAbility());
+        this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), true, filter));
     }
 
     public Thoughtleech(final Thoughtleech card) {
@@ -61,41 +67,5 @@ public class Thoughtleech extends CardImpl {
     @Override
     public Thoughtleech copy() {
         return new Thoughtleech(this);
-    }
-}
-
-class ThoughtleechTriggeredAbility extends TriggeredAbilityImpl {
-
-    ThoughtleechTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-    }
-
-    ThoughtleechTriggeredAbility(final ThoughtleechTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ThoughtleechTriggeredAbility copy() {
-        return new ThoughtleechTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent p = game.getPermanent(event.getTargetId());
-        if(p != null && p.getSubtype().contains("Island")) {
-            if(game.getOpponents(this.controllerId).contains(p.getControllerId()))
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an Island an opponent controls becomes tapped, " + modes.getText();
     }
 }
