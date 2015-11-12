@@ -9,7 +9,7 @@ import org.mage.plugins.card.images.CardDownloadData;
 public interface CardImageSource {
 
     String generateURL(CardDownloadData card) throws Exception;
-    String generateTokenUrl(CardDownloadData card);
+    String generateTokenUrl(CardDownloadData card) throws Exception;
     String getSourceName();
     Float getAverageSize();
 }

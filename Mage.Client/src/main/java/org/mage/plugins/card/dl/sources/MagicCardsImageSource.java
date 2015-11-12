@@ -157,7 +157,12 @@ public class MagicCardsImageSource implements CardImageSource {
 
     @Override
     public String generateTokenUrl(CardDownloadData card) {
-        String name = card.getName().replaceAll(" ", "-").replace(",", "").toLowerCase();
+        String name = card.getName();
+        // add type to name if it's not 0
+        if (card.getType() > 0) {
+            name = name + " " + card.getType();
+        }
+        name = name.replaceAll(" ", "-").replace(",", "").toLowerCase();
         String set = "not-supported-set";
         if (setNameTokenReplacement.containsKey(card.getSet())) {
             set = setNameTokenReplacement.get(card.getSet());
