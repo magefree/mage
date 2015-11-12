@@ -30,7 +30,6 @@ import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardPluginImpl;
-import org.mage.plugins.theme.ThemePluginImpl;
 
 
 public class Plugins implements MagePlugins {
@@ -58,8 +57,7 @@ public class Plugins implements MagePlugins {
         pm.addPluginsFrom(new File(PLUGINS_DIRECTORY).toURI());
         this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
-        //this.themePlugin = pm.getPlugin(ThemePlugin.class);
-        this.themePlugin = new ThemePluginImpl();
+        this.themePlugin = pm.getPlugin(ThemePlugin.class);
         logger.info("Done.");
     }
 

@@ -59,6 +59,7 @@ public class CardCriteria {
     private boolean red;
     private boolean white;
     private boolean colorless;
+    private Integer convertedManaCost;
     private String sortBy;
     private Long start;
     private Long count;
@@ -173,6 +174,11 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria convertedManaCost(Integer convertedManaCost) {
+        this.convertedManaCost = convertedManaCost;
+        return this;
+    }
+
     public CardCriteria maxCardNumber(int maxCardNumber) {
         this.maxCardNumber = maxCardNumber;
         return this;
@@ -245,6 +251,11 @@ public class CardCriteria {
 
         for (String subType : subtypes) {
             where.like("subtypes", new SelectArg('%' + subType + '%'));
+            clausesCount++;
+        }
+
+        if (convertedManaCost != null) {
+            where.eq("convertedManaCost", convertedManaCost);
             clausesCount++;
         }
 
