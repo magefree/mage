@@ -28,6 +28,13 @@ public class EmblemView implements CommandObjectView, Serializable {
         rules = emblem.getAbilities().getRules(sourceCard.getName());
     }
 
+    public EmblemView(Emblem emblem) {
+        id = emblem.getId();
+        name = emblem.getName();
+        expansionSetCode = emblem.getExpansionSetCodeForImage();
+        rules = emblem.getAbilities().getRules(emblem.getName());
+    }
+
     @Override
     public String getExpansionSetCode() {
         return expansionSetCode;

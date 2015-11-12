@@ -166,12 +166,9 @@ public class Main {
             else {
                 logger.fatal("Unable to start MAGE server - another server is already started");
             }
-        } catch (IOException ex) {
-            logger.fatal("Failed to start server - " + connection.toString(), ex);
         } catch (Exception ex) {
             logger.fatal("Failed to start server - " + connection.toString(), ex);
         }
-
     }
 
     static void initStatistics() {
