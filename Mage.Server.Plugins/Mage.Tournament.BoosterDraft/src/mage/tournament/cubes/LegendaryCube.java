@@ -100,7 +100,7 @@ public LegendaryCube() {
         cubeCards.add(new CardIdentity("Captain Sisay", ""));
         cubeCards.add(new CardIdentity("Careful Consideration", ""));
         cubeCards.add(new CardIdentity("Cascade Bluffs", ""));
-        cubeCards.add(new CardIdentity("Catch & Release", ""));
+        cubeCards.add(new CardIdentity("Catch // Release", ""));
         cubeCards.add(new CardIdentity("Cauldron of Souls", ""));
         cubeCards.add(new CardIdentity("Chain Reaction", ""));
         cubeCards.add(new CardIdentity("Chainer's Edict", ""));
@@ -186,7 +186,7 @@ public LegendaryCube() {
         cubeCards.add(new CardIdentity("Fact or Fiction", ""));
         cubeCards.add(new CardIdentity("Faith's Fetters", ""));
         cubeCards.add(new CardIdentity("Faithless Looting", ""));
-        cubeCards.add(new CardIdentity("Far & Away", ""));
+        cubeCards.add(new CardIdentity("Far // Away", ""));
         cubeCards.add(new CardIdentity("Farseek", ""));
         cubeCards.add(new CardIdentity("Fellwar Stone", ""));
         cubeCards.add(new CardIdentity("Fetid Heath", ""));
@@ -237,7 +237,7 @@ public LegendaryCube() {
         cubeCards.add(new CardIdentity("Hero's Demise", ""));
         cubeCards.add(new CardIdentity("Hero's Downfall", ""));
         cubeCards.add(new CardIdentity("Heroes' Podium", ""));
-        cubeCards.add(new CardIdentity("Hide & Seek", ""));
+        cubeCards.add(new CardIdentity("Hide // Seek", ""));
         cubeCards.add(new CardIdentity("Hidetsugu's Second Rite", ""));
         cubeCards.add(new CardIdentity("Hinterland Harbor", ""));
         cubeCards.add(new CardIdentity("Homicidal Seclusion", ""));
@@ -411,7 +411,7 @@ public LegendaryCube() {
         cubeCards.add(new CardIdentity("Progenitus", ""));
         cubeCards.add(new CardIdentity("Prophetic Prism", ""));
         cubeCards.add(new CardIdentity("Psychotic Fury", ""));
-        cubeCards.add(new CardIdentity("Pure & Simple", ""));
+        cubeCards.add(new CardIdentity("Pure // Simple", ""));
         cubeCards.add(new CardIdentity("Putrefy", ""));
         cubeCards.add(new CardIdentity("Pyromancer's Goggles", ""));
         cubeCards.add(new CardIdentity("Radha, Heir to Keld", ""));
@@ -492,7 +492,7 @@ public LegendaryCube() {
         cubeCards.add(new CardIdentity("Sphinx-Bone Wand", ""));
         cubeCards.add(new CardIdentity("Spine of Ish Sah", ""));
         cubeCards.add(new CardIdentity("Spirit of the Night", ""));
-        cubeCards.add(new CardIdentity("Spite & Malice", ""));
+        cubeCards.add(new CardIdentity("Spite // Malice", ""));
         cubeCards.add(new CardIdentity("Squee, Goblin Nabob", ""));
         cubeCards.add(new CardIdentity("Staff of Nin", ""));
         cubeCards.add(new CardIdentity("Steam Vents", ""));
@@ -576,7 +576,7 @@ public LegendaryCube() {
         cubeCards.add(new CardIdentity("Tuktuk the Explorer", ""));
         cubeCards.add(new CardIdentity("Tumble Magnet", ""));
         cubeCards.add(new CardIdentity("Tundra", ""));
-        cubeCards.add(new CardIdentity("Turn & Burn", ""));
+        cubeCards.add(new CardIdentity("Turn // Burn", ""));
         cubeCards.add(new CardIdentity("Twilight Mire", ""));
         cubeCards.add(new CardIdentity("Tymaret, the Murder King", ""));
         cubeCards.add(new CardIdentity("Ugin's Insight", ""));
@@ -610,7 +610,7 @@ public LegendaryCube() {
         cubeCards.add(new CardIdentity("Warstorm Surge", ""));
         cubeCards.add(new CardIdentity("Watery Grave", ""));
         cubeCards.add(new CardIdentity("Wayfarer's Bauble", ""));
-        cubeCards.add(new CardIdentity("Wear & Tear", ""));
+        cubeCards.add(new CardIdentity("Wear // Tear", ""));
         cubeCards.add(new CardIdentity("Whispers of the Muse", ""));
         cubeCards.add(new CardIdentity("Wild Ricochet", ""));
         cubeCards.add(new CardIdentity("Windswept Heath", ""));
