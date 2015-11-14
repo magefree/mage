@@ -110,4 +110,30 @@ public class CantCastTest extends CardTestPlayerBase {
         assertLife(playerB, 16);
 
     }
+
+    @Test
+    public void testVoidWinnowerWithMorph() {
+        // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
+        // Your opponents can't block with creatures with even converted mana costs.
+        addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
+        /*
+         Pine Walker
+         Creature - Elemental
+         5/5
+         Morph {4}{G} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+         Whenever Pine Walker or another creature you control is turned face up, untap that creature.
+         */
+        addCard(Zone.HAND, playerA, "Pine Walker");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "", 0);
+        assertHandCount(playerA, "Pine Walker", 1);
+
+    }
 }

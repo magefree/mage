@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
@@ -45,6 +44,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -115,10 +115,10 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Ability ability = (Ability) getValue("targetAbility");
-            if (ability != null && (ability instanceof SpellAbility)) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null) {
                 // the low bit will always be set on an odd number.
-                return (((SpellAbility) ability).getConvertedManaCost() & 1) == 0;
+                return (spell.getConvertedManaCost() & 1) == 0;
             }
         }
         return false;
