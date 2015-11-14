@@ -148,4 +148,34 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertExileCount("Unified Front", 1);
 
     }
+
+    /**
+     * Conflagrate flashback no longer works. Requires mana payment but never
+     * allows target selection before resolving.
+     */
+    @Test
+    public void testConflagrate() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+
+        // Conflagrate deals X damage divided as you choose among any number of target creatures and/or players.
+        // Flashback-{R}{R}, Discard X cards.
+        addCard(Zone.HAND, playerA, "Conflagrate", 1);
+
+        addCard(Zone.HAND, playerA, "Forest", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Conflagrate");
+        setChoice(playerA, "X=2");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
+        setChoice(playerA, "X=4");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 14);
+
+        assertExileCount("Conflagrate", 1);
+
+    }
 }

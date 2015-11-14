@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -121,6 +122,9 @@ public class FlashbackAbility extends SpellAbility {
             sbRule.append(manaCosts.getText());
         }
         if (costs.size() > 0) {
+            if (manaCosts.size() > 0) {
+                sbRule.append(", ");
+            }
             sbRule.append(costs.getText());
             sbRule.append(".");
         }
@@ -173,19 +177,26 @@ class FlashbackEffect extends OneShotEffect {
                 SpellAbility spellAbility;
                 switch (((FlashbackAbility) source).getSpellAbilityType()) {
                     case SPLIT_LEFT:
-                        spellAbility = ((SplitCard) card).getLeftHalfCard().getSpellAbility();
+                        spellAbility = ((SplitCard) card).getLeftHalfCard().getSpellAbility().copy();
                         break;
                     case SPLIT_RIGHT:
-                        spellAbility = ((SplitCard) card).getRightHalfCard().getSpellAbility();
+                        spellAbility = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
                         break;
                     default:
-                        spellAbility = card.getSpellAbility();
+                        spellAbility = card.getSpellAbility().copy();
                 }
 
                 spellAbility.clear();
                 // set the payed flashback costs to the spell ability so abilities like Converge or calculation of {X} values work
                 spellAbility.getManaCostsToPay().clear();
                 spellAbility.getManaCostsToPay().addAll(source.getManaCostsToPay());
+                // needed to get e.g. paid costs from Conflagrate
+                spellAbility.getCosts().clear();
+                for (Cost cost : source.getCosts()) {
+                    if (!(cost instanceof VariableCost)) {
+                        spellAbility.getCosts().add(cost);
+                    }
+                }
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " flashbacks " + card.getLogName());
                 }
