@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -46,7 +46,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -76,15 +76,16 @@ public class ConcertedEffort extends CardImpl {
 }
 
 class ConcertedEffortEffect extends OneShotEffect {
-    
-    private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterFear = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterFirstStrike = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterDoubleStrike = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterLandwalk = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterProtection = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterTrample = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterVigilance = new FilterCreaturePermanent();
+
+    private static final FilterControlledCreaturePermanent filterFlying = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filterFear = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filterFirstStrike = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filterDoubleStrike = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filterLandwalk = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filterProtection = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filterTrample = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filterVigilance = new FilterControlledCreaturePermanent();
+
     static {
         filterFlying.add(new AbilityPredicate(FlyingAbility.class));
         filterFear.add(new AbilityPredicate(FearAbility.class));
@@ -95,69 +96,69 @@ class ConcertedEffortEffect extends OneShotEffect {
         filterTrample.add(new AbilityPredicate(TrampleAbility.class));
         filterVigilance.add(new AbilityPredicate(VigilanceAbility.class));
     }
-    
+
     ConcertedEffortEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance";
     }
-    
+
     ConcertedEffortEffect(final ConcertedEffortEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ConcertedEffortEffect copy() {
         return new ConcertedEffortEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         // Flying
         if (game.getBattlefield().contains(filterFlying, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), source);
         }
-        
+
         // Fear
         if (game.getBattlefield().contains(filterFear, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityAllEffect(FearAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.EndOfTurn), source);
         }
-        
+
         // First strike
         if (game.getBattlefield().contains(filterFirstStrike, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), source);
         }
-        
-        // Double strike 
+
+        // Double strike
         if (game.getBattlefield().contains(filterDoubleStrike, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), source);
         }
-              
+
         // Landwalk
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterLandwalk, source.getControllerId(), game)) {
             for (Ability ability : permanent.getAbilities(game)) {
                 if (ability instanceof LandwalkAbility) {
-                    game.addEffect(new GainAbilityAllEffect(ability, Duration.EndOfTurn), source);
+                    game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn), source);
                 }
             }
         }
-        
+
         // Protection
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterProtection, source.getControllerId(), game)) {
             for (Ability ability : permanent.getAbilities(game)) {
                 if (ability instanceof ProtectionAbility) {
-                    game.addEffect(new GainAbilityAllEffect(ability, Duration.EndOfTurn), source);
+                    game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn), source);
                 }
             }
         }
-        
+
         // Trample
         if (game.getBattlefield().contains(filterTrample, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), source);
         }
-        
+
         // Vigilance
         if (game.getBattlefield().contains(filterVigilance, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), source);
         }
         return true;
     }
