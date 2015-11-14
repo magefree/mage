@@ -2706,7 +2706,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Mode mode : option.getModes().values()) {
             Ability newOption = option.copy();
             newOption.getModes().getSelectedModes().clear();
-            newOption.getModes().setMode(mode);
+            newOption.getModes().getSelectedModes().add(mode);
+            newOption.getModes().setActiveMode(mode);
             if (newOption.getTargets().getUnchosen().size() > 0) {
                 if (newOption.getManaCosts().getVariableCosts().size() > 0) {
                     addVariableXOptions(options, newOption, 0, game);
@@ -3445,6 +3446,12 @@ public abstract class PlayerImpl implements Player, Serializable {
             putCardsOnTopOfLibrary(cards, game, source, true);
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, getId(), source == null ? null : source.getSourceId(), getId(), value, true));
+        return true;
+    }
+
+    @Override
+    public boolean addTargets(Ability ability, Game game) {
+        // only used for TestPlayer to preSet Targets
         return true;
     }
 

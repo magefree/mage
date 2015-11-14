@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.mage.test.lki;
 
 import mage.constants.PhaseStep;
@@ -20,10 +19,10 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
     /**
      * see here for more information
      * http://www.slightlymagic.net/forum/viewtopic.php?f=116&t=14516
-     * 
-     * Tests Safehold Elite with persist returns to battlefield with -1/-1 counter
-     * Murder Investigation has to put 2 tokens onto battlefield because enchanted Safehold Elite
-     * was 2/2
+     *
+     * Tests Safehold Elite with persist returns to battlefield with -1/-1
+     * counter Murder Investigation has to put 2 tokens onto battlefield because
+     * enchanted Safehold Elite was 2/2
      *
      * @author LevelX
      */
@@ -38,9 +37,9 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         // {1}{W}
         // Enchant creature you control
         // When enchanted creature dies, put X 1/1 white Soldier creature tokens onto the battlefield, where X is its power.
-        addCard(Zone.HAND, playerA, "Murder Investigation",1);
+        addCard(Zone.HAND, playerA, "Murder Investigation", 1);
 
-        addCard(Zone.HAND, playerB, "Lightning Bolt",2);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder Investigation", "Safehold Elite");
@@ -58,17 +57,20 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         // because enchanted Safehold Elite's P/T was 2/2, Murder Investigation has to put 2 Soldier onto the battlefield
         assertPermanentCount(playerA, "Soldier", 2);
         assertGraveyardCount(playerB, "Lightning Bolt", 2);
-        
-        assertActionCount(playerB, 0);        
+
+        assertActionCount(playerB, 0);
 
     }
-     
+
     /**
-     * Here we test that Trostani's first ability checks the toughness on resolve.
+     * Here we test that Trostani's first ability checks the toughness on
+     * resolve.
      *
      */
     @Test
     public void testTrostaniSelesnyasVoice1() {
+        // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // {1}{G}{W}, {T}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
         addCard(Zone.BATTLEFIELD, playerA, "Trostani, Selesnya's Voice");
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
@@ -76,20 +78,21 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Grizzly Bears", "Grizzly Bears", StackClause.WHILE_NOT_ON_STACK);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
+        assertGraveyardCount(playerA, "Giant Growth", 1);
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertLife(playerA, 25);
     }
 
     /**
-     * Here we test correct spell interaction by playing Cloudshift BEFORE Giant Growth resolves.
-     * Cloudshift will remove 2/2 creature and it will return as 2/2.
-     * Giant Growth will be fizzled.
-     * That means that player should gain 2 + 2 life.
+     * Here we test correct spell interaction by playing Cloudshift BEFORE Giant
+     * Growth resolves. Cloudshift will remove 2/2 creature and it will return
+     * as 2/2. Giant Growth will be fizzled. That means that player should gain
+     * 2 + 2 life.
      */
     @Test
     public void testTrostaniSelesnyasVoice2() {
@@ -102,7 +105,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Grizzly Bears", "Grizzly Bears", StackClause.WHILE_NOT_ON_STACK);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Grizzly Bears", "Giant Growth",
                 StackClause.WHILE_ON_STACK);
 
@@ -114,8 +117,8 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
     }
 
     /**
-     * Here we test actual use of LKI by playing Cloudshift AFTER Giant Growth resolves.
-     * Cloudshift will remove 5/5 creature and it will return as 2/2.
+     * Here we test actual use of LKI by playing Cloudshift AFTER Giant Growth
+     * resolves. Cloudshift will remove 5/5 creature and it will return as 2/2.
      * That means that player should gain 5 + 2 life.
      *
      */
@@ -130,7 +133,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Grizzly Bears", "Grizzly Bears", StackClause.WHILE_NOT_ON_STACK);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Grizzly Bears", "Giant Growth",
                 StackClause.WHILE_NOT_ON_STACK);
 
@@ -141,6 +144,5 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         assertLife(playerA, 27);
 
     }
-
 
 }

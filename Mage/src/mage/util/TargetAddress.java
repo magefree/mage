@@ -36,11 +36,11 @@ import mage.cards.Card;
 import mage.game.stack.Spell;
 import mage.target.Target;
 
-
 /**
  * @author duncant
  */
 public class TargetAddress {
+
     protected int spellAbilityIndex;
     protected UUID mode;
     protected int targetIndex;
@@ -52,8 +52,9 @@ public class TargetAddress {
     }
 
     protected static class TargetAddressIterable implements Iterable<TargetAddress> {
+
         protected final Card card;
-        
+
         public TargetAddressIterable(Card card) {
             this.card = card;
         }
@@ -64,9 +65,10 @@ public class TargetAddress {
     }
 
     protected static class TargetAddressIterator implements Iterator<TargetAddress> {
+
         protected Iterator<SpellAbility> spellAbilityIterator;
         protected Integer lastSpellAbilityIndex = null;
-        protected Iterator<UUID> modeIterator = null;
+        protected Iterator<Mode> modeIterator = null;
         protected Modes modes = null;
         protected UUID lastMode = null;
         protected Iterator<Target> targetIterator = null;
@@ -88,14 +90,14 @@ public class TargetAddress {
         public boolean hasNext() {
             return lastTargetIndex != null;
         }
-        
+
         public TargetAddress next() {
             TargetAddress ret = new TargetAddress(lastSpellAbilityIndex,
-                                                  lastMode,
-                                                  lastTargetIndex);
+                    lastMode,
+                    lastTargetIndex);
             calcNext();
             return ret;
-            
+
         }
 
         public void remove() {
@@ -118,9 +120,9 @@ public class TargetAddress {
                         return;
                     }
                 }
-                
+
                 if (modeIterator != null && modeIterator.hasNext()) {
-                    lastMode = modeIterator.next();
+                    lastMode = modeIterator.next().getId();
                     targetIterator = modes.get(lastMode).getTargets().iterator();
                 } else {
                     lastMode = null;
@@ -144,7 +146,6 @@ public class TargetAddress {
             }
         }
     }
-
 
     public static Iterable<TargetAddress> walk(Card card) {
         return new TargetAddressIterable(card);
@@ -179,8 +180,8 @@ public class TargetAddress {
 
     public boolean equals(TargetAddress other) {
         return spellAbilityIndex == other.spellAbilityIndex
-            && mode.equals(other.mode)
-            && targetIndex == other.targetIndex;
+                && mode.equals(other.mode)
+                && targetIndex == other.targetIndex;
     }
 
     @Override

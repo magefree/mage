@@ -117,8 +117,8 @@ public abstract class StackObjImpl implements StackObject {
             }
             for (Ability ability : objectAbilities) {
                 // Some spells can have more than one mode
-                for (UUID modeId : ability.getModes().getSelectedModes()) {
-                    Mode mode = ability.getModes().get(modeId);
+                for (Mode mode : ability.getModes().getSelectedModes()) {
+                    ability.getModes().setActiveMode(mode);
                     oldTargetDescription.append(ability.getTargetDescription(mode.getTargets(), game));
                     for (Target target : mode.getTargets()) {
                         Target newTarget = chooseNewTarget(targetController, ability, mode, target, forceChange, filterNewTarget, game);

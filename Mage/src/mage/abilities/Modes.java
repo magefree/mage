@@ -49,8 +49,8 @@ import mage.util.CardUtil;
  */
 public class Modes extends LinkedHashMap<UUID, Mode> {
 
-    private UUID modeId;
-    private final ArrayList<UUID> selectedModes = new ArrayList<>();
+    private Mode mode; // the current mode of the selected modes
+    private final ArrayList<Mode> selectedModes = new ArrayList<>();
     private int minModes;
     private int maxModes;
     private TargetController modeChooser;
@@ -58,25 +58,40 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private boolean eachModeOnlyOnce; // state if each mode can be chosen only once as long as the source object exists
 
     public Modes() {
-        Mode mode = new Mode();
+        this.mode = new Mode();
         this.put(mode.getId(), mode);
-        this.modeId = mode.getId();
         this.minModes = 1;
         this.maxModes = 1;
-        this.selectedModes.add(modeId);
+        this.selectedModes.add(mode);
         this.modeChooser = TargetController.YOU;
         this.eachModeOnlyOnce = false;
         this.eachModeMoreThanOnce = false;
     }
 
     public Modes(final Modes modes) {
-        this.modeId = modes.modeId;
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
-        this.selectedModes.addAll(modes.selectedModes);
+
+        if (modes.size() == 1) {
+            this.mode = values().iterator().next();
+            this.selectedModes.add(mode);
+        } else {
+            // probably there is still a problem with copying modes with the same mode selected multiple times.
+            for (Mode selectedMode : modes.getSelectedModes()) {
+                Mode copiedMode = selectedMode.copy();
+                this.selectedModes.add(copiedMode);
+                if (modes.getSelectedModes().size() == 1) {
+                    this.mode = copiedMode;
+                } else {
+                    if (selectedMode.equals(modes.getMode())) {
+                        this.mode = copiedMode;
+                    }
+                }
+            }
+        }
         this.modeChooser = modes.modeChooser;
         this.eachModeOnlyOnce = modes.eachModeOnlyOnce;
         this.eachModeMoreThanOnce = modes.eachModeMoreThanOnce;
@@ -87,10 +102,21 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public Mode getMode() {
-        return get(modeId);
+        return mode;
     }
 
-    public ArrayList<UUID> getSelectedModes() {
+    public UUID getModeId(int index) {
+        int idx = 0;
+        for (Mode currentMode : this.values()) {
+            idx++;
+            if (idx == index) {
+                return currentMode.getId();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Mode> getSelectedModes() {
         return selectedModes;
     }
 
@@ -118,16 +144,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         return this.modeChooser;
     }
 
-    public void setActiveMode(UUID modeId) {
-        if (selectedModes.contains(modeId)) {
-            this.modeId = modeId;
-        }
-    }
-
-    public void setMode(Mode mode) {
-        if (this.containsKey(mode.getId())) {
-            this.modeId = mode.getId();
-            this.selectedModes.add(mode.getId());
+    public void setActiveMode(Mode mode) {
+        if (selectedModes.contains(mode)) {
+            this.mode = mode;
         }
     }
 
@@ -156,7 +175,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 for (Mode mode : this.values()) {
                     if ((!isEachModeOnlyOnce() || onceSelectedModes == null || !onceSelectedModes.contains(mode.getId()))
                             && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                        this.selectedModes.add(mode.getId());
+                        this.selectedModes.add(mode.copy());
                     }
                 }
                 if (isEachModeOnlyOnce()) {
@@ -184,6 +203,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             Player player = game.getPlayer(playerId);
 
             // player chooses modes manually
+            this.mode = null;
             while (this.selectedModes.size() < this.getMaxModes()) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
@@ -192,29 +212,38 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                     }
                     return this.selectedModes.size() >= this.getMinModes();
                 }
-                setMode(choice);
+                this.selectedModes.add(choice.copy());
+                if (mode == null) {
+                    mode = choice;
+                }
             }
             if (isEachModeOnlyOnce()) {
                 setAlreadySelectedModes(selectedModes, source, game);
             }
             return true;
         }
-        this.modeId = this.values().iterator().next().getId();
-        this.selectedModes.clear();
-        this.selectedModes.add(modeId);
+        if (mode == null) {
+            this.selectedModes.clear();
+            Mode copiedMode = this.values().iterator().next().copy();
+            this.selectedModes.add(copiedMode);
+            this.setActiveMode(copiedMode);
+        }
         if (isEachModeOnlyOnce()) {
             setAlreadySelectedModes(selectedModes, source, game);
         }
         return true;
     }
 
-    private void setAlreadySelectedModes(ArrayList<UUID> selectedModes, Ability source, Game game) {
+    private void setAlreadySelectedModes(ArrayList<Mode> selectedModes, Ability source, Game game) {
         String key = getKey(source, game);
         Set<UUID> onceSelectedModes = (Set<UUID>) game.getState().getValue(key);
         if (onceSelectedModes == null) {
             onceSelectedModes = new HashSet<>();
         }
-        onceSelectedModes.addAll(selectedModes);
+        for (Mode mode : selectedModes) {
+            onceSelectedModes.add(mode.getId());
+        }
+
         game.getState().setValue(key, onceSelectedModes);
     }
 

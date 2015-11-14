@@ -123,10 +123,10 @@ public class SpellskiteTest extends CardTestPlayerBase {
     public void testSpellskite() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // Choose two -
-        // Counter target spell;
-        // or return target permanent to its owner's hand;
-        // or tap all creatures your opponents control;
-        // or draw a card.
+        // - Counter target spell;
+        // - return target permanent to its owner's hand;
+        // - tap all creatures your opponents control;
+        // - draw a card.
         addCard(Zone.HAND, playerA, "Cryptic Command");
 
         addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);
@@ -141,7 +141,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         setModeChoice(playerA, "1"); // Counter target spell
         setModeChoice(playerA, "2"); // return target permanent to its owner's hand
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Cryptic Command");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Cryptic Command", "Cryptic Command");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

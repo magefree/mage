@@ -1568,9 +1568,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return modes.getMode();
         }
         //TODO: improve this;
+        AvailableMode:
         for (Mode mode : modes.getAvailableModes(source, game)) {
-            if (!modes.getSelectedModes().contains(mode.getId()) // select only modes not already selected
-                    && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
+            for (Mode selectedMode : modes.getSelectedModes()) {
+                if (selectedMode.getId().equals(mode.getId())) {
+                    continue AvailableMode;
+                }
+            }
+            if (mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
                 return mode;
             }
         }

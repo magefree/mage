@@ -51,10 +51,11 @@ public class ReturnToHandTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
-        addCard(Zone.HAND, playerB, "Bone Splinters");
 
         // As an additional cost to cast Bone Splinters, sacrifice a creature.
         // Destroy target creature.
+        addCard(Zone.HAND, playerB, "Bone Splinters");
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Bone Splinters", "Pillarfield Ox");
         setChoice(playerB, "Skarrgan Firebird");
 
@@ -126,7 +127,7 @@ public class ReturnToHandTest extends CardTestPlayerBase {
         // Devoid
         // Choose one or both
         // - Return target spell or creature to its owner's hand;
-        // or Brutal Expulsion deals 2 damage to target creature or planeswalker. If that permanent would be put into a graveyard this turn, exile it instead.
+        // - Brutal Expulsion deals 2 damage to target creature or planeswalker. If that permanent would be put into a graveyard this turn, exile it instead.
         addCard(Zone.HAND, playerA, "Brutal Expulsion"); // {2}{U}{R}
 
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
@@ -135,6 +136,8 @@ public class ReturnToHandTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Pillarfield Ox");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Brutal Expulsion", "mode=1Pillarfield Ox^mode=2Silvercoat Lion", "Pillarfield Ox");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "2");
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
 
         execute();

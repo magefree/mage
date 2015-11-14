@@ -787,4 +787,13 @@ public interface Player extends MageItem, Copyable<Player> {
     MatchPlayer getMatchPlayer();
 
     boolean scry(int value, Ability source, Game game);
+
+    /**
+     * Only used for test player for pre-setting targets
+     *
+     * @param ability
+     * @param game
+     * @return
+     */
+    boolean addTargets(Ability ability, Game game);
 }

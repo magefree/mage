@@ -86,7 +86,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marath, Will of the Wild");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Marath, Will of the Wild");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Marath, Will of the Wild", "Marath, Will of the Wild", StackClause.WHILE_NOT_ON_STACK);
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},Remove X +1/+1 counters from Marath", "Archangel of Thune");
         setChoice(playerA, "X=3");

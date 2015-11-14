@@ -27,10 +27,14 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardsImpl;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -70,7 +74,14 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        return controller.moveCards(new CardsImpl(targetPointer.getTargets(game, source)), null, Zone.HAND, source, game);
+        Set<Card> cards = new LinkedHashSet<>();
+        for (UUID targetId : targetPointer.getTargets(game, source)) {
+            MageObject mageObject = game.getObject(targetId);
+            if (mageObject instanceof Card) {
+                cards.add((Card) mageObject);
+            }
+        }
+        return controller.moveCards(cards, Zone.HAND, source, game);
     }
 
     @Override

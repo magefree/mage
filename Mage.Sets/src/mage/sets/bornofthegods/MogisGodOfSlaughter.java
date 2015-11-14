@@ -74,9 +74,9 @@ public class MogisGodOfSlaughter extends CardImpl {
         // As long as your devotion to black and red is less than seven, Mogis isn't a creature.
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.B, ColoredManaSymbol.R), 7);
         effect.setText("As long as your devotion to black and red is less than seven, Mogis isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        
-        
-        // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless he or she sacrifices a creature.        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
+        // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless he or she sacrifices a creature.
         effect = new DoUnlessTargetPaysCost(new DamageTargetEffect(2, false, "that player"), new SacrificeTargetCost(new TargetControlledCreaturePermanent()),
                 "Sacrifice a creature? (otherwise you get 2 damage)");
         effect.setText("Mogis deals 2 damage to that player unless he or she sacrifices a creature");
@@ -95,6 +95,7 @@ public class MogisGodOfSlaughter extends CardImpl {
 }
 
 class DoUnlessTargetPaysCost extends OneShotEffect {
+
     private final OneShotEffect executingEffect;
     private final Cost cost;
     private final String userMessage;
@@ -102,6 +103,7 @@ class DoUnlessTargetPaysCost extends OneShotEffect {
     public DoUnlessTargetPaysCost(OneShotEffect effect, Cost cost) {
         this(effect, cost, null);
     }
+
     public DoUnlessTargetPaysCost(OneShotEffect effect, Cost cost, String userMessage) {
         super(Outcome.Benefit);
         this.executingEffect = effect;
@@ -123,7 +125,7 @@ class DoUnlessTargetPaysCost extends OneShotEffect {
         if (player != null && mageObject != null) {
             String message = userMessage;
             if (message == null) {
-                message = new StringBuilder(getCostText()).append(" to prevent ").append(executingEffect.getText(source.getModes().getMode())).append("?").toString();
+                message = getCostText() + " to prevent " + executingEffect.getText(source.getModes().getMode()) + "?";
             }
             message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             cost.clearPaid();
@@ -132,8 +134,8 @@ class DoUnlessTargetPaysCost extends OneShotEffect {
             }
             if (!cost.isPaid()) {
                 executingEffect.setTargetPointer(this.targetPointer);
-                return executingEffect.apply(game, source);                
-            }            
+                return executingEffect.apply(game, source);
+            }
             return true;
         }
         return false;
@@ -153,8 +155,8 @@ class DoUnlessTargetPaysCost extends OneShotEffect {
     private String getCostText() {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
-        if (costText != null &&
-                !costText.toLowerCase().startsWith("discard")
+        if (costText != null
+                && !costText.toLowerCase().startsWith("discard")
                 && !costText.toLowerCase().startsWith("sacrifice")
                 && !costText.toLowerCase().startsWith("remove")) {
             sb.append("pay ");

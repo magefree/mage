@@ -36,6 +36,7 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -195,9 +196,9 @@ public class Spell extends StackObjImpl implements Card {
             if (notTargeted || legalParts) {
                 for (SpellAbility spellAbility : this.spellAbilities) {
                     if (spellAbilityHasLegalParts(spellAbility, game)) {
-                        for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                            spellAbility.getModes().setActiveMode(modeId);
-                            if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
+                        for (Mode mode : spellAbility.getModes().getSelectedModes()) {
+                            spellAbility.getModes().setActiveMode(mode);
+                            if (mode.getTargets().stillLegal(spellAbility, game)) {
                                 if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
                                     updateOptionalCosts(index);
                                 }
@@ -268,9 +269,8 @@ public class Spell extends StackObjImpl implements Card {
 
     private boolean hasTargets(SpellAbility spellAbility, Game game) {
         if (spellAbility.getModes().getSelectedModes().size() > 1) {
-            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                spellAbility.getModes().setActiveMode(modeId);
-                if (!spellAbility.getTargets().isEmpty()) {
+            for (Mode mode : spellAbility.getModes().getSelectedModes()) {
+                if (!mode.getTargets().isEmpty()) {
                     return true;
                 }
 
@@ -285,11 +285,10 @@ public class Spell extends StackObjImpl implements Card {
         if (spellAbility.getModes().getSelectedModes().size() > 1) {
             boolean targetedMode = false;
             boolean legalTargetedMode = false;
-            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                spellAbility.getModes().setActiveMode(modeId);
-                if (spellAbility.getTargets().size() > 0) {
+            for (Mode mode : spellAbility.getModes().getSelectedModes()) {
+                if (mode.getTargets().size() > 0) {
                     targetedMode = true;
-                    if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
+                    if (mode.getTargets().stillLegal(spellAbility, game)) {
                         legalTargetedMode = true;
                     }
                 }

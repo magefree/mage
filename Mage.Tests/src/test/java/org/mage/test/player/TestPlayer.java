@@ -118,6 +118,8 @@ public class TestPlayer implements Player {
 
     private final ComputerPlayer computerPlayer;
 
+    private String[] groupsForTargetHandling = null;
+
     public TestPlayer(ComputerPlayer computerPlayer) {
         this.computerPlayer = computerPlayer;
         AIPlayer = false;
@@ -204,23 +206,14 @@ public class TestPlayer implements Player {
         return true;
     }
 
-//    private boolean checkSpellOnTopOfStackCondition(String[] groups, Game game) {
-//        if (groups.length > 2 && groups[2].startsWith("spellOnTopOfStack=")) {
-//            String spellOnTopOFStack = groups[2].substring(18);
-//            if (game.getStack().size() > 0) {
-//                StackObject stackObject = game.getStack().getFirst();
-//                if (stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack)) {
-//                    return true;
-//                }
-//            }
-//            return false;
-//        }
-//        return true;
-//    }
-    private boolean addTargets(Ability ability, String[] groups, Game game) {
+    @Override
+    public boolean addTargets(Ability ability, Game game) {
+        if (groupsForTargetHandling == null) {
+            return true;
+        }
         boolean result = true;
-        for (int i = 1; i < groups.length; i++) {
-            String group = groups[i];
+        for (int i = 1; i < groupsForTargetHandling.length; i++) {
+            String group = groupsForTargetHandling[i];
             if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack") || group.startsWith("!spellOnStack") || group.startsWith("target=null") || group.startsWith("manaInPool=")) {
                 break;
             }
@@ -277,29 +270,36 @@ public class TestPlayer implements Player {
         int index = 0;
         int targetsSet = 0;
         for (String targetName : targetList) {
+            Mode selectedMode = null;
             if (targetName.startsWith("mode=")) {
                 int modeNr = Integer.parseInt(targetName.substring(5, 6));
                 if (modeNr == 0 || modeNr > ability.getModes().size()) {
                     throw new UnsupportedOperationException("Given mode number (" + modeNr + ") not available for " + ability.toString());
                 }
-                int modeCounter = 1;
-                for (Mode mode : ability.getModes().values()) {
-                    if (modeCounter == modeNr) {
-                        ability.getModes().setMode(mode);
+                UUID modeId = ability.getModes().getModeId(modeNr);
+
+                for (Mode mode : ability.getModes().getSelectedModes()) {
+                    if (mode.getId().equals(modeId)) {
+                        selectedMode = mode;
+                        ability.getModes().setActiveMode(mode);
                         index = 0; // reset target index if mode changes
                         break;
                     }
-                    modeCounter++;
                 }
                 targetName = targetName.substring(6);
+            } else {
+                selectedMode = ability.getModes().getMode();
             }
-            if (ability.getTargets().size() == 0) {
+            if (selectedMode == null) {
+                throw new UnsupportedOperationException("Mode not available for " + ability.toString());
+            }
+            if (selectedMode.getTargets().size() == 0) {
                 throw new AssertionError("Ability has no targets. " + ability.toString());
             }
-            if (index >= ability.getTargets().size()) {
+            if (index >= selectedMode.getTargets().size()) {
                 break; // this can happen if targets should be set but can't be used because of hexproof e.g.
             }
-            Target currentTarget = ability.getTargets().get(index);
+            Target currentTarget = selectedMode.getTargets().get(index);
             if (targetName.startsWith("targetPlayer=")) {
                 target = targetName.substring(targetName.indexOf("targetPlayer=") + 13);
                 for (Player player : game.getPlayers().values()) {
@@ -362,6 +362,7 @@ public class TestPlayer implements Player {
                 if (action.getAction().startsWith("activate:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("activate:") + 9);
+                    groupsForTargetHandling = null;
                     String[] groups = command.split("\\$");
                     if (groups.length > 2 && !checkExecuteCondition(groups, game)) {
                         break;
@@ -371,13 +372,11 @@ public class TestPlayer implements Player {
                             int bookmark = game.bookmarkState();
                             Ability newAbility = ability.copy();
                             if (groups.length > 1 && !groups[1].equals("target=NO_TARGET")) {
-                                if (!addTargets(newAbility, groups, game)) {
-                                    // targets could not be set -> try next priority
-                                    break;
-                                }
+                                groupsForTargetHandling = groups;
                             }
                             if (computerPlayer.activateAbility((ActivatedAbility) newAbility, game)) {
                                 actions.remove(action);
+                                groupsForTargetHandling = null;
                                 return true;
                             } else {
                                 game.restoreState(bookmark, ability.getRule());
@@ -1913,6 +1912,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
+        groupsForTargetHandling = null;
         return computerPlayer.playMana(ability, unpaid, promptText, game);
     }
 
