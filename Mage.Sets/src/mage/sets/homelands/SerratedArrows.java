@@ -59,7 +59,7 @@ public class SerratedArrows extends CardImpl {
         this.expansionSetCode = "HML";
 
         // Serrated Arrows enters the battlefield with three arrowhead counters on it.
-        Effect effect = new AddCountersSourceEffect(CounterType.ARROWHEAD.createInstance(4));
+        Effect effect = new AddCountersSourceEffect(CounterType.ARROWHEAD.createInstance(3));
         effect.setText("with three arrowhead counters on it");
         this.addAbility(new EntersBattlefieldAbility(effect));
         // At the beginning of your upkeep, if there are no arrowhead counters on Serrated Arrows, sacrifice it.
@@ -67,7 +67,7 @@ public class SerratedArrows extends CardImpl {
                 "if there are no arrowhead counters on {this}, sacrifice it");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false, false));
         // {tap}, Remove an arrowhead counter from Serrated Arrows: Put a -1/-1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()),
                 new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.ARROWHEAD.createInstance()));
