@@ -2292,6 +2292,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public boolean replaceEvent(GameEvent event, Ability targetAbility) {
+        return state.replaceEvent(event, targetAbility, this);
+    }
+
+    @Override
     public PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage) {
         return preventDamage(event, source, game, Integer.MAX_VALUE);
     }

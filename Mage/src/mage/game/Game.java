@@ -290,6 +290,8 @@ public interface Game extends MageItem, Serializable {
 
     boolean replaceEvent(GameEvent event);
 
+    boolean replaceEvent(GameEvent event, Ability targetAbility);
+
     /**
      * Creates and fires an damage prevention event
      *

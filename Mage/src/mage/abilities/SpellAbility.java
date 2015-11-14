@@ -178,4 +178,23 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return cardName;
     }
 
+    public int getConvertedManaCost() {
+        int cmc = 0;
+        int xMultiplier = 0;
+        for (String symbolString : getManaCosts().getSymbols()) {
+            int index = symbolString.indexOf("{X}");
+            while (index != -1) {
+                xMultiplier++;
+                symbolString = symbolString.substring(index + 3);
+                index = symbolString.indexOf("{X}");
+            }
+        }
+        if (getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
+            cmc += getManaCostsToPay().getX() * xMultiplier;
+        } else {
+            cmc += getManaCosts().convertedManaCost() + getManaCostsToPay().getX() * xMultiplier;
+        }
+        return cmc;
+
+    }
 }

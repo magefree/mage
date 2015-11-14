@@ -491,21 +491,8 @@ public class Spell extends StackObjImpl implements Card {
         if (faceDown) {
             return 0;
         }
-        for (Ability spellAbility : spellAbilities) {
-            int xMultiplier = 0;
-            for (String symbolString : spellAbility.getManaCosts().getSymbols()) {
-                int index = symbolString.indexOf("{X}");
-                while (index != -1) {
-                    xMultiplier++;
-                    symbolString = symbolString.substring(index + 3);
-                    index = symbolString.indexOf("{X}");
-                }
-            }
-            if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
-                cmc += spellAbility.getManaCostsToPay().getX() * xMultiplier;
-            } else {
-                cmc += spellAbility.getManaCosts().convertedManaCost() + spellAbility.getManaCostsToPay().getX() * xMultiplier;
-            }
+        for (SpellAbility spellAbility : spellAbilities) {
+            cmc += spellAbility.getConvertedManaCost();
         }
         if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
             cmc += getCard().getManaCost().convertedManaCost();

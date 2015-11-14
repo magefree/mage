@@ -317,7 +317,10 @@ public abstract class AbilityImpl implements Ability {
         // its mana cost; see rule 107.3), the player announces the value of that variable.
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
-
+        // For effects from cards like Void Winnower x costs have to be set
+        if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
+            return false;
+        }
         for (Mode mode : this.getModes().getSelectedModes()) {
             this.getModes().setActiveMode(mode);
             //20121001 - 601.2c
