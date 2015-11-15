@@ -29,6 +29,7 @@ package mage.sets.commander2015;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -56,7 +57,7 @@ public class SandstoneOracle extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Sandstone Oracle enters the battlefield, choose an opponent. If that player has more cards in hand that you, draw cards equal to the difference.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SandstoneOracleEffect()));
     }
@@ -72,32 +73,35 @@ public class SandstoneOracle extends CardImpl {
 }
 
 class SandstoneOracleEffect extends OneShotEffect {
-    
+
     SandstoneOracleEffect() {
         super(Outcome.DrawCard);
         this.staticText = "choose an opponent. If that player has more cards in hand that you, draw cards equal to the difference";
     }
-    
+
     SandstoneOracleEffect(final SandstoneOracleEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public SandstoneOracleEffect copy() {
         return new SandstoneOracleEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             TargetOpponent target = new TargetOpponent(true);
             if (controller.choose(Outcome.DrawCard, target, source.getSourceId(), game)) {
                 Player opponent = game.getPlayer(target.getFirstTarget());
-                game.informPlayers("Sandstone Oracle: " + controller.getLogName() + " has chosen " + opponent.getLogName());
-                int cardsDiff = opponent.getHand().size() - controller.getHand().size();
-                if (cardsDiff > 0) {
-                    controller.drawCards(cardsDiff, game);
+                if (opponent != null) {
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());
+                    int cardsDiff = opponent.getHand().size() - controller.getHand().size();
+                    if (cardsDiff > 0) {
+                        controller.drawCards(cardsDiff, game);
+                    }
                 }
             }
             return true;
