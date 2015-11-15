@@ -32,8 +32,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,8 +62,8 @@ public class DivineSacrament extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
         this.addAbility(ability);
         // Threshold - White creatures get an additional +1/+1 as long as seven or more cards are in your graveyard.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
-                    new AddContinuousEffectToGame(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)),
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                    new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false),
                     new CardsInControllerGraveCondition(7),
                     "<i>Threshold</i> - If seven or more cards are in your graveyard, white creatures get an additional +1/+1."
                 ));
