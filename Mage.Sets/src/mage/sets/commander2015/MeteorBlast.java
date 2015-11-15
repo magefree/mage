@@ -57,7 +57,7 @@ public class MeteorBlast extends CardImpl {
     public MeteorBlast(final MeteorBlast card) {
         super(card);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
@@ -86,8 +86,8 @@ class MeteorVolleyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             if (source.getTargets().size() > 0) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                     Permanent creature = game.getPermanent(targetId);
@@ -105,7 +105,7 @@ class MeteorVolleyEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
     @Override
     public MeteorVolleyEffect copy() {
         return new MeteorVolleyEffect(this);

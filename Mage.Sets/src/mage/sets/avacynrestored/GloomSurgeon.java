@@ -27,19 +27,21 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -86,19 +88,19 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
             int preventedDamage = event.getAmount();
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), preventedDamage));
             Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {                
-                player.moveCards(player.getLibrary().getTopCards(game, preventedDamage), Zone.LIBRARY, Zone.EXILED, source, game);
+            if (player != null) {
+                player.moveCards(player.getLibrary().getTopCards(game, preventedDamage), Zone.EXILED, source, game);
             }
             return true;
         }
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
