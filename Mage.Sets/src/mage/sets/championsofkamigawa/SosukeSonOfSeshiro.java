@@ -29,17 +29,16 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -76,7 +75,10 @@ public class SosukeSonOfSeshiro extends CardImpl {
         // Other Snake creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
         // Whenever a Warrior you control deals combat damage to a creature, destroy that creature at end of combat.
-        this.addAbility(new SosukeSonOfSeshiroTriggeredAbility());
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        effect.setText("destroy that creature at end of combat");
+        this.addAbility(new SosukeSonOfSeshiroTriggeredAbility(effect));
     }
 
     public SosukeSonOfSeshiro(final SosukeSonOfSeshiro card) {
@@ -91,8 +93,8 @@ public class SosukeSonOfSeshiro extends CardImpl {
 
 class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
 
-    SosukeSonOfSeshiroTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SosukeSonOfSeshiroEffect());
+    SosukeSonOfSeshiroTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
     }
 
     SosukeSonOfSeshiroTriggeredAbility(final SosukeSonOfSeshiroTriggeredAbility ability) {
@@ -126,37 +128,5 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a Warrior you control deals combat damage to a creature, destroy that creature at end of combat.";
-    }
-}
-
-class SosukeSonOfSeshiroEffect extends OneShotEffect {
-
-    SosukeSonOfSeshiroEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "destroy that creature at end of combat";
-    }
-
-    SosukeSonOfSeshiroEffect(final SosukeSonOfSeshiroEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public SosukeSonOfSeshiroEffect copy() {
-        return new SosukeSonOfSeshiroEffect(this);
     }
 }
