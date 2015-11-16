@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.util.functions.AbilityApplier;
 
 /**
@@ -61,7 +61,7 @@ public class MercurialPretender extends CardImpl {
 
         // You may have Mercurial Pretender enter the battlefield as a copy of any creature you control
         // except it gains "{2}{U}{U}: Return this creature to its owner's hand."
-        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(),
+        Effect effect = new CopyPermanentEffect(new FilterControlledCreaturePermanent(),
                 new AbilityApplier(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}"))));
         effect.setText(effectText);
         this.addAbility(new EntersBattlefieldAbility(effect, true));
