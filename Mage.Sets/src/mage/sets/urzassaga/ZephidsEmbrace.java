@@ -29,23 +29,21 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,15 +56,23 @@ public class ZephidsEmbrace extends CardImpl {
     public ZephidsEmbrace(UUID ownerId) {
         super(ownerId, 114, "Zephid's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "USG";
-
         this.subtype.add("Aura");
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ZephidsEmbraceEffect()));
+        // Enchanted creature gets +2/+2 and has flying and shroud.
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
+        Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and has flying");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and shroud");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public ZephidsEmbrace(final ZephidsEmbrace card) {
@@ -77,58 +83,4 @@ public class ZephidsEmbrace extends CardImpl {
     public ZephidsEmbrace copy() {
         return new ZephidsEmbrace(this);
     }
-}
-
-class ZephidsEmbraceEffect extends ContinuousEffectImpl {
-
-    public ZephidsEmbraceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Enchanted creature gets +2/+2 and has flying and shroud";
-    }
-
-    public ZephidsEmbraceEffect(final ZephidsEmbraceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ZephidsEmbraceEffect copy() {
-        return new ZephidsEmbraceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                switch (layer) {
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.ModifyPT_7c) {
-                            creature.addPower(2);
-                            creature.addToughness(2);
-                        }
-                        break;
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            creature.addAbility(FlyingAbility.getInstance(), game);
-                            creature.addAbility(ShroudAbility.getInstance(), game);
-                        }
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
-    }
-
 }
