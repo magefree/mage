@@ -25,62 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.iceage;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.RegenerateAttachedEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Backfir3
+ *
+ * @author LoneFox
  */
-public class GaeasEmbrace extends CardImpl {
+public class HyalopterousLemure extends CardImpl {
 
-    public GaeasEmbrace(UUID ownerId) {
-        super(ownerId, 255, "Gaea's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "USG";
-        this.subtype.add("Aura");
+    public HyalopterousLemure(UUID ownerId) {
+        super(ownerId, 21, "Hyalopterous Lemure", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "ICE";
+        this.subtype.add("Spirit");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        // Enchanted creature gets +3/+3 and has trample.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3));
-        Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has trample");
+        // {0}: Hyalopterous Lemure gets -1/-0 and gains flying until end of turn.
+        Effect effect = new BoostSourceEffect(-1, 0, Duration.EndOfTurn);
+        effect.setText("{this} gets -1/-0");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{0}"));
+        effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);
-        // {G}: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public GaeasEmbrace(final GaeasEmbrace card) {
+    public HyalopterousLemure(final HyalopterousLemure card) {
         super(card);
     }
 
     @Override
-    public GaeasEmbrace copy() {
-        return new GaeasEmbrace(this);
+    public HyalopterousLemure copy() {
+        return new HyalopterousLemure(this);
     }
 }

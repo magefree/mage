@@ -25,62 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.iceage;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.Effect;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.RegenerateAttachedEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
- * @author Backfir3
+ *
+ * @author LoneFox
  */
-public class GaeasEmbrace extends CardImpl {
+public class ForbiddenLore extends CardImpl {
 
-    public GaeasEmbrace(UUID ownerId) {
-        super(ownerId, 255, "Gaea's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "USG";
+    public ForbiddenLore(UUID ownerId) {
+        super(ownerId, 124, "Forbidden Lore", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+        this.expansionSetCode = "ICE";
         this.subtype.add("Aura");
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        // Enchant land
+        TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature gets +3/+3 and has trample.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3));
-        Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has trample");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-        // {G}: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
+        // Enchanted land has "{tap}: Target creature gets +2/+1 until end of turn."
+        Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 1, Duration.EndOfTurn), new TapSourceCost());
+        gainAbility.addTarget(new TargetCreaturePermanent());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
+            Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gets +2/+1 until end of turn.\"")));
     }
 
-    public GaeasEmbrace(final GaeasEmbrace card) {
+    public ForbiddenLore(final ForbiddenLore card) {
         super(card);
     }
 
     @Override
-    public GaeasEmbrace copy() {
-        return new GaeasEmbrace(this);
+    public ForbiddenLore copy() {
+        return new ForbiddenLore(this);
     }
 }

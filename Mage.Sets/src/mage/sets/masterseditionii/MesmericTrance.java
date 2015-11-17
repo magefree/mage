@@ -25,64 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2011;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class ShivsEmbrace extends CardImpl {
+public class MesmericTrance extends CardImpl {
 
-    public ShivsEmbrace(UUID ownerId) {
-        super(ownerId, 156, "Shiv's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "M11";
-        this.subtype.add("Aura");
+    public MesmericTrance(UUID ownerId) {
+        super(ownerId, 55, "Mesmeric Trance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
+        this.expansionSetCode = "ME2";
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // Cumulative upkeep {1}
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        // {U}, Discard a card: Draw a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{U}"));
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
-        // Enchanted creature gets +2/+2 and has flying.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
-        Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has flying");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-        // {R}: Enchanted creature gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-
     }
 
-    public ShivsEmbrace(final ShivsEmbrace card) {
+    public MesmericTrance(final MesmericTrance card) {
         super(card);
     }
 
     @Override
-    public ShivsEmbrace copy() {
-        return new ShivsEmbrace(this);
+    public MesmericTrance copy() {
+        return new MesmericTrance(this);
     }
 }
