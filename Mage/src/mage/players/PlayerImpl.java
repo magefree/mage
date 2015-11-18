@@ -61,6 +61,7 @@ import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -222,7 +223,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     // indicates that the spell with the set sourceId can be cast with an alternate mana costs (can also be no mana costs)
     protected UUID castSourceIdWithAlternateMana;
-    protected ManaCosts castSourceIdManaCosts;
+    protected ManaCosts<ManaCost> castSourceIdManaCosts;
+    protected Costs<Cost> castSourceIdCosts;
 
     // indicates that the player is in mana payment phase
     protected boolean payManaMode = false;
@@ -326,6 +328,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.castSourceIdWithAlternateMana = player.castSourceIdWithAlternateMana;
         this.castSourceIdManaCosts = player.castSourceIdManaCosts;
+        this.castSourceIdCosts = player.castSourceIdCosts;
         this.payManaMode = player.payManaMode;
     }
 
@@ -388,6 +391,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
         this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
         this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
+        this.castSourceIdCosts = player.getCastSourceIdCosts();
 
         // Don't restore!
         // this.storedBookmark
@@ -453,6 +457,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.castSourceIdWithAlternateMana = null;
         this.castSourceIdManaCosts = null;
+        this.castSourceIdCosts = null;
     }
 
     /**
@@ -476,6 +481,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.alternativeSourceCosts.clear();
         this.castSourceIdWithAlternateMana = null;
         this.castSourceIdManaCosts = null;
+        this.castSourceIdCosts = null;
         this.getManaPool().clearEmptyManaPoolRules();
     }
 
@@ -684,6 +690,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         return true;
     }
 
+    /**
+     *
+     * @param amount
+     * @param source
+     * @param game
+     */
     @Override
     public void discard(int amount, Ability source, Game game) {
         discard(amount, false, source, game);
@@ -917,14 +929,20 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts) {
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, mage.abilities.costs.Costs costs) {
         castSourceIdWithAlternateMana = sourceId;
         castSourceIdManaCosts = manaCosts;
+        castSourceIdCosts = costs;
     }
 
     @Override
     public UUID getCastSourceIdWithAlternateMana() {
         return castSourceIdWithAlternateMana;
+    }
+
+    @Override
+    public Costs<Cost> getCastSourceIdCosts() {
+        return castSourceIdCosts;
     }
 
     @Override
@@ -950,20 +968,25 @@ public abstract class PlayerImpl implements Player, Serializable {
                 Zone fromZone = game.getState().getZone(card.getMainCard().getId());
                 card.cast(game, fromZone, ability, playerId);
                 Spell spell = game.getStack().getSpell(ability.getId());
-                // some effects set sourceId to cast without paying mana costs
+                // some effects set sourceId to cast without paying mana costs or other costs
                 if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
-                    ManaCosts alternateCosts = getCastSourceIdManaCosts();
                     Ability spellAbility = spell.getSpellAbility();
+                    ManaCosts alternateCosts = getCastSourceIdManaCosts();
+                    Costs<Cost> costs = getCastSourceIdCosts();
                     if (alternateCosts == null) {
                         noMana = true;
                     } else {
                         spellAbility.getManaCosts().clear();
-                        spellAbility.getManaCosts().add(alternateCosts.copy());
                         spellAbility.getManaCostsToPay().clear();
+                        spellAbility.getManaCosts().add(alternateCosts.copy());
                         spellAbility.getManaCostsToPay().add(alternateCosts.copy());
                     }
+                    spellAbility.getCosts().clear();
+                    if (costs != null) {
+                        spellAbility.getCosts().addAll(costs);
+                    }
                 }
-                setCastSourceIdWithAlternateMana(null, null);
+                setCastSourceIdWithAlternateMana(null, null, null);
                 GameEvent event = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
                 game.fireEvent(event);
                 if (spell.activate(game, noMana)) {
@@ -984,12 +1007,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
+    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana
+    ) {
         return ability;
     }
 
     @Override
-    public boolean playLand(Card card, Game game) {
+    public boolean playLand(Card card, Game game
+    ) {
         // Check for alternate casting possibilities: e.g. land with Morph
         ActivatedAbility playLandAbility = null;
         boolean found = false;
