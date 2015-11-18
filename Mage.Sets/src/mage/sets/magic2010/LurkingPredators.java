@@ -28,10 +28,7 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +36,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -51,7 +52,6 @@ public class LurkingPredators extends CardImpl {
     public LurkingPredators(UUID ownerId) {
         super(ownerId, 190, "Lurking Predators", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "M10";
-
 
         // Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new LurkingPredatorsEffect(), false));
@@ -85,26 +85,25 @@ class LurkingPredatorsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        if (player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards("Lurking Predators", cards, game);
+        if (controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
+            Cards cards = new CardsImpl(card);
+            controller.revealCards(sourceObject.getIdName(), cards, game);
 
             if (card != null) {
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    card = player.getLibrary().removeFromTop(game);
-                    card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                } else if (player.chooseUse(Outcome.Neutral, "Put " + card.getName() + " on the bottom of your library?", source, game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
+                    controller.putCardsOnBottomOfLibrary(cards, game, source, false);
                 }
             }
         }
-        return false;
+        return true;
     }
 }

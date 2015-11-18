@@ -799,6 +799,7 @@ public class HumanPlayer extends PlayerImpl {
             if (unpaid instanceof ManaCostsImpl) {
                 specialManaAction(unpaid, game);
                 // TODO: delve or convoke cards with PhyrexianManaCost won't work together (this combinaton does not exist yet)
+                @SuppressWarnings("unchecked")
                 ManaCostsImpl<ManaCost> costs = (ManaCostsImpl<ManaCost>) unpaid;
                 for (ManaCost cost : costs.getUnpaid()) {
                     if (cost instanceof PhyrexianManaCost) {
