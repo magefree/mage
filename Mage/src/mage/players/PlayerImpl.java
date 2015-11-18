@@ -3075,7 +3075,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case GRAVEYARD:
                 fromZone = game.getState().getZone(cards.iterator().next().getId());
                 successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
-                break;
+                return successfulMovedCards.size() > 0;
             case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
                 List<Permanent> permanents = new ArrayList<>();
                 List<Permanent> permanentsEntered = new ArrayList<>();
@@ -3285,6 +3285,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         }
+        game.fireEvent(new ZoneChangeGroupEvent(movedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, Zone.GRAVEYARD));
         return movedCards;
     }
 
