@@ -43,6 +43,8 @@ import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -1122,8 +1124,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts) {
-        computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts);
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs) {
+        computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs);
     }
 
     @Override
@@ -1134,6 +1136,11 @@ public class TestPlayer implements Player {
     @Override
     public ManaCosts getCastSourceIdManaCosts() {
         return computerPlayer.getCastSourceIdManaCosts();
+    }
+
+    @Override
+    public Costs<Cost> getCastSourceIdCosts() {
+        return computerPlayer.getCastSourceIdCosts();
     }
 
     @Override
