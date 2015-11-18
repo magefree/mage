@@ -25,85 +25,83 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.sets.commander2015;
 
+import java.util.HashMap;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class LurkingPredators extends CardImpl {
+public class DeadlyTempest extends CardImpl {
 
-    public LurkingPredators(UUID ownerId) {
-        super(ownerId, 190, "Lurking Predators", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
-        this.expansionSetCode = "M10";
+    public DeadlyTempest(UUID ownerId) {
+        super(ownerId, 19, "Deadly Tempest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
+        this.expansionSetCode = "C15";
 
-        // Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new LurkingPredatorsEffect(), false));
+        // Destroy all creatures. Each player loses life equal to the number of creatures he or she controlled that were destroyed this way.
+        getSpellAbility().addEffect(new DeadlyTempestEffect());
     }
 
-    public LurkingPredators(final LurkingPredators card) {
+    public DeadlyTempest(final DeadlyTempest card) {
         super(card);
     }
 
     @Override
-    public LurkingPredators copy() {
-        return new LurkingPredators(this);
+    public DeadlyTempest copy() {
+        return new DeadlyTempest(this);
     }
 }
 
-class LurkingPredatorsEffect extends OneShotEffect {
+class DeadlyTempestEffect extends OneShotEffect {
 
-    public LurkingPredatorsEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library";
+    public DeadlyTempestEffect() {
+        super(Outcome.DestroyPermanent);
+        this.staticText = "Destroy all creatures. Each player loses life equal to the number of creatures he or she controlled that were destroyed this way";
     }
 
-    public LurkingPredatorsEffect(final LurkingPredatorsEffect effect) {
+    public DeadlyTempestEffect(final DeadlyTempestEffect effect) {
         super(effect);
     }
 
     @Override
-    public LurkingPredatorsEffect copy() {
-        return new LurkingPredatorsEffect(this);
+    public DeadlyTempestEffect copy() {
+        return new DeadlyTempestEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-
-        if (controller.getLibrary().size() > 0) {
-            Card card = controller.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl(card);
-            controller.revealCards(sourceObject.getIdName(), cards, game);
-
-            if (card != null) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
-                    controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+        if (controller != null) {
+            HashMap<UUID, Integer> destroyedCreatures = new HashMap<>();
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                if (permanent.destroy(source.getSourceId(), game, false)) {
+                    int count = destroyedCreatures.containsKey(permanent.getControllerId()) ? destroyedCreatures.get(permanent.getControllerId()) : 0;
+                    destroyedCreatures.put(permanent.getControllerId(), count + 1);
                 }
             }
+            for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
+                int count = destroyedCreatures.containsKey(playerId) ? destroyedCreatures.get(playerId) : 0;
+                if (count > 0) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.damage(count, playerId, game, false, true);
+                    }
+                }
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 }

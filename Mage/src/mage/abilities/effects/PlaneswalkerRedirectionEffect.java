@@ -109,6 +109,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
         if (permanent != null) {
             return permanent.getControllerId();
         }
-        return null;
+        // for effects like Deflecting Palm (could be wrong if card was played multiple times by different players)
+        return game.getContinuousEffects().getControllerOfSourceId(sourceId);
     }
 }

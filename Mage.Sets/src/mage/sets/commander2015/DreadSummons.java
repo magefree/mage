@@ -25,85 +25,87 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.sets.commander2015;
 
+import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class LurkingPredators extends CardImpl {
+public class DreadSummons extends CardImpl {
 
-    public LurkingPredators(UUID ownerId) {
-        super(ownerId, 190, "Lurking Predators", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
-        this.expansionSetCode = "M10";
+    public DreadSummons(UUID ownerId) {
+        super(ownerId, 20, "Dread Summons", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
+        this.expansionSetCode = "C15";
 
-        // Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new LurkingPredatorsEffect(), false));
+        // Each player puts the top X cards of his or her library into his or her graveyard. For each creature card put into a graveyard this way, you put a 2/2 black Zombie creature token onto the battlefield tapped.
+        getSpellAbility().addEffect(new DreadSummonsEffect());
     }
 
-    public LurkingPredators(final LurkingPredators card) {
+    public DreadSummons(final DreadSummons card) {
         super(card);
     }
 
     @Override
-    public LurkingPredators copy() {
-        return new LurkingPredators(this);
+    public DreadSummons copy() {
+        return new DreadSummons(this);
     }
 }
 
-class LurkingPredatorsEffect extends OneShotEffect {
+class DreadSummonsEffect extends OneShotEffect {
 
-    public LurkingPredatorsEffect() {
+    public DreadSummonsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library";
+        this.staticText = "Each player puts the top X cards of his or her library into his or her graveyard. For each creature card put into a graveyard this way, you put a 2/2 black Zombie creature token onto the battlefield tapped";
     }
 
-    public LurkingPredatorsEffect(final LurkingPredatorsEffect effect) {
+    public DreadSummonsEffect(final DreadSummonsEffect effect) {
         super(effect);
     }
 
     @Override
-    public LurkingPredatorsEffect copy() {
-        return new LurkingPredatorsEffect(this);
+    public DreadSummonsEffect copy() {
+        return new DreadSummonsEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-
-        if (controller.getLibrary().size() > 0) {
-            Card card = controller.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl(card);
-            controller.revealCards(sourceObject.getIdName(), cards, game);
-
-            if (card != null) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
-                    controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+        if (controller != null) {
+            int numberOfCards = source.getManaCostsToPay().getX();
+            if (numberOfCards > 0) {
+                int numberOfCreatureCards = 0;
+                for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        Set<Card> movedCards = player.moveCardsToGraveyardWithInfo(player.getLibrary().getTopCards(game, numberOfCards), source, game, Zone.LIBRARY);
+                        for (Card card : movedCards) {
+                            if (card.getCardType().contains(CardType.CREATURE)) {
+                                numberOfCreatureCards++;
+                            }
+                        }
+                    }
+                }
+                if (numberOfCreatureCards > 0) {
+                    return new CreateTokenEffect(new ZombieToken(), numberOfCreatureCards, true, false).apply(game, source);
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 }
