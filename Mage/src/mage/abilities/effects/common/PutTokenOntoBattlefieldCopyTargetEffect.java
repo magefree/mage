@@ -164,10 +164,8 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         if (gainsHaste) {
             token.addAbility(HasteAbility.getInstance());
         }
-        if (additionalSubType != null) {
-            if (token.getSubtype().contains(additionalSubType)) {
-                token.getSubtype().add(additionalSubType);
-            }
+        if (additionalSubType != null && !token.getSubtype().contains(additionalSubType)) {
+            token.getSubtype().add(additionalSubType);
         }
         token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield

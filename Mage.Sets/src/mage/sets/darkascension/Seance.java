@@ -97,7 +97,7 @@ class SeanceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             if (controller.moveCards(card, null, Zone.EXILED, source, game)) {
-                PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+                PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false);
                 effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                 effect.setAdditionalSubType("Spirit");
                 effect.apply(game, source);
