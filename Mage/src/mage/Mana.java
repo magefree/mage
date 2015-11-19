@@ -507,7 +507,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public boolean enough(final Mana avail) {
         Mana compare = avail.copy();
-        compare.subtract(this);
+        red -= avail.red;
+        green -= avail.green;
+        blue -= avail.blue;
+        white -= avail.white;
+        black -= avail.black;
+        colorless -= avail.colorless;
+        any -= avail.any;
         if (compare.getRed() < 0) {
             compare.setAny(compare.getAny() + compare.getRed());
             if (compare.getAny() < 0) {
