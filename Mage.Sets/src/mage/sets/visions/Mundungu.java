@@ -25,47 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.visions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author Plopman
+ * @author nigelzor
  */
-public class TangleAsp extends CardImpl {
+public class Mundungu extends CardImpl {
 
-    public TangleAsp(UUID ownerId) {
-        super(ownerId, 94, "Tangle Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Snake");
-
-        this.color.setGreen(true);
+    public Mundungu(UUID ownerId) {
+        super(ownerId, 132, "Mundungu", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
+        this.expansionSetCode = "VIS";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
+        // {tap}: Counter target spell unless its controller pays {1} and 1 life.
+        CostsImpl<Cost> costs = new CostsImpl<>();
+        costs.add(new GenericManaCost(1));
+        costs.add(new PayLifeCost(1));
+        costs.setText("{1} and 1 life");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(costs), new TapSourceCost());
+        ability.addTarget(new TargetSpell());
+        this.addAbility(ability);
     }
 
-    public TangleAsp(final TangleAsp card) {
+    public Mundungu(final Mundungu card) {
         super(card);
     }
 
     @Override
-    public TangleAsp copy() {
-        return new TangleAsp(this);
+    public Mundungu copy() {
+        return new Mundungu(this);
     }
 }

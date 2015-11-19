@@ -25,47 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.masterseditioniv;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
- * @author Plopman
+ * @author nigelzor
  */
-public class TangleAsp extends CardImpl {
+public class Aladdin extends CardImpl {
 
-    public TangleAsp(UUID ownerId) {
-        super(ownerId, 94, "Tangle Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Snake");
-
-        this.color.setGreen(true);
+    public Aladdin(UUID ownerId) {
+        super(ownerId, 106, "Aladdin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "ME4";
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
+        // {1}{R}{R}, {tap}: Gain control of target artifact for as long as you control Aladdin.
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
+                new GainControlTargetEffect(Duration.Custom),
+                new SourceOnBattlefieldControlUnchangedCondition(),
+                "Gain control of target artifact for as long as you control Aladdin");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{R}{R}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetArtifactPermanent());
+        this.addAbility(ability);
     }
 
-    public TangleAsp(final TangleAsp card) {
+    public Aladdin(final Aladdin card) {
         super(card);
     }
 
     @Override
-    public TangleAsp copy() {
-        return new TangleAsp(this);
+    public Aladdin copy() {
+        return new Aladdin(this);
     }
 }

@@ -25,47 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.portalsecondage;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 
 /**
  *
- * @author Plopman
+ * @author nigelzor
  */
-public class TangleAsp extends CardImpl {
+public class DeathcoilWurm extends CardImpl {
 
-    public TangleAsp(UUID ownerId) {
-        super(ownerId, 94, "Tangle Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Snake");
+    public DeathcoilWurm(UUID ownerId) {
+        super(ownerId, 65, "Deathcoil Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
+        this.expansionSetCode = "PO2";
+        this.subtype.add("Wurm");
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(6);
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
+        // You may have Deathcoil Wurm assign its combat damage as though it weren't blocked.
+        this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }
 
-    public TangleAsp(final TangleAsp card) {
+    public DeathcoilWurm(final DeathcoilWurm card) {
         super(card);
     }
 
     @Override
-    public TangleAsp copy() {
-        return new TangleAsp(this);
+    public DeathcoilWurm copy() {
+        return new DeathcoilWurm(this);
     }
 }

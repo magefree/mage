@@ -25,47 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.starter1999;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Plopman
+ * @author nigelzor
  */
-public class TangleAsp extends CardImpl {
+public class CinderStorm extends CardImpl {
 
-    public TangleAsp(UUID ownerId) {
-        super(ownerId, 94, "Tangle Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Snake");
+    public CinderStorm(UUID ownerId) {
+        super(ownerId, 93, "Cinder Storm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{R}");
+        this.expansionSetCode = "S99";
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
+        // Cinder Storm deals 7 damage to target creature or player.
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(7));
     }
 
-    public TangleAsp(final TangleAsp card) {
+    public CinderStorm(final CinderStorm card) {
         super(card);
     }
 
     @Override
-    public TangleAsp copy() {
-        return new TangleAsp(this);
+    public CinderStorm copy() {
+        return new CinderStorm(this);
     }
 }

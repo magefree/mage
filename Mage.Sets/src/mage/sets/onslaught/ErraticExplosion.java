@@ -25,47 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Plopman
+ * @author nigelzor
  */
-public class TangleAsp extends CardImpl {
+public class ErraticExplosion extends mage.sets.planechase2012.ErraticExplosion {
 
-    public TangleAsp(UUID ownerId) {
-        super(ownerId, 94, "Tangle Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Snake");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
+    public ErraticExplosion(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 201;
+        this.expansionSetCode = "ONS";
     }
 
-    public TangleAsp(final TangleAsp card) {
+    public ErraticExplosion(final ErraticExplosion card) {
         super(card);
     }
 
     @Override
-    public TangleAsp copy() {
-        return new TangleAsp(this);
+    public ErraticExplosion copy() {
+        return new ErraticExplosion(this);
     }
 }

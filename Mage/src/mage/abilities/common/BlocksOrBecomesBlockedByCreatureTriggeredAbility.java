@@ -30,8 +30,11 @@ package mage.abilities.common;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -40,19 +43,29 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BlocksOrBecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
+    // note that this is using the Filter#match(E e, Game game),
+    // not FilterInPlay#(E o, UUID sourceId, UUID playerId, Game game)
+    // this triggers on both blocked and blocking, so source and player don't have a consistent definition
+    protected FilterPermanent filter;
     protected String rule;
 
     public BlocksOrBecomesBlockedByCreatureTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, null);
+        this(effect, new FilterCreaturePermanent(), optional, null);
     }
 
-    public BlocksOrBecomesBlockedByCreatureTriggeredAbility(Effect effect, boolean optional, String rule) {
+    public BlocksOrBecomesBlockedByCreatureTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
+        this(effect, filter, optional, null);
+    }
+
+    public BlocksOrBecomesBlockedByCreatureTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, String rule) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
         this.rule = rule;
     }
 
     public BlocksOrBecomesBlockedByCreatureTriggeredAbility(final BlocksOrBecomesBlockedByCreatureTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
         this.rule = ability.rule;
     }
 
@@ -64,16 +77,22 @@ public class BlocksOrBecomesBlockedByCreatureTriggeredAbility extends TriggeredA
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+            Permanent blocked = game.getPermanent(event.getTargetId());
+            if (blocked != null && filter.match(blocked, game)) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                }
+                return true;
             }
-            return true;
         }
         if (event.getTargetId().equals(this.getSourceId())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+            Permanent blocker = game.getPermanent(event.getSourceId());
+            if (blocker != null && filter.match(blocker, game)) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -83,7 +102,7 @@ public class BlocksOrBecomesBlockedByCreatureTriggeredAbility extends TriggeredA
         if (rule != null) {
             return rule;
         }
-        return "Whenever {this} blocks or becomes blocked by a creature, " + super.getRule();
+        return "Whenever {this} blocks or becomes blocked by a " + filter.getMessage() + ", " + super.getRule();
     }
 
     @Override

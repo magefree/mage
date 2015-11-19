@@ -25,47 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
+import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
  *
- * @author Plopman
+ * @author nigelzor
  */
-public class TangleAsp extends CardImpl {
+public class BrassGnat extends CardImpl {
 
-    public TangleAsp(UUID ownerId) {
-        super(ownerId, 94, "Tangle Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Snake");
-
-        this.color.setGreen(true);
+    public BrassGnat(UUID ownerId) {
+        super(ownerId, 249, "Brass Gnat", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Insect");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Brass Gnat doesn't untap during your untap step.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        // At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Gnat.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                Zone.BATTLEFIELD,
+                new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(1)),
+                TargetController.YOU,
+                false));
     }
 
-    public TangleAsp(final TangleAsp card) {
+    public BrassGnat(final BrassGnat card) {
         super(card);
     }
 
     @Override
-    public TangleAsp copy() {
-        return new TangleAsp(this);
+    public BrassGnat copy() {
+        return new BrassGnat(this);
     }
 }

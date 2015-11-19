@@ -25,47 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+
+import mage.abilities.condition.common.MyMainPhaseCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author Plopman
+ * @author nigelzor
  */
-public class TangleAsp extends CardImpl {
+public class HauntingHymn extends CardImpl {
 
-    public TangleAsp(UUID ownerId) {
-        super(ownerId, 94, "Tangle Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Snake");
+    public HauntingHymn(UUID ownerId) {
+        super(ownerId, 112, "Haunting Hymn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
+        this.expansionSetCode = "TSP";
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        // Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new DiscardTargetEffect(4),
+                new DiscardTargetEffect(2),
+                MyMainPhaseCondition.getInstance(),
+                "Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead"));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
-        // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
     }
 
-    public TangleAsp(final TangleAsp card) {
+    public HauntingHymn(final HauntingHymn card) {
         super(card);
     }
 
     @Override
-    public TangleAsp copy() {
-        return new TangleAsp(this);
+    public HauntingHymn copy() {
+        return new HauntingHymn(this);
     }
 }
