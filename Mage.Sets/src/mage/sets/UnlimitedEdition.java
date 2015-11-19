@@ -20,8 +20,8 @@ public class UnlimitedEdition extends ExpansionSet {
     private UnlimitedEdition() {
         super("Unlimited Edition", "2ED", "mage.sets.unlimitededition", new GregorianCalendar(1993, 11, 1).getTime(), SetType.CORE);
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;

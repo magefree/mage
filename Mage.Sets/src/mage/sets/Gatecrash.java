@@ -44,15 +44,15 @@ public class Gatecrash extends ExpansionSet {
     }
 
     private Gatecrash() {
-        super("Gatecrash", "GTC", "mage.sets.gatecrash", new GregorianCalendar(2013, 2, 01).getTime(), SetType.EXPANSION);
+        super("Gatecrash", "GTC", "mage.sets.gatecrash", new GregorianCalendar(2013, 2, 1).getTime(), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
+        this.parentSet = ReturnToRavnica.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.parentSet = ReturnToRavnica.getInstance();
-        this.hasBasicLands = false;
     }
 }

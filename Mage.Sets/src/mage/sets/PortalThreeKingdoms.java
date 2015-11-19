@@ -36,15 +36,10 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class PortalThreeKingdoms extends ExpansionSet {
 
     private static final PortalThreeKingdoms fINSTANCE = new PortalThreeKingdoms();
 
-    /**
-     *
-     * @return
-     */
     public static PortalThreeKingdoms getInstance() {
         return fINSTANCE;
     }
@@ -56,7 +51,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         this.hasBoosters = true;
         this.numBoosterLands = 2;
         this.numBoosterCommon = 5;
-        this.numBoosterUncommon = 5;
+        this.numBoosterUncommon = 2;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
     }
