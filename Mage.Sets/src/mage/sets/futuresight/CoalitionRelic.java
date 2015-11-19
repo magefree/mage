@@ -109,15 +109,15 @@ class CoalitionRelicEffect extends OneShotEffect {
                     player.choose(outcome, choice, game);
                 }
                 if (choice.getColor().isBlack()) {
-                    mana.increaseBlack();
+                    mana.addBlack();
                 } else if (choice.getColor().isBlue()) {
-                    mana.increaseBlue();
+                    mana.addBlue();
                 } else if (choice.getColor().isRed()) {
-                    mana.increaseRed();
+                    mana.addRed();
                 } else if (choice.getColor().isGreen()) {
-                    mana.increaseGreen();
+                    mana.addGreen();
                 } else if (choice.getColor().isWhite()) {
-                    mana.increaseWhite();
+                    mana.addWhite();
                 }
                 choice.clearChoice();
             }
