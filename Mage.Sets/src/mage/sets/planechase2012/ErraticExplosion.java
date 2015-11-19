@@ -28,26 +28,19 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -78,7 +71,7 @@ class ErraticExplosionEffect extends OneShotEffect {
 
     public ErraticExplosionEffect() {
         super(Outcome.Damage);
-        this.staticText = "Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player. Put the revealed cards on the bottom of your library in any order.";
+        this.staticText = "Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. {this} deals damage equal to that card's converted mana cost to that creature or player. Put the revealed cards on the bottom of your library in any order";
     }
 
     public ErraticExplosionEffect(ErraticExplosionEffect effect) {
@@ -92,32 +85,36 @@ class ErraticExplosionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            CardsImpl cards = new CardsImpl();
-            Library library = player.getLibrary();
-            Card card = null;
-            do {
-                card = library.removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            CardsImpl toReveal = new CardsImpl();
+            boolean nonLandFound = false;
+            Card nonLandCard = null;
+
+            while (nonLandFound && controller.getLibrary().size() > 0) {
+                nonLandCard = controller.getLibrary().removeFromTop(game);
+                toReveal.add(nonLandCard);
+                nonLandFound = nonLandCard.getCardType().contains(CardType.LAND);
+            }
             // reveal cards
-            if (!cards.isEmpty()) {
-                player.revealCards("Erratic Explosion", cards, game);
+            if (!toReveal.isEmpty()) {
+                controller.revealCards(sourceObject.getIdName(), toReveal, game);
             }
             // the nonland card
-            Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (targetCreature != null) {
-                targetCreature.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
-            }
-            Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            if (targetPlayer != null) {
-                targetPlayer.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+            if (nonLandCard != null) {
+                Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+                if (targetCreature != null) {
+                    targetCreature.damage(nonLandCard.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+                } else {
+                    Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+                    if (targetPlayer != null) {
+                        targetPlayer.damage(nonLandCard.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+                    }
+                }
             }
             // put the cards on the bottom of the library in any order
-            return player.putCardsOnBottomOfLibrary(cards, game, source, true);
+            return controller.putCardsOnBottomOfLibrary(toReveal, game, source, true);
         }
         return false;
     }

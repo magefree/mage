@@ -29,7 +29,6 @@ package mage.sets.phyrexiavsthecoalition;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -42,6 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HornetToken;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
@@ -73,33 +73,33 @@ public class HornetCannon extends CardImpl {
 }
 
 class HornetCannonEffect extends OneShotEffect {
-    
+
     public HornetCannonEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put a 1/1 colorless Insect artifact creature token with flying and haste named Hornet onto the battlefield. Destroy it at the beginning of the next end step.";
     }
-    
+
     public HornetCannonEffect(final HornetCannonEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public HornetCannonEffect copy() {
         return new HornetCannonEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Token hornetToken = new HornetToken();
         hornetToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-        
-        DestroyTargetEffect destroyEffect = new DestroyTargetEffect("destroy the token.");
-        destroyEffect.setTargetPointer(new FixedTarget(hornetToken.getLastAddedToken()));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(destroyEffect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        for (UUID tokenId : hornetToken.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                DestroyTargetEffect destroyEffect = new DestroyTargetEffect(false);
+                destroyEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(destroyEffect), source);
+            }
+        }
         return true;
     }
 }

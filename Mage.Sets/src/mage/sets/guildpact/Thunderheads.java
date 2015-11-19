@@ -28,12 +28,9 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -44,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 
@@ -93,13 +91,14 @@ class ThunderheadsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new WeirdToken();
         if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            for (UUID tokenId : token.getLastAddedTokenIds()) {
+                Permanent tokenPermanent = game.getPermanent(tokenId);
+                if (tokenPermanent != null) {
+                    ExileTargetEffect exileEffect = new ExileTargetEffect();
+                    exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+                }
+            }
             return true;
         }
         return false;
@@ -107,6 +106,7 @@ class ThunderheadsEffect extends OneShotEffect {
 }
 
 class WeirdToken extends Token {
+
     WeirdToken() {
         super("Weird", "3/3 blue Weird create token with defender and flying");
         cardType.add(CardType.CREATURE);

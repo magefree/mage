@@ -385,6 +385,8 @@ public interface Game extends MageItem, Serializable {
 
     UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
 
+    UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source);
+
     void applyEffects();
 
     boolean checkStateAndTriggered();

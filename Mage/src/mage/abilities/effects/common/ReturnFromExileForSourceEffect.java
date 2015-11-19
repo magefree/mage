@@ -104,7 +104,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
                 if (returnToZone.equals(Zone.BATTLEFIELD)) {
                     controller.moveCards(exile.getCards(game), returnToZone, source, game, false, false, true, null);
                 } else {
-                    controller.moveCards(exile, null, returnToZone, source, game);
+                    controller.moveCards(exile, returnToZone, source, game);
                 }
             }
             return true;

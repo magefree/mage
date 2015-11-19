@@ -29,7 +29,6 @@ package mage.sets.gatecrash;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -51,7 +50,6 @@ public class RapidHybridization extends CardImpl {
     public RapidHybridization(UUID ownerId) {
         super(ownerId, 44, "Rapid Hybridization", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "GTC";
-
 
         // Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Frog Lizard creature token onto the battlefield.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -87,7 +85,7 @@ class RapidHybridizationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (permanent != null) {
             RapidHybridizationToken token = new RapidHybridizationToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
@@ -103,12 +101,12 @@ class RapidHybridizationToken extends Token {
         super("Frog Lizard", "3/3 green Frog Lizard creature token onto the battlefield");
         this.setOriginalExpansionSetCode("GTC");
         cardType.add(CardType.CREATURE);
-        
+
         color.setGreen(true);
-        
+
         subtype.add("Frog");
         subtype.add("Lizard");
-        
+
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

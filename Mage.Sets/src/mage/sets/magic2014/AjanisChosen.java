@@ -29,7 +29,6 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -39,8 +38,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatToken;
@@ -53,11 +51,6 @@ import mage.players.Player;
  */
 public class AjanisChosen extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
     public AjanisChosen(UUID ownerId) {
         super(ownerId, 2, "Ajani's Chosen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "M14";
@@ -69,7 +62,7 @@ public class AjanisChosen extends CardImpl {
 
         // Whenever an enchantment enters the battlefield under your control, put a 2/2 white Cat creature token onto the battlefield. If that enchantment is an Aura, you may attach it to the token.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AjanisChosenEffect(), filter, false, SetTargetPointer.PERMANENT,
+                Zone.BATTLEFIELD, new AjanisChosenEffect(), new FilterControlledEnchantmentPermanent(), false, SetTargetPointer.PERMANENT,
                 "Whenever an enchantment enters the battlefield under your control, put a 2/2 white Cat creature token onto the battlefield. If that enchantment is an Aura, you may attach it to the token"));
     }
 
@@ -84,7 +77,6 @@ public class AjanisChosen extends CardImpl {
 }
 
 class AjanisChosenEffect extends OneShotEffect {
-
 
     public AjanisChosenEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -102,19 +94,22 @@ class AjanisChosenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new CatToken();
-        if(token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())){
-            Player player = game.getPlayer(source.getControllerId());
-            Permanent enchantement = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
-            if(player != null && enchantement != null && tokenPermanent != null && enchantement.getSubtype().contains("Aura"))
-            {
-                Permanent oldCreature = game.getPermanent(enchantement.getAttachedTo());
-
-                if(oldCreature != null && enchantement.getSpellAbility().getTargets().get(0).canTarget(tokenPermanent.getId(), game) && player.chooseUse(Outcome.Neutral, "Attach " + enchantement.getName() + " to the token ?", source, game))
-                {
-                    if(oldCreature.removeAttachment(enchantement.getId(), game)){
-                        tokenPermanent.addAttachment(enchantement.getId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Token token = new CatToken();
+            if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
+                Permanent enchantment = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+                if (enchantment != null && enchantment.getSubtype().contains("Aura")) {
+                    for (UUID tokenId : token.getLastAddedTokenIds()) {
+                        Permanent tokenPermanent = game.getPermanent(tokenId);
+                        if (tokenPermanent != null) {
+                            Permanent oldCreature = game.getPermanent(enchantment.getAttachedTo());
+                            if (oldCreature != null && enchantment.getSpellAbility().getTargets().get(0).canTarget(tokenPermanent.getId(), game) && controller.chooseUse(Outcome.Neutral, "Attach " + enchantment.getName() + " to the token ?", source, game)) {
+                                if (oldCreature.removeAttachment(enchantment.getId(), game)) {
+                                    tokenPermanent.addAttachment(enchantment.getId(), game);
+                                }
+                            }
+                        }
                     }
                 }
             }

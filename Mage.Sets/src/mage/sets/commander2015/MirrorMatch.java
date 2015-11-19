@@ -29,7 +29,6 @@ package mage.sets.commander2015;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -137,25 +136,25 @@ class MirrorMatchEffect extends OneShotEffect {
         if (controller != null) {
             for (UUID attackerId : game.getCombat().getAttackers()) {
                 Permanent attacker = game.getPermanent(attackerId);
-                if (attacker != null) {
-                    if (source.getControllerId().equals(game.getCombat().getDefendingPlayerId(attackerId, game))) {
-                        PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false);
-                        effect.setTargetPointer(new FixedTarget(attacker, game));
-                        effect.apply(game, source);
+                if (attacker != null
+                        && source.getControllerId().equals(game.getCombat().getDefendingPlayerId(attackerId, game))) {
+                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false);
+                    effect.setTargetPointer(new FixedTarget(attacker, game));
+                    effect.apply(game, source);
+                    CombatGroup group = game.getCombat().findGroup(attacker.getId());
+                    boolean isCreature = false;
+                    if (group != null) {
                         for (Permanent addedToken : effect.getAddedPermanent()) {
                             if (addedToken.getCardType().contains(CardType.CREATURE)) {
-                                CombatGroup group = game.getCombat().findGroup(attacker.getId());
-                                if (group != null) {
-                                    group.addBlockerToGroup(addedToken.getId(), attackerId, game);
-                                }
+                                group.addBlockerToGroup(addedToken.getId(), attackerId, game);
+                                isCreature = true;
                             }
-                            ExileTargetEffect sacrificeEffect = new ExileTargetEffect("Exile the token at end of combat");
-                            sacrificeEffect.setTargetPointer(new FixedTarget(addedToken, game));
-                            DelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(sacrificeEffect);
-                            delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setControllerId(source.getControllerId());
-                            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                            game.addDelayedTriggeredAbility(delayedAbility);
+                            ExileTargetEffect exileEffect = new ExileTargetEffect("Exile the token at end of combat");
+                            exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
+                            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
+                        }
+                        if (isCreature) {
+                            group.pickBlockerOrder(attacker.getControllerId(), game);
                         }
                     }
                 }

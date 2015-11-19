@@ -31,7 +31,6 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -50,7 +49,6 @@ public class InfernalGenesis extends CardImpl {
     public InfernalGenesis(UUID ownerId) {
         super(ownerId, 68, "Infernal Genesis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
         this.expansionSetCode = "PCY";
-
 
         // At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), TargetController.ANY, false));
@@ -81,9 +79,9 @@ class InfernalGenesisEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            Card card = player.getLibrary().removeFromTop(game);
+            Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
-                if (player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game)) {
+                if (player.moveCards(card, Zone.GRAVEYARD, source, game)) {
                     int cmc = card.getManaCost().convertedManaCost();
                     MinionToken token = new MinionToken();
                     token.putOntoBattlefield(cmc, game, source.getSourceId(), player.getId());
