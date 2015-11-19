@@ -32,11 +32,15 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -44,11 +48,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  * @author BursegSardaukar
@@ -125,10 +132,10 @@ class GoblinClearCutterEffect extends OneShotEffect {
                 }
                 switch (manaChoice.getChoice()) {
                     case "Green":
-                        mana.increaseGreen();
+                        mana.addGreen();
                         break;
                     case "Red":
-                        mana.increaseRed();
+                        mana.addRed();
                         break;
                 }
                 player.getManaPool().addMana(mana, game, source);
