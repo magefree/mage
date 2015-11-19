@@ -61,20 +61,19 @@ public class SwissPairingMinimalWeightMatching {
         playersCount = players.size();
 
         swissPlayers = new ArrayList<PlayerInfo>();
-        for (int i = 0; i < playersCount; i++) {
+        for (TournamentPlayer tournamentPlayer : players) {
             PlayerInfo swissPlayer = new PlayerInfo();
-            swissPlayer.tournamentPlayer = players.get(i);
-            swissPlayer.playerId = players.get(i).getPlayer().getId();
-            swissPlayer.points = players.get(i).getPoints();
+            swissPlayer.tournamentPlayer = tournamentPlayer;
+            swissPlayer.points = tournamentPlayer.getPoints();
             swissPlayers.add(swissPlayer);
         }
 
         // shuffle players first to add some randomness
         Collections.shuffle(swissPlayers);
-        Map<UUID, Integer> map = new HashMap<>();
+        Map<TournamentPlayer, Integer> map = new HashMap<>();
         for (int i = 0; i < playersCount; i++) {
             swissPlayers.get(i).id = i;
-            map.put(swissPlayers.get(i).playerId, i);
+            map.put(swissPlayers.get(i).tournamentPlayer, i);
         }
 
         // calculate Tie Breaker points -- Sum of Opponents' Scores (SOS)
@@ -84,11 +83,16 @@ public class SwissPairingMinimalWeightMatching {
                 TournamentPlayer player1 = pairing.getPlayer1();
                 TournamentPlayer player2 = pairing.getPlayer2();
 
-                int id1 = map.get(player1.getPlayer().getId());
-                int id2 = map.get(player2.getPlayer().getId());
+                Integer id1 = map.get(player1);
+                Integer id2 = map.get(player2);
 
-                swissPlayers.get(id1).sosPoints += player2.getPoints();
-                swissPlayers.get(id2).sosPoints += player1.getPoints();
+                // a player could have left the tournament, so we should check if id is not null
+                if (id1 != null) {
+                    swissPlayers.get(id1).sosPoints += player2.getPoints();
+                }
+                if (id2 != null) {
+                    swissPlayers.get(id2).sosPoints += player1.getPoints();
+                }
                 // todo: sos points for byes? maybe add player points?
             }
         }
@@ -106,9 +110,10 @@ public class SwissPairingMinimalWeightMatching {
         });
 
         // order could be changed, update ids and mapping
+        map.clear();
         for (int i = 0; i < playersCount; i++) {
             swissPlayers.get(i).id = i;
-            map.put(swissPlayers.get(i).playerId, i);
+            map.put(swissPlayers.get(i).tournamentPlayer, i);
         }
 
         // count ties and matches between players
@@ -119,15 +124,19 @@ public class SwissPairingMinimalWeightMatching {
                 TournamentPlayer player1 = pairing.getPlayer1();
                 TournamentPlayer player2 = pairing.getPlayer2();
 
-                int id1 = map.get(player1.getPlayer().getId());
-                int id2 = map.get(player2.getPlayer().getId());
+                Integer id1 = map.get(player1);
+                Integer id2 = map.get(player2);
 
-                duels[id1][id2]++;
-                duels[id2][id1]++;
+                if (id1 != null && id2 != null) {
+                    duels[id1][id2]++;
+                    duels[id2][id1]++;
+                }
             }
             for (TournamentPlayer playerBye : round.getPlayerByes()) {
-                int id = map.get(playerBye.getPlayer().getId());
-                byes[id]++;
+                Integer id = map.get(playerBye);
+                if (id != null) {
+                    byes[id]++;
+                }
             }
         }
 
@@ -272,8 +281,6 @@ public class SwissPairingMinimalWeightMatching {
         public int id;
 
         public TournamentPlayer tournamentPlayer;
-
-        public UUID playerId;
 
         public int points;
 

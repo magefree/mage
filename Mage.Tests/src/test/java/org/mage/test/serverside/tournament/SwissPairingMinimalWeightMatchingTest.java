@@ -82,6 +82,7 @@ public class SwissPairingMinimalWeightMatchingTest {
 
         CheckPair(roundPairings.getPairings(), player1, player2);
         CheckPair(roundPairings.getPairings(), player3, player4);
+        Assert.assertEquals(0, roundPairings.getPlayerByes().size());
     }
 
     @Test
@@ -131,6 +132,46 @@ public class SwissPairingMinimalWeightMatchingTest {
 
         CheckPair(roundPairings.getPairings(), player1, player4);
         CheckPair(roundPairings.getPairings(), player2, player3);
+        Assert.assertEquals(0, roundPairings.getPlayerByes().size());
+    }
+
+    @Test
+    public void PlayerLeftTournamentAfterFirstRound() {
+        // 1 > 3
+        // 2 > 4
+        // 4 left the tournament
+
+        TournamentPlayer player1 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player2 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player3 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player4 = new TournamentPlayer(new PlayerStub(), null);
+        List<TournamentPlayer> players = new ArrayList<>();
+        //players.add(player4); -- player 4 is not active
+        players.add(player2);
+        players.add(player3);
+        players.add(player1);
+
+        player1.setPoints(3);
+        player2.setPoints(3);
+        player3.setPoints(0);
+        player4.setPoints(0);
+
+        List<Round> rounds = new ArrayList<>();
+        Round round = new Round(1, new TournamentStub());
+        TournamentPairing pair1 = new TournamentPairing(player1, player3);
+        round.addPairing(pair1);
+        TournamentPairing pair2 = new TournamentPairing(player4, player2);
+        round.addPairing(pair2);
+        rounds.add(round);
+
+        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds);
+        RoundPairings roundPairings = swissPairing.getRoundPairings();
+
+        Assert.assertEquals(1, roundPairings.getPairings().size());
+        Assert.assertEquals(1, roundPairings.getPlayerByes().size());
+
+        CheckPair(roundPairings.getPairings(), player1, player2);
+        Assert.assertTrue(roundPairings.getPlayerByes().contains(player3));
     }
 
     @Test
@@ -188,6 +229,53 @@ public class SwissPairingMinimalWeightMatchingTest {
         CheckPair(roundPairings.getPairings(), player1, player4);
         CheckPair(roundPairings.getPairings(), player2, player5);
         Assert.assertTrue(roundPairings.getPlayerByes().contains(player3));
+    }
+
+    @Test
+    public void PlayerWithByeLeftTournament() {
+        // 1 > 2
+        // 3 > 4
+        // 5
+        // 5 left the tournament
+
+
+        TournamentPlayer player1 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player2 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player3 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player4 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player5 = new TournamentPlayer(new PlayerStub(), null);
+        List<TournamentPlayer> players = new ArrayList<>();
+        //players.add(player5); -- player 5 is not active
+        players.add(player4);
+        players.add(player2);
+        players.add(player3);
+        players.add(player1);
+
+        player1.setPoints(3);
+        player2.setPoints(0);
+        player3.setPoints(3);
+        player4.setPoints(0);
+        player5.setPoints(3);
+
+        List<Round> rounds = new ArrayList<>();
+        // first round
+        Round round = new Round(1, new TournamentStub());
+        TournamentPairing pair1 = new TournamentPairing(player1, player2);
+        round.addPairing(pair1);
+        TournamentPairing pair2 = new TournamentPairing(player3, player4);
+        round.addPairing(pair2);
+        round.getPlayerByes().add(player5);
+        rounds.add(round);
+
+        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds);
+        RoundPairings roundPairings = swissPairing.getRoundPairings();
+
+        Assert.assertEquals(2, roundPairings.getPairings().size());
+        Assert.assertEquals(0, roundPairings.getPlayerByes().size());
+
+        CheckPair(roundPairings.getPairings(), player1, player3);
+        CheckPair(roundPairings.getPairings(), player2, player4);
+        Assert.assertEquals(0, roundPairings.getPlayerByes().size());
     }
 
     @Test
