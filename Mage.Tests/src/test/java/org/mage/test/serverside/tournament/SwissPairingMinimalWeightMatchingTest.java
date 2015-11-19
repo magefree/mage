@@ -74,7 +74,7 @@ public class SwissPairingMinimalWeightMatchingTest {
         round.addPairing(pair2);
         rounds.add(round);
 
-        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds);
+        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds, false);
         RoundPairings roundPairings = swissPairing.getRoundPairings();
 
         Assert.assertEquals(2, roundPairings.getPairings().size());
@@ -124,7 +124,7 @@ public class SwissPairingMinimalWeightMatchingTest {
         round.addPairing(pair2);
         rounds.add(round);
 
-        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds);
+        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds, true);
         RoundPairings roundPairings = swissPairing.getRoundPairings();
 
         Assert.assertEquals(2, roundPairings.getPairings().size());
@@ -164,7 +164,7 @@ public class SwissPairingMinimalWeightMatchingTest {
         round.addPairing(pair2);
         rounds.add(round);
 
-        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds);
+        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds, false);
         RoundPairings roundPairings = swissPairing.getRoundPairings();
 
         Assert.assertEquals(1, roundPairings.getPairings().size());
@@ -220,7 +220,7 @@ public class SwissPairingMinimalWeightMatchingTest {
         round.getPlayerByes().add(player4);
         rounds.add(round);
 
-        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds);
+        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds, false);
         RoundPairings roundPairings = swissPairing.getRoundPairings();
 
         Assert.assertEquals(2, roundPairings.getPairings().size());
@@ -267,7 +267,7 @@ public class SwissPairingMinimalWeightMatchingTest {
         round.getPlayerByes().add(player5);
         rounds.add(round);
 
-        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds);
+        SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(players, rounds, false);
         RoundPairings roundPairings = swissPairing.getRoundPairings();
 
         Assert.assertEquals(2, roundPairings.getPairings().size());
@@ -302,7 +302,8 @@ public class SwissPairingMinimalWeightMatchingTest {
 
         List<Round> rounds = new ArrayList<>();
         for (int i = 0; i < roundsCount; i++) {
-            SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(new ArrayList<>(players), rounds);
+            SwissPairingMinimalWeightMatching swissPairing =
+                    new SwissPairingMinimalWeightMatching(new ArrayList<>(players), rounds, i + 1 == roundsCount);
             RoundPairings roundPairings = swissPairing.getRoundPairings();
 
             Assert.assertEquals(playersCount / 2, roundPairings.getPairings().size());

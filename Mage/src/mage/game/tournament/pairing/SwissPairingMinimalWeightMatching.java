@@ -57,7 +57,7 @@ public class SwissPairingMinimalWeightMatching {
     // weight of pairings
     private final int[][] w;
 
-    public SwissPairingMinimalWeightMatching(List<TournamentPlayer> players, List<Round> rounds) {
+    public SwissPairingMinimalWeightMatching(List<TournamentPlayer> players, List<Round> rounds, boolean isLastRound) {
         playersCount = players.size();
 
         swissPlayers = new ArrayList<PlayerInfo>();
@@ -147,27 +147,40 @@ public class SwissPairingMinimalWeightMatching {
         // calculate weight
         // try to pair players with equal scores
         w = new int[n][n];
-        for (int i = 0; i < playersCount; i++) {
-            PlayerInfo player = swissPlayers.get(i);
-            for (int p = player.points; p >= 0 ; p--) {
-                int first = -1;
-                int last = -1;
-                for (int j = 0; j < playersCount; j++) {
-                    if (swissPlayers.get(j).points == p) {
-                        if (first < 0) {
-                            first = j;
-                        }
-                        last = j;
-                    }
-                }
-                if (first < 0) {
-                    continue;
-                }
-                int self = (p == player.points ? i : first - 1);
-                int diff = 10 * (player.points - p);
-                for (int j = Math.max(first, i); j <= last; j++) {
-                    w[i][j] = Math.abs(j - (last + first - self)) + diff;
+        int pointsDiffMultiplier = 10;
+        if (isLastRound) {
+            // for the last round, for each unpaired player starting with the first place, pair
+            // against the highest ranked player they haven't played against
+            for (int i = 0; i < playersCount; i++) {
+                for (int j = 0; j < i; j++) {
+                    w[i][j] = Math.abs(i - j) +
+                            pointsDiffMultiplier * Math.abs(swissPlayers.get(i).points - swissPlayers.get(j).points);
                     w[j][i] = w[i][j];
+                }
+            }
+        } else {
+            for (int i = 0; i < playersCount; i++) {
+                PlayerInfo player = swissPlayers.get(i);
+                for (int p = player.points; p >= 0; p--) {
+                    int first = -1;
+                    int last = -1;
+                    for (int j = 0; j < playersCount; j++) {
+                        if (swissPlayers.get(j).points == p) {
+                            if (first < 0) {
+                                first = j;
+                            }
+                            last = j;
+                        }
+                    }
+                    if (first < 0) {
+                        continue;
+                    }
+                    int self = (p == player.points ? i : first - 1);
+                    int diff = pointsDiffMultiplier * (player.points - p);
+                    for (int j = Math.max(first, i); j <= last; j++) {
+                        w[i][j] = Math.abs(j - (last + first - self)) + diff;
+                        w[j][i] = w[i][j];
+                    }
                 }
             }
         }

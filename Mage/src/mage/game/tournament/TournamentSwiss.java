@@ -68,10 +68,11 @@ public abstract class TournamentSwiss extends TournamentImpl {
 
     protected Round createRoundSwiss() {
         List<TournamentPlayer> roundPlayers = getActivePlayers();
+        boolean isLastRound = (rounds.size() + 1 == getNumberRounds());
 
         RoundPairings roundPairings;
         if (roundPlayers.size() <= 16) {
-            SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(roundPlayers, rounds);
+            SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(roundPlayers, rounds, isLastRound);
             roundPairings = swissPairing.getRoundPairings();
         } else {
             SwissPairingSimple swissPairing = new SwissPairingSimple(roundPlayers, rounds);
@@ -86,7 +87,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
         for (TournamentPlayer playerBye : roundPairings.getPlayerByes()) {
             // player free round - add to bye players of this round
             round.getPlayerByes().add(playerBye);
-            if (round.getRoundNumber() == getNumberRounds()) {
+            if (isLastRound) {
                 playerBye.setState(TournamentPlayerState.FINISHED);
             } else {
                 playerBye.setState(TournamentPlayerState.WAITING);
