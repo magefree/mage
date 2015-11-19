@@ -112,7 +112,7 @@ class TheMimeoplasmEffect extends OneShotEffect {
                                     Cards cardsToExile = new CardsImpl();
                                     cardsToExile.add(cardToCopy);
                                     cardsToExile.add(cardForCounters);
-                                    controller.moveCards(cardsToExile, Zone.GRAVEYARD, Zone.EXILED, source, game);
+                                    controller.moveCards(cardsToExile, Zone.EXILED, source, game);
                                     CopyEffect copyEffect = new CopyEffect(Duration.Custom, cardToCopy, source.getSourceId());
                                     game.addEffect(copyEffect, source);
                                     permanent.addCounters(CounterType.P1P1.createInstance(cardForCounters.getPower().getValue()), game);

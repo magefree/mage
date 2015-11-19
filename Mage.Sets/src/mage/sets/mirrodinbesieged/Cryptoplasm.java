@@ -33,7 +33,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -102,8 +101,7 @@ class CryptoplasmEffect extends OneShotEffect {
     public boolean apply(Game game, final Ability source) {
         Permanent creatureToCopy = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creatureToCopy != null) {
-            CopyEffect effect = new CopyEffect(creatureToCopy, source.getSourceId());
-            effect.setApplier(new ApplyToPermanent() {
+            ApplyToPermanent applier = new ApplyToPermanent() {
                 @Override
                 public Boolean apply(Game game, Permanent permanent) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
@@ -120,9 +118,8 @@ class CryptoplasmEffect extends OneShotEffect {
                     return true;
                 }
 
-            });
-            game.addEffect(effect, source);
-
+            };
+            game.copyPermanent(creatureToCopy, source.getSourceId(), source, applier);
         }
         return true;
     }
