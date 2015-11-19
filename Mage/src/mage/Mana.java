@@ -63,7 +63,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     protected int any;
     protected boolean flag = false;
 
-    //todo unsafe and mutable
+    //TODO THIS IS UNSAFE AND MUTABLE
+    //TODO THIS SHOULD BE REMOVED
     public static final Mana RedMana = RedMana(1);
     public static final Mana GreenMana = GreenMana(1);
     public static final Mana BlueMana = BlueMana(1);
@@ -268,24 +269,52 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param mana mana values to subtract
      */
-    public void subtract(final Mana mana) {
-        red -= mana.red;
-        green -= mana.green;
-        blue -= mana.blue;
-        white -= mana.white;
-        black -= mana.black;
-        colorless -= mana.colorless;
-        any -= mana.any;
+    public void subtract(final Mana mana) throws ArithmeticException {
+        red = validateSubtraction(red, mana.red);
+        green = validateSubtraction(green, mana.green);
+        blue = validateSubtraction(blue, mana.blue);
+        white = validateSubtraction(white, mana.white);
+        black = validateSubtraction(black, mana.black);
+        colorless = validateSubtraction(colorless, mana.colorless);
+        any = validateSubtraction(any, mana.any);
     }
 
-    public void subtractCost(Mana cost) {
-        red -= cost.red;
-        green -= cost.green;
-        blue -= cost.blue;
-        white -= cost.white;
-        black -= cost.black;
-        any -= cost.any;
-        colorless -= cost.colorless;
+    /**
+     * Ensures subtraction will not result in a negative number.
+     *
+     * @param lhs left hand side operand
+     * @param rhs right hand side operand
+     * @return returns the non-negative subtraction result
+     * @throws ArithmeticException thrown when the result of the subtraction
+     *                             is less than 0.
+     */
+    private int validateSubtraction(final int lhs, final int rhs) throws ArithmeticException {
+        int result = lhs - rhs;
+        if (result < 0) {
+            throw new ArithmeticException("You can not subtract below 0");
+        }
+        return result;
+    }
+
+
+    /**
+     * Subtracts the passed in mana values from this instance. Will not
+     * reduce this instances mana below 0. The difference between this and
+     * {@code subtract()} is that if we do not have the available colorlesss
+     * mana to pay, we take mana from our colored mana pools.
+     *
+     * @param mana mana values to subtract
+     * @throws ArithmeticException thrown if there is not enough available
+     *                             colored mana to make up the negative colorless cost
+     */
+    public void subtractCost(final Mana mana) throws ArithmeticException {
+        red = validateSubtraction(red, mana.red);
+        green = validateSubtraction(green, mana.green);
+        blue = validateSubtraction(blue, mana.blue);
+        white = validateSubtraction(white, mana.white);
+        black = validateSubtraction(black, mana.black);
+        any = validateSubtraction(any, mana.any);
+        colorless -= mana.colorless; // can be minus, will use remaining mana to pay
 
         while (colorless < 0) {
             int oldColorless = colorless;
@@ -318,7 +347,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 colorless++;
             }
             if (oldColorless == colorless) {
-                break; // to prevent endless loop -> should not be possible, but who knows
+                throw new ArithmeticException("Not enough mana to pay colorless");
             }
         }
     }
