@@ -114,10 +114,10 @@ class ManaforgeCinderManaEffect extends OneShotEffect {
             }
             switch (manaChoice.getChoice()) {
                 case "Black":
-                    mana.addBlack();
+                    mana.increaseBlack();
                     break;
                 case "Red":
-                    mana.addRed();
+                    mana.increaseRed();
                     break;
             }
             controller.getManaPool().addMana(mana, game, source);
