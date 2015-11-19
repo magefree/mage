@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class AysenBureaucrats extends mage.sets.masterseditionii.AysenBureaucrats {
+public class AysenBureaucrats2 extends mage.sets.masterseditionii.AysenBureaucrats {
 
-    public AysenBureaucrats(UUID ownerId) {
+    public AysenBureaucrats2(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 105;
         this.expansionSetCode = "HML";
     }
 
-    public AysenBureaucrats(final AysenBureaucrats card) {
+    public AysenBureaucrats2(final AysenBureaucrats2 card) {
         super(card);
     }
 
     @Override
-    public AysenBureaucrats copy() {
-        return new AysenBureaucrats(this);
+    public AysenBureaucrats2 copy() {
+        return new AysenBureaucrats2(this);
     }
 }
