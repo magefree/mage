@@ -1,6 +1,7 @@
 package mage;
 
 
+
 /**
  * Enum representing the mana symbols.
  * <p>
@@ -77,11 +78,11 @@ public enum ManaSymbol {
     MONOCOLORED_HYBRID_B("{2/B}", B, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     MONOCOLORED_HYBRID_R("{2/R}", R, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     MONOCOLORED_HYBRID_G("{2/G}", G, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
-    PHYREXIAN_W("{W/P}", W, Type.PHYREXIAN, Type.COLORED),
-    PHYREXIAN_G("{G/P}", G, Type.PHYREXIAN, Type.COLORED),
-    PHYREXIAN_R("{R/P}", R, Type.PHYREXIAN, Type.COLORED),
-    PHYREXIAN_B("{B/P}", B, Type.PHYREXIAN, Type.COLORED),
-    PHYREXIAN_U("{U/P}", U, Type.PHYREXIAN, Type.COLORED),
+    PHYREXIAN_W("{W/P}", W, Type.PHYREXIAN, Type.COLORED, Type.MONOCOLORED),
+    PHYREXIAN_G("{G/P}", G, Type.PHYREXIAN, Type.COLORED, Type.MONOCOLORED),
+    PHYREXIAN_R("{R/P}", R, Type.PHYREXIAN, Type.COLORED, Type.MONOCOLORED),
+    PHYREXIAN_B("{B/P}", B, Type.PHYREXIAN, Type.COLORED, Type.MONOCOLORED),
+    PHYREXIAN_U("{U/P}", U, Type.PHYREXIAN, Type.COLORED, Type.MONOCOLORED),
     SNOW("{S}", Type.SNOW);
 
     private enum Type {

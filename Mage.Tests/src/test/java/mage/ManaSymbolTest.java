@@ -645,6 +645,151 @@ public class ManaSymbolTest {
 
 
     @Test
+    public void shouldCreateWPhyrexianMana() {
+        // given
+
+        // when
+        ManaSymbol phyW = ManaSymbol.PHYREXIAN_W;
+
+        // then
+        assertEquals("{W/P}", phyW.toString());
+        assertFalse(phyW.isGreen());
+        assertFalse(phyW.isBlue());
+        assertFalse(phyW.isRed());
+        assertFalse(phyW.isBlack());
+        assertFalse(phyW.isPrimary());
+        assertFalse(phyW.isGeneric());
+        assertFalse(phyW.isColorless());
+        assertFalse(phyW.isHybrid());
+        assertFalse(phyW.isSnow());
+
+        assertTrue(phyW.isWhite());
+        assertTrue(phyW.isPhyrexian());
+        assertTrue(phyW.isColored());
+        assertTrue(phyW.isMonocolored());
+
+        assertEquals(ManaSymbol.W, phyW.getManaSymbol1());
+        assertEquals(null, phyW.getManaSymbol2());
+    }
+
+
+    @Test
+     public void shouldCreateGPhyrexianMana() {
+        // given
+
+        // when
+        ManaSymbol phyG = ManaSymbol.PHYREXIAN_G;
+
+        // then
+        assertEquals("{G/P}", phyG.toString());
+        assertFalse(phyG.isWhite());
+        assertFalse(phyG.isBlue());
+        assertFalse(phyG.isRed());
+        assertFalse(phyG.isBlack());
+        assertFalse(phyG.isPrimary());
+        assertFalse(phyG.isGeneric());
+        assertFalse(phyG.isColorless());
+        assertFalse(phyG.isHybrid());
+        assertFalse(phyG.isSnow());
+
+        assertTrue(phyG.isGreen());
+        assertTrue(phyG.isPhyrexian());
+        assertTrue(phyG.isColored());
+        assertTrue(phyG.isMonocolored());
+
+        assertEquals(ManaSymbol.G, phyG.getManaSymbol1());
+        assertEquals(null, phyG.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateRPhyrexianMana() {
+        // given
+
+        // when
+        ManaSymbol phyR = ManaSymbol.PHYREXIAN_R;
+
+        // then
+        assertEquals("{R/P}", phyR.toString());
+        assertFalse(phyR.isGreen());
+        assertFalse(phyR.isWhite());
+        assertFalse(phyR.isBlue());
+        assertFalse(phyR.isBlack());
+        assertFalse(phyR.isPrimary());
+        assertFalse(phyR.isGeneric());
+        assertFalse(phyR.isColorless());
+        assertFalse(phyR.isHybrid());
+        assertFalse(phyR.isSnow());
+
+        assertTrue(phyR.isRed());
+        assertTrue(phyR.isPhyrexian());
+        assertTrue(phyR.isColored());
+        assertTrue(phyR.isMonocolored());
+
+        assertEquals(ManaSymbol.R, phyR.getManaSymbol1());
+        assertEquals(null, phyR.getManaSymbol2());
+    }
+
+
+    @Test
+     public void shouldCreateBPhyrexianMana() {
+        // given
+
+        // when
+        ManaSymbol phyB = ManaSymbol.PHYREXIAN_B;
+
+        // then
+        assertEquals("{B/P}", phyB.toString());
+        assertFalse(phyB.isRed());
+        assertFalse(phyB.isGreen());
+        assertFalse(phyB.isWhite());
+        assertFalse(phyB.isBlue());
+        assertFalse(phyB.isPrimary());
+        assertFalse(phyB.isGeneric());
+        assertFalse(phyB.isColorless());
+        assertFalse(phyB.isHybrid());
+        assertFalse(phyB.isSnow());
+
+        assertTrue(phyB.isBlack());
+        assertTrue(phyB.isPhyrexian());
+        assertTrue(phyB.isColored());
+        assertTrue(phyB.isMonocolored());
+
+        assertEquals(ManaSymbol.B, phyB.getManaSymbol1());
+        assertEquals(null, phyB.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateUPhyrexianMana() {
+        // given
+
+        // when
+        ManaSymbol phyU = ManaSymbol.PHYREXIAN_U;
+
+        // then
+        assertEquals("{U/P}", phyU.toString());
+        assertFalse(phyU.isBlack());
+        assertFalse(phyU.isRed());
+        assertFalse(phyU.isGreen());
+        assertFalse(phyU.isWhite());
+        assertFalse(phyU.isPrimary());
+        assertFalse(phyU.isGeneric());
+        assertFalse(phyU.isColorless());
+        assertFalse(phyU.isHybrid());
+        assertFalse(phyU.isSnow());
+
+        assertTrue(phyU.isBlue());
+        assertTrue(phyU.isPhyrexian());
+        assertTrue(phyU.isColored());
+        assertTrue(phyU.isMonocolored());
+
+        assertEquals(ManaSymbol.U, phyU.getManaSymbol1());
+        assertEquals(null, phyU.getManaSymbol2());
+    }
+
+
+    @Test
     public void shouldCreateSnowMana() {
         // given
 
@@ -670,6 +815,5 @@ public class ManaSymbolTest {
 
         assertEquals(null, snow.getManaSymbol1());
         assertEquals(null, snow.getManaSymbol2());
-
     }
 }
