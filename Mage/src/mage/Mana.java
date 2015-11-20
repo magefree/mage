@@ -270,30 +270,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param mana mana values to subtract
      */
     public void subtract(final Mana mana) throws ArithmeticException {
-        red = validateSubtraction(red, mana.red);
-        green = validateSubtraction(green, mana.green);
-        blue = validateSubtraction(blue, mana.blue);
-        white = validateSubtraction(white, mana.white);
-        black = validateSubtraction(black, mana.black);
-        colorless = validateSubtraction(colorless, mana.colorless);
-        any = validateSubtraction(any, mana.any);
-    }
-
-    /**
-     * Ensures subtraction will not result in a negative number.
-     *
-     * @param lhs left hand side operand
-     * @param rhs right hand side operand
-     * @return returns the non-negative subtraction result
-     * @throws ArithmeticException thrown when the result of the subtraction
-     *                             is less than 0.
-     */
-    private int validateSubtraction(final int lhs, final int rhs) throws ArithmeticException {
-        int result = lhs - rhs;
-        if (result < 0) {
-            throw new ArithmeticException("You can not subtract below 0");
-        }
-        return result;
+        red -= mana.red;
+        green -= mana.green;
+        blue -= mana.blue;
+        white -= mana.white;
+        black -= mana.black;
+        colorless -= mana.colorless;
+        any -= mana.any;
     }
 
 
@@ -308,13 +291,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *                             colored mana to make up the negative colorless cost
      */
     public void subtractCost(final Mana mana) throws ArithmeticException {
-        red = validateSubtraction(red, mana.red);
-        green = validateSubtraction(green, mana.green);
-        blue = validateSubtraction(blue, mana.blue);
-        white = validateSubtraction(white, mana.white);
-        black = validateSubtraction(black, mana.black);
-        any = validateSubtraction(any, mana.any);
-        colorless -= mana.colorless; // can be minus, will use remaining mana to pay
+        red -= mana.red;
+        green -= mana.green;
+        blue -= mana.blue;
+        white -= mana.white;
+        black -= mana.black;
+        any -= mana.any;
+        colorless -= mana.colorless;
 
         while (colorless < 0) {
             int oldColorless = colorless;

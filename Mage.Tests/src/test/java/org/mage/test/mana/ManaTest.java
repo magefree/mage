@@ -1,5 +1,6 @@
 package org.mage.test.mana;
 
+import junit.framework.Assert;
 import mage.Mana;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -431,26 +432,10 @@ public class ManaTest {
         assertEquals(1, thisMana.getAny());
     }
 
-    @Test
-    public void shouldNotSubtractLessThan0() {
-        // given
-        expectedException.expect(ArithmeticException.class);
-        expectedException.expectMessage("You can not subtract below 0");
-        Mana thisMana = new Mana(2, 2, 2, 2, 2, 2, 2);
-        Mana thatMana = new Mana(10, 1, 1, 1, 10, 1, 1);
-
-        // when
-        thisMana.subtract(thatMana);
-
-        // then
-    }
-
 
     @Test
-    public void shouldNotAllowMinusSubtractionCost() {
+    public void shouldSubtractCost() {
         // given
-        expectedException.expect(ArithmeticException.class);
-        expectedException.expectMessage("You can not subtract below 0");
         Mana thisMana = new Mana(2, 2, 2, 2, 2, 2, 2);
         Mana thatMana = new Mana(10, 1, 1, 1, 10, 1, 1);
 
@@ -458,7 +443,13 @@ public class ManaTest {
         thisMana.subtractCost(thatMana);
 
         // then
-
+        assertEquals(-8, thisMana.getRed());
+        assertEquals(1, thisMana.getGreen());
+        assertEquals(1, thisMana.getBlue());
+        assertEquals(1, thisMana.getWhite());
+        assertEquals(-8, thisMana.getBlack());
+        assertEquals(1, thisMana.getColorless());
+        assertEquals(1, thisMana.getAny());
     }
 
 
