@@ -1,7 +1,5 @@
 package mage.verify;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -17,43 +15,70 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
-import java.text.Normalizer;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CompareWithMtgjsonTest {
+public class VerifyCardDataTest {
 
     @Test
-    public void testSets() throws IOException {
-        Collection<ExpansionSet> sets = Sets.getInstance().values();
+    public void verifySets() throws IOException {
+        Map<String, JsonSet> reference = JsonSet.loadAll();
 
-        Map<String, Map<String, Object>> reference = new ObjectMapper().readValue(
-                CompareWithMtgjsonTest.class.getResourceAsStream("AllCards.json"),
-                new TypeReference<Map<String, Map<String, Object>>>() {});
-
-        Map<String, String> aliases = new HashMap<>();
-        for (String name : reference.keySet()) {
-            String unaccented = stripAccents(name);
-            if (!name.equals(unaccented)) {
-                aliases.put(name, unaccented);
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            JsonSet ref = reference.get(set.getCode());
+            if (ref == null) {
+                for (JsonSet js : reference.values()) {
+                    if (set.getCode().equals(js.oldCode) || set.getCode().toLowerCase().equals(js.magicCardsInfoCode)) {
+                        ref = js;
+                        break;
+                    }
+                }
+                if (ref == null) {
+                    System.out.println("missing reference for " + set);
+                    continue;
+                }
+            }
+            if (!String.format("%tF", set.getReleaseDate()).equals(ref.releaseDate)) {
+                System.out.printf("%40s %-20s %20tF %20s%n", set, "release date", set.getReleaseDate(), ref.releaseDate);
+            }
+            if (set.hasBoosters() != (ref.booster != null)) {
+                System.out.printf("%40s %-20s %20s %20s%n", set, "has boosters", set.hasBoosters(), ref.booster != null);
+            }
+            boolean refHasBasicLands = false;
+            for (JsonCard card : ref.cards) {
+                if ("Mountain".equals(card.name)) {
+                    refHasBasicLands = true;
+                    break;
+                }
+            }
+            if (set.hasBasicLands() != refHasBasicLands) {
+                System.out.printf("%40s %-20s %20s %20s%n", set, "has basic lands", set.hasBasicLands(), refHasBasicLands);
             }
         }
-        for (Map.Entry<String, String> mapping : aliases.entrySet()) {
-            reference.put(mapping.getValue(), reference.get(mapping.getKey()));
-        }
+    }
 
+    public static List<Card> allCards() {
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        List<Card> cards = new ArrayList<>();
         for (ExpansionSet set : sets) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                Set<String> tokens = findSourceTokens(setInfo.getCardClass());
-                Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
-                        setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
-                if (card.isSplitCard()) {
-                    check(reference, ((SplitCard) card).getLeftHalfCard(), null);
-                    check(reference, ((SplitCard) card).getRightHalfCard(), null);
-                } else {
-                    check(reference, card, tokens);
-                }
+                cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
+                        setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
+            }
+        }
+        return cards;
+    }
+
+    @Test
+    public void verifyCards() throws IOException {
+        for (Card card : allCards()) {
+            Set<String> tokens = findSourceTokens(card.getClass());
+            if (card.isSplitCard()) {
+                check(((SplitCard) card).getLeftHalfCard(), null);
+                check(((SplitCard) card).getRightHalfCard(), null);
+            } else {
+                check(card, tokens);
             }
         }
     }
@@ -76,22 +101,17 @@ public class CompareWithMtgjsonTest {
         }
     }
 
-    private String stripAccents(String str) {
-        String decomposed = Normalizer.normalize(str, Normalizer.Form.NFKD);
-        return decomposed.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-    }
-
-    private void check(Map<String, Map<String, Object>> reference, Card card, Set<String> tokens) {
-        Map<String, Object> ref = findReference(reference, card.getName());
+    private void check(Card card, Set<String> tokens) {
+        JsonCard ref = MtgJson.find(card.getName());
         if (ref == null) {
             System.out.println("Missing card reference for " + card);
             return;
         }
         checkAll(card, ref);
         if (tokens != null) {
-            Map<String, Object> ref2 = null;
+            JsonCard ref2 = null;
             if (card.isFlipCard()) {
-                ref2 = findReference(reference, card.getFlipCardName());
+                ref2 = MtgJson.find(card.getFlipCardName());
             }
             for (String token : tokens) {
                 if (!(token.equals(card.getName())
@@ -105,32 +125,18 @@ public class CompareWithMtgjsonTest {
         }
     }
 
-    private Map<String, Object> findReference(Map<String, Map<String, Object>> reference, String name) {
-        Map<String, Object> ref = reference.get(name);
-        if (ref == null) {
-            name = name.replaceFirst("\\bA[Ee]", "Æ");
-            ref = reference.get(name);
-        }
-        if (ref == null) {
-            name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
-            ref = reference.get(name);
-        }
-        return ref;
+    private boolean containsInTypesOrText(JsonCard ref, String token) {
+        return contains(ref.types, token)
+                || contains(ref.subtypes, token)
+                || contains(ref.supertypes, token)
+                || ref.text.contains(token);
     }
 
-    private boolean containsInTypesOrText(Map<String, Object> ref, String token) {
-        return contains(ref, "types", token)
-                || contains(ref, "subtypes", token)
-                || contains(ref, "supertypes", token)
-                || ((String) ref.get("text")).contains(token);
-    }
-
-    private boolean contains(Map<String, Object> ref, String key, String value) {
-        Collection<String> options = (Collection<String>) ref.get(key);
+    private boolean contains(Collection<String> options, String value) {
         return options != null && options.contains(value);
     }
 
-    private void checkAll(Card card, Map<String, Object> ref) {
+    private void checkAll(Card card, JsonCard ref) {
         checkCost(card, ref);
         checkPT(card, ref);
         checkSubtypes(card, ref);
@@ -139,8 +145,8 @@ public class CompareWithMtgjsonTest {
         checkColors(card, ref);
     }
 
-    private void checkColors(Card card, Map<String, Object> ref) {
-        Collection<String> expected = (Collection<String>) ref.get("colors");
+    private void checkColors(Card card, JsonCard ref) {
+        Collection<String> expected = ref.colors;
         ObjectColor color = card.getColor(null);
         if (expected == null) {
             expected = Collections.emptyList();
@@ -155,8 +161,8 @@ public class CompareWithMtgjsonTest {
         }
     }
 
-    private void checkSubtypes(Card card, Map<String, Object> ref) {
-        Collection<String> expected = (Collection<String>) ref.get("subtypes");
+    private void checkSubtypes(Card card, JsonCard ref) {
+        Collection<String> expected = ref.subtypes;
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
             for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
@@ -170,15 +176,15 @@ public class CompareWithMtgjsonTest {
         }
     }
 
-    private void checkSupertypes(Card card, Map<String, Object> ref) {
-        Collection<String> expected = (Collection<String>) ref.get("supertypes");
+    private void checkSupertypes(Card card, JsonCard ref) {
+        Collection<String> expected = ref.supertypes;
         if (!eqSet(card.getSupertype(), expected)) {
             System.out.println(card.getSupertype() + " != " + expected + " for " + card);
         }
     }
 
-    private void checkTypes(Card card, Map<String, Object> ref) {
-        Collection<String> expected = (Collection<String>) ref.get("types");
+    private void checkTypes(Card card, JsonCard ref) {
+        Collection<String> expected = ref.types;
         List<String> type = new ArrayList<>();
         for (CardType cardType : card.getCardType()) {
             type.add(cardType.toString());
@@ -195,9 +201,9 @@ public class CompareWithMtgjsonTest {
         return b != null && a.size() == b.size() && a.containsAll(b);
     }
 
-    private void checkPT(Card card, Map<String, Object> ref) {
+    private void checkPT(Card card, JsonCard ref) {
         String pt = card.getPower() + "/" + card.getToughness();
-        String expected = ref.get("power") + "/" + ref.get("toughness");
+        String expected = ref.power + "/" + ref.toughness;
         if ("0/0".equals(pt) && ("null/null".equals(expected) || "*/*".equals(expected))) {
             // ok
         } else if (!Objects.equals(pt, expected.replace("*", "0"))) {
@@ -205,8 +211,8 @@ public class CompareWithMtgjsonTest {
         }
     }
 
-    private void checkCost(Card card, Map<String, Object> ref) {
-        String expected = (String) ref.get("manaCost");
+    private void checkCost(Card card, JsonCard ref) {
+        String expected = ref.manaCost;
         String cost = join(card.getManaCost().getSymbols());
         if ("".equals(cost)) {
             cost = null;
