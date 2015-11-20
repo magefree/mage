@@ -67,12 +67,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     public ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
         for (T cost : costs) {
-            this.add((T) cost.copy());
+            this.add(cost.copy());
         }
     }
 
     @Override
-    public boolean add(ManaCost cost) {
+    public final boolean add(ManaCost cost) {
         if (cost instanceof ManaCosts) {
             for (ManaCost manaCost : (ManaCosts<T>) cost) {
                 super.add((T) manaCost);
@@ -298,7 +298,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public void load(String mana) {
+    public final void load(String mana) {
         this.clear();
         if (costs.containsKey(mana)) {
             ManaCosts<T> savedCosts = costs.get(mana);
@@ -433,7 +433,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public boolean isPaid() {
         for (T cost : this) {
-            if (!((T) cost instanceof VariableManaCost) && !cost.isPaid()) {
+            if (!(cost instanceof VariableManaCost) && !cost.isPaid()) {
                 return false;
             }
         }
@@ -465,7 +465,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public ManaCosts<T> copy() {
-        return new ManaCostsImpl(this);
+        return new ManaCostsImpl<>(this);
     }
 
     @Override
