@@ -120,7 +120,7 @@ public enum ManaSymbol {
      * @param manaSymbol2 Second associated mana symbol. For hybrid mana symbol.
      * @param types
      */
-    private ManaSymbol(String symbol, ManaSymbol manaSymbol1, ManaSymbol manaSymbol2, Type... types) {
+    ManaSymbol(String symbol, ManaSymbol manaSymbol1, ManaSymbol manaSymbol2, Type... types) {
         this.symbol = symbol;
         boolean lPrimary = false, lColored = false, lGeneric = false, lColorless = false;
         boolean lMonocolored = false, lHybrid = false, lPhyrexian = false, lSnow = false;
@@ -174,11 +174,11 @@ public enum ManaSymbol {
      * @param manaSymbol Associated mana symbol. For monocolored hybrid and phyrexian mana.
      * @param types
      */
-    private ManaSymbol(String symbol, ManaSymbol manaSymbol, Type... types) {
+    ManaSymbol(String symbol, ManaSymbol manaSymbol, Type... types) {
         this(symbol, manaSymbol, null, types);
     }
 
-    private ManaSymbol(String symbol, Type... types) {
+    ManaSymbol(String symbol, Type... types) {
         this(symbol, null, null, types);
     }
 
