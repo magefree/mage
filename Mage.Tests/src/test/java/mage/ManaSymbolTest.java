@@ -352,4 +352,294 @@ public class ManaSymbolTest {
         assertEquals(ManaSymbol.G, monoHybridG.getManaSymbol1());
         assertEquals(null, monoHybridG.getManaSymbol2());
     }
+
+
+    @Test
+    public void shouldCreateHybridWUManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridWU = ManaSymbol.HYBRID_WU;
+
+        // then
+        assertEquals("{W/U}", hybridWU.toString());
+        assertFalse(hybridWU.isGreen());
+        assertFalse(hybridWU.isBlack());
+        assertFalse(hybridWU.isRed());
+        assertFalse(hybridWU.isSnow());
+        assertFalse(hybridWU.isPhyrexian());
+        assertFalse(hybridWU.isPrimary());
+        assertFalse(hybridWU.isGeneric());
+        assertFalse(hybridWU.isColorless());
+        assertFalse(hybridWU.isMonocolored());
+
+        assertTrue(hybridWU.isWhite());
+        assertTrue(hybridWU.isBlue());
+        assertTrue(hybridWU.isHybrid());
+        assertTrue(hybridWU.isColored());
+
+        assertEquals(ManaSymbol.W, hybridWU.getManaSymbol1());
+        assertEquals(ManaSymbol.U, hybridWU.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridWBManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridWB = ManaSymbol.HYBRID_WB;
+
+        // then
+        assertEquals("{W/B}", hybridWB.toString());
+        assertFalse(hybridWB.isBlue());
+        assertFalse(hybridWB.isGreen());
+        assertFalse(hybridWB.isRed());
+        assertFalse(hybridWB.isSnow());
+        assertFalse(hybridWB.isPhyrexian());
+        assertFalse(hybridWB.isPrimary());
+        assertFalse(hybridWB.isGeneric());
+        assertFalse(hybridWB.isColorless());
+        assertFalse(hybridWB.isMonocolored());
+
+        assertTrue(hybridWB.isWhite());
+        assertTrue(hybridWB.isBlack());
+        assertTrue(hybridWB.isHybrid());
+        assertTrue(hybridWB.isColored());
+
+        assertEquals(ManaSymbol.W, hybridWB.getManaSymbol1());
+        assertEquals(ManaSymbol.B, hybridWB.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridUBManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridUB = ManaSymbol.HYBRID_UB;
+
+        // then
+        assertEquals("{U/B}", hybridUB.toString());
+        assertFalse(hybridUB.isWhite());
+        assertFalse(hybridUB.isGreen());
+        assertFalse(hybridUB.isRed());
+        assertFalse(hybridUB.isSnow());
+        assertFalse(hybridUB.isPhyrexian());
+        assertFalse(hybridUB.isPrimary());
+        assertFalse(hybridUB.isGeneric());
+        assertFalse(hybridUB.isColorless());
+        assertFalse(hybridUB.isMonocolored());
+
+        assertTrue(hybridUB.isBlue());
+        assertTrue(hybridUB.isBlack());
+        assertTrue(hybridUB.isHybrid());
+        assertTrue(hybridUB.isColored());
+
+        assertEquals(ManaSymbol.U, hybridUB.getManaSymbol1());
+        assertEquals(ManaSymbol.B, hybridUB.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridURManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridUR = ManaSymbol.HYBRID_UR;
+
+        // then
+        assertEquals("{U/R}", hybridUR.toString());
+        assertFalse(hybridUR.isBlack());
+        assertFalse(hybridUR.isWhite());
+        assertFalse(hybridUR.isGreen());
+        assertFalse(hybridUR.isSnow());
+        assertFalse(hybridUR.isPhyrexian());
+        assertFalse(hybridUR.isPrimary());
+        assertFalse(hybridUR.isGeneric());
+        assertFalse(hybridUR.isColorless());
+        assertFalse(hybridUR.isMonocolored());
+
+        assertTrue(hybridUR.isBlue());
+        assertTrue(hybridUR.isRed());
+        assertTrue(hybridUR.isHybrid());
+        assertTrue(hybridUR.isColored());
+
+        assertEquals(ManaSymbol.U, hybridUR.getManaSymbol1());
+        assertEquals(ManaSymbol.R, hybridUR.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridBRManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridBR = ManaSymbol.HYBRID_BR;
+
+        // then
+        assertEquals("{B/R}", hybridBR.toString());
+        assertFalse(hybridBR.isBlue());
+        assertFalse(hybridBR.isWhite());
+        assertFalse(hybridBR.isGreen());
+        assertFalse(hybridBR.isSnow());
+        assertFalse(hybridBR.isPhyrexian());
+        assertFalse(hybridBR.isPrimary());
+        assertFalse(hybridBR.isGeneric());
+        assertFalse(hybridBR.isColorless());
+        assertFalse(hybridBR.isMonocolored());
+
+        assertTrue(hybridBR.isBlack());
+        assertTrue(hybridBR.isRed());
+        assertTrue(hybridBR.isHybrid());
+        assertTrue(hybridBR.isColored());
+
+        assertEquals(ManaSymbol.B, hybridBR.getManaSymbol1());
+        assertEquals(ManaSymbol.R, hybridBR.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridBGManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridBG = ManaSymbol.HYBRID_BG;
+
+        // then
+        assertEquals("{B/G}", hybridBG.toString());
+        assertFalse(hybridBG.isRed());
+        assertFalse(hybridBG.isBlue());
+        assertFalse(hybridBG.isWhite());
+        assertFalse(hybridBG.isSnow());
+        assertFalse(hybridBG.isPhyrexian());
+        assertFalse(hybridBG.isPrimary());
+        assertFalse(hybridBG.isGeneric());
+        assertFalse(hybridBG.isColorless());
+        assertFalse(hybridBG.isMonocolored());
+
+        assertTrue(hybridBG.isBlack());
+        assertTrue(hybridBG.isGreen());
+        assertTrue(hybridBG.isHybrid());
+        assertTrue(hybridBG.isColored());
+
+        assertEquals(ManaSymbol.B, hybridBG.getManaSymbol1());
+        assertEquals(ManaSymbol.G, hybridBG.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridRGManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridRG = ManaSymbol.HYBRID_RG;
+
+        // then
+        assertEquals("{R/G}", hybridRG.toString());
+        assertFalse(hybridRG.isBlack());
+        assertFalse(hybridRG.isBlue());
+        assertFalse(hybridRG.isWhite());
+        assertFalse(hybridRG.isSnow());
+        assertFalse(hybridRG.isPhyrexian());
+        assertFalse(hybridRG.isPrimary());
+        assertFalse(hybridRG.isGeneric());
+        assertFalse(hybridRG.isColorless());
+        assertFalse(hybridRG.isMonocolored());
+
+        assertTrue(hybridRG.isRed());
+        assertTrue(hybridRG.isGreen());
+        assertTrue(hybridRG.isHybrid());
+        assertTrue(hybridRG.isColored());
+
+        assertEquals(ManaSymbol.R, hybridRG.getManaSymbol1());
+        assertEquals(ManaSymbol.G, hybridRG.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridRWManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridRW = ManaSymbol.HYBRID_RW;
+
+        // then
+        assertEquals("{R/W}", hybridRW.toString());
+        assertFalse(hybridRW.isGreen());
+        assertFalse(hybridRW.isBlack());
+        assertFalse(hybridRW.isBlue());
+        assertFalse(hybridRW.isSnow());
+        assertFalse(hybridRW.isPhyrexian());
+        assertFalse(hybridRW.isPrimary());
+        assertFalse(hybridRW.isGeneric());
+        assertFalse(hybridRW.isColorless());
+        assertFalse(hybridRW.isMonocolored());
+
+        assertTrue(hybridRW.isRed());
+        assertTrue(hybridRW.isWhite());
+        assertTrue(hybridRW.isHybrid());
+        assertTrue(hybridRW.isColored());
+
+        assertEquals(ManaSymbol.R, hybridRW.getManaSymbol1());
+        assertEquals(ManaSymbol.W, hybridRW.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridGWManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridGW = ManaSymbol.HYBRID_GW;
+
+        // then
+        assertEquals("{G/W}", hybridGW.toString());
+        assertFalse(hybridGW.isRed());
+        assertFalse(hybridGW.isBlack());
+        assertFalse(hybridGW.isBlue());
+        assertFalse(hybridGW.isSnow());
+        assertFalse(hybridGW.isPhyrexian());
+        assertFalse(hybridGW.isPrimary());
+        assertFalse(hybridGW.isGeneric());
+        assertFalse(hybridGW.isColorless());
+        assertFalse(hybridGW.isMonocolored());
+
+        assertTrue(hybridGW.isGreen());
+        assertTrue(hybridGW.isWhite());
+        assertTrue(hybridGW.isHybrid());
+        assertTrue(hybridGW.isColored());
+
+        assertEquals(ManaSymbol.G, hybridGW.getManaSymbol1());
+        assertEquals(ManaSymbol.W, hybridGW.getManaSymbol2());
+    }
+
+
+    @Test
+    public void shouldCreateHybridGUManaSymbol() {
+        // given
+
+        // when
+        ManaSymbol hybridGU = ManaSymbol.HYBRID_GU;
+
+        // then
+        assertEquals("{G/U}", hybridGU.toString());
+        assertFalse(hybridGU.isWhite());
+        assertFalse(hybridGU.isRed());
+        assertFalse(hybridGU.isBlack());
+        assertFalse(hybridGU.isSnow());
+        assertFalse(hybridGU.isPhyrexian());
+        assertFalse(hybridGU.isPrimary());
+        assertFalse(hybridGU.isGeneric());
+        assertFalse(hybridGU.isColorless());
+        assertFalse(hybridGU.isMonocolored());
+
+        assertTrue(hybridGU.isGreen());
+        assertTrue(hybridGU.isBlue());
+        assertTrue(hybridGU.isHybrid());
+        assertTrue(hybridGU.isColored());
+
+        assertEquals(ManaSymbol.G, hybridGU.getManaSymbol1());
+        assertEquals(ManaSymbol.U, hybridGU.getManaSymbol2());
+    }
 }
