@@ -242,6 +242,7 @@ public enum CardRepository {
             subtypes.add("Reflection");
             subtypes.add("Sand");
             subtypes.add("Saproling");
+            subtypes.add("Scion");
             subtypes.add("Serf");
             subtypes.add("Splinter");
             subtypes.add("Survivor");
