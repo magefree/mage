@@ -149,6 +149,7 @@ import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.common.TargetSpellOrPermanent;
 import mage.util.Copier;
 import mage.util.MessageToClient;
+import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
@@ -1637,42 +1638,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     private static void addBasicLands(Deck deck, String landName, int number) {
         Random random = new Random();
-        Set<String> landSets = new HashSet<>();
-
-        // decide from which sets basic lands are taken from
-        for (String setCode : deck.getExpansionSetCodes()) {
-            ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
-            if (expansionInfo.hasBasicLands()) {
-                landSets.add(expansionInfo.getCode());
-            }
-        }
-
-        // if sets have no basic land, take land from block
-        if (landSets.isEmpty()) {
-            for (String setCode : deck.getExpansionSetCodes()) {
-                ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
-                List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
-                for (ExpansionInfo blockSet : blockSets) {
-                    if (blockSet.hasBasicLands()) {
-                        landSets.add(blockSet.getCode());
-                    }
-                }
-            }
-        }
-        // if still no set with lands found, take one by random
-        if (landSets.isEmpty()) {
-            // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
-            // select a set with basic lands by random
-            Random generator = new Random();
-            List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
-            if (basicLandSets.size() > 0) {
-                landSets.add(basicLandSets.get(generator.nextInt(basicLandSets.size())).getCode());
-            }
-        }
-
-        if (landSets.isEmpty()) {
-            throw new IllegalArgumentException("No set with basic land was found");
-        }
+        Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());
 
         CardCriteria criteria = new CardCriteria();
         if (!landSets.isEmpty()) {
