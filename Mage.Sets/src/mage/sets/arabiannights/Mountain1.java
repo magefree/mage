@@ -27,19 +27,20 @@
  */
 package mage.sets.arabiannights;
 
+import mage.constants.Rarity;
+
 import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
-
-
 public class Mountain1 extends mage.cards.basiclands.Mountain {
 
     public Mountain1(UUID ownerId) {
         super(ownerId, 91);
         this.expansionSetCode = "ARN";
+        this.rarity = Rarity.COMMON;
     }
 
     public Mountain1(final Mountain1 card) {

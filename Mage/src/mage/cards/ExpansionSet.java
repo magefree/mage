@@ -58,7 +58,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterSpecial;
 
     protected int numBoosterLands;
-    protected int ratioBoosterSpecialLand = 0; // if > 0 basic lands are replaced with speical land in the ratio every X land is replaced by special land
+    protected int ratioBoosterSpecialLand = 0; // if > 0 basic lands are replaced with special land in the ratio every X land is replaced by special land
 
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
