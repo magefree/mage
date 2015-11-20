@@ -256,7 +256,7 @@ public class EvolveTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ivy Lane Denizen", 2);
         assertPermanentCount(playerA, "Adaptive Snapjaw", 1);
 
-        assertPowerToughness(playerA, "Adaptive Snapjaw", 9, 5); // +2 from Ivys and +1 from add to all with +1/+1 counter
+        assertPowerToughness(playerA, "Adaptive Snapjaw", 8, 4); // +2 from Ivys
         assertPowerToughness(playerA, "Renegade Krasis", 5, 4); // +1 Evolve by Ivy and +1 Evolve by Snapjaw
         assertPowerToughness(playerA, "Ivy Lane Denizen", 2, 3, Filter.ComparisonScope.Any);
         assertPowerToughness(playerA, "Ivy Lane Denizen", 5, 6, Filter.ComparisonScope.Any); // +1 from Other Ivy + 2 from Krasis
