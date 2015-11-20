@@ -642,4 +642,34 @@ public class ManaSymbolTest {
         assertEquals(ManaSymbol.G, hybridGU.getManaSymbol1());
         assertEquals(ManaSymbol.U, hybridGU.getManaSymbol2());
     }
+
+
+    @Test
+    public void shouldCreateSnowMana() {
+        // given
+
+        // when
+        ManaSymbol snow = ManaSymbol.SNOW;
+
+        // then
+        assertEquals("{S}", snow.toString());
+        assertFalse(snow.isGreen());
+        assertFalse(snow.isBlue());
+        assertFalse(snow.isWhite());
+        assertFalse(snow.isRed());
+        assertFalse(snow.isBlack());
+        assertFalse(snow.isPhyrexian());
+        assertFalse(snow.isPrimary());
+        assertFalse(snow.isGeneric());
+        assertFalse(snow.isColorless());
+        assertFalse(snow.isMonocolored());
+        assertFalse(snow.isHybrid());
+        assertFalse(snow.isColored());
+
+        assertTrue(snow.isSnow());
+
+        assertEquals(null, snow.getManaSymbol1());
+        assertEquals(null, snow.getManaSymbol2());
+
+    }
 }
