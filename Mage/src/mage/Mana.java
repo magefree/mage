@@ -135,48 +135,66 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         any += mana.getAny();
     }
 
-    public void addRed() {
+    public void increaseRed() {
         red++;
     }
 
-    public void addGreen() {
+    public void increaseGreen() {
         green++;
     }
 
-    public void addBlue() {
+    public void increaseBlue() {
         blue++;
     }
 
-    public void addWhite() {
+    public void increaseWhite() {
         white++;
     }
 
-    public void addBlack() {
+    public void increaseBlack() {
         black++;
     }
 
-    public void addColorless() {
+    public void increaseColorless() {
         colorless++;
     }
 
-    public void subtract(Mana mana) {
-        red -= mana.getRed();
-        green -= mana.getGreen();
-        blue -= mana.getBlue();
-        white -= mana.getWhite();
-        black -= mana.getBlack();
-        colorless -= mana.getColorless();
-        any -= mana.getAny();
+    /**
+     * Subtracts the passed in mana values from this instance. Will not
+     * reduce this instances mana below 0.
+     *
+     * @param mana mana values to subtract
+     */
+    public void subtract(final Mana mana) throws ArithmeticException {
+        red -= mana.red;
+        green -= mana.green;
+        blue -= mana.blue;
+        white -= mana.white;
+        black -= mana.black;
+        colorless -= mana.colorless;
+        any -= mana.any;
     }
 
-    public void subtractCost(Mana cost) {
-        red -= cost.getRed();
-        green -= cost.getGreen();
-        blue -= cost.getBlue();
-        white -= cost.getWhite();
-        black -= cost.getBlack();
-        any -= cost.getAny();
-        colorless -= cost.getColorless();
+
+    /**
+     * Subtracts the passed in mana values from this instance. Will not
+     * reduce this instances mana below 0. The difference between this and
+     * {@code subtract()} is that if we do not have the available colorlesss
+     * mana to pay, we take mana from our colored mana pools.
+     *
+     * @param mana mana values to subtract
+     * @throws ArithmeticException thrown if there is not enough available
+     *                             colored mana to make up the negative colorless cost
+     */
+    public void subtractCost(final Mana mana) throws ArithmeticException {
+        red -= mana.red;
+        green -= mana.green;
+        blue -= mana.blue;
+        white -= mana.white;
+        black -= mana.black;
+        any -= mana.any;
+        colorless -= mana.colorless;
+
         while (colorless < 0) {
             int oldColorless = colorless;
             if (red > 0) {
