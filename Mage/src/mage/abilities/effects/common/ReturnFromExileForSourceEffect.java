@@ -37,9 +37,10 @@ import static mage.constants.Zone.GRAVEYARD;
 import static mage.constants.Zone.HAND;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.PermanentToken;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -95,11 +96,12 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            int zoneChangeCounter = source.getSourceObjectZoneChangeCounter();
-            if (zoneChangeCounter > 0 && previousZone && !(sourceObject instanceof PermanentToken)) {
-                zoneChangeCounter--;
+            Permanent permanentLeftBattlefield = (Permanent) getValue("permanentLeftBattlefield");
+            if (permanentLeftBattlefield == null) {
+                Logger.getLogger(ReturnFromExileForSourceEffect.class).error("Permanent not found: " + sourceObject.getName());
+                return false;
             }
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), permanentLeftBattlefield.getZoneChangeCounter(game)));
             if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
                 if (returnToZone.equals(Zone.BATTLEFIELD)) {
                     controller.moveCards(exile.getCards(game), returnToZone, source, game, false, false, true, null);

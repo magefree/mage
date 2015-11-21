@@ -32,9 +32,8 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -56,9 +55,7 @@ import mage.util.CardUtil;
  * @author Temba21
  */
 public class WormfangDrake extends CardImpl {
-    
 
-    
     public WormfangDrake(UUID ownerId) {
         super(ownerId, 57, "Wormfang Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "JUD";
@@ -66,7 +63,7 @@ public class WormfangDrake extends CardImpl {
         this.subtype.add("Drake");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-    
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
@@ -74,8 +71,8 @@ public class WormfangDrake extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new WormfangDrakeExileCost()), false));
 
-        // When Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.       
-        this.addAbility(new WormfangDrakeTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
+        // When Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }
 
     public WormfangDrake(final WormfangDrake card) {
@@ -88,23 +85,6 @@ public class WormfangDrake extends CardImpl {
     }
 }
 
-class WormfangDrakeTriggeredAbility extends ZoneChangeTriggeredAbility {
-
-    public WormfangDrakeTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
-    }
-
-    public WormfangDrakeTriggeredAbility(WormfangDrakeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WormfangDrakeTriggeredAbility copy() {
-        return new WormfangDrakeTriggeredAbility(this);
-    }
-
-}
-
 class WormfangDrakeExileCost extends CostImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
@@ -114,7 +94,7 @@ class WormfangDrakeExileCost extends CostImpl {
     }
 
     public WormfangDrakeExileCost() {
-        this.addTarget(new TargetControlledCreaturePermanent(1,1,filter, true));
+        this.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, true));
         this.text = "Exile a creature you control other than {this}";
     }
 
@@ -125,11 +105,11 @@ class WormfangDrakeExileCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Player controller = game.getPlayer(controllerId);
-        MageObject sourceObject = ability.getSourceObject(game);        
+        MageObject sourceObject = ability.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
                 UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter());
-                for (UUID targetId: targets.get(0).getTargets()) {
+                for (UUID targetId : targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent == null) {
                         return false;

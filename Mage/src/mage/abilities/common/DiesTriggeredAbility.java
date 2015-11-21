@@ -89,7 +89,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
                 }
             }
             for (Effect effect : getEffects()) {
-                effect.setValue("diedPermanent", zEvent.getTarget());
+                effect.setValue("permanentLeftBattlefield", zEvent.getTarget());
             }
             return true;
         }

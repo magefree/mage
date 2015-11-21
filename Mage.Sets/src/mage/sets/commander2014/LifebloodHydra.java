@@ -99,7 +99,7 @@ class LifebloodHydraEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent diedPermanent = (Permanent) getValue("diedPermanent");
+            Permanent diedPermanent = (Permanent) getValue("permanentLeftBattlefield");
             if (diedPermanent != null) {
                 controller.gainLife(diedPermanent.getPower().getValue(), game);
                 controller.drawCards(diedPermanent.getPower().getValue(), game);
