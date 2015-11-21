@@ -130,10 +130,10 @@ class XenagosManaEffect extends OneShotEffect {
                 }
                 switch (manaChoice.getChoice()) {
                     case "Green":
-                        mana.addGreen();
+                        mana.increaseGreen();
                         break;
                     case "Red":
-                        mana.addRed();
+                        mana.increaseRed();
                         break;
                 }
                 player.getManaPool().addMana(mana, game, source);
