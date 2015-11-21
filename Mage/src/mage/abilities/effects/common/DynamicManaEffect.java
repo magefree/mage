@@ -154,15 +154,15 @@ public class DynamicManaEffect extends BasicManaEffect {
                             }
                         }
                         if (choiceColor.getColor().isBlack()) {
-                            computedMana.addBlack();
+                            computedMana.increaseBlack();
                         } else if (choiceColor.getColor().isBlue()) {
-                            computedMana.addBlue();
+                            computedMana.increaseBlue();
                         } else if (choiceColor.getColor().isRed()) {
-                            computedMana.addRed();
+                            computedMana.increaseRed();
                         } else if (choiceColor.getColor().isGreen()) {
-                            computedMana.addGreen();
+                            computedMana.increaseGreen();
                         } else if (choiceColor.getColor().isWhite()) {
-                            computedMana.addWhite();
+                            computedMana.increaseWhite();
                         }
                         if (!oneChoice) {
                             choiceColor.clearChoice();
