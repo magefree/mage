@@ -3,6 +3,7 @@ package org.mage.test.utils;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.UUID;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -89,6 +90,42 @@ public class ManaUtilTest extends CardTestPlayerBase {
     }
 
     /**
+     * Mana.enough is used to check if a spell can be cast with an given amount
+     * of avalable mana
+     */
+    @Test
+    public void testManaEnough() {
+        testManaAvailEnough("{G}", 1, "", true);
+        testManaAvailEnough("{G}", 0, "{G}", true);
+        testManaAvailEnough("{R}", 0, "{G}", false);
+        testManaAvailEnough("{B}", 0, "{G}", false);
+        testManaAvailEnough("{U}", 0, "{G}", false);
+        testManaAvailEnough("{W}", 0, "{G}", false);
+
+        testManaAvailEnough("{R}", 1, "", true);
+        testManaAvailEnough("{R}", 0, "{R}", true);
+        testManaAvailEnough("{G}", 0, "{R}", false);
+        testManaAvailEnough("{B}", 0, "{R}", false);
+        testManaAvailEnough("{U}", 0, "{R}", false);
+        testManaAvailEnough("{W}", 0, "{R}", false);
+
+        testManaAvailEnough("{U}{B}{W}{G}{R}", 4, "{R}", true);
+        testManaAvailEnough("{U}{B}{W}{G}{R}", 3, "{R}{B}", true);
+
+        testManaAvailEnough("{U}{U}{U}{G}{G}{2}", 2, "{U}{U}{G}{R}{B}", true);
+
+        testManaAvailEnough("{2}{U}{U}", 0, "{U}{U}{U}{U}", true);
+        testManaAvailEnough("{2}{U}{U}", 0, "{4}", false);
+        testManaAvailEnough("{2}{U}{U}", 0, "{B}{B}{4}", false);
+
+        testManaAvailEnough("{G}", 0, "{G/W}", true);
+        testManaAvailEnough("{G}{W}", 0, "{G/W}{G/W}", true);
+        testManaAvailEnough("{W}{W}", 0, "{G/W}{G/W}", true);
+        testManaAvailEnough("{G}{G}", 0, "{G/W}{G/W}", true);
+
+    }
+
+    /**
      * Common way to test ManaUtil.tryToAutoPay
      *
      * We get all mana abilities, then try to auto pay and compare to expected1
@@ -140,6 +177,26 @@ public class ManaUtilTest extends CardTestPlayerBase {
         Assert.assertEquals(1, useableAbilities.size());
         ManaAbility ability = useableAbilities.values().iterator().next();
         Assert.assertTrue("Wrong mana ability has been chosen", expectedChosen.isInstance(ability));
+    }
+
+    /**
+     * Checks if the given available Mana is enough to pay a given mana cost
+     *
+     * @param manaCostsToPay
+     * @param availablyAny
+     * @param available
+     * @param expected
+     */
+    private void testManaAvailEnough(String manaCostsToPay, int availablyAny, String available, boolean expected) {
+        ManaCost unpaid = new ManaCostsImpl(manaCostsToPay);
+        ManaCost costAvailable = new ManaCostsImpl(available);
+        Mana manaAvailable = costAvailable.getMana();
+        manaAvailable.setAny(availablyAny);
+        if (expected) {
+            Assert.assertTrue("The available Mana " + costAvailable.getText() + " should be enough to pay the costs " + unpaid.getText(), unpaid.getMana().enough(manaAvailable));
+        } else {
+            Assert.assertFalse("The available Mana " + costAvailable.getText() + " shouldn't be enough to pay the costs " + unpaid.getText(), unpaid.getMana().enough(manaAvailable));
+        }
     }
 
     /**

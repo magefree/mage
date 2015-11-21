@@ -58,7 +58,6 @@ public class Plugins implements MagePlugins {
         pm.addPluginsFrom(new File(PLUGINS_DIRECTORY).toURI());
         this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
-        //this.themePlugin = pm.getPlugin(ThemePlugin.class);
         this.themePlugin = new ThemePluginImpl();
         logger.info("Done.");
     }

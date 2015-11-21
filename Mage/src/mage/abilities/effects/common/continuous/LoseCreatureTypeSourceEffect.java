@@ -30,6 +30,7 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -50,10 +51,11 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
     private final int lessThan;
 
     /**
-     * Permanent loses the creature type as long as the dynamic value is less than the value of lessThan.
-     * 
+     * Permanent loses the creature type as long as the dynamic value is less
+     * than the value of lessThan.
+     *
      * @param dynamicValue
-     * @param lessThan 
+     * @param lessThan
      */
     public LoseCreatureTypeSourceEffect(DynamicValue dynamicValue, int lessThan) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -84,7 +86,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().remove(CardType.CREATURE);
-                        permanent.getSubtype().clear();
+                        permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
                         if (permanent.isAttacking() || permanent.getBlocking() > 0) {
                             permanent.removeFromCombat(game);
                         }

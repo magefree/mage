@@ -29,7 +29,7 @@ package mage.sets.dissension;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTappedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -38,12 +38,14 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -51,13 +53,19 @@ import mage.game.permanent.Permanent;
  */
 public class PalliationAccord extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
+
     public PalliationAccord(UUID ownerId) {
         super(ownerId, 122, "Palliation Accord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
         this.expansionSetCode = "DIS";
 
         // Whenever a creature an opponent controls becomes tapped, put a shield counter on Palliation Accord.
-        this.addAbility(new PallationAccordTriggeredAbility());
-        
+        this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.SHIELD.createInstance()), false, filter));
+
         // Remove a shield counter from Palliation Accord: Prevent the next 1 damage that would be dealt to you this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PalliationAccordPreventionEffect(), new RemoveCountersSourceCost(CounterType.SHIELD.createInstance())));
     }
@@ -69,41 +77,6 @@ public class PalliationAccord extends CardImpl {
     @Override
     public PalliationAccord copy() {
         return new PalliationAccord(this);
-    }
-}
-
-class PallationAccordTriggeredAbility extends TriggeredAbilityImpl {
-    PallationAccordTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.SHIELD.createInstance()));
-    }
-
-    PallationAccordTriggeredAbility(final PallationAccordTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PallationAccordTriggeredAbility copy() {
-        return new PallationAccordTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent p = game.getPermanent(event.getTargetId());
-        if (p != null && p.getCardType().contains(CardType.CREATURE)) {
-            if (game.getOpponents(this.controllerId).contains(p.getControllerId()))
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature an opponent controls becomes tapped, " + modes.getText();
     }
 }
 

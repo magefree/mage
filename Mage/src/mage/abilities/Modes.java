@@ -30,7 +30,6 @@ package mage.abilities;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -50,33 +49,52 @@ import mage.util.CardUtil;
  */
 public class Modes extends LinkedHashMap<UUID, Mode> {
 
-    private UUID modeId;
-    private final Set<UUID> selectedModes = new LinkedHashSet<>();
+    private Mode mode; // the current mode of the selected modes
+    private final ArrayList<Mode> selectedModes = new ArrayList<>();
     private int minModes;
     private int maxModes;
     private TargetController modeChooser;
-    private boolean eachModeOnlyOnce; // state if each mode can be chosen only once
+    private boolean eachModeMoreThanOnce; // each mode can be selected multiple times during one choice
+    private boolean eachModeOnlyOnce; // state if each mode can be chosen only once as long as the source object exists
 
     public Modes() {
-        Mode mode = new Mode();
+        this.mode = new Mode();
         this.put(mode.getId(), mode);
-        this.modeId = mode.getId();
         this.minModes = 1;
         this.maxModes = 1;
-        this.selectedModes.add(modeId);
+        this.selectedModes.add(mode);
         this.modeChooser = TargetController.YOU;
+        this.eachModeOnlyOnce = false;
+        this.eachModeMoreThanOnce = false;
     }
 
     public Modes(final Modes modes) {
-        this.modeId = modes.modeId;
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
-        this.selectedModes.addAll(modes.selectedModes);
+
+        if (modes.size() == 1) {
+            this.mode = values().iterator().next();
+            this.selectedModes.add(mode);
+        } else {
+            // probably there is still a problem with copying modes with the same mode selected multiple times.
+            for (Mode selectedMode : modes.getSelectedModes()) {
+                Mode copiedMode = selectedMode.copy();
+                this.selectedModes.add(copiedMode);
+                if (modes.getSelectedModes().size() == 1) {
+                    this.mode = copiedMode;
+                } else {
+                    if (selectedMode.equals(modes.getMode())) {
+                        this.mode = copiedMode;
+                    }
+                }
+            }
+        }
         this.modeChooser = modes.modeChooser;
         this.eachModeOnlyOnce = modes.eachModeOnlyOnce;
+        this.eachModeMoreThanOnce = modes.eachModeMoreThanOnce;
     }
 
     public Modes copy() {
@@ -84,10 +102,21 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public Mode getMode() {
-        return get(modeId);
+        return mode;
     }
 
-    public Set<UUID> getSelectedModes() {
+    public UUID getModeId(int index) {
+        int idx = 0;
+        for (Mode currentMode : this.values()) {
+            idx++;
+            if (idx == index) {
+                return currentMode.getId();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Mode> getSelectedModes() {
         return selectedModes;
     }
 
@@ -115,24 +144,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         return this.modeChooser;
     }
 
-    public void setActiveMode(UUID modeId) {
-        if (selectedModes.contains(modeId)) {
-            this.modeId = modeId;
-        }
-    }
-
-    public void setMode(Mode mode) {
-        if (this.containsKey(mode.getId())) {
-            this.modeId = mode.getId();
-            this.selectedModes.add(mode.getId());
-            Set<UUID> copySelectedModes = new LinkedHashSet<>();
-            copySelectedModes.addAll(selectedModes);
-            selectedModes.clear();
-            for (UUID basicModeId : this.keySet()) {
-                if (copySelectedModes.contains(basicModeId)) {
-                    selectedModes.add(basicModeId);
-                }
-            }
+    public void setActiveMode(Mode mode) {
+        if (selectedModes.contains(mode)) {
+            this.mode = mode;
         }
     }
 
@@ -153,7 +167,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 }
             }
             // check if all modes can be activated automatically
-            if (this.size() == this.getMinModes()) {
+            if (this.size() == this.getMinModes() && !isEachModeMoreThanOnce()) {
                 Set<UUID> onceSelectedModes = null;
                 if (isEachModeOnlyOnce()) {
                     onceSelectedModes = getAlreadySelectedModes(source, game);
@@ -161,7 +175,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 for (Mode mode : this.values()) {
                     if ((!isEachModeOnlyOnce() || onceSelectedModes == null || !onceSelectedModes.contains(mode.getId()))
                             && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                        this.selectedModes.add(mode.getId());
+                        this.selectedModes.add(mode.copy());
                     }
                 }
                 if (isEachModeOnlyOnce()) {
@@ -189,6 +203,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             Player player = game.getPlayer(playerId);
 
             // player chooses modes manually
+            this.mode = null;
             while (this.selectedModes.size() < this.getMaxModes()) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
@@ -197,28 +212,38 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                     }
                     return this.selectedModes.size() >= this.getMinModes();
                 }
-                setMode(choice);
+                this.selectedModes.add(choice.copy());
+                if (mode == null) {
+                    mode = choice;
+                }
             }
             if (isEachModeOnlyOnce()) {
                 setAlreadySelectedModes(selectedModes, source, game);
             }
             return true;
         }
-        this.modeId = this.values().iterator().next().getId();
-        this.selectedModes.add(modeId);
+        if (mode == null) {
+            this.selectedModes.clear();
+            Mode copiedMode = this.values().iterator().next().copy();
+            this.selectedModes.add(copiedMode);
+            this.setActiveMode(copiedMode);
+        }
         if (isEachModeOnlyOnce()) {
             setAlreadySelectedModes(selectedModes, source, game);
         }
         return true;
     }
 
-    private void setAlreadySelectedModes(Set<UUID> selectedModes, Ability source, Game game) {
+    private void setAlreadySelectedModes(ArrayList<Mode> selectedModes, Ability source, Game game) {
         String key = getKey(source, game);
         Set<UUID> onceSelectedModes = (Set<UUID>) game.getState().getValue(key);
         if (onceSelectedModes == null) {
             onceSelectedModes = new HashSet<>();
         }
-        onceSelectedModes.addAll(selectedModes);
+        for (Mode mode : selectedModes) {
+            onceSelectedModes.add(mode.getId());
+        }
+
         game.getState().setValue(key, onceSelectedModes);
     }
 
@@ -232,7 +257,12 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public List<Mode> getAvailableModes(Ability source, Game game) {
         List<Mode> availableModes = new ArrayList<>();
-        Set<UUID> nonAvailableModes = getAlreadySelectedModes(source, game);
+        Set<UUID> nonAvailableModes;
+        if (isEachModeMoreThanOnce()) {
+            nonAvailableModes = new HashSet<>();
+        } else {
+            nonAvailableModes = getAlreadySelectedModes(source, game);
+        }
         for (Mode mode : this.values()) {
             if (isEachModeOnlyOnce() && nonAvailableModes != null && nonAvailableModes.contains(mode.getId())) {
                 continue;
@@ -253,13 +283,19 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             sb.append("choose one or both ");
         } else if (this.getMinModes() == 2 && this.getMaxModes() == 2) {
             sb.append("choose two ");
+        } else if (this.getMinModes() == 3 && this.getMaxModes() == 3) {
+            sb.append("choose three ");
         } else {
             sb.append("choose one ");
         }
         if (isEachModeOnlyOnce()) {
             sb.append("that hasn't been chosen ");
         }
-        sb.append("&mdash;<br>");
+        if (isEachModeMoreThanOnce()) {
+            sb.append(". You may choose the same mode more than once.<br>");
+        } else {
+            sb.append("&mdash;<br>");
+        }
         for (Mode mode : this.values()) {
             sb.append("&bull  ");
             sb.append(mode.getEffects().getTextStartingUpperCase(mode));
@@ -281,6 +317,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public void setEachModeOnlyOnce(boolean eachModeOnlyOnce) {
         this.eachModeOnlyOnce = eachModeOnlyOnce;
+    }
+
+    public boolean isEachModeMoreThanOnce() {
+        return eachModeMoreThanOnce;
+    }
+
+    public void setEachModeMoreThanOnce(boolean eachModeMoreThanOnce) {
+        this.eachModeMoreThanOnce = eachModeMoreThanOnce;
     }
 
 }

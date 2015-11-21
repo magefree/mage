@@ -36,7 +36,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
@@ -46,9 +45,9 @@ import mage.target.TargetPermanent;
  * @author emerald000
  */
 public class ActiveVolcano extends CardImpl {
-    
+
     private static final FilterPermanent filterBlue = new FilterPermanent("blue permanent");
-    private static final FilterLandPermanent filterIsland = new FilterLandPermanent("Island");
+    private static final FilterPermanent filterIsland = new FilterPermanent("Island");
     static {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
         filterIsland.add(new SubtypePredicate("Island"));
@@ -62,7 +61,7 @@ public class ActiveVolcano extends CardImpl {
         // Choose one - Destroy target blue permanent;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filterBlue));
-        
+
         // or return target Island to its owner's hand.
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());

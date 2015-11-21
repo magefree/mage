@@ -137,14 +137,24 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
         if (duration != Duration.WhileOnBattlefield) {
             sb.append(" ").append(duration.toString());
         }
-        String message = power.getMessage();
-        if (message.length() == 0) {
+        String message = null;
+        String fixedPart = null;
+        if (t.contains("X")) {
             message = toughness.getMessage();
+            fixedPart = ", where X is ";
+        } else if (p.contains("X")) {
+            message = power.getMessage();
+            fixedPart = ", where X is ";
+        } else if (!power.getMessage().isEmpty()) {
+            message = power.getMessage();
+            fixedPart = " for each ";
+        } else if (!toughness.getMessage().isEmpty()) {
+            message = toughness.getMessage();
+            fixedPart = " for each ";
         }
-        if (message.length() > 0) {
-            sb.append(" for each ");
+        if (message != null && !message.isEmpty() && fixedPart != null) {
+            sb.append(fixedPart).append(message);
         }
-        sb.append(message);
         staticText = sb.toString();
     }
 

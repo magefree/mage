@@ -64,7 +64,7 @@ public class ExileSpellEffect extends OneShotEffect implements MageSingleton {
         if (controller != null) {
             Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
             if (spellCard != null) {
-                controller.moveCards(spellCard, null, Zone.EXILED, source, game);
+                controller.moveCards(spellCard, Zone.EXILED, source, game);
             }
             return true;
         }

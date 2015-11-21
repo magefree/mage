@@ -110,6 +110,10 @@ public class GameEvent implements Serializable {
         PLAY_LAND, LAND_PLAYED,
         CAST_SPELL,
         /* SPELL_CAST
+         x-Costs are already defined
+         */
+        CAST_SPELL_LATE,
+        /* SPELL_CAST
          targetId    id of the spell that's cast
          sourceId    sourceId of the spell that's cast
          playerId    player that casts the spell
@@ -214,6 +218,7 @@ public class GameEvent implements Serializable {
         SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
         FIGHTED_PERMANENT,
         EXPLOITED_CREATURE,
+        EVOLVED_CREATURE,
         ATTACH, ATTACHED,
         UNATTACH, UNATTACHED,
         ADD_COUNTER, COUNTER_ADDED,

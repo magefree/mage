@@ -8,6 +8,7 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -50,9 +51,8 @@ public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffe
             } else {
                 return false;
             }
-            for (UUID modeId : sourceAbility.getModes().getSelectedModes()) {
-                sourceAbility.getModes().setActiveMode(modeId);
-                targets.addAll(sourceAbility.getTargets());
+            for (Mode mode : sourceAbility.getModes().getSelectedModes()) {
+                targets.addAll(mode.getTargets());
             }
 
             boolean twoTimesTarget = false;

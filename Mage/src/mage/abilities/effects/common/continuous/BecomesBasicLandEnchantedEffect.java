@@ -51,7 +51,7 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
         allLandTypes.add("Forest");
         allLandTypes.add("Swamp");
         allLandTypes.add("Plains");
-        allLandTypes.add("Mountains");
+        allLandTypes.add("Mountain");
         allLandTypes.add("Island");
         allLandTypes.add("Urza's");
         allLandTypes.add("Mine");

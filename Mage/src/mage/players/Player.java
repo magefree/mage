@@ -44,6 +44,8 @@ import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -756,18 +758,22 @@ public interface Player extends MageItem, Copyable<Player> {
     void cleanUpOnMatchEnd();
 
     /**
-     * If the next cast spell has the set sourceId, the spell will be cast
-     * without mana.
+     * If the next spell cast has the set sourceId, the spell will be cast
+     * without mana (null) or the mana set to manaCosts instead of its normal
+     * mana costs.
      *
      * @param sourceId the source that can be cast without mana
      * @param manaCosts alternate ManaCost, null if it can be cast without mana
      * cost
+     * @param costs alternate other costs you need to pay
      */
-    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts);
+    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, mage.abilities.costs.Costs costs);
 
     UUID getCastSourceIdWithAlternateMana();
 
     ManaCosts getCastSourceIdManaCosts();
+
+    Costs<Cost> getCastSourceIdCosts();
 
     // permission handling to show hand cards
     void addPermissionToShowHandCards(UUID watcherUserId);
@@ -787,4 +793,13 @@ public interface Player extends MageItem, Copyable<Player> {
     MatchPlayer getMatchPlayer();
 
     boolean scry(int value, Ability source, Game game);
+
+    /**
+     * Only used for test player for pre-setting targets
+     *
+     * @param ability
+     * @param game
+     * @return
+     */
+    boolean addTargets(Ability ability, Game game);
 }

@@ -27,7 +27,6 @@
  */
 package mage.filter.predicate.mageobject;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.filter.predicate.Predicate;
@@ -52,8 +51,7 @@ public class NumberOfTargetsPredicate implements Predicate<MageObject> {
         Spell spell = game.getStack().getSpell(input.getId());
         if (spell != null) {
             int numberOfTargets = 0;
-            for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
-                Mode mode = spell.getSpellAbility().getModes().get(modeId);
+            for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
                 for (Target target : mode.getTargets()) {
                     numberOfTargets += target.getTargets().size();
                 }

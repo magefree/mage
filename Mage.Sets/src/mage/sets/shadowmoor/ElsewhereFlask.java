@@ -27,7 +27,6 @@
  */
 package mage.sets.shadowmoor;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,7 +41,8 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceImpl;
+import mage.choices.Choice;
+import mage.choices.ChoiceBasicLandType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -103,15 +103,9 @@ class ElsewhereFlaskEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            ChoiceImpl choices = new ChoiceImpl(true);
-            Set<String> choicesSet = choices.getChoices();
-            choicesSet.add("Forest");
-            choicesSet.add("Plains");
-            choicesSet.add("Mountain");
-            choicesSet.add("Island");
-            choicesSet.add("Swamp");
-            if (player.choose(Outcome.Neutral, choices, game)) {
-                game.getState().setValue(source.getSourceId().toString() + "_ElsewhereFlask", choices.getChoice());
+            Choice choice = new ChoiceBasicLandType();
+            if (player.choose(Outcome.Neutral, choice, game)) {
+                game.getState().setValue(source.getSourceId().toString() + "_ElsewhereFlask", choice.getChoice());
             }
             game.addEffect(new ElsewhereFlaskContinuousEffect(), source);
             return true;

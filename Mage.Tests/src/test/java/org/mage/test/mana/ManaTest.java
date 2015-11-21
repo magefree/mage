@@ -1,6 +1,5 @@
 package org.mage.test.mana;
 
-import junit.framework.Assert;
 import mage.Mana;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;

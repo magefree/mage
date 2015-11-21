@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
@@ -50,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class WhirlerRogue extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts");
 
     static {
@@ -67,8 +68,10 @@ public class WhirlerRogue extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Whirler Rogue enters the battlefield, put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 2)));
-        
+        Effect effect = new CreateTokenEffect(new ThopterColorlessToken(), 2);
+        effect.setText("put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
+
         // Tap two untapped artifacts you control: Target creature can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
         ability.addTarget(new TargetCreaturePermanent());

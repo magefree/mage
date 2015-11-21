@@ -132,6 +132,8 @@ public class PlayerView implements Serializable {
                             }
                         }
                         commandList.add(new EmblemView(emblem, sourceCard));
+                    } else {
+                        commandList.add(new EmblemView(emblem));
                     }
                 }
             } else if (commandObject instanceof Commander) {
@@ -229,7 +231,7 @@ public class PlayerView implements Serializable {
         return this.userData;
     }
 
-    public List<CommandObjectView> getCommadObjectList() {
+    public List<CommandObjectView> getCommandObjectList() {
         return commandList;
     }
 

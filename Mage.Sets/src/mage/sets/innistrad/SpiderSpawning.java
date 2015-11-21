@@ -28,18 +28,16 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TimingRule;
-import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SpiderToken;
 
 /**
  *
@@ -68,15 +66,3 @@ public class SpiderSpawning extends CardImpl {
     }
 }
 
-class SpiderToken extends Token {
-
-    public SpiderToken() {
-        super("Spider", "1/2 green Spider creature token with reach");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Spider");
-        power = new MageInt(1);
-        toughness = new MageInt(2);
-        addAbility(ReachAbility.getInstance());
-    }
-}

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.keyword;
 
 import java.util.UUID;
@@ -42,26 +41,24 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- * 702.38. Provoke
- *  702.38a Provoke is a triggered ability. “Provoke” means “Whenever this creature attacks, you may
- *          choose to have target creature defending player controls block this creature this combat
- *          if able. If you do, untap that creature.”
- *  702.38b If a creature has multiple instances of provoke, each triggers separately.
+ * 702.38. Provoke 702.38a Provoke is a triggered ability. “Provoke” means
+ * “Whenever this creature attacks, you may choose to have target creature
+ * defending player controls block this creature this combat if able. If you do,
+ * untap that creature.” 702.38b If a creature has multiple instances of
+ * provoke, each triggers separately.
  *
  * @author LevelX2
  *
  */
-
 public class ProvokeAbility extends AttacksTriggeredAbility {
 
-     public ProvokeAbility() {
+    public ProvokeAbility() {
         super(new UntapTargetEffect(), true, "Provoke <i>(Whenever this attacks, you may have target creature defending player controls untap and block it if able.)</i>");
         this.addEffect(new ProvokeRequirementEffect());
     }
 
     public ProvokeAbility(final ProvokeAbility ability) {
         super(ability);
-        this.text = ability.text;
     }
 
     @Override

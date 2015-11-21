@@ -73,7 +73,7 @@ public class KothOfTheHammer extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+
         filterCount.add(new SubtypePredicate("Mountain"));
         filterCount.add(new ControllerPredicate(TargetController.YOU));
     }

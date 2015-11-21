@@ -501,7 +501,7 @@ public class TablesPanel extends javax.swing.JPanel {
         // type
         List<RowFilter<Object, Object>> typeFilterList = new ArrayList<>();
         if (btnTypeMatch.isSelected()) {
-            typeFilterList.add(RowFilter.regexFilter("Two|Commander|Free|Tiny", TableTableModel.COLUMN_GAME_TYPE));
+            typeFilterList.add(RowFilter.regexFilter("Two|Commander|Free|Tiny|Momir", TableTableModel.COLUMN_GAME_TYPE));
         }
         if (btnTypeTourneyConstructed.isSelected()) {
             typeFilterList.add(RowFilter.regexFilter("Constructed", TableTableModel.COLUMN_GAME_TYPE));
@@ -537,7 +537,7 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Limited", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatOther.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("^Constructed - Pauper|^Constructed - Extended|^Constructed - Historical|^Constructed - Super", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Extended|^Constructed - Historical|^Constructed - Super", TableTableModel.COLUMN_DECK_TYPE));
         }
 
         List<RowFilter<Object, Object>> skillFilterList = new ArrayList<>();

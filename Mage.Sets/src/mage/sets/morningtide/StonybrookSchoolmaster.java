@@ -29,7 +29,7 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTappedTriggeredAbility;
+import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -51,7 +51,7 @@ public class StonybrookSchoolmaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Stonybrook Schoolmaster becomes tapped, you may put a 1/1 blue Merfolk Wizard creature token onto the battlefield.
-        this.addAbility(new BecomesTappedTriggeredAbility(new CreateTokenEffect(new MerfolkWizardToken()), true));
+        this.addAbility(new BecomesTappedSourceTriggeredAbility(new CreateTokenEffect(new MerfolkWizardToken()), true));
     }
 
     public StonybrookSchoolmaster(final StonybrookSchoolmaster card) {

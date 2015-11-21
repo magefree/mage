@@ -129,20 +129,22 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
         if (controller != null) {
             Token token = new KorSoldierToken();
             if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
-                Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
-                if (tokenPermanent != null) {
-                    //TODO: Make sure the Equipment can legally enchant the token, preferably on targetting.
-                    Target target = new TargetControlledPermanent(0, 1, filter, true);
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                            && controller.chooseUse(outcome, "Attach an Equipment you control to the created Token?", source, game)) {
-                        if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
-                            Permanent equipmentPermanent = game.getPermanent(target.getFirstTarget());
-                            if (equipmentPermanent != null) {
-                                Permanent attachedTo = game.getPermanent(equipmentPermanent.getAttachedTo());
-                                if (attachedTo != null) {
-                                    attachedTo.removeAttachment(equipmentPermanent.getId(), game);
+                for (UUID tokenId : token.getLastAddedTokenIds()) {
+                    Permanent tokenPermanent = game.getPermanent(tokenId);
+                    if (tokenPermanent != null) {
+                        //TODO: Make sure the Equipment can legally enchant the token, preferably on targetting.
+                        Target target = new TargetControlledPermanent(0, 1, filter, true);
+                        if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                                && controller.chooseUse(outcome, "Attach an Equipment you control to the created " + tokenPermanent.getIdName() + "?", source, game)) {
+                            if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
+                                Permanent equipmentPermanent = game.getPermanent(target.getFirstTarget());
+                                if (equipmentPermanent != null) {
+                                    Permanent attachedTo = game.getPermanent(equipmentPermanent.getAttachedTo());
+                                    if (attachedTo != null) {
+                                        attachedTo.removeAttachment(equipmentPermanent.getId(), game);
+                                    }
+                                    tokenPermanent.addAttachment(equipmentPermanent.getId(), game);
                                 }
-                                tokenPermanent.addAttachment(equipmentPermanent.getId(), game);
                             }
                         }
                     }

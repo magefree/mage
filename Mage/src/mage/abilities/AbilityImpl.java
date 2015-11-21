@@ -155,7 +155,7 @@ public abstract class AbilityImpl implements Ability {
                 subAbilities.add(subAbility.copy());
             }
         }
-        this.modes = ability.modes.copy();
+        this.modes = ability.getModes().copy();
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
@@ -196,6 +196,7 @@ public abstract class AbilityImpl implements Ability {
         boolean result = true;
         //20100716 - 117.12
         if (checkIfClause(game)) {
+
             for (Effect effect : getEffects()) {
                 if (effect instanceof OneShotEffect) {
                     boolean effectResult = effect.apply(game, this);
@@ -255,8 +256,13 @@ public abstract class AbilityImpl implements Ability {
         /* 20130201 - 601.2b
          * If the spell is modal the player announces the mode choice (see rule 700.2).
          */
-        if (!modes.choose(game, this)) {
+        if (!getModes().choose(game, this)) {
             return false;
+        }
+        if (controller.isTestMode()) {
+            if (!controller.addTargets(this, game)) {
+                return false;
+            }
         }
 
         getSourceObject(game);
@@ -274,9 +280,8 @@ public abstract class AbilityImpl implements Ability {
         }
         // TODO: Because all (non targeted) choices have to be done during resolution
         // this has to be removed, if all using effects are changed
-        for (UUID modeId : this.getModes().getSelectedModes()) {
-            this.getModes().setActiveMode(modeId);
-            if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
+        for (Mode mode : this.getModes().getSelectedModes()) {
+            if (mode.getChoices().size() > 0 && mode.getChoices().choose(game, this) == false) {
                 logger.debug("activate failed - choice");
                 return false;
             }
@@ -312,9 +317,12 @@ public abstract class AbilityImpl implements Ability {
         // its mana cost; see rule 107.3), the player announces the value of that variable.
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
-
-        for (UUID modeId : this.getModes().getSelectedModes()) {
-            this.getModes().setActiveMode(modeId);
+        // For effects from cards like Void Winnower x costs have to be set
+        if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
+            return false;
+        }
+        for (Mode mode : this.getModes().getSelectedModes()) {
+            this.getModes().setActiveMode(mode);
             //20121001 - 601.2c
             // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
@@ -335,7 +343,7 @@ public abstract class AbilityImpl implements Ability {
             if (sourceObject != null && !this.getAbilityType().equals(AbilityType.TRIGGERED)) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
-            if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, noMana, game) == false) {
+            if (mode.getTargets().size() > 0 && mode.getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, noMana, game) == false) {
                 if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
                     game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
                 }
@@ -408,7 +416,7 @@ public abstract class AbilityImpl implements Ability {
             }
             if (variableManaCost != null) {
                 int xValue = getManaCostsToPay().getX();
-                game.informPlayers(new StringBuilder(controller.getLogName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+                game.informPlayers(controller.getLogName() + " announces a value of " + xValue + " for " + variableManaCost.getText());
             }
         }
         activated = true;
@@ -681,7 +689,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Effects getEffects() {
-        return modes.getMode().getEffects();
+        return getModes().getMode().getEffects();
     }
 
     @Override
@@ -706,7 +714,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Choices getChoices() {
-        return modes.getMode().getChoices();
+        return getModes().getMode().getChoices();
     }
 
     @Override
@@ -781,7 +789,7 @@ public abstract class AbilityImpl implements Ability {
         }
 
         String ruleStart = sbRule.toString();
-        String text = modes.getText();
+        String text = getModes().getText();
         String rule;
         if (!text.isEmpty()) {
             if (ruleStart.length() > 1) {
@@ -873,7 +881,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Targets getTargets() {
-        return modes.getMode().getTargets();
+        return getModes().getMode().getTargets();
     }
 
     @Override
@@ -883,12 +891,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean isModal() {
-        return this.modes.size() > 1;
+        return getModes().size() > 1;
     }
 
     @Override
     public void addMode(Mode mode) {
-        this.modes.addMode(mode);
+        getModes().addMode(mode);
     }
 
     @Override
@@ -899,9 +907,12 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public boolean canChooseTarget(Game game) {
         int found = 0;
-        for (Mode mode : modes.values()) {
+        for (Mode mode : getModes().values()) {
             if (mode.getTargets().canChoose(sourceId, controllerId, game)) {
                 found++;
+                if (getModes().isEachModeMoreThanOnce()) {
+                    return true;
+                }
                 if (found >= getModes().getMinModes()) {
                     return true;
                 }
@@ -1034,7 +1045,7 @@ public abstract class AbilityImpl implements Ability {
             logger.warn("Could get no object: " + this.toString());
         }
         return new StringBuilder(" activates: ")
-                .append(object != null ? this.formatRule(modes.getText(), object.getLogName()) : modes.getText())
+                .append(object != null ? this.formatRule(getModes().getText(), object.getLogName()) : getModes().getText())
                 .append(" from ")
                 .append(getMessageText(game)).toString();
     }
@@ -1103,13 +1114,15 @@ public abstract class AbilityImpl implements Ability {
             }
         } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
             Modes spellModes = ((Spell) object).getSpellAbility().getModes();
-            int item = 0;
-            for (Mode mode : spellModes.values()) {
-                item++;
-                if (spellModes.getSelectedModes().contains(mode.getId())) {
-                    spellModes.setActiveMode(mode.getId());
-                    sb.append(" (mode ").append(item).append(")");
-                    sb.append(getTargetDescriptionForLog(getTargets(), game));
+            for (Mode selectedMode : spellModes.getSelectedModes()) {
+                int item = 0;
+                for (Mode mode : spellModes.values()) {
+                    item++;
+                    if (mode.getId().equals(selectedMode.getId())) {
+                        sb.append(" (mode ").append(item).append(")");
+                        sb.append(getTargetDescriptionForLog(selectedMode.getTargets(), game));
+                        break;
+                    }
                 }
             }
         } else {

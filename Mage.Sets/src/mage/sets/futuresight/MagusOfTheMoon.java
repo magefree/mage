@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
@@ -108,13 +109,15 @@ public class MagusOfTheMoon extends CardImpl {
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
             for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        land.removeAllAbilities(source.getSourceId(), game);
-                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                        break;
                     case TypeChangingEffects_4:
-                        land.getSubtype().clear();
+                        // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+                        // So the ability removing has to be done before Layer 6
+                        land.removeAllAbilities(source.getSourceId(), game);
+                        land.getSubtype().removeAll(CardRepository.instance.getLandTypes());
                         land.getSubtype().add("Mountain");
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                         break;
                 }
             }

@@ -1491,6 +1491,14 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source) {
+        delayedAbility.setSourceId(source.getSourceId());
+        delayedAbility.setControllerId(source.getControllerId());
+        delayedAbility.setSourceObject(source.getSourceObject(this), this);
+        return addDelayedTriggeredAbility(delayedAbility);
+    }
+
+    @Override
     public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
@@ -2289,6 +2297,11 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public boolean replaceEvent(GameEvent event) {
         return state.replaceEvent(event, this);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability targetAbility) {
+        return state.replaceEvent(event, targetAbility, this);
     }
 
     @Override

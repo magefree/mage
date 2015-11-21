@@ -30,7 +30,7 @@ package mage.sets.seventhedition;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.BecomesTappedTriggeredAbility;
+import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ public class CityOfBrass extends CardImpl {
         this.expansionSetCode = "7ED";
 
         // Whenever City of Brass becomes tapped, it deals 1 damage to you.
-        this.addAbility(new BecomesTappedTriggeredAbility(new DamageControllerEffect(1)));
+        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DamageControllerEffect(1)));
 
         // {tap}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());

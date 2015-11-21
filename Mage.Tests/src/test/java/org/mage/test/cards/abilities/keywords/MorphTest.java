@@ -47,7 +47,7 @@ public class MorphTest extends CardTestPlayerBase {
      *
      */
     @Test
-    public void testCastMoprhCreatureWithoutMorph() {
+    public void testCastMorphCreatureWithoutMorph() {
         /*
          Pine Walker
          Creature - Elemental

@@ -109,16 +109,16 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CAST_SPELL;
+        return event.getType() == EventType.CAST_SPELL_LATE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object != null && (object instanceof Spell)) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null) {
                 // the low bit will always be set on an odd number.
-                return (((Spell) object).getConvertedManaCost() & 1) == 0;
+                return (spell.getConvertedManaCost() & 1) == 0;
             }
         }
         return false;

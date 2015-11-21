@@ -28,9 +28,12 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.ObjectColor;
 
 /**
  *
@@ -38,16 +41,21 @@ import mage.ObjectColor;
  */
 public class WolfToken extends Token {
 
-    public WolfToken() {
-        this("ISD");
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("BNG", "C14", "CNS", "FNMP", "ISD", "LRW", "M10", "M14", "MM2", "SHM", "SOM", "ZEN"));
     }
-    
+
+    public WolfToken() {
+        this((String) null);
+    }
+
     public WolfToken(String setCode) {
         super("Wolf", "2/2 green Wolf creature token");
-        this.setOriginalExpansionSetCode(setCode);
-        if (setCode.equals("ISD")) {
-            setTokenType(Type.SECOND.code);
-        }
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
+
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Wolf");
@@ -55,9 +63,20 @@ public class WolfToken extends Token {
         toughness = new MageInt(2);
     }
 
-    public WolfToken(Token.Type type) {
-        this();
-        setTokenType(type.getCode());
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ISD")) {
+            this.setTokenType(2);
+        }
     }
 
+    public WolfToken(final WolfToken token) {
+        super(token);
+    }
+
+    @Override
+    public Token copy() {
+        return new WolfToken(this);
+    }
 }

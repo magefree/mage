@@ -30,7 +30,6 @@ package mage.sets.worldwake;
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -47,13 +46,13 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class StoneIdolTrap extends CardImpl {
-
 
     public StoneIdolTrap(UUID ownerId) {
         super(ownerId, 93, "Stone Idol Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{R}");
@@ -86,6 +85,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl {
     static {
         filter.add(new AttackingPredicate());
     }
+
     public StoneIdolTrapCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "{this} costs {1} less to cast for each attacking creature";
@@ -97,7 +97,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield().count(filter, source.getSourceId(),  source.getControllerId(),game);
+        int reductionAmount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
         CardUtil.reduceCost(abilityToModify, reductionAmount);
         return true;
     }
@@ -136,14 +136,14 @@ class StoneIdolTrapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StoneTrapIdolToken token = new StoneTrapIdolToken();
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-        ExileTargetEffect exileEffect = new ExileTargetEffect("exile the token");
-        exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect, TargetController.YOU);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
-        
+        for (UUID tokenId : token.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                ExileTargetEffect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+            }
+        }
         return true;
     }
 }

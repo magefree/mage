@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -59,10 +60,10 @@ public class DeadlyWanderings extends CardImpl {
         Effect effect = new ConditionalContinuousEffect(boostEffect, new OneControlledCreatureCondition(),
                 "As long as you control exactly one creature, that creature gets +2/+0");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ContinuousEffect deathtouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield);
+        ContinuousEffect deathtouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent());
         effect = new ConditionalContinuousEffect(deathtouchEffect, new OneControlledCreatureCondition(), "and has deathtouch");
         ability.addEffect(effect);
-        ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield);
+        ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent());
         effect = new ConditionalContinuousEffect(lifelinkEffect, new OneControlledCreatureCondition(), "and lifelink");
         ability.addEffect(effect);
         this.addAbility(ability);

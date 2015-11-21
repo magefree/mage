@@ -290,6 +290,8 @@ public interface Game extends MageItem, Serializable {
 
     boolean replaceEvent(GameEvent event);
 
+    boolean replaceEvent(GameEvent event, Ability targetAbility);
+
     /**
      * Creates and fires an damage prevention event
      *
@@ -383,6 +385,8 @@ public interface Game extends MageItem, Serializable {
 
     UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
 
+    UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source);
+
     void applyEffects();
 
     boolean checkStateAndTriggered();
@@ -421,7 +425,7 @@ public interface Game extends MageItem, Serializable {
 
     void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
 
-    // controlling the behaviour of replacement effects
+    // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
 
     public boolean getScopeRelevant();

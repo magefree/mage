@@ -64,7 +64,16 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_YES;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_TEXT_NO;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_TEXT_YES;
+import static mage.constants.PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_FIRST;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_LAST;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_FIRST;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
@@ -790,6 +799,7 @@ public class HumanPlayer extends PlayerImpl {
             if (unpaid instanceof ManaCostsImpl) {
                 specialManaAction(unpaid, game);
                 // TODO: delve or convoke cards with PhyrexianManaCost won't work together (this combinaton does not exist yet)
+                @SuppressWarnings("unchecked")
                 ManaCostsImpl<ManaCost> costs = (ManaCostsImpl<ManaCost>) unpaid;
                 for (ManaCost cost : costs.getUnpaid()) {
                     if (cost instanceof PhyrexianManaCost) {
@@ -1284,12 +1294,27 @@ public class HumanPlayer extends PlayerImpl {
         if (modes.size() > 1) {
             MageObject obj = game.getObject(source.getSourceId());
             Map<UUID, String> modeMap = new LinkedHashMap<>();
+            AvailableModes:
             for (Mode mode : modes.getAvailableModes(source, game)) {
-                if (!modes.getSelectedModes().contains(mode.getId()) // show only modes not already selected
-                        && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
+                int timesSelected = 0;
+                for (Mode selectedMode : modes.getSelectedModes()) {
+                    if (mode.getId().equals(selectedMode.getId())) {
+                        if (modes.isEachModeMoreThanOnce()) {
+                            timesSelected++;
+                        } else {
+                            continue AvailableModes;
+                        }
+                    }
+                }
+                if (mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and needed targets have to be available
                     String modeText = mode.getEffects().getText(mode);
                     if (obj != null) {
-                        modeText = modeText.replace("{source}", obj.getName());
+                        modeText = modeText.replace("{source}", obj.getName()).replace("{this}", obj.getName());
+                    }
+                    if (modes.isEachModeMoreThanOnce()) {
+                        if (timesSelected > 0) {
+                            modeText = "(selected " + timesSelected + "x) " + modeText;
+                        }
                     }
                     modeMap.put(mode.getId(), modeText);
                 }
@@ -1316,6 +1341,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             return null;
         }
+
         return modes.getMode();
     }
 

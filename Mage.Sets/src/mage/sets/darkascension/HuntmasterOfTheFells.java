@@ -101,7 +101,7 @@ public class HuntmasterOfTheFells extends CardImpl {
 class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl {
 
     public HuntmasterOfTheFellsAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken(Token.Type.SECOND)), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()), false);
         this.addEffect(new GainLifeEffect(2));
     }
 

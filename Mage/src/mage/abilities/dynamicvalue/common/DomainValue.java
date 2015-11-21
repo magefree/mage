@@ -53,11 +53,10 @@ public class DomainValue implements DynamicValue {
         int haveSwamps = 0;
         int haveForests = 0;
         UUID targetPlayer;
-        if(playerId != null) {
+        if (playerId != null) {
             targetPlayer = playerId;
-        }
-        else if(countTargetPlayer) {
-            targetPlayer = sourceAbility.getTargets().getFirstTarget();
+        } else if (countTargetPlayer) {
+            targetPlayer = effect.getTargetPointer().getFirst(game, sourceAbility);
         } else {
             targetPlayer = sourceAbility.getControllerId();
         }

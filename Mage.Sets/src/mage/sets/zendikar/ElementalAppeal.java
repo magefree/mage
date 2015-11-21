@@ -33,7 +33,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
@@ -44,6 +43,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -55,7 +55,6 @@ public class ElementalAppeal extends CardImpl {
     public ElementalAppeal(UUID ownerId) {
         super(ownerId, 123, "Elemental Appeal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");
         this.expansionSetCode = "ZEN";
-
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));
@@ -100,17 +99,14 @@ class ElementalAppealEffect extends OneShotEffect {
         ElementalToken token = new ElementalToken();
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
-        FixedTarget fixedTarget = new FixedTarget(token.getLastAddedToken());
-        source.getEffects().get(1).setTargetPointer(fixedTarget);
-
-        ExileTargetEffect exileEffect = new ExileTargetEffect();
-        exileEffect.setTargetPointer(fixedTarget);
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
-
+        for (UUID tokenId : token.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                ExileTargetEffect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+            }
+        }
         return true;
     }
 }

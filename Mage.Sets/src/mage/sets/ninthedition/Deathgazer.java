@@ -29,24 +29,30 @@ package mage.sets.ninthedition;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.ObjectColor;
+import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Plopman
  */
 public class Deathgazer extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+    }
 
     public Deathgazer(UUID ownerId) {
         super(ownerId, 124, "Deathgazer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -57,7 +63,11 @@ public class Deathgazer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Deathgazer blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
-        this.addAbility(new DeathgazerTriggeredAbility(new DestroyTargetEffect(), false));
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        effect.setText("destroy that creature at end of combat");
+        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, filter, false));
+
     }
 
     public Deathgazer(final Deathgazer card) {
@@ -67,56 +77,5 @@ public class Deathgazer extends CardImpl {
     @Override
     public Deathgazer copy() {
         return new Deathgazer(this);
-    }
-}
-
-class DeathgazerTriggeredAbility extends TriggeredAbilityImpl {
-
-    
-    
-    public DeathgazerTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public DeathgazerTriggeredAbility(final DeathgazerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.BLOCKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getSourceId().equals(this.getSourceId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && !permanent.getColor(game).isBlack()) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
-            }
-        }
-        if (event.getTargetId().equals(this.getSourceId())) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && !permanent.getColor(game).isBlack()) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} blocks or becomes blocked by a nonblack creature, " + super.getRule();
-    }
-
-    @Override
-    public DeathgazerTriggeredAbility copy() {
-        return new DeathgazerTriggeredAbility(this);
     }
 }

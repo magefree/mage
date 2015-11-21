@@ -212,12 +212,31 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @return
      */
     public boolean addAttackingCreature(UUID creatureId, Game game) {
+        return this.addAttackingCreature(creatureId, game, null);
+    }
+
+    public boolean addAttackingCreature(UUID creatureId, Game game, UUID playerToAttack) {
+        Set<UUID> possibleDefenders;
+        if (playerToAttack != null) {
+            possibleDefenders = new HashSet<>();
+            for (UUID objectId : defenders) {
+                Permanent planeswalker = game.getPermanent(objectId);
+                if (planeswalker != null && planeswalker.getControllerId().equals(playerToAttack)) {
+                    possibleDefenders.add(objectId);
+                } else if (playerToAttack.equals(objectId)) {
+                    possibleDefenders.add(objectId);
+                }
+            }
+        } else {
+            possibleDefenders = new HashSet(defenders);
+        }
         Player player = game.getPlayer(attackerId);
-        if (defenders.size() == 1) {
-            addAttackerToCombat(creatureId, defenders.iterator().next(), game);
+        if (possibleDefenders.size() == 1) {
+            addAttackerToCombat(creatureId, possibleDefenders.iterator().next(), game);
             return true;
         } else {
-            TargetDefender target = new TargetDefender(defenders, creatureId);
+            TargetDefender target = new TargetDefender(possibleDefenders, creatureId);
+            target.setNotTarget(true);
             target.setRequired(true);
             player.chooseTarget(Outcome.Damage, target, null, game);
             if (target.getFirstTarget() != null) {

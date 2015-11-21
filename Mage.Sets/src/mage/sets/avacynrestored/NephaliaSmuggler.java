@@ -38,6 +38,8 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -46,6 +48,11 @@ import java.util.UUID;
  * @author noxx
  */
 public class NephaliaSmuggler extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public NephaliaSmuggler(UUID ownerId) {
         super(ownerId, 69, "Nephalia Smuggler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
@@ -60,7 +67,7 @@ public class NephaliaSmuggler extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl("{3}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

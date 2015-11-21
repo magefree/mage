@@ -28,7 +28,10 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
@@ -39,6 +42,12 @@ import mage.abilities.keyword.FlyingAbility;
  */
 public class FaerieRogueToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("SHM", "MOR", "MMA", "MM2"));
+    }
+
     public FaerieRogueToken() {
         super("Faerie Rogue", "1/1 black Faerie Rogue creature token with flying");
         cardType.add(CardType.CREATURE);
@@ -48,6 +57,7 @@ public class FaerieRogueToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("SHM", "MOR", "MMA"));
+
+        availableImageSetCodes = tokenImageSets;
     }
 }

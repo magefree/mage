@@ -37,20 +37,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class GoldnightCommanderTest extends CardTestPlayerBase {
 
-    /**
-     * Goldnight Commander    {3}{W}
-     * Human Cleric Soldier
-     * Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-     *
-
+    /*
+     * Goldnight Commander {3}{W} Human Cleric Soldier
+     * Whenever another creature enters the battlefield under your control, creatures you control get
+     * +1/+1 until end of turn.
      */
     @Test
     public void testThreeCreaturesEnterAtTheSameTime() {
         // The ability of the Commander triggers three times and each trigger sees all three creatures
-
         addCard(Zone.HAND, playerA, "Thatcher Revolt");
         addCard(Zone.BATTLEFIELD, playerA, "Goldnight Commander", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);

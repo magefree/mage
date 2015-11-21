@@ -45,7 +45,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.other.PlayerIdPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -106,7 +106,7 @@ class JolraelEmpressOfBeastsEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             FilterPermanent filter = new FilterLandPermanent();
-            filter.add(new PlayerIdPredicate(targetPlayer.getId()));
+            filter.add(new ControllerIdPredicate(targetPlayer.getId()));
             game.addEffect(new BecomesCreatureAllEffect(new JolraelLandsToken(), "lands", filter, Duration.EndOfTurn), source);
             return true;
         }

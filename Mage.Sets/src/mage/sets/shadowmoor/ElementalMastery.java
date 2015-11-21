@@ -30,7 +30,6 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -64,7 +63,6 @@ public class ElementalMastery extends CardImpl {
         super(ownerId, 90, "Elemental Mastery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -110,16 +108,17 @@ class ElementalMasteryEffect extends OneShotEffect {
         Permanent creatureAttached = game.getPermanent(source.getSourceId());
         if (creatureAttached != null) {
             int power = creatureAttached.getPower().getValue();
-            for (int i = 0; i < power; i++) {
+            if (power > 0) {
                 ElementalToken token = new ElementalToken();
-                token.putOntoBattlefield(1, game, creatureAttached.getId(), creatureAttached.getControllerId());
-                ExileTargetEffect exileEffect = new ExileTargetEffect("exile the token");
-                exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                token.putOntoBattlefield(power, game, creatureAttached.getId(), creatureAttached.getControllerId());
+                for (UUID tokenId : token.getLastAddedTokenIds()) {
+                    Permanent tokenPermanent = game.getPermanent(tokenId);
+                    if (tokenPermanent != null) {
+                        ExileTargetEffect exileEffect = new ExileTargetEffect();
+                        exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+                    }
+                }
             }
             return true;
         }

@@ -29,8 +29,10 @@ package mage.abilities.effects.common.cost;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -100,23 +102,31 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             if (upTo) {
                 Mana mana = abilityToModify.getManaCostsToPay().getMana();
                 int reduceMax = mana.getColorless();
-                if (reduceMax > 2) {
-                    reduceMax = 2;
+                if (reduceMax > amount) {
+                    reduceMax = amount;
                 }
                 if (reduceMax > 0) {
                     Player controller = game.getPlayer(abilityToModify.getControllerId());
                     if (controller == null) {
                         return false;
                     }
-                    ChoiceImpl choice = new ChoiceImpl(true);
-                    Set<String> set = new LinkedHashSet<>();
-                    for (int i = 0; i <= reduceMax; i++) {
-                        set.add(String.valueOf(i));
+                    int reduce = reduceMax;
+                    if (!(abilityToModify instanceof ActivatedAbility) || !((ActivatedAbility) abilityToModify).isCheckPlayableMode()) {
+                        ChoiceImpl choice = new ChoiceImpl(false);
+                        Set<String> set = new LinkedHashSet<>();
+                        for (int i = 0; i <= amount; i++) {
+                            set.add(String.valueOf(i));
+                        }
+                        choice.setChoices(set);
+                        MageObject mageObject = game.getObject(abilityToModify.getSourceId());
+                        choice.setMessage("Reduce cost of " + (mageObject != null ? mageObject.getIdName() : filter.getMessage()));
+                        if (controller.choose(Outcome.Benefit, choice, game)) {
+                            reduce = Integer.parseInt(choice.getChoice());
+                        } else {
+                            reduce = reduceMax; // cancel will be set to max possible reduce
+                        }
                     }
-                    choice.setChoices(set);
-                    choice.setMessage("Reduce cost of " + filter);
-                    if (controller.choose(Outcome.Benefit, choice, game)) {
-                        int reduce = Integer.parseInt(choice.getChoice());
+                    if (reduce > 0) {
                         CardUtil.reduceCost(abilityToModify, reduce);
                     }
                 }

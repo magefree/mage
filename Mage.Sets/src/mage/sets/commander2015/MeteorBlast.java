@@ -47,17 +47,17 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class MeteorBlast extends CardImpl {
 
     public MeteorBlast(UUID ownerId) {
-        super(ownerId, 28, "Meteor Volley", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
+        super(ownerId, 28, "Meteor Blast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
         this.expansionSetCode = "C15";
 
-        // Meteor Volley deals 4 damage to each of X target creatures and/or players.
-        this.getSpellAbility().addEffect(new MeteorVolleyEffect());
+        // Meteor Blast deals 4 damage to each of X target creatures and/or players.
+        this.getSpellAbility().addEffect(new MeteorBlastEffect());
     }
 
     public MeteorBlast(final MeteorBlast card) {
         super(card);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
@@ -73,21 +73,21 @@ public class MeteorBlast extends CardImpl {
     }
 }
 
-class MeteorVolleyEffect extends OneShotEffect {
+class MeteorBlastEffect extends OneShotEffect {
 
-    public MeteorVolleyEffect() {
-        super(Outcome.Benefit);
+    public MeteorBlastEffect() {
+        super(Outcome.Damage);
         staticText = "{this} deals 4 damage to each of X target creatures and/or players";
     }
 
-    public MeteorVolleyEffect(final MeteorVolleyEffect effect) {
+    public MeteorBlastEffect(final MeteorBlastEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             if (source.getTargets().size() > 0) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                     Permanent creature = game.getPermanent(targetId);
@@ -105,9 +105,9 @@ class MeteorVolleyEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
     @Override
-    public MeteorVolleyEffect copy() {
-        return new MeteorVolleyEffect(this);
+    public MeteorBlastEffect copy() {
+        return new MeteorBlastEffect(this);
     }
 }

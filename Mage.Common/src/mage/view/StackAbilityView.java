@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
@@ -98,13 +99,12 @@ public class StackAbilityView extends CardView {
 
     private void updateTargets(Game game, StackAbility ability) {
         List<String> names = new ArrayList<>();
-        for (UUID modeId : ability.getModes().getSelectedModes()) {
-            ability.getModes().setActiveMode(modeId);
-            if (ability.getTargets().size() > 0) {
-                setTargets(ability.getTargets());
+        for (Mode mode : ability.getModes().getSelectedModes()) {
+            if (mode.getTargets().size() > 0) {
+                setTargets(mode.getTargets());
             } else {
                 List<UUID> targetList = new ArrayList<>();
-                for (Effect effect : ability.getEffects()) {
+                for (Effect effect : mode.getEffects()) {
                     TargetPointer targetPointer = effect.getTargetPointer();
                     if (targetPointer instanceof FixedTarget) {
                         targetList.add(((FixedTarget) targetPointer).getTarget());
@@ -132,9 +132,8 @@ public class StackAbilityView extends CardView {
         // show for modal ability, which mode was choosen
         if (ability.isModal()) {
             Modes modes = ability.getModes();
-            for (UUID modeId : modes.getSelectedModes()) {
-                modes.setActiveMode(modeId);
-                this.rules.add("<span color='green'><i>Chosen mode: " + ability.getEffects().getText(modes.get(modeId)) + "</i></span>");
+            for (Mode mode : modes.getSelectedModes()) {
+                this.rules.add("<span color='green'><i>Chosen mode: " + mode.getEffects().getText(mode) + "</i></span>");
             }
         }
     }

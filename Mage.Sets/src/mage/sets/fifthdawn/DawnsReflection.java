@@ -142,15 +142,15 @@ class DawnsReflectionManaEffect extends ManaEffect {
                 }
 
                 if (choiceColor.getColor().isBlack()) {
-                    mana.increaseBlack();
+                    mana.addBlack();
                 } else if (choiceColor.getColor().isBlue()) {
-                    mana.increaseBlue();
+                    mana.addBlue();
                 } else if (choiceColor.getColor().isRed()) {
-                    mana.increaseRed();
+                    mana.addRed();
                 } else if (choiceColor.getColor().isGreen()) {
-                    mana.increaseGreen();
+                    mana.addGreen();
                 } else if (choiceColor.getColor().isWhite()) {
-                    mana.increaseWhite();
+                    mana.addWhite();
                 }
             }
 

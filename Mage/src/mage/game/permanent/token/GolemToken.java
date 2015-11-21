@@ -27,6 +27,10 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.constants.CardType;
 import mage.MageInt;
 
@@ -36,8 +40,14 @@ import mage.MageInt;
  */
 public class GolemToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("MM2", "NPH", "SOM"));
+    }
+
     public GolemToken() {
-        this("SOM");
+        this(null);
     }
 
     public GolemToken(String setCode) {
@@ -48,5 +58,7 @@ public class GolemToken extends Token {
         subtype.add("Golem");
         power = new MageInt(3);
         toughness = new MageInt(3);
+
+        availableImageSetCodes = tokenImageSets;
     }
 }

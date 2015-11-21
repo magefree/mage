@@ -86,14 +86,14 @@ public class StackAbility extends StackObjImpl implements Ability {
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
         this.controllerId = controllerId;
-        this.name = new StringBuilder("stack ability (").append(ability.getRule()).append(")").toString();
+        this.name = "stack ability (" + ability.getRule() + ")";
     }
 
-    public StackAbility(final StackAbility spell) {
-        this.ability = spell.ability.copy();
-        this.controllerId = spell.controllerId;
-        this.name = spell.name;
-        this.expansionSetCode = spell.expansionSetCode;
+    public StackAbility(final StackAbility stackAbility) {
+        this.ability = stackAbility.ability.copy();
+        this.controllerId = stackAbility.controllerId;
+        this.name = stackAbility.name;
+        this.expansionSetCode = stackAbility.expansionSetCode;
     }
 
     @Override

@@ -802,7 +802,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnCommandZoneActionPerformed(java.awt.event.ActionEvent evt) {
-        DialogManager.getManager(gameId).showEmblemsDialog(CardsViewUtil.convertCommandObject(player.getCommadObjectList()), bigCard, gameId);
+        DialogManager.getManager(gameId).showEmblemsDialog(CardsViewUtil.convertCommandObject(player.getCommandObjectList()), bigCard, gameId);
     }
 
     private void btnExileZoneActionPerformed(java.awt.event.ActionEvent evt) {

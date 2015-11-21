@@ -44,6 +44,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -122,7 +123,7 @@ class P1P1CountersOnControlledCreaturesCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        for (Permanent permanent :game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), sourceAbility.getControllerId(), game)) {
             count += permanent.getCounters().getCount(CounterType.P1P1);
         }
         return count;

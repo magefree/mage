@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -44,7 +43,6 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
 public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect {
 
     private final DynamicValue numberCards;
@@ -53,7 +51,7 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
     public PutTopCardOfLibraryIntoGraveEachPlayerEffect(int numberCards, TargetController targetController) {
         this(new StaticValue(numberCards), targetController);
     }
-    
+
     public PutTopCardOfLibraryIntoGraveEachPlayerEffect(DynamicValue numberCards, TargetController targetController) {
         super(Outcome.Discard);
         this.numberCards = numberCards;
@@ -76,42 +74,42 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            switch(targetController) {
+            switch (targetController) {
                 case OPPONENT:
-                    for(UUID playerId: game.getOpponents(source.getControllerId()) ) {
+                    for (UUID playerId : game.getOpponents(source.getControllerId())) {
                         putCardsToGravecard(playerId, source, game);
                     }
                     break;
                 case ANY:
-                    for(UUID playerId: player.getInRange() ) {
+                    for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                         putCardsToGravecard(playerId, source, game);
                     }
                     break;
                 case NOT_YOU:
-                    for(UUID playerId: player.getInRange() ) {
+                    for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                         if (!playerId.equals(source.getSourceId())) {
                             putCardsToGravecard(playerId, source, game);
                         }
                     }
                     break;
                 default:
-                    throw new UnsupportedOperationException("TargetController type not supported.");        
-            }            
+                    throw new UnsupportedOperationException("TargetController type not supported.");
+            }
             return true;
         }
         return false;
     }
-    
+
     private void putCardsToGravecard(UUID playerId, Ability source, Game game) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            player.moveCards(player.getLibrary().getTopCards(game, numberCards.calculate(game, source, this)), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            player.moveCards(player.getLibrary().getTopCards(game, numberCards.calculate(game, source, this)), Zone.GRAVEYARD, source, game);
         }
     }
 
     private String setText() {
         StringBuilder sb = new StringBuilder();
-        switch(targetController) {
+        switch (targetController) {
             case OPPONENT:
                 sb.append("Each opponent ");
                 break;
@@ -120,14 +118,14 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
                 break;
             case NOT_YOU:
                 sb.append("Each other player ");
-                break;                
+                break;
             default:
-                throw new UnsupportedOperationException("TargetController type not supported.");                   
+                throw new UnsupportedOperationException("TargetController type not supported.");
         }
         sb.append("puts the top ");
-        sb.append(CardUtil.numberToText(numberCards.toString(),"a"));
+        sb.append(CardUtil.numberToText(numberCards.toString(), "a"));
         sb.append(" card");
-        sb.append(numberCards.toString().equals("1")?"":"s");
+        sb.append(numberCards.toString().equals("1") ? "" : "s");
         sb.append(" of his or her library into his or her graveyard");
         return sb.toString();
     }

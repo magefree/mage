@@ -28,6 +28,10 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.MageInt;
 import mage.constants.CardType;
 
@@ -37,6 +41,12 @@ import mage.constants.CardType;
  */
 public class SaprolingToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("10E", "ALA", "DDE", "DDH", "DDJ", "M12", "M13", "M14", "MM2", "MMA", "RTR"));
+    }
+
     public SaprolingToken() {
         super("Saproling", "1/1 green Saproling creature token");
         this.setOriginalExpansionSetCode("MMA");
@@ -45,5 +55,7 @@ public class SaprolingToken extends Token {
         subtype.add("Saproling");
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = tokenImageSets;
     }
 }

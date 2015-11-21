@@ -1,12 +1,22 @@
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.MageInt;
 import mage.constants.CardType;
 
 public class MyrToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("C14", "MM2", "NPH", "SOM"));
+    }
+
     public MyrToken() {
-        this("SOM");
+        this(null);
     }
 
     public MyrToken(String expansionSetCode) {
@@ -17,5 +27,7 @@ public class MyrToken extends Token {
         subtype.add("Myr");
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = tokenImageSets;
     }
 }

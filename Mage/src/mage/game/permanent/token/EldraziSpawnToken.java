@@ -28,6 +28,9 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import mage.constants.CardType;
 import mage.constants.Zone;
@@ -42,6 +45,12 @@ import mage.abilities.mana.SimpleManaAbility;
  */
 public class EldraziSpawnToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("ROE", "MM2", "DDP"));
+    }
+
     public EldraziSpawnToken() {
         super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {1} to your mana pool.\"");
         cardType.add(CardType.CREATURE);
@@ -50,7 +59,8 @@ public class EldraziSpawnToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana, new SacrificeSourceCost()));
-        this.setOriginalExpansionSetCode("ROE");
+
+        availableImageSetCodes = tokenImageSets;
         // Get one of the three possible token images
         this.setTokenType(new Random().nextInt(3) + 1);
     }

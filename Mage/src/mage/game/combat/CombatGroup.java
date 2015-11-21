@@ -411,12 +411,30 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return true;
     }
 
+    /**
+     *
+     * @param blockerId
+     * @param playerId controller of the blocking creature
+     * @param game
+     */
     public void addBlocker(UUID blockerId, UUID playerId, Game game) {
         for (UUID attackerId : attackers) {
             if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, attackerId, blockerId, playerId))) {
                 return;
             }
         }
+        addBlockerToGroup(blockerId, playerId, game);
+    }
+
+    /**
+     * Adds a blocker to a combat group without creating a DECLARE_BLOCKER
+     * event.
+     *
+     * @param blockerId
+     * @param playerId controller of the blocking creature
+     * @param game
+     */
+    public void addBlockerToGroup(UUID blockerId, UUID playerId, Game game) {
         Permanent blocker = game.getPermanent(blockerId);
         if (blockerId != null && blocker != null) {
             blocker.setBlocking(blocker.getBlocking() + 1);

@@ -16,7 +16,6 @@
     <description>Mage Plugins POM</description>
 
     <modules>
-        <module>Mage.Theme.Plugin</module>
         <module>Mage.Counter.Plugin</module>
     </modules>
 

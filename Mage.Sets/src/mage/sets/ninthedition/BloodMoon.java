@@ -28,6 +28,12 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.mana.RedManaAbility;
+import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -35,11 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -55,7 +56,6 @@ public class BloodMoon extends CardImpl {
     public BloodMoon(UUID ownerId) {
         super(ownerId, 176, "Blood Moon", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "9ED";
-
 
         // Nonbasic lands are Mountains.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodMoonEffect()));
@@ -74,6 +74,7 @@ public class BloodMoon extends CardImpl {
 class BloodMoonEffect extends ContinuousEffectImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
+
     static {
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
@@ -99,15 +100,17 @@ class BloodMoonEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent land: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             switch (layer) {
-                case AbilityAddingRemovingEffects_6:
-                    land.removeAllAbilities(source.getSourceId(), game);
-                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                    break;
                 case TypeChangingEffects_4:
-                    land.getSubtype().clear();
+                    // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+                    // So the ability removing has to be done before Layer 6
+                    land.removeAllAbilities(source.getSourceId(), game);
+                    land.getSubtype().removeAll(CardRepository.instance.getLandTypes());
                     land.getSubtype().add("Mountain");
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                     break;
             }
         }

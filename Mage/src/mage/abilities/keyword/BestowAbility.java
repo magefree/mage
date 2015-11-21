@@ -35,6 +35,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.cards.Card;
+import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
@@ -181,7 +182,7 @@ public class BestowAbility extends SpellAbility {
                                 }
                             } else {
                                 permanent.getCardType().remove(CardType.CREATURE);
-                                permanent.getSubtype().clear();
+                                permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
                                 if (!permanent.getSubtype().contains("Aura")) {
                                     permanent.getSubtype().add("Aura");
                                 }

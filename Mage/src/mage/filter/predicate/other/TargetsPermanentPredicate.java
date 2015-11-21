@@ -53,13 +53,12 @@ public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<Ob
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         StackObject object = game.getStack().getStackObject(input.getObject().getId());
-        if(object != null) {
-            for(UUID modeId : object.getStackAbility().getModes().getSelectedModes()) {
-                Mode mode = object.getStackAbility().getModes().get(modeId);
-                for(Target target : mode.getTargets()) {
-                    for(UUID targetId : target.getTargets()) {
+        if (object != null) {
+            for (Mode mode : object.getStackAbility().getModes().getSelectedModes()) {
+                for (Target target : mode.getTargets()) {
+                    for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-                        if(permanent != null && targetFilter.match(permanent, input.getSourceId(), input.getPlayerId(), game)) {
+                        if (permanent != null && targetFilter.match(permanent, input.getSourceId(), input.getPlayerId(), game)) {
                             return true;
                         }
                     }

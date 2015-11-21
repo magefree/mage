@@ -45,7 +45,7 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ThrullToken;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
@@ -114,22 +114,10 @@ class EndrekSahrMasterBreederEffect extends OneShotEffect {
         if (spell != null) {
             int cmc = spell.getConvertedManaCost();
             if (cmc > 0) {
-                return new CreateTokenEffect(new EndrekSahrMasterBreederThrullToken(), cmc).apply(game, source);
+                return new CreateTokenEffect(new ThrullToken(), cmc).apply(game, source);
             }
             return true;
         }
         return false;
-    }
-}
-
-class EndrekSahrMasterBreederThrullToken extends Token {
-
-    public EndrekSahrMasterBreederThrullToken() {
-        super("Thrull", "1/1 black Thrull creature token");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Thrull");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

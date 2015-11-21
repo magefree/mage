@@ -29,19 +29,13 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -57,7 +51,7 @@ public class CacklingFiend extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(FlyingAbility.getInstance());
+        // When Cackling Fiend enters the battlefield, each opponent discards a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 

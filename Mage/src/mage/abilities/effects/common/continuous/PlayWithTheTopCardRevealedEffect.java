@@ -41,18 +41,18 @@ import mage.players.Player;
  * @author nantuko
  */
 public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
-    
+
     protected boolean allPlayers;
 
     public PlayWithTheTopCardRevealedEffect() {
         this(false);
     }
-    
+
     public PlayWithTheTopCardRevealedEffect(boolean allPlayers) {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         this.allPlayers = allPlayers;
         if (allPlayers) {
-            staticText = "Each player plays with the top card of his or her library revealed.";
+            staticText = "Players play with the top card of their libraries revealed.";
         }
         else {
             staticText = "Play with the top card of your library revealed";
