@@ -202,22 +202,22 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                         }
                         switch (choice.getChoice()) {
                             case "Black":
-                                newMana.addBlack();
+                                newMana.increaseBlack();
                                 break;
                             case "Blue":
-                                newMana.addBlue();
+                                newMana.increaseBlue();
                                 break;
                             case "Red":
-                                newMana.addRed();
+                                newMana.increaseRed();
                                 break;
                             case "Green":
-                                newMana.addGreen();
+                                newMana.increaseGreen();
                                 break;
                             case "White":
-                                newMana.addWhite();
+                                newMana.increaseWhite();
                                 break;
                             case "Colorless":
-                                newMana.addColorless();
+                                newMana.increaseColorless();
                                 break;
                         }
                     }
