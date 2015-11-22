@@ -108,6 +108,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private int avatarId = -1;
     private String flagName;
+    private String basicTooltipText;
 
     private PriorityTimer timer;
 
@@ -159,25 +160,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     public void update(PlayerView player) {
         this.player = player;
-        if (flagName == null) { // do only once
-            avatar.setText(this.player.getName());
-            if (!player.getUserData().getFlagName().equals(flagName)) {
-                flagName = player.getUserData().getFlagName();
-                this.avatar.setTopTextImage(CountryUtil.getCountryFlagIcon(flagName).getImage());
-            }
-            // TODO: Add the wins to the tooltiptext of the avatar
-            String countryname = CountryUtil.getCountryName(flagName);
-            if (countryname == null) {
-                countryname = "Unknown";
-            }
-            String tooltip = "<HTML>Name: " + player.getName() + "<br/>Country: " + countryname;
-            avatar.setToolTipText(tooltip);
-            avatar.repaint();
-
-            // used if avatar image can't be used
-            this.btnPlayer.setText(player.getName());
-            this.btnPlayer.setToolTipText(tooltip);
-        }
+        updateAvatar();
         int playerLife = player.getLife();
         if (playerLife > 99) {
             Font font = lifeLabel.getFont();
@@ -285,6 +268,39 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
 
         update(player.getManaPool());
+    }
+
+    /**
+     * Updates the avatar image and tooltip text
+     */
+    private void updateAvatar() {
+        if (flagName == null) { // do only once
+            avatar.setText(this.player.getName());
+            if (!player.getUserData().getFlagName().equals(flagName)) {
+                flagName = player.getUserData().getFlagName();
+                this.avatar.setTopTextImage(CountryUtil.getCountryFlagIcon(flagName).getImage());
+            }
+            // TODO: Add the wins to the tooltiptext of the avatar
+            String countryname = CountryUtil.getCountryName(flagName);
+            if (countryname == null) {
+                countryname = "Unknown";
+            }
+            basicTooltipText = "<HTML>Name: " + player.getName()
+                    + "<br/>Country: " + countryname
+                    + "<br/>Deck hash code: " + player.getDeckHashCode()
+                    + "<br/>Wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)";
+        }
+        // Extend tooltip
+        StringBuilder tooltipText = new StringBuilder(basicTooltipText);
+        if (player.getExperience() > 0) {
+            tooltipText.append("<br/>Experience counters: ").append(player.getExperience());
+        }
+        avatar.setToolTipText(tooltipText.toString());
+        avatar.repaint();
+
+        // used if avatar image can't be used
+        this.btnPlayer.setText(player.getName());
+        this.btnPlayer.setToolTipText(tooltipText.toString());
     }
 
     private String getPriorityTimeLeftString(PlayerView player) {

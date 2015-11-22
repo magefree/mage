@@ -58,6 +58,10 @@ public class PlayerView implements Serializable {
     private final String name;
     private final int life;
     private final int poison;
+    private final int experience;
+    private final int wins;
+    private final int winsNeeded;
+    private final long deckHashCode;
     private final int libraryCount;
     private final int handCount;
     private final boolean isActive;
@@ -85,6 +89,10 @@ public class PlayerView implements Serializable {
         this.name = player.getName();
         this.life = player.getLife();
         this.poison = player.getCounters().getCount(CounterType.POISON);
+        this.experience = player.getCounters().getCount(CounterType.EXPERIENCE);
+        this.wins = player.getMatchPlayer().getWins();
+        this.winsNeeded = player.getMatchPlayer().getWinsNeeded();
+        this.deckHashCode = player.getMatchPlayer().getDeck().getDeckHashCode();
         this.libraryCount = player.getLibrary().size();
         this.handCount = player.getHand().size();
         this.manaPool = new ManaPoolView(player.getManaPool());
@@ -183,8 +191,24 @@ public class PlayerView implements Serializable {
         return this.poison;
     }
 
+    public int getExperience() {
+        return this.experience;
+    }
+
     public int getLibraryCount() {
         return this.libraryCount;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public int getWinsNeeded() {
+        return winsNeeded;
+    }
+
+    public long getDeckHashCode() {
+        return deckHashCode;
     }
 
     public int getHandCount() {
