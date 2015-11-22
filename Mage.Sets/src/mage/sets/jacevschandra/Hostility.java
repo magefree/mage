@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -111,7 +112,10 @@ class HostilityEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             if (game.getOpponents(source.getControllerId()).contains(event.getTargetId())) {
-                return true;
+                Spell spell = game.getStack().getSpell(event.getSourceId());
+                if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
+                    return true;
+                }
             }
         }
         return false;
