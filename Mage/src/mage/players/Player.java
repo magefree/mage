@@ -649,7 +649,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
 
     /**
-     * Iniversal method to move cards from one zone to another. Do not mix
+     * Universal method to move cards from one zone to another. Do not mix
      * objects from different from zones to move.
      *
      * @param cards
@@ -659,7 +659,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param tapped tha cards are tapped on the battlefield
      * @param faceDown the cards are face down in the to zone
      * @param byOwner the card is moved (or put onto battlefield) by the owner
-     * of the card and if target zone is battlefield controlls the permanent
+     * of the card and if target zone is battlefield controls the permanent
      * (instead of the controller of the source)
      * @param appliedEffects
      * @return

@@ -32,7 +32,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -166,10 +165,8 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(sourceId)) {
-            return game.getState().getZone(sourceId).equals(Zone.EXILED);
-        }
-        return false;        
+        return source.getControllerId().equals(affectedControllerId)
+                && sourceId.equals(getTargetPointer().getFirst(game, source));
     }
     
 }
@@ -209,17 +206,6 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public String getRule() {
         return "At the beginning of your next upkeep, if you haven't played it, " + modes.getText();
     }
-}
-
-
-class GrinningTotemYouHaveNotPlayedCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        return zone.getCards(game).size() > 0;
-    }
-    
 }
 
 class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {

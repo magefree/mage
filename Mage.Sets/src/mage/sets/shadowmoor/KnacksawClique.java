@@ -29,11 +29,13 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.UntapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -45,14 +47,14 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.util.CardUtil;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author jeffwadsworth
-
  */
 public class KnacksawClique extends CardImpl {
 
@@ -104,16 +106,17 @@ class KnacksawCliqueEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(source.getFirstTarget());
-        if (opponent != null) {
-            Player you = game.getPlayer(source.getControllerId());
-            UUID exileId = CardUtil.getCardExileZoneId(game, source);
-            Card card = opponent.getLibrary().getFromTop(game);
-            if (card != null 
-                    && you != null) {
-                card.moveToExile(exileId, "Knacksaw Clique", source.getSourceId(), game);
-                if (card.getSpellAbility() != null) {
-                    game.addEffect(new KnacksawCliqueCastFromExileEffect(card.getId(), exileId), source);
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && opponent != null) {
+            if (opponent.getLibrary().size() > 0) {
+                Library library = opponent.getLibrary();
+                Card card = library.getFromTop(game);
+                if (card != null) {
+                    opponent.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                    ContinuousEffect effect = new KnacksawCliqueCastFromExileEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
                 }
             }
             return true;
@@ -124,20 +127,13 @@ class KnacksawCliqueEffect extends OneShotEffect {
 
 class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
 
-    private final UUID cardId;
-    private final UUID exileId;
-
-    public KnacksawCliqueCastFromExileEffect(UUID cardId, UUID exileId) {
+    public KnacksawCliqueCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, you may play that card";
-        this.cardId = cardId;
-        this.exileId = exileId;
     }
 
     public KnacksawCliqueCastFromExileEffect(final KnacksawCliqueCastFromExileEffect effect) {
         super(effect);
-        this.cardId = effect.cardId;
-        this.exileId = effect.exileId;
     }
 
     @Override
@@ -152,12 +148,8 @@ class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(this.cardId) && source.getControllerId().equals(affectedControllerId)) {
-            Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getExile().getExileZone(exileId).contains(cardId)) {
-                return true;
-            }
-        }
-        return false;
+        return source.getControllerId().equals(affectedControllerId)
+                && sourceId.equals(getTargetPointer().getFirst(game, source));
+
     }
 }
