@@ -63,7 +63,7 @@ import org.apache.log4j.Logger;
  */
 public class SimulatedPlayer2 extends ComputerPlayer {
 
-    private static final transient Logger logger = Logger.getLogger(SimulatedPlayer2.class);
+    private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
     private final boolean isSimulatedPlayer;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private boolean forced;

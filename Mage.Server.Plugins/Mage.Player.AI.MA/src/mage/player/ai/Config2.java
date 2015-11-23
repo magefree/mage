@@ -28,14 +28,13 @@
 
 package mage.player.ai;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mage.util.Logging;
 
 /**
  *
@@ -43,7 +42,7 @@ import mage.util.Logging;
  */
 public class Config2 {
 
-    private static final Logger logger = Logging.getLogger(Config2.class.getName());
+    private static final Logger logger = Logger.getLogger(Config2.class);
 
 //    public static final int maxDepth;
     public static final int maxNodes;
@@ -70,9 +69,9 @@ public class Config2 {
 //                p.setProperty("maxThinkSeconds", "30");
             }
         } catch (IOException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.error(null, ex);
         } catch (URISyntaxException ex) {
-            Logger.getLogger(Config2.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(null, ex);
         }
 //        maxDepth = Integer.parseInt(p.getProperty("maxDepth"));
         maxNodes = Integer.parseInt(p.getProperty("maxNodes"));

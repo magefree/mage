@@ -28,10 +28,9 @@
 
 package mage.player.ai;
 
+import org.apache.log4j.Logger;
+
 import java.util.concurrent.Callable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mage.util.Logging;
 
 /**
  *
@@ -39,7 +38,7 @@ import mage.util.Logging;
  */
 public class SimulateBlockWorker implements Callable {
 
-    private static final Logger logger = Logging.getLogger(SimulationWorker.class.getName());
+    private static final Logger logger = Logger.getLogger(SimulationWorker.class);
 
     private SimulationNode node;
     private ComputerPlayer3 player;
@@ -54,7 +53,7 @@ public class SimulateBlockWorker implements Callable {
         try {
 //            player.simulateBlock(node);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.error(null, ex);
         }
         return null;
     }

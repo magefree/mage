@@ -44,7 +44,7 @@ import org.apache.log4j.Logger;
  */
 public class MageObjectReference implements Comparable<MageObjectReference>, Serializable {
 
-    private static final transient Logger logger = Logger.getLogger(MageObjectReference.class);
+    private static final Logger logger = Logger.getLogger(MageObjectReference.class);
 
     private final UUID sourceId;
     private final int zoneChangeCounter;

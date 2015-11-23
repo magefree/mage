@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 
-    private static final transient Logger logger = Logger.getLogger(ComputerPlayer3.class);
+    private static final Logger logger = Logger.getLogger(ComputerPlayer3.class);
 
     public ComputerPlayer3(String name, RangeOfInfluence range, int skill) {
         super(name, range, skill);

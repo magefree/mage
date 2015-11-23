@@ -51,7 +51,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class SimulatedPlayer extends ComputerPlayer {
 
-    private static final transient Logger logger = Logger.getLogger(SimulatedPlayer.class);
+    private static final Logger logger = Logger.getLogger(SimulatedPlayer.class);
     private boolean isSimulatedPlayer;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private static PassAbility pass = new PassAbility();

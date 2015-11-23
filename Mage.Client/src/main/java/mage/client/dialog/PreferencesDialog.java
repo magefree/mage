@@ -78,7 +78,7 @@ import org.apache.log4j.Logger;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
-    private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
+    private static final Logger log = Logger.getLogger(PreferencesDialog.class);
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";

@@ -62,7 +62,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     protected transient MCTSNode root;
     protected int maxThinkTime;
-    private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+    private static final Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
     private int poolSize;
 
     public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {

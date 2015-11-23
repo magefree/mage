@@ -50,7 +50,7 @@ import mage.util.ThreadLocalStringBuilder;
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
 
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
     public AbilitiesImpl() {}
 

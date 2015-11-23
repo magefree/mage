@@ -84,7 +84,7 @@ import mage.util.ThreadLocalStringBuilder;
  */
 public abstract class PermanentImpl extends CardImpl implements Permanent {
 
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(300);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(300);
 
     protected boolean tapped;
     protected boolean flipped;

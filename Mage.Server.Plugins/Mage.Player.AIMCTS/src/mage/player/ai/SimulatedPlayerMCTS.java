@@ -66,7 +66,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     private boolean isSimulatedPlayer;
     private static Random rnd = new Random();
     private int actionCount = 0;
-    private static final transient Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
+    private static final Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
 
     public SimulatedPlayerMCTS(UUID id, boolean isSimulatedPlayer) {
         super(id);

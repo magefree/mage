@@ -11,7 +11,7 @@ public class ArtificialScoringSystem implements ScoringSystem {
 
     public static ArtificialScoringSystem inst;
 
-    private static final transient Logger log = Logger.getLogger(ArtificialScoringSystem.class);
+    private static final Logger log = Logger.getLogger(ArtificialScoringSystem.class);
 
     static {
         inst = new ArtificialScoringSystem();

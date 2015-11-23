@@ -86,7 +86,7 @@ import mage.watchers.Watchers;
  */
 public class GameState implements Serializable, Copyable<GameState> {
 
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
 
     private final Players players;
     private final PlayerList playerList;

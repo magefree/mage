@@ -138,7 +138,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
 
-    private static final transient Logger logger = Logger.getLogger(GameImpl.class);
+    private static final Logger logger = Logger.getLogger(GameImpl.class);
 
     private static final FilterPermanent filterAura = new FilterPermanent();
     private static final FilterPermanent filterEquipment = new FilterPermanent();

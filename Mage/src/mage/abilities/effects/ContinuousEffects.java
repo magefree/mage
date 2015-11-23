@@ -82,7 +82,7 @@ import org.apache.log4j.Logger;
  */
 public class ContinuousEffects implements Serializable {
 
-    private static final transient Logger logger = Logger.getLogger(ContinuousEffects.class);
+    private static final Logger logger = Logger.getLogger(ContinuousEffects.class);
 
     private long order = 0;
 

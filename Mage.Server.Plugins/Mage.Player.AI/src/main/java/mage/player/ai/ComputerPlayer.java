@@ -160,7 +160,7 @@ import org.apache.log4j.Logger;
  */
 public class ComputerPlayer extends PlayerImpl implements Player {
 
-    private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
+    private static final Logger log = Logger.getLogger(ComputerPlayer.class);
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are availble
     protected boolean ALLOW_INTERRUPT = true;     // change this for test / debugging purposes to false to switch off interrupts while debugging

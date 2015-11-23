@@ -36,8 +36,6 @@ package mage.client.dialog;
 import java.awt.Point;
 import java.beans.PropertyVetoException;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.event.InternalFrameAdapter;
@@ -50,6 +48,7 @@ import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
 import mage.view.ExileView;
 import mage.view.SimpleCardsView;
+import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
@@ -57,6 +56,8 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  * @author BetaSteward_at_googlemail.com
  */
 public class CardInfoWindowDialog extends MageDialog {
+
+    private static final Logger logger = Logger.getLogger(CardInfoWindowDialog.class);
 
     public static enum ShowType {
 
@@ -123,7 +124,7 @@ public class CardInfoWindowDialog extends MageDialog {
                 try {
                     this.setIcon(false);
                 } catch (PropertyVetoException ex) {
-                    Logger.getLogger(CardInfoWindowDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.error(null, ex);
                 }
             }
         } else {

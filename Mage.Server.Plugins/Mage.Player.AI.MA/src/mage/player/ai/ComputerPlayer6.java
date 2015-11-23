@@ -104,6 +104,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.Targets;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -111,7 +112,7 @@ import mage.target.Targets;
  */
 public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
-    private static final transient org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ComputerPlayer6.class);
+    private static final Logger logger = Logger.getLogger(ComputerPlayer6.class);
     private static final ExecutorService pool = Executors.newFixedThreadPool(1);
     protected int maxDepth;
     protected int maxNodes;

@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public class LoadCallbackClient implements CallbackClient {
 
-    private static final transient Logger log = Logger.getLogger(LoadCallbackClient.class);
+    private static final Logger log = Logger.getLogger(LoadCallbackClient.class);
 
     private Session session;
     private UUID gameId;

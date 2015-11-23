@@ -84,8 +84,8 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbilityImpl implements Ability {
 
-    private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
+    private static final Logger logger = Logger.getLogger(AbilityImpl.class);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
     private static final List<Watcher> emptyWatchers = new ArrayList<>();
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 

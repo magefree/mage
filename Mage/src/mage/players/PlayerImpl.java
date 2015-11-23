@@ -136,7 +136,7 @@ import org.apache.log4j.Logger;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
-    private static final transient Logger logger = Logger.getLogger(PlayerImpl.class);
+    private static final Logger logger = Logger.getLogger(PlayerImpl.class);
 
     private static Random rnd = new Random();
 

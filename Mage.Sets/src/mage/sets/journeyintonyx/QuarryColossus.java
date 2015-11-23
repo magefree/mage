@@ -30,7 +30,6 @@ package mage.sets.journeyintonyx;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.UUID;
-import java.util.logging.Logger;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;

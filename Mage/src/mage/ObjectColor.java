@@ -35,7 +35,7 @@ import mage.util.ThreadLocalStringBuilder;
 
 public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
 
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(10);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(10);
 
     public static final ObjectColor WHITE = new ObjectColor("W");
     public static final ObjectColor BLUE = new ObjectColor("U");

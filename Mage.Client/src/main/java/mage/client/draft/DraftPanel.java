@@ -53,8 +53,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -82,12 +80,15 @@ import mage.view.DraftPickView;
 import mage.view.DraftView;
 import mage.view.SimpleCardView;
 import mage.view.SimpleCardsView;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftPanel extends javax.swing.JPanel {
+
+    private static final Logger logger = Logger.getLogger(DraftPanel.class);
 
     private UUID draftId;
     private Session session;
@@ -185,7 +186,7 @@ public class DraftPanel extends javax.swing.JPanel {
             try {
                 Files.write(pathToDraftLog(), "".getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             } catch (IOException ex) {
-                Logger.getLogger(DraftPanel.class.getName()).log(Level.SEVERE, null, ex);
+                logger.error(null, ex);
             }
         } else {
             logFilename = null;
@@ -523,7 +524,7 @@ public class DraftPanel extends javax.swing.JPanel {
         try {
             Files.write(pathToDraftLog(), data.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException ex) {
-            Logger.getLogger(DraftPanel.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(null, ex);
         }
     }
 

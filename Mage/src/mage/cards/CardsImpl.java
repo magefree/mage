@@ -49,7 +49,7 @@ import mage.util.ThreadLocalStringBuilder;
  */
 public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializable {
 
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
     private static Random rnd = new Random();
     private UUID ownerId;

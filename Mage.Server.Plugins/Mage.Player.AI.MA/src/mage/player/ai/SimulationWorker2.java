@@ -29,11 +29,9 @@
 package mage.player.ai;
 
 import java.util.concurrent.Callable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.abilities.Ability;
 import mage.game.Game;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -41,7 +39,7 @@ import mage.util.Logging;
  */
 public class SimulationWorker2 implements Callable {
 
-    private static final Logger logger = Logging.getLogger(SimulationWorker2.class.getName());
+    private static final Logger logger = Logger.getLogger(SimulationWorker2.class);
 
     private Game game;
     private SimulatedAction2 previousActions;
@@ -60,7 +58,7 @@ public class SimulationWorker2 implements Callable {
         try {
 //            player.simulateAction(game, previousActions, action);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.error(null, ex);
         }
         return null;
     }

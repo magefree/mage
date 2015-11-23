@@ -74,7 +74,7 @@ import org.apache.log4j.Logger;
  */
 public class ComputerPlayer7 extends ComputerPlayer6 {
 
-    private static final transient Logger logger = Logger.getLogger(ComputerPlayer7.class);
+    private static final Logger logger = Logger.getLogger(ComputerPlayer7.class);
 
     private boolean allowBadMoves;
 
