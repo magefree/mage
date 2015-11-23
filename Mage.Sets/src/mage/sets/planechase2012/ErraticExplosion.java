@@ -89,13 +89,14 @@ class ErraticExplosionEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             CardsImpl toReveal = new CardsImpl();
-            boolean nonLandFound = false;
             Card nonLandCard = null;
 
-            while (nonLandFound && controller.getLibrary().size() > 0) {
-                nonLandCard = controller.getLibrary().removeFromTop(game);
-                toReveal.add(nonLandCard);
-                nonLandFound = nonLandCard.getCardType().contains(CardType.LAND);
+            while (nonLandCard == null && controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().removeFromTop(game);
+                toReveal.add(card);
+                if (!card.getCardType().contains(CardType.LAND)) {
+                    nonLandCard = card;
+                }
             }
             // reveal cards
             if (!toReveal.isEmpty()) {

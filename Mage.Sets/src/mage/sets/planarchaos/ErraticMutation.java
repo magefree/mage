@@ -28,6 +28,8 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -40,12 +42,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-
-
 
 /**
  *
@@ -56,7 +55,6 @@ public class ErraticMutation extends CardImpl {
     public ErraticMutation(UUID ownerId) {
         super(ownerId, 41, "Erratic Mutation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "PLC";
-
 
         // Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -77,7 +75,7 @@ public class ErraticMutation extends CardImpl {
 class ErraticMutationEffect extends OneShotEffect {
 
     public ErraticMutationEffect() {
-        super(Outcome.DrawCard);
+        super(Outcome.UnboostCreature);
         this.staticText = "Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order";
     }
 
@@ -92,29 +90,33 @@ class ErraticMutationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            CardsImpl cards = new CardsImpl();
-            Library library = player.getLibrary();
-            Card card = null;
-            do {
-                card = library.removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            CardsImpl toReveal = new CardsImpl();
+            Card nonLandCard = null;
+
+            while (nonLandCard == null && controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().removeFromTop(game);
+                toReveal.add(card);
+                if (!card.getCardType().contains(CardType.LAND)) {
+                    nonLandCard = card;
                 }
-            } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
+            }
             // reveal cards
-            if (!cards.isEmpty()) {
-                player.revealCards("Erratic Mutation", cards, game);
+            if (!toReveal.isEmpty()) {
+                controller.revealCards(sourceObject.getIdName(), toReveal, game);
             }
             // the nonland card
-            int boostValue = card.getManaCost().convertedManaCost();
-            // unboost target
-            ContinuousEffect effect = new BoostTargetEffect(boostValue, boostValue * -1, Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
-            game.addEffect(effect, source);
+            if (nonLandCard != null) {
+                int boostValue = nonLandCard.getManaCost().convertedManaCost();
+                // unboost target
+                ContinuousEffect effect = new BoostTargetEffect(boostValue, -boostValue, Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
+                game.addEffect(effect, source);
+            }
             // put the cards on the bottom of the library in any order
-            return player.putCardsOnBottomOfLibrary(cards, game, source, true);
+            return controller.putCardsOnBottomOfLibrary(toReveal, game, source, true);
         }
         return false;
     }
