@@ -38,7 +38,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
@@ -70,13 +69,11 @@ public class GrinningTotem extends CardImpl {
 
         // {2}, {tap}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles his or her library.
         // Until the beginning of your next upkeep, you may play that card.
+        // At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrinningTotemSearchAndExileEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());
-        // At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new GrinningTotemDelayedTriggeredAbility()));
-        
         this.addAbility(ability);
     }
 
@@ -94,7 +91,9 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 
     public GrinningTotemSearchAndExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles his or her library. Until the beginning of your next upkeep, you may play that card";
+        this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles his or her library. " +
+                "Until the beginning of your next upkeep, you may play that card. " +
+                "At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard";
     }
     
     public GrinningTotemSearchAndExileEffect(final GrinningTotemSearchAndExileEffect effect) {
@@ -110,18 +109,21 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        MageObject sourcObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
         if (you != null && targetOpponent != null) {
             if (targetOpponent.getLibrary().size() > 0) {
                 TargetCardInLibrary targetCard = new TargetCardInLibrary();
                 if (you.searchLibrary(targetCard, game, targetOpponent.getId())) {
                     Card card = targetOpponent.getLibrary().remove(targetCard.getFirstTarget(), game);
                     if (card != null) {
-                        you.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcObject != null ? sourcObject.getIdName() : "", source.getSourceId(), game, Zone.LIBRARY, true);
+                        UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
+                        you.moveCardToExileWithInfo(card, exileZoneId, sourceObject != null ? sourceObject.getIdName() : "", source.getSourceId(), game, Zone.LIBRARY, true);
                         ContinuousEffect effect = new GrinningTotemMayPlayEffect();
                         effect.setTargetPointer(new FixedTarget(card.getId()));
                         game.addEffect(effect, source);
-                    }                    
+
+                        game.addDelayedTriggeredAbility(new GrinningTotemDelayedTriggeredAbility(exileZoneId), source);
+                    }
                 }
             }
             targetOpponent.shuffleLibrary(game);
@@ -173,17 +175,21 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
 
 class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    public GrinningTotemDelayedTriggeredAbility() {
-        super(new GrinningTotemPutIntoGraveyardEffect());
+    private final UUID exileZoneId;
+
+    public GrinningTotemDelayedTriggeredAbility(UUID exileZoneId) {
+        super(new GrinningTotemPutIntoGraveyardEffect(exileZoneId));
+        this.exileZoneId = exileZoneId;
     }
 
     public GrinningTotemDelayedTriggeredAbility(final GrinningTotemDelayedTriggeredAbility ability) {
         super(ability);
+        this.exileZoneId = ability.exileZoneId;
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, this.getSourceId()));        
+        ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         return exileZone != null && exileZone.getCards(game).size() > 0;
     }
 
@@ -210,13 +216,17 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
 
-    public GrinningTotemPutIntoGraveyardEffect() {
+    private final UUID exileZoneId;
+
+    public GrinningTotemPutIntoGraveyardEffect(UUID exileZoneId) {
         super(Outcome.Detriment);
+        this.exileZoneId = exileZoneId;
         this.staticText = "put it into its owner's graveyard";
     }
     
     public GrinningTotemPutIntoGraveyardEffect(final GrinningTotemPutIntoGraveyardEffect effect) {
         super(effect);
+        this.exileZoneId = effect.exileZoneId;
     }
 
     @Override
@@ -227,7 +237,7 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        ExileZone zone = game.getExile().getExileZone(exileZoneId);
         if (controller != null && zone != null) {
             return controller.moveCards(zone, Zone.EXILED, Zone.GRAVEYARD, source, game);
         }

@@ -58,7 +58,6 @@ import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
 /**
- * import mage.constants.Outcome;
  *
  * @author LevelX2
  */
