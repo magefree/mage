@@ -25,70 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author nigelzor
  */
-public class UginsInsight extends CardImpl {
+public class AcceleratedMutation extends CardImpl {
 
-    public UginsInsight(UUID ownerId) {
-        super(ownerId, 87, "Ugin's Insight", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "BFZ";
+    public AcceleratedMutation(UUID ownerId) {
+        super(ownerId, 109, "Accelerated Mutation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
+        this.expansionSetCode = "SCG";
 
-        // Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards.
-        this.getSpellAbility().addEffect(new UginsInsightEffect());
+        // Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.
+        DynamicValue amount = new HighestConvertedManaCostValue();
+        this.getSpellAbility().addEffect(new BoostTargetEffect(amount, amount, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public UginsInsight(final UginsInsight card) {
+    public AcceleratedMutation(final AcceleratedMutation card) {
         super(card);
     }
 
     @Override
-    public UginsInsight copy() {
-        return new UginsInsight(this);
-    }
-}
-
-class UginsInsightEffect extends OneShotEffect {
-
-    public UginsInsightEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards";
-    }
-
-    public UginsInsightEffect(final UginsInsightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UginsInsightEffect copy() {
-        return new UginsInsightEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int highCMC = new HighestConvertedManaCostValue().calculate(game, source, this);
-            if (highCMC > 0) {
-                controller.scry(highCMC, source, game);
-            }
-            controller.drawCards(3, game);
-            return true;
-        }
-        return false;
+    public AcceleratedMutation copy() {
+        return new AcceleratedMutation(this);
     }
 }

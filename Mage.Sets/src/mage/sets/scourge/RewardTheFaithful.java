@@ -25,70 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author fireshoes
+ * @author nigelzor
  */
-public class UginsInsight extends CardImpl {
+public class RewardTheFaithful extends CardImpl {
 
-    public UginsInsight(UUID ownerId) {
-        super(ownerId, 87, "Ugin's Insight", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "BFZ";
+    public RewardTheFaithful(UUID ownerId) {
+        super(ownerId, 22, "Reward the Faithful", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "SCG";
 
-        // Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards.
-        this.getSpellAbility().addEffect(new UginsInsightEffect());
+        // Any number of target players each gain life equal to the highest converted mana cost among permanents you control.
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(new HighestConvertedManaCostValue()));
+        this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
     }
 
-    public UginsInsight(final UginsInsight card) {
+    public RewardTheFaithful(final RewardTheFaithful card) {
         super(card);
     }
 
     @Override
-    public UginsInsight copy() {
-        return new UginsInsight(this);
-    }
-}
-
-class UginsInsightEffect extends OneShotEffect {
-
-    public UginsInsightEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards";
-    }
-
-    public UginsInsightEffect(final UginsInsightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UginsInsightEffect copy() {
-        return new UginsInsightEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int highCMC = new HighestConvertedManaCostValue().calculate(game, source, this);
-            if (highCMC > 0) {
-                controller.scry(highCMC, source, game);
-            }
-            controller.drawCards(3, game);
-            return true;
-        }
-        return false;
+    public RewardTheFaithful copy() {
+        return new RewardTheFaithful(this);
     }
 }

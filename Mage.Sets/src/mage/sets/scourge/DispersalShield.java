@@ -25,69 +25,70 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.sets.scourge;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.stack.Spell;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author fireshoes
+ * @author nigelzor
  */
-public class UginsInsight extends CardImpl {
+public class DispersalShield extends CardImpl {
 
-    public UginsInsight(UUID ownerId) {
-        super(ownerId, 87, "Ugin's Insight", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "BFZ";
+    public DispersalShield(UUID ownerId) {
+        super(ownerId, 33, "Dispersal Shield", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "SCG";
 
-        // Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards.
-        this.getSpellAbility().addEffect(new UginsInsightEffect());
+        // Counter target spell if its converted mana cost is less than or equal to the highest converted mana cost among permanents you control.
+        this.getSpellAbility().addEffect(new DispersalShieldEffect());
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public UginsInsight(final UginsInsight card) {
+    public DispersalShield(final DispersalShield card) {
         super(card);
     }
 
     @Override
-    public UginsInsight copy() {
-        return new UginsInsight(this);
+    public DispersalShield copy() {
+        return new DispersalShield(this);
     }
 }
 
-class UginsInsightEffect extends OneShotEffect {
+class DispersalShieldEffect extends OneShotEffect {
 
-    public UginsInsightEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards";
+    public DispersalShieldEffect() {
+        super(Outcome.Detriment);
+        staticText = "Counter target spell if its converted mana cost is less than or equal to the highest converted mana cost among permanents you control";
     }
 
-    public UginsInsightEffect(final UginsInsightEffect effect) {
+    public DispersalShieldEffect(DispersalShieldEffect effect) {
         super(effect);
     }
 
     @Override
-    public UginsInsightEffect copy() {
-        return new UginsInsightEffect(this);
+    public Effect copy() {
+        return new DispersalShieldEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int highCMC = new HighestConvertedManaCostValue().calculate(game, source, this);
-            if (highCMC > 0) {
-                controller.scry(highCMC, source, game);
-            }
-            controller.drawCards(3, game);
-            return true;
+        DynamicValue amount = new HighestConvertedManaCostValue();
+        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        if (spell != null && spell.getConvertedManaCost() <= amount.calculate(game, source, this)) {
+            return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
         }
         return false;
     }
