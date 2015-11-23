@@ -317,7 +317,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         if (Character.isDigit(symbol.charAt(0))) {
                             this.add((T) new GenericManaCost(Integer.valueOf(symbol)));
                         } else {
-                            if (!symbol.equals("X")) {
+                            if(symbol.equals("S")) {
+                                this.add((T) new SnowManaCost());
+                            }
+                            else if (!symbol.equals("X")) {
                                 this.add((T) new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                             } else {
                                 // check X wasn't added before
@@ -334,9 +337,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                             //TODO: handle multiple {X} and/or {Y} symbols
                         }
                     } else {
-                        if (symbol.equals("snow")) {
-                            this.add((T) new SnowManaCost());
-                        } else if (Character.isDigit(symbol.charAt(0))) {
+                        if (Character.isDigit(symbol.charAt(0))) {
                             this.add((T) new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
                         } else if (symbol.contains("P")) {
                             this.add((T) new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));

@@ -57,9 +57,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class RimeTransfusion extends CardImpl {
-    
-    static final String rule = "and has \"{snow}: This creature can't be blocked this turn except by snow creatures.\"";
-    
+
+    static final String rule = "and has \"{S}: This creature can't be blocked this turn except by snow creatures.\"";
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by snow creatures until end of turn");
 
     static {
@@ -78,10 +78,10 @@ public class RimeTransfusion extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
-        // Enchanted creature gets +2/+1 and has "{snow}: This creature can't be blocked this turn except by snow creatures."
+
+        // Enchanted creature gets +2/+1 and has "{S}: This creature can't be blocked this turn except by snow creatures."
         SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn))),new ManaCostsImpl("{snow}"));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn))),new ManaCostsImpl("{S}"));
         ability2.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule));
         this.addAbility(ability2);
     }
