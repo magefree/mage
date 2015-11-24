@@ -111,7 +111,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
 
         // Equipped creature has deathtouch and lifelink.
-        addCard(Zone.BATTLEFIELD, playerA, "Basilisk Collar");
+        addCard(Zone.BATTLEFIELD, playerA, "Marchesa, the Black Rose");
         /*
          {R}{G}{W} Legendary Creature - Elemental Beast
          Marath, Will of the Wild enters the battlefield with a number of +1/+1 counters on
