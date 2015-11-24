@@ -71,7 +71,7 @@ class AgelessEntityEffect extends OneShotEffect {
 
     public AgelessEntityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "put that many +1/+1 counters on this creature";
+        this.staticText = "put that many +1/+1 counters on {this}";
     }
 
     public AgelessEntityEffect(final AgelessEntityEffect effect) {

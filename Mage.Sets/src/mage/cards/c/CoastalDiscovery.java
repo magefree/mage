@@ -46,7 +46,7 @@ public class CoastalDiscovery extends CardImpl {
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
 
-        // Awaken 4 - {5}U}
+        // Awaken 4 - {5}{U}
         this.addAbility(new AwakenAbility(this, 4, "{5}{U}"));
     }
 

@@ -45,11 +45,10 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  *
  * @author LoneFox
-
  */
 public class AlphaKavu extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kavu");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kavu creature");
 
     static {
         filter.add(new SubtypePredicate("Kavu"));

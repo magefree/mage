@@ -67,7 +67,7 @@ public class AnyaMercilessAngel extends CardImpl {
         // Anya, Merciless Angel gets +3/+3 for each opponent whose life total is less than half his or her starting life total.
         DynamicValue dValue = new MultipliedValue(new AnyaMercilessAngelDynamicValue(), 3);
         Effect effect = new BoostSourceEffect(dValue, dValue, Duration.WhileOnBattlefield);
-        effect.setText("{this{ gets +3/+3 for each opponent whose life total is less than half his or her starting life total");
+        effect.setText("{this} gets +3/+3 for each opponent whose life total is less than half his or her starting life total");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(dValue, dValue, Duration.WhileOnBattlefield)));
         
         // As long as an opponent's life total is less than half his or her starting life total, Anya has indestructible.

@@ -79,7 +79,7 @@ class AvatarOfMightCostReductionEffect extends CostModificationEffectImpl {
 
     AvatarOfMightCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "If an opponent controls at least four more creatures than you, {this} will costs {6} less to cast";
+        staticText = "If an opponent controls at least four more creatures than you, {this} costs {6} less to cast";
     }
 
     AvatarOfMightCostReductionEffect(final AvatarOfMightCostReductionEffect effect) {

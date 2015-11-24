@@ -50,7 +50,7 @@ import mage.game.events.GameEvent;
  */
 public class Pestilence extends CardImpl {
 
-    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.";
+    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
 
     public Pestilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");

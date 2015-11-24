@@ -73,7 +73,7 @@ class BalancingActEffect extends OneShotEffect {
    
     public BalancingActEffect() {
         super(Outcome.Sacrifice);
-        staticText = "Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
+        staticText = "Each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way";
     }
 
     public BalancingActEffect(final BalancingActEffect effect) {
@@ -90,7 +90,7 @@ class BalancingActEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int minPermanent = Integer.MAX_VALUE, minCard = Integer.MAX_VALUE;
-            // count minimal permanets
+            // count minimal permanents
             for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)){
                 Player player = game.getPlayer(playerId);
                 if(player != null){
