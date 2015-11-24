@@ -57,7 +57,7 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
 
     /**
      *
-     * @param fromBattlefieldOnly the object is only returned if it's on the
+     * @param fromBattlefieldOnly the object is only returned if it is on the
      * battlefield as the effect resolves
      * @param returnFromNextZone the object is only returned, if it has changed
      * the zone one time after the source ability triggered or was activated
@@ -67,7 +67,7 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
         super(Outcome.ReturnToHand);
         this.fromBattlefieldOnly = fromBattlefieldOnly;
         this.returnFromNextZone = returnFromNextZone;
-        staticText = "return {this} to it's owner's hand";
+        staticText = "return {this} to its owner's hand";
     }
 
     public ReturnToHandSourceEffect(final ReturnToHandSourceEffect effect) {

@@ -104,13 +104,13 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         this.conspireId = conspireId;
         switch (conspireTargets) {
             case NONE:
-                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it.)";
+                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it.";
                 break;
             case ONE:
-                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)";
+                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.";
                 break;
             case MORE:
-                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it  and you may choose a new targets for the copy.)";
+                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.";
                 break;
         }
         Cost cost = new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true));
