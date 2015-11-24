@@ -28,16 +28,12 @@
 package mage.sets.portal;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -51,7 +47,9 @@ public class SorcerousSight extends CardImpl {
         this.expansionSetCode = "POR";
 
         // Look at target opponent's hand.
-        this.getSpellAbility().addEffect(new SorcerousSightEffect());
+        Effect effect = new LookAtTargetPlayerHandEffect();
+        effect.setText("Look at target opponent's hand");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetOpponent());
         
         // Draw a card.
@@ -66,33 +64,4 @@ public class SorcerousSight extends CardImpl {
     public SorcerousSight copy() {
         return new SorcerousSight(this);
     }
-}
-
-class SorcerousSightEffect extends OneShotEffect {
-
-    SorcerousSightEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Look at target opponent's hand";
-    }
-
-    SorcerousSightEffect(final SorcerousSightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player != null && controller != null && sourceObject != null) {
-            controller.lookAtCards(sourceObject.getIdName() + " (" + player.getName() + ")", player.getHand(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public SorcerousSightEffect copy() {
-        return new SorcerousSightEffect(this);
-    }
-
 }

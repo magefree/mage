@@ -25,40 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class Peek extends CardImpl {
+public class MagesGuile extends CardImpl {
 
-    public Peek(UUID ownerId) {
-        super(ownerId, 94, "Peek", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "10E";
+    public MagesGuile(UUID ownerId) {
+        super(ownerId, 91, "Mage's Guile", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "ONS";
 
-        // Look at target player's hand.
-        this.getSpellAbility().addEffect(new LookAtTargetPlayerHandEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        // Target creature gains shroud until end of turn.
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Cycling {U}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
     }
 
-    public Peek(final Peek card) {
+    public MagesGuile(final MagesGuile card) {
         super(card);
     }
 
     @Override
-    public Peek copy() {
-        return new Peek(this);
+    public MagesGuile copy() {
+        return new MagesGuile(this);
     }
 }

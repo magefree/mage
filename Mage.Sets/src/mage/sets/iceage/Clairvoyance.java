@@ -28,19 +28,14 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -54,7 +49,7 @@ public class Clairvoyance extends CardImpl {
         this.expansionSetCode = "ICE";
 
         // Look at target player's hand.
-        this.getSpellAbility().addEffect(new ClairvoyanceEffect());
+        this.getSpellAbility().addEffect(new LookAtTargetPlayerHandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         // Draw a card at the beginning of the next turn's upkeep.
@@ -70,33 +65,4 @@ public class Clairvoyance extends CardImpl {
     public Clairvoyance copy() {
         return new Clairvoyance(this);
     }
-}
-
-class ClairvoyanceEffect extends OneShotEffect {
-
-    ClairvoyanceEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Look at target player's hand";
-    }
-
-    ClairvoyanceEffect(final ClairvoyanceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player != null && controller != null && sourceObject != null) {
-            controller.lookAtCards(sourceObject.getIdName() + " (" + player.getName() + ")", player.getHand(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public ClairvoyanceEffect copy() {
-        return new ClairvoyanceEffect(this);
-    }
-
 }
