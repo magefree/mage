@@ -55,10 +55,10 @@ public class RiftstonePortal extends CardImpl {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
  
-        // As long as Riftstone Portal is in your graveyard, lands you control have "{tap}: Add {G} or {W} to your mana pool."
+        // As long as Riftstone Portal is in your graveyard, lands you control have "{T}: Add {G} or {W} to your mana pool."
         ContinuousEffect effect = new GainAbilityControlledEffect(new GreenManaAbility(),
                 Duration.WhileOnBattlefield, new FilterControlledLandPermanent());
-        effect.setText("As long as Riftstone Portal is in your graveyard, lands you control have \"{tap}: Add {G} or {W} to your mana pool.\"");
+        effect.setText("As long as Riftstone Portal is in your graveyard, lands you control have \"{T}: Add {G} or {W} to your mana pool.\"");
         Ability ability = new SimpleStaticAbility(Zone.GRAVEYARD, effect);
         effect = new GainAbilityControlledEffect(new WhiteManaAbility(),
                 Duration.WhileOnBattlefield, new FilterControlledLandPermanent());

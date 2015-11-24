@@ -59,7 +59,7 @@ public class GoblinBangchuckers extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {t}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.
+        // {T}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinBangchuckersEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -79,7 +79,7 @@ class GoblinBangchuckersEffect extends OneShotEffect {
 
     public GoblinBangchuckersEffect() {
         super(Outcome.Damage);
-        staticText = "{tap}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself";
+        staticText = "Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself";
     }
 
     public GoblinBangchuckersEffect(GoblinBangchuckersEffect effect) {

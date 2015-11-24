@@ -65,13 +65,13 @@ public class NomadDecoy extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         
-        // Threshold - {W}{W}, {tap}: Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.
+        // Threshold - {W}{W}, {T}: Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}{W}"));
         thresholdAbility.addTarget(new TargetCreaturePermanent(2));
         thresholdAbility.addCost(new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(thresholdAbility),
                                                                                                  new CardsInControllerGraveCondition(7),
-                                                                                                 "<i>Threshold</i> - {W}{W}, {tap}: Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.")));
+                                                                                                 "<i>Threshold</i> - {W}{W}, {T}: Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.")));
     }
 
     public NomadDecoy(final NomadDecoy card) {

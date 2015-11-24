@@ -67,11 +67,11 @@ public class WolfhuntersQuiver extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Equipment");
 
-        // Equipped creature has "{tap}: This creature deals 1 damage to target creature or player"
+        // Equipped creature has "{T}: This creature deals 1 damage to target creature or player"
         Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         abilityToGain.addTarget(new TargetCreatureOrPlayer());
         Effect effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
-        effect.setText("Equipped creature has \"{tap}: This creature deals 1 damage to target creature or player\"");
+        effect.setText("Equipped creature has \"{T}: This creature deals 1 damage to target creature or player\"");
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         
         // and "{T}: This creature deals 3 damage to target Werewolf creature."
