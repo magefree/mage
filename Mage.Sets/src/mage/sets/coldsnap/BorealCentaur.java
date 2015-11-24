@@ -29,43 +29,40 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class BorealCentaur extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+    public BorealCentaur(UUID ownerId) {
+        super(ownerId, 104, "Boreal Centaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "CSP";
         this.supertype.add("Snow");
-        this.subtype.add("Construct");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.subtype.add("Centaur");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+        // {S}: Boreal Centaur gets +1/+1 until end of turn. Activate this ability only once each turn.
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{S}")));
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public BorealCentaur(final BorealCentaur card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public BorealCentaur copy() {
+        return new BorealCentaur(this);
     }
 }

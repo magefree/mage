@@ -29,43 +29,36 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class GristleGrinner extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+    public GristleGrinner(UUID ownerId) {
+        super(ownerId, 59, "Gristle Grinner", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "CSP";
-        this.supertype.add("Snow");
-        this.subtype.add("Construct");
+        this.subtype.add("Zombie");
         this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+        // Whenever a creature dies, Gristle Grinner gets +2/+2 until end of turn.
+        this.addAbility(new DiesCreatureTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public GristleGrinner(final GristleGrinner card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public GristleGrinner copy() {
+        return new GristleGrinner(this);
     }
 }

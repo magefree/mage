@@ -30,42 +30,40 @@ package mage.sets.coldsnap;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterLandCard;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class SimianBrawler extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+    public SimianBrawler(UUID ownerId) {
+        super(ownerId, 122, "Simian Brawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "CSP";
-        this.supertype.add("Snow");
-        this.subtype.add("Construct");
+        this.subtype.add("Ape");
+        this.subtype.add("Warrior");
         this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+        // Discard a land card: Simian Brawler gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
+            new DiscardCardCost(new FilterLandCard("a land card"))));
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public SimianBrawler(final SimianBrawler card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public SimianBrawler copy() {
+        return new SimianBrawler(this);
     }
 }

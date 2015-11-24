@@ -30,42 +30,50 @@ package mage.sets.coldsnap;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class DiamondFaerie extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "CSP";
-        this.supertype.add("Snow");
-        this.subtype.add("Construct");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snow creatures");
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+    static {
+        filter.add(new SupertypePredicate("Snow"));
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public DiamondFaerie(UUID ownerId) {
+        super(ownerId, 128, "Diamond Faerie", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");
+        this.expansionSetCode = "CSP";
+        this.supertype.add("Snow");
+        this.subtype.add("Faerie");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {1}{S}: Snow creatures you control get +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1,
+            Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{S}")));
+    }
+
+    public DiamondFaerie(final DiamondFaerie card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public DiamondFaerie copy() {
+        return new DiamondFaerie(this);
     }
 }

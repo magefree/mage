@@ -29,43 +29,47 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class AdarkarWindform extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+    public AdarkarWindform(UUID ownerId) {
+        super(ownerId, 26, "Adarkar Windform", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "CSP";
         this.supertype.add("Snow");
-        this.subtype.add("Construct");
+        this.subtype.add("Illusion");
         this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {1}{S}: Target creature loses flying until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityTargetEffect(
+            FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{S}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public AdarkarWindform(final AdarkarWindform card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public AdarkarWindform copy() {
+        return new AdarkarWindform(this);
     }
 }

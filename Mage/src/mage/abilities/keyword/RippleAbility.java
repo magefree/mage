@@ -59,7 +59,7 @@ public class RippleAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Ripple <i>((When you cast this spell, you may reveal the top " + CardUtil.numberToText(rippleNumber) + " cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.))</i>";
+        return "Ripple " + rippleNumber + " <i>(When you cast this spell, you may reveal the top " + CardUtil.numberToText(rippleNumber) + " cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.)</i>";
     }
 
 

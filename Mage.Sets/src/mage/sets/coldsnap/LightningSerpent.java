@@ -29,43 +29,48 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.TargetController;
+import mage.counters.CounterType;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class LightningSerpent extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+    public LightningSerpent(UUID ownerId) {
+        super(ownerId, 88, "Lightning Serpent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{X}{R}");
         this.expansionSetCode = "CSP";
-        this.supertype.add("Snow");
-        this.subtype.add("Construct");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.subtype.add("Elemental");
+        this.subtype.add("Serpent");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Lightning Serpent enters the battlefield with X +1/+0 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P0.createInstance())));
+        // At the beginning of the end step, sacrifice Lightning Serpent.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public LightningSerpent(final LightningSerpent card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public LightningSerpent copy() {
+        return new LightningSerpent(this);
     }
 }

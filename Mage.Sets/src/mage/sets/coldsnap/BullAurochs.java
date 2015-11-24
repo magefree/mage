@@ -29,43 +29,52 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class BullAurochs extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "CSP";
-        this.supertype.add("Snow");
-        this.subtype.add("Construct");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Aurochs");
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+    static {
+        filter.add(new SubtypePredicate("Aurochs"));
+        filter.add(new AnotherPredicate());
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public BullAurochs(UUID ownerId) {
+        super(ownerId, 107, "Bull Aurochs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "CSP";
+        this.subtype.add("Aurochs");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Whenever Bull Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
+        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, 1);
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, new StaticValue(0), Duration.EndOfTurn, true), false));
+    }
+
+    public BullAurochs(final BullAurochs card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public BullAurochs copy() {
+        return new BullAurochs(this);
     }
 }

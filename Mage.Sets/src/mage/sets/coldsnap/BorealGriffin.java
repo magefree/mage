@@ -30,42 +30,43 @@ package mage.sets.coldsnap;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class BorealGriffin extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+    public BorealGriffin(UUID ownerId) {
+        super(ownerId, 2, "Boreal Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "CSP";
         this.supertype.add("Snow");
-        this.subtype.add("Construct");
+        this.subtype.add("Griffin");
         this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(2);
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {S}: Boreal Griffin gains first strike until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
+            FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public BorealGriffin(final BorealGriffin card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public BorealGriffin copy() {
+        return new BorealGriffin(this);
     }
 }

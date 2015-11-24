@@ -59,8 +59,8 @@ public class ScryingSheets extends CardImpl {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {1}{snow}, {tap}: Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryingSheetsEffect(), new ManaCostsImpl<>("{1}{snow}"));
+        // {1}{S}, {T}: Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryingSheetsEffect(), new ManaCostsImpl<>("{1}{S}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -29,43 +29,53 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class PhyrexianIronfoot extends CardImpl {
+public class WildernessElemental extends CardImpl {
 
-    public PhyrexianIronfoot(UUID ownerId) {
-        super(ownerId, 139, "Phyrexian Ironfoot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "CSP";
-        this.supertype.add("Snow");
-        this.subtype.add("Construct");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands your opponents control");
 
-        // Phyrexian Ironfoot doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-
-        // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+    static {
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    public WildernessElemental(UUID ownerId) {
+        super(ownerId, 134, "Wilderness Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
+        this.expansionSetCode = "CSP";
+        this.subtype.add("Elemental");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Wilderness Elemental's power is equal to the number of nonbasic lands your opponents control.
+         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+   }
+
+    public WildernessElemental(final WildernessElemental card) {
         super(card);
     }
 
     @Override
-    public PhyrexianIronfoot copy() {
-        return new PhyrexianIronfoot(this);
+    public WildernessElemental copy() {
+        return new WildernessElemental(this);
     }
 }
