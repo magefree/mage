@@ -179,10 +179,12 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
                     setTarget:
                     for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
                         for (Target target : mode.getTargets()) {
-                            if (target.getClass().equals(usedTarget.getClass()) && target.getMessage().equals(usedTarget.getMessage())) {
-                                target.clearChosen();
-                                target.add(creature.getId(), game);
-                                break setTarget;
+                            if (target.getClass().equals(usedTarget.getClass())) {
+                                target.clearChosen(); // For targets with Max > 1 we need to clear before the text is comapred
+                                if (target.getMessage().equals(usedTarget.getMessage())) {
+                                    target.add(creature.getId(), game);
+                                    break setTarget;
+                                }
                             }
                         }
                     }
