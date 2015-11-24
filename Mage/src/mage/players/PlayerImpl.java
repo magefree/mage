@@ -1489,7 +1489,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 StringBuilder sb = new StringBuilder(message).append(" to untap").append(" (").append(Math.min(leftForUntap.size(), numberToUntap)).append(" in total");
                                 MageObject effectSource = game.getObject(ability.getSourceId());
                                 if (effectSource != null) {
-                                    sb.append(" from ").append(effectSource.getLogName()).toString();
+                                    sb.append(" from ").append(effectSource.getLogName());
                                 }
                                 sb.append(")");
                                 filter.setMessage(sb.toString());

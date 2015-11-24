@@ -221,7 +221,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
             sb.append(" of them.");
         }
 
-        sb.append(" That player discards ").append(discardMultipleCards ? "those cards" : "that card").toString();
+        sb.append(" That player discards ").append(discardMultipleCards ? "those cards" : "that card");
         return sb.toString();
     }
 }

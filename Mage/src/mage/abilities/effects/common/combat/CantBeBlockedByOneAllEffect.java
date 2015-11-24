@@ -59,7 +59,7 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
         if (duration.equals(Duration.EndOfTurn)) {
             sb.append("this turn ");
         }
-        sb.append("except by ").append(CardUtil.numberToText(amount)).append(" or more creatures").toString();
+        sb.append("except by ").append(CardUtil.numberToText(amount)).append(" or more creatures");
         staticText = sb.toString();
     }
 

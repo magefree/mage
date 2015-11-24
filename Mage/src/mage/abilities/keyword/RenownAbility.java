@@ -103,7 +103,7 @@ class BecomesRenownedSourceEffect extends OneShotEffect {
         sb.append(renownValue == Integer.MAX_VALUE ? "X" : renownValue)
                 .append(".  <i>(When this creature deals combat damage to a player, if it isn't renowned, put ")
                 .append(renownValue == Integer.MAX_VALUE ? "X" : CardUtil.numberToText(renownValue, "a"))
-                .append(" +1/+1 counter on it and it becomes renowned.)</i>").toString();
+                .append(" +1/+1 counter on it and it becomes renowned.)</i>");
         return sb.toString();
     }
 
