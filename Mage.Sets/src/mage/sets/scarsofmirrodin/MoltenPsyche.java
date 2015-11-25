@@ -78,7 +78,7 @@ class MoltenPsycheEffect extends OneShotEffect {
     public MoltenPsycheEffect() {
         super(Outcome.Neutral);
         staticText = "Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.\n"
-                + "<i>Metalcraft<i/> - If you control three or more artifacts, {this} deals damage to each opponent equal to the number of cards that player has drawn this turn.";
+                + "<i>Metalcraft</i> - If you control three or more artifacts, {this} deals damage to each opponent equal to the number of cards that player has drawn this turn.";
     }
 
     public MoltenPsycheEffect(final MoltenPsycheEffect effect) {

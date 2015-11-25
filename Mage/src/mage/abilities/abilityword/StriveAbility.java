@@ -68,7 +68,7 @@ public class StriveAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("<i>Strive<i/> - {this} costs ").append(striveCost).append(" more to cast for each target beyond the first.").toString();
+        return new StringBuilder("<i>Strive</i> - {this} costs ").append(striveCost).append(" more to cast for each target beyond the first.").toString();
     }
 }
 

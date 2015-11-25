@@ -35,7 +35,7 @@ public class DevoidAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "Devoid <i>(This card has no color.)<i/>";
+        return "Devoid <i>(This card has no color.)</i>";
     }
 
 }

@@ -89,7 +89,7 @@ public class Effects extends ArrayList<Effect> {
                 !lastRule.endsWith("\"") &&
                 !lastRule.startsWith("<b>Level ") &&
                 !lastRule.endsWith(".)") &&
-                !lastRule.endsWith("<i/>") ) {
+                !lastRule.endsWith("</i>") ) {
             sbText.append(".");
         }
         return sbText.toString();

@@ -54,7 +54,7 @@ public class SoulbondAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Soulbond <i>(You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)<i/>";
+        return "Soulbond <i>(You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)</i>";
     }
 
     @Override

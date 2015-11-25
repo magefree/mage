@@ -60,7 +60,7 @@ public class LoxodonWarhammer extends CardImpl {
         effect.setText("and has trample");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT);
-        effect.setText("and lifelink. <i>(If the creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker. Damage dealt by the creature also causes its controller to gain that much life.)<i/>");
+        effect.setText("and lifelink. <i>(If the creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker. Damage dealt by the creature also causes its controller to gain that much life.)</i>");
         ability.addEffect(effect);
         this.addAbility(ability);
 

@@ -58,7 +58,7 @@ public class RancidEarth extends CardImpl {
                 new RancidEarthEffect(),
                 new DestroyTargetEffect(),
                 new CardsInControllerGraveCondition(7),
-                "Destroy target land.<br/><br/><i>Threshold<i/> - If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player."));
+                "Destroy target land.<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player."));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 

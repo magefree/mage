@@ -89,10 +89,10 @@ public class SoulshiftAbility extends DiesTriggeredAbility {
     @Override
     public String getRule() {
         if (amount instanceof StaticValue) {
-            return "Soulshift " + amount.toString() + " <i>(When this creature dies, you may return target Spirit card with converted mana cost " + amount.toString() + " or less from your graveyard to your hand.)<i/>";
+            return "Soulshift " + amount.toString() + " <i>(When this creature dies, you may return target Spirit card with converted mana cost " + amount.toString() + " or less from your graveyard to your hand.)</i>";
         } else {
             return "{this} has soulshift X, where X is the number of " + amount.getMessage() +
-            ". <i>(When this creature dies, you may return target Spirit card with converted mana cost X or less from your graveyard to your hand.)<i/>";
+            ". <i>(When this creature dies, you may return target Spirit card with converted mana cost X or less from your graveyard to your hand.)</i>";
         }
         
     }

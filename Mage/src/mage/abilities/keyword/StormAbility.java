@@ -84,7 +84,7 @@ public class StormAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Storm <i>(When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)<i/>" ;
+        return "Storm <i>(When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)</i>" ;
     }
 }
 

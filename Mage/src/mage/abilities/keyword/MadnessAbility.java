@@ -47,7 +47,7 @@ public class MadnessAbility extends StaticAbility {
     public MadnessAbility(Card card, ManaCosts madnessCost) {
         super(Zone.HAND, new MadnessReplacementEffect((ManaCosts<ManaCost>) madnessCost));
         addSubAbility(new MadnessTriggeredAbility((ManaCosts<ManaCost>) madnessCost));
-        rule = "Madness " + madnessCost.getText() + " <i>(If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)<i/>";
+        rule = "Madness " + madnessCost.getText() + " <i>(If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)</i>";
     }
 
     public MadnessAbility(final MadnessAbility ability) {
@@ -73,7 +73,7 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
 
     public MadnessReplacementEffect(ManaCosts<ManaCost> madnessCost) {
         super(Duration.EndOfGame, Outcome.Benefit);
-        staticText = "Madness " + madnessCost.getText() + " <i>(If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)<i/>";
+        staticText = "Madness " + madnessCost.getText() + " <i>(If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)</i>";
     }
 
     public MadnessReplacementEffect(final MadnessReplacementEffect effect) {
