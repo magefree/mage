@@ -3299,7 +3299,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
-                        .append(" puts ").append(card.getLogName()).append(" ")
+                        .append(" puts ").append(card.getLogName()).append(" ").append(card.isCopy() ? "(Copy) " : "")
                         .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "");
                 if (card.getOwnerId().equals(getId())) {
                     sb.append("into his or her graveyard");

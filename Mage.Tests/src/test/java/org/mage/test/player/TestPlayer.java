@@ -97,6 +97,8 @@ import mage.target.TargetSource;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.common.TargetPermanentOrPlayer;
 import mage.util.MessageToClient;
@@ -775,6 +777,57 @@ public class TestPlayer implements Player {
                                     target.add(card.getId(), game);
                                     targetFound = true;
                                     break;
+                                }
+                            }
+                        }
+                    }
+                    if (targetFound) {
+                        targets.remove(targetDefinition);
+                        return true;
+                    }
+                }
+
+            }
+            if (target instanceof TargetCardInYourGraveyard) {
+                for (String targetDefinition : targets) {
+                    String[] targetList = targetDefinition.split("\\^");
+                    boolean targetFound = false;
+                    for (String targetName : targetList) {
+                        for (Card card : computerPlayer.getGraveyard().getCards(((TargetCardInYourGraveyard) target).getFilter(), game)) {
+                            if (card.getName().equals(targetName) || (card.getName() + "-" + card.getExpansionSetCode()).equals(targetName)) {
+                                if (((TargetCardInYourGraveyard) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                    target.add(card.getId(), game);
+                                    targetFound = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (targetFound) {
+                        targets.remove(targetDefinition);
+                        return true;
+                    }
+                }
+
+            }
+            if (target instanceof TargetCardInOpponentsGraveyard) {
+                for (String targetDefinition : targets) {
+                    String[] targetList = targetDefinition.split("\\^");
+                    boolean targetFound = false;
+
+                    for (String targetName : targetList) {
+                        IterateOpponentsGraveyards:
+                        for (UUID opponentId : game.getState().getPlayersInRange(getId(), game)) {
+                            if (computerPlayer.hasOpponent(opponentId, game)) {
+                                Player opponent = game.getPlayer(opponentId);
+                                for (Card card : opponent.getGraveyard().getCards(((TargetCardInOpponentsGraveyard) target).getFilter(), game)) {
+                                    if (card.getName().equals(targetName) || (card.getName() + "-" + card.getExpansionSetCode()).equals(targetName)) {
+                                        if (((TargetCardInOpponentsGraveyard) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                            target.add(card.getId(), game);
+                                            targetFound = true;
+                                            break IterateOpponentsGraveyards;
+                                        }
+                                    }
                                 }
                             }
                         }

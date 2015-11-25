@@ -56,7 +56,7 @@ public class PithingNeedle extends CardImpl {
 
         // As Pithing Needle enters the battlefield, name a card.
         this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
-        
+
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PithingNeedleEffect()));
     }
@@ -93,15 +93,18 @@ class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            MageObject object = game.getObject(event.getSourceId());
-            Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability != null && object != null) {
-                if (ability.getAbilityType() != AbilityType.MANA &&
-                    object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
-                        return true;
-                }
+        MageObject object = game.getObject(event.getSourceId());
+        Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
+        if (ability != null && object != null) {
+            if (!ability.getAbilityType().equals(AbilityType.MANA)
+                    && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
+                return true;
             }
         }
         return false;
