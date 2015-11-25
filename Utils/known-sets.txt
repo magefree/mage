@@ -9,6 +9,7 @@ Battle for Zendikar|battleforzendikar|
 Betrayers of Kamigawa|betrayersofkamigawa|
 Born of the Gods|bornofthegods|
 Champions of Kamigawa|championsofkamigawa|
+Chronicles|chronicles|
 Clash Pack|clashpack|
 Classic Sixth Edition|classicsixthedition|
 Coldsnap|coldsnap|
