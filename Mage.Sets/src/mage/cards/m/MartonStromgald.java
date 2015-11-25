@@ -47,8 +47,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
  */
 public class MartonStromgald extends CardImpl {
 
-    private static final FilterAttackingCreature attackingFilter = new FilterAttackingCreature(" for each attacking creature other than {this}");
-    private static final FilterBlockingCreature blockingFilter = new FilterBlockingCreature(" for each blocking creature other than {this}");
+    private static final FilterAttackingCreature attackingFilter = new FilterAttackingCreature("attacking creature other than {this}");
+    private static final FilterBlockingCreature blockingFilter = new FilterBlockingCreature("blocking creature other than {this}");
     
     static {
         attackingFilter.add(new AnotherPredicate());
