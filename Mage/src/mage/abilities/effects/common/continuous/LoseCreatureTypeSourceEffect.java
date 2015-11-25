@@ -104,7 +104,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
     }
 
     private void setText() {
-        StringBuilder sb = new StringBuilder("As long as your ");
+        StringBuilder sb = new StringBuilder("As long as ");
         sb.append(dynamicValue.getMessage()).append(" is less than ");
         sb.append(CardUtil.numberToText(lessThan)).append(", {this} isn't a creature");
         staticText = sb.toString();
