@@ -231,23 +231,28 @@ public class EvolveTest extends CardTestPlayerBase {
         // Evolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness
         // than this creature, put a +1/+1 counter on this creature.)
         // Whenever Renegade Krasis evolves, put a +1/+1 counter on each other creature you control with a +1/+1 counter on it.
-        addCard(Zone.BATTLEFIELD, playerA, "Renegade Krasis", 1); // 3/2
-        addCard(Zone.BATTLEFIELD, playerA, "Ivy Lane Denizen", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 9);
+        addCard(Zone.HAND, playerA, "Renegade Krasis", 1); // {1}{G}{G} - 3/2
+        // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 16);
 
         // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
-        addCard(Zone.HAND, playerA, "Ivy Lane Denizen", 1); // {3}{G} - Creature 2/3
+        addCard(Zone.HAND, playerA, "Ivy Lane Denizen", 2); // {3}{G} - Creature 2/3
         // Evolve
         addCard(Zone.HAND, playerA, "Adaptive Snapjaw", 1); // {4}{G} - Creature 6/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ivy Lane Denizen");
-        addTarget(playerA, "Ivy Lane Denizen");
-        setChoice(playerA, "Evolve");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Renegade Krasis");
+        addTarget(playerA, "Ivy Lane Denizen"); // Ivy target
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ivy Lane Denizen"); // Renegade Krasis evolves
+        addTarget(playerA, "Renegade Krasis"); // Ivy target
+        setChoice(playerA, "Whenever another green creature"); // So +1/+1 counter from Renegade is first put onto Ivy
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Adaptive Snapjaw");
-        addTarget(playerA, "Adaptive Snapjaw");
-        addTarget(playerA, "Adaptive Snapjaw");
-        setChoice(playerA, "Whenever {this} evolves");
+        addTarget(playerA, "Adaptive Snapjaw"); // From Ivy 1
+        addTarget(playerA, "Adaptive Snapjaw"); // From Ivy 2
+        setChoice(playerA, "Evolve"); // Evolve of Renegade Krasis first on the stack, so Adaptive Snapjaw gets +1/+1 from Renegade Krasis ability
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -256,8 +261,8 @@ public class EvolveTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ivy Lane Denizen", 2);
         assertPermanentCount(playerA, "Adaptive Snapjaw", 1);
 
-        assertPowerToughness(playerA, "Adaptive Snapjaw", 8, 4); // +2 from Ivys
-        assertPowerToughness(playerA, "Renegade Krasis", 5, 4); // +1 Evolve by Ivy and +1 Evolve by Snapjaw
+        assertPowerToughness(playerA, "Adaptive Snapjaw", 9, 5); // +2 from Ivys + 1 From Renegade Krasis's Evolve
+        assertPowerToughness(playerA, "Renegade Krasis", 6, 5); // +1 Evolve by Ivy and +1 from Ivy as 2nd Ivy enters +1 Evolve by Snapjaw
         assertPowerToughness(playerA, "Ivy Lane Denizen", 2, 3, Filter.ComparisonScope.Any);
         assertPowerToughness(playerA, "Ivy Lane Denizen", 5, 6, Filter.ComparisonScope.Any); // +1 from Other Ivy + 2 from Krasis
 
