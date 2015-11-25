@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class EliteCatWarrior extends mage.sets.portal.EliteCatWarrior {
+public class EliteCatWarrior extends mage.sets.portal.EliteCatWarrior1 {
 
     public EliteCatWarrior(UUID ownerId) {
         super(ownerId);

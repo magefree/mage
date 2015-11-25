@@ -37,7 +37,7 @@ public class Exhaustion extends mage.sets.portalthreekingdoms.Exhaustion {
 
     public Exhaustion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = 55;
         this.expansionSetCode = "POR";
     }
 
