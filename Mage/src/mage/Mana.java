@@ -320,44 +320,44 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public boolean enough(Mana avail) {
         Mana compare = avail.copy();
         compare.subtract(this);
-        if (compare.getRed() < 0) {
-            compare.setAny(compare.getAny() + compare.getRed());
-            if (compare.getAny() < 0) {
+        if (compare.red < 0) {
+            compare.any = compare.getAny() + compare.getRed();
+            if (compare.any < 0) {
                 return false;
             }
-            compare.setRed(0);
+            compare.red =0;
         }
-        if (compare.getGreen() < 0) {
-            compare.setAny(compare.getAny() + compare.getGreen());
-            if (compare.getAny() < 0) {
+        if (compare.green < 0) {
+            compare.any = compare.getAny() + compare.getGreen();
+            if (compare.any < 0) {
                 return false;
             }
-            compare.setGreen(0);
+            compare.green = 0;
         }
-        if (compare.getBlue() < 0) {
-            compare.setAny(compare.getAny() + compare.getBlue());
-            if (compare.getAny() < 0) {
+        if (compare.blue < 0) {
+            compare.any = compare.getAny() + compare.getBlue();
+            if (compare.any < 0) {
                 return false;
             }
-            compare.setBlue(0);
+            compare.blue = 0;
         }
-        if (compare.getBlack() < 0) {
-            compare.setAny(compare.getAny() + compare.getBlack());
-            if (compare.getAny() < 0) {
+        if (compare.black < 0) {
+            compare.any = compare.getAny() + compare.getBlack();
+            if (compare.any < 0) {
                 return false;
             }
-            compare.setBlack(0);
+            compare.black = 0;
         }
-        if (compare.getWhite() < 0) {
-            compare.setAny(compare.getAny() + compare.getWhite());
-            if (compare.getAny() < 0) {
+        if (compare.white < 0) {
+            compare.any = compare.getAny() + compare.getWhite();
+            if (compare.any < 0) {
                 return false;
             }
-            compare.setWhite(0);
+            compare.white = 0;
         }
-        if (compare.getColorless() < 0) {
-            int remaining = compare.getRed() + compare.getGreen() + compare.getBlack() + compare.getBlue() + compare.getWhite() + compare.getAny();
-            if (compare.getColorless() + remaining < 0) {
+        if (compare.colorless < 0) {
+            int remaining = compare.red + compare.green + compare.black + compare.blue + compare.white + compare.any;
+            if (compare.colorless + remaining < 0) {
                 return false;
             }
         }
@@ -367,62 +367,62 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public Mana needed(Mana avail) {
         Mana compare = avail.copy();
         compare.subtract(this);
-        if (compare.getRed() < 0 && compare.getAny() > 0) {
-            int diff = Math.min(compare.getAny(), Math.abs(compare.getRed()));
-            compare.setAny(compare.getAny() - diff);
-            compare.setRed(compare.getRed() + diff);
+        if (compare.red < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.red));
+            compare.any = compare.getAny() - diff;
+            compare.red = compare.getRed() + diff;
         }
-        if (compare.getGreen() < 0 && compare.getAny() > 0) {
-            int diff = Math.min(compare.getAny(), Math.abs(compare.getGreen()));
-            compare.setAny(compare.getAny() - diff);
-            compare.setGreen(compare.getGreen() + diff);
+        if (compare.green < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.green));
+            compare.any = compare.any - diff;
+            compare.green = compare.green + diff;
         }
-        if (compare.getBlue() < 0 && compare.getAny() > 0) {
-            int diff = Math.min(compare.getAny(), Math.abs(compare.getBlue()));
-            compare.setAny(compare.getAny() - diff);
-            compare.setBlue(compare.getBlue() + diff);
+        if (compare.blue < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.blue));
+            compare.any = compare.any - diff;
+            compare.blue = compare.blue + diff;
         }
-        if (compare.getBlack() < 0 && compare.getAny() > 0) {
-            int diff = Math.min(compare.getAny(), Math.abs(compare.getBlack()));
-            compare.setAny(compare.getAny() - diff);
-            compare.setBlack(compare.getBlack() + diff);
+        if (compare.black < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.black));
+            compare.any = compare.any - diff;
+            compare.black = compare.getBlack() + diff;
         }
-        if (compare.getWhite() < 0 && compare.getAny() > 0) {
-            int diff = Math.min(compare.getAny(), Math.abs(compare.getWhite()));
-            compare.setAny(compare.getAny() - diff);
-            compare.setWhite(compare.getWhite() + diff);
+        if (compare.white < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.white));
+            compare.any = compare.any - diff;
+            compare.white = compare.white + diff;
         }
-        if (compare.getColorless() < 0) {
+        if (compare.colorless < 0) {
             int remaining = 0;
-            remaining += Math.min(0, compare.getRed());
-            remaining += Math.min(0, compare.getWhite());
-            remaining += Math.min(0, compare.getGreen());
-            remaining += Math.min(0, compare.getBlack());
-            remaining += Math.min(0, compare.getBlue());
-            remaining += Math.min(0, compare.getAny());
+            remaining += Math.min(0, compare.red);
+            remaining += Math.min(0, compare.white);
+            remaining += Math.min(0, compare.green);
+            remaining += Math.min(0, compare.black);
+            remaining += Math.min(0, compare.blue);
+            remaining += Math.min(0, compare.any);
             if (remaining > 0) {
-                int diff = Math.min(remaining, Math.abs(compare.getColorless()));
-                compare.setColorless(compare.getColorless() + diff);
+                int diff = Math.min(remaining, Math.abs(compare.colorless));
+                compare.colorless = compare.colorless + diff;
             }
         }
         Mana needed = new Mana();
-        if (compare.getRed() < 0) {
-            needed.setRed(Math.abs(compare.getRed()));
+        if (compare.red < 0) {
+            needed.red = Math.abs(compare.red);
         }
-        if (compare.getWhite() < 0) {
-            needed.setWhite(Math.abs(compare.getWhite()));
+        if (compare.white < 0) {
+            needed.white = Math.abs(compare.white);
         }
-        if (compare.getGreen() < 0) {
-            needed.setGreen(Math.abs(compare.getGreen()));
+        if (compare.green < 0) {
+            needed.green = Math.abs(compare.green);
         }
-        if (compare.getBlack() < 0) {
-            needed.setBlack(Math.abs(compare.getBlack()));
+        if (compare.black < 0) {
+            needed.black = Math.abs(compare.black);
         }
-        if (compare.getBlue() < 0) {
-            needed.setBlue(Math.abs(compare.getBlue()));
+        if (compare.blue < 0) {
+            needed.blue = Math.abs(compare.blue);
         }
-        if (compare.getColorless() < 0) {
-            needed.setColorless(Math.abs(compare.getColorless()));
+        if (compare.colorless < 0) {
+            needed.colorless = Math.abs(compare.colorless);
         }
         return needed;
     }
