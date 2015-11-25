@@ -18,13 +18,13 @@ import mage.constants.SetType;
  *
  * This class was originally made to work with the historical standard ruleset.
  * Data taken from http://thattournament.website/historic-tournament.php (site
- * changed, originally thtp://mtgt.nfshost.com/historic-tournament.php)
+ * changed, originally http://mtgt.nfshost.com/historic-tournament.php)
  *
  * If there are any questions or corrections, feel free to contact me.
  *
  * @author Marthinwurer (at gmail.com)
  */
-public class SuperStandard extends Constructed {
+public class SuperType2 extends Constructed {
 
     /*
      * This array stores the set codes of each standard up to
@@ -60,8 +60,8 @@ public class SuperStandard extends Constructed {
      * Constructor. Don't need to mess with any of the sets yet; that will be
      * done in the overridden validate function.
      */
-    public SuperStandard() {
-        super("Constructed - Super Standard");
+    public SuperType2() {
+        super("Constructed - Super Type 2");
 
         banned.add("Ancient Den");
         banned.add("Disciple of the Vault");

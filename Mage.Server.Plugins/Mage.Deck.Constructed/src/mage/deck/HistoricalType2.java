@@ -23,7 +23,7 @@ import mage.constants.SetType;
  *
  * @author Marthinwurer (at gmail.com)
  */
-public class HistoricalStandard extends Constructed {
+public class HistoricalType2 extends Constructed {
 
     /*
      * This array stores the set codes of each standard up to
@@ -34,9 +34,9 @@ public class HistoricalStandard extends Constructed {
         {"DRK", "FEM", "4ED"},
         //  2nd standard: 4th, Fallen Empires, Ice Age, Chronicles, Homelands,
         //                Alliances, and Mirage.
-        {"FEM", "4ED", "ICE", "HML", "ALL", "MIR"},
+        {"FEM", "4ED", "ICE", "CHR", "HML", "ALL", "MIR"},
         //  3rd standard: 4th, Chronicles, Alliances, Mirage, Visions.
-        {"4ED", "ALL", "MIR", "VIS"},
+        {"4ED", "CHR", "ALL", "MIR", "VIS"},
         //  4th Standard: Ice Age, Homelands, Alliances, Mirage, Visions, 5th,
         //                and Weatherlight.
         {"ICE", "HML", "ALL", "MIR", "VIS", "5ED", "WTH"},
@@ -84,15 +84,17 @@ public class HistoricalStandard extends Constructed {
      * Constructor. Don't need to mess with any of the sets yet; that will be
      * done in the overridden validate function.
      */
-    public HistoricalStandard() {
-        super("Constructed - Historical Standard");
+    public HistoricalType2() {
+        super("Constructed - Historical Type 2");
 
         // banned cards
         banned.add("Balance");
+        banned.add("Earthcraft");
         banned.add("Memory Jar");
         banned.add("Mind Over Matter");
         banned.add("Mind Twist");
         banned.add("Skullclamp");
+        banned.add("Time Spiral");
         banned.add("Tolarian Academy");
         banned.add("Yawgmoth's Bargain");
     }
