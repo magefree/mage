@@ -111,7 +111,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
 
         // Equipped creature has deathtouch and lifelink.
-        addCard(Zone.BATTLEFIELD, playerA, "Marchesa, the Black Rose");
+        addCard(Zone.BATTLEFIELD, playerA, "Basilisk Collar");
         /*
          {R}{G}{W} Legendary Creature - Elemental Beast
          Marath, Will of the Wild enters the battlefield with a number of +1/+1 counters on
@@ -123,6 +123,9 @@ public class DeathtouchTest extends CardTestPlayerBase {
          */
         addCard(Zone.HAND, playerA, "Marath, Will of the Wild", 1);
 
+        // Vigilance
+        // Other creatures you control get +2/+2.
+        // Creatures your opponents control get -2/-2.
         addCard(Zone.BATTLEFIELD, playerB, "Elesh Norn, Grand Cenobite");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marath, Will of the Wild");

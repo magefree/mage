@@ -105,7 +105,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                                 }
                             }
                         }
-                        if ("".equals(type) || type == null) {
+                        if ("".equals(type) || type == null && permanent.getCardType().contains(CardType.LAND)) {
                             permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
                         }
                         if (token.getSubtype().size() > 0) {
@@ -124,13 +124,13 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     if (sublayer == SubLayer.NA) {
                         if (token.getAbilities().size() > 0) {
                             for (Ability ability : token.getAbilities()) {
-                                permanent.addAbility(ability, game);
+                                permanent.addAbility(ability, source.getSourceId(), game);
                             }
                         }
                     }
                     break;
                 case PTChangingEffects_7:
-                    if (sublayer == SubLayer.SetPT_7b) {
+                    if (sublayer == SubLayer.CharacteristicDefining_7a) {
                         MageInt power = token.getPower();
                         MageInt toughness = token.getToughness();
                         if (power != null && toughness != null) {
