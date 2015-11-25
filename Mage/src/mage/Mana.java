@@ -28,18 +28,24 @@
 package mage;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import static mage.constants.ManaType.COLORLESS;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
+
+    private static final transient Logger logger = Logger.getLogger(Mana.class);
+
 
     protected int red;
     protected int green;
@@ -61,6 +67,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public Mana(final Mana mana) {
+        Objects.requireNonNull(mana, "The passed in mana can not be null");
         this.red = mana.red;
         this.green = mana.green;
         this.blue = mana.blue;
@@ -71,7 +78,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         this.flag = mana.flag;
     }
 
-    public Mana(ColoredManaSymbol color) {
+    public Mana(final ColoredManaSymbol color) {
+        Objects.requireNonNull(color, "The passed in ColoredManaSymbol can not be null");
         switch (color) {
             case G:
                 green = 1;
@@ -92,37 +100,37 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public static Mana RedMana(int num) {
-        return new Mana(num, 0, 0, 0, 0, 0, 0);
+        return new Mana(notNegative(num, "Red"), 0, 0, 0, 0, 0, 0);
     }
 
     public static Mana GreenMana(int num) {
-        return new Mana(0, num, 0, 0, 0, 0, 0);
+        return new Mana(0, notNegative(num, "Green"), 0, 0, 0, 0, 0);
     }
 
     public static Mana BlueMana(int num) {
-        return new Mana(0, 0, num, 0, 0, 0, 0);
+        return new Mana(0, 0, notNegative(num, "Blue"), 0, 0, 0, 0);
     }
 
     public static Mana WhiteMana(int num) {
-        return new Mana(0, 0, 0, num, 0, 0, 0);
+        return new Mana(0, 0, 0, notNegative(num, "White"), 0, 0, 0);
     }
 
     public static Mana BlackMana(int num) {
-        return new Mana(0, 0, 0, 0, num, 0, 0);
+        return new Mana(0, 0, 0, 0, notNegative(num, "Black"), 0, 0);
     }
 
     public static Mana ColorlessMana(int num) {
-        return new Mana(0, 0, 0, 0, 0, num, 0);
+        return new Mana(0, 0, 0, 0, 0, notNegative(num, "Colorless"), 0);
     }
 
     public Mana(int red, int green, int blue, int white, int black, int colorless, int any) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
-        this.white = white;
-        this.black = black;
-        this.colorless = colorless;
-        this.any = any;
+        this.red = notNegative(red, "Red");
+        this.green = notNegative(green, "Green");
+        this.blue = notNegative(blue, "Blue");
+        this.white = notNegative(white, "White");
+        this.black = notNegative(black, "Black");
+        this.colorless = notNegative(colorless, "Colorless");
+        this.any = notNegative(any, "Any");
     }
 
     public void add(Mana mana) {
@@ -226,7 +234,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 colorless++;
             }
             if (oldColorless == colorless) {
-                break; // to prevent endless loop -> should not be possible, but who knows
+                throw new ArithmeticException("Not enough mana to pay colorless");
             }
         }
     }
@@ -424,7 +432,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public void setRed(int red) {
-        this.red = red;
+        this.red = notNegative(red, "Red");
     }
 
     public int getGreen() {
@@ -432,7 +440,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public void setGreen(int green) {
-        this.green = green;
+        this.green = notNegative(green, "Green");
     }
 
     public int getBlue() {
@@ -440,7 +448,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public void setBlue(int blue) {
-        this.blue = blue;
+        this.blue = notNegative(blue, "Blue");
     }
 
     public int getWhite() {
@@ -448,7 +456,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public void setWhite(int white) {
-        this.white = white;
+        this.white = notNegative(white, "White");
     }
 
     public int getBlack() {
@@ -456,7 +464,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public void setBlack(int black) {
-        this.black = black;
+        this.black = notNegative(black, "Black");
     }
 
     public int getColorless() {
@@ -464,7 +472,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public void setColorless(int colorless) {
-        this.colorless = colorless;
+        this.colorless = notNegative(colorless, "Colorless");
     }
 
     public int getAny() {
@@ -472,7 +480,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public void setAny(int any) {
-        this.any = any;
+        this.any = notNegative(any, "Any");
     }
 
     @Override
@@ -664,5 +672,46 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             count++;
         }
         return count;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Mana mana = (Mana) o;
+
+        if (red != mana.red) return false;
+        if (green != mana.green) return false;
+        if (blue != mana.blue) return false;
+        if (white != mana.white) return false;
+        if (black != mana.black) return false;
+        if (colorless != mana.colorless) return false;
+        if (any != mana.any) return false;
+        return flag == mana.flag;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = red;
+        result = 31 * result + green;
+        result = 31 * result + blue;
+        result = 31 * result + white;
+        result = 31 * result + black;
+        result = 31 * result + colorless;
+        result = 31 * result + any;
+        result = 31 * result + (flag ? 1 : 0);
+        return result;
+    }
+
+    private static int notNegative(int value, final String name) {
+        if (value < 0) {
+            logger.info(name + " can not be less than 0. Passed in: " + value + " Defaulting to 0.");
+            value = 0;
+        }
+
+        return value;
     }
 }
