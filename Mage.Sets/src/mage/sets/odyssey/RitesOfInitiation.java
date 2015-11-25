@@ -45,43 +45,42 @@ import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author cbt33
+ * @author emerald000
  */
-public class SacredRites extends CardImpl {
+public class RitesOfInitiation extends CardImpl {
 
-    public SacredRites(UUID ownerId) {
-        super(ownerId, 44, "Sacred Rites", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+    public RitesOfInitiation(UUID ownerId) {
+        super(ownerId, 217, "Rites of Initiation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ODY";
 
-
-        // Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.
-        this.getSpellAbility().addEffect(new SacredRitesEffect());
+        // Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way.
+        this.getSpellAbility().addEffect(new RitesOfInitiationEffect());
     }
 
-    public SacredRites(final SacredRites card) {
+    public RitesOfInitiation(final RitesOfInitiation card) {
         super(card);
     }
 
     @Override
-    public SacredRites copy() {
-        return new SacredRites(this);
+    public RitesOfInitiation copy() {
+        return new RitesOfInitiation(this);
     }
 }
 
-class SacredRitesEffect extends OneShotEffect {
+class RitesOfInitiationEffect extends OneShotEffect {
     
-    SacredRitesEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.";
+    RitesOfInitiationEffect() {
+        super(Outcome.BoostCreature);
+        this.staticText = "Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way";
     }
     
-    SacredRitesEffect(final SacredRitesEffect effect) {
+    RitesOfInitiationEffect(final RitesOfInitiationEffect effect) {
         super(effect);
     }
     
     @Override
-    public SacredRitesEffect copy() {
-        return new SacredRitesEffect(this);
+    public RitesOfInitiationEffect copy() {
+        return new RitesOfInitiationEffect(this);
     }
     
     @Override
@@ -99,7 +98,7 @@ class SacredRitesEffect extends OneShotEffect {
                         numDiscarded++;
                     }
                 }
-            game.addEffect(new BoostControlledEffect(0, numDiscarded, Duration.EndOfTurn), source);
+            game.addEffect(new BoostControlledEffect(numDiscarded, 0, Duration.EndOfTurn), source);
             return true;
         }
         return false;
