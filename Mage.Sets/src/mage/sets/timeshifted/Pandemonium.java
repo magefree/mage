@@ -49,6 +49,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Pandemonium extends CardImpl {
 
+    private final UUID originalId;
+
     public Pandemonium(UUID ownerId) {
         super(ownerId, 68, "Pandemonium", Rarity.SPECIAL, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "TSB";
@@ -56,22 +58,24 @@ public class Pandemonium extends CardImpl {
         // Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PandemoniumEffect(), new FilterCreaturePermanent(), false, SetTargetPointer.PERMANENT, "");
         ability.addTarget(new TargetCreatureOrPlayer());
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     public Pandemonium(final Pandemonium card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof EntersBattlefieldAllTriggeredAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             UUID creatureId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
             Permanent creature = game.getPermanent(creatureId);
             if (creature != null) {
                 ability.getTargets().get(0).setTargetController(creature.getControllerId());
             }
-        }        
+        }
     }
 
     @Override
@@ -81,21 +85,21 @@ public class Pandemonium extends CardImpl {
 }
 
 class PandemoniumEffect extends OneShotEffect {
-    
+
     public PandemoniumEffect() {
         super(Outcome.Benefit);
         this.staticText = "that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice";
     }
-    
+
     public PandemoniumEffect(final PandemoniumEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PandemoniumEffect copy() {
         return new PandemoniumEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -106,7 +110,7 @@ class PandemoniumEffect extends OneShotEffect {
                 if (targetPermanent != null) {
                     targetPermanent.damage(enteringCreature.getPower().getValue(), source.getSourceId(), game, false, true);
                 } else {
-                Player targetPlayer = game.getPlayer(source.getTargets().getFirstTarget());
+                    Player targetPlayer = game.getPlayer(source.getTargets().getFirstTarget());
                     if (targetPlayer != null) {
                         targetPlayer.damage(enteringCreature.getPower().getValue(), source.getSourceId(), game, false, true);
                     }

@@ -56,6 +56,8 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class GethLordOfTheVault extends CardImpl {
 
+    private final UUID originalId;
+
     public GethLordOfTheVault(UUID ownerId) {
         super(ownerId, 64, "Geth, Lord of the Vault", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "SOM";
@@ -70,16 +72,17 @@ public class GethLordOfTheVault extends CardImpl {
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
+        originalId = ability.getOriginalId();
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard")));
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
-            FilterCard filter = new FilterCard(new StringBuilder("artifact or creature card with converted mana cost ").append(xValue).append(" from an opponent's graveyard").toString());
+            FilterCard filter = new FilterCard("artifact or creature card with converted mana cost " + xValue + " from an opponent's graveyard");
             filter.add(Predicates.or(
                     new CardTypePredicate(CardType.ARTIFACT),
                     new CardTypePredicate(CardType.CREATURE)));
@@ -91,6 +94,7 @@ public class GethLordOfTheVault extends CardImpl {
 
     public GethLordOfTheVault(final GethLordOfTheVault card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

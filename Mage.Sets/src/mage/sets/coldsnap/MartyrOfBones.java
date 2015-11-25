@@ -57,6 +57,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class MartyrOfBones extends CardImpl {
 
+    private final UUID originalId;
+
     public MartyrOfBones(UUID ownerId) {
         super(ownerId, 65, "Martyr of Bones", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "CSP";
@@ -72,16 +74,18 @@ public class MartyrOfBones extends CardImpl {
         ability.addCost(new RevealVariableBlackCardsFromHandCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 1, new FilterCard("cards in a single graveyard")));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
-    
+
     public MartyrOfBones(final MartyrOfBones card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             int amount = 0;
             for (Cost cost : ability.getCosts()) {
                 if (cost instanceof RevealVariableBlackCardsFromHandCost) {
@@ -100,36 +104,37 @@ public class MartyrOfBones extends CardImpl {
 }
 
 class RevealVariableBlackCardsFromHandCost extends VariableCostImpl {
-    
+
     private static final FilterCard filter = new FilterCard("X black cards from your hand");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
-    
+
     RevealVariableBlackCardsFromHandCost() {
         super("black cards to reveal");
         this.text = new StringBuilder("Reveal ").append(xText).append(" black cards from {this}").toString();
     }
-    
+
     RevealVariableBlackCardsFromHandCost(final RevealVariableBlackCardsFromHandCost cost) {
         super(cost);
     }
-   
+
     @Override
     public RevealVariableBlackCardsFromHandCost copy() {
         return new RevealVariableBlackCardsFromHandCost(this);
     }
-    
+
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
         return new RevealTargetFromHandCost(new TargetCardInHand(0, xValue, filter));
     }
-    
+
     @Override
     public int getMinValue(Ability source, Game game) {
         return 0;
     }
-    
+
     @Override
     public int getMaxValue(Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());

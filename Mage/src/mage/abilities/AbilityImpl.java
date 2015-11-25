@@ -516,12 +516,11 @@ public abstract class AbilityImpl implements Ability {
                 // set the xcosts to paid
                 variableCost.setAmount(xValue);
                 ((Cost) variableCost).setPaid();
-                String message = new StringBuilder(controller.getLogName())
-                        .append(" announces a value of ").append(xValue).append(" (").append(variableCost.getActionText()).append(")").toString();
+                String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ")";
                 if (announceString == null) {
                     announceString = message;
                 } else {
-                    announceString = new StringBuilder(announceString).append(" ").append(message).toString();
+                    announceString = announceString + " " + message;
                 }
             }
         }

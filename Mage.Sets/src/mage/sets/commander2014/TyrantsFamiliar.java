@@ -38,7 +38,6 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,6 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TyrantsFamiliar extends CardImpl {
 
+    private final UUID originalId;
+
     public TyrantsFamiliar(UUID ownerId) {
         super(ownerId, 39, "Tyrant's Familiar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.expansionSetCode = "C14";
@@ -62,30 +63,32 @@ public class TyrantsFamiliar extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        
+
         // Lieutenant - As long as you control your commander, Tyrant's Familiar gets +2/+2 and has "Whenever Tyrant's Familiar attacks, it deals 7 damage to target creature defending player controls."
         Ability gainedAbility = new AttacksTriggeredAbility(new DamageTargetEffect(7), false);
         gainedAbility.addTarget(new TargetCreaturePermanent());
         ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
         effect.setText("and has \"Whenever {this} attacks, it deals 7 damage to target creature defending player controls\"");
+        originalId = gainedAbility.getOriginalId();
         this.addAbility(new LieutenantAbility(effect));
     }
 
     public TyrantsFamiliar(final TyrantsFamiliar card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public TyrantsFamiliar copy() {
         return new TyrantsFamiliar(this);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.TRIGGERED)) {
+        if (ability.getOriginalId().equals(originalId)) {
             ability.getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
             UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());

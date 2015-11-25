@@ -25,20 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.*;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -50,6 +49,8 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class HearthKami extends CardImpl {
+
+    private final UUID originalId;
 
     public HearthKami(UUID ownerId) {
         super(ownerId, 171, "Hearth Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -63,12 +64,13 @@ public class HearthKami extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("artifact with converted mana cost X")));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("artifact with converted mana cost ").append(xValue).toString());
@@ -80,6 +82,7 @@ public class HearthKami extends CardImpl {
 
     public HearthKami(final HearthKami card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

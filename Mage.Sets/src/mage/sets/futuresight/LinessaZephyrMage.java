@@ -61,6 +61,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LinessaZephyrMage extends CardImpl {
 
+    private final UUID originalId;
+
     public LinessaZephyrMage(UUID ownerId) {
         super(ownerId, 51, "Linessa, Zephyr Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "FUT";
@@ -75,6 +77,7 @@ public class LinessaZephyrMage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
 
         // Grandeur - Discard another card named Linessa, Zephyr Mage: Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
@@ -85,11 +88,12 @@ public class LinessaZephyrMage extends CardImpl {
 
     public LinessaZephyrMage(final LinessaZephyrMage card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + xValue);

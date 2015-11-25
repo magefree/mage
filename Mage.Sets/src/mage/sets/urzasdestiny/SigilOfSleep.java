@@ -52,6 +52,8 @@ import mage.target.targetpointer.FirstTargetPointer;
  */
 public class SigilOfSleep extends CardImpl {
 
+    private final UUID originalId;
+
     public SigilOfSleep(UUID ownerId) {
         super(ownerId, 46, "Sigil of Sleep", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "UDS";
@@ -67,13 +69,14 @@ public class SigilOfSleep extends CardImpl {
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return target creature that player controls to its owner's hand");
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(effect, "enchanted", false, true, false);
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
 
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof DealsDamageToAPlayerAttachedTriggeredAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             UUID playerId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
             if (playerId != null) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that player controls");
@@ -89,6 +92,7 @@ public class SigilOfSleep extends CardImpl {
 
     public SigilOfSleep(final SigilOfSleep card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

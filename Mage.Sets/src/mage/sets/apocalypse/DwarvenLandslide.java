@@ -29,6 +29,7 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -72,8 +73,10 @@ public class DwarvenLandslide extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (KickedCondition.getInstance().apply(game, ability)) {
-            getSpellAbility().addTarget(new TargetLandPermanent(new FilterLandPermanent("land (Kicker)")));
+        if (ability instanceof SpellAbility) {
+            if (KickedCondition.getInstance().apply(game, ability)) {
+                getSpellAbility().addTarget(new TargetLandPermanent(new FilterLandPermanent("land (Kicker)")));
+            }
         }
     }
 
