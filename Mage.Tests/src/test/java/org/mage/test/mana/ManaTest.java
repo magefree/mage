@@ -27,7 +27,7 @@ public class ManaTest {
     public void shouldNotAllowNullCopyConstructor() {
         // given
         expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("The passed in Mana can not be null");
+        expectedException.expectMessage("The passed in mana can not be null");
 
         // when
         Mana nullMana = null;
