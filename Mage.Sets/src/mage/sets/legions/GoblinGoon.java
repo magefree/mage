@@ -123,7 +123,7 @@ class GoblinGoonCantBlockEffect extends RestrictionEffect {
 
     GoblinGoonCantBlockEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "Goblin Goon can't block unless you control more creatures than attacking player";
+        staticText = "{this} can't block unless you control more creatures than attacking player";
     }
 
     GoblinGoonCantBlockEffect(final GoblinGoonCantBlockEffect effect) {
