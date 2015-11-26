@@ -96,7 +96,7 @@ class HideawayExileEffect extends OneShotEffect {
 
     public HideawayExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library";
+        this.staticText = "look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library";
     }
 
     public HideawayExileEffect(final HideawayExileEffect effect) {

@@ -85,7 +85,7 @@ class MizzixsMasteryEffect extends OneShotEffect {
 
     public MizzixsMasteryEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile {this}";
+        this.staticText = "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost";
     }
 
     public MizzixsMasteryEffect(final MizzixsMasteryEffect effect) {

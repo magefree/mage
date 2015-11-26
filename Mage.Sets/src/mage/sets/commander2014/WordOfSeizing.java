@@ -50,17 +50,16 @@ public class WordOfSeizing extends CardImpl {
         super(ownerId, 185, "Word of Seizing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "C14";
 
-
         // Split second
         this.addAbility(new SplitSecondAbility());
 
         // Untap target permanent and gain control of it until end of turn. It gains haste until end of turn.
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
-        effect.setText("and gain control of it until end of turn. ");
+        effect.setText("and gain control of it until end of turn");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("It gains haste until end of turn. ");
+        effect.setText("It gains haste until end of turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPermanent());
 
