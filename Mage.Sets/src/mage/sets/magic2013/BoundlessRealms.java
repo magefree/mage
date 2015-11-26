@@ -97,7 +97,7 @@ class BoundlessRealmsEffect extends OneShotEffect {
         int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
         TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterBasicLandCard());
         if (controller.searchLibrary(target, game)) {
-            controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.HAND, source, game, true, false, false, null);
+            controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
         controller.shuffleLibrary(game);
         return true;
