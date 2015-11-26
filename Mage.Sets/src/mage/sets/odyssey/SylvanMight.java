@@ -25,47 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetOpponent;
+import mage.constants.TimingRule;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author dustinconrad
+ * @author LoneFox
  */
-public class WanderguardSentry extends CardImpl {
+public class SylvanMight extends CardImpl {
 
-    public WanderguardSentry(UUID ownerId) {
-        super(ownerId, 111, "Wanderguard Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Drone");
+    public SylvanMight(UUID ownerId) {
+        super(ownerId, 277, "Sylvan Might", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "ODY";
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
-        Effect effect = new LookAtTargetPlayerHandEffect();
-        effect.setText("look at target opponent's hand");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Target creature gets +2/+2 and gains trample until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Flashback {2}{G}{G}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}{G}"), TimingRule.INSTANT));
     }
 
-    public WanderguardSentry(final WanderguardSentry card) {
+    public SylvanMight(final SylvanMight card) {
         super(card);
     }
 
     @Override
-    public WanderguardSentry copy() {
-        return new WanderguardSentry(this);
+    public SylvanMight copy() {
+        return new SylvanMight(this);
     }
 }

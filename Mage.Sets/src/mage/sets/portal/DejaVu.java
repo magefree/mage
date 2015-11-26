@@ -25,47 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.portal;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetOpponent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author dustinconrad
+ * @author LoneFox
  */
-public class WanderguardSentry extends CardImpl {
+public class DejaVu extends CardImpl {
 
-    public WanderguardSentry(UUID ownerId) {
-        super(ownerId, 111, "Wanderguard Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Drone");
+    public static final FilterCard filter = new FilterCard("sorcery card from your graveyard");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
-        Effect effect = new LookAtTargetPlayerHandEffect();
-        effect.setText("look at target opponent's hand");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+    static {
+        filter.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public WanderguardSentry(final WanderguardSentry card) {
+    public DejaVu(UUID ownerId) {
+        super(ownerId, 53, "Deja Vu", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
+        this.expansionSetCode = "POR";
+
+        // Return target sorcery card from your graveyard to your hand.
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+    }
+
+    public DejaVu(final DejaVu card) {
         super(card);
     }
 
     @Override
-    public WanderguardSentry copy() {
-        return new WanderguardSentry(this);
+    public DejaVu copy() {
+        return new DejaVu(this);
     }
 }

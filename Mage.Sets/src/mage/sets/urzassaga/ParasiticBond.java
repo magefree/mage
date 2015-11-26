@@ -25,47 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.target.common.TargetOpponent;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author dustinconrad
+ * @author LoneFox
  */
-public class WanderguardSentry extends CardImpl {
+public class ParasiticBond extends CardImpl {
 
-    public WanderguardSentry(UUID ownerId) {
-        super(ownerId, 111, "Wanderguard Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Drone");
+    public ParasiticBond(UUID ownerId) {
+        super(ownerId, 145, "Parasitic Bond", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Aura");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
-        Effect effect = new LookAtTargetPlayerHandEffect();
-        effect.setText("look at target opponent's hand");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        // At the beginning of the upkeep of enchanted creature's controller, Parasitic Bond deals 2 damage to that player.
+        Effect effect = new DamageTargetEffect(2);
+        effect.setText("{this} deals 2 damage to that player");
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect,
+            TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
-    public WanderguardSentry(final WanderguardSentry card) {
+    public ParasiticBond(final ParasiticBond card) {
         super(card);
     }
 
     @Override
-    public WanderguardSentry copy() {
-        return new WanderguardSentry(this);
+    public ParasiticBond copy() {
+        return new ParasiticBond(this);
     }
 }

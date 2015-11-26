@@ -25,47 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetOpponent;
+import mage.game.permanent.token.Token;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author dustinconrad
+ * @author LoneFox
  */
-public class WanderguardSentry extends CardImpl {
+public class Vivify extends CardImpl {
 
-    public WanderguardSentry(UUID ownerId) {
-        super(ownerId, 111, "Wanderguard Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Drone");
+    public Vivify(UUID ownerId) {
+        super(ownerId, 281, "Vivify", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
+        this.expansionSetCode = "ODY";
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
-        Effect effect = new LookAtTargetPlayerHandEffect();
-        effect.setText("look at target opponent's hand");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Target land becomes a 3/3 creature until end of turn. It's still a land.
+        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new AnimatedLand(), false, true, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetLandPermanent());
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public WanderguardSentry(final WanderguardSentry card) {
+    public Vivify(final Vivify card) {
         super(card);
     }
 
     @Override
-    public WanderguardSentry copy() {
-        return new WanderguardSentry(this);
+    public Vivify copy() {
+        return new Vivify(this);
+    }
+}
+
+class AnimatedLand extends Token {
+
+    public AnimatedLand() {
+        super("", "3/3 creature");
+        this.cardType.add(CardType.CREATURE);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
     }
 }

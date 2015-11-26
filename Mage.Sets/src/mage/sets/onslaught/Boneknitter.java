@@ -25,47 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetOpponent;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author dustinconrad
+ * @author LoneFox
  */
-public class WanderguardSentry extends CardImpl {
+public class Boneknitter extends CardImpl {
 
-    public WanderguardSentry(UUID ownerId) {
-        super(ownerId, 111, "Wanderguard Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Drone");
+    private static final FilterPermanent filter = new FilterPermanent("Zombie");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
-        Effect effect = new LookAtTargetPlayerHandEffect();
-        effect.setText("look at target opponent's hand");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public WanderguardSentry(final WanderguardSentry card) {
+    public Boneknitter(UUID ownerId) {
+        super(ownerId, 128, "Boneknitter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Zombie");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {1}{B}: Regenerate target Zombie.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+        // Morph {2}{B}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}")));
+    }
+
+    public Boneknitter(final Boneknitter card) {
         super(card);
     }
 
     @Override
-    public WanderguardSentry copy() {
-        return new WanderguardSentry(this);
+    public Boneknitter copy() {
+        return new Boneknitter(this);
     }
 }

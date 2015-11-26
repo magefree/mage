@@ -25,47 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.effects.common.AmplifyEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.keyword.AmplifyAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetOpponent;
+import mage.counters.CounterType;
 
 /**
  *
- * @author dustinconrad
+ * @author LoneFox
  */
-public class WanderguardSentry extends CardImpl {
+public class EmbalmedBrawler extends CardImpl {
 
-    public WanderguardSentry(UUID ownerId) {
-        super(ownerId, 111, "Wanderguard Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Drone");
+    public EmbalmedBrawler(UUID ownerId) {
+        super(ownerId, 69, "Embalmed Brawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
-        Effect effect = new LookAtTargetPlayerHandEffect();
-        effect.setText("look at target opponent's hand");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Amplify 1
+        this.addAbility(new AmplifyAbility(AmplifyEffect.AmplifyFactor.Amplify1));
+        // Whenever Embalmed Brawler attacks or blocks, you lose 1 life for each +1/+1 counter on it.
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new LoseLifeSourceControllerEffect(new CountersCount(CounterType.P1P1)), false));
     }
 
-    public WanderguardSentry(final WanderguardSentry card) {
+    public EmbalmedBrawler(final EmbalmedBrawler card) {
         super(card);
     }
 
     @Override
-    public WanderguardSentry copy() {
-        return new WanderguardSentry(this);
+    public EmbalmedBrawler copy() {
+        return new EmbalmedBrawler(this);
     }
 }

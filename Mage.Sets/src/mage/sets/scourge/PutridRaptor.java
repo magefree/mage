@@ -25,47 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.scourge;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetOpponent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author dustinconrad
+ * @author LoneFox
  */
-public class WanderguardSentry extends CardImpl {
+public class PutridRaptor extends CardImpl {
 
-    public WanderguardSentry(UUID ownerId) {
-        super(ownerId, 111, "Wanderguard Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Drone");
+    private static final FilterCard filter = new FilterCard("a Zombie card");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
-        Effect effect = new LookAtTargetPlayerHandEffect();
-        effect.setText("look at target opponent's hand");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public WanderguardSentry(final WanderguardSentry card) {
+    public PutridRaptor(UUID ownerId) {
+        super(ownerId, 71, "Putrid Raptor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Zombie");
+        this.subtype.add("Lizard");
+        this.subtype.add("Beast");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // Morph-Discard a Zombie card.
+        this.addAbility(new MorphAbility(this, new DiscardCardCost(filter)));
+    }
+
+    public PutridRaptor(final PutridRaptor card) {
         super(card);
     }
 
     @Override
-    public WanderguardSentry copy() {
-        return new WanderguardSentry(this);
+    public PutridRaptor copy() {
+        return new PutridRaptor(this);
     }
 }
