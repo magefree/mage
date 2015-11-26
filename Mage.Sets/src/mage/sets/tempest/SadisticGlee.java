@@ -30,13 +30,10 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -61,11 +58,9 @@ public class SadisticGlee extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
         // Whenever a creature dies, put a +1/+1 counter on enchanted creature.
-        Effect effect = new GainAbilityAttachedEffect(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false), AttachmentType.AURA);
-        ability.addEffect(effect);
-        effect.setText("Whenever a creature dies, put a +1/+1 counter on enchanted creature.");
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersAttachedEffect(
+            CounterType.P1P1.createInstance(), "enchanted creature"), false));
     }
 
     public SadisticGlee(final SadisticGlee card) {
