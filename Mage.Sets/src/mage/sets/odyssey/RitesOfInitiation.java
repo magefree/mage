@@ -31,17 +31,13 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -86,19 +82,10 @@ class RitesOfInitiationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Target target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard("cards to discard"));
-            while (player.canRespond() && !target.isChosen()) {
-                target.choose(Outcome.BoostCreature, player.getId(), source.getSourceId(), game);
-            }
-            int numDiscarded = 0;
-                for (UUID targetId : target.getTargets()) {
-                    Card card = player.getHand().get(targetId, game);
-                    if (player.discard(card, source, game)) {
-                        numDiscarded++;
-                    }
-                }
-            game.addEffect(new BoostControlledEffect(numDiscarded, 0, Duration.EndOfTurn), source);
+        if (player != null) {            
+            int numToDiscard = player.getAmount(0, player.getHand().size(), "Discard how many cards at random?", game);
+            player.discard(numToDiscard, true, source, game);
+            game.addEffect(new BoostControlledEffect(numToDiscard, 0, Duration.EndOfTurn), source);
             return true;
         }
         return false;
