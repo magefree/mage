@@ -1207,8 +1207,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean playLand(Card card, Game game) {
-        return computerPlayer.playLand(card, game);
+    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming) {
+        return computerPlayer.playCard(card, game, noMana, ignoreTiming);
+    }
+
+    @Override
+    public boolean playLand(Card card, Game game, boolean ignoreTiming) {
+        return computerPlayer.playLand(card, game, ignoreTiming);
     }
 
     @Override
@@ -1786,34 +1791,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    @Deprecated
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
     }
 
     @Override
+    @Deprecated
     public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
         return computerPlayer.moveCards(card, fromZone, toZone, source, game);
     }
 
     @Override
+    @Deprecated
     public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
     }
 
-//    @Override
-//    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
-//        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
-//    }
-//
-//    @Override
-//    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
-//        return computerPlayer.moveCards(card, fromZone, toZone, source, game);
-//    }
-//
-//    @Override
-//    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game, boolean withName) {
-//        return computerPlayer.moveCards(cards, fromZone, toZone, source, game);
-//    }
     @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
         return computerPlayer.moveCardToHandWithInfo(card, sourceId, game);

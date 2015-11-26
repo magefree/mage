@@ -79,8 +79,6 @@ import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionInfo;
-import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.AsThoughEffectType;
@@ -995,7 +993,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         while (lands.size() > 0 && this.canPlayLand()) {
             if (lands.size() == 1) {
-                this.playLand(lands.iterator().next(), game);
+                this.playLand(lands.iterator().next(), game, false);
             } else {
                 playALand(lands, game);
             }
@@ -1010,7 +1008,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (ManaAbility ability : card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (netMana.enough(mana)) {
-                            this.playLand(card, game);
+                            this.playLand(card, game, false);
                             lands.remove(card);
                             return;
                         }
@@ -1024,7 +1022,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (ManaAbility ability : card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (mana.contains(netMana)) {
-                            this.playLand(card, game);
+                            this.playLand(card, game, false);
                             lands.remove(card);
                             return;
                         }
@@ -1033,7 +1031,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
         //play first available land
-        this.playLand(lands.iterator().next(), game);
+        this.playLand(lands.iterator().next(), game, false);
         lands.remove(lands.iterator().next());
     }
 

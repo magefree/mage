@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -55,11 +55,11 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class HordeOfNotions extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Elemental card from your graveyard");
-    
+
     static {
         filter.add(new SubtypePredicate("Elemental"));
     }
-    
+
     public HordeOfNotions(UUID ownerId) {
         super(ownerId, 249, "Horde of Notions", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "LRW";
@@ -74,8 +74,8 @@ public class HordeOfNotions extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        
-        // {W}{U}{B}{R}{G}: You may play target Elemental card from your graveyard without paying its mana cost.        
+
+        // {W}{U}{B}{R}{G}: You may play target Elemental card from your graveyard without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HordeOfNotionsEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
@@ -92,37 +92,28 @@ public class HordeOfNotions extends CardImpl {
 }
 
 class HordeOfNotionsEffect extends OneShotEffect {
-    
+
     public HordeOfNotionsEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "You may play target Elemental card from your graveyard without paying its mana cost";
     }
-    
+
     public HordeOfNotionsEffect(final HordeOfNotionsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public HordeOfNotionsEffect copy() {
         return new HordeOfNotionsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null ) {
-                // Probably there is no Elemental land, but who knows
-                if (card.getCardType().contains(CardType.LAND) && controller.canPlayLand() && 
-                            controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", source, game)) {
-                    controller.playLand(card, game);
-                } else {
-                    if (card.getSpellAbility().canChooseTarget(game) && 
-                            controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", source, game)) {
-                        controller.cast(card.getSpellAbility(), game, true);    
-                    }
-                }                
+            if (card != null && controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", source, game)) {
+                controller.playCard(card, game, true, true);
             }
             return true;
         }

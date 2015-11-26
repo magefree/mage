@@ -368,7 +368,29 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPlayLand();
 
-    boolean playLand(Card card, Game game);
+    /**
+     * Plays a card if possible
+     *
+     * @param card the card that can be cast
+     * @param game
+     * @param noMana if it's a spell i can be cast without paying mana
+     * @param ignoreTiming if it's cast during the resolution of another spell
+     * no sorcery or play land timing restriction are checked. For a land it has
+     * to be the turn of the player playing that card.
+     * @return
+     */
+    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming);
+
+    /**
+     *
+     * @param card the land card to play
+     * @param game
+     * @param ignoreTiming false - it won't be checked if the stack is empty and
+     * you are able to play a Sorcery. It's still checked, if you are able to
+     * play a land concerning the numner of lands you already played.
+     * @return
+     */
+    boolean playLand(Card card, Game game, boolean ignoreTiming);
 
     boolean activateAbility(ActivatedAbility ability, Game game);
 

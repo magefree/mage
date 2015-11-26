@@ -25,11 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.stub;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -41,8 +53,12 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.ManaType;
+import mage.constants.Outcome;
 import mage.constants.PlayerAction;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -63,9 +79,6 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.MessageToClient;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -601,7 +614,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean playLand(Card card, Game game) {
+    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming) {
+        return false;
+    }
+
+    @Override
+    public boolean playLand(Card card, Game game, boolean ignoreTiming) {
         return false;
     }
 

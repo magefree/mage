@@ -956,6 +956,23 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming) {
+        if (card == null) {
+            return false;
+        }
+        boolean result;
+        if (card.getCardType().contains(CardType.LAND)) {
+            result = playLand(card, game, ignoreTiming);
+        } else {
+            result = cast(card.getSpellAbility(), game, noMana);
+        }
+        if (result == false) {
+            game.informPlayer(this, "You can't play " + card.getIdName() + ".");
+        }
+        return result;
+    }
+
+    @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana) {
         if (!ability.getSpellAbilityType().equals(SpellAbilityType.BASE)) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
@@ -1007,14 +1024,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana
-    ) {
+    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
         return ability;
     }
 
     @Override
-    public boolean playLand(Card card, Game game
-    ) {
+    public boolean playLand(Card card, Game game, boolean ignoreTiming) {
         // Check for alternate casting possibilities: e.g. land with Morph
         ActivatedAbility playLandAbility = null;
         boolean found = false;
@@ -1038,7 +1053,16 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (playLandAbility == null) {
             return false;
         }
+        //20091005 - 114.2a
         if (!playLandAbility.canActivate(this.playerId, game)) {
+            return false;
+        }
+        if (ignoreTiming) {
+            if (!game.getActivePlayerId().equals(playerId)) {
+                // Also if a land can be played during the resolution of another spell, it has to be the turn of the player playing the land
+                return false;
+            }
+        } else if (!game.canPlaySorcery(playerId)) {
             return false;
         }
         //20091005 - 305.1
@@ -1147,9 +1171,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             return true;
         }
         if (ability instanceof PlayLandAbility) {
-
             Card card = game.getCard(ability.getSourceId());
-            result = playLand(card, game);
+            result = playLand(card, game, false);
         } else {
             if (!ability.canActivate(this.playerId, game)) {
                 return false;

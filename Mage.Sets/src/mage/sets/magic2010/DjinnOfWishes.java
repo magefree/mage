@@ -28,12 +28,8 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,6 +42,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -100,33 +100,16 @@ class DjinnOfWishesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards("Djinn of Wishes", cards, game);
-
-            player.getLibrary().removeFromTop(game);
-
-            boolean used = false;
-            if (player.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", source, game)) {
-                if (card.getCardType().contains(CardType.LAND)) {
-                    // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                    if (game.getActivePlayerId().equals(player.getId()) && player.canPlayLand()) {
-                        used = true;
-                        player.playLand(card, game);
-                    }
-                } else {
-                    used = true;
-                    player.cast(card.getSpellAbility(), game, true);
-                }
-            }
-
-            if (!used) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null && controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
+            Cards cards = new CardsImpl(card);
+            controller.revealCards(sourceObject.getIdName(), cards, game);
+            if (!controller.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", source, game)
+                    || !controller.playCard(card, game, true, true)) {
                 card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
             }
-
             return true;
         }
         return false;

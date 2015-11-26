@@ -109,11 +109,11 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         Player controller = game.getPlayer(source.getControllerId());
         if (spell != null && controller != null) {
-            controller.moveCards(spell, null, Zone.EXILED, source, game);
+            controller.moveCards(spell, Zone.EXILED, source, game);
             if (!spell.isCopy()) {
                 Card spellCard = spell.getCard();
                 if (spellCard != null && controller.chooseUse(Outcome.PlayForFree, "Cast " + spellCard.getIdName() + " for free?", source, game)) {
-                    controller.cast(spellCard.getSpellAbility(), game, true);
+                    controller.playCard(spellCard, game, true, true);
                 }
                 return true;
             }
