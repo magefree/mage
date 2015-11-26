@@ -225,10 +225,11 @@ public class CardUtil {
         for (ManaCost manaCost : manaCosts) {
             Mana mana = manaCost.getOptions().get(0);
             int colorless = mana != null ? mana.getColorless() : 0;
-            if (!updated && restToReduce != 0 && colorless > 0) {
+            if (restToReduce != 0 && colorless > 0) {
                 if ((colorless - restToReduce) > 0) {
                     int newColorless = colorless - restToReduce;
                     adjustedCost.add(new GenericManaCost(newColorless));
+                    restToReduce = 0;
                 } else {
                     restToReduce -= colorless;
                 }
