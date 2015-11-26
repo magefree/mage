@@ -1057,7 +1057,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             // what makes no real sense. So it makes no sense to generally do a restorState here.
             // restoreState(bookmark, card.getName(), game);
         }
-        return false;
+        // if the to play the land is replaced (e.g. Kjeldoran Outpos and don't sacrificing a Plains) it's a valid satte so returning true here
+        return true;
     }
 
     protected boolean playManaAbility(ManaAbility ability, Game game) {
@@ -3167,8 +3168,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             default:
                 throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
         }
-
-        game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
+        if (!successfulMovedCards.isEmpty()) {
+            game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
+        }
         return successfulMovedCards.size() > 0;
     }
 

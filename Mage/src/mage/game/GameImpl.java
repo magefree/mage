@@ -725,7 +725,7 @@ public abstract class GameImpl implements Game, Serializable {
         boolean wasPaused = state.isPaused();
         state.resume();
         if (!gameOver(null)) {
-            fireInformEvent(new StringBuilder("Turn ").append(state.getTurnNum()).toString());
+            fireInformEvent("Turn " + state.getTurnNum());
             if (checkStopOnTurnOption()) {
                 return;
             }
