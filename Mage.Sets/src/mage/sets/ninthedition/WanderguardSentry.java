@@ -31,11 +31,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.RevealHandTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -53,7 +53,9 @@ public class WanderguardSentry extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Wanderguard Sentry enters the battlefield, look at target opponent's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new RevealHandTargetEffect(TargetController.OPPONENT));
+        Effect effect = new LookAtTargetPlayerHandEffect();
+        effect.setText("look at target opponent's hand");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
