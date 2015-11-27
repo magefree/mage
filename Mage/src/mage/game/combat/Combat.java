@@ -399,7 +399,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     public void selectBlockers(Player blockController, Game game) {
         Player attacker = game.getPlayer(attackerId);
         //20101001 - 509.1c
-        this.retrieveMustBlockAttackerRequirements(attacker, game);
+        game.getCombat().retrieveMustBlockAttackerRequirements(attacker, game);
         Player controller;
         for (UUID defenderId : getPlayerDefenders(game)) {
             Player defender = game.getPlayer(defenderId);
@@ -415,26 +415,26 @@ public class Combat implements Serializable, Copyable<Combat> {
                     if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
                         return;
                     }
-                    if (!this.checkBlockRestrictions(defender, game)) {
+                    if (!game.getCombat().checkBlockRestrictions(defender, game)) {
                         if (controller.isHuman()) { // only human player can decide to do the block in another way
                             continue;
                         }
                     }
-                    choose = !this.checkBlockRequirementsAfter(defender, controller, game);
+                    choose = !game.getCombat().checkBlockRequirementsAfter(defender, controller, game);
                     if (!choose) {
-                        choose = !this.checkBlockRestrictionsAfter(defender, controller, game);
+                        choose = !game.getCombat().checkBlockRestrictionsAfter(defender, controller, game);
                     }
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 
                 // add info about attacker blocked by blocker to the game log
                 if (!game.isSimulation()) {
-                    this.logBlockerInfo(defender, game);
+                    game.getCombat().logBlockerInfo(defender, game);
                 }
             }
         }
         // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors
-        TraceUtil.traceCombatIfNeeded(game, this);
+        TraceUtil.traceCombatIfNeeded(game, game.getCombat());
     }
 
     /**
