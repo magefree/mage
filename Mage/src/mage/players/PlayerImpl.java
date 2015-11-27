@@ -1057,12 +1057,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!playLandAbility.canActivate(this.playerId, game)) {
             return false;
         }
-        if (ignoreTiming) {
-            if (!game.getActivePlayerId().equals(playerId)) {
-                // Also if a land can be played during the resolution of another spell, it has to be the turn of the player playing the land
-                return false;
-            }
-        } else if (!game.canPlaySorcery(playerId)) {
+        if (!ignoreTiming && !game.canPlaySorcery(playerId)) {
             return false;
         }
         //20091005 - 305.1
