@@ -162,9 +162,11 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
+        if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+            sb.append("any number of target ").append(target.getTargetName()).append(" gain ");
+        } else if (target.getMaxNumberOfTargets() > 1) {
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("Up to");
+                sb.append("up to ");
             }
             sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
         } else {

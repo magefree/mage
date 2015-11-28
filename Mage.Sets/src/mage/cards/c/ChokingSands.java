@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ChokingSands extends CardImpl {
     
-    private static final FilterLandPermanent filter = new FilterLandPermanent("non-Swamp");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("non-Swamp land");
     
     static {
         filter.add(Predicates.not(new SubtypePredicate("Swamp")));

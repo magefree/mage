@@ -149,7 +149,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
         sb.append("put ");
-        if (target.getMaxNumberOfTargets() == 0) {
+        if (target.getMaxNumberOfTargets() == 0 || target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
             sb.append("any number of ");
         } else if (target.getMaxNumberOfTargets() != 1 || target.getNumberOfTargets() != 1) {
             if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {

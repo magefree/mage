@@ -53,7 +53,7 @@ public class Confessor extends CardImpl {
 
         // Whenever a player discards a card, you may gain 1 life.
         this.addAbility(new SimpleTriggeredAbility(
-                Zone.BATTLEFIELD, EventType.DISCARDED_CARD, new GainLifeEffect(1), "Whenever a player discards a card, you may", false, true));
+                Zone.BATTLEFIELD, EventType.DISCARDED_CARD, new GainLifeEffect(1), "Whenever a player discards a card, ", false, true));
     }
 
     public Confessor(final Confessor card) {

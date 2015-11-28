@@ -59,7 +59,7 @@ public class ClockworkBeetle extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Clockwork Beetle enters the battlefield with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "{this} enters the battlefield with two +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
 
         // Whenever Clockwork Beetle attacks or blocks, remove a +1/+1 counter from it at end of combat.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkBeetleEffect(), false));

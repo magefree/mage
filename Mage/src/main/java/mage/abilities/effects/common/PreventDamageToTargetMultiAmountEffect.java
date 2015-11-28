@@ -132,7 +132,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
+        sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
         if (duration.equals(Duration.EndOfTurn)) {
             sb.append("this turn ");
         }

@@ -98,6 +98,6 @@ public class DomainValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "basic land type among lands you control";
+        return "basic land type among lands " + (countTargetPlayer ? "he or she controls" : "you control");
     }
 }

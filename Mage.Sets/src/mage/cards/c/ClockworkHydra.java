@@ -64,9 +64,7 @@ public class ClockworkHydra extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Clockwork Hydra enters the battlefield with four +1/+1 counters on it.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(4));
-        effect.setText("with four +1/+1 counters on it");
-        this.addAbility(new EntersBattlefieldAbility(effect));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), "with four +1/+1 counters on it"));
         // Whenever Clockwork Hydra attacks or blocks, remove a +1/+1 counter from it. If you do, Clockwork Hydra deals 1 damage to target creature or player.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkHydraEffect(), false));
 
