@@ -66,4 +66,33 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testDiesTriggeredAbilityOnlyIfPresent() {
+        // <i>Landfall</i> - Whenever a land enters the battlefield under your control, put a 5/5 red and green Elemental creature token onto the battlefield.
+        // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to target creature or player.
+        addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Rage", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Lightning Elemental", 1); // 4/1 Elemental - Haste
+
+        // Blastfire Bolt deals 5 damage to target creature. Destroy all Equipment attached to that creature.
+        addCard(Zone.HAND, playerB, "Blastfire Bolt", 1); // {5}{R}
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1); // {R}
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Lightning Elemental"); // Dying Lightning Elemental does no longer trigger ability of Omnath
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Blastfire Bolt", "Omnath, Locus of Rage", "Lightning Bolt");
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Blastfire Bolt", 1);
+        assertGraveyardCount(playerA, "Omnath, Locus of Rage", 1);
+        assertGraveyardCount(playerA, "Lightning Elemental", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+
+    }
 }
