@@ -304,15 +304,20 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testTurntimberBasilisk() {
+        // Landfall - Whenever a land enters the battlefield under your control, you may
+        // have target creature block Turntimber Basilisk this turn if able.
         addCard(Zone.BATTLEFIELD, playerA, "Turntimber Basilisk");
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
         addCard(Zone.HAND, playerA, "Forest");
 
         addCard(Zone.BATTLEFIELD, playerB, "Storm Crow");
 
+        // Turntimber Basilisk's Landfall ability targets Storm Crow,
+        // so Storm Crow must block Turntimber Basilisk if able
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         addTarget(playerA, "Storm Crow");
 
+        // Turntimber Basilisk doesn't attack and Storm Crow can block Grizzly Bears
         attack(3, playerA, "Grizzly Bears");
         block(3, playerB, "Storm Crow", "Grizzly Bears");
 
