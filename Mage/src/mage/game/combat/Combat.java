@@ -538,6 +538,11 @@ public class Combat implements Serializable, Copyable<Combat> {
                         UUID attackingCreatureId = requirementEntry.getKey().mustBlockAttacker(ability, game);
                         Player defender = game.getPlayer(possibleBlocker.getControllerId());
                         if (attackingCreatureId != null && defender != null && possibleBlocker.canBlock(attackingCreatureId, game)) {
+                            Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+                            if (attackingCreature == null || !attackingCreature.isAttacking()) {
+                                // creature that must be blocked is not attacking
+                                continue;
+                            }
                             // check if the possible blocker has to pay cost to block, if so don't force
                             if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
                                     GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, attackingCreatureId, possibleBlocker.getId(), possibleBlocker.getControllerId()), game)) {

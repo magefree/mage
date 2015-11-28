@@ -298,4 +298,33 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Walking Corpse", 1);
         assertPermanentCount(playerB, "Llanowar Elves", 1);
     }
+
+    /**
+     * Reproduces a bug when a creature that must be blocked is not attacking
+     */
+    @Test
+    public void testTurntimberBasilisk() {
+        addCard(Zone.BATTLEFIELD, playerA, "Turntimber Basilisk");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Forest");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Storm Crow");
+
+        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        addTarget(playerA, "Storm Crow");
+
+        attack(3, playerA, "Grizzly Bears");
+        block(3, playerB, "Storm Crow", "Grizzly Bears");
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Turntimber Basilisk", 1);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertPermanentCount(playerB, "Storm Crow", 0);
+    }
+
 }
