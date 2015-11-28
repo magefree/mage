@@ -173,7 +173,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private transient List<ColoredManaSymbol> chosenColors;
 
     private transient ManaCost currentUnpaidMana;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
@@ -197,7 +197,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public boolean chooseMulligan(Game game) {
         log.debug("chooseMulligan");
-        if (hand.size() < 6 || isTestMode()) {
+        if (hand.size() < 6 || isTestMode() || game.getClass().getName().contains("Momir")) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
