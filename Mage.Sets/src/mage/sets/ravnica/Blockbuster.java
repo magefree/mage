@@ -28,7 +28,10 @@
 package mage.sets.ravnica;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
@@ -55,7 +58,9 @@ public class Blockbuster extends CardImpl {
         this.expansionSetCode = "RAV";
 
         // {1}{R}, Sacrifice Blockbuster: Blockbuster deals 3 damage to each tapped creature and each player.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(3, filter), new ManaCostsImpl("{1}{R}")));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(3, filter), new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 
     public Blockbuster(final Blockbuster card) {
