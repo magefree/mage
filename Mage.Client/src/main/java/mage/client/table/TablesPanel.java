@@ -69,7 +69,7 @@ import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
+import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.NewTableDialog;
@@ -143,16 +143,16 @@ public class TablesPanel extends javax.swing.JPanel {
 
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
 
-        chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
-        chatPanel.setBorder(null);
-        chatPanel.setChatType(ChatPanel.ChatType.TABLES);
+        chatPanelMain.getUserChatPanel().useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
+        chatPanelMain.getUserChatPanel().setBorder(null);
+        chatPanelMain.getUserChatPanel().setChatType(ChatPanelBasic.ChatType.TABLES);
 
         filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
             btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
             btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
             btnSkillBeginner, btnSkillCasual, btnSkillSerious};
 
-        JComponent[] components = new JComponent[]{chatPanel, jSplitPane1, jScrollPane1, jScrollPane2, topPanel, jPanel3};
+        JComponent[] components = new JComponent[]{chatPanelMain, jSplitPane1, jScrollPane1, jScrollPane2, topPanel, jPanel3};
         for (JComponent component : components) {
             component.setOpaque(false);
         }
@@ -274,7 +274,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     public void cleanUp() {
         saveSettings();
-        chatPanel.cleanUp();
+        chatPanelMain.cleanUp();
     }
 
     private void saveDividerLocations() {
@@ -284,7 +284,7 @@ public class TablesPanel extends javax.swing.JPanel {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, Integer.toString(chatPanel.getSplitDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, Integer.toString(chatPanelMain.getSplitDividerLocation()));
     }
 
     private void restoreSettings() {
@@ -333,8 +333,8 @@ public class TablesPanel extends javax.swing.JPanel {
                     }
                 }
                 location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, null);
-                if (location != null && chatPanel != null) {
-                    chatPanel.setSplitDividerLocation(Integer.parseInt(location));
+                if (location != null && chatPanelMain != null) {
+                    chatPanelMain.setSplitDividerLocation(Integer.parseInt(location));
                 }
             }
         }
@@ -376,7 +376,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 updateTablesTask.execute();
             }
             if (updatePlayersTask == null || updatePlayersTask.isDone()) {
-                updatePlayersTask = new UpdatePlayersTask(session, roomId, this.chatPanel);
+                updatePlayersTask = new UpdatePlayersTask(session, roomId, this.chatPanelMain);
                 updatePlayersTask.execute();
             }
             if (this.btnStateFinished.isSelected()) {
@@ -426,7 +426,7 @@ public class TablesPanel extends javax.swing.JPanel {
             MageFrame.getDesktop().add(joinTableDialog, JLayeredPane.MODAL_LAYER);
         }
         if (chatRoomId != null) {
-            this.chatPanel.connect(chatRoomId);
+            this.chatPanelMain.getUserChatPanel().connect(chatRoomId);
             startTasks();
             this.setVisible(true);
             this.repaint();
@@ -461,7 +461,7 @@ public class TablesPanel extends javax.swing.JPanel {
         } else {
             this.jPanel2.setVisible(true);
             this.jLabel2.setText(serverMessages.get(0));
-            this.jButton1.setVisible(serverMessages.size() > 1);
+            this.jButtonNext.setVisible(serverMessages.size() > 1);
         }
     }
 
@@ -473,7 +473,7 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         }
         stopTasks();
-        this.chatPanel.disconnect();
+        this.chatPanelMain.getUserChatPanel().disconnect();
 
         Component c = this.getParent();
         while (c != null && !(c instanceof TablesPane)) {
@@ -484,8 +484,8 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     }
 
-    public ChatPanel getChatPanel() {
-        return this.chatPanel;
+    public ChatPanelBasic getChatPanel() {
+        return chatPanelMain.getUserChatPanel();
     }
 
     private void setTableFilter() {
@@ -628,15 +628,15 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonNext = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
-        chatPanel = new mage.client.chat.ChatPanel(true);
         jPanel3 = new javax.swing.JPanel();
         jSplitPane2 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTables = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCompleted = new javax.swing.JTable();
+        chatPanelMain = new mage.client.table.PlayersChatPanel();
 
         topPanel.setBackground(java.awt.Color.white);
         topPanel.setOpaque(false);
@@ -1022,13 +1022,13 @@ public class TablesPanel extends javax.swing.JPanel {
 
         jLabel2.setText("You are playing Mage version 0.7.5. Welcome! -- Mage dev team --");
 
-        jButton1.setText("Next");
-        jButton1.setMaximumSize(new java.awt.Dimension(55, 25));
-        jButton1.setMinimumSize(new java.awt.Dimension(55, 25));
-        jButton1.setPreferredSize(new java.awt.Dimension(55, 25));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNext.setText("Next");
+        jButtonNext.setMaximumSize(new java.awt.Dimension(55, 25));
+        jButtonNext.setMinimumSize(new java.awt.Dimension(55, 25));
+        jButtonNext.setPreferredSize(new java.awt.Dimension(55, 25));
+        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNextActionPerformed(evt);
             }
         });
 
@@ -1037,7 +1037,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1048,7 +1048,7 @@ public class TablesPanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1057,9 +1057,6 @@ public class TablesPanel extends javax.swing.JPanel {
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(10);
         jSplitPane1.setResizeWeight(1.0);
-
-        chatPanel.setMinimumSize(new java.awt.Dimension(100, 43));
-        jSplitPane1.setRightComponent(chatPanel);
 
         jSplitPane2.setBorder(null);
         jSplitPane2.setDividerSize(10);
@@ -1085,7 +1082,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1093,6 +1090,7 @@ public class TablesPanel extends javax.swing.JPanel {
         );
 
         jSplitPane1.setLeftComponent(jPanel3);
+        jSplitPane1.setRightComponent(chatPanelMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -1154,7 +1152,7 @@ public class TablesPanel extends javax.swing.JPanel {
         newTableDialog.showDialog(roomId);
     }//GEN-LAST:event_btnNewTableActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         synchronized (this) {
             if (messages != null && !messages.isEmpty()) {
                 currentMessage++;
@@ -1164,7 +1162,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 this.jLabel2.setText(messages.get(currentMessage));
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNextActionPerformed
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
         setTableFilter();
@@ -1206,10 +1204,10 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnTypeMatch;
     private javax.swing.JToggleButton btnTypeTourneyConstructed;
     private javax.swing.JToggleButton btnTypeTourneyLimited;
-    private mage.client.chat.ChatPanel chatPanel;
+    private mage.client.table.PlayersChatPanel chatPanelMain;
     private javax.swing.JToolBar filterBar1;
     private javax.swing.JToolBar filterBar2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonNext;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
@@ -1413,11 +1411,11 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
 
     private final Session session;
     private final UUID roomId;
-    private final ChatPanel chat;
+    private final PlayersChatPanel chat;
 
     private static final Logger logger = Logger.getLogger(UpdatePlayersTask.class);
 
-    UpdatePlayersTask(Session session, UUID roomId, ChatPanel chat) {
+    UpdatePlayersTask(Session session, UUID roomId, PlayersChatPanel chat) {
         this.session = session;
         this.roomId = roomId;
         this.chat = chat;

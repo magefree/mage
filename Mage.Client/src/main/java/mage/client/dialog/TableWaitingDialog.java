@@ -41,7 +41,7 @@ import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
+import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
@@ -86,7 +86,7 @@ public class TableWaitingDialog extends MageDialog {
             this.setSize(prefWidth, prefHeight);
         }
 
-        chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
+        chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         tableSeats.createDefaultColumnsFromModel();
         TableUtil.setColumnWidthAndOrder(tableSeats, defaultColumnsWidth, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
         tableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
@@ -183,7 +183,7 @@ public class TableWaitingDialog extends MageDialog {
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSeats = new javax.swing.JTable();
-        chatPanel = new mage.client.chat.ChatPanel(false);
+        chatPanel = new mage.client.chat.ChatPanelBasic();
 
         setResizable(true);
         setTitle("Waiting for players");
@@ -219,9 +219,10 @@ public class TableWaitingDialog extends MageDialog {
             }
         });
 
-        jSplitPane1.setDividerLocation(320);
+        jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(1.0);
+        jSplitPane1.setToolTipText("");
 
         tableSeats.setModel(tableWaitModel);
         tableSeats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -239,12 +240,12 @@ public class TableWaitingDialog extends MageDialog {
                 .addComponent(btnMoveDown)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMoveUp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnStart)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancel)
                 .addContainerGap())
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,7 +309,7 @@ public class TableWaitingDialog extends MageDialog {
     private javax.swing.JButton btnMoveDown;
     private javax.swing.JButton btnMoveUp;
     private javax.swing.JButton btnStart;
-    private mage.client.chat.ChatPanel chatPanel;
+    private mage.client.chat.ChatPanelBasic chatPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable tableSeats;

@@ -33,9 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
-import static mage.client.chat.ChatPanel.ChatType.TABLES;
-import static mage.client.chat.ChatPanel.ChatType.TOURNAMENT;
+import mage.client.chat.ChatPanelBasic;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
@@ -116,9 +114,9 @@ public class CallbackClientImpl implements CallbackClient {
                             break;
                         case "chatMessage": {
                             ChatMessage message = (ChatMessage) callback.getData();
-                            ChatPanel panel = MageFrame.getChat(callback.getObjectId());
+                            ChatPanelBasic panel = MageFrame.getChat(callback.getObjectId());
                             if (panel != null) {
-                                // play the to the message connected sound
+                                // play the sound related to the message
                                 if (message.getSoundToPlay() != null) {
                                     switch (message.getSoundToPlay()) {
                                         case PlayerLeft:
@@ -383,9 +381,9 @@ public class CallbackClientImpl implements CallbackClient {
         });
     }
 
-    private void createChatStartMessage(ChatPanel chatPanel) {
+    private void createChatStartMessage(ChatPanelBasic chatPanel) {
         chatPanel.setStartMessageDone(true);
-        ChatPanel usedPanel = chatPanel;
+        ChatPanelBasic usedPanel = chatPanel;
         if (chatPanel.getConnectedChat() != null) {
             usedPanel = chatPanel.getConnectedChat();
         }

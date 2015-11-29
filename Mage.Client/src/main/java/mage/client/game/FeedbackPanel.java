@@ -42,7 +42,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
+import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
 import mage.client.util.audio.AudioManager;
@@ -71,7 +71,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private Session session;
     private FeedbackMode mode;
     private MageDialog connectedDialog;
-    private ChatPanel connectedChatPanel;
+    private ChatPanelBasic connectedChatPanel;
     private int lastMessageId;
 
     private static final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
@@ -323,7 +323,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         return this.mode;
     }
 
-    public void setConnectedChatPanel(ChatPanel chatPanel) {
+    public void setConnectedChatPanel(ChatPanelBasic chatPanel) {
         this.connectedChatPanel = chatPanel;
     }
 

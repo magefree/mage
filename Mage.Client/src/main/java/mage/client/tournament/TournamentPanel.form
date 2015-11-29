@@ -349,10 +349,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="mage.client.chat.ChatPanel" name="chatPanel1">
-          <Properties>
-            <Property name="startMessageDone" type="boolean" value="true"/>
-          </Properties>
+        <Component class="mage.client.chat.ChatPanelBasic" name="chatPanel1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>

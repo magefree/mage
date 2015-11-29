@@ -35,82 +35,65 @@ package mage.client.chat;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
-import javax.swing.Icon;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
-import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
-import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_WIDTH;
-import mage.client.util.MageTableRowSorter;
-import mage.client.util.gui.TableUtil;
-import mage.client.util.gui.countryBox.CountryCellRenderer;
-import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
-import mage.view.RoomUsersView;
-import mage.view.UsersView;
 import org.mage.card.arcane.ManaSymbols;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com, nantuko
  */
-public class ChatPanel extends javax.swing.JPanel {
+public class ChatPanelBasic extends javax.swing.JPanel {
 
-    private UUID chatId;
-    private Session session;
-    private final List<String> players = new ArrayList<>();
-    private final UserTableModel userTableModel;
+    protected UUID chatId;
+    protected Session session;
     /**
      * Chat message color for opponents.
      */
-    private static final String OPPONENT_COLOR = "#FF7F50";
+    protected static final String OPPONENT_COLOR = "#FF7F50";
     /**
      * Chat message color for client player.
      */
-    private static final String MY_COLOR = "#7FFFD4";
+    protected static final String MY_COLOR = "#7FFFD4";
     /**
      * Chat message color for timestamps.
      */
-    private static final String TIMESTAMP_COLOR = "#CCCC33";
+    protected static final String TIMESTAMP_COLOR = "#CCCC33";
     /**
      * Chat message color for messages.
      */
-    private static final String MESSAGE_COLOR = "White";
+    protected static final String MESSAGE_COLOR = "White";
     /**
      * Chat message color for personal infos.
      */
-    private static final String USER_INFO_COLOR = "Yellow";
+    protected static final String USER_INFO_COLOR = "Yellow";
     /**
      * Chat message color for status infos.
      */
-    private static final String STATUS_COLOR = "#FFCC33";
+    protected static final String STATUS_COLOR = "#FFCC33";
     /**
      * Alpha value for transparency (255 = not transparent)
      */
-    private static final int ALPHA = 80;
+    public static final int CHAT_ALPHA = 80;
     /**
      * This will be a chat that will be connected to {this} and will handle
      * redirected messages; Mostly used to redirect user messages to another
      * window.
      */
-    private ChatPanel connectedChat;
+    protected ChatPanelBasic connectedChat;
     /**
      * Parent chat this chat connected to. Used to send messages using parent
      * chat as it is the only one connected to server.
      */
-    private ChatPanel parentChatRef;
+    protected ChatPanelBasic parentChatRef;
     /**
      * Selected extended view mode.
      */
-    private VIEW_MODE extendedViewMode = VIEW_MODE.NONE;
+    protected VIEW_MODE extendedViewMode = VIEW_MODE.NONE;
 
     public enum VIEW_MODE {
 
@@ -120,57 +103,31 @@ public class ChatPanel extends javax.swing.JPanel {
      * Controls the output start messages as the chat panel is created
      *
      */
-    private ChatType chatType = ChatType.DEFAULT;
-
-    private static final int[] defaultColumnsWidth = {20, 100, 100, 80, 80};
+    protected ChatType chatType = ChatType.DEFAULT;
 
     public enum ChatType {
 
         DEFAULT, GAME, TABLES, TOURNAMENT
     }
-    private boolean startMessageDone = false;
+    protected boolean startMessageDone = false;
 
     /**
-     * Creates new form ChatPanel
-     */
-    public ChatPanel() {
-        this(false);
-    }
-
-    /**
-     * @param addPlayersTab if true, adds chat/players tabs
-     */
-    /**
+     *
      * Creates new form ChatPanel
      *
-     * @param addPlayersTab
      */
-    public ChatPanel(boolean addPlayersTab) {
-        userTableModel = new UserTableModel();
+    public ChatPanelBasic() {
         initComponents();
-        setBackground(new Color(0, 0, 0, ALPHA));
-        jTablePlayers.setBackground(new Color(0, 0, 0, ALPHA));
-        jTablePlayers.setForeground(Color.white);
-        jTablePlayers.setRowSorter(new MageTableRowSorter(userTableModel));
-
-        TableUtil.setColumnWidthAndOrder(jTablePlayers, defaultColumnsWidth, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
-        jTablePlayers.setDefaultRenderer(Icon.class, new CountryCellRenderer());
+        setBackground(new Color(0, 0, 0, CHAT_ALPHA));
 
         if (jScrollPaneTxt != null) {
-            jScrollPaneTxt.setBackground(new Color(0, 0, 0, ALPHA));
-            jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, ALPHA));
-        }
-        if (jScrollPanePlayers != null) {
-            jScrollPanePlayers.setBackground(new Color(0, 0, 0, ALPHA));
-            jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, ALPHA));
-        }
-        if (!addPlayersTab) {
-            simplifyComponents();
+            jScrollPaneTxt.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
+            jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
         }
     }
 
     public void cleanUp() {
-        TableUtil.saveColumnWidthAndOrderToPrefs(jTablePlayers, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
+
     }
 
     public ChatType getChatType() {
@@ -254,7 +211,7 @@ public class ChatPanel extends javax.swing.JPanel {
         this.txtConversation.append(text.toString());
     }
 
-    private String getColoredText(String color, String text) {
+    protected String getColoredText(String color, String text) {
         StringBuilder sb = new StringBuilder();
         sb.append("<font color='");
         sb.append(color);
@@ -268,23 +225,23 @@ public class ChatPanel extends javax.swing.JPanel {
         return txtConversation.getText();
     }
 
-    public ChatPanel getConnectedChat() {
+    public ChatPanelBasic getConnectedChat() {
         return connectedChat;
     }
 
-    public void setConnectedChat(ChatPanel connectedChat) {
+    public void setConnectedChat(ChatPanelBasic connectedChat) {
         this.connectedChat = connectedChat;
     }
 
-    public void setParentChat(ChatPanel parentChatRef) {
+    public void setParentChat(ChatPanelBasic parentChatRef) {
         this.parentChatRef = parentChatRef;
     }
 
-    public ChatPanel getParentChatRef() {
+    public ChatPanelBasic getParentChatRef() {
         return parentChatRef;
     }
 
-    public void setParentChatRef(ChatPanel parentChatRef) {
+    public void setParentChatRef(ChatPanelBasic parentChatRef) {
         this.parentChatRef = parentChatRef;
     }
 
@@ -303,102 +260,12 @@ public class ChatPanel extends javax.swing.JPanel {
             case GAME:
             case TABLES:
             case DEFAULT:
-                alpha = ALPHA;
+                alpha = CHAT_ALPHA;
         }
         this.txtConversation.setExtBackgroundColor(new Color(0, 0, 0, alpha)); // Alpha = 255 not transparent
-        // this.txtConversation.setBackground(new Color(0, 0, 0, 0));
-        // this.txtConversation.setForeground(new Color(255, 255, 255));
         this.txtConversation.setSelectionColor(Color.LIGHT_GRAY);
         this.jScrollPaneTxt.setOpaque(alpha == 255);
         this.jScrollPaneTxt.getViewport().setOpaque(!chatType.equals(ChatType.TABLES));
-    }
-
-    public void setSplitDividerLocation(int location) {
-        if (jSplitPane1 != null) {
-            jSplitPane1.setDividerLocation(location);
-        }
-    }
-
-    public int getSplitDividerLocation() {
-        if (jSplitPane1 == null) {
-            return 0;
-        }
-        return this.jSplitPane1.getDividerLocation();
-    }
-
-    class UserTableModel extends AbstractTableModel {
-
-        private final String[] columnNames = new String[]{"Loc", "Players", "Info", "Games", "Connection"};
-        private UsersView[] players = new UsersView[0];
-
-        public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
-            RoomUsersView roomUserInfo = roomUserInfoList.iterator().next();
-            this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
-            JTableHeader th = jTablePlayers.getTableHeader();
-            TableColumnModel tcm = th.getColumnModel();
-
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(1)).setHeaderValue("Players (" + this.players.length + ")");
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(3)).setHeaderValue(
-                    "Games " + roomUserInfo.getNumberActiveGames()
-                    + (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads() : " (")
-                    + " limit: " + roomUserInfo.getNumberMaxGames() + ")");
-            th.repaint();
-            this.fireTableDataChanged();
-        }
-
-        @Override
-        public int getRowCount() {
-            return players.length;
-        }
-
-        @Override
-        public int getColumnCount() {
-            return columnNames.length;
-        }
-
-        @Override
-        public Object getValueAt(int arg0, int arg1) {
-            switch (arg1) {
-                case 0:
-                    return players[arg0].getFlagName();
-                case 1:
-                    return players[arg0].getUserName();
-                case 2:
-                    return players[arg0].getInfoState();
-                case 3:
-                    return players[arg0].getInfoGames();
-                case 4:
-                    return players[arg0].getInfoPing();
-            }
-            return "";
-        }
-
-        @Override
-        public String getColumnName(int columnIndex) {
-            String colName = "";
-
-            if (columnIndex <= getColumnCount()) {
-                colName = columnNames[columnIndex];
-            }
-
-            return colName;
-        }
-
-        @Override
-        public Class getColumnClass(int columnIndex) {
-            switch (columnIndex) {
-                case 0:
-                    return Icon.class;
-                default:
-                    return String.class;
-            }
-        }
-
-        @Override
-        public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
-        }
-
     }
 
     public void clear() {
@@ -414,17 +281,9 @@ public class ChatPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPaneTxt = new javax.swing.JScrollPane();
         txtConversation = new mage.client.components.ColorPane();
-        jScrollPanePlayers = new javax.swing.JScrollPane();
-        jTablePlayers = new javax.swing.JTable();
         txtMessage = new javax.swing.JTextField();
-
-        jSplitPane1.setBorder(null);
-        jSplitPane1.setDividerSize(10);
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setResizeWeight(0.25);
 
         jScrollPaneTxt.setBorder(null);
 
@@ -434,25 +293,6 @@ public class ChatPanel extends javax.swing.JPanel {
         txtConversation.setMargin(new java.awt.Insets(2, 2, 2, 2));
         txtConversation.setOpaque(false);
         jScrollPaneTxt.setViewportView(txtConversation);
-
-        jSplitPane1.setRightComponent(jScrollPaneTxt);
-
-        jScrollPanePlayers.setBorder(null);
-
-        jTablePlayers.setModel(this.userTableModel);
-        jTablePlayers.setToolTipText("Connected players");
-        jTablePlayers.setAutoscrolls(false);
-        jTablePlayers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTablePlayers.setFocusable(false);
-        jTablePlayers.setGridColor(new java.awt.Color(255, 255, 255));
-        jTablePlayers.setOpaque(false);
-        jTablePlayers.setRequestFocusEnabled(false);
-        jTablePlayers.setRowSelectionAllowed(false);
-        jTablePlayers.setUpdateSelectionOnSort(false);
-        jTablePlayers.setVerifyInputWhenFocusTarget(false);
-        jScrollPanePlayers.setViewportView(jTablePlayers);
-
-        jSplitPane1.setTopComponent(jScrollPanePlayers);
 
         txtMessage.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -464,36 +304,22 @@ public class ChatPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(txtMessage)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void simplifyComponents() {
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE));
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)));
-        jTablePlayers = null;
-        jScrollPanePlayers = null;
-    }
-
-    private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
+    public void handleKeyTyped(java.awt.event.KeyEvent evt) {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             if (parentChatRef != null) {
                 parentChatRef.session.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
@@ -503,20 +329,14 @@ public class ChatPanel extends javax.swing.JPanel {
             this.txtMessage.setText("");
             this.txtMessage.repaint();
         }
+    }
+
+    private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
+        handleKeyTyped(evt);
 }//GEN-LAST:event_txtMessageKeyTyped
 
-    public void setRoomUserInfo(List<Collection<RoomUsersView>> view) {
-        try {
-            userTableModel.loadData(view.get(0));
-        } catch (Exception ex) {
-            this.players.clear();
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPanePlayers;
     private javax.swing.JScrollPane jScrollPaneTxt;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTablePlayers;
     private mage.client.components.ColorPane txtConversation;
     private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
