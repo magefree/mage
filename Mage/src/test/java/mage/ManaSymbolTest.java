@@ -8,13 +8,12 @@ import static org.junit.Assert.*;
  * Custom unit tests for {@link ManaSymbol}
  */
 public class ManaSymbolTest {
-
     @Test
     public void shouldCreateWhiteManaSymbol() {
         // given
 
         // when
-        ManaSymbol w = ManaSymbol.W;
+        ManaSymbol w = mage.ManaSymbol.W;
 
         // then
         assertEquals("{W}", w.toString());
@@ -38,7 +37,7 @@ public class ManaSymbolTest {
     }
 
     @Test
-     public void shouldCreateBlueManaSymbol() {
+    public void shouldCreateBlueManaSymbol() {
         // given
 
         // when
@@ -674,7 +673,7 @@ public class ManaSymbolTest {
 
 
     @Test
-     public void shouldCreateGPhyrexianMana() {
+    public void shouldCreateGPhyrexianMana() {
         // given
 
         // when
@@ -732,7 +731,7 @@ public class ManaSymbolTest {
 
 
     @Test
-     public void shouldCreateBPhyrexianMana() {
+    public void shouldCreateBPhyrexianMana() {
         // given
 
         // when
