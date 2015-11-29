@@ -51,10 +51,10 @@ public class KarplusanForest extends CardImpl {
         
         this.addAbility(new ColorlessManaAbility());
 
-        Ability redManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new TapSourceCost());
+        Ability redManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new TapSourceCost());
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);
-        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new TapSourceCost());
+        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new TapSourceCost());
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);
     }

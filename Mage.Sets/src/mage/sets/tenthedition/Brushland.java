@@ -50,10 +50,10 @@ public class Brushland extends CardImpl {
         this.expansionSetCode = "10E";
         this.addAbility(new ColorlessManaAbility());
 
-        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new TapSourceCost());
+        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new TapSourceCost());
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);
-        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new TapSourceCost());
+        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new TapSourceCost());
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);
     }

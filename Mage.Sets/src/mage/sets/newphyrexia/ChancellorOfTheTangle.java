@@ -79,7 +79,7 @@ public class ChancellorOfTheTangle extends CardImpl {
 class ChancellorOfTheTangleDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     ChancellorOfTheTangleDelayedTriggeredAbility () {
-        super(new BasicManaEffect(Mana.GreenMana));
+        super(new BasicManaEffect(Mana.GreenMana(1)));
     }
 
     ChancellorOfTheTangleDelayedTriggeredAbility(ChancellorOfTheTangleDelayedTriggeredAbility ability) {

@@ -63,12 +63,12 @@ public class TaintedPeak extends CardImpl {
         // {tap}: Add {B} or {R} to your mana pool. Activate this ability only if you control a Swamp.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.BlackMana),
+                new BasicManaEffect(Mana.BlackMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0)));
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.RedMana),
+                new BasicManaEffect(Mana.RedMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0)));
 

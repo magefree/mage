@@ -48,7 +48,7 @@ public class EldraziScionToken extends Token {
         subtype.add("Scion");
         power = new MageInt(1);
         toughness = new MageInt(1);
-        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana, new SacrificeSourceCost()));
+        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
         setOriginalExpansionSetCode("BFZ");
 
     }

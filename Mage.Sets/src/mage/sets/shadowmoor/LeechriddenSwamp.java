@@ -68,7 +68,7 @@ public class LeechriddenSwamp extends CardImpl {
         this.subtype.add("Swamp");
 
         // ({tap}: Add {B} to your mana pool.)
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new TapSourceCost()));
 
         // Leechridden Swamp enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

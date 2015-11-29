@@ -62,12 +62,12 @@ public class TaintedIsle extends CardImpl {
         // {tap}: Add {U} or {B} to your mana pool. Activate this ability only if you control a Swamp.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.BlueMana),
+                new BasicManaEffect(Mana.BlueMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0)));
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.BlackMana),
+                new BasicManaEffect(Mana.BlackMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0)));
 

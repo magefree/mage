@@ -60,7 +60,7 @@ public class FountainOfCho extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {T}, Remove any number of storage counters from Fountain of Cho: Add {W} to your mana pool for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
-                Mana.WhiteMana,
+                Mana.WhiteMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
                 "Add {W} to your mana pool for each storage counter removed this way",

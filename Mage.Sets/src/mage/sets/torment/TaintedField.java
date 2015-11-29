@@ -63,12 +63,12 @@ public class TaintedField extends CardImpl {
         // {tap}: Add {W} or {B} to your mana pool. Activate this ability only if you control a Swamp.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.WhiteMana),
+                new BasicManaEffect(Mana.WhiteMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0)));
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.BlackMana),
+                new BasicManaEffect(Mana.BlackMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0)));
     }

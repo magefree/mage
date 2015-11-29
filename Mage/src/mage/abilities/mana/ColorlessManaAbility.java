@@ -38,7 +38,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 public class ColorlessManaAbility extends BasicManaAbility {
 
     public ColorlessManaAbility() {
-        super(new BasicManaEffect(Mana.ColorlessMana));
+        super(new BasicManaEffect(Mana.ColorlessMana(1)));
         this.netMana.add(new Mana(0,0,0,0,0,1,0));
     }
 

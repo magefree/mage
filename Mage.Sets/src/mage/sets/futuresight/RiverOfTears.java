@@ -52,8 +52,8 @@ public class RiverOfTears extends CardImpl {
 
         // {T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
         this.addAbility(new ConditionalManaAbility(Zone.BATTLEFIELD, new ConditionalManaEffect(
-                new BasicManaEffect(Mana.BlackMana),
-                new BasicManaEffect(Mana.BlueMana),
+                new BasicManaEffect(Mana.BlackMana(1)),
+                new BasicManaEffect(Mana.BlueMana(1)),
                 LandfallCondition.getInstance(),
                 "Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead"),
             new TapSourceCost()), 

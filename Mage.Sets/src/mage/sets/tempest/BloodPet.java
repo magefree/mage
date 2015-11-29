@@ -53,7 +53,7 @@ public class BloodPet extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Blood Pet: Add {B} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new SacrificeSourceCost()));
     }
 
     public BloodPet(final BloodPet card) {

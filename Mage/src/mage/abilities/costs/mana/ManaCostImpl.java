@@ -242,19 +242,19 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     protected void addColoredOption(ColoredManaSymbol symbol) {
         switch (symbol) {
             case B:
-                this.options.add(Mana.BlackMana);
+                this.options.add(Mana.BlackMana(1));
                 break;
             case U:
-                this.options.add(Mana.BlueMana);
+                this.options.add(Mana.BlueMana(1));
                 break;
             case W:
-                this.options.add(Mana.WhiteMana);
+                this.options.add(Mana.WhiteMana(1));
                 break;
             case R:
-                this.options.add(Mana.RedMana);
+                this.options.add(Mana.RedMana(1));
                 break;
             case G:
-                this.options.add(Mana.GreenMana);
+                this.options.add(Mana.GreenMana(1));
                 break;
         }
     }

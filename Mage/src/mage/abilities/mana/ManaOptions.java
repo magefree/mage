@@ -296,25 +296,25 @@ public class ManaOptions extends ArrayList<Mana> {
                 for (Mana existingMana : existingManas) {
                     Mana manaToPay = manaAvailable.copy();
                     manaToPay.subtract(existingMana);
-                    if (manaToPay.getBlack() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlackMana.toString())) {
-                        manaToPay.subtract(Mana.BlackMana);
-                        addManaCombination(Mana.BlackMana, existingMana, payCombinations, payCombinationsStrings);
+                    if (manaToPay.getBlack() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlackMana(1).toString())) {
+                        manaToPay.subtract(Mana.BlackMana(1));
+                        addManaCombination(Mana.BlackMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPay.getBlue() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlueMana.toString())) {
-                        manaToPay.subtract(Mana.BlueMana);
-                        addManaCombination(Mana.BlueMana, existingMana, payCombinations, payCombinationsStrings);
+                    if (manaToPay.getBlue() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlueMana(1).toString())) {
+                        manaToPay.subtract(Mana.BlueMana(1));
+                        addManaCombination(Mana.BlueMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPay.getGreen() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.GreenMana.toString())) {
-                        manaToPay.subtract(Mana.GreenMana);
-                        addManaCombination(Mana.GreenMana, existingMana, payCombinations, payCombinationsStrings);
+                    if (manaToPay.getGreen() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.GreenMana(1).toString())) {
+                        manaToPay.subtract(Mana.GreenMana(1));
+                        addManaCombination(Mana.GreenMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPay.getRed() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.RedMana.toString())) {
-                        manaToPay.subtract(Mana.RedMana);
-                        addManaCombination(Mana.RedMana, existingMana, payCombinations, payCombinationsStrings);
+                    if (manaToPay.getRed() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.RedMana(1).toString())) {
+                        manaToPay.subtract(Mana.RedMana(1));
+                        addManaCombination(Mana.RedMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPay.getWhite() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.WhiteMana.toString())) {
-                        manaToPay.subtract(Mana.WhiteMana);
-                        addManaCombination(Mana.WhiteMana, existingMana, payCombinations, payCombinationsStrings);
+                    if (manaToPay.getWhite() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.WhiteMana(1).toString())) {
+                        manaToPay.subtract(Mana.WhiteMana(1));
+                        addManaCombination(Mana.WhiteMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                 }
             }

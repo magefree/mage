@@ -56,7 +56,7 @@ public class TolarianAcademy extends CardImpl {
         this.supertype.add("Legendary");
         this.expansionSetCode = "USG";
 
-        DynamicManaAbility ability = new DynamicManaAbility(Mana.BlueMana, new PermanentsOnBattlefieldCount(filter));
+        DynamicManaAbility ability = new DynamicManaAbility(Mana.BlueMana(1), new PermanentsOnBattlefieldCount(filter));
         this.addAbility(ability);
     }
 

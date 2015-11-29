@@ -51,10 +51,10 @@ public class AdarkarWastes extends CardImpl {
 
         this.addAbility(new ColorlessManaAbility());
 
-        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new TapSourceCost());
+        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new TapSourceCost());
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);
-        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana, new TapSourceCost());
+        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new TapSourceCost());
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);
     }

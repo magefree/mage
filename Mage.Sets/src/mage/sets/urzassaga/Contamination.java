@@ -102,7 +102,7 @@ class ContaminationReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ManaEvent manaEvent = (ManaEvent) event;
         Mana mana = manaEvent.getMana();
-        mana.setToMana(Mana.BlackMana);
+        mana.setToMana(Mana.BlackMana(1));
         return false;
     }
     

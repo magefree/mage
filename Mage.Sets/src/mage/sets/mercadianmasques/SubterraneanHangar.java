@@ -60,7 +60,7 @@ public class SubterraneanHangar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {tap}, Remove any number of storage counters from Subterranean Hangar: Add {B} to your mana pool for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
-                Mana.BlackMana,
+                Mana.BlackMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
                 "Add {B} to your mana pool for each storage counter removed this way",

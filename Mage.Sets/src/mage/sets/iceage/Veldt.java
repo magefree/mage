@@ -67,10 +67,10 @@ public class Veldt extends CardImpl {
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), TargetController.YOU, false);
         this.addAbility(ability2);
         // {tap}: Add {G} or {W} to your mana pool. Put a depletion counter on Veldt.
-        Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new TapSourceCost());
+        Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new TapSourceCost());
         ability3.addEffect(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance()));
         this.addAbility(ability3);
-        Ability ability4 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new TapSourceCost());
+        Ability ability4 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new TapSourceCost());
         ability4.addEffect(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance()));
         this.addAbility(ability4);
     }

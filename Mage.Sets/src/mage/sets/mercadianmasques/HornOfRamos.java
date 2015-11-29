@@ -51,7 +51,7 @@ public class HornOfRamos extends CardImpl {
         this.addAbility(new GreenManaAbility());
         
         // Sacrifice Horn of Ramos: Add {G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new SacrificeSourceCost()));
     }
 
     public HornOfRamos(final HornOfRamos card) {

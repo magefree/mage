@@ -50,7 +50,7 @@ public class Sacrifice extends CardImpl {
         // As an additional cost to cast Sacrifice, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         // Add to your mana pool an amount of {B} equal to the sacrificed creature's converted mana cost.
-        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.BlackMana, new SacrificeCostConvertedMana("creature"),
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.BlackMana(1), new SacrificeCostConvertedMana("creature"),
             "add to your mana pool an amount of {B} equal to the sacrificed creature's converted mana cost"));
     }
 

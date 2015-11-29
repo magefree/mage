@@ -76,7 +76,7 @@ public class JunglePatrol extends CardImpl {
         
         // Sacrifice a token named Wood: Add {R} to your mana pool.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new BasicManaEffect(Mana.RedMana),
+                new BasicManaEffect(Mana.RedMana(1)),
                 new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }
 

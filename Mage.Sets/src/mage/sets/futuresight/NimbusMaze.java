@@ -68,13 +68,13 @@ public class NimbusMaze extends CardImpl {
         // {tap}: Add {W} to your mana pool. Activate this ability only if you control an Island.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.WhiteMana),
+                new BasicManaEffect(Mana.WhiteMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(controlIsland)));
         // {tap}: Add {U} to your mana pool. Activate this ability only if you control a Plains.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.BlueMana),
+                new BasicManaEffect(Mana.BlueMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(controlPlains)));
     }
