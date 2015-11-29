@@ -60,8 +60,7 @@ import mage.target.Targets;
 public class NotOfThisWorld extends CardImpl {
 
     public NotOfThisWorld(UUID ownerId) {
-        super(ownerId, 8, "Not of This World", Rarity.UNCOMMON,
-                new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
+        super(ownerId, 8, "Not of This World", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Eldrazi");
 
@@ -85,7 +84,6 @@ public class NotOfThisWorld extends CardImpl {
 
 class TargetStackObjectTargetingControlledPermanent extends TargetObject {
 
-    
     public TargetStackObjectTargetingControlledPermanent() {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
@@ -105,10 +103,7 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         StackObject stackObject = game.getStack().getStackObject(id);
-        if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
-            return true;
-        }
-        return false;
+        return (stackObject instanceof Spell) || (stackObject instanceof StackAbility);
     }
 
     @Override
@@ -121,7 +116,7 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
         for (StackObject stackObject : game.getStack()) {
             if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
                 Targets objectTargets = stackObject.getStackAbility().getTargets();
-                if(!objectTargets.isEmpty()) {
+                if (!objectTargets.isEmpty()) {
                     for (Target target : objectTargets) {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
@@ -129,9 +124,9 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
                                 return true;
                             }
                         }
-                    }                    
+                    }
                 }
-            }       
+            }
         }
         return false;
     }
@@ -148,7 +143,7 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
         for (StackObject stackObject : game.getStack()) {
             if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
                 Targets objectTargets = stackObject.getStackAbility().getTargets();
-                if(!objectTargets.isEmpty()) {
+                if (!objectTargets.isEmpty()) {
                     for (Target target : objectTargets) {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
@@ -156,10 +151,10 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
                                 possibleTargets.add(stackObject.getId());
                             }
                         }
-                    }                    
+                    }
                 }
-            }       
-        }        
+            }
+        }
         return possibleTargets;
     }
 

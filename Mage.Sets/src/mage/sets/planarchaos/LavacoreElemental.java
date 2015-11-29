@@ -29,6 +29,7 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
@@ -56,10 +57,12 @@ public class LavacoreElemental extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Vanishing 1
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(1))));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(1)));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(1));
         this.addAbility(new VanishingSacrificeAbility());
-        
+
         // Whenever a creature you control deals combat damage to a player, put a time counter on Lavacore Elemental.
         Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(1));
         effect.setText("put a time counter on {this}");

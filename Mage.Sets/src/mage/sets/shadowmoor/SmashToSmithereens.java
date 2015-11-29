@@ -28,17 +28,12 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -52,9 +47,11 @@ public class SmashToSmithereens extends CardImpl {
         this.expansionSetCode = "SHM";
 
         // Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new SmashToSmithereensEffect());
+        Effect effect = new DamageTargetControllerEffect(3);
+        effect.setText("{this} deals 3 damage to that artifact's controller");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
     public SmashToSmithereens(final SmashToSmithereens card) {
@@ -64,37 +61,5 @@ public class SmashToSmithereens extends CardImpl {
     @Override
     public SmashToSmithereens copy() {
         return new SmashToSmithereens(this);
-    }
-}
-
-class SmashToSmithereensEffect extends OneShotEffect {
-
-    SmashToSmithereensEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals 3 damage to that artifact's controller";
-    }
-
-    SmashToSmithereensEffect(final SmashToSmithereensEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-        if (permanent != null) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                player.damage(3, source.getSourceId(), game, false, true);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public SmashToSmithereensEffect copy() {
-        return new SmashToSmithereensEffect(this);
     }
 }

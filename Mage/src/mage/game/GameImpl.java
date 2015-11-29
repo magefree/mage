@@ -49,6 +49,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.common.GemstoneCavernsAbility;
@@ -67,6 +68,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.CardType;
@@ -76,8 +78,10 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -117,6 +121,7 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.GameLog;
+import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
 import mage.watchers.common.BlockedAttackerWatcher;
@@ -133,7 +138,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
 
-    private static final transient Logger logger = Logger.getLogger(GameImpl.class);
+    private static final Logger logger = Logger.getLogger(GameImpl.class);
 
     private static final FilterPermanent filterAura = new FilterPermanent();
     private static final FilterPermanent filterEquipment = new FilterPermanent();
@@ -171,6 +176,9 @@ public abstract class GameImpl implements Game, Serializable {
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
     protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
 
+    // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
+    protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
+
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
@@ -207,6 +215,9 @@ public abstract class GameImpl implements Game, Serializable {
     private final int startLife;
     protected PlayerList playerList;
 
+    // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
+    protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
+
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
         this.id = UUID.randomUUID();
         this.range = range;
@@ -236,6 +247,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.lki.putAll(game.lki);
         this.lkiExtended.putAll(game.lkiExtended);
         this.shortLivingLKI.putAll(game.shortLivingLKI);
+        this.permanentsEntering.putAll(game.permanentsEntering);
         if (logger.isDebugEnabled()) {
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
@@ -246,6 +258,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.priorityTime = game.priorityTime;
         this.saveGame = game.saveGame;
         this.startLife = game.startLife;
+        this.enterWithCounters.putAll(game.enterWithCounters);
     }
 
     @Override
@@ -340,12 +353,12 @@ public abstract class GameImpl implements Game, Serializable {
         MageObject object;
         if (state.getBattlefield().containsPermanent(objectId)) {
             object = state.getBattlefield().getPermanent(objectId);
-            state.setZone(objectId, Zone.BATTLEFIELD);
+            state.setZone(objectId, Zone.BATTLEFIELD); // why is this neccessary?
             return object;
         }
         for (StackObject item : state.getStack()) {
             if (item.getId().equals(objectId)) {
-                state.setZone(objectId, Zone.STACK);
+                state.setZone(objectId, Zone.STACK); // why is this neccessary?
                 return item;
             }
             if (item.getSourceId().equals(objectId) && item instanceof Spell) {
@@ -354,7 +367,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         for (CommandObject commandObject : state.getCommand()) {
-            if (commandObject instanceof Commander && commandObject.getId().equals(objectId)) {
+            if (commandObject.getId().equals(objectId)) {
                 return commandObject;
             }
         }
@@ -362,11 +375,11 @@ public abstract class GameImpl implements Game, Serializable {
         object = getCard(objectId);
 
         if (object == null) {
-            for (CommandObject commandObject : state.getCommand()) {
-                if (commandObject.getId().equals(objectId)) {
-                    return commandObject;
-                }
-            }
+//            for (CommandObject commandObject : state.getCommand()) {
+//                if (commandObject.getId().equals(objectId)) {
+//                    return commandObject;
+//                }
+//            }
             // can be an ability of a sacrificed Token trying to get it's source object
             object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
@@ -390,6 +403,11 @@ public abstract class GameImpl implements Game, Serializable {
             object = state.getBattlefield().getPermanent(objectId);
             return object;
         }
+        // can be an ability of a sacrificed Token trying to get it's source object
+        object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
+        if (object != null) {
+            return object;
+        }
         for (CommandObject commandObject : state.getCommand()) {
             if (commandObject instanceof Commander && commandObject.getId().equals(objectId)) {
                 return commandObject;
@@ -402,8 +420,6 @@ public abstract class GameImpl implements Game, Serializable {
                     return commandObject;
                 }
             }
-            // can be an ability of a sacrificed Token trying to get it's source object
-            object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
         return object;
     }
@@ -417,6 +433,29 @@ public abstract class GameImpl implements Game, Serializable {
             if (commandObject.getId().equals(objectId)) {
                 return commandObject;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public UUID getOwnerId(UUID objectId) {
+        return getOwnerId(getObject(objectId));
+    }
+
+    @Override
+    public UUID getOwnerId(MageObject object) {
+        if (object instanceof Card) {
+            return ((Card) object).getOwnerId();
+        }
+        if (object instanceof Spell) {
+            return ((Spell) object).getOwnerId();
+        }
+        if (object instanceof StackObject) {
+            // maybe this is not correct in all cases?
+            return ((StackObject) object).getControllerId();
+        }
+        if (object instanceof CommandObject) {
+            return ((CommandObject) object).getControllerId();
         }
         return null;
     }
@@ -464,6 +503,16 @@ public abstract class GameImpl implements Game, Serializable {
             permanent = (Permanent) this.getLastKnownInformation(permanentId, Zone.BATTLEFIELD);
         }
         return permanent;
+    }
+
+    @Override
+    public Permanent getPermanentEntering(UUID permanentId) {
+        return permanentsEntering.get(permanentId);
+    }
+
+    @Override
+    public Map<UUID, Permanent> getPermanentsEntering() {
+        return permanentsEntering;
     }
 
     @Override
@@ -622,7 +671,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void removeBookmark(int bookmark) {
+    public void removeBookmark(int bookmark
+    ) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {
@@ -675,7 +725,7 @@ public abstract class GameImpl implements Game, Serializable {
         boolean wasPaused = state.isPaused();
         state.resume();
         if (!gameOver(null)) {
-            fireInformEvent(new StringBuilder("Turn ").append(state.getTurnNum()).toString());
+            fireInformEvent("Turn " + state.getTurnNum());
             if (checkStopOnTurnOption()) {
                 return;
             }
@@ -841,37 +891,63 @@ public abstract class GameImpl implements Game, Serializable {
         Player choosingPlayer = null;
         if (choosingPlayerId != null) {
             choosingPlayer = this.getPlayer(choosingPlayerId);
+            if (choosingPlayer != null && !choosingPlayer.isInGame()) {
+                choosingPlayer = null;
+            }
         }
         if (choosingPlayer == null) {
             choosingPlayerId = pickChoosingPlayer();
+            if (choosingPlayerId == null) {
+                return;
+            }
             choosingPlayer = getPlayer(choosingPlayerId);
         }
-        getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
-        if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
-            startingPlayerId = targetPlayer.getTargets().get(0);
-            Player startingPlayer = state.getPlayer(startingPlayerId);
-            StringBuilder message = new StringBuilder(choosingPlayer.getLogName()).append(" chooses that ");
-            if (choosingPlayer.getId().equals(startingPlayerId)) {
-                message.append("he or she");
-            } else {
-                message.append(startingPlayer.getLogName());
-            }
-            message.append(" takes the first turn");
-
-            this.informPlayers(message.toString());
-        } else {
-            // not possible to choose starting player, stop here
+        if (choosingPlayer == null) {
             return;
         }
+        getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
+        if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
+            startingPlayerId = targetPlayer.getTargets().get(0);
+        } else if (getState().getPlayers().size() < 3) {
+            // not possible to choose starting player, choosing player has probably conceded, so stop here
+            return;
+        }
+        if (startingPlayerId == null) {
+            // choose any available player as starting player
+            for (Player player : state.getPlayers().values()) {
+                if (player.isInGame()) {
+                    startingPlayerId = player.getId();
+                    break;
+                }
+            }
+            if (startingPlayerId == null) {
+                return;
+            }
+        }
+        Player startingPlayer = state.getPlayer(startingPlayerId);
+        if (startingPlayer == null) {
+            logger.debug("Starting player not found. playerId:" + startingPlayerId);
+            return;
+        }
+        StringBuilder message = new StringBuilder(choosingPlayer.getLogName()).append(" chooses that ");
+        if (choosingPlayer.getId().equals(startingPlayerId)) {
+            message.append("he or she");
+        } else {
+            message.append(startingPlayer.getLogName());
+        }
+        message.append(" takes the first turn");
+
+        this.informPlayers(message.toString());
 
         //20091005 - 103.3
+        int startingHandSize = 7;
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (!gameOptions.testMode || player.getLife() == 0) {
                 player.initLife(this.getLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(7, this);
+                player.drawCards(startingHandSize, this);
             }
         }
 
@@ -913,6 +989,15 @@ public abstract class GameImpl implements Game, Serializable {
             }
             saveState(false);
         } while (!mulliganPlayers.isEmpty());
+        // new scry rule
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            Player player = getPlayer(playerId);
+            if (player != null && player.getHand().size() < startingHandSize) {
+                if (player.chooseUse(Outcome.Benefit, new MessageToClient("Scry 1?", "Look at the top card of your library. You may put that card on the bottom of your library."), null, this)) {
+                    player.scry(1, null, this);
+                }
+            }
+        }
         getState().setChoosingPlayerId(null);
         Watchers watchers = state.getWatchers();
         // add default watchers
@@ -960,6 +1045,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
+
     }
 
     protected UUID findWinnersAndLosers() {
@@ -994,9 +1080,17 @@ public abstract class GameImpl implements Game, Serializable {
 
     protected UUID pickChoosingPlayer() {
         UUID[] players = getPlayers().keySet().toArray(new UUID[0]);
-        UUID playerId = players[rnd.nextInt(players.length)];
-        fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
-        return playerId;
+        UUID playerId;
+        while (!hasEnded()) {
+            playerId = players[rnd.nextInt(players.length)];
+            Player player = getPlayer(playerId);
+            if (player != null && player.isInGame()) {
+                fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
+                return player.getId();
+            }
+        }
+        logger.debug("Game was not possible to pick a choosing player.  GameId:" + getId());
+        return null;
     }
 
     @Override
@@ -1075,15 +1169,6 @@ public abstract class GameImpl implements Game, Serializable {
         player.drawCards(numCards - deduction, this);
     }
 
-//    @Override
-//    public void quit(UUID playerId) {
-//        if (state != null) {
-//            Player player = state.getPlayer(playerId);
-//            if (player != null && player.isInGame()) {
-//                player.quit(this);
-//            }
-//        }
-//    }
     @Override
     public synchronized void timerTimeout(UUID playerId) {
         Player player = state.getPlayer(playerId);
@@ -1108,7 +1193,7 @@ public abstract class GameImpl implements Game, Serializable {
     public synchronized void concede(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            logger.debug(new StringBuilder("Player ").append(player.getName()).append(" concedes game ").append(this.getId()));
+            logger.debug("Player " + player.getName() + " concedes game " + this.getId());
             fireInformEvent(player.getLogName() + " has conceded.");
             player.concede(this);
         }
@@ -1128,10 +1213,10 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void sendPlayerAction(PlayerAction playerAction, UUID playerId) {
+    public void sendPlayerAction(PlayerAction playerAction, UUID playerId, Object data) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            player.sendPlayerAction(playerAction, this);
+            player.sendPlayerAction(playerAction, this, data);
         }
     }
 
@@ -1334,12 +1419,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
-        return copyPermanent(Duration.Custom, copyFromPermanent, copyToPermanent, source, applier);
+    public Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier) {
+        return copyPermanent(Duration.Custom, copyFromPermanent, copyToPermanentId, source, applier);
     }
 
     @Override
-    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
+    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier) {
         Permanent newBluePrint = null;
         // handle copies of copies
         for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
@@ -1372,7 +1457,7 @@ public abstract class GameImpl implements Game, Serializable {
             applier.apply(this, newBluePrint);
         }
 
-        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanent.getId());
+        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
         newEffect.newId();
         newEffect.setApplier(applier);
         Ability newAbility = source.copy();
@@ -1397,11 +1482,20 @@ public abstract class GameImpl implements Game, Serializable {
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
+            // Too early, because no targets set yet !!!!!!!!!!!
             for (Effect effect : newAbility.getEffects()) {
                 effect.getTargetPointer().init(this, newAbility);
             }
             state.addTriggeredAbility(newAbility);
         }
+    }
+
+    @Override
+    public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source) {
+        delayedAbility.setSourceId(source.getSourceId());
+        delayedAbility.setControllerId(source.getControllerId());
+        delayedAbility.setSourceObject(source.getSourceObject(this), this);
+        return addDelayedTriggeredAbility(delayedAbility);
     }
 
     @Override
@@ -1453,6 +1547,7 @@ public abstract class GameImpl implements Game, Serializable {
      */
     public boolean checkTriggered() {
         boolean played = false;
+        state.getTriggers().checkStateTriggers(this);
         for (UUID playerId : state.getPlayerList(state.getActivePlayerId())) {
             Player player = getPlayer(playerId);
             while (player.isInGame()) { // player can die or win caused by triggered abilities or leave the game
@@ -1516,6 +1611,9 @@ public abstract class GameImpl implements Game, Serializable {
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
         while (copiedCards.hasNext()) {
             Card card = copiedCards.next();
+            if (card instanceof SplitCardHalf) {
+                continue; // only the main card is moves, not the halves
+            }
             Zone zone = state.getZone(card.getId());
             if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
                 switch (zone) {
@@ -1613,11 +1711,22 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                 } else {
+                    SpellAbility spellAbility = perm.getSpellAbility();
                     if (perm.getSpellAbility().getTargets().isEmpty()) {
+                        for (Ability ability : perm.getAbilities(this)) {
+                            if ((ability instanceof SpellAbility)
+                                    && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
+                                    && !ability.getTargets().isEmpty()) {
+                                spellAbility = (SpellAbility) ability;
+                                break;
+                            }
+                        }
+                    }
+                    if (spellAbility.getTargets().isEmpty()) {
                         Permanent enchanted = this.getPermanent(perm.getAttachedTo());
                         logger.error("Aura without target: " + perm.getName() + " attached to " + (enchanted == null ? " null" : enchanted.getName()));
                     } else {
-                        Target target = perm.getSpellAbility().getTargets().get(0);
+                        Target target = spellAbility.getTargets().get(0);
                         if (target instanceof TargetPermanent) {
                             Permanent attachedTo = getPermanent(perm.getAttachedTo());
                             if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
@@ -1633,7 +1742,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     }
                                 }
                             } else {
-                                Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                                Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (auraFilter instanceof FilterControlledCreaturePermanent) {
                                     if (!((FilterControlledCreaturePermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
                                             || attachedTo.cantBeEnchantedBy(perm, this)) {
@@ -1664,7 +1773,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     somethingHappened = true;
                                 }
                             } else {
-                                Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                                Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
                                     if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;
@@ -1776,7 +1885,7 @@ public abstract class GameImpl implements Game, Serializable {
                     Player controller = this.getPlayer(legend.getControllerId());
                     if (controller != null) {
                         Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                        targetLegendaryToKeep.setTargetName(new StringBuilder(legend.getName()).append(" to keep (Legendary Rule)?").toString());
+                        targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
                         controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
                         for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                             if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
@@ -1878,11 +1987,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireAskPlayerEvent(UUID playerId, String message) {
+    public void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.ask(playerId, message);
+        playerQueryEventSource.ask(playerId, message.getMessage(), source, addMessageToOptions(message, null));
     }
 
     @Override
@@ -1906,26 +2015,31 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+    public void fireSelectTargetEvent(UUID playerId, MessageToClient message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, targets, required, options);
+        playerQueryEventSource.target(playerId, message.getMessage(), targets, required, addMessageToOptions(message, options));
     }
 
     @Override
-    public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
+    public void fireSelectTargetEvent(UUID playerId, MessageToClient message, Cards cards, boolean required, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, cards, required, options);
+        playerQueryEventSource.target(playerId, message.getMessage(), cards, required, addMessageToOptions(message, options));
     }
 
+    /**
+     * Only used from human players to select order triggered abilities go to
+     * the stack.
+     *
+     * @param playerId
+     * @param message
+     * @param abilities
+     */
     @Override
-    public void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
-        if (simulation) {
-            return;
-        }
+    public void fireSelectTargetTriggeredAbilityEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
         playerQueryEventSource.target(playerId, message, abilities);
     }
 
@@ -2183,6 +2297,11 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public boolean replaceEvent(GameEvent event) {
         return state.replaceEvent(event, this);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability targetAbility) {
+        return state.replaceEvent(event, targetAbility, this);
     }
 
     @Override
@@ -2448,8 +2567,10 @@ public abstract class GameImpl implements Game, Serializable {
                 card.setZone(Zone.BATTLEFIELD, this);
                 card.setOwnerId(ownerId);
                 PermanentCard permanent = new PermanentCard(card.getCard(), ownerId, this);
-                getBattlefield().addPermanent(permanent);
+                getPermanentsEntering().put(permanent.getId(), permanent);
                 permanent.entersBattlefield(permanent.getId(), this, Zone.OUTSIDE, false);
+                getBattlefield().addPermanent(permanent);
+                getPermanentsEntering().remove(permanent.getId());
                 ((PermanentImpl) permanent).removeSummoningSickness();
                 if (card.isTapped()) {
                     permanent.setTapped(true);
@@ -2649,6 +2770,7 @@ public abstract class GameImpl implements Game, Serializable {
                     for (Player playerObject : getPlayers().values()) {
                         if (playerObject.isHuman() && playerObject.isInGame()) {
                             playerObject.abort();
+                            playerObject.resetPlayerPassedActions();
                         }
                     }
                     fireUpdatePlayersEvent();
@@ -2662,4 +2784,35 @@ public abstract class GameImpl implements Game, Serializable {
         return executingRollback;
     }
 
+    @Override
+    public void setEnterWithCounters(UUID sourceId, Counters counters) {
+        if (counters == null) {
+            if (enterWithCounters.containsKey(sourceId)) {
+                enterWithCounters.remove(sourceId);
+            }
+            return;
+        }
+        enterWithCounters.put(sourceId, counters);
+    }
+
+    @Override
+    public Counters getEnterWithCounters(UUID sourceId) {
+        return enterWithCounters.get(sourceId);
+    }
+
+    private Map<String, Serializable> addMessageToOptions(MessageToClient message, Map<String, Serializable> options) {
+        if (message.getSecondMessage() != null) {
+            if (options == null) {
+                options = new HashMap<>();
+            }
+            options.put("secondMessage", message.getSecondMessage());
+        }
+        if (message.getHintText() != null) {
+            if (options == null) {
+                options = new HashMap<>();
+            }
+            options.put("hintText", message.getHintText());
+        }
+        return options;
+    }
 }

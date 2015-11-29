@@ -34,12 +34,15 @@ import mage.MageObject;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class SpellStack extends ArrayDeque<StackObject> {
+
+    private static final Logger logger = Logger.getLogger(SpellStack.class);
 
     protected Date dateLastAdded;
 
@@ -61,21 +64,28 @@ public class SpellStack extends ArrayDeque<StackObject> {
             top.resolve(game);
         } finally {
             if (top != null) {
-                this.remove(top);
+                if (contains(top)) {
+                    logger.warn("StackObject was still on the stack after resoving" + top.getName());
+                    this.remove(top);
+                }
             }
         }
     }
 
-    public void remove(StackObject object) {
+    public boolean remove(StackObject object) {
         for (StackObject spell : this) {
             if (spell.getId().equals(object.getId())) {
-                super.remove(spell);
-                return;
+                return super.remove(spell);
             }
         }
+        return false;
     }
 
     public boolean counter(UUID objectId, UUID sourceId, Game game) {
+        return counter(objectId, sourceId, game, Zone.GRAVEYARD, false, true);
+    }
+
+    public boolean counter(UUID objectId, UUID sourceId, Game game, Zone zone, boolean owner, boolean onTop) {
         // the counter logic is copied by some spells to handle replacement effects of the countered spell
         // so if logic is changed here check those spells for needed changes too
         // Concerned cards to check: Hinder, Spell Crumple
@@ -95,12 +105,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 counteredObjectName = "Ability (" + stackObject.getStackAbility().getRule(targetSourceName) + ") of " + targetSourceName;
             }
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-                if (stackObject instanceof Spell) {
-                    game.rememberLKI(objectId, Zone.STACK, (Spell) stackObject);
-                } else {
+                if (!(stackObject instanceof Spell)) { // spells are removed from stack by the card movement
                     this.remove(stackObject);
                 }
-                stackObject.counter(sourceId, game);
+                stackObject.counter(sourceId, game, zone, owner, onTop);
                 if (!game.isSimulation()) {
                     game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 }

@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,7 +20,7 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
@@ -28,6 +28,7 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,10 +44,12 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -57,8 +60,10 @@ public class KnowledgePool extends CardImpl {
     public KnowledgePool(UUID ownerId) {
         super(ownerId, 111, "Knowledge Pool", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "MBS";
+
         // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of his or her library
         this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false));
+
         // Whenever a player casts a spell from his or her hand, that player exiles it. If the player does, he or she may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
         this.addAbility(new KnowledgePoolAbility());
     }
@@ -87,14 +92,17 @@ class KnowledgePoolEffect1 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId: sourcePlayer.getInRange()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
+        for (UUID playerId : controller.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                int amount = Math.min(3, player.getLibrary().size());
-                for (int i = 0; i < amount; i++) {
-                    player.getLibrary().removeFromTop(game).moveToExile(source.getSourceId(), "Knowledge Pool Exile", source.getSourceId(), game);
-                }
+                player.moveCardsToExile(player.getLibrary().getTopCards(game, 3), source, game, true,
+                        CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()),
+                        sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ")");
             }
         }
         return true;
@@ -129,7 +137,7 @@ class KnowledgePoolAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getZone() == Zone.HAND) {            
+        if (event.getZone() == Zone.HAND) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null) {
                 for (Effect effect : this.getEffects()) {
@@ -159,12 +167,16 @@ class KnowledgePoolEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            if (spell.moveToExile(source.getSourceId(), "Knowledge Pool Exile", source.getSourceId(), game)) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && spell != null && sourceObject != null) {
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
+            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
+            if (controller.moveCardsToExile(spell, source, game, true, exileZoneId, sourceObject.getIdName())) {
                 Player player = game.getPlayer(spell.getControllerId());
-                if (player != null && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with Knowledge Pool without paying that card's mana cost?", source, game)) {
+                if (player != null && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with " + sourceObject.getLogName() + " without paying that card's mana cost?", source, game)) {
                     TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-                    while (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(source.getSourceId()), target, game)) {
+                    while (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null && !card.getId().equals(spell.getSourceId())) {
                             game.getExile().removeCard(card, game);

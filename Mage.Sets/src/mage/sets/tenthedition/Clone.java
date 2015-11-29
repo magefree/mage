@@ -25,19 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -54,11 +50,7 @@ public class Clone extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new CopyPermanentEffect(),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield",
-                true));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(), true));
     }
 
     public Clone(final Clone card) {

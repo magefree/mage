@@ -97,8 +97,8 @@ class BoonweaverGiantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
@@ -108,18 +108,18 @@ class BoonweaverGiantEffect extends OneShotEffect {
 
         Card card = null;
         Zone zone = null;
-        if (player.chooseUse(Outcome.Neutral, "Search your graveyard for an Aura card?", source, game)) {
+        if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for an Aura card?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-            if (player.choose(Outcome.PutCardInPlay, player.getGraveyard(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     zone = Zone.GRAVEYARD;
                 }
             }
         }
-        if (card == null && player.chooseUse(Outcome.Neutral, "Search your Hand for an Aura card?", source, game)) {
+        if (card == null && controller.chooseUse(Outcome.Neutral, "Search your Hand for an Aura card?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (player.choose(Outcome.PutCardInPlay, player.getHand(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     zone = Zone.HAND;
@@ -128,13 +128,13 @@ class BoonweaverGiantEffect extends OneShotEffect {
         }
         if (card == null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (player.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     zone = Zone.LIBRARY;
                 }
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
         }
         // aura card found - attach it
         if (card != null) {
@@ -142,7 +142,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
             if (permanent != null) {
                 game.getState().setValue("attachTo:" + card.getId(), permanent);
             }
-            player.putOntoBattlefieldWithInfo(card, game, zone, source.getSourceId());
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             if (permanent != null) {
                 return permanent.addAttachment(card.getId(), game);
             }

@@ -28,19 +28,16 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -49,7 +46,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  * @author Loki
  */
 public class SoulsurgeElemental extends CardImpl {
-
 
     public SoulsurgeElemental(UUID ownerId) {
         super(ownerId, 163, "Soulsurge Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");

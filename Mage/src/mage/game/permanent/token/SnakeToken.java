@@ -28,6 +28,10 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.MageInt;
 import mage.constants.CardType;
 
@@ -37,18 +41,26 @@ import mage.constants.CardType;
  */
 public class SnakeToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("ZEN", "KTK", "MM2"));
+    }
+
     public SnakeToken() {
-        this("ZEN");
+        this(null);
     }
     
     public SnakeToken(String setCode) {
         super("Snake", "1/1 green Snake creature token");
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Snake");
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
     }
 
 }

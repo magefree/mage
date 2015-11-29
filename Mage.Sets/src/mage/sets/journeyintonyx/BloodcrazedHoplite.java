@@ -72,7 +72,7 @@ public class BloodcrazedHoplite extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)));
         // Whenever a +1/+1 counter is placed on Bloodcrazed Hoplite, remove a +1/+1 counter from target creature an opponent controls.
         Ability ability = new BloodcrazedHopliteTriggeredAbility();
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
@@ -89,7 +89,7 @@ public class BloodcrazedHoplite extends CardImpl {
 class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
 
     public BloodcrazedHopliteTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), true);
+        super(Zone.ALL, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), true);
     }
 
     public BloodcrazedHopliteTriggeredAbility(BloodcrazedHopliteTriggeredAbility ability) {

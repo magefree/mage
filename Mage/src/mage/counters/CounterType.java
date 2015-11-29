@@ -39,8 +39,12 @@ public enum CounterType {
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),
+    BOUNTY("bounty"),
     BRIBERY("bribery"),
+    CARRION("carrion"),
     CHARGE("charge"),
+    CORPSE("corpse"),
+    CRYSTAL("crystal"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESPAIR("despair"),
@@ -49,13 +53,16 @@ public enum CounterType {
     DOOM("doom"),
     ELIXIR("elixir"),
     EON("eon"),
+    EXPERIENCE("experience"),
     EYEBALL("eyeball"),
     FADE("fade"),
     FATE("fate"),
     FEATHER("feather"),
     FLOOD("flood"),
     FUSE("fuse"),
+    GOLD("gold"),
     HATCHLING("hatchling"),
+    HEALING("healing"),
     HOOFPRINT("hoofprint"),
     ICE("ice"),
     JAVELIN("javelin"),
@@ -66,8 +73,13 @@ public enum CounterType {
     LOYALTY("loyalty"),
     MANNEQUIN("mannequin"),
     M1M1(new BoostCounter(-1, -1).name),
+    M2M2(new BoostCounter(-2, -2).name),
     MINING("mining"),
+    MUSTER("muster"),
+    P0P1(new BoostCounter(0, 1).name),
+    P1P0(new BoostCounter(1, 0).name),
     P1P1(new BoostCounter(1, 1).name),
+    P1P2(new BoostCounter(1, 2).name),
     P2P2(new BoostCounter(2, 2).name),
     PAGE("page"),
     PAIN("pain"),
@@ -76,17 +88,22 @@ public enum CounterType {
     POISON("poison"),
     PRESSURE("pressure"),
     QUEST("quest"),
+    SCREAM("scream"),
+    SHELL("shell"),
     SHIELD("shield"),
+    SHRED("shred"),
     SLIME("slime"),
     SPORE("spore"),
     STORAGE("storage"),
+    STRIFE("strife"),
     STUDY("study"),
     THEFT("theft"),
+    TIDE("tide"),
     TIME("time"),
     TOWER("tower"),
     VELOCITY("velocity"),
-    VILE("vile"),
     VERSE("verse"),
+    VITALITY("vitality"),
     WISH("wish");
 
     private final String name;
@@ -122,12 +139,20 @@ public enum CounterType {
      */
     public Counter createInstance(int amount) {
         switch (this) {
+            case P0P1:
+                return new BoostCounter(0, 1, amount);
+            case P1P0:
+                return new BoostCounter(1, 0, amount);
             case P1P1:
                 return new BoostCounter(1, 1, amount);
+            case P1P2:
+                return new BoostCounter(1, 2, amount);
             case P2P2:
                 return new BoostCounter(2, 2, amount);
             case M1M1:
                 return new BoostCounter(-1, -1, amount);
+            case M2M2:
+                return new BoostCounter(-2, -2, amount);
             default:
                 return new Counter(name, amount);
         }

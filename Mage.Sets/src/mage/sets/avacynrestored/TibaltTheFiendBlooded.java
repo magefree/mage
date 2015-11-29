@@ -29,29 +29,27 @@ package mage.sets.avacynrestored;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -70,8 +68,7 @@ public class TibaltTheFiendBlooded extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Tibalt");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
 
         // +1: Draw a card, then discard a card at random.
         LoyaltyAbility ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);

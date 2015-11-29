@@ -65,10 +65,10 @@ public class WorldheartPhoenix extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. 
+        // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
         // If you do, it enters the battlefield with two +1/+1 counters on it.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new WorldheartPhoenixPlayEffect());
-        ability.addEffect(new EntersBattlefieldEffect(new WorldheartPhoenixEntersBattlefieldEffect(), 
+        ability.addEffect(new EntersBattlefieldEffect(new WorldheartPhoenixEntersBattlefieldEffect(),
                 "If you do, it enters the battlefield with two +1/+1 counters on it"));
         this.addAbility(ability);
 
@@ -111,7 +111,7 @@ public class WorldheartPhoenix extends CardImpl {
                     Player player = game.getPlayer(affectedControllerId);
                     if (player != null) {
                         // can sometimes be cast with base mana cost from grave????
-                        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
+                        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), null);
                         return true;
                     }
                 }
@@ -136,10 +136,12 @@ public class WorldheartPhoenix extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-                if (obj != null && obj instanceof SpellAbility) {
+                SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+                if (spellAbility != null
+                        && spellAbility.getSourceId().equals(source.getSourceId())
+                        && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                     // TODO: No perfect solution because there could be other effects that allow to cast the card for this mana cost
-                    if (((SpellAbility) obj).getManaCosts().getText().equals("{W}{U}{B}{R}{G}")) {
+                    if (spellAbility.getManaCosts().getText().equals("{W}{U}{B}{R}{G}")) {
                         permanent.addCounters(CounterType.P1P1.createInstance(2), game);
                     }
                 }

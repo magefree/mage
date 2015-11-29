@@ -41,16 +41,20 @@ import mage.game.permanent.Permanent;
  */
 public class BecomesTappedAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BecomesTappedAttachedTriggeredAbility(Effect effect, boolean isOptional) {
-        super(Zone.BATTLEFIELD, effect, isOptional);
+    private final String description;
+
+    public BecomesTappedAttachedTriggeredAbility(Effect effect, String description) {
+        this(effect, description, false);
     }
 
-    public BecomesTappedAttachedTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
+    public BecomesTappedAttachedTriggeredAbility(Effect effect, String description, boolean isOptional) {
+        super(Zone.BATTLEFIELD, effect, isOptional);
+        this.description = description;
     }
 
     public BecomesTappedAttachedTriggeredAbility(final BecomesTappedAttachedTriggeredAbility ability) {
         super(ability);
+        this.description = ability.description;
     }
 
     @Override
@@ -75,6 +79,6 @@ public class BecomesTappedAttachedTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public String getRule() {
-        return "Whenever enchanted creature becomes tapped, " + super.getRule();
+        return "Whenever " + description + " becomes tapped, " + super.getRule();
     }
 }

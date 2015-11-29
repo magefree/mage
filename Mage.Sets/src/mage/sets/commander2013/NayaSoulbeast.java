@@ -66,8 +66,9 @@ public class NayaSoulbeast extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // When you cast Naya Soulbeast, each player reveals the top card of his or her library. Naya Soulbeast enters the battlefield with X +1/+1 counters on it, where X is the total converted mana cost of all cards revealed this way.
+        // When you cast Naya Soulbeast, each player reveals the top card of his or her library.
         Ability ability = new CastSourceTriggeredAbility(new NayaSoulbeastCastEffect(), false);
+        // Naya Soulbeast enters the battlefield with X +1/+1 counters on it, where X is the total converted mana cost of all cards revealed this way.
         ability.addEffect(new NayaSoulbeastReplacementEffect());
         this.addAbility(ability);
     }
@@ -104,7 +105,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             int cmc = 0;
-            for (UUID playerId :controller.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     if (player.getLibrary().size() > 0) {
@@ -130,19 +131,19 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
     public NayaSoulbeastReplacementEffect() {
-        super(Duration.OneUse, Outcome.BoostCreature, true);
+        super(Duration.OneUse, Outcome.BoostCreature);
         staticText = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total converted mana cost of all cards revealed this way";
     }
 
     public NayaSoulbeastReplacementEffect(final NayaSoulbeastReplacementEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());
@@ -152,7 +153,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Object object = this.getValue("NayaSoulbeastCounters");
         if (object instanceof Integer) {
-            int amount = ((Integer)object);
+            int amount = ((Integer) object);
             new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)).apply(game, source);
         }
         return false;

@@ -106,6 +106,6 @@ class TerraRavagerLandCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "land defending player controls";
+        return "the number of lands defending player controls";
     }
 }

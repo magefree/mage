@@ -61,7 +61,6 @@ public class RuneTailKitsuneAscendant extends CardImpl {
         this.toughness = new MageInt(2);
         this.flipCard = true;
         this.flipCardName = "Rune-Tail's Essence";
-        
 
         // When you have 30 or more life, flip Rune-Tail, Kitsune Ascendant.
         this.addAbility(new RuneTailKitsuneAscendantFlipAbility());
@@ -103,22 +102,22 @@ class RuneTailKitsuneAscendantFlipAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you have 30 or more life, flip {this}";
+        return "When you have 30 or more life, flip {this}.";
     }
 
 }
 
 class RuneTailEssence extends Token {
 
-
     RuneTailEssence() {
         super("Rune-Tail's Essence", "");
         supertype.add("Legendary");
         cardType.add(CardType.ENCHANTMENT);
-        
+
         color.setWhite(true);
 
         // Prevent all damage that would be dealt to creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, new FilterControlledCreatureInPlay())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, new FilterControlledCreatureInPlay("creatures you control"))));
     }
 }

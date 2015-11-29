@@ -41,7 +41,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.Targets;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -56,7 +55,6 @@ public class SacredRites extends CardImpl {
 
 
         // Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.
-        this.getSpellAbility().addTarget(new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard()));
         this.getSpellAbility().addEffect(new SacredRitesEffect());
     }
 
@@ -72,12 +70,12 @@ public class SacredRites extends CardImpl {
 
 class SacredRitesEffect extends OneShotEffect {
     
-    public SacredRitesEffect() {
+    SacredRitesEffect() {
         super(Outcome.Benefit);
         this.staticText = "Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.";
     }
     
-    public SacredRitesEffect(final SacredRitesEffect effect) {
+    SacredRitesEffect(final SacredRitesEffect effect) {
         super(effect);
     }
     
@@ -90,14 +88,18 @@ class SacredRitesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Targets targets = source.getTargets();
-            int i = 0;
-                for (Target target: targets) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    player.discard(card, source, game);
-                    i++;
+            Target target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard("cards to discard"));
+            while (player.canRespond() && !target.isChosen()) {
+                target.choose(Outcome.BoostCreature, player.getId(), source.getSourceId(), game);
+            }
+            int numDiscarded = 0;
+                for (UUID targetId : target.getTargets()) {
+                    Card card = player.getHand().get(targetId, game);
+                    if (player.discard(card, source, game)) {
+                        numDiscarded++;
+                    }
                 }
-            game.addEffect(new BoostControlledEffect(0, i, Duration.EndOfTurn), source);
+            game.addEffect(new BoostControlledEffect(0, numDiscarded, Duration.EndOfTurn), source);
             return true;
         }
         return false;

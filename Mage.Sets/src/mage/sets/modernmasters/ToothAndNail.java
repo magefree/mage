@@ -33,8 +33,8 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.EntwineAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -55,7 +55,7 @@ public class ToothAndNail extends CardImpl {
         super(ownerId, 170, "Tooth and Nail", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
         this.expansionSetCode = "MMA";
 
-        // Choose one - 
+        // Choose one -
         // Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle your library;
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, new FilterCreatureCard()), true));
         // or put up to two creature cards from your hand onto the battlefield.
@@ -95,20 +95,15 @@ class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
         TargetCardInHand target = new TargetCardInHand(0, 2, new FilterCreatureCard("creature cards"));
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-            for (UUID targetId: target.getTargets()) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                }
-            }
-            return true;
+        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+            return controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
+                    Zone.BATTLEFIELD, source, game, false, false, false, null);
         }
         return false;
     }

@@ -38,7 +38,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.CatToken;
 
 /**
  *
@@ -67,18 +67,5 @@ public class KembaKhaRegent extends CardImpl {
     @Override
     public KembaKhaRegent copy() {
         return new KembaKhaRegent(this);
-    }
-}
-
-class CatToken extends Token {
-
-    public CatToken() {
-        super("Cat", "a 2/2 white Cat creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Cat");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
     }
 }

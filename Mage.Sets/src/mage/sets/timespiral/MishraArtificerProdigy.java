@@ -142,15 +142,12 @@ class MishraArtificerProdigyEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("card named " + this.cardName);
             filter.add(new NamePredicate(cardName));
             Card card = null;
-            Zone zone = null;
             // Graveyard
             if (controller.chooseUse(Outcome.Neutral, "Search your graveyard?", source, game)) {
-                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, 1, filter);
+                // You can't fail to find the card in your graveyard because it's not hidden
+                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter);
                 if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
                     card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        zone = Zone.GRAVEYARD;
-                    }
                 }
             }
             // Hand
@@ -158,9 +155,6 @@ class MishraArtificerProdigyEffect extends OneShotEffect {
                 TargetCardInHand target = new TargetCardInHand(0, 1, filter);
                 if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
                     card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        zone = Zone.HAND;
-                    }
                 }
             }
             // Library
@@ -168,15 +162,12 @@ class MishraArtificerProdigyEffect extends OneShotEffect {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 if (controller.searchLibrary(target, game)) {
                     card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        zone = Zone.LIBRARY;
-                    }
                 }
                 controller.shuffleLibrary(game);
             }
             // Put on battlefield
             if (card != null) {
-                controller.moveCards(card, zone, Zone.BATTLEFIELD, source, game);
+                controller.moveCards(card, null, Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

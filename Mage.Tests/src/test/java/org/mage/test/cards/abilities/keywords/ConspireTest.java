@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -40,38 +39,37 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ConspireTest extends CardTestPlayerBase {
 
     /**
-     * 702.77. Conspire
-     * 702.77a Conspire is a keyword that represents two abilities. The first is a static ability that functions
-     * while the spell with conspire is on the stack. The second is a triggered ability that functions
-     * while the spell with conspire is on the stack. “Conspire” means “As an additional cost to cast
-     * this spell, you may tap two untapped creatures you control that each share a color with it” and
-     * “When you cast this spell, if its conspire cost was paid, copy it. If the spell has any targets, you
-     * may choose new targets for the copy.” Paying a spell’s conspire cost follows the rules for
-     * paying additional costs in rules 601.2b and 601.2e–g.
-     * 
-     * 702.77b If a spell has multiple instances of conspire, each is paid separately and triggers based on
-     * its own payment, not any other instance of conspire
-     * 
-     */
-
-    /** 
-     * 	Burn Trail
-     * 	Sorcery, 3R (4)
-     * 	Burn Trail deals 3 damage to target creature or player.
-     * 	
-     * 	Conspire (As you cast this spell, you may tap two untapped creatures you 
-     *  control that share a color with it. When you do, copy it and you may 
-     *  choose a new target for the copy.)
+     * 702.77. Conspire 702.77a Conspire is a keyword that represents two
+     * abilities. The first is a static ability that functions while the spell
+     * with conspire is on the stack. The second is a triggered ability that
+     * functions while the spell with conspire is on the stack. “Conspire” means
+     * “As an additional cost to cast this spell, you may tap two untapped
+     * creatures you control that each share a color with it” and “When you cast
+     * this spell, if its conspire cost was paid, copy it. If the spell has any
+     * targets, you may choose new targets for the copy.” Paying a spell’s
+     * conspire cost follows the rules for paying additional costs in rules
+     * 601.2b and 601.2e–g.
+     *
+     * 702.77b If a spell has multiple instances of conspire, each is paid
+     * separately and triggers based on its own payment, not any other instance
+     * of conspire
      *
      */
-
+    /**
+     * Burn Trail Sorcery, 3R (4) Burn Trail deals 3 damage to target creature
+     * or player.
+     *
+     * Conspire (As you cast this spell, you may tap two untapped creatures you
+     * control that share a color with it. When you do, copy it and you may
+     * choose a new target for the copy.)
+     *
+     */
     @Test
     public void testConspire() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Roughrider");
         addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin");
         addCard(Zone.HAND, playerA, "Burn Trail");
-
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail", playerB);
         setChoice(playerA, "Yes");
@@ -93,7 +91,6 @@ public class ConspireTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin");
         addCard(Zone.HAND, playerA, "Burn Trail");
 
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail", playerB);
         setChoice(playerA, "No");
 
@@ -107,4 +104,50 @@ public class ConspireTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testWortTheRaidmother() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
+        // Each red or green instant or sorcery spell you cast has conspire.
+        // (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+        addCard(Zone.HAND, playerA, "Wort, the Raidmother");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother");// {4}{R/G}{R/G}
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Wort, the Raidmother", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertLife(playerB, 14);
+
+    }
+
+    @Test
+    public void testWortTheRaidmotherWithConspireSpell() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin", 2);
+        // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
+        // Each red or green instant or sorcery spell you cast has conspire.
+        // (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+        addCard(Zone.HAND, playerA, "Wort, the Raidmother");
+        addCard(Zone.HAND, playerA, "Burn Trail");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Burn Trail", playerB);
+        setChoice(playerA, "Yes"); // use Conspire from Burn Trail itself
+        setChoice(playerA, "Yes"); // use Conspire gained from Wort, the Raidmother
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Wort, the Raidmother", 1);
+        assertLife(playerB, 11);
+        assertLife(playerA, 20);
+        assertGraveyardCount(playerA, "Burn Trail", 1);
+
+    }
 }

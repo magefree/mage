@@ -61,12 +61,11 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null && sourceObject.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()) {
-            Card card = (Card) sourceObject;
-            if (controller.moveCards(card, Zone.BATTLEFIELD, Zone.EXILED, source, game)) {
-                Player owner = game.getPlayer(card.getOwnerId());
-                if (owner != null) {
-                    game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-                    owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+            if (controller.moveCards(sourceObject, Zone.EXILED, source, game)) {
+                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+                Card cardFromExile = game.getCard(source.getSourceId());
+                if (cardFromExile != null) {
+                    controller.moveCards(cardFromExile, Zone.BATTLEFIELD, source, game, false, false, true, null);
                     if (additionalEffect != null) {
                         if (additionalEffect instanceof ContinuousEffect) {
                             game.addEffect((ContinuousEffect) additionalEffect, source);

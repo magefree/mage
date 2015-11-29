@@ -28,6 +28,10 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.constants.CardType;
@@ -38,6 +42,12 @@ import mage.constants.CardType;
  */
 public class ElephantToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("C14", "CNS", "DDD", "MM2", "WWK"));
+    }
+
     public ElephantToken() {
         super("Elephant", "3/3 green Elephant creature token");
         cardType.add(CardType.CREATURE);
@@ -46,7 +56,7 @@ public class ElephantToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        this.setOriginalExpansionSetCode("DDD");
+        availableImageSetCodes = tokenImageSets;
     }
 
 }

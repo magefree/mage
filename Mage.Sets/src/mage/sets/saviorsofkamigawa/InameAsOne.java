@@ -35,21 +35,23 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -75,9 +77,9 @@ public class InameAsOne extends CardImpl {
         // When Iname as One enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter), false),
-                    new CastFromHandCondition()));
+                        new CastFromHandCondition()));
         this.addAbility(ability, new CastFromHandWatcher());
-        
+
         // When Iname as One dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
         ability = new DiesTriggeredAbility(new InameAsOneEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
@@ -114,15 +116,18 @@ class InameAsOneEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller != null && sourceObject != null && targetCard != null) {
             if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit card?", source, game)) {
                 // In a Commander game, you may send Iname to the Command Zone instead of exiling it during the resolution
-                // of its ability. If you do, its ability still works. Iname's ability only requires that you attempted to 
-                // exile it, not that it actually gets to the exile zone. This is similar to how destroying a creature 
+                // of its ability. If you do, its ability still works. Iname's ability only requires that you attempted to
+                // exile it, not that it actually gets to the exile zone. This is similar to how destroying a creature
                 // (with, for example, Rest in Peace) doesn't necessarily ensure that creature will end up in the graveyard;
                 // it just so happens that the action of exiling something and the exile zone both use the same word: "exile".
+                Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
+                effect.setTargetPointer(new FixedTarget(targetCard.getId(), targetCard.getZoneChangeCounter(game)));
                 new ExileSourceEffect().apply(game, source);
-                return new ReturnFromGraveyardToBattlefieldTargetEffect().apply(game, source);
+                return effect.apply(game, source);
             }
             return true;
         }

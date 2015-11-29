@@ -32,7 +32,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.GraftAbility;
@@ -69,7 +72,10 @@ public class SimicBasilisk extends CardImpl {
         this.addAbility(new GraftAbility(this, 3));
         
         // {1}{G}: Until end of turn, target creature with a +1/+1 counter on it gains "Whenever this creature deals combat damage to a creature, destroy that creature at end of combat."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(), true, false, true), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        effect.setText("destroy that creature at end of combat");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new DealsDamageToACreatureTriggeredAbility(effect, true, false, true), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

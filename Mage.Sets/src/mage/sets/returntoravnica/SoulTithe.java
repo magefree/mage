@@ -30,13 +30,6 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.MageObject;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,6 +40,13 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,9 +76,7 @@ public class SoulTithe extends CardImpl {
         // At the beginning of the upkeep of enchanted permanent's controller,
         // that player sacrifices it unless he or she pays {X},
         // where X is its converted mana cost.
-        Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SoulTitheSacrificeSourceUnlessPaysEffect(), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
-
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SoulTitheEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
     public SoulTithe (final SoulTithe card) {
@@ -91,38 +89,42 @@ public class SoulTithe extends CardImpl {
     }
 }
 
-class SoulTitheSacrificeSourceUnlessPaysEffect extends OneShotEffect {
+class SoulTitheEffect extends OneShotEffect {
 
-    public SoulTitheSacrificeSourceUnlessPaysEffect() {
+    public SoulTitheEffect() {
         super(Outcome.Sacrifice);
         staticText = "that player sacrifices it unless he or she pays {X}, where X is its converted mana cost";
      }
 
-    public SoulTitheSacrificeSourceUnlessPaysEffect(final SoulTitheSacrificeSourceUnlessPaysEffect effect) {
+    public SoulTitheEffect(final SoulTitheEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player != null && permanent != null && sourceObject != null) {
-            int cmc = permanent.getManaCost().convertedManaCost();
-            if (player.chooseUse(Outcome.Benefit, "Pay {" + cmc + "} for " + permanent.getName() + "? (otherwise you sacrifice it)", source, game)) {
-                Cost cost = new GenericManaCost(cmc);
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+        Permanent aura = game.getPermanent(source.getSourceId());
+        if(aura != null) {
+            Permanent permanent = game.getPermanent(aura.getAttachedTo());
+            if(permanent != null) {
+                Player player = game.getPlayer(permanent.getControllerId());
+                if(player != null) {
+                    int cmc = permanent.getManaCost().convertedManaCost();
+                    if (player.chooseUse(Outcome.Benefit, "Pay {" + cmc + "} for " + permanent.getName() + "? (otherwise you sacrifice it)", source, game)) {
+                        Cost cost = new GenericManaCost(cmc);
+                        if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                            return true;
+                        }
+                    }
+                    permanent.sacrifice(source.getSourceId(), game);
                     return true;
                 }
             }
-            permanent.sacrifice(source.getSourceId(), game);
-            return true;
         }
         return false;
     }
 
     @Override
-    public SoulTitheSacrificeSourceUnlessPaysEffect copy() {
-        return new SoulTitheSacrificeSourceUnlessPaysEffect(this);
+    public SoulTitheEffect copy() {
+        return new SoulTitheEffect(this);
     }
  }

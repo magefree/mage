@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class MCTSPlayer extends ComputerPlayer {
 
-     private static final transient Logger logger = Logger.getLogger(MCTSPlayer.class);
+     private static final Logger logger = Logger.getLogger(MCTSPlayer.class);
 
     protected PassAbility pass = new PassAbility();
 

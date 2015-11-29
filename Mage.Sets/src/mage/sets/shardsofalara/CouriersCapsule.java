@@ -29,6 +29,8 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
+
+import mage.abilities.costs.common.TapSourceCost;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -51,6 +53,7 @@ public class CouriersCapsule extends CardImpl {
 
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl("{1}{U}"));
+        ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

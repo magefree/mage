@@ -88,8 +88,7 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
                 card = game.getCard(getTargetPointer().getFirst(game, source));
             }
             if (card != null) {
-                Zone currentZone = game.getState().getZone(card.getId());
-                controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

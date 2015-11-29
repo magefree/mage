@@ -18,16 +18,22 @@ public class DoIfCostPaid extends OneShotEffect {
     protected Effects executingEffects = new Effects();
     private final Cost cost;
     private String chooseUseText;
+    private boolean optional;
 
     public DoIfCostPaid(Effect effect, Cost cost) {
         this(effect, cost, null);
     }
 
     public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText) {
+        this(effect, cost, chooseUseText, true);
+    }
+
+    public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText, boolean optional) {
         super(Outcome.Benefit);
         this.executingEffects.add(effect);
         this.cost = cost;
         this.chooseUseText = chooseUseText;
+        this.optional = optional;
     }
 
     public DoIfCostPaid(final DoIfCostPaid effect) {
@@ -35,6 +41,7 @@ public class DoIfCostPaid extends OneShotEffect {
         this.executingEffects = effect.executingEffects.copy();
         this.cost = effect.cost.copy();
         this.chooseUseText = effect.chooseUseText;
+        this.optional = effect.optional;
     }
 
     public void addEffect(Effect effect) {
@@ -53,12 +60,14 @@ public class DoIfCostPaid extends OneShotEffect {
                     effectText = effectText.substring(0, effectText.length() - 1);
                 }
                 message = getCostText() + " and " + effectText + "?";
+                message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
             } else {
                 message = chooseUseText;
             }
             message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             boolean result = true;
-            if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffects.get(0).getOutcome(), message, source, game)) {
+            if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+                    && (optional && player.chooseUse(executingEffects.get(0).getOutcome(), message, source, game))) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     for (Effect effect : executingEffects) {
@@ -69,7 +78,7 @@ public class DoIfCostPaid extends OneShotEffect {
                             game.addEffect((ContinuousEffect) effect, source);
                         }
                     }
-                    player.resetStoredBookmark(game); // otherwise you can undo card drawn with Mentor of the Meek
+                    player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
                 }
             }
             return result;
@@ -86,13 +95,14 @@ public class DoIfCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return "you may " + getCostText() + ". If you do, " + executingEffects.getText(mode);
+        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode);
     }
 
     protected String getCostText() {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
         if (costText != null
+                && !costText.toLowerCase().startsWith("put")
                 && !costText.toLowerCase().startsWith("exile")
                 && !costText.toLowerCase().startsWith("discard")
                 && !costText.toLowerCase().startsWith("sacrifice")

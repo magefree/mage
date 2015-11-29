@@ -29,12 +29,10 @@ package mage.abilities.effects.common;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -52,7 +50,6 @@ public class CreateTokenEffect extends OneShotEffect {
     private boolean attacking;
     private UUID lastAddedTokenId;
     private ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
-    private boolean expansionSetCodeChecked;
 
     public CreateTokenEffect(Token token) {
         this(token, new StaticValue(1));
@@ -76,7 +73,6 @@ public class CreateTokenEffect extends OneShotEffect {
         this.amount = amount.copy();
         this.tapped = tapped;
         this.attacking = attacking;
-        this.expansionSetCodeChecked = false;
         setText();
     }
 
@@ -88,7 +84,6 @@ public class CreateTokenEffect extends OneShotEffect {
         this.attacking = effect.attacking;
         this.lastAddedTokenId = effect.lastAddedTokenId;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
-        this.expansionSetCodeChecked = effect.expansionSetCodeChecked;
     }
 
     @Override
@@ -98,22 +93,11 @@ public class CreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!expansionSetCodeChecked) {
-            updateExpansionSetCode(game, source);
-        }
         int value = amount.calculate(game, source, this);
         token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
         this.lastAddedTokenId = token.getLastAddedToken();
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
         return true;
-    }
-
-    private void updateExpansionSetCode(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject instanceof Card) {
-            token.setExpansionSetCodeForImage(((Card) sourceObject).getExpansionSetCode());
-        }
-        expansionSetCodeChecked = true;
     }
 
     public UUID getLastAddedTokenId() {

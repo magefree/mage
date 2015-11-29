@@ -30,11 +30,10 @@ package mage.sets.journeyintonyx;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -62,7 +61,7 @@ public class AjaniMentorOfHeroes extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
     private static final FilterCard filterCard = new FilterCard("an Aura, creature, or planeswalker card");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filterCard.add(Predicates.or(
@@ -70,23 +69,22 @@ public class AjaniMentorOfHeroes extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }
-    
+
     public AjaniMentorOfHeroes(UUID ownerId) {
         super(ownerId, 145, "Ajani, Mentor of Heroes", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{W}");
         this.expansionSetCode = "JOU";
         this.subtype.add("Ajani");
 
-        
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Distribute three +1/+1 counters among one, two, or three target creatures you control
         Ability ability = new LoyaltyAbility(new AjaniMentorOfHeroesAddCountersEffect(), 1);
         ability.addTarget(new TargetCreaturePermanentAmount(3, filter));
         this.addAbility(ability);
-        
+
         // +1: Look at the top four cards of your library. You may reveal an Aura, creature, or planeswalker card from among them and put that card into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(4,1, filterCard,true, false, Zone.HAND, true), 1));
-        
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(4, 1, filterCard, true, false, Zone.HAND, true), 1));
+
         // -8: You gain 100 life.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(100), -8));
     }
@@ -122,7 +120,7 @@ class AjaniMentorOfHeroesAddCountersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && source.getTargets().size() > 0) {
             Target multiTarget = source.getTargets().get(0);
-            for (UUID target: multiTarget.getTargets()) {
+            for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
                     permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);

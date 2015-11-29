@@ -41,8 +41,8 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
-import mage.target.common.TargetCreatureOrPlayerAmount;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *

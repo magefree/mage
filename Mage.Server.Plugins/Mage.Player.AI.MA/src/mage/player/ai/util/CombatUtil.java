@@ -12,6 +12,7 @@ import mage.game.turn.EndOfCombatStep;
 import mage.game.turn.FirstCombatDamageStep;
 import mage.game.turn.Step;
 import mage.players.Player;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -24,7 +25,7 @@ public class CombatUtil {
 
     private static final List<Permanent> emptyList = new ArrayList<Permanent>();
 
-    private static final transient org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(CombatUtil.class);
+    private static final Logger log = Logger.getLogger(CombatUtil.class);
 
     private CombatUtil() {
     }

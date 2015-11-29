@@ -43,8 +43,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -66,7 +68,7 @@ public class PrimalPlasma extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Primal Plasma enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalPlasmaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new PrimalPlasmaReplacementEffect()));
     }
 
     public PrimalPlasma(final PrimalPlasma card) {
@@ -102,7 +104,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                 return true;
             }
@@ -117,7 +119,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose what " + permanent.getIdName() + " becomes to");
@@ -151,7 +153,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
                     game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                     break;
             }
-            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom), source);
+            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
 
         }
         return false;

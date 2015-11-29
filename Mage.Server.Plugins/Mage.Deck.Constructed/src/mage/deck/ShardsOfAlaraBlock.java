@@ -37,7 +37,7 @@ import mage.cards.decks.Constructed;
 public class ShardsOfAlaraBlock extends Constructed {
 
     public ShardsOfAlaraBlock() {
-        super("Constructed - Shards Of Alara Block");
+        super("Constructed - Shards of Alara Block");
         setCodes.add("ALA");
         setCodes.add("CON");
         setCodes.add("ARB");

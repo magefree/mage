@@ -40,7 +40,7 @@ import javax.swing.*;
  */
 public class FeedbackDialog extends javax.swing.JDialog {
 
-    private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
+    private static final Logger log = Logger.getLogger(PreferencesDialog.class);
 
     private String[] feedbackTypes = {"", "Bug or \"something doesn't work\"",
         "Feature or \"I need that function\"",

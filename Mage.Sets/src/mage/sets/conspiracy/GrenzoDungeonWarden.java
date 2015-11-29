@@ -30,11 +30,11 @@ package mage.sets.conspiracy;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,8 +63,8 @@ public class GrenzoDungeonWarden extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Grenzo, Dungeon Warden enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new GrenzoDungeonWardenEtBEffect()));
-        
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
+
         // {2}: Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to Grenzo's power, put it onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrenzoDungeonWardenEffect(), new GenericManaCost(2)));
     }
@@ -79,68 +79,34 @@ public class GrenzoDungeonWarden extends CardImpl {
     }
 }
 
-class GrenzoDungeonWardenEtBEffect extends OneShotEffect {
-
-    GrenzoDungeonWardenEtBEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with X +1/+1 counters on it";
-    }
-
-    GrenzoDungeonWardenEtBEffect(final GrenzoDungeonWardenEtBEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Object obj = getValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
-                int amount = ((Ability) obj).getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public GrenzoDungeonWardenEtBEffect copy() {
-        return new GrenzoDungeonWardenEtBEffect(this);
-    }
-}
-
 class GrenzoDungeonWardenEffect extends OneShotEffect {
-    
+
     GrenzoDungeonWardenEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to {this}'s power, put it onto the battlefield";
     }
-    
+
     GrenzoDungeonWardenEffect(final GrenzoDungeonWardenEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public GrenzoDungeonWardenEffect copy() {
         return new GrenzoDungeonWardenEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.getLibrary().size() > 0) {
-                Card card = controller.getLibrary().removeFromBottom(game);
+                Card card = controller.getLibrary().getFromBottom(game);
                 if (card != null) {
-                    controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
                         if (sourcePermanent != null && card.getPower().getValue() <= sourcePermanent.getPower().getValue()) {
-                            controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
                     }
                 }

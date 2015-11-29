@@ -52,7 +52,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         // Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
         addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Mana", 1);
         
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");        
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.");
         setChoice(playerA, "Green");
         
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
@@ -75,12 +75,12 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         // Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
         addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Mana", 1);
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.");
         setChoice(playerA, "Green");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Untap another target permanent.","Nykthos, Shrine to Nyx");
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.");
         setChoice(playerA, "Green");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
@@ -106,12 +106,12 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         // If unused mana would empty from your mana pool, that mana becomes colorless instead.
         addCard(Zone.BATTLEFIELD, playerA, "Kruphix, God of Horizons", 1); // 1 G devotion
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.");
         setChoice(playerA, "Green");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Untap another target permanent.","Nykthos, Shrine to Nyx");
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.");
         setChoice(playerA, "Green");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

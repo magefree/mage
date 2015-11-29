@@ -49,7 +49,7 @@ import mage.util.ThreadLocalStringBuilder;
  */
 public class Turn implements Serializable {
 
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(50);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(50);
 
     private Phase currentPhase;
     private UUID activePlayerId;

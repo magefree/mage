@@ -56,7 +56,7 @@ public class Whipkeeper extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Whipkeeper deals damage to target creature equal to the damage already dealt to it this turn.
+        // {T}: Whipkeeper deals damage to target creature equal to the damage already dealt to it this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WhipkeeperEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -77,7 +77,7 @@ class WhipkeeperEffect extends OneShotEffect {
 
     public WhipkeeperEffect() {
         super(Outcome.Damage);
-        staticText = "{tap}: {this} deals damage to target creature equal to the damage already dealt to it this turn.";
+        staticText = "{this} deals damage to target creature equal to the damage already dealt to it this turn.";
     }
     public WhipkeeperEffect(final WhipkeeperEffect effect) {
         super(effect);

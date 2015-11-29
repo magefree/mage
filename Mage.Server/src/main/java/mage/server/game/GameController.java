@@ -228,7 +228,7 @@ public class GameController implements GameCallback {
                         try {
                             switch (event.getQueryType()) {
                                 case ASK:
-                                    ask(event.getPlayerId(), event.getMessage());
+                                    ask(event.getPlayerId(), event.getMessage(), event.getOptions());
                                     break;
                                 case PICK_TARGET:
                                     target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getPerms(), event.getTargets(), event.isRequired(), event.getOptions());
@@ -582,7 +582,7 @@ public class GameController implements GameCallback {
                 }
                 break;
             default:
-                game.sendPlayerAction(playerAction, getPlayerId(userId));
+                game.sendPlayerAction(playerAction, getPlayerId(userId), data);
         }
     }
 
@@ -774,11 +774,11 @@ public class GameController implements GameCallback {
         // TODO: inform watchers about game end and who won
     }
 
-    private synchronized void ask(UUID playerId, final String question) throws MageException {
+    private synchronized void ask(UUID playerId, final String question, final Map<String, Serializable> options) throws MageException {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).ask(question);
+                getGameSession(playerId).ask(question, options);
             }
         });
 
@@ -825,8 +825,11 @@ public class GameController implements GameCallback {
             @Override
             public void execute(UUID playerId) {
                 if (cards != null) {
-                    Zone targetZone = (Zone) options.get("targetZone");
-                    boolean showFaceDown = targetZone != null && targetZone.equals(Zone.PICK);
+                    // Zone targetZone = (Zone) options.get("targetZone");
+                    // Are there really situations where a player selects from a list of face down cards?
+                    // So always show face up for selection
+                    // boolean showFaceDown = targetZone != null && targetZone.equals(Zone.PICK);
+                    boolean showFaceDown = true;
                     getGameSession(playerId).target(question, new CardsView(game, cards.getCards(game), showFaceDown), targets, required, options);
                 } else if (perms != null) {
                     CardsView permsView = new CardsView();
@@ -846,7 +849,8 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).target(question, new CardsView(abilities, game), null, required, options);
+                CardsView cardsView = new CardsView(abilities, game);
+                getGameSession(playerId).target(question, cardsView, null, required, options);
             }
         });
     }

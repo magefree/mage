@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastAllTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.Card;
@@ -61,7 +61,7 @@ public class ElderPineOfJukai extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new SpellCastAllTriggeredAbility(new ElderPineOfJukaiEffect(), new FilterSpiritOrArcaneCard(), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ElderPineOfJukaiEffect(), new FilterSpiritOrArcaneCard(), false));
 
         // Soulshift 2
         this.addAbility(new SoulshiftAbility(2));

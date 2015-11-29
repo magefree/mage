@@ -56,7 +56,7 @@ import mage.players.Player;
 public class ReplicateAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Replicate";
-    private static final String reminderTextMana = "<i>(When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>";
+    private static final String reminderTextMana = "When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.";
     protected OptionalAdditionalCost additionalCost;
 
     public ReplicateAbility(Card card, String manaString) {

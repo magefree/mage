@@ -28,19 +28,17 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.util.functions.AddSubtypeApplier;
 
 /**
  *
@@ -59,11 +57,11 @@ public class SakashimasStudent extends CardImpl {
 
         // Ninjutsu {1}{U}
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
+
         // You may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,new EntersBattlefieldEffect(
-                new CopyPermanentEffect(new SakashimasStudentApplyToPermanent()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types",
-                true)));
+        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new AddSubtypeApplier("Ninja"));
+        effect.setText("as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types");
+        this.addAbility(new EntersBattlefieldAbility(effect, true));
 
     }
 
@@ -74,16 +72,5 @@ public class SakashimasStudent extends CardImpl {
     @Override
     public SakashimasStudent copy() {
         return new SakashimasStudent(this);
-    }
-}
-
-class SakashimasStudentApplyToPermanent extends ApplyToPermanent {
-
-    @Override
-    public Boolean apply(Game game, Permanent permanent) {
-        if (!permanent.getSubtype().contains("Ninja")) {
-            permanent.getSubtype().add("Ninja");
-        }
-        return true;
     }
 }

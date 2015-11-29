@@ -77,11 +77,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return true;
     }
 
-    // TODO: Implement for all TriggeredAbilities so this default method can be removed
-    /*@Override
-     public boolean checkEventType(GameEvent event, Game game) {
-     return true;
-     }*/
     @Override
     public boolean resolve(Game game) {
         if (isOptional()) {
@@ -138,7 +133,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                             || ruleLow.startsWith("return")
                             || ruleLow.startsWith("tap")
                             || ruleLow.startsWith("untap")
-                            || ruleLow.startsWith("put")) {
+                            || ruleLow.startsWith("put")
+                            || ruleLow.startsWith("remove")) {
                         sb.append("you may ");
                     } else {
                         if (!ruleLow.startsWith("its controller may")) {

@@ -29,6 +29,7 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -80,11 +81,9 @@ public class SaplingOfColfenor extends CardImpl {
 }
 
 class SaplingOfColfenorEffect extends OneShotEffect {
-    
-    Cards cards = new CardsImpl();
 
     public SaplingOfColfenorEffect() {
-        super(Outcome.GainLife);
+        super(Outcome.Benefit);
         this.staticText = "reveal the top card of your library. If it's a creature card, you gain life equal to that card's toughness, lose life equal to its power, then put it into your hand";
     }
 
@@ -99,16 +98,20 @@ class SaplingOfColfenorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null && you.getLibrary().size() > 0) {
-            Card card = you.getLibrary().removeFromTop(game);
-            cards.add(card);
-            you.revealCards("Sapling of Colfenor", cards, game);
-            if (card.getCardType().contains(CardType.CREATURE)) {
-                you.gainLife(card.getToughness().getValue(), game);
-                you.loseLife(card.getPower().getValue(), game);
-                return card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            if (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().getFromTop(game);
+                Cards cards = new CardsImpl(card);
+                controller.revealCards(sourceObject.getIdName(), cards, game);
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    controller.gainLife(card.getToughness().getValue(), game);
+                    controller.loseLife(card.getPower().getValue(), game);
+                    return controller.moveCards(cards.getCards(game), Zone.HAND, source, game);
+                }
             }
+            return true;
         }
         return false;
     }

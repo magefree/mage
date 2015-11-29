@@ -29,8 +29,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,9 +36,10 @@ import mage.abilities.condition.common.CastFromHandCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.game.permanent.token.BirdToken;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -76,18 +75,4 @@ public class ScionOfVituGhazi extends CardImpl {
         return new ScionOfVituGhazi(this);
     }
 
-}
-
-
-class BirdToken extends Token {
-    public BirdToken() {
-        super("Bird", "1/1 white Bird creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Bird");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
-        setOriginalExpansionSetCode("RTR");
-    }
 }

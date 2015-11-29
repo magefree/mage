@@ -76,21 +76,21 @@ public class ProteusStaff extends CardImpl {
 }
 
 class ProteusStaffEffect extends OneShotEffect {
-    
+
     ProteusStaffEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of his or her library in any order.";
     }
-    
+
     ProteusStaffEffect(final ProteusStaffEffect effect) {
         super(effect);
     }
-    
+
     @java.lang.Override
     public ProteusStaffEffect copy() {
         return new ProteusStaffEffect(this);
     }
-    
+
     @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
@@ -100,7 +100,7 @@ class ProteusStaffEffect extends OneShotEffect {
             if (owner != null && controller != null) {
                 // Put target creature on the bottom of its owner's library.
                 owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, true);
-                
+
                 // That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card.
                 Cards cards = new CardsImpl();
                 while (controller.getLibrary().size() > 0) {
@@ -108,16 +108,15 @@ class ProteusStaffEffect extends OneShotEffect {
                     if (card != null) {
                         if (card.getCardType().contains(CardType.CREATURE)) {
                             // The player puts that card onto the battlefield
-                            controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                             break;
-                        }
-                        else {
+                        } else {
                             cards.add(card);
                         }
                     }
                 }
                 controller.revealCards("Proteus Staff", cards, game);
-                
+
                 // and the rest on the bottom of his or her library in any order.
                 while (cards.size() > 0 && controller.canRespond()) {
                     if (cards.size() == 1) {
@@ -125,9 +124,8 @@ class ProteusStaffEffect extends OneShotEffect {
                         if (card != null) {
                             controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
                             cards.remove(card);
-                        }                    
-                    }
-                    else {
+                        }
+                    } else {
                         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on bottom of your library (last chosen will be on bottom)"));
                         controller.choose(Outcome.Neutral, cards, target, game);
                         Card card = cards.get(target.getFirstTarget(), game);

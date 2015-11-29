@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Duneblast extends CardImpl {
 
     public Duneblast(UUID ownerId) {
-        super(ownerId, 174, "Duneblast", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{G}{B}");
+        super(ownerId, 174, "Duneblast", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{B}{G}");
         this.expansionSetCode = "KTK";
 
 

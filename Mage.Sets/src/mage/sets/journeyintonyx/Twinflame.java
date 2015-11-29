@@ -34,7 +34,7 @@ import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -42,11 +42,9 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  *
@@ -58,13 +56,12 @@ public class Twinflame extends CardImpl {
         super(ownerId, 115, "Twinflame", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "JOU";
 
-
         // Strive - Twinflame costs 2R more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{R}"));
         // Choose any number of target creatures you control. For each of them, put a token that's a copy of that creature onto the battlefield. Those tokens have haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TwinflameCopyEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), false));
-                
+
     }
 
     public Twinflame(final Twinflame card) {
@@ -78,44 +75,43 @@ public class Twinflame extends CardImpl {
 }
 
 class TwinflameCopyEffect extends OneShotEffect {
-    
+
     public TwinflameCopyEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose any number of target creatures you control. For each of them, put a token that's a copy of that creature onto the battlefield. Those tokens have haste. Exile them at the beginning of the next end step";
     }
-    
+
     public TwinflameCopyEffect(final TwinflameCopyEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public TwinflameCopyEffect copy() {
         return new TwinflameCopyEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID creatureId: this.getTargetPointer().getTargets(game, source)) {
+            for (UUID creatureId : this.getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
                 if (creature != null) {
-                    EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(creature);
-
-                    token.addAbility(HasteAbility.getInstance());
-                    token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-                    ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
-                }                
+                    PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+                    effect.setTargetPointer(new FixedTarget(creature, game));
+                    effect.apply(game, source);
+                    for (Permanent addedToken : effect.getAddedPermanent()) {
+                        ExileTargetEffect exileEffect = new ExileTargetEffect();
+                        exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
+                }
             }
-            return true;            
+            return true;
         }
         return false;
     }

@@ -158,8 +158,7 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            Zone currentZone = game.getState().getZone(card.getId());
-            controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId());
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             Effect effect = new AttachEffect(Outcome.AddAbility);
             effect.setTargetPointer(new FixedTarget(card.getId()));
             effect.apply(game, source);

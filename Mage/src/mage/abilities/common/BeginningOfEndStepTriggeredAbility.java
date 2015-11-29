@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +39,7 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
+
     private TargetController targetController;
     private Condition interveningIfClauseCondition;
 
@@ -91,8 +91,9 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                     }
                     return true;
                 }
-        break;
+                break;
             case ANY:
+            case NEXT:
                 if (getTargets().size() == 0) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -128,15 +129,17 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         StringBuilder sb = new StringBuilder(getEffects().getText(modes.getMode()));
         if (this.optional) {
-            if (sb.substring(0, 6).toLowerCase().equals("target")){
+            if (sb.substring(0, 6).toLowerCase().equals("target")) {
                 sb.insert(0, "you may have ");
-            } else if (!sb.substring(0, 4).toLowerCase().equals("you ")){
+            } else if (!sb.substring(0, 4).toLowerCase().equals("you ")) {
                 sb.insert(0, "you may ");
             }
         }
         switch (targetController) {
             case YOU:
                 return sb.insert(0, generateConditionString()).insert(0, "At the beginning of your end step, ").toString();
+            case NEXT:
+                return sb.insert(0, generateConditionString()).insert(0, "At the beginning of the end step, ").toString();
             case OPPONENT:
                 return sb.insert(0, generateConditionString()).insert(0, "At the beginning of each opponent's end step, ").toString();
             case ANY:

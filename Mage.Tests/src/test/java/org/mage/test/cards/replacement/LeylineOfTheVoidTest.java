@@ -29,7 +29,6 @@ package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -37,7 +36,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class LeylineOfTheVoidTest extends CardTestPlayerBase {
 
     /**
@@ -57,20 +55,51 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
         // If a card would be put into an opponent's graveyard from anywhere, exile it instead.
         addCard(Zone.BATTLEFIELD, playerA, "Leyline of the Void");
-        
+
         // {X}, {T}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
         addCard(Zone.BATTLEFIELD, playerA, "Helm of Obedience");
-
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},{T}: Target opponent puts cards", playerB);
         setChoice(playerA, "X=1");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
+
         assertExileCount(playerB, 71); // All cards go to exile replaced from Leyline of the void
     }
-    
+
+    /**
+     * Today i casted Ill-gotten Gains in EDH (with a leyline of the veil in
+     * play) and the spell simply discarded both players hands not letting
+     * either of us choose cards to get back, this ended up with me losing the
+     * game as i was going to combo off some cards in yard.
+     */
+    @Test
+    public void testIllgottenGains() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
+        // If a card would be put into an opponent's graveyard from anywhere, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Leyline of the Void");
+
+        // Exile Ill-Gotten Gains.
+        // Each player discards his or her hand,
+        // then returns up to three cards from his or her graveyard to his or her hand.
+        addCard(Zone.HAND, playerA, "Ill-Gotten Gains"); // Sorcery - {2}{B}{B}
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 4);
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ill-Gotten Gains");
+        setChoice(playerA, "Silvercoat Lion^Silvercoat Lion^Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerB, 4);
+        assertHandCount(playerB, 0);
+
+        assertExileCount(playerA, 1);
+        assertHandCount(playerA, 3);
+    }
+
 }
-
-

@@ -28,12 +28,12 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,20 +42,15 @@ import mage.target.TargetPermanent;
  */
 public class IntoTheCore extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public IntoTheCore(UUID ownerId) {
         super(ownerId, 67, "Into the Core", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
         this.expansionSetCode = "MBS";
 
-
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        // Exile two target artifacts.
+        this.getSpellAbility().addTarget(new TargetPermanent(2, 2, new FilterArtifactPermanent("artifacts"), false));
+        Effect effect = new ExileTargetEffect();
+        effect.setText("Exile two target artifacts");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public IntoTheCore(final IntoTheCore card) {

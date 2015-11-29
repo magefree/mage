@@ -28,19 +28,14 @@
 package mage.sets.theros;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -50,20 +45,21 @@ import mage.target.common.TargetLandPermanent;
 public class PeakEruption extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
+
     static{
         filter.add(new SubtypePredicate(("Mountain")));
     }
-    
-    
+
     public PeakEruption(UUID ownerId) {
         super(ownerId, 132, "Peak Eruption", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "THS";
 
-
         // Destroy target Mountain. Peak Eruption deals 3 damage to that land's controller.
-        this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new PeakEruptionEffect());
+        Effect effect = new DamageTargetControllerEffect(3);
+        effect.setText("{this} deals 3 damage to that land's controller");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
     }
 
     public PeakEruption(final PeakEruption card) {
@@ -73,38 +69,5 @@ public class PeakEruption extends CardImpl {
     @Override
     public PeakEruption copy() {
         return new PeakEruption(this);
-    }
-}
-
-
-class PeakEruptionEffect extends OneShotEffect {
-
-    PeakEruptionEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals 3 damage to that land's controller";
-    }
-
-    PeakEruptionEffect(final PeakEruptionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-        if (permanent != null) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                player.damage(3, source.getSourceId(), game, false, true);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public PeakEruptionEffect copy() {
-        return new PeakEruptionEffect(this);
     }
 }

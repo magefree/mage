@@ -33,10 +33,9 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
@@ -44,7 +43,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -69,7 +67,7 @@ public class SarkhanUnbroken extends CardImpl {
         this.expansionSetCode = "DTK";
         this.subtype.add("Sarkhan");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Draw a card, then add one mana of any color to your mana pool.
         this.addAbility(new LoyaltyAbility(new SarkhanUnbrokenAbility1(), 1));
@@ -127,26 +125,26 @@ class SarkhanUnbrokenAbility1 extends OneShotEffect {
             Mana mana = new Mana();
 
             controller.choose(Outcome.Benefit, manaChoice, game);
-            
+
             if (manaChoice.getChoice() == null) {
                 return false;
             }
 
             switch (manaChoice.getChoice()) {
                 case "White":
-                    mana.addWhite();
+                    mana.increaseWhite();
                     break;
                 case "Blue":
-                    mana.addBlue();
+                    mana.increaseBlue();
                     break;
                 case "Black":
-                    mana.addBlack();
+                    mana.increaseBlack();
                     break;
                 case "Red":
-                    mana.addRed();
+                    mana.increaseRed();
                     break;
                 case "Green":
-                    mana.addGreen();
+                    mana.increaseGreen();
                     break;
             }
 

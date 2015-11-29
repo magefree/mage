@@ -32,7 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -40,7 +40,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -52,7 +51,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -71,7 +69,7 @@ public class NarsetTranscendent extends CardImpl {
         this.expansionSetCode = "DTK";
         this.subtype.add("Narset");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
         // +1: Look at the top card of your library. If it's a noncreature, nonland card, you may reveal it and put it into your hand.
         this.addAbility(new LoyaltyAbility(new NarsetTranscendentEffect1(), 1));

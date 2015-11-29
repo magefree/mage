@@ -28,26 +28,22 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
+
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -76,7 +72,8 @@ public class ChameleonColossus extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
 
         // {2}{G}{G}: Chameleon Colossus gets +X/+X until end of turn, where X is its power.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChameleonColossusEffect(), new ManaCostsImpl("{2}{G}{G}")));
+        SourcePermanentPowerCount x = new SourcePermanentPowerCount();
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(x, x, Duration.EndOfTurn, true), new ManaCostsImpl("{2}{G}{G}")));
     }
 
     public ChameleonColossus(final ChameleonColossus card) {
@@ -86,33 +83,5 @@ public class ChameleonColossus extends CardImpl {
     @Override
     public ChameleonColossus copy() {
         return new ChameleonColossus(this);
-    }
-}
-
-class ChameleonColossusEffect extends ContinuousEffectImpl {
-    public ChameleonColossusEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "{this} gets +X/+X until end of turn, where X is its power";
-    }
-
-    public ChameleonColossusEffect(final ChameleonColossusEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChameleonColossusEffect copy() {
-        return new ChameleonColossusEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            int power = sourcePermanent.getPower().getValue();
-            sourcePermanent.addPower(power);
-            sourcePermanent.addToughness(power);
-            return true;
-        }
-        return false;
     }
 }

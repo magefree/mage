@@ -52,7 +52,7 @@ public class BrighthearthBanneret extends CardImpl {
     static {
         filter.add(Predicates.or(
                 new SubtypePredicate("Elemental"),
-                new SubtypePredicate("Shaman")));
+                new SubtypePredicate("Warrior")));
     }
 
     public BrighthearthBanneret(UUID ownerId) {

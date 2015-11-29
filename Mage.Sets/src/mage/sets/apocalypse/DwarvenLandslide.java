@@ -29,6 +29,7 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -41,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -62,6 +64,7 @@ public class DwarvenLandslide extends CardImpl {
         this.addAbility(new KickerAbility(kickerCosts));
         // Destroy target land. If Dwarven Landslide was kicked, destroy another target land.
         getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target land. If {this} was kicked, destroy another target land"));
+        getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
     public DwarvenLandslide(final DwarvenLandslide card) {
@@ -70,7 +73,11 @@ public class DwarvenLandslide extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        ability.addTarget(new TargetLandPermanent(KickedCondition.getInstance().apply(game, ability) ? 2 : 1));
+        if (ability instanceof SpellAbility) {
+            if (KickedCondition.getInstance().apply(game, ability)) {
+                getSpellAbility().addTarget(new TargetLandPermanent(new FilterLandPermanent("land (Kicker)")));
+            }
+        }
     }
 
     @Override

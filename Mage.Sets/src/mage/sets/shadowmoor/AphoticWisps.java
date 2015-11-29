@@ -25,20 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,19 +46,25 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AphoticWisps extends CardImpl {
 
-    public AphoticWisps (UUID ownerId) {
+    public AphoticWisps(UUID ownerId) {
         super(ownerId, 55, "Aphotic Wisps", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "SHM";
 
-        //    Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
+        // Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.EndOfTurn);
+        effect.setText("Target creature becomes black");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains fear until end of turn");
+        this.getSpellAbility().addEffect(effect);
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("<br>Draw a card");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public AphoticWisps (final AphoticWisps card) {
+    public AphoticWisps(final AphoticWisps card) {
         super(card);
     }
 
@@ -69,4 +74,3 @@ public class AphoticWisps extends CardImpl {
     }
 
 }
-

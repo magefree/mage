@@ -9,11 +9,13 @@ Battle for Zendikar|battleforzendikar|
 Betrayers of Kamigawa|betrayersofkamigawa|
 Born of the Gods|bornofthegods|
 Champions of Kamigawa|championsofkamigawa|
+Chronicles|chronicles|
 Clash Pack|clashpack|
 Classic Sixth Edition|classicsixthedition|
 Coldsnap|coldsnap|
 Commander 2013 Edition|commander2013|
 Commander 2014 Edition|commander2014|
+Commander 2015|commander2015|
 Conflux|conflux|
 Dark Ascension|darkascension|
 Darksteel|darksteel|
@@ -39,6 +41,7 @@ Duel Decks: Phyrexia vs. the Coalition|phyrexiavsthecoalition|
 Duel Decks: Sorin vs. Tibalt|sorinvstibalt|
 Duel Decks: Speed vs. Cunning|speedvscunning|
 Duel Decks: Venser vs. Koth|venservskoth|
+Duel Decks: Zendikar vs. Eldrazi|zendikarvseldrazi|
 Eighth Edition|eighthedition|
 Eventide|eventide|
 Exodus|exodus|
@@ -100,6 +103,7 @@ Morningtide|morningtide|
 Nemesis|nemesis|
 New Phyrexia|newphyrexia|
 Ninth Edition|ninthedition|
+Oath of the Gatewatch|oathofthegatewatch|
 Odyssey|odyssey|
 Onslaught|onslaught|
 Planar Chaos|planarchaos|
@@ -146,3 +150,4 @@ World Magic Cup Qualifier|worldmagiccupqualifier|
 Worldwake|worldwake|
 WPN Gateway|wpngateway|
 Zendikar|zendikar|
+Zendikar Expeditions|zendikarexpeditions|

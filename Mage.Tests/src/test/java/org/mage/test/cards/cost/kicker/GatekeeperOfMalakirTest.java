@@ -17,6 +17,8 @@ public class GatekeeperOfMalakirTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Gatekeeper of Malakir");
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
+        // Kicker {B} (You may pay an additional {B} as you cast this spell.)
+        // When Gatekeeper of Malakir enters the battlefield, if it was kicked, target player sacrifices a creature.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -28,6 +30,5 @@ public class GatekeeperOfMalakirTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Llanowar Elves", 0);
         assertGraveyardCount(playerB, 1);
     }
-
 
 }

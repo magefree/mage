@@ -73,7 +73,7 @@ public class ScaleguardSentinels extends CardImpl {
 
         // Scaleguard Sentinels enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast Scaleguard Sentinels.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true),
-                ScaleguardSentinelsCondition.getInstance(), true,
+                ScaleguardSentinelsCondition.getInstance(),
                 "{this} enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast {this}", ""),
                 new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
 
@@ -111,7 +111,7 @@ class ScaleguardSentinelsCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (sourcePermanent != null) {
             DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
             return (watcher != null && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId()));

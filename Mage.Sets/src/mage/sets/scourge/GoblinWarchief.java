@@ -60,6 +60,7 @@ public class GoblinWarchief extends CardImpl {
         super(ownerId, 97, "Goblin Warchief", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "SCG";
         this.subtype.add("Goblin");
+        this.subtype.add("Warrior");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -56,7 +56,7 @@ public class LichsTomb extends CardImpl {
 
         // You don't lose the game for having 0 or less life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
-        
+
         // Whenever you lose life, sacrifice a permanent for each 1 life you lost.
         this.addAbility(new LichsTombTriggeredAbility());
     }
@@ -72,15 +72,15 @@ public class LichsTomb extends CardImpl {
 }
 
 class LichsTombTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     LichsTombTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeControllerEffect(new FilterPermanent(), 0, ""), false);
     }
-    
+
     LichsTombTriggeredAbility(final LichsTombTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public LichsTombTriggeredAbility copy() {
         return new LichsTombTriggeredAbility(this);
@@ -90,16 +90,16 @@ class LichsTombTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.LOST_LIFE;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId() == this.getControllerId()) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             ((SacrificeEffect) this.getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
             return true;
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever you lose life, sacrifice a permanent for each 1 life you lost.";

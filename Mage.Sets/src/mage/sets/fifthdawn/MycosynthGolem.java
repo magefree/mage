@@ -54,14 +54,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  */
 public class MycosynthGolem extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("Artifact creature spells you cast");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-    
     public MycosynthGolem(UUID ownerId) {
         super(ownerId, 137, "Mycosynth Golem", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{11}");
         this.expansionSetCode = "5DN";
@@ -75,8 +68,8 @@ public class MycosynthGolem extends CardImpl {
 
         // Artifact creature spells you cast have affinity for artifacts.
         this.addAbility(new SimpleStaticAbility(
-            Zone.BATTLEFIELD, new MycosynthGolemGainAbilitySpellsEffect(new AffinityForArtifactsAbility(), filter)));        
-        
+                Zone.BATTLEFIELD, new MycosynthGolemGainAbilitySpellsEffect()));
+
     }
 
     public MycosynthGolem(final MycosynthGolem card) {
@@ -91,20 +84,21 @@ public class MycosynthGolem extends CardImpl {
 
 class MycosynthGolemGainAbilitySpellsEffect extends ContinuousEffectImpl {
 
-    private final Ability ability;
-    private final FilterSpell filter;
+    private static final FilterSpell filter = new FilterSpell("Artifact creature spells you cast");
+    private static final Ability ability = new AffinityForArtifactsAbility();
 
-    public MycosynthGolemGainAbilitySpellsEffect(Ability ability, FilterSpell filter) {
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+
+    public MycosynthGolemGainAbilitySpellsEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability;
-        this.filter = filter;
-        staticText = filter.getMessage() + " have " + ability.getRule();
+        staticText = "Artifact creature spells you cast have affinity for artifacts";
     }
 
     public MycosynthGolemGainAbilitySpellsEffect(final MycosynthGolemGainAbilitySpellsEffect effect) {
         super(effect);
-        this.ability = effect.ability;
-        this.filter = effect.filter;
     }
 
     @Override
@@ -114,17 +108,15 @@ class MycosynthGolemGainAbilitySpellsEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
+        if (controller != null && permanent != null) {
             for (StackObject stackObject : game.getStack()) {
                 // only spells cast, so no copies of spells
                 if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
                     if (filter.match(spell, game)) {
-                        if (!spell.getAbilities().contains(ability)) {
-                            game.getState().addOtherAbility(spell.getCard(), ability);
-                        }
+                        game.getState().addOtherAbility(spell.getCard(), ability);
                     }
                 }
             }

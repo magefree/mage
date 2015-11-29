@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -12,6 +11,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -24,19 +24,28 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
     public AttacksIfAbleAllEffect(FilterCreaturePermanent filter) {
         this(filter, Duration.WhileOnBattlefield);
     }
-    
+
+    boolean eachCombat;
+
     public AttacksIfAbleAllEffect(FilterCreaturePermanent filter, Duration duration) {
+        this(filter, duration, false);
+    }
+
+    public AttacksIfAbleAllEffect(FilterCreaturePermanent filter, Duration duration, boolean eachCombat) {
         super(duration);
-        staticText = new StringBuilder(filter.getMessage())
-                .append(" attack ")
-                .append(duration.equals(Duration.EndOfTurn) ? "this":"each")
-                .append(" turn if able").toString();
         this.filter = filter;
+        this.eachCombat = eachCombat;
+        if (this.duration == Duration.EndOfTurn) {
+            staticText = filter.getMessage() + " attack " + (eachCombat ? "each combat" : "this turn") + " if able";
+        } else {
+            staticText = filter.getMessage() + " attack each " + (eachCombat ? "combat" : "turn") + " if able";
+        }
     }
 
     public AttacksIfAbleAllEffect(final AttacksIfAbleAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.eachCombat = effect.eachCombat;
     }
 
     @Override
@@ -46,7 +55,14 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (eachCombat) {
+                return true;
+            }
+            AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
+            return watcher != null && !watcher.getAttackedThisTurnCreatures().contains(permanent.getId());
+        }
+        return false;
     }
 
     @Override

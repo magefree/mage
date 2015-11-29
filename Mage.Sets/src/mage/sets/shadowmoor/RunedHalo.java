@@ -85,7 +85,7 @@ class RunedHaloSetProtectionEffect extends OneShotEffect {
 
     public RunedHaloSetProtectionEffect() {
         super(Outcome.Protect);
-        staticText = "<br/><br/>You have protection from the chosen name  <i>(You can't be targeted, dealt damage, or enchanted by anything with that name.)<i/>";
+        staticText = "<br/><br/>You have protection from the chosen name  <i>(You can't be targeted, dealt damage, or enchanted by anything with that name.)</i>";
     }
 
     public RunedHaloSetProtectionEffect(final RunedHaloSetProtectionEffect effect) {

@@ -31,18 +31,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetSpellOrPermanent;
 
@@ -65,7 +58,7 @@ public class VenserShaperSavant extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // When Venser, Shaper Savant enters the battlefield, return target spell or permanent to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new VenserShaperSavantEffect(), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(true), false);
         Target target = new TargetSpellOrPermanent();
         ability.addTarget(target);
         this.addAbility(ability);
@@ -78,58 +71,5 @@ public class VenserShaperSavant extends CardImpl {
     @Override
     public VenserShaperSavant copy() {
         return new VenserShaperSavant(this);
-    }
-}
-
-class VenserShaperSavantEffect extends OneShotEffect {
-
-    public VenserShaperSavantEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "return target spell or permanent to its owner's hand";
-    }
-
-    public VenserShaperSavantEffect(final VenserShaperSavantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public VenserShaperSavantEffect copy() {
-        return new VenserShaperSavantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                return controller.moveCards(permanent, null, Zone.HAND, source, game);
-            }
-
-            /**
-             * 01.05.2007 If a spell is returned to its owner's hand, it's
-             * removed from the stack and thus will not resolve. The spell isn't
-             * countered; it just no longer exists. 01.05.2007 If a copy of a
-             * spell is returned to its owner's hand, it's moved there, then it
-             * will cease to exist as a state-based action. 01.05.2007 If
-             * Venser's enters-the-battlefield ability targets a spell cast with
-             * flashback, that spell will be exiled instead of returning to its
-             * owner's hand.
-             */
-            Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
-            if (spell != null) {
-                Card card = null;
-                if (!spell.isCopy()) {
-                    card = spell.getCard();
-                }
-                game.getStack().remove(spell);
-                if (card != null) {
-                    controller.moveCards(card, null, Zone.HAND, source, game);
-                }
-                return true;
-            }
-
-        }
-        return false;
     }
 }

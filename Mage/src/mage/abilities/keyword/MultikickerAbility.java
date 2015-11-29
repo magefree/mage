@@ -43,7 +43,7 @@ import mage.abilities.costs.OptionalAdditionalCost;
 public class MultikickerAbility extends KickerAbility {
 
     protected static final String MultikickerKeyword = "Multikicker";
-    protected static final String MultikickerReminder = "(You may pay an additional {cost} any number of times as you cast this spell.)";
+    protected static final String MultikickerReminder = "You may pay an additional {cost} any number of times as you cast this spell.";
 
     public MultikickerAbility(String manaString) {
        super(MultikickerKeyword, MultikickerReminder);

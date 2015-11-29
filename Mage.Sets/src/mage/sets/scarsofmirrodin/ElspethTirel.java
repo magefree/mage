@@ -25,20 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.counters.CounterType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,28 +44,25 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  *
  * @author Loki
  */
 public class ElspethTirel extends CardImpl {
 
-    public ElspethTirel (UUID ownerId) {
+    public ElspethTirel(UUID ownerId) {
         super(ownerId, 6, "Elspeth Tirel", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Elspeth");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
-
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         this.addAbility(new LoyaltyAbility(new ElspethTirelFirstEffect(), 2));
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken(), 3), -2));
         this.addAbility(new LoyaltyAbility(new ElspethTirelThirdEffect(), -5));
     }
 
-    public ElspethTirel (final ElspethTirel card) {
+    public ElspethTirel(final ElspethTirel card) {
         super(card);
     }
 
@@ -78,6 +73,7 @@ public class ElspethTirel extends CardImpl {
 }
 
 class ElspethTirelFirstEffect extends OneShotEffect {
+
     public ElspethTirelFirstEffect() {
         super(Outcome.GainLife);
         staticText = "You gain 1 life for each creature you control";
@@ -105,6 +101,7 @@ class ElspethTirelFirstEffect extends OneShotEffect {
 }
 
 class ElspethTirelThirdEffect extends OneShotEffect {
+
     public ElspethTirelThirdEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy all other permanents except for lands and tokens";
@@ -116,9 +113,10 @@ class ElspethTirelThirdEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (!perm.getId().equals(source.getSourceId()) && !(perm instanceof PermanentToken) && ! (perm.getCardType().contains(CardType.LAND)))
+        for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
+            if (!perm.getId().equals(source.getSourceId()) && !(perm instanceof PermanentToken) && !(perm.getCardType().contains(CardType.LAND))) {
                 perm.destroy(source.getSourceId(), game, false);
+            }
         }
         return true;
     }

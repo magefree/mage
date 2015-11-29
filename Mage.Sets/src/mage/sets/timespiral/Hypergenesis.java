@@ -60,7 +60,7 @@ public class Hypergenesis extends CardImpl {
 
         // Suspend 3-{1}{G}{G}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{G}{G}"), this));
-        
+
         // Starting with you, each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
         this.getSpellAbility().addEffect(new HypergenesisEffect());
     }
@@ -77,8 +77,9 @@ public class Hypergenesis extends CardImpl {
 
 @SuppressWarnings("unchecked")
 class HypergenesisEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterCard("an artifact, creature, enchantment, or land card");
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT), new CardTypePredicate(CardType.LAND)));
     }
@@ -109,7 +110,7 @@ class HypergenesisEffect extends OneShotEffect {
             UUID firstInactivePlayer = null;
             Target target = new TargetCardInHand(filter);
 
-            while (controller.canRespond()) {                
+            while (controller.canRespond()) {
                 if (currentPlayer != null && currentPlayer.canRespond() && controller.getInRange().contains(currentPlayer.getId())) {
                     if (firstInactivePlayer == null) {
                         firstInactivePlayer = currentPlayer.getId();
@@ -120,7 +121,7 @@ class HypergenesisEffect extends OneShotEffect {
                         if (target.chooseTarget(outcome, currentPlayer.getId(), source, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
-                                currentPlayer.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                                currentPlayer.moveCards(card, Zone.BATTLEFIELD, source, game);
                                 firstInactivePlayer = null;
                             }
                         }

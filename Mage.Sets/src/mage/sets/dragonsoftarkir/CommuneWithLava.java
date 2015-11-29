@@ -151,10 +151,8 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(sourceId)) {
-            return game.getState().getZone(sourceId).equals(Zone.EXILED);
-        }
-        return false;
+        return source.getControllerId().equals(affectedControllerId)
+                && getTargetPointer().getTargets(game, source).contains(sourceId);
     }
 
 }

@@ -27,15 +27,14 @@
  */
 package mage.sets.gatecrash;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -43,15 +42,17 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class GideonChampionOfJustice extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Gideon");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.
         LoyaltyAbility ability1 = new LoyaltyAbility(

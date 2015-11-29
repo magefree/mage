@@ -70,8 +70,10 @@ public class Vintage extends Constructed {
         restricted.add("Black Lotus");
         restricted.add("Brainstorm");
         restricted.add("Channel");
+        restricted.add("Chalice of the Void");
         restricted.add("Demonic Consultation");
         restricted.add("Demonic Tutor");
+        restricted.add("Dig Through Time");
         restricted.add("Fastbond");
         restricted.add("Flash");
         restricted.add("Imperial Seal");
@@ -93,13 +95,12 @@ public class Vintage extends Constructed {
         restricted.add("Ponder");
         restricted.add("Sol Ring");
         restricted.add("Strip Mine");
-        restricted.add("Thirst for Knowledge");
         restricted.add("Time Vault");
         restricted.add("Time Walk");
         restricted.add("Timetwister");
         restricted.add("Tinker");
         restricted.add("Tolarian Academy");
-        restricted.add("Treasure Cruise"); //  banned effective January 23, 2015
+        restricted.add("Treasure Cruise");
         restricted.add("Trinisphere");
         restricted.add("Vampiric Tutor");
         restricted.add("Wheel of Fortune");

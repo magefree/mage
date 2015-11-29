@@ -29,7 +29,7 @@ package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -59,7 +59,7 @@ public class RotlungReanimator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Rotlung Reanimator or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false, filter));
+        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false, filter));
     }
 
     public RotlungReanimator(final RotlungReanimator card) {

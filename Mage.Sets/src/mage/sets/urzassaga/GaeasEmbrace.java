@@ -28,16 +28,11 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.RegenerateAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -45,6 +40,12 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,18 +59,18 @@ public class GaeasEmbrace extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
         // Enchanted creature gets +3/+3 and has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
-
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3));
+        Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and has trample");
+        ability.addEffect(effect);
+        this.addAbility(ability);
         // {G}: Regenerate enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
     }

@@ -61,7 +61,7 @@ public class ChangelingAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Changeling <i>(This card is every creature type.)<i/>";
+        return "Changeling <i>(This card is every creature type.)</i>";
     }
 
     @Override

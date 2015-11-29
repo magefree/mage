@@ -25,12 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -38,6 +35,12 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,20 +50,23 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Firebreathing extends CardImpl {
 
-    public Firebreathing (UUID ownerId) {
+    public Firebreathing(UUID ownerId) {
         super(ownerId, 132, "Firebreathing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // {R}: Enchanted creature gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public Firebreathing (final Firebreathing card) {
+    public Firebreathing(final Firebreathing card) {
         super(card);
     }
 

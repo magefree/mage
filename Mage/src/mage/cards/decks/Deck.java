@@ -130,14 +130,10 @@ public class Deck implements Serializable {
     public Set<String> getExpansionSetCodes() {
         Set<String> sets = new LinkedHashSet<>();
         for (Card card : getCards()) {
-            if (!sets.contains(card.getExpansionSetCode())) {
-                sets.add(card.getExpansionSetCode());
-            }
+            sets.add(card.getExpansionSetCode());
         }
         for (Card card : getSideboard()) {
-            if (!sets.contains(card.getExpansionSetCode())) {
-                sets.add(card.getExpansionSetCode());
-            }
+            sets.add(card.getExpansionSetCode());
         }
         return sets;
     }

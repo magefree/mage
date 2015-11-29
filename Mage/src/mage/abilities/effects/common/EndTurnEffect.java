@@ -36,7 +36,7 @@ public class EndTurnEffect extends OneShotEffect {
 
     public EndTurnEffect() {
         super(Outcome.Detriment);
-        staticText = "End the turn <i>(Exile all spells and abilities on the stack. Discard down to your maximum hand size. Damage wears off, and \"this turn\" and \"until end of turn\" effects end.)<i/>";
+        staticText = "End the turn <i>(Exile all spells and abilities on the stack. Discard down to your maximum hand size. Damage wears off, and \"this turn\" and \"until end of turn\" effects end.)</i>";
     }
 
     public EndTurnEffect(EndTurnEffect effect) {

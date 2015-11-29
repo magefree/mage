@@ -40,6 +40,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -57,6 +58,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -183,7 +185,7 @@ public class SuspendAbility extends ActivatedAbilityImpl {
                 setRuleAtTheTop(true);
             }
             addSubAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
-            addSubAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
+            addSubAbility(new SuspendPlayCardAbility());
         }
         ruleText = sb.toString();
     }
@@ -208,7 +210,7 @@ public class SuspendAbility extends ActivatedAbilityImpl {
         game.getState().addOtherAbility(card, ability1);
         game.getState().addAbility(ability1, source.getSourceId(), card);
 
-        SuspendPlayCardAbility ability2 = new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE));
+        SuspendPlayCardAbility ability2 = new SuspendPlayCardAbility();
         ability2.setSourceId(card.getId());
         ability2.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability2);
@@ -298,11 +300,8 @@ class SuspendExileEffect extends OneShotEffect {
 
 class SuspendPlayCardAbility extends TriggeredAbilityImpl {
 
-    public SuspendPlayCardAbility(boolean isCreature) {
-        super(Zone.EXILED, new SuspendPlayCardEffect(isCreature));
-        if (isCreature) {
-            this.addEffect(new GainHasteEffect());
-        }
+    public SuspendPlayCardAbility() {
+        super(Zone.EXILED, new SuspendPlayCardEffect());
         setRuleVisible(false);
     }
 
@@ -329,7 +328,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When the last time counter is removed from this card, if it's removed from the game, " + super.getRule();
+        return "When the last time counter is removed from this card ({this}), if it's removed from the game, " + super.getRule();
     }
 
     @Override
@@ -340,7 +339,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
 
 class SuspendPlayCardEffect extends OneShotEffect {
 
-    public SuspendPlayCardEffect(boolean isCreature) {
+    public SuspendPlayCardEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "play it without paying its mana cost if able. If you can't, it remains removed from the game";
     }
@@ -378,7 +377,14 @@ class SuspendPlayCardEffect extends OneShotEffect {
                 card.getAbilities().removeAll(abilitiesToRemove);
             }
             // cast the card for free
-            return player.cast(card.getSpellAbility(), game, true);
+            if (player.cast(card.getSpellAbility(), game, true)) {
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    ContinuousEffect effect = new GainHasteEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
+                    game.addEffect(effect, source);
+                }
+                return true;
+            }
         }
         return false;
     }
@@ -408,14 +414,17 @@ class GainHasteEffect extends ContinuousEffectImpl {
         if (suspendController == null) {
             suspendController = source.getControllerId();
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             if (suspendController.equals(source.getControllerId())) {
                 permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
-                return true;
             } else {
                 this.discard();
             }
+            return true;
+        }
+        if (game.getState().getZoneChangeCounter(((FixedTarget) getTargetPointer()).getTarget()) >= ((FixedTarget) getTargetPointer()).getZoneChangeCounter()) {
+            this.discard();
         }
         return false;
     }
@@ -427,7 +436,7 @@ class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbili
     public SuspendBeginningOfUpkeepTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
                 SuspendedCondition.getInstance(),
-                "At the beginning of your upkeep, if this card is suspended, remove a time counter from it.");
+                "At the beginning of your upkeep, if this card ({this}) is suspended, remove a time counter from it.");
         this.setRuleVisible(false);
 
     }

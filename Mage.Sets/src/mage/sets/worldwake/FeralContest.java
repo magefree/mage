@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -53,8 +52,7 @@ public class FeralContest extends CardImpl {
         super(ownerId, 100, "Feral Contest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "WWK";
 
-
-        // Put a +1/+1 counter on target creature you control. 
+        // Put a +1/+1 counter on target creature you control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         // Another target creature blocks it this turn if able.
@@ -88,7 +86,7 @@ class FeralContestEffect extends RequirementEffect {
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {        
+    public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getTargets().get(1).getFirstTarget())) {
             return permanent.canBlock(source.getFirstTarget(), game);
         }
@@ -116,4 +114,3 @@ class FeralContestEffect extends RequirementEffect {
     }
 
 }
-

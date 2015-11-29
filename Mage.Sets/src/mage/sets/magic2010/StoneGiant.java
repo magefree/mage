@@ -28,26 +28,22 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DestroyTargetAtBeginningOfNextEndStepEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -68,7 +64,7 @@ public class StoneGiant extends CardImpl {
                 new TapSourceCost());
         ability.addTarget(new StoneGiantTarget());
         // Destroy that creature at the beginning of the next end step.
-        ability.addEffect(new StoneGiantEffect());
+        ability.addEffect(new DestroyTargetAtBeginningOfNextEndStepEffect());
         this.addAbility(ability);
     }
 
@@ -107,34 +103,5 @@ class StoneGiantTarget extends TargetPermanent {
             return super.canTarget(controllerId, id, source, game);
         }
         return false;
-    }
-}
-
-class StoneGiantEffect extends OneShotEffect {
-
-    public StoneGiantEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Destroy that creature at the beginning of the next end step";
-    }
-
-    public StoneGiantEffect(final StoneGiantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StoneGiantEffect copy() {
-        return new StoneGiantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        DestroyTargetEffect effect = new DestroyTargetEffect();
-        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
-        return true;
     }
 }

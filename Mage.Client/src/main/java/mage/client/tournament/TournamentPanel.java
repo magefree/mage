@@ -49,7 +49,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
+import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH;
@@ -105,8 +105,8 @@ public class TournamentPanel extends javax.swing.JPanel {
         tableMatches.createDefaultColumnsFromModel();
         TableUtil.setColumnWidthAndOrder(tableMatches, defaultColumnsWidthMatches, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
 
-        chatPanel1.useExtendedView(ChatPanel.VIEW_MODE.NONE);
-        chatPanel1.setChatType(ChatPanel.ChatType.TOURNAMENT);
+        chatPanel1.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
+        chatPanel1.setChatType(ChatPanelBasic.ChatType.TOURNAMENT);
 
         Action action = new AbstractAction() {
             @Override
@@ -317,7 +317,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         tablePlayers = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableMatches = new javax.swing.JTable();
-        chatPanel1 = new mage.client.chat.ChatPanel();
+        chatPanel1 = new mage.client.chat.ChatPanelBasic();
 
         setPreferredSize(new java.awt.Dimension(908, 580));
 
@@ -484,8 +484,6 @@ public class TournamentPanel extends javax.swing.JPanel {
         jSplitPane1.setBottomComponent(jScrollPane2);
 
         jSplitPane2.setLeftComponent(jSplitPane1);
-
-        chatPanel1.setStartMessageDone(true);
         jSplitPane2.setRightComponent(chatPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -524,7 +522,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     private javax.swing.JPanel actionPanel;
     private javax.swing.JButton btnCloseWindow;
     private javax.swing.JButton btnQuitTournament;
-    private mage.client.chat.ChatPanel chatPanel1;
+    private mage.client.chat.ChatPanelBasic chatPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;

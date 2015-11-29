@@ -32,14 +32,13 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -47,7 +46,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.TurnPhase;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -62,27 +60,27 @@ import mage.target.common.TargetCreaturePermanent;
 public class GideonBattleForged extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-    
+
     public GideonBattleForged(UUID ownerId) {
         super(ownerId, 23, "Gideon, Battle-Forged", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "");
         this.expansionSetCode = "ORI";
         this.subtype.add("Gideon");
-        
+
         this.color.setWhite(true);
-        
+
         this.nightCard = true;
         this.canTransform = true;
-        
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
-        
-        // +2: Up to one target creature an opponent controls attacks Gideon, Battle-Forged during its controller's next turn if able.        
+
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
+
+        // +2: Up to one target creature an opponent controls attacks Gideon, Battle-Forged during its controller's next turn if able.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new GideonBattleForgedAttacksIfAbleTargetEffect(Duration.Custom), 2);
-        loyaltyAbility.addTarget(new TargetCreaturePermanent(0,1,filter, false));
-        this.addAbility(loyaltyAbility);        
+        loyaltyAbility.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        this.addAbility(loyaltyAbility);
 
         // +1: Until your next turn, target creature gains indestructible. Untap that creature.
         Effect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.UntilYourNextTurn);
@@ -92,14 +90,14 @@ public class GideonBattleForged extends CardImpl {
         effect = new UntapTargetEffect();
         effect.setText("Untap that creature");
         loyaltyAbility.addEffect(effect);
-        this.addAbility(loyaltyAbility);        
+        this.addAbility(loyaltyAbility);
 
         // 0: Until end of turn, Gideon, Battle-Forged becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonBattleForgedToken(), "planeswalker", Duration.EndOfTurn), 0);
         effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt to him this turn");
         ability3.addEffect(effect);
-        this.addAbility(ability3);        
+        this.addAbility(ability3);
 
     }
 
@@ -131,7 +129,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
 
     int nextTurnTargetController = 0;
     protected MageObjectReference targetPermanentReference;
-            
+
     public GideonBattleForgedAttacksIfAbleTargetEffect(Duration duration) {
         super(duration);
         staticText = "Up to one target creature an opponent controls attacks {this} during its controller's next turn if able";
@@ -147,7 +145,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
     public GideonBattleForgedAttacksIfAbleTargetEffect copy() {
         return new GideonBattleForgedAttacksIfAbleTargetEffect(this);
     }
-    
+
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (targetPermanentReference == null) {
@@ -160,10 +158,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         if (nextTurnTargetController == 0 && startingTurn != game.getTurnNum() && game.getActivePlayerId().equals(targetPermanent.getControllerId())) {
             nextTurnTargetController = game.getTurnNum();
         }
-        if (game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController) {
-            return true;
-        }
-        return false;
+        return game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController;
     }
 
     @Override
@@ -175,7 +170,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
             targetPermanentReference = new MageObjectReference(getTargetPointer().getFirst(game, source), game);
         }
     }
-    
+
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(getTargetPointer().getFirst(game, source))) {

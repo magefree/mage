@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -73,7 +74,7 @@ public class Fluctuator extends CardImpl {
 }
 
 class FluctuatorEffect extends CostModificationEffectImpl {
-    
+
     private static final String effectText = "Cycling abilities you activate cost you up to {2} less to activate";
 
     public FluctuatorEffect() {
@@ -87,37 +88,44 @@ class FluctuatorEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getControllerId().equals(source.getControllerId()) && 
-                abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED) &&
-                (abilityToModify instanceof CyclingAbility);
+        return abilityToModify.getControllerId().equals(source.getControllerId())
+                && (abilityToModify instanceof CyclingAbility);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
-        if (controller != null){
+        if (controller != null) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
             int reduceMax = mana.getColorless();
-            if (reduceMax > 2){
+            if (reduceMax > 2) {
                 reduceMax = 2;
             }
             if (reduceMax > 0) {
-                ChoiceImpl choice = new ChoiceImpl(true);
-                Set<String> set = new LinkedHashSet<>();
+                int reduce = 0;
+                if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)
+                        && ((ActivatedAbility) abilityToModify).isCheckPlayableMode()) {
+                    reduce = reduceMax;
+                } else {
+                    ChoiceImpl choice = new ChoiceImpl(true);
+                    Set<String> set = new LinkedHashSet<>();
 
-                for(int i = 0; i <= reduceMax; i++){
-                    set.add(String.valueOf(i));
+                    for (int i = 0; i <= reduceMax; i++) {
+                        set.add(String.valueOf(i));
+                    }
+                    choice.setChoices(set);
+                    choice.setMessage("Reduce cycling cost");
+
+                    if (controller.choose(Outcome.Benefit, choice, game)) {
+                        reduce = Integer.parseInt(choice.getChoice());
+
+                    }
                 }
-                choice.setChoices(set);
-                choice.setMessage("Reduce cycling cost");
-                if(controller.choose(Outcome.Benefit, choice, game)){
-                    int reduce = Integer.parseInt(choice.getChoice());
-                    CardUtil.reduceCost(abilityToModify, reduce);
-                }
+                CardUtil.reduceCost(abilityToModify, reduce);
             }
             return true;
         }
-         return false;
+        return false;
     }
 
     @Override

@@ -35,6 +35,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -57,10 +58,12 @@ public class VolrathsLaboratory extends CardImpl {
         this.expansionSetCode = "TPR";
 
         // As Volrath's Laboratory enters the battlefield, choose a color and a creature type.
-        Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral), null, true, "As Volrath's Laboratory enters the battlefield, choose a color and a creature type.", "");
+        Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
+        Effect effect = new ChooseColorEffect(Outcome.Neutral);
+        effect.setText("and a creature type");
         ability.addEffect(new ChooseCreatureTypeEffect(Outcome.Neutral));
         this.addAbility(ability);
-        
+
         // {5}, {T}: Put a 2/2 creature token of the chosen color and type onto the battlefield.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VolrathsLaboratoryEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
@@ -78,21 +81,21 @@ public class VolrathsLaboratory extends CardImpl {
 }
 
 class VolrathsLaboratoryEffect extends OneShotEffect {
-    
+
     VolrathsLaboratoryEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put a 2/2 creature token of the chosen color and type onto the battlefield";
     }
-    
+
     VolrathsLaboratoryEffect(final VolrathsLaboratoryEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public VolrathsLaboratoryEffect copy() {
         return new VolrathsLaboratoryEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");

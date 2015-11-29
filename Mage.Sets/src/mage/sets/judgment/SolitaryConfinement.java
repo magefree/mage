@@ -54,16 +54,15 @@ public class SolitaryConfinement extends CardImpl {
         super(ownerId, 24, "Solitary Confinement", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "JUD";
 
-
         // At the beginning of your upkeep, sacrifice Solitary Confinement unless you discard a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())), TargetController.YOU, false));
-        
+
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
-        
+
         // You have shroud.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(ShroudAbility.getInstance())));
-        
+
         // Prevent all damage that would be dealt to you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }

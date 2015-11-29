@@ -25,30 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  * @author Loki
  */
 public class DesolationAngel extends CardImpl {
+
+    private static final FilterLandPermanent filter = new FilterLandPermanent("lands");
+    private static final FilterLandPermanent filter2 = new FilterLandPermanent("lands you control");
+
+    static {
+        filter2.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public DesolationAngel(UUID ownerId) {
         super(ownerId, 38, "Desolation Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -65,7 +69,8 @@ public class DesolationAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Desolation Angel enters the battlefield, destroy all lands you control. If it was kicked, destroy all lands instead.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DesolationAngelEntersBattlefieldEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DestroyAllEffect(filter),
+                new DestroyAllEffect(filter2), KickedCondition.getInstance(), "destroy all lands you control. If it was kicked, destroy all lands instead.")));
     }
 
     public DesolationAngel(final DesolationAngel card) {
@@ -76,34 +81,4 @@ public class DesolationAngel extends CardImpl {
     public DesolationAngel copy() {
         return new DesolationAngel(this);
     }
-}
-
-class DesolationAngelEntersBattlefieldEffect extends OneShotEffect {
-    DesolationAngelEntersBattlefieldEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "destroy all lands you control. If it was kicked, destroy all lands instead";
-    }
-
-    DesolationAngelEntersBattlefieldEffect(final DesolationAngelEntersBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card p = game.getCard(source.getSourceId());
-        boolean kicked = KickedCondition.getInstance().apply(game, source);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            if ((!kicked && permanent.getControllerId() == source.getControllerId())
-               || kicked) {
-                permanent.destroy(source.getSourceId(), game, false);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public DesolationAngelEntersBattlefieldEffect copy() {
-        return new DesolationAngelEntersBattlefieldEffect(this);
-    }
-
 }

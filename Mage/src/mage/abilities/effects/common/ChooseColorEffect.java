@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.ChoiceColor;
@@ -55,8 +55,11 @@ public class ChooseColorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
+        MageObject mageObject = game.getPermanentEntering(source.getSourceId());
+        if (mageObject == null) {
+            mageObject = game.getObject(source.getSourceId());
+        }
+        if (controller != null && mageObject != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
                 controller.choose(outcome, choice, game);
@@ -65,10 +68,12 @@ public class ChooseColorEffect extends OneShotEffect {
                 }
             }
             if (!game.isSimulation()) {
-                game.informPlayers(permanent.getLogName()+": "+controller.getLogName()+" has chosen "+choice.getChoice());
+                game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
             }
-            game.getState().setValue(source.getSourceId() + "_color", choice.getColor());
-            permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
+            game.getState().setValue(mageObject.getId() + "_color", choice.getColor());
+            if (mageObject instanceof Permanent) {
+                ((Permanent) mageObject).addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
+            }
             return true;
         }
         return false;

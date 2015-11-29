@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -42,6 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
@@ -53,6 +55,7 @@ public class Token extends MageObjectImpl {
     private int tokenType;
     private int originalCardNumber;
     private String originalExpansionSetCode;
+    private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
 
     // list of set codes tokene images are available for
@@ -89,6 +92,7 @@ public class Token extends MageObjectImpl {
         if (abilities != null) {
             this.abilities = abilities.copy();
         }
+        this.expansionSetCodeChecked = false;
     }
 
     public Token(final Token token) {
@@ -99,6 +103,7 @@ public class Token extends MageObjectImpl {
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
         this.originalCardNumber = token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
+        this.expansionSetCodeChecked = token.expansionSetCodeChecked;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
     }
@@ -132,13 +137,24 @@ public class Token extends MageObjectImpl {
     }
 
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking) {
+        return putOntoBattlefield(amount, game, sourceId, controllerId, tapped, attacking, null);
+    }
+
+    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
         }
         lastAddedTokenIds.clear();
-        // TODO: Check this setCode handling because it makes no sens if token put into play with e.g. "Feldon of the third Path"
+
+        // moved here from CreateTokenEffect because not all cards that create tokens use CreateTokenEffect
+        // they use putOntoBattlefield directly
         Card source = game.getCard(sourceId);
+        if (!expansionSetCodeChecked) {
+            expansionSetCodeChecked = this.updateExpansionSetCode(source);
+        }
+
+        // TODO: Check this setCode handling because it makes no sense if token put into play with e.g. "Feldon of the third Path"
         String setCode;
         if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {
             setCode = this.getOriginalExpansionSetCode();
@@ -148,31 +164,43 @@ public class Token extends MageObjectImpl {
         GameEvent event = new GameEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount, this.getCardType().contains(CardType.CREATURE));
         if (!game.replaceEvent(event)) {
             amount = event.getAmount();
+
+            List<Permanent> permanents = new ArrayList<>();
+            List<Permanent> permanentsEntered = new ArrayList<>();
+
             for (int i = 0; i < amount; i++) {
                 PermanentToken newToken = new PermanentToken(this, event.getPlayerId(), setCode, game); // use event.getPlayerId() because it can be replaced by replacement effect
                 game.getState().addCard(newToken);
-                game.addPermanent(newToken);
-                if (tapped) {
-                    newToken.setTapped(true);
-                }
-                this.lastAddedTokenIds.add(newToken.getId());
-                this.lastAddedTokenId = newToken.getId();
-                game.setScopeRelevant(true);
-                game.applyEffects();
-                boolean entered = newToken.entersBattlefield(sourceId, game, Zone.OUTSIDE, true);
-                game.setScopeRelevant(false);
-                game.applyEffects();
-                if (entered) {
-                    game.fireEvent(new ZoneChangeEvent(newToken, event.getPlayerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
-                    if (attacking && game.getCombat() != null) {
-                        game.getCombat().addAttackingCreature(newToken.getId(), game);
-                    }
-                    if (!game.isSimulation()) {
-                        game.informPlayers(controller.getLogName() + " puts a " + newToken.getLogName() + " token onto the battlefield");
-                    }
+                permanents.add(newToken);
+                game.getPermanentsEntering().put(newToken.getId(), newToken);
+                newToken.setTapped(tapped);
+            }
+            game.setScopeRelevant(true);
+            for (Permanent permanent : permanents) {
+                if (permanent.entersBattlefield(sourceId, game, Zone.OUTSIDE, true)) {
+                    permanentsEntered.add(permanent);
+                } else {
+                    game.getPermanentsEntering().remove(permanent.getId());
                 }
             }
+            game.setScopeRelevant(false);
+            for (Permanent permanent : permanentsEntered) {
+                game.addPermanent(permanent);
+                permanent.setZone(Zone.BATTLEFIELD, game);
+                game.getPermanentsEntering().remove(permanent.getId());
 
+                this.lastAddedTokenIds.add(permanent.getId());
+                this.lastAddedTokenId = permanent.getId();
+                game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
+                if (attacking && game.getCombat() != null) {
+                    game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
+                }
+                if (!game.isSimulation()) {
+                    game.informPlayers(controller.getLogName() + " puts a " + permanent.getLogName() + " token onto the battlefield");
+                }
+
+            }
+            game.applyEffects();
             return true;
         }
         return false;
@@ -217,12 +245,24 @@ public class Token extends MageObjectImpl {
             if (availableImageSetCodes.contains(code)) {
                 setOriginalExpansionSetCode(code);
             } else {
-                setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+                // we should not set random set if appropriate set is already used
+                if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
+                        || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
+                    setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+                }
             }
         } else {
             if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
                 setOriginalExpansionSetCode(code);
             }
         }
+    }
+
+    public boolean updateExpansionSetCode(Card source) {
+        if (source == null) {
+            return false;
+        }
+        this.setExpansionSetCodeForImage(source.getExpansionSetCode());
+        return true;
     }
 }

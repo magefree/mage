@@ -25,12 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.AbilityType;
@@ -41,7 +42,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
-import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -49,19 +50,20 @@ import mage.target.TargetPlayer;
  */
 public class BurningTreeShaman extends CardImpl {
 
-    public BurningTreeShaman (UUID ownerId) {
+    public BurningTreeShaman(UUID ownerId) {
         super(ownerId, 105, "Burning-Tree Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Centaur");
         this.subtype.add("Shaman");
 
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
+        // Whenever a player activates an ability that isn't a mana ability, Burning-Tree Shaman deals 1 damage to that player.
         this.addAbility(new BurningTreeShamanTriggeredAbility());
     }
 
-    public BurningTreeShaman (final BurningTreeShaman card) {
+    public BurningTreeShaman(final BurningTreeShaman card) {
         super(card);
     }
 
@@ -72,9 +74,9 @@ public class BurningTreeShaman extends CardImpl {
 }
 
 class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
+
     BurningTreeShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-        this.addTarget(new TargetPlayer());
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(1), false, "that player", true));
     }
 
     BurningTreeShamanTriggeredAbility(final BurningTreeShamanTriggeredAbility ability) {
@@ -94,8 +96,10 @@ class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
-            this.getTargets().get(0).add(event.getPlayerId(), game);
+        if (stackAbility != null && stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
+            for (Effect effect : getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            }
             return true;
         }
         return false;

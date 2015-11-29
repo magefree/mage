@@ -83,7 +83,7 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
-import mage.client.chat.ChatPanel;
+import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.components.MageDesktopManager;
 import mage.client.components.MageJDesktop;
@@ -165,7 +165,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static boolean grayMode = false;
     private static boolean fullscreenMode = false;
 
-    private static final Map<UUID, ChatPanel> chats = new HashMap<>();
+    private static final Map<UUID, ChatPanelBasic> chats = new HashMap<>();
     private static final Map<UUID, GamePanel> games = new HashMap<>();
     private static final Map<UUID, DraftPanel> drafts = new HashMap<>();
     private static final MageUI ui = new MageUI();
@@ -358,6 +358,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 } else {
                     connectDialog.showDialog();
                 }
+                setWindowTitle();
             }
         });
 
@@ -369,10 +370,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void setWindowTitle() {
+    private void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: "
-                + version == null ? "<not available>" : version.toString() + "  Server: "
-                        + ((session != null && session.isConnected()) ? session.getVersionInfo() : "<not connected>"));
+                + (version == null ? "<not available>" : version.toString()) + "  Server: "
+                + ((session != null && session.isConnected()) ? session.getVersionInfo() : "<not connected>"));
     }
 
     private void addTooltipContainer() {
@@ -959,12 +960,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 session.disconnect(false);
                 tablesPane.clearChat();
-                setWindowTitle();
                 showMessage("You have disconnected");
             }
         } else {
             connectDialog.showDialog();
         }
+        setWindowTitle();
     }//GEN-LAST:event_btnConnectActionPerformed
 
     public void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
@@ -1249,11 +1250,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return ui;
     }
 
-    public static ChatPanel getChat(UUID chatId) {
+    public static ChatPanelBasic getChat(UUID chatId) {
         return chats.get(chatId);
     }
 
-    public static void addChat(UUID chatId, ChatPanel chatPanel) {
+    public static void addChat(UUID chatId, ChatPanelBasic chatPanel) {
         chats.put(chatId, chatPanel);
     }
 

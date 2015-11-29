@@ -69,7 +69,7 @@ public class StreambedAquitects extends CardImpl {
 
         // {tap}: Target Merfolk creature gets +1/+1 and gains islandwalk until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1,1, Duration.EndOfTurn), new TapSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(new IslandwalkAbility(), Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityTargetEffect(new IslandwalkAbility(false), Duration.EndOfTurn));
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);

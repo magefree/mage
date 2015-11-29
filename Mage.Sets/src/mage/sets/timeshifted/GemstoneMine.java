@@ -40,21 +40,12 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class GemstoneMine extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(Predicates.not(new AnotherPredicate()));
-    }
 
     public GemstoneMine(UUID ownerId) {
         super(ownerId, 119, "Gemstone Mine", Rarity.RARE, new CardType[]{CardType.LAND}, "");

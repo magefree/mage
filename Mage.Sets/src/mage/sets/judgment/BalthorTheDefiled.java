@@ -37,8 +37,9 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -50,7 +51,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
-
 
 /**
  *
@@ -75,7 +75,7 @@ public class BalthorTheDefiled extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalthorTheDefiledEffect(), new ManaCostsImpl("{B}{B}{B}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
-        
+
     }
 
     public BalthorTheDefiled(final BalthorTheDefiled card) {
@@ -98,32 +98,32 @@ class BalthorTheDefiledEffect extends OneShotEffect {
                 new ColorPredicate(ObjectColor.RED)));
     }
 
-    public  BalthorTheDefiledEffect() {
+    public BalthorTheDefiledEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player returns all black and all red creature cards from his or her graveyard to the battlefield";
     }
 
-    public  BalthorTheDefiledEffect(final  BalthorTheDefiledEffect effect) {
+    public BalthorTheDefiledEffect(final BalthorTheDefiledEffect effect) {
         super(effect);
     }
 
     @Override
-    public  BalthorTheDefiledEffect copy() {
-        return new  BalthorTheDefiledEffect(this);
+    public BalthorTheDefiledEffect copy() {
+        return new BalthorTheDefiledEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
+            Cards cardsToReturn = new CardsImpl();
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card: player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game)) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
-                    }
+                    cardsToReturn.addAll(player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
                 }
             }
+            controller.moveCards(cardsToReturn.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
             return true;
         }
         return false;

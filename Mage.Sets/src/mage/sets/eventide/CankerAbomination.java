@@ -61,11 +61,7 @@ public class CankerAbomination extends CardImpl {
         this.toughness = new MageInt(6);
 
         // As Canker Abomination enters the battlefield, choose an opponent. Canker Abomination enters the battlefield with a -1/-1 counter on it for each creature that player controls.
-        Ability ability = new AsEntersBattlefieldAbility(new CankerAbominationEffect());
-        Target target = new TargetOpponent();
-        target.setNotTarget(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        this.addAbility(new AsEntersBattlefieldAbility(new CankerAbominationEffect()));
 
     }
 
@@ -97,14 +93,19 @@ class CankerAbominationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent CankerAbomination = game.getPermanent(source.getSourceId());
-        if (player != null && CankerAbomination != null) {
-            Player chosenPlayer = game.getPlayer(source.getFirstTarget());
-            if (chosenPlayer != null) {
-                game.informPlayers(CankerAbomination.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                int amount = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), chosenPlayer.getId(), game).size();
-                CankerAbomination.addCounters(CounterType.M1M1.createInstance(amount), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent cankerAbomination = game.getPermanentEntering(source.getSourceId());
+        if (controller != null && cankerAbomination != null) {
+            Target target = new TargetOpponent();
+            target.setNotTarget(true);
+            controller.choose(outcome, target, source.getSourceId(), game);
+            Player opponent = game.getPlayer(target.getFirstTarget());
+            if (opponent != null) {
+                game.informPlayers(cankerAbomination.getName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());
+                int amount = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), opponent.getId(), game).size();
+                if (amount > 0) {
+                    cankerAbomination.addCounters(CounterType.M1M1.createInstance(amount), game);
+                }
                 return true;
             }
         }

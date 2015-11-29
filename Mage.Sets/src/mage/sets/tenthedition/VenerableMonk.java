@@ -28,12 +28,12 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -50,6 +50,8 @@ public class VenerableMonk extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // When Venerable Monk enters the battlefield, you gain 2 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
     }
 

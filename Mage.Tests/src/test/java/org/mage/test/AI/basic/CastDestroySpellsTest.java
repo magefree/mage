@@ -45,11 +45,13 @@ public class CastDestroySpellsTest extends CardTestPlayerBaseAI {
     @Test
     public void testOrzhovCharm() {
         // Choose one -
-        // Return target creature you control and all Auras you control attached to it to their owner's hand;
-        // or destroy target creature and you lose life equal to its toughness;
-        // or return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
+        // - Return target creature you control and all Auras you control attached to it to their owner's hand;
+        // - Destroy target creature and you lose life equal to its toughness;
+        // - Return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
         addCard(Zone.HAND, playerA, "Orzhov Charm"); // {W}{B}
 
+        // {T}: Add {1} to your mana pool.
+        // {T}  {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B} to your mana pool.
         addCard(Zone.BATTLEFIELD, playerA, "Fetid Heath", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 

@@ -84,26 +84,26 @@ public class IwamoriOfTheOpenFist extends CardImpl {
 class IwamoriOfTheOpenFistEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("legendary creature card");
-    
+
     static {
         filter.add(new SupertypePredicate("Legendary"));
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
-    
+
     public IwamoriOfTheOpenFistEffect() {
         super(Outcome.Detriment);
         this.staticText = "each opponent may put a legendary creature card from his or her hand onto the battlefield";
     }
-    
+
     public IwamoriOfTheOpenFistEffect(final IwamoriOfTheOpenFistEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public IwamoriOfTheOpenFistEffect copy() {
         return new IwamoriOfTheOpenFistEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -123,14 +123,7 @@ class IwamoriOfTheOpenFistEffect extends OneShotEffect {
                     }
                 }
             }
-            if (cards.size() > 0) {
-                for (Card card: cards.getCards(game)) {
-                    Player player = game.getPlayer(card.getOwnerId());
-                    if (player != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                    }
-                }                
-            }
+            controller.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
             return true;
         }
 

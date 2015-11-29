@@ -55,10 +55,9 @@ public class DevoutInvocation extends CardImpl {
         super(ownerId, 16, "Devout Invocation", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{6}{W}");
         this.expansionSetCode = "M14";
 
-
         // Tap any number of untapped creatures you control. Put a 4/4 white Angel creature token with flying onto the battlefield for each creature tapped this way.
         this.getSpellAbility().addEffect(new DevoutInvocationEffect());
-        
+
     }
 
     public DevoutInvocation(final DevoutInvocation card) {
@@ -72,9 +71,9 @@ public class DevoutInvocation extends CardImpl {
 }
 
 class DevoutInvocationEffect extends OneShotEffect {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
-    
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -93,7 +92,7 @@ class DevoutInvocationEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int tappedAmount = 0;
-            TargetPermanent target = new TargetPermanent(0,1,filter, false);
+            TargetPermanent target = new TargetPermanent(0, 1, filter, false);
             while (true && controller.canRespond()) {
                 target.clearChosen();
                 if (target.canChoose(source.getControllerId(), game)) {
@@ -109,15 +108,13 @@ class DevoutInvocationEffect extends OneShotEffect {
                     } else {
                         break;
                     }
-                }
-                else {
+                } else {
                     break;
                 }
             }
             if (tappedAmount > 0) {
                 AngelToken angelToken = new AngelToken();
                 angelToken.putOntoBattlefield(tappedAmount, game, source.getSourceId(), source.getControllerId());
-                game.informPlayers(new StringBuilder(controller.getLogName()).append(" puts ").append(tappedAmount).append(" token").append(tappedAmount != 1 ?"s":"").append(" onto the battlefield").toString());
             }
             return true;
         }

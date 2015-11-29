@@ -94,12 +94,12 @@ class IllGottenGainsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Target target = new TargetCardInYourGraveyard(0, 3, new FilterCard());
                     if (target.choose(Outcome.ReturnToHand, player.getId(), source.getSourceId(), game)) {
-                        controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
+                        player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
                     }
                 }
             }

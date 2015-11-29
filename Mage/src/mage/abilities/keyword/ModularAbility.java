@@ -22,24 +22,24 @@ import mage.target.Target;
 import mage.target.common.TargetArtifactPermanent;
 import mage.util.CardUtil;
 
-
 /**
  *
  * 702.41. Modular
  *
- *   702.41a Modular represents both a static ability and a triggered ability.
- *           "Modular N" means "This permanent enters the battlefield with N +1/+1
- *           counters on it" and "When this permanent is put into a graveyard
- *           from the battlefield, you may put a +1/+1 counter on target artifact
- *           creature for each +1/+1 counter on this permanent."
- *   702.41b If a creature has multiple instances of modular, each one works separately.
+ * 702.41a Modular represents both a static ability and a triggered ability.
+ * "Modular N" means "This permanent enters the battlefield with N +1/+1
+ * counters on it" and "When this permanent is put into a graveyard from the
+ * battlefield, you may put a +1/+1 counter on target artifact creature for each
+ * +1/+1 counter on this permanent." 702.41b If a creature has multiple
+ * instances of modular, each one works separately.
  *
- * 
+ *
  * @author Loki, LevelX2
  */
-
 public class ModularAbility extends DiesTriggeredAbility {
+
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact creature");
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -74,7 +74,7 @@ public class ModularAbility extends DiesTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getTarget().getCounters().getCount(CounterType.P1P1) > 0) {
                 return true;
             }
@@ -94,9 +94,9 @@ public class ModularAbility extends DiesTriggeredAbility {
             sb.append("-Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>");
         } else {
             sb.append(" ").append(amount).append(" <i>(This enters the battlefield with ")
-                          .append(CardUtil.numberToText(amount, "a"))
-                .append(" +1/+1 counter").append(amount != 1 ? "s":"")
-                .append(" on it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>");
+                    .append(CardUtil.numberToText(amount, "a"))
+                    .append(" +1/+1 counter").append(amount != 1 ? "s" : "")
+                    .append(" on it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>");
         }
         return sb.toString();
     }
@@ -108,10 +108,8 @@ class ModularStaticAbility extends StaticAbility {
     private String ruleText;
 
     public ModularStaticAbility(int amount) {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
-        ruleText = new StringBuilder("This enters the battlefield with ").append(CardUtil.numberToText(amount, "a"))
-                .append(" +1/+1 counter").append(amount != 1 ? "s":"")
-                .append(" on it.").toString();
+        super(Zone.ALL, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
+        ruleText = "This enters the battlefield with " + CardUtil.numberToText(amount, "a") + " +1/+1 counter" + (amount != 1 ? "s" : "") + " on it.";
         this.setRuleVisible(false);
     }
 
@@ -131,9 +129,10 @@ class ModularStaticAbility extends StaticAbility {
     }
 }
 
-
 class ModularDistributeCounterEffect extends OneShotEffect {
+
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact creature");
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }

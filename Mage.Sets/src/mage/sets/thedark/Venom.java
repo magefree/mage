@@ -31,8 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -66,7 +67,10 @@ public class Venom extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
-        this.addAbility(new VenomTriggeredAbility());
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        effect.setText("destroy that creature at end of combat");
+        this.addAbility(new VenomTriggeredAbility(effect));
     }
 
     public Venom(final Venom card) {
@@ -81,8 +85,8 @@ public class Venom extends CardImpl {
 
 class VenomTriggeredAbility extends TriggeredAbilityImpl {
 
-    VenomTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new VenomEffect());
+    VenomTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
     }
 
     VenomTriggeredAbility(final VenomTriggeredAbility ability) {
@@ -126,37 +130,5 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.";
-    }
-}
-
-class VenomEffect extends OneShotEffect {
-
-    VenomEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "destroy that creature at end of combat";
-    }
-
-    VenomEffect(final VenomEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public VenomEffect copy() {
-        return new VenomEffect(this);
     }
 }

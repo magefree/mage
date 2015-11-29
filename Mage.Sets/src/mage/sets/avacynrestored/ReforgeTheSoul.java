@@ -28,17 +28,14 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.abilities.keyword.MiracleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -50,9 +47,11 @@ public class ReforgeTheSoul extends CardImpl {
         super(ownerId, 151, "Reforge the Soul", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "AVR";
 
-
         // Each player discards his or her hand, then draws seven cards.
-        this.getSpellAbility().addEffect(new ReforgeTheSoulEffect());
+        this.getSpellAbility().addEffect(new DiscardHandAllEffect());
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText(", then draws seven cards");
+        this.getSpellAbility().addEffect(effect);
 
         // Miracle {1}{R}
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{R}")));
@@ -65,41 +64,5 @@ public class ReforgeTheSoul extends CardImpl {
     @Override
     public ReforgeTheSoul copy() {
         return new ReforgeTheSoul(this);
-    }
-}
-
-class ReforgeTheSoulEffect extends OneShotEffect {
-
-    public ReforgeTheSoulEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Each player discards his or her hand, then draws seven cards";
-    }
-
-    public ReforgeTheSoulEffect(final ReforgeTheSoulEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ReforgeTheSoulEffect copy() {
-        return new ReforgeTheSoulEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    for (Card card : player.getHand().getCards(game)) {
-                        player.discard(card, source, game);
-                    }
-
-                    player.drawCards(7, game);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

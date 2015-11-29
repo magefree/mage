@@ -6,6 +6,7 @@
 package mage.abilities.common;
 
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
@@ -21,7 +22,7 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
 
     private final ManaCosts costsToAdd;
 
-    public PayMoreToCastAsThoughtItHadFlashAbility(Card card, ManaCosts costsToAdd) {
+    public PayMoreToCastAsThoughtItHadFlashAbility(Card card, ManaCosts<ManaCost> costsToAdd) {
         super(card.getSpellAbility().getManaCosts().copy(), card.getName() + " as though it had flash", Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
         this.costsToAdd = costsToAdd;
         this.timing = TimingRule.INSTANT;

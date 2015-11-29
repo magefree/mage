@@ -152,7 +152,7 @@ class SkeletonToken extends Token {
         super("Skeleton", "1/1 black Skeleton creature token with \"{B}: Regenerate this creature.\"");
         this.cardType.add(CardType.CREATURE);
         this.color = ObjectColor.BLACK;
-        this.subtype.add("Bat");
+        this.subtype.add("Skeleton");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

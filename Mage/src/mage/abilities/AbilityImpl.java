@@ -84,8 +84,8 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbilityImpl implements Ability {
 
-    private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
+    private static final Logger logger = Logger.getLogger(AbilityImpl.class);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
     private static final List<Watcher> emptyWatchers = new ArrayList<>();
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
@@ -155,7 +155,7 @@ public abstract class AbilityImpl implements Ability {
                 subAbilities.add(subAbility.copy());
             }
         }
-        this.modes = ability.modes.copy();
+        this.modes = ability.getModes().copy();
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
@@ -196,6 +196,7 @@ public abstract class AbilityImpl implements Ability {
         boolean result = true;
         //20100716 - 117.12
         if (checkIfClause(game)) {
+
             for (Effect effect : getEffects()) {
                 if (effect instanceof OneShotEffect) {
                     boolean effectResult = effect.apply(game, this);
@@ -237,6 +238,7 @@ public abstract class AbilityImpl implements Ability {
                  */
                 if (effect.applyEffectsAfter()) {
                     game.applyEffects();
+                    game.getState().getTriggers().checkStateTriggers(game);
                 }
             }
         }
@@ -254,8 +256,13 @@ public abstract class AbilityImpl implements Ability {
         /* 20130201 - 601.2b
          * If the spell is modal the player announces the mode choice (see rule 700.2).
          */
-        if (!modes.choose(game, this)) {
+        if (!getModes().choose(game, this)) {
             return false;
+        }
+        if (controller.isTestMode()) {
+            if (!controller.addTargets(this, game)) {
+                return false;
+            }
         }
 
         getSourceObject(game);
@@ -273,9 +280,8 @@ public abstract class AbilityImpl implements Ability {
         }
         // TODO: Because all (non targeted) choices have to be done during resolution
         // this has to be removed, if all using effects are changed
-        for (UUID modeId : this.getModes().getSelectedModes()) {
-            this.getModes().setActiveMode(modeId);
-            if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
+        for (Mode mode : this.getModes().getSelectedModes()) {
+            if (mode.getChoices().size() > 0 && mode.getChoices().choose(game, this) == false) {
                 logger.debug("activate failed - choice");
                 return false;
             }
@@ -311,9 +317,12 @@ public abstract class AbilityImpl implements Ability {
         // its mana cost; see rule 107.3), the player announces the value of that variable.
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
-
-        for (UUID modeId : this.getModes().getSelectedModes()) {
-            this.getModes().setActiveMode(modeId);
+        // For effects from cards like Void Winnower x costs have to be set
+        if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
+            return false;
+        }
+        for (Mode mode : this.getModes().getSelectedModes()) {
+            this.getModes().setActiveMode(mode);
             //20121001 - 601.2c
             // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
@@ -334,7 +343,7 @@ public abstract class AbilityImpl implements Ability {
             if (sourceObject != null && !this.getAbilityType().equals(AbilityType.TRIGGERED)) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
-            if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
+            if (mode.getTargets().size() > 0 && mode.getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, noMana, game) == false) {
                 if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
                     game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
                 }
@@ -407,7 +416,7 @@ public abstract class AbilityImpl implements Ability {
             }
             if (variableManaCost != null) {
                 int xValue = getManaCostsToPay().getX();
-                game.informPlayers(new StringBuilder(controller.getLogName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+                game.informPlayers(controller.getLogName() + " announces a value of " + xValue + " for " + variableManaCost.getText());
             }
         }
         activated = true;
@@ -444,25 +453,36 @@ public abstract class AbilityImpl implements Ability {
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
         boolean alternativeCostisUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent) && !(this instanceof FlashbackAbility)) {
-            for (Ability ability : sourceObject.getAbilities()) {
-                // if cast for noMana no Alternative costs are allowed
-                if (!noMana && ability instanceof AlternativeSourceCosts) {
-                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                    if (alternativeSpellCosts.isAvailable(this, game)) {
-                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                            // only one alternative costs may be activated
-                            alternativeCostisUsed = true;
-                            break;
+            Abilities<Ability> abilities = null;
+            if (sourceObject instanceof Card) {
+                abilities = ((Card) sourceObject).getAbilities(game);
+            } else {
+                sourceObject.getAbilities();
+            }
+            if (abilities != null) {
+                for (Ability ability : abilities) {
+                    // if cast for noMana no Alternative costs are allowed
+                    if (!noMana && ability instanceof AlternativeSourceCosts) {
+                        AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                        if (alternativeSpellCosts.isAvailable(this, game)) {
+                            if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                                // only one alternative costs may be activated
+                                alternativeCostisUsed = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if (ability instanceof OptionalAdditionalSourceCosts) {
-                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+                    if (ability instanceof OptionalAdditionalSourceCosts) {
+                        ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+                    }
                 }
             }
             // controller specific alternate spell costs
             if (!noMana && !alternativeCostisUsed) {
-                if (this.getAbilityType().equals(AbilityType.SPELL)) {
+                if (this.getAbilityType().equals(AbilityType.SPELL)
+                        // 117.9a Only one alternative cost can be applied to any one spell as it’s being cast.
+                        // So an alternate spell ability can't be paid with Omniscience
+                        && !((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
                     for (AlternativeSourceCosts alternativeSourceCosts : controller.getAlternativeSourceCosts()) {
                         if (alternativeSourceCosts.isAvailable(this, game)) {
                             if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
@@ -496,12 +516,11 @@ public abstract class AbilityImpl implements Ability {
                 // set the xcosts to paid
                 variableCost.setAmount(xValue);
                 ((Cost) variableCost).setPaid();
-                String message = new StringBuilder(controller.getLogName())
-                        .append(" announces a value of ").append(xValue).append(" (").append(variableCost.getActionText()).append(")").toString();
+                String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ")";
                 if (announceString == null) {
                     announceString = message;
                 } else {
-                    announceString = new StringBuilder(announceString).append(" ").append(message).toString();
+                    announceString = announceString + " " + message;
                 }
             }
         }
@@ -669,7 +688,16 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Effects getEffects() {
-        return modes.getMode().getEffects();
+        return getModes().getMode().getEffects();
+    }
+
+    @Override
+    public Effects getAllEffects() {
+        Effects allEffects = new Effects();
+        for (Mode mode : getModes().values()) {
+            allEffects.addAll(mode.getEffects());
+        }
+        return allEffects;
     }
 
     @Override
@@ -685,7 +713,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Choices getChoices() {
-        return modes.getMode().getChoices();
+        return getModes().getMode().getChoices();
     }
 
     @Override
@@ -758,23 +786,28 @@ public abstract class AbilityImpl implements Ability {
                 sbRule.append(": ");
             }
         }
-        if (abilityWord != null) {
-            sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> &mdash; "));
-        }
-        String text = modes.getText();
+
+        String ruleStart = sbRule.toString();
+        String text = getModes().getText();
+        String rule;
         if (!text.isEmpty()) {
-            if (sbRule.length() > 1) {
-                String end = sbRule.substring(sbRule.length() - 2).trim();
+            if (ruleStart.length() > 1) {
+                String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    sbRule.append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
+                    rule = ruleStart + Character.toUpperCase(text.charAt(0)) + text.substring(1);
                 } else {
-                    sbRule.append(text);
+                    rule = ruleStart + text;
                 }
             } else {
-                sbRule.append(text);
+                rule = ruleStart + text;
             }
+        } else {
+            rule = ruleStart;
         }
-        return sbRule.toString();
+        if (abilityWord != null) {
+            rule = "<i>" + abilityWord + "</i> &mdash; " + Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+        }
+        return rule;
     }
 
     @Override
@@ -847,7 +880,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Targets getTargets() {
-        return modes.getMode().getTargets();
+        return getModes().getMode().getTargets();
     }
 
     @Override
@@ -857,12 +890,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean isModal() {
-        return this.modes.size() > 1;
+        return getModes().size() > 1;
     }
 
     @Override
     public void addMode(Mode mode) {
-        this.modes.addMode(mode);
+        getModes().addMode(mode);
     }
 
     @Override
@@ -873,9 +906,12 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public boolean canChooseTarget(Game game) {
         int found = 0;
-        for (Mode mode : modes.values()) {
+        for (Mode mode : getModes().values()) {
             if (mode.getTargets().canChoose(sourceId, controllerId, game)) {
                 found++;
+                if (getModes().isEachModeMoreThanOnce()) {
+                    return true;
+                }
                 if (found >= getModes().getMinModes()) {
                     return true;
                 }
@@ -929,7 +965,10 @@ public abstract class AbilityImpl implements Ability {
         // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
         // so will use the sourceId of the object itself that came as a parameter if it is not null
         if (object == null) {
-            object = game.getObject(getSourceId());
+            object = game.getPermanentEntering(getSourceId());
+            if (object == null) {
+                object = game.getObject(getSourceId());
+            }
         }
         if (object != null && !object.getAbilities().contains(this)) {
             if (object instanceof Permanent) {
@@ -1005,7 +1044,7 @@ public abstract class AbilityImpl implements Ability {
             logger.warn("Could get no object: " + this.toString());
         }
         return new StringBuilder(" activates: ")
-                .append(object != null ? this.formatRule(modes.getText(), object.getLogName()) : modes.getText())
+                .append(object != null ? this.formatRule(getModes().getText(), object.getLogName()) : getModes().getText())
                 .append(" from ")
                 .append(getMessageText(game)).toString();
     }
@@ -1074,13 +1113,15 @@ public abstract class AbilityImpl implements Ability {
             }
         } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
             Modes spellModes = ((Spell) object).getSpellAbility().getModes();
-            int item = 0;
-            for (Mode mode : spellModes.values()) {
-                item++;
-                if (spellModes.getSelectedModes().contains(mode.getId())) {
-                    spellModes.setActiveMode(mode.getId());
-                    sb.append(" (mode ").append(item).append(")");
-                    sb.append(getTargetDescriptionForLog(getTargets(), game));
+            for (Mode selectedMode : spellModes.getSelectedModes()) {
+                int item = 0;
+                for (Mode mode : spellModes.values()) {
+                    item++;
+                    if (mode.getId().equals(selectedMode.getId())) {
+                        sb.append(" (mode ").append(item).append(")");
+                        sb.append(getTargetDescriptionForLog(selectedMode.getTargets(), game));
+                        break;
+                    }
                 }
             }
         } else {

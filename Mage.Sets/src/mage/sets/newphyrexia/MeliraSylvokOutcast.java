@@ -29,13 +29,6 @@ package mage.sets.newphyrexia;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +36,13 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -63,7 +63,6 @@ public class MeliraSylvokOutcast extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Scout");
 
-        
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -113,7 +112,7 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ADD_COUNTER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getData().equals(CounterType.POISON.getName()) && event.getTargetId().equals(source.getControllerId());
@@ -141,16 +140,19 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ADD_COUNTER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getData().equals(CounterType.M1M1.getName())) {
             Permanent perm = game.getPermanent(event.getTargetId());
+            if (perm == null) {
+                perm = game.getPermanentEntering(event.getTargetId());
+            }
             if (perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId())) {
                 return true;
             }
@@ -181,7 +183,7 @@ class MeliraSylvokOutcastEffect3 extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (opponents.contains(perm.getControllerId())) {
                 perm.getAbilities().remove(InfectAbility.getInstance());
             }

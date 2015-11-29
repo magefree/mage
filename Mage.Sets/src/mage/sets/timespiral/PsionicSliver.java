@@ -60,13 +60,13 @@ public class PsionicSliver extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // All Sliver creatures have "{tap}: This creature deals 2 damage to target creature or player and 3 damage to itself."
+        // All Sliver creatures have "{T}: This creature deals 2 damage to target creature or player and 3 damage to itself."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability.addEffect(new DamageSelfEffect(3));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
-                        filter, "All Sliver creatures have \"{tap}: This creature deals 2 damage to target creature or player and 3 damage to itself.\"")));
+                        filter, "All Sliver creatures have \"{T}: This creature deals 2 damage to target creature or player and 3 damage to itself.\"")));
     }
 
     public PsionicSliver(final PsionicSliver card) {

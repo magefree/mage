@@ -12,5 +12,7 @@ package mage.cards;
 public interface SplitCardHalf extends Card {
 
     @Override
-    Card copy();
+    SplitCardHalf copy();
+
+    void setParentCard(SplitCard card);
 }

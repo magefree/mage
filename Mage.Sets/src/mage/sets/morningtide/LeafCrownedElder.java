@@ -55,10 +55,10 @@ public class LeafCrownedElder extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
-        // Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Leaf-Crowned Elder, you may reveal it. 
+        // Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Leaf-Crowned Elder, you may reveal it.
         // If you do, you may play that card without paying its mana cost.
         this.addAbility(new KinshipAbility(new LeafCrownedElderPlayEffect()));
-        
+
     }
 
     public LeafCrownedElder(final LeafCrownedElder card) {
@@ -84,18 +84,11 @@ class LeafCrownedElderPlayEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (player != null && card != null) {            
-            if (player.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", source, game)) {
-                if (card.getCardType().contains(CardType.LAND)) {
-                    // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                    if (game.getActivePlayerId().equals(player.getId()) && player.canPlayLand()) {
-                        player.playLand(card, game);
-                    }
-                } else {
-                    player.cast(card.getSpellAbility(), game, true);
-                }
+        if (controller != null && card != null) {
+            if (controller.chooseUse(Outcome.PlayForFree, "Play " + card.getIdName() + " without paying its mana cost?", source, game)) {
+                controller.playCard(card, game, true, true);
             }
             return true;
         }

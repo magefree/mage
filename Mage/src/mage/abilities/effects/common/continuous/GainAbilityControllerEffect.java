@@ -61,7 +61,10 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
     public GainAbilityControllerEffect(Ability ability, Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
-        staticText = "You have " + ability.getRule() + " " + duration.toString();
+        staticText = "You have " + ability.getRule();
+        if (!duration.toString().isEmpty()) {
+            staticText += " " + duration.toString();
+        }
     }
 
     public GainAbilityControllerEffect(final GainAbilityControllerEffect effect) {

@@ -69,4 +69,31 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
 
     }
 
+    /**
+     * Activating Karn Liberated 's ultimate in an edh game (human OR ai) causes
+     * all the command zones to lose their generals upon the new game restart
+     */
+    @Test
+    public void castCommanderAfterKarnUltimate() {
+        // +4: Target player exiles a card from his or her hand.
+        // -3: Exile target permanent.
+        // -14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
+        addCard(Zone.BATTLEFIELD, playerA, "Karn Liberated", 1);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
+        addTarget(playerA, "Silvercoat Lion");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
+        addTarget(playerA, "Silvercoat Lion");
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "-14: Restart");
+
+        setStopAt(5, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Karn Liberated", 0);
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
+        assertCommandZoneCount(playerA, "Prossh, Skyraider of Kher", 1);
+        assertCommandZoneCount(playerB, "Ob Nixilis of the Black Oath", 1);
+
+    }
 }

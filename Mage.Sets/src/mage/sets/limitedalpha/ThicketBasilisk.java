@@ -29,27 +29,29 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author Backfir3
  */
 public class ThicketBasilisk extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature");
+
+    static {
+        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+    }
 
     public ThicketBasilisk(UUID ownerId) {
         super(ownerId, 127, "Thicket Basilisk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
@@ -60,7 +62,10 @@ public class ThicketBasilisk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Thicket Basilisk blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
-        this.addAbility(new ThicketBasiliskTriggeredAbility());
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        effect.setText("destroy that creature at end of combat");
+        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, filter, false));
     }
 
     public ThicketBasilisk(final ThicketBasilisk card) {
@@ -70,82 +75,5 @@ public class ThicketBasilisk extends CardImpl {
     @Override
     public ThicketBasilisk copy() {
         return new ThicketBasilisk(this);
-    }
-}
-
-class ThicketBasiliskTriggeredAbility extends TriggeredAbilityImpl {
-
-    ThicketBasiliskTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ThicketBasiliskEffect());
-    }
-
-    ThicketBasiliskTriggeredAbility(final ThicketBasiliskTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ThicketBasiliskTriggeredAbility copy() {
-        return new ThicketBasiliskTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.BLOCKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent blocker = game.getPermanent(event.getSourceId());
-        Permanent blocked = game.getPermanent(event.getTargetId());
-        Permanent thicketBasilisk = game.getPermanent(sourceId);
-        if (blocker != null && blocker != thicketBasilisk
-                && !blocker.getSubtype().contains("Wall")
-                && blocked == thicketBasilisk) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
-            return true;
-        }
-        if (blocker != null && blocker == thicketBasilisk
-                && !blocked.getSubtype().contains("Wall")) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.";
-    }
-}
-
-class ThicketBasiliskEffect extends OneShotEffect {
-
-    ThicketBasiliskEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "destroy that creature at end of combat";
-    }
-
-    ThicketBasiliskEffect(final ThicketBasiliskEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ThicketBasiliskEffect copy() {
-        return new ThicketBasiliskEffect(this);
     }
 }

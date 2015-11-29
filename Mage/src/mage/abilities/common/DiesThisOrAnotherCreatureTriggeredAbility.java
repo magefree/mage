@@ -28,9 +28,9 @@
 package mage.abilities.common;
 
 import mage.MageObject;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,7 +49,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     }
 
     public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        super(Zone.ALL, effect, optional); // Needs "ALL" if the source itself should trigger or multiple (incl. source go to grave)
         this.filter = filter;
     }
 
@@ -67,38 +67,37 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        Permanent sourcePermanent;
+        Permanent sourcePermanent = null;
         if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
             sourcePermanent = game.getPermanent(getSourceId());
         } else {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
+            if (game.getShortLivingLKI(sourceId, Zone.BATTLEFIELD)) {
+                sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
+            }
         }
         if (sourcePermanent == null) {
             return false;
         }
         return hasSourceObjectAbility(game, sourcePermanent, event);
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
 
-        if (game.getPermanent(sourceId) == null) {
-            if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
-                return false;
-            }
+        if (game.getPermanentOrLKIBattlefield(getSourceId()) == null) {
+            return false;
         }
 
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null) {
-                if (permanent.getId().equals(this.getSourceId())) {
+            if (zEvent.getTarget() != null) {
+                if (zEvent.getTarget().getId().equals(this.getSourceId())) {
                     return true;
                 } else {
-                    if (filter.match(permanent, sourceId, controllerId, game)) {
+                    if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
                         return true;
                     }
                 }

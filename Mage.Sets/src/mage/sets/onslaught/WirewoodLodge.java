@@ -38,9 +38,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -48,7 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WirewoodLodge extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf");
+    private static final FilterPermanent filter = new FilterPermanent("Elf");
+
     static {
         filter.add(new SubtypePredicate("Elf"));
     }
@@ -56,14 +57,14 @@ public class WirewoodLodge extends CardImpl {
     public WirewoodLodge(UUID ownerId) {
         super(ownerId, 329, "Wirewood Lodge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
-        
+
         // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        
+
         // {G}, {T}: Untap target Elf.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

@@ -46,7 +46,7 @@ public class Smash extends CardImpl {
         this.expansionSetCode = "APC";
 
         // Destroy target artifact.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

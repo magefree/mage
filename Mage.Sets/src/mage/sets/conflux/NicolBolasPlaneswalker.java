@@ -28,19 +28,17 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -65,8 +63,7 @@ public class NicolBolasPlaneswalker extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Bolas");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +3: Destroy target noncreature permanent.
         LoyaltyAbility ability = new LoyaltyAbility(new DestroyTargetEffect(), 3);

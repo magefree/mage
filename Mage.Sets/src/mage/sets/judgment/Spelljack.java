@@ -28,7 +28,6 @@
 package mage.sets.judgment;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -42,7 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -75,40 +73,35 @@ public class Spelljack extends CardImpl {
 }
 
 class SpelljackEffect extends OneShotEffect {
-    
+
     SpelljackEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may play it without paying its mana cost for as long as it remains exiled";
     }
-    
+
     SpelljackEffect(final SpelljackEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public SpelljackEffect copy() {
         return new SpelljackEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID objectId = targetPointer.getFirst(game, source);
-        UUID sourceId = source.getSourceId();
-
-        StackObject stackObject = game.getStack().getStackObject(objectId);
-        if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-            game.rememberLKI(objectId, Zone.STACK, stackObject);
-            game.getStack().remove(stackObject);
-            if (!((Spell) stackObject).isCopiedSpell()) {
-                MageObject card = game.getObject(stackObject.getSourceId());
-                if (card instanceof Card) {
-                    ((Card) card).moveToZone(Zone.EXILED, sourceId, game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            UUID targetId = targetPointer.getFirst(game, source);
+            StackObject stackObject = game.getStack().getStackObject(targetId);
+            if (stackObject != null && game.getStack().counter(targetId, source.getSourceId(), game, Zone.EXILED, false, false)) {
+                Card card = ((Spell) stackObject).getCard();
+                if (card != null) {
                     ContinuousEffect effect = new SpelljackCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
                     game.addEffect(effect, source);
                 }
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
             return true;
         }
         return false;
@@ -148,10 +141,9 @@ class SpelljackCastFromExileEffect extends AsThoughEffectImpl {
                 if (card != null) {
                     if (game.getState().getZone(sourceId) == Zone.EXILED) {
                         Player player = game.getPlayer(affectedControllerId);
-                        player.setCastSourceIdWithAlternateMana(sourceId, null);
+                        player.setCastSourceIdWithAlternateMana(sourceId, null, null);
                         return true;
-                    }
-                    else {
+                    } else {
                         this.discard();
                     }
                 }

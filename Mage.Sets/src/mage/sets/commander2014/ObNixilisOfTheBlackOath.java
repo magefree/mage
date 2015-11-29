@@ -28,11 +28,10 @@
 package mage.sets.commander2014;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -45,17 +44,14 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.DemonToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -70,20 +66,19 @@ public class ObNixilisOfTheBlackOath extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Nixilis");
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +2: Each opponent loses 1 life. You gain life equal to the life lost this way.
         this.addAbility(new LoyaltyAbility(new ObNixilisOfTheBlackOathEffect1(), 2));
 
         // -2: Put a 5/5 black Demon creature token with flying onto the battlefield. You lose 2 life.
-        LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new CreateTokenEffect(new ObNixilisDemonToken()), -2);
+        LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new CreateTokenEffect(new DemonToken()), -2);
         loyaltyAbility.addEffect(new LoseLifeSourceControllerEffect(2));
         this.addAbility(loyaltyAbility);
 
         // -8: You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ObNixilisOfTheBlackOathEmblem()), -8));
-        
+
         // Ob Nixilis of the Black Oath can be your commander.
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
@@ -114,7 +109,7 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int loseLife = 0;
-            for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
                     loseLife += opponent.loseLife(1, game);
@@ -134,31 +129,16 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
 
 }
 
-class ObNixilisDemonToken extends Token {
-
-    ObNixilisDemonToken() {
-        super("Demon", "5/5 black Demon creature token with flying");
-        setTokenType(1);
-        setOriginalExpansionSetCode("C14");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Demon");
-
-        color.setBlack(true);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-
-        addAbility(FlyingAbility.getInstance());
-    }
-}
-
 class ObNixilisOfTheBlackOathEmblem extends Emblem {
+
     // You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
+
     public ObNixilisOfTheBlackOathEmblem() {
         this.setName("EMBLEM: Ob Nixilis of the Black Oath");
         DynamicValue xValue = new SacrificeCostCreaturesPower();
         Effect effect = new GainLifeEffect(xValue);
         effect.setText("You gain X life");
-        Ability ability  = new SimpleActivatedAbility(Zone.COMMAND, effect, new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.COMMAND, effect, new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         effect = new DrawCardSourceControllerEffect(xValue);
         effect.setText("and draw X cards, where X is the sacrificed creature's power");

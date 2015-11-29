@@ -30,11 +30,11 @@ package mage.abilities.condition.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-
 /**
- * Checks if the player has its commander in play
+ * Checks if the player has its commander in play and controls it
  *
  * @author LevelX2
  */
@@ -42,7 +42,8 @@ public class CommanderInPlayCondition implements Condition {
 
     private static CommanderInPlayCondition fInstance = null;
 
-    private CommanderInPlayCondition() {}
+    private CommanderInPlayCondition() {
+    }
 
     public static Condition getInstance() {
         if (fInstance == null) {
@@ -55,7 +56,8 @@ public class CommanderInPlayCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return game.getPermanent(controller.getCommanderId()) != null;
+            Permanent commander = game.getPermanent(controller.getCommanderId());
+            return commander != null && commander.getControllerId().equals(source.getControllerId());
         }
         return false;
     }

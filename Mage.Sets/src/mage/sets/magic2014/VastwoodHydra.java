@@ -30,19 +30,17 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -57,6 +55,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
 public class VastwoodHydra extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
@@ -70,7 +69,8 @@ public class VastwoodHydra extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Vastwood Hydra enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new VastwoodHydraEffect()));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
+
         // When Vastwood Hydra dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on Vastwood Hydra among any number of creatures you control.
         Ability ability = new DiesTriggeredAbility(new VastwoodHydraDistributeEffect(), true);
         ability.addTarget(new TargetCreaturePermanentAmount(new CountersCount(CounterType.P1P1), filter));
@@ -87,46 +87,11 @@ public class VastwoodHydra extends CardImpl {
     }
 }
 
-class VastwoodHydraEffect extends OneShotEffect {
-
-    public VastwoodHydraEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "with X +1/+1 counters on it";
-    }
-
-    public VastwoodHydraEffect(final VastwoodHydraEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                // delete to prevent using it again if put into battlefield from other effect
-                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
-                int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
-                if (amount > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public VastwoodHydraEffect copy() {
-        return new VastwoodHydraEffect(this);
-    }
-
-}
-
 class VastwoodHydraDistributeEffect extends OneShotEffect {
 
     public VastwoodHydraDistributeEffect() {
         super(Outcome.BoostCreature);
-                this.staticText = "distribute a number of +1/+1 counters equal to the number of +1/+1 counters on {this} among any number of creatures you control";
+        this.staticText = "distribute a number of +1/+1 counters equal to the number of +1/+1 counters on {this} among any number of creatures you control";
     }
 
     public VastwoodHydraDistributeEffect(final VastwoodHydraDistributeEffect effect) {
@@ -142,7 +107,7 @@ class VastwoodHydraDistributeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (source.getTargets().size() > 0) {
             Target multiTarget = source.getTargets().get(0);
-            for (UUID target: multiTarget.getTargets()) {
+            for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
                     permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);

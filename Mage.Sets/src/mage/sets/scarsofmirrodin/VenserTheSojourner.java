@@ -32,7 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +40,6 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -48,7 +47,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -80,7 +78,7 @@ public class VenserTheSojourner extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Venser");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);

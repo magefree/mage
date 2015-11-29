@@ -59,7 +59,7 @@ public class MyojinOfInfiniteRage extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands");
 
     public MyojinOfInfiniteRage(UUID ownerId) {
-        super(ownerId, 181, "Myojin Of Infinite Rage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{R}{R}{R}");
+        super(ownerId, 181, "Myojin of Infinite Rage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{R}{R}{R}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");

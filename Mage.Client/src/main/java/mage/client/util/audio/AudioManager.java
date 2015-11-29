@@ -303,7 +303,7 @@ public class AudioManager {
 
     private static void checkAndPlayClip(MageClip mageClip) {
         try {
-            if (mageClip != null) {
+            if (mageClip != null && mageClip.getClip() != null) {
                 boolean playSound = false;
                 switch (mageClip.getAudioGroup()) {
                     case GameSounds:

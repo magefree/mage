@@ -74,6 +74,9 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if(staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
     }
 }

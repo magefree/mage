@@ -99,10 +99,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     && !controllerId.equals(playerId)) {
                 return false;
             }
-            // Check if spell has no costs (not {0} mana costs), than it's not castable. E.g. for spells like Living End, that only can be cast by Suspend Ability.
-            if (this.getManaCosts().isEmpty() && this.getCosts().isEmpty()) {
-                return false;
-            }
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (this.isCheckPlayableMode()) {
                 if (game.getContinuousEffects().preventedByRuleModification(
@@ -182,4 +178,23 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return cardName;
     }
 
+    public int getConvertedManaCost() {
+        int cmc = 0;
+        int xMultiplier = 0;
+        for (String symbolString : getManaCosts().getSymbols()) {
+            int index = symbolString.indexOf("{X}");
+            while (index != -1) {
+                xMultiplier++;
+                symbolString = symbolString.substring(index + 3);
+                index = symbolString.indexOf("{X}");
+            }
+        }
+        if (getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
+            cmc += getManaCostsToPay().getX() * xMultiplier;
+        } else {
+            cmc += getManaCosts().convertedManaCost() + getManaCostsToPay().getX() * xMultiplier;
+        }
+        return cmc;
+
+    }
 }

@@ -30,24 +30,25 @@ package mage.sets.apocalypse;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
 
 /**
  * @author Loki
  */
 public class GladeGnarr extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("a blue spell");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+    }
 
     public GladeGnarr(UUID ownerId) {
         super(ownerId, 78, "Glade Gnarr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
@@ -56,7 +57,9 @@ public class GladeGnarr extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new GladeGnarrTriggeredAbility());
+
+        // Whenever a player casts a blue spell, Glade Gnarr gets +2/+2 until end of turn.
+        this.addAbility(new SpellCastAllTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter, false));
     }
 
     public GladeGnarr(final GladeGnarr card) {
@@ -66,43 +69,5 @@ public class GladeGnarr extends CardImpl {
     @Override
     public GladeGnarr copy() {
         return new GladeGnarr(this);
-    }
-}
-
-class GladeGnarrTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCard filter = new FilterCard("a black spell");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
-    public GladeGnarrTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), false);
-    }
-
-    public GladeGnarrTriggeredAbility(final GladeGnarrTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && filter.match(spell, game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player casts " + filter.getMessage() + ", " + super.getRule();
-    }
-
-    @Override
-    public GladeGnarrTriggeredAbility copy() {
-        return new GladeGnarrTriggeredAbility(this);
     }
 }

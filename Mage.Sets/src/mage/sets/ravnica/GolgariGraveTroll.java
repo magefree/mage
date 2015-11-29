@@ -28,10 +28,6 @@
 package mage.sets.ravnica;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -42,6 +38,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -104,7 +104,7 @@ class GolgariGraveTrollEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null && player != null) {
             int amount = player.getGraveyard().count(filter, game);
             if (amount > 0) {

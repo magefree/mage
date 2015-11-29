@@ -32,12 +32,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -48,8 +45,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -63,10 +58,10 @@ public class ObeliskOfUrd extends CardImpl {
 
         // Convoke
         this.addAbility(new ConvokeAbility());
-        
+
         // As Obelisk of Urd enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new ObeliskOfUrdEnterBattlefieldEffect()));
-        
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
+
         // Creatures you control of the chosen type get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ObeliskOfUrdBoostEffect()));
     }
@@ -78,43 +73,6 @@ public class ObeliskOfUrd extends CardImpl {
     @Override
     public ObeliskOfUrd copy() {
         return new ObeliskOfUrd(this);
-    }
-}
-
-class ObeliskOfUrdEnterBattlefieldEffect extends OneShotEffect {
-    
-    ObeliskOfUrdEnterBattlefieldEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "choose a creature type";
-    }
-    
-    ObeliskOfUrdEnterBattlefieldEffect(final ObeliskOfUrdEnterBattlefieldEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public ObeliskOfUrdEnterBattlefieldEffect copy() {
-        return new ObeliskOfUrdEnterBattlefieldEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
-        }
-        return false;
     }
 }
 
@@ -142,7 +100,7 @@ class ObeliskOfUrdBoostEffect extends ContinuousEffectImpl {
         if (permanent != null) {
             String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
             if (subtype != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (perm.hasSubtype(subtype)) {
                         perm.addPower(2);
                         perm.addToughness(2);

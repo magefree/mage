@@ -54,6 +54,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.counters.Counters;
 import mage.game.combat.Combat;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
@@ -72,6 +73,7 @@ import mage.game.turn.Turn;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
 
 public interface Game extends MageItem, Serializable {
@@ -105,9 +107,17 @@ public interface Game extends MageItem, Serializable {
 
     UUID getControllerId(UUID objectId);
 
+    UUID getOwnerId(UUID objectId);
+
+    UUID getOwnerId(MageObject object);
+
     Permanent getPermanent(UUID permanentId);
 
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
+
+    Permanent getPermanentEntering(UUID permanentId);
+
+    Map<UUID, Permanent> getPermanentsEntering();
 
     Map<Zone, HashMap<UUID, MageObject>> getLKI();
 
@@ -220,15 +230,15 @@ public interface Game extends MageItem, Serializable {
 
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
 
-    void fireAskPlayerEvent(UUID playerId, String message);
+    void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source);
 
     void fireChooseChoiceEvent(UUID playerId, Choice choice);
 
-    void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
+    void fireSelectTargetEvent(UUID playerId, MessageToClient message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
 
-    void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options);
+    void fireSelectTargetEvent(UUID playerId, MessageToClient message, Cards cards, boolean required, Map<String, Serializable> options);
 
-    void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
+    void fireSelectTargetTriggeredAbilityEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
 
     void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required);
 
@@ -279,6 +289,8 @@ public interface Game extends MageItem, Serializable {
     void addSimultaneousEvent(GameEvent event);
 
     boolean replaceEvent(GameEvent event);
+
+    boolean replaceEvent(GameEvent event, Ability targetAbility);
 
     /**
      * Creates and fires an damage prevention event
@@ -352,26 +364,28 @@ public interface Game extends MageItem, Serializable {
     void addPermanent(Permanent permanent);
 
     // priority method
-    void sendPlayerAction(PlayerAction playerAction, UUID playerId);
+    void sendPlayerAction(PlayerAction playerAction, UUID playerId, Object data);
 
     /**
      * This version supports copying of copies of any depth.
      *
      * @param copyFromPermanent
-     * @param copyToPermanent
+     * @param copyToPermanentId
      * @param source
      * @param applier
      * @return
      */
-    Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
+    Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier);
 
-    Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
+    Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier);
 
     Card copyCard(Card cardToCopy, Ability source, UUID newController);
 
     void addTriggeredAbility(TriggeredAbility ability);
 
     UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
+
+    UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source);
 
     void applyEffects();
 
@@ -411,7 +425,7 @@ public interface Game extends MageItem, Serializable {
 
     void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
 
-    // controlling the behaviour of replacement effects
+    // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
 
     public boolean getScopeRelevant();
@@ -436,4 +450,8 @@ public interface Game extends MageItem, Serializable {
     void rollbackTurns(int turnsToRollback);
 
     boolean executingRollback();
+
+    void setEnterWithCounters(UUID sourceId, Counters counters);
+
+    Counters getEnterWithCounters(UUID sourceId);
 }

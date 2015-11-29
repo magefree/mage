@@ -28,10 +28,8 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +38,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -85,6 +85,7 @@ public class VendilionClique extends CardImpl {
 }
 
 class VendilionCliqueEffect extends OneShotEffect {
+
     VendilionCliqueEffect() {
         super(Outcome.Discard);
         staticText = "look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card";
@@ -97,17 +98,18 @@ class VendilionCliqueEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        if (player != null && sourcePlayer != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player != null && controller != null && sourceObject != null) {
             TargetCard targetCard = new TargetCard(Zone.ALL, new FilterNonlandCard());
             targetCard.setRequired(false);
-            if (sourcePlayer.choose(Outcome.Discard, player.getHand(), targetCard, game)) {
-                Card c = game.getCard(targetCard.getFirstTarget());
-                if (c != null) {
+            if (controller.choose(Outcome.Discard, player.getHand(), targetCard, game)) {
+                Card card = game.getCard(targetCard.getFirstTarget());
+                if (card != null) {
                     CardsImpl cards = new CardsImpl();
-                    cards.add(c);
-                    player.revealCards("Vendilion Clique effect", cards, game);
-                    c.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                    cards.add(card);
+                    player.revealCards(sourceObject.getIdName(), cards, game);
+                    player.putCardsOnBottomOfLibrary(cards, game, source, true);
                     player.drawCards(1, game);
                 }
             }

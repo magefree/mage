@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -50,10 +49,11 @@ public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
     public PutLandFromHandOntoBattlefieldEffect() {
         this(false);
     }
+
     public PutLandFromHandOntoBattlefieldEffect(boolean tapped) {
         super(Outcome.PutLandInPlay);
         this.tapped = tapped;
-        staticText = "you may put a land card from your hand onto the battlefield" + (tapped ? " tapped":"");
+        staticText = "you may put a land card from your hand onto the battlefield" + (tapped ? " tapped" : "");
     }
 
     public PutLandFromHandOntoBattlefieldEffect(final PutLandFromHandOntoBattlefieldEffect effect) {
@@ -66,12 +66,12 @@ public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetCardInHand(new FilterLandCard("land card"));
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game) &&
-                    controller.chooseUse(outcome, "Put land onto battlefield?", source, game) &&
-                    controller.choose(outcome, target, source.getSourceId(), game)) {
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                    && controller.chooseUse(outcome, "Put land onto battlefield?", source, game)
+                    && controller.choose(outcome, target, source.getSourceId(), game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), tapped);
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
                 }
             }
             return true;
@@ -85,4 +85,4 @@ public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
         return new PutLandFromHandOntoBattlefieldEffect(this);
     }
 
- }
+}

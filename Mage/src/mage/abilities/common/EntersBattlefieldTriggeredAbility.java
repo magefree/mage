@@ -27,9 +27,9 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -73,7 +73,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return  event.getTargetId().equals(getSourceId());
+        return event.getTargetId().equals(getSourceId());
     }
 
     @Override
@@ -81,7 +81,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
         if (noRule) {
             return super.getRule();
         }
-        return (rulePrefix != null ? rulePrefix : "") + "When {this} enters the battlefield, "+ super.getRule();
+        return (rulePrefix != null ? rulePrefix : "") + "When {this} enters the battlefield, " + super.getRule();
     }
 
     @Override

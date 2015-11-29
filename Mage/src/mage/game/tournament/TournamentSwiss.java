@@ -27,13 +27,15 @@
  */
 package mage.game.tournament;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import mage.constants.TournamentPlayerState;
 import mage.game.events.TableEvent;
+import mage.game.tournament.pairing.RoundPairings;
+import mage.game.tournament.pairing.SwissPairingMinimalWeightMatching;
+import mage.game.tournament.pairing.SwissPairingSimple;
 
 /**
  *
@@ -46,8 +48,8 @@ public abstract class TournamentSwiss extends TournamentImpl {
     }
 
     @Override
-    protected void runTournament() {        
-        for (Map.Entry<UUID, TournamentPlayer> entry: players.entrySet()) {
+    protected void runTournament() {
+        for (Map.Entry<UUID, TournamentPlayer> entry : players.entrySet()) {
             if (entry.getValue().getPlayer().autoLoseGame()) {
                 entry.getValue().setEliminated();
                 entry.getValue().setResults("Auto Eliminated");
@@ -57,7 +59,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
         while (this.getActivePlayers().size() > 1 && this.getNumberRounds() > this.getRounds().size()) {
             // check if some player got killed / disconnected meanwhile and update their state
             tableEventSource.fireTableEvent(TableEvent.EventType.CHECK_STATE_PLAYERS);
-            // Swiss pairing 
+            // Swiss pairing
             Round round = createRoundSwiss();
             playRound(round);
         }
@@ -65,75 +67,36 @@ public abstract class TournamentSwiss extends TournamentImpl {
     }
 
     protected Round createRoundSwiss() {
+        List<TournamentPlayer> roundPlayers = getActivePlayers();
+        boolean isLastRound = (rounds.size() + 1 == getNumberRounds());
+
+        RoundPairings roundPairings;
+        if (roundPlayers.size() <= 16) {
+            SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(roundPlayers, rounds, isLastRound);
+            roundPairings = swissPairing.getRoundPairings();
+        } else {
+            SwissPairingSimple swissPairing = new SwissPairingSimple(roundPlayers, rounds);
+            roundPairings = swissPairing.getRoundPairings();
+        }
+
         Round round = new Round(rounds.size() + 1, this);
         rounds.add(round);
-        List<TournamentPlayer> roundPlayers = getActivePlayers();
-        // sort players by tournament points
-        Collections.sort(roundPlayers, new Comparator<TournamentPlayer>() {
-            @Override public int compare(TournamentPlayer p1, TournamentPlayer p2) {
-                return  p2.getPoints() - p1.getPoints();
-            }
-
-        });
-        // create pairings
-        while (roundPlayers.size() > 0) {
-            TournamentPlayer player1 = roundPlayers.get(0);
-            roundPlayers.remove(0);
-            TournamentPlayer playerForPossibleSecondPairing = null;
-            for (TournamentPlayer player2: roundPlayers) {
-                if (alreadyPaired(player1, player2)) {
-                    // if laready paired but equal ponts -> remember if second pairing is needed
-                    if (playerForPossibleSecondPairing == null) {
-                        playerForPossibleSecondPairing = player2;
-                    }
-                } else {
-                    if (player2.getPoints() < player1.getPoints() && playerForPossibleSecondPairing != null) {
-                        // pair again with a player
-                        round.addPairing(new TournamentPairing(player1, playerForPossibleSecondPairing));
-                        roundPlayers.remove(playerForPossibleSecondPairing);
-                        player1 = null;
-                        break;
-                    } else {
-                        // pair agains the next not paired before
-                        round.addPairing(new TournamentPairing(player1, player2));
-                        roundPlayers.remove(player2);
-                        player1 = null;
-                        break;
-                    }
-                }
-            }
-            if (player1 != null) {
-                // no pairing done yet
-                if (playerForPossibleSecondPairing != null) {
-                    // pair again with a player
-                    round.addPairing(new TournamentPairing(player1, playerForPossibleSecondPairing));
-                    roundPlayers.remove(playerForPossibleSecondPairing);
-                } else {
-                    // player free round - add to bye players of this round
-                    round.getPlayerByes().add(player1);
-                    if (round.getRoundNumber() == getNumberRounds()) {
-                        player1.setState(TournamentPlayerState.FINISHED);
-                    } else {
-                        player1.setState(TournamentPlayerState.WAITING);
-                    }
-                    player1.setStateInfo("Round Bye");
-                    updateResults();
-                }
-            }
+        for (TournamentPairing pairing : roundPairings.getPairings()) {
+            round.addPairing(pairing);
         }
+        for (TournamentPlayer playerBye : roundPairings.getPlayerByes()) {
+            // player free round - add to bye players of this round
+            round.getPlayerByes().add(playerBye);
+            if (isLastRound) {
+                playerBye.setState(TournamentPlayerState.FINISHED);
+            } else {
+                playerBye.setState(TournamentPlayerState.WAITING);
+            }
+            playerBye.setStateInfo("Round Bye");
+            updateResults();
+        }
+
         return round;
     }
 
-    protected boolean alreadyPaired(TournamentPlayer player1, TournamentPlayer player2) {
-        for (Round round : rounds) {
-            for (TournamentPairing pairing: round.getPairs()) {
-                if (pairing.getPlayer1().equals(player1) || pairing.getPlayer2().equals(player1)) {
-                    if (pairing.getPlayer1().equals(player2) || pairing.getPlayer2().equals(player2)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
 }

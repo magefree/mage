@@ -64,13 +64,13 @@ public class AshcloudPhoenix extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Ashcloud Phoenix dies, return it to the battlefield face down under your control.
         this.addAbility(new DiesTriggeredAbility(new AshcloudPhoenixEffect()));
-        
+
         // Morph {4}{R}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));
-        
+
         // When Ashcloud Phoenix is turned face up, it deals 2 damage to each player.
         Effect effect = new DamagePlayersEffect(2, TargetController.ANY);
         effect.setText("it deals 2 damage to each player");
@@ -88,30 +88,30 @@ public class AshcloudPhoenix extends CardImpl {
 }
 
 class AshcloudPhoenixEffect extends OneShotEffect {
-    
+
     AshcloudPhoenixEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return it to the battlefield face down under your control";
     }
-    
+
     AshcloudPhoenixEffect(final AshcloudPhoenixEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public AshcloudPhoenixEffect copy() {
         return new AshcloudPhoenixEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
                 Player owner = game.getPlayer(card.getOwnerId());
                 if (owner != null && owner.getGraveyard().contains(card.getId())) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), false, true);
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, true, false, null);
                 }
             }
             return true;

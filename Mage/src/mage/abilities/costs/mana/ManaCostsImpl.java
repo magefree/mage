@@ -51,6 +51,7 @@ import mage.util.ManaUtil;
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
 
     protected UUID id;
+    protected String text = null;
 
     private static Map<String, ManaCosts> costs = new HashMap<>();
 
@@ -66,12 +67,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     public ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
         for (T cost : costs) {
-            this.add((T) cost.copy());
+            this.add(cost.copy());
         }
     }
 
     @Override
-    public boolean add(ManaCost cost) {
+    public final boolean add(ManaCost cost) {
         if (cost instanceof ManaCosts) {
             for (ManaCost manaCost : (ManaCosts<T>) cost) {
                 super.add((T) manaCost);
@@ -228,30 +229,62 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof ColoredManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof HybridManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
+        // Mono Hybrid mana costs
+        // First try only to pay colored mana with the pool
+        for (ManaCost cost : this) {
+            if (!cost.isPaid() && cost instanceof MonoHybridManaCost) {
+                if (((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.W)) && pool.getWhite() > 0)
+                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.B)) && pool.getBlack() > 0)
+                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.R)) && pool.getRed() > 0)
+                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.G)) && pool.getGreen() > 0)
+                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.U)) && pool.getBlue() > 0)) {
+                    cost.assignPayment(game, ability, pool);
+                    if (pool.count() == 0) {
+                        return;
+                    }
+                }
+            }
+        }
+        // if colored didn't fit pay colorless with the mana
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof MonoHybridManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof SnowManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof GenericManaCost) {
                 cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
+                }
             }
         }
 
@@ -265,7 +298,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public void load(String mana) {
+    public final void load(String mana) {
         this.clear();
         if (costs.containsKey(mana)) {
             ManaCosts<T> savedCosts = costs.get(mana);
@@ -284,7 +317,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         if (Character.isDigit(symbol.charAt(0))) {
                             this.add((T) new GenericManaCost(Integer.valueOf(symbol)));
                         } else {
-                            if (!symbol.equals("X")) {
+                            if(symbol.equals("S")) {
+                                this.add((T) new SnowManaCost());
+                            }
+                            else if (!symbol.equals("X")) {
                                 this.add((T) new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                             } else {
                                 // check X wasn't added before
@@ -301,9 +337,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                             //TODO: handle multiple {X} and/or {Y} symbols
                         }
                     } else {
-                        if (symbol.equals("snow")) {
-                            this.add((T) new SnowManaCost());
-                        } else if (Character.isDigit(symbol.charAt(0))) {
+                        if (Character.isDigit(symbol.charAt(0))) {
                             this.add((T) new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
                         } else if (symbol.contains("P")) {
                             this.add((T) new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
@@ -341,7 +375,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
     public String getText() {
+        if (text != null) {
+            return text;
+        }
         if (this.size() == 0) {
             return "";
         }
@@ -392,7 +434,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public boolean isPaid() {
         for (T cost : this) {
-            if (!((T) cost instanceof VariableManaCost) && !cost.isPaid()) {
+            if (!(cost instanceof VariableManaCost) && !cost.isPaid()) {
                 return false;
             }
         }
@@ -424,7 +466,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public ManaCosts<T> copy() {
-        return new ManaCostsImpl(this);
+        return new ManaCostsImpl<>(this);
     }
 
     @Override

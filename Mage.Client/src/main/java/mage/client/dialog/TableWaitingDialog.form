@@ -28,13 +28,13 @@
               <Component id="btnMoveDown" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnMoveUp" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="326" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="btnStart" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jSplitPane1" alignment="0" pref="644" max="32767" attributes="0"/>
+          <Component id="jSplitPane1" alignment="0" pref="500" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -91,9 +91,10 @@
     </Component>
     <Container class="javax.swing.JSplitPane" name="jSplitPane1">
       <Properties>
-        <Property name="dividerLocation" type="int" value="320"/>
+        <Property name="dividerLocation" type="int" value="300"/>
         <Property name="dividerSize" type="int" value="3"/>
         <Property name="resizeWeight" type="double" value="1.0"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
@@ -122,10 +123,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="mage.client.chat.ChatPanel" name="chatPanel">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new mage.client.chat.ChatPanel(false);"/>
-          </AuxValues>
+        <Component class="mage.client.chat.ChatPanelBasic" name="chatPanel">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>

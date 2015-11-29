@@ -29,6 +29,7 @@ package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -55,7 +56,7 @@ import mage.players.Player;
 public class RiptideShapeshifter extends CardImpl {
 
     public RiptideShapeshifter(UUID ownerId) {
-        super(ownerId, 109, "Riptide Shapeshifter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 109, "Riptide Shapeshifter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "ONS";
         this.subtype.add("Shapeshifter");
 
@@ -79,47 +80,46 @@ public class RiptideShapeshifter extends CardImpl {
 }
 
 class RiptideShapeshifterEffect extends OneShotEffect {
-    
+
     RiptideShapeshifterEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose a creature type. Reveal cards from the top of your library until you reveal a creature card of that type. Put that card onto the battlefield and shuffle the rest into your library";
     }
-    
+
     RiptideShapeshifterEffect(final RiptideShapeshifterEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public RiptideShapeshifterEffect copy() {
         return new RiptideShapeshifterEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose a creature type:");
             choice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.BoostCreature, choice, game)) {
-                if (!player.canRespond()) {
+            while (!controller.choose(Outcome.BoostCreature, choice, game)) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }
             Cards revealedCards = new CardsImpl();
-            while (player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().removeFromTop(game);
+            while (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (card.getCardType().contains(CardType.CREATURE) && card.getSubtype().contains(choice.getChoice())) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     break;
                 }
                 revealedCards.add(card);
             }
-            player.revealCards("Riptide Shapeshifter", revealedCards, game);
-            for (Card card: revealedCards.getCards(game)) {
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }                           
-            player.shuffleLibrary(game);
+            controller.revealCards(sourceObject.getIdName(), revealedCards, game);
+            controller.moveCards(revealedCards, Zone.LIBRARY, source, game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

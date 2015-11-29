@@ -27,12 +27,13 @@
  */
 package mage.abilities.effects.common.combat;
 
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -63,7 +64,21 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (affectedObjectsSet) {
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
+            }
+        }
+    }
+
+    @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (affectedObjectsSet) {
+            return targetPointer.getFirst(game, source).equals(permanent.getId());
+        }
         return permanent.getAttachments().contains(source.getSourceId());
     }
 

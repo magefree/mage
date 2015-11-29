@@ -38,17 +38,18 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author emerald000
  */
 public class RiptideLaboratory extends CardImpl {
-    
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Wizard");
+
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Wizard you control");
+
     static {
         filter.add(new SubtypePredicate("Wizard"));
     }
@@ -59,11 +60,11 @@ public class RiptideLaboratory extends CardImpl {
 
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        
+
         // {1}{U}, {tap}: Return target Wizard you control to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }
 

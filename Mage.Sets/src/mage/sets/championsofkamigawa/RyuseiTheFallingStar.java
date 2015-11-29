@@ -53,7 +53,7 @@ public class RyuseiTheFallingStar extends CardImpl {
     }
 
     public RyuseiTheFallingStar(UUID ownerID) {
-        super(ownerID, 185, "Ryusei, The Falling Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        super(ownerID, 185, "Ryusei, the Falling Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");

@@ -35,7 +35,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -78,7 +77,7 @@ class PatriarchsBiddingEffect extends OneShotEffect {
 
     public PatriarchsBiddingEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield.";
+        this.staticText = "each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield";
     }
 
     public PatriarchsBiddingEffect(final PatriarchsBiddingEffect effect) {
@@ -91,12 +90,12 @@ class PatriarchsBiddingEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability ability) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        MageObject sourceObject = game.getObject(ability.getSourceId());
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null) {
             Set<String> chosenTypes = new HashSet<>();
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose a creature type");
@@ -108,24 +107,21 @@ class PatriarchsBiddingEffect extends OneShotEffect {
                 }
                 String chosenType = typeChoice.getChoice();
                 if (chosenType != null) {
-                    game.informPlayers(sourceObject.getName() + ": " + player.getLogName() + " has chosen " + chosenType);
+                    game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + chosenType);
                     chosenTypes.add(chosenType);
                 }
             }
-            
+
             List<SubtypePredicate> predicates = new ArrayList<>();
             for (String type : chosenTypes) {
                 predicates.add(new SubtypePredicate(type));
             }
             FilterCard filter = new FilterCreatureCard();
             filter.add(Predicates.or(predicates));
-            
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(filter, game)) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, ability.getSourceId());
-                    }
+                    player.moveCards(player.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

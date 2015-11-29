@@ -27,38 +27,29 @@
  */
 package mage.sets.innistrad;
 
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  * @author nantuko
  */
 public class DearlyDeparted extends CardImpl {
-
-    private static final String ruleText = "As long as {this} is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
 
     public DearlyDeparted(UUID ownerId) {
         super(ownerId, 9, "Dearly Departed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
@@ -71,8 +62,7 @@ public class DearlyDeparted extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD,
-                new EntersBattlefieldEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new DearlyDepartedEntersBattlefieldEffect()));
     }
 
     public DearlyDeparted(final DearlyDeparted card) {
@@ -85,43 +75,26 @@ public class DearlyDeparted extends CardImpl {
     }
 }
 
-class EntersBattlefieldEffect extends ReplacementEffectImpl {
+class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    protected Effects baseEffects = new Effects();
-    protected String text;
-
-    public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
-
-    public EntersBattlefieldEffect(Effect baseEffect) {
-        this(baseEffect, "");
+    public DearlyDepartedEntersBattlefieldEffect() {
+        super(Duration.OneUse, Outcome.BoostCreature);
+        staticText = "As long as {this} is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    public EntersBattlefieldEffect(Effect baseEffect, String text) {
-        super(Duration.OneUse, baseEffect.getOutcome());
-        this.baseEffects.add(baseEffect);
-        this.text = text;
-    }
-
-    public EntersBattlefieldEffect(EntersBattlefieldEffect effect) {
+    public DearlyDepartedEntersBattlefieldEffect(DearlyDepartedEntersBattlefieldEffect effect) {
         super(effect);
-        this.baseEffects = effect.baseEffects.copy();
-        this.text = effect.text;
     }
 
-    public void addEffect(Effect effect) {
-        baseEffects.add(effect);
-    }
-    
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype("Human")) {
-            setValue("target", permanent);
             return true;
         }
         return false;
@@ -129,33 +102,16 @@ class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Spell spell = game.getStack().getSpell(event.getSourceId());
-        for (Effect effect: baseEffects) {
-            Object target = getValue("target");
-            if (target != null && target instanceof Permanent) {
-                effect.setTargetPointer(new FixedTarget(((Permanent)target).getId()));
-                if (effect instanceof ContinuousEffect) {
-                    game.addEffect((ContinuousEffect) effect, source);
-                }
-                else {
-                    if (spell != null) {
-                        effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
-                    }
-                    effect.apply(game, source);
-                }
-            }
+        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (target != null) {
+            target.addCounters(CounterType.P1P1.createInstance(), game);
         }
         return false;
     }
 
     @Override
-    public String getText(Mode mode) {
-        return (text == null || text.isEmpty()) ? baseEffects.getText(mode) : text;
-    }
-
-    @Override
-    public EntersBattlefieldEffect copy() {
-        return new EntersBattlefieldEffect(this);
+    public DearlyDepartedEntersBattlefieldEffect copy() {
+        return new DearlyDepartedEntersBattlefieldEffect(this);
     }
 
 }

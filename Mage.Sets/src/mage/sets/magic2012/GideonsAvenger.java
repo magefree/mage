@@ -29,23 +29,27 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTappedTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author Loki
  */
 public class GideonsAvenger extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
 
     public GideonsAvenger(UUID ownerId) {
         super(ownerId, 17, "Gideon's Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
@@ -56,7 +60,8 @@ public class GideonsAvenger extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new GideonsAvengerTriggeredAbility());
+        // Whenever a creature an opponent controls becomes tapped, put a +1/+1 counter on Gideon's Avenger.
+        this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
     public GideonsAvenger(final GideonsAvenger card) {
@@ -66,40 +71,5 @@ public class GideonsAvenger extends CardImpl {
     @Override
     public GideonsAvenger copy() {
         return new GideonsAvenger(this);
-    }
-}
-
-class GideonsAvengerTriggeredAbility extends TriggeredAbilityImpl {
-    GideonsAvengerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-    }
-
-    GideonsAvengerTriggeredAbility(final GideonsAvengerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GideonsAvengerTriggeredAbility copy() {
-        return new GideonsAvengerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent p = game.getPermanent(event.getTargetId());
-        if (p != null && p.getCardType().contains(CardType.CREATURE)) {
-            if (game.getOpponents(this.controllerId).contains(p.getControllerId()))
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature an opponent controls becomes tapped, " + modes.getText();
     }
 }

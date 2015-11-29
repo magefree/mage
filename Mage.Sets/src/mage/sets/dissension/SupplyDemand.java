@@ -39,7 +39,6 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInLibrary;
 
-
 /**
  *
  * @author LevelX2
@@ -53,16 +52,16 @@ public class SupplyDemand extends SplitCard {
     }
 
     public SupplyDemand(UUID ownerId) {
-        super(ownerId, 157, "Supply", "Demand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{U}", "{X}{G}{W}", false);
+        super(ownerId, 157, "Supply", "Demand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G}{W}", "{1}{W}{U}", false);
         this.expansionSetCode = "DIS";
-
-        // Demand
-        // Search your library for a multicolored card, reveal it, and put it into your hand. Then shuffle your library.
-        getLeftHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, filter), true));
 
         // Supply
         // Put X 1/1 green Saproling creature tokens onto the battlefield.
-        getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new ManacostVariableValue()));
+        getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new ManacostVariableValue()));
+
+        // Demand
+        // Search your library for a multicolored card, reveal it, and put it into your hand. Then shuffle your library.
+        getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, filter), true));
 
     }
 

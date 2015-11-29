@@ -29,11 +29,12 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.RedirectionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -42,9 +43,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -72,11 +75,18 @@ public class RaziaBorosArchangel extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // {tap}: The next 3 damage that would be dealt to target creature you control this turn is dealt to another target creature instead.
+        // {T}: The next 3 damage that would be dealt to target creature you control this turn is dealt to another target creature instead.
         Effect effect = new RaziaBorosArchangelEffect(Duration.EndOfTurn, 3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetCreaturePermanent());
+        Target target = new TargetControlledCreaturePermanent();
+        target.setTargetTag(1);
+        ability.addTarget(target);
+
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature (damage is redirected to)");
+        filter.add(new AnotherTargetPredicate(2));
+        target = new TargetCreaturePermanent(filter);
+        target.setTargetTag(2);
+        ability.addTarget(target);
         this.addAbility(ability);
 
     }
@@ -91,19 +101,17 @@ public class RaziaBorosArchangel extends CardImpl {
     }
 }
 
-class RaziaBorosArchangelEffect extends PreventionEffectImpl {
+class RaziaBorosArchangelEffect extends RedirectionEffect {
 
-    private int amount;
+    protected MageObjectReference redirectToObject;
 
     public RaziaBorosArchangelEffect(Duration duration, int amount) {
-        super(duration);
-        this.amount = amount;
+        super(duration, 3, true);
         staticText = "The next " + amount + " damage that would be dealt to target creature you control this turn is dealt to another target creature instead";
     }
 
     public RaziaBorosArchangelEffect(final RaziaBorosArchangelEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -117,42 +125,16 @@ class RaziaBorosArchangelEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int prevented;
-            if (event.getAmount() >= this.amount) {
-                int damage = amount;
-                event.setAmount(event.getAmount() - amount);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            } else {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            }
-
-            // deal damage now
-            if (prevented > 0) {
-                UUID redirectTo = source.getTargets().get(1).getFirstTarget();
-                Permanent permanent = game.getPermanent(redirectTo);
-                if (permanent != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
-                    // keep the original source id as it is redirecting
-                    permanent.damage(prevented, event.getSourceId(), game, false, true);
-                }
-            }
-        }
-        return false;
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        redirectToObject = new MageObjectReference(source.getTargets().get(1).getFirstTarget(), game);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            if (source.getTargets().getFirstTarget().equals(event.getTargetId())) {
+        if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+            if (redirectToObject.equals(new MageObjectReference(source.getTargets().get(1).getFirstTarget(), game))) {
+                redirectTarget = source.getTargets().get(1);
                 return true;
             }
         }

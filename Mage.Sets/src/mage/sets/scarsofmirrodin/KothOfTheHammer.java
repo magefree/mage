@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -44,7 +43,6 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -54,7 +52,6 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -70,25 +67,24 @@ import mage.target.common.TargetLandPermanent;
  * @author Loki, North
  */
 public class KothOfTheHammer extends CardImpl {
+
     static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
     private static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+
         filterCount.add(new SubtypePredicate("Mountain"));
         filterCount.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public KothOfTheHammer (UUID ownerId) {
+    public KothOfTheHammer(UUID ownerId) {
         super(ownerId, 94, "Koth of the Hammer", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Koth");
 
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
-        
         // +1: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new BecomesCreatureTargetEffect(new KothOfTheHammerToken(), false, true, Duration.EndOfTurn));
@@ -102,7 +98,7 @@ public class KothOfTheHammer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KothOfTheHammerEmblem()), -5));
     }
 
-    public KothOfTheHammer (final KothOfTheHammer card) {
+    public KothOfTheHammer(final KothOfTheHammer card) {
         super(card);
     }
 
@@ -111,6 +107,7 @@ public class KothOfTheHammer extends CardImpl {
         return new KothOfTheHammer(this);
     }
 }
+
 class KothOfTheHammerToken extends Token {
 
     public KothOfTheHammerToken() {
@@ -125,7 +122,9 @@ class KothOfTheHammerToken extends Token {
 }
 
 class KothOfTheHammerEmblem extends Emblem {
+
     // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
+
     public KothOfTheHammerEmblem() {
         this.setName("EMBLEM: Koth of the Hammer");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
@@ -133,6 +132,7 @@ class KothOfTheHammerEmblem extends Emblem {
 }
 
 class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
+
     public KothOfTheHammerThirdEffect() {
         super(Duration.EndOfGame, Outcome.AddAbility);
         staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to target creature or player.'\"";

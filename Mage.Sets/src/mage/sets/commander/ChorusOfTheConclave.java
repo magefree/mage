@@ -46,9 +46,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -103,43 +103,38 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int xCost = 0;
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            if (you.chooseUse(Outcome.Benefit, "Do you wish to pay the additonal cost to add +1/+1 counters to the creature you cast?", source, game)) {
-                xCost += playerPaysXGenericMana(you, source, game);
-                // save the x value to be available for ETB replacement effect
-                Object object = game.getState().getValue("spellX" + source.getSourceId());
-                Map<UUID, Integer> spellX;
-                if (object != null && object instanceof Map) {
-                    spellX = (Map<UUID, Integer>) object;
-                } else {
-                    spellX = new HashMap<>();
-                }
-                spellX.put(event.getSourceId(), xCost);
-                game.getState().setValue("spellX" + source.getSourceId(), spellX);
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId() == source.getControllerId()) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             MageObject spellObject = game.getObject(event.getSourceId());
             if (spellObject != null) {
                 return spellObject.getCardType().contains(CardType.CREATURE);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        int xCost = 0;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.chooseUse(Outcome.Benefit, "Do you wish to pay the additonal cost to add +1/+1 counters to the creature you cast?", source, game)) {
+                xCost += playerPaysXGenericMana(controller, source, game);
+                // save the x value to be available for ETB replacement effect
+                Object object = game.getState().getValue("spellX" + source.getSourceId());
+                Map<String, Integer> spellX;
+                if (object != null && object instanceof Map) {
+                    spellX = (Map<String, Integer>) object;
+                } else {
+                    spellX = new HashMap<>();
+                }
+                spellX.put(event.getSourceId().toString() + game.getState().getZoneChangeCounter(event.getSourceId()), xCost);
+                game.getState().setValue("spellX" + source.getSourceId(), spellX);
             }
         }
         return false;
@@ -157,7 +152,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
                 payed = true;
             }
         }
-        game.informPlayers(new StringBuilder(player.getLogName()).append(" pays {").append(xValue).append("}.").toString());
+        game.informPlayers(player.getLogName() + " pays {" + xValue + "}");
         return xValue;
     }
 
@@ -191,22 +186,25 @@ class ChorusOfTheConclaveReplacementEffect2 extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Map<UUID, Integer> spellX = (Map<UUID, Integer>) game.getState().getValue("spellX" + source.getSourceId());
-        return spellX != null && spellX.containsKey(event.getSourceId());
+        Map<String, Integer> spellX = (Map<String, Integer>) game.getState().getValue("spellX" + source.getSourceId());
+        return spellX != null
+                && event.getSourceId() != null
+                && spellX.containsKey(event.getSourceId().toString() + (game.getState().getZoneChangeCounter(event.getSourceId()) - 1));
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getSourceId());
-        Map<UUID, Integer> spellX = (Map<UUID, Integer>) game.getState().getValue("spellX" + source.getSourceId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
+        Map<String, Integer> spellX = (Map<String, Integer>) game.getState().getValue("spellX" + source.getSourceId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && creature != null && spellX != null) {
-            int xValue = spellX.get(event.getSourceId());
+            String key = event.getSourceId().toString() + (game.getState().getZoneChangeCounter(event.getSourceId()) - 1);
+            int xValue = spellX.get(key);
             if (xValue > 0) {
                 creature.addCounters(CounterType.P1P1.createInstance(xValue), game);
-                game.informPlayers(sourceObject.getName() +": Added " + xValue +" +1/+1 counter" + (xValue > 1 ? "s":"") + "on " + creature.getName());
+                game.informPlayers(sourceObject.getLogName() + ": " + creature.getLogName() + " enters the battlefield with " + xValue + " +1/+1 counter" + (xValue > 1 ? "s" : "") + " on it");
             }
-            spellX.remove(event.getSourceId());
+            spellX.remove(key);
         }
         return false;
     }

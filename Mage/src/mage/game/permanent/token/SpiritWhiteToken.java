@@ -27,6 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
@@ -36,15 +39,23 @@ import mage.constants.CardType;
  */
 public class SpiritWhiteToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM"));
+    }
+
     public SpiritWhiteToken() {
-        this("SHM", 0);
+        this(null, 0);
     }
 
     public SpiritWhiteToken(String setCode) {
         this(setCode, 0);
     }
+
     public SpiritWhiteToken(String setCode, int tokenType) {
         super("Spirit", "1/1 white Spirit creature token with flying");
+        availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         if (tokenType > 0) {
             setTokenType(tokenType);
@@ -56,5 +67,22 @@ public class SpiritWhiteToken extends Token {
         toughness = new MageInt(1);
         
         addAbility(FlyingAbility.getInstance());
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("AVR")) {
+            setTokenType(1);
+        }
+    }
+
+    public SpiritWhiteToken(final SpiritWhiteToken token) {
+        super(token);
+    }
+
+    @Override
+    public SpiritWhiteToken copy() {
+        return new SpiritWhiteToken(this);
     }
 }

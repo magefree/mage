@@ -28,21 +28,22 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
+import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-
 
 /**
  * @author Loki
@@ -61,7 +62,7 @@ public class WitchMawNephilim extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), true));
 
         // Whenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
-        this.addAbility(new WitchMawNephilimTriggeredAbility());
+        this.addAbility(new AttacksTriggeredAbility(new WitchMawNephilimEffect(), false));
     }
 
     public WitchMawNephilim(final WitchMawNephilim card) {
@@ -74,34 +75,31 @@ public class WitchMawNephilim extends CardImpl {
     }
 }
 
-class WitchMawNephilimTriggeredAbility extends AttacksTriggeredAbility {
-    WitchMawNephilimTriggeredAbility() {
-        super(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), false);
+class WitchMawNephilimEffect extends OneShotEffect {
+
+    public WitchMawNephilimEffect() {
+        super(Outcome.AddAbility);
+        this.staticText = "it gains trample until end of turn if its power is 10 or greater";
     }
 
-    WitchMawNephilimTriggeredAbility(final WitchMawNephilimTriggeredAbility ability) {
-        super(ability);
+    public WitchMawNephilimEffect(final WitchMawNephilimEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            Permanent source = game.getPermanent(event.getSourceId());
-            if (source.getPower().getValue() >= 10) {
-                return true;
+    public WitchMawNephilimEffect copy() {
+        return new WitchMawNephilimEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null) {
+            if (sourceObject.getPower().getValue() >= 10) {
+                game.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), source);
             }
+            return true;
         }
         return false;
     }
-
-    @Override
-    public AttacksTriggeredAbility copy() {
-        return new WitchMawNephilimTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} attacks, it gains trample until end of turn if its power is 10 or greater";
-    }
 }
-

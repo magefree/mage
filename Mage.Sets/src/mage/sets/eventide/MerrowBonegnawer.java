@@ -50,11 +50,11 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth
  */
 public class MerrowBonegnawer extends CardImpl {
-    
+
     private UUID exileId = UUID.randomUUID();
-    
+
     private static final FilterSpell filter = new FilterSpell("black spell");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
@@ -69,13 +69,13 @@ public class MerrowBonegnawer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target player exiles a card from his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, exileId, "Merrow Bonegnawer", new FilterCard("a card")), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, exileId, getIdName(), new FilterCard()), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
         // Whenever you cast a black spell, you may untap Merrow Bonegnawer.
         this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), filter, true, false));
-        
+
     }
 
     public MerrowBonegnawer(final MerrowBonegnawer card) {

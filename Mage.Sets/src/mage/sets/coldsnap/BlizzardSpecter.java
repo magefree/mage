@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,7 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,14 +63,17 @@ public class BlizzardSpecter extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Blizzard Specter deals combat damage to a player, choose one - That player returns a permanent he or she controls to its owner's hand; or that player discards a card.
-        Ability ability2 = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandEffect(), false);
-        
-        Mode mode2 = new Mode();
-        mode2.getEffects().add(new DiscardTargetEffect(1, false));
-        ability2.addMode(mode2);
-        
-        this.addAbility(ability2);
+
+        // Whenever Blizzard Specter deals combat damage to a player, choose one
+        // - That player returns a permanent he or she controls to its owner's hand;
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandEffect(), false, true);
+
+        // or that player discards a card.
+        Mode mode = new Mode();
+        mode.getEffects().add(new DiscardTargetEffect(1, false));
+        ability.addMode(mode);
+
+        this.addAbility(ability);
     }
 
     public BlizzardSpecter(final BlizzardSpecter card) {
@@ -103,26 +104,19 @@ class ReturnToHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
-
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player == null) {
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        if (targetPlayer == null) {
             return false;
         }
-
         Target target = new TargetControlledPermanent(1, 1, new FilterControlledPermanent(), true);
-        if (target.canChoose(player.getId(), game)) {
-            while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), game)) {
-                player.chooseTarget(Outcome.ReturnToHand, target, source, game);
+        if (target.canChoose(targetPlayer.getId(), game)) {
+            targetPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent != null) {
+                targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
             }
 
-            for (UUID targetId: target.getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    result |= permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                }
-            }
         }
-        return result;
+        return true;
     }
 }

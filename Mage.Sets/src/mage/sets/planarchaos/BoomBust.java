@@ -25,32 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
-/**
- *
- * @author LevelX2
- */
-
-
 public class BoomBust extends SplitCard {
 
     private static final FilterLandPermanent filter1 = new FilterLandPermanent("land you control");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("land you don't control");
+
     static {
         filter1.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
@@ -62,7 +55,7 @@ public class BoomBust extends SplitCard {
 
         // Boom
         // Destroy target land you control and target land you don't control.
-        Effect effect = new DestroyTargetEffect();
+        Effect effect = new DestroyTargetEffect(false, true);
         effect.setText("Destroy target land you control and target land you don't control");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter1));

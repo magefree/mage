@@ -27,24 +27,23 @@
  */
 package mage.sets.lorwyn;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.common.MyTurnCondition;
 
 /**
  *
@@ -57,7 +56,9 @@ public class HoofprintsOfTheStag extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
 
+        // Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.HOOFPRINT.createInstance(1)), true));
+        // {2}{w}, Remove four hoofprint counters from Hoofprints of the Stag: Put a 4/4 white Elemental creature token with flying onto the battlefield. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WhiteElementalToken(), 1), new ManaCostsImpl("{2}{W}"), MyTurnCondition.getInstance());
         ability.addCost(new RemoveCountersSourceCost(CounterType.HOOFPRINT.createInstance(4)));
         this.addAbility(ability);
@@ -74,6 +75,7 @@ public class HoofprintsOfTheStag extends CardImpl {
 }
 
 class WhiteElementalToken extends Token {
+
     WhiteElementalToken() {
         super("Elemental", "4/4 white Elemental creature token with flying");
         cardType.add(CardType.CREATURE);
@@ -81,6 +83,7 @@ class WhiteElementalToken extends Token {
         subtype.add("Elemental");
         power = new MageInt(4);
         toughness = new MageInt(4);
+        setTokenType(2);
         this.addAbility(FlyingAbility.getInstance());
     }
 }

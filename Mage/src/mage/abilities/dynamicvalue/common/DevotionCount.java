@@ -55,12 +55,12 @@ public class DevotionCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "put a number of";
+        return "X";
     }
 
     @Override
     public String getMessage() {
-        StringBuilder sb = new StringBuilder("devotion to ");
+        StringBuilder sb = new StringBuilder("your devotion to ");
         int count = 0;
         for (ColoredManaSymbol coloredManaSymbol : devotionColors) {
             if (count > 0) {

@@ -35,7 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.SoldierToken;
+import mage.game.permanent.token.KorSoldierToken;
 
 /**
  *
@@ -50,7 +50,7 @@ public class NomadsAssembly extends CardImpl {
         this.expansionSetCode = "ROE";
 
 
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), new PermanentsOnBattlefieldCount(filter)));
         this.addAbility(new ReboundAbility());
     }
 

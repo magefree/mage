@@ -38,7 +38,6 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -76,8 +75,8 @@ public class DralnusPet extends CardImpl {
         kickerCosts.add(new DiscardCardCost(new FilterCreatureCard()));
         this.addAbility(new KickerAbility(kickerCosts));
         // If Dralnu's Pet was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
-        Ability ability = new EntersBattlefieldAbility(new DralnusPetEffect(), KickedCondition.getInstance(), true,
-            "If {this} was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost", "");
+        Ability ability = new EntersBattlefieldAbility(new DralnusPetEffect(), KickedCondition.getInstance(),
+                "If {this} was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost", "");
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
@@ -113,10 +112,12 @@ class DralnusPetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
+            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+            if (spellAbility != null
+                    && spellAbility.getSourceId().equals(source.getSourceId())
+                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                 int cmc = 0;
-                for (Cost cost : ((SpellAbility) obj).getCosts()) {
+                for (Cost cost : spellAbility.getCosts()) {
                     if (cost instanceof DiscardCardCost && ((DiscardCardCost) cost).getCards().size() > 0) {
                         cmc = ((DiscardCardCost) cost).getCards().get(0).getManaCost().convertedManaCost();
                     }

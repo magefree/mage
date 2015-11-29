@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -70,36 +70,32 @@ public class Victimize extends CardImpl {
 }
 
 class VictimizeEffect extends OneShotEffect {
-    
+
     VictimizeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped";
     }
-    
+
     VictimizeEffect(final VictimizeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public VictimizeEffect copy() {
         return new VictimizeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")));
             if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
-                for (UUID targetId: getTargetPointer().getTargets(game, source)) {
-                    Card card = game.getCard(targetId);
-                    if (card != null) {
-                        controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), true);
-                    }
-                }
+                controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game),
+                        Zone.BATTLEFIELD, source, game, true, false, false, null);
             }
             return true;
         }
         return false;
-    }   
+    }
 }

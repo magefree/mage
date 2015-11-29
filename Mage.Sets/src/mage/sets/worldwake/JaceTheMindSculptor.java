@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,21 +20,19 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -43,8 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.game.ExileZone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -56,13 +53,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class JaceTheMindSculptor extends CardImpl {
 
-
     public JaceTheMindSculptor(UUID ownerId) {
         super(ownerId, 31, "Jace, the Mind Sculptor", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Jace");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +2: Look at the top card of target player's library. You may put that card on the bottom of that player's library.
         LoyaltyAbility ability1 = new LoyaltyAbility(new JaceTheMindSculptorEffect1(), 2);
@@ -77,7 +73,7 @@ public class JaceTheMindSculptor extends CardImpl {
         LoyaltyAbility ability3 = new LoyaltyAbility(new ReturnToHandTargetEffect(), -1);
         ability3.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability3);
-        
+
         // −12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.
         LoyaltyAbility ability4 = new LoyaltyAbility(new JaceTheMindSculptorEffect3(), -12);
         ability4.addTarget(new TargetPlayer());
@@ -123,7 +119,7 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect {
                 cards.add(card);
                 controller.lookAtCards("Jace, the Mind Sculptor", cards, game);
                 if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", source, game)) {
-                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
+                    controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
                 } else {
                     game.informPlayers(controller.getLogName() + " puts the card back on top of the library.");
                 }
@@ -153,27 +149,19 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(3, game);
-            putOnLibrary(player, source, game);
-            putOnLibrary(player, source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.drawCards(3, game);
+            TargetCardInHand target = new TargetCardInHand(2, 2, new FilterCard());
+            controller.chooseTarget(Outcome.Detriment, target, source, game);
+            Cards cardsToLibrary = new CardsImpl(target.getTargets());
+            if (!cardsToLibrary.isEmpty()) {
+                controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, true);
+            }
             return true;
         }
         return false;
     }
-
-    private boolean putOnLibrary(Player player, Ability source, Game game) {
-        TargetCardInHand target = new TargetCardInHand();
-        player.chooseTarget(Outcome.ReturnToHand, target, source, game);
-        Card card = player.getHand().get(target.getFirstTarget(), game);
-        if (card != null) {
-            player.getHand().remove(card);
-            player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
-        }
-        return true;
-    }
-
 }
 
 class JaceTheMindSculptorEffect3 extends OneShotEffect {

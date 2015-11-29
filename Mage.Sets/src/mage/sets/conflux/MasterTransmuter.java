@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
@@ -61,7 +61,7 @@ public class MasterTransmuter extends CardImpl {
         // {U}, {tap}, Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(new FilterArtifactCard("an artifact card")), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         this.addAbility(ability);
 
     }

@@ -59,7 +59,7 @@ public class HelmOfPossession extends CardImpl {
 
         // You may choose not to untap Helm of Possession during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
-        
+
         // {2}, {tap}, Sacrifice a creature: Gain control of target creature for as long as you control Helm of Possession and Helm of Possession remains tapped.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
@@ -92,9 +92,9 @@ class HelmOfPossessionCondition implements Condition {
             controllerId = source.getControllerId();
         }
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null){
-            if (permanent.isTapped()){
-                return controllerId == source.getControllerId();
+        if (permanent != null) {
+            if (permanent.isTapped()) {
+                return controllerId.equals(source.getControllerId());
             }
         }
         return false;

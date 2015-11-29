@@ -28,12 +28,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -43,32 +37,31 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-
 
 /**
  * @author noxx
  */
 public class CanopyCover extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+    private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-    
     public CanopyCover(UUID ownerId) {
         super(ownerId, 98, "Canopy Cover", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -81,7 +74,7 @@ public class CanopyCover extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrchardSpiritEffect()));
 
         // Enchanted creature can't be the target of spells or abilities your opponents control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedAttachedEffect(filter, Duration.WhileOnBattlefield, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedAttachedEffect(filter, Duration.WhileOnBattlefield, AttachmentType.AURA, TargetController.OPPONENT)));
     }
 
     public CanopyCover(final CanopyCover card) {

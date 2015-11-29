@@ -44,10 +44,12 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -69,10 +71,10 @@ public class Dracoplasm extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // As Dracoplasm enters the battlefield, sacrifice any number of creatures. Dracoplasm's power becomes the total power of those creatures and its toughness becomes their total toughness.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DracoplasmEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoplasmEffect()));
+
         // {R}: Dracoplasm gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
@@ -88,41 +90,41 @@ public class Dracoplasm extends CardImpl {
 }
 
 class DracoplasmEffect extends ReplacementEffectImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-    
+
     static {
         filter.add(new AnotherPredicate());
     }
-    
+
     public DracoplasmEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        super(Duration.EndOfGame, Outcome.BoostCreature);
         this.staticText = "As {this} enters the battlefield, sacrifice any number of creatures. {this}'s power becomes the total power of those creatures and its toughness becomes their total toughness";
     }
-    
+
     public DracoplasmEffect(final DracoplasmEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DracoplasmEffect copy() {
         return new DracoplasmEffect(this);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId());        
+        return event.getTargetId().equals(source.getSourceId());
 
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
@@ -133,18 +135,18 @@ class DracoplasmEffect extends ReplacementEffectImpl {
             if (target.getTargets().size() > 0) {
                 int power = 0;
                 int toughness = 0;
-                for (UUID targetId: target.getTargets()) {
+                for (UUID targetId : target.getTargets()) {
                     Permanent targetCreature = game.getPermanent(targetId);
                     if (targetCreature != null && targetCreature.sacrifice(source.getSourceId(), game)) {
                         power += targetCreature.getPower().getValue();
                         toughness += targetCreature.getToughness().getValue();
                     }
                 }
-                ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom);
+                ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
                 game.addEffect(effect, source);
             }
         }
         return false;
     }
-     
+
 }

@@ -40,7 +40,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WarriorToken;
 import mage.game.stack.StackAbility;
 
 /**
@@ -79,7 +79,7 @@ public class HeraldOfAnafenza extends CardImpl {
 class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
 
     public HeraldOfAnafenzaTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new HeraldOfAnafenzaWarriorToken()), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorToken()), false);
     }
 
     public HeraldOfAnafenzaTriggeredAbility(final HeraldOfAnafenzaTriggeredAbility ability) {
@@ -90,7 +90,7 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
     public HeraldOfAnafenzaTriggeredAbility copy() {
         return new HeraldOfAnafenzaTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
@@ -110,20 +110,5 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever you activate {this}'s outlast ability, " + super.getRule();
-    }
-}
-
-class HeraldOfAnafenzaWarriorToken extends Token {
-
-    public HeraldOfAnafenzaWarriorToken() {
-        super("Warrior", "1/1 white Warrior creature token");
-        this.setOriginalExpansionSetCode("KTK");
-        this.setTokenType(1);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Warrior");
-
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

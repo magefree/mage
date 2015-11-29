@@ -61,7 +61,7 @@ public class BenalishLancer extends CardImpl {
 
         // If Benalish Lancer was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                KickedCondition.getInstance(), true,
+                KickedCondition.getInstance(),
                 "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.", "");
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);

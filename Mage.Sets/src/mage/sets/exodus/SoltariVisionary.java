@@ -99,7 +99,7 @@ class SoltariVisionaryTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent soltari = game.getPermanent(event.getSourceId());
-        if (soltari != null && soltari.getId() == this.getSourceId()) {
+        if (soltari != null && soltari.getId().equals(this.getSourceId())) {
             FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment that player controls.");
             filter.add(new ControllerIdPredicate(event.getPlayerId()));
             filter.setMessage("enchantment controlled by " + game.getPlayer(event.getTargetId()).getLogName());

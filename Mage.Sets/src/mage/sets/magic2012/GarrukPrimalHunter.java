@@ -25,23 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.counters.CounterType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,20 +52,19 @@ import mage.players.Player;
  * @author Loki
  */
 public class GarrukPrimalHunter extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
-    public GarrukPrimalHunter (UUID ownerId) {
+    public GarrukPrimalHunter(UUID ownerId) {
         super(ownerId, 174, "Garruk, Primal Hunter", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}{G}");
         this.expansionSetCode = "M12";
         this.subtype.add("Garruk");
 
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
-        
         // +1: Put a 3/3 green Beast creature token onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new BeastToken()), 1));
-        
+
         // -3: Draw cards equal to the greatest power among creatures you control.
         this.addAbility(new LoyaltyAbility(new GarrukPrimalHunterEffect(), -3));
 
@@ -77,7 +72,7 @@ public class GarrukPrimalHunter extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WurmToken(), new PermanentsOnBattlefieldCount(filter)), -6));
     }
 
-    public GarrukPrimalHunter (final GarrukPrimalHunter card) {
+    public GarrukPrimalHunter(final GarrukPrimalHunter card) {
         super(card);
     }
 
@@ -89,6 +84,7 @@ public class GarrukPrimalHunter extends CardImpl {
 }
 
 class GarrukPrimalHunterEffect extends OneShotEffect {
+
     GarrukPrimalHunterEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw cards equal to the greatest power among creatures you control";

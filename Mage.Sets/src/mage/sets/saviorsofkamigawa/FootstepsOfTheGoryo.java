@@ -28,22 +28,18 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,7 +57,6 @@ public class FootstepsOfTheGoryo extends CardImpl {
         super(ownerId, 68, "Footsteps of the Goryo", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
-
 
         // Return target creature card from your graveyard to the battlefield. Sacrifice that creature at the beginning of the next end step.
         this.getSpellAbility().addEffect(new FootstepsOfTheGoryoEffect());
@@ -100,22 +95,21 @@ class FootstepsOfTheGoryoEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         // Sacrifice it at end of turn
-                        Effect sacrificeEffect = new SacrificeTargetEffect("Sacrifice that creature at the beginning of next end step");
-                        sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
+                        Effect sacrificeEffect = new SacrificeTargetEffect("Sacrifice that creature at the beginning of next end step", source.getControllerId());
+                        sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceObject(source.getSourceObject(game), game);
                         game.addDelayedTriggeredAbility(delayedAbility);
-                        return true;
-
                     }
                 }
             }
+            return true;
         }
         return false;
     }

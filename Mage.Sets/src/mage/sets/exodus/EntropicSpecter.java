@@ -27,6 +27,7 @@
  */
 package mage.sets.exodus;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -34,18 +35,19 @@ import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -64,13 +66,13 @@ public class EntropicSpecter extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // As Entropic Specter enters the battlefield, choose an opponent.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponent()));
-        
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
+
         // Entropic Specter's power and toughness are each equal to the number of cards in the chosen player's hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Duration.WhileOnBattlefield)));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Duration.WhileOnBattlefield, SubLayer.SetPT_7b)));
+
         // Whenever Entropic Specter deals damage to a player, that player discards a card.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));
     }
@@ -85,47 +87,12 @@ public class EntropicSpecter extends CardImpl {
     }
 }
 
-class ChooseOpponent extends OneShotEffect {
-
-    public ChooseOpponent() {
-        super(Outcome.Neutral);
-        this.staticText = "choose an opponent";
-    }
-
-    public ChooseOpponent(final ChooseOpponent effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChooseOpponent copy() {
-        return new ChooseOpponent(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            TargetOpponent target = new TargetOpponent();
-            target.setNotTarget(true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Player chosenPlayer = game.getPlayer(target.getFirstTarget());
-                if (chosenPlayer != null) {
-                    game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
-                    game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-}
-
 class CardsInTargetPlayerHandCount implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {
-            UUID playerId = (UUID) game.getState().getValue(sourceAbility.getSourceId() + "_player");
+            UUID playerId = (UUID) game.getState().getValue(sourceAbility.getSourceId() + ChooseOpponentEffect.VALUE_KEY);
             Player chosenPlayer = game.getPlayer(playerId);
             if (chosenPlayer != null) {
                 return chosenPlayer.getHand().size();

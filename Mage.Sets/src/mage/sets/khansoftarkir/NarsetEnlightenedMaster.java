@@ -151,7 +151,7 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
             if (card != null) {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
-                    player.setCastSourceIdWithAlternateMana(objectId, null);
+                    player.setCastSourceIdWithAlternateMana(objectId, null, null);
                     return true;
                 }
             }

@@ -27,6 +27,7 @@
  */
 package mage.sets.bornofthegods;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,14 +48,13 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
  */
 public class ChampionOfStraySouls extends CardImpl {
 
+    private final UUID originalId;
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
 
     static {
@@ -71,8 +71,9 @@ public class ChampionOfStraySouls extends CardImpl {
         this.toughness = new MageInt(4);
 
         /**
-         *  You choose the targets of the first ability as you activate that ability,
-         *  before you pay any costs. You can't target any of the creatures you sacrifice.
+         * You choose the targets of the first ability as you activate that
+         * ability, before you pay any costs. You can't target any of the
+         * creatures you sacrifice.
          */
         // {3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creatures from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
@@ -80,11 +81,12 @@ public class ChampionOfStraySouls extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeXTargetCost(filter));
-        ability.addTarget(new TargetCardInYourGraveyard(0,Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
 
         // {5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, 
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD,
                 new PutOnLibrarySourceEffect(true, "Put {this} on top of your library from your graveyard"),
                 new ManaCostsImpl("{5}{B}{B}")));
 
@@ -92,12 +94,12 @@ public class ChampionOfStraySouls extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
                     int xValue = new GetXValue().calculate(game, ability, null);
                     ability.getTargets().clear();
-                    ability.addTarget(new TargetCardInYourGraveyard(xValue,xValue, new FilterCreatureCard("creature cards from your graveyard")));
+                    ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, new FilterCreatureCard("creature cards from your graveyard")));
                 }
             }
         }
@@ -105,6 +107,7 @@ public class ChampionOfStraySouls extends CardImpl {
 
     public ChampionOfStraySouls(final ChampionOfStraySouls card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

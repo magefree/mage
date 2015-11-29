@@ -28,17 +28,11 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.MageObject;
-
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -52,7 +46,7 @@ public class Peek extends CardImpl {
         this.expansionSetCode = "10E";
 
         // Look at target player's hand.
-        this.getSpellAbility().addEffect(new PeekEffect());
+        this.getSpellAbility().addEffect(new LookAtTargetPlayerHandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         // Draw a card.
@@ -67,32 +61,4 @@ public class Peek extends CardImpl {
     public Peek copy() {
         return new Peek(this);
     }
-}
-
-class PeekEffect extends OneShotEffect {
-    PeekEffect() {
-        super(Outcome.Detriment);
-        staticText = "look at target player's hand";
-    }
-
-    PeekEffect(final PeekEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player != null && controller != null && sourceObject != null) {
-            controller.lookAtCards(sourceObject.getIdName() + " " + player.getName() + " (" + game.getTurnNum()+"|"+game.getPhase().getType() +")", player.getHand(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public PeekEffect copy() {
-        return new PeekEffect(this);
-    }
-
 }

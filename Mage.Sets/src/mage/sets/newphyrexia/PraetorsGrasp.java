@@ -34,8 +34,6 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -167,7 +165,7 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
     private final UUID cardId;
 
     public PraetorsGraspRevealEffect(UUID cardId) {
-        super(AsThoughEffectType.REVEAL_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         this.cardId = cardId;
         staticText = "You may look at and play that card for as long as it remains exiled";
     }
@@ -198,10 +196,7 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
                     Player controller = game.getPlayer(source.getControllerId());
                     Card card = game.getCard(cardId);
                     if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
-                        if (controller.chooseUse(outcome, "Reveal exiled card?", source, game)) {
-                            Cards cards = new CardsImpl(card);
-                            controller.lookAtCards("Exiled with " + sourceObject.getIdName(), cards, game);
-                        }
+                        return true;
                     }
                 } else {
                     discard();

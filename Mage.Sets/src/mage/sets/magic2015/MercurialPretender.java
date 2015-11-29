@@ -29,25 +29,18 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.AbilityApplier;
 
 /**
  *
@@ -55,7 +48,7 @@ import mage.util.functions.ApplyToPermanent;
  */
 public class MercurialPretender extends CardImpl {
 
-    private static final String abilityText = "You may have {this} enter the battlefield as a copy of any creature you control except it gains \"{2}{U}{U}: Return this creature to its owner's hand.\"";
+    private static final String effectText = "as a copy of any creature you control except it gains \"{2}{U}{U}: Return this creature to its owner's hand.\"";
 
     public MercurialPretender(UUID ownerId) {
         super(ownerId, 68, "Mercurial Pretender", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
@@ -68,9 +61,10 @@ public class MercurialPretender extends CardImpl {
 
         // You may have Mercurial Pretender enter the battlefield as a copy of any creature you control
         // except it gains "{2}{U}{U}: Return this creature to its owner's hand."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new MercurialPretenderCopyEffect(), abilityText, true));
-        this.addAbility(ability);
+        Effect effect = new CopyPermanentEffect(new FilterControlledCreaturePermanent(),
+                new AbilityApplier(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}"))));
+        effect.setText(effectText);
+        this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
     public MercurialPretender(final MercurialPretender card) {
@@ -80,48 +74,5 @@ public class MercurialPretender extends CardImpl {
     @Override
     public MercurialPretender copy() {
         return new MercurialPretender(this);
-    }
-}
-class MercurialPretenderCopyEffect extends OneShotEffect {
-
-    public MercurialPretenderCopyEffect() {
-        super(Outcome.Copy);
-    }
-
-    public MercurialPretenderCopyEffect(final MercurialPretenderCopyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            Target target = new TargetPermanent(new FilterControlledCreaturePermanent());
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                player.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
-                if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
-                        @Override
-                        public Boolean apply(Game game, Permanent permanent) {
-                            // {2}{U}{U}: Return this creature to its owner's hand.
-                            Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}"));
-                            permanent.addAbility(ability, game);
-                            return true;
-                        }
-                    });
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public MercurialPretenderCopyEffect copy() {
-        return new MercurialPretenderCopyEffect(this);
     }
 }

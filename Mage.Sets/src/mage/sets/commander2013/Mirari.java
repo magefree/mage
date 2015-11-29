@@ -30,6 +30,7 @@ package mage.sets.commander2013;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
@@ -44,6 +45,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -70,7 +72,6 @@ public class Mirari extends CardImpl {
         return new Mirari(this);
     }
 }
-
 
 class MirariTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -106,8 +107,9 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
-                this.getTargets().get(0).clearChosen();
-                this.getTargets().get(0).add(spell.getId(), game);
+                for (Effect effect : getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(spell.getId()));
+                }
                 return true;
             }
         }
@@ -115,9 +117,9 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private boolean isControlledInstantOrSorcery(Spell spell) {
-        return spell != null &&
-            (spell.getControllerId().equals(this.getControllerId())) &&
-            (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
+        return spell != null
+                && (spell.getControllerId().equals(this.getControllerId()))
+                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
     }
 
     @Override

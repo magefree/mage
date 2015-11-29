@@ -78,11 +78,11 @@ public class GameSessionPlayer extends GameSessionWatcher {
         super.CleanUp();
     }
 
-    public void ask(final String question) {
+    public void ask(final String question, final Map<String, Serializable> options) {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(getGameView(), question)));
+                user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(getGameView(), question, options)));
             }
         }
     }

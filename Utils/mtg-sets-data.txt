@@ -25,6 +25,7 @@ Chronicles|CHR|
 Clash Pack|CLASH|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
+Commander 2015|C15|
 Conflux|CON|
 Coldsnap|CSP|
 Dark Ascension|DKA|
@@ -53,6 +54,7 @@ Duel Decks: Phyrexia vs. the Coalition|DDE|
 Duel Decks: Sorin vs. Tibalt|DDK|
 Duel Decks: Speed vs. Cunning|DDN|
 Duel Decks: Venser vs. Koth|DDI|
+Duel Decks: Zendikar vs. Eldrazi|DDP|
 Eventide|EVE|
 Exodus|EXO|
 Fallen Empires|FEM|
@@ -109,6 +111,7 @@ MTGO Vanguard|VGO|
 New Phyrexia|NPH|
 Ninth Edition|9ED|
 Nemesis|NMS|
+Oath of the Gatewatch|OGW|
 Odyssey|ODY|
 Onslaught|ONS|
 Prophecy|PCY|
@@ -160,3 +163,4 @@ World Magic Cup Qualifier|WMCQ|
 Worldwake|WWK|
 WPN Gateway|GRC|
 Zendikar|ZEN|
+Zendikar Expeditions|EXP|

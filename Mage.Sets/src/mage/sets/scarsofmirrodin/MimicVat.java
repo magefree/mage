@@ -37,7 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -50,10 +50,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -204,19 +202,18 @@ class MimicVatCreateTokenEffect extends OneShotEffect {
         if (permanent.getImprinted().size() > 0) {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(card);
-
-                token.addAbility(HasteAbility.getInstance());
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-                ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
+                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                effect.apply(game, source);
+                for (Permanent addedToken : effect.getAddedPermanent()) {
+                    ExileTargetEffect exileEffect = new ExileTargetEffect();
+                    exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                    game.addDelayedTriggeredAbility(delayedAbility);
+                }
 
                 return true;
             }

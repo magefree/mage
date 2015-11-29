@@ -25,21 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -50,18 +49,19 @@ public class RazorvergeThicket extends CardImpl {
 
     private static FilterLandPermanent filter = new FilterLandPermanent();
 
-    public RazorvergeThicket (UUID ownerId) {
+    public RazorvergeThicket(UUID ownerId) {
         super(ownerId, 228, "Razorverge Thicket", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 4));
+        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 3));
         String abilityText = "tap it unless you control fewer than 3 lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
     }
 
-    public RazorvergeThicket (final RazorvergeThicket card) {
+    public RazorvergeThicket(final RazorvergeThicket card) {
         super(card);
     }
 

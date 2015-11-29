@@ -64,7 +64,7 @@ public class PouncingKavu extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         // If Pouncing Kavu was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-            KickedCondition.getInstance(), true, "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.", "");
+            KickedCondition.getInstance(), "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.", "");
         ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }

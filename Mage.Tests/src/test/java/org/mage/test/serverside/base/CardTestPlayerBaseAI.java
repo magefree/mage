@@ -55,13 +55,13 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
     }
 
     @Override
-    protected TestPlayer createPlayer(String name) {
+    protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
         if (name.equals("PlayerA")) {
             TestPlayer testPlayer = new TestPlayer(new ComputerPlayer7("PlayerA", RangeOfInfluence.ONE, skill));
             testPlayer.setAIPlayer(true);
             return testPlayer;
         }
-        return super.createPlayer(name);
+        return super.createPlayer(name, rangeOfInfluence);
     }
 
     public void setAISkill(int skill) {

@@ -27,14 +27,14 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,13 +42,13 @@ import mage.game.permanent.token.Token;
 
 /**
  * @author LevelX2
- * 
+ *
  */
 public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     protected Token token;
     protected String type;
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
     public BecomesCreatureAllEffect(Token token, String type, FilterPermanent filter, Duration duration) {
         super(duration, Outcome.BecomeCreature);
@@ -71,7 +71,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
@@ -93,8 +93,9 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                         break;
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getColor(game).hasColor())
+                            if (token.getColor(game).hasColor()) {
                                 permanent.getColor(game).setColor(token.getColor(game));
+                            }
                         }
                         break;
                     case AbilityAddingRemovingEffects_6:

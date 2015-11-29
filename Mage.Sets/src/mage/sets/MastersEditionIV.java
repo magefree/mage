@@ -46,7 +46,7 @@ public class MastersEditionIV extends ExpansionSet {
 
     private MastersEditionIV() {
         super("Masters Edition IV", "ME4", "mage.sets.masterseditioniv", new GregorianCalendar(2011, 1, 10).getTime(), SetType.MAGIC_ONLINE);
-        this.hasBasicLands = true;
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

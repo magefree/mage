@@ -8,6 +8,7 @@ package mage.sets.antiquities;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -32,48 +33,46 @@ import mage.util.CardUtil;
  * @author nick.myers
  */
 public class PowerArtifact extends CardImpl {
-    
+
     public PowerArtifact(UUID ownerId) {
         super(ownerId, 55, "Power Artifact", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
         this.expansionSetCode = "ATQ";
         this.subtype.add("Aura");
-        
+
         // Enchant artifact
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
-        // The activation cost of target artifact is reduced by {2}. If this would reduce target
-        // artifact's activation cost below {1}, target artifact's activation cost becomes {1}.
-        // Power Artifact has no effect on artifacts that have no activation cost or whose activation
-        // cost is {0}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PowerArtifactCostModificationEffect()));        
+
+        // Enchanted artifact's activated abilities cost less to activate.
+        // This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PowerArtifactCostModificationEffect()));
     }
-    
+
     public PowerArtifact(final PowerArtifact card) {
         super(card);
     }
-    
+
     @Override
     public PowerArtifact copy() {
         return new PowerArtifact(this);
-    }    
+    }
 }
 
 class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
-    
+
     PowerArtifactCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "The activation cost of target artifact is reduced by {2}. If this would reduce target artifact's activation cost below {1}, target artifact's activation cost becomes {1}. Power artifact has no effect on artifacts that have no activation cost or whose activation cost is {0}.";
-        
+
     }
-    
+
     PowerArtifactCostModificationEffect(PowerArtifactCostModificationEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
@@ -90,21 +89,22 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
         }
         return true;
     }
-    
+
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         Permanent artifact = game.getPermanent(abilityToModify.getSourceId());
         if (artifact != null && artifact.getAttachments().contains(source.getSourceId())) {
-            if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)) {
+            if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)
+                    || (abilityToModify.getAbilityType().equals(AbilityType.MANA) && (abilityToModify instanceof ActivatedAbility))) {
                 return true;
             }
         }
         return false;
     }
-    
-    @Override 
+
+    @Override
     public PowerArtifactCostModificationEffect copy() {
         return new PowerArtifactCostModificationEffect(this);
     }
-    
+
 }

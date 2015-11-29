@@ -29,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
@@ -63,15 +64,16 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class CardPanel extends MagePermanent implements MouseListener, MouseMotionListener, MouseWheelListener, ComponentListener {
+
     private static final long serialVersionUID = -3272134219262184410L;
 
-    private static final Logger log = Logger.getLogger(CardPanel.class);
+    private static final Logger logger = Logger.getLogger(CardPanel.class);
 
     private static final int WIDTH_LIMIT = 90; // card width limit to create smaller counter
     public static final double TAPPED_ANGLE = Math.PI / 2;
     public static final double FLIPPED_ANGLE = Math.PI;
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
-    public static final int POPUP_X_GAP = 1; // prevent popup window from blinking
+    public static final int POPUP_X_GAP = 1; // prevent tooltip window from blinking
 
     public static CardPanel dragAnimationPanel;
 
@@ -120,7 +122,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private GlowText ptText;
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
-    public  int cardXOffset, cardYOffset, cardWidth, cardHeight;
+    public int cardXOffset, cardYOffset, cardWidth, cardHeight;
 
     private boolean isSelected;
     private boolean isPlayable;
@@ -132,8 +134,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private ActionCallback callback;
 
-    protected boolean popupShowing;
-    protected TextPopup popupText = new TextPopup();
+    protected boolean tooltipShowing;
+    protected TextPopup tooltipText = new TextPopup();
     protected UUID gameId;
     private TransferData data = new TransferData();
 
@@ -152,6 +154,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private int yTextOffset = 10;
 
+    // if this is set, it's opened if the user right clicks on the card panel
+    private JPopupMenu popupMenu;
+
     public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
         this.gameCard = newGameCard;
         this.callback = callback;
@@ -165,7 +170,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
         //for container debug (don't remove)
         //setBorder(BorderFactory.createLineBorder(Color.green));
-
         if (this.gameCard.canTransform()) {
             buttonPanel = new JPanel();
             buttonPanel.setLayout(null);
@@ -222,14 +226,14 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
         if (newGameCard.isAbility()) {
             if (AbilityType.TRIGGERED.equals(newGameCard.getAbilityType())) {
-                setTypeIcon(ImageManagerImpl.getInstance().getTriggeredAbilityImage(),"Triggered Ability");
+                setTypeIcon(ImageManagerImpl.getInstance().getTriggeredAbilityImage(), "Triggered Ability");
             } else if (AbilityType.ACTIVATED.equals(newGameCard.getAbilityType())) {
-                setTypeIcon(ImageManagerImpl.getInstance().getActivatedAbilityImage(),"Activated Ability");
+                setTypeIcon(ImageManagerImpl.getInstance().getActivatedAbilityImage(), "Activated Ability");
             }
         }
 
         if (this.gameCard.isToken()) {
-            setTypeIcon(ImageManagerImpl.getInstance().getTokenIconImage(),"Token Permanent");
+            setTypeIcon(ImageManagerImpl.getInstance().getTokenIconImage(), "Token Permanent");
         }
 
         // icon to inform about permanent is copying something
@@ -299,7 +303,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         imagePanel.setScalingMultiPassType(MultipassType.none);
 
         String cardType = getType(newGameCard);
-        popupText.setText(getText(cardType, newGameCard));
+        tooltipText.setText(getText(cardType, newGameCard));
 
         Util.threadPool.submit(new Runnable() {
             @Override
@@ -326,9 +330,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     }
                     setText(gameCard);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.fatal("Problem during image animation", e);
                 } catch (Error err) {
-                    err.printStackTrace();
+                    logger.error("Problem during image animation", err);
                 }
             }
         });
@@ -344,7 +348,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         typeButton.setLocation(2, 2);
         typeButton.setSize(25, 25);
 
-
         iconPanel.setVisible(true);
         typeButton.setIcon(new ImageIcon(bufferedImage));
         if (toolTipText != null) {
@@ -355,17 +358,17 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     public void cleanUp() {
         if (dayNightButton != null) {
-            for(ActionListener al: dayNightButton.getActionListeners()) {
+            for (ActionListener al : dayNightButton.getActionListeners()) {
                 dayNightButton.removeActionListener(al);
             }
         }
-        for(MouseListener ml: this.getMouseListeners() ){
+        for (MouseListener ml : this.getMouseListeners()) {
             this.removeMouseListener(ml);
         }
-        for(MouseMotionListener ml: this.getMouseMotionListeners() ){
+        for (MouseMotionListener ml : this.getMouseMotionListeners()) {
             this.removeMouseMotionListener(ml);
         }
-        for(MouseWheelListener ml: this.getMouseWheelListeners() ){
+        for (MouseWheelListener ml : this.getMouseWheelListeners()) {
             this.removeMouseWheelListener(ml);
         }
         // this holds reference to ActionCallback forever so set it to null to prevent
@@ -393,7 +396,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             }
         }
     }
-
 
     @Override
     public void setZone(String zone) {
@@ -502,7 +504,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         } else if (isPlayable) {
             g2d.setColor(new Color(153, 102, 204, 200));
             //g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
-            g2d.fillRoundRect(cardXOffset, cardYOffset , cardWidth , cardHeight , cornerSize, cornerSize);
+            g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
         }
 
         if (canAttack) {
@@ -512,10 +514,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
         //TODO:uncomment
         /*
-                  if (gameCard.isAttacking()) {
-                      g2d.setColor(new Color(200,10,10,200));
-                      g2d.fillRoundRect(cardXOffset+1, cardYOffset+1, cardWidth-2, cardHeight-2, cornerSize, cornerSize);
-                  }*/
+         if (gameCard.isAttacking()) {
+         g2d.setColor(new Color(200,10,10,200));
+         g2d.fillRoundRect(cardXOffset+1, cardYOffset+1, cardWidth-2, cardHeight-2, cornerSize, cornerSize);
+         }*/
     }
 
     @Override
@@ -562,8 +564,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (counterPanel != null) {
             counterPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
             counterPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
-            int size = cardWidth > WIDTH_LIMIT ? 40: 20;
-
+            int size = cardWidth > WIDTH_LIMIT ? 40 : 20;
 
             minusCounterLabel.setLocation(counterPanel.getWidth() - size, counterPanel.getHeight() - size * 2);
             minusCounterLabel.setSize(size, size);
@@ -576,7 +577,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
             otherCounterLabel.setLocation(5, counterPanel.getHeight() - size);
             otherCounterLabel.setSize(size, size);
-
 
         }
         int fontHeight = Math.round(cardHeight * (27f / 680));
@@ -823,7 +823,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         this.gameCard = card;
 
         String cardType = getType(card);
-        popupText.setText(getText(cardType, card));
+        tooltipText.setText(getText(cardType, card));
 
         if (hasSickness && CardUtil.isCreature(gameCard) && isPermanent) {
             overlayPanel.setVisible(true);
@@ -864,11 +864,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             minusCounterLabel.setVisible(false);
             loyaltyCounterLabel.setVisible(false);
             otherCounterLabel.setVisible(false);
-            for (CounterView counterView:card.getCounters()) {
+            for (CounterView counterView : card.getCounters()) {
                 if (counterView.getCount() == 0) {
                     continue;
                 }
-                switch(counterView.getName()) {
+                switch (counterView.getName()) {
                     case "+1/+1":
                         if (counterView.getCount() != plusCounter) {
                             plusCounter = counterView.getCount();
@@ -913,10 +913,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     }
 
     private static ImageIcon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
-        int factor = cardWidth > WIDTH_LIMIT ? 2 :1;
+        int factor = cardWidth > WIDTH_LIMIT ? 2 : 1;
         int xOffset = amount > 9 ? 2 : 5;
-        int fontSize = factor == 1 ? amount < 10 ? 12 : amount < 100 ? 10 : amount < 1000 ? 7: 6
-                                    :amount < 10 ? 19 : amount < 100 ? 15 : amount < 1000 ? 12: amount < 10000 ?9 : 8;
+        int fontSize = factor == 1 ? amount < 10 ? 12 : amount < 100 ? 10 : amount < 1000 ? 7 : 6
+                : amount < 10 ? 19 : amount < 100 ? 15 : amount < 1000 ? 12 : amount < 10000 ? 9 : 8;
         BufferedImage newImage;
         if (cardWidth > WIDTH_LIMIT) {
             newImage = ImageManagerImpl.deepCopy(image);
@@ -925,7 +925,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
         Graphics graphics = newImage.getGraphics();
         graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize ));
+        graphics.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize));
         graphics.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
         return new ImageIcon(newImage);
     }
@@ -977,12 +977,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (gameCard.hideInfo()) {
             return;
         }
-        if (!popupShowing) {
+        if (!tooltipShowing) {
             synchronized (this) {
-                if (!popupShowing) {
+                if (!tooltipShowing) {
                     TransferData transferData = getTransferDataForMouseEntered();
                     if (this.isShowing()) {
-                        popupShowing = true;
+                        tooltipShowing = true;
                         callback.mouseEntered(e, transferData);
                     }
                 }
@@ -1013,13 +1013,13 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (getMousePosition(true) != null) {
             return;
         }
-        if (popupShowing) {
+        if (tooltipShowing) {
             synchronized (this) {
-                if (popupShowing) {
-                    popupShowing = false;
+                if (tooltipShowing) {
+                    tooltipShowing = false;
                     data.component = this;
                     data.card = this.gameCard;
-                    data.popupText = popupText;
+                    data.popupText = tooltipText;
                     callback.mouseExited(e, data);
                 }
             }
@@ -1047,7 +1047,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private TransferData getTransferDataForMouseEntered() {
         data.component = this;
         data.card = this.gameCard;
-        data.popupText = popupText;
+        data.popupText = tooltipText;
         data.gameId = this.gameId;
         data.locationOnScreen = data.component.getLocationOnScreen(); // we need this for popup
         data.popupOffsetX = isTapped() ? cardHeight + cardXOffset + POPUP_X_GAP : cardWidth + cardXOffset + POPUP_X_GAP;
@@ -1145,7 +1145,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 dayNightButton.setIcon(new ImageIcon(night));
             }
             if (this.gameCard.getSecondCardFace() == null) {
-                log.error("no second side for card to transform!");
+                logger.error("no second side for card to transform!");
                 return;
             }
             if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
@@ -1210,5 +1210,14 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         yTextOffset = yOffset;
     }
 
+    @Override
+    public JPopupMenu getPopupMenu() {
+        return popupMenu;
+    }
+
+    @Override
+    public void setPopupMenu(JPopupMenu popupMenu) {
+        this.popupMenu = popupMenu;
+    }
 
 }

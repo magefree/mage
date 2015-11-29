@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author anonymous
  */
-public class RukhEgg extends mage.sets.arabiannights.RukhEgg {
+public class RukhEgg extends mage.sets.arabiannights.RukhEgg1 {
 
     public RukhEgg(UUID ownerId) {
         super(ownerId);

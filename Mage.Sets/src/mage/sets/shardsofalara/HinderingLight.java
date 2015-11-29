@@ -28,11 +28,12 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -57,7 +58,6 @@ public class HinderingLight extends CardImpl {
     public HinderingLight(UUID ownerId) {
         super(ownerId, 173, "Hindering Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{U}");
         this.expansionSetCode = "ALA";
-
 
         // Counter target spell that targets you or a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
@@ -84,9 +84,8 @@ class HinderingLightPredicate implements ObjectPlayerPredicate<ObjectPlayer<Stac
         if (controllerId == null) {
             return false;
         }
-        for (UUID modeId :input.getObject().getStackAbility().getModes().getSelectedModes()) {
-            input.getObject().getStackAbility().getModes().setActiveMode(modeId);
-            for (Target target : input.getObject().getStackAbility().getTargets()) {
+        for (Mode mode : input.getObject().getStackAbility().getModes().getSelectedModes()) {
+            for (Target target : mode.getTargets()) {
                 for (UUID targetId : target.getTargets()) {
                     if (controllerId.equals(targetId)) {
                         return true;
@@ -96,7 +95,7 @@ class HinderingLightPredicate implements ObjectPlayerPredicate<ObjectPlayer<Stac
                         return true;
                     }
                 }
-            }                      
+            }
         }
         return false;
     }

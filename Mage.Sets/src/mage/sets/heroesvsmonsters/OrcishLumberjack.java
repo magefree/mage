@@ -123,10 +123,10 @@ class OrcishLumberjackManaEffect extends ManaEffect {
                 }
                 switch (manaChoice.getChoice()) {
                     case "Green":
-                        mana.addGreen();
+                        mana.increaseGreen();
                         break;
                     case "Red":
-                        mana.addRed();
+                        mana.increaseRed();
                         break;
                 }
                 

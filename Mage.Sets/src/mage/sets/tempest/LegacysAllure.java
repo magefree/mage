@@ -54,6 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LegacysAllure extends CardImpl {
 
+    private final UUID originalId;
+
     public LegacysAllure(UUID ownerId) {
         super(ownerId, 71, "Legacy's Allure", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
         this.expansionSetCode = "TMP";
@@ -62,18 +64,20 @@ public class LegacysAllure extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(new Counter("treasure")), TargetController.YOU, true));
 
         // Sacrifice Legacy's Allure: Gain control of target creature with power less than or equal to the number of treasure counters on Legacy's Allure.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.EndOfGame, true),new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.EndOfGame, true), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with power less than or equal to the number of treasure counters on " + getLogName())));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     public LegacysAllure(final LegacysAllure card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
             if (sourcePermanent != null) {
                 int numbCounters = sourcePermanent.getCounters().getCount("treasure");

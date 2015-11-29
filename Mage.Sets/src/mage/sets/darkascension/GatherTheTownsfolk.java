@@ -30,13 +30,12 @@ package mage.sets.darkascension;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HumanToken;
 
 /**
  *
@@ -63,18 +62,4 @@ public class GatherTheTownsfolk extends CardImpl {
     public GatherTheTownsfolk copy() {
         return new GatherTheTownsfolk(this);
     }
-}
-
-class HumanToken extends Token {
-
-    public HumanToken() {
-        super("Human", "1/1 white Human creature token");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        
-        subtype.add("Human");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-
 }

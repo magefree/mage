@@ -27,21 +27,25 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -53,7 +57,6 @@ public class AbundantGrowth extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Aura");
 
-
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -64,9 +67,11 @@ public class AbundantGrowth extends CardImpl {
         // When Abundant Growth enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
-        // Enchanted land has "{tap}: Add one mana of any color to your mana pool."
+        // Enchanted land has "{T}: Add one mana of any color to your mana pool."
         Ability gainedAbility = new AnyColorManaAbility(new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
+        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
+        effect.setText("Enchanted land has \"{T}: Add one mana of any color to your mana pool.\"");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public AbundantGrowth(final AbundantGrowth card) {

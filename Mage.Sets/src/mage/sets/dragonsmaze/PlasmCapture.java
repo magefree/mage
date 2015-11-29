@@ -35,8 +35,8 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility.PhaseSelection;
+import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
@@ -95,8 +95,8 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
             game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
             // mana gets added also if counter is not successful
             int mana = spell.getConvertedManaCost();
-            AtTheBeginOMainPhaseDelayedTriggeredAbility delayedAbility =
-                    new AtTheBeginOMainPhaseDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), false, TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
+            AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility =
+                    new AtTheBeginOfMainPhaseDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), false, TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             delayedAbility.setSourceObject(source.getSourceObject(game), game);
@@ -141,15 +141,15 @@ class PlasmCaptureManaEffect extends ManaEffect {
                 }
 
                 if (choiceColor.getColor().isBlack()) {
-                    mana.addBlack();
+                    mana.increaseBlack();
                 } else if (choiceColor.getColor().isBlue()) {
-                    mana.addBlue();
+                    mana.increaseBlue();
                 } else if (choiceColor.getColor().isRed()) {
-                    mana.addRed();
+                    mana.increaseRed();
                 } else if (choiceColor.getColor().isGreen()) {
-                    mana.addGreen();
+                    mana.increaseGreen();
                 } else if (choiceColor.getColor().isWhite()) {
-                    mana.addWhite();
+                    mana.increaseWhite();
                 }
             }
 

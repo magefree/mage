@@ -106,9 +106,9 @@ public class SkywardEyeProphets extends CardImpl {
                 cards.add(card);
                 controller.revealCards(sourceObject.getName(), cards, game);
                 if (card.getCardType().contains(CardType.LAND)) {
-                    return controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                    return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
-                    controller.moveCards(card, null, Zone.HAND, source, game);
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
             }
             return true;

@@ -63,8 +63,8 @@ import mage.players.Player;
 public class BuybackAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Buyback";
-    private static final String reminderTextCost = "<i>(You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)</i>";
-    private static final String reminderTextMana = "<i>(You may pay an additional {cost} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>";
+    private static final String reminderTextCost = "You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.";
+    private static final String reminderTextMana = "You may pay an additional {cost} as you cast this spell. If you do, put this card into your hand as it resolves.";
     protected OptionalAdditionalCost buybackCost;
 
     public BuybackAbility(String manaString) {
@@ -96,6 +96,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         }
     }
 
+    @Override
     public boolean isActivated() {
         if (buybackCost != null) {
             return buybackCost.isActivated();
@@ -112,11 +113,11 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetBuyback();
                 if (buybackCost != null) {
-                    if (player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(buybackCost.getText(false)).append(" ?").toString(), ability, game)) {
+                    if (player.chooseUse(Outcome.Benefit, "Pay " + buybackCost.getText(false) + " ?", ability, game)) {
                         buybackCost.activate();
                         for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
@@ -185,7 +186,8 @@ class BuybackEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.STACK) {
+            if (zEvent.getFromZone() == Zone.STACK
+                    && source.getSourceId().equals(event.getSourceId())) { // if spell fizzled, the sourceId is null
                 return true;
             }
         }

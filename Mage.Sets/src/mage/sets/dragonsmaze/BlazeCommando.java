@@ -31,22 +31,20 @@ package mage.sets.dragonsmaze;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SoldierTokenWithHaste;
 import mage.game.stack.StackObject;
 
 /**
@@ -82,12 +80,13 @@ public class BlazeCommando extends CardImpl {
     }
 
 }
+
 class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
 
     private final List<UUID> handledStackObjects = new ArrayList<>();
 
     public BlazeCommandoTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new BlazeCommandoSoldierToken(), 2), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierTokenWithHaste(), 2), false);
     }
 
     public BlazeCommandoTriggeredAbility(final BlazeCommandoTriggeredAbility ability) {
@@ -103,10 +102,10 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
     public void reset(Game game) {
         /**
          * Blaze Commando's ability triggers each time an instant or sorcery spell you control
-         * deals damage (or, put another way, the number of times the word “deals” appears in 
+         * deals damage (or, put another way, the number of times the word “deals” appears in
          * its instructions), no matter how much damage is dealt or how many players or permanents
-         * are dealt damage. For example, if you cast Punish the Enemy and it “deals 3 damage to 
-         * target player and 3 damage to target creature,” Blaze Commando's ability will trigger 
+         * are dealt damage. For example, if you cast Punish the Enemy and it “deals 3 damage to
+         * target player and 3 damage to target creature,” Blaze Commando's ability will trigger
          * once and you'll get two Soldier tokens.
          */
         handledStackObjects.clear();
@@ -136,19 +135,5 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return new StringBuilder("Whenever an instant or sorcery spell you control deals damage, ").append(super.getRule()).toString();
-    }
-}
-
-class BlazeCommandoSoldierToken extends Token {
-
-    public BlazeCommandoSoldierToken() {
-        super("Soldier", "1/1 red and white Soldier creature tokens with haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        color.setWhite(true);
-        subtype.add("Soldier");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(HasteAbility.getInstance());
     }
 }

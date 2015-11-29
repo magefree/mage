@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -57,9 +57,11 @@ public class TinStreetHooligan extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Tin Street Hooligan enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DestroyTargetEffect(), new ManaWasSpentCondition(ColoredManaSymbol.G),
-                "if {G} was spent to cast {this}, destroy target artifact"), false);
-        ability.addTarget(new TargetArtifactPermanent());        
+        Ability ability = new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()),
+                new ManaWasSpentCondition(ColoredManaSymbol.G),
+                "When {this} enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.");
+        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability, new ManaSpentToCastWatcher());
     }
 

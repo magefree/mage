@@ -27,14 +27,9 @@
  */
 package mage.sets.innistrad;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -47,6 +42,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -101,15 +103,21 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Player player: game.getPlayers().values()) {
-            for (Card card: player.getGraveyard().getCards(game)) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-                    game.addEffect(new GrimoireOfTheDeadEffect2(card.getId()), source);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Set<Card> creatureCards = new LinkedHashSet<>();
+            for (Player player : game.getPlayers().values()) {
+                for (Card card : player.getGraveyard().getCards(game)) {
+                    if (card.getCardType().contains(CardType.CREATURE)) {
+                        creatureCards.add(card);
+                        game.addEffect(new GrimoireOfTheDeadEffect2(card.getId()), source);
+                    }
                 }
             }
+            controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -121,10 +129,10 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
 
 class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
 
-    private UUID targetId;
+    private final UUID targetId;
 
     public GrimoireOfTheDeadEffect2(UUID targetId) {
-        super(Duration.EndOfGame, Outcome.Neutral);
+        super(Duration.Custom, Outcome.Neutral);
         this.targetId = targetId;
         staticText = "Becomes a black Zombie in addition to its other colors and types";
     }

@@ -27,14 +27,14 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -74,16 +74,14 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cardsToHand = new CardsImpl();
-        Zone fromZone = game.getState().getZone(targetPointer.getFirst(game, source));
-
+        Set<Card> cards = new LinkedHashSet<>();
         for (UUID targetId : targetPointer.getTargets(game, source)) {
             MageObject mageObject = game.getObject(targetId);
             if (mageObject instanceof Card) {
-                cardsToHand.add((Card) mageObject);
+                cards.add((Card) mageObject);
             }
         }
-        return controller.moveCards(cardsToHand, fromZone, Zone.HAND, source, game);
+        return controller.moveCards(cards, Zone.HAND, source, game);
     }
 
     @Override
@@ -106,7 +104,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             if (!target.getTargetName().startsWith("another")) {
                 sb.append("target ");
             }
-            sb.append(target.getTargetName()).append(" to its owner's hand").toString();
+            sb.append(target.getTargetName()).append(" to its owner's hand");
             return sb.toString();
         }
     }

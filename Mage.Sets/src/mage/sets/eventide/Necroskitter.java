@@ -80,7 +80,7 @@ public class Necroskitter extends CardImpl {
 class NecroskitterTriggeredAbility extends TriggeredAbilityImpl {
 
     public NecroskitterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToBattlefieldUnderYourControlTargetEffect());
+        super(Zone.BATTLEFIELD, new ReturnToBattlefieldUnderYourControlTargetEffect(), true);
     }
 
     public NecroskitterTriggeredAbility(NecroskitterTriggeredAbility ability) {
@@ -100,18 +100,13 @@ class NecroskitterTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (game.getPermanent(sourceId) == null) {
-            if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
-                return false;
-            }
-        }
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            Permanent permanent = zEvent.getTarget();
             if (permanent != null
                     && permanent.getCounters().containsKey(CounterType.M1M1)
                     && game.getOpponents(controllerId).contains(permanent.getControllerId())) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId())));
                 }
                 return true;
             }

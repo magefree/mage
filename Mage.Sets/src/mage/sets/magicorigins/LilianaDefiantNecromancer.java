@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
@@ -40,7 +40,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -49,7 +48,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -57,7 +55,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -84,9 +81,8 @@ public class LilianaDefiantNecromancer extends CardImpl {
         this.color.setBlack(true);
 
         this.nightCard = true;
-        // this.canTransform = true;
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +2: Each player discards a card.
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(1, false), 2));
@@ -97,7 +93,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
-        //-8: You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step.";
+        //-8: You get an emblem with "Whenever a creature dies, return it to the battlefield under your control at the beginning of the next end step.";
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaDefiantNecromancerEmblem()), -8));
     }
 
@@ -130,11 +126,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
 
 class LilianaDefiantNecromancerEmblem extends Emblem {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     //  You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step."
     public LilianaDefiantNecromancerEmblem() {

@@ -116,16 +116,16 @@ class PuppeteerCliqueEffect extends OneShotEffect {
         boolean result = false;
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                if (you.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                        hasteEffect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        hasteEffect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(hasteEffect, source);
                         ExileTargetEffect exileEffect = new ExileTargetEffect("exile " + permanent.getLogName());
-                        exileEffect.setTargetPointer(new FixedTarget(card.getId()));
+                        exileEffect.setTargetPointer(new FixedTarget(permanent, game));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect, TargetController.YOU);
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());

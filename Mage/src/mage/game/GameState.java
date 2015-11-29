@@ -86,7 +86,7 @@ import mage.watchers.Watchers;
  */
 public class GameState implements Serializable, Copyable<GameState> {
 
-    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
+    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
 
     private final Players players;
     private final PlayerList playerList;
@@ -309,7 +309,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (StackObject spell : stack) {
             sb.append(spell.getControllerId()).append(spell.getName());
             sb.append(spell.getStackAbility().toString());
-            for (Mode mode : spell.getStackAbility().getModes().values()) {
+            for (Mode mode : spell.getStackAbility().getModes().getSelectedModes()) {
                 if (!mode.getTargets().isEmpty()) {
                     sb.append("targets");
                     for (Target target : mode.getTargets()) {
@@ -367,7 +367,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (StackObject spell : stack) {
             sb.append(spell.getControllerId()).append(spell.getName());
             sb.append(spell.getStackAbility().toString());
-            for (Mode mode : spell.getStackAbility().getModes().values()) {
+            for (Mode mode : spell.getStackAbility().getModes().getSelectedModes()) {
                 if (!mode.getTargets().isEmpty()) {
                     sb.append("targets");
                     for (Target target : mode.getTargets()) {
@@ -624,7 +624,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     public Permanent getPermanent(UUID permanentId) {
         if (permanentId != null && battlefield.containsPermanent(permanentId)) {
             Permanent permanent = battlefield.getPermanent(permanentId);
-            setZone(permanent.getId(), Zone.BATTLEFIELD); // shouldn't this be set anyway? (LevelX2)
+            // setZone(permanent.getId(), Zone.BATTLEFIELD); // shouldn't this be set anyway? (LevelX2)
             return permanent;
         }
         return null;
@@ -668,7 +668,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public boolean replaceEvent(GameEvent event, Game game) {
-        if (effects.preventedByRuleModification(event, null, game, false)) {
+        return replaceEvent(event, null, game);
+    }
+
+    public boolean replaceEvent(GameEvent event, Ability targetAbility, Game game) {
+        if (effects.preventedByRuleModification(event, targetAbility, game, false)) {
             return true;
         }
         return effects.replaceEvent(event, game);
@@ -709,7 +713,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addAbility(Ability ability, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
-            for (Mode mode : ability.getModes().values()) {
+            for (Mode mode : ability.getModes().getSelectedModes()) {
                 for (Effect effect : mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {
                         addEffect((ContinuousEffect) effect, ability);
@@ -731,7 +735,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      */
     public void addAbility(Ability ability, UUID sourceId, Card attachedTo) {
         if (ability instanceof StaticAbility) {
-            for (Mode mode : ability.getModes().values()) {
+            for (Mode mode : ability.getModes().getSelectedModes()) {
                 for (Effect effect : mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {
                         addEffect((ContinuousEffect) effect, sourceId, ability);
@@ -742,9 +746,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             // TODO: add sources for triggers - the same way as in addEffect: sources
             this.triggers.add((TriggeredAbility) ability, sourceId, attachedTo);
         }
-        for (Watcher watcher : ability.getWatchers()) {
-            watcher.setControllerId(attachedTo.getOwnerId());
-            watcher.setSourceId(attachedTo.getId());
+        List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
+        for (Watcher watcher : watcherList) {
+            // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
+            watcher.setControllerId(attachedTo == null ? ability.getControllerId() : attachedTo.getOwnerId());
+            watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
             watchers.add(watcher);
         }
         for (Ability sub : ability.getSubAbilities()) {

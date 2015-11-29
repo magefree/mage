@@ -27,12 +27,18 @@
  */
 package mage.sets.urzasdestiny;
 
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import static mage.constants.Layer.PTChangingEffects_7;
@@ -58,7 +64,6 @@ public class Opalescence extends CardImpl {
         super(ownerId, 13, "Opalescence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "UDS";
 
-
         // Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost. It's still an enchantment.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpalescenceEffect()));
 
@@ -72,19 +77,23 @@ public class Opalescence extends CardImpl {
     public Opalescence copy() {
         return new Opalescence(this);
     }
+
 }
 
 class OpalescenceEffect extends ContinuousEffectImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Each other non-Aura enchantment");
+    private static final EnumSet checkDependencyTypes;
+
     static {
         filter.add(Predicates.not(new SubtypePredicate("Aura")));
         filter.add(new AnotherPredicate());
+        checkDependencyTypes = EnumSet.of(DependencyType.AuraAddingRemoving, DependencyType.EnchantmentAddingRemoving);
     }
-    
+
     public OpalescenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-        staticText = "Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost";
+        staticText = "Each other non-Aura enchantment is a creature in addition to its other types and has base power and base toughness each equal to its converted mana cost";
     }
 
     public OpalescenceEffect(final OpalescenceEffect effect) {
@@ -125,10 +134,24 @@ class OpalescenceEffect extends ContinuousEffectImpl {
         return false;
     }
 
-
     @Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
     }
 
+    @Override
+    public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
+        Set<UUID> dependentTo = null;
+        for (ContinuousEffect effect : allEffectsInLayer) {
+            for (DependencyType dependencyType : effect.getDependencyTypes()) {
+                if (checkDependencyTypes.contains(dependencyType)) {
+                    if (dependentTo == null) {
+                        dependentTo = new HashSet<>();
+                    }
+                    dependentTo.add(effect.getId());
+                }
+            }
+        }
+        return dependentTo;
+    }
 }

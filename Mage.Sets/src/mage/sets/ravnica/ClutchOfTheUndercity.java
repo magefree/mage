@@ -35,7 +35,7 @@ import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  * @author Loki
@@ -50,7 +50,7 @@ public class ClutchOfTheUndercity extends CardImpl {
         // Return target permanent to its owner's hand. Its controller loses 3 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent());
         // Transmute {1}{U}{B}
         this.addAbility(new TransmuteAbility("{1}{U}{B}"));
     }

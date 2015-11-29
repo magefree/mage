@@ -38,15 +38,12 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -55,10 +52,8 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 /**
@@ -67,14 +62,12 @@ import mage.watchers.Watcher;
  */
 public class CavernOfSouls extends CardImpl {
 
-    private static final String ruleText = "choose a creature type";
-
     public CavernOfSouls(UUID ownerId) {
         super(ownerId, 226, "Cavern of Souls", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "AVR";
 
         // As Cavern of Souls enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new CavernOfSoulsEffect(), ruleText));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
 
         // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
@@ -82,7 +75,7 @@ public class CavernOfSouls extends CardImpl {
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
         Ability ability = new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new CavernOfSoulsManaBuilder(), true);
         this.addAbility(ability, new CavernOfSoulsWatcher(ability.getOriginalId()));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CavernOfSoulsCantCounterEffect()));        
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CavernOfSoulsCantCounterEffect()));
     }
 
     public CavernOfSouls(final CavernOfSouls card) {
@@ -95,60 +88,23 @@ public class CavernOfSouls extends CardImpl {
     }
 }
 
-class CavernOfSoulsEffect extends OneShotEffect {
-
-    public CavernOfSoulsEffect() {
-        super(Outcome.Benefit);
-        staticText = "As {this} enters the battlefield, choose a creature type";
-    }
-
-    public CavernOfSoulsEffect(final CavernOfSoulsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.Benefit, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
-        }
-        return false;
-    }
-
-    @Override
-    public CavernOfSoulsEffect copy() {
-        return new CavernOfSoulsEffect(this);
-    }
-}
-
 class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
     String creatureType;
-    
+
     @Override
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
         Object value = game.getState().getValue(source.getSourceId() + "_type");
         if (value != null && value instanceof String) {
             creatureType = (String) value;
-        }         
+        }
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName() +
-                    " (can only be spend to cast for creatures of type " + creatureType + " and that spell can't be countered)");
-        }        
-        return super.setMana(mana, source, game); 
+            game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
+                    + " (can only be spend to cast for creatures of type " + creatureType + " and that spell can't be countered)");
+        }
+        return super.setMana(mana, source, game);
     }
 
     @Override
@@ -174,11 +130,11 @@ class CavernOfSoulsConditionalMana extends ConditionalMana {
 class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 
     String creatureType;
-    
+
     CavernOfSoulsManaCondition(String creatureType) {
         this.creatureType = creatureType;
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source, UUID manaProducer) {
         // check: ... to cast a creature spell
@@ -197,7 +153,7 @@ class CavernOfSoulsWatcher extends Watcher {
 
     private List<UUID> spells = new ArrayList<>();
     private final String originalId;
-    
+
     public CavernOfSoulsWatcher(UUID originalId) {
         super("ManaPaidFromCavernOfSoulsWatcher", WatcherScope.CARD);
         this.originalId = originalId.toString();
@@ -222,7 +178,7 @@ class CavernOfSoulsWatcher extends Watcher {
             }
         }
     }
-    
+
     public boolean spellCantBeCountered(UUID spellId) {
         return spells.contains(spellId);
     }

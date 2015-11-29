@@ -27,6 +27,8 @@
  */
 package mage.sets.masterseditionii;
 
+import mage.constants.Rarity;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class SnowCoveredPlains extends mage.sets.iceage.SnowCoveredPlains {
         super(ownerId);
         this.cardNumber = 241;
         this.expansionSetCode = "ME2";
+        this.rarity = Rarity.LAND;
     }
 
     public SnowCoveredPlains(final SnowCoveredPlains card) {

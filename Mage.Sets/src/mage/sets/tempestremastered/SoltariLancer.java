@@ -46,8 +46,8 @@ import mage.filter.common.FilterAttackingCreature;
  * @author fireshoes
  */
 public class SoltariLancer extends CardImpl {
-    
-    private static final String rule = "Spirit of the Night has first strike as long as it's attacking";
+
+    private static final String rule = "{this} has first strike as long as it's attacking";
 
     public SoltariLancer(UUID ownerId) {
         super(ownerId, 30, "Soltari Lancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -59,7 +59,7 @@ public class SoltariLancer extends CardImpl {
 
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
-        
+
         // Soltari Lancer has first strike as long as it's attacking.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new SourceMatchesFilterCondition(new FilterAttackingCreature()), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

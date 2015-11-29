@@ -34,16 +34,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
-import mage.filter.predicate.permanent.BlockingPredicate;
-import mage.game.Game;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,11 +46,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public class GodosIrregulars extends CardImpl {
-
-    private static final FilterCreaturePermanent basicFilter = new FilterCreaturePermanent("creature blocking it");
-    static {
-        basicFilter.add(new BlockingPredicate());
-    }
 
     public GodosIrregulars(UUID ownerId) {
         super(ownerId, 101, "Godo's Irregulars", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
@@ -68,19 +58,10 @@ public class GodosIrregulars extends CardImpl {
 
         // {R}: Godo's Irregulars deals 1 damage to target creature blocking it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R"));
-        ability.addTarget(new TargetCreaturePermanent());
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking it");
+        filter.add(new BlockingAttackerIdPredicate(this.getId()));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.ACTIVATED)) {
-            ability.getTargets().clear();
-            FilterCreaturePermanent filter = basicFilter.copy();
-            filter.add(new BlockingAttackerIdPredicate(this.getId()));
-            Target target = new TargetCreaturePermanent(filter);
-            ability.addTarget(target);
-        }
     }
 
     public GodosIrregulars(final GodosIrregulars card) {

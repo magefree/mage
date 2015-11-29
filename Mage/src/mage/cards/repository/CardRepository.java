@@ -29,6 +29,7 @@ package mage.cards.repository;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
@@ -39,13 +40,12 @@ import com.j256.ormlite.table.TableUtils;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import org.apache.log4j.Logger;
@@ -61,13 +61,15 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
-    private static final long CARD_DB_VERSION = 41;
+    private static final long CARD_DB_VERSION = 43;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 32;
+    private static final long CARD_CONTENT_VERSION = 43;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
+
+    private final TreeSet<String> landTypes = new TreeSet();
 
     private CardRepository() {
         File file = new File("db");
@@ -85,7 +87,7 @@ public enum CardRepository {
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
         }
     }
 
@@ -102,7 +104,7 @@ public enum CardRepository {
                             }
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB: " + ex.getCause());
+                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
                     }
                     return null;
                 }
@@ -240,6 +242,7 @@ public enum CardRepository {
             subtypes.add("Reflection");
             subtypes.add("Sand");
             subtypes.add("Saproling");
+            subtypes.add("Scion");
             subtypes.add("Serf");
             subtypes.add("Splinter");
             subtypes.add("Survivor");
@@ -249,6 +252,25 @@ public enum CardRepository {
         } catch (SQLException ex) {
         }
         return subtypes;
+    }
+
+    public Set<String> getLandTypes() {
+        if (landTypes.isEmpty()) {
+            try {
+                QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+                qb.distinct().selectColumns("subtypes");
+                qb.where().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
+                List<CardInfo> results = cardDao.query(qb.prepare());
+                for (CardInfo card : results) {
+                    landTypes.addAll(card.getSubTypes());
+                }
+                // Removing Dryad because of Dryad Arbor
+                landTypes.remove("Dryad");
+
+            } catch (SQLException ex) {
+            }
+        }
+        return landTypes;
     }
 
     public CardInfo findCard(String setCode, int cardNumber) {
@@ -300,21 +322,32 @@ public enum CardRepository {
         return null;
     }
 
-    public CardInfo findPreferedCoreExpansionCard(String name) {
-        List<CardInfo> cards = findCards(name);
+    public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive) {
+        List<CardInfo> cards;
+        if (caseInsensitive) {
+            cards = findCardsCaseInsensitive(name);
+        } else {
+            cards = findCards(name);
+        }
         if (!cards.isEmpty()) {
-            CardInfo cardInfo = cards.get(random.nextInt(cards.size()));
-            ExpansionSet set = Sets.getInstance().get(cardInfo.getSetCode());
-            if (set.getSetType().equals(SetType.EXPANSION) || set.getSetType().equals(SetType.CORE)) {
-                return cardInfo;
-            }
-            for (CardInfo cardInfoToCheck : cards) {
-                set = Sets.getInstance().get(cardInfoToCheck.getSetCode());
-                if (set.getSetType().equals(SetType.CORE) || set.getSetType().equals(SetType.EXPANSION)) {
-                    return cardInfoToCheck;
+            Date lastReleaseDate = null;
+            Date lastExpansionDate = null;
+            CardInfo cardToUse = null;
+            for (CardInfo cardinfo : cards) {
+                ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
+                if (set != null) {
+                    if ((set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.CORE))
+                            && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
+                        cardToUse = cardinfo;
+                        lastExpansionDate = set.getReleaseDate();
+                    }
+                    if (lastExpansionDate == null && (lastReleaseDate == null || set.getReleaseDate().after(lastReleaseDate))) {
+                        cardToUse = cardinfo;
+                        lastReleaseDate = set.getReleaseDate();
+                    }
                 }
             }
-            return cardInfo;
+            return cardToUse;
         }
         return null;
     }
@@ -323,9 +356,25 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("name", new SelectArg(name));
-
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
+        }
+        return new ArrayList<>();
+    }
+
+    public List<CardInfo> findCardsCaseInsensitive(String name) {
+        try {
+            String sqlName = name.toLowerCase().replaceAll("\'", "\'\'");
+            GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
+                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower(name) = '" + sqlName + "'",
+                    cardDao.getRawRowMapper());
+            List<CardInfo> result = new ArrayList<>();
+            for (CardInfo cardinfo : rawResults) {
+                result.add(cardinfo);
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
         return new ArrayList<>();
     }
@@ -346,7 +395,7 @@ public enum CardRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME + "Content");
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(CardRepository.class).error("Error getting content version from DB - ", ex);
         }
         return 0;
     }
@@ -356,7 +405,7 @@ public enum CardRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(CardRepository.class).error("Error getting content version - ", ex);
         }
     }
 

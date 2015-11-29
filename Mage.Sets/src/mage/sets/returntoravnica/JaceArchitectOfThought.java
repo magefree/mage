@@ -34,11 +34,10 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -48,7 +47,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.ExileZone;
@@ -76,7 +74,7 @@ public class JaceArchitectOfThought extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Jace");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtStartEffect1(), 1));

@@ -28,7 +28,6 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -40,7 +39,7 @@ import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinTokenWithHaste;
 
 /**
  *
@@ -58,9 +57,8 @@ public class Goblinslide extends CardImpl {
         super(ownerId, 109, "Goblinslide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "KTK";
 
-
         // Whenever you cast a noncreature spell, you may pay {1}. If you do, put a 1/1 red Goblin creature token with haste onto the battlefield.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new GoblinslideGoblinToken()), new GenericManaCost(1)), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new GoblinTokenWithHaste()), new GenericManaCost(1)), filter, false));
     }
 
     public Goblinslide(final Goblinslide card) {
@@ -70,19 +68,5 @@ public class Goblinslide extends CardImpl {
     @Override
     public Goblinslide copy() {
         return new Goblinslide(this);
-    }
-}
-
-class GoblinslideGoblinToken extends Token {
-
-    GoblinslideGoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token with haste");
-        this.setOriginalExpansionSetCode("KTK");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Goblin");
-        color.setRed(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(HasteAbility.getInstance());
     }
 }

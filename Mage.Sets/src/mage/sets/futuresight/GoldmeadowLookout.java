@@ -77,7 +77,7 @@ public class GoldmeadowLookout extends CardImpl {
 class GoldmeadowHarrierToken extends Token {
 
     public GoldmeadowHarrierToken() {
-        super("Goldmeadow Harrier", "1/1 white Kithkin Soldier creature token named Goldmeadow Harrier with \"{W}, {tap}: Tap target creature.\"");
+        super("Goldmeadow Harrier", "1/1 white Kithkin Soldier creature token named Goldmeadow Harrier with \"{W}, {T}: Tap target creature.\"");
         this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

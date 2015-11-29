@@ -29,10 +29,14 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.cards.repository.CardRepository;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -48,14 +52,14 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.setSubtypes.add(setSubtype);
         this.attachmentType = attachmentType;
-    setText();
+        setText();
     }
 
     public SetCardSubtypeAttachedEffect(List<String> setSubtypes, Duration duration, AttachmentType attachmentType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.setSubtypes.addAll(setSubtypes);
         this.attachmentType = attachmentType;
-    setText();
+        setText();
     }
 
     public SetCardSubtypeAttachedEffect(final SetCardSubtypeAttachedEffect effect) {
@@ -70,8 +74,8 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
             if (target != null) {
-                target.getSubtype().clear();
-                                target.getSubtype().addAll(setSubtypes);
+                target.getSubtype().retainAll(CardRepository.instance.getLandTypes());
+                target.getSubtype().addAll(setSubtypes);
             }
         }
         return true;
@@ -91,7 +95,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         }
 
         sb.append(" creature is a");
-        for (String subtype: this.setSubtypes) {
+        for (String subtype : this.setSubtypes) {
             sb.append(" ").append(subtype);
         }
         staticText = sb.toString();

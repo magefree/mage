@@ -66,6 +66,9 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
     @Test
     public void testSpellsReturnToHand() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        // Lifelink
+        // Instant and sorcery spells you control have lifelink.
+        // {2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of your graveyard as it resolves.
         addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
@@ -199,7 +202,6 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
      * Test that if Soulfire Grand Master has left the battlefield spell has no
      * longer lifelink
      */
-
     @Test
     public void testSoulfireLeft() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
@@ -231,7 +233,6 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
      * the elemental, so stoke didnt resolve, but i still got the life from
      * lifelink.
      */
-
     @Test
     public void testSoulfireStokeTheFlames() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
@@ -296,7 +297,6 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
      * Constructed.
      *
      */
-
     @Test
     public void testWithDeflectingPalm() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);

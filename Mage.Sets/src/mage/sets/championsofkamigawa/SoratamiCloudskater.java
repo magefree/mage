@@ -25,21 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -65,7 +64,7 @@ public class SoratamiCloudskater extends CardImpl {
 
         // {2}, Return a land you control to its owner's hand: Draw a card, then discard a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new GenericManaCost(2));
-        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }
 

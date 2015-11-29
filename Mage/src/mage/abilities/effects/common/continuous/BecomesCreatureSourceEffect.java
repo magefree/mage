@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -105,8 +105,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                                 }
                             }
                         }
-                        if ("".equals(type) || type == null) {
-                            permanent.getSubtype().clear();
+                        if ("".equals(type) || type == null && permanent.getCardType().contains(CardType.LAND)) {
+                            permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
                         }
                         if (token.getSubtype().size() > 0) {
                             permanent.getSubtype().addAll(token.getSubtype());
@@ -123,14 +123,14 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
                         if (token.getAbilities().size() > 0) {
-                            for (Ability ability: token.getAbilities()) {
-                                permanent.addAbility(ability, game);
+                            for (Ability ability : token.getAbilities()) {
+                                permanent.addAbility(ability, source.getSourceId(), game);
                             }
                         }
                     }
                     break;
                 case PTChangingEffects_7:
-                    if (sublayer == SubLayer.SetPT_7b) {
+                    if (sublayer == SubLayer.CharacteristicDefining_7a) {
                         MageInt power = token.getPower();
                         MageInt toughness = token.getToughness();
                         if (power != null && toughness != null) {
@@ -156,8 +156,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     private void setText() {
         if (type != null && type.length() > 0) {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
-        }
-        else {
+        } else {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription();
         }
     }

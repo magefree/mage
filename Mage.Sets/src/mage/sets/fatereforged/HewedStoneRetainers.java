@@ -29,18 +29,12 @@ package mage.sets.fatereforged;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.ruleModifying.CastOnlyIfYouHaveCastAnotherSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -56,7 +50,7 @@ public class HewedStoneRetainers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Cast Hewed Stone Retainers only if you've cast another spell this turn.
-       this.addAbility(new SimpleStaticAbility(Zone.ALL, new HewedStoneRetainersEffect()));
+       this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
     }
 
     public HewedStoneRetainers(final HewedStoneRetainers card) {
@@ -69,40 +63,3 @@ public class HewedStoneRetainers extends CardImpl {
     }
 }
 
-class HewedStoneRetainersEffect extends ContinuousRuleModifyingEffectImpl {
-    HewedStoneRetainersEffect() {
-       super(Duration.EndOfGame, Outcome.Detriment);
-       staticText = "Cast {this} only if you've cast another spell this turn";
-    }
-
-    HewedStoneRetainersEffect(final HewedStoneRetainersEffect effect) {
-       super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-       if (event.getSourceId().equals(source.getSourceId())) {
-           CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-           if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0) {
-               return true;
-           }
-       }
-       return false;
-
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-       return true;
-    }
-
-    @Override
-    public HewedStoneRetainersEffect copy() {
-       return new HewedStoneRetainersEffect(this);
-    }
-}

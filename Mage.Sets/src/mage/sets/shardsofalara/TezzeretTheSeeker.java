@@ -31,13 +31,12 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -47,7 +46,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
@@ -69,7 +67,7 @@ public class TezzeretTheSeeker extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Tezzeret");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Untap up to two target artifacts.
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
@@ -109,8 +107,8 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
@@ -125,15 +123,15 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, cmc + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
-        if (player.searchLibrary(target, game)) {
-            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (controller.searchLibrary(target, game)) {
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
     }
 }

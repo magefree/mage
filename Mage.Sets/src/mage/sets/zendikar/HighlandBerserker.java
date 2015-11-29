@@ -28,15 +28,15 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -65,7 +65,10 @@ public class HighlandBerserker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter), true));
+        // Whenever Highland Berserker or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
+        Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
+        effect.setText("you may have Ally creatures you control gain first strike until end of turn");
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(effect, true));
     }
 
     public HighlandBerserker(final HighlandBerserker card) {

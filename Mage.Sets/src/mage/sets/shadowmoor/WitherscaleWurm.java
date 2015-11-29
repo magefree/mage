@@ -29,21 +29,17 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -65,7 +61,7 @@ public class WitherscaleWurm extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
 
         // Whenever Witherscale Wurm deals damage to an opponent, remove all -1/-1 counters from it.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new WitherscaleWurmEffect(), false));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.M1M1), false));
 
     }
 
@@ -76,34 +72,5 @@ public class WitherscaleWurm extends CardImpl {
     @Override
     public WitherscaleWurm copy() {
         return new WitherscaleWurm(this);
-    }
-}
-
-class WitherscaleWurmEffect extends OneShotEffect {
-
-    public WitherscaleWurmEffect() {
-        super(Outcome.Benefit);
-        staticText = "remove all -1/-1 counters from it";
-    }
-
-    public WitherscaleWurmEffect(WitherscaleWurmEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent witherscaleWurm = game.getPermanent(source.getSourceId());
-        if (witherscaleWurm != null
-                && witherscaleWurm.getCounters().containsKey(CounterType.M1M1)) {
-            int M1M1Counters = witherscaleWurm.getCounters().getCount(CounterType.M1M1);
-            witherscaleWurm.getCounters().removeCounter(CounterType.M1M1, M1M1Counters);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public WitherscaleWurmEffect copy() {
-        return new WitherscaleWurmEffect(this);
     }
 }

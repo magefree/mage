@@ -92,7 +92,7 @@ import mage.watchers.common.MiracleWatcher;
  */
 
 public class MiracleAbility extends TriggeredAbilityImpl {
-    private static final String staticRule = " <i>(You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)<i/>";
+    private static final String staticRule = " <i>(You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)</i>";
     private String ruleText;
 
     @SuppressWarnings("unchecked")

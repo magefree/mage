@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -102,7 +103,7 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null && creature.getControllerId().equals(source.getControllerId())
                 && creature.getCardType().contains(CardType.CREATURE)
                 && creature.hasSubtype("Rogue")
@@ -119,7 +120,7 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), game);
         }

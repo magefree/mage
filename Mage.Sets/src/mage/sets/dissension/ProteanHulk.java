@@ -78,47 +78,42 @@ public class ProteanHulk extends CardImpl {
 }
 
 class ProteanHulkEffect extends OneShotEffect {
-    
+
     ProteanHulkEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "search your library for any number of creature cards with total converted mana cost 6 or less and put them onto the battlefield. Then shuffle your library";
     }
-    
+
     ProteanHulkEffect(final ProteanHulkEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ProteanHulkEffect copy() {
         return new ProteanHulkEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Cards cardsPicked = this.ProteanHulkSearch(game, source);
-            for (UUID cardId : cardsPicked) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.PICK, source.getSourceId());
-                }
-            }
-            player.shuffleLibrary(game);
+            controller.moveCards(cardsPicked.getCards(game), Zone.BATTLEFIELD, source, game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;
     }
-    
+
     Cards ProteanHulkSearch(Game game, Ability source) {
-        Cards cardsPicked = new CardsImpl(Zone.PICK);
+        Cards cardsPicked = new CardsImpl(Zone.LIBRARY);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, source.getControllerId(), source.getControllerId(), source.getControllerId(), Integer.MAX_VALUE);
             if (!game.replaceEvent(event)) {
                 int manaCostLeftToFetch = 6;
                 int librarySearchLimit = event.getAmount();
-                
+
                 FilterCard filter = new FilterCreatureCard("number of creature cards with total converted mana cost 6 or less (6 CMC left)");
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, manaCostLeftToFetch + 1));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
@@ -131,15 +126,14 @@ class ProteanHulkEffect extends OneShotEffect {
                         break;
                     }
                     cardsPicked.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
                     game.getState().getLookedAt(source.getControllerId()).add("Protean Hulk", cardsPicked);
-                    
+
                     librarySearchLimit--;
                     if (librarySearchLimit == 0) {
                         break;
                     }
                     manaCostLeftToFetch -= card.getManaCost().convertedManaCost();
-                    filter = new FilterCreatureCard("number of creature cards with total converted mana cost 6 or less ("+ manaCostLeftToFetch +" CMC left)");
+                    filter = new FilterCreatureCard("number of creature cards with total converted mana cost 6 or less (" + manaCostLeftToFetch + " CMC left)");
                     filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, manaCostLeftToFetch + 1));
                     target = new TargetCardInLibrary(0, 1, filter);
                     target.setCardLimit(librarySearchLimit);

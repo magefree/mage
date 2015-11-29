@@ -28,17 +28,19 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -71,16 +73,12 @@ public class Lhurgoyf extends CardImpl {
     }
 }
 
-
-
 class LhurgoyfEffect extends ContinuousEffectImpl {
 
-
     public LhurgoyfEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
         staticText = "{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1";
     }
-
 
     public LhurgoyfEffect(final LhurgoyfEffect effect) {
         super(effect);

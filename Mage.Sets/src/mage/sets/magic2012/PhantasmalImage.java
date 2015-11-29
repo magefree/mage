@@ -29,23 +29,18 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.MageObject;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
 import mage.util.functions.ApplyToPermanent;
 
 /**
@@ -54,7 +49,31 @@ import mage.util.functions.ApplyToPermanent;
  */
 public class PhantasmalImage extends CardImpl {
 
-    private static final String abilityText = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+    private static final String effectText = "a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+
+    ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
+        @Override
+        public Boolean apply(Game game, Permanent permanent) {
+            if (!permanent.getSubtype().contains("Illusion")) {
+                permanent.getSubtype().add("Illusion");
+            }
+            // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
+            permanent.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+            //permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
+            return true;
+        }
+
+        @Override
+        public Boolean apply(Game game, MageObject mageObject) {
+            if (!mageObject.getSubtype().contains("Illusion")) {
+                mageObject.getSubtype().add("Illusion");
+            }
+            // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
+            mageObject.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+            //permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
+            return true;
+        }
+    };
 
     public PhantasmalImage(UUID ownerId) {
         super(ownerId, 72, "Phantasmal Image", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -68,9 +87,9 @@ public class PhantasmalImage extends CardImpl {
         // You may have Phantasmal Image enter the battlefield as a copy of any creature
         // on the battlefield, except it's an Illusion in addition to its other types and
         // it gains "When this creature becomes the target of a spell or ability, sacrifice it."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new PhantasmalImageCopyEffect(), abilityText, true));
-        this.addAbility(ability);
+        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), phantasmalImageApplier);
+        effect.setText(effectText);
+        this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
     public PhantasmalImage(final PhantasmalImage card) {
@@ -80,52 +99,5 @@ public class PhantasmalImage extends CardImpl {
     @Override
     public PhantasmalImage copy() {
         return new PhantasmalImage(this);
-    }
-}
-
-class PhantasmalImageCopyEffect extends OneShotEffect {
-
-    public PhantasmalImageCopyEffect() {
-        super(Outcome.Copy);
-    }
-
-    public PhantasmalImageCopyEffect(final PhantasmalImageCopyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            Target target = new TargetPermanent(new FilterCreaturePermanent("creature (you copy from)"));
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                player.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
-                if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
-                        @Override
-                        public Boolean apply(Game game, Permanent permanent) {
-                            if (!permanent.getSubtype().contains("Illusion")) {
-                                permanent.getSubtype().add("Illusion");
-                            }
-                            // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
-                            permanent.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
-                            //permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
-                            return true;
-                        }
-                    });
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public PhantasmalImageCopyEffect copy() {
-        return new PhantasmalImageCopyEffect(this);
     }
 }

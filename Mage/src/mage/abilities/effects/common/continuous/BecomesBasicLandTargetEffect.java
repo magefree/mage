@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import java.util.ArrayList;
@@ -38,9 +37,11 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceBasicLandType;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -53,8 +54,6 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
-
 public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     protected boolean chooseLandType;
@@ -76,6 +75,21 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, boolean loseOther, String... landNames) {
         super(duration, Outcome.Detriment);
         this.landTypes.addAll(Arrays.asList(landNames));
+        if (landTypes.contains("Mountain")) {
+            dependencyTypes.add(DependencyType.BecomeMountain);
+        }
+        if (landTypes.contains("Forest")) {
+            dependencyTypes.add(DependencyType.BecomeForest);
+        }
+        if (landTypes.contains("Swamp")) {
+            dependencyTypes.add(DependencyType.BecomeSwamp);
+        }
+        if (landTypes.contains("Island")) {
+            dependencyTypes.add(DependencyType.BecomeIsland);
+        }
+        if (landTypes.contains("Plains")) {
+            dependencyTypes.add(DependencyType.BecomePlains);
+        }
         this.chooseLandType = chooseLandType;
         this.staticText = setText();
         this.loseOther = loseOther;
@@ -98,6 +112,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     public BecomesBasicLandTargetEffect copy() {
         return new BecomesBasicLandTargetEffect(this);
     }
+
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
@@ -113,12 +128,12 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             }
         }
 
-        if(!loseOther) {
+        if (!loseOther) {
             for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
                 Permanent land = game.getPermanent(targetPermanent);
                 if (land != null) {
-                    for(String type : land.getSubtype()) {
-                        if(!landTypes.contains(type)) {
+                    for (String type : land.getSubtype()) {
+                        if (!landTypes.contains(type)) {
                             landTypes.add(type);
                         }
                     }
@@ -133,9 +148,20 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             Permanent land = game.getPermanent(targetPermanent);
             if (land != null) {
                 switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
+                    case TypeChangingEffects_4:
+                        // Attention: Cards like Unstable Frontier that use this class do not give the "Basic" supertype to the target
+                        if (!land.getCardType().contains(CardType.LAND)) {
+                            land.getCardType().add(CardType.LAND);
+                        }
+                        // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+                        // So the ability removing has to be done before Layer 6
                         land.removeAllAbilities(source.getSourceId(), game);
-                        for (String landType : landTypes)  {
+                        // 305.7
+                        land.getSubtype().removeAll(CardRepository.instance.getLandTypes());
+                        land.getSubtype().addAll(landTypes);
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        for (String landType : landTypes) {
                             switch (landType) {
                                 case "Swamp":
                                     land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
@@ -155,13 +181,6 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                             }
                         }
                         break;
-                    case TypeChangingEffects_4:
-                        if (!land.getCardType().contains(CardType.LAND)) {
-                            land.getCardType().add(CardType.LAND);
-                        }
-                        land.getSubtype().clear();
-                        land.getSubtype().addAll(landTypes);
-                        break;
                 }
             }
         }
@@ -180,8 +199,8 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         } else {
             sb.append("Target land becomes a ");
             int i = 1;
-            for (String landType : landTypes)  {
-                if (i >1) {
+            for (String landType : landTypes) {
+                if (i > 1) {
                     if (i == landTypes.size()) {
                         sb.append(" and ");
                     } else {
@@ -193,7 +212,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             }
         }
         if (!duration.toString().isEmpty() && !duration.equals(Duration.EndOfGame)) {
-                sb.append(" ").append(duration.toString());
+            sb.append(" ").append(duration.toString());
         }
         return sb.toString();
     }

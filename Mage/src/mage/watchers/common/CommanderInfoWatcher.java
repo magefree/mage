@@ -113,13 +113,12 @@ public class CommanderInfoWatcher extends Watcher {
                 sb.append(" ").append(castCount).append(castCount == 1 ? " time" : " times").append(" casted from the command zone.");
             }
             this.addInfo(object, "Commander", sb.toString(), game);
-
             if (checkCommanderDamage) {
                 for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
                     Player damagedPlayer = game.getPlayer(entry.getKey());
-                    sb.setLength(0);
                     sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getLogName()).append(".");
-                    this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(), sb.toString(), game);
+                    this.addInfo(object, "Commander" + entry.getKey(),
+                            "<b>Commander</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + ".", game);
                 }
             }
         }

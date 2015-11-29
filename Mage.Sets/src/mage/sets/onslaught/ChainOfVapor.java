@@ -28,6 +28,7 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -87,34 +88,31 @@ class ChainOfVaporEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
             controller.moveCards(permanent, null, Zone.HAND, source, game);
             Player player = game.getPlayer(permanent.getControllerId());
-            if (player.chooseUse(Outcome.ReturnToHand, "Sacrifice a land to copy this spell?", source, game)) {
-                TargetControlledPermanent target = new TargetControlledPermanent(new FilterControlledLandPermanent());
-                if (player.chooseTarget(Outcome.Sacrifice, target, source, game)) {
-                    Permanent land = game.getPermanent(target.getFirstTarget());
-                    if (land != null) {
-                        if (land.sacrifice(source.getSourceId(), game)) {
-                            Spell spell = game.getStack().getSpell(source.getSourceId());
-                            if (spell != null) {
-                                Spell copy = spell.copySpell();
-                                copy.setControllerId(player.getId());
-                                copy.setCopiedSpell(true);
-                                game.getStack().push(copy);
-                                copy.chooseNewTargets(game, player.getId());
-                                String activateMessage = copy.getActivatedMessage(game);
-                                if (activateMessage.startsWith(" casts ")) {
-                                    activateMessage = activateMessage.substring(6);
-                                }
-                                game.informPlayers(player.getLogName() + " copies " + activateMessage);
-                                return true;
+            TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ")"), true);
+            if (player.chooseTarget(Outcome.Sacrifice, target, source, game)) {
+                Permanent land = game.getPermanent(target.getFirstTarget());
+                if (land != null && land.sacrifice(source.getSourceId(), game)) {
+                    if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
+                        Spell spell = game.getStack().getSpell(source.getSourceId());
+                        if (spell != null) {
+                            Spell copy = spell.copySpell();
+                            copy.setControllerId(player.getId());
+                            copy.setCopiedSpell(true);
+                            game.getStack().push(copy);
+                            copy.chooseNewTargets(game, player.getId());
+                            String activateMessage = copy.getActivatedMessage(game);
+                            if (activateMessage.startsWith(" casts ")) {
+                                activateMessage = activateMessage.substring(6);
                             }
-                            return false;
+                            game.informPlayers(player.getLogName() + " " + activateMessage);
                         }
                     }
                 }

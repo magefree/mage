@@ -54,11 +54,11 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     protected boolean lockedIn = false;
 
     public BoostControlledEffect(int power, int toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("Creatures"), false);
+        this(power, toughness, duration, new FilterCreaturePermanent("creatures"), false);
     }
 
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("Creatures"), false);
+        this(power, toughness, duration, new FilterCreaturePermanent("creatures"), false);
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, boolean excludeSource) {
@@ -81,7 +81,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
      * @param power
      * @param toughness
      * @param duration
-     * @param filter
+     * @param filter AnotherPredicate is not working, you need to use the
+     * excludeSource option
      * @param lockedIn if true, power and toughness will be calculated only
      * once, when the ability resolves
      * @param excludeSource

@@ -28,8 +28,6 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -42,9 +40,14 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WurmToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -71,7 +74,7 @@ public class WurmweaverCoil extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(6, 6, Duration.WhileOnBattlefield)));
-        Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WurmweaverCoilToken(), 1), new ManaCostsImpl("{G}{G}{G}"));
+        Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WurmToken(), 1), new ManaCostsImpl("{G}{G}{G}"));
         activatedAbility.addCost(new SacrificeSourceCost());
         this.addAbility(activatedAbility);
     }
@@ -83,16 +86,5 @@ public class WurmweaverCoil extends CardImpl {
     @Override
     public WurmweaverCoil copy() {
         return new WurmweaverCoil(this);
-    }
-}
-
-class WurmweaverCoilToken extends Token {
-    WurmweaverCoilToken() {
-        super("Wurm", "6/6 green Wurm creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Wurm");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
     }
 }

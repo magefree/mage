@@ -106,6 +106,7 @@ public abstract class StackObjImpl implements StackObject {
     public boolean chooseNewTargets(Game game, UUID targetControllerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget) {
         Player targetController = game.getPlayer(targetControllerId);
         if (targetController != null) {
+            StringBuilder oldTargetDescription = new StringBuilder();
             StringBuilder newTargetDescription = new StringBuilder();
             // Fused split spells or spells where "Splice on Arcane" was used can have more than one ability
             Abilities<Ability> objectAbilities = new AbilitiesImpl<>();
@@ -116,8 +117,9 @@ public abstract class StackObjImpl implements StackObject {
             }
             for (Ability ability : objectAbilities) {
                 // Some spells can have more than one mode
-                for (UUID modeId : ability.getModes().getSelectedModes()) {
-                    Mode mode = ability.getModes().get(modeId);
+                for (Mode mode : ability.getModes().getSelectedModes()) {
+                    ability.getModes().setActiveMode(mode);
+                    oldTargetDescription.append(ability.getTargetDescription(mode.getTargets(), game));
                     for (Target target : mode.getTargets()) {
                         Target newTarget = chooseNewTarget(targetController, ability, mode, target, forceChange, filterNewTarget, game);
                         // clear the old target and copy all targets from new target
@@ -131,7 +133,7 @@ public abstract class StackObjImpl implements StackObject {
                 }
 
             }
-            if (newTargetDescription.length() > 0 && !game.isSimulation()) {
+            if (!newTargetDescription.toString().equals(oldTargetDescription.toString()) && !game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " is now " + newTargetDescription.toString());
             }
             return true;

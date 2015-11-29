@@ -48,7 +48,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.EmptyApplyToPermanent;
 
-
 /**
  * @author duncant
  */
@@ -68,11 +67,11 @@ public class Shapesharer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(ChangelingAbility.getInstance());
-        
+
         // {2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.
         Ability copyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                                                         new ShapesharerEffect(),
-                                                         new ManaCostsImpl("{2}{U}"));
+                new ShapesharerEffect(),
+                new ManaCostsImpl("{2}{U}"));
         copyAbility.addTarget(new TargetPermanent(filterShapeshifter));
         copyAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(copyAbility);
@@ -89,6 +88,7 @@ public class Shapesharer extends CardImpl {
 }
 
 class ShapesharerEffect extends OneShotEffect {
+
     public ShapesharerEffect() {
         super(Outcome.Copy);
         this.staticText = "Target Shapeshifter becomes a copy of target creature until your next turn.";
@@ -105,10 +105,12 @@ class ShapesharerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability ability) {
-        Permanent copyTo = game.getPermanent(ability.getFirstTarget());
+        Permanent copyTo = game.getPermanent(getTargetPointer().getFirst(game, ability));
         if (copyTo != null) {
             Permanent copyFrom = game.getPermanentOrLKIBattlefield(ability.getTargets().get(1).getFirstTarget());
-            game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo, ability, new EmptyApplyToPermanent());
+            if (copyFrom != null) {
+                game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), ability, new EmptyApplyToPermanent());
+            }
         }
         return true;
     }

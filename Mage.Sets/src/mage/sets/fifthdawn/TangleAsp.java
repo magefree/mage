@@ -54,8 +54,8 @@ public class TangleAsp extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
-        AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(delayedAbility, true);
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
         this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
     }

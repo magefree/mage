@@ -61,7 +61,6 @@ public class Mirrorweave extends CardImpl {
         super(ownerId, 143, "Mirrorweave", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W/U}{W/U}");
         this.expansionSetCode = "SHM";
 
-
         // Each other creature becomes a copy of target nonlegendary creature until end of turn.
         this.getSpellAbility().addEffect(new MirrorWeaveEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
@@ -105,7 +104,7 @@ class MirrorWeaveEffect extends OneShotEffect {
                 filter.add(Predicates.not(new PermanentIdPredicate(copyFromCreature.getId())));
                 for (Permanent copyToCreature : game.getBattlefield().getAllActivePermanents(filter, game)) {
                     if (copyToCreature != null) {
-                        game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToCreature, source, new EmptyApplyToPermanent());
+                        game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToCreature.getId(), source, new EmptyApplyToPermanent());
                     }
                 }
             }

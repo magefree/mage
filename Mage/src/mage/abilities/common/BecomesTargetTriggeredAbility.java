@@ -27,11 +27,13 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -39,12 +41,20 @@ import mage.game.events.GameEvent;
  */
 public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
+    private final FilterStackObject filter;
+
     public BecomesTargetTriggeredAbility(Effect effect) {
+        this(effect, new FilterStackObject("a spell or ability"));
+    }
+
+    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
         super(Zone.BATTLEFIELD, effect);
+        this.filter = filter.copy();
     }
 
     public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter.copy();
     }
 
     @Override
@@ -59,11 +69,12 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(getSourceId());
+        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
+        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
     }
 
     @Override
     public String getRule() {
-        return "When {this} becomes the target of a spell or ability, " + super.getRule();
+        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
     }
 }

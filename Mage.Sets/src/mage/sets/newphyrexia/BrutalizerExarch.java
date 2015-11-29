@@ -28,19 +28,17 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -71,7 +69,11 @@ public class BrutalizerExarch extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BrutalizerExarchEffect1());
+        // When Brutalizer Exarch enters the battlefield, choose one
+        // - Search your library for a creature card, reveal it, then shuffle your library and put that card on top of it;
+        TargetCardInLibrary target = new TargetCardInLibrary(new FilterCreatureCard("a creature card"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), false);
+        // or put target noncreature permanent on the bottom of its owner's library.
         Mode mode = new Mode();
         mode.getEffects().add(new BrutalizerExarchEffect2());
         mode.getTargets().add(new TargetPermanent(filter));
@@ -86,45 +88,6 @@ public class BrutalizerExarch extends CardImpl {
     @Override
     public BrutalizerExarch copy() {
         return new BrutalizerExarch(this);
-    }
-}
-
-class BrutalizerExarchEffect1 extends OneShotEffect {
-
-    public BrutalizerExarchEffect1() {
-        super(Outcome.Benefit);
-        this.staticText = "Search your library for a creature card, reveal it, then shuffle your library and put that card on top of it";
-    }
-
-    public BrutalizerExarchEffect1(final BrutalizerExarchEffect1 effect) {
-        super(effect);
-    }
-
-    @Override
-    public BrutalizerExarchEffect1 copy() {
-        return new BrutalizerExarchEffect1(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(new FilterCreatureCard("creature card in your library"));
-            if (player.searchLibrary(target, game)) {
-                Card card = player.getLibrary().remove(target.getFirstTarget(), game);
-                if (card != null) {
-                    Cards cards = new CardsImpl();
-                    cards.add(card);
-                    player.revealCards("Brutalizer Exarch", cards, game);
-                }
-                player.shuffleLibrary(game);
-                if (card != null)
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                return true;
-            }
-            player.shuffleLibrary(game);
-        }
-        return false;
     }
 }
 

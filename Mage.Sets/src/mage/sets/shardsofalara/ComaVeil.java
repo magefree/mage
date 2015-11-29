@@ -53,7 +53,7 @@ public class ComaVeil extends CardImpl {
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     public ComaVeil(UUID ownerId) {
         super(ownerId, 36, "Coma Veil", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
         this.expansionSetCode = "ALA";
@@ -66,7 +66,7 @@ public class ComaVeil extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         // Enchanted permanent doesn't untap during its controller's untap step.
         EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
-        ability.addEffect(new DontUntapInControllersUntapStepEnchantedEffect());
+        ability.addEffect(new DontUntapInControllersUntapStepEnchantedEffect("permanent"));
         this.addAbility(ability);
     }
 

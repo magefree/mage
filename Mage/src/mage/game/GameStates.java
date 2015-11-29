@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class GameStates implements Serializable {
 
-    private static final transient Logger logger = Logger.getLogger(GameStates.class);
+    private static final Logger logger = Logger.getLogger(GameStates.class);
 
 //    private final List<byte[]> states;
     private final List<GameState> states;

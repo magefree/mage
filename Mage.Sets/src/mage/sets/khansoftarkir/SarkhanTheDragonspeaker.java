@@ -34,13 +34,12 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -54,7 +53,6 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
@@ -71,16 +69,16 @@ public class SarkhanTheDragonspeaker extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Sarkhan");
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Until end of turn, Sarkhan, the Dragonspeaker becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste.
         this.addAbility(new LoyaltyAbility(new SarkhanTheDragonspeakerEffect(), 1));
-        
+
         // -3: Sarkhan, the Dragonspeaker deals 4 damage to target creature.
         LoyaltyAbility ability = new LoyaltyAbility(new DamageTargetEffect(4), -3);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // -6: You get an emblem with "At the beginning of your draw step, draw two additional cards" and "At the beginning of your end step, discard your hand."
         Effect effect = new GetEmblemEffect(new SarkhanTheDragonspeakerEmblem());
         effect.setText("You get an emblem with \"At the beginning of your draw step, draw two additional cards\" and \"At the beginning of your end step, discard your hand.\"");
@@ -98,7 +96,7 @@ public class SarkhanTheDragonspeaker extends CardImpl {
 }
 
 class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
-    
+
     SarkhanTheDragonspeakerEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Until end of turn, {this} becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste.";
@@ -112,7 +110,7 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
     public SarkhanTheDragonspeakerEffect copy() {
         return new SarkhanTheDragonspeakerEffect(this);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);

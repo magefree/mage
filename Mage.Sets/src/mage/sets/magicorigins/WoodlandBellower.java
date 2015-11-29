@@ -78,6 +78,7 @@ public class WoodlandBellower extends CardImpl {
 }
 
 class WoodlandBellowerEffect extends OneShotEffect {
+
     WoodlandBellowerEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Search your library for a nonlegendary green creature card with converted mana cost 3 or less, put it onto the battlefield, then shuffle your library";
@@ -89,27 +90,25 @@ class WoodlandBellowerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         FilterCard filter = new FilterCard("nonlegendary green creature card with converted mana cost 3 or less");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new CardTypePredicate(CardType.CREATURE)); 
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(Predicates.not(new SupertypePredicate("Legendary")));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
-                Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-                if (card != null) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-                }
+                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
     }
 

@@ -57,28 +57,29 @@ public class CopyTokenFunction implements Function<Token, Card> {
         }
         // A copy contains only the attributes of the basic card or basic Token that's the base of the permanent
         // else gained abililies would be copied too.
+
         MageObject sourceObj = source;
         if (source instanceof PermanentToken) {
             sourceObj = ((PermanentToken) source).getToken();
             // to show the source image, the original values have to be used
-            target.setOriginalExpansionSetCode(((Token)sourceObj).getOriginalExpansionSetCode());
-            target.setOriginalCardNumber(((Token)sourceObj).getOriginalCardNumber());
-            target.setCopySourceCard(((PermanentToken)source).getToken().getCopySourceCard());
+            target.setOriginalExpansionSetCode(((Token) sourceObj).getOriginalExpansionSetCode());
+            target.setOriginalCardNumber(((Token) sourceObj).getOriginalCardNumber());
+            target.setCopySourceCard(((PermanentToken) source).getToken().getCopySourceCard());
         } else if (source instanceof PermanentCard) {
-            if (((PermanentCard)source).isMorphed() || ((PermanentCard)source).isManifested()) {
+            if (((PermanentCard) source).isMorphed() || ((PermanentCard) source).isManifested()) {
                 MorphAbility.setPermanentToFaceDownCreature(target);
                 return target;
             } else {
-            sourceObj = ((PermanentCard) source).getCard();
-            target.setOriginalExpansionSetCode(source.getExpansionSetCode());
-            target.setOriginalCardNumber(source.getCardNumber());
-            target.setCopySourceCard((Card)sourceObj);
+                sourceObj = ((PermanentCard) source).getCard();
+                target.setOriginalExpansionSetCode(source.getExpansionSetCode());
+                target.setOriginalCardNumber(source.getCardNumber());
+                target.setCopySourceCard((Card) sourceObj);
             }
         } else {
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
             if (source instanceof Card) {
-                target.setCopySourceCard((Card)source);
+                target.setCopySourceCard(source);
             }
         }
 

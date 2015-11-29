@@ -28,14 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -47,8 +41,13 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 
@@ -61,7 +60,6 @@ public class ZektarShrineExpedition extends CardImpl {
     public ZektarShrineExpedition(UUID ownerId) {
         super(ownerId, 155, "Zektar Shrine Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "ZEN";
-
 
         // Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Zektar Shrine Expedition.
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
@@ -101,15 +99,14 @@ class ZektarShrineExpeditionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ElementalToken token = new ElementalToken();
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-        ExileTargetEffect exileEffect = new ExileTargetEffect();
-        exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
-
+        for (UUID tokenId : token.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                ExileTargetEffect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+            }
+        }
         return true;
     }
 }

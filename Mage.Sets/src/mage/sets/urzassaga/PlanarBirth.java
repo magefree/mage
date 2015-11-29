@@ -30,8 +30,9 @@ package mage.sets.urzassaga;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -65,33 +66,33 @@ public class PlanarBirth extends CardImpl {
 }
 
 class PlanarBirthEffect extends OneShotEffect {
-    
+
     PlanarBirthEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = "Return all basic land cards from all graveyards to the battlefield tapped under their owners' control";
     }
-    
+
     PlanarBirthEffect(final PlanarBirthEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PlanarBirthEffect copy() {
         return new PlanarBirthEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            Cards toBattlefield = new CardsImpl();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(new FilterBasicLandCard(), source.getSourceId(), controller.getId(), game)) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), true);
-                    }
+                    toBattlefield.addAll(player.getGraveyard().getCards(new FilterBasicLandCard(), source.getSourceId(), controller.getId(), game));
                 }
             }
+            controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
             return true;
         }
         return false;

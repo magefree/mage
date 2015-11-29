@@ -27,6 +27,8 @@
  */
 package mage.sets.masterseditionii;
 
+import mage.constants.Rarity;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class SnowCoveredForest extends mage.sets.iceage.SnowCoveredForest {
         super(ownerId);
         this.cardNumber = 245;
         this.expansionSetCode = "ME2";
+        this.rarity = Rarity.LAND;
     }
 
     public SnowCoveredForest(final SnowCoveredForest card) {

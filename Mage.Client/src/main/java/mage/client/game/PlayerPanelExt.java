@@ -69,6 +69,9 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
+import static mage.constants.Constants.DEFAULT_AVATAR_ID;
+import static mage.constants.Constants.MAX_AVATAR_ID;
+import static mage.constants.Constants.MIN_AVATAR_ID;
 import mage.constants.ManaType;
 import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
@@ -92,7 +95,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private static final int AVATAR_COUNT = 77;
 
-    private static final String DEFAULT_AVATAR_PATH = "/avatars/51.jpg";
+    private static final String DEFAULT_AVATAR_PATH = "/avatars/" + DEFAULT_AVATAR_ID + ".jpg";
 
     private static final int PANEL_WIDTH = 94;
     private static final int PANEL_HEIGHT = 242;
@@ -105,6 +108,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private int avatarId = -1;
     private String flagName;
+    private String basicTooltipText;
 
     private PriorityTimer timer;
 
@@ -156,25 +160,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     public void update(PlayerView player) {
         this.player = player;
-        if (flagName == null) { // do only once
-            avatar.setText(this.player.getName());
-            if (!player.getUserData().getFlagName().equals(flagName)) {
-                flagName = player.getUserData().getFlagName();
-                this.avatar.setTopTextImage(CountryUtil.getCountryFlagIcon(flagName).getImage());
-            }
-            // TODO: Add the wins to the tooltiptext of the avatar
-            String countryname = CountryUtil.getCountryName(flagName);
-            if (countryname == null) {
-                countryname = "Unknown";
-            }
-            String tooltip = "<HTML>Name: " + player.getName() + "<br/>Country: " + countryname;
-            avatar.setToolTipText(tooltip);
-            avatar.repaint();
-
-            // used if avatar image can't be used
-            this.btnPlayer.setText(player.getName());
-            this.btnPlayer.setToolTipText(tooltip);
-        }
+        updateAvatar();
         int playerLife = player.getLife();
         if (playerLife > 99) {
             Font font = lifeLabel.getFont();
@@ -238,8 +224,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
-            if (id <= 0) {
-                id = PreferencesDialog.DEFAULT_AVATAR_ID;
+            if (!(id >= 1000) && (id <= 0 || (id <= MIN_AVATAR_ID && id > MAX_AVATAR_ID))) {
+                id = DEFAULT_AVATAR_ID;
             }
             if (id != avatarId) {
                 avatarId = id;
@@ -282,6 +268,39 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
 
         update(player.getManaPool());
+    }
+
+    /**
+     * Updates the avatar image and tooltip text
+     */
+    private void updateAvatar() {
+        if (flagName == null) { // do only once
+            avatar.setText(this.player.getName());
+            if (!player.getUserData().getFlagName().equals(flagName)) {
+                flagName = player.getUserData().getFlagName();
+                this.avatar.setTopTextImage(CountryUtil.getCountryFlagIcon(flagName).getImage());
+            }
+            // TODO: Add the wins to the tooltiptext of the avatar
+            String countryname = CountryUtil.getCountryName(flagName);
+            if (countryname == null) {
+                countryname = "Unknown";
+            }
+            basicTooltipText = "<HTML>Name: " + player.getName()
+                    + "<br/>Country: " + countryname
+                    + "<br/>Deck hash code: " + player.getDeckHashCode()
+                    + "<br/>Wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)";
+        }
+        // Extend tooltip
+        StringBuilder tooltipText = new StringBuilder(basicTooltipText);
+        if (player.getExperience() > 0) {
+            tooltipText.append("<br/>Experience counters: ").append(player.getExperience());
+        }
+        avatar.setToolTipText(tooltipText.toString());
+        avatar.repaint();
+
+        // used if avatar image can't be used
+        this.btnPlayer.setText(player.getName());
+        this.btnPlayer.setToolTipText(tooltipText.toString());
     }
 
     private String getPriorityTimeLeftString(PlayerView player) {
@@ -799,7 +818,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnCommandZoneActionPerformed(java.awt.event.ActionEvent evt) {
-        DialogManager.getManager(gameId).showEmblemsDialog(CardsViewUtil.convertCommandObject(player.getCommadObjectList()), bigCard, gameId);
+        DialogManager.getManager(gameId).showEmblemsDialog(CardsViewUtil.convertCommandObject(player.getCommandObjectList()), bigCard, gameId);
     }
 
     private void btnExileZoneActionPerformed(java.awt.event.ActionEvent evt) {

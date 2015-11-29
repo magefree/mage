@@ -27,8 +27,8 @@
  */
 package mage.sets.magicorigins;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -94,23 +94,22 @@ class AnimistsAwakeningEffect extends OneShotEffect {
         Cards cards = new CardsImpl(Zone.LIBRARY);
         int xValue = source.getManaCostsToPay().getX();
         cards.addAll(controller.getLibrary().getTopCards(game, xValue));
-        List<Permanent> lands = new ArrayList<>();
         if (cards.size() > 0) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
+            Set<Card> toBattlefield = new LinkedHashSet<>();
             for (Card card : cards.getCards(new FilterLandCard(), source.getSourceId(), source.getControllerId(), game)) {
                 cards.remove(card);
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
-                Permanent land = game.getPermanent(card.getId());
-                if (land != null) {
-                    lands.add(land);
-                }
-
+                toBattlefield.add(card);
             }
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, true, false, true, null);
             controller.putCardsOnBottomOfLibrary(cards, game, source, true);
 
             if (SpellMasteryCondition.getInstance().apply(game, source)) {
-                for (Permanent land : lands) {
-                    land.untap(game);
+                for (Card card : toBattlefield) {
+                    Permanent land = game.getPermanent(card.getId());
+                    if (land != null) {
+                        land.untap(game);
+                    }
                 }
             }
         }

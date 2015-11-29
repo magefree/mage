@@ -115,19 +115,22 @@ class WhipOfErebosEffect extends OneShotEffect {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
-            if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
-                // gains haste
-                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
-                // Exile at begin of next end step
-                ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
-                exileEffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+            if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                Permanent creature = game.getPermanent(card.getId());
+                if (creature != null) {
+                    // gains haste
+                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                    effect.setTargetPointer(new FixedTarget(creature, game));
+                    game.addEffect(effect, source);
+                    // Exile at begin of next end step
+                    ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
+                    exileEffect.setTargetPointer(new FixedTarget(creature, game));
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                    game.addDelayedTriggeredAbility(delayedAbility);
+                }
             }
             return true;
         }

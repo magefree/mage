@@ -73,7 +73,6 @@ public class TeferiMageOfZhalfir extends CardImpl {
         // Each opponent can cast spells only any time he or she could cast a sorcery.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferiMageOfZhalfirReplacementEffect()));
 
-        
     }
 
     public TeferiMageOfZhalfir(final TeferiMageOfZhalfir card) {
@@ -107,31 +106,31 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             // in graveyard
-            for (UUID cardId: controller.getGraveyard()) {
+            for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // on Hand
-            for (UUID cardId: controller.getHand()) {
+            for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Exile
-            for (Card card: game.getState().getExile().getAllCards(game)) {
+            for (Card card : game.getState().getExile().getAllCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Library (e.g. for Mystical Teachings)
-            for (Card card: controller.getLibrary().getCards(game)) {
+            for (Card card : controller.getLibrary().getCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
-            }  
+            }
             // commander in command zone
             if (controller.getCommanderId() != null && game.getState().getZone(controller.getCommanderId()).equals(Zone.COMMAND)) {
                 Card card = game.getCard(controller.getCommanderId());
@@ -160,7 +159,7 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can cast spells only any time you could cast a sorcery  (" + mageObject.getLogName() + ").";
+            return "You can cast spells only any time you could cast a sorcery  (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -169,7 +168,6 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
-
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {

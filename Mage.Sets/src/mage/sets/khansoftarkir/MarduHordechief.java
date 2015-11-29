@@ -36,7 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WarriorToken;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
@@ -55,7 +55,7 @@ public class MarduHordechief extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Raid</i> - When Mardu Hordechief enters the battlefield, if you attacked with a creature this turn, put a 1/1 white Warrior creature token onto the battlefield
-        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MarduHordechiefToken())), RaidCondition.getInstance(),
+        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WarriorToken())), RaidCondition.getInstance(),
                 "<i>Raid</i> -  When {this} enters the battlefield, if you attacked with a creature this turn, put a 1/1 white Warrior creature token onto the battlefield."),
                 new PlayerAttackedWatcher());
     }
@@ -67,19 +67,5 @@ public class MarduHordechief extends CardImpl {
     @Override
     public MarduHordechief copy() {
         return new MarduHordechief(this);
-    }
-}
-
-class MarduHordechiefToken extends Token {
-
-    MarduHordechiefToken() {
-        super("Warrior", "1/1 white Warrior creature token");
-        this.setOriginalExpansionSetCode("KTK");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Warrior");
-
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

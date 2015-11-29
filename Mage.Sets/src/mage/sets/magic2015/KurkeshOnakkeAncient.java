@@ -80,15 +80,15 @@ public class KurkeshOnakkeAncient extends CardImpl {
 }
 
 class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     KurkeshOnakkeAncientTriggeredAbility() {
         super(Zone.BATTLEFIELD, new KurkeshOnakkeAncientEffect(), false);
     }
-    
+
     KurkeshOnakkeAncientTriggeredAbility(final KurkeshOnakkeAncientTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public KurkeshOnakkeAncientTriggeredAbility copy() {
         return new KurkeshOnakkeAncientTriggeredAbility(this);
@@ -98,43 +98,45 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ACTIVATED_ABILITY;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (source.getCardType().contains(CardType.ARTIFACT)) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
-                Effect effect = this.getEffects().get(0);
-                effect.setValue("stackAbility", stackAbility.getStackAbility());
-                return true;
+        if (event.getPlayerId().equals(getControllerId())) {
+            Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (source != null && source.getCardType().contains(CardType.ARTIFACT)) {
+                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+                if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
+                    Effect effect = this.getEffects().get(0);
+                    effect.setValue("stackAbility", stackAbility.getStackAbility());
+                    return true;
+                }
             }
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
-        return "Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}.  If you do, copy that ability.  You may choose new targets for the copy.";
+        return "Whenever you activate an ability of an artifact, if it isn't a mana ability" + super.getRule();
     }
 }
 
 class KurkeshOnakkeAncientEffect extends OneShotEffect {
-    
+
     KurkeshOnakkeAncientEffect() {
         super(Outcome.Benefit);
-        this.staticText = ", you may pay {R}.  If you do, copy that ability.  You may choose new targets for the copy.";
+        this.staticText = ", you may pay {R}. If you do, copy that ability. You may choose new targets for the copy";
     }
-    
+
     KurkeshOnakkeAncientEffect(final KurkeshOnakkeAncientEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public KurkeshOnakkeAncientEffect copy() {
         return new KurkeshOnakkeAncientEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -152,7 +154,7 @@ class KurkeshOnakkeAncientEffect extends OneShotEffect {
                         if (newAbility.getTargets().size() > 0) {
                             if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
                                 newAbility.getTargets().clearChosen();
-                                if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, game) == false) {
+                                if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, false, game) == false) {
                                     return false;
                                 }
                             }

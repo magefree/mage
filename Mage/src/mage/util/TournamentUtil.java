@@ -7,10 +7,12 @@
 package mage.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
 import mage.cards.Card;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -32,44 +34,44 @@ public class TournamentUtil {
      * @return setCode for lands
      */
             
-    public static Set<String> getLandSetCodeForDeckSets(Set<String> setCodesDeck) {
+    public static Set<String> getLandSetCodeForDeckSets(Collection<String> setCodesDeck) {
         
-        Set<String> setCodesland = new HashSet<>();
+        Set<String> landSetCodes = new HashSet<>();
         // decide from which sets basic lands are taken from
         for (String setCode :setCodesDeck) {
             ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
             if (expansionInfo.hasBasicLands()) {
-                setCodesland.add(expansionInfo.getCode());
+                landSetCodes.add(expansionInfo.getCode());
             }
         }
 
         // if sets have no basic land, take land from block
-        if (setCodesland.isEmpty()) {
+        if (landSetCodes.isEmpty()) {
             for (String setCode :setCodesDeck) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                 List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
                 for (ExpansionInfo blockSet: blockSets) {
                     if (blockSet.hasBasicLands()) {
-                        setCodesland.add(blockSet.getCode());
+                        landSetCodes.add(blockSet.getCode());
                     }
                 }
             }
         }
         // if still no set with lands found, take one by random
-        if (setCodesland.isEmpty()) {
+        if (landSetCodes.isEmpty()) {
             // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
             // select a set with basic lands by random
             Random generator = new Random();
             List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
             if (basicLandSets.size() > 0) {
-                setCodesland.add(basicLandSets.get(generator.nextInt(basicLandSets.size())).getCode());
+                landSetCodes.add(basicLandSets.get(generator.nextInt(basicLandSets.size())).getCode());
             }
         }
 
-        if (setCodesland.isEmpty()) {
+        if (landSetCodes.isEmpty()) {
             throw new IllegalArgumentException("No set with basic land was found");
         }
-        return setCodesland;
+        return landSetCodes;
     }
     
     public static List<Card> getLands(String landName, int number, Set<String> landSets) {

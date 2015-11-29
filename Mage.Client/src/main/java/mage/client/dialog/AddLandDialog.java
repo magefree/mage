@@ -57,7 +57,7 @@ public class AddLandDialog extends MageDialog {
     private static final Logger logger = Logger.getLogger(MageDialog.class);
 
     private Deck deck;
-    private final Set<String> setCodesland = new HashSet<>();
+    private final Set<String> landSetCodes = new HashSet<>();
 
     private static final int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
 
@@ -71,27 +71,27 @@ public class AddLandDialog extends MageDialog {
 
     public void showDialog(Deck deck, DeckEditorMode mode) {
         this.deck = deck;
-        SortedSet<String> landSets = new TreeSet<>();
+        SortedSet<String> landSetNames = new TreeSet<>();
         if (!mode.equals(DeckEditorMode.FREE_BUILDING)) {
             // decide from which sets basic lands are taken from
             for (String setCode : deck.getExpansionSetCodes()) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                 if (expansionInfo != null && expansionInfo.hasBasicLands()) {
-                    this.setCodesland.add(expansionInfo.getCode());
-                    landSets.add(expansionInfo.getName());
+                    this.landSetCodes.add(expansionInfo.getCode());
+                    landSetNames.add(expansionInfo.getName());
                 }
             }
 
             // if sets have no basic land, take land from block
-            if (this.setCodesland.isEmpty()) {
+            if (this.landSetCodes.isEmpty()) {
                 for (String setCode : deck.getExpansionSetCodes()) {
                     ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                     if (expansionInfo != null) {
                         List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
                         for (ExpansionInfo blockSet : blockSets) {
                             if (blockSet.hasBasicLands()) {
-                                this.setCodesland.add(blockSet.getCode());
-                                landSets.add(blockSet.getName());
+                                this.landSetCodes.add(blockSet.getCode());
+                                landSetNames.add(blockSet.getName());
                             }
                         }
                     }
@@ -99,19 +99,19 @@ public class AddLandDialog extends MageDialog {
             }
         }
         // if still no set with lands found, add list of all available
-        if (this.setCodesland.isEmpty()) {
+        if (this.landSetCodes.isEmpty()) {
             List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
             for (ExpansionInfo expansionInfo : basicLandSets) {
-                landSets.add(expansionInfo.getName());
+                landSetNames.add(expansionInfo.getName());
             }
         }
-        if (landSets.isEmpty()) {
+        if (landSetNames.isEmpty()) {
             throw new IllegalArgumentException("No set with basic land was found");
         }
-        if (landSets.size() > 1) {
-            landSets.add("<Random lands>");
+        if (landSetNames.size() > 1) {
+            landSetNames.add("<Random lands>");
         }
-        cbLandSet.setModel(new DefaultComboBoxModel(landSets.toArray()));
+        cbLandSet.setModel(new DefaultComboBoxModel(landSetNames.toArray()));
 
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         this.setVisible(true);
@@ -123,7 +123,7 @@ public class AddLandDialog extends MageDialog {
 
         CardCriteria criteria = new CardCriteria();
         if (landSetName.equals("<Random lands>")) {
-            criteria.setCodes(setCodesland.toArray(new String[setCodesland.size()]));
+            criteria.setCodes(landSetCodes.toArray(new String[landSetCodes.size()]));
         } else {
             ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByName(landSetName);
             if (expansionInfo == null) {

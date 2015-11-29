@@ -109,7 +109,7 @@ public class SoulbondWatcher extends Watcher {
                                 Cards cards = new CardsImpl();
                                 cards.add(chosen);
                                 controller.lookAtCards("Soulbond", cards, game);
-                                if (controller.chooseUse(Outcome.Benefit, "Use Soulbond for recent " + permanent.getLogName() + "?", null, game)) {
+                                if (controller.chooseUse(Outcome.Benefit, "Use Soulbond for recent " + permanent.getLogName() + "?", SoulbondAbility.getInstance(), game)) {
                                     chosen.setPairedCard(permanent.getId());
                                     permanent.setPairedCard(chosen.getId());
                                     if (!game.isSimulation()) {

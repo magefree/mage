@@ -27,12 +27,10 @@
  */
 package mage.abilities.effects.common.counter;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -67,21 +65,16 @@ public class AddCountersAllEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             if (counter != null) {
-                UUID controllerId = source.getControllerId();
-                List<Permanent> permanents = game.getBattlefield().getAllActivePermanents();
-                for (Permanent permanent : permanents) {
-                    if (filter.match(permanent, source.getSourceId(), controllerId, game)) {
-                        permanent.addCounters(counter.copy(), game);
-                        if (!game.isSimulation())
-                            game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
-                                .append(controller.getLogName()).append(" puts ")
-                                .append(counter.getCount()).append(" ").append(counter.getName().toLowerCase())
-                                .append(" counter on ").append(permanent.getName()).toString());
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                    permanent.addCounters(counter.copy(), game);
+                    if (!game.isSimulation()) {
+                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + counter.getCount() + " " + counter.getName().toLowerCase()
+                                + " counter on " + permanent.getLogName());
                     }
                 }
-            }            
+            }
             return true;
-        }        
+        }
         return false;
     }
 

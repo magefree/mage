@@ -28,13 +28,13 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -45,7 +45,6 @@ public class CacklingCounterpart extends CardImpl {
     public CacklingCounterpart(UUID ownerId) {
         super(ownerId, 46, "Cackling Counterpart", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "ISD";
-
 
         // Put a token onto the battlefield that's a copy of target creature you control.
         this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
@@ -64,5 +63,3 @@ public class CacklingCounterpart extends CardImpl {
         return new CacklingCounterpart(this);
     }
 }
-
-

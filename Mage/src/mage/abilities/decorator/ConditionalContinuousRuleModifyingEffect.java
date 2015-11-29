@@ -41,7 +41,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl  {
+public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     protected ContinuousRuleModifyingEffect effect;
     protected ContinuousRuleModifyingEffect otherwiseEffect;
@@ -87,7 +87,6 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
         }
         initDone = true;
     }
-
 
     @Override
     public boolean isDiscarded() {
@@ -136,4 +135,20 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
     public ConditionalContinuousRuleModifyingEffect copy() {
         return new ConditionalContinuousRuleModifyingEffect(this);
     }
+
+    @Override
+    public boolean sendMessageToGameLog() {
+        return effect.sendMessageToGameLog(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean sendMessageToUser() {
+        return effect.sendMessageToUser(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        return effect.getInfoMessage(source, event, game); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

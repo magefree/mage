@@ -70,7 +70,7 @@ public class LeafdrakeRoost extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land has "{G}{U}, {tap}: Put a 2/2 green and blue Drake creature token with flying onto the battlefield."
-        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LeafdrakeRoostDragonToken()), new ManaCostsImpl("{G}{U}"));
+        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LeafdrakeRoostDrakeToken()), new ManaCostsImpl("{G}{U}"));
         abilityToGain.addCost(new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted land has \"{G}{U}, {t}: Put a 2/2 green and blue Drake creature token with flying onto the battlefield.\"")));
@@ -87,14 +87,14 @@ public class LeafdrakeRoost extends CardImpl {
     }
 }
 
-class LeafdrakeRoostDragonToken extends Token {
+class LeafdrakeRoostDrakeToken extends Token {
 
-    public LeafdrakeRoostDragonToken() {
-        super("Dragon", "2/2 green and blue Drake creature token with flying");
+    public LeafdrakeRoostDrakeToken() {
+        super("Drake", "2/2 green and blue Drake creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setBlue(true);
-        subtype.add("Dragon");
+        subtype.add("Drake");
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

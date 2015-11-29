@@ -44,6 +44,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -66,8 +67,17 @@ public class DroolingGroodion extends CardImpl {
         // {2}{B}{G}, Sacrifice a creature: Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DroolingGroodionEffect(), new ManaCostsImpl("{2}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (first target)")));
-        ability.addTarget(new TargetOtherCreaturePermanent(new FilterCreaturePermanent("creature (second target)")));
+
+        TargetCreaturePermanent target = new TargetCreaturePermanent(new FilterCreaturePermanent("creature (first target)"));
+        target.setTargetTag(1);
+        ability.addTarget(target);
+
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature (second target");
+        filter.add(new AnotherTargetPredicate(2));
+        target = new TargetCreaturePermanent(filter);
+        target.setTargetTag(2);
+        ability.addTarget(target);
+
         this.addAbility(ability);
     }
 
@@ -111,29 +121,4 @@ class DroolingGroodionEffect extends ContinuousEffectImpl {
         }
         return true;
     }
-}
-
-class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
-    
-    public TargetOtherCreaturePermanent(FilterCreaturePermanent filter) {
-        super(filter);
-    }
-
-    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().get(0).getTargets().contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
-    public TargetOtherCreaturePermanent copy() {
-        return new TargetOtherCreaturePermanent(this);
-    }
-
 }

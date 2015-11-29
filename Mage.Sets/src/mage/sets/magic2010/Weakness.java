@@ -29,21 +29,17 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,14 +52,16 @@ public class Weakness extends CardImpl {
     public Weakness(UUID ownerId) {
         super(ownerId, 121, "Weakness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "M10";
-
         this.subtype.add("Aura");
+
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-    this.getSpellAbility().addTarget(auraTarget);
-    this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
-    this.addAbility(ability);
-    this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WeaknessEffect()));
+        this.addAbility(ability);
+        // Enchanted creature gets -2/-1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, -1, Duration.WhileOnBattlefield)));
     }
 
     public Weakness(final Weakness card) {
@@ -74,52 +72,4 @@ public class Weakness extends CardImpl {
     public Weakness copy() {
         return new Weakness(this);
     }
-}
-
-class WeaknessEffect extends ContinuousEffectImpl {
-
-    public WeaknessEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
-        staticText = "Enchanted creature gets -2/-1";
-    }
-
-    public WeaknessEffect(final WeaknessEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-    if (enchantment != null && enchantment.getAttachedTo() != null) {
-        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-        if (creature != null) {
-            switch (layer) {
-                case PTChangingEffects_7:
-                    if (sublayer == SubLayer.ModifyPT_7c) {
-                        creature.addPower(-2);
-                        creature.addToughness(-1);
-                    }
-                    break;
-            }
-            return true;
-        }
-    }
-    return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-    return layer == Layer.PTChangingEffects_7;
-    }
-
-    @Override
-    public WeaknessEffect copy() {
-        return new WeaknessEffect(this);
-    }
-
 }

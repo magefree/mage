@@ -29,18 +29,13 @@ package mage.abilities.keyword;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
@@ -54,13 +49,14 @@ import mage.players.Player;
 /**
  * 702.32. Flashback
  *
- * 702.32a. Flashback appears on some instants and sorceries. It represents two static abilities: 
- * one that functions while the card is in a player‘s graveyard and the other that functions 
- * while the card is on the stack. Flashback [cost] means, "You may cast this card from your 
- * graveyard by paying [cost] rather than paying its mana cost" and, "If the flashback cost 
- * was paid, exile this card instead of putting it anywhere else any time it would leave the 
- * stack." Casting a spell using its flashback ability follows the rules for paying alternative 
- * costs in rules 601.2b and 601.2e–g.
+ * 702.32a. Flashback appears on some instants and sorceries. It represents two
+ * static abilities: one that functions while the card is in a player‘s
+ * graveyard and the other that functions while the card is on the stack.
+ * Flashback [cost] means, "You may cast this card from your graveyard by paying
+ * [cost] rather than paying its mana cost" and, "If the flashback cost was
+ * paid, exile this card instead of putting it anywhere else any time it would
+ * leave the stack." Casting a spell using its flashback ability follows the
+ * rules for paying alternative costs in rules 601.2b and 601.2e–g.
  *
  * @author nantuko
  */
@@ -92,10 +88,10 @@ public class FlashbackAbility extends SpellAbility {
             if (card != null) {
                 // Flashback can never cast a split card by Fuse, because Fuse only works from hand
                 if (card.isSplitCard()) {
-                    if (((SplitCard)card).getLeftHalfCard().getName().equals(abilityName)) {
-                        return ((SplitCard)card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((SplitCard)card).getRightHalfCard().getName().equals(abilityName)) {
-                        return ((SplitCard)card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);                        
+                    if (((SplitCard) card).getLeftHalfCard().getName().equals(abilityName)) {
+                        return ((SplitCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
+                    } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
+                        return ((SplitCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
                 }
                 return card.getSpellAbility().canActivate(playerId, game);
@@ -108,7 +104,7 @@ public class FlashbackAbility extends SpellAbility {
     public FlashbackAbility copy() {
         return new FlashbackAbility(this);
     }
-   
+
     @Override
     public String getRule(boolean all) {
         return this.getRule();
@@ -126,6 +122,9 @@ public class FlashbackAbility extends SpellAbility {
             sbRule.append(manaCosts.getText());
         }
         if (costs.size() > 0) {
+            if (manaCosts.size() > 0) {
+                sbRule.append(", ");
+            }
             sbRule.append(costs.getText());
             sbRule.append(".");
         }
@@ -176,45 +175,33 @@ class FlashbackEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 SpellAbility spellAbility;
-                switch(((FlashbackAbility) source).getSpellAbilityType()) {
+                switch (((FlashbackAbility) source).getSpellAbilityType()) {
                     case SPLIT_LEFT:
-                        spellAbility = ((SplitCard)card).getLeftHalfCard().getSpellAbility();
+                        spellAbility = ((SplitCard) card).getLeftHalfCard().getSpellAbility().copy();
                         break;
                     case SPLIT_RIGHT:
-                        spellAbility = ((SplitCard)card).getRightHalfCard().getSpellAbility();
+                        spellAbility = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
                         break;
                     default:
-                        spellAbility = card.getSpellAbility();
+                        spellAbility = card.getSpellAbility().copy();
                 }
 
                 spellAbility.clear();
-                // used if flashbacked spell has a {X} cost
-                int amount = source.getManaCostsToPay().getX();
-                if (amount == 0) {
-                    // add variable cost like Discard X cards to get the X value to the spell
-                    // because there is currently no way to set the x value in anotehr way, it's set for the
-                    // x mana value to be known by the spell
-                    for (Cost cost:source.getCosts()) {
-                        if (cost instanceof VariableCost && cost.isPaid()) {
-                            amount = ((VariableCost) cost).getAmount();
-                            break;
-                        }
-                    }                    
-                }
-                if (amount > 0) {
-                    // multiplier must be taken into account because if the base spell has {X}{X} the x value would be wrongly halfed
-                    for (VariableCost variableCost: spellAbility.getManaCostsToPay().getVariableCosts()) {
-                        if (variableCost instanceof  VariableManaCost) {
-                            amount = amount * ((VariableManaCost)variableCost).getMultiplier();
-                            break;
-                        }
+                // set the payed flashback costs to the spell ability so abilities like Converge or calculation of {X} values work
+                spellAbility.getManaCostsToPay().clear();
+                spellAbility.getManaCostsToPay().addAll(source.getManaCostsToPay());
+                // needed to get e.g. paid costs from Conflagrate
+                spellAbility.getCosts().clear();
+                for (Cost cost : source.getCosts()) {
+                    if (!(cost instanceof VariableCost)) {
+                        spellAbility.getCosts().add(cost);
                     }
-                    spellAbility.getManaCostsToPay().setX(amount);
                 }
-                if (!game.isSimulation())
-                    game.informPlayers(new StringBuilder(controller.getLogName()).append(" flashbacks ").append(card.getName()).toString());
+                if (!game.isSimulation()) {
+                    game.informPlayers(controller.getLogName() + " flashbacks " + card.getLogName());
+                }
                 spellAbility.setCostModificationActive(false); // prevents to apply cost modification twice for flashbacked spells
-                if (controller.cast(spellAbility, game, true)) {
+                if (controller.cast(spellAbility, game, false)) {
                     game.addEffect(new FlashbackReplacementEffect(), source);
                     return true;
                 }
@@ -252,7 +239,7 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, game.getState().getZone(card.getId()), true);
+                return controller.moveCards(card, Zone.EXILED, source, game);
             }
         }
         return false;
@@ -265,8 +252,8 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId()) 
-                && ((ZoneChangeEvent)event).getFromZone() == Zone.STACK
-                && ((ZoneChangeEvent)event).getToZone() != Zone.EXILED;
+        return event.getTargetId().equals(source.getSourceId())
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
     }
 }

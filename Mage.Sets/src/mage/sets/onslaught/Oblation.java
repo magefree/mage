@@ -50,7 +50,6 @@ public class Oblation extends CardImpl {
         super(ownerId, 46, "Oblation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ONS";
 
-
         // The owner of target nonland permanent shuffles it into his or her library, then draws two cards.
         this.getSpellAbility().addEffect(new OblationEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
@@ -67,21 +66,21 @@ public class Oblation extends CardImpl {
 }
 
 class OblationEffect extends OneShotEffect {
-    
+
     OblationEffect() {
         super(Outcome.Removal);
         this.staticText = "The owner of target nonland permanent shuffles it into his or her library, then draws two cards";
     }
-    
+
     OblationEffect(final OblationEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public OblationEffect copy() {
         return new OblationEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
@@ -90,6 +89,9 @@ class OblationEffect extends OneShotEffect {
             if (player != null) {
                 player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
                 player.shuffleLibrary(game);
+
+                game.applyEffects(); // so effects from creatures that were on the battlefield won't trigger from draw 
+
                 player.drawCards(2, game);
                 return true;
             }

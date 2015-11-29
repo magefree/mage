@@ -28,8 +28,6 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +36,8 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -62,7 +62,7 @@ public class RiftwingCloudskate extends CardImpl {
         this.addAbility(ability);
 
         // Suspend 3-{1}{U}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{U}"),this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{U}"), this));
     }
 
     public RiftwingCloudskate(final RiftwingCloudskate card) {
