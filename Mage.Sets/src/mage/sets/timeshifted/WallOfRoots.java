@@ -61,7 +61,7 @@ public class WallOfRoots extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Put a -0/-1 counter on Wall of Roots: Add {G} to your mana pool. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana), new WallOfRootsCost()));
+        this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), new WallOfRootsCost()));
     }
 
     public WallOfRoots(final WallOfRoots card) {

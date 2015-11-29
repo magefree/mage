@@ -351,23 +351,23 @@ public class ManaUtil {
         int countColorless = 0;
         ManaAbility chosenManaAbility = null;
         for (ManaAbility ability : useableAbilities.values()) {
-            if (ability instanceof RedManaAbility && mana.contains(Mana.RedMana)) {
+            if (ability instanceof RedManaAbility && mana.contains(Mana.RedMana(1))) {
                 chosenManaAbility = ability;
                 countColorfull++;
             }
-            if (ability instanceof BlackManaAbility && mana.contains(Mana.BlackMana)) {
+            if (ability instanceof BlackManaAbility && mana.contains(Mana.BlackMana(1))) {
                 chosenManaAbility = ability;
                 countColorfull++;
             }
-            if (ability instanceof BlueManaAbility && mana.contains(Mana.BlueMana)) {
+            if (ability instanceof BlueManaAbility && mana.contains(Mana.BlueMana(1))) {
                 chosenManaAbility = ability;
                 countColorfull++;
             }
-            if (ability instanceof WhiteManaAbility && mana.contains(Mana.WhiteMana)) {
+            if (ability instanceof WhiteManaAbility && mana.contains(Mana.WhiteMana(1))) {
                 chosenManaAbility = ability;
                 countColorfull++;
             }
-            if (ability instanceof GreenManaAbility && mana.contains(Mana.GreenMana)) {
+            if (ability instanceof GreenManaAbility && mana.contains(Mana.GreenMana(1))) {
                 chosenManaAbility = ability;
                 countColorfull++;
             }

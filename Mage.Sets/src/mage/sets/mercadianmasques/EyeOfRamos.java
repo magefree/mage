@@ -51,7 +51,7 @@ public class EyeOfRamos extends CardImpl {
         this.addAbility(new BlueManaAbility());
         
         // Sacrifice Eye of Ramos: Add {U} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana, new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new SacrificeSourceCost()));
     }
 
     public EyeOfRamos(final EyeOfRamos card) {

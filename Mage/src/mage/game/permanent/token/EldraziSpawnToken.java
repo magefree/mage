@@ -58,7 +58,7 @@ public class EldraziSpawnToken extends Token {
         subtype.add("Spawn");
         power = new MageInt(0);
         toughness = new MageInt(1);
-        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana, new SacrificeSourceCost()));
+        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
 
         availableImageSetCodes = tokenImageSets;
         // Get one of the three possible token images

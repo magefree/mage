@@ -59,7 +59,7 @@ public class CityOfShadows extends CardImpl {
         this.addAbility(ability);
 
         // {T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
-        ability = new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.STORAGE),
+        ability = new DynamicManaAbility(Mana.ColorlessMana(1), new CountersCount(CounterType.STORAGE),
                 "Add {X} to your mana pool, where X is the number of storage counters on {this}");
         this.addAbility(ability);
     }

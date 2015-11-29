@@ -59,7 +59,7 @@ public class SimianSpiritGuide extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Exile Simian Spirit Guide from your hand: Add {R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.HAND, new BasicManaEffect(Mana.RedMana), new ExileSourceFromHandCost()));
+        this.addAbility(new SimpleManaAbility(Zone.HAND, new BasicManaEffect(Mana.RedMana(1)), new ExileSourceFromHandCost()));
     }
 
     public SimianSpiritGuide(final SimianSpiritGuide card) {

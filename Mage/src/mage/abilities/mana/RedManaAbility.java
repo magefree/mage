@@ -39,7 +39,7 @@ import mage.constants.ColoredManaSymbol;
 public class RedManaAbility extends BasicManaAbility {
 
     public RedManaAbility() {
-        super(new BasicManaEffect(Mana.RedMana));
+        super(new BasicManaEffect(Mana.RedMana(1)));
         this.netMana.add(new Mana(ColoredManaSymbol.R));
     }
 

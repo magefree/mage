@@ -64,7 +64,7 @@ public class EverflowingChalice extends CardImpl {
                 "with a charge counter on it for each time it was kicked"));
 
         // {T}: Add {1} to your mana pool for each charge counter on Everflowing Chalice.
-        this.addAbility(new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.CHARGE)));
+        this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new CountersCount(CounterType.CHARGE)));
     }
 
     public EverflowingChalice(final EverflowingChalice card) {

@@ -61,7 +61,7 @@ public class GemstoneCaverns extends CardImpl {
         Ability ability = new ConditionalManaAbility(Zone.BATTLEFIELD,
                 new ConditionalManaEffect(
                     new AddManaOfAnyColorEffect(),
-                    new BasicManaEffect(Mana.ColorlessMana),    
+                    new BasicManaEffect(Mana.ColorlessMana(1)),
                     new SourceHasCounterCondition(CounterType.LUCK), 
                     "Add {1} to your mana pool. If {this} has a luck counter on it, instead add one mana of any color to your mana pool."),
                 new TapSourceCost());        

@@ -63,7 +63,7 @@ public class Dragonrage extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // Add {R} to your mana pool for each attacking creature you control. 
-        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana, 
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1),
                 new PermanentsOnBattlefieldCount(filter)));
         
         // Until end of turn, attacking creatures you control gain "{R}: This creature gets +1/+0 until end of turn."

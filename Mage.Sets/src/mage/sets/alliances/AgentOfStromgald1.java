@@ -52,7 +52,7 @@ public class AgentOfStromgald1 extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}: Add {B} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new ManaCostsImpl("{R}")));
     }
 
     public AgentOfStromgald1(final AgentOfStromgald1 card) {

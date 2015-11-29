@@ -59,9 +59,9 @@ public class SkyshroudElf extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {1}: Add {R} or {W} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new ManaCostsImpl("{1}"));
         this.addAbility(ability);
-        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new ManaCostsImpl("{1}"));
+        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new ManaCostsImpl("{1}"));
         this.addAbility(ability2);
     }
 

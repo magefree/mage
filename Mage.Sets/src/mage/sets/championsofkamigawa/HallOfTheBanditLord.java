@@ -71,7 +71,7 @@ public class HallOfTheBanditLord extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}, Pay 3 life: Add {1} to your mana pool. If that mana is spent on a creature spell, it gains haste.
-        Mana mana = Mana.ColorlessMana;
+        Mana mana = Mana.ColorlessMana(1);
         mana.setFlag(true);
         ManaEffect effect = new BasicManaEffect(mana);
         effect.setText("Add {1} to your mana pool. If that mana is spent on a creature spell, it gains haste");

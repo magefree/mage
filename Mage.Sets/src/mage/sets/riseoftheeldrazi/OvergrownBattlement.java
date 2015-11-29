@@ -60,7 +60,7 @@ public class OvergrownBattlement extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filter)));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
     public OvergrownBattlement(final OvergrownBattlement card) {

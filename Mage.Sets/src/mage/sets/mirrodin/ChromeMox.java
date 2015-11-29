@@ -185,17 +185,17 @@ class ChromeMoxManaEffect extends ManaEffect {
                             player.choose(outcome, choice, game);
                         }
                         if (choice.getChoice().equals("Black")) {
-                            player.getManaPool().addMana(Mana.BlackMana, game, source);
+                            player.getManaPool().addMana(Mana.BlackMana(1), game, source);
                         } else if (choice.getChoice().equals("Blue")) {
-                            player.getManaPool().addMana(Mana.BlueMana, game, source);
+                            player.getManaPool().addMana(Mana.BlueMana(1), game, source);
                         } else if (choice.getChoice().equals("Red")) {
-                            player.getManaPool().addMana(Mana.RedMana, game, source);
+                            player.getManaPool().addMana(Mana.RedMana(1), game, source);
                         } else if (choice.getChoice().equals("Green")) {
-                            player.getManaPool().addMana(Mana.GreenMana, game, source);
+                            player.getManaPool().addMana(Mana.GreenMana(1), game, source);
                         } else if (choice.getChoice().equals("White")) {
-                            player.getManaPool().addMana(Mana.WhiteMana, game, source);
+                            player.getManaPool().addMana(Mana.WhiteMana(1), game, source);
                         } else if (choice.getChoice().equals("Colorless")) {
-                            player.getManaPool().addMana(Mana.ColorlessMana, game, source);
+                            player.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
                         }
                         checkToFirePossibleEvents(mana, game, source);
                         player.getManaPool().addMana(mana, game, source);

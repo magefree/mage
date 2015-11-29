@@ -56,13 +56,6 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     protected int any;
     protected boolean flag;
 
-    //TODO  These are unsafe and mutable
-    public static final Mana RedMana = RedMana(1);
-    public static final Mana GreenMana = GreenMana(1);
-    public static final Mana BlueMana = BlueMana(1);
-    public static final Mana WhiteMana = WhiteMana(1);
-    public static final Mana BlackMana = BlackMana(1);
-    public static final Mana ColorlessMana = ColorlessMana(1);
 
 
     /**
