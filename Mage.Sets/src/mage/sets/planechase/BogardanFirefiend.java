@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -52,7 +52,7 @@ public class BogardanFirefiend extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
