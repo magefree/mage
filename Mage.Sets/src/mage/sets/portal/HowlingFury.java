@@ -25,36 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.portal;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
+public class HowlingFury extends mage.sets.starter1999.HowlingFury {
 
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
-
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+    public HowlingFury(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 20;
+        this.expansionSetCode = "POR";
+        this.rarity = Rarity.COMMON;
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public HowlingFury(final HowlingFury card) {
         super(card);
     }
 
     @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    public HowlingFury copy() {
+        return new HowlingFury(this);
     }
 }

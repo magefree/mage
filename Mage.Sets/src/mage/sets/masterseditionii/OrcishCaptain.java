@@ -25,94 +25,95 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author fireshoes
  */
-public class GoblinBangchuckers extends CardImpl {
+public class OrcishCaptain extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Orc creature");
 
-    public GoblinBangchuckers(UUID ownerId) {
-        super(ownerId, 137, "Goblin Bangchuckers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Goblin");
+    static {
+        filter.add(new SubtypePredicate("Orc"));
+    }
+
+    public OrcishCaptain(UUID ownerId) {
+        super(ownerId, 139, "Orcish Captain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "ME2";
+        this.subtype.add("Orc");
         this.subtype.add("Warrior");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {T}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinBangchuckersEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        // {1}: Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrcishCaptainEffect(), new GenericManaCost(1));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    public GoblinBangchuckers(final GoblinBangchuckers card) {
+    public OrcishCaptain(final OrcishCaptain card) {
         super(card);
     }
 
     @Override
-    public GoblinBangchuckers copy() {
-        return new GoblinBangchuckers(this);
+    public OrcishCaptain copy() {
+        return new OrcishCaptain(this);
     }
 }
 
-class GoblinBangchuckersEffect extends OneShotEffect {
+class OrcishCaptainEffect extends OneShotEffect {
 
-    public GoblinBangchuckersEffect() {
+    public OrcishCaptainEffect() {
         super(Outcome.Damage);
-        staticText = "Flip a coin. If you win the flip, {this} deals 2 damage to target creature or player. If you lose the flip, {this} deals 2 damage to itself";
+        staticText = "Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn";
     }
 
-    public GoblinBangchuckersEffect(GoblinBangchuckersEffect effect) {
+    public OrcishCaptainEffect(OrcishCaptainEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller != null && permanent != null) {
             if (controller.flipCoin(game)) {
-                Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-                if (permanent != null) {
-                    permanent.damage(2, source.getSourceId(), game, false, true);
-                    return true;
-                }
-                Player player = game.getPlayer(targetPointer.getFirst(game, source));
-                if (player != null) {
-                    player.damage(2, source.getSourceId(), game, false, true);
-                    return true;
-                }
+                game.informPlayers("Orcish Captain: Won flip. Target Orc creature gets +2/+0 until end of turn.");
+                game.addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn), source);
+                return true;
             } else {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    permanent.damage(2, source.getSourceId(), game, false, true);
-                    return true;
-                }
+                game.informPlayers("Orcish Captain: Lost flip. Target Orc creature gets -0/-2 until end of turn.");
+                game.addEffect(new BoostTargetEffect(-0, -2, Duration.EndOfTurn), source);
+                return true;
             }
         }
         return false;
     }
 
     @Override
-    public GoblinBangchuckersEffect copy() {
-        return new GoblinBangchuckersEffect(this);
+    public OrcishCaptainEffect copy() {
+        return new OrcishCaptainEffect(this);
     }
 }

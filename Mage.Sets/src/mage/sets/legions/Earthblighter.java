@@ -25,36 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
-
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
-
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+public class Earthblighter extends CardImpl {
+    
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public Earthblighter(UUID ownerId) {
+        super(ownerId, 68, "Earthblighter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {2}{B}, {tap}, Sacrifice a Goblin: Destroy target land.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
+    }
+
+    public Earthblighter(final Earthblighter card) {
         super(card);
     }
 
     @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    public Earthblighter copy() {
+        return new Earthblighter(this);
     }
 }

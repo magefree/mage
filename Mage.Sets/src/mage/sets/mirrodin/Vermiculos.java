@@ -25,36 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
-
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
-
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+public class Vermiculos extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterArtifactPermanent("an artifact");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public Vermiculos(UUID ownerId) {
+        super(ownerId, 80, "Vermiculos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Horror");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Whenever an artifact enters the battlefield, Vermiculos gets +4/+4 until end of turn.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), filter, false));
+    }
+
+    public Vermiculos(final Vermiculos card) {
         super(card);
     }
 
-    @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    @java.lang.Override
+    public Vermiculos copy() {
+        return new Vermiculos(this);
     }
 }

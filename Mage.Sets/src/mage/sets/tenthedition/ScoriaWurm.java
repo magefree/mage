@@ -25,94 +25,79 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.tenthedition;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author nantuko
+ * @author fireshoes
  */
-public class GoblinBangchuckers extends CardImpl {
+public class ScoriaWurm extends CardImpl {
 
-    public GoblinBangchuckers(UUID ownerId) {
-        super(ownerId, 137, "Goblin Bangchuckers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+    public ScoriaWurm(UUID ownerId) {
+        super(ownerId, 227, "Scoria Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Wurm");
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {T}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinBangchuckersEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        // At the beginning of your upkeep, flip a coin. If you lose the flip, return Scoria Wurm to its owner's hand.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ScoriaWurmEffect(), TargetController.YOU, false));
     }
 
-    public GoblinBangchuckers(final GoblinBangchuckers card) {
+    public ScoriaWurm(final ScoriaWurm card) {
         super(card);
     }
 
     @Override
-    public GoblinBangchuckers copy() {
-        return new GoblinBangchuckers(this);
+    public ScoriaWurm copy() {
+        return new ScoriaWurm(this);
     }
 }
 
-class GoblinBangchuckersEffect extends OneShotEffect {
+class ScoriaWurmEffect extends OneShotEffect {
 
-    public GoblinBangchuckersEffect() {
+    public ScoriaWurmEffect() {
         super(Outcome.Damage);
-        staticText = "Flip a coin. If you win the flip, {this} deals 2 damage to target creature or player. If you lose the flip, {this} deals 2 damage to itself";
+        staticText = "flip a coin. If you lose the flip, return {this} to its owner's hand";
     }
 
-    public GoblinBangchuckersEffect(GoblinBangchuckersEffect effect) {
+    public ScoriaWurmEffect(ScoriaWurmEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller != null && permanent != null) {
             if (controller.flipCoin(game)) {
-                Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-                if (permanent != null) {
-                    permanent.damage(2, source.getSourceId(), game, false, true);
-                    return true;
-                }
-                Player player = game.getPlayer(targetPointer.getFirst(game, source));
-                if (player != null) {
-                    player.damage(2, source.getSourceId(), game, false, true);
-                    return true;
-                }
+                return true;
             } else {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    permanent.damage(2, source.getSourceId(), game, false, true);
-                    return true;
+                new ReturnToHandSourceEffect().apply(game, source);
+                return true;
                 }
             }
-        }
         return false;
     }
 
     @Override
-    public GoblinBangchuckersEffect copy() {
-        return new GoblinBangchuckersEffect(this);
+    public ScoriaWurmEffect copy() {
+        return new ScoriaWurmEffect(this);
     }
 }

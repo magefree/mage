@@ -28,33 +28,48 @@
 package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
+public class Crackdown extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite creatures with power 3 or greater");
 
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
-
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public Crackdown(UUID ownerId) {
+        super(ownerId, 15, "Crackdown", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "MMQ";
+
+        // Nonwhite creatures with power 3 or greater don't untap during their controllers' untap steps.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+    }
+
+    public Crackdown(final Crackdown card) {
         super(card);
     }
 
     @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    public Crackdown copy() {
+        return new Crackdown(this);
     }
 }

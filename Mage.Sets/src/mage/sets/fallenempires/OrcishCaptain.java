@@ -25,36 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.target.TargetPlayer;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
+public class OrcishCaptain extends mage.sets.masterseditionii.OrcishCaptain {
 
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
-
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+    public OrcishCaptain(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 123;
+        this.expansionSetCode = "FEM";
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public OrcishCaptain(final OrcishCaptain card) {
         super(card);
     }
 
     @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    public OrcishCaptain copy() {
+        return new OrcishCaptain(this);
     }
 }

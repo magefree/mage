@@ -25,36 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.starter1999;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
+public class HowlingFury extends CardImpl {
 
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
+    public HowlingFury(UUID ownerId) {
+        super(ownerId, 82, "Howling Fury", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        this.expansionSetCode = "S99";
 
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // Target creature gets +4/+0 until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 0, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public HowlingFury(final HowlingFury card) {
         super(card);
     }
 
     @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    public HowlingFury copy() {
+        return new HowlingFury(this);
     }
 }

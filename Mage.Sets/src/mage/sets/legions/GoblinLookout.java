@@ -25,36 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
-
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
-
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+public class GoblinLookout extends CardImpl {
+    
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Goblin creatures");
+    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("a Goblin");
+    static {
+        filterCreature.add(new SubtypePredicate("Goblin"));
+        filterPermanent.add(new SubtypePredicate("Goblin"));
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public GoblinLookout(UUID ownerId) {
+        super(ownerId, 101, "Goblin Lookout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Goblin");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // {tap}, Sacrifice a Goblin: Goblin creatures get +2/+0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 0, Duration.EndOfTurn, filterCreature, false), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
+        this.addAbility(ability);
+    }
+
+    public GoblinLookout(final GoblinLookout card) {
         super(card);
     }
 
     @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    public GoblinLookout copy() {
+        return new GoblinLookout(this);
     }
 }

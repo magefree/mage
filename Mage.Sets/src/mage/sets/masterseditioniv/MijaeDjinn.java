@@ -25,54 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.masterseditioniv;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class SpikeDrone extends CardImpl {
+public class MijaeDjinn extends CardImpl {
 
-    public SpikeDrone(UUID ownerId) {
-        super(ownerId, 152, "Spike Drone", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Spike");
-        this.subtype.add("Drone");
+    public MijaeDjinn(UUID ownerId) {
+        super(ownerId, 127, "Mijae Djinn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
+        this.expansionSetCode = "ME4";
+        this.subtype.add("Djinn");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            "{this} enters the battlefield with a +1/+1 counters on it"));
-
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(2));
-        ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Whenever Mijae Djinn attacks, flip a coin. If you lose the flip, remove Mijae Djinn from combat and tap it.
+        this.addAbility(new AttacksTriggeredAbility(new MijaeDjinnEffect(), false));
     }
 
-    public SpikeDrone(final SpikeDrone card) {
+    public MijaeDjinn(final MijaeDjinn card) {
         super(card);
     }
 
     @Override
-    public SpikeDrone copy() {
-        return new SpikeDrone(this);
+    public MijaeDjinn copy() {
+        return new MijaeDjinn(this);
+    }
+}
+
+class MijaeDjinnEffect extends OneShotEffect {
+
+    public MijaeDjinnEffect() {
+        super(Outcome.Damage);
+        staticText = "flip a coin. If you lose the flip, remove {this} from combat and tap it";
+    }
+
+    public MijaeDjinnEffect(MijaeDjinnEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent creature = game.getPermanent(source.getSourceId());
+        if (controller != null && creature != null) {
+            if (controller.flipCoin(game)) {
+                return true;
+            } else {
+                creature.removeFromCombat(game);
+                creature.tap(game);
+                return true;
+                }
+            }
+        return false;
+    }
+
+    @Override
+    public MijaeDjinnEffect copy() {
+        return new MijaeDjinnEffect(this);
     }
 }

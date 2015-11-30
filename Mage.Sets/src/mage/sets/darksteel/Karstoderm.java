@@ -25,36 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.common.FilterArtifactPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
+public class Karstoderm extends CardImpl {
 
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
+    public Karstoderm(UUID ownerId) {
+        super(ownerId, 77, "Karstoderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Beast");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // Karstoderm enters the battlefield with five +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
+            "{this} enters the battlefield with five +1/+1 counters on it"));
+        
+        // Whenever an artifact enters the battlefield, remove a +1/+1 counter from Karstoderm.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, 
+                new RemoveCounterSourceEffect(CounterType.P1P1.createInstance(1)), 
+                new FilterArtifactPermanent("an artifact"), false));
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public Karstoderm(final Karstoderm card) {
         super(card);
     }
 
     @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    public Karstoderm copy() {
+        return new Karstoderm(this);
     }
 }

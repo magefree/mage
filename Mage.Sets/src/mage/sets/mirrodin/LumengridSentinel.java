@@ -25,36 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
-
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
-
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+public class LumengridSentinel extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterArtifactPermanent("an artifact");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public LumengridSentinel(UUID ownerId) {
+        super(ownerId, 40, "Lumengrid Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        
+        // Whenever an artifact enters the battlefield under your control, you may tap target permanent.
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter, true);
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
+    }
+
+    public LumengridSentinel(final LumengridSentinel card) {
         super(card);
     }
 
-    @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    @java.lang.Override
+    public LumengridSentinel copy() {
+        return new LumengridSentinel(this);
     }
 }

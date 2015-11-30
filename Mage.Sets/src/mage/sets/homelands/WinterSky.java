@@ -25,36 +25,73 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author fireshoes
  */
-public class SpectersWail extends CardImpl {
+public class WinterSky extends CardImpl {
 
-    public SpectersWail(UUID ownerId) {
-        super(ownerId, 164, "Specter's Wail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
+    public WinterSky(UUID ownerId) {
+        super(ownerId, 100, "Winter Sky", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
+        this.expansionSetCode = "HML";
 
-        // Target player discards a card at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // Flip a coin. If you win the flip, Winter Sky deals 1 damage to each creature and each player. If you lose the flip, each player draws a card.
+        this.getSpellAbility().addEffect(new WinterSkyEffect());
     }
 
-    public SpectersWail(final SpectersWail card) {
+    public WinterSky(final WinterSky card) {
         super(card);
     }
 
     @Override
-    public SpectersWail copy() {
-        return new SpectersWail(this);
+    public WinterSky copy() {
+        return new WinterSky(this);
+    }
+}
+
+class WinterSkyEffect extends OneShotEffect {
+
+    public WinterSkyEffect() {
+        super(Outcome.Damage);
+        staticText = "Flip a coin. If you win the flip, {this} deals 1 damage to each creature and each player. If you lose the flip, each player draws a card";
+    }
+
+    public WinterSkyEffect(WinterSkyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.flipCoin(game)) {
+                new DamageEverythingEffect(1).apply(game, source);
+                return true;
+            } else {
+                new DrawCardAllEffect(1).apply(game, source);
+                return true;
+                }
+            }
+        return false;
+    }
+
+    @Override
+    public WinterSkyEffect copy() {
+        return new WinterSkyEffect(this);
     }
 }

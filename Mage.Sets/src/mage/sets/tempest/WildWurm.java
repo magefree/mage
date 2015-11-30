@@ -30,49 +30,72 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class SpikeDrone extends CardImpl {
+public class WildWurm extends CardImpl {
 
-    public SpikeDrone(UUID ownerId) {
-        super(ownerId, 152, "Spike Drone", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+    public WildWurm(UUID ownerId) {
+        super(ownerId, 212, "Wild Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "TMP";
-        this.subtype.add("Spike");
-        this.subtype.add("Drone");
+        this.subtype.add("Wurm");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
 
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            "{this} enters the battlefield with a +1/+1 counters on it"));
-
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(2));
-        ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // When Wild Wurm enters the battlefield, flip a coin. If you lose the flip, return Wild Wurm to its owner's hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new WildWurmEffect(), false));
     }
 
-    public SpikeDrone(final SpikeDrone card) {
+    public WildWurm(final WildWurm card) {
         super(card);
     }
 
     @Override
-    public SpikeDrone copy() {
-        return new SpikeDrone(this);
+    public WildWurm copy() {
+        return new WildWurm(this);
+    }
+}
+
+class WildWurmEffect extends OneShotEffect {
+
+    public WildWurmEffect() {
+        super(Outcome.Damage);
+        staticText = "flip a coin. If you lose the flip, return {this} to its owner's hand";
+    }
+
+    public WildWurmEffect(WildWurmEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller != null && permanent != null) {
+            if (controller.flipCoin(game)) {
+                return true;
+            } else {
+                new ReturnToHandSourceEffect().apply(game, source);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public WildWurmEffect copy() {
+        return new WildWurmEffect(this);
     }
 }
