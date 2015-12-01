@@ -1,15 +1,14 @@
-package mage;
-
-import mage.constants.ColoredManaSymbol;
-import mage.constants.ManaType;
-import mage.filter.FilterMana;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+package test.java.mage;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.*;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
+import mage.filter.FilterMana;
+import static org.junit.Assert.assertEquals;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Custom unit tests for {link Mana}.
