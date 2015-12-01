@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game;
+package main.java.mage.game;
 
 import mage.cards.Card;
 import mage.cards.Cards;

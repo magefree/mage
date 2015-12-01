@@ -1,4 +1,4 @@
-package mage.util.functions;
+package main.java.mage.util.functions;
 
 import java.io.Serializable;
 import mage.game.Game;

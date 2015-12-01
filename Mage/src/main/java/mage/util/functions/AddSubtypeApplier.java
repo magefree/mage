@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.util.functions;
+package main.java.mage.util.functions;
 
 import mage.MageObject;
 import mage.game.Game;

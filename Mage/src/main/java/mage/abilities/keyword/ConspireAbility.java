@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.keyword;
+package main.java.mage.abilities.keyword;
 
 import java.util.HashSet;
 import java.util.Iterator;

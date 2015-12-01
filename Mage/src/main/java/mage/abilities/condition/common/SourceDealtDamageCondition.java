@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.condition.common;
+package main.java.mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;

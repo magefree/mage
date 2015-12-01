@@ -1,4 +1,4 @@
-package mage.util.functions;
+package main.java.mage.util.functions;
 
 import mage.MageObject;
 import mage.game.Game;

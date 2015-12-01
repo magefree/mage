@@ -1,4 +1,4 @@
-package mage.constants;
+package main.java.mage.constants;
 
 /**
  * The time per player to have activity in a match.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common.delayed;
+package main.java.mage.abilities.common.delayed;
 
 import mage.constants.TargetController;
 import mage.abilities.DelayedTriggeredAbility;

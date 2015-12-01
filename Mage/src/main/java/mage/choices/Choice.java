@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.choices;
+package main.java.mage.choices;
 
 import java.util.Map;
 import java.util.Set;

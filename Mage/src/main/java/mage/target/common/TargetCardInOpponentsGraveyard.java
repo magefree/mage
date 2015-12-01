@@ -1,4 +1,4 @@
-package mage.target.common;
+package main.java.mage.target.common;
 
 import mage.abilities.Ability;
 import mage.cards.Card;

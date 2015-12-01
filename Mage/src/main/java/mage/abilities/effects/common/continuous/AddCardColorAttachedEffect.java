@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common.continuous;
+package main.java.mage.abilities.effects.common.continuous;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;

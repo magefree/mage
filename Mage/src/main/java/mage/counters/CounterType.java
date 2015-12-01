@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.counters;
+package main.java.mage.counters;
 
 /**
  * Enum for counters, names and instances.

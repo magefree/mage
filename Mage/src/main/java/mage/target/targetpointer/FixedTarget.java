@@ -1,4 +1,4 @@
-package mage.target.targetpointer;
+package main.java.mage.target.targetpointer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.watchers.common;
+package main.java.mage.watchers.common;
 
 import java.util.HashMap;
 import java.util.Map;

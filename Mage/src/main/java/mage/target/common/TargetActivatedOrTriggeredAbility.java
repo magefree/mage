@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.target.common;
+package main.java.mage.target.common;
 
 import java.util.HashSet;
 import java.util.Set;

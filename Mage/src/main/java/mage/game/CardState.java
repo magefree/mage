@@ -1,4 +1,4 @@
-package mage.game;
+package main.java.mage.game;
 
 import java.io.Serializable;
 import java.util.HashMap;

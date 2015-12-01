@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.costs.common;
+package main.java.mage.abilities.costs.common;
 
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;

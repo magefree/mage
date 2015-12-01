@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package main.java.mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.ObjectColor;

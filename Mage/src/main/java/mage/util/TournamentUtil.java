@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package mage.util;
+package main.java.mage.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

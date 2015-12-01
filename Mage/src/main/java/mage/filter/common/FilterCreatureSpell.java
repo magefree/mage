@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.filter.common;
+package main.java.mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterSpell;

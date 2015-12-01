@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package main.java.mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;

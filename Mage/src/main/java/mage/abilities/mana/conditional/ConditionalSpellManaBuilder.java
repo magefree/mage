@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.mana.conditional;
+package main.java.mage.abilities.mana.conditional;
 
 import java.util.UUID;
 import mage.ConditionalMana;

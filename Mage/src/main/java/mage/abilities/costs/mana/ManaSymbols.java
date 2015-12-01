@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.costs.mana;
+package main.java.mage.abilities.costs.mana;
 
 import mage.ManaSymbol;
 import mage.constants.ColoredManaSymbol;

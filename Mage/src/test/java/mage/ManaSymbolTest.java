@@ -1,4 +1,4 @@
-package mage;
+package main.java.mage;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package mage.abilities.common.delayed;
+package main.java.mage.abilities.common.delayed;
 
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;

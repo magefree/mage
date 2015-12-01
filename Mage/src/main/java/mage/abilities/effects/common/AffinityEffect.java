@@ -1,4 +1,4 @@
-package mage.abilities.effects.common;
+package main.java.mage.abilities.effects.common;
 
 import mage.Mana;
 import mage.abilities.Ability;

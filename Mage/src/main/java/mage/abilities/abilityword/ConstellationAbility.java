@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.abilityword;
+package main.java.mage.abilities.abilityword;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package main.java.mage.abilities.costs.common;
 
 import mage.constants.Outcome;
 import mage.abilities.Ability;

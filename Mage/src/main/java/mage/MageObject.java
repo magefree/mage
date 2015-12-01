@@ -1,4 +1,4 @@
-package mage;
+package main.java.mage;
 
 import java.io.Serializable;
 import java.util.List;

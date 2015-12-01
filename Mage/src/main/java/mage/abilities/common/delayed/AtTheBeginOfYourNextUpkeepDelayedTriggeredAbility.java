@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.common.delayed;
+package main.java.mage.abilities.common.delayed;
 
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;

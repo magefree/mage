@@ -1,4 +1,4 @@
-package mage.abilities.condition.common;
+package main.java.mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package mage.abilities.mana;
+package main.java.mage.abilities.mana;
 
 import mage.Mana;
 import mage.abilities.costs.Cost;

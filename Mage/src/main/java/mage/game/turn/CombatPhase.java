@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.turn;
+package main.java.mage.game.turn;
 
 import mage.constants.TurnPhase;
 import mage.game.events.GameEvent.EventType;

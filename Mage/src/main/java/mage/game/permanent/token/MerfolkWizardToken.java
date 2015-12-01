@@ -1,4 +1,4 @@
-package mage.game.permanent.token;
+package main.java.mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;

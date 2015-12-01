@@ -1,4 +1,4 @@
-package mage.cards.mock;
+package main.java.mage.cards.mock;
 
 import java.util.List;
 import mage.MageInt;

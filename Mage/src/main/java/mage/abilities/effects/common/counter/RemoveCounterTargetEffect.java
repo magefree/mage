@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common.counter;
+package main.java.mage.abilities.effects.common.counter;
 
 import java.util.HashSet;
 import java.util.Set;

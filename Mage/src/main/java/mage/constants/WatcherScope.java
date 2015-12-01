@@ -1,4 +1,4 @@
-package mage.constants;
+package main.java.mage.constants;
 
 /**
  *

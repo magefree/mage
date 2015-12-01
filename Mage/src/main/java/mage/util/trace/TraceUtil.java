@@ -1,4 +1,4 @@
-package mage.util.trace;
+package main.java.mage.util.trace;
 
 import java.util.HashMap;
 import java.util.HashSet;

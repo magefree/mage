@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.players;
+package main.java.mage.players;
 
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;

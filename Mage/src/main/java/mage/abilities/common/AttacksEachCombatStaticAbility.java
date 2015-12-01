@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.common;
+package main.java.mage.abilities.common;
 
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;

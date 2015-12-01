@@ -1,4 +1,4 @@
-package mage.abilities.dynamicvalue;
+package main.java.mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;

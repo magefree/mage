@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs;
+package main.java.mage.abilities.costs;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package mage.abilities.decorator;
+package main.java.mage.abilities.decorator;
 
 import java.util.List;
 import java.util.Set;

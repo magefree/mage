@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.filter.predicate.permanent;
+package main.java.mage.filter.predicate.permanent;
 
 import mage.filter.predicate.Predicate;
 import mage.game.Game;

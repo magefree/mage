@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.filter.common;
+package main.java.mage.filter.common;
 
 import mage.game.Game;
 import mage.game.permanent.Permanent;

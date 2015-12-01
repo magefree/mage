@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.tournament;
+package main.java.mage.game.tournament;
 
 import java.util.UUID;
 import mage.constants.TournamentPlayerState;

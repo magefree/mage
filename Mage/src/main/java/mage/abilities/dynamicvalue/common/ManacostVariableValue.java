@@ -1,4 +1,4 @@
-package mage.abilities.dynamicvalue.common;
+package main.java.mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;

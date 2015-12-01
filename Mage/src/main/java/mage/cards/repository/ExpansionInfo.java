@@ -1,4 +1,4 @@
-package mage.cards.repository;
+package main.java.mage.cards.repository;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;

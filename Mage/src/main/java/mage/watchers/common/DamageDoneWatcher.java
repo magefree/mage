@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.watchers.common;
+package main.java.mage.watchers.common;
 
 import java.util.HashMap;
 import java.util.Map;

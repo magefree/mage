@@ -1,4 +1,4 @@
-package mage.abilities.costs;
+package main.java.mage.abilities.costs;
 
 import mage.abilities.Ability;
 import mage.game.Game;

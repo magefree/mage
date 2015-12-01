@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.util;
+package main.java.mage.util;
 
 import java.io.InputStream;
 

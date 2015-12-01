@@ -1,4 +1,4 @@
-package mage.filter.common;
+package main.java.mage.filter.common;
 
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;

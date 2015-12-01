@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.filter.common;
+package main.java.mage.filter.common;
 
 import mage.abilities.keyword.DefenderAbility;
 import mage.filter.predicate.Predicate;

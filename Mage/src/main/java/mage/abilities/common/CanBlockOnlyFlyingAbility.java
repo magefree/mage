@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package mage.abilities.common;
+package main.java.mage.abilities.common;
 
 import mage.abilities.effects.common.combat.CanBlockOnlyFlyingEffect;
 import mage.constants.Duration;

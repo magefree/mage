@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.cards;
+package main.java.mage.cards;
 
 import java.util.UUID;
 import mage.constants.CardType;

@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.keyword;
+package main.java.mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
 import mage.constants.Zone;

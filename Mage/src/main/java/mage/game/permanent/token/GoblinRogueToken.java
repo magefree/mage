@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.game.permanent.token;
+package main.java.mage.game.permanent.token;
 
 import java.util.Arrays;
 import mage.constants.CardType;

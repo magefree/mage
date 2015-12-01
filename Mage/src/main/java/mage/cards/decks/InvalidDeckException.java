@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.cards.decks;
+package main.java.mage.cards.decks;
 
 import java.util.Map;
 import java.util.Map.Entry;

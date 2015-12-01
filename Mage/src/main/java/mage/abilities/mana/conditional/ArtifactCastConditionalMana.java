@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.mana.conditional;
+package main.java.mage.abilities.mana.conditional;
 
 import mage.ConditionalMana;
 import mage.Mana;

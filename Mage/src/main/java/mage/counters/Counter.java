@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.counters;
+package main.java.mage.counters;
 
 import java.io.Serializable;
 

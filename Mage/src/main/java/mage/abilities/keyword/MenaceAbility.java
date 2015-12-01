@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.keyword;
+package main.java.mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;

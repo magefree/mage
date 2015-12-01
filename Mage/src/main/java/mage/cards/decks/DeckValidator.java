@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.decks;
+package main.java.mage.cards.decks;
 
 import java.io.Serializable;
 import java.util.Collection;

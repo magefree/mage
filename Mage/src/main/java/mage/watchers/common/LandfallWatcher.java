@@ -1,4 +1,4 @@
-package mage.watchers.common;
+package main.java.mage.watchers.common;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package mage.cards.repository;
+package main.java.mage.cards.repository;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;

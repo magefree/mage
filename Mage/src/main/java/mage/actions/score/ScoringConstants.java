@@ -1,4 +1,4 @@
-package mage.actions.score;
+package main.java.mage.actions.score;
 
 /**
  * Constants for scoring system.

@@ -1,4 +1,4 @@
-package mage.target.targetpointer;
+package main.java.mage.target.targetpointer;
 
 import java.io.Serializable;
 import java.util.List;

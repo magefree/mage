@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects;
+package main.java.mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.constants.CostModificationType;

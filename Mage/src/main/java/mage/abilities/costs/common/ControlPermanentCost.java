@@ -1,4 +1,4 @@
-package mage.abilities.costs.common;
+package main.java.mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;

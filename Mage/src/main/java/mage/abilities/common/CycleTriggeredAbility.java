@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.common;
+package main.java.mage.abilities.common;
 
 import mage.abilities.effects.Effect;
 import mage.abilities.keyword.CyclingAbility;

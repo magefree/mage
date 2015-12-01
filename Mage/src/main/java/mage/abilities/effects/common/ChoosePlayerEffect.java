@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.effects.common;
+package main.java.mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;

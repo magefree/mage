@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.effects.common;
+package main.java.mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;

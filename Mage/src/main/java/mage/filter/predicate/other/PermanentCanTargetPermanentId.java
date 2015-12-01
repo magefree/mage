@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.other;
+package main.java.mage.filter.predicate.other;
 
 import java.util.UUID;
 import mage.filter.predicate.Predicate;

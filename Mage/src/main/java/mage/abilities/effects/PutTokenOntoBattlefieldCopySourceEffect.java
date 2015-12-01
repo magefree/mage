@@ -1,4 +1,4 @@
-package mage.abilities.effects;
+package main.java.mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;

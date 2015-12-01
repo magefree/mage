@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.decorator;
+package main.java.mage.abilities.decorator;
 
 import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;

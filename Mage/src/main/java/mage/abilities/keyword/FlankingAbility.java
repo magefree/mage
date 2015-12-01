@@ -1,5 +1,5 @@
 
-package mage.abilities.keyword;
+package main.java.mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;

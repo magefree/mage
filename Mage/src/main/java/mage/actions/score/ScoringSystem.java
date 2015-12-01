@@ -1,4 +1,4 @@
-package mage.actions.score;
+package main.java.mage.actions.score;
 
 import mage.cards.Card;
 import mage.game.Game;

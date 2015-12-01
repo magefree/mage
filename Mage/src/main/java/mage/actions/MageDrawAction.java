@@ -1,4 +1,4 @@
-package mage.actions;
+package main.java.mage.actions;
 
 import java.util.ArrayList;
 import java.util.List;

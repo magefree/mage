@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.condition;
+package main.java.mage.abilities.condition;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package mage.abilities.effects.common.continuous;
+package main.java.mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
