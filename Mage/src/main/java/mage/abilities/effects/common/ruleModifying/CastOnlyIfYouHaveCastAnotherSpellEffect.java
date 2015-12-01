@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.abilities.effects.common.ruleModifying;
+package mage.abilities.effects.common.ruleModifying;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;

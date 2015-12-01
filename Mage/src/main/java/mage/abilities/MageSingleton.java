@@ -1,4 +1,4 @@
-package main.java.mage.abilities;
+package mage.abilities;
 
 /**
  * Marker class for singleton abilities and effects.

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package main.java.mage.abilities.effects.common;
+package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;

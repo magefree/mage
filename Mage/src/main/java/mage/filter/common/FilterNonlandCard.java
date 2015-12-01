@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package main.java.mage.filter.common;
+package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterCard;

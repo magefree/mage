@@ -1,4 +1,4 @@
-package main.java.mage.abilities.effects.common;
+package mage.abilities.effects.common;
 
 import mage.ConditionalMana;
 import mage.Mana;

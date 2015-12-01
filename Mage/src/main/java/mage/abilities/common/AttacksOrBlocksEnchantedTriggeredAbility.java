@@ -1,6 +1,6 @@
 // @author jeffwadsworth
 
-package main.java.mage.abilities.common;
+package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;

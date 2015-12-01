@@ -1,4 +1,4 @@
-package main.java.mage.filter.predicate.permanent;
+package mage.filter.predicate.permanent;
 
 import mage.cards.Card;
 import mage.counters.CounterType;

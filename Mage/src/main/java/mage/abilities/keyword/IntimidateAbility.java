@@ -1,4 +1,4 @@
-package main.java.mage.abilities.keyword;
+package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.mage.abilities.dynamicvalue.common;
+package mage.abilities.dynamicvalue.common;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package main.java.mage.players.net;
+package mage.players.net;
 
 import java.io.Serializable;
 

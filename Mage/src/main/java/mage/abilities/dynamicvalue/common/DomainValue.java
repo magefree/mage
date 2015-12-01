@@ -1,4 +1,4 @@
-package main.java.mage.abilities.dynamicvalue.common;
+package mage.abilities.dynamicvalue.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;

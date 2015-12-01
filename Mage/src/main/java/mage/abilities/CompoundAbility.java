@@ -1,4 +1,4 @@
-package main.java.mage.abilities;
+package mage.abilities;
 
 import java.util.Arrays;
 import java.util.List;

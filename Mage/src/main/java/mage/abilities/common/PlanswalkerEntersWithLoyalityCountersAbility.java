@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.mage.abilities.common;
+package mage.abilities.common;
 
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.counters.CounterType;

@@ -1,4 +1,4 @@
-package main.java.mage.abilities.condition;
+package mage.abilities.condition;
 
 import java.io.Serializable;
 import mage.abilities.Ability;

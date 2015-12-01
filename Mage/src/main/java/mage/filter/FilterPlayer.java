@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package main.java.mage.filter;
+package mage.filter;
 
 import java.util.ArrayList;
 import java.util.List;

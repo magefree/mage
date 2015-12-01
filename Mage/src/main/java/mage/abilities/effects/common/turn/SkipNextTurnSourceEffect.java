@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.mage.abilities.effects.common.turn;
+package mage.abilities.effects.common.turn;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;

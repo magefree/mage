@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package main.java.mage.game;
+package mage.game;
 
 import java.io.Serializable;
 import java.util.UUID;

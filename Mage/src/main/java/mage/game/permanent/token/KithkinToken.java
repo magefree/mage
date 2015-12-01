@@ -1,4 +1,4 @@
-package main.java.mage.game.permanent.token;
+package mage.game.permanent.token;
 
 import java.util.Arrays;
 import mage.MageInt;

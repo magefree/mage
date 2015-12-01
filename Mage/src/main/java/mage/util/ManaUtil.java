@@ -1,4 +1,4 @@
-package main.java.mage.util;
+package mage.util;
 
 import java.util.Arrays;
 import java.util.HashSet;

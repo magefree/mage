@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.abilities.costs;
+package mage.abilities.costs;
 
 import mage.abilities.Ability;
 import mage.game.Game;

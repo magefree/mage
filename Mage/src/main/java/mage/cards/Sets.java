@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.cards;
+package mage.cards;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.mage.abilities.dynamicvalue.common;
+package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;

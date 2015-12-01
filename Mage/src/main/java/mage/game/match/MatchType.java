@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.game.match;
+package mage.game.match;
 
 import java.io.Serializable;
 

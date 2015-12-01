@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package main.java.mage.counters;
+package mage.counters;
 
 import org.apache.log4j.Logger;
 

@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package main.java.mage.game.command;
+package mage.game.command;
 
 import java.util.ArrayList;
 

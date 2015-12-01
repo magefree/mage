@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package main.java.mage.abilities.common;
+package mage.abilities.common;
 
 import mage.constants.Outcome;
 import mage.constants.Zone;

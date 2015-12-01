@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package main.java.mage.target.common;
+package mage.target.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;

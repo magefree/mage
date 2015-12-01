@@ -1,4 +1,4 @@
-package main.java.mage.abilities.keyword;
+package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
 import mage.abilities.MageSingleton;

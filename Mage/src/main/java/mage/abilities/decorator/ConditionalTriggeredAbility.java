@@ -1,4 +1,4 @@
-package main.java.mage.abilities.decorator;
+package mage.abilities.decorator;
 
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;

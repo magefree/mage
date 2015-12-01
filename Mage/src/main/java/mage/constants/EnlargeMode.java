@@ -1,4 +1,4 @@
-package main.java.mage.constants;
+package mage.constants;
 
 /**
  * Controlls the display handling of the enlarged image of the card / permanent

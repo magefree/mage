@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.game.tournament.pairing;
+package mage.game.tournament.pairing;
 
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;

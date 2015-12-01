@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package main.java.mage.target.common;
+package mage.target.common;
 
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.TargetPermanent;

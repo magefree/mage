@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package main.java.mage.cards.decks.importer;
+package mage.cards.decks.importer;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

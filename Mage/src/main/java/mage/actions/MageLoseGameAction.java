@@ -1,4 +1,4 @@
-package main.java.mage.actions;
+package mage.actions;
 
 import mage.actions.impl.MageAction;
 import mage.actions.score.ArtificialScoringSystem;

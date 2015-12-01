@@ -1,4 +1,4 @@
-package main.java.mage.choices;
+package mage.choices;
 
 public class ChoiceColorOrArtifact extends ChoiceColor {
     public ChoiceColorOrArtifact() {

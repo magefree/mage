@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package main.java.mage.util.functions;
+package mage.util.functions;
 
 import mage.MageObject;
 import mage.constants.CardType;

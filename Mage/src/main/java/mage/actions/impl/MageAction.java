@@ -1,4 +1,4 @@
-package main.java.mage.actions.impl;
+package mage.actions.impl;
 
 import mage.game.Game;
 import mage.players.Player;

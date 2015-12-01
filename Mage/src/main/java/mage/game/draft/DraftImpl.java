@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.game.draft;
+package mage.game.draft;
 
 import java.util.Collection;
 import java.util.HashSet;

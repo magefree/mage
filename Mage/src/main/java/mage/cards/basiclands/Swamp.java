@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package main.java.mage.cards.basiclands;
+package mage.cards.basiclands;
 
 import java.util.UUID;
 import mage.abilities.mana.BlackManaAbility;

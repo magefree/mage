@@ -1,4 +1,4 @@
-package main.java.mage.abilities.common;
+package mage.abilities.common;
 
 import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;

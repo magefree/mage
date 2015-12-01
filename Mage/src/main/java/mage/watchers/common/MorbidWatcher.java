@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.watchers.common;
+package mage.watchers.common;
 
 import mage.constants.CardType;
 import mage.constants.WatcherScope;

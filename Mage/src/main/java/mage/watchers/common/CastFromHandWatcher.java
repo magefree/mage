@@ -1,4 +1,4 @@
-package main.java.mage.watchers.common;
+package mage.watchers.common;
 
 import mage.constants.WatcherScope;
 import mage.constants.Zone;

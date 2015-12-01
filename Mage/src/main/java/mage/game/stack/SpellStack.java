@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package main.java.mage.game.stack;
+package mage.game.stack;
 
 import java.util.ArrayDeque;
 import java.util.Date;

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.cards.decks;
+package mage.cards.decks;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package main.java.mage.cards.mock;
+package mage.cards.mock;
 
 import mage.abilities.AbilityImpl;
 import mage.constants.AbilityType;

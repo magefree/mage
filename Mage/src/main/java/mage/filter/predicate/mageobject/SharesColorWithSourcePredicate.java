@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package main.java.mage.filter.predicate.mageobject;
+package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
 import mage.filter.predicate.ObjectSourcePlayer;

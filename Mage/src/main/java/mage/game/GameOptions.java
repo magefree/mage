@@ -1,4 +1,4 @@
-package main.java.mage.game;
+package mage.game;
 
 import java.io.Serializable;
 import mage.constants.PhaseStep;

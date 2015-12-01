@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-package main.java.mage.abilities.effects.common.cost;
+package mage.abilities.effects.common.cost;
 
 import mage.constants.Duration;
 import mage.constants.EffectType;

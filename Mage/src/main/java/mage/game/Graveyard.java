@@ -1,4 +1,4 @@
-package main.java.mage.game;
+package mage.game;
 
 import java.util.UUID;
 

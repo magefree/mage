@@ -1,4 +1,4 @@
-package main.java.mage.abilities.costs;
+package mage.abilities.costs;
 
 import java.util.UUID;
 import mage.abilities.Ability;

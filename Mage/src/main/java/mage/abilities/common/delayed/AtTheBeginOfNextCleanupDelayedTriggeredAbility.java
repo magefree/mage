@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package main.java.mage.abilities.common.delayed;
+package mage.abilities.common.delayed;
 
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;

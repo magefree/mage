@@ -1,4 +1,4 @@
-package main.java.mage.abilities.keyword;
+package mage.abilities.keyword;
 
 import mage.MageObject;
 import mage.abilities.Ability;
