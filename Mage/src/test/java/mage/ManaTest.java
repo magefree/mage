@@ -1,11 +1,11 @@
-package test.java.mage;
+package mage;
 
-import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertFalse;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -20,7 +20,6 @@ public class ManaTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-
     @Test
     public void shouldNotAllowNullCopyConstructor() {
         // given
@@ -31,7 +30,6 @@ public class ManaTest {
         Mana nullMana = null;
         new Mana(nullMana);
     }
-
 
     @Test
     public void shouldCreateManaFromCopy() {
@@ -50,7 +48,6 @@ public class ManaTest {
         assertEquals(0, copy.getWhite());
     }
 
-
     @Test
     public void shouldCreateManaFromGreenColoredManaSymbol() {
         // given
@@ -66,7 +63,6 @@ public class ManaTest {
         assertEquals(0, mana.getBlue());
         assertEquals(0, mana.getWhite());
     }
-
 
     @Test
     public void shouldCreateManaFromRedColoredManaSymbol() {
@@ -84,7 +80,6 @@ public class ManaTest {
         assertEquals(0, mana.getWhite());
     }
 
-
     @Test
     public void shouldCreateManaFromBlackColoredManaSymbol() {
         // given
@@ -100,7 +95,6 @@ public class ManaTest {
         assertEquals(0, mana.getBlue());
         assertEquals(0, mana.getWhite());
     }
-
 
     @Test
     public void shouldCreateManaFromBlueColoredManaSymbol() {
@@ -118,7 +112,6 @@ public class ManaTest {
         assertEquals(0, mana.getWhite());
     }
 
-
     @Test
     public void shouldCreateManaFromWhiteColoredManaSymbol() {
         // given
@@ -135,7 +128,6 @@ public class ManaTest {
         assertEquals(1, mana.getWhite());
     }
 
-
     @Test
     public void shouldNotCreateManaFromNullColoredManaSymbol() {
         // given
@@ -147,7 +139,6 @@ public class ManaTest {
         // when
         new Mana(nullSymbol);
     }
-
 
     @Test
     public void shouldCreateManaFromIntegers() {
@@ -165,7 +156,6 @@ public class ManaTest {
         assertEquals(7, mana.getAny());
     }
 
-
     @Test
     public void shouldNotAllowNegativeIntegers() {
         // given
@@ -177,7 +167,6 @@ public class ManaTest {
         assertEquals(0, mana.getRed());
     }
 
-
     @Test
     public void shouldCreateRedMana() {
 
@@ -187,7 +176,6 @@ public class ManaTest {
         // then
         assertEquals(1, mana.getRed());
     }
-
 
     @Test
     public void shouldCreateGreenMana() {
@@ -199,7 +187,6 @@ public class ManaTest {
         assertEquals(1, mana.getGreen());
     }
 
-
     @Test
     public void shouldCreateBlueMana() {
 
@@ -209,7 +196,6 @@ public class ManaTest {
         // then
         assertEquals(1, mana.getBlue());
     }
-
 
     @Test
     public void shouldCreateWhiteMana() {
@@ -221,7 +207,6 @@ public class ManaTest {
         assertEquals(1, mana.getWhite());
     }
 
-
     @Test
     public void shouldCreateBlackMana() {
 
@@ -232,7 +217,6 @@ public class ManaTest {
         assertEquals(1, mana.getBlack());
     }
 
-
     @Test
     public void shouldCreateColorlessMana() {
 
@@ -242,7 +226,6 @@ public class ManaTest {
         // then
         assertEquals(1, mana.getColorless());
     }
-
 
     @Test
     public void shouldNotAllowNegativeRedMana() {
@@ -255,7 +238,6 @@ public class ManaTest {
         assertEquals(0, mana.getRed());
     }
 
-
     @Test
     public void shouldNotAllowNegativeGreenMana() {
         // given
@@ -266,7 +248,6 @@ public class ManaTest {
         //then
         assertEquals(0, mana.getGreen());
     }
-
 
     @Test
     public void shouldNotAllowNegativeBlueMana() {
@@ -279,7 +260,6 @@ public class ManaTest {
         assertEquals(0, mana.getBlue());
     }
 
-
     @Test
     public void shouldNotAllowNegativeWhiteMana() {
         // given
@@ -290,7 +270,6 @@ public class ManaTest {
         //then
         assertEquals(0, mana.getWhite());
     }
-
 
     @Test
     public void shouldNotAllowNegativeBlackMana() {
@@ -303,7 +282,6 @@ public class ManaTest {
         assertEquals(0, mana.getBlack());
     }
 
-
     @Test
     public void shouldNotAllowNegativeColorlessMana() {
         // given
@@ -315,13 +293,11 @@ public class ManaTest {
         assertEquals(0, mana.getColorless());
     }
 
-
     @Test
     public void shouldAddMana() {
         // given
         Mana thisMana = new Mana(1, 2, 3, 4, 5, 6, 7);
         Mana thatMana = new Mana(1, 2, 3, 4, 5, 6, 7);
-
 
         // when
         thisMana.add(thatMana);
@@ -336,7 +312,6 @@ public class ManaTest {
         assertEquals(14, thisMana.getAny());
     }
 
-
     @Test
     public void shouldIncreaseRedMana() {
         // given
@@ -348,7 +323,6 @@ public class ManaTest {
         // then
         assertEquals(1, mana.getRed());
     }
-
 
     @Test
     public void shouldIncreaseGreenMana() {
@@ -429,7 +403,6 @@ public class ManaTest {
         assertEquals(1, thisMana.getAny());
     }
 
-
     @Test
     public void shouldSubtractCost() {
         // given
@@ -449,7 +422,6 @@ public class ManaTest {
         assertEquals(1, thisMana.getAny());
     }
 
-
     @Test
     public void shouldUseExistingManaToPayColorless() {
         // given
@@ -467,7 +439,6 @@ public class ManaTest {
         assertEquals(1, available.getRed());
     }
 
-
     @Test
     public void shouldThrowExceptionOnUnavailableColorless() {
         // given
@@ -483,7 +454,6 @@ public class ManaTest {
         // when
         available.subtractCost(cost);
     }
-
 
     @Test
     public void shouldReturnCount() {
@@ -502,7 +472,6 @@ public class ManaTest {
         assertEquals(22, coloredCount);
         assertEquals(5, filteredMana);
     }
-
 
     @Test
     public void shouldReturnString() {
@@ -533,7 +502,6 @@ public class ManaTest {
         assertEquals(0, mana.getColorless());
         assertEquals(0, mana.getAny());
     }
-
 
     @Test
     public void shouldReturnCopy() {
@@ -568,7 +536,6 @@ public class ManaTest {
         assertEquals(1, whiteMana);
     }
 
-
     @Test
     public void shouldGetColorByManaType() {
         // given
@@ -590,7 +557,6 @@ public class ManaTest {
         assertEquals(1, whiteMana);
         assertEquals(1, colorlessMana);
     }
-
 
     @Test
     public void shouldSetManaFromType() {
@@ -628,7 +594,6 @@ public class ManaTest {
         assertFalse(mana == newMana);
     }
 
-
     @Test
     public void shouldHaveEqualManaValue() {
         // given
@@ -641,7 +606,6 @@ public class ManaTest {
         // then
         assertTrue(equalMana);
     }
-
 
     @Test
     public void shouldGetDifferentColors() {
@@ -656,7 +620,6 @@ public class ManaTest {
         // then
         assertEquals(2, colors);
     }
-
 
     @Test
     public void shouldNotSetManaLessThanZero() {
