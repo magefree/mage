@@ -37,7 +37,7 @@ public class Damnation extends mage.sets.planarchaos.Damnation {
 
     public Damnation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = 98;
         this.expansionSetCode = "JR";
     }
 

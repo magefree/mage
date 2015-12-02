@@ -4,11 +4,14 @@ Antiquities|antiquities|
 Apocalypse|apocalypse|
 Archenemy|archenemy|
 Arabian Nights|arabiannights|
+Arena League|arenaleague|
+Asia Pacific Land Program|asiapacificlandprogram|
 Avacyn Restored|avacynrestored|
 Battle for Zendikar|battleforzendikar|
 Betrayers of Kamigawa|betrayersofkamigawa|
 Born of the Gods|bornofthegods|
 Champions of Kamigawa|championsofkamigawa|
+Champs|champs|
 Chronicles|chronicles|
 Clash Pack|clashpack|
 Classic Sixth Edition|classicsixthedition|
@@ -16,6 +19,7 @@ Coldsnap|coldsnap|
 Commander 2013 Edition|commander2013|
 Commander 2014 Edition|commander2014|
 Commander 2015|commander2015|
+Commander's Arsenal|commandersarsenal|
 Conflux|conflux|
 Dark Ascension|darkascension|
 Darksteel|darksteel|
@@ -43,6 +47,7 @@ Duel Decks: Speed vs. Cunning|speedvscunning|
 Duel Decks: Venser vs. Koth|venservskoth|
 Duel Decks: Zendikar vs. Eldrazi|zendikarvseldrazi|
 Eighth Edition|eighthedition|
+European Land Program|europeanlandprogram|
 Eventide|eventide|
 Exodus|exodus|
 Fallen Empires|fallenempires|
@@ -131,6 +136,7 @@ Shards of Alara|shardsofalara|
 Starter 1999|starter1999|
 Starter 2000|starter2000|
 Stronghold|stronghold|
+Super Series|superseries|
 Tempest|tempest|
 Tempest Remastered|tempestremastered|
 Tenth Edition|tenthedition|
@@ -139,6 +145,7 @@ Theros|theros|
 Time Spiral "Timeshifted"|timeshifted|
 Time Spiral|timespiral|
 Torment|torment|
+Ugin's Fate|uginsfate|
 Unlimited Edition|unlimitededition|
 Urza's Destiny|urzasdestiny|
 Urza's Legacy|urzaslegacy|
