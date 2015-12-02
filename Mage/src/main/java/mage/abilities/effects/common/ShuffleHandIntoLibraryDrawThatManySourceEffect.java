@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ShuffleHandIntoLibraryDrawThatManySourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class WhirlpoolRider extends CardImpl {
+public class ShuffleHandIntoLibraryDrawThatManySourceEffect extends OneShotEffect {
 
-    public WhirlpoolRider(UUID ownerId) {
-        super(ownerId, 35, "Whirlpool Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "APC";
-        this.subtype.add("Merfolk");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // When Whirlpool Rider enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect()));
-
+    public ShuffleHandIntoLibraryDrawThatManySourceEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "shuffle the cards from your hand into your library, then draw that many cards";
     }
 
-    public WhirlpoolRider(final WhirlpoolRider card) {
-        super(card);
+    public ShuffleHandIntoLibraryDrawThatManySourceEffect(final ShuffleHandIntoLibraryDrawThatManySourceEffect effect) {
+        super(effect);
     }
 
     @Override
-    public WhirlpoolRider copy() {
-        return new WhirlpoolRider(this);
+    public ShuffleHandIntoLibraryDrawThatManySourceEffect copy() {
+        return new ShuffleHandIntoLibraryDrawThatManySourceEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int cardsHand = controller.getHand().size();
+            if (cardsHand > 0) {
+                controller.moveCards(controller.getHand(), Zone.LIBRARY, source, game);
+                controller.shuffleLibrary(game);
+                game.applyEffects(); // then
+                controller.drawCards(cardsHand, game);
+            }
+            return true;
+        }
+        return false;
     }
 }
