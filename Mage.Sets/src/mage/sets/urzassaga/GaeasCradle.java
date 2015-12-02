@@ -56,7 +56,7 @@ public class GaeasCradle extends CardImpl {
         this.expansionSetCode = "USG";
         this.supertype.add("Legendary");
 
-        DynamicManaAbility ability = new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filter));
+        DynamicManaAbility ability = new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter));
         this.addAbility(ability);
     }
 

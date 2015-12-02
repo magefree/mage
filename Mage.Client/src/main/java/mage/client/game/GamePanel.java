@@ -82,7 +82,7 @@ import mage.cards.action.ActionCallback;
 import mage.choices.Choice;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
-import mage.client.chat.ChatPanel;
+import mage.client.chat.ChatPanelBasic;
 import mage.client.combat.CombatManager;
 import mage.client.components.HoverButton;
 import mage.client.components.MageComponents;
@@ -1204,12 +1204,12 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipForward = new javax.swing.JButton();
         btnPreviousPlay = new javax.swing.JButton();
         pnlBattlefield = new javax.swing.JPanel();
-        gameChatPanel = new mage.client.chat.ChatPanel();
-        gameChatPanel.useExtendedView(ChatPanel.VIEW_MODE.GAME);
-        userChatPanel = new mage.client.chat.ChatPanel();
+        gameChatPanel = new mage.client.chat.ChatPanelBasic();
+        gameChatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.GAME);
+        userChatPanel = new mage.client.chat.ChatPanelBasic();
         userChatPanel.setParentChat(gameChatPanel);
-        userChatPanel.useExtendedView(ChatPanel.VIEW_MODE.CHAT);
-        userChatPanel.setChatType(ChatPanel.ChatType.GAME);
+        userChatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.CHAT);
+        userChatPanel.setChatType(ChatPanelBasic.ChatType.GAME);
         gameChatPanel.setConnectedChat(userChatPanel);
         gameChatPanel.disableInput();
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
@@ -2125,9 +2125,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private javax.swing.JButton btnStopWatching;
 
-    private mage.client.chat.ChatPanel gameChatPanel;
+    private mage.client.chat.ChatPanelBasic gameChatPanel;
     private mage.client.game.FeedbackPanel feedbackPanel;
-    private mage.client.chat.ChatPanel userChatPanel;
+    private mage.client.chat.ChatPanelBasic userChatPanel;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane0;

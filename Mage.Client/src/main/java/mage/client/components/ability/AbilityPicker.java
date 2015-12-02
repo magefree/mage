@@ -29,7 +29,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private static final int DIALOG_WIDTH = 440;
     private static final int DIALOG_HEIGHT = 260;
 
-    private transient static final Logger log = Logger.getLogger(AbilityPicker.class);
+    private static final Logger log = Logger.getLogger(AbilityPicker.class);
 
     private JList rows;
     private List<Object> choices;

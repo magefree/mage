@@ -54,6 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class OathOfLieges extends CardImpl {
 
+    private final UUID originalId;
     private static final FilterPlayer filter = new FilterPlayer("player who controls more lands than you do and is his your opponent");
 
     static {
@@ -69,16 +70,18 @@ public class OathOfLieges extends CardImpl {
         effect.setText("that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, true);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     public OathOfLieges(final OathOfLieges card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof BeginningOfUpkeepTriggeredAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
             if (activePlayer != null) {
                 ability.getTargets().clear();

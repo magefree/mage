@@ -70,7 +70,7 @@ public class BottomlessVault extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
         // {tap}, Remove any number of storage counters from Bottomless Vault: Add {B} to your mana pool for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
-                Mana.BlackMana,
+                Mana.BlackMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
                 "Add {B} to your mana pool for each storage counter removed this way",

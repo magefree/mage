@@ -111,7 +111,7 @@ class MarketFestivalTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool <i>(in addition to the mana the land produces)<i/>.";
+        return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool <i>(in addition to the mana the land produces)</i>.";
     }
 }
 
@@ -154,15 +154,15 @@ class MarketFestivalManaEffect extends ManaEffect {
                 }
 
                 if (choiceColor.getColor().isBlack()) {
-                    mana.addBlack();
+                    mana.increaseBlack();
                 } else if (choiceColor.getColor().isBlue()) {
-                    mana.addBlue();
+                    mana.increaseBlue();
                 } else if (choiceColor.getColor().isRed()) {
-                    mana.addRed();
+                    mana.increaseRed();
                 } else if (choiceColor.getColor().isGreen()) {
-                    mana.addGreen();
+                    mana.increaseGreen();
                 } else if (choiceColor.getColor().isWhite()) {
-                    mana.addWhite();
+                    mana.increaseWhite();
                 }
             }
             checkToFirePossibleEvents(mana, game, source);

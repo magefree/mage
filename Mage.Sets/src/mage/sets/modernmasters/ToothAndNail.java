@@ -103,7 +103,7 @@ class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
         TargetCardInHand target = new TargetCardInHand(0, 2, new FilterCreatureCard("creature cards"));
         if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             return controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
-                    Zone.BATTLEFIELD, source, game, true, false, false, null);
+                    Zone.BATTLEFIELD, source, game, false, false, false, null);
         }
         return false;
     }

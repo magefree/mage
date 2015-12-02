@@ -56,7 +56,7 @@ public class ElvesOfDeepShadow extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Add {B} to your mana pool. Elves of Deep Shadow deals 1 damage to you.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);
     }

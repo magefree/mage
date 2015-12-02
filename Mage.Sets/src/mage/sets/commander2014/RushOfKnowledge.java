@@ -28,15 +28,11 @@
 package mage.sets.commander2014;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -48,10 +44,10 @@ public class RushOfKnowledge extends CardImpl {
         super(ownerId, 123, "Rush of Knowledge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "C14";
 
-
         // Draw cards equal to the highest converted mana cost among permanents you control.
-        this.getSpellAbility().addEffect(new RushOfKnowledgeEffect());
-
+        DrawCardSourceControllerEffect effect = new DrawCardSourceControllerEffect(new HighestConvertedManaCostValue());
+        effect.setText("Draw cards equal to the highest converted mana cost among permanents you control");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public RushOfKnowledge(final RushOfKnowledge card) {
@@ -61,43 +57,5 @@ public class RushOfKnowledge extends CardImpl {
     @Override
     public RushOfKnowledge copy() {
         return new RushOfKnowledge(this);
-    }
-}
-
-class RushOfKnowledgeEffect extends OneShotEffect {
-
-    public RushOfKnowledgeEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Draw cards equal to the highest converted mana cost among permanents you control";
-    }
-
-    public RushOfKnowledgeEffect(final RushOfKnowledgeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RushOfKnowledgeEffect copy() {
-        return new RushOfKnowledgeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int highCMC = 0;
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-                if (permanent.getSpellAbility() != null) {
-                    int cmc = permanent.getSpellAbility().getManaCosts().convertedManaCost();
-                    if (cmc > highCMC) {
-                        highCMC = cmc;
-                    }
-                }
-            }
-            if (highCMC > 0) {
-                controller.drawCards(highCMC, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

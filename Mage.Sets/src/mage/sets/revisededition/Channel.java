@@ -103,7 +103,7 @@ class ChannelSpecialAction extends SpecialAction {
     ChannelSpecialAction() {
         super();
         this.addCost(new PayLifeCost(1));
-        this.addEffect(new BasicManaEffect(Mana.ColorlessMana));
+        this.addEffect(new BasicManaEffect(Mana.ColorlessMana(1)));
     }
 
     ChannelSpecialAction(final ChannelSpecialAction ability) {

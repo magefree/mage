@@ -132,19 +132,19 @@ class SarkhanUnbrokenAbility1 extends OneShotEffect {
 
             switch (manaChoice.getChoice()) {
                 case "White":
-                    mana.addWhite();
+                    mana.increaseWhite();
                     break;
                 case "Blue":
-                    mana.addBlue();
+                    mana.increaseBlue();
                     break;
                 case "Black":
-                    mana.addBlack();
+                    mana.increaseBlack();
                     break;
                 case "Red":
-                    mana.addRed();
+                    mana.increaseRed();
                     break;
                 case "Green":
-                    mana.addGreen();
+                    mana.increaseGreen();
                     break;
             }
 

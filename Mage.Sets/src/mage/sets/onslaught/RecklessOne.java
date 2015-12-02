@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class RecklessOne extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblins on the battlefield");
+    private static final FilterPermanent filter = new FilterPermanent("Goblins on the battlefield");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

@@ -65,6 +65,7 @@ public class ClockworkGnomes extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public ClockworkGnomes(final ClockworkGnomes card) {

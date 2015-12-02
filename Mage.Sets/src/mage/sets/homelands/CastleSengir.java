@@ -52,14 +52,14 @@ public class CastleSengir extends CardImpl {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add {B} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new GenericManaCost(1));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {2}, {tap}: Add {U} or {R} to your mana pool.
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana, new GenericManaCost(2));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new GenericManaCost(2));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

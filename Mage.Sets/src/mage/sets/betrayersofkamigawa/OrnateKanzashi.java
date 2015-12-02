@@ -79,6 +79,7 @@ public class OrnateKanzashi extends CardImpl {
     }
 
 }
+
 class OrnateKanzashiEffect extends OneShotEffect {
 
     public OrnateKanzashiEffect() {
@@ -98,14 +99,14 @@ class OrnateKanzashiEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());        
+        MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && opponent != null) {
             if (opponent.getLibrary().size() > 0) {
                 Library library = opponent.getLibrary();
                 Card card = library.getFromTop(game);
                 if (card != null) {
                     opponent.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                    ContinuousEffect effect = new OrnateKanzashiCastFromExileEffect(card.getId());
+                    ContinuousEffect effect = new OrnateKanzashiCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
                 }
@@ -118,7 +119,7 @@ class OrnateKanzashiEffect extends OneShotEffect {
 
 class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
 
-    public OrnateKanzashiCastFromExileEffect(UUID cardId) {
+    public OrnateKanzashiCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play that card from exile this turn";
     }
@@ -139,6 +140,7 @@ class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {        
-        return source.getControllerId().equals(affectedControllerId) && objectId.equals(getTargetPointer().getFirst(game, source));
+        return source.getControllerId().equals(affectedControllerId)
+                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

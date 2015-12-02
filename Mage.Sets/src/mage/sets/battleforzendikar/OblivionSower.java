@@ -111,7 +111,7 @@ class OblivionSowerEffect extends OneShotEffect {
                         + targetPlayer.getName() + " to put into play under your control");
                 TargetCard targetCards = new TargetCard(0, exiledLands.size(), Zone.EXILED, filterToPlay);
                 if (controller.chooseTarget(outcome, exiledLands, targetCards, source, game)) {
-                    controller.moveCards(new CardsImpl(targetCards.getTargets()), null, Zone.BATTLEFIELD, source, game);
+                    controller.moveCards(new CardsImpl(targetCards.getTargets()), Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

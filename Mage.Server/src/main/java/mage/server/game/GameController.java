@@ -825,8 +825,11 @@ public class GameController implements GameCallback {
             @Override
             public void execute(UUID playerId) {
                 if (cards != null) {
-                    Zone targetZone = (Zone) options.get("targetZone");
-                    boolean showFaceDown = targetZone != null && targetZone.equals(Zone.PICK);
+                    // Zone targetZone = (Zone) options.get("targetZone");
+                    // Are there really situations where a player selects from a list of face down cards?
+                    // So always show face up for selection
+                    // boolean showFaceDown = targetZone != null && targetZone.equals(Zone.PICK);
+                    boolean showFaceDown = true;
                     getGameSession(playerId).target(question, new CardsView(game, cards.getCards(game), showFaceDown), targets, required, options);
                 } else if (perms != null) {
                     CardsView permsView = new CardsView();

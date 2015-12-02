@@ -28,16 +28,11 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -51,7 +46,7 @@ public class GitaxianProbe extends CardImpl {
         this.expansionSetCode = "NPH";
 
         // Look at target player's hand.
-        this.getSpellAbility().addEffect(new GitaxianProbeEffect());
+        this.getSpellAbility().addEffect(new LookAtTargetPlayerHandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
@@ -65,35 +60,6 @@ public class GitaxianProbe extends CardImpl {
     @Override
     public GitaxianProbe copy() {
         return new GitaxianProbe(this);
-    }
-
-}
-
-class GitaxianProbeEffect extends OneShotEffect {
-
-    GitaxianProbeEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Look at target player's hand";
-    }
-
-    GitaxianProbeEffect(final GitaxianProbeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player != null && controller != null && sourceObject != null) {
-            controller.lookAtCards(sourceObject.getIdName() + " (" + player.getName() + ")", player.getHand(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public GitaxianProbeEffect copy() {
-        return new GitaxianProbeEffect(this);
     }
 
 }

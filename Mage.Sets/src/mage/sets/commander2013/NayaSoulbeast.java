@@ -131,7 +131,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
     public NayaSoulbeastReplacementEffect() {
-        super(Duration.OneUse, Outcome.BoostCreature, true);
+        super(Duration.OneUse, Outcome.BoostCreature);
         staticText = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total converted mana cost of all cards revealed this way";
     }
 

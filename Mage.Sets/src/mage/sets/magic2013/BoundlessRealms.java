@@ -28,21 +28,20 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
@@ -55,7 +54,6 @@ public class BoundlessRealms extends CardImpl {
     public BoundlessRealms(UUID ownerId) {
         super(ownerId, 162, "Boundless Realms", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{G}");
         this.expansionSetCode = "M13";
-
 
         // Search your library for up to X basic land cards, where X is the number of lands you control, and put them onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new BoundlessRealmsEffect());
@@ -89,32 +87,19 @@ class BoundlessRealmsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         FilterLandPermanent filter = new FilterLandPermanent();
         filter.add(new ControllerPredicate(TargetController.YOU));
 
         int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
         TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterBasicLandCard());
-
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
+        if (controller.searchLibrary(target, game)) {
+            controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
-
-        if (player.searchLibrary(target, game)) {
-            for (UUID cardId : target.getTargets()) {
-                Card card = player.getLibrary().getCard(cardId, game);
-                if (card != null) {
-                    if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId())) {
-                        Permanent permanent = game.getPermanent(card.getId());
-                        if (permanent != null) {
-                            permanent.setTapped(true);
-                        }
-                    }
-                }
-            }
-        }
-
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return true;
     }
 }

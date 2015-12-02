@@ -61,7 +61,7 @@ public class SkitteringSkirge extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // When you cast a creature spell, sacrifice Skittering Skirge.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), filter, false));
     }
 
     public SkitteringSkirge(final SkitteringSkirge card) {

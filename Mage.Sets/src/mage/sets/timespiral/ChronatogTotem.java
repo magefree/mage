@@ -27,35 +27,29 @@
  */
 package mage.sets.timespiral;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.EffectType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -74,14 +68,13 @@ public class ChronatogTotem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ChronatogTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
         
         // {0}: Chronatog Totem gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if Chronatog Totem is a creature.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ChronatogTotemAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(3, 3, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{0}"),
-                new ChronatogTotemCondition(),
-                "{0}: {this} gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if {this} is a creature");
+                new ChronatogTotemCondition());
         ability.addEffect(new SkipNextTurnSourceEffect());
-        this.addAbility(ability, new ActivatedAbilityUsedThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     public ChronatogTotem(final ChronatogTotem card) {
@@ -91,6 +84,52 @@ public class ChronatogTotem extends CardImpl {
     @Override
     public ChronatogTotem copy() {
         return new ChronatogTotem(this);
+    }
+}
+
+class ChronatogTotemAbility extends LimitedTimesPerTurnActivatedAbility {
+
+    private static final Effects emptyEffects = new Effects();
+
+    private final Condition condition;
+
+    public ChronatogTotemAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
+        super(zone, effect, cost);
+        this.condition = condition;
+    }
+
+    public ChronatogTotemAbility(ChronatogTotemAbility ability) {
+        super(ability);
+        this.condition = ability.condition;
+    }
+
+    @Override
+    public Effects getEffects(Game game, EffectType effectType) {
+        if (!condition.apply(game, this)) {
+            return emptyEffects;
+        }
+        return super.getEffects(game, effectType);
+    }
+
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        if (!condition.apply(game, this)) {
+            return false;
+        }
+        return super.canActivate(playerId, game);
+    }
+
+    @Override
+    public ChronatogTotemAbility copy() {
+        return new ChronatogTotemAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        StringBuilder sb = new StringBuilder(super.getRule());
+        sb.deleteCharAt(sb.length() - 1); // remove last '.'
+        sb.append(" and only if ").append(condition.toString()).append(".");
+        return sb.toString();
     }
 }
 
@@ -111,60 +150,15 @@ class ChronatogTotemCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ActivatedAbilityUsedThisTurnWatcher watcher = (ActivatedAbilityUsedThisTurnWatcher) game.getState().getWatchers().get("ActivatedAbilityUsedThisTurn");
-        if (!watcher.getActivatedThisTurn().contains(source.getOriginalId())) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                return permanent.getCardType().contains(CardType.CREATURE);
-            }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return permanent.getCardType().contains(CardType.CREATURE);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "once each turn and only if an opponent controls a flying creature";
-    }
-}
-
-class ActivatedAbilityUsedThisTurnWatcher extends Watcher {
-
-    public Set<UUID> activatedThisTurn = new HashSet<>(0);
-
-    ActivatedAbilityUsedThisTurnWatcher() {
-        super("ActivatedAbilityUsedThisTurn", WatcherScope.GAME);
-    }
-
-    ActivatedAbilityUsedThisTurnWatcher(final ActivatedAbilityUsedThisTurnWatcher watcher) {
-        super(watcher);
-        this.activatedThisTurn.addAll(watcher.activatedThisTurn);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.ACTIVATED_ABILITY) {
-            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-            if (stackObject != null) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
-                if (stackAbility != null && stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
-                    this.activatedThisTurn.add(stackAbility.getOriginalId());
-                }
-            }
-        }
-    }
-
-    public Set<UUID> getActivatedThisTurn() {
-        return Collections.unmodifiableSet(this.activatedThisTurn);
-    }
-
-    @Override
-    public ActivatedAbilityUsedThisTurnWatcher copy() {
-        return new ActivatedAbilityUsedThisTurnWatcher(this);
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        this.activatedThisTurn.clear();
+        return "{this} is a creature";
     }
 }

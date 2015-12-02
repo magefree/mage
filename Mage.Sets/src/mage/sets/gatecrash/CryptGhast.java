@@ -83,7 +83,7 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility {
     }
 
     public CryptGhastTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana), false);
+        super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(1)), false);
         this.usesStack = false;
     }
 

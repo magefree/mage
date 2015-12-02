@@ -114,4 +114,25 @@ public class CryptoplasmTest extends CardTestPlayerBase {
         assertLife(playerB, 16);
         assertLife(playerA, 25);
     }
+
+    @Test
+    public void testTransformMultipleTime() {
+        // At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Cryptoplasm", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // 6/4
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm", 1); // 6/4
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptoplasm");
+        addTarget(playerA, "Silvercoat Lion");
+        addTarget(playerA, "Craw Wurm");
+        setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Craw Wurm", 1);
+    }
 }

@@ -44,6 +44,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -141,7 +142,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
                         toughness += targetCreature.getToughness().getValue();
                     }
                 }
-                ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom);
+                ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
                 game.addEffect(effect, source);
             }
         }

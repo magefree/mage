@@ -36,15 +36,10 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class Starter1999 extends ExpansionSet {
 
     private static final Starter1999 fINSTANCE = new Starter1999();
 
-    /**
-     *
-     * @return
-     */
     public static Starter1999 getInstance() {
         return fINSTANCE;
     }
@@ -54,8 +49,8 @@ public class Starter1999 extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterLands = 2;
+        this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;

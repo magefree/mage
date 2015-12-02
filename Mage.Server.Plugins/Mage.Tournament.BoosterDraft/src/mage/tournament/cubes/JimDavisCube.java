@@ -91,10 +91,12 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Brainstorm", ""));
         cubeCards.add(new CardIdentity("Breeding Pool", ""));
         cubeCards.add(new CardIdentity("Brimaz, King of Oreskos", ""));
+        cubeCards.add(new CardIdentity("Bring to Light", ""));
         cubeCards.add(new CardIdentity("Broodmate Dragon", ""));
         cubeCards.add(new CardIdentity("Cabal Ritual", ""));
         cubeCards.add(new CardIdentity("Careful Study", ""));
         cubeCards.add(new CardIdentity("Carrion Feeder", ""));
+        cubeCards.add(new CardIdentity("Catacomb Sifter", ""));
         cubeCards.add(new CardIdentity("Celestial Colonnade", ""));
         cubeCards.add(new CardIdentity("Chained to the Rocks", ""));
         cubeCards.add(new CardIdentity("Chain Lightning", ""));
@@ -141,6 +143,7 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Dismember", ""));
         cubeCards.add(new CardIdentity("Dragon Hunter", ""));
         cubeCards.add(new CardIdentity("Dragonlord Atarka", ""));
+        cubeCards.add(new CardIdentity("Drana, Liberator of Malakir", ""));
         cubeCards.add(new CardIdentity("Dream Halls", ""));
         cubeCards.add(new CardIdentity("Dryad Militant", ""));
         cubeCards.add(new CardIdentity("Dust Bowl", ""));
@@ -148,7 +151,6 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Edric, Spymaster of Trest", ""));
         cubeCards.add(new CardIdentity("Eidolon of the Great Revel", ""));
         cubeCards.add(new CardIdentity("Electrolyze", ""));
-        cubeCards.add(new CardIdentity("Elspeth, Knight-Errant", ""));
         cubeCards.add(new CardIdentity("Emrakul, the Aeons Torn", ""));
         cubeCards.add(new CardIdentity("Engineered Explosives", ""));
         cubeCards.add(new CardIdentity("Enlightened Tutor", ""));
@@ -194,6 +196,7 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Genesis Hydra", ""));
         cubeCards.add(new CardIdentity("Ghitu Encampment", ""));
         cubeCards.add(new CardIdentity("Ghor-Clan Rampager", ""));
+        cubeCards.add(new CardIdentity("Gideon, Ally of Zendikar", ""));
         cubeCards.add(new CardIdentity("Gifts Ungiven", ""));
         cubeCards.add(new CardIdentity("Gilded Lotus", ""));
         cubeCards.add(new CardIdentity("Gitaxian Probe", ""));
@@ -214,7 +217,6 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Grim Lavamancer", ""));
         cubeCards.add(new CardIdentity("Grim Monolith", ""));
         cubeCards.add(new CardIdentity("Griselbrand", ""));
-        cubeCards.add(new CardIdentity("Grisly Salvage", ""));
         cubeCards.add(new CardIdentity("Gush", ""));
         cubeCards.add(new CardIdentity("Hallowed Fountain", ""));
         cubeCards.add(new CardIdentity("Hallowed Spiritkeeper", ""));
@@ -231,7 +233,6 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Hooting Mandrills", ""));
         cubeCards.add(new CardIdentity("Horizon Canopy", ""));
         cubeCards.add(new CardIdentity("Hymn to Tourach", ""));
-        cubeCards.add(new CardIdentity("Icefeather Aven", ""));
         cubeCards.add(new CardIdentity("Imperial Recruiter", ""));
         cubeCards.add(new CardIdentity("Imperial Seal", ""));
         cubeCards.add(new CardIdentity("Inferno Titan", ""));
@@ -273,6 +274,7 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Lotus Petal", ""));
         cubeCards.add(new CardIdentity("Maelstrom Pulse", ""));
         cubeCards.add(new CardIdentity("Magma Jet", ""));
+        cubeCards.add(new CardIdentity("Makindi Sliderunner", ""));
         cubeCards.add(new CardIdentity("Mana Confluence", ""));
         cubeCards.add(new CardIdentity("Mana Leak", ""));
         cubeCards.add(new CardIdentity("Mardu Woe-Reaper", ""));
@@ -306,7 +308,6 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Mystical Tutor", ""));
         cubeCards.add(new CardIdentity("Necropotence", ""));
         cubeCards.add(new CardIdentity("Nether Void", ""));
-        cubeCards.add(new CardIdentity("Nimble Mongoose", ""));
         cubeCards.add(new CardIdentity("Noble Hierarch", ""));
         cubeCards.add(new CardIdentity("Oath of Druids", ""));
         cubeCards.add(new CardIdentity("Oblivion Ring", ""));
@@ -319,6 +320,7 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Outpost Siege", ""));
         cubeCards.add(new CardIdentity("Overgrown Tomb", ""));
         cubeCards.add(new CardIdentity("Pack Rat", ""));
+        cubeCards.add(new CardIdentity("Painful Truths", ""));
         cubeCards.add(new CardIdentity("Path to Exile", ""));
         cubeCards.add(new CardIdentity("Pernicious Deed", ""));
         cubeCards.add(new CardIdentity("Phantasmal Image", ""));
@@ -361,15 +363,14 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Rofellos, Llanowar Emissary", ""));
         cubeCards.add(new CardIdentity("Rude Awakening", ""));
         cubeCards.add(new CardIdentity("Sacred Foundry", ""));
-        cubeCards.add(new CardIdentity("Sagu Mauler", ""));
         cubeCards.add(new CardIdentity("Sakura-Tribe Elder", ""));
-        cubeCards.add(new CardIdentity("Sarcomancy", ""));
         cubeCards.add(new CardIdentity("Sarkhan, the Dragonspeaker", ""));
         cubeCards.add(new CardIdentity("Savannah", ""));
         cubeCards.add(new CardIdentity("Scalding Tarn", ""));
         cubeCards.add(new CardIdentity("Scavenging Ooze", ""));
         cubeCards.add(new CardIdentity("Scroll Rack", ""));
         cubeCards.add(new CardIdentity("Scrubland", ""));
+        cubeCards.add(new CardIdentity("Scythe Leopard", ""));
         cubeCards.add(new CardIdentity("Seachrome Coast", ""));
         cubeCards.add(new CardIdentity("Searing Blaze", ""));
         cubeCards.add(new CardIdentity("Seat of the Synod", ""));
@@ -377,15 +378,16 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Seething Song", ""));
         cubeCards.add(new CardIdentity("Sensei's Divining Top", ""));
         cubeCards.add(new CardIdentity("Shadowmage Infiltrator", ""));
+        cubeCards.add(new CardIdentity("Shambling Vent", ""));
         cubeCards.add(new CardIdentity("Shardless Agent", ""));
         cubeCards.add(new CardIdentity("Shelldock Isle", ""));
         cubeCards.add(new CardIdentity("Show and Tell", ""));
         cubeCards.add(new CardIdentity("Shrapnel Blast", ""));
-        cubeCards.add(new CardIdentity("Shriekmaw", ""));
         cubeCards.add(new CardIdentity("Siege Rhino", ""));
         cubeCards.add(new CardIdentity("Signal Pest", ""));
         cubeCards.add(new CardIdentity("Simic Growth Chamber", ""));
         cubeCards.add(new CardIdentity("Simic Signet", ""));
+        cubeCards.add(new CardIdentity("Simic Sky Swallower", ""));
         cubeCards.add(new CardIdentity("Sinkhole", ""));
         cubeCards.add(new CardIdentity("Skullclamp", ""));
         cubeCards.add(new CardIdentity("Skyshroud Elite", ""));
@@ -433,7 +435,6 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Temple Garden", ""));
         cubeCards.add(new CardIdentity("Temple of Epiphany", ""));
         cubeCards.add(new CardIdentity("Temple of Malice", ""));
-        cubeCards.add(new CardIdentity("Temple of Silence", ""));
         cubeCards.add(new CardIdentity("Tendrils of Agony", ""));
         cubeCards.add(new CardIdentity("Terastodon", ""));
         cubeCards.add(new CardIdentity("Terminate", ""));
@@ -447,7 +448,6 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Thoughtseize", ""));
         cubeCards.add(new CardIdentity("Thragtusk", ""));
         cubeCards.add(new CardIdentity("Thran Dynamo", ""));
-        cubeCards.add(new CardIdentity("Thundermaw Hellkite", ""));
         cubeCards.add(new CardIdentity("Tidehollow Sculler", ""));
         cubeCards.add(new CardIdentity("Time Spiral", ""));
         cubeCards.add(new CardIdentity("Timetwister", ""));
@@ -506,7 +506,6 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Xathrid Necromancer", ""));
         cubeCards.add(new CardIdentity("Yawgmoth's Will", ""));
         cubeCards.add(new CardIdentity("Young Pyromancer", ""));
-        cubeCards.add(new CardIdentity("Zombie Cutthroat", ""));
         cubeCards.add(new CardIdentity("Zurgo Bellstriker", ""));
     }
 }

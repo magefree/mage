@@ -34,7 +34,9 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -42,12 +44,18 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class BrightstoneRitual extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("Goblin on the battlefield");
+
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
+    }
+
     public BrightstoneRitual(UUID ownerId) {
         super(ownerId, 191, "Brightstone Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ONS";
 
         // Add {R} to your mana pool for each Goblin on the battlefield.
-        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("Goblin","Goblin on the battlefield"))));
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
     public BrightstoneRitual(final BrightstoneRitual card) {

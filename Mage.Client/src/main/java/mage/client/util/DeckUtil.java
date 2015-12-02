@@ -43,7 +43,7 @@ import org.apache.log4j.Logger;
  */
 public class DeckUtil {
 
-    private static final transient Logger log = Logger.getLogger(DeckUtil.class);
+    private static final Logger log = Logger.getLogger(DeckUtil.class);
 
     private DeckUtil() {
     }

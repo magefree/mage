@@ -63,6 +63,7 @@ public class NotOfThisWorldTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
+        assertHandCount(playerB, "Not of This World", 0);
         assertGraveyardCount(playerB, "Not of This World", 1);
         assertPermanentCount(playerB, "Ruhan of the Fomori", 1);
 

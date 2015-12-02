@@ -57,7 +57,7 @@ public class AEtherling extends CardImpl {
         // {U}: Exile AEtherling. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(true), new ManaCostsImpl("{U}")));
         // {U}: AEtherling can't be blocked this turn
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{U}")));
         // {1}: AEtherling gets +1/-1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
         // {1}: AEtherling gets -1/+1 until end of turn

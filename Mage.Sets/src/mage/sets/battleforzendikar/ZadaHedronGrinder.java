@@ -30,6 +30,7 @@ package mage.sets.battleforzendikar;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -102,9 +103,8 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
                 boolean targetsSource = false;
-                for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
-                    spell.getSpellAbility().getModes().setActiveMode(modeId);
-                    for (Target target : spell.getSpellAbility().getTargets()) {
+                for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
+                    for (Target target : mode.getTargets()) {
                         for (UUID targetId : target.getTargets()) {
                             if (targetId.equals(getSourceId())) {
                                 targetsSource = true;
@@ -161,9 +161,8 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
         if (spell != null && controller != null) {
             Target usedTarget = null;
             setUsedTarget:
-            for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
-                spell.getSpellAbility().getModes().setActiveMode(modeId);
-                for (Target target : spell.getSpellAbility().getTargets()) {
+            for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
+                for (Target target : mode.getTargets()) {
                     if (target.getFirstTarget().equals(source.getSourceId())) {
                         usedTarget = target.copy();
                         usedTarget.clearChosen();
@@ -178,13 +177,14 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
                 if (!creature.getId().equals(source.getSourceId()) && usedTarget.canTarget(source.getControllerId(), creature.getId(), source, game)) {
                     Spell copy = spell.copySpell();
                     setTarget:
-                    for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
-                        copy.getSpellAbility().getModes().setActiveMode(modeId);
-                        for (Target target : copy.getSpellAbility().getTargets()) {
-                            if (target.getClass().equals(usedTarget.getClass()) && target.getMessage().equals(usedTarget.getMessage())) {
-                                target.clearChosen();
-                                target.add(creature.getId(), game);
-                                break setTarget;
+                    for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
+                        for (Target target : mode.getTargets()) {
+                            if (target.getClass().equals(usedTarget.getClass())) {
+                                target.clearChosen(); // For targets with Max > 1 we need to clear before the text is comapred
+                                if (target.getMessage().equals(usedTarget.getMessage())) {
+                                    target.add(creature.getId(), game);
+                                    break setTarget;
+                                }
                             }
                         }
                     }

@@ -27,26 +27,22 @@
  */
 package mage.sets.magic2012;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.Random;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.Rarity;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.PlayerList;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.Random;
-import java.util.UUID;
 
 /**
  *
@@ -57,7 +53,6 @@ public class Scrambleverse extends CardImpl {
     public Scrambleverse(UUID ownerId) {
         super(ownerId, 153, "Scrambleverse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
         this.expansionSetCode = "M12";
-
 
         // For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents.
         this.getSpellAbility().addEffect(new ScrambleverseEffect());
@@ -87,15 +82,13 @@ class ScrambleverseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Random random = new Random();
-        PlayerList players = game.getPlayerList();
+        PlayerList players = game.getState().getPlayersInRange(source.getControllerId(), game);
         int count = players.size();
-        if (count > 1) {
-            FilterNonlandPermanent nonLand = new FilterNonlandPermanent();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(nonLand, source.getControllerId(), source.getSourceId(), game)) {
-                ContinuousEffect effect = new ScrambleverseControlEffect(players.get(random.nextInt(count)));
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                game.addEffect(effect, source);
-            }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, players.get(random.nextInt(count)));
+            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            game.addEffect(effect, source);
+            permanent.untap(game);
         }
         return true;
     }
@@ -103,39 +96,5 @@ class ScrambleverseEffect extends OneShotEffect {
     @Override
     public ScrambleverseEffect copy() {
         return new ScrambleverseEffect(this);
-    }
-}
-
-class ScrambleverseControlEffect extends ContinuousEffectImpl {
-
-    private UUID controllerId;
-
-    public ScrambleverseControlEffect(UUID controllerId) {
-        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.controllerId = controllerId;
-    }
-
-    public ScrambleverseControlEffect(final ScrambleverseControlEffect effect) {
-        super(effect);
-        this.controllerId = effect.controllerId;
-    }
-
-    @Override
-    public ScrambleverseControlEffect copy() {
-        return new ScrambleverseControlEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null && controllerId != null) {
-            return permanent.changeControllerId(controllerId, game);
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of {this}";
     }
 }

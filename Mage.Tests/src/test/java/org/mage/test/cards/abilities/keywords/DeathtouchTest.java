@@ -86,7 +86,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marath, Will of the Wild");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Marath, Will of the Wild");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Marath, Will of the Wild", "Marath, Will of the Wild", StackClause.WHILE_NOT_ON_STACK);
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},Remove X +1/+1 counters from Marath", "Archangel of Thune");
         setChoice(playerA, "X=3");
@@ -123,6 +123,9 @@ public class DeathtouchTest extends CardTestPlayerBase {
          */
         addCard(Zone.HAND, playerA, "Marath, Will of the Wild", 1);
 
+        // Vigilance
+        // Other creatures you control get +2/+2.
+        // Creatures your opponents control get -2/-2.
         addCard(Zone.BATTLEFIELD, playerB, "Elesh Norn, Grand Cenobite");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marath, Will of the Wild");

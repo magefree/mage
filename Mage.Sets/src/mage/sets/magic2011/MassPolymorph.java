@@ -58,6 +58,8 @@ public class MassPolymorph extends CardImpl {
         super(ownerId, 64, "Mass Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "M11";
 
+        // Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards.
+        // Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.
         this.getSpellAbility().addEffect(new MassPolymorphEffect());
     }
 
@@ -93,7 +95,7 @@ class MassPolymorphEffect extends OneShotEffect {
             Set<Card> creaturesToExile = new HashSet<>();
             creaturesToExile.addAll(creatures);
             count = creatures.size();
-            controller.moveCards(creaturesToExile, null, Zone.HAND, source, game);
+            controller.moveCards(creaturesToExile, Zone.HAND, source, game);
 
             Cards revealed = new CardsImpl();
             Set<Card> creatureCards = new LinkedHashSet<>();

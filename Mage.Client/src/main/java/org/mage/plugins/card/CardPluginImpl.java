@@ -81,6 +81,7 @@ public class CardPluginImpl implements CardPlugin {
 
     @PluginLoaded
     public void newPlugin(CardPlugin plugin) {
+        log.info(plugin.toString() + " has been loaded.");
     }
 
     @Override

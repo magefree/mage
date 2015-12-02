@@ -22,6 +22,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
      */
     @Test
     public void testPermanentControlEffect() {
+        // When Smelt-Ward Gatekeepers enters the battlefield, if you control two or more Gates, gain control of target creature an opponent controls until end of turn. Untap that creature. That creature gains haste until end of turn.
         addCard(Zone.HAND, playerA, "Smelt-Ward Gatekeepers", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Boros Guildgate", 2);

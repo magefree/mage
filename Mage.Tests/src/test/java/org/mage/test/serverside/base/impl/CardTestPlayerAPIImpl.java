@@ -12,6 +12,7 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -141,7 +142,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     protected TestPlayer createPlayer(Game game, TestPlayer player, String name, String deckName) throws GameException {
-        player = createNewPlayer(name);
+        player = createNewPlayer(name, game.getRangeOfInfluence());
         player.setTestMode(true);
         logger.debug("Loading deck...");
         Deck deck = Deck.load(DeckImporterUtil.importDeck(deckName), false, false);
@@ -187,8 +188,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     }
 
-    protected TestPlayer createNewPlayer(String playerName) {
-        return createPlayer(playerName);
+    protected TestPlayer createNewPlayer(String playerName, RangeOfInfluence rangeOfInfluence) {
+        return createPlayer(playerName, rangeOfInfluence);
     }
 
     protected Player getPlayerFromName(String playerName, String line) {
@@ -614,14 +615,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count Expected count.
      */
     public void assertCounterCount(String cardName, CounterType type, int count) throws AssertionError {
+        this.assertCounterCount(null, cardName, type, count);
+    }
+
+    public void assertCounterCount(Player player, String cardName, CounterType type, int count) throws AssertionError {
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getName().equals(cardName)) {
+            if (permanent.getName().equals(cardName) && (player == null || permanent.getControllerId().equals(player.getId()))) {
                 found = permanent;
                 break;
             }
         }
-        Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
+        Assert.assertNotNull("There is no such permanent " + (player == null ? "" : "for player " + player.getName()) + " on the battlefield, cardName=" + cardName, found);
         Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters().getCount(type));
     }
 
@@ -862,6 +867,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Assert card count in player's library.
+     *
+     * @param player {@link Player} who's library should be counted.
+     * @param cardName Name of the cards that should be counted.
+     * @param count Expected count.
+     */
+    public void assertLibraryCount(Player player, String cardName, int count) throws AssertionError {
+        int actualCount = 0;
+        for (Card card : player.getLibrary().getCards(currentGame)) {
+            if (card.getName().equals(cardName)) {
+                actualCount++;
+            }
+        }
+
+        Assert.assertEquals("(Library " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
+    }
+
+    /**
      * Asserts added actions count. Usefull to make sure that all actions were
      * executed.
      *
@@ -990,6 +1013,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:" + ability + "$target=" + targetName);
     }
 
+    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
+        this.activateAbility(turnNum, step, player, ability, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
+    }
+
     /**
      *
      * @param turnNum
@@ -1000,13 +1027,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * NO_TARGET
      * @param spellOnStack
      */
-    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
+    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack, StackClause clause) {
         StringBuilder sb = new StringBuilder("activate:").append(ability);
         if (targetName != null && !targetName.isEmpty()) {
             sb.append("$target=").append(targetName);
         }
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
-            sb.append("$spellOnStack=").append(spellOnStack);
+            sb.append("$").append(StackClause.WHILE_ON_STACK.equals(clause) ? "" : "!").append("spellOnStack=").append(spellOnStack);
         }
         player.addAction(turnNum, step, sb.toString());
     }

@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  */
 public class SternMentor extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{tap}: Target player puts the top two cards of his or her library into his or her graveyard.\"";
+    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{T}: Target player puts the top two cards of his or her library into his or her graveyard.\"";
 
     public SternMentor(UUID ownerId) {
         super(ownerId, 77, "Stern Mentor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -61,7 +61,7 @@ public class SternMentor extends CardImpl {
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Stern Mentor is paired with another creature, each of those creatures has "{t}: Target player puts the top two cards of his or her library into his or her graveyard."
+        // As long as Stern Mentor is paired with another creature, each of those creatures has "{T}: Target player puts the top two cards of his or her library into his or her graveyard."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));

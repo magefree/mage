@@ -70,7 +70,7 @@ public class SandSilos extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
         // {tap}, Remove any number of storage counters from Sand Silos: Add {U} to your mana pool for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
-                Mana.BlueMana,
+                Mana.BlueMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
                 "Add {U} to your mana pool for each storage counter removed this way",

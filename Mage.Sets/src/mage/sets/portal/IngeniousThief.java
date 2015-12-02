@@ -29,17 +29,13 @@ package mage.sets.portal;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -60,7 +56,7 @@ public class IngeniousThief extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Ingenious Thief enters the battlefield, look at target player's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new IngeniousThiefEffect(), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LookAtTargetPlayerHandEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -73,33 +69,4 @@ public class IngeniousThief extends CardImpl {
     public IngeniousThief copy() {
         return new IngeniousThief(this);
     }
-}
-
-class IngeniousThiefEffect extends OneShotEffect {
-
-    IngeniousThiefEffect() {
-        super(Outcome.Benefit);
-        staticText = "Look at target player's hand";
-    }
-
-    IngeniousThiefEffect(final IngeniousThiefEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player != null && controller != null && sourceObject != null) {
-            controller.lookAtCards(sourceObject.getIdName() + " (" + player.getName() + ")", player.getHand(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public IngeniousThiefEffect copy() {
-        return new IngeniousThiefEffect(this);
-    }
-
 }

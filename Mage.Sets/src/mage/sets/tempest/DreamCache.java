@@ -30,12 +30,13 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -49,7 +50,6 @@ public class DreamCache extends CardImpl {
     public DreamCache(UUID ownerId) {
         super(ownerId, 59, "Dream Cache", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "TMP";
-
 
         // Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.
         this.getSpellAbility().addEffect(new DreamCacheEffect());
@@ -71,7 +71,7 @@ class DreamCacheEffect extends OneShotEffect {
         super(Outcome.DrawCard);
         this.staticText = "Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.";
     }
-    
+
     public DreamCacheEffect(final DreamCacheEffect effect) {
         super(effect);
     }
@@ -80,33 +80,26 @@ class DreamCacheEffect extends OneShotEffect {
     public DreamCacheEffect copy() {
         return new DreamCacheEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(3, game);
-            
-            boolean putOnTop = player.chooseUse(Outcome.Neutral, "Put cards on top?", source, game);
-            putInLibrary(player, source, game, putOnTop);
-            putInLibrary(player, source, game, putOnTop);
-            
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.drawCards(3, game);
+            boolean putOnTop = controller.chooseUse(Outcome.Neutral, "Put cards on top?", source, game);
+            TargetCardInHand target = new TargetCardInHand(2, 2, new FilterCard());
+            controller.chooseTarget(Outcome.Detriment, target, source, game);
+            Cards cardsToLibrary = new CardsImpl(target.getTargets());
+            if (!cardsToLibrary.isEmpty()) {
+                if (putOnTop) {
+                    controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
+                } else {
+                    controller.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
+                }
+            }
             return true;
         }
         return false;
     }
-    
-    private boolean putInLibrary(Player player, Ability source, Game game, boolean putOnTop) {
-        if (player.getHand().size() > 0) {
-            TargetCardInHand target = new TargetCardInHand();
-            player.chooseTarget(Outcome.Detriment, target, source, game);
-            Card card = player.getHand().get(target.getFirstTarget(), game);
-            if (card != null) {
-                player.getHand().remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, putOnTop);
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

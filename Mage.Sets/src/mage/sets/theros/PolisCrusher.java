@@ -64,6 +64,8 @@ public class PolisCrusher extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
+    private final UUID originalId;
+
     public PolisCrusher(UUID ownerId) {
         super(ownerId, 198, "Polis Crusher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
         this.expansionSetCode = "THS";
@@ -83,16 +85,18 @@ public class PolisCrusher extends CardImpl {
                 new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true),
                 MonstrousCondition.getInstance(),
                 "Whenever {this} deals combat damage to a player, if {this} is monstrous, destroy target enchantment that player controls.");
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     public PolisCrusher(final PolisCrusher card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof ConditionalTriggeredAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof DestroyTargetEffect) {
                     Player attackedPlayer = game.getPlayer(effect.getTargetPointer().getFirst(game, ability));

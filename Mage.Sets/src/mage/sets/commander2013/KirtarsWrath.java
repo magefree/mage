@@ -59,7 +59,7 @@ public class KirtarsWrath extends CardImpl {
                 new KirtarsWrathEffect(),
                 new DestroyAllEffect(new FilterCreaturePermanent("all creatures"), true),
                 new CardsInControllerGraveCondition(7),
-                "Destroy all creatures. They can't be regenerated.<br/><br/><i>Threshold<i/> - If seven or more cards are in your graveyard, instead destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated"));
+                "Destroy all creatures. They can't be regenerated.<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, instead destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated"));
 
     }
 

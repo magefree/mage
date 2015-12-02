@@ -192,7 +192,7 @@ class BrainMaggotReturnExiledCardEffect extends OneShotEffect {
             ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (exile != null && sourcePermanent != null) {
-                controller.moveCards(exile, null, Zone.HAND, source, game);
+                controller.moveCards(exile, Zone.HAND, source, game);
                 return true;
             }
         }

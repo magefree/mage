@@ -28,10 +28,8 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -41,9 +39,7 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.target.TargetSpell;
 
 /**
@@ -97,25 +93,9 @@ class DesertionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID objectId = source.getFirstTarget();
-        UUID sourceId = source.getSourceId();
-
-        StackObject stackObject = game.getStack().getStackObject(objectId);
-        if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-            if (stackObject instanceof Spell) {
-                game.rememberLKI(objectId, Zone.STACK, (Spell) stackObject);
-                game.getStack().remove(stackObject);
-                if (!((Spell) stackObject).isCopiedSpell() && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game)) {
-                    MageObject card = game.getObject(stackObject.getSourceId());
-                    if (card instanceof Card) {
-                        ((Card) card).putOntoBattlefield(game, Zone.STACK, source.getSourceId(), source.getControllerId());
-                    }
-                } else {
-                    stackObject.counter(sourceId, game);
-                }
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
-                return true;
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.BATTLEFIELD, false, false);
         }
         return false;
     }

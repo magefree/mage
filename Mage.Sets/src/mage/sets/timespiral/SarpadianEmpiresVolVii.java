@@ -46,6 +46,7 @@ import mage.game.Game;
 import mage.game.permanent.token.CitizenToken;
 import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.SaprolingToken;
+import mage.game.permanent.token.ThrullToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -161,17 +162,6 @@ class CamaridToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add("Camarid");
         color.setBlue(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-}
-
-class ThrullToken extends Token {
-    public ThrullToken() {
-        super("Thrull", "1/1 black Thrull creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Thrull");
-        color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

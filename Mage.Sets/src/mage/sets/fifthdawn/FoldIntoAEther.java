@@ -28,14 +28,14 @@
 package mage.sets.fifthdawn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -52,7 +52,6 @@ public class FoldIntoAEther extends CardImpl {
     public FoldIntoAEther(UUID ownerId) {
         super(ownerId, 31, "Fold into AEther", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "5DN";
-
 
         // Counter target spell. If that spell is countered this way, its controller may put a creature card from his or her hand onto the battlefield.
         this.getSpellAbility().addEffect(new FoldIntoAEtherEffect());
@@ -87,19 +86,21 @@ class FoldIntoAEtherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        Player player = null;
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        StackObject stackObject = game.getStack().getStackObject(targetId);
+        Player spellController = null;
         if (stackObject != null) {
-            player = game.getPlayer(stackObject.getControllerId());
+            spellController = game.getPlayer(stackObject.getControllerId());
         }
-        if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
+        if (game.getStack().counter(targetId, source.getSourceId(), game)) {
             TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-            if (player != null 
-                    && player.chooseUse(Outcome.Neutral, "Put a creature card from your hand in play?", source, game)
-                    && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+            if (spellController != null
+                    && target.canChoose(source.getSourceId(), source.getSourceId(), game)
+                    && spellController.chooseUse(Outcome.Neutral, "Put a creature card from your hand in play?", source, game)
+                    && spellController.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
+                    spellController.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

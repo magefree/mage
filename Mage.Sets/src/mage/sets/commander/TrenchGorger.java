@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -100,13 +101,13 @@ class TrenchGorgerEffect extends OneShotEffect {
             TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, new FilterLandCard("any number of land cards"));
             target.choose(outcome, controller.getId(), controller.getId(), game);
             int count = 0;
-            for (UUID cardId: target.getTargets()) {
+            for (UUID cardId : target.getTargets()) {
                 Card card = game.getCard(cardId);
                 controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 count++;
             }
             controller.shuffleLibrary(game);
-            game.addEffect(new SetPowerToughnessSourceEffect(count, count, Duration.EndOfGame), source);
+            game.addEffect(new SetPowerToughnessSourceEffect(count, count, Duration.EndOfGame, SubLayer.SetPT_7b), source);
             return true;
         }
         return false;

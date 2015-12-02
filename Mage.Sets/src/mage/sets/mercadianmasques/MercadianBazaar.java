@@ -60,7 +60,7 @@ public class MercadianBazaar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {tap}, Remove any number of storage counters from Mercadian Bazaar: Add {R} to your mana pool for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
-                Mana.RedMana,
+                Mana.RedMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
                 "Add {R} to your mana pool for each storage counter removed this way",

@@ -59,6 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class QuillmaneBaku extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private final UUID originalId;
 
     public QuillmaneBaku(UUID ownerId) {
         super(ownerId, 48, "Quillmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
@@ -76,12 +77,13 @@ public class QuillmaneBaku extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(1)));
         ability.addTarget(new TargetCreaturePermanent());
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             int maxConvManaCost = 0;
             for (Cost cost : ability.getCosts()) {
                 if (cost instanceof RemoveVariableCountersSourceCost) {
@@ -98,6 +100,7 @@ public class QuillmaneBaku extends CardImpl {
 
     public QuillmaneBaku(final QuillmaneBaku card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

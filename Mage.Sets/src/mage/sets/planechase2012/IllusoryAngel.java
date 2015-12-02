@@ -28,21 +28,14 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.ruleModifying.CastOnlyIfYouHaveCastAnotherSpellEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
 *
@@ -55,7 +48,6 @@ public class IllusoryAngel extends CardImpl {
        this.expansionSetCode = "PC2";
        this.subtype.add("Angel");
        this.subtype.add("Illusion");
-
        this.power = new MageInt(4);
        this.toughness = new MageInt(4);
 
@@ -63,7 +55,7 @@ public class IllusoryAngel extends CardImpl {
        this.addAbility(FlyingAbility.getInstance());
 
        // Cast Illusory Angel only if you've cast another spell this turn.
-       this.addAbility(new SimpleStaticAbility(Zone.ALL, new IllusoryAngelEffect()));
+       this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
     }
 
     public IllusoryAngel(final IllusoryAngel card) {
@@ -73,38 +65,5 @@ public class IllusoryAngel extends CardImpl {
     @Override
     public IllusoryAngel copy() {
        return new IllusoryAngel(this);
-    }
-}
-
-class IllusoryAngelEffect extends ContinuousRuleModifyingEffectImpl {
-    IllusoryAngelEffect() {
-       super(Duration.EndOfGame, Outcome.Detriment);
-       staticText = "Cast {this} only if you've cast another spell this turn";
-    }
-
-    IllusoryAngelEffect(final IllusoryAngelEffect effect) {
-       super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-       if (event.getSourceId().equals(source.getSourceId())) {
-           CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-           if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0) {
-               return true;
-           }
-       }
-       return false;
-
-    }
-
-    @Override
-    public IllusoryAngelEffect copy() {
-       return new IllusoryAngelEffect(this);
     }
 }

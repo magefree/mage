@@ -37,7 +37,7 @@ public class FeldonOfTheThirdPath extends mage.sets.commander2014.FeldonOfTheThi
 
     public FeldonOfTheThirdPath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = 100;
         this.expansionSetCode = "JR";
     }
 

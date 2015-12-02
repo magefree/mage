@@ -60,8 +60,8 @@ import java.util.concurrent.*;
  */
 public class ComputerPlayer2 extends ComputerPlayer implements Player {
 
-    private static final transient Logger logger = Logger.getLogger(ComputerPlayer2.class);
-    private static final transient ExecutorService pool = Executors.newFixedThreadPool(1);
+    private static final Logger logger = Logger.getLogger(ComputerPlayer2.class);
+    private static final ExecutorService pool = Executors.newFixedThreadPool(1);
 
     protected int maxDepth;
     protected int maxNodes;

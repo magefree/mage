@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class SkullOfOrm extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("enchantment cards");
+    private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
     
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
@@ -60,7 +60,7 @@ public class SkullOfOrm extends CardImpl {
 
         // {5}, {tap}: Return target enchantment card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{5}"));
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

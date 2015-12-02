@@ -104,7 +104,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
                 Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (game.getOpponents(this.getControllerId()).contains(permanent.getControllerId())) {
                     for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId())));
                     }
                     return true;
                 }
@@ -137,18 +137,21 @@ class PrinceOfThrallsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(targetPointer.getFirst(game, source));
-        Permanent permanent = (Permanent) game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
-        Player opponent = game.getPlayer(permanent.getControllerId());
-        if (opponent != null && card != null && permanent != null && source.getControllerId() != null) {
-            PayLifeCost cost = new PayLifeCost(3);
-            if (opponent.chooseUse(Outcome.Neutral, cost.getText() + " or " + permanent.getName() + " comes back into the battlefield under opponents control", source, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), opponent.getId(), true)) {
-                    return true;
+        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        if (controller != null && card != null && permanent != null) {
+            Player opponent = game.getPlayer(permanent.getControllerId());
+            if (opponent != null) {
+                PayLifeCost cost = new PayLifeCost(3);
+                if (opponent.chooseUse(Outcome.Neutral, cost.getText() + " or " + card.getLogName() + " comes back into the battlefield under opponents control", source, game)) {
+                    cost.clearPaid();
+                    if (cost.pay(source, game, source.getSourceId(), opponent.getId(), true)) {
+                        return true;
+                    }
                 }
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, id, source.getControllerId());
             return true;
         }
         return false;

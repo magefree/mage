@@ -52,6 +52,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -116,17 +117,19 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null) {
-            Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())
-                    && card.getCardType().contains(CardType.CREATURE)) {
-                Permanent creature = game.getPermanent(card.getId());
-                ContinuousEffect effect = new AddCardSubTypeTargetEffect("Zombie", Duration.WhileOnBattlefield);
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
-                game.addEffect(effect, source);
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null) {
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)
+                        && card.getCardType().contains(CardType.CREATURE)) {
+                    Permanent creature = game.getPermanent(card.getId());
+                    ContinuousEffect effect = new AddCardSubTypeTargetEffect("Zombie", Duration.WhileOnBattlefield);
+                    effect.setTargetPointer(new FixedTarget(creature.getId()));
+                    game.addEffect(effect, source);
+                }
             }
+            return true;
         }
         return false;
     }

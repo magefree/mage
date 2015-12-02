@@ -8,8 +8,10 @@ Seventh Edition|7ED|
 Eighth Edition|8ED|
 Tenth Edition|10E|
 Alliances|ALL|
+Asia Pacific Land Program|APAC|
 Apocalypse|APC|
 Alara Reborn|ARB|
+Arena League|ARENA|
 Arabian Nights|ARN|
 Anthologies|ATH|
 Antiquities|ATQ|
@@ -21,11 +23,13 @@ Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
 Born of the Gods|BNG|
 Champions of Kamigawa|CHK|
+Champs|CP|
 Chronicles|CHR|
 Clash Pack|CLASH|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
 Commander 2015|C15|
+Commander's Arsenal|CMA|
 Conflux|CON|
 Coldsnap|CSP|
 Dark Ascension|DKA|
@@ -55,6 +59,7 @@ Duel Decks: Sorin vs. Tibalt|DDK|
 Duel Decks: Speed vs. Cunning|DDN|
 Duel Decks: Venser vs. Koth|DDI|
 Duel Decks: Zendikar vs. Eldrazi|DDP|
+European Land Program|EURO|
 Eventide|EVE|
 Exodus|EXO|
 Fallen Empires|FEM|
@@ -137,12 +142,14 @@ Saviors of Kamigawa|SOK|
 Starter 2000|S00|
 Starter 1999|S99|
 Stronghold|STH|
+Super Series|SUS|
 Tempest|TMP|
 Tempest Remastered|TPR|
 Theros|THS|
 Torment|TOR|
 Time Spiral|TSP|
 Time Spiral "Timeshifted"|TSB|
+Ugin's Fate|UGIN|
 Unglued|UGL|
 Unhinged|UNH|
 Urza's Destiny|UDS|

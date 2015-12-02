@@ -28,16 +28,18 @@
 package mage.sets.shardsofalara;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -55,7 +57,6 @@ public class ClarionUltimatum extends CardImpl {
     public ClarionUltimatum(UUID ownerId) {
         super(ownerId, 163, "Clarion Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{G}{W}{W}{W}{U}{U}");
         this.expansionSetCode = "ALA";
-
 
         // Choose five permanents you control. For each of those permanents, you may search your library for a card with the same name as that permanent. Put those cards onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ClarionUltimatumEffect());
@@ -90,32 +91,28 @@ class ClarionUltimatumEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         int permanentsCount = game.getBattlefield().getAllActivePermanents(source.getControllerId()).size();
-        if (player == null || permanentsCount < 1) {
+        if (controller == null || permanentsCount < 1) {
             return false;
         }
 
         TargetControlledPermanent permanentsTarget = new TargetControlledPermanent(Math.min(permanentsCount, 5));
-        player.choose(Outcome.Benefit, permanentsTarget, source.getSourceId(), game);
+        controller.choose(Outcome.Benefit, permanentsTarget, source.getSourceId(), game);
 
-        List<Card> chosenCards = new ArrayList<Card>();
-        List<String> namesFiltered = new ArrayList<String>();
+        Set<Card> chosenCards = new LinkedHashSet<>();
+        List<String> namesFiltered = new ArrayList<>();
         List<UUID> permanents = permanentsTarget.getTargets();
         for (UUID permanentId : permanents) {
             Permanent permanent = game.getPermanent(permanentId);
             final String cardName = permanent.getName();
             if (!namesFiltered.contains(cardName)) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Search for ").append(cardName).append(" in your library?");
-
-                if (player.chooseUse(Outcome.PutCardInPlay, sb.toString(), source, game)) {
+                if (controller.chooseUse(Outcome.PutCardInPlay, "Search for " + cardName + " in your library?", source, game)) {
                     FilterCard filter = new FilterCard("card named " + cardName);
                     filter.add(new NamePredicate(cardName));
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);
-
-                    if (player.searchLibrary(target, game)) {
-                        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+                    if (controller.searchLibrary(target, game)) {
+                        Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                         if (card != null) {
                             chosenCards.add(card);
                         }
@@ -126,14 +123,8 @@ class ClarionUltimatumEffect extends OneShotEffect {
             }
         }
 
-        for (Card card : chosenCards) {
-            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
-            Permanent permanent = game.getPermanent(card.getId());
-            if (permanent != null) {
-                permanent.setTapped(true);
-            }
-        }
-        player.shuffleLibrary(game);
+        controller.moveCards(chosenCards, Zone.BATTLEFIELD, source, game, true, false, false, null);
+        controller.shuffleLibrary(game);
         return true;
     }
 }

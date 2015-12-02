@@ -27,7 +27,6 @@
  */
 package mage.sets.returntoravnica;
 
-import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
@@ -60,7 +59,6 @@ public class IzzetStaticaster extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

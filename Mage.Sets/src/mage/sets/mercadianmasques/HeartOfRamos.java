@@ -51,7 +51,7 @@ public class HeartOfRamos extends CardImpl {
         this.addAbility(new RedManaAbility());
         
         // Sacrifice Heart of Ramos: Add {R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new SacrificeSourceCost()));
     }
 
     public HeartOfRamos(final HeartOfRamos card) {

@@ -36,9 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
 import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.token.MyrToken;
@@ -71,9 +70,9 @@ public class Myrsmith extends CardImpl {
     }
 }
 
-class MyrsmithEffect extends OneShotEffect {
+class MyrsmithEffect extends CreateTokenEffect {
     public MyrsmithEffect() {
-        super(Outcome.PutCreatureInPlay);
+        super(new MyrToken());
         staticText = "you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield";
     }
 
@@ -86,7 +85,7 @@ class MyrsmithEffect extends OneShotEffect {
         Cost cost = new GenericManaCost(1);
         cost.clearPaid();
         if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
-            new MyrToken().putOntoBattlefield(1, game, source.getControllerId(), source.getControllerId());
+            super.apply(game, source);
         }
         return true;
     }

@@ -28,14 +28,14 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -67,7 +67,6 @@ public class Spelltwine extends CardImpl {
     public Spelltwine(UUID ownerId) {
         super(ownerId, 68, "Spelltwine", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "M13";
-
 
         // Exile target instant or sorcery card from your graveyard and target instant or sorcery card from an opponent's graveyard. Copy those cards. Cast the copies if able without paying their mana costs. Exile Spelltwine.
         this.getSpellAbility().addEffect(new SpelltwineEffect());
@@ -105,10 +104,10 @@ class SpelltwineEffect extends OneShotEffect {
         Card cardTwo = game.getCard(source.getTargets().get(1).getFirstTarget());
         if (controller != null) {
             if (cardOne != null) {
-                controller.moveCardToExileWithInfo(cardOne, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                controller.moveCards(cardOne, Zone.EXILED, source, game);
             }
             if (cardTwo != null) {
-                controller.moveCardToExileWithInfo(cardTwo, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                controller.moveCards(cardTwo, Zone.EXILED, source, game);
             }
             boolean castCardOne = true;
             if (cardOne != null && controller.chooseUse(Outcome.Neutral, "Cast the copy of " + cardOne.getName() + " first?", source, game)) {

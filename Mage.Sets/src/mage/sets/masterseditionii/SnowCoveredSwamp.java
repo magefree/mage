@@ -27,6 +27,8 @@
  */
 package mage.sets.masterseditionii;
 
+import mage.constants.Rarity;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class SnowCoveredSwamp extends mage.sets.iceage.SnowCoveredSwamp {
         super(ownerId);
         this.cardNumber = 243;
         this.expansionSetCode = "ME2";
+        this.rarity = Rarity.LAND;
     }
 
     public SnowCoveredSwamp(final SnowCoveredSwamp card) {

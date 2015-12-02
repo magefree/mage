@@ -53,6 +53,8 @@ import mage.target.targetpointer.FirstTargetPointer;
  */
 public class SentinelOfTheEternalWatch extends CardImpl {
 
+    private final UUID originalId;
+
     public SentinelOfTheEternalWatch(UUID ownerId) {
         super(ownerId, 30, "Sentinel of the Eternal Watch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.expansionSetCode = "ORI";
@@ -64,12 +66,15 @@ public class SentinelOfTheEternalWatch extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // At the beginning of combat on each opponent's turn, tap target creature that player controls.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect("target creature that player controls"), TargetController.OPPONENT, false, true));
-        
+        Ability ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect("target creature that player controls"), TargetController.OPPONENT, false, true);
+        originalId = ability.getOriginalId();
+        this.addAbility(ability);
+
     }
 
     public SentinelOfTheEternalWatch(final SentinelOfTheEternalWatch card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
@@ -79,8 +84,8 @@ public class SentinelOfTheEternalWatch extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof BeginningOfCombatTriggeredAbility) {
-            for (Effect effect: ability.getEffects()) {
+        if (ability.getOriginalId().equals(originalId)) {
+            for (Effect effect : ability.getEffects()) {
                 UUID opponentId = effect.getTargetPointer().getFirst(game, ability);
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
@@ -93,6 +98,5 @@ public class SentinelOfTheEternalWatch extends CardImpl {
             }
         }
     }
-    
-    
+
 }

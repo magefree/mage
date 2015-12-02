@@ -52,6 +52,8 @@ import mage.target.TargetPermanent;
  */
 public class GorillaShaman1 extends CardImpl {
 
+    private final UUID originalId;
+
     public GorillaShaman1(UUID ownerId) {
         super(ownerId, 106, "Gorilla Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "ALL";
@@ -63,12 +65,13 @@ public class GorillaShaman1 extends CardImpl {
         // {X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
         ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("noncreature artifact with converted mana cost X")));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
             FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("noncreature artifact with converted mana cost ").append(xValue).toString());
@@ -81,6 +84,7 @@ public class GorillaShaman1 extends CardImpl {
 
     public GorillaShaman1(final GorillaShaman1 card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

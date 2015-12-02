@@ -63,12 +63,12 @@ public class TaintedWood extends CardImpl {
         // {tap}: Add {B} or {G} to your mana pool. Activate this ability only if you control a Swamp.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.BlackMana),
+                new BasicManaEffect(Mana.BlackMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0)));
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.GreenMana),
+                new BasicManaEffect(Mana.GreenMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0)));
     }

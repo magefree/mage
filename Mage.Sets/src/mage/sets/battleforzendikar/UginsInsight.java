@@ -29,13 +29,13 @@ package mage.sets.battleforzendikar;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -82,15 +82,7 @@ class UginsInsightEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int highCMC = 0;
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-                if (permanent.getSpellAbility() != null) {
-                    int cmc = permanent.getSpellAbility().getManaCosts().convertedManaCost();
-                    if (cmc > highCMC) {
-                        highCMC = cmc;
-                    }
-                }
-            }
+            int highCMC = new HighestConvertedManaCostValue().calculate(game, source, this);
             if (highCMC > 0) {
                 controller.scry(highCMC, source, game);
             }

@@ -27,16 +27,21 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -51,8 +56,11 @@ public class TormentorsTrident extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +3/+0 and attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 0));
+        Effect effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT);
+        effect.setText("and attacks each turn if able");
+        ability.addEffect(effect);
+        this.addAbility(ability);
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));

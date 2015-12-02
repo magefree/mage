@@ -57,13 +57,13 @@ public class ScreechingSliver extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // All Slivers have "{tap}: Target player puts the top card of his or her library into his or her graveyard."
+        // All Slivers have "{T}: Target player puts the top card of his or her library into his or her graveyard."
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
-                        filter, "All Sliver creatures have \"{tap}: Target player puts the top card of his or her library into his or her graveyard.\"")));
+                        filter, "All Sliver creatures have \"{T}: Target player puts the top card of his or her library into his or her graveyard.\"")));
     }
 
     public ScreechingSliver(final ScreechingSliver card) {

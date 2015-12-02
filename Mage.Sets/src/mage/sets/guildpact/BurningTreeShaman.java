@@ -30,6 +30,7 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -41,7 +42,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
-import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -76,8 +76,7 @@ public class BurningTreeShaman extends CardImpl {
 class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     BurningTreeShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1, false, "that player"));
-        this.addTarget(new TargetPlayer());
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(1), false, "that player", true));
     }
 
     BurningTreeShamanTriggeredAbility(final BurningTreeShamanTriggeredAbility ability) {

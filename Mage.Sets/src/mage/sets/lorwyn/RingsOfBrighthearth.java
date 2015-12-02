@@ -94,7 +94,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
+            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ManaAbility)) {
                 Effect effect = this.getEffects().get(0);
                 effect.setValue("stackAbility", stackAbility.getStackAbility());
                 return true;

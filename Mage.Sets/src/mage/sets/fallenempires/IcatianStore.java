@@ -70,7 +70,7 @@ public class IcatianStore extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
         // {tap}, Remove any number of storage counters from Icatian Store: Add {W} to your mana pool for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
-                Mana.WhiteMana,
+                Mana.WhiteMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
                 "Add {W} to your mana pool for each storage counter removed this way",

@@ -35,9 +35,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -60,6 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SkyfireKirin extends CardImpl {
 
+    private final UUID originalId;
+
     public SkyfireKirin(UUID ownerId) {
         super(ownerId, 113, "Skyfire Kirin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "SOK";
@@ -75,12 +75,13 @@ public class SkyfireKirin extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new SkyfireKirinEffect(), new FilterSpiritOrArcaneCard(), true, true);
         ability.addTarget(new TargetCreaturePermanent());
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.TRIGGERED)) {
+        if (ability.getOriginalId().equals(originalId)) {
             Spell spell = game.getStack().getSpell(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
             if (spell != null) {
                 int cmc = spell.getConvertedManaCost();
@@ -94,6 +95,7 @@ public class SkyfireKirin extends CardImpl {
 
     public SkyfireKirin(final SkyfireKirin card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
@@ -121,7 +123,7 @@ class SkyfireKirinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = null;
-        for(Target target: source.getTargets()) {
+        for (Target target : source.getTargets()) {
             if (target instanceof TargetPermanent) {
                 targetCreature = game.getPermanent(target.getFirstTarget());
             }

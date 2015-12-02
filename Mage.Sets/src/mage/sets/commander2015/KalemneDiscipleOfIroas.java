@@ -56,16 +56,16 @@ import mage.players.Player;
  * @author fireshoes
  */
 public class KalemneDiscipleOfIroas extends CardImpl {
-    
+
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with converted mana cost 5 or greater");
 
     static {
         filterSpell.add(new CardTypePredicate(CardType.CREATURE));
-		filterSpell.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 4));
+        filterSpell.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 4));
     }
 
     public KalemneDiscipleOfIroas(UUID ownerId) {
-        super(ownerId, 999, "Kalemne, Disciple of Iroas", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
+        super(ownerId, 45, "Kalemne, Disciple of Iroas", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
         this.expansionSetCode = "C15";
         this.supertype.add("Legendary");
         this.subtype.add("Giant");
@@ -75,16 +75,16 @@ public class KalemneDiscipleOfIroas extends CardImpl {
 
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
-        
+
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        
+
         // Whenever you cast a creature spell with converted mana cost 5 or greater, you get an experience counter.
         Effect effect = new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1), false);
         effect.setText("you get an experience counter");
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filterSpell, false);
         this.addAbility(ability);
-        
+
         // Kalemne, Disciple of Iroas gets +1/+1 for each experience counter you have.
         DynamicValue value = new SourceControllerExperienceCountersCount();
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
@@ -107,13 +107,13 @@ class SourceControllerExperienceCountersCount implements DynamicValue {
         int amount = 0;
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
-                amount = player.getCounters().getCount(CounterType.EXPERIENCE);
-            }
+            amount = player.getCounters().getCount(CounterType.EXPERIENCE);
+        }
         return amount;
     }
 
     @Override
-    public DynamicValue copy() {
+    public SourceControllerExperienceCountersCount copy() {
         return new SourceControllerExperienceCountersCount();
     }
 

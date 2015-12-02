@@ -62,7 +62,7 @@ public class GameView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final transient Logger logger = Logger.getLogger(GameView.class);
+    private static final Logger logger = Logger.getLogger(GameView.class);
 
     private final int priorityTime;
     private final List<PlayerView> players = new ArrayList<>();
@@ -123,6 +123,7 @@ public class GameView implements Serializable {
                         checkPaid(stackObject.getId(), (StackAbility) stackObject);
                     } else if (object instanceof Emblem) {
                         Card sourceCard = game.getCard(((Emblem) object).getSourceId());
+                        CardView cardView;
                         if (sourceCard != null) {
                             if (!sourceCard.getCardType().contains(CardType.PLANESWALKER)) {
                                 if (sourceCard.getSecondCardFace() != null) {
@@ -131,11 +132,12 @@ public class GameView implements Serializable {
                             }
                             ((StackAbility) stackObject).setName("Emblem " + sourceCard.getName());
                             ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
+                            cardView = new CardView(new EmblemView(((Emblem) object), sourceCard));
                         } else {
-                            throw new IllegalArgumentException("Source card for emblem not found.");
+                            cardView = new CardView(new EmblemView((Emblem) object));
                         }
                         stack.put(stackObject.getId(),
-                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), new CardView(new EmblemView(((Emblem) object), sourceCard))));
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else {
                         if (object instanceof StackAbility) {

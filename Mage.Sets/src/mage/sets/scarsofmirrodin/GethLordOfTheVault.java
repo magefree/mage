@@ -25,14 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -57,7 +56,9 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class GethLordOfTheVault extends CardImpl {
 
-    public GethLordOfTheVault (UUID ownerId) {
+    private final UUID originalId;
+
+    public GethLordOfTheVault(UUID ownerId) {
         super(ownerId, 64, "Geth, Lord of the Vault", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "SOM";
         this.supertype.add("Legendary");
@@ -71,27 +72,29 @@ public class GethLordOfTheVault extends CardImpl {
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
+        originalId = ability.getOriginalId();
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard")));
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
-            FilterCard filter = new FilterCard(new StringBuilder("artifact or creature card with converted mana cost ").append(xValue).append(" from an opponent's graveyard").toString());
+            FilterCard filter = new FilterCard("artifact or creature card with converted mana cost " + xValue + " from an opponent's graveyard");
             filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+                    new CardTypePredicate(CardType.ARTIFACT),
+                    new CardTypePredicate(CardType.CREATURE)));
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
             Target target = new TargetCardInOpponentsGraveyard(filter);
             ability.addTarget(target);
         }
     }
 
-    public GethLordOfTheVault (final GethLordOfTheVault card) {
+    public GethLordOfTheVault(final GethLordOfTheVault card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
@@ -100,6 +103,7 @@ public class GethLordOfTheVault extends CardImpl {
     }
 
 }
+
 class GethLordOfTheVaultEffect extends OneShotEffect {
 
     public GethLordOfTheVaultEffect() {
@@ -113,15 +117,19 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId(), true);
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                player.moveCards(player.getLibrary().getTopCards(game, card.getManaCost().convertedManaCost()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
+            if (card != null) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                Player player = game.getPlayer(card.getOwnerId());
+                if (player != null) {
+                    player.moveCards(player.getLibrary().getTopCards(game, card.getManaCost().convertedManaCost()), Zone.GRAVEYARD, source, game);
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

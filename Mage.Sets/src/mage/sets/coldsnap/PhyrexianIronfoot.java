@@ -55,9 +55,9 @@ public class PhyrexianIronfoot extends CardImpl {
 
         // Phyrexian Ironfoot doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-        
-        // {1}{snow}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{snow}")));
+
+        // {1}{S}: Untap Phyrexian Ironfoot.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
     }
 
     public PhyrexianIronfoot(final PhyrexianIronfoot card) {

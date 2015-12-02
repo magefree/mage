@@ -36,7 +36,6 @@
 package mage.client.unusedFiles;
 
 import mage.client.cards.BigCard;
-import mage.client.unusedFiles.CombatGroup;
 import mage.view.CombatGroupView;
 
 import javax.swing.*;
@@ -44,15 +43,16 @@ import java.awt.*;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.client.dialog.MageDialog;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class CombatDialog extends MageDialog {
+
+    private static final Logger logger = Logger.getLogger(CombatDialog.class);
 
     private UUID gameId;
     private BigCard bigCard;
@@ -100,7 +100,7 @@ public class CombatDialog extends MageDialog {
         try {
             this.setSelected(true);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(CombatDialog.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(null, ex);
         }
         pack();
         this.revalidate();

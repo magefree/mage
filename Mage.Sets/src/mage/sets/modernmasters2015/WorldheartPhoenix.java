@@ -111,7 +111,7 @@ public class WorldheartPhoenix extends CardImpl {
                     Player player = game.getPlayer(affectedControllerId);
                     if (player != null) {
                         // can sometimes be cast with base mana cost from grave????
-                        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
+                        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), null);
                         return true;
                     }
                 }

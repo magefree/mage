@@ -56,7 +56,7 @@ public class ManaGeyser extends CardImpl {
 
 
         // Add {R} to your mana pool for each tapped land your opponents control.
-        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
     public ManaGeyser(final ManaGeyser card) {

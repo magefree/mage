@@ -29,20 +29,13 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ShuffleHandIntoLibraryDrawThatManySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -61,10 +54,10 @@ public class WhirlpoolDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Whirlpool Drake enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new WhirlpoolSDrakeTriggeredEffect(), false));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect(), false));
+
         // When Whirlpool Drake dies, shuffle the cards from your hand into your library, then draw that many cards.
-        this.addAbility(new DiesTriggeredAbility(new WhirlpoolSDrakeTriggeredEffect(), false));
+        this.addAbility(new DiesTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect(), false));
     }
 
     public WhirlpoolDrake(final WhirlpoolDrake card) {
@@ -74,42 +67,5 @@ public class WhirlpoolDrake extends CardImpl {
     @Override
     public WhirlpoolDrake copy() {
         return new WhirlpoolDrake(this);
-    }
-}
-
-class WhirlpoolSDrakeTriggeredEffect extends OneShotEffect {
-
-    public WhirlpoolSDrakeTriggeredEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "shuffle the cards from your hand into your library, then draw that many cards";
-    }
-
-    public WhirlpoolSDrakeTriggeredEffect(final WhirlpoolSDrakeTriggeredEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WhirlpoolSDrakeTriggeredEffect copy() {
-        return new WhirlpoolSDrakeTriggeredEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int cardsHand = controller.getHand().size();
-            if (cardsHand > 0){
-                for (Card card: controller.getHand().getCards(game)) {
-                    if (card != null) {
-                        controller.removeFromHand(card, game);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
-                }
-                controller.shuffleLibrary(game);
-                controller.drawCards(cardsHand, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

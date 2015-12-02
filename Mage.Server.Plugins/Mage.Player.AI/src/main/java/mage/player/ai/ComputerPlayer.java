@@ -79,8 +79,6 @@ import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionInfo;
-import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.AsThoughEffectType;
@@ -145,10 +143,12 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 import mage.target.common.TargetDefender;
 import mage.target.common.TargetDiscard;
+import mage.target.common.TargetOpponent;
 import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.common.TargetSpellOrPermanent;
 import mage.util.Copier;
 import mage.util.MessageToClient;
+import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
@@ -160,7 +160,7 @@ import org.apache.log4j.Logger;
  */
 public class ComputerPlayer extends PlayerImpl implements Player {
 
-    private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
+    private static final Logger log = Logger.getLogger(ComputerPlayer.class);
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are availble
     protected boolean ALLOW_INTERRUPT = true;     // change this for test / debugging purposes to false to switch off interrupts while debugging
@@ -173,6 +173,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private transient List<ColoredManaSymbol> chosenColors;
 
     private transient ManaCost currentUnpaidMana;
+    private final Random random = new Random();
 
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
@@ -196,7 +197,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public boolean chooseMulligan(Game game) {
         log.debug("chooseMulligan");
-        if (hand.size() < 6 || isTestMode()) {
+        if (hand.size() < 6 || isTestMode() || game.getClass().getName().contains("Momir")) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
@@ -218,33 +219,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID opponentId = game.getOpponents(abilityControllerId).iterator().next();
+        UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
         if (target instanceof TargetPlayer) {
-            if (outcome.isGood()) {
-                if (target.canTarget(abilityControllerId, game)) {
-                    target.add(abilityControllerId, game);
-                    return true;
-                }
-                if (target.isRequired(sourceId, game)) {
-                    if (target.canTarget(opponentId, game)) {
-                        target.add(opponentId, game);
-                        return true;
-                    }
-                }
-            } else {
-                if (target.canTarget(opponentId, game)) {
-                    target.add(opponentId, game);
-                    return true;
-                }
-                if (target.isRequired(sourceId, game)) {
-                    if (target.canTarget(abilityControllerId, game)) {
-                        target.add(abilityControllerId, game);
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return setTargetPlayer(outcome, target, null, sourceId, abilityControllerId, randomOpponentId, game);
         }
+
         if (target instanceof TargetDiscard) {
             findPlayables(game);
             if (unplayable.size() > 0) {
@@ -291,13 +270,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 if (outcome.isGood()) {
                     targets = threats(abilityControllerId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
                 } else {
-                    targets = threats(opponentId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
+                    targets = threats(randomOpponentId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
                 }
                 if (targets.isEmpty() && target.isRequired()) {
                     if (!outcome.isGood()) {
                         targets = threats(abilityControllerId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
                     } else {
-                        targets = threats(opponentId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
+                        targets = threats(randomOpponentId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
                     }
                 }
             }
@@ -322,9 +301,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target instanceof TargetCardInHand) {
+        if (target instanceof TargetCardInHand
+                || (target.getZone().equals(Zone.HAND) && (target instanceof TargetCard))) {
             List<Card> cards = new ArrayList<>();
-            for (UUID cardId : ((TargetCardInHand) target).possibleTargets(sourceId, this.getId(), game)) {
+            for (UUID cardId : target.possibleTargets(sourceId, this.getId(), game)) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     cards.add(card);
@@ -346,7 +326,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, sourceId, ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             } else {
-                targets = threats(opponentId, sourceId, ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
+                targets = threats(randomOpponentId, sourceId, ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             }
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargetted = target.getTargets();
@@ -363,8 +343,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     return true;
                 }
             } else {
-                if (target.canTarget(opponentId, null, game)) {
-                    target.add(opponentId, game);
+                if (target.canTarget(randomOpponentId, null, game)) {
+                    target.add(randomOpponentId, game);
                     return true;
                 }
             }
@@ -376,8 +356,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target instanceof TargetPermanentOrPlayer) {
             List<Permanent> targets;
             TargetPermanentOrPlayer t = ((TargetPermanentOrPlayer) target);
-            List<Permanent> ownedTargets = threats(abilityControllerId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());;
-            List<Permanent> opponentTargets = threats(opponentId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
+            List<Permanent> ownedTargets = threats(abilityControllerId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
+            List<Permanent> opponentTargets = threats(randomOpponentId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
             if (outcome.isGood()) {
                 targets = ownedTargets;
             } else {
@@ -398,16 +378,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     return true;
                 }
             } else {
-                if (target.canTarget(opponentId, null, game)) {
-                    target.add(opponentId, game);
+                if (target.canTarget(randomOpponentId, null, game)) {
+                    target.add(randomOpponentId, game);
                     return true;
                 }
             }
             if (!target.isRequired(sourceId, game) || target.getNumberOfTargets() == 0) {
                 return false;
             }
-            if (target.canTarget(opponentId, null, game)) {
-                target.add(opponentId, game);
+            if (target.canTarget(randomOpponentId, null, game)) {
+                target.add(randomOpponentId, game);
                 return true;
             }
             if (target.canTarget(abilityControllerId, null, game)) {
@@ -495,33 +475,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID opponentId = game.getOpponents(abilityControllerId).iterator().next();
+        UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
         if (target instanceof TargetPlayer) {
-            if (outcome.isGood()) {
-                if (target.canTarget(abilityControllerId, abilityControllerId, source, game)) {
-                    target.addTarget(playerId, source, game);
-                    return true;
-                }
-                if (target.isRequired(source)) {
-                    if (target.canTarget(abilityControllerId, opponentId, source, game)) {
-                        target.addTarget(opponentId, source, game);
-                        return true;
-                    }
-                }
-            } else {
-                if (target.canTarget(abilityControllerId, opponentId, source, game)) {
-                    target.addTarget(opponentId, source, game);
-                    return true;
-                }
-                if (target.isRequired(source)) {
-                    if (target.canTarget(abilityControllerId, abilityControllerId, source, game)) {
-                        target.addTarget(abilityControllerId, source, game);
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return setTargetPlayer(outcome, target, source, source.getSourceId(), abilityControllerId, randomOpponentId, game);
         }
+
         if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
             if (outcome.isGood()) {
                 Cards cards = new CardsImpl(target.possibleTargets(source.getSourceId(), getId(), game));
@@ -588,7 +546,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source == null ? null : source.getSourceId(), ((TargetPermanent) target).getFilter(), game, target.getTargets());
             } else {
-                targets = threats(opponentId, source == null ? null : source.getSourceId(), ((TargetPermanent) target).getFilter(), game, target.getTargets());
+                targets = threats(randomOpponentId, source == null ? null : source.getSourceId(), ((TargetPermanent) target).getFilter(), game, target.getTargets());
             }
             if (targets.isEmpty() && target.isRequired(source)) {
                 targets = threats(null, source == null ? null : source.getSourceId(), ((TargetPermanent) target).getFilter(), game, target.getTargets());
@@ -612,7 +570,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source.getSourceId(), ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             } else {
-                targets = threats(opponentId, source.getSourceId(), ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
+                targets = threats(randomOpponentId, source.getSourceId(), ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             }
 
             if (targets.isEmpty()) {
@@ -622,8 +580,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         return true;
                     }
                 } else {
-                    if (target.canTarget(getId(), opponentId, source, game)) {
-                        target.addTarget(opponentId, source, game);
+                    if (target.canTarget(getId(), randomOpponentId, source, game)) {
+                        target.addTarget(randomOpponentId, source, game);
                         return true;
                     }
                 }
@@ -648,8 +606,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     return true;
                 }
             } else {
-                if (target.canTarget(getId(), opponentId, source, game)) {
-                    target.addTarget(opponentId, source, game);
+                if (target.canTarget(getId(), randomOpponentId, source, game)) {
+                    target.addTarget(randomOpponentId, source, game);
                     return true;
                 }
             }
@@ -709,7 +667,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source == null ? null : source.getSourceId(), ((TargetSpellOrPermanent) target).getPermanentFilter(), game, target.getTargets());
             } else {
-                targets = threats(opponentId, source == null ? null : source.getSourceId(), ((TargetSpellOrPermanent) target).getPermanentFilter(), game, target.getTargets());
+                targets = threats(randomOpponentId, source == null ? null : source.getSourceId(), ((TargetSpellOrPermanent) target).getPermanentFilter(), game, target.getTargets());
             }
             if (targets.isEmpty() && target.isRequired(source)) {
                 targets = threats(null, source == null ? null : source.getSourceId(), ((TargetSpellOrPermanent) target).getPermanentFilter(), game, target.getTargets());
@@ -757,7 +715,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target instanceof TargetDefender) {
             // TODO: Improve, now planeswalker is always chosen if it exits
             List<Permanent> targets;
-            targets = game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), opponentId, game);
+            targets = game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), randomOpponentId, game);
             if (targets != null && !targets.isEmpty()) {
                 for (Permanent planeswalker : targets) {
                     if (target.canTarget(getId(), planeswalker.getId(), source, game)) {
@@ -769,8 +727,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             if (!target.isChosen()) {
-                if (target.canTarget(getId(), opponentId, source, game)) {
-                    target.addTarget(opponentId, source, game);
+                if (target.canTarget(getId(), randomOpponentId, source, game)) {
+                    target.addTarget(randomOpponentId, source, game);
                 }
             }
             return target.isChosen();
@@ -993,7 +951,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         while (lands.size() > 0 && this.canPlayLand()) {
             if (lands.size() == 1) {
-                this.playLand(lands.iterator().next(), game);
+                this.playLand(lands.iterator().next(), game, false);
             } else {
                 playALand(lands, game);
             }
@@ -1008,7 +966,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (ManaAbility ability : card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (netMana.enough(mana)) {
-                            this.playLand(card, game);
+                            this.playLand(card, game, false);
                             lands.remove(card);
                             return;
                         }
@@ -1022,7 +980,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (ManaAbility ability : card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (mana.contains(netMana)) {
-                            this.playLand(card, game);
+                            this.playLand(card, game, false);
                             lands.remove(card);
                             return;
                         }
@@ -1031,7 +989,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
         //play first available land
-        this.playLand(lands.iterator().next(), game);
+        this.playLand(lands.iterator().next(), game, false);
         lands.remove(lands.iterator().next());
     }
 
@@ -1567,9 +1525,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return modes.getMode();
         }
         //TODO: improve this;
+        AvailableMode:
         for (Mode mode : modes.getAvailableModes(source, game)) {
-            if (!modes.getSelectedModes().contains(mode.getId()) // select only modes not already selected
-                    && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
+            for (Mode selectedMode : modes.getSelectedModes()) {
+                if (selectedMode.getId().equals(mode.getId())) {
+                    continue AvailableMode;
+                }
+            }
+            if (mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
                 return mode;
             }
         }
@@ -1631,42 +1594,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     private static void addBasicLands(Deck deck, String landName, int number) {
         Random random = new Random();
-        Set<String> landSets = new HashSet<>();
-
-        // decide from which sets basic lands are taken from
-        for (String setCode : deck.getExpansionSetCodes()) {
-            ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
-            if (expansionInfo.hasBasicLands()) {
-                landSets.add(expansionInfo.getCode());
-            }
-        }
-
-        // if sets have no basic land, take land from block
-        if (landSets.isEmpty()) {
-            for (String setCode : deck.getExpansionSetCodes()) {
-                ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
-                List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
-                for (ExpansionInfo blockSet : blockSets) {
-                    if (blockSet.hasBasicLands()) {
-                        landSets.add(blockSet.getCode());
-                    }
-                }
-            }
-        }
-        // if still no set with lands found, take one by random
-        if (landSets.isEmpty()) {
-            // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
-            // select a set with basic lands by random
-            Random generator = new Random();
-            List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
-            if (basicLandSets.size() > 0) {
-                landSets.add(basicLandSets.get(generator.nextInt(basicLandSets.size())).getCode());
-            }
-        }
-
-        if (landSets.isEmpty()) {
-            throw new IllegalArgumentException("No set with basic land was found");
-        }
+        Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());
 
         CardCriteria criteria = new CardCriteria();
         if (!landSets.isEmpty()) {
@@ -2222,4 +2150,116 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         return new ComputerPlayer(this);
     }
 
+    /**
+     * Sets a possible target player
+     *
+     */
+    private boolean setTargetPlayer(Outcome outcome, Target target, Ability source, UUID sourceId, UUID abilityControllerId, UUID randomOpponentId, Game game) {
+        if (target instanceof TargetOpponent) {
+            if (source == null) {
+                if (((TargetOpponent) target).canTarget(randomOpponentId, game)) {
+                    target.add(randomOpponentId, game);
+                    return true;
+                }
+            } else {
+                if (((TargetOpponent) target).canTarget(randomOpponentId, source, game)) {
+                    target.add(randomOpponentId, game);
+                    return true;
+                }
+            }
+            for (UUID currentId : game.getOpponents(abilityControllerId)) {
+                if (source == null) {
+                    if (((TargetOpponent) target).canTarget(currentId, game)) {
+                        target.add(currentId, game);
+                        return true;
+                    }
+                } else {
+                    if (((TargetOpponent) target).canTarget(currentId, source, game)) {
+                        target.add(currentId, game);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        if (target instanceof TargetPlayer) {
+            if (outcome.isGood()) {
+                if (source == null) {
+                    if (target.canTarget(abilityControllerId, game)) {
+                        target.add(abilityControllerId, game);
+                        return true;
+                    }
+                    if (target.isRequired(sourceId, game)) {
+                        if (target.canTarget(randomOpponentId, game)) {
+                            target.add(randomOpponentId, game);
+                            return true;
+                        }
+                    }
+                } else {
+                    if (target.canTarget(abilityControllerId, abilityControllerId, source, game)) {
+                        target.addTarget(playerId, source, game);
+                        return true;
+                    }
+                    if (target.isRequired(sourceId, game)) {
+                        if (target.canTarget(randomOpponentId, game)) {
+                            target.add(randomOpponentId, game);
+                            return true;
+                        }
+                    }
+                }
+
+            } else {
+                if (source == null) {
+                    if (target.canTarget(randomOpponentId, game)) {
+                        target.add(randomOpponentId, game);
+                        return true;
+                    }
+                    if (target.isRequired(sourceId, game)) {
+                        if (target.canTarget(abilityControllerId, game)) {
+                            target.add(abilityControllerId, game);
+                            return true;
+                        }
+                    }
+                } else {
+                    if (target.canTarget(randomOpponentId, game)) {
+                        target.add(randomOpponentId, game);
+                        return true;
+                    }
+                    if (target.isRequired(sourceId, game)) {
+                        if (target.canTarget(abilityControllerId, game)) {
+                            target.add(abilityControllerId, game);
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns an opponent by random
+     *
+     * @param abilityControllerId
+     * @param game
+     * @return
+     */
+    private UUID getRandomOpponent(UUID abilityControllerId, Game game) {
+        UUID randomOpponentId = game.getOpponents(abilityControllerId).iterator().next();
+        Set<UUID> opponents = game.getOpponents(abilityControllerId);
+        if (opponents.size() > 1) {
+            int rand = random.nextInt(opponents.size());
+            int count = 0;
+            for (UUID currentId : opponents) {
+                if (count == rand) {
+                    randomOpponentId = currentId;
+                    break;
+                }
+            }
+        }
+        return randomOpponentId;
+    }
 }

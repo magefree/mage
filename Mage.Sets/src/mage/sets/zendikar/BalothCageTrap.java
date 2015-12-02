@@ -28,7 +28,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -53,7 +52,6 @@ public class BalothCageTrap extends CardImpl {
         super(ownerId, 156, "Baloth Cage Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
-
 
         // If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new BalothCageTrapAlternativeCost());

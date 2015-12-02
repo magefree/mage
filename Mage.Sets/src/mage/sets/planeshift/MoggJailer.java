@@ -29,24 +29,18 @@ package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -59,7 +53,6 @@ public class MoggJailer extends CardImpl {
 
     static {
         filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.LessThan, 2), Predicates.not(new TappedPredicate())));
-        //filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
     
     public MoggJailer(UUID ownerId) {
@@ -70,7 +63,7 @@ public class MoggJailer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
-        Effect effect = new CantAttackIfDefenderControllsPermanent(filter);
+        Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
         effect.setText("Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
@@ -83,51 +76,4 @@ public class MoggJailer extends CardImpl {
     public MoggJailer copy() {
         return new MoggJailer(this);
     }
-}
-
-class CantAttackIfDefenderControllsPermanent extends RestrictionEffect {
-
-    private final FilterPermanent filter;
-
-    public CantAttackIfDefenderControllsPermanent(FilterPermanent filter) {
-        super(Duration.WhileOnBattlefield);
-        this.filter = filter;
-        staticText = new StringBuilder("{this} can't attack if defending player controls ").append(filter.getMessage()).toString();
-    }
-
-    public CantAttackIfDefenderControllsPermanent(final CantAttackIfDefenderControllsPermanent effect) {
-        super(effect);
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
-        UUID defendingPlayerId;
-        Player player = game.getPlayer(defenderId);
-        if (player == null) {
-            Permanent permanent = game.getPermanent(defenderId);
-            if (permanent != null) {
-                defendingPlayerId = permanent.getControllerId();
-            } else {
-                return true;
-            }
-        } else {
-            defendingPlayerId = defenderId;
-        }
-        if (defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) > 0) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public CantAttackIfDefenderControllsPermanent copy() {
-        return new CantAttackIfDefenderControllsPermanent(this);
-    }
-
 }

@@ -30,6 +30,7 @@ package mage.sets.shardsofalara;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -56,11 +57,8 @@ public class BrilliantUltimatum extends CardImpl {
         super(ownerId, 159, "Brilliant Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}{W}{U}{U}{U}{B}{B}");
         this.expansionSetCode = "ALA";
 
-
         // Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs.
         this.getSpellAbility().addEffect(new BrilliantUltimatumEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
-
     }
 
     public BrilliantUltimatum(final BrilliantUltimatum card) {
@@ -91,22 +89,19 @@ class BrilliantUltimatumEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
         Cards pile2 = new CardsImpl();
-        int max = Math.min(you.getLibrary().size(), 5);
-        for (int i = 0; i < max; i++) {
-            Card card = you.getLibrary().removeFromTop(game);
-            if (card != null) {
-                card.moveToExile(source.getSourceId(), "Brilliant Ultimatum", source.getSourceId(), game);
-                pile2.add(card);
-            }
-        }
+        pile2.addAll(controller.getLibrary().getTopCards(game, 5));
+        controller.moveCardsToExile(pile2.getCards(game), source, game, true, source.getSourceId(), sourceObject.getIdName());
 
-        Player opponent = game.getPlayer(source.getFirstTarget());
+        TargetOpponent targetOpponent = new TargetOpponent(true);
+        targetOpponent.choose(outcome, source.getControllerId(), source.getSourceId(), game);
+        Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
         if (opponent != null) {
             TargetCard target = new TargetCard(0, pile2.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));
             target.setRequired(false);
@@ -123,55 +118,32 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                     }
                 }
             }
-            for (UUID cardID : pile1) {
-                Card card = pile1.get(cardID, game);
-                pileOne.add(card);
-            }
-            for (UUID cardId : pile2) {
-                Card card = pile2.get(cardId, game);
-                pileTwo.add(card);
-            }
-            
-            you.revealCards("Pile 1 (Brilliant Ultimatum)", pile1, game);
-            you.revealCards("Pile 2 (Brilliant Ultimatum)", pile2, game);
-            
-            boolean choice = you.choosePile(Outcome.PlayForFree, "Which pile (play for free)?", pileOne, pileTwo, game);
+            pileOne.addAll(pile1.getCards(game));
+            pileTwo.addAll(pile2.getCards(game));
+            controller.revealCards("Pile 1 - " + sourceObject.getIdName(), pile1, game);
+            controller.revealCards("Pile 2 - " + sourceObject.getIdName(), pile2, game);
+
+            boolean choice = controller.choosePile(Outcome.PlayForFree, "Which pile (play for free)?", pileOne, pileTwo, game);
+            String selectedPileName;
+            List<Card> selectedPileCards;
+            Cards selectedPile;
             if (choice) {
-                game.informPlayer(you, you.getLogName() + " chose Pile 1.");
-                while (!pileOne.isEmpty() && you.chooseUse(Outcome.PlayForFree, "Do you want to play a card from Pile 1?", source, game)) {
-                    TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
-                    if (you.chooseTarget(Outcome.PlayForFree, pile1, targetExiledCard, source, game)) {
-                        Card card = pile1.get(targetExiledCard.getFirstTarget(), game);
-                        if (card != null) {
-                            if (card.getCardType().contains(CardType.LAND)) {
-                                you.playLand(card, game);
-                                pileOne.remove(card);
-                                pile1.remove(card);
-                            } else {
-                                you.cast(card.getSpellAbility(), game, true);
-                                pileOne.remove(card);
-                                pile1.remove(card);
-                            }
-                        }
-                    }
-                }
+                selectedPileName = "pile 1";
+                selectedPileCards = pileOne;
+                selectedPile = pile1;
             } else {
-                game.informPlayer(you, you.getLogName() + " chose Pile 2.");
-                while (!pileTwo.isEmpty() && you.chooseUse(Outcome.PlayForFree, "Do you want to play a card from Pile 2?", source, game)) {
-                    TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
-                    if (you.chooseTarget(Outcome.PlayForFree, pile2, targetExiledCard, source, game)) {
-                        Card card = pile2.get(targetExiledCard.getFirstTarget(), game);
-                        if (card != null) {
-                            if (card.getCardType().contains(CardType.LAND)) {
-                                you.playLand(card, game);
-                                pileTwo.remove(card);
-                                pile2.remove(card);
-                            } else {
-                                you.cast(card.getSpellAbility(), game, true);
-                                pileTwo.remove(card);
-                                pile2.remove(card);
-                            }
-                        }
+                selectedPileName = "pile 2";
+                selectedPileCards = pileTwo;
+                selectedPile = pile2;
+            }
+            game.informPlayers(controller.getLogName() + " chose " + selectedPileName + ".");
+            while (!selectedPileCards.isEmpty() && controller.chooseUse(Outcome.PlayForFree, "Do you want to play a card for free from " + selectedPileName + "?", source, game)) {
+                TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
+                if (controller.chooseTarget(Outcome.PlayForFree, selectedPile, targetExiledCard, source, game)) {
+                    Card card = selectedPile.get(targetExiledCard.getFirstTarget(), game);
+                    if (controller.playCard(card, game, true, true)) {
+                        selectedPileCards.remove(card);
+                        selectedPile.remove(card);
                     }
                 }
             }

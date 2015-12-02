@@ -29,20 +29,15 @@ package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.abilityword.GrandeurAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -66,7 +61,8 @@ public class TaroxBladewing extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         
         // Grandeur - Discard another card named Tarox Bladewing: Tarox Bladewing gets +X/+X until end of turn, where X is its power.
-        this.addAbility(new GrandeurAbility(new TaroxBladewingEffect(), "Tarox Bladewing"));
+        SourcePermanentPowerCount x = new SourcePermanentPowerCount();
+        this.addAbility(new GrandeurAbility(new BoostSourceEffect(x, x, Duration.EndOfTurn, true), "Tarox Bladewing"));
     }
 
     public TaroxBladewing(final TaroxBladewing card) {
@@ -76,34 +72,5 @@ public class TaroxBladewing extends CardImpl {
     @Override
     public TaroxBladewing copy() {
         return new TaroxBladewing(this);
-    }
-}
-
-class TaroxBladewingEffect extends ContinuousEffectImpl {
-    
-    TaroxBladewingEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "{this} gets +X/+X until end of turn, where X is its power";
-    }
-
-    TaroxBladewingEffect(final TaroxBladewingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TaroxBladewingEffect copy() {
-        return new TaroxBladewingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            int power = permanent.getPower().getValue();
-            permanent.addPower(power);
-            permanent.addToughness(power);
-            return true;
-        }
-        return false;
     }
 }

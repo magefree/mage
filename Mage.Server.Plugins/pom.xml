@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.4</version>
+        <version>1.4.5</version>
     </parent>
 
     <artifactId>mage-server-plugins</artifactId>
@@ -17,9 +17,10 @@
     <modules>
         <module>Mage.Deck.Constructed</module>
         <module>Mage.Deck.Limited</module>
-	<module>Mage.Game.CommanderDuel</module>
+        <module>Mage.Game.CommanderDuel</module>
         <module>Mage.Game.CommanderFreeForAll</module>
         <module>Mage.Game.FreeForAll</module>
+        <module>Mage.Game.MomirDuel</module>
         <module>Mage.Game.TinyLeadersDuel</module>
         <module>Mage.Game.TwoPlayerDuel</module>
         <module>Mage.Player.AI</module>

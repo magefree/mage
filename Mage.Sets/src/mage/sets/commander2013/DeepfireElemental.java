@@ -52,11 +52,14 @@ import mage.target.TargetPermanent;
  */
 public class DeepfireElemental extends CardImpl {
 
+    private final UUID originalId;
+
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature with converted mana cost X");
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     public DeepfireElemental(UUID ownerId) {
         super(ownerId, 185, "Deepfire Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
         this.expansionSetCode = "C13";
@@ -68,12 +71,13 @@ public class DeepfireElemental extends CardImpl {
         // {X}{X}{1}: Destroy target artifact or creature with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
         ability.addTarget(new TargetPermanent(filter));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             ability.getTargets().clear();
             FilterPermanent newFilter = filter.copy();
             newFilter.setMessage(new StringBuilder("artifact or creature with converted mana cost {").append(ability.getManaCostsToPay().getX()).append("}").toString());
@@ -85,6 +89,7 @@ public class DeepfireElemental extends CardImpl {
 
     public DeepfireElemental(final DeepfireElemental card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

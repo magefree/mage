@@ -51,7 +51,7 @@ public class ToothOfRamos extends CardImpl {
         this.addAbility(new WhiteManaAbility());
         
         // Sacrifice Tooth of Ramos: Add {W} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new SacrificeSourceCost()));
     }
 
     public ToothOfRamos(final ToothOfRamos card) {

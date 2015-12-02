@@ -124,7 +124,7 @@ class JaceTelepathUnboundEffect extends OneShotEffect {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
             ContinuousEffect effect = new JaceTelepathUnboundCastFromGraveyardEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId()));
+            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             game.addEffect(effect, source);
             effect = new JaceTelepathUnboundReplacementEffect(card.getId());
             game.addEffect(effect, source);

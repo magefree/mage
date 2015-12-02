@@ -28,10 +28,6 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -42,8 +38,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -70,7 +69,7 @@ public class CountrysideCrusher extends CardImpl {
         // Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                false, new FilterLandCard("a land card"),TargetController.YOU
+                false, new FilterLandCard("a land card"), TargetController.YOU
         ));
 
     }
@@ -111,7 +110,7 @@ class CountrysideCrusherEffect extends OneShotEffect {
                 Card card = controller.getLibrary().getFromTop(game);
                 cards.add(card);
                 if (card.getCardType().contains(CardType.LAND)) {
-                    controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 } else {
                     break;
                 }

@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Thirst extends CardImpl {
 
     public Thirst(UUID ownerId) {
-        super(ownerId, 104, "Thirst", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+        super(ownerId, 99, "Thirst", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "MIR";
         this.subtype.add("Aura");
 

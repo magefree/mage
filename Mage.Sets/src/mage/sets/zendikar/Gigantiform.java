@@ -48,6 +48,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -67,7 +68,6 @@ public class Gigantiform extends CardImpl {
         super(ownerId, 162, "Gigantiform", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
-
 
         // Kicker {4}
         this.addAbility(new KickerAbility("{4}"));
@@ -101,7 +101,7 @@ class GigantiformAbility extends StaticAbility {
 
     public GigantiformAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b));
         this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));
     }
 
@@ -143,14 +143,14 @@ class GigantiformEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player != null && player.searchLibrary(target, game)) {
-            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (controller != null && controller.searchLibrary(target, game)) {
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

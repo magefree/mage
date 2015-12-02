@@ -72,13 +72,13 @@ public class DementiaSliver extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // All Slivers have "{tap}: Name a card. Target opponent reveals a card at random from his or her hand. If it's the named card, that player discards it. Activate this ability only during your turn."
+        // All Slivers have "{T}: Name a card. Target opponent reveals a card at random from his or her hand. If it's the named card, that player discards it. Activate this ability only during your turn."
         Ability gainedAbility = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new TapSourceCost(), MyTurnCondition.getInstance());
         gainedAbility.addEffect(new DementiaSliverEffect());
         gainedAbility.addTarget(new TargetOpponent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter,
-                        "All Slivers have \"{tap}: Name a card. Target opponent reveals a card at random from his or her hand. If it's the named card, that player discards it\"")));
+                        "All Slivers have \"{T}: Name a card. Target opponent reveals a card at random from his or her hand. If it's the named card, that player discards it\"")));
     }
 
     public DementiaSliver(final DementiaSliver card) {

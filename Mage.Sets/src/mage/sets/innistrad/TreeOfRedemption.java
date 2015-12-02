@@ -28,11 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +36,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -94,14 +95,17 @@ class TreeOfRedemptionEffect extends OneShotEffect {
             if (perm != null) {
                 int amount = perm.getToughness().getValue();
                 int life = player.getLife();
-                if (life == amount)
+                if (life == amount) {
                     return false;
-                if (life < amount && !player.isCanGainLife())
+                }
+                if (life < amount && !player.isCanGainLife()) {
                     return false;
-                if (life > amount && !player.isCanLoseLife())
+                }
+                if (life > amount && !player.isCanLoseLife()) {
                     return false;
+                }
                 player.setLife(amount, game);
-                game.addEffect(new SetPowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.WhileOnBattlefield), source);
+                game.addEffect(new SetPowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
                 return true;
             }
         }

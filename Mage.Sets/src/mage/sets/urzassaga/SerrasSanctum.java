@@ -56,7 +56,7 @@ public class SerrasSanctum extends CardImpl {
         this.expansionSetCode = "USG";
         this.supertype.add("Legendary");
 
-        DynamicManaAbility ability = new DynamicManaAbility(Mana.WhiteMana, new PermanentsOnBattlefieldCount(filter));
+        DynamicManaAbility ability = new DynamicManaAbility(Mana.WhiteMana(1), new PermanentsOnBattlefieldCount(filter));
         this.addAbility(ability);
     }
 

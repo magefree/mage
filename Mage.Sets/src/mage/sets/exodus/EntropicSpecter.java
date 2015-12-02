@@ -44,6 +44,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -70,7 +71,7 @@ public class EntropicSpecter extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
 
         // Entropic Specter's power and toughness are each equal to the number of cards in the chosen player's hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Duration.WhileOnBattlefield, SubLayer.SetPT_7b)));
 
         // Whenever Entropic Specter deals damage to a player, that player discards a card.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));

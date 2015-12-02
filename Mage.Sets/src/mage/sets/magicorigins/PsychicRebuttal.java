@@ -29,6 +29,7 @@ package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -137,9 +138,8 @@ class PsychicRebuttalPredicate implements ObjectPlayerPredicate<ObjectPlayer<Sta
         if (controllerId == null) {
             return false;
         }
-        for (UUID modeId : input.getObject().getStackAbility().getModes().getSelectedModes()) {
-            input.getObject().getStackAbility().getModes().setActiveMode(modeId);
-            for (Target target : input.getObject().getStackAbility().getTargets()) {
+        for (Mode mode : input.getObject().getStackAbility().getModes().getSelectedModes()) {
+            for (Target target : mode.getTargets()) {
                 for (UUID targetId : target.getTargets()) {
                     if (controllerId.equals(targetId)) {
                         return true;

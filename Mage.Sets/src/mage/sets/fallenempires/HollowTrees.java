@@ -70,7 +70,7 @@ public class HollowTrees extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
         // {tap}, Remove any number of storage counters from Hollow Trees: Add {G} to your mana pool for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
-                Mana.GreenMana,
+                Mana.GreenMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
                 "Add {G} to your mana pool for each storage counter removed this way",

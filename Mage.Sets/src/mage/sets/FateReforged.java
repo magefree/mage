@@ -57,7 +57,7 @@ public class FateReforged extends ExpansionSet {
         super("Fate Reforged", "FRF", "mage.sets.fatereforged", new GregorianCalendar(2015, 1, 23).getTime(), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.parentSet = KhansOfTarkir.getInstance();
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;

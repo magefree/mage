@@ -39,23 +39,24 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class RiverfallMimic extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("a spell that's both blue and red");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
-    
+
     private String rule = "Whenever you cast a spell that's both blue and red, {this} has base power and toughness 3/3 until end of turn and can't be blocked this turn.";
 
     public RiverfallMimic(UUID ownerId) {
@@ -69,7 +70,7 @@ public class RiverfallMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both blue and red, Riverfall Mimic has base power and toughness 3/3 until end of turn and can't be blocked this turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(3, 3, Duration.EndOfTurn), filter, false, rule);
+        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(3, 3, Duration.EndOfTurn, SubLayer.SetPT_7b), filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
     }

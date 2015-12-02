@@ -27,9 +27,10 @@
  */
 package mage.sets.scourge;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -48,7 +49,10 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.DragonToken2;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -59,7 +63,6 @@ public class DayOfTheDragons extends CardImpl {
     public DayOfTheDragons(UUID ownerId) {
         super(ownerId, 31, "Day of the Dragons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
         this.expansionSetCode = "SCG";
-
 
         // When Day of the Dragons enters the battlefield, exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DayOfTheDragonsEntersEffect(), false));
@@ -98,18 +101,17 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = source.getSourceId();
-        int creaturesExiled = 0;
-        if (exileId != null) {
-            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                if (creature != null) {
-                    if (creature.moveToExile(exileId, "Day of the Dragons", source.getSourceId(), game)) {
-                        creaturesExiled++;
-                    }
-                }
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            Set<Card> toExile = new HashSet<>();
+            toExile.addAll(game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game));
+            if (!toExile.isEmpty()) {
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
+                DragonToken2 token = new DragonToken2();
+                token.putOntoBattlefield(toExile.size(), game, source.getSourceId(), source.getControllerId());
             }
-            DragonToken2 token = new DragonToken2();
-            token.putOntoBattlefield(creaturesExiled, game, source.getSourceId(), source.getControllerId());
             return true;
         }
         return false;
@@ -141,20 +143,22 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = source.getSourceId();
-        for (Permanent dragon : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            if (dragon != null) {
-                dragon.sacrifice(source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null) {
+            for (Permanent dragon : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+                if (dragon != null) {
+                    dragon.sacrifice(source.getSourceId(), game);
+                }
             }
-        }
-        ExileZone exile = game.getExile().getExileZone(exileId);
-        if (exile != null) {
-            exile = exile.copy();
-            for (UUID cardId : exile) {
-                Card card = game.getCard(cardId);
-                card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+            int zoneChangeCounter = source.getSourceObjectZoneChangeCounter();
+            if (zoneChangeCounter > 0 && !(sourceObject instanceof PermanentToken)) {
+                zoneChangeCounter--;
             }
-            game.getExile().getExileZone(exileId).clear();
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
+            if (exile != null) {
+                controller.moveCards(exile, Zone.BATTLEFIELD, source, game);
+            }
             return true;
         }
         return false;

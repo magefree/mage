@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class Wellwisher extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf on the battlefield");
+    private static final FilterPermanent filter = new FilterPermanent("Elf on the battlefield");
 
     static {
         filter.add(new SubtypePredicate("Elf"));

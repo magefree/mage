@@ -147,6 +147,7 @@ class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return sourceId.equals(getTargetPointer().getFirst(game, source)) && game.getState().getZone(sourceId) == Zone.EXILED;
+        return source.getControllerId().equals(affectedControllerId)
+                && sourceId.equals(getTargetPointer().getFirst(game, source));
     }
 }

@@ -55,6 +55,7 @@ import mage.target.TargetPlayer;
  */
 public class OathOfDruids extends CardImpl {
 
+    private final UUID originalId;
     private static final FilterPlayer filter = new FilterPlayer();
 
     static {
@@ -68,12 +69,13 @@ public class OathOfDruids extends CardImpl {
         // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is his or her opponent. The first player may reveal cards from the top of his or her library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, true);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof BeginningOfUpkeepTriggeredAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
             if (activePlayer != null) {
                 ability.setControllerId(activePlayer.getId());
@@ -86,6 +88,7 @@ public class OathOfDruids extends CardImpl {
 
     public OathOfDruids(final OathOfDruids card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

@@ -78,7 +78,7 @@ import org.apache.log4j.Logger;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
-    private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
+    private static final Logger log = Logger.getLogger(PreferencesDialog.class);
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
@@ -270,7 +270,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
     private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
 
-    private static int selectedAvatarId = DEFAULT_AVATAR_ID;
+    private static int selectedAvatarId;
 
     private final JFileChooser fc = new JFileChooser();
 
@@ -2723,6 +2723,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static UserData getUserData() {
+        if (selectedAvatarId == 0) {
+            getSelectedAvatar();
+        }
         return new UserData(UserGroup.PLAYER,
                 PreferencesDialog.selectedAvatarId,
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true"),

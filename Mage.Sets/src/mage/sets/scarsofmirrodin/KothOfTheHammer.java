@@ -73,7 +73,7 @@ public class KothOfTheHammer extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+
         filterCount.add(new SubtypePredicate("Mountain"));
         filterCount.add(new ControllerPredicate(TargetController.YOU));
     }
@@ -92,7 +92,7 @@ public class KothOfTheHammer extends CardImpl {
         this.addAbility(ability);
 
         // -2: Add {R} to your mana pool for each Mountain you control.
-        this.addAbility(new LoyaltyAbility(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(filterCount)), -2));
+        this.addAbility(new LoyaltyAbility(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filterCount)), -2));
 
         // -5: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KothOfTheHammerEmblem()), -5));

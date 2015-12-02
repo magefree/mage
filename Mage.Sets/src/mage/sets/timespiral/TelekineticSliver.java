@@ -58,11 +58,11 @@ public class TelekineticSliver extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // All Slivers have "{tap}: Tap target permanent."
+        // All Slivers have "{T}: Tap target permanent."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter, "All Slivers have \"{tap}: Tap target permanent.\"")));
+                new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter, "All Slivers have \"{T}: Tap target permanent.\"")));
     }
 
     public TelekineticSliver(final TelekineticSliver card) {

@@ -30,16 +30,13 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.keyword.SwampwalkAbility;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -54,7 +51,11 @@ public class Blistergrub extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new BlistergrubEffect(), false));
+
+        // Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)
+        this.addAbility(new SwampwalkAbility());
+        // When Blistergrub dies, each opponent loses 2 life.
+        this.addAbility(new DiesTriggeredAbility(new LoseLifeOpponentsEffect(2), false));
     }
 
     public Blistergrub (final Blistergrub card) {
@@ -64,32 +65,5 @@ public class Blistergrub extends CardImpl {
     @Override
     public Blistergrub copy() {
         return new Blistergrub(this);
-    }
-}
-
-class BlistergrubEffect extends OneShotEffect {
-
-    public BlistergrubEffect() {
-        super(Outcome.Damage);
-        staticText = "each opponent loses 2 life";
-    }
-
-    public BlistergrubEffect(final BlistergrubEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID opp : game.getOpponents(source.getControllerId())) {
-            Player opponent = game.getPlayer(opp);
-            if (opponent != null)
-                opponent.loseLife(2, game);
-        }
-        return true;
-    }
-
-    @Override
-    public BlistergrubEffect copy() {
-        return new BlistergrubEffect(this);
     }
 }

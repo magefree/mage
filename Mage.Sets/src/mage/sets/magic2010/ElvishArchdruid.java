@@ -71,7 +71,7 @@ public class ElvishArchdruid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         
         // {T}: Add {G} to your mana pool for each Elf you control.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filterCount)));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filterCount)));
     }
 
     public ElvishArchdruid(final ElvishArchdruid card) {

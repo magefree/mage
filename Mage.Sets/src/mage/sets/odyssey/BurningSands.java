@@ -46,20 +46,22 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BurningSands extends CardImpl {
 
+    private final UUID originalId;
     private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
 
     public BurningSands(UUID ownerId) {
         super(ownerId, 180, "Burning Sands", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "ODY";
 
-
         // Whenever a creature dies, that creature's controller sacrifices a land.
-        this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeEffect(filter, 1, "that creature's controller"), false, false, true));
+        Ability ability = new DiesCreatureTriggeredAbility(new SacrificeEffect(filter, 1, "that creature's controller"), false, false, true);
+        originalId = ability.getOriginalId();
+        this.addAbility(ability);
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof DiesCreatureTriggeredAbility) {
+        if (ability.getOriginalId().equals(originalId)) {
             UUID creatureId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
             Permanent creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
             if (creature != null) {
@@ -70,6 +72,7 @@ public class BurningSands extends CardImpl {
 
     public BurningSands(final BurningSands card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override

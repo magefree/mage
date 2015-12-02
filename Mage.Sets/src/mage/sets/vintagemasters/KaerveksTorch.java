@@ -29,6 +29,7 @@ package mage.sets.vintagemasters;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -44,14 +45,13 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.Target;
-import mage.target.Targets;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.util.CardUtil;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class KaerveksTorch extends CardImpl {
 
@@ -95,13 +95,11 @@ class KaerveksTorchCostIncreaseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if(abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
-        {
-            for(UUID modeId: abilityToModify.getModes().getSelectedModes()) {
-                abilityToModify.getModes().setActiveMode(modeId);
-                for(Target target: abilityToModify.getTargets()) {
-                    for(UUID id: target.getTargets()) {
-                        if(id.equals(source.getSourceObject(game).getId())) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+            for (Mode mode : abilityToModify.getModes().getSelectedModes()) {
+                for (Target target : mode.getTargets()) {
+                    for (UUID targetId : target.getTargets()) {
+                        if (targetId.equals(source.getSourceObject(game).getId())) {
                             return true;
                         }
                     }

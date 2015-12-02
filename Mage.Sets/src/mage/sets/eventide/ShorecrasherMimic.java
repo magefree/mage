@@ -39,18 +39,19 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class ShorecrasherMimic extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("a spell that's both green and blue");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(new ColorPredicate(ObjectColor.BLUE));
@@ -69,10 +70,10 @@ public class ShorecrasherMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both green and blue, Shorecrasher Mimic has base power and toughness 5/3 until end of turn and gains trample until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(5, 3, Duration.EndOfTurn), filter, false, rule);
+        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(5, 3, Duration.EndOfTurn, SubLayer.SetPT_7b), filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
-        
+
     }
 
     public ShorecrasherMimic(final ShorecrasherMimic card) {

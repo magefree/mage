@@ -83,7 +83,7 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
-import mage.client.chat.ChatPanel;
+import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.components.MageDesktopManager;
 import mage.client.components.MageJDesktop;
@@ -165,7 +165,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static boolean grayMode = false;
     private static boolean fullscreenMode = false;
 
-    private static final Map<UUID, ChatPanel> chats = new HashMap<>();
+    private static final Map<UUID, ChatPanelBasic> chats = new HashMap<>();
     private static final Map<UUID, GamePanel> games = new HashMap<>();
     private static final Map<UUID, DraftPanel> drafts = new HashMap<>();
     private static final MageUI ui = new MageUI();
@@ -372,8 +372,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: "
-                + version == null ? "<not available>" : version.toString() + "  Server: "
-                        + ((session != null && session.isConnected()) ? session.getVersionInfo() : "<not connected>"));
+                + (version == null ? "<not available>" : version.toString()) + "  Server: "
+                + ((session != null && session.isConnected()) ? session.getVersionInfo() : "<not connected>"));
     }
 
     private void addTooltipContainer() {
@@ -1250,11 +1250,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return ui;
     }
 
-    public static ChatPanel getChat(UUID chatId) {
+    public static ChatPanelBasic getChat(UUID chatId) {
         return chats.get(chatId);
     }
 
-    public static void addChat(UUID chatId, ChatPanel chatPanel) {
+    public static void addChat(UUID chatId, ChatPanelBasic chatPanel) {
         chats.put(chatId, chatPanel);
     }
 

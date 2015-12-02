@@ -49,17 +49,12 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
-import static mage.remote.Connection.ProxyType.HTTP;
-import static mage.remote.Connection.ProxyType.SOCKS;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
-import org.mage.plugins.card.dl.sources.CardImageSource;
-import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
-import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
-import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
+import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
@@ -140,7 +135,16 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         p0.add(jLabel1);
         p0.add(Box.createVerticalStrut(5));
-        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com", "mythicspoiler.com" /*, "mtgimage.com (HQ)" , "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"*/});
+        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] {
+            "magiccards.info",
+            "wizards.com",
+            "mythicspoiler.com",
+            "tokens.mtg.onl",
+            //"mtgimage.com (HQ)",
+            //"mtgathering.ru HQ",
+            //"mtgathering.ru MQ",
+            //"mtgathering.ru LQ",
+        });
         jComboBox1 = new JComboBox();
 
         cardImageSource = MagicCardsImageSource.getInstance();
@@ -160,6 +164,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 2:
                         cardImageSource = MythicspoilerComSource.getInstance();
+                        break;
+                    case 3:
+                        cardImageSource = TokensMtgImageSource.getInstance();
                         break;
                 }
                 int count = DownloadPictures.this.cards.size();
@@ -221,7 +228,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         // JOptionPane
         Object[] options = { startDownloadButton, closeButton = new JButton("Cancel") };
-        dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+        dlg = new JOptionPane(p0, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, options, options[1]);
     }
 
     public static boolean checkForNewCards(List<CardInfo> allCards) {
@@ -363,23 +370,27 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             while (line != null) {
                 line = line.trim();
                 if (line.startsWith("|")) { // new format
-                    String[] params = line.split("\\|");
-                    if (params.length >= 4) {
+                    String[] params = line.split("\\|", -1);
+                    if (params.length >= 5) {
+                        int type = 0;
+                        if (params[4] != null && ! params[4].isEmpty()) {
+                            type = Integer.parseInt(params[4].trim());
+                        }
                         if (params[1].toLowerCase().equals("generate") && params[2].startsWith("TOK:")) {
                             String set = params[2].substring(4);
-                            CardDownloadData card = new CardDownloadData(params[3], set, 0, false, 0, "", true);
+                            CardDownloadData card = new CardDownloadData(params[3], set, 0, false, type, "", true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM:")) {
                             String set = params[2].substring(7);
-                            CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, 0, false,0, "", true);
+                            CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, 0, false, type, "", true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM-:")) {
                             String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, 0, false, 0, "", true);
+                            CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, 0, false, type, "", true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM!:")) {
                             String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3], set, 0, false, 0, "", true);
+                            CardDownloadData card = new CardDownloadData(params[3], set, 0, false, type, "", true);
                             list.add(card);
                         }
                     } else {

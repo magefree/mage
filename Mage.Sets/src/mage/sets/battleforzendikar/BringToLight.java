@@ -45,6 +45,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -77,7 +78,7 @@ class BringToLightEffect extends OneShotEffect {
     public BringToLightEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "<i>Converge</i> &mdash; Search your library for a creature, instant, or sorcery card with converted mana "
-                + "cost less than or equal to the number of colors of mana spent to cast Bring to Light, exile that card, "
+                + "cost less than or equal to the number of colors of mana spent to cast {this}, exile that card, "
                 + "then shuffle your library. You may cast that card without paying its mana cost";
     }
 
@@ -102,12 +103,16 @@ class BringToLightEffect extends OneShotEffect {
             controller.searchLibrary(target, game);
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                controller.moveCards(card, null, Zone.EXILED, source, game);
+                controller.moveCards(card, Zone.EXILED, source, game);
             }
             controller.shuffleLibrary(game);
             if (card != null) {
                 if (controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
-                    controller.cast(card.getSpellAbility(), game, true);
+                    if (card.getSpellAbility() != null) {
+                        controller.cast(card.getSpellAbility(), game, true);
+                    } else {
+                        Logger.getLogger(BringToLightEffect.class).error("Bring to Light: spellAbility == null " + card.getName());
+                    }
                 }
             }
             return true;

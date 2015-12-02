@@ -62,7 +62,7 @@ public class RofellosLlanowarEmissary extends CardImpl {
         this.toughness = new MageInt(1);
 		
         // {tap}: Add {G} to your mana pool for each Forest you control.
-		this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filter)));
+		this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
     public RofellosLlanowarEmissary(final RofellosLlanowarEmissary card) {
