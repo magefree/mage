@@ -29,6 +29,7 @@ package mage.sets.planechase2012;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,7 +38,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ShuffleHandIntoLibraryDrawThatManySourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -62,7 +63,7 @@ public class WhirlpoolWarrior extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Whirlpool Warrior enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new WhirlpoolWarriorTriggeredEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect()));
 
         // {R}, Sacrifice Whirlpool Warrior: Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WhirlpoolWarriorActivatedEffect(), new ManaCostsImpl("{R}"));
@@ -77,51 +78,6 @@ public class WhirlpoolWarrior extends CardImpl {
     @Override
     public WhirlpoolWarrior copy() {
         return new WhirlpoolWarrior(this);
-    }
-}
-
-class WhirlpoolWarriorTriggeredEffect extends OneShotEffect {
-
-    public WhirlpoolWarriorTriggeredEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "shuffle the cards from your hand into your library, then draw that many cards";
-    }
-
-    public WhirlpoolWarriorTriggeredEffect(final WhirlpoolWarriorTriggeredEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WhirlpoolWarriorTriggeredEffect copy() {
-        return new WhirlpoolWarriorTriggeredEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Map<UUID, Integer> cardsToDraw = new LinkedHashMap<>();
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    int cardsInHand = player.getHand().size();
-                    if (cardsInHand > 0) {
-                        cardsToDraw.put(playerId, cardsInHand);
-                    }
-                    player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
-                    player.shuffleLibrary(game);
-                }
-            }
-            for (UUID playerId : cardsToDraw.keySet()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.drawCards(cardsToDraw.get(playerId), game);
-                }
-            }
-            return true;
-        }
-
-        return false;
     }
 }
 
@@ -145,21 +101,22 @@ class WhirlpoolWarriorActivatedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            Map<UUID, Integer> playerCards = new LinkedHashMap<>();
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int cardsHand = player.getHand().size();
                     if (cardsHand > 0) {
-                        for (Card card : player.getHand().getCards(game)) {
-                            if (card != null) {
-                                player.removeFromHand(card, game);
-                                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                            }
-                        }
-                        game.informPlayers(player.getLogName() + " shuffles the cards from his or her hand into his or her library");
+                        playerCards.put(playerId, cardsHand);
+                        player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
                         player.shuffleLibrary(game);
-                        player.drawCards(cardsHand, game);
                     }
+                }
+            }
+            for (Entry<UUID, Integer> entry : playerCards.entrySet()) {
+                Player player = game.getPlayer(entry.getKey());
+                if (player != null) {
+                    player.drawCards(entry.getValue(), game);
                 }
             }
             return true;

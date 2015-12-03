@@ -29,18 +29,11 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ShuffleHandIntoLibraryDrawThatManySourceEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -57,7 +50,7 @@ public class WhirlpoolRider extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Whirlpool Rider enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new WhirlpoolRiderTriggeredEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect()));
 
     }
 
@@ -68,42 +61,5 @@ public class WhirlpoolRider extends CardImpl {
     @Override
     public WhirlpoolRider copy() {
         return new WhirlpoolRider(this);
-    }
-}
-
-class WhirlpoolRiderTriggeredEffect extends OneShotEffect {
-
-    public WhirlpoolRiderTriggeredEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "shuffle the cards from your hand into your library, then draw that many cards";
-    }
-
-    public WhirlpoolRiderTriggeredEffect(final WhirlpoolRiderTriggeredEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WhirlpoolRiderTriggeredEffect copy() {
-        return new WhirlpoolRiderTriggeredEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int cardsHand = controller.getHand().size();
-            if (cardsHand > 0) {
-                for (Card card: controller.getHand().getCards(game)) {
-                    if (card != null) {
-                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
-                    }
-                }
-                controller.shuffleLibrary(game);
-                controller.drawCards(cardsHand, game);
-            }
-            return true;            
-        }
-
-        return false;
     }
 }

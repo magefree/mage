@@ -29,11 +29,11 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -41,6 +41,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -56,8 +58,11 @@ public class ChandrasPhoenix extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        // Haste (This creature can attack and as soon as it comes under your control.)
         this.addAbility(HasteAbility.getInstance());
+        // Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return Chandra's Phoenix from your graveyard to your hand.
         this.addAbility(new ChandrasPhoenixTriggeredAbility());
     }
 
@@ -72,6 +77,7 @@ public class ChandrasPhoenix extends CardImpl {
 }
 
 class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
+
     ChandrasPhoenixTriggeredAbility() {
         super(Zone.GRAVEYARD, new ReturnToHandSourceEffect());
     }
@@ -93,10 +99,21 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            Card c = game.getCard(event.getSourceId());
-            if (c != null) {
-                if (c.getColor(game).isRed() && (c.getCardType().contains(CardType.PLANESWALKER) || c.getCardType().contains(CardType.INSTANT) || c.getCardType().contains(CardType.SORCERY))) {
-                    return true;
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+            if (stackObject != null) {
+                MageObject sourceObjectDamage;
+                if (stackObject instanceof StackAbility) {
+                    sourceObjectDamage = ((StackAbility) stackObject).getSourceObject(game);
+                } else {
+                    sourceObjectDamage = stackObject;
+                }
+                if (sourceObjectDamage != null) {
+                    if (sourceObjectDamage.getColor(game).isRed()
+                            && (sourceObjectDamage.getCardType().contains(CardType.PLANESWALKER)
+                            || sourceObjectDamage.getCardType().contains(CardType.INSTANT)
+                            || sourceObjectDamage.getCardType().contains(CardType.SORCERY))) {
+                        return true;
+                    }
                 }
             }
         }

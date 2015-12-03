@@ -25,24 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mediainserts;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
-public class ChandrasPhoenix extends mage.sets.magic2012.ChandrasPhoenix {
+/**
+ *
+ * @author LevelX2
+ */
+public class ShuffleHandIntoLibraryDrawThatManySourceEffect extends OneShotEffect {
 
-    public ChandrasPhoenix(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 37;
-        this.expansionSetCode = "MBP";
+    public ShuffleHandIntoLibraryDrawThatManySourceEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "shuffle the cards from your hand into your library, then draw that many cards";
     }
 
-    public ChandrasPhoenix(final ChandrasPhoenix card) {
-        super(card);
+    public ShuffleHandIntoLibraryDrawThatManySourceEffect(final ShuffleHandIntoLibraryDrawThatManySourceEffect effect) {
+        super(effect);
     }
 
     @Override
-    public ChandrasPhoenix copy() {
-        return new ChandrasPhoenix(this);
+    public ShuffleHandIntoLibraryDrawThatManySourceEffect copy() {
+        return new ShuffleHandIntoLibraryDrawThatManySourceEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int cardsHand = controller.getHand().size();
+            if (cardsHand > 0) {
+                controller.moveCards(controller.getHand(), Zone.LIBRARY, source, game);
+                controller.shuffleLibrary(game);
+                game.applyEffects(); // then
+                controller.drawCards(cardsHand, game);
+            }
+            return true;
+        }
+        return false;
     }
 }

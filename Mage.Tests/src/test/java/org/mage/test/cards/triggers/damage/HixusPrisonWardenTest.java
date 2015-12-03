@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.cards.triggers.combat.damage;
+package org.mage.test.cards.triggers.damage;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
