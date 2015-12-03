@@ -160,7 +160,7 @@
 
 |Generate|TOK:DD3B|Elemental||
 |Generate|TOK:DD3B|Elf Warrior||
-|Generate|TOK:|DD3B|Goblin||
+|Generate|TOK:DD3B|Goblin||
 
 |Generate|TOK:DD3A|Spirit||
 |Generate|TOK:DD3A|Demon||
