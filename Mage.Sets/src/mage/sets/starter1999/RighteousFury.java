@@ -25,76 +25,78 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.starter1999;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class SlateStreetRuffian extends CardImpl {
+public class RighteousFury extends CardImpl {
 
-    public SlateStreetRuffian(UUID ownerId) {
-        super(ownerId, 78, "Slate Street Ruffian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+    public RighteousFury(UUID ownerId) {
+        super(ownerId, 23, "Righteous Fury", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
+        this.expansionSetCode = "S99";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-
-        // Whenever Slate Street Ruffian becomes blocked, defending player discards a card.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new SlateStreetRuffianDiscardEffect(), false));
+        // Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
+        this.getSpellAbility().addEffect(new RighteousFuryEffect());
     }
 
-    public SlateStreetRuffian(final SlateStreetRuffian card) {
+    public RighteousFury(final RighteousFury card) {
         super(card);
     }
 
     @Override
-    public SlateStreetRuffian copy() {
-        return new SlateStreetRuffian(this);
+    public RighteousFury copy() {
+        return new RighteousFury(this);
     }
 }
 
-class SlateStreetRuffianDiscardEffect extends OneShotEffect {
+class RighteousFuryEffect extends OneShotEffect {
 
-    public SlateStreetRuffianDiscardEffect() {
-        super(Outcome.Discard);
-        this.staticText = "defending player discards a card";
+    public RighteousFuryEffect() {
+        super(Outcome.DestroyPermanent);
+        this.staticText = "Destroy all tapped creatures. You gain 2 life for each creature destroyed this way";
     }
 
-    public SlateStreetRuffianDiscardEffect(final SlateStreetRuffianDiscardEffect effect) {
+    public RighteousFuryEffect(final RighteousFuryEffect effect) {
         super(effect);
     }
 
     @Override
-    public SlateStreetRuffianDiscardEffect copy() {
-        return new SlateStreetRuffianDiscardEffect(this);
+    public RighteousFuryEffect copy() {
+        return new RighteousFuryEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent blockingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (blockingCreature != null) {
-            Player opponent = game.getPlayer(blockingCreature.getControllerId());
-            if (opponent != null) {
-                opponent.discard(1, false, source, game);
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int destroyedCreature = 0;
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("all tapped creatures");
+            filter.add(new TappedPredicate());
+            for(Permanent creature: game.getState().getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
+                if (creature.destroy(source.getSourceId(), game, false)) {
+                    destroyedCreature++;
+                }
             }
+            if (destroyedCreature > 0) {
+                new GainLifeEffect(destroyedCreature * 2).apply(game, source);
+            }
+            return true;
         }
         return false;
     }

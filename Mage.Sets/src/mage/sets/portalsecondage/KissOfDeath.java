@@ -25,48 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.portalsecondage;
 
 import java.util.UUID;
-import mage.abilities.condition.LockedInCondition;
-import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class RoarOfChallenge extends CardImpl {
+public class KissOfDeath extends CardImpl {
 
-    public RoarOfChallenge(UUID ownerId) {
-        super(ownerId, 145, "Roar of Challenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "KTK";
+    public KissOfDeath(UUID ownerId) {
+        super(ownerId, 16, "Kiss of Death", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
+        this.expansionSetCode = "PO2";
 
-
-        // All creatures able to block target creature this turn do so.
-        this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
-                "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Kiss of Death deals 4 damage to target opponent. You gain 4 life.
+            this.getSpellAbility().addEffect(new DamageTargetEffect(4));
+        this.getSpellAbility().addEffect(new GainLifeEffect(4));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public RoarOfChallenge(final RoarOfChallenge card) {
+    public KissOfDeath(final KissOfDeath card) {
         super(card);
     }
 
     @Override
-    public RoarOfChallenge copy() {
-        return new RoarOfChallenge(this);
+    public KissOfDeath copy() {
+        return new KissOfDeath(this);
     }
 }

@@ -68,8 +68,8 @@ public class SuturePriest extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another creature enters the battlefield under your control,you gain 1 life.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
+        // Whenever another creature enters the battlefield under your control, you may gain 1 life.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filter, true));
 
         // Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.
         this.addAbility(new SuturePriestSecondTriggeredAbility());

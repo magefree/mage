@@ -25,65 +25,70 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class SlateStreetRuffian extends CardImpl {
+public class CorruptOfficial extends CardImpl {
 
-    public SlateStreetRuffian(UUID ownerId) {
-        super(ownerId, 78, "Slate Street Ruffian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "GTC";
+    public CorruptOfficial(UUID ownerId) {
+        super(ownerId, 128, "Corrupt Official", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "MMQ";
         this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add("Minion");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-
-        // Whenever Slate Street Ruffian becomes blocked, defending player discards a card.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new SlateStreetRuffianDiscardEffect(), false));
+        // {2}{B}: Regenerate Corrupt Official.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        
+        // Whenever Corrupt Official becomes blocked, defending player discards a card at random.
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new CorruptOfficialDiscardEffect(), false));
     }
 
-    public SlateStreetRuffian(final SlateStreetRuffian card) {
+    public CorruptOfficial(final CorruptOfficial card) {
         super(card);
     }
 
     @Override
-    public SlateStreetRuffian copy() {
-        return new SlateStreetRuffian(this);
+    public CorruptOfficial copy() {
+        return new CorruptOfficial(this);
     }
 }
 
-class SlateStreetRuffianDiscardEffect extends OneShotEffect {
+class CorruptOfficialDiscardEffect extends OneShotEffect {
 
-    public SlateStreetRuffianDiscardEffect() {
+    public CorruptOfficialDiscardEffect() {
         super(Outcome.Discard);
-        this.staticText = "defending player discards a card";
+        this.staticText = "defending player discards a card at random";
     }
 
-    public SlateStreetRuffianDiscardEffect(final SlateStreetRuffianDiscardEffect effect) {
+    public CorruptOfficialDiscardEffect(final CorruptOfficialDiscardEffect effect) {
         super(effect);
     }
 
     @Override
-    public SlateStreetRuffianDiscardEffect copy() {
-        return new SlateStreetRuffianDiscardEffect(this);
+    public CorruptOfficialDiscardEffect copy() {
+        return new CorruptOfficialDiscardEffect(this);
     }
 
     @Override
@@ -92,7 +97,7 @@ class SlateStreetRuffianDiscardEffect extends OneShotEffect {
         if (blockingCreature != null) {
             Player opponent = game.getPlayer(blockingCreature.getControllerId());
             if (opponent != null) {
-                opponent.discard(1, false, source, game);
+                opponent.discard(1, true, source, game);
                 return true;
             }
         }

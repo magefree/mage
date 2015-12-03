@@ -25,48 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.abilities.condition.LockedInCondition;
-import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class RoarOfChallenge extends CardImpl {
-
-    public RoarOfChallenge(UUID ownerId) {
-        super(ownerId, 145, "Roar of Challenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "KTK";
-
-
-        // All creatures able to block target creature this turn do so.
-        this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
-                "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+public class Groffskithur extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("card named Groffskithur from your graveyard");
+    
+    static {
+        filter.add(new NamePredicate("Groffskithur"));
     }
 
-    public RoarOfChallenge(final RoarOfChallenge card) {
+    public Groffskithur(UUID ownerId) {
+        super(ownerId, 121, "Groffskithur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Beast");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Whenever Groffskithur becomes blocked, you may return target card named Groffskithur from your graveyard to your hand.
+        Ability ability = new BecomesBlockedTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability);
+    }
+
+    public Groffskithur(final Groffskithur card) {
         super(card);
     }
 
-    @Override
-    public RoarOfChallenge copy() {
-        return new RoarOfChallenge(this);
+    @java.lang.Override
+    public Groffskithur copy() {
+        return new Groffskithur(this);
     }
 }

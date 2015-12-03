@@ -25,76 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class SlateStreetRuffian extends CardImpl {
+public class OverwhelmingForces extends CardImpl {
 
-    public SlateStreetRuffian(UUID ownerId) {
-        super(ownerId, 78, "Slate Street Ruffian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+    public OverwhelmingForces(UUID ownerId) {
+        super(ownerId, 79, "Overwhelming Forces", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{B}{B}");
+        this.expansionSetCode = "PTK";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-
-        // Whenever Slate Street Ruffian becomes blocked, defending player discards a card.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new SlateStreetRuffianDiscardEffect(), false));
+        // Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
+        this.getSpellAbility().addEffect(new OverwhelmingForcesEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public SlateStreetRuffian(final SlateStreetRuffian card) {
+    public OverwhelmingForces(final OverwhelmingForces card) {
         super(card);
     }
 
     @Override
-    public SlateStreetRuffian copy() {
-        return new SlateStreetRuffian(this);
+    public OverwhelmingForces copy() {
+        return new OverwhelmingForces(this);
     }
 }
 
-class SlateStreetRuffianDiscardEffect extends OneShotEffect {
+class OverwhelmingForcesEffect extends OneShotEffect {
 
-    public SlateStreetRuffianDiscardEffect() {
-        super(Outcome.Discard);
-        this.staticText = "defending player discards a card";
+    public OverwhelmingForcesEffect() {
+        super(Outcome.DestroyPermanent);
+        this.staticText = "Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way";
     }
 
-    public SlateStreetRuffianDiscardEffect(final SlateStreetRuffianDiscardEffect effect) {
+    public OverwhelmingForcesEffect(final OverwhelmingForcesEffect effect) {
         super(effect);
     }
 
     @Override
-    public SlateStreetRuffianDiscardEffect copy() {
-        return new SlateStreetRuffianDiscardEffect(this);
+    public OverwhelmingForcesEffect copy() {
+        return new OverwhelmingForcesEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent blockingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (blockingCreature != null) {
-            Player opponent = game.getPlayer(blockingCreature.getControllerId());
-            if (opponent != null) {
-                opponent.discard(1, false, source, game);
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && getTargetPointer().getFirst(game, source) != null) {
+            int destroyedCreature = 0;
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
+                if (permanent.destroy(source.getSourceId(), game, false)) {
+                    destroyedCreature++;
+                }
             }
+            if (destroyedCreature > 0) {
+                new DrawCardSourceControllerEffect(destroyedCreature).apply(game, source);
+            }
+            return true;
         }
         return false;
     }

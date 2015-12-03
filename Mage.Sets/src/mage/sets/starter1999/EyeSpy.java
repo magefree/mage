@@ -25,77 +25,83 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.starter1999;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class SlateStreetRuffian extends CardImpl {
+public class EyeSpy extends CardImpl {
 
-    public SlateStreetRuffian(UUID ownerId) {
-        super(ownerId, 78, "Slate Street Ruffian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Human");
-        this.subtype.add("Warrior");
+    public EyeSpy(UUID ownerId) {
+        super(ownerId, 38, "Eye Spy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}");
+        this.expansionSetCode = "S99";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-
-        // Whenever Slate Street Ruffian becomes blocked, defending player discards a card.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new SlateStreetRuffianDiscardEffect(), false));
+        // Look at the top card of target player's library. You may put that card into his or her graveyard.
+        this.getSpellAbility().addEffect(new EyeSpyEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SlateStreetRuffian(final SlateStreetRuffian card) {
+    public EyeSpy(final EyeSpy card) {
         super(card);
     }
 
     @Override
-    public SlateStreetRuffian copy() {
-        return new SlateStreetRuffian(this);
+    public EyeSpy copy() {
+        return new EyeSpy(this);
     }
 }
 
-class SlateStreetRuffianDiscardEffect extends OneShotEffect {
+class EyeSpyEffect extends OneShotEffect {
 
-    public SlateStreetRuffianDiscardEffect() {
-        super(Outcome.Discard);
-        this.staticText = "defending player discards a card";
+    public EyeSpyEffect() {
+        super(Outcome.Detriment);
+        staticText = "Look at the top card of target player's library. You may put that card into his or her graveyard";
     }
 
-    public SlateStreetRuffianDiscardEffect(final SlateStreetRuffianDiscardEffect effect) {
+    public EyeSpyEffect(final EyeSpyEffect effect) {
         super(effect);
     }
 
     @Override
-    public SlateStreetRuffianDiscardEffect copy() {
-        return new SlateStreetRuffianDiscardEffect(this);
+    public EyeSpyEffect copy() {
+        return new EyeSpyEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent blockingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (blockingCreature != null) {
-            Player opponent = game.getPlayer(blockingCreature.getControllerId());
-            if (opponent != null) {
-                opponent.discard(1, false, source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (controller != null && player != null) {
+            Card card = player.getLibrary().getFromTop(game);
+            if (card != null) {
+                Cards cards = new CardsImpl();
+                cards.add(card);
+                controller.lookAtCards("Eye Spy", cards, game);
+                if (controller.chooseUse(outcome, "Do you wish to put card into the player's graveyard?", source, game)) {
+                    controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                } else {
+                    game.informPlayers(controller.getLogName() + " puts the card back on top of the library.");
+                }
                 return true;
             }
         }
         return false;
     }
+
 }

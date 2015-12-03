@@ -25,15 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.starter1999;
 
 import java.util.UUID;
-import mage.abilities.condition.LockedInCondition;
-import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -42,31 +39,27 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class RoarOfChallenge extends CardImpl {
+public class WindSail extends CardImpl {
 
-    public RoarOfChallenge(UUID ownerId) {
-        super(ownerId, 145, "Roar of Challenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "KTK";
+    public WindSail(UUID ownerId) {
+        super(ownerId, 62, "Wind Sail", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
+        this.expansionSetCode = "S99";
 
-
-        // All creatures able to block target creature this turn do so.
-        this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
-                "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // One or two target creatures gain flying until end of turn.
+        Effect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("One or two target creatures gain flying until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 2));
     }
 
-    public RoarOfChallenge(final RoarOfChallenge card) {
+    public WindSail(final WindSail card) {
         super(card);
     }
 
     @Override
-    public RoarOfChallenge copy() {
-        return new RoarOfChallenge(this);
+    public WindSail copy() {
+        return new WindSail(this);
     }
 }

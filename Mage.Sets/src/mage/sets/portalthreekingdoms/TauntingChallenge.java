@@ -25,15 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.condition.LockedInCondition;
-import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -42,31 +37,25 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class RoarOfChallenge extends CardImpl {
+public class TauntingChallenge extends CardImpl {
 
-    public RoarOfChallenge(UUID ownerId) {
-        super(ownerId, 145, "Roar of Challenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "KTK";
-
+    public TauntingChallenge(UUID ownerId) {
+        super(ownerId, 152, "Taunting Challenge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
+        this.expansionSetCode = "PTK";
 
         // All creatures able to block target creature this turn do so.
         this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
-                "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RoarOfChallenge(final RoarOfChallenge card) {
+    public TauntingChallenge(final TauntingChallenge card) {
         super(card);
     }
 
     @Override
-    public RoarOfChallenge copy() {
-        return new RoarOfChallenge(this);
+    public TauntingChallenge copy() {
+        return new TauntingChallenge(this);
     }
 }

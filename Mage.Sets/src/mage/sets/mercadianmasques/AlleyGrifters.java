@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,48 +42,46 @@ import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class SlateStreetRuffian extends CardImpl {
+public class AlleyGrifters extends CardImpl {
 
-    public SlateStreetRuffian(UUID ownerId) {
-        super(ownerId, 78, "Slate Street Ruffian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "GTC";
+    public AlleyGrifters(UUID ownerId) {
+        super(ownerId, 115, "Alley Grifters", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+        this.expansionSetCode = "MMQ";
         this.subtype.add("Human");
-        this.subtype.add("Warrior");
-
+        this.subtype.add("Mercenary");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-
-        // Whenever Slate Street Ruffian becomes blocked, defending player discards a card.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new SlateStreetRuffianDiscardEffect(), false));
+        // Whenever Alley Grifters becomes blocked, defending player discards a card.
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new AlleyGriftersDiscardEffect(), false));
     }
 
-    public SlateStreetRuffian(final SlateStreetRuffian card) {
+    public AlleyGrifters(final AlleyGrifters card) {
         super(card);
     }
 
     @Override
-    public SlateStreetRuffian copy() {
-        return new SlateStreetRuffian(this);
+    public AlleyGrifters copy() {
+        return new AlleyGrifters(this);
     }
 }
 
-class SlateStreetRuffianDiscardEffect extends OneShotEffect {
+class AlleyGriftersDiscardEffect extends OneShotEffect {
 
-    public SlateStreetRuffianDiscardEffect() {
+    public AlleyGriftersDiscardEffect() {
         super(Outcome.Discard);
         this.staticText = "defending player discards a card";
     }
 
-    public SlateStreetRuffianDiscardEffect(final SlateStreetRuffianDiscardEffect effect) {
+    public AlleyGriftersDiscardEffect(final AlleyGriftersDiscardEffect effect) {
         super(effect);
     }
 
     @Override
-    public SlateStreetRuffianDiscardEffect copy() {
-        return new SlateStreetRuffianDiscardEffect(this);
+    public AlleyGriftersDiscardEffect copy() {
+        return new AlleyGriftersDiscardEffect(this);
     }
 
     @Override

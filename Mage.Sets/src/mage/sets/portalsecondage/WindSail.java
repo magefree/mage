@@ -25,48 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.portalsecondage;
 
 import java.util.UUID;
-import mage.abilities.condition.LockedInCondition;
-import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class RoarOfChallenge extends CardImpl {
+public class WindSail extends mage.sets.starter1999.WindSail {
 
-    public RoarOfChallenge(UUID ownerId) {
-        super(ownerId, 145, "Roar of Challenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "KTK";
-
-
-        // All creatures able to block target creature this turn do so.
-        this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
-                "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    public WindSail(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 60;
+        this.expansionSetCode = "PO2";
+        this.rarity = Rarity.COMMON;
     }
 
-    public RoarOfChallenge(final RoarOfChallenge card) {
+    public WindSail(final WindSail card) {
         super(card);
     }
 
     @Override
-    public RoarOfChallenge copy() {
-        return new RoarOfChallenge(this);
+    public WindSail copy() {
+        return new WindSail(this);
     }
 }

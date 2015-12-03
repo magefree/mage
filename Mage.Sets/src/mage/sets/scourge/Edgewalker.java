@@ -25,48 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.abilities.condition.LockedInCondition;
-import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class RoarOfChallenge extends CardImpl {
-
-    public RoarOfChallenge(UUID ownerId) {
-        super(ownerId, 145, "Roar of Challenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "KTK";
-
-
-        // All creatures able to block target creature this turn do so.
-        this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(FerociousCondition.getInstance()),
-                "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+public class Edgewalker extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("Cleric spells");
+    static {
+        filter.add(new SubtypePredicate("Cleric"));
     }
 
-    public RoarOfChallenge(final RoarOfChallenge card) {
+    public Edgewalker(UUID ownerId) {
+        super(ownerId, 137, "Edgewalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Cleric spells you cast cost {W}{B} less to cast. This effect reduces only the amount of colored mana you pay.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, new ManaCostsImpl<>("{W}{B}"))));
+    }
+
+    public Edgewalker(final Edgewalker card) {
         super(card);
     }
 
     @Override
-    public RoarOfChallenge copy() {
-        return new RoarOfChallenge(this);
+    public Edgewalker copy() {
+        return new Edgewalker(this);
     }
 }
