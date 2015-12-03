@@ -1,4 +1,4 @@
-package org.mage.test.cards.triggers.combat.damage;
+package org.mage.test.cards.triggers.damage;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;

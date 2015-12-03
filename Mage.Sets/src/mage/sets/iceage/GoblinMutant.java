@@ -39,7 +39,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -48,18 +47,18 @@ import mage.filter.predicate.permanent.TappedPredicate;
 /**
  *
  * @author BursegSardaukar
-
+ *
  */
 public class GoblinMutant extends CardImpl {
 
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature with power 3 or greater");
     static final private FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
-    
+
     static {
         filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2), Predicates.not(new TappedPredicate())));
         filter2.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
-    
+
     public GoblinMutant(UUID ownerId) {
         super(ownerId, 188, "Goblin Mutant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "ICE";
@@ -71,12 +70,12 @@ public class GoblinMutant extends CardImpl {
 
         //Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Goblin Mutant can't attack if defending player controls an untapped creature with power 3 or greater.
         Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
         effect.setText("{this} can't attack if defending player controls an untapped creature with power 3 or greater.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+
         //Goblin Mutant can't block creatures with power 3 or greater.
         Effect effectBlock = new CantBlockCreaturesSourceEffect(filter2);
         effectBlock.setText("{this} can't block creatures with power 3 or greater.");
