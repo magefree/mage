@@ -53,28 +53,28 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * You may exchange control of Perplexing Chimera and any spell cast
- * by an opponent, not just one with targets.
+ * You may exchange control of Perplexing Chimera and any spell cast by an
+ * opponent, not just one with targets.
  *
- * You make the decision whether to exchange control of Perplexing Chimera
- * and the spell as the triggered ability resolves.
+ * You make the decision whether to exchange control of Perplexing Chimera and
+ * the spell as the triggered ability resolves.
  *
  * If Perplexing Chimera leaves the battlefield or the spell leaves the stack
  * before the triggered ability resolves, you can't make the exchange.
  *
- * Neither Perplexing Chimera nor the spell changes zones. Only control of
- * them is exchanged.
+ * Neither Perplexing Chimera nor the spell changes zones. Only control of them
+ * is exchanged.
  *
- * After the ability resolves, you control the spell. Any instance of "you"
- * in that spell's text now refers to you, "an opponent" refers to one of
- * your opponents, and so on. The change of control happens before new targets
- * are chosen, so any targeting restrictions such as "target opponent" or
- * "target creature you control" are now made in reference to you, not the
- * spell's original controller. You may change those targets to be legal in
- * reference to you, or, if those are the spell's only targets, the spell will
- * be countered on resolution for having illegal targets. When the spell
- * resolves, any illegal targets are unaffected by it and you make all decisions
- * the spell's effect calls for.
+ * After the ability resolves, you control the spell. Any instance of "you" in
+ * that spell's text now refers to you, "an opponent" refers to one of your
+ * opponents, and so on. The change of control happens before new targets are
+ * chosen, so any targeting restrictions such as "target opponent" or "target
+ * creature you control" are now made in reference to you, not the spell's
+ * original controller. You may change those targets to be legal in reference to
+ * you, or, if those are the spell's only targets, the spell will be countered
+ * on resolution for having illegal targets. When the spell resolves, any
+ * illegal targets are unaffected by it and you make all decisions the spell's
+ * effect calls for.
  *
  * You may change any of the spell's targets. If you change a target, you must
  * choose a legal target for the spell. If you can't, you must leave the target
@@ -139,7 +139,7 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            for (Effect effect: this.getEffects()) {
+            for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }
             return true;
@@ -184,7 +184,7 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
             spell.setControllerId(controller.getId());
             // and chooses new targets
             spell.chooseNewTargets(game, controller.getId());
-            game.informPlayers(new StringBuilder(controller.getLogName()).append(" got control of ").append(spell.getName()).append(" spell.").toString());
+            game.informPlayers(controller.getLogName() + " got control of " + spell.getName() + " spell.");
             // and spell controller get control of Perplexing Chimera
             if (spellCaster != null) {
                 ContinuousEffect effect = new PerplexingChimeraControlEffect();
@@ -218,8 +218,10 @@ class PerplexingChimeraControlEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             return permanent.changeControllerId(this.getTargetPointer().getFirst(game, source), game);
+        } else {
+            discard(); // if card once left the battlefield the effect can be discarded
         }
-        return false;
+        return true;
     }
 
 }
