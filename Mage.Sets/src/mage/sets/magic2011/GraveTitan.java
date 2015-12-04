@@ -95,10 +95,7 @@ class GraveTitanAbility extends TriggeredAbilityImpl {
         if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
             return true;
         }
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

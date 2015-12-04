@@ -149,18 +149,25 @@ public class Token extends MageObjectImpl {
 
         // moved here from CreateTokenEffect because not all cards that create tokens use CreateTokenEffect
         // they use putOntoBattlefield directly
-        Card source = game.getCard(sourceId);
-        if (!expansionSetCodeChecked) {
-            expansionSetCodeChecked = this.updateExpansionSetCode(source);
-        }
-
         // TODO: Check this setCode handling because it makes no sense if token put into play with e.g. "Feldon of the third Path"
-        String setCode;
+        String setCode = null;
         if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {
             setCode = this.getOriginalExpansionSetCode();
         } else {
-            setCode = source != null ? source.getExpansionSetCode() : null;
+            Card source = game.getCard(sourceId);
+            if (source != null) {
+                setCode = source.getExpansionSetCode();
+            } else {
+                MageObject object = game.getObject(sourceId);
+                if (object instanceof PermanentToken) {
+                    ((PermanentToken) object).getExpansionSetCode();
+                }
+            }
         }
+        if (!expansionSetCodeChecked) {
+            expansionSetCodeChecked = this.updateExpansionSetCode(setCode);
+        }
+
         GameEvent event = new GameEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount, this.getCardType().contains(CardType.CREATURE));
         if (!game.replaceEvent(event)) {
             amount = event.getAmount();
@@ -258,11 +265,11 @@ public class Token extends MageObjectImpl {
         }
     }
 
-    public boolean updateExpansionSetCode(Card source) {
-        if (source == null) {
+    public boolean updateExpansionSetCode(String setCode) {
+        if (setCode == null || setCode.isEmpty()) {
             return false;
         }
-        this.setExpansionSetCodeForImage(source.getExpansionSetCode());
+        this.setExpansionSetCodeForImage(setCode);
         return true;
     }
 }
