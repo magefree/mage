@@ -245,13 +245,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         this(UUID.randomUUID());
         this.name = name;
         this.range = range;
-        hand = new CardsImpl(Zone.HAND);
+        hand = new CardsImpl();
         graveyard = new Graveyard();
         abilities = new AbilitiesImpl<>();
         counters = new Counters();
         manaPool = new ManaPool(playerId);
         library = new Library(playerId);
-        sideboard = new CardsImpl(Zone.OUTSIDE);
+        sideboard = new CardsImpl();
     }
 
     protected PlayerImpl(UUID id) {

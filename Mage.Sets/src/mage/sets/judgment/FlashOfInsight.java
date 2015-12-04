@@ -112,7 +112,7 @@ class FlashOfInsightEffect extends OneShotEffect {
         int xValue;
         xValue = source.getManaCostsToPay().getX();
 
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         int count = Math.min(player.getLibrary().size(), xValue);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);

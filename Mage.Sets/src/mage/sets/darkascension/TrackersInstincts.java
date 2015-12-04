@@ -28,11 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +36,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -93,7 +93,7 @@ class TrackersInstinctsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
 
             boolean creaturesFound = false;
             int count = Math.min(controller.getLibrary().size(), 4);

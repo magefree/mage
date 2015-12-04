@@ -28,10 +28,6 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -42,6 +38,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -101,7 +100,7 @@ class SilentBladeOniEffect extends OneShotEffect {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (opponent != null && controller != null) {
-            Cards cardsInHand = new CardsImpl(Zone.PICK);
+            Cards cardsInHand = new CardsImpl();
             cardsInHand.addAll(opponent.getHand());
             if (cardsInHand.size() > 0) {
                 TargetCard target = new TargetCard(1, Zone.PICK, new FilterNonlandCard());

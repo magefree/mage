@@ -88,7 +88,7 @@ class GatherThePackEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.LIBRARY);
+        Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, 5));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);

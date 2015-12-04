@@ -87,7 +87,7 @@ class NightsnareDiscardEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         if (player != null && controller != null) {
             if (!player.getHand().isEmpty()) {
-                Cards revealedCards = new CardsImpl(Zone.HAND);
+                Cards revealedCards = new CardsImpl();
                 revealedCards.addAll(player.getHand());
                 player.revealCards(sourceCard != null ? sourceCard.getIdName() : "Discard", revealedCards, game);
                 // You may choose a nonland card from it.

@@ -131,7 +131,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
             }
             int numberToReveal = this.numberCardsToReveal.calculate(game, source, this);
             if (numberToReveal > 0) {
-                Cards revealedCards = new CardsImpl(Zone.HAND);
+                Cards revealedCards = new CardsImpl();
                 numberToReveal = Math.min(player.getHand().size(), numberToReveal);
                 if (player.getHand().size() > numberToReveal) {
                     TargetCardInHand chosenCards = new TargetCardInHand(numberToReveal, numberToReveal, new FilterCard("card in " + player.getLogName() + "'s hand"));

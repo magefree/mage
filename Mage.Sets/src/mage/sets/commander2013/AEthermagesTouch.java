@@ -96,7 +96,7 @@ class AEthermagesTouchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
 
             boolean properCardFound = false;
             int count = Math.min(player.getLibrary().size(), 4);

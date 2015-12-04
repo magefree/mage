@@ -128,7 +128,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
         Player opponent = game.getPlayer(opponentId);
 
         if (player != null && opponent != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
             int count = Math.min(player.getLibrary().size(), 2);
             for (int i = 0; i < count; i++) {
                 Card card = opponent.getLibrary().removeFromTop(game);

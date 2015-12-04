@@ -29,18 +29,16 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.MageObject;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -74,53 +72,37 @@ public class CranialExtraction extends CardImpl {
 
 }
 
-class CranialExtractionEffect extends OneShotEffect {
+class CranialExtractionEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public CranialExtractionEffect() {
-        super(Outcome.Exile);
-        staticText = "Name a nonland card. Search target player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library";
+    CranialExtractionEffect() {
+        super(false, "target player's", "all cards with that name");
     }
 
-    public CranialExtractionEffect(final CranialExtractionEffect effect) {
+    CranialExtractionEffect(final CranialExtractionEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && controller != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
+            cardChoice.setMessage("Name a nonland card");
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {
                 if (!controller.canRespond()) {
                     return false;
                 }
             }
-
             String cardName = cardChoice.getChoice();
-            game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
-            for (Card card: player.getGraveyard().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                }
+            MageObject sourceObject = game.getObject(source.getSourceId());
+            if (sourceObject != null) {
+                game.informPlayers(sourceObject.getName() + " named card: [" + cardName + "]");
             }
-            for (Card card: player.getHand().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
-                }
-            }
-            for (Card card: player.getLibrary().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
-                }
-            }
-            controller.lookAtCards(sourceObject.getName() + " Hand", player.getHand(), game);
-            controller.lookAtCards(sourceObject.getName() + " Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
-            player.shuffleLibrary(game);
+            super.applySearchAndExile(game, source, cardName, player.getId());
         }
         return true;
     }
@@ -130,4 +112,8 @@ class CranialExtractionEffect extends OneShotEffect {
         return new CranialExtractionEffect(this);
     }
 
+    @Override
+    public String getText(Mode mode) {
+        return "Name a nonland card. " + super.getText(mode);
+    }
 }

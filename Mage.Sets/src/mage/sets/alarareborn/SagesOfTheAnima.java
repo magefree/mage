@@ -104,7 +104,7 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
         FilterCard filter = new FilterCard();
         filter.add(new CardTypePredicate(CardType.CREATURE));
         Player player = game.getPlayer(event.getPlayerId());
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         if (player != null) {
             for (int i = 0; i < 3; i++) {
                 Card card = player.getLibrary().removeFromTop(game);

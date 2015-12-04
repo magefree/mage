@@ -28,11 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -46,6 +41,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -116,7 +116,7 @@ class ShrineOfPiercingVisionEffect extends OneShotEffect {
         }
         int count = permanent.getCounters().getCount(CounterType.CHARGE);
 
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         count = Math.min(player.getLibrary().size(), count);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);

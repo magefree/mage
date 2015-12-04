@@ -28,10 +28,6 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +35,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -92,7 +92,7 @@ class WorldlyCounselEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         int count = (new DomainValue()).calculate(game, source, this);
         count = Math.min(player.getLibrary().size(), count);
         for (int i = 0; i < count; i++) {

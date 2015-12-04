@@ -107,7 +107,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards revealedCards = new CardsImpl(Zone.PICK);
+            Cards revealedCards = new CardsImpl();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (playerId != controller.getId()) {
                     Player opponent = game.getPlayer(playerId);

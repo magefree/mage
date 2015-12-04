@@ -89,7 +89,7 @@ class GlimpseTheFutureEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
 
         if (controller != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
             int cardsCount = Math.min(3, controller.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
                 Card card = controller.getLibrary().removeFromTop(game);

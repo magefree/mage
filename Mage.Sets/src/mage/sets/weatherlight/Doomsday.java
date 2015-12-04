@@ -27,6 +27,7 @@
  */
 package mage.sets.weatherlight;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -41,8 +42,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.UUID;
 
 /**
  *
@@ -92,8 +91,8 @@ class DoomsdayEffect extends OneShotEffect {
         
         if (player != null) {
             //Search your library and graveyard for five cards
-            Cards allCards = new CardsImpl(Zone.PICK);
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards allCards = new CardsImpl();
+            Cards cards = new CardsImpl();
             allCards.addAll(player.getLibrary().getCardList());
             allCards.addAll(player.getGraveyard());
             int number = Math.min(5, allCards.size());

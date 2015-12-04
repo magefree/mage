@@ -115,7 +115,7 @@ class ThievingSpriteEffect extends OneShotEffect {
 
         Cards revealedCards = new CardsImpl();
         if (numberOfFaeries > 0 && targetPlayer.getHand().size() > numberOfFaeries) {
-            Cards cardsInHand = new CardsImpl(Zone.PICK);
+            Cards cardsInHand = new CardsImpl();
             cardsInHand.addAll(targetPlayer.getHand());
 
             TargetCard target = new TargetCard(numberOfFaeries, Zone.PICK, new FilterCard());

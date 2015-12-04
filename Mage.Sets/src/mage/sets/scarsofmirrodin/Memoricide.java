@@ -30,17 +30,15 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -72,55 +70,37 @@ public class Memoricide extends CardImpl {
 
 }
 
-class MemoricideEffect extends OneShotEffect {
+class MemoricideEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public MemoricideEffect() {
-        super(Outcome.Exile);
-        staticText = "Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library";
+    MemoricideEffect() {
+        super(true, "target player's", "any number of cards with that name");
     }
 
-    public MemoricideEffect(final MemoricideEffect effect) {
+    MemoricideEffect(final MemoricideEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (player != null && controller != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
+            cardChoice.setMessage("Name a nonland card");
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {
                 if (!controller.canRespond()) {
                     return false;
                 }
             }
-
             String cardName = cardChoice.getChoice();
             MageObject sourceObject = game.getObject(source.getSourceId());
             if (sourceObject != null) {
                 game.informPlayers(sourceObject.getName() + " named card: [" + cardName + "]");
             }
-            for (Card card : player.getGraveyard().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
-                }
-            }
-            for (Card card : player.getHand().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
-                }
-            }
-            for (Card card : player.getLibrary().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
-                }
-            }
-            controller.lookAtCards("Memoricide Hand", player.getHand(), game);
-            controller.lookAtCards("Memoricide Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
-            player.shuffleLibrary(game);
+            super.applySearchAndExile(game, source, cardName, player.getId());
         }
         return true;
     }
@@ -130,4 +110,8 @@ class MemoricideEffect extends OneShotEffect {
         return new MemoricideEffect(this);
     }
 
+    @Override
+    public String getText(Mode mode) {
+        return "Name a nonland card. " + super.getText(mode);
+    }
 }

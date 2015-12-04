@@ -106,7 +106,7 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            Cards cards = new CardsImpl(Zone.LIBRARY);
+            Cards cards = new CardsImpl();
 
             int creatureCardsFound = 0;
             int count = Math.min(controller.getLibrary().size(), 8);

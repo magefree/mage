@@ -154,7 +154,7 @@ class HeroesPodiumEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         int count = source.getManaCostsToPay().getX();
         count = Math.min(player.getLibrary().size(), count);
         boolean legendaryIncluded = false;

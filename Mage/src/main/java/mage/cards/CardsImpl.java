@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
@@ -53,7 +52,6 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     private static Random rnd = new Random();
     private UUID ownerId;
-    private Zone zone;
 
     public CardsImpl() {
     }
@@ -70,21 +68,9 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         }
     }
 
-    public CardsImpl(Zone zone) {
-        this.zone = zone;
-    }
-
-    public CardsImpl(Zone zone, Collection<Card> cards) {
-        this(zone);
-        for (Card card : cards) {
-            this.add(card.getId());
-        }
-    }
-
     public CardsImpl(final CardsImpl cards) {
         this.addAll(cards);
         this.ownerId = cards.ownerId;
-        this.zone = cards.zone;
     }
 
     @Override
@@ -126,7 +112,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         if (this.size() == 0) {
             return null;
         }
-        UUID[] cards = this.toArray(new UUID[0]);
+        UUID[] cards = this.toArray(new UUID[this.size()]);
         return game.getCard(cards[rnd.nextInt(cards.length)]);
     }
 

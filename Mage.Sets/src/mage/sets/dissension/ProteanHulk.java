@@ -106,7 +106,7 @@ class ProteanHulkEffect extends OneShotEffect {
     }
 
     Cards ProteanHulkSearch(Game game, Ability source) {
-        Cards cardsPicked = new CardsImpl(Zone.LIBRARY);
+        Cards cardsPicked = new CardsImpl();
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, source.getControllerId(), source.getControllerId(), source.getControllerId(), Integer.MAX_VALUE);

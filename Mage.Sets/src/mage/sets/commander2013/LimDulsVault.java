@@ -95,7 +95,7 @@ class LimDulsVaultEffect extends OneShotEffect {
 
         boolean doAgain;
         do  {
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
             int count = Math.min(player.getLibrary().size(), 5);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
@@ -105,7 +105,7 @@ class LimDulsVaultEffect extends OneShotEffect {
                 }
             }
             player.lookAtCards("Lim-Dul's Vault", cards, game);
-            doAgain = player.chooseUse(outcome, "Pay 1 lfe and look at the next 5 cards?", source, game);
+            doAgain = player.chooseUse(outcome, "Pay 1 life and look at the next 5 cards?", source, game);
             if (doAgain) {
                 player.loseLife(1, game);
             } else {

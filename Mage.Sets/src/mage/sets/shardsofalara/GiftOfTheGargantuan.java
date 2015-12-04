@@ -28,16 +28,16 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandCard;
@@ -93,7 +93,7 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         boolean creatureCardFound = false;
         boolean landCardFound = false;
         int count = Math.min(player.getLibrary().size(), 4);

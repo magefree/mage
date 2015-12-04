@@ -168,7 +168,7 @@ class SummoningTrapEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.LIBRARY);
+        Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, 7));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(Zone.LIBRARY,

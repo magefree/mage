@@ -28,7 +28,6 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -95,7 +94,7 @@ class  NaturalSelectionEffect extends OneShotEffect {
         if (player == null || you == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         int count = Math.min(player.getLibrary().size(), 3);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);

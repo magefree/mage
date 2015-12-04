@@ -150,7 +150,7 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
             int xValue = cost.announceXValue(source, game);
             cost.getFixedCostsFromAnnouncedValue(xValue).pay(source, game, source.getSourceId(), source.getControllerId(), false);
             
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
             int count = Math.min(player.getLibrary().size(), xValue);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);

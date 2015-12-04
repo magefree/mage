@@ -104,7 +104,7 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
         int devotion = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (devotion > 0 && targetPlayer != null) {
-            Cards revealedCards = new CardsImpl(Zone.PICK);
+            Cards revealedCards = new CardsImpl();
             int amount = Math.min(targetPlayer.getHand().size(), devotion);
             if (targetPlayer.getHand().size() > amount) {
                 FilterCard filter = new FilterCard("card in target player's hand");
