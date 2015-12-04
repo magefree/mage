@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -69,18 +70,18 @@ public class GraspOfFate extends CardImpl {
     public GraspOfFate(final GraspOfFate card) {
         super(card);
     }
-    
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             ability.getTargets().clear();
-            for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
                     FilterPermanent filter = new FilterPermanent("nonland permanent from opponent " + opponent.getLogName());
                     filter.add(new ControllerIdPredicate(opponentId));
                     filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-                    TargetPermanent target = new TargetPermanent(0, 1, filter,false);
+                    TargetPermanent target = new TargetPermanent(0, 1, filter, false);
                     ability.addTarget(target);
                 }
             }
@@ -113,7 +114,7 @@ class GraspOfFateExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName()).apply(game, source);
+            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName(), Zone.BATTLEFIELD, true).apply(game, source);
         }
         return false;
     }
