@@ -90,7 +90,7 @@ class BitterRevelationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Cards cards = new CardsImpl(Zone.LIBRARY);
+            Cards cards = new CardsImpl();
             int cardsCount = Math.min(4, player.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);

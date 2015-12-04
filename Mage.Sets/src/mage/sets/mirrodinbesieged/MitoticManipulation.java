@@ -30,16 +30,16 @@ package mage.sets.mirrodinbesieged;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -102,8 +102,8 @@ class MitoticManipulationEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.PICK);
-        Cards cardsFound = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
+        Cards cardsFound = new CardsImpl();
         int count = Math.min(player.getLibrary().size(), 7);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);

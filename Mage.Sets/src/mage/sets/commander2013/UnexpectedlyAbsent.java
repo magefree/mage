@@ -27,11 +27,8 @@
  */
 package mage.sets.commander2013;
 
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -108,7 +105,7 @@ class UnexpectedlyAbsentEffect extends OneShotEffect {
                 Player owner = game.getPlayer(permanent.getOwnerId());
                 if (owner != null) {
                     int xValue = Math.min(source.getManaCostsToPay().getX(), owner.getLibrary().size());
-                    Cards cards = new CardsImpl(Zone.PICK);
+                    Cards cards = new CardsImpl();
                     Deque<UUID> cardIds = new LinkedList<>();
                     for (int i = 0; i < xValue; i++) {
                         Card card = owner.getLibrary().removeFromTop(game);

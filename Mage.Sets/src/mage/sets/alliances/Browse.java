@@ -91,7 +91,7 @@ class BrowseEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
 
         if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
             int cardsCount = Math.min(5, player.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);

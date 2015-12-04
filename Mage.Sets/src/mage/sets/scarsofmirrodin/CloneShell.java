@@ -95,7 +95,7 @@ class CloneShellEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         int count = Math.min(player.getLibrary().size(), 4);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);

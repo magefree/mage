@@ -4,12 +4,11 @@ import java.util.UUID;
 
 import mage.cards.Card;
 import mage.cards.CardsImpl;
-import mage.constants.Zone;
 
 public class Graveyard extends CardsImpl {
 	
 	public Graveyard() {
-		super(Zone.GRAVEYARD);
+		super();
 	}
     
     public Graveyard(final Graveyard graveyard) {

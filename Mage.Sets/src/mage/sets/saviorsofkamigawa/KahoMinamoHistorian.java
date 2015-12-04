@@ -40,7 +40,6 @@ import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -155,10 +154,10 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, source));
             FilterCard filter = new FilterCard();
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, source.getManaCostsToPay().getX()));
-            Cards cards = new CardsImpl(Zone.EXILED, game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)).getCards(filter, game));
+            TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
+            Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
             if (cards.size() > 0 && controller.choose(Outcome.PlayForFree, cards, target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

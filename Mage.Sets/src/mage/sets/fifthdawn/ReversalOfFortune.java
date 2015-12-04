@@ -94,7 +94,7 @@ class ReversalOfFortuneEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (controller != null && opponent != null) {
             // Target opponent reveals his or her hand
-            Cards revealedCards = new CardsImpl(Zone.HAND); 
+            Cards revealedCards = new CardsImpl(); 
             revealedCards.addAll(opponent.getHand()); 
             opponent.revealCards("Reveal", revealedCards, game);
             

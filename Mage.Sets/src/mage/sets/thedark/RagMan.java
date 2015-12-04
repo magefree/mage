@@ -104,7 +104,7 @@ class RagManDiscardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            Cards creatureCardsInHand = new CardsImpl(Zone.PICK);
+            Cards creatureCardsInHand = new CardsImpl();
             for (UUID cardId : player.getHand()) {
                 Card card = player.getHand().get(cardId, game);
                 if (filter.match(card, game)) {

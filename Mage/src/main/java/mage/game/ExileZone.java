@@ -30,7 +30,6 @@ package mage.game;
 
 import java.io.Serializable;
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.cards.CardsImpl;
 
 /**
@@ -48,7 +47,7 @@ public class ExileZone extends CardsImpl implements Serializable {
     }
 
     public ExileZone(UUID id, String name, boolean hidden) {
-        super(Zone.EXILED);
+        super();
         this.id = id;
         this.name = name;
         this.hidden = hidden;

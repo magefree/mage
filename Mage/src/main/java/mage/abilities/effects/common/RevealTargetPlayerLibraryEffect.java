@@ -35,7 +35,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -77,7 +76,7 @@ public class RevealTargetPlayerLibraryEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.LIBRARY);
+        Cards cards = new CardsImpl();
         cards.addAll(player.getLibrary().getTopCards(game, amountCards.calculate(game, source, this)));
         player.revealCards(sourceObject.getIdName() + " - Top " + amountCards.toString() + "cards of " + targetPlayer.getName() + "\'s library", cards, game);
         return true;

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -91,9 +92,13 @@ public class TargetCardInLibrary extends TargetCard {
             cards = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
         }
         Collections.sort(cards, new CardNameComparator());
+        Cards cardsId = new CardsImpl();
+        for (Card card : cards) {
+            cardsId.add(card);
+        }
         while (!isChosen() && !doneChosing()) {
             chosen = targets.size() >= minNumberOfTargets;
-            if (!player.chooseTarget(outcome, new CardsImpl(Zone.LIBRARY, cards), this, null, game)) {
+            if (!player.chooseTarget(outcome, cardsId, this, null, game)) {
                 return chosen;
             }
             chosen = targets.size() >= minNumberOfTargets;

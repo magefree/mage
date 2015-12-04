@@ -95,7 +95,7 @@ class GenesisWaveEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.LIBRARY);
+        Cards cards = new CardsImpl();
         int xValue = source.getManaCostsToPay().getX();
         int numberCards = Math.min(controller.getLibrary().size(), xValue);
         for (int i = 0; i < numberCards; i++) {

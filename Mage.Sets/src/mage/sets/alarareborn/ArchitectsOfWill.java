@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -104,7 +103,7 @@ class ArchitectsOfWillEffect extends OneShotEffect {
                 || controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.LIBRARY);
+        Cards cards = new CardsImpl();
         int count = Math.min(targetPlayer.getLibrary().size(), 3);
         for (int i = 0; i < count; i++) {
             Card card = targetPlayer.getLibrary().removeFromTop(game);

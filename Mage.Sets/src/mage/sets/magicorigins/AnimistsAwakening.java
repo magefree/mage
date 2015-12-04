@@ -91,7 +91,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.LIBRARY);
+        Cards cards = new CardsImpl();
         int xValue = source.getManaCostsToPay().getX();
         cards.addAll(controller.getLibrary().getTopCards(game, xValue));
         if (cards.size() > 0) {

@@ -197,7 +197,7 @@ class JarOfEyeballsEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         int count = Math.min(player.getLibrary().size(), countersRemoved);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);

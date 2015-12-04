@@ -112,7 +112,7 @@ class BalaGedThiefEffect extends OneShotEffect {
 
         int numberOfAllies = game.getBattlefield().countAll(filter, you.getId(), game);
 
-        Cards cardsInHand = new CardsImpl(Zone.PICK);
+        Cards cardsInHand = new CardsImpl();
         cardsInHand.addAll(targetPlayer.getHand());
 
         int count = Math.min(cardsInHand.size(), numberOfAllies);

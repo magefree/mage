@@ -28,9 +28,6 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,7 +40,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -103,7 +102,7 @@ public class RavenFamiliar extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Player player = game.getPlayer(source.getControllerId());
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
             int count = Math.min(player.getLibrary().size(), 3);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);

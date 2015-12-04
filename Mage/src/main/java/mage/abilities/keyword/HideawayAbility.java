@@ -116,7 +116,7 @@ class HideawayExileEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.LIBRARY);
+        Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, 4));
         if (cards.size() > 0) {
             TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
