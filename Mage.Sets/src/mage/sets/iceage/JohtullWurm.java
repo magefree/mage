@@ -102,7 +102,6 @@ class JohtullWurmValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int count = 0;
         for(CombatGroup combatGroup : game.getCombat().getGroups()) {
             if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
                  int blockers = combatGroup.getBlockers().size();

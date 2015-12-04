@@ -29,12 +29,17 @@ package mage.sets.ninthedition;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.game.Game;
+import mage.game.combat.CombatGroup;
 
 /**
  *
@@ -51,7 +56,7 @@ public class ElvishBerserker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Elvish Berserker becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
+        this.addAbility(new ElvishBerserkerAbility());
     }
 
     public ElvishBerserker(final ElvishBerserker card) {
@@ -61,5 +66,52 @@ public class ElvishBerserker extends CardImpl {
     @Override
     public ElvishBerserker copy() {
         return new ElvishBerserker(this);
+    }
+}
+
+class ElvishBerserkerAbility extends BecomesBlockedTriggeredAbility {
+
+    public ElvishBerserkerAbility() {
+        super(null, false);
+        ElvishBerserkerValue value = new ElvishBerserkerValue();
+        this.addEffect(new BoostSourceEffect(value, value, Duration.EndOfTurn));
+    }
+
+    public ElvishBerserkerAbility(final ElvishBerserkerAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ElvishBerserkerAbility copy() {
+        return new ElvishBerserkerAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.";
+    }
+}
+
+class ElvishBerserkerValue implements DynamicValue {
+
+    @Override
+    public ElvishBerserkerValue copy() {
+        return new ElvishBerserkerValue();
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
+                 int blockers = combatGroup.getBlockers().size();
+                 return blockers > 1 ? (blockers) : 0;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public String getMessage() {
+        return "+1/+1 until end of turn for each creature blocking it";
     }
 }
