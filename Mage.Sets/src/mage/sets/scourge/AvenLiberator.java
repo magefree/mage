@@ -25,50 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.sets.scourge;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.RecruiterEffect;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class GoblinRecruiter extends CardImpl {
+public class AvenLiberator extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Goblin cards");
+    public AvenLiberator(UUID ownerId) {
+        super(ownerId, 4, "Aven Liberator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Bird");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Morph {3}{W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}")));
+        // When Aven Liberator is turned face up, target creature you control gains protection from the color of your choice until end of turn.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public GoblinRecruiter(UUID ownerId) {
-        super(ownerId, 80, "Goblin Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "VIS";
-        this.subtype.add("Goblin");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
-    }
-
-    public GoblinRecruiter(final GoblinRecruiter card) {
+    public AvenLiberator(final AvenLiberator card) {
         super(card);
     }
 
     @Override
-    public GoblinRecruiter copy() {
-        return new GoblinRecruiter(this);
+    public AvenLiberator copy() {
+        return new AvenLiberator(this);
     }
 }

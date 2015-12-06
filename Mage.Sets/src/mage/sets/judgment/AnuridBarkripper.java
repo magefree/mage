@@ -25,50 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.RecruiterEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-
+import mage.constants.Zone;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class GoblinRecruiter extends CardImpl {
+public class AnuridBarkripper extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Goblin cards");
+    public AnuridBarkripper(UUID ownerId) {
+        super(ownerId, 104, "Anurid Barkripper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Frog");
+        this.subtype.add("Beast");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
+        // Threshold - Anurid Barkripper gets +2/+2 as long as seven or more cards are in your graveyard.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            "As long as seven or more cards are in your graveyard, {this} gets +2/+2"));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
+        this.addAbility(ability);
     }
 
-    public GoblinRecruiter(UUID ownerId) {
-        super(ownerId, 80, "Goblin Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "VIS";
-        this.subtype.add("Goblin");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
-    }
-
-    public GoblinRecruiter(final GoblinRecruiter card) {
+    public AnuridBarkripper(final AnuridBarkripper card) {
         super(card);
     }
 
     @Override
-    public GoblinRecruiter copy() {
-        return new GoblinRecruiter(this);
+    public AnuridBarkripper copy() {
+        return new AnuridBarkripper(this);
     }
 }

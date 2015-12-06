@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,37 +38,35 @@ import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
-
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class GoblinRecruiter extends CardImpl {
+public class DwarvenRecruiter extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Goblin cards");
+    private static final FilterCard filter = new FilterCard("Dwarf cards");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate("Dwarf"));
     }
 
-    public GoblinRecruiter(UUID ownerId) {
-        super(ownerId, 80, "Goblin Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "VIS";
-        this.subtype.add("Goblin");
+    public DwarvenRecruiter(UUID ownerId) {
+        super(ownerId, 186, "Dwarven Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Dwarf");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
+        // When Dwarven Recruiter enters the battlefield, search your library for any number of Dwarf cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
     }
 
-    public GoblinRecruiter(final GoblinRecruiter card) {
+    public DwarvenRecruiter(final DwarvenRecruiter card) {
         super(card);
     }
 
     @Override
-    public GoblinRecruiter copy() {
-        return new GoblinRecruiter(this);
+    public DwarvenRecruiter copy() {
+        return new DwarvenRecruiter(this);
     }
 }

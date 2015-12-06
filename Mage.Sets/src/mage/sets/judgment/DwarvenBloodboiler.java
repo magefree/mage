@@ -25,50 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.RecruiterEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class GoblinRecruiter extends CardImpl {
+public class DwarvenBloodboiler extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Goblin cards");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Dwarf you control");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(new SubtypePredicate("Dwarf"));
     }
 
-    public GoblinRecruiter(UUID ownerId) {
-        super(ownerId, 80, "Goblin Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "VIS";
-        this.subtype.add("Goblin");
+    public DwarvenBloodboiler(UUID ownerId) {
+        super(ownerId, 84, "Dwarven Bloodboiler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Dwarf");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
+        // Tap an untapped Dwarf you control: Target creature gets +2/+0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn),
+            new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public GoblinRecruiter(final GoblinRecruiter card) {
+    public DwarvenBloodboiler(final DwarvenBloodboiler card) {
         super(card);
     }
 
     @Override
-    public GoblinRecruiter copy() {
-        return new GoblinRecruiter(this);
+    public DwarvenBloodboiler copy() {
+        return new DwarvenBloodboiler(this);
     }
 }

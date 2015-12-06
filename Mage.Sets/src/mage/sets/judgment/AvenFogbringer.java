@@ -25,50 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.RecruiterEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class GoblinRecruiter extends CardImpl {
+public class AvenFogbringer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Goblin cards");
-
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
-    }
-
-    public GoblinRecruiter(UUID ownerId) {
-        super(ownerId, 80, "Goblin Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "VIS";
-        this.subtype.add("Goblin");
-
-        this.power = new MageInt(1);
+    public AvenFogbringer(UUID ownerId) {
+        super(ownerId, 34, "Aven Fogbringer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Bird");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Aven Fogbringer enters the battlefield, return target land to its owner's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
     }
 
-    public GoblinRecruiter(final GoblinRecruiter card) {
+    public AvenFogbringer(final AvenFogbringer card) {
         super(card);
     }
 
     @Override
-    public GoblinRecruiter copy() {
-        return new GoblinRecruiter(this);
+    public AvenFogbringer copy() {
+        return new AvenFogbringer(this);
     }
 }
