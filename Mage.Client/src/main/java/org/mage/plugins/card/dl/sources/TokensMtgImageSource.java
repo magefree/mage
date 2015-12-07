@@ -28,9 +28,6 @@
 
 package org.mage.plugins.card.dl.sources;
 
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.images.CardDownloadData;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,6 +37,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.images.CardDownloadData;
 
 /**
  *
