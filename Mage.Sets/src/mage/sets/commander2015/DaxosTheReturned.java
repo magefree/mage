@@ -60,8 +60,9 @@ import mage.players.Player;
  * @author fireshoes
  */
 public class DaxosTheReturned extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
+
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
@@ -80,10 +81,10 @@ public class DaxosTheReturned extends CardImpl {
         effect.setText("you get an experience counter");
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filter, false);
         this.addAbility(ability);
-        
-        // {1}{W}{B}: Put a white and black Spirit enchantment creature token onto the battlefield. It has 
+
+        // {1}{W}{B}: Put a white and black Spirit enchantment creature token onto the battlefield. It has
         // "This creature's power and toughness are each equal to the number of experience counters you have."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl("{1}{W}{B}")));        
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl("{1}{W}{B}")));
     }
 
     public DaxosTheReturned(final DaxosTheReturned card) {
@@ -96,13 +97,13 @@ public class DaxosTheReturned extends CardImpl {
     }
 }
 
-
 class DaxosSpiritToken extends Token {
+
     DaxosSpiritToken() {
         super("Spirit", "white and black Spirit enchantment creature token with \"This creature's power and toughness are each equal to the number of experience counters you have.\"");
         this.setOriginalExpansionSetCode("C15");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ENCHANTMENT);
+        cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setBlack(true);
         subtype.add("Spirit");
