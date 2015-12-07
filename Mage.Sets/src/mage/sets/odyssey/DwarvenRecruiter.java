@@ -25,55 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.RecruiterEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author LoneFox
  */
-public class SerendibSorcerer extends CardImpl {
+public class DwarvenRecruiter extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
+    private static final FilterCard filter = new FilterCard("Dwarf cards");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(new SubtypePredicate("Dwarf"));
     }
 
-    public SerendibSorcerer(UUID ownerId) {
-        super(ownerId, 61, "Serendib Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public DwarvenRecruiter(UUID ownerId) {
+        super(ownerId, 186, "Dwarven Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Dwarf");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // {tap}: Target creature other than Serendib Sorcerer becomes 0/2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(0, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+        // When Dwarven Recruiter enters the battlefield, search your library for any number of Dwarf cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    public DwarvenRecruiter(final DwarvenRecruiter card) {
         super(card);
     }
 
     @Override
-    public SerendibSorcerer copy() {
-        return new SerendibSorcerer(this);
+    public DwarvenRecruiter copy() {
+        return new DwarvenRecruiter(this);
     }
 }

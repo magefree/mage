@@ -25,55 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LoneFox
  */
-public class SerendibSorcerer extends CardImpl {
+public class AnuridBarkripper extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
+    public AnuridBarkripper(UUID ownerId) {
+        super(ownerId, 104, "Anurid Barkripper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Frog");
+        this.subtype.add("Beast");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public SerendibSorcerer(UUID ownerId) {
-        super(ownerId, 61, "Serendib Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {tap}: Target creature other than Serendib Sorcerer becomes 0/2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(0, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // Threshold - Anurid Barkripper gets +2/+2 as long as seven or more cards are in your graveyard.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            "As long as seven or more cards are in your graveyard, {this} gets +2/+2"));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    public AnuridBarkripper(final AnuridBarkripper card) {
         super(card);
     }
 
     @Override
-    public SerendibSorcerer copy() {
-        return new SerendibSorcerer(this);
+    public AnuridBarkripper copy() {
+        return new AnuridBarkripper(this);
     }
 }

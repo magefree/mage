@@ -25,55 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author LoneFox
  */
-public class SerendibSorcerer extends CardImpl {
+public class AirborneAid extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
+    private static final FilterPermanent filter = new FilterPermanent("Bird on the battlefield");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(new SubtypePredicate("Bird"));
     }
 
-    public SerendibSorcerer(UUID ownerId) {
-        super(ownerId, 61, "Serendib Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public AirborneAid(UUID ownerId) {
+        super(ownerId, 62, "Airborne Aid", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
+        this.expansionSetCode = "ONS";
 
-        // {tap}: Target creature other than Serendib Sorcerer becomes 0/2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(0, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+        // Draw a card for each Bird on the battlefield.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    public AirborneAid(final AirborneAid card) {
         super(card);
     }
 
     @Override
-    public SerendibSorcerer copy() {
-        return new SerendibSorcerer(this);
+    public AirborneAid copy() {
+        return new AirborneAid(this);
     }
 }

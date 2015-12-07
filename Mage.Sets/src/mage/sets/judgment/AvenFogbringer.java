@@ -25,55 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author LoneFox
  */
-public class SerendibSorcerer extends CardImpl {
+public class AvenFogbringer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public SerendibSorcerer(UUID ownerId) {
-        super(ownerId, 61, "Serendib Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
+    public AvenFogbringer(UUID ownerId) {
+        super(ownerId, 34, "Aven Fogbringer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Bird");
         this.subtype.add("Wizard");
-        this.power = new MageInt(1);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {tap}: Target creature other than Serendib Sorcerer becomes 0/2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(0, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Aven Fogbringer enters the battlefield, return target land to its owner's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    public AvenFogbringer(final AvenFogbringer card) {
         super(card);
     }
 
     @Override
-    public SerendibSorcerer copy() {
-        return new SerendibSorcerer(this);
+    public AvenFogbringer copy() {
+        return new AvenFogbringer(this);
     }
 }

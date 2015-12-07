@@ -25,55 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.torment;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LoneFox
  */
-public class SerendibSorcerer extends CardImpl {
+public class Pyromania extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
+    public Pyromania(UUID ownerId) {
+        super(ownerId, 112, "Pyromania", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+        this.expansionSetCode = "TOR";
 
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public SerendibSorcerer(UUID ownerId) {
-        super(ownerId, 61, "Serendib Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {tap}: Target creature other than Serendib Sorcerer becomes 0/2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(0, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // {1}{R}, Discard a card at random: Pyromania deals 1 damage to target creature or player.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new DiscardCardCost(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
+        // {1}{R}, Sacrifice Pyromania: Pyromania deals 1 damage to target creature or player.
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    public Pyromania(final Pyromania card) {
         super(card);
     }
 
     @Override
-    public SerendibSorcerer copy() {
-        return new SerendibSorcerer(this);
+    public Pyromania copy() {
+        return new Pyromania(this);
     }
 }

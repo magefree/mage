@@ -31,24 +31,25 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RecruiterEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInLibrary;
+
 
 /**
  *
  * @author Quercitron
  */
 public class GoblinRecruiter extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("Goblin cards");
+
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
+    }
 
     public GoblinRecruiter(UUID ownerId) {
         super(ownerId, 80, "Goblin Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -59,7 +60,7 @@ public class GoblinRecruiter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GoblinRecruiterEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
     }
 
     public GoblinRecruiter(final GoblinRecruiter card) {
@@ -70,49 +71,4 @@ public class GoblinRecruiter extends CardImpl {
     public GoblinRecruiter copy() {
         return new GoblinRecruiter(this);
     }
-}
-
-class GoblinRecruiterEffect extends OneShotEffect {
-
-    private static final FilterCard goblinFilter = new FilterCard("Goblin cards");
-
-    static {
-        goblinFilter.add(new SubtypePredicate("Goblin"));
-    }
-
-    public GoblinRecruiterEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.";
-    }
-
-    public GoblinRecruiterEffect(final GoblinRecruiterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GoblinRecruiterEffect copy() {
-        return new GoblinRecruiterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetCardInLibrary targetGoblins = new TargetCardInLibrary(0, Integer.MAX_VALUE, goblinFilter);
-            Cards cards = new CardsImpl();
-            if (controller.searchLibrary(targetGoblins, game)) {
-                cards.addAll(targetGoblins.getTargets());
-            }
-            controller.revealCards(staticText, cards, game);
-            controller.shuffleLibrary(game);
-
-            int numberOfGoblins = cards.size();
-            if (numberOfGoblins > 0) {
-                controller.putCardsOnTopOfLibrary(cards, game, source, true);
-            }
-            return true;
-        }
-        return false;
-    }
-
 }

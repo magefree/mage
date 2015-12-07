@@ -17,18 +17,21 @@ import javax.swing.text.html.HTMLEditorKit;
 public class ColorPane extends JEditorPane {
 
     HTMLEditorKit kit = new HTMLEditorKit();
-    HTMLDocument doc =  new HTMLDocument();
-    
+    HTMLDocument doc = new HTMLDocument();
+
     public ColorPane() {
         this.setEditorKit(kit);
         this.setDocument(doc);
     }
+
     /**
-     * This method solves the known issue with Nimbus LAF background transparency and background color.
+     * This method solves the known issue with Nimbus LAF background
+     * transparency and background color.
+     *
      * @param color
      */
     public void setExtBackgroundColor(Color color) {
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
         JPanel jPanel = new JPanel();
         jPanel.setBackground(color);
         setLayout(new BorderLayout());

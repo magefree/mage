@@ -47,8 +47,9 @@ public class AddCountersControllerEffect extends OneShotEffect {
     /**
      *
      * @param counter Counter to add. Includes type and amount.
-     * @param enchantedEquipped If true, not source controller will get counter,
-     * but permanent's controller that source enchants or equippes.
+     * @param enchantedEquipped If true, not source controller will get the
+     * counter, but the permanent's controller that the source permanent
+     * enchants or equippes.
      */
     public AddCountersControllerEffect(Counter counter, boolean enchantedEquipped) {
         super(Outcome.Benefit);

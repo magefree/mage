@@ -25,55 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.torment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author LoneFox
  */
-public class SerendibSorcerer extends CardImpl {
+public class OrganGrinder extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public SerendibSorcerer(UUID ownerId) {
-        super(ownerId, 61, "Serendib Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
+    public OrganGrinder(UUID ownerId) {
+        super(ownerId, 75, "Organ Grinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "TOR";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // {tap}: Target creature other than Serendib Sorcerer becomes 0/2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(0, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // {tap}, Exile three cards from your graveyard: Target player loses 3 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(3), new TapSourceCost());
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, new FilterCard("three cards from your graveyard"))));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    public OrganGrinder(final OrganGrinder card) {
         super(card);
     }
 
     @Override
-    public SerendibSorcerer copy() {
-        return new SerendibSorcerer(this);
+    public OrganGrinder copy() {
+        return new OrganGrinder(this);
     }
 }

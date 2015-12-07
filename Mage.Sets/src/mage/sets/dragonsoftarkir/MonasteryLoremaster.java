@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MonasteryLoremaster extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("target noncreature, nonland card from your graveyard");
+    private static final FilterCard filter = new FilterCard("noncreature, nonland card from your graveyard");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));

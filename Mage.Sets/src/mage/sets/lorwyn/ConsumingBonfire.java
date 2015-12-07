@@ -25,55 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author LoneFox
+ * @author Poddo
  */
-public class SerendibSorcerer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
+public class ConsumingBonfire extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterPermanent("non-Elemental creature");
+    private static final FilterPermanent filter2 = new FilterPermanent("Treefolk creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(Predicates.not(new SubtypePredicate("Elemental")));
+        filter2.add(new CardTypePredicate(CardType.CREATURE));
+        filter2.add(new SubtypePredicate("Treefolk"));              
     }
 
-    public SerendibSorcerer(UUID ownerId) {
-        super(ownerId, 61, "Serendib Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public ConsumingBonfire(UUID ownerId) {
+        super(ownerId, 161, "Consuming Bonfire", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{R}{R}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Elemental");
 
-        // {tap}: Target creature other than Serendib Sorcerer becomes 0/2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(0, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+        // Choose one - Consuming Bonfire deals 4 damage to target non-Elemental creature; 
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
+                
+        //or Consuming Bonfire deals 7 damage to target Treefolk creature.
+        Mode mode = new Mode();
+        mode.getEffects().add(new DamageTargetEffect(7));
+        mode.getTargets().add(new TargetPermanent(filter2));
+        this.getSpellAbility().addMode(mode);
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    public ConsumingBonfire(final ConsumingBonfire card) {
         super(card);
     }
 
     @Override
-    public SerendibSorcerer copy() {
-        return new SerendibSorcerer(this);
+    public ConsumingBonfire copy() {
+        return new ConsumingBonfire(this);
     }
 }

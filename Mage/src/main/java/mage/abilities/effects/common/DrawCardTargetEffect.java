@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -84,18 +85,19 @@ public class DrawCardTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            int cardsToDraw = amount.calculate(game, source, this);
-            if (upTo) {
-                cardsToDraw = player.getAmount(0, cardsToDraw, "Draw how many cards?", game);
+        for (UUID playerId : getTargetPointer().getTargets(game, source)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                int cardsToDraw = amount.calculate(game, source, this);
+                if (upTo) {
+                    cardsToDraw = player.getAmount(0, cardsToDraw, "Draw how many cards?", game);
+                }
+                if (!optional || player.chooseUse(outcome, "Use draw effect?", source, game)) {
+                    player.drawCards(cardsToDraw, game);
+                }
             }
-            if (!optional || player.chooseUse(outcome, "Use draw effect?", source, game)) {
-                player.drawCards(cardsToDraw, game);
-            }
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override

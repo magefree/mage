@@ -25,55 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.judgment;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author LoneFox
  */
-public class SerendibSorcerer extends CardImpl {
+public class SoulcatchersAerie extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
+    private static final FilterPermanent filter = new FilterPermanent("a Bird");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Bird creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(new SubtypePredicate("Bird"));
+        filter2.add(new SubtypePredicate("Bird"));
     }
 
-    public SerendibSorcerer(UUID ownerId) {
-        super(ownerId, 61, "Serendib Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public SoulcatchersAerie(UUID ownerId) {
+        super(ownerId, 25, "Soulcatchers' Aerie", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "JUD";
 
-        // {tap}: Target creature other than Serendib Sorcerer becomes 0/2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(0, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+        // Whenever a Bird is put into your graveyard from the battlefield, put a feather counter on Soulcatchers' Aerie.
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance()),
+            false, filter, false, true));
+        // Bird creatures get +1/+1 for each feather counter on Soulcatchers' Aerie.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersCount(CounterType.FEATHER),
+            new CountersCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter2, false,
+            "Bird creatures get +1/+1 for each feather counter on {this}.")));
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    public SoulcatchersAerie(final SoulcatchersAerie card) {
         super(card);
     }
 
     @Override
-    public SerendibSorcerer copy() {
-        return new SerendibSorcerer(this);
+    public SoulcatchersAerie copy() {
+        return new SoulcatchersAerie(this);
     }
 }

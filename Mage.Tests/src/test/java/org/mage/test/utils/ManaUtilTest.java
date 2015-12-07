@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.BasicManaAbility;
@@ -14,6 +15,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
 import mage.cards.repository.CardRepository;
+import mage.util.CardUtil;
 import mage.util.ManaUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -123,6 +125,49 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaAvailEnough("{W}{W}", 0, "{G/W}{G/W}", true);
         testManaAvailEnough("{G}{G}", 0, "{G/W}{G/W}", true);
 
+    }
+
+    /**
+     * Mana.enough is used to check if a spell can be cast with an given amount
+     * of avalable mana
+     */
+    @Test
+    public void testManaIncrease() {
+        // cost - reduction - rest
+        testManaReduction("{G}{G}", "{G}", "{G}");
+        testManaReduction("{1}{G}{G}", "{G}", "{1}{G}");
+        testManaReduction("{B}{B}", "{B}", "{B}");
+        testManaReduction("{1}{B}{B}", "{B}", "{1}{B}");
+        testManaReduction("{W}{W}", "{W}", "{W}");
+        testManaReduction("{1}{W}{W}", "{W}", "{1}{W}");
+        testManaReduction("{U}{U}", "{U}", "{U}");
+        testManaReduction("{1}{U}{U}", "{U}", "{1}{U}");
+        testManaReduction("{R}{R}", "{R}", "{R}");
+        testManaReduction("{1}{R}{R}", "{R}", "{1}{R}");
+
+        testManaReduction("{R}{G}{B}{U}{W}", "{R}{G}{B}{U}{W}", "{0}");
+
+        // Hybrid Mana
+        testManaReduction("{2/B}{2/B}{2/B}", "{B}{B}", "{2/B}");
+        testManaReduction("{2/B}{2/B}{2/B}", "{B}{B}{B}", "{0}");
+        testManaReduction("{2/W}{2/W}{2/W}", "{W}{W}", "{2/W}");
+        testManaReduction("{2/W}{2/W}{2/W}", "{W}{W}{W}", "{0}");
+
+        testManaReduction("{G/B}{G/B}{G/B}", "{B}{G}{B}", "{0}");
+    }
+
+    /**
+     * Checks if a given mana reduction left the expected amount of mana costs
+     *
+     * @param manaCostsToPay
+     * @param availablyAny
+     * @param available
+     * @param expected
+     */
+    private void testManaReduction(String manaCostsToPay, String manaToReduce, String restMana) {
+        SpellAbility spellAbility = new SpellAbility(new ManaCostsImpl(manaCostsToPay), "Test");
+        CardUtil.adjustCost(spellAbility, new ManaCostsImpl(manaToReduce), true);
+        Assert.assertTrue("The mana cost to pay " + manaCostsToPay + " reduced by " + manaToReduce + " should left " + restMana + " but the rest was " + spellAbility.getManaCostsToPay().getText(), spellAbility.getManaCostsToPay().getText().equals(restMana));
     }
 
     /**

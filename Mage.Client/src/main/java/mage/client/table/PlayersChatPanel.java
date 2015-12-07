@@ -38,13 +38,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.swing.Icon;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import mage.client.chat.ChatPanelBasic;
 import static mage.client.chat.ChatPanelBasic.CHAT_ALPHA;
-import mage.client.chat.ChatPanelSeparated;
-import mage.client.components.ColorPane;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_WIDTH;
 import mage.client.util.MageTableRowSorter;
@@ -62,8 +61,6 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     private final List<String> players = new ArrayList<>();
     private final UserTableModel userTableModel;
-    private final ChatPanelSeparated userChatPanel;
-    private final ColorPane systemMessagesPane;
     private static final int[] defaultColumnsWidth = {20, 100, 100, 80, 80};
 
 
@@ -84,43 +81,26 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         TableUtil.setColumnWidthAndOrder(jTablePlayers, defaultColumnsWidth, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
         jTablePlayers.setDefaultRenderer(Icon.class, new CountryCellRenderer());
 
-        systemMessagesPane = new ColorPane();
+        jScrollPaneTalk.setSystemMessagesPane(colorPaneSystem);
+        jScrollPaneTalk.setOpaque(false);
 
-        userChatPanel = new ChatPanelSeparated();
-        userChatPanel.setSystemMessagesPane(systemMessagesPane);
-
-        if (jTabbedPaneText != null) {
-            jTabbedPaneText.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
-            if (userChatPanel != null) {
-                userChatPanel.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
-                jTabbedPaneText.addTab("Talk", userChatPanel);
-            }
-            if (systemMessagesPane != null) {
-                systemMessagesPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-                systemMessagesPane.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-                systemMessagesPane.setFocusCycleRoot(false);
-                systemMessagesPane.setMargin(new java.awt.Insets(2, 2, 2, 2));
-                systemMessagesPane.setOpaque(false);
-                systemMessagesPane.setExtBackgroundColor(new Color(0, 0, 0, CHAT_ALPHA)); // Alpha = 255 not transparent
-                systemMessagesPane.setSelectionColor(Color.LIGHT_GRAY);
-                jTabbedPaneText.addTab("System", systemMessagesPane);
-
-            }
-        }
+        jScrollPaneSystem.getViewport().setOpaque(false);
+        colorPaneSystem.setExtBackgroundColor(new Color(0, 0, 0, CHAT_ALPHA)); // Alpha = 255 not transparent
+        colorPaneSystem.setBorder(new EmptyBorder(5, 5, 5, 5));
         if (jScrollPanePlayers != null) {
-
             jScrollPanePlayers.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
         }
+
     }
 
     public ChatPanelBasic getUserChatPanel() {
-        return userChatPanel;
+        return jScrollPaneTalk;
     }
 
     public void cleanUp() {
         TableUtil.saveColumnWidthAndOrderToPrefs(jTablePlayers, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
-        userChatPanel.cleanUp();
+        jScrollPaneTalk.cleanUp();
     }
 
     public void setSplitDividerLocation(int location) {
@@ -219,11 +199,16 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        jSpinner1 = new javax.swing.JSpinner();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPanePlayers = new javax.swing.JScrollPane();
         jTablePlayers = new javax.swing.JTable();
         jTabbedPaneText = new javax.swing.JTabbedPane();
+        jScrollPaneTalk = new mage.client.chat.ChatPanelSeparated();
+        jScrollPaneSystem = new javax.swing.JScrollPane();
+        colorPaneSystem = new mage.client.components.ColorPane();
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(10);
@@ -246,6 +231,26 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jScrollPanePlayers.setViewportView(jTablePlayers);
 
         jSplitPane1.setTopComponent(jScrollPanePlayers);
+
+        jTabbedPaneText.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+        jTabbedPaneText.addTab("Talk", jScrollPaneTalk);
+
+        jScrollPaneSystem.setBorder(null);
+        jScrollPaneSystem.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneSystem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPaneSystem.setFocusable(false);
+        jScrollPaneSystem.setOpaque(false);
+
+        colorPaneSystem.setEditable(false);
+        colorPaneSystem.setBackground(new java.awt.Color(0, 0, 0));
+        colorPaneSystem.setBorder(null);
+        colorPaneSystem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        colorPaneSystem.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        colorPaneSystem.setOpaque(false);
+        jScrollPaneSystem.setViewportView(colorPaneSystem);
+
+        jTabbedPaneText.addTab("System", jScrollPaneSystem);
+
         jSplitPane1.setRightComponent(jTabbedPaneText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -270,7 +275,11 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private mage.client.components.ColorPane colorPaneSystem;
     private javax.swing.JScrollPane jScrollPanePlayers;
+    private javax.swing.JScrollPane jScrollPaneSystem;
+    private mage.client.chat.ChatPanelSeparated jScrollPaneTalk;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPaneText;
     private javax.swing.JTable jTablePlayers;
