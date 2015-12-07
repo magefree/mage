@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  */
 public class ArgivianBlacksmith extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("target artifact creature");
+    private static final FilterPermanent filter = new FilterPermanent("artifact creature");
     
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
