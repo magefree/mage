@@ -27,14 +27,13 @@
  */
 package mage.sets.magic2013;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -50,7 +49,7 @@ public class MoggFlunkies extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Mogg Flunkies can't attack or block alone.
-        this.addAbility(CantAttackAloneAbility.getInstance());
+        this.addAbility(new CantAttackAloneAbility());
         this.addAbility(CantBlockAloneAbility.getInstance());
     }
 

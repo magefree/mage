@@ -69,6 +69,10 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         return true;
     }
 
+    public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game) {
+        return true;
+    }
+
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return true;
     }

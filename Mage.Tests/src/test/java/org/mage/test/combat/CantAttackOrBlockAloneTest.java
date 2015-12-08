@@ -49,6 +49,23 @@ public class CantAttackOrBlockAloneTest extends CardTestPlayerBase {
     }
 
     /**
+     * Try to attack with two Flunkies
+     */
+    @Test
+    public void testCanAttackWithTwo() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mogg Flunkies", 2); // 3/3
+
+        attack(2, playerB, "Mogg Flunkies");
+        attack(2, playerB, "Mogg Flunkies");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 14);
+
+    }
+
+    /**
      * Try to block alone
      */
     @Test

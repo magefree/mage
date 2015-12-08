@@ -36,11 +36,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.CanAttackOnlyAloneAbility;
-import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -58,11 +57,14 @@ import mage.target.common.TargetDefender;
 import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class Combat implements Serializable, Copyable<Combat> {
+
+    private static final Logger logger = Logger.getLogger(Combat.class);
 
     private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
     private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
@@ -252,14 +254,18 @@ public class Combat implements Serializable, Copyable<Combat> {
             Player player = game.getPlayer(attackerId);
             //20101001 - 508.1d
             game.getCombat().checkAttackRequirements(player, game);
-            if (!game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
-                player.selectAttackers(game, attackerId);
-            }
-            if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
-                return;
-            }
-            // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the valid combat object!!!
-            game.getCombat().checkAttackRestrictions(player, game);
+            boolean firstTime = true;
+            do {
+                if (!firstTime || !game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
+                    player.selectAttackers(game, attackerId);
+                }
+                firstTime = false;
+                if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
+                    return;
+                }
+                // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the current combat object!!!
+                // I don't like it too - it has to be redesigned
+            } while (!game.getCombat().checkAttackRestrictions(player, game));
             game.getCombat().resumeSelectAttackers(game);
         }
     }
@@ -337,50 +343,60 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    protected void checkAttackRestrictions(Player player, Game game) {
-        int count = 0;
-        for (CombatGroup group : groups) {
-            count += group.getAttackers().size();
-        }
-
-        if (count > 1) {
-            List<UUID> tobeRemoved = new ArrayList<>();
+    /**
+     *
+     * @param player
+     * @param game
+     * @return true if the attack with that set of creatures and attacked
+     * players/planeswalkers is possible
+     */
+    protected boolean checkAttackRestrictions(Player player, Game game) {
+        boolean check = true;
+        int numberOfChecks = 0;
+        UUID attackerToRemove = null;
+        Check:
+        while (check) {
+            check = false;
+            numberOfChecks++;
+            int numberAttackers = 0;
             for (CombatGroup group : groups) {
-                for (UUID attackingCreatureId : group.getAttackers()) {
-                    Permanent attacker = game.getPermanent(attackingCreatureId);
-                    if (count > 1 && attacker != null && attacker.getAbilities().containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
-                        if (!game.isSimulation()) {
-                            game.informPlayers(attacker.getLogName() + " can only attack alone. Removing it from combat.");
+                numberAttackers += group.getAttackers().size();
+            }
+            Player attackingPlayer = game.getPlayer(attackerId);
+            if (attackerToRemove != null) {
+                removeAttacker(attackerToRemove, game);
+            }
+            for (UUID attackingCreatureId : this.getAttackers()) {
+                Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+                for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
+                    RestrictionEffect effect = entry.getKey();
+                    for (Ability ability : entry.getValue()) {
+                        if (!effect.canAttackCheckAfter(numberAttackers, ability, game)) {
+                            MageObject sourceObject = ability.getSourceObject(game);
+                            if (attackingPlayer.isHuman()) {
+                                game.informPlayer(attackingPlayer, attackingCreature.getIdName() + " can't attack this way (" + (sourceObject == null ? "null" : sourceObject.getIdName()) + ")");
+                                return false;
+                            } else {
+                                // remove attacking creatures for AI that are not allowed to attack
+                                // can create possible not allowed attack scenarios, but not sure how to solve this
+                                for (CombatGroup combatGroup : this.getGroups()) {
+                                    if (combatGroup.getAttackers().contains(attackingCreatureId)) {
+                                        attackerToRemove = attackingCreatureId;
+                                    }
+                                }
+                                check = true; // do the check again
+                                if (numberOfChecks > 50) {
+                                    logger.error("Seems to be an AI declare attacker lock (reached 50 check iterations) " + (sourceObject == null ? "null" : sourceObject.getIdName()));
+                                    return true; // break the check
+                                }
+                                continue Check;
+                            }
                         }
-                        tobeRemoved.add(attackingCreatureId);
-                        count--;
                     }
                 }
             }
-            for (UUID attackingCreatureId : tobeRemoved) {
-                this.removeAttacker(attackingCreatureId, game);
-            }
         }
-
-        if (count == 1) {
-            List<UUID> tobeRemoved = new ArrayList<>();
-            for (CombatGroup group : groups) {
-                for (UUID attackingCreatureId : group.getAttackers()) {
-                    Permanent attacker = game.getPermanent(attackingCreatureId);
-                    if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
-                        if (!game.isSimulation()) {
-                            game.informPlayers(attacker.getLogName() + " can't attack alone. Removing it from combat.");
-                        }
-                        tobeRemoved.add(attackingCreatureId);
-                    }
-                }
-            }
-            for (UUID attackingCreatureId : tobeRemoved) {
-                this.removeAttacker(attackingCreatureId, game);
-            }
-
-        }
-
+        return true;
     }
 
     public void selectBlockers(Game game) {

@@ -48,7 +48,7 @@ public class BondedConstruct extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bonded Construct can't attack alone.
-        this.addAbility(CantAttackAloneAbility.getInstance());
+        this.addAbility(new CantAttackAloneAbility());
     }
 
     public BondedConstruct(final BondedConstruct card) {
