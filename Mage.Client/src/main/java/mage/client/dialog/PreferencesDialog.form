@@ -83,10 +83,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="main_card" min="-2" max="-2" attributes="0"/>
+                      <Component id="main_card" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_game" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -114,31 +114,31 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="displayBigCardsInHand" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="showToolTipsInAnyZone" min="-2" max="-2" attributes="0"/>
-                                      <Component id="showCardName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <Component id="tooltipDelayLabel" max="32767" attributes="0"/>
+                              <Component id="displayBigCardsInHand" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tooltipDelay" alignment="1" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="showCardName" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="displayBigCardsInHand" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="showToolTipsInAnyZone" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="showCardName" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="tooltipDelayLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="tooltipDelay" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -155,20 +155,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="displayBigCardsInHandActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="showToolTipsInAnyZone">
-                  <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show card tooltips while hovering with the mouse pointer over a card"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
-                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showToolTipsInAnyZoneActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JCheckBox" name="showCardName">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
@@ -182,6 +168,25 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showCardNameActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="tooltipDelayLabel">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Delay in milliseconds for showing the card tooltip text"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The time the appearance of the tooltip window for a card is delayed.&lt;br&gt;&#xa;If set to zero, the tooltip window won&apos;t be shown at all."/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JSlider" name="tooltipDelay">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="1000"/>
+                    <Property name="maximum" type="int" value="5000"/>
+                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="snapToTicks" type="boolean" value="true"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The time the appearance of the tooltip window for a card is delayed.&lt;br&gt;&#xa;If set to zero, the tooltip window won&apos;t be shown at all."/>
+                    <Property name="value" type="int" value="300"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -204,11 +209,9 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
+                              <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
+                              <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="cbConfirmEmptyManaPool" alignment="0" pref="485" max="32767" attributes="0"/>
                               <Component id="cbAllowRequestToShowHandCards" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbShowStormCounter" alignment="0" max="32767" attributes="0"/>
@@ -531,7 +534,7 @@
                           <Component id="checkBoxEndTurnOthers" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="phases_stopSettings" pref="183" max="32767" attributes="0"/>
+                      <Component id="phases_stopSettings" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1223,7 +1226,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="avatarPane" alignment="0" pref="418" max="32767" attributes="0"/>
+                  <Component id="avatarPane" alignment="0" pref="438" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -2097,7 +2100,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnlProxySettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="107" max="32767" attributes="0"/>
+                      <EmptySpace pref="127" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
