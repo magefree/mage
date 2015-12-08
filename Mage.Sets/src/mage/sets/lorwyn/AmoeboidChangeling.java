@@ -28,7 +28,6 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,7 +38,9 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,17 +59,18 @@ public class AmoeboidChangeling extends CardImpl {
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
-        
+
         // {tap}: Target creature gains all creature types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, null, false, Layer.TypeChangingEffects_4, SubLayer.NA), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        
+
         this.addAbility(ability);
-        
+
         // {tap}: Target creature loses all creature types until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAllCreatureTypesTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        
+
         this.addAbility(ability);
     }
 
