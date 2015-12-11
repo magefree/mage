@@ -92,7 +92,7 @@ class PainfulMemoriesEffect extends OneShotEffect {
             targetPlayer.revealCards("Painful Memories", targetPlayer.getHand(), game);
             
             if (targetPlayer.getHand().size() > 0) {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
+                TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
                 if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                     Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {

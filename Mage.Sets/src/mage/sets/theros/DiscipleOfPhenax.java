@@ -128,7 +128,7 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
                 targetPlayer.revealCards("Disciple of Phenax", revealedCards, game);
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null) {
-                    TargetCard yourChoice = new TargetCard(Zone.PICK, new FilterCard());
+                    TargetCard yourChoice = new TargetCard(Zone.HAND, new FilterCard());
                     yourChoice.setNotTarget(true);
                     if (you.choose(Outcome.Benefit, revealedCards, yourChoice, game)) {
                         Card card = targetPlayer.getHand().get(yourChoice.getFirstTarget(), game);

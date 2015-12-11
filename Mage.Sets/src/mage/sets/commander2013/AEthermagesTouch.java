@@ -112,12 +112,12 @@ class AEthermagesTouchEffect extends OneShotEffect {
 
             if (!cards.isEmpty()) {
                 player.revealCards("AEthermage's Touch", cards, game);
-                TargetCard target = new TargetCard(Zone.PICK, filterPutOntoBattlefield);
+                TargetCard target = new TargetCard(Zone.LIBRARY, filterPutOntoBattlefield);
                 if (properCardFound && player.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);
-                        if (card.putOntoBattlefield(game, Zone.PICK, source.getSourceId(), source.getControllerId())) {
+                        if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId())) {
                             // It gains \"At the beginning of your end step, return this creature to its owner's hand.\"
                             Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), TargetController.YOU, null, false);
                             ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);

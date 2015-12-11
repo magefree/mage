@@ -27,6 +27,8 @@
  */
 package mage.sets.dissension;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -43,9 +45,6 @@ import mage.game.Game;
 import mage.game.permanent.token.ElementalToken;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -120,7 +119,7 @@ class ResearchEffect extends OneShotEffect {
                     filteredCards.add(card.getId());
                 }
 
-                TargetCard target = new TargetCard(Zone.PICK, filter);
+                TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
                 if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                     Card card = player.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {

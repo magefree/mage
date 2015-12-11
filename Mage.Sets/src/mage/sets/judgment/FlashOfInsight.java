@@ -118,12 +118,11 @@ class FlashOfInsightEffect extends OneShotEffect {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
             }
         }
         player.lookAtCards(sourceObject.getName(), cards, game);
 
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put into your hand"));
+        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
         if (player.choose(Outcome.DrawCard, cards, target, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
@@ -133,27 +132,7 @@ class FlashOfInsightEffect extends OneShotEffect {
             }
         }
 
-        target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-        if (cards.size() > 0) {
-            game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
-                    .append(player.getLogName()).append(" puts ")
-                    .append(cards.size() == 1 ? "a":cards.size())
-                    .append(" card").append(cards.size() > 1 ? "s":"")
-                    .append(" on the bottom of his or her library").toString());
-        }
-        while (player.canRespond() && cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-        }
+        player.putCardsOnBottomOfLibrary(cards, game, source, true);
 
         return true;
     }

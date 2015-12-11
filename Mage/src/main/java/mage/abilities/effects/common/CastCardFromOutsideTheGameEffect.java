@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -39,8 +40,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-import java.util.Set;
-
 /**
  * @author magenoxx_at_gmail.com
  */
@@ -48,7 +47,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
 
     private static final String choiceText = "Cast a card from outside the game?";
 
-    private FilterCard filterCard;
+    private final FilterCard filterCard;
 
     public CastCardFromOutsideTheGameEffect(FilterCard filter, String ruleText) {
         super(Outcome.Benefit);
@@ -76,15 +75,17 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
         while (player.chooseUse(Outcome.Benefit, choiceText, source, game)) {
             Cards cards = player.getSideboard();
             if (cards.isEmpty()) {
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayer(player, "You have no cards outside the game.");
+                }
                 return false;
             }
 
             Set<Card> filtered = cards.getCards(filterCard, source.getSourceId(), source.getControllerId(), game);
             if (filtered.isEmpty()) {
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayer(player, "You have no " + filterCard.getMessage() + " outside the game.");
+                }
                 return false;
             }
             
@@ -93,7 +94,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
                 filteredCards.add(card.getId());
             }
 
-            TargetCard target = new TargetCard(Zone.PICK, filterCard);
+            TargetCard target = new TargetCard(Zone.OUTSIDE, filterCard);
             if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                 Card card = player.getSideboard().get(target.getFirstTarget(), game);
                 if (card != null) {

@@ -103,7 +103,7 @@ class SilentBladeOniEffect extends OneShotEffect {
             Cards cardsInHand = new CardsImpl();
             cardsInHand.addAll(opponent.getHand());
             if (cardsInHand.size() > 0) {
-                TargetCard target = new TargetCard(1, Zone.PICK, new FilterNonlandCard());
+                TargetCard target = new TargetCard(1, Zone.HAND, new FilterNonlandCard());
                 if (controller.chooseTarget(outcome, cardsInHand, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

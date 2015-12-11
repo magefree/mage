@@ -33,18 +33,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -94,25 +88,7 @@ class ArjunTheShiftingFlameEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             int count = you.getHand().size();
-            Cards cards = new CardsImpl();
-            for (Card card : you.getHand().getCards(game)) {
-                cards.add(card.getId());
-            }
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-            while (you.canRespond() && cards.size() > 1) {
-                you.choose(Outcome.Neutral, cards, target, game);
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                }
-                target.clearChosen();
-            }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-            you.getHand().clear();
+            you.putCardsOnBottomOfLibrary(you.getHand(), game, source, true);
             you.drawCards(count, game);
         }
         return true;

@@ -28,14 +28,13 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -95,7 +94,7 @@ class PerishTheThoughtEffect extends OneShotEffect {
                 targetOpponent.revealCards("Perish the Thought", targetOpponent.getHand(), game);
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null) {
-                    TargetCard target = new TargetCard(Zone.PICK, filter);
+                    TargetCard target = new TargetCard(Zone.HAND, filter);
                     target.setNotTarget(true);
                     if (you.choose(Outcome.Neutral, targetOpponent.getHand(), target, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);

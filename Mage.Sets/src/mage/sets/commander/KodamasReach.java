@@ -106,7 +106,7 @@ class KodamasReachEffect extends OneShotEffect {
                 }
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
                 if (target.getTargets().size() == 2) {
-                    TargetCard target2 = new TargetCard(Zone.PICK, filter);
+                    TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
                     controller.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
                     if (card != null) {

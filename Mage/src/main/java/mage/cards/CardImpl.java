@@ -546,8 +546,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     removed = true;
                 }
                 break;
-
-            case PICK: // Pick should no longer be used
             case BATTLEFIELD: // for sacrificing permanents or putting to library
                 removed = true;
                 break;

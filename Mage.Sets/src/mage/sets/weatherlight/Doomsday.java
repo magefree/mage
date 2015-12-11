@@ -96,7 +96,7 @@ class DoomsdayEffect extends OneShotEffect {
             allCards.addAll(player.getLibrary().getCardList());
             allCards.addAll(player.getGraveyard());
             int number = Math.min(5, allCards.size());
-            TargetCard target = new TargetCard(number, number, Zone.PICK, new FilterCard());
+            TargetCard target = new TargetCard(number, number, Zone.ALL, new FilterCard());
             
             if (player.choose(Outcome.Benefit, allCards, target, game)){
                 // exile the rest
@@ -113,7 +113,7 @@ class DoomsdayEffect extends OneShotEffect {
                     
                 }
                 //Put the chosen cards on top of your library in any order
-                target = new TargetCard(Zone.PICK, new FilterCard("Card to put on top"));
+                target = new TargetCard(Zone.ALL, new FilterCard("Card to put on top"));
                 while (cards.size() > 1 && player.canRespond()) {
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);

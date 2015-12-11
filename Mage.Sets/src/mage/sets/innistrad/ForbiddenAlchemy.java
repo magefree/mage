@@ -100,14 +100,13 @@ class ForbiddenAlchemyEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
                 }
             }
 
             if (cards.size() > 0) {
                 player.lookAtCards("Forbidden Alchemy", cards, game);
 
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put in your hand"));
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
                 if (player.choose(Outcome.Benefit, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
