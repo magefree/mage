@@ -105,7 +105,7 @@ class TalarasBaneEffect extends OneShotEffect {
         Card card = null;
         if (targetPlayer != null && you != null) {
             targetPlayer.revealCards("Talaras Bane", targetPlayer.getHand(), game);
-            TargetCard target = new TargetCard(Zone.PICK, filter);
+            TargetCard target = new TargetCard(Zone.HAND, filter);
             if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 card = targetPlayer.getHand().get(target.getFirstTarget(), game);
             }

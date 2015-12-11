@@ -28,12 +28,12 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -50,7 +50,7 @@ public class EmberBeast extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ember Beast can't attack or block alone.
-        this.addAbility(CantAttackAloneAbility.getInstance());
+        this.addAbility(new CantAttackAloneAbility());
         this.addAbility(CantBlockAloneAbility.getInstance());
     }
 

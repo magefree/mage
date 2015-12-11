@@ -139,7 +139,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
             player.lookAtCards("Psychic Surgery", cards, game);
 
             if (!cards.isEmpty() && player.chooseUse(Outcome.Exile, "Do you wish to exile a card?", source, game)) {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to exile"));
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
                 if (player.choose(Outcome.Exile, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
@@ -148,22 +148,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
                     }
                 }
             }
-
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on top of his library"));
-            while (player.canRespond() && cards.size() > 1) {
-                player.choose(Outcome.Neutral, cards, target, game);
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-                target.clearChosen();
-            }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
-
+            player.putCardsOnBottomOfLibrary(cards, game, source, true);
             return true;
         }
         return false;

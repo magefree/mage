@@ -66,7 +66,11 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean onCard) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA,
+        this(ability, duration, rule, onCard, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA);
+    }
+
+    public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean onCard, Layer layer, SubLayer subLayer) {
+        super(duration, layer, subLayer,
                 ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
         this.ability = ability;
         staticText = rule;

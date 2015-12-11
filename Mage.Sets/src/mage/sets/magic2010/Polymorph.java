@@ -29,10 +29,6 @@ package mage.sets.magic2010;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -40,6 +36,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
@@ -112,7 +112,7 @@ class PolymorphEffect extends OneShotEffect {
                     }
 
                     if (card.getCardType().contains(CardType.CREATURE)) {
-                        card.putOntoBattlefield(game, Zone.PICK, source.getSourceId(), player.getId());
+                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                     }
 
                     if (cards.size() > 0) {

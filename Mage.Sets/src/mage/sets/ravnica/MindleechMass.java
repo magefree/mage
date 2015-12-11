@@ -103,7 +103,7 @@ class MindleechMassEffect extends OneShotEffect {
             opponent.revealCards("Opponents hand", cardsInHand, game);
             if (cardsInHand.size() > 0 
                     && cardsInHand.getCards(new FilterNonlandCard(), game).size() > 0) {
-                TargetCard target = new TargetCard(1, Zone.PICK, new FilterNonlandCard());
+                TargetCard target = new TargetCard(1, Zone.HAND, new FilterNonlandCard());
                 if (you.chooseTarget(Outcome.PlayForFree, cardsInHand, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

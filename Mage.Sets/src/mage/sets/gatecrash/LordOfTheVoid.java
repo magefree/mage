@@ -1,5 +1,5 @@
 /*
-/*
+ /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -29,10 +29,6 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -42,6 +38,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -58,13 +58,12 @@ public class LordOfTheVoid extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Demon");
 
-        
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
         //Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         //Whenever Lord of the Void deals combat damage to a player, exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LordOfTheVoidEffect(), false, true));
     }
@@ -79,11 +78,10 @@ public class LordOfTheVoid extends CardImpl {
     }
 }
 
-
 class LordOfTheVoidEffect extends OneShotEffect {
 
     public LordOfTheVoidEffect() {
-        super(Outcome.PutCardInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control";
     }
 
@@ -103,22 +101,16 @@ class LordOfTheVoidEffect extends OneShotEffect {
         if (player == null || controller == null) {
             return false;
         }
-        
+
         Cards cards = new CardsImpl();
-        int max = Math.min(player.getLibrary().size(), 7);
-        for(int i = 0; i < max; i++){
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                card.moveToExile(null, "", source.getSourceId(), game);
-                cards.add(card);
-            }
-        }
-        if(cards.getCards(new FilterCreatureCard(), game).size() > 0){
+        cards.addAll(player.getLibrary().getTopCards(game, 7));
+        controller.moveCards(cards, Zone.EXILED, source, game);
+        if (cards.getCards(new FilterCreatureCard(), game).size() > 0) {
             TargetCard target = new TargetCard(Zone.EXILED, new FilterCreatureCard());
-            if(controller.chooseTarget(Outcome.PutCreatureInPlay, cards, target, source, game)){
+            if (controller.chooseTarget(outcome, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
-                if(card != null){
-                    card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+                if (card != null) {
+                    controller.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);
                 }
             }
         }

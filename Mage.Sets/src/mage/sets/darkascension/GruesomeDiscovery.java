@@ -29,10 +29,6 @@ package mage.sets.darkascension;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -40,6 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -105,7 +105,7 @@ class GruesomeDiscoveryEffect extends OneShotEffect {
                 targetPlayer.discard(2, source, game);
             }
 
-            TargetCard target = new TargetCard(2, Zone.PICK, new FilterCard());
+            TargetCard target = new TargetCard(2, Zone.HAND, new FilterCard());
             if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {

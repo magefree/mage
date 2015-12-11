@@ -101,7 +101,6 @@ class LimDulsVaultEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
                 }
             }
             player.lookAtCards("Lim-Dul's Vault", cards, game);
@@ -112,7 +111,7 @@ class LimDulsVaultEffect extends OneShotEffect {
                 player.shuffleLibrary(game);
             }
             
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard(doAgain ? textBottom : textTop));
+            TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard(doAgain ? textBottom : textTop));
             while (player.canRespond() && cards.size() > 1) {
                 player.choose(Outcome.Neutral, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);

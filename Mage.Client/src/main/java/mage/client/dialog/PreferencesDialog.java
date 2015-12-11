@@ -54,6 +54,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
@@ -81,7 +82,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static final Logger log = Logger.getLogger(PreferencesDialog.class);
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
-    public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
+    public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
@@ -338,8 +339,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabMain = new javax.swing.JPanel();
         main_card = new javax.swing.JPanel();
         displayBigCardsInHand = new javax.swing.JCheckBox();
-        showToolTipsInAnyZone = new javax.swing.JCheckBox();
         showCardName = new javax.swing.JCheckBox();
+        tooltipDelayLabel = new javax.swing.JLabel();
+        tooltipDelay = new javax.swing.JSlider();
         main_game = new javax.swing.JPanel();
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         showPlayerNamesPermanently = new javax.swing.JCheckBox();
@@ -478,17 +480,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        showToolTipsInAnyZone.setSelected(true);
-        showToolTipsInAnyZone.setText("Show card tooltips while hovering with the mouse pointer over a card");
-        showToolTipsInAnyZone.setToolTipText("");
-        showToolTipsInAnyZone.setActionCommand("");
-        showToolTipsInAnyZone.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        showToolTipsInAnyZone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showToolTipsInAnyZoneActionPerformed(evt);
-            }
-        });
-
         showCardName.setSelected(true);
         showCardName.setText("Show card name on card panel");
         showCardName.setToolTipText("Write the card's name on the card to make the card name more recognizable.");
@@ -500,30 +491,45 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        tooltipDelayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tooltipDelayLabel.setText("Delay in milliseconds for showing the card tooltip text");
+        tooltipDelayLabel.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
+
+        tooltipDelay.setMajorTickSpacing(1000);
+        tooltipDelay.setMaximum(5000);
+        tooltipDelay.setMinorTickSpacing(100);
+        tooltipDelay.setPaintLabels(true);
+        tooltipDelay.setPaintTicks(true);
+        tooltipDelay.setSnapToTicks(true);
+        tooltipDelay.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
+        tooltipDelay.setValue(300);
+
         javax.swing.GroupLayout main_cardLayout = new javax.swing.GroupLayout(main_card);
         main_card.setLayout(main_cardLayout);
         main_cardLayout.setHorizontalGroup(
             main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_cardLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tooltipDelayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(displayBigCardsInHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tooltipDelay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(main_cardLayout.createSequentialGroup()
-                        .addComponent(displayBigCardsInHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(main_cardLayout.createSequentialGroup()
-                        .addGroup(main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(showToolTipsInAnyZone)
-                            .addComponent(showCardName))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(showCardName)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         main_cardLayout.setVerticalGroup(
             main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_cardLayout.createSequentialGroup()
                 .addComponent(displayBigCardsInHand)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showToolTipsInAnyZone)
+                .addComponent(showCardName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showCardName))
+                .addComponent(tooltipDelayLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tooltipDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
@@ -603,10 +609,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(main_gameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(showPlayerNamesPermanently, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nonLandPermanentsInOnePile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(showAbilityPickerForced, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(showPlayerNamesPermanently, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nonLandPermanentsInOnePile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(showAbilityPickerForced)
                     .addComponent(cbConfirmEmptyManaPool, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
                     .addComponent(cbAllowRequestToShowHandCards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbShowStormCounter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -691,10 +696,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_card, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -911,7 +916,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(jLabelEndOfTurn)
                     .addComponent(checkBoxEndTurnOthers))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(phases_stopSettings, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addComponent(phases_stopSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1696,7 +1701,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(avatarPane, javax.swing.GroupLayout.PREFERRED_SIZE, 418, Short.MAX_VALUE)
+            .addComponent(avatarPane, javax.swing.GroupLayout.PREFERRED_SIZE, 438, Short.MAX_VALUE)
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
@@ -1877,7 +1882,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
@@ -1931,7 +1936,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         // main
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false", UPDATE_CACHE_POLICY);
@@ -2222,10 +2227,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEnableOtherSoundsActionPerformed
 
-    private void showToolTipsInAnyZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showToolTipsInAnyZoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_showToolTipsInAnyZoneActionPerformed
-
     private void cbStopAttackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopAttackActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbStopAttackActionPerformed
@@ -2349,7 +2350,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static void loadPhases(Preferences prefs) {
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "true");
-        load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
+        load(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "300");
         load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
@@ -2573,6 +2574,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
         field.setText(prop);
     }
 
+    private static void load(Preferences prefs, JSlider field, String propName, String defaultValue) {
+        String prop = prefs.get(propName, defaultValue);
+        int value;
+        try {
+            value = Integer.parseInt(prop);
+        } catch (NumberFormatException e) {
+            // It's OK to ignore "e" here because returning a default value is the documented behaviour on invalid input.
+            value = Integer.parseInt(defaultValue);
+        }
+        field.setValue(value);
+    }
+
     private static void load(Preferences prefs, JComboBox field, String propName, String defaultValue) {
         String prop = prefs.get(propName, defaultValue);
         field.setSelectedItem(prop);
@@ -2602,6 +2615,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
+    private static void save(Preferences prefs, JSlider slider, String propName, String yesValue, String noValue, boolean updateCache) {
+        prefs.put(propName, Integer.toString(slider.getValue()));
+        if (updateCache) {
+            updateCache(propName, Integer.toString(slider.getValue()));
+        }
+    }
+
     private static void save(Preferences prefs, JTextField textField, String propName) {
         prefs.put(propName, textField.getText().trim());
         updateCache(propName, textField.getText().trim());
@@ -2614,6 +2634,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public void reset() {
         tabsPanel.setSelectedIndex(0);
+    }
+
+    public static int getCachedValue(String key, int def) {
+        String stringValue = getCachedValue(key, String.valueOf(def));
+        int value;
+        try {
+            value = Integer.parseInt(stringValue);
+        } catch (NumberFormatException e) {
+            // It's OK to ignore "e" here because returning a default value is the documented behaviour on invalid input.
+            value = def;
+        }
+        return value;
     }
 
     public static String getCachedValue(String key, String def) {
@@ -2852,7 +2884,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox showAbilityPickerForced;
     private javax.swing.JCheckBox showCardName;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
-    private javax.swing.JCheckBox showToolTipsInAnyZone;
     private javax.swing.JPanel sounds_backgroundMusic;
     private javax.swing.JPanel sounds_clips;
     private javax.swing.JPanel tabAvatars;
@@ -2862,6 +2893,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel tabPhases;
     private javax.swing.JPanel tabSounds;
     private javax.swing.JTabbedPane tabsPanel;
+    private javax.swing.JSlider tooltipDelay;
+    private javax.swing.JLabel tooltipDelayLabel;
     private javax.swing.JTextField txtBackgroundImagePath;
     private javax.swing.JTextField txtBattlefieldIBGMPath;
     private javax.swing.JTextField txtBattlefieldImagePath;

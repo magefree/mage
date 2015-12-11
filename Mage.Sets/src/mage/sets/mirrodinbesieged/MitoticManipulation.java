@@ -109,7 +109,6 @@ class MitoticManipulationEffect extends OneShotEffect {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
                 if (permanentNames.contains(card.getName())) {
                     cardsFound.add(card);
                 }
@@ -118,7 +117,7 @@ class MitoticManipulationEffect extends OneShotEffect {
         player.lookAtCards("Mitotic Manipulation", cards, game);
 
         if (!cardsFound.isEmpty() && player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put a card on the battlefield?", source, game)) {
-            TargetCard target = new TargetCard(Zone.PICK, filter);
+            TargetCard target = new TargetCard(Zone.LIBRARY, filter);
 
             if (player.choose(Outcome.PutCardInPlay, cardsFound, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
@@ -128,22 +127,7 @@ class MitoticManipulationEffect extends OneShotEffect {
                 }
             }
         }
-
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-        while (player.canRespond() && cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-        }
-
+        player.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }

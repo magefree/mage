@@ -118,7 +118,7 @@ class ThievingSpriteEffect extends OneShotEffect {
             Cards cardsInHand = new CardsImpl();
             cardsInHand.addAll(targetPlayer.getHand());
 
-            TargetCard target = new TargetCard(numberOfFaeries, Zone.PICK, new FilterCard());
+            TargetCard target = new TargetCard(numberOfFaeries, Zone.HAND, new FilterCard());
 
             if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, game)) {
                 List<UUID> targets = target.getTargets();
@@ -133,7 +133,7 @@ class ThievingSpriteEffect extends OneShotEffect {
             revealedCards.addAll(targetPlayer.getHand());
         }
         
-        TargetCard targetInHand = new TargetCard(Zone.PICK, new FilterCard("card to discard"));
+        TargetCard targetInHand = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
 
         if (!revealedCards.isEmpty()) {
             targetPlayer.revealCards("Thieving Sprite", revealedCards, game);

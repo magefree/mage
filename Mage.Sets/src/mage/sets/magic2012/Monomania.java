@@ -27,21 +27,20 @@
  */
 package mage.sets.magic2012;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
@@ -86,7 +85,7 @@ class MonomaniaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            TargetCard target = new TargetCard(Zone.PICK, filter);
+            TargetCard target = new TargetCard(Zone.HAND, filter);
             if (player.choose(Outcome.Detriment, player.getHand(), target, game)) {
                 while (player.getHand().size() > 1) {
                     for (UUID uuid : player.getHand()) {

@@ -91,7 +91,7 @@ class NightTerrorsEffect extends OneShotEffect {
         if (player != null && targetPlayer != null) {
             targetPlayer.revealCards("Night Terrors", targetPlayer.getHand(), game);
 
-            TargetCard target = new TargetCard(Zone.PICK, new FilterNonlandCard("nonland card to exile"));
+            TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card to exile"));
             if (player.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {

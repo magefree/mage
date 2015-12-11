@@ -69,7 +69,7 @@ public class MasterOfCruelties extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // Master of Cruelties can only attack alone.
-        this.addAbility(CanAttackOnlyAloneAbility.getInstance());
+        this.addAbility(new CanAttackOnlyAloneAbility());
 
         // Whenever Master of Cruelties attacks a player and isn't blocked, that player's life total becomes 1. Master of Cruelties assigns no combat damage this combat.
         this.addAbility(new MasterOfCrueltiesTriggeredAbility());
@@ -111,7 +111,7 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(getSourceId());
         if (sourcePermanent.isAttacking()) {
-            for (CombatGroup combatGroup: game.getCombat().getGroups()) {
+            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                 if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
                     // check if a player is attacked (instead of a planeswalker)
                     Player defendingPlayer = game.getPlayer(combatGroup.getDefenderId());
@@ -184,11 +184,11 @@ class MasterOfCrueltiesNoDamageEffect extends ContinuousRuleModifyingEffectImpl 
                 return false;
         }
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent) event;
-        return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();                
-        
+        return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();
+
     }
 }

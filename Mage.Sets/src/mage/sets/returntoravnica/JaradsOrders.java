@@ -29,16 +29,15 @@ package mage.sets.returntoravnica;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -102,7 +101,7 @@ class JaradsOrdersEffect extends OneShotEffect {
                     }
                     controller.revealCards("Jarad's Orders", revealed, game);
                     if (target.getTargets().size() == 2) {
-                        TargetCard target2 = new TargetCard(Zone.PICK, filter);
+                        TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
                         controller.choose(Outcome.Benefit, revealed, target2, game);
                         Card card = revealed.get(target2.getFirstTarget(), game);
                         controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);

@@ -119,7 +119,7 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
                     cards.remove(revealedCard);
                 }
             }
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
+            TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard());
             while (player.canRespond() && cards.size() > 1) {
                 player.choose(Outcome.Neutral, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);

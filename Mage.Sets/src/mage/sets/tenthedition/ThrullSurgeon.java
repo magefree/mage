@@ -28,9 +28,6 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -39,7 +36,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -96,7 +95,7 @@ class ThrullSurgeonEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && you != null) {
             you.lookAtCards("Discard", targetPlayer.getHand(), game);
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
+            TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
             target.setNotTarget(true);
             if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);

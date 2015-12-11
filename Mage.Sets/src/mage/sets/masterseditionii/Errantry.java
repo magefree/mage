@@ -32,12 +32,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CanAttackOnlyAloneEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -49,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class Errantry extends CardImpl {
 
@@ -66,8 +64,8 @@ public class Errantry extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature gets +3/+0 and can only attack alone.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityAttachedEffect(CanAttackOnlyAloneAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and can only attack alone.");
+        Effect effect = new CanAttackOnlyAloneEffect();
+        effect.setText("and can only attack alone");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

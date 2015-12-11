@@ -115,7 +115,7 @@ class SteamAuguryEffect extends OneShotEffect {
         }
 
         if (opponent != null) {
-            TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
+            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             List<Card> pile1 = new ArrayList<>();
             Cards pile1CardsIds = new CardsImpl();
             target.setRequired(false);

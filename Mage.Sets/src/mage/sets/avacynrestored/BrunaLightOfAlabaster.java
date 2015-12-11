@@ -27,8 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
@@ -37,21 +36,22 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
+import mage.filter.predicate.other.AuraPermanentCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import java.util.UUID;
-import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
-import mage.filter.predicate.other.AuraPermanentCanAttachToPermanentId;
 /**
  * @author noxx
  */
@@ -138,7 +138,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
 
         int count = player.getHand().count(filterAuraCard, game);
         while (player.canRespond() && count > 0 && player.chooseUse(Outcome.Benefit, "Attach an Aura from your hand?", source, game)) {
-            TargetCard targetAura = new TargetCard(Zone.PICK, filterAuraCard);
+            TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);
             if (player.choose(Outcome.Benefit, player.getHand(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
@@ -152,7 +152,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
 
         count = player.getGraveyard().count(filterAuraCard, game);
         while (player.canRespond() && count > 0 && player.chooseUse(Outcome.Benefit, "Attach an Aura from your graveyard?", source, game)) {
-            TargetCard targetAura = new TargetCard(Zone.PICK, filterAuraCard);
+            TargetCard targetAura = new TargetCard(Zone.GRAVEYARD, filterAuraCard);
             if (player.choose(Outcome.Benefit, player.getGraveyard(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {

@@ -862,7 +862,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     moveObjectToLibrary(objectId, source == null ? null : source.getSourceId(), game, false, false);
                 }
             } else {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
+                TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
                 while (isInGame() && cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
@@ -3344,11 +3344,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 StringBuilder sb = new StringBuilder(this.getLogName())
                         .append(" puts ").append(withName ? card.getLogName() : "a card").append(" ");
                 if (fromZone != null) {
-                    if (fromZone.equals(Zone.PICK)) {
-                        sb.append("a picked card ");
-                    } else {
-                        sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ");
-                    }
+                    sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ");
                 }
                 sb.append("to the ").append(toTop ? "top" : "bottom");
                 if (card.getOwnerId().equals(getId())) {

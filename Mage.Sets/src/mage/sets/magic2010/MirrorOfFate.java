@@ -28,10 +28,6 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -40,6 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.game.ExileZone;
@@ -113,7 +113,7 @@ class MirrorOfFateEffect extends OneShotEffect {
             card.moveToExile(null, null, source.getSourceId(), game);
         }
 
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on top of your library"));
+        TargetCard target = new TargetCard(Zone.EXILED, new FilterCard("card to put on top of your library"));
         while (player.canRespond() && cards.size() > 1) {
             player.choose(Outcome.Neutral, cards, target, game);
             Card card = cards.get(target.getFirstTarget(), game);

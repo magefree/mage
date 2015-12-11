@@ -119,7 +119,6 @@ class DimirCharmEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if(card != null){
                     cards.add(card);
-                    game.getState().setZone(card.getId(), Zone.PICK);
                 }
             }
             if(cards.size() > 0){

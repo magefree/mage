@@ -29,16 +29,15 @@ package mage.sets.judgment;
 
 import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -116,7 +115,7 @@ class BurningWishEffect extends OneShotEffect {
                     filteredCards.add(card.getId());
                 }
 
-                TargetCard target = new TargetCard(Zone.PICK, filter);
+                TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
                 if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                     Card card = player.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {

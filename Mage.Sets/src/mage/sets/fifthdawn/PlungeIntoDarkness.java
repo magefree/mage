@@ -156,12 +156,11 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
                 }
             }
             player.lookAtCards("Plunge into Darkness", cards, game);
 
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put into your hand"));
+            TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
             if (player.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {

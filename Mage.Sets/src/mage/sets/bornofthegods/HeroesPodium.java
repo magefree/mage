@@ -165,7 +165,6 @@ class HeroesPodiumEffect extends OneShotEffect {
                 if (filter.match(card, game)) {
                     legendaryIncluded = true;
                 }
-                game.setZone(card.getId(), Zone.PICK);
             }
         }
         player.lookAtCards("Heroes' Podium", cards, game);
@@ -178,7 +177,7 @@ class HeroesPodiumEffect extends OneShotEffect {
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 return true;
             } else {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
+                TargetCard target = new TargetCard(Zone.LIBRARY, filter);
                 if (player.choose(outcome, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {

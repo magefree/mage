@@ -74,6 +74,7 @@ public class MageActionCallback implements ActionCallback {
     private TransferData popupData;
     private JComponent cardInfoPane;
     private volatile boolean popupTextWindowOpen = false;
+    private int tooltipDelay;
 
     enum EnlargedWindowState {
 
@@ -140,8 +141,8 @@ public class MageActionCallback implements ActionCallback {
 
     private void showTooltipPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
         if (data.component != null) {
-            String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
-            if (showTooltips.equals("false")) {
+            tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
+            if (tooltipDelay == 0) {
                 return;
             }
         }
@@ -169,7 +170,7 @@ public class MageActionCallback implements ActionCallback {
         ThreadUtils.threadPool2.submit(new Runnable() {
             @Override
             public void run() {
-                ThreadUtils.sleep(300);
+                ThreadUtils.sleep(tooltipDelay);
 
                 if (tooltipCard == null || !tooltipCard.equals(data.card) || session == null || !popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
                     return;

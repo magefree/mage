@@ -36,7 +36,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,20 +54,20 @@ public class WingsOfVelisVel extends CardImpl {
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
-        
+
         // Target creature becomes 4/4, gains all creature types, and gains flying until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new SetPowerToughnessTargetEffect(4, 4, Duration.EndOfTurn);
         effect.setText("Target creature becomes 4/4");
-        this.getSpellAbility().addEffect(effect);      
-        
-        effect = new GainAbilityTargetEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn);
+        this.getSpellAbility().addEffect(effect);
+
+        effect = new GainAbilityTargetEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, null, false, Layer.TypeChangingEffects_4, SubLayer.NA);
         effect.setText(", gains all creature types");
-        this.getSpellAbility().addEffect(effect);      
+        this.getSpellAbility().addEffect(effect);
 
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText(", and gains flying until end of turn");
-        this.getSpellAbility().addEffect(effect);        
+        this.getSpellAbility().addEffect(effect);
     }
 
     public WingsOfVelisVel(final WingsOfVelisVel card) {
