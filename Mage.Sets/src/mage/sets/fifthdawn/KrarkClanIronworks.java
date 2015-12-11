@@ -49,7 +49,7 @@ public class KrarkClanIronworks extends CardImpl {
         super(ownerId, 134, "Krark-Clan Ironworks", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "5DN";
 
-        // Sacrifice an artifact: Add {2} to your mana pool.
+        // Sacrifice an artifact: Add {C}{C} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         this.addAbility(ability);
 

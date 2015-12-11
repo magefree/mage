@@ -57,7 +57,7 @@ public class Cloudpost extends CardImpl {
 
         // Cloudpost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool for each Locus on the battlefield.
+        // {tap}: Add {C} to your mana pool for each Locus on the battlefield.
         this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 

@@ -48,7 +48,7 @@ public class DesolateLighthouse extends CardImpl {
         super(ownerId, 227, "Desolate Lighthouse", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "AVR";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}{U}{R}, {tap}: Draw a card, then discard a card.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

@@ -64,7 +64,7 @@ public class ContestedCliffs extends CardImpl {
         super(ownerId, 314, "Contested Cliffs", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {R}{G}, {tap}: Choose target Beast creature you control and target creature an opponent controls. Those creatures fight each other.
         Effect effect = new FightTargetsEffect();

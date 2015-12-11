@@ -54,7 +54,7 @@ public class WintermoonMesa extends CardImpl {
 
         // Wintermoon Mesa enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {tap}, Sacrifice Wintermoon Mesa: Tap two target lands.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));

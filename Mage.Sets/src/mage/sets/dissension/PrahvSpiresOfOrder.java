@@ -49,7 +49,7 @@ public class PrahvSpiresOfOrder extends CardImpl {
         super(ownerId, 177, "Prahv, Spires of Order", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DIS";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}{W}{U}, {T}: Prevent all damage a source of your choice would deal this turn.

@@ -47,7 +47,7 @@ public class VecTownships extends CardImpl {
         super(ownerId, 339, "Vec Townships", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "TMP";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {G} or {W} to your mana pool. Vec Townships doesn't untap during your next untap step.
         Ability ability = new GreenManaAbility();

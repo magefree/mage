@@ -61,7 +61,7 @@ public class Drumhunter extends CardImpl {
 
         // At the beginning of your end step, if you control a creature with power 5 or greater, you may draw a card.
         this.addAbility(new DrumHunterTriggeredAbility());
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
     }
 

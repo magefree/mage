@@ -56,7 +56,7 @@ public class ScryingSheets extends CardImpl {
         this.expansionSetCode = "CSP";
         this.supertype.add("Snow");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{S}, {T}: Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand.

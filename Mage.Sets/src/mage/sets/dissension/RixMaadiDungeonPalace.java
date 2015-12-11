@@ -50,7 +50,7 @@ public class RixMaadiDungeonPalace extends CardImpl {
         super(ownerId, 179, "Rix Maadi, Dungeon Palace", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DIS";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{B}{R}, {tap}: Each player discards a card. Activate this ability only any time you could cast a sorcery.

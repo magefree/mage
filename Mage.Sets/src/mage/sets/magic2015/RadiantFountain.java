@@ -48,7 +48,7 @@ public class RadiantFountain extends CardImpl {
         // When Radiant Fountain enters the battlefield, you gain 2 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));
         
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
     }
 

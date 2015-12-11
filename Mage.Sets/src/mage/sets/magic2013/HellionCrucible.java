@@ -57,7 +57,7 @@ public class HellionCrucible extends CardImpl {
         super(ownerId, 226, "Hellion Crucible", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "M13";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {1}{R}, {tap}: Put a pressure counter on Hellion Crucible.

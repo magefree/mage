@@ -53,7 +53,7 @@ public class WindingCanyons extends CardImpl {
         super(ownerId, 167, "Winding Canyons", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "WTH";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {2}, {tap}: Until end of turn, you may play creature cards as though they had flash.

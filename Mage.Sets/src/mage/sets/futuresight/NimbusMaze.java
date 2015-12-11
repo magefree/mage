@@ -63,7 +63,7 @@ public class NimbusMaze extends CardImpl {
         super(ownerId, 178, "Nimbus Maze", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "FUT";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {W} to your mana pool. Activate this ability only if you control an Island.
         this.addAbility(new ActivateIfConditionManaAbility(

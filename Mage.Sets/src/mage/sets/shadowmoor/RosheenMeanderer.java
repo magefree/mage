@@ -57,7 +57,7 @@ public class RosheenMeanderer extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {T}: Add {4} to your mana pool. Spend this mana only on costs that contain {X}.
+        // {T}: Add {C}{C}{C}{C} to your mana pool. Spend this mana only on costs that contain {X}.
         this.addAbility(new RosheenMeandererManaAbility());
 
     }

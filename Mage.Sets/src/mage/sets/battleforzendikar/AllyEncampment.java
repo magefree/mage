@@ -62,7 +62,7 @@ public class AllyEncampment extends CardImpl {
         super(ownerId, 228, "Ally Encampment", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "BFZ";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {T} Add one mana of any color to your mana pool. Spend this mana only to cast an Ally spell.

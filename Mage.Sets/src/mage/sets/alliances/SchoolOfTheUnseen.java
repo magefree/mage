@@ -47,7 +47,7 @@ public class SchoolOfTheUnseen extends CardImpl {
         super(ownerId, 186, "School of the Unseen", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ALL";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {tap}: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(2));

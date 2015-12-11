@@ -58,7 +58,7 @@ public class UnholyGrotto extends CardImpl {
         super(ownerId, 327, "Unholy Grotto", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {B}, {tap}: Put target Zombie card from your graveyard on top of your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{B}"));

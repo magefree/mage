@@ -50,7 +50,7 @@ public class BlightedCataract extends CardImpl {
         super(ownerId, 229, "Blighted Cataract", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "BFZ";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {5}{U}, {T}, Sacrifice Blighted Cataract: Draw two cards.

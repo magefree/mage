@@ -70,7 +70,7 @@ public class ManaVault extends CardImpl {
                 new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(1), TargetController.YOU, false),
                 SourceTappedCondition.getInstance(),
                 "At the beginning of your draw step, if {this} is tapped, it deals 1 damage to you."));
-        // {tap}: Add {3} to your mana pool.
+        // {tap}: Add {C}{C}{C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
     }
 

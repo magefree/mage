@@ -47,7 +47,7 @@ public class HengeOfRamos extends CardImpl {
         super(ownerId, 318, "Henge of Ramos", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "MMQ";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {tap}: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility(new ManaCostsImpl<>("{2}"));

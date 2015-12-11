@@ -59,7 +59,7 @@ public class CrucibleOfTheSpiritDragon extends CardImpl {
         super(ownerId, 167, "Crucible of the Spirit Dragon", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "FRF";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Put a storage counter on Crucible of the Spirit Dragon.

@@ -55,7 +55,7 @@ public class SlayersStronghold extends CardImpl {
         super(ownerId, 229, "Slayers' Stronghold", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "AVR";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {R}{W}, {tap}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}{W}"));

@@ -47,7 +47,7 @@ public class UnknownShores extends CardImpl {
         super(ownerId, 229, "Unknown Shores", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "THS";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {T}: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));

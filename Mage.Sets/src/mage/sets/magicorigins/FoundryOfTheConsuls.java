@@ -52,7 +52,7 @@ public class FoundryOfTheConsuls extends CardImpl {
         super(ownerId, 247, "Foundry of the Consuls", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ORI";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {5}, {T}, Sacrifice Foundry of the Consuls: Put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken(), 2),

@@ -48,7 +48,7 @@ public class SunkenRuins extends CardImpl {
         super(ownerId, 280, "Sunken Ruins", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "SHM";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {UB}, {tap}: Add {U}{U}, {U}{B}, or {B}{B} to your mana pool.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new ManaCostsImpl("{U/B}"));

@@ -60,7 +60,7 @@ public class VolrathsStronghold extends CardImpl {
         this.expansionSetCode = "STH";
         this.supertype.add("Legendary");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{B}, {tap}: Put target creature card from your graveyard on top of your library.

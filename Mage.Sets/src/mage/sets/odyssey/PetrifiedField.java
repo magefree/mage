@@ -52,7 +52,7 @@ public class PetrifiedField extends CardImpl {
         super(ownerId, 323, "Petrified Field", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ODY";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {tap}, Sacrifice Petrified Field: Return target land card from your graveyard to your hand.

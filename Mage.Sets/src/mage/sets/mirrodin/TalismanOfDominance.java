@@ -47,7 +47,7 @@ public class TalismanOfDominance extends CardImpl {
         super(ownerId, 253, "Talisman of Dominance", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MRD";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {U} or {B} to your mana pool. Talisman of Dominance deals 1 damage to you.
         Ability blueManaAbility = new BlueManaAbility();

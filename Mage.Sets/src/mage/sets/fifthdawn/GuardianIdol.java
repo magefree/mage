@@ -53,7 +53,7 @@ public class GuardianIdol extends CardImpl {
 
         // Guardian Idol enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {2}: Guardian Idol becomes a 2/2 Golem artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GuardianIdolGolemToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));

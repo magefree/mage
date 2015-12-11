@@ -56,7 +56,7 @@ public class DustBowl extends CardImpl {
         super(ownerId, 316, "Dust Bowl", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "MMQ";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {3}, {tap}, Sacrifice a land: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(3));

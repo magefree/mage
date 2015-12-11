@@ -49,7 +49,7 @@ public class KoskunKeep extends CardImpl {
         super(ownerId, 139, "Koskun Keep", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "HML";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add {R} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new GenericManaCost(1));

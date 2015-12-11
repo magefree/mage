@@ -47,7 +47,7 @@ public class MoggHollows extends CardImpl {
         super(ownerId, 318, "Mogg Hollows", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "TMP";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {R} or {G} to your mana pool. Mogg Hollows doesn't untap during your next untap step.
         Ability ability = new RedManaAbility();

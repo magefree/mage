@@ -68,7 +68,7 @@ public class Everglades extends CardImpl {
         // When Everglades enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(1, 1, filter, true)))));
 
-        // {tap}: Add {1}{B} to your mana pool.
+        // {tap}: Add {C}{B} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 1, 1, 0), new TapSourceCost()));
 
     }

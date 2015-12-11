@@ -47,7 +47,7 @@ public class ArchaeologicalDig extends CardImpl {
         super(ownerId, 320, "Archaeological Dig", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "INV";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}, Sacrifice Archaeological Dig: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility(new TapSourceCost());

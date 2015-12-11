@@ -67,12 +67,12 @@ public class BoseijuWhoSheltersAll extends CardImpl {
         // Boseiju, Who Shelters All enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         
-        // {tap}, Pay 2 life: Add {1} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
+        // {tap}, Pay 2 life: Add {C} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
         Mana mana = new Mana(0, 0, 0, 0, 0, 1, 0);
         mana.setFlag(true); // used to indicate this mana ability
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
         ability.addCost(new PayLifeCost(2));
-        ability.getEffects().get(0).setText("Add {1} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities");
+        ability.getEffects().get(0).setText("Add {C} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities");
         this.addAbility(ability);
                 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoseijuWhoSheltersAllCantCounterEffect()), new BoseijuWhoSheltersAllWatcher());

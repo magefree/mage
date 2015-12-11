@@ -29,7 +29,7 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class VolcanicSpray extends CardImpl {
 
 
         // Volcanic Spray deals 1 damage to each creature without flying and each player.
-        this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(1, filter));
         // Flashback {1}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{R}"), TimingRule.SORCERY));
     }

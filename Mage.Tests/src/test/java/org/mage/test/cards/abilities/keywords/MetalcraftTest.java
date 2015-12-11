@@ -52,7 +52,7 @@ public class MetalcraftTest extends CardTestPlayerBase {
         // Metalcraft - {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts
         addCard(Zone.BATTLEFIELD, playerA, "Rusted Relic", 1); 
 
-        // {T}: Add {1}to your mana pool.
+        // {T}: Add {C}to your mana pool.
         // {1}: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.
         // {1}, {T}: Target Blinkmoth creature gets +1/+1 until end of turn.        
         addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1); 

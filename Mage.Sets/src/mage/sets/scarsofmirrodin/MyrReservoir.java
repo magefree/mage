@@ -64,7 +64,7 @@ public class MyrReservoir extends CardImpl {
         super(ownerId, 183, "Myr Reservoir", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "SOM";
 
-        // {tap}: Add {2} to your mana pool. Spend this mana only to cast Myr spells or activate abilities of Myr.
+        // {tap}: Add {C}{C} to your mana pool. Spend this mana only to cast Myr spells or activate abilities of Myr.
         this.addAbility(new MyrReservoirManaAbility());
 
         // {3}, {tap}: Return target Myr card from your graveyard to your hand.

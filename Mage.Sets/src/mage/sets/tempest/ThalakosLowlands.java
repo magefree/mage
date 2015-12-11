@@ -47,7 +47,7 @@ public class ThalakosLowlands extends CardImpl {
         super(ownerId, 338, "Thalakos Lowlands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "TMP";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {W} or {U} to your mana pool. Thalakos Lowlands doesn't untap during your next untap step.
         Ability ability = new WhiteManaAbility();

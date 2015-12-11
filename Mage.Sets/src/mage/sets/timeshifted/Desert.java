@@ -60,7 +60,7 @@ public class Desert extends CardImpl {
         this.expansionSetCode = "TSB";
         this.subtype.add("Desert");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost(), new IsStepCondition(PhaseStep.END_COMBAT, false), null);

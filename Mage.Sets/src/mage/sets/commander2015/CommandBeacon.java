@@ -53,7 +53,7 @@ public class CommandBeacon extends CardImpl {
         super(ownerId, 56, "Command Beacon", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "C15";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {T}, Sacrifice Command Beacon: Put your commander into your hand from the command zone.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CommandBeaconEffect(), new TapSourceCost());

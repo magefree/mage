@@ -52,7 +52,7 @@ public class BlightedFen extends CardImpl {
         super(ownerId, 230, "Blighted Fen", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "BFZ";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}{B}, {T}, Sacrifice Blighted Fen: Target opponent sacrifices a creature.

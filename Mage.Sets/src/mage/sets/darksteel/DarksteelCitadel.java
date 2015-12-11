@@ -48,7 +48,7 @@ public class DarksteelCitadel extends CardImpl {
         // Indestructible (Effects that say "destroy" don't destroy this land.)
         this.addAbility(IndestructibleAbility.getInstance());
         
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
     }
 

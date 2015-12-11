@@ -48,7 +48,7 @@ public class WoodedBastion extends CardImpl {
         super(ownerId, 281, "Wooded Bastion", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "SHM";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {GW}, {tap}: Add {G}{G}, {G}{W}, or {W}{W} to your mana pool.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new ManaCostsImpl("{G/W}"));

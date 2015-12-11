@@ -56,7 +56,7 @@ public class NovijenHeartOfProgress extends CardImpl {
         super(ownerId, 175, "Novijen, Heart of Progress", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DIS";
 
-        // {T}: Add {1} to your mana pool.        
+        // {T}: Add {C} to your mana pool.        
         this.addAbility(new ColorlessManaAbility());
         
 	// {G}{U}, {T}: Put a +1/+1 counter on each creature that entered the battlefield this turn.

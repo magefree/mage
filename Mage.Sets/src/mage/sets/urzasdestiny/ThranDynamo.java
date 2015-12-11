@@ -47,7 +47,7 @@ public class ThranDynamo extends CardImpl {
         super(ownerId, 139, "Thran Dynamo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "UDS";
 
-        // {tap}: Add {3} to your mana pool.
+        // {tap}: Add {C}{C}{C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
         
     }

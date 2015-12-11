@@ -40,7 +40,7 @@ public class ScorchedRuins extends CardImpl {
         // If you do, put Scorched Ruins onto the battlefield. If you don't, put it into its
         // owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(2,2,filter,false)))));
-        // {tap}: Add {4} to your mana pool
+        // {tap}: Add {C}{C}{C}{C} to your mana pool
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(4), new TapSourceCost()));
         
     }

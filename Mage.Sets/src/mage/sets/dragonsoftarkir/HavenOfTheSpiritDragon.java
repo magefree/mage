@@ -69,7 +69,7 @@ public class HavenOfTheSpiritDragon extends CardImpl {
         super(ownerId, 249, "Haven of the Spirit Dragon", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DTK";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: add one mana of any color to your mana pool. Spend this mana only to cast a Dragon creature spell.

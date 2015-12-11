@@ -51,7 +51,7 @@ public class RishadanPort extends CardImpl {
         super(ownerId, 324, "Rishadan Port", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "MMQ";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Tap target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(1));

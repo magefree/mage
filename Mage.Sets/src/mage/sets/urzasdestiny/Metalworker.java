@@ -62,7 +62,7 @@ public class Metalworker extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {tap}: Reveal any number of artifact cards in your hand. Add {2} to your mana pool for each card revealed this way.
+        // {tap}: Reveal any number of artifact cards in your hand. Add {C}{C} to your mana pool for each card revealed this way.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MetalworkerManaEffect(), new TapSourceCost()));
     }
 
@@ -82,7 +82,7 @@ class MetalworkerManaEffect extends ManaEffect {
 
     public MetalworkerManaEffect() {
         super();
-        staticText = "Reveal any number of artifact cards in your hand. Add {2} to your mana pool for each card revealed this way";
+        staticText = "Reveal any number of artifact cards in your hand. Add {C}{C} to your mana pool for each card revealed this way";
     }
 
     public MetalworkerManaEffect(final MetalworkerManaEffect effect) {

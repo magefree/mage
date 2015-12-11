@@ -52,7 +52,7 @@ public class EldraziSpawnToken extends Token {
     }
 
     public EldraziSpawnToken() {
-        super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {1} to your mana pool.\"");
+        super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C} to your mana pool.\"");
         cardType.add(CardType.CREATURE);
         subtype.add("Eldrazi");
         subtype.add("Spawn");

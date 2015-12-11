@@ -43,7 +43,7 @@ public class SpellFizzlesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // Devoid
         // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
-        // Put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
+        // Put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
         addCard(Zone.HAND, playerA, "Adverse Conditions"); // {3}{U}
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);

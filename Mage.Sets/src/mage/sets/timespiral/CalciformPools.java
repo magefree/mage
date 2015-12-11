@@ -54,7 +54,7 @@ public class CalciformPools extends CardImpl {
         super(ownerId, 270, "Calciform Pools", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "TSP";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Put a storage counter on Calciform Pools.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()),new GenericManaCost(1));

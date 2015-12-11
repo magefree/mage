@@ -54,7 +54,7 @@ public class FungalReaches extends CardImpl {
         super(ownerId, 274, "Fungal Reaches", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "CMD";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {tap}: Put a storage counter on Fungal Reaches.

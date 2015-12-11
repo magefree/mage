@@ -51,7 +51,7 @@ public class Mutavault extends CardImpl {
         super(ownerId, 148, "Mutavault", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "MOR";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,

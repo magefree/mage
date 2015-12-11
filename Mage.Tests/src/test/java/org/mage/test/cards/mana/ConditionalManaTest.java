@@ -92,7 +92,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sliver Hive", 1);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {1} to your mana pool");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C} to your mana pool");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any type");
         setChoice(playerA, "White");
 
@@ -112,7 +112,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     public void testRosheenMeandererUsingAbility() {
         // Flying
         addCard(Zone.HAND, playerB, "Snapping Drake", 2); // {3}{U}
-        // {T}: Add {4} to your mana pool. Spend this mana only on costs that contain {X}.
+        // {T}: Add {C}{C}{C}{C} to your mana pool. Spend this mana only on costs that contain {X}.
         addCard(Zone.BATTLEFIELD, playerB, "Rosheen Meanderer", 1);
         // {X}, {T}: Untap X target lands.
         addCard(Zone.BATTLEFIELD, playerB, "Candelabra of Tawnos", 1);
@@ -121,7 +121,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake");
 
-        activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {4}");
+        activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {C}{C}{C}{C}");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X},{T}: Untap");
         setChoice(playerB, "X=4");

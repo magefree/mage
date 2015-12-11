@@ -79,7 +79,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Adarkar Wastes
-    // {T}: Add {1} to your mana pool.
+    // {T}: Add {C} to your mana pool.
     // {T}: Add {W} or {U} to your mana pool. Adarkar Wastes deals 1 damage to you.
     @Test
     public void testAdarkarWastes() {
@@ -169,7 +169,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Nykthos, Shrine to Nyx
-    // {T}: Add {1} to your mana pool.
+    // {T}: Add {C} to your mana pool.
     // {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
     @Test
     public void testNykthos1() {
@@ -225,9 +225,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star", 1);
         // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Sphere", 1);
-        // {T}: Add {1} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {3} to your mana pool instead.
+        // {T}: Add {C} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} to your mana pool instead.
         addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         // {T}: Add {R} or {G} to your mana pool. Each opponent gains 1 life.
         addCard(Zone.BATTLEFIELD, playerA, "Grove of the Burnwillows", 1);
 
@@ -293,7 +293,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
     @Test
     public void testMageRingNetwork() {
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         // {T}, {1} : Put a storage counter on Mage-Ring Network.
         // {T}, Remove X storage counters from Mage-Ring Network: Add {X} to your mana pool.
         addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);
@@ -311,7 +311,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
     @Test
     public void testMageRingNetwork2() {
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         // {T}, {1} : Put a storage counter on Mage-Ring Network.
         // {T}, Remove X storage counters from Mage-Ring Network: Add {X} to your mana pool.
         addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);

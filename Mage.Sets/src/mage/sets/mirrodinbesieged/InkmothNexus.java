@@ -54,7 +54,7 @@ public class InkmothNexus extends CardImpl {
         super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "MBS";
         
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

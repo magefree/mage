@@ -51,7 +51,7 @@ public class YavimayaHollow extends CardImpl {
         this.expansionSetCode = "UDS";
         this.supertype.add("Legendary");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {G}, {tap}: Regenerate target creature.

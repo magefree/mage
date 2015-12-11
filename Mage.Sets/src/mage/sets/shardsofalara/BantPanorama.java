@@ -68,7 +68,7 @@ public class BantPanorama extends CardImpl {
         super(ownerId, 221, "Bant Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ALA";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}, Sacrifice Bant Panorama: Search your library for a basic Forest, Plains, or Island card and put it onto the battlefield tapped. Then shuffle your library.

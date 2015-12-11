@@ -47,7 +47,7 @@ public class PrismaticLens extends CardImpl {
         super(ownerId, 262, "Prismatic Lens", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "TSP";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility(new ManaCostsImpl("{1}"));

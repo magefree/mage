@@ -53,7 +53,7 @@ public class MagusOfTheLibrary extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {tap}: Draw a card. Activate this ability only if you have exactly seven cards in hand.

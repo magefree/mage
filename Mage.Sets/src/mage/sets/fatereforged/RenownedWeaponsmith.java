@@ -69,7 +69,7 @@ public class RenownedWeaponsmith extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // {t}: Add {2} to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+        // {t}: Add {C}{C} to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new RenownedWeaponsmithManaBuilder()));
 
         // {U}, {T}: Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle your library.

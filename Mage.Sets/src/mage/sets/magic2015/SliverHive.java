@@ -74,7 +74,7 @@ public class SliverHive extends CardImpl {
         super(ownerId, 247, "Sliver Hive", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "M15";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a Sliver spell.

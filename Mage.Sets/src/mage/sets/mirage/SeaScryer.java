@@ -56,7 +56,7 @@ public class SeaScryer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add {U} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlueMana(1)), new GenericManaCost(1));

@@ -53,7 +53,7 @@ public class UrzasFactory extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Urza's");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {7}, {tap}: Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AssemblyWorkerToken()), new GenericManaCost(7));

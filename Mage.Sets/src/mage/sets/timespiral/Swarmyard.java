@@ -63,7 +63,7 @@ public class Swarmyard extends CardImpl {
         super(ownerId, 278, "Swarmyard", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "TSP";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {tap}: Regenerate target Insect, Rat, Spider, or Squirrel.

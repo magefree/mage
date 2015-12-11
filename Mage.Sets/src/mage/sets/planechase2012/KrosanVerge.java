@@ -66,7 +66,7 @@ public class KrosanVerge extends CardImpl {
 
         // Krosan Verge enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {T}, Sacrifice Krosan Verge: Search your library for a Forest card and a Plains card and put them onto the battlefield tapped. Then shuffle your library.
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), true, Outcome.PutLandInPlay);

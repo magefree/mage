@@ -57,7 +57,7 @@ public class HauntedFengraf extends CardImpl {
         super(ownerId, 157, "Haunted Fengraf", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DKA";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {3}, {tap}, Sacrifice Haunted Fengraf: Return a creature card at random from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HauntedFengrafEffect(), new GenericManaCost(3));

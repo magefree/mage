@@ -53,7 +53,7 @@ public class GrinningIgnus extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {R}, Return Grinning Ignus to its owner's hand: Add {2}{R} to your mana pool. Activate this ability only any time you could cast a sorcery.
+        // {R}, Return Grinning Ignus to its owner's hand: Add {C}{C}{R} to your mana pool. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 0, 2, 0), new ManaCostsImpl("{R}"));
         ability.addCost(new ReturnToHandSourceCost());
         this.addAbility(ability);

@@ -51,7 +51,7 @@ public class FetidHeath extends CardImpl {
         super(ownerId, 176, "Fetid Heath", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "EVE";
         
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {W/B}, {tap}: Add {W}{W}, {W}{B}, or {B}{B} to your mana pool.

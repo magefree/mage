@@ -53,10 +53,10 @@ public class EldraziTemple extends CardImpl {
         super(ownerId, 227, "Eldrazi Temple", Rarity.RARE, new CardType[]{ CardType.LAND }, null);
         this.expansionSetCode = "ROE";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T}: Add {2} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.  
+        // {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.  
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new EldraziTempleManaBuilder()));
     }
 

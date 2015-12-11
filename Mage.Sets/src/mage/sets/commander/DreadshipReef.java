@@ -54,7 +54,7 @@ public class DreadshipReef extends CardImpl {
         super(ownerId, 271, "Dreadship Reef", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "CMD";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Put a storage counter on Dreadship Reef.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()),new GenericManaCost(1));

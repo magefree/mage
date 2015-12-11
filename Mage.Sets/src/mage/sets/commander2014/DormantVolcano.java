@@ -68,7 +68,7 @@ public class DormantVolcano extends CardImpl {
         // When Dormant Volcano enters the battlefield, sacrifice it unless you return an untapped Mountain you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
 
-        // {tap}: Add {1}{R} to your mana pool.
+        // {tap}: Add {C}{R} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 0, 1,0 ), new TapSourceCost()));
 
     }

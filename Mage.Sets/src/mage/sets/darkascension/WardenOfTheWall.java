@@ -57,7 +57,7 @@ public class WardenOfTheWall extends CardImpl {
         // Warden of the Wall enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying.

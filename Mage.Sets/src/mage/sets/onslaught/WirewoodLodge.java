@@ -58,7 +58,7 @@ public class WirewoodLodge extends CardImpl {
         super(ownerId, 329, "Wirewood Lodge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {G}, {T}: Untap target Elf.

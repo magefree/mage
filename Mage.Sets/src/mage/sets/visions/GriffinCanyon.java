@@ -58,7 +58,7 @@ public class GriffinCanyon extends CardImpl {
         super(ownerId, 163, "Griffin Canyon", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "VIS";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GriffinCanyonEffect(), new TapSourceCost());

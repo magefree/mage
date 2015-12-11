@@ -54,7 +54,7 @@ public class GrimMonolith extends CardImpl {
 
         // Grim Monolith doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-        // {tap}: Add {3} to your mana pool.
+        // {tap}: Add {C}{C}{C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
         // {4}: Untap Grim Monolith.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{4}")));

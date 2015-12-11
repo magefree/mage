@@ -49,7 +49,7 @@ public class CascadeBluffs extends CardImpl {
         super(ownerId, 175, "Cascade Bluffs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "EVE";
         
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {U/R}, {tap}: Add {U}{U}, {U}{R}, or {R}{R} to your mana pool.

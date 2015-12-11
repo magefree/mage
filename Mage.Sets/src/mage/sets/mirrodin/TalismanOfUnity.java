@@ -47,7 +47,7 @@ public class TalismanOfUnity extends CardImpl {
         super(ownerId, 257, "Talisman of Unity", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MRD";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {G} or {W} to your mana pool. Talisman of Unity deals 1 damage to you.
         Ability greenManaAbility = new GreenManaAbility();

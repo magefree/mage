@@ -57,7 +57,7 @@ public class TaintedField extends CardImpl {
         super(ownerId, 140, "Tainted Field", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "TOR";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}: Add {W} or {B} to your mana pool. Activate this ability only if you control a Swamp.

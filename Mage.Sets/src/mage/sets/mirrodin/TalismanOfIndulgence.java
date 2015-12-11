@@ -47,7 +47,7 @@ public class TalismanOfIndulgence extends CardImpl {
         super(ownerId, 255, "Talisman of Indulgence", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MRD";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {B} or {R} to your mana pool. Talisman of Indulgence deals 1 damage to you.
         Ability blackManaAbility = new BlackManaAbility();

@@ -70,7 +70,7 @@ public class SpringjackPasture extends CardImpl {
         super(ownerId, 326, "Springjack Pasture", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "C13";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}, {tap}: Put a 0/1 white Goat creature token onto the battlefield.

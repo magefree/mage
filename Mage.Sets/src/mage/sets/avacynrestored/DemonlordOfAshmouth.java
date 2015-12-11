@@ -27,20 +27,19 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.effects.common.ExileSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -64,7 +63,7 @@ public class DemonlordOfAshmouth extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Demonlord of Ashmouth enters the battlefield, exile it unless you sacrifice another creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
 
         this.addAbility(new UndyingAbility());
     }

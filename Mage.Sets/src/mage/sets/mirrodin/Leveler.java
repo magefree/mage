@@ -88,7 +88,7 @@ class LevelerExileLibraryEffect extends OneShotEffect {
             int count = controller.getLibrary().size();
             Cards cards = new CardsImpl();
             cards.addAll(controller.getLibrary().getTopCards(game, count));
-            controller.moveCards(cards, Zone.LIBRARY, Zone.EXILED, source, game);
+            controller.moveCards(cards, Zone.EXILED, source, game);
             return true;
         }
         return false;

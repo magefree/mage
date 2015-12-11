@@ -51,7 +51,7 @@ public class Wasteland extends CardImpl {
         super(ownerId, 340, "Wasteland", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "TMP";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}, Sacrifice Wasteland: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());

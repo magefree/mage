@@ -60,7 +60,7 @@ public class TerrainGenerator extends CardImpl {
         super(ownerId, 29, "Terrain Generator", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DD3D";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {2}, {tap}: You may put a basic land card from your hand onto the battlefield tapped.

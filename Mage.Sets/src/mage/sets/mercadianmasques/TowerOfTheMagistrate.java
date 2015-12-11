@@ -52,7 +52,7 @@ public class TowerOfTheMagistrate extends CardImpl {
         super(ownerId, 330, "Tower of the Magistrate", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "MMQ";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {1}, {tap}: Target creature gains protection from artifacts until end of turn.

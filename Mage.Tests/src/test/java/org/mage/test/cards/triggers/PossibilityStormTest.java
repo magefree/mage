@@ -63,7 +63,7 @@ public class PossibilityStormTest extends CardTestPlayerBase {
         // Possibility Storm on the bottom of his or her library in a random order.
         addCard(Zone.BATTLEFIELD, playerA, "Possibility Storm", 2);
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         // Morph {2}
         addCard(Zone.HAND, playerA, "Zoetic Cavern");
 

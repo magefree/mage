@@ -76,7 +76,7 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
         addCard(Zone.HAND, playerA, "Phyrexian Vault", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         // Basalt Monolith doesn't untap during your untap step.
-        // {T}: Add {3} to your mana pool.
+        // {T}: Add {C}{C}{C} to your mana pool.
         // {3}: Untap Basalt Monolith.
         addCard(Zone.BATTLEFIELD, playerA, "Basalt Monolith", 1, true);
 

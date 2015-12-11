@@ -56,7 +56,7 @@ public class MageRingNetwork extends CardImpl {
         super(ownerId, 249, "Mage-Ring Network", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ORI";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {T}: Put a storage counter on Mage-Ring Network.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()),

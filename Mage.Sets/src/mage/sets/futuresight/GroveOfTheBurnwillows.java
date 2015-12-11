@@ -51,7 +51,7 @@ public class GroveOfTheBurnwillows extends CardImpl {
         super(ownerId, 176, "Grove of the Burnwillows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "FUT";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {R} or {G} to your mana pool. Each opponent gains 1 life.
         Ability RedManaAbility = new RedManaAbility();

@@ -48,7 +48,7 @@ public class MysticGate extends CardImpl {
         super(ownerId, 277, "Mystic Gate", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "SHM";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {WU}, {tap}: Add {W}{W}, {W}{U}, or {U}{U} to your mana pool.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl("{W/U}"));

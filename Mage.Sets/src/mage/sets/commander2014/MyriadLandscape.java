@@ -65,7 +65,7 @@ public class MyriadLandscape extends CardImpl {
         // Myriad Landscape enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {tap}, Sacrifice Myriad Landscape: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle your library.

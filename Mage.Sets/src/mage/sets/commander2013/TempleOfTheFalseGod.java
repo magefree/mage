@@ -51,7 +51,7 @@ public class TempleOfTheFalseGod extends CardImpl {
         super(ownerId, 327, "Temple of the False God", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "C13";
 
-        // {tap}: Add {2} to your mana pool. Activate this ability only if you control five or more lands.
+        // {tap}: Add {C}{C} to your mana pool. Activate this ability only if you control five or more lands.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.ColorlessMana(2)),

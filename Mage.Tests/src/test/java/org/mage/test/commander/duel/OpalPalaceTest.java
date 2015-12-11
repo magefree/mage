@@ -48,7 +48,7 @@ public class OpalPalaceTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         // {1}, {T}: Add to your mana pool one mana of any color in your commander's color identity. 
         // If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it
         // equal to the number of times it's been cast from the command zone this game.        

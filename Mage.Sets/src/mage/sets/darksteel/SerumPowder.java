@@ -55,7 +55,7 @@ public class SerumPowder extends CardImpl {
         super(ownerId, 138, "Serum Powder", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DST";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // Any time you could mulligan and Serum Powder is in your hand, you may exile all the cards from your hand, then draw that many cards.

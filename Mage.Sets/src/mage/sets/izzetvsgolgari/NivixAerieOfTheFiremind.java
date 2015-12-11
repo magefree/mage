@@ -59,7 +59,7 @@ public class NivixAerieOfTheFiremind extends CardImpl {
         super(ownerId, 36, "Nivix, Aerie of the Firemind", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DDJ";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {2}{U}{R}, {tap}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery.

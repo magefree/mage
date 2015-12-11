@@ -56,7 +56,7 @@ public class RathsEdge extends CardImpl {
         this.expansionSetCode = "NMS";
         this.supertype.add("Legendary");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {4}, {tap}, Sacrifice a land: Rath's Edge deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{4}"));

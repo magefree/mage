@@ -55,7 +55,7 @@ public class CityOfTraitors extends CardImpl {
         // When you play another land, sacrifice City of Traitors.
         this.addAbility(new CityOfTraitorsTriggeredAbility());
 
-        // {tap}: Add {2} to your mana pool.
+        // {tap}: Add {C}{C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 

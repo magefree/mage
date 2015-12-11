@@ -66,7 +66,7 @@ public class BroodButcher extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // When Brood Butcher enters the battlefield, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
+        // When Brood Butcher enters the battlefield, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziScionToken()), false));
 
         // {B}{G}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.

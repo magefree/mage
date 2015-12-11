@@ -55,7 +55,7 @@ public class KessigWolfRun extends CardImpl {
         super(ownerId, 243, "Kessig Wolf Run", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ISD";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn.

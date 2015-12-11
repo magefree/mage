@@ -42,7 +42,7 @@ public class SkipTurnTest extends CardTestPlayerBase {
     @Test
     public void testEaterOfDays() {
         // At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on Shrine of Boundless Growth.
-        // {T}, Sacrifice Shrine of Boundless Growth: Add {1} to your mana pool for each charge counter on Shrine of Boundless Growth.
+        // {T}, Sacrifice Shrine of Boundless Growth: Add {C} to your mana pool for each charge counter on Shrine of Boundless Growth.
         addCard(Zone.HAND, playerA, "Shrine of Boundless Growth", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
         // Flying

@@ -60,7 +60,7 @@ public class AlchemistsRefuge extends CardImpl {
         super(ownerId, 225, "Alchemist's Refuge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "AVR";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {G}{U}, {tap}: You may cast nonland cards this turn as though they had flash.

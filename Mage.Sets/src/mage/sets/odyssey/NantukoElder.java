@@ -52,7 +52,7 @@ public class NantukoElder extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {tap}: Add {1}{G} to your mana pool.
+        // {tap}: Add {C}{G} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 1,0 ), new TapSourceCost()));
 
     }

@@ -47,7 +47,7 @@ public class RootwaterDepths extends CardImpl {
         super(ownerId, 329, "Rootwater Depths", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "TMP";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {U} or {B} to your mana pool. Rootwater Depths doesn't untap during your next untap step.
         Ability ability = new BlueManaAbility();

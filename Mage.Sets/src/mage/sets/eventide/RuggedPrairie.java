@@ -48,7 +48,7 @@ public class RuggedPrairie extends CardImpl {
     public RuggedPrairie (UUID ownerId) {
         super(ownerId, 178, "Rugged Prairie", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "EVE";
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {R/W}, {tap}: Add {R}{R}, {R}{W}, or {W}{W} to your mana pool.

@@ -49,7 +49,7 @@ public class CastleSengir extends CardImpl {
         super(ownerId, 138, "Castle Sengir", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "HML";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add {B} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new GenericManaCost(1));

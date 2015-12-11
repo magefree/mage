@@ -67,7 +67,7 @@ public class CoralAtoll extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Coral Atoll enters the battlefield, sacrifice it unless you return an untapped Island you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
-        // {tap}: Add {1}{U} to your mana pool.
+        // {tap}: Add {C}{U} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 0, 1,0 ), new TapSourceCost()));
 
         

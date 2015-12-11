@@ -67,7 +67,7 @@ public class ContestedWarZone extends CardImpl {
         // Whenever a creature deals combat damage to you, that creature's controller gains control of Contested War Zone.
         this.addAbility(new ContestedWarZoneAbility());
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {1}, {T}: Attacking creatures get +1/+0 until end of turn.

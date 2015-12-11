@@ -51,7 +51,7 @@ public class GrimBackwoods extends CardImpl {
         super(ownerId, 156, "Grim Backwoods", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DKA";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {2}{B}{G}, {tap}, Sacrifice a creature: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}{B}{G}"));

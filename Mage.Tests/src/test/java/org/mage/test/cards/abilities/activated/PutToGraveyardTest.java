@@ -45,7 +45,7 @@ public class PutToGraveyardTest extends CardTestPlayerBase {
     @Test
     public void testExileToGraveyard() {
         // Devoid
-        // {1}{G}, Put a card an opponent owns from exile into that player's graveyard: Put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
+        // {1}{G}, Put a card an opponent owns from exile into that player's graveyard: Put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
         addCard(Zone.BATTLEFIELD, playerA, "Void Attendant");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);

@@ -89,7 +89,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerB, "Mutavault", 1);
 

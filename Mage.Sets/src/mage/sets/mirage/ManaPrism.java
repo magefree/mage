@@ -49,7 +49,7 @@ public class ManaPrism extends CardImpl {
         super(ownerId, 273, "Mana Prism", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "MIR";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new TapSourceCost()));
         
         // {1}, {tap}: Add one mana of any color to your mana pool.

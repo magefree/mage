@@ -57,7 +57,7 @@ public class TaintedPeak extends CardImpl {
         super(ownerId, 142, "Tainted Peak", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "TOR";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}: Add {B} or {R} to your mana pool. Activate this ability only if you control a Swamp.

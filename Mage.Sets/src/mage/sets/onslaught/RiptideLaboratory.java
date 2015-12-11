@@ -58,7 +58,7 @@ public class RiptideLaboratory extends CardImpl {
         super(ownerId, 322, "Riptide Laboratory", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{U}, {tap}: Return target Wizard you control to its owner's hand.

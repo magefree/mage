@@ -52,7 +52,7 @@ public class BlightedSteppe extends CardImpl {
         super(ownerId, 232, "Blighted Steppe", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "BFZ";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {3}{W}, {T}, Sacrifice Blighted Steppe: You gain 2 life for each creature you control.

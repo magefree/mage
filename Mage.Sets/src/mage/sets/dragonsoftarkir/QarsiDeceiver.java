@@ -58,7 +58,7 @@ public class QarsiDeceiver extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        // {T}: Add {1} to your mana pool. Spend this mana only to cast a face-down creature spell, pay a mana cost to turn a manifested creature face up, or pay a morph cost. <i.(A megamorph cost is a morph cost.)</i>
+        // {T}: Add {C} to your mana pool. Spend this mana only to cast a face-down creature spell, pay a mana cost to turn a manifested creature face up, or pay a morph cost. <i.(A megamorph cost is a morph cost.)</i>
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 1, new QarsiDeceiverManaBuilder()));
     }
 

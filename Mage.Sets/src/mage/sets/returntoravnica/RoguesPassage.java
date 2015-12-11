@@ -51,7 +51,7 @@ public class RoguesPassage extends CardImpl {
         super(ownerId, 245, "Rogue's Passage", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "RTR";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 0, 1, 0), new TapSourceCost()));
 
         // {4}, {T}: Target creature can't be blocked this turn.

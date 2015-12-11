@@ -51,7 +51,7 @@ public class StripMine extends CardImpl {
         super(ownerId, 189, "Strip Mine", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "4ED";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}, Sacrifice Strip Mine: Destroy target land.

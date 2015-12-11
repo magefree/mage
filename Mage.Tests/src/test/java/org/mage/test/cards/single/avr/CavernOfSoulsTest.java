@@ -89,7 +89,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
     public void testDrakeCantBeCountered() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // As Cavern of Souls enters the battlefield, choose a creature type.
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
         addCard(Zone.HAND, playerA, "Cavern of Souls");
         addCard(Zone.HAND, playerA, "Azure Drake");

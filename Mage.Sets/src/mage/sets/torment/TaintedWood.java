@@ -57,7 +57,7 @@ public class TaintedWood extends CardImpl {
         super(ownerId, 143, "Tainted Wood", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "TOR";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}: Add {B} or {G} to your mana pool. Activate this ability only if you control a Swamp.

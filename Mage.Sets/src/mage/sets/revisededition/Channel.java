@@ -57,7 +57,7 @@ public class Channel extends CardImpl {
         super(ownerId, 95, "Channel", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}{G}");
         this.expansionSetCode = "3ED";
 
-        // Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {1} to your mana pool.
+        // Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C} to your mana pool.
         this.getSpellAbility().addEffect(new ChannelEffect());
     }
 
@@ -75,7 +75,7 @@ class ChannelEffect extends OneShotEffect {
     
     ChannelEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {1} to your mana pool";
+        this.staticText = "Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C} to your mana pool";
     }
     
     ChannelEffect(final ChannelEffect effect) {

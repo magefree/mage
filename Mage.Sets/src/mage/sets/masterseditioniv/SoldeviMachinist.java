@@ -59,7 +59,7 @@ public class SoldeviMachinist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add {2} to your mana pool. Spend this mana only to activate abilities of artifacts.
+        // {tap}: Add {C}{C} to your mana pool. Spend this mana only to activate abilities of artifacts.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new SoldeviMachinistManaBuilder()));
     }
 

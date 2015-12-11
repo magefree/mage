@@ -16,7 +16,7 @@ public class WardenOfTheWallTest extends CardTestPlayerBase {
     /*
      * Warden of the Wall
      *   Warden of the Wall enters the battlefield tapped.
-     *   {T}: Add {1} to your mana pool.
+     *   {T}: Add {C} to your mana pool.
      *   As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying.
      *
      */

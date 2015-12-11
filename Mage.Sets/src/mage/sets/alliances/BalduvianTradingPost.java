@@ -70,7 +70,7 @@ public class BalduvianTradingPost extends CardImpl {
         // If Balduvian Trading Post would enter the battlefield, sacrifice an untapped Mountain instead. If you do, put Balduvian Trading Post onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
 
-        // {tap}: Add {1}{R} to your mana pool.
+        // {tap}: Add {C}{R} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 0, 1,0 ), new TapSourceCost()));
 
         // {1}, {tap}: Balduvian Trading Post deals 1 damage to target attacking creature.

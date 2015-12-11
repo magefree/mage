@@ -51,7 +51,7 @@ public class PhyrexianTower extends CardImpl {
         this.expansionSetCode = "USG";
         this.supertype.add("Legendary");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}, Sacrifice a creature: Add {B}{B} to your mana pool.

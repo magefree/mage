@@ -46,7 +46,7 @@ public class MishrasWorkshop extends CardImpl {
         super(ownerId, 305, "Mishra's Workshop", Rarity.MYTHIC, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "VMA";
 
-        // {tap}: Add {3} to your mana pool. Spend this mana only to cast artifact spells.
+        // {tap}: Add {C}{C}{C} to your mana pool. Spend this mana only to cast artifact spells.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 3,
                 new ConditionalSpellManaBuilder(new FilterArtifactSpell("artifact spells"))));
 

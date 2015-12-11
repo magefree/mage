@@ -48,7 +48,7 @@ public class LibraryOfAlexandria extends CardImpl {
         super(ownerId, 303, "Library of Alexandria", Rarity.MYTHIC, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "VMA";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Draw a card. Activate this ability only if you have exactly seven cards in hand.
         this.addAbility(new ConditionalActivatedAbility(

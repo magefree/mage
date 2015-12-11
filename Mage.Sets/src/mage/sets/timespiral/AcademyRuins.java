@@ -52,7 +52,7 @@ public class AcademyRuins extends CardImpl {
         this.expansionSetCode = "TSP";
         this.supertype.add("Legendary");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}{U}, {tap}: Put target artifact card from your graveyard on top of your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl("{1}{U}"));

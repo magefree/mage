@@ -53,7 +53,7 @@ public class ApprenticeWizard extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // {U}, {tap}: Add {3} to your mana pool.
+        // {U}, {tap}: Add {C}{C}{C} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

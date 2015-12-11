@@ -53,7 +53,7 @@ public class ReliquaryTower extends CardImpl {
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
     }
 

@@ -58,7 +58,7 @@ public class UntaidakeTheCloudKeeper extends CardImpl {
 
         // Untaidake, the Cloud Keeper enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}, Pay 2 life: Add {2} to your mana pool. Spend this mana only to cast legendary spells.
+        // {tap}, Pay 2 life: Add {C}{C} to your mana pool. Spend this mana only to cast legendary spells.
         Ability ability = new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new LegendarySpellManaBuilder());
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);

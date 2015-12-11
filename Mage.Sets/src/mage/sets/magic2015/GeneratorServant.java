@@ -70,12 +70,12 @@ public class GeneratorServant extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {T}, Sacrifice Generator Servant: Add {2} to your mana pool.  If that mana is spent on a creature spell, it gains haste until end of turn.
+        // {T}, Sacrifice Generator Servant: Add {C}{C} to your mana pool.  If that mana is spent on a creature spell, it gains haste until end of turn.
         Mana mana = Mana.ColorlessMana(2);
         mana.setFlag(true); // used to indicate this mana ability
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.getEffects().get(0).setText("Add {2} to your mana pool. If that mana is spent on a creature spell, it gains haste until end of turn.");
+        ability.getEffects().get(0).setText("Add {C}{C} to your mana pool. If that mana is spent on a creature spell, it gains haste until end of turn.");
         this.addAbility(ability);
 
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GeneratorServantHasteEffect()), new GeneratorServantWatcher());

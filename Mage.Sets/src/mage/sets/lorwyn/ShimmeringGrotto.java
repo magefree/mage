@@ -47,7 +47,7 @@ public class ShimmeringGrotto extends CardImpl {
     public ShimmeringGrotto(UUID ownerId) {
         super(ownerId, 273, "Shimmering Grotto", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "LRW";
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));

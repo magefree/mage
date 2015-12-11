@@ -61,7 +61,7 @@ public class SunseedNurturer extends CardImpl {
 
         // At the beginning of your end step, if you control a creature with power 5 or greater, you may gain 2 life.
         this.addAbility(new SunseedNurturerTriggeredAbility());
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
     }
 

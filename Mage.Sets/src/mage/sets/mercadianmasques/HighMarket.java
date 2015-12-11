@@ -50,7 +50,7 @@ public class HighMarket extends CardImpl {
         super(ownerId, 320, "High Market", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "MMQ";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}, Sacrifice a creature: You gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());

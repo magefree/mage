@@ -50,7 +50,7 @@ public class StensiaBloodhall extends CardImpl {
         super(ownerId, 247, "Stensia Bloodhall", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ISD";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
         // {3}{B}{R}, {T}: Stensia Bloodhall deals 2 damage to target player.

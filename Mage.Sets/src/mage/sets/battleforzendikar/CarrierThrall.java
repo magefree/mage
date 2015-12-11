@@ -50,9 +50,9 @@ public class CarrierThrall extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // When Carrier Thrall dies, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature. Add {1} to your mana pool."
+        // When Carrier Thrall dies, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature. Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {1} to your mana pool.\"");
+        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.addAbility(new DiesTriggeredAbility(effect, false));
 
     }

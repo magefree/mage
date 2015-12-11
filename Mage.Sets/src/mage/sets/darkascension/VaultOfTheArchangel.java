@@ -53,7 +53,7 @@ public class VaultOfTheArchangel extends CardImpl {
         super(ownerId, 158, "Vault of the Archangel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DKA";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {2}{W}{B}, {tap}: Creatures you control gain deathtouch and lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

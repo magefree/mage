@@ -79,7 +79,7 @@ public class ShelteredValley extends CardImpl {
         effect.setText("if you control three or fewer lands, you gain 1 life");
         ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false);
         this.addAbility(ability);
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
     }
 

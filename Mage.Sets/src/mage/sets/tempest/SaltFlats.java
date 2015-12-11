@@ -50,7 +50,7 @@ public class SaltFlats extends CardImpl {
 
         // Salt Flats enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {W} or {B} to your mana pool. Salt Flats deals 1 damage to you.
         Ability ability = new WhiteManaAbility();

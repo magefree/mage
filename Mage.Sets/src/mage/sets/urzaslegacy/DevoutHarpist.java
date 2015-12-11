@@ -28,15 +28,15 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -86,9 +86,9 @@ public class DevoutHarpist extends CardImpl {
 class DevoutHarpistPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
     @Override
     public boolean apply(ObjectPlayer<Permanent> input, Game game) {
-        Permanent attachement = input.getObject();
-        if (attachement != null) {
-            Permanent permanent = game.getPermanent(attachement.getAttachedTo());
+        Permanent attachment = input.getObject();
+        if (attachment != null) {
+            Permanent permanent = game.getPermanent(attachment.getAttachedTo());
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }

@@ -51,7 +51,7 @@ public class DuskmantleHouseOfShadow extends CardImpl {
         super(ownerId, 277, "Duskmantle, House of Shadow", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "RAV";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {U}{B}, {tap}: Target player puts the top card of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new ManaCostsImpl("{U}{B}"));

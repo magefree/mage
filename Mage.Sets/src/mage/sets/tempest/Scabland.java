@@ -50,7 +50,7 @@ public class Scabland extends CardImpl {
 
         // Scabland enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {R} or {W} to your mana pool. Scabland deals 1 damage to you.
         Ability ability = new RedManaAbility();

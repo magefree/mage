@@ -48,7 +48,7 @@ public class UrGolemsEye extends CardImpl {
         super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "DST";
         
-        // {tap}: Add {2} to your mana pool.
+        // {tap}: Add {C}{C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
     }
 

@@ -50,7 +50,7 @@ public class SkyshroudForest extends CardImpl {
 
         // Skyshroud Forest enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {G} or {U} to your mana pool. Skyshroud Forest deals 1 damage to you.
         Ability ability = new GreenManaAbility();

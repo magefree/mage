@@ -52,7 +52,7 @@ public class MouthOfRonom extends CardImpl {
         this.expansionSetCode = "CSP";
         this.supertype.add("Snow");
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {4}{S}, {T}, Sacrifice Mouth of Ronom: Mouth of Ronom deals 4 damage to target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl("{4}{S}"));

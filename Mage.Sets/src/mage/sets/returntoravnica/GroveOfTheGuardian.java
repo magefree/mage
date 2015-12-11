@@ -65,7 +65,7 @@ public class GroveOfTheGuardian extends CardImpl {
         super(ownerId, 240, "Grove of the Guardian", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "RTR";
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 0, 1, 0), new TapSourceCost()));
 
         // {3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Put an 8/8 green and white Elemental creature token with vigilance onto the battlefield.

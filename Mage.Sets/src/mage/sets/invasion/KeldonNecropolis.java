@@ -52,7 +52,7 @@ public class KeldonNecropolis extends CardImpl {
         this.expansionSetCode = "INV";
         this.supertype.add("Legendary");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {4}{R}, {tap}, Sacrifice a creature: Keldon Necropolis deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl(new ManaCostsImpl("{4}{R}")));

@@ -48,7 +48,7 @@ public class AshnodsAltar extends CardImpl {
         super(ownerId, 349, "Ashnod's Altar", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "5ED";
 
-        // Sacrifice a creature: Add {2} to your mana pool.
+        // Sacrifice a creature: Add {C}{C} to your mana pool.
         SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true));
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), cost));
     }

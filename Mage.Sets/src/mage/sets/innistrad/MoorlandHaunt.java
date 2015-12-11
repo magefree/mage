@@ -54,7 +54,7 @@ public class MoorlandHaunt extends CardImpl {
         super(ownerId, 244, "Moorland Haunt", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ISD";
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {W}{U}, {tap}, Exile a creature card from your graveyard: Put a 1/1 white Spirit creature token with flying onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

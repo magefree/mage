@@ -53,7 +53,7 @@ public class KorHaven extends CardImpl {
         this.expansionSetCode = "NMS";
         this.supertype.add("Legendary");
 
-        // {tap}: Add {1} to your mana pool.
+        // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
         // {1}{W}, {tap}: Prevent all combat damage that would be dealt by target attacking creature this turn.
