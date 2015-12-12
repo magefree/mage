@@ -28,9 +28,6 @@
 package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +39,8 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -62,7 +61,7 @@ public class KyrenToy extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         
-        // {T}, Remove X charge counters from Kyren Toy: Add {X}{1} to your mana pool.
+        // {T}, Remove X charge counters from Kyren Toy: Add X mana of {C} to your mana pool, and then add {C} to your mana pool.
         ability = new KyrenToyManaAbility();
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);
@@ -96,7 +95,7 @@ public class KyrenToy extends CardImpl {
 
         KyrenToyManaEffect() {
             super();
-            staticText = "Add {X}{1} to your mana pool";
+            staticText = "Add X mana of {C} to your mana pool, and then add {C} to your mana pool";
         }
 
         KyrenToyManaEffect(final KyrenToyManaEffect effect) {
