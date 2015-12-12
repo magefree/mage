@@ -110,7 +110,7 @@ class LordOfTheVoidEffect extends OneShotEffect {
             if (controller.chooseTarget(outcome, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null);
                 }
             }
         }
