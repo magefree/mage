@@ -81,15 +81,6 @@ public class Deck implements Serializable {
         Collections.sort(sbCardNames);
         String deckString = deckCardNames.toString() + sbCardNames.toString();
         deck.setDeckHashCode(DeckUtil.fixedHash(deckString));
-//        try{
-//            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-//            messageDigest.update(deckString.getBytes());
-//            String encryptedString = new String(messageDigest.digest());
-//            deck.setDeckHashCode(encryptedString.hashCode());
-//        }
-//        catch (NoSuchAlgorithmException e) {
-//            // nothing
-//        }
         return deck;
     }
 

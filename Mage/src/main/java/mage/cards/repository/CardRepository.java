@@ -386,6 +386,7 @@ public enum CardRepository {
 
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of card repository query statement", ex);
         }
         return new ArrayList<>();
     }
