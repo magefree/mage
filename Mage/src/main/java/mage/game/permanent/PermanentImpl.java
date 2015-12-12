@@ -627,7 +627,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             this.abilities.setControllerId(controllerId);
             game.getContinuousEffects().setController(objectId, controllerId);
-
+            // the controller of triggered abilites is always set/checked before the abilities triggers so not needed here
             game.fireEvent(new GameEvent(EventType.LOST_CONTROL, objectId, objectId, beforeResetControllerId));
             game.fireEvent(new GameEvent(EventType.GAINED_CONTROL, objectId, objectId, controllerId));
 

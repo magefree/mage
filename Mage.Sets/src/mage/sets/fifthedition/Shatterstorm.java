@@ -28,10 +28,10 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
@@ -43,7 +43,6 @@ public class Shatterstorm extends CardImpl {
     public Shatterstorm(UUID ownerId) {
         super(ownerId, 266, "Shatterstorm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "5ED";
-
 
         // Destroy all artifacts. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent("artifacts"), true));
