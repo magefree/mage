@@ -41,7 +41,9 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -51,7 +53,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class MirrorEntity extends CardImpl {
 
-    static private FilterControlledCreaturePermanent filter = new  FilterControlledCreaturePermanent("Creatures you control");
+    static private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
 
     public MirrorEntity(UUID ownerId) {
         super(ownerId, 31, "Mirror Entity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -68,7 +70,7 @@ public class MirrorEntity extends CardImpl {
         Effect effect = new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, filter, true);
         effect.setText("Until end of turn, creatures you control have base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new VariableManaCost());
-        effect = new GainAbilityAllEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, filter);
+        effect = new GainAbilityAllEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, filter, false, Layer.TypeChangingEffects_4, SubLayer.NA);
         effect.setText("and gain all creature types");
         ability.addEffect(effect);
         this.addAbility(ability);

@@ -25,19 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -55,16 +54,14 @@ public class AbruptDecay extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public AbruptDecay (UUID ownerId) {
+    public AbruptDecay(UUID ownerId) {
         super(ownerId, 141, "Abrupt Decay", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{G}");
         this.expansionSetCode = "RTR";
 
-
-
         // Abrupt Decay can't be countered by spells or abilities.
-        Effect effect =  new CantBeCounteredSourceEffect();
+        Effect effect = new CantBeCounteredSourceEffect();
         effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
+        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
@@ -73,7 +70,7 @@ public class AbruptDecay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));
     }
 
-    public AbruptDecay (final AbruptDecay card) {
+    public AbruptDecay(final AbruptDecay card) {
         super(card);
     }
 

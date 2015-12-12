@@ -3230,7 +3230,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 card = game.getCard(card.getId());
             }
             if (!game.isSimulation()) {
-                game.informPlayers(this.getLogName() + " puts "
+                game.informPlayers(getLogName() + " puts "
                         + (withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"))
                         + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " "
                         + (card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand")

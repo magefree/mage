@@ -28,20 +28,22 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetNonlandPermanent;
-
 
 /**
  *
@@ -58,7 +60,6 @@ public class CyclonicRift extends CardImpl {
     public CyclonicRift(UUID ownerId) {
         super(ownerId, 35, "Cyclonic Rift", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "RTR";
-
 
         // Return target nonland permanent you don't control to its owner's hand.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));
@@ -97,7 +98,7 @@ class CyclonicRiftEffect extends OneShotEffect {
             if (!creature.getControllerId().equals(source.getControllerId())) {
                 creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }
-            
+
         }
         return true;
     }
