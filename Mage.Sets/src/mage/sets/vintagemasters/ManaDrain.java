@@ -56,7 +56,7 @@ public class ManaDrain extends CardImpl {
         this.expansionSetCode = "VMA";
 
         
-        // Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.
+        // Counter target spell. At the beginning of your next main phase, add X mana of {C} to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new ManaDrainCounterEffect());        
     }
@@ -75,7 +75,7 @@ class ManaDrainCounterEffect extends OneShotEffect {
 
     public ManaDrainCounterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost";
+        this.staticText = "Counter target spell. At the beginning of your next main phase, add X mana of {C} to your mana pool, where X is that spell's converted mana cost";
     }
 
     public ManaDrainCounterEffect(final ManaDrainCounterEffect effect) {
