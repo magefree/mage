@@ -29,14 +29,21 @@ package mage.sets.archenemy;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.SearchEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -61,7 +68,9 @@ public class YavimayaDryad extends CardImpl {
         // Forestwalk
         this.addAbility(new ForestwalkAbility());
         // When Yavimaya Dryad enters the battlefield, you may search your library for a Forest card and put it onto the battlefield tapped under target player's control. If you do, shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new YavimayaDryadEffect(new TargetCardInLibrary(filter)), true);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     public YavimayaDryad(final YavimayaDryad card) {
@@ -71,5 +80,40 @@ public class YavimayaDryad extends CardImpl {
     @Override
     public YavimayaDryad copy() {
         return new YavimayaDryad(this);
+    }
+}
+
+class YavimayaDryadEffect extends SearchEffect {
+
+    public YavimayaDryadEffect(TargetCardInLibrary target) {
+        super(target, Outcome.PutLandInPlay);
+        staticText = "you may search your library for a Forest card and put it onto the battlefield tapped under target player's control. If you do, shuffle your library";
+    }
+
+    public YavimayaDryadEffect(final YavimayaDryadEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public YavimayaDryadEffect copy() {
+        return new YavimayaDryadEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetPlayer == null) {
+            return false;
+        }
+        if (controller.searchLibrary(target, game)) {
+            if (target.getTargets().size() > 0) {
+                targetPlayer.moveCards(new CardsImpl(target.getTargets()).getCards(game),
+                        Zone.BATTLEFIELD, source, game, true, false, false, null);
+            }
+            controller.shuffleLibrary(game);
+            return true;
+        }
+        return false;
     }
 }
