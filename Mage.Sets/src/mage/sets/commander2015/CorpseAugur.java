@@ -38,6 +38,7 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreatureCard;
 import mage.target.TargetPlayer;
 
 /**
@@ -55,10 +56,11 @@ public class CorpseAugur extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Corpse Augur dies, you draw X cards and you lose X life, where X is the number of creature cards in target player's graveyard.
-        Effect effect = new DrawCardSourceControllerEffect(new CardsInTargetPlayersGraveyardCount());
+        CardsInTargetPlayersGraveyardCount dynamicValue = new CardsInTargetPlayersGraveyardCount(new FilterCreatureCard("the number of creature cards"));
+        Effect effect = new DrawCardSourceControllerEffect(dynamicValue);
         effect.setText("You draw X cards");
         Ability ability = new DiesTriggeredAbility(effect, false);
-        effect = new LoseLifeSourceControllerEffect(new CardsInTargetPlayersGraveyardCount());
+        effect = new LoseLifeSourceControllerEffect(dynamicValue);
         effect.setText("and you lose X life, where X is the number of creature cards in target player's graveyard");
         ability.addEffect(effect);
         ability.addTarget(new TargetPlayer());
