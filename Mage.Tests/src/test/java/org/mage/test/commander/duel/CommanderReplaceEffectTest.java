@@ -74,4 +74,37 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerB, "Horror", 1);
         assertPowerToughness(playerB, "Horror", 1, 1);
     }
+
+    @Test
+    public void saveCommanderWithGiftOfImmortality() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+
+        // Enchant creature
+        // When enchanted creature dies, return that card to the battlefield under its owner's control.
+        // Return Gift of Immortality to the battlefield attached to that creature at the beginning of the next end step.
+        addCard(Zone.HAND, playerA, "Gift of Immortality", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 6);
+        addCard(Zone.HAND, playerB, "Phyrexian Rebirth", 1);
+
+        // Daxos of Meletis can't be blocked by creatures with power 3 or greater.
+        // Whenever Daxos of Meletis deals combat damage to a player, exile the top card of that player's library. You gain life equal to that card's converted mana cost. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gift of Immortality", "Daxos of Meletis");
+
+        // Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phyrexian Rebirth");
+        setChoice(playerA, "No"); // Let the commander go to graveyard because of Gift of Immortality
+
+        setStopAt(3, PhaseStep.UPKEEP);
+        execute();
+
+        assertPermanentCount(playerB, "Horror", 1);
+        assertPowerToughness(playerB, "Horror", 1, 1);
+
+        assertPermanentCount(playerA, "Daxos of Meletis", 1);
+        assertPermanentCount(playerA, "Gift of Immortality", 1);
+
+    }
 }

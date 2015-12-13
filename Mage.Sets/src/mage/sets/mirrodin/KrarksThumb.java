@@ -29,15 +29,15 @@ package mage.sets.mirrodin;
 
 import java.util.Random;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -68,6 +68,7 @@ public class KrarksThumb extends CardImpl {
 }
 
 class KrarksThumbEffect extends ReplacementEffectImpl {
+
     KrarksThumbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would flip a coin, instead flip two coins and ignore one";
@@ -88,9 +89,9 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
             }
             if (player.chooseUse(outcome, "Ignore the first coin flip?", source, game)) {
                 event.setFlag(secondCoinFlip);
-                game.informPlayers(new StringBuilder(player.getLogName()).append(" ignores the first coin flip.").toString());
+                game.informPlayers(player.getLogName() + " ignores the first coin flip.");
             } else {
-                game.informPlayers(new StringBuilder(player.getLogName()).append(" ignores the second coin flip.").toString());
+                game.informPlayers(player.getLogName() + " ignores the second coin flip.");
             }
         }
         return false;

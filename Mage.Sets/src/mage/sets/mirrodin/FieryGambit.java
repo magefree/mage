@@ -28,15 +28,15 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,7 +53,6 @@ public class FieryGambit extends CardImpl {
         super(ownerId, 90, "Fiery Gambit", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "MRD";
 
-
         // Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, Fiery Gambit has no effect. If you win one or more flips, Fiery Gambit deals 3 damage to target creature. If you win two or more flips, Fiery Gambit deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control.
         this.getSpellAbility().addEffect(new FieryGambitEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -68,7 +67,6 @@ public class FieryGambit extends CardImpl {
         return new FieryGambit(this);
     }
 }
-
 
 class FieryGambitEffect extends OneShotEffect {
 
@@ -89,12 +87,13 @@ class FieryGambitEffect extends OneShotEffect {
     @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             int flipsWon = 0;
             boolean controllerStopped = false;
             while (controller.flipCoin(game)) {
                 ++flipsWon;
-                if (!controller.chooseUse(outcome, new StringBuilder("You won ").append(flipsWon).append(flipsWon == 1?" flip.":" flips.")
+                if (!controller.chooseUse(outcome, new StringBuilder("You won ").append(flipsWon).append(flipsWon == 1 ? " flip." : " flips.")
                         .append(" Flip another coin?").toString(), source, game)) {
                     controllerStopped = true;
                     break;
@@ -113,7 +112,7 @@ class FieryGambitEffect extends OneShotEffect {
                     new UntapAllLandsControllerEffect().apply(game, source);
                 }
             } else {
-                game.informPlayers("Fiery Gambit had no effect");
+                game.informPlayers(sourceObject.getIdName() + " had no effect");
             }
             return true;
         }

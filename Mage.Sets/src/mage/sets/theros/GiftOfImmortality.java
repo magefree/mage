@@ -59,7 +59,6 @@ public class GiftOfImmortality extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -67,9 +66,9 @@ public class GiftOfImmortality extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When enchanted creature dies, return that card to the battlefield under its owner's control. 
+        // When enchanted creature dies, return that card to the battlefield under its owner's control.
         // Return Gift of Immortality to the battlefield attached to that creature at the beginning of the next end step.
-        this.addAbility(new DiesAttachedTriggeredAbility(new GiftOfImmortalityEffect(),"enchanted creature", false));
+        this.addAbility(new DiesAttachedTriggeredAbility(new GiftOfImmortalityEffect(), "enchanted creature", false));
     }
 
     public GiftOfImmortality(final GiftOfImmortality card) {
@@ -106,20 +105,21 @@ class GiftOfImmortalityEffect extends OneShotEffect {
             if (card != null) {
                 Zone currentZone = game.getState().getZone(card.getId());
                 if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId())) {
-                    //create delayed triggered ability
-                    Effect effect = new GiftOfImmortalityReturnEnchantmentEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null) {
+                        //create delayed triggered ability
+                        Effect effect = new GiftOfImmortalityReturnEnchantmentEffect();
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                    }
                 }
                 return true;
             }
         }
-
-
 
         return false;
     }
@@ -128,7 +128,7 @@ class GiftOfImmortalityEffect extends OneShotEffect {
 class GiftOfImmortalityReturnEnchantmentEffect extends OneShotEffect {
 
     public GiftOfImmortalityReturnEnchantmentEffect() {
-        super(Outcome.BoostCreature);
+        super(Outcome.PutCardInPlay);
         staticText = "Return {this} to the battlefield attached to that creature at the beginning of the next end step";
     }
 
@@ -140,11 +140,11 @@ class GiftOfImmortalityReturnEnchantmentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card aura = game.getCard(source.getSourceId());
         if (aura != null && game.getState().getZone(aura.getId()).equals(Zone.GRAVEYARD)) {
-            Player you = game.getPlayer(source.getControllerId());
+            Player controller = game.getPlayer(source.getControllerId());
             Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (you != null && creature != null) {
+            if (controller != null && creature != null) {
                 game.getState().setValue("attachTo:" + aura.getId(), creature);
-                aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), you.getId());
+                aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
                 return creature.addAttachment(aura.getId(), game);
             }
         }
