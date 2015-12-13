@@ -28,9 +28,6 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -38,9 +35,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -73,6 +72,7 @@ public class BloodlordOfVaasgoth extends CardImpl {
         // Bloodthirst 3
         this.addAbility(new BloodthirstAbility(3));
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
@@ -92,6 +92,8 @@ public class BloodlordOfVaasgoth extends CardImpl {
 class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 
     private Ability ability = new BloodthirstAbility(3);
+    private int zoneChangeCounter;
+    private UUID permanentId;
 
     public BloodlordOfVaasgothEffect() {
         super(Duration.OneUse, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -101,6 +103,8 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
     public BloodlordOfVaasgothEffect(final BloodlordOfVaasgothEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
+        this.zoneChangeCounter = effect.zoneChangeCounter;
+        this.permanentId = effect.permanentId;
     }
 
     @Override
@@ -109,18 +113,34 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void init(Ability source, Game game) {
+        super.init(source, game);
         Spell object = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (object != null) {
-            Permanent permanent = game.getPermanent(object.getSourceId());
-            if (permanent != null) {
-                permanent.addAbility(ability, source.getSourceId(), game);
-                return true;
-            }
-        } else {
-            used = true;
+            zoneChangeCounter = game.getState().getZoneChangeCounter(object.getSourceId()) + 1;
+            permanentId = object.getSourceId();
         }
-        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(permanentId);
+        if (permanent != null && permanent.getZoneChangeCounter(game) <= zoneChangeCounter) {
+            permanent.addAbility(ability, source.getSourceId(), game);
+            return true;
+        } else {
+            if (game.getState().getZoneChangeCounter(permanentId) >= zoneChangeCounter) {
+                discard();
+            }
+            Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+            if (spell != null) { // Bloodthirst checked while spell is on the stack so needed to give it already to the spell
+                Ability ability1 = ability.copy();
+                ability1.setSourceId(spell.getSourceId());
+                ability1.setControllerId(spell.getControllerId());
+                game.getState().addAbility(ability1, spell);
+            }
+        }
+        return true;
     }
 
 }
