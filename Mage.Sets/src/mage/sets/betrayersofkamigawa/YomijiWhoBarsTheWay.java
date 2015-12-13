@@ -35,7 +35,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -44,12 +44,6 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  * @author LevelX2
  */
 public class YomijiWhoBarsTheWay extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a legendary permanent other than Yomiji, Who Bars the Way");
-    static {
-        filter.add(new AnotherPredicate());
-        filter.add(new SupertypePredicate("Legendary"));
-    }
 
     public YomijiWhoBarsTheWay(UUID ownerId) {
         super(ownerId, 30, "Yomiji, Who Bars the Way", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
@@ -61,6 +55,9 @@ public class YomijiWhoBarsTheWay extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a legendary permanent other than Yomiji, Who Bars the Way is put into a graveyard from the battlefield, return that card to its owner's hand.
+        FilterPermanent filter = new FilterPermanent("a legendary permanent other than " + getName());
+        filter.add(new AnotherPredicate());
+        filter.add(new SupertypePredicate("Legendary"));
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return that card to its owner's hand");
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(effect, false, filter, true));
