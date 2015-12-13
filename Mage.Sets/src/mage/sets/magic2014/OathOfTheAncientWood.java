@@ -50,6 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class OathOfTheAncientWood extends CardImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Oath of the Ancient Wood or another enchantment");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
@@ -58,10 +59,9 @@ public class OathOfTheAncientWood extends CardImpl {
         super(ownerId, 187, "Oath of the Ancient Wood", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "M14";
 
-
         // Whenever Oath of the Ancient Wood or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, true, SetTargetPointer.PERMANENT, null, true);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, true, SetTargetPointer.NONE, null, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
