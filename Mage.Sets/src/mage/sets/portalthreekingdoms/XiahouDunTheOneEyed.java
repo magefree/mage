@@ -35,6 +35,7 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MyTurnBeforeAttackersDeclaredCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -48,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author fireshoes
  */
 public class XiahouDunTheOneEyed extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("a black card");
 
     static {
@@ -65,8 +66,10 @@ public class XiahouDunTheOneEyed extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Horsemanship
+        this.addAbility(HorsemanshipAbility.getInstance());
+
         // Sacrifice Xiahou Dun, the One-Eyed: Return target black card from your graveyard to your hand. Activate this ability only during your turn, before attackers are declared.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
