@@ -30,6 +30,7 @@ package mage.sets.weatherlight;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -60,9 +61,10 @@ public class PhyrexianFurnace extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianFurnaceEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
         // {1}, Sacrifice Phyrexian Furnace: Exile target card from a graveyard. Draw a card.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}"));
+        ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
@@ -99,7 +101,7 @@ class PhyrexianFurnaceEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             Card bottomCard = null;
-            for (Card card :player.getGraveyard().getCards(game)) {
+            for (Card card : player.getGraveyard().getCards(game)) {
                 bottomCard = card;
                 break;
             }
