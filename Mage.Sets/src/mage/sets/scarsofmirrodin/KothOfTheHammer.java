@@ -69,7 +69,7 @@ import mage.target.common.TargetLandPermanent;
 public class KothOfTheHammer extends CardImpl {
 
     static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
-    private static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");
+    static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
@@ -124,7 +124,6 @@ class KothOfTheHammerToken extends Token {
 class KothOfTheHammerEmblem extends Emblem {
 
     // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
-
     public KothOfTheHammerEmblem() {
         this.setName("EMBLEM: Koth of the Hammer");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
@@ -147,10 +146,10 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
         switch (layer) {
             case AbilityAddingRemovingEffects_6:
                 if (sublayer == SubLayer.NA) {
-                    for (Permanent p : game.getBattlefield().getActivePermanents(KothOfTheHammer.filter, source.getControllerId(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(KothOfTheHammer.filterCount, source.getControllerId(), source.getSourceId(), game)) {
                         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
                         ability.addTarget(new TargetCreatureOrPlayer());
-                        p.addAbility(ability, game);
+                        permanent.addAbility(ability, source.getSourceId(), game);
                     }
                 }
                 break;
