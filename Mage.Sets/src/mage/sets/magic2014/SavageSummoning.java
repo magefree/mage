@@ -207,9 +207,9 @@ class SavageSummoningWatcher extends Watcher {
     }
 
     public boolean isCardCastWithThisSavageSummoning(Card card, UUID cardId, int zoneChangeCounter, Game game) {
-        String creatureCardKey = new StringBuilder(card.getId().toString()).append("_").append(card.getZoneChangeCounter(game) - 1).toString();
+        String creatureCardKey = card.getId().toString() + "_" + (card.getZoneChangeCounter(game));
         // add one because card is now gone to battlefield as creature
-        String cardKey = new StringBuilder(cardId.toString()).append("_").append(zoneChangeCounter).toString();
+        String cardKey = cardId.toString() + "_" + zoneChangeCounter;
         HashSet<String> savageSpells = (HashSet<String>) cardsCastWithSavageSummoning.get(creatureCardKey);
         return savageSpells != null && savageSpells.contains(cardKey);
     }

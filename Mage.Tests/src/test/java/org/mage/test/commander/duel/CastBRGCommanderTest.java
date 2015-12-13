@@ -56,15 +56,18 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
+        // The next creature card you cast this turn can be cast as though it had flash.
+        // That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it.
         addCard(Zone.HAND, playerA, "Savage Summoning");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Savage Summoning");
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Prossh, Skyraider of Kher");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Prossh, Skyraider of Kher"); // 5/5
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Savage Summoning", 1);
         assertPermanentCount(playerA, "Prossh, Skyraider of Kher", 1);
+        assertPowerToughness(playerA, "Prossh, Skyraider of Kher", 6, 6); // +1/+1 by Savage Summoning
         assertPermanentCount(playerA, "Kobolds of Kher Keep", 6);
 
     }

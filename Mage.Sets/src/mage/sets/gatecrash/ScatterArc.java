@@ -28,11 +28,11 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -45,18 +45,19 @@ import mage.target.TargetSpell;
 public class ScatterArc extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     public ScatterArc(UUID ownerId) {
         super(ownerId, 48, "Scatter Arc", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "GTC";
 
-
         // Counter target noncreature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
