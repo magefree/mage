@@ -31,9 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
+import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -42,8 +42,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -59,11 +57,10 @@ public class BitingTether extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
@@ -71,7 +68,7 @@ public class BitingTether extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
         // At the beginning of your upkeep, put a -1/-1 counter on enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new BitingTetherEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(CounterType.M1M1.createInstance(), "enchanted creature"), TargetController.YOU, false));
 
     }
 
@@ -82,36 +79,5 @@ public class BitingTether extends CardImpl {
     @Override
     public BitingTether copy() {
         return new BitingTether(this);
-    }
-}
-
-class BitingTetherEffect extends OneShotEffect {
-
-    public BitingTetherEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "put a -1/-1 counter on enchanted creature";
-    }
-
-    public BitingTetherEffect(final BitingTetherEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BitingTetherEffect copy() {
-        return new BitingTetherEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent bitingTether = game.getPermanent(source.getSourceId());
-        if (bitingTether == null) {
-            return false;
-        }
-        Permanent enchantedCreature = game.getPermanent(bitingTether.getAttachedTo());
-        if (enchantedCreature != null) {
-            enchantedCreature.addCounters(CounterType.M1M1.createInstance(), game);
-            return true;
-        }
-        return false;
     }
 }

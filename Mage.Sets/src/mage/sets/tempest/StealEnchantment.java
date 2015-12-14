@@ -56,12 +56,12 @@ public class StealEnchantment extends CardImpl {
         // Enchant enchantment
         TargetPermanent auraTarget = new TargetEnchantmentPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // You control enchanted enchantment.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("enchantment")));
     }
 
     public StealEnchantment(final StealEnchantment card) {
