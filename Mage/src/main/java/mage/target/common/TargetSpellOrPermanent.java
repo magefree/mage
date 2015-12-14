@@ -43,6 +43,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetImpl;
+import mage.util.GameLog;
 
 /**
  *
@@ -254,7 +255,11 @@ public class TargetSpellOrPermanent extends TargetImpl {
                 sb.append(permanent.getLogName()).append(" ");
             } else {
                 Spell spell = game.getStack().getSpell(targetId);
-                sb.append(spell.getLogName()).append(" ");
+                if (spell.isFaceDown(game)) {
+                    sb.append(GameLog.getNeutralColoredText("face down spell"));
+                } else {
+                    sb.append(spell.getLogName()).append(" ");
+                }
             }
         }
         return sb.toString();
