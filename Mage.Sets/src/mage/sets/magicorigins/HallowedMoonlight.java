@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -89,9 +90,12 @@ class HallowedMoonlightEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
-            controller.moveCards(entersTheBattlefieldEvent.getTarget(), Zone.EXILED, source, game, false, false, false, null);
+        Card targetCard = game.getCard(event.getTargetId());
+        if (targetCard == null) {
+            targetCard = ((EntersTheBattlefieldEvent) event).getTarget();
+        }
+        if (controller != null && targetCard != null) {
+            controller.moveCards(targetCard, Zone.EXILED, source, game, false, false, false, null);
             return true;
         }
         return false;

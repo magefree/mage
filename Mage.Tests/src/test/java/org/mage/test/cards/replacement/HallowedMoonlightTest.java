@@ -76,4 +76,39 @@ public class HallowedMoonlightTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * I cast Rally the Ancestors with many creatures in my graveyard. Opponent
+     * responds with Hallowed Moonlight. After Rally the Ancestors resolves, the
+     * creature cards in my graveyard remain in my graveyard, but are also added
+     * to the exile zone.
+     */
+    @Test
+    public void testRallyTheAncestors() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead.
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Hallowed Moonlight");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 6);
+        // Return each creature card with converted mana cost X or less from your graveyard to the battlefield.
+        // Exile those creatures at the beginning of your next upkeep. Exile Rally the Ancestors.
+        addCard(Zone.HAND, playerB, "Rally the Ancestors"); // Instant - {X}{W}{W}
+        addCard(Zone.GRAVEYARD, playerB, "Pillarfield Ox");
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rally the Ancestors");
+        setChoice(playerB, "X=4");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Hallowed Moonlight", NO_TARGET, "Rally the Ancestors");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Hallowed Moonlight", 1);
+
+        assertExileCount("Rally the Ancestors", 1);
+        assertExileCount("Pillarfield Ox", 1);
+        assertExileCount("Silvercoat Lion", 1);
+
+    }
+
 }

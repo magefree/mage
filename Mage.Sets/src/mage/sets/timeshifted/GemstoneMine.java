@@ -54,10 +54,10 @@ public class GemstoneMine extends CardImpl {
         // Gemstone Mine enters the battlefield with three mining counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.MINING.createInstance(3))));
 
-        // {tap}, Remove a mining counter from Gemstone Mine: Add one mana of any color to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
+        // {T}, Remove a mining counter from Gemstone Mine: Add one mana of any color to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.MINING.createInstance(1)));
-        ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(), new SourceHasCounterCondition(CounterType.MINING, 0,0), "If there are no mining counters on Gemstone Mine, sacrifice it"));
+        ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(), new SourceHasCounterCondition(CounterType.MINING, 0, 0), "If there are no mining counters on {this}, sacrifice it"));
         this.addAbility(ability);
     }
 
