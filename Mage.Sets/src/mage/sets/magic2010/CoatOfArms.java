@@ -27,10 +27,13 @@
  */
 package mage.sets.magic2010;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import mage.MageObjectReference;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.ChangelingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -38,10 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -100,13 +99,16 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
             int amount = getAmount(permanents, permanent);
             permanent.addPower(amount);
             permanent.addToughness(amount);
-        }        
+        }
         return true;
     }
 
     private int getAmount(List<Permanent> permanents, Permanent target) {
         int amount = 0;
         List<String> targetSubtype = target.getSubtype();
+        if (target.getAbilities().contains(ChangelingAbility.getInstance())) {
+            return permanents.size() - 1;
+        }
         for (Permanent permanent : permanents) {
             if (!permanent.getId().equals(target.getId())) {
                 for (String subtype : targetSubtype) {
