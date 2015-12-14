@@ -1,3 +1,5 @@
+#|Generate|TOK:DDQ|Angel||
+
 |Generate|TOK:C15|Angel||
 |Generate|TOK:C15|Bear||
 |Generate|TOK:C15|Beast||

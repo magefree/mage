@@ -44,6 +44,7 @@ Duel Decks: Anthology, Elves vs. Goblins|DD3|
 Duel Decks: Anthology, Divine vs. Demonic|DD3|
 Duel Decks: Anthology, Garruk vs. Liliana|DD3|
 Duel Decks: Anthology, Jace vs. Chandra|DD3|
+Duel Decks: Blessed vs. Cursed|DDQ|
 Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Elspeth vs. Kiora|DDO|

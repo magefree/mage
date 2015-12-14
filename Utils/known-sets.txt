@@ -31,6 +31,7 @@ Duel Decks: Anthology, Divine vs. Demonic|anthologydivinevsdemonic|
 Duel Decks: Anthology, Elves vs. Goblins|anthologyelvesvsgoblins|
 Duel Decks: Anthology, Garruk vs. Liliana|anthologygarrukvsliliana|
 Duel Decks: Anthology, Jace vs. Chandra|anthologyjacevschandra|
+Duel Decks: Blessed vs. Cursed|blessedvscursed|
 Duel Decks: Divine vs. Demonic|divinevsdemonic|
 Duel Decks: Elspeth vs. Kiora|elspethvskiora|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
