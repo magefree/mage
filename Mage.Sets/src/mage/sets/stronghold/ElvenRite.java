@@ -28,16 +28,11 @@
 package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -51,7 +46,7 @@ public class ElvenRite extends CardImpl {
         this.expansionSetCode = "STH";
 
         // Distribute two +1/+1 counters among one or two target creatures.
-        this.getSpellAbility().addEffect(new ElvenRiteDistributeEffect());
+        this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.P1P1, 2, false, "one or two target creatures"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));
     }
 
@@ -62,36 +57,5 @@ public class ElvenRite extends CardImpl {
     @Override
     public ElvenRite copy() {
         return new ElvenRite(this);
-    }
-}
-
-class ElvenRiteDistributeEffect extends OneShotEffect {
-
-    public ElvenRiteDistributeEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "Distribute two +1/+1 counters among one or two target creatures";
-    }
-
-    public ElvenRiteDistributeEffect(final ElvenRiteDistributeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ElvenRiteDistributeEffect copy() {
-        return new ElvenRiteDistributeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() > 0) {
-            Target multiTarget = source.getTargets().get(0);
-            for (UUID target : multiTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(target);
-                if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);
-                }
-            }
-        }
-        return true;
     }
 }

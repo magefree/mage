@@ -25,55 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class ArmamentCorps extends CardImpl {
+public class BountyOfTheHunt extends mage.sets.masterseditionii.BountyOfTheHunt {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+    public BountyOfTheHunt(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 63;
+        this.expansionSetCode = "ALL";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public ArmamentCorps(UUID ownerId) {
-        super(ownerId, 165, "Armament Corps", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{G}");
-        this.expansionSetCode = "KTK";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // When Armament Corps enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 2, false, "one or two target creatures you control"), false);
-        ability.addTarget(new TargetCreaturePermanentAmount(2, filter));
-        this.addAbility(ability);
-    }
-
-    public ArmamentCorps(final ArmamentCorps card) {
+    public BountyOfTheHunt(final BountyOfTheHunt card) {
         super(card);
     }
 
     @Override
-    public ArmamentCorps copy() {
-        return new ArmamentCorps(this);
+    public BountyOfTheHunt copy() {
+        return new BountyOfTheHunt(this);
     }
 }

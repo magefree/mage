@@ -25,15 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.torment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -41,35 +39,30 @@ import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class ShamblingSwarm extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    public ShamblingSwarm(UUID ownerId) {
+        super(ownerId, 82, "Shambling Swarm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
+        this.expansionSetCode = "TOR";
+        this.subtype.add("Horror");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
+        // When Shambling Swarm dies, distribute three -1/-1 counters among one, two, or three target creatures. For each -1/-1 counter you put on a creature this way, remove a -1/-1 counter from that creature at the beginning of the next end step.
+        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.M1M1, 3, true, "one, two, or three target creatures"), false);
+        ability.addTarget(new TargetCreaturePermanentAmount(3));
         this.addAbility(ability);
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public ShamblingSwarm(final ShamblingSwarm card) {
         super(card);
     }
 
     @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    public ShamblingSwarm copy() {
+        return new ShamblingSwarm(this);
     }
-
 }

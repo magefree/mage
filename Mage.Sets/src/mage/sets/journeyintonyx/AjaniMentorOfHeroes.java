@@ -31,12 +31,11 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -47,10 +46,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -78,7 +73,7 @@ public class AjaniMentorOfHeroes extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Distribute three +1/+1 counters among one, two, or three target creatures you control
-        Ability ability = new LoyaltyAbility(new AjaniMentorOfHeroesAddCountersEffect(), 1);
+        Ability ability = new LoyaltyAbility(new DistributeCountersEffect(CounterType.P1P1, 3, false, "one, two, or three target creatures you control"), 1);
         ability.addTarget(new TargetCreaturePermanentAmount(3, filter));
         this.addAbility(ability);
 
@@ -96,39 +91,5 @@ public class AjaniMentorOfHeroes extends CardImpl {
     @Override
     public AjaniMentorOfHeroes copy() {
         return new AjaniMentorOfHeroes(this);
-    }
-}
-
-class AjaniMentorOfHeroesAddCountersEffect extends OneShotEffect {
-
-    public AjaniMentorOfHeroesAddCountersEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "Distribute three +1/+1 counters among one, two, or three target creatures you control";
-    }
-
-    public AjaniMentorOfHeroesAddCountersEffect(final AjaniMentorOfHeroesAddCountersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AjaniMentorOfHeroesAddCountersEffect copy() {
-        return new AjaniMentorOfHeroesAddCountersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && source.getTargets().size() > 0) {
-            Target multiTarget = source.getTargets().get(0);
-            for (UUID target : multiTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(target);
-                if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);
-                    game.informPlayers(new StringBuilder(controller.getLogName()).append(" puts ").append(multiTarget.getTargetAmount(target)).append(" ").append(CounterType.P1P1.getName().toLowerCase()).append(" counter on ").append(permanent.getName()).toString());
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
