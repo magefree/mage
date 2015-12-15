@@ -28,8 +28,6 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,9 +38,17 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
@@ -58,6 +64,7 @@ public class DualCasting extends CardImpl {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public DualCasting(UUID ownerId) {

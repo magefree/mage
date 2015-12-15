@@ -1,3 +1,7 @@
+#Generate|TOK:OGW|Elemental||
+#Generate|TOK:OGW|Plant||
+#Generate|TOK:OGW|Zombie||
+
 #|Generate|TOK:DDQ|Angel||
 
 |Generate|TOK:C15|Angel||

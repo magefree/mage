@@ -37,7 +37,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 

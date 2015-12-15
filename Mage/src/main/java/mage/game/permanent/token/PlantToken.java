@@ -31,7 +31,6 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import mage.MageInt;
 import mage.constants.CardType;
 
@@ -40,7 +39,7 @@ public class PlantToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("WWK", "DDP"));
+        tokenImageSets.addAll(Arrays.asList("WWK", "DDP", "OGW"));
     }
 
     public PlantToken() {
