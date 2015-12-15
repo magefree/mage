@@ -36,7 +36,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterOwnedCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanentAmount;
@@ -47,18 +49,14 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class BountyOfTheHunt extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a green card from your hand");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-
-
     public BountyOfTheHunt(UUID ownerId) {
         super(ownerId, 154, "Bounty of the Hunt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
         this.expansionSetCode = "ME2";
 
         // You may exile a green card from your hand rather than pay Bounty of the Hunt's mana cost.
+        FilterOwnedCard filter = new FilterOwnedCard("green card from your hand");
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+        filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
 
         // Distribute three +1/+1 counters among one, two, or three target creatures. For each +1/+1 counter you put on a creature this way, remove a +1/+1 counter from that creature at the beginning of the next cleanup step.
