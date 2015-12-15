@@ -112,7 +112,7 @@ public class Counter implements Serializable {
      * to be less than 0. If an attempt is made to make the count be less than zero, the call will be logged.
      */
     public void remove(int amount) {
-        if (count > amount) {
+        if (count >= amount) {
             count -= amount;
         } else {
             logger.warn("An attempt was made to set the counter '" + name +
