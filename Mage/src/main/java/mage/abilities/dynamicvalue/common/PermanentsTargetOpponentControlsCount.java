@@ -27,11 +27,11 @@
  */
 package mage.abilities.dynamicvalue.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 
 /**
@@ -68,9 +68,9 @@ public class PermanentsTargetOpponentControlsCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (sourceAbility.getFirstTarget() != null) {
-            filter.add(new ControllerIdPredicate(sourceAbility.getFirstTarget()));
-            int value = game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        UUID targetOpponentId = effect.getTargetPointer().getFirst(game, sourceAbility);
+        if (targetOpponentId != null) {
+            int value = game.getBattlefield().countAll(filter, targetOpponentId, game);
             return multiplier * value;
         } else {
             return 0;
