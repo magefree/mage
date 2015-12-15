@@ -25,41 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author fireshoes
  */
-public class ArmoredSkaab extends CardImpl {
+public class LumithreadField extends CardImpl {
 
-    public ArmoredSkaab(UUID ownerId) {
-        super(ownerId, 43, "Armored Skaab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ISD";
-        this.subtype.add("Zombie");
-        this.subtype.add("Warrior");
+    public LumithreadField(UUID ownerId) {
+        super(ownerId, 25, "Lumithread Field", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "FUT";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(4);
-
-        // When Armored Skaab enters the battlefield, put the top four cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(4)));
+        // Creatures you control get +0/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
+        
+        // Morph {1}{W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{W}")));
     }
 
-    public ArmoredSkaab(final ArmoredSkaab card) {
+    public LumithreadField(final LumithreadField card) {
         super(card);
     }
 
     @Override
-    public ArmoredSkaab copy() {
-        return new ArmoredSkaab(this);
+    public LumithreadField copy() {
+        return new LumithreadField(this);
     }
 }
