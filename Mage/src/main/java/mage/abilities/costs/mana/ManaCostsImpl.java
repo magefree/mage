@@ -315,13 +315,14 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 if (symbol.length() > 0) {
                     if (symbol.length() == 1 || isNumeric(symbol)) {
                         if (Character.isDigit(symbol.charAt(0))) {
-                            this.add((T) new GenericManaCost(Integer.valueOf(symbol)));
+                            this.add(new GenericManaCost(Integer.valueOf(symbol)));
                         } else {
-                            if(symbol.equals("S")) {
-                                this.add((T) new SnowManaCost());
-                            }
-                            else if (!symbol.equals("X")) {
-                                this.add((T) new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
+                            if (symbol.equals("S")) {
+                                this.add(new SnowManaCost());
+                            } else if (symbol.equals("C")) {
+                                this.add(new ColorlessManaCost(1));
+                            } else if (!symbol.equals("X")) {
+                                this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                             } else {
                                 // check X wasn't added before
                                 if (modifierForX == 0) {
@@ -331,7 +332,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                                             modifierForX++;
                                         }
                                     }
-                                    this.add((T) new VariableManaCost(modifierForX));
+                                    this.add(new VariableManaCost(modifierForX));
                                 }
                             }
                             //TODO: handle multiple {X} and/or {Y} symbols

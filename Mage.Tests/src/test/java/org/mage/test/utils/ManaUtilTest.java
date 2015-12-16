@@ -89,6 +89,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         Assert.assertEquals("{U}", ManaUtil.condenseManaCostString("{U}"));
         Assert.assertEquals("{2}", ManaUtil.condenseManaCostString("{2}"));
         Assert.assertEquals("", ManaUtil.condenseManaCostString("{}"));
+        Assert.assertEquals("{5}{C}{R}{R}{R}{U}", ManaUtil.condenseManaCostString("{R}{C}{R}{2}{R}{3}{U}"));
     }
 
     /**
