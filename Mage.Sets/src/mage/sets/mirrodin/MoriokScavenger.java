@@ -25,51 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.cards.CardImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class MoriokScavenger extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    final static FilterCreatureCard filter = new FilterCreatureCard("artifact creature card from your graveyard");
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
+    public MoriokScavenger(UUID ownerId) {
+        super(ownerId, 68, "Moriok Scavenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // When Moriok Scavenger enters the battlefield, you may return target artifact creature card from your graveyard to your hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public MoriokScavenger(final MoriokScavenger card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public MoriokScavenger copy() {
+        return new MoriokScavenger(this);
     }
-
 }

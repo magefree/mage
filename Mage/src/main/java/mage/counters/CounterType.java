@@ -74,6 +74,7 @@ public enum CounterType {
     LOYALTY("loyalty"),
     MANNEQUIN("mannequin"),
     M1M1(new BoostCounter(-1, -1).name),
+    M2M1(new BoostCounter(-2, -1).name),
     M2M2(new BoostCounter(-2, -2).name),
     MINING("mining"),
     MUSTER("muster"),
@@ -153,6 +154,8 @@ public enum CounterType {
                 return new BoostCounter(2, 2, amount);
             case M1M1:
                 return new BoostCounter(-1, -1, amount);
+            case M2M1:
+                return new BoostCounter(-2, -1, amount);
             case M2M2:
                 return new BoostCounter(-2, -2, amount);
             default:

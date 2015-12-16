@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class HeartwoodShard extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    public HeartwoodShard(UUID ownerId) {
+        super(ownerId, 184, "Heartwood Shard", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "MRD";
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
+        // {3}, {tap} or {G}, {tap}: Target creature gains trample until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+            TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{3}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+            TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public HeartwoodShard(final HeartwoodShard card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public HeartwoodShard copy() {
+        return new HeartwoodShard(this);
     }
-
 }

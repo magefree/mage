@@ -25,49 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class StealArtifact extends CardImpl {
+public class BountyOfTheHunt extends mage.sets.masterseditionii.BountyOfTheHunt {
 
-    public StealArtifact(UUID ownerId) {
-        super(ownerId, 99, "Steal Artifact", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "7ED";
-        this.subtype.add("Aura");
-
-        // Enchant artifact
-         TargetPermanent auraTarget = new TargetArtifactPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        // You control enchanted artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("artifact")));
+    public BountyOfTheHunt(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 63;
+        this.expansionSetCode = "ALL";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public StealArtifact(final StealArtifact card) {
+    public BountyOfTheHunt(final BountyOfTheHunt card) {
         super(card);
     }
 
     @Override
-    public StealArtifact copy() {
-        return new StealArtifact(this);
+    public BountyOfTheHunt copy() {
+        return new BountyOfTheHunt(this);
     }
 }

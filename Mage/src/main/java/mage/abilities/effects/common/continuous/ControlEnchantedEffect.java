@@ -15,8 +15,12 @@ import mage.game.permanent.Permanent;
 public class ControlEnchantedEffect extends ContinuousEffectImpl {
 
     public ControlEnchantedEffect() {
+        this("creature");
+    }
+
+    public ControlEnchantedEffect(String targetDescription) {
         super(Duration.WhileOnBattlefield, Outcome.GainControl);
-        staticText = "You control enchanted creature";
+        staticText = "You control enchanted " + targetDescription;
     }
 
     public ControlEnchantedEffect(final ControlEnchantedEffect effect) {

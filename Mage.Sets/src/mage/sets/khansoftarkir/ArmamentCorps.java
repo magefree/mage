@@ -31,15 +31,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -47,6 +46,12 @@ import mage.target.common.TargetCreaturePermanentAmount;
  * @author LevelX2
  */
 public class ArmamentCorps extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public ArmamentCorps(UUID ownerId) {
         super(ownerId, 165, "Armament Corps", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{G}");
@@ -58,8 +63,8 @@ public class ArmamentCorps extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Armament Corps enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ArmamentCorpsDistributeEffect(), false);
-        ability.addTarget(new TargetCreaturePermanentAmount(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 2, false, "one or two target creatures you control"), false);
+        ability.addTarget(new TargetCreaturePermanentAmount(2, filter));
         this.addAbility(ability);
     }
 
@@ -70,36 +75,5 @@ public class ArmamentCorps extends CardImpl {
     @Override
     public ArmamentCorps copy() {
         return new ArmamentCorps(this);
-    }
-}
-
-class ArmamentCorpsDistributeEffect extends OneShotEffect {
-
-    public ArmamentCorpsDistributeEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "Distribute two +1/+1 counters among one or two target creatures";
-    }
-
-    public ArmamentCorpsDistributeEffect(final ArmamentCorpsDistributeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArmamentCorpsDistributeEffect copy() {
-        return new ArmamentCorpsDistributeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() > 0) {
-            Target multiTarget = source.getTargets().get(0);
-            for (UUID target : multiTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(target);
-                if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);
-                }
-            }
-        }
-        return true;
     }
 }

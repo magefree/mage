@@ -25,51 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
- * @author LevelX
+
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class CopperhoofVorrac extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    private static final FilterPermanent filter = new FilterPermanent("untapped permanent your opponents control");
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
-        this.addAbility(ability);
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public CopperhoofVorrac(UUID ownerId) {
+        super(ownerId, 116, "Copperhoof Vorrac", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Boar");
+        this.subtype.add("Beast");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Copperhoof Vorrac gets +1/+1 for each untapped permanent your opponents control.
+        PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+    }
+
+    public CopperhoofVorrac(final CopperhoofVorrac card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public CopperhoofVorrac copy() {
+        return new CopperhoofVorrac(this);
     }
-
 }

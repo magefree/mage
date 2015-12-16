@@ -25,51 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.ObjectColor;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.constants.TargetController;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class DrossHarvester extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    private static final FilterCard filter = new FilterCard("white");
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
-        this.addAbility(ability);
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public DrossHarvester(UUID ownerId) {
+        super(ownerId, 63, "Dross Harvester", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Horror");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // Protection from white
+        this.addAbility(new ProtectionAbility(filter));
+        // At the beginning of your end step, you lose 4 life.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(4),
+           TargetController.YOU, false));
+        // Whenever a creature dies, you gain 2 life.
+        this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(2), false));
+    }
+
+    public DrossHarvester(final DrossHarvester card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public DrossHarvester copy() {
+        return new DrossHarvester(this);
     }
-
 }

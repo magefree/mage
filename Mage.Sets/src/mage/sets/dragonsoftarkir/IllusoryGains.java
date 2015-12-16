@@ -56,9 +56,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class IllusoryGains extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
@@ -71,13 +71,13 @@ public class IllusoryGains extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
-        
+
         // Whenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new IllusoryGainsEffect(), filter, false, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, you attach Illusory Gains to that creature."));

@@ -25,51 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class ForgeArmor extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    public ForgeArmor(UUID ownerId) {
+        super(ownerId, 92, "Forge Armor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
+        this.expansionSetCode = "MRD";
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
-        this.addAbility(ability);
+        // As an additional cost to cast Forge Armor, sacrifice an artifact.
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent())));
+        // Put X +1/+1 counters on target creature, where X is the sacrificed artifact's converted mana cost.
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(new AddCountersTargetEffect(
+            CounterType.P1P1.createInstance(), new SacrificeCostConvertedMana("artifact"))));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public ForgeArmor(final ForgeArmor card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public ForgeArmor copy() {
+        return new ForgeArmor(this);
     }
-
 }

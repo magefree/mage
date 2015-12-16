@@ -25,51 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class RelicBane extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    public RelicBane(UUID ownerId) {
+        super(ownerId, 76, "Relic Bane", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Aura");
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        // Enchant artifact
+        TargetPermanent auraTarget = new TargetArtifactPermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        // Enchanted artifact has "At the beginning of your upkeep, you lose 2 life."
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
+            new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2),
+            TargetController.YOU, false), AttachmentType.AURA)));
+     }
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
-        this.addAbility(ability);
-    }
-
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public RelicBane(final RelicBane card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public RelicBane copy() {
+        return new RelicBane(this);
     }
-
 }

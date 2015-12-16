@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.ObjectColor;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
+import mage.filter.common.FilterOwnedCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class BountyOfTheHunt extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    public BountyOfTheHunt(UUID ownerId) {
+        super(ownerId, 154, "Bounty of the Hunt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
+        this.expansionSetCode = "ME2";
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        // You may exile a green card from your hand rather than pay Bounty of the Hunt's mana cost.
+        FilterOwnedCard filter = new FilterOwnedCard("green card from your hand");
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+        filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
-        this.addAbility(ability);
+        // Distribute three +1/+1 counters among one, two, or three target creatures. For each +1/+1 counter you put on a creature this way, remove a +1/+1 counter from that creature at the beginning of the next cleanup step.
+        this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.P1P1, 3, true, "one, two, or three target creatures"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3));
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public BountyOfTheHunt(final BountyOfTheHunt card) {
         super(card);
     }
 
     @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    public BountyOfTheHunt copy() {
+        return new BountyOfTheHunt(this);
     }
-
 }

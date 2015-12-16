@@ -61,7 +61,7 @@ public class Annex extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("land")));
     }
 
     public Annex(final Annex card) {

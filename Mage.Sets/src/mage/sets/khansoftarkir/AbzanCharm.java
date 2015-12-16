@@ -28,23 +28,18 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -78,7 +73,7 @@ public class AbzanCharm extends CardImpl {
 
         // *Distribute two +1/+1 counters among one or two target creatures.
         mode = new Mode();
-        mode.getEffects().add(new AbzanCharmDistributeEffect());
+        mode.getEffects().add(new DistributeCountersEffect(CounterType.P1P1, 2, false, "one or two target creatures"));
         mode.getTargets().add(new TargetCreaturePermanentAmount(2));
         this.getSpellAbility().addMode(mode);
 
@@ -91,36 +86,5 @@ public class AbzanCharm extends CardImpl {
     @Override
     public AbzanCharm copy() {
         return new AbzanCharm(this);
-    }
-}
-
-class AbzanCharmDistributeEffect extends OneShotEffect {
-
-    public AbzanCharmDistributeEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "Distribute two +1/+1 counters among one or two target creatures";
-    }
-
-    public AbzanCharmDistributeEffect(final AbzanCharmDistributeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AbzanCharmDistributeEffect copy() {
-        return new AbzanCharmDistributeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() > 0) {
-            Target multiTarget = source.getTargets().get(0);
-            for (UUID target : multiTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(target);
-                if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);
-                }
-            }
-        }
-        return true;
     }
 }

@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
+import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class GoblinDirigible extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
-
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+    public GoblinDirigible(UUID ownerId) {
+        super(ownerId, 177, "Goblin Dirigible", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Construct");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
-        this.addAbility(ability);
+        // Goblin Dirigible doesn't untap during your untap step.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        // At the beginning of your upkeep, you may pay {4}. If you do, untap Goblin Dirigible.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
+            new UntapSourceEffect(), new ManaCostsImpl("{4}")), TargetController.YOU, false));
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public GoblinDirigible(final GoblinDirigible card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public GoblinDirigible copy() {
+        return new GoblinDirigible(this);
     }
-
 }

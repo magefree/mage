@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Mode;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCounterCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class PowerConduit extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    public PowerConduit(UUID ownerId) {
+        super(ownerId, 229, "Power Conduit", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "MRD";
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
+        // {tap}, Remove a counter from a permanent you control: Choose one - Put a charge counter on target artifact; or put a +1/+1 counter on target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
+        ability.addCost(new RemoveCounterCost(new TargetControlledPermanent()));
+        ability.addTarget(new TargetArtifactPermanent());
+        Mode mode = new Mode();
+        mode.getEffects().add(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        mode.getTargets().add(new TargetCreaturePermanent());
+        ability.addMode(mode);
         this.addAbility(ability);
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public PowerConduit(final PowerConduit card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public PowerConduit copy() {
+        return new PowerConduit(this);
     }
-
 }

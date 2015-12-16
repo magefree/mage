@@ -30,23 +30,18 @@ package mage.sets.alliances;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -55,7 +50,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  * @author Plopman
  */
 public class Contagion extends CardImpl {
-   
+
     public Contagion(UUID ownerId) {
         super(ownerId, 4, "Contagion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
         this.expansionSetCode = "ALL";
@@ -63,15 +58,15 @@ public class Contagion extends CardImpl {
         FilterOwnedCard filter = new FilterOwnedCard("black card from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        
+
         // You may pay 1 life and exile a black card from your hand rather than pay Contagion's mana cost.
         AlternativeCostSourceAbility ability = new AlternativeCostSourceAbility(new PayLifeCost(1));
         ability.addCost(new ExileFromHandCost(new TargetCardInHand(filter)));
-        this.addAbility(ability);  
-        
+        this.addAbility(ability);
+
         // Distribute two -2/-1 counters among one or two target creatures.
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));
-        this.getSpellAbility().addEffect(new DistributeCountersEffect());
+        this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.M2M1, 2, false, "one or two target creatures"));
     }
 
     public Contagion(final Contagion card) {
@@ -81,42 +76,5 @@ public class Contagion extends CardImpl {
     @Override
     public Contagion copy() {
         return new Contagion(this);
-    }
-}
-
-class DistributeCountersEffect extends OneShotEffect {
-
-
-    public DistributeCountersEffect() {
-        super(Outcome.UnboostCreature);
-    }
-
-    public DistributeCountersEffect(final DistributeCountersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DistributeCountersEffect copy() {
-        return new DistributeCountersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() > 0) {
-            Target multiTarget = source.getTargets().get(0);
-            for (UUID target: multiTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(target);
-                if (permanent != null) {
-                    int amount = multiTarget.getTargetAmount(target);
-                    permanent.addCounters(new BoostCounter(-2, -1, amount), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Distribute two -2/-1 counters among one or two target creatures";
     }
 }

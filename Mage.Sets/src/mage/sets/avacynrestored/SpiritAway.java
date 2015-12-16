@@ -27,7 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -37,10 +37,14 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -58,11 +62,11 @@ public class SpiritAway extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-
-        // You control enchanted creature.
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
         // Enchanted creature gets +2/+2 and has flying.

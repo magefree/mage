@@ -25,51 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author LevelX
+ *
+ * @author LoneFox
  */
-public class JuganTheRisingStar extends CardImpl {
+public class Irradiate extends CardImpl {
 
-    public JuganTheRisingStar(UUID ownerId) {
-        super(ownerId, 217, "Jugan, the Rising Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Dragon");
-        this.subtype.add("Spirit");
+    public Irradiate(UUID ownerId) {
+        super(ownerId, 67, "Irradiate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
+        this.expansionSetCode = "MRD";
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 5, false, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
-        this.addAbility(ability);
+        // Target creature gets -1/-1 until end of turn for each artifact you control.
+        PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent(), -1);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(count, count, Duration.EndOfTurn, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    public Irradiate(final Irradiate card) {
         super(card);
     }
 
-    @Override
-    public JuganTheRisingStar copy() {
-        return new JuganTheRisingStar(this);
+    @java.lang.Override
+    public Irradiate copy() {
+        return new Irradiate(this);
     }
-
 }

@@ -28,18 +28,14 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -54,7 +50,7 @@ public class BlessingsOfNature extends CardImpl {
 
 
         // Distribute four +1/+1 counters among any number of target creatures.
-        this.getSpellAbility().addEffect(new BlessingsOfNatureEffect());
+        this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.P1P1, 4, false, "any number of target creatures"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4));
 
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{G}")));
@@ -67,36 +63,5 @@ public class BlessingsOfNature extends CardImpl {
     @Override
     public BlessingsOfNature copy() {
         return new BlessingsOfNature(this);
-    }
-}
-
-class BlessingsOfNatureEffect extends OneShotEffect {
-
-    public BlessingsOfNatureEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "Distribute four +1/+1 counters among any number of target creatures";
-    }
-
-    public BlessingsOfNatureEffect(final BlessingsOfNatureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BlessingsOfNatureEffect copy() {
-        return new BlessingsOfNatureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() > 0) {
-            Target multiTarget = source.getTargets().get(0);
-            for (UUID target : multiTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(target);
-                if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);
-                }
-            }
-        }
-        return true;
     }
 }
