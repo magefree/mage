@@ -130,13 +130,13 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                         if (sublayer == SubLayer.NA) {
                             if (token.getAbilities().size() > 0) {
                                 for (Ability ability : token.getAbilities()) {
-                                    permanent.addAbility(ability, game);
+                                    permanent.addAbility(ability, source.getSourceId(), game);
                                 }
                             }
                         }
                         break;
                     case PTChangingEffects_7:
-                        if (sublayer == SubLayer.SetPT_7b) {
+                        if (sublayer == SubLayer.CharacteristicDefining_7a) {
                             permanent.getToughness().setValue(token.getToughness().getValue());
                             permanent.getPower().setValue(token.getPower().getValue());
                         }

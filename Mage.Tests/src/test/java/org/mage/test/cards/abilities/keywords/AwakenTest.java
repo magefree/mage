@@ -58,4 +58,66 @@ public class AwakenTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
     }
 
+    /**
+     * Used Awaken on Scatter to the Winds on an unanimated Shambling Vent.
+     * Animated vent and it was still a 3/3 with lifelink when it should've been
+     * 5/6.
+     */
+    @Test
+    public void testShamblingVentAndAnimation() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Lantern", 1);
+        // Shambling Vent enters the battlefield tapped.
+        // {T}: Add {W} or {B} to your mana pool.
+        // {1}{W}{B}: Shambling Vent becomes a 2/3 white and black Elemental creature with lifelink until end of turn. It's still a land.
+        addCard(Zone.BATTLEFIELD, playerA, "Shambling Vent", 1);
+        // Counter target spell.
+        // Awaken 3-{4}{U}{U}
+        addCard(Zone.HAND, playerA, "Scatter to the Winds", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Scatter to the Winds with awaken", "Silvercoat Lion");
+        addTarget(playerA, "Shambling Vent");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W}{B}");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Scatter to the Winds", 1);
+        assertPowerToughness(playerA, "Shambling Vent", 5, 6);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+    }
+
+    @Test
+    public void testShamblingVent() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Lantern", 1);
+        // Shambling Vent enters the battlefield tapped.
+        // {T}: Add {W} or {B} to your mana pool.
+        // {1}{W}{B}: Shambling Vent becomes a 2/3 white and black Elemental creature with lifelink until end of turn. It's still a land.
+        addCard(Zone.BATTLEFIELD, playerA, "Shambling Vent", 1);
+        // Counter target spell.
+        // Awaken 3-{4}{U}{U}
+        addCard(Zone.HAND, playerA, "Scatter to the Winds", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Scatter to the Winds with awaken", "Silvercoat Lion");
+        addTarget(playerA, "Shambling Vent");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Scatter to the Winds", 1);
+        assertPowerToughness(playerA, "Shambling Vent", 3, 3);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+    }
 }
