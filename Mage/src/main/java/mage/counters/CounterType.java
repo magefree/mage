@@ -104,6 +104,7 @@ public enum CounterType {
     TIDE("tide"),
     TIME("time"),
     TOWER("tower"),
+    TRAP("trap"),
     VELOCITY("velocity"),
     VERSE("verse"),
     VITALITY("vitality"),
