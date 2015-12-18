@@ -170,7 +170,7 @@ class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                controller.moveCards(card, Zone.STACK, Zone.EXILED, source, game);
+                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.STACK, true);
                 return true;
             }
         }
