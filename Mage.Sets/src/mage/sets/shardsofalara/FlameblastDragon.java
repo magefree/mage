@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
@@ -78,6 +77,7 @@ public class FlameblastDragon extends CardImpl {
 }
 
 class FlameblastDragonEffect extends OneShotEffect {
+
     FlameblastDragonEffect() {
         super(Outcome.Benefit);
         staticText = "you may pay {X}{R}. If you do, {this} deals X damage to target creature or player";
@@ -103,7 +103,7 @@ class FlameblastDragonEffect extends OneShotEffect {
                     }
                     Player targetPlayer = game.getPlayer(source.getFirstTarget());
                     if (targetPlayer != null) {
-                        targetPlayer.damage(costX, source.getSourceId(), game, true, false);
+                        targetPlayer.damage(costX, source.getSourceId(), game, false, true);
                         return true;
                     }
                     return false;

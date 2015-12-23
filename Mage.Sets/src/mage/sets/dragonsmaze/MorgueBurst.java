@@ -100,7 +100,7 @@ class MorgueBurstEffect extends OneShotEffect {
                 }
                 Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
                 if (targetPlayer != null) {
-                    targetPlayer.damage(damage, source.getSourceId(), game, true, false);
+                    targetPlayer.damage(damage, source.getSourceId(), game, false, true);
                     return true;
                 }
             }

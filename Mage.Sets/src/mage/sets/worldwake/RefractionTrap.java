@@ -30,9 +30,6 @@ package mage.sets.worldwake;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
@@ -41,8 +38,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -64,7 +63,6 @@ public class RefractionTrap extends CardImpl {
         super(ownerId, 17, "Refraction Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Trap");
-
 
         // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new RefractionTrapAlternativeCost());
@@ -89,7 +87,7 @@ public class RefractionTrap extends CardImpl {
 class RefractionTrapWatcher extends Watcher {
 
     Set<UUID> playersMetCondition = new HashSet<>();
-            
+
     public RefractionTrapWatcher() {
         super("RefractionTrapWatcher", WatcherScope.GAME);
     }
@@ -120,19 +118,20 @@ class RefractionTrapWatcher extends Watcher {
     public boolean conditionMetForAnOpponent(UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            for(UUID playerId: playersMetCondition) {
+            for (UUID playerId : playersMetCondition) {
                 if (controller.hasOpponent(playerId, game)) {
                     return true;
                 }
             }
         }
         return false;
-        
+
     }
+
     @Override
     public void reset() {
         playersMetCondition.clear();
-        super.reset();        
+        super.reset();
     }
 }
 
@@ -179,20 +178,20 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
     public RefractionTrapPreventDamageEffect(final RefractionTrapPreventDamageEffect effect) {
         super(effect);
         this.amount = effect.amount;
-         this.target = effect.target.copy();
+        this.target = effect.target.copy();
     }
 
     @Override
     public RefractionTrapPreventDamageEffect copy() {
         return new RefractionTrapPreventDamageEffect(this);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
         super.init(source, game);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -213,7 +212,7 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
             Player player = game.getPlayer(damageTarget);
             if (player != null) {
                 game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + player.getLogName());
-                player.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, true, false);
+                player.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
             }
         }
 
@@ -231,8 +230,8 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
             }
 
             // check damage source
-            if (!object.getId().equals(target.getFirstTarget()) && 
-                    !((object instanceof StackObject) && ((StackObject)object).getSourceId().equals(target.getFirstTarget()))) {
+            if (!object.getId().equals(target.getFirstTarget())
+                    && !((object instanceof StackObject) && ((StackObject) object).getSourceId().equals(target.getFirstTarget()))) {
                 return false;
             }
 

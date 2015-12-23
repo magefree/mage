@@ -32,8 +32,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -97,7 +97,7 @@ class MeglonothEffect extends OneShotEffect {
         Permanent meglonoth = game.getPermanent(source.getSourceId());
         Permanent blocked = game.getPermanent(targetPointer.getFirst(game, source));
         if (blocked != null && meglonoth != null) {
-            game.getPlayer(blocked.getControllerId()).damage(meglonoth.getPower().getValue(), id, game, true, false);
+            game.getPlayer(blocked.getControllerId()).damage(meglonoth.getPower().getValue(), id, game, false, true);
             return true;
         }
         return false;

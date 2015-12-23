@@ -45,6 +45,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,7 +63,6 @@ public class ShiningShoal extends CardImpl {
         super(ownerId, 21, "Shining Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-
 
         // You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost
         FilterOwnedCard filter = new FilterOwnedCard("a white card with converted mana cost X from your hand");
@@ -85,7 +85,6 @@ public class ShiningShoal extends CardImpl {
         return new ShiningShoal(this);
     }
 }
-
 
 class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
 
@@ -145,13 +144,13 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
                 if (permanent != null) {
                     game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
                     // keep the original source id as it is redirecting
-                    permanent.damage(prevented, event.getSourceId(), game, false, true, event.getAppliedEffects());
+                    permanent.damage(prevented, event.getSourceId(), game, ((DamageEvent) event).isCombatDamage(), ((DamageEvent) event).isPreventable(), event.getAppliedEffects());
                 }
                 Player player = game.getPlayer(redirectTo);
                 if (player != null) {
                     game.informPlayers("Dealing " + prevented + " to " + player.getLogName() + " instead");
                     // keep the original source id as it is redirecting
-                    player.damage(prevented, event.getSourceId(), game, true, false, event.getAppliedEffects());
+                    player.damage(prevented, event.getSourceId(), game, ((DamageEvent) event).isCombatDamage(), ((DamageEvent) event).isPreventable(), event.getAppliedEffects());
                 }
             }
         }

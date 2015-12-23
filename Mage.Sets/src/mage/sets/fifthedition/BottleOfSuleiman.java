@@ -44,7 +44,6 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.MageInt;
-import mage.ObjectColor;
 
 /**
  *
@@ -76,7 +75,7 @@ class BottleOfSuleimanEffect extends OneShotEffect {
 
     public BottleOfSuleimanEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Flip a coin. If you lose the flip, Bottle of Suleiman deals 5 damage to you. If you win the flip, put a 5/5 colorless Djinn artifact creature token with flying onto the battlefield.";
+        staticText = "Flip a coin. If you lose the flip, {this} deals 5 damage to you. If you win the flip, put a 5/5 colorless Djinn artifact creature token with flying onto the battlefield.";
     }
 
     public BottleOfSuleimanEffect(final BottleOfSuleimanEffect effect) {
@@ -97,7 +96,7 @@ class BottleOfSuleimanEffect extends OneShotEffect {
                 token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
                 return true;
             } else {
-                you.damage(5, source.getSourceId(), game, true, false);
+                you.damage(5, source.getSourceId(), game, false, true);
                 return true;
             }
 
