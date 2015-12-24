@@ -91,7 +91,7 @@ class DevastationTideEffect extends OneShotEffect {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
                 cardsToHand.add((Card) permanent);
             }
-            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+            controller.moveCards(cardsToHand, Zone.HAND, source, game);
             return true;
 
         }
