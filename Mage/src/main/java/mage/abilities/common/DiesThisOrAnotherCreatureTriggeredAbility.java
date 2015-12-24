@@ -74,7 +74,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
         if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
             sourcePermanent = game.getPermanent(getSourceId());
         } else {
-            if (game.getShortLivingLKI(sourceId, Zone.BATTLEFIELD)) {
+            if (game.getShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
                 sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
             }
         }
@@ -97,7 +97,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
                 if (zEvent.getTarget().getId().equals(this.getSourceId())) {
                     return true;
                 } else {
-                    if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+                    if (filter.match(zEvent.getTarget(), getSourceId(), getControllerId(), game)) {
                         return true;
                     }
                 }

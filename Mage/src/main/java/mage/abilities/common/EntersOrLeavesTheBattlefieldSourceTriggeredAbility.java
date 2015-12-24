@@ -39,11 +39,11 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author LevelX2
  */
-
 public class EntersOrLeavesTheBattlefieldSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public EntersOrLeavesTheBattlefieldSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     public EntersOrLeavesTheBattlefieldSourceTriggeredAbility(final EntersOrLeavesTheBattlefieldSourceTriggeredAbility ability) {
@@ -67,7 +67,7 @@ public class EntersOrLeavesTheBattlefieldSourceTriggeredAbility extends Triggere
             return true;
         }
         if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone().equals(Zone.BATTLEFIELD)) {
                 return true;
             }

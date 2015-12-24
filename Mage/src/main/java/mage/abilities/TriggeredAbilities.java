@@ -41,8 +41,6 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
@@ -97,9 +95,11 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                     boolean controllerSet = false;
                     if (!ability.getZone().equals(Zone.COMMAND) && event != null
                             && event.getTargetId() != null // && event.getTargetId().equals(ability.getSourceId())
-                            && ((event.getType().equals(EventType.ZONE_CHANGE) && ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD))
-                            || event.getType().equals(EventType.DESTROYED_PERMANENT)
-                            || event.getType().equals(EventType.SACRIFICED_PERMANENT))
+                            && ability.isLeavesTheBattlefieldTrigger()
+                            //                            && ((event.getType().equals(EventType.ZONE_CHANGE)
+                            //                            && ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD))
+                            //                            || event.getType().equals(EventType.DESTROYED_PERMANENT)
+                            //                            || event.getType().equals(EventType.SACRIFICED_PERMANENT))
                             && game.getLKI().get(Zone.BATTLEFIELD) != null && game.getLKI().get(Zone.BATTLEFIELD).containsKey(ability.getSourceId())) {
                         // need to check if object was face down for dies and destroy events because the ability triggers in the new zone, zone counter -1 is used
                         Permanent permanent = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD, ability.getSourceObjectZoneChangeCounter() - 1);

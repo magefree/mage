@@ -50,16 +50,12 @@ public class DragonAppeasement extends CardImpl {
         super(ownerId, 115, "Dragon Appeasement", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}{G}");
         this.expansionSetCode = "ARB";
 
-
-
-        
-
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
-        
+
         // Whenever you sacrifice a creature, you may draw a card.
         this.addAbility(new DragonAppeasementTriggeredAbility());
-        
+
     }
 
     public DragonAppeasement(final DragonAppeasement card) {
@@ -76,6 +72,7 @@ class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
 
     public DragonAppeasementTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     public DragonAppeasementTriggeredAbility(final DragonAppeasementTriggeredAbility ability) {
@@ -103,4 +100,3 @@ class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever you sacrifice a creature, " + super.getRule();
     }
 }
-

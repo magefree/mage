@@ -110,4 +110,35 @@ public class UlamogTheInfiniteGyreTest extends CardTestPlayerBase {
         assertHandCount(playerA, 4);
 
     }
+
+    /**
+     * Ixidron turned Ulamog, the Infinite Gyre to a 2/2 with no name and then
+     * someone used an Wrath of the Gods effect. Ulamog, the Infinite Gyre
+     * entered the graveyard without triggering his shuffle effect (just like
+     * this case: http://www.mtgsalvation.com/forums/magi ... nd-kozilek).
+     */
+    @Test
+    public void testFaceDownToGraveyard() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        // When you cast Kozilek, Butcher of Truth, draw four cards.
+        // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
+        // When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        addCard(Zone.BATTLEFIELD, playerA, "Kozilek, Butcher of Truth"); // {10}
+        // As Ixidron enters the battlefield, turn all other nontoken creatures face down.
+        // Ixidron's power and toughness are each equal to the number of face-down creatures on the battlefield.
+        addCard(Zone.HAND, playerA, "Ixidron"); // {3}{U}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addCard(Zone.HAND, playerB, "Wrath of God", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ixidron");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Wrath of God");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ixidron", 0);
+        assertGraveyardCount(playerB, "Wrath of God", 1);
+        assertGraveyardCount(playerA, 0);
+    }
 }

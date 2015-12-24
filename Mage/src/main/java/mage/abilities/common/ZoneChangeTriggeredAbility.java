@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,8 +37,9 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
 /**
- * Is applied when the {@link Permanent} with this ability instance changes zones.
- * 
+ * Is applied when the {@link Permanent} with this ability instance changes
+ * zones.
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
@@ -51,14 +51,17 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
     public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
         this(toZone == null ? Zone.ALL : toZone, fromZone, toZone, effect, rule, optional);
     }
-    
+
     public ZoneChangeTriggeredAbility(Zone worksInZone, Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
         super(worksInZone, effect, optional);
+        if (fromZone.equals(Zone.BATTLEFIELD)) {
+            setLeavesTheBattlefieldTrigger(true);
+        }
         this.fromZone = fromZone;
         this.toZone = toZone;
         this.rule = rule;
     }
-    
+
     public ZoneChangeTriggeredAbility(Zone toZone, Effect effect, String rule, boolean optional) {
         super(toZone, effect, optional);
         this.fromZone = null;
@@ -81,7 +84,7 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
                 return true;
             }
