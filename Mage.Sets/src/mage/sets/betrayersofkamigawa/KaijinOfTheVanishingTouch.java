@@ -28,20 +28,16 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -59,11 +55,11 @@ public class KaijinOfTheVanishingTouch extends CardImpl {
 
         // Defender (This creature can't attack.)
         this.addAbility(DefenderAbility.getInstance());
-
         // Whenever Kaijin of the Vanishing Touch blocks a creature, return that creature to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
-        Ability ability = new BlocksCreatureTriggeredAbility(new KaijinOfTheVanishingTouchEffect(), false, true);
-        this.addAbility(ability);
-
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("return that creature to its owner's hand at end of combat");
+        this.addAbility(new BlocksCreatureTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+            new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
     public KaijinOfTheVanishingTouch(final KaijinOfTheVanishingTouch card) {
@@ -73,37 +69,5 @@ public class KaijinOfTheVanishingTouch extends CardImpl {
     @Override
     public KaijinOfTheVanishingTouch copy() {
         return new KaijinOfTheVanishingTouch(this);
-    }
-}
-
-class KaijinOfTheVanishingTouchEffect extends OneShotEffect {
-
-    KaijinOfTheVanishingTouchEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "return that creature to its owner's hand at end of combat";
-    }
-
-    KaijinOfTheVanishingTouchEffect(final KaijinOfTheVanishingTouchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new ReturnToHandTargetEffect());
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public KaijinOfTheVanishingTouchEffect copy() {
-        return new KaijinOfTheVanishingTouchEffect(this);
     }
 }
