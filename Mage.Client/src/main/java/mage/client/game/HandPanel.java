@@ -1,6 +1,5 @@
 package mage.client.game;
 
-import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.Config;
@@ -36,7 +35,7 @@ public class HandPanel extends JPanel {
 
         jPanel = new JPanel();
         jScrollPane1 = new JScrollPane(jPanel);
-        jScrollPane1.getViewport().setBackground(new Color(0,0,0,0));
+        jScrollPane1.getViewport().setBackground(new Color(0, 0, 0, 0));
 
         jPanel.setLayout(new GridBagLayout()); // centers hand
         jPanel.setBackground(new Color(0, 0, 0, 0));
@@ -67,7 +66,7 @@ public class HandPanel extends JPanel {
     }
 
     public void loadCards(CardsView cards, BigCard bigCard, UUID gameId) {
-        hand.loadCards(cards, bigCard, gameId, null);
+        hand.loadCards(cards, bigCard, gameId, true);
         hand.sizeCards(getHandCardDimension());
     }
 
@@ -91,7 +90,7 @@ public class HandPanel extends JPanel {
 
     private JPanel jPanel;
     private JScrollPane jScrollPane1;
-    private static final Border emptyBorder = new EmptyBorder(0,0,0,0);
+    private static final Border emptyBorder = new EmptyBorder(0, 0, 0, 0);
     private mage.client.cards.Cards hand;
 
 }

@@ -692,7 +692,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (cardInfoWindowDialog.isClosed()) {
                         graveyardWindows.remove(player.getName());
                     } else {
-                        cardInfoWindowDialog.loadCards(player.getGraveyard(), bigCard, gameId);
+                        cardInfoWindowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
                     }
                 }
                 // show top card window
@@ -801,7 +801,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void displayStack(GameView game, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
-        this.stack.loadCards(game.getStack(), bigCard, gameId, null);
+        this.stack.loadCards(game.getStack(), bigCard, gameId, true);
     }
 
     /**
@@ -908,7 +908,7 @@ public final class GamePanel extends javax.swing.JPanel {
         CardInfoWindowDialog newGraveyard = new CardInfoWindowDialog(ShowType.GRAVEYARD, playerName);
         graveyardWindows.put(playerName, newGraveyard);
         MageFrame.getDesktop().add(newGraveyard, JLayeredPane.MODAL_LAYER);
-        newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId);
+        newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
     }
 
     public void openTopLibraryWindow(String playerName) {
