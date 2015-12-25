@@ -25,44 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.UnlessPaysDelayedEffect;
+import mage.MageInt;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class QuenchableFire extends CardImpl {
+public class WallOfTears extends CardImpl {
 
-    public QuenchableFire(UUID ownerId) {
-        super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    public WallOfTears(UUID ownerId) {
+        super(ownerId, 50, "Wall of Tears", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "STH";
+        this.subtype.add("Wall");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
 
-        // Quenchable Fire deals 3 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        // It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
-        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{U}"),
-            new DamageTargetEffect(3, true, "that player"), PhaseStep.UPKEEP, false,
-            "It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step."));
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        // Whenever Wall of Tears blocks a creature, return that creature to its owner's hand at end of combat.
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("return that creature to its owner's hand at end of combat");
+        this.addAbility(new BlocksCreatureTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+            new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
-    public QuenchableFire(final QuenchableFire card) {
+    public WallOfTears(final WallOfTears card) {
         super(card);
     }
 
     @Override
-    public QuenchableFire copy() {
-        return new QuenchableFire(this);
+    public WallOfTears copy() {
+        return new WallOfTears(this);
     }
 }

@@ -25,44 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.nemesis;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.UnlessPaysDelayedEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class QuenchableFire extends CardImpl {
+public class FlowstoneWall extends CardImpl {
 
-    public QuenchableFire(UUID ownerId) {
-        super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    public FlowstoneWall(UUID ownerId) {
+        super(ownerId, 86, "Flowstone Wall", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Wall");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(6);
 
-        // Quenchable Fire deals 3 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        // It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
-        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{U}"),
-            new DamageTargetEffect(3, true, "that player"), PhaseStep.UPKEEP, false,
-            "It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step."));
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        // {R}: Flowstone Wall gets +1/-1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public QuenchableFire(final QuenchableFire card) {
+    public FlowstoneWall(final FlowstoneWall card) {
         super(card);
     }
 
     @Override
-    public QuenchableFire copy() {
-        return new QuenchableFire(this);
+    public FlowstoneWall copy() {
+        return new FlowstoneWall(this);
     }
 }

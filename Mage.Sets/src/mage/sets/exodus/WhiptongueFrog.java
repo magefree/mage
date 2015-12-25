@@ -25,44 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.exodus;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.UnlessPaysDelayedEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class QuenchableFire extends CardImpl {
+public class WhiptongueFrog extends CardImpl {
 
-    public QuenchableFire(UUID ownerId) {
-        super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    public WhiptongueFrog(UUID ownerId) {
+        super(ownerId, 52, "Whiptongue Frog", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "EXO";
+        this.subtype.add("Frog");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Quenchable Fire deals 3 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        // It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
-        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{U}"),
-            new DamageTargetEffect(3, true, "that player"), PhaseStep.UPKEEP, false,
-            "It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step."));
+        // {U}: Whiptongue Frog gains flying until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public QuenchableFire(final QuenchableFire card) {
+    public WhiptongueFrog(final WhiptongueFrog card) {
         super(card);
     }
 
     @Override
-    public QuenchableFire copy() {
-        return new QuenchableFire(this);
+    public WhiptongueFrog copy() {
+        return new WhiptongueFrog(this);
     }
 }

@@ -25,44 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.UnlessPaysDelayedEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class QuenchableFire extends CardImpl {
+public class RootwaterAlligator extends CardImpl {
 
-    public QuenchableFire(UUID ownerId) {
-        super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 
-        // Quenchable Fire deals 3 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        // It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
-        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{U}"),
-            new DamageTargetEffect(3, true, "that player"), PhaseStep.UPKEEP, false,
-            "It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step."));
+    static{
+        filter.add(new SubtypePredicate("Forest"));
     }
 
-    public QuenchableFire(final QuenchableFire card) {
+    public RootwaterAlligator(UUID ownerId) {
+        super(ownerId, 122, "Rootwater Alligator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "EXO";
+        this.subtype.add("Crocodile");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // Sacrifice a Forest: Regenerate Rootwater Alligator.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+    }
+
+    public RootwaterAlligator(final RootwaterAlligator card) {
         super(card);
     }
 
     @Override
-    public QuenchableFire copy() {
-        return new QuenchableFire(this);
+    public RootwaterAlligator copy() {
+        return new RootwaterAlligator(this);
     }
 }
