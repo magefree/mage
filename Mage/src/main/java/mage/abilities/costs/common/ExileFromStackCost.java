@@ -25,11 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
- 
 package mage.abilities.costs.common;
- 
-import java.util.UUID;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
@@ -37,45 +35,46 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
- 
+
 /**
  *
  * @author LevelX2
  */
 public class ExileFromStackCost extends CostImpl {
- 
+
     public ExileFromStackCost(TargetSpell target) {
         this.addTarget(target);
         this.text = "Exile " + target.getTargetName();
     }
- 
+
     public ExileFromStackCost(ExileFromStackCost cost) {
         super(cost);
     }
- 
+
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
             Player player = game.getPlayer(controllerId);
-            for (UUID targetId: targets.get(0).getTargets()) {
+            for (UUID targetId : targets.get(0).getTargets()) {
                 Spell spellToExile = game.getStack().getSpell(targetId);
                 if (spellToExile == null) {
                     return false;
                 }
-                paid |= spellToExile.moveToExile(null, "", ability.getSourceId(), game);
-                if (paid && !game.isSimulation()) {
-                    game.informPlayers(player.getLogName() + " exiles " + spellToExile.getName() +" (as costs)");
+                spellToExile.moveToExile(null, "", ability.getSourceId(), game);
+                paid = true;
+                if (!game.isSimulation()) {
+                    game.informPlayers(player.getLogName() + " exiles " + spellToExile.getName() + " (as costs)");
                 }
             }
         }
         return paid;
     }
- 
+
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         return targets.canChoose(controllerId, game);
     }
- 
+
     @Override
     public ExileFromStackCost copy() {
         return new ExileFromStackCost(this);

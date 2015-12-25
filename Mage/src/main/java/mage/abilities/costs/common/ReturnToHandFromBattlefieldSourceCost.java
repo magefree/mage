@@ -25,36 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  * @author Loki
  */
-public class ReturnToHandSourceCost extends CostImpl {
+public class ReturnToHandFromBattlefieldSourceCost extends CostImpl {
 
-    public ReturnToHandSourceCost() {
+    public ReturnToHandFromBattlefieldSourceCost() {
         this.text = "return {this} to its owner's hand";
     }
 
-    public ReturnToHandSourceCost(ReturnToHandSourceCost cost) {
+    public ReturnToHandFromBattlefieldSourceCost(ReturnToHandFromBattlefieldSourceCost cost) {
         super(cost);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Permanent permanent = game.getPermanent(sourceId);
-        if (permanent == null)
+        Player controller = game.getPlayer(controllerId);
+        if (permanent == null || controller == null) {
             return false;
-        paid = permanent.moveToZone(Zone.HAND, sourceId, game, false);
+        }
+        controller.moveCards(permanent, Zone.HAND, ability, game);
+        paid = true;
         return paid;
     }
 
@@ -64,7 +66,7 @@ public class ReturnToHandSourceCost extends CostImpl {
     }
 
     @Override
-    public ReturnToHandSourceCost copy() {
-        return new ReturnToHandSourceCost(this);
+    public ReturnToHandFromBattlefieldSourceCost copy() {
+        return new ReturnToHandFromBattlefieldSourceCost(this);
     }
 }

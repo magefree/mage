@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
@@ -40,8 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-
-public class ExileXFromYourGraveCost extends VariableCostImpl  {
+public class ExileXFromYourGraveCost extends VariableCostImpl {
 
     protected FilterCard filter;
 
@@ -50,10 +48,9 @@ public class ExileXFromYourGraveCost extends VariableCostImpl  {
     }
 
     public ExileXFromYourGraveCost(FilterCard filter, boolean additionalCostText) {
-        super(new StringBuilder(filter.getMessage()).append(" to exile").toString());
+        super(filter.getMessage() + " to exile");
         this.filter = filter;
-        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, exile ":"Exile ")
-                .append(xText).append(" ").append(filter.getMessage()).toString();
+        this.text = (additionalCostText ? "As an additional cost to cast {source}, exile " : "Exile ") + xText + " " + filter.getMessage();
     }
 
     public ExileXFromYourGraveCost(final ExileXFromYourGraveCost cost) {
