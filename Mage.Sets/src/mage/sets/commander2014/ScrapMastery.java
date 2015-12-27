@@ -112,7 +112,7 @@ class ScrapMasteryEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    controller.moveCards(exiledCards.get(playerId), Zone.BATTLEFIELD, source, game);
+                    player.moveCards(exiledCards.get(playerId), Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;
