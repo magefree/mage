@@ -25,44 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.UnlessPaysDelayedEffect;
+import mage.MageInt;
+import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class QuenchableFire extends CardImpl {
+public class PitScorpion extends CardImpl {
 
-    public QuenchableFire(UUID ownerId) {
-        super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    public PitScorpion(UUID ownerId) {
+        super(ownerId, 49, "Pit Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "5ED";
+        this.subtype.add("Scorpion");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Quenchable Fire deals 3 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        // It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
-        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{U}"),
-            new DamageTargetEffect(3, true, "that player"), PhaseStep.UPKEEP, false,
-            "It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step."));
+        // Whenever Pit Scorpion deals damage to a player, that player gets a poison counter.
+        Effect effect = new AddPoisonCounterTargetEffect(1);
+        effect.setText("that player gets a poison counter");
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }
 
-    public QuenchableFire(final QuenchableFire card) {
+    public PitScorpion(final PitScorpion card) {
         super(card);
     }
 
     @Override
-    public QuenchableFire copy() {
-        return new QuenchableFire(this);
+    public PitScorpion copy() {
+        return new PitScorpion(this);
     }
 }

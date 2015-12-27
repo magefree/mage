@@ -25,44 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.UnlessPaysDelayedEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class QuenchableFire extends CardImpl {
+public class Onslaught extends CardImpl {
 
-    public QuenchableFire(UUID ownerId) {
-        super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    private static final FilterSpell filter = new FilterSpell("a creature spell");
 
-        // Quenchable Fire deals 3 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        // It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
-        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{U}"),
-            new DamageTargetEffect(3, true, "that player"), PhaseStep.UPKEEP, false,
-            "It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step."));
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public QuenchableFire(final QuenchableFire card) {
+    public Onslaught(UUID ownerId) {
+        super(ownerId, 92, "Onslaught", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
+        this.expansionSetCode = "EXO";
+
+        // Whenever you cast a creature spell, tap target creature.
+        Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filter, false);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
+
+    public Onslaught(final Onslaught card) {
         super(card);
     }
 
     @Override
-    public QuenchableFire copy() {
-        return new QuenchableFire(this);
+    public Onslaught copy() {
+        return new Onslaught(this);
     }
 }

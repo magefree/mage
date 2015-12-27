@@ -25,44 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.mirage;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UnlessPaysDelayedEffect;
+import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
  */
-public class QuenchableFire extends CardImpl {
+public class SabertoothCobra extends CardImpl {
 
-    public QuenchableFire(UUID ownerId) {
-        super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    public SabertoothCobra(UUID ownerId) {
+        super(ownerId, 136, "Sabertooth Cobra", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "MIR";
+        this.subtype.add("Snake");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Quenchable Fire deals 3 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        // It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
-        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{U}"),
-            new DamageTargetEffect(3, true, "that player"), PhaseStep.UPKEEP, false,
-            "It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step."));
+        // Whenever Sabertooth Cobra deals damage to a player, he or she gets a poison counter. That player gets another poison counter at the beginning of his or her next upkeep unless he or she pays {2} before that turn.
+        Effect effect = new AddPoisonCounterTargetEffect(1);
+        effect.setText("that player gets a poison counter");
+        Ability ability = new DealsDamageToAPlayerTriggeredAbility(effect, false, true);
+        effect = new AddPoisonCounterTargetEffect(1);
+        effect.setText("That player gets another poison counter.");
+        ability.addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{2}"), effect, PhaseStep.UPKEEP, true,
+            "That player gets another poison counter at the beginning of his or her next upkeep unless he or she pays {2} before that turn."));
+        this.addAbility(ability);
     }
 
-    public QuenchableFire(final QuenchableFire card) {
+    public SabertoothCobra(final SabertoothCobra card) {
         super(card);
     }
 
     @Override
-    public QuenchableFire copy() {
-        return new QuenchableFire(this);
+    public SabertoothCobra copy() {
+        return new SabertoothCobra(this);
     }
 }
