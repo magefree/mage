@@ -37,6 +37,7 @@ public enum AbilityWord {
     BLOODRUSH("Bloodrush"),
     CHANNEL("Channel"),
     CHROMA("Chroma"),
+    COHORT("Cohort"),
     CONSTELLATION("Constellation"),
     CONVERGE("Converge"),
     DOMAIN("Domain"),
