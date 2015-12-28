@@ -25,60 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.sets.exodus;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author fireshoes
  */
-public class Fleshformer extends CardImpl {
+public class PygmyTroll extends CardImpl {
 
-    public Fleshformer(UUID ownerId) {
-        super(ownerId, 45, "Fleshformer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "CON";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    public PygmyTroll(UUID ownerId) {
+        super(ownerId, 118, "Pygmy Troll", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "EXO";
+        this.subtype.add("Troll");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate this ability only during your turn.
-        Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("{this} gets +2/+2");
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{U}{B}{R}{G}"), MyTurnCondition.getInstance());
-        effect = new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains fear until end of turn");
-        ability.addEffect(effect);
-        ability.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Whenever Pygmy Troll becomes blocked by a creature, Pygmy Troll gets +1/+1 until end of turn.
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
         
+        // {G}: Regenerate Pygmy Troll.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public Fleshformer(final Fleshformer card) {
+    public PygmyTroll(final PygmyTroll card) {
         super(card);
     }
 
     @Override
-    public Fleshformer copy() {
-        return new Fleshformer(this);
+    public PygmyTroll copy() {
+        return new PygmyTroll(this);
     }
 }

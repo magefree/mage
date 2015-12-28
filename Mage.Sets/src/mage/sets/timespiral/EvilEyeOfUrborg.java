@@ -25,60 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FearAbility;
+import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author fireshoes
  */
-public class Fleshformer extends CardImpl {
+public class EvilEyeOfUrborg extends CardImpl {
+    
+    private static final FilterCreaturePermanent cantAttackFilter = new FilterCreaturePermanent("Non-Eye creatures you control");
 
-    public Fleshformer(UUID ownerId) {
-        super(ownerId, 45, "Fleshformer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "CON";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate this ability only during your turn.
-        Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("{this} gets +2/+2");
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{U}{B}{R}{G}"), MyTurnCondition.getInstance());
-        effect = new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains fear until end of turn");
-        ability.addEffect(effect);
-        ability.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-        
+    static {
+        cantAttackFilter.add(Predicates.not((new SubtypePredicate("Eye"))));
+        cantAttackFilter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public Fleshformer(final Fleshformer card) {
+    public EvilEyeOfUrborg(UUID ownerId) {
+        super(ownerId, 107, "Evil Eye of Urborg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Eye");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(3);
+
+        // Non-Eye creatures you control can't attack.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, cantAttackFilter)));
+        
+        // Whenever Evil Eye of Urborg becomes blocked by a creature, destroy that creature.
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DestroyTargetEffect(), false));
+    }
+
+    public EvilEyeOfUrborg(final EvilEyeOfUrborg card) {
         super(card);
     }
 
     @Override
-    public Fleshformer copy() {
-        return new Fleshformer(this);
+    public EvilEyeOfUrborg copy() {
+        return new EvilEyeOfUrborg(this);
     }
 }

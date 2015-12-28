@@ -25,60 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FearAbility;
+import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author fireshoes
  */
-public class Fleshformer extends CardImpl {
+public class OffBalance extends CardImpl {
 
-    public Fleshformer(UUID ownerId) {
-        super(ownerId, 45, "Fleshformer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "CON";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    public OffBalance(UUID ownerId) {
+        super(ownerId, 15, "Off Balance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "NMS";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate this ability only during your turn.
-        Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("{this} gets +2/+2");
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{U}{B}{R}{G}"), MyTurnCondition.getInstance());
-        effect = new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains fear until end of turn");
-        ability.addEffect(effect);
-        ability.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-        
+        // Target creature can't attack or block this turn.
+        this.getSpellAbility().addEffect(new CantAttackBlockTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Fleshformer(final Fleshformer card) {
+    public OffBalance(final OffBalance card) {
         super(card);
     }
 
     @Override
-    public Fleshformer copy() {
-        return new Fleshformer(this);
+    public OffBalance copy() {
+        return new OffBalance(this);
     }
 }

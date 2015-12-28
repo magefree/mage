@@ -25,60 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.sets.torment;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.common.DiscardXTargetCost;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FearAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.game.Game;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author fireshoes
  */
-public class Fleshformer extends CardImpl {
-
-    public Fleshformer(UUID ownerId) {
-        super(ownerId, 45, "Fleshformer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "CON";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate this ability only during your turn.
-        Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("{this} gets +2/+2");
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{U}{B}{R}{G}"), MyTurnCondition.getInstance());
-        effect = new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains fear until end of turn");
-        ability.addEffect(effect);
-        ability.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-        
+public class TurbulentDreams extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterPermanent("nonland permanents");
+    
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public Fleshformer(final Fleshformer card) {
+    public TurbulentDreams(UUID ownerId) {
+        super(ownerId, 49, "Turbulent Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}");
+        this.expansionSetCode = "TOR";
+
+        // As an additional cost to cast Turbulent Dreams, discard X cards.
+        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
+        
+        // Return X target nonland permanents to their owners' hands.
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("Return X target nonland permanents to their owners' hands");
+        this.getSpellAbility().addEffect(effect);
+    }
+
+    public TurbulentDreams(final TurbulentDreams card) {
         super(card);
+    }
+    
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = new GetXValue().calculate(game, ability, null);
+            Target target = new TargetPermanent(0, xValue, filter, false);
+            ability.addTarget(target);
     }
 
     @Override
-    public Fleshformer copy() {
-        return new Fleshformer(this);
+    public TurbulentDreams copy() {
+        return new TurbulentDreams(this);
     }
 }
