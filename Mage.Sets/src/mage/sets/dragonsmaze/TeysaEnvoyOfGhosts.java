@@ -28,9 +28,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,6 +36,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -69,7 +68,7 @@ public class TeysaEnvoyOfGhosts extends CardImpl {
         // protection from creatures
         this.addAbility(new ProtectionAbility(new FilterCreaturePermanent("creatures")));
         // Whenever a creature deals combat damage to you, destroy that creature. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.
-       this.addAbility(new TeysaEnvoyOfGhostsTriggeredAbility());
+        this.addAbility(new TeysaEnvoyOfGhostsTriggeredAbility());
 
     }
 
@@ -89,7 +88,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         this.addEffect(new CreateTokenEffect(new TeysaEnvoyOfGhostsToken(), 1));
 
-     }
+    }
 
     public TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
         super(ability);
@@ -104,12 +103,15 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (damageEvent.getPlayerId().equals(getControllerId()) && damageEvent.isCombatDamage() && sourcePermanent != null && sourcePermanent.getCardType().contains(CardType.CREATURE)) {
+        if (damageEvent.getPlayerId().equals(getControllerId())
+                && damageEvent.isCombatDamage()
+                && sourcePermanent != null
+                && sourcePermanent.getCardType().contains(CardType.CREATURE)) {
             game.getState().setValue(sourceId.toString(), sourcePermanent.getControllerId());
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
             return true;
@@ -125,6 +127,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class TeysaEnvoyOfGhostsToken extends Token {
+
     TeysaEnvoyOfGhostsToken() {
         super("Spirit", "1/1 white and black Spirit creature token with flying");
         cardType.add(CardType.CREATURE);

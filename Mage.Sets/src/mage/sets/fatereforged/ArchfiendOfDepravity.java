@@ -61,7 +61,7 @@ public class ArchfiendOfDepravity extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // At the beginning of each opponent's end step, that player chooses up to two creatures he or she controls, then sacrifices the rest.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ArchfiendOfDepravityEffect(), TargetController.OPPONENT, false));
     }
@@ -79,7 +79,7 @@ public class ArchfiendOfDepravity extends CardImpl {
 class ArchfiendOfDepravityEffect extends OneShotEffect {
 
     public ArchfiendOfDepravityEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.Benefit); // AI should select two creatures if possible so it has to be a benefit
         this.staticText = "that player chooses up to two creatures he or she controls, then sacrifices the rest";
     }
 

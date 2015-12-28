@@ -45,6 +45,7 @@ import mage.players.Player;
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
     protected boolean optional;
+    protected boolean leavesTheBattlefieldTrigger;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -52,6 +53,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     public TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
         super(AbilityType.TRIGGERED, zone);
+        setLeavesTheBattlefieldTrigger(false);
         if (effect != null) {
             addEffect(effect);
         }
@@ -61,6 +63,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
         super(ability);
         this.optional = ability.optional;
+        this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
     }
 
     @Override
@@ -134,7 +137,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                             || ruleLow.startsWith("tap")
                             || ruleLow.startsWith("untap")
                             || ruleLow.startsWith("put")
-                            || ruleLow.startsWith("remove")) {
+                            || ruleLow.startsWith("remove")
+                            || ruleLow.startsWith("counter")) {
                         sb.append("you may ");
                     } else {
                         if (!ruleLow.startsWith("its controller may")) {
@@ -168,18 +172,31 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
          * again before the ability resolves.) The most common zone-change
          * triggers are enters-the-battlefield triggers and
          * leaves-the-battlefield triggers.
+         *
+         * from:
+         * http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/537065-ixidron-and-kozilek
+         * There are two types of triggers that involve the graveyard: dies
+         * triggers (which are a subset of leave-the-battlefield triggers) and
+         * put into the graveyard from anywhere triggers.
+         *
+         * The former triggers trigger based on the game state prior to the move
+         * where the Kozilek permanent is face down and has no abilities. The
+         * latter triggers trigger from the game state after the move where the
+         * Kozilek card is itself and has the ability.
          */
         if (event != null && event.getTargetId() != null && event.getTargetId().equals(getSourceId())) {
             switch (event.getType()) {
                 case ZONE_CHANGE:
                 case DESTROYED_PERMANENT:
-                    if (event.getType().equals(EventType.DESTROYED_PERMANENT)) {
-                        source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
-                    } else {
-                        if (((ZoneChangeEvent) event).getTarget() != null) {
-                            source = ((ZoneChangeEvent) event).getTarget();
+                    if (isLeavesTheBattlefieldTrigger()) {
+                        if (event.getType().equals(EventType.DESTROYED_PERMANENT)) {
+                            source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
                         } else {
-                            source = game.getLastKnownInformation(getSourceId(), ((ZoneChangeEvent) event).getZone());
+                            if (((ZoneChangeEvent) event).getTarget() != null) {
+                                source = ((ZoneChangeEvent) event).getTarget();
+                            } else {
+                                source = game.getLastKnownInformation(getSourceId(), ((ZoneChangeEvent) event).getZone());
+                            }
                         }
                     }
 
@@ -191,6 +208,23 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             }
         }
         return super.isInUseableZone(game, source, event);
+    }
+
+    /*
+     603.6c,603.6d
+     */
+    @Override
+    public boolean isLeavesTheBattlefieldTrigger() {
+        return leavesTheBattlefieldTrigger;
+    }
+
+    /*
+     603.6c,603.6d
+     This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected to had the ability on the battlefeild while the trigger is checked
+     */
+    @Override
+    public final void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger) {
+        this.leavesTheBattlefieldTrigger = leavesTheBattlefieldTrigger;
     }
 
     @Override

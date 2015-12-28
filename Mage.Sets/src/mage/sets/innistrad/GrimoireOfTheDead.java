@@ -114,7 +114,7 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, false, null);
             return true;
         }
         return false;

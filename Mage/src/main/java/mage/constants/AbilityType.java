@@ -5,6 +5,7 @@ package mage.constants;
  * @author North
  */
 public enum AbilityType {
+
     PLAY_LAND("Play land"),
     MANA("Mana"),
     SPELL("Spell"),
@@ -15,7 +16,7 @@ public enum AbilityType {
     LOYALTY("Loyalty"),
     SPECIAL_ACTION("Special Action");
 
-    private String text;
+    private final String text;
 
     AbilityType(String text) {
         this.text = text;

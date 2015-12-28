@@ -48,7 +48,7 @@ public class ExileOpponentsCardFromExileToGraveyardCost extends CostImpl {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     paid = true;
-                    controller.moveCards(card, null, Zone.GRAVEYARD, ability, game);
+                    controller.moveCards(card, Zone.GRAVEYARD, ability, game);
                 }
             }
         }

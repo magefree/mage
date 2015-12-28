@@ -134,10 +134,10 @@ public class Cards extends javax.swing.JPanel {
     }
 
     public boolean loadCards(SimpleCardsView cardsView, BigCard bigCard, UUID gameId) {
-        return loadCards(CardsViewUtil.convertSimple(cardsView), bigCard, gameId, null);
+        return loadCards(CardsViewUtil.convertSimple(cardsView), bigCard, gameId, true);
     }
 
-    public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, java.util.List<UUID> order) {
+    public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, boolean revertOrder) {
         boolean changed = false;
 
         // remove objects no longer on the stack from display
@@ -168,10 +168,14 @@ public class Cards extends javax.swing.JPanel {
             }
         }
 
-        // order objects for display
         java.util.List<CardView> orderedList = new ArrayList<>();
-        for (CardView card : cardsView.values()) {
-            orderedList.add(0, card);
+        if (revertOrder) {
+            // order objects for display
+            for (CardView card : cardsView.values()) {
+                orderedList.add(0, card);
+            }
+        } else {
+            orderedList.addAll(cardsView.values());
         }
 
         // add objects to the panel

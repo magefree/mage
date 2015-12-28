@@ -38,7 +38,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandSourceCost;
+import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -79,7 +79,7 @@ public class MazesEnd extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterCard)), new GenericManaCost(3));
         ability.addEffect(new MazesEndEffect());
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ReturnToHandSourceCost());
+        ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         this.addAbility(ability);
 
     }

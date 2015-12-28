@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.ReturnToHandSourceCost;
+import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
@@ -71,7 +71,7 @@ public class KrasisIncubation extends CardImpl {
 
         // {1}{G}{U}, Return Krasis Incubation to its owner's hand: Put two +1/+1 counters on enchanted creature.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(2), new ManaCostsImpl("{1}{G}{U}"));
-        ability.addCost(new ReturnToHandSourceCost());
+        ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         this.addAbility(ability);
 
     }

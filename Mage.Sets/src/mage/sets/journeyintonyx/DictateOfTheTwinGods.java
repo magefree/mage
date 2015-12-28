@@ -57,12 +57,11 @@ public class DictateOfTheTwinGods extends CardImpl {
         super(ownerId, 93, "Dictate of the Twin Gods", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "JOU";
 
-
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DictateOfTheTwinGodsEffect()));
-        
+
     }
 
     public DictateOfTheTwinGods(final DictateOfTheTwinGods card) {
@@ -91,9 +90,9 @@ class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
         return new DictateOfTheTwinGodsEffect(this);
     }
 
-    @Override    
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
+        switch (event.getType()) {
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
@@ -102,7 +101,7 @@ class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
                 return false;
         }
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
@@ -115,17 +114,17 @@ class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        DamageEvent damageEvent = (DamageEvent)event;
+        DamageEvent damageEvent = (DamageEvent) event;
         if (damageEvent.getType() == EventType.DAMAGE_PLAYER) {
             Player targetPlayer = game.getPlayer(event.getTargetId());
             if (targetPlayer != null) {
-                targetPlayer.damage(damageEvent.getAmount()*2, damageEvent.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
+                targetPlayer.damage(damageEvent.getAmount() * 2, damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
                 return true;
             }
         } else {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             if (targetPermanent != null) {
-                targetPermanent.damage(damageEvent.getAmount()*2, damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                targetPermanent.damage(damageEvent.getAmount() * 2, damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
                 return true;
             }
         }

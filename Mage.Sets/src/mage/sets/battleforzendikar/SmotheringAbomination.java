@@ -86,6 +86,7 @@ class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
 
     public SmotheringAbominationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     public SmotheringAbominationTriggeredAbility(final SmotheringAbominationTriggeredAbility ability) {

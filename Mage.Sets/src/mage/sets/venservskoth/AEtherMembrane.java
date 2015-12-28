@@ -27,23 +27,18 @@
  */
 package mage.sets.venservskoth;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -63,7 +58,10 @@ public class AEtherMembrane extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.
-        this.addAbility(new BlocksCreatureTriggeredAbility(new AEtherMembraneEffect(), false, true));
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("return that creature to its owner's hand at end of combat");
+        this.addAbility(new BlocksCreatureTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+            new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
     public AEtherMembrane(final AEtherMembrane card) {
@@ -73,39 +71,5 @@ public class AEtherMembrane extends CardImpl {
     @Override
     public AEtherMembrane copy() {
         return new AEtherMembrane(this);
-    }
-}
-
-// @klayhamn: This is identical to the effect of KaijinOfTheVanishingTouch but there's only 2 cards with this effect
-// and it's not generic enough to be extracted, imho
-class AEtherMembraneEffect extends OneShotEffect {
-
-    AEtherMembraneEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "return that creature to its owner's hand at end of combat";
-    }
-
-    AEtherMembraneEffect(final AEtherMembraneEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new ReturnToHandTargetEffect());
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public AEtherMembraneEffect copy() {
-        return new AEtherMembraneEffect(this);
     }
 }

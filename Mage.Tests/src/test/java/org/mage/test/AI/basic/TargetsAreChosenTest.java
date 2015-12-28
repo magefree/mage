@@ -223,6 +223,26 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
     }
 
     /**
+     * When I have Archfiend of Depravity on the field, the AI always sacks
+     * creatures until it has ONE left, when the card states that you can keep
+     * TWO at the end of each turn. This makes it un-fun playing the Archfiend
+     * as it makes it a lot easier to win.
+     */
+    @Test
+    public void testArchfiendOfDepravity() {
+        // Flying
+        // At the beginning of each opponent's end step, that player chooses up to two creatures he or she controls, then sacrifices the rest.
+        addCard(Zone.BATTLEFIELD, playerB, "Archfiend of Depravity");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 3);
+        setStopAt(2, PhaseStep.UNTAP);
+        execute();
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 2, 2, Filter.ComparisonScope.All);
+    }
+
+    /**
      * Target selection from EntersTheBattlefield is not varied in the AI
      * calculation, so value is only calculated for the one selected target set.
      *

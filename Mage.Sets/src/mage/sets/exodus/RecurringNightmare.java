@@ -30,7 +30,7 @@ package mage.sets.exodus;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandSourceCost;
+import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class RecurringNightmare extends CardImpl {
         // Sacrifice a creature, Return Recurring Nightmare to its owner's hand: Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        ability.addCost(new ReturnToHandSourceCost());
+        ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         this.addAbility(ability);
     }
 

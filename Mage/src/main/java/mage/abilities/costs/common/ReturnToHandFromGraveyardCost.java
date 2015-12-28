@@ -27,10 +27,14 @@
  */
 package mage.abilities.costs.common;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -59,14 +63,18 @@ public class ReturnToHandFromGraveyardCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
+                Set<Card> cardsToMove = new LinkedHashSet<>();
                 for (UUID targetId : targets.get(0).getTargets()) {
                     mage.cards.Card targetCard = game.getCard(targetId);
                     if (targetCard == null) {
                         return false;
                     }
-                    paid |= controller.moveCardToHandWithInfo(targetCard, sourceId, game);
+                    cardsToMove.add(targetCard);
                 }
+                controller.moveCards(cardsToMove, Zone.HAND, ability, game);
+                paid = true;
             }
+
         }
         return paid;
     }

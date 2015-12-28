@@ -67,7 +67,7 @@ public class SavraQueenOfTheGolgari extends CardImpl {
 
         // Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.
         this.addAbility(new SavraSacrificeBlackCreatureAbility());
-        
+
         // Whenever you sacrifice a green creature, you may gain 2 life.
         this.addAbility(new SavraSacrificeGreenCreatureAbility());
     }
@@ -87,6 +87,7 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     public SavraSacrificeBlackCreatureAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SavraSacrificeEffect(), new PayLifeCost(2)));
         this.addTarget(new TargetCreatureOrPlayer());
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     public SavraSacrificeBlackCreatureAbility(final SavraSacrificeBlackCreatureAbility ability) {
@@ -136,7 +137,7 @@ class SavraSacrificeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<UUID> perms = new ArrayList<>();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {            
+        if (controller != null) {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
@@ -154,9 +155,9 @@ class SavraSacrificeEffect extends OneShotEffect {
                     permanent.sacrifice(source.getSourceId(), game);
                 }
             }
-            return true;        
+            return true;
         }
-        return false;        
+        return false;
     }
 }
 

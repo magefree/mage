@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandSourceCost;
+import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -73,7 +73,7 @@ public class SteelshaperApprentice extends CardImpl {
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true),
                 new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ReturnToHandSourceCost());
+        ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         this.addAbility(ability);
     }
 

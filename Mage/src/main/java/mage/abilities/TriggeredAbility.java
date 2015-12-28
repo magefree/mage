@@ -56,6 +56,10 @@ public interface TriggeredAbility extends Ability {
 
     boolean isOptional();
 
+    boolean isLeavesTheBattlefieldTrigger();
+
+    void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger);
+
     @Override
     TriggeredAbility copy();
 

@@ -61,7 +61,7 @@ public class MazirekKraulDeathPriest extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever a player sacrifices another permanent, put a +1/+1 counter on each creature you control.
         this.addAbility(new PlayerSacrificesPermanentTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false));
     }
@@ -99,7 +99,7 @@ class PlayerSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player sacrifices a permanent, " + super.getRule();
+        return "Whenever a player sacrifices another permanent, " + super.getRule();
     }
 
     @Override

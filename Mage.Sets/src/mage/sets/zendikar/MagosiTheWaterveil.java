@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.common.ReturnToHandSourceCost;
+import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -70,7 +70,7 @@ public class MagosiTheWaterveil extends CardImpl {
         // {T}, Remove an eon counter from Magosi, the Waterveil and return it to its owner's hand: Take an extra turn after this one.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
         ability2.addCost(new RemoveCountersSourceCost(CounterType.EON.createInstance()));
-        ability2.addCost(new ReturnToHandSourceCost());
+        ability2.addCost(new ReturnToHandFromBattlefieldSourceCost());
         this.addAbility(ability2);
 
     }

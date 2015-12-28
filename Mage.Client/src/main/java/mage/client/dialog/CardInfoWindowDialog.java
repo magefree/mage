@@ -114,7 +114,7 @@ public class CardInfoWindowDialog extends MageDialog {
     }
 
     public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
-        boolean changed = cards.loadCards(exile, bigCard, gameId, null);
+        boolean changed = cards.loadCards(exile, bigCard, gameId, true);
         String titel = name + " (" + exile.size() + ")";
         setTitle(titel);
         this.setTitelBarToolTip(titel);
@@ -138,7 +138,11 @@ public class CardInfoWindowDialog extends MageDialog {
     }
 
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
-        cards.loadCards(showCards, bigCard, gameId, null);
+        loadCards(showCards, bigCard, gameId, true);
+    }
+
+    public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
+        cards.loadCards(showCards, bigCard, gameId, revertOrder);
         if (showType.equals(ShowType.GRAVEYARD)) {
             String titel = name + "'s Graveyard (" + showCards.size() + ")";
             setTitle(titel);

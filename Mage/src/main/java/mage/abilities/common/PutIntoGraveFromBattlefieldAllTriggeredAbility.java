@@ -50,8 +50,10 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         this(effect, optional, filter, setTargetPointer, false);
     }
+
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer, boolean onlyToControllerGraveyard) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.setLeavesTheBattlefieldTrigger(true);
         this.filter = filter;
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         this.setTargetPointer = setTargetPointer;
@@ -75,11 +77,11 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         if (zEvent.getFromZone() == Zone.BATTLEFIELD
                 && zEvent.getToZone() == Zone.GRAVEYARD) {
             if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
-                if(onlyToControllerGraveyard && !this.getControllerId().equals(game.getOwnerId(zEvent.getTargetId()))) {
+                if (onlyToControllerGraveyard && !this.getControllerId().equals(game.getOwnerId(zEvent.getTargetId()))) {
                     return false;
                 }
                 if (setTargetPointer) {
-                    for (Effect effect :this.getEffects()) {
+                    for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
                 }
@@ -91,8 +93,8 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
 
     @Override
     public String getRule() {
-        return "Whenever " + filter.getMessage() + " is put into " + (onlyToControllerGraveyard ? "your":"a") +
-                " graveyard from the battlefield, " + super.getRule();
+        return "Whenever " + filter.getMessage() + " is put into " + (onlyToControllerGraveyard ? "your" : "a")
+                + " graveyard from the battlefield, " + super.getRule();
     }
 
     @Override

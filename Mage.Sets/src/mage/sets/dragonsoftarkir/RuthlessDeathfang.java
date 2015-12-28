@@ -79,6 +79,7 @@ class RuthlessDeathfangTriggeredAbility extends TriggeredAbilityImpl {
 
     public RuthlessDeathfangTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterCreaturePermanent("creature"), 1, "target opponent"), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     public RuthlessDeathfangTriggeredAbility(final RuthlessDeathfangTriggeredAbility ability) {
