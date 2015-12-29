@@ -33,17 +33,21 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -62,11 +66,11 @@ public class LaquatussChampion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Laquatus's Champion enters the battlefield, target player loses 6 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new LaquatussChampionEntersEffect(), false);
+        Ability ability = new LaquatussChampionEntersBattlefieldTriggeredAbility();
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // When Laquatus's Champion leaves the battlefield, that player gains 6 life.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new LaquatussChampionLeavesEffect(), false));
+        this.addAbility(new LaquatussChampionLeavesBattlefieldTriggeredAbility());
         // {B}: Regenerate Laquatus's Champion.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
@@ -81,60 +85,58 @@ public class LaquatussChampion extends CardImpl {
     }
 }
 
-class LaquatussChampionEntersEffect extends OneShotEffect {
+class LaquatussChampionEntersBattlefieldTriggeredAbility extends EntersBattlefieldTriggeredAbility implements AdjustingSourceCosts {
 
-    public LaquatussChampionEntersEffect() {
-        super(Outcome.LoseLife);
-        this.staticText = "target player loses 6 life";
+    public LaquatussChampionEntersBattlefieldTriggeredAbility() {
+        super(new LoseLifeTargetEffect(6), false);
     }
 
-    public LaquatussChampionEntersEffect(final LaquatussChampionEntersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LaquatussChampionEntersEffect copy() {
-        return new LaquatussChampionEntersEffect(this);
+    public LaquatussChampionEntersBattlefieldTriggeredAbility(LaquatussChampionEntersBattlefieldTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+    public LaquatussChampionEntersBattlefieldTriggeredAbility copy() {
+        return new LaquatussChampionEntersBattlefieldTriggeredAbility(this);
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Player player = game.getPlayer(ability.getFirstTarget());
         if (player != null) {
-            player.loseLife(6, game);
-            game.getState().setValue(CardUtil.getCardZoneString("targetPlayer", source.getSourceId(), game), player.getId());
-            return true;
+            String key = CardUtil.getCardZoneString("targetPlayer", this.getSourceId(), game);
+            game.getState().setValue(key, player.getId());
         }
-        return false;
     }
 }
 
-class LaquatussChampionLeavesEffect extends OneShotEffect {
+class LaquatussChampionLeavesBattlefieldTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
 
-    public LaquatussChampionLeavesEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "that player gains 6 life";
+    public LaquatussChampionLeavesBattlefieldTriggeredAbility() {
+        super(new GainLifeTargetEffect(6), false);
     }
 
-    public LaquatussChampionLeavesEffect(final LaquatussChampionLeavesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LaquatussChampionLeavesEffect copy() {
-        return new LaquatussChampionLeavesEffect(this);
+    public LaquatussChampionLeavesBattlefieldTriggeredAbility(LaquatussChampionLeavesBattlefieldTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Object object = game.getState().getValue(CardUtil.getCardZoneString("targetPlayer", source.getSourceId(), game));
-        if (object instanceof UUID) {
-            Player player = game.getPlayer((UUID) object);
-            if (player != null) {
-                player.gainLife(6, game);
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (super.checkTrigger(event, game)) {
+            String key = CardUtil.getCardZoneString("targetPlayer", this.getSourceId(), game, true);
+            Object object = game.getState().getValue(key);
+            if (object instanceof UUID) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget((UUID) object));
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public LaquatussChampionLeavesBattlefieldTriggeredAbility copy() {
+        return new LaquatussChampionLeavesBattlefieldTriggeredAbility(this);
     }
 }
