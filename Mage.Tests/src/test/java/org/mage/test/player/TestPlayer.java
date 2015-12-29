@@ -759,6 +759,7 @@ public class TestPlayer implements Player {
                             if (player.getName().equals(playerName)
                                     && ((TargetPlayer) target).canTarget(computerPlayer.getId(), player.getId(), source, game)) {
                                 target.add(player.getId(), game);
+                                targets.remove(targetDefinition);
                                 return true;
                             }
                         }
