@@ -32,15 +32,19 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -60,12 +64,13 @@ public class SoulScourge extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Soul Scourge enters the battlefield, target player loses 3 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SoulScourgeEntersEffect(), false);
+        Ability ability = new SoulScourgeEntersBattlefieldTriggeredAbility();
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // When Soul Scourge leaves the battlefield, that player gains 3 life.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SoulScourgeLeavesEffect(), false));
+        this.addAbility(new SoulScourgeLeavesBattlefieldTriggeredAbility());
     }
 
     public SoulScourge(final SoulScourge card) {
@@ -78,60 +83,58 @@ public class SoulScourge extends CardImpl {
     }
 }
 
-class SoulScourgeEntersEffect extends OneShotEffect {
+class SoulScourgeEntersBattlefieldTriggeredAbility extends EntersBattlefieldTriggeredAbility implements AdjustingSourceCosts {
 
-    public SoulScourgeEntersEffect() {
-        super(Outcome.LoseLife);
-        this.staticText = "target player loses 3 life";
+    public SoulScourgeEntersBattlefieldTriggeredAbility() {
+        super(new LoseLifeTargetEffect(3), false);
     }
 
-    public SoulScourgeEntersEffect(final SoulScourgeEntersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SoulScourgeEntersEffect copy() {
-        return new SoulScourgeEntersEffect(this);
+    public SoulScourgeEntersBattlefieldTriggeredAbility(SoulScourgeEntersBattlefieldTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+    public SoulScourgeEntersBattlefieldTriggeredAbility copy() {
+        return new SoulScourgeEntersBattlefieldTriggeredAbility(this);
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Player player = game.getPlayer(ability.getFirstTarget());
         if (player != null) {
-            player.loseLife(3, game);
-            game.getState().setValue(CardUtil.getCardZoneString("targetPlayer", source.getSourceId(), game), player.getId());
-            return true;
+            String key = CardUtil.getCardZoneString("targetPlayer", this.getSourceId(), game);
+            game.getState().setValue(key, player.getId());
         }
-        return false;
     }
 }
 
-class SoulScourgeLeavesEffect extends OneShotEffect {
+class SoulScourgeLeavesBattlefieldTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
 
-    public SoulScourgeLeavesEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "that player gains 3 life";
+    public SoulScourgeLeavesBattlefieldTriggeredAbility() {
+        super(new GainLifeTargetEffect(3), false);
     }
 
-    public SoulScourgeLeavesEffect(final SoulScourgeLeavesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SoulScourgeLeavesEffect copy() {
-        return new SoulScourgeLeavesEffect(this);
+    public SoulScourgeLeavesBattlefieldTriggeredAbility(SoulScourgeLeavesBattlefieldTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Object object = game.getState().getValue(CardUtil.getCardZoneString("targetPlayer", source.getSourceId(), game));
-        if (object instanceof UUID) {
-            Player player = game.getPlayer((UUID) object);
-            if (player != null) {
-                player.gainLife(3, game);
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (super.checkTrigger(event, game)) {
+            String key = CardUtil.getCardZoneString("targetPlayer", this.getSourceId(), game, true);
+            Object object = game.getState().getValue(key);
+            if (object instanceof UUID) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget((UUID) object));
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public SoulScourgeLeavesBattlefieldTriggeredAbility copy() {
+        return new SoulScourgeLeavesBattlefieldTriggeredAbility(this);
     }
 }
