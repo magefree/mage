@@ -27,7 +27,7 @@
  */
 package mage.abilities.keyword;
 
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.Card;
 import mage.constants.CardType;
@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SupportAbility extends EntersBattlefieldAbility {
+public class SupportAbility extends EntersBattlefieldTriggeredAbility {
 
     public SupportAbility(Card card, int amount) {
         super(new SupportEffect(card, amount), false);
