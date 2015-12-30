@@ -88,4 +88,26 @@ public class SurgeTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
     }
 
+    @Test
+    public void testTyrantOfValakut() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        // Surge {3}{R}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
+        // Flying
+        // When Tyrant of Valakut enters the battlefield, if its surge cost was paid, it deals 3 damage to target creature or player.
+        addCard(Zone.HAND, playerA, "Tyrant of Valakut"); // {5}{R}{R}
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tyrant of Valakut");
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertPermanentCount(playerA, "Tyrant of Valakut", 1);
+
+        assertLife(playerB, 14);
+    }
+
 }

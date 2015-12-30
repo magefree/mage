@@ -27,6 +27,7 @@
  */
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -42,6 +43,8 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  * @author LevelX2
  */
 public class SurgeAbility extends SpellAbility {
+
+    public static final String SURGE_ACTIVATION_VALUE_KEY = "surgeActivation";
 
     private String rule;
 
@@ -77,6 +80,21 @@ public class SurgeAbility extends SpellAbility {
                     }
                 }
             }
+        }
+        return false;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean activate(Game game, boolean noMana) {
+        if (super.activate(game, noMana)) {
+            ArrayList<Integer> surgeActivations = (ArrayList) game.getState().getValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId());
+            if (surgeActivations == null) {
+                surgeActivations = new ArrayList<>(); // zoneChangeCounter
+                game.getState().setValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId(), surgeActivations);
+            }
+            surgeActivations.add(game.getState().getZoneChangeCounter(getSourceId()));
+            return true;
         }
         return false;
     }
