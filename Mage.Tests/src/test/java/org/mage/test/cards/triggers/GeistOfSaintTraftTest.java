@@ -40,8 +40,9 @@ public class GeistOfSaintTraftTest extends CardTestPlayerBase {
     /**
      * Geist of Saint Traft - Legendary Spirit Cleric 2/2, {1}{W}{U}
      *
-     * Hexproof
-     * Whenever Geist of Saint Traft attacks, put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat.
+     * Hexproof Whenever Geist of Saint Traft attacks, put a 4/4 white Angel
+     * creature token with flying onto the battlefield tapped and attacking.
+     * Exile that token at end of combat.
      *
      */
     @Test
@@ -51,7 +52,7 @@ public class GeistOfSaintTraftTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Geist of Saint Traft");
 
-        setStopAt(2, PhaseStep.END_COMBAT);
+        setStopAt(2, PhaseStep.COMBAT_DAMAGE);
         execute();
 
         assertPermanentCount(playerB, "Geist of Saint Traft", 1);
@@ -62,7 +63,6 @@ public class GeistOfSaintTraftTest extends CardTestPlayerBase {
         assertLife(playerA, 14);
         assertLife(playerB, 20);
     }
-
 
     @Test
     public void testTokenwillBeExiled() {

@@ -53,18 +53,17 @@ public class TyrantOfValakut extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
+        // Surge {3}{R}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
+        addAbility(new SurgeAbility(this, "{3}{R}{R}"));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Tyrant of Valakut enters the battlefield, if its surge cost was paid, it deals 3 damage to target creature or player.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new ConditionalTriggeredAbility(ability, SurgedCondition.getInstance(),
                 "When {this} enters the battlefield, if its surge cost was paid, it deals 3 damage to target creature or player."));
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {3}{R}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{3}{R}{R}"));
     }
 
     public TyrantOfValakut(final TyrantOfValakut card) {
