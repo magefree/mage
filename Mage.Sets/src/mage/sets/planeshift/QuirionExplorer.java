@@ -29,10 +29,11 @@ package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.mana.AnyColorOpponentLandsProduceManaAbility;
+import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
@@ -50,7 +51,7 @@ public class QuirionExplorer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorOpponentLandsProduceManaAbility());
+        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 
     public QuirionExplorer(final QuirionExplorer card) {

@@ -28,10 +28,11 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.abilities.mana.AnyColorOpponentLandsProduceManaAbility;
+import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ExoticOrchard extends CardImpl {
         this.expansionSetCode = "CON";
 
         // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorOpponentLandsProduceManaAbility());
+        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 
     public ExoticOrchard(final ExoticOrchard card) {

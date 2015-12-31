@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,29 +37,28 @@ import mage.constants.TargetController;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class SylvokExplorer extends CardImpl {
+public class HarvesterDruid extends CardImpl {
 
-    public SylvokExplorer(UUID ownerId) {
-        super(ownerId, 93, "Sylvok Explorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
+    public HarvesterDruid(UUID ownerId) {
+        super(ownerId, 120, "Harvester Druid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "JUD";
         this.subtype.add("Human");
         this.subtype.add("Druid");
-
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
+        // {tap}: Add to your mana pool one mana of any color that a land you control could produce.
+        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU));
     }
 
-    public SylvokExplorer(final SylvokExplorer card) {
+    public HarvesterDruid(final HarvesterDruid card) {
         super(card);
     }
 
     @Override
-    public SylvokExplorer copy() {
-        return new SylvokExplorer(this);
+    public HarvesterDruid copy() {
+        return new HarvesterDruid(this);
     }
 }
