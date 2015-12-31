@@ -99,13 +99,7 @@ class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null)
-                {
-                    player.setPlayCardsFromGraveyard(true);
-                }
-            }
+            controller.setPlayCardsFromGraveyard(true);
             return true;
         }
         return false;
@@ -148,12 +142,12 @@ class YawgmothsWillReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {

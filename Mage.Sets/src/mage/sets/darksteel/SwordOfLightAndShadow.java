@@ -101,7 +101,7 @@ public class SwordOfLightAndShadow extends CardImpl {
         if (ability instanceof SwordOfLightAndShadowAbility) {
             Player controller = game.getPlayer(ability.getControllerId());
             if (controller != null) {
-                // Target may only be added if possible target exists. Else the gain life effect won't trigger, becuase there is no valid target for the
+                // Target may only be added if possible target exists. Else the gain life effect won't trigger, because there is no valid target for the
                 // return to hand ability
                 if (controller.getGraveyard().count(new FilterCreatureCard(), ability.getSourceId(), ability.getControllerId(), game) > 0) {
                     ability.addTarget(new TargetCardInYourGraveyard(0, 1, new FilterCreatureCard("creature card from your graveyard")));
@@ -115,8 +115,8 @@ public class SwordOfLightAndShadow extends CardImpl {
 class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl {
 
     public SwordOfLightAndShadowAbility() {
-        super(Zone.BATTLEFIELD, new SwordOfLightAndShadowReturnToHandTargetEffect(), false);
-        this.addEffect(new GainLifeEffect(3));
+        super(Zone.BATTLEFIELD, new GainLifeEffect(3), false);
+        this.addEffect(new SwordOfLightAndShadowReturnToHandTargetEffect());
 
     }
 
@@ -177,7 +177,7 @@ class SwordOfLightAndShadowReturnToHandTargetEffect extends OneShotEffect {
                         case GRAVEYARD:
                             Card card = game.getCard(targetId);
                             if (card != null) {
-                                controller.moveCards(card, null, Zone.HAND, source, game);
+                                controller.moveCards(card, Zone.HAND, source, game);
                             } else {
                                 result = false;
                             }

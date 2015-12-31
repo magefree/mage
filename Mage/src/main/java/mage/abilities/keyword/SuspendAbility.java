@@ -234,6 +234,10 @@ public class SuspendAbility extends ActivatedAbilityImpl {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
+        if (!game.getState().getZone(getSourceId()).equals(Zone.HAND)) {
+            // Supend can only be activated from hand
+            return false;
+        }
         MageObject object = game.getObject(sourceId);
         return (object.getCardType().contains(CardType.INSTANT)
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)

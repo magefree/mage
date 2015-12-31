@@ -1291,6 +1291,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (Zone.GRAVEYARD.equals(zone) && canPlayCardsFromGraveyard()) {
                 for (ActivatedAbility ability : object.getAbilities().getPlayableAbilities(Zone.HAND)) {
                     if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
+                        if (ability.getManaCosts().isEmpty() && ability.getCosts().isEmpty() && ability instanceof SpellAbility) {
+                            continue; // You can't play spells from graveyard that have no costs
+                        }
                         if (ability.canActivate(playerId, game)) {
                             useable.put(ability.getId(), ability);
                         }

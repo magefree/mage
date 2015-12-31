@@ -9,15 +9,16 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Wonder
- *   As long as Wonder is in your graveyard and you control an Island, creatures you control have flying.
+ * Wonder As long as Wonder is in your graveyard and you control an Island,
+ * creatures you control have flying.
  *
  * @author magenoxx_at_gmail.com
  */
 public class WonderTest extends CardTestPlayerBase {
 
     /**
-     * Tests creatures for Flying gained from Wonder ability when all conditions were met
+     * Tests creatures for Flying gained from Wonder ability when all conditions
+     * were met
      */
     @Test
     public void testCardWithAllConditionsMet() {
@@ -38,7 +39,7 @@ public class WonderTest extends CardTestPlayerBase {
 
         // check no flying in graveyard
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
-            if (card.equals("Runeclaw Bear")) {
+            if (card.getName().equals("Runeclaw Bear")) {
                 Assert.assertFalse(card.getAbilities().contains(FlyingAbility.getInstance()));
             }
         }
