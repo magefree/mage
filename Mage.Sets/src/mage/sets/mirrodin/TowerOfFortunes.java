@@ -25,19 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,15 +44,17 @@ import mage.constants.Zone;
  */
 public class TowerOfFortunes extends CardImpl {
 
-    public TowerOfFortunes (UUID ownerId) {
+    public TowerOfFortunes(UUID ownerId) {
         super(ownerId, 267, "Tower of Fortunes", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "MRD";
+
+        // {8}, {T} : Draw four cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(4), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public TowerOfFortunes (final TowerOfFortunes card) {
+    public TowerOfFortunes(final TowerOfFortunes card) {
         super(card);
     }
 

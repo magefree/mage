@@ -121,7 +121,7 @@ class NotionThiefReplacementEffect extends ReplacementEffectImpl {
                     return true;
                 }
             } else {
-                // not an opponents players draw step, always replace draw
+                // not an opponents players draw step, always replace the draw
                 return true;
             }
         }
