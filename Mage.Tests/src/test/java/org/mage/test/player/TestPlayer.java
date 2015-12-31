@@ -1947,6 +1947,44 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+        if (!choices.isEmpty()) {
+            for (String choose2 : choices) {
+                String[] targetList = choose2.split("\\^");
+                boolean targetFound = false;
+                for (String targetName : targetList) {
+                    boolean originOnly = false;
+                    boolean copyOnly = false;
+                    if (targetName.endsWith("]")) {
+                        if (targetName.endsWith("[no copy]")) {
+                            originOnly = true;
+                            targetName = targetName.substring(0, targetName.length() - 9);
+                        }
+                        if (targetName.endsWith("[only copy]")) {
+                            copyOnly = true;
+                            targetName = targetName.substring(0, targetName.length() - 11);
+                        }
+                    }
+                    for (Card card : cards.getCards(game)) {
+                        if (target.getTargets().contains(card.getId())) {
+                            continue;
+                        }
+                        if (card.getName().equals(targetName)) {
+                            if (target.isNotTarget() || target.canTarget(card.getId(), game)) {
+                                if ((card.isCopy() && !originOnly) || (!card.isCopy() && !copyOnly)) {
+                                    target.add(card.getId(), game);
+                                    targetFound = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (targetFound) {
+                    choices.remove(choose2);
+                    return true;
+                }
+            }
+        }
         return computerPlayer.choose(outcome, cards, target, game);
     }
 

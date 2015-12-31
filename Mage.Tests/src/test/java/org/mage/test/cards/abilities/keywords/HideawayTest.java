@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -42,27 +42,23 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class HideawayTest extends CardTestPlayerBase {
 
     /**
-     * 702.74. Hideaway
-     * 702.74a Hideaway represents a static ability and a triggered ability. “Hideaway” means “This
-     * permanent enters the battlefield tapped” and “When this permanent enters the battlefield, look at
-     * the top four cards of your library. Exile one of them face down and put the rest on the bottom of
-     * your library in any order. The exiled card gains ‘Any player who has controlled the permanent
-     * that exiled this card may look at this card in the exile zone.’”
-     * 
-     */
-
-    /** 
-     * 	Shelldock Isle
-     * 	Land
-     * 	Hideaway (This land enters the battlefield tapped. When it does, look at 
-     *  the top four cards of your library, exile one face down, then put the 
-     *  rest on the bottom of your library.)
-     * 	{T}: Add {U} to your mana pool.
-     * 	{U}, {T}: You may play the exiled card without paying its mana cost if a 
-     *  library has twenty or fewer cards in it.
+     * 702.74. Hideaway 702.74a Hideaway represents a static ability and a
+     * triggered ability. “Hideaway” means “This permanent enters the
+     * battlefield tapped” and “When this permanent enters the battlefield, look
+     * at the top four cards of your library. Exile one of them face down and
+     * put the rest on the bottom of your library in any order. The exiled card
+     * gains ‘Any player who has controlled the permanent that exiled this card
+     * may look at this card in the exile zone.’”
      *
      */
-
+    /**
+     * Shelldock Isle Land Hideaway (This land enters the battlefield tapped.
+     * When it does, look at the top four cards of your library, exile one face
+     * down, then put the rest on the bottom of your library.) {T}: Add {U} to
+     * your mana pool. {U}, {T}: You may play the exiled card without paying its
+     * mana cost if a library has twenty or fewer cards in it.
+     *
+     */
     @Test
     public void testHideaway() {
         addCard(Zone.HAND, playerA, "Shelldock Isle");
@@ -74,11 +70,54 @@ public class HideawayTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Shelldock Isle", 1);
         assertExileCount(playerA, 1);
-        for (Card card :currentGame.getExile().getAllCards(currentGame)){
+        for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             Assert.assertTrue("Exiled card is not face down", card.isFaceDown(currentGame));
         }
-        
 
     }
 
+    /**
+     * In commander, an opponent cast Ulamog, the Ceaseless Hunger off of
+     * Mosswort Bridge. After it resolved, another opponent exile Ulamog with a
+     * Quarantine Field. Ulamog was shown as exile face down, as it had been
+     * from the Mosswort Bridge.
+     */
+    @Test
+    public void testMosswortBridge() {
+        // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
+        // {T}: Add {G} to your mana pool.
+        // {G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.
+        addCard(Zone.HAND, playerA, "Mosswort Bridge");
+        // When you cast Ulamog, the Ceaseless Hunger, exile two target permanents.
+        // Indestructible
+        // Whenever Ulamog attacks, defending player exiles the top twenty cards of his or her library.
+        addCard(Zone.LIBRARY, playerA, "Ulamog, the Ceaseless Hunger");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Dross Crocodile", 2);// 5/1
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mosswort Bridge");
+        setChoice(playerA, "Ulamog, the Ceaseless Hunger");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
+        addTarget(playerA, "Dross Crocodile^Dross Crocodile");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount("Dross Crocodile", 2);
+        assertPermanentCount(playerA, "Mosswort Bridge", 1);
+        assertExileCount(playerA, 2);
+        assertExileCount("Ulamog, the Ceaseless Hunger", 0);
+
+        assertPermanentCount(playerA, "Ulamog, the Ceaseless Hunger", 1);
+
+        assertTapped("Mosswort Bridge", true);
+
+        Permanent permanent = getPermanent("Ulamog, the Ceaseless Hunger", playerA);
+        Card card = currentGame.getCard(permanent.getId());
+        Assert.assertFalse("Previous exiled card may be no longer face down", card.isFaceDown(currentGame));
+
+    }
 }
