@@ -36,6 +36,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -65,10 +66,10 @@ public class Werebear extends CardImpl {
                 new ConditionalContinuousEffect(
                     new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
-                    "<i>Threshold</i> - {this} gets +3/+3 as long as seven or more cards are in your graveyard"
+                    "{this} gets +3/+3 as long as seven or more cards are in your graveyard"
                 ));
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
-
     }
 
     public Werebear(final Werebear card) {

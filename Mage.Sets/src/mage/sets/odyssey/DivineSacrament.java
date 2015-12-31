@@ -35,6 +35,7 @@ import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -47,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author Beta_Steward (Honor of the Pure), LevelX2 (Demoralize), cbt
  */
 public class DivineSacrament extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -65,8 +66,9 @@ public class DivineSacrament extends CardImpl {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                     new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false),
                     new CardsInControllerGraveCondition(7),
-                    "<i>Threshold</i> - If seven or more cards are in your graveyard, white creatures get an additional +1/+1."
+                    "If seven or more cards are in your graveyard, white creatures get an additional +1/+1."
                 ));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 

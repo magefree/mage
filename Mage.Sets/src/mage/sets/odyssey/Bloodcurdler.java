@@ -43,6 +43,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -65,18 +66,19 @@ public class Bloodcurdler extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // At the beginning of your upkeep, put the top card of your library into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveControllerEffect(1), TargetController.YOU, false));
 
         Condition thresholdCondition = new CardsInControllerGraveCondition(7);
         // Threshold - As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."
-        Ability thresholdAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), thresholdCondition,
-                    "<i>Threshold</i> - If seven or more cards are in your graveyard, {this} gets +1/+1"));
+        Ability thresholdAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
+            new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), thresholdCondition,
+            "If seven or more cards are in your graveyard, {this} gets +1/+1"));
         ContinuousEffect effect = new GainAbilitySourceEffect(new BeginningOfEndStepTriggeredAbility(new ExileCardFromOwnGraveyardControllerEffect(2), TargetController.YOU, false));
         thresholdAbility.addEffect(new ConditionalContinuousEffect(effect, thresholdCondition,
-                "and has \"At the beginning of your end step, exile two cards from your graveyard.\""));
+            "and has \"At the beginning of your end step, exile two cards from your graveyard.\""));
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

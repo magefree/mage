@@ -41,6 +41,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.EffectType;
 import mage.constants.Rarity;
@@ -68,10 +69,11 @@ public class CabalInquisitor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Threshold - {1}{B}, {T}, Exile two cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.
-        Ability ability = new ActivateAsSorceryConditionalActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"), new CardsInControllerGraveCondition(7), "<br/><br/><i>Threshold</i> - {1}{B}, {T}, Exile two cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.");
+        Ability ability = new ActivateAsSorceryConditionalActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"), new CardsInControllerGraveCondition(7));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, new FilterCard("cards from your graveyard"))));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 
@@ -87,24 +89,21 @@ public class CabalInquisitor extends CardImpl {
 
 
 class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl {
-    
+
     private Condition condition;
-    private String ruleText = "<i>Threshold</i> - {1}{B}, {t}, Exile two cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.";
 
     private static final Effects emptyEffects = new Effects();
 
-    public ActivateAsSorceryConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
+    public ActivateAsSorceryConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.ruleText = rule;
-        timing = TimingRule.SORCERY; 
+        timing = TimingRule.SORCERY;
     }
 
 
     public ActivateAsSorceryConditionalActivatedAbility(final ActivateAsSorceryConditionalActivatedAbility ability) {
         super(ability);
         this.condition = ability.condition;
-        this.ruleText = ability.ruleText;
     }
 
     @Override
@@ -130,6 +129,6 @@ class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl 
 
     @Override
     public String getRule() {
-        return ruleText;
+        return super.getRule() + " Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.";
     }
 }

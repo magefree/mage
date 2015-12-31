@@ -36,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -60,14 +61,14 @@ public class KrosanRestorer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
-        
+
         // Threshold - {tap}: Untap up to three target lands. Activate this ability only if seven or more cards are in your graveyard.
-        ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                new UntapTargetEffect(), 
-                new TapSourceCost(), 
-                new CardsInControllerGraveCondition(7),
-                "<i>Threshold</i> - {T}: Untap up to three target lands. Activate this ability only if seven or more cards are in your graveyard.");
+        ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+                new UntapTargetEffect(),
+                new TapSourceCost(),
+                new CardsInControllerGraveCondition(7));
         ability.addTarget(new TargetLandPermanent(0, 3, new FilterLandPermanent(), false));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 

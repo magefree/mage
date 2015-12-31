@@ -31,20 +31,20 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
+
  *
  * @author cbt33
  */
@@ -64,14 +64,16 @@ public class NomadDecoy extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
         // Threshold - {W}{W}, {T}: Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        thresholdAbility.addTarget(new TargetCreaturePermanent(2));
+        Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+            new TapTargetEffect(),
+            new ManaCostsImpl("{W}{W}"),
+            new CardsInControllerGraveCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(thresholdAbility),
-                                                                                                 new CardsInControllerGraveCondition(7),
-                                                                                                 "<i>Threshold</i> - {W}{W}, {T}: Tap two target creatures. Activate this ability only if seven or more cards are in your graveyard.")));
+        thresholdAbility.addTarget(new TargetCreaturePermanent(2));
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
+        this.addAbility(thresholdAbility);
     }
 
     public NomadDecoy(final NomadDecoy card) {

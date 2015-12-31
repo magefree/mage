@@ -29,12 +29,14 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -56,11 +58,12 @@ public class InfectedVermin extends CardImpl {
         // {2}{B}: Infected Vermin deals 1 damage to each creature and each player.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{2}{B}")));
         // Threshold - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard.
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new DamageEverythingEffect(3),
                 new ManaCostsImpl("{3}{B}"),
-                new CardsInControllerGraveCondition(7),
-                "<i>Threshold</i> - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard."));
+                new CardsInControllerGraveCondition(7));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
+        this.addAbility(ability);
     }
 
     public InfectedVermin(final InfectedVermin card) {
