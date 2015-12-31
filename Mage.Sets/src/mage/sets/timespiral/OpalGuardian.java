@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class OpalGuardian extends CardImpl {
 
@@ -59,10 +59,10 @@ public class OpalGuardian extends CardImpl {
         this.expansionSetCode = "TSP";
 
         // When an opponent casts a creature spell, if Opal Guardian is an enchantment, Opal Guardian becomes a 3/4 Gargoyle creature with flying and protection from red.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGuardianGargoyle(), "", Duration.WhileOnBattlefield, true),
-            new FilterCreatureSpell(), false);
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGuardianGargoyle(), "", Duration.WhileOnBattlefield, true, false),
+                new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
-            "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 3/4 Gargoyle creature with flying and protection from red."));
+                "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 3/4 Gargoyle creature with flying and protection from red."));
     }
 
     public OpalGuardian(final OpalGuardian card) {

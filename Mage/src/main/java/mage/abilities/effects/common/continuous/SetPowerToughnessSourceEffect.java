@@ -53,6 +53,7 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
+        setCharacterDefining(subLayer.equals(SubLayer.CharacteristicDefining_7a));
         this.amount = amount;
         staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }

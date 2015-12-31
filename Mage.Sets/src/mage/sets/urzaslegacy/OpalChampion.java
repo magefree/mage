@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class OpalChampion extends CardImpl {
 
@@ -55,10 +55,10 @@ public class OpalChampion extends CardImpl {
         this.expansionSetCode = "ULG";
 
         // When an opponent casts a creature spell, if Opal Champion is an enchantment, Opal Champion becomes a 3/3 Knight creature with first strike.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalChampionKnight(), "", Duration.WhileOnBattlefield, true),
-            new FilterCreatureSpell(), false);
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalChampionKnight(), "", Duration.WhileOnBattlefield, true, false),
+                new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
-            "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 3/3 Knight creature with first strike."));
+                "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 3/3 Knight creature with first strike."));
     }
 
     public OpalChampion(final OpalChampion card) {

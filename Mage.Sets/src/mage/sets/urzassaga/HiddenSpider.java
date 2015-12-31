@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class HiddenSpider extends CardImpl {
 
@@ -63,10 +63,10 @@ public class HiddenSpider extends CardImpl {
         this.expansionSetCode = "USG";
 
         // When an opponent casts a creature spell with flying, if Hidden Spider is an enchantment, Hidden Spider becomes a 3/5 Spider creature with reach.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenSpiderToken(), "", Duration.WhileOnBattlefield, true),
-            filter, false);
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenSpiderToken(), "", Duration.WhileOnBattlefield, true, false),
+                filter, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
-            "When an opponent casts a creature spell with flying, if {this} is an enchantment, {this} becomes a 3/5 Spider creature with reach."));
+                "When an opponent casts a creature spell with flying, if {this} is an enchantment, {this} becomes a 3/5 Spider creature with reach."));
     }
 
     public HiddenSpider(final HiddenSpider card) {

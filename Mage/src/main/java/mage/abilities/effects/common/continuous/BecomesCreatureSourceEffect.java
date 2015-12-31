@@ -51,16 +51,17 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected String type;
     protected boolean losePreviousTypes;
 
-    public BecomesCreatureSourceEffect(Token token, String type, Duration duration, boolean losePreviousTypes) {
+    public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
+        this(token, type, duration, false, false);
+    }
+
+    public BecomesCreatureSourceEffect(Token token, String type, Duration duration, boolean losePreviousTypes, boolean characterDefining) {
         super(duration, Outcome.BecomeCreature);
+        this.characterDefining = characterDefining;
         this.token = token;
         this.type = type;
         this.losePreviousTypes = losePreviousTypes;
         setText();
-    }
-
-    public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
-        this(token, type, duration, false);
     }
 
     public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
@@ -130,7 +131,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     }
                     break;
                 case PTChangingEffects_7:
-                    if (sublayer == SubLayer.CharacteristicDefining_7a) {
+                    if ((sublayer == SubLayer.CharacteristicDefining_7a && isCharacterDefining())
+                            || (sublayer == SubLayer.SetPT_7b && !isCharacterDefining())) {
                         MageInt power = token.getPower();
                         MageInt toughness = token.getToughness();
                         if (power != null && toughness != null) {

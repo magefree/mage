@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class HiddenGibbons extends CardImpl {
 
@@ -61,10 +61,10 @@ public class HiddenGibbons extends CardImpl {
         this.expansionSetCode = "ULG";
 
         // When an opponent casts an instant spell, if Hidden Gibbons is an enchantment, Hidden Gibbons becomes a 4/4 Ape creature.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenGibbonsApe(), "", Duration.WhileOnBattlefield, true),
-            filter, false);
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenGibbonsApe(), "", Duration.WhileOnBattlefield, true, false),
+                filter, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
-            "When an opponent casts an instant spell, if {this} is an enchantment, {this} becomes a 4/4 Ape creature."));
+                "When an opponent casts an instant spell, if {this} is an enchantment, {this} becomes a 4/4 Ape creature."));
     }
 
     public HiddenGibbons(final HiddenGibbons card) {

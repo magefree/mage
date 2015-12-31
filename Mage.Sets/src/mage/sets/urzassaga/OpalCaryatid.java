@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class OpalCaryatid extends CardImpl {
 
@@ -54,10 +54,10 @@ public class OpalCaryatid extends CardImpl {
         this.expansionSetCode = "USG";
 
         // When an opponent casts a creature spell, if Opal Caryatid is an enchantment, Opal Caryatid becomes a 2/2 Soldier creature.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalCaryatidSoldier(), "", Duration.WhileOnBattlefield, true),
-            new FilterCreatureSpell(), false);
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalCaryatidSoldier(), "", Duration.WhileOnBattlefield, true, false),
+                new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
-            "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Soldier creature."));
+                "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Soldier creature."));
     }
 
     public OpalCaryatid(final OpalCaryatid card) {

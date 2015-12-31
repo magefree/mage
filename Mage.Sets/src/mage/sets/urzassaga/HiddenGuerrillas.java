@@ -41,13 +41,12 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class HiddenGuerrillas extends CardImpl {
 
@@ -56,11 +55,11 @@ public class HiddenGuerrillas extends CardImpl {
         this.expansionSetCode = "USG";
 
         // When an opponent casts an artifact spell, if Hidden Guerrillas is an enchantment, Hidden Guerrillas becomes a 5/3 Soldier creature with trample.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenGuerrillasSoldier(), "", Duration.WhileOnBattlefield, true),
-            new FilterArtifactSpell(), false);
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenGuerrillasSoldier(), "", Duration.WhileOnBattlefield, true, false),
+                new FilterArtifactSpell(), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
-            "When an opponent casts an artifact spell, if {this} is an enchantment, {this} becomes a 5/3 Soldier creature with trample."));
-     }
+                "When an opponent casts an artifact spell, if {this} is an enchantment, {this} becomes a 5/3 Soldier creature with trample."));
+    }
 
     public HiddenGuerrillas(final HiddenGuerrillas card) {
         super(card);

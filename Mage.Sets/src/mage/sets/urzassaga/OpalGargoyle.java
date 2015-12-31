@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class OpalGargoyle extends CardImpl {
 
@@ -55,10 +55,10 @@ public class OpalGargoyle extends CardImpl {
         this.expansionSetCode = "USG";
 
         // When an opponent casts a creature spell, if Opal Gargoyle is an enchantment, Opal Gargoyle becomes a 2/2 Gargoyle creature with flying.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGargoyleToken(), "", Duration.WhileOnBattlefield, true),
-            new FilterCreatureSpell(), false);
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGargoyleToken(), "", Duration.WhileOnBattlefield, true, false),
+                new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
-            "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Gargoyle creature with flying."));
+                "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Gargoyle creature with flying."));
     }
 
     public OpalGargoyle(final OpalGargoyle card) {

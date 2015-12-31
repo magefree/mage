@@ -55,7 +55,7 @@ public class LurkingEvil extends CardImpl {
         this.expansionSetCode = "USG";
 
         // Pay half your life, rounded up: Lurking Evil becomes a 4/4 Horror creature with flying.
-        Effect effect = new BecomesCreatureSourceEffect(new LurkingEvilToken(), null, Duration.EndOfGame, true);
+        Effect effect = new BecomesCreatureSourceEffect(new LurkingEvilToken(), null, Duration.EndOfGame, true, false);
         effect.setText("{this} becomes a 4/4 Horror creature with flying");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new LurkingEvilCost()));
     }
@@ -91,11 +91,10 @@ class LurkingEvilCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             int currentLife = controller.getLife();
-            int lifeToPay = (currentLife + currentLife%2) / 2; // Divide by two and round up.
+            int lifeToPay = (currentLife + currentLife % 2) / 2; // Divide by two and round up.
             if (lifeToPay < 0) {
                 this.paid = true;
-            }
-            else {
+            } else {
                 this.paid = (controller.loseLife(lifeToPay, game) == lifeToPay);
             }
             return this.paid;

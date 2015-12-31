@@ -30,7 +30,6 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -73,24 +72,23 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller == null) {
+        if (controller == null) {
             return;
         }
-        if(setColor == null) {
+        if (setColor == null) {
             ChoiceColor choice = new ChoiceColor();
-            while(!choice.isChosen()) {
+            while (!choice.isChosen()) {
                 controller.choose(Outcome.PutManaInPool, choice, game);
-                if(!controller.canRespond()) {
+                if (!controller.canRespond()) {
                     return;
                 }
             }
-            if(choice.getColor() != null) {
+            if (choice.getColor() != null) {
                 setColor = choice.getColor();
-            }
-            else {
+            } else {
                 return;
             }
-            if(!game.isSimulation()) {
+            if (!game.isSimulation()) {
                 game.informPlayers(controller.getLogName() + " has chosen the color: " + setColor.toString());
             }
         }
@@ -103,12 +101,11 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
         if (controller == null) {
             return false;
         }
-        if(setColor != null) {
+        if (setColor != null) {
             MageObject sourceObject = game.getObject(source.getSourceId());
-            if(sourceObject != null) {
+            if (sourceObject != null) {
                 sourceObject.getColor(game).setColor(setColor);
-            }
-            else {
+            } else {
                 this.discard();
             }
             return true;
@@ -119,10 +116,10 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         return "{this} becomes " + (setColor == null ? "the color of your choice" : setColor.getDescription())
-            + " " + duration.toString();
+                + " " + duration.toString();
     }
 }

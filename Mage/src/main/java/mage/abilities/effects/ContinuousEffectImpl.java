@@ -72,6 +72,14 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected List<MageObjectReference> affectedObjectList = new ArrayList<>();
     protected boolean temporary = false;
     protected EnumSet<DependencyType> dependencyTypes;
+    /*
+     A Characteristic Defining Ability (CDA) is an ability that defines a characteristic of a card or token.
+     There are 3 specific rules that distinguish a CDA from other abilities.
+     1) A CDA can only define a characteristic of either the card or token it comes from.
+     2) A CDA can not be triggered, activated, or conditional.
+     3) A CDA must define a characteristic. Usually color, power and/or toughness, or sub-type.
+     */
+    protected boolean characterDefining = false;
 
     // until your next turn
     protected int startingTurn;
@@ -105,6 +113,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingTurn = effect.startingTurn;
         this.startingControllerId = effect.startingControllerId;
         this.dependencyTypes = effect.dependencyTypes;
+        this.characterDefining = effect.characterDefining;
     }
 
     @Override
@@ -254,6 +263,14 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public void setTemporary(boolean temporary) {
         this.temporary = temporary;
+    }
+
+    public boolean isCharacterDefining() {
+        return characterDefining;
+    }
+
+    public void setCharacterDefining(boolean characterDefining) {
+        this.characterDefining = characterDefining;
     }
 
     @Override

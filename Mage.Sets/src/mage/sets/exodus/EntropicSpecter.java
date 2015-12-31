@@ -71,7 +71,9 @@ public class EntropicSpecter extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
 
         // Entropic Specter's power and toughness are each equal to the number of cards in the chosen player's hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Duration.WhileOnBattlefield, SubLayer.SetPT_7b)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                // back to the graveyard or if the choosen player left the gane it's again a 0/0
+                new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a)));
 
         // Whenever Entropic Specter deals damage to a player, that player discards a card.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));
