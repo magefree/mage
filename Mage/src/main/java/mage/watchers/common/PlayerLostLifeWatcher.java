@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.watchers.common;
 
 import java.util.HashMap;
@@ -37,11 +36,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
-
-
-/**
+/*
  * Counts amount of life lost current or last turn by players.
- *
+ * This watcher is always added in gameImpl.init
  *
  * @author LevelX2
  */

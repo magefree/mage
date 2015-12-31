@@ -28,9 +28,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -38,7 +35,9 @@ import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -64,7 +63,7 @@ public class CryptbornHorror extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Cryptborn Horror enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn.
-        this.addAbility(new EntersBattlefieldAbility(new CryptbornHorrorEffect(),rule));
+        this.addAbility(new EntersBattlefieldAbility(new CryptbornHorrorEffect(), rule));
     }
 
     public CryptbornHorror(final CryptbornHorror card) {
@@ -76,7 +75,9 @@ public class CryptbornHorror extends CardImpl {
         return new CryptbornHorror(this);
     }
 }
+
 class CryptbornHorrorEffect extends OneShotEffect {
+
     CryptbornHorrorEffect() {
         super(Outcome.BoostCreature);
     }
@@ -87,16 +88,13 @@ class CryptbornHorrorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null) {
-            OpponentsLostLifeCount dynamicValue = new OpponentsLostLifeCount();
-            if (dynamicValue != null) {
-                int oll = dynamicValue.calculate(game, source, this);
-                if (oll > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(oll), game);
-                }
-                return true;
+            int oll = new OpponentsLostLifeCount().calculate(game, source, this);
+            if (oll > 0) {
+                permanent.addCounters(CounterType.P1P1.createInstance(oll), game);
             }
+            return true;
         }
         return false;
     }
