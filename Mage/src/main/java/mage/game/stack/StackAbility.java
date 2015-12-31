@@ -57,6 +57,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.EffectType;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -123,11 +124,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public void counter(UUID sourceId, Game game) {
         // zone, owner, top ignored
-        this.counter(sourceId, game, Zone.GRAVEYARD, true, true);
+        this.counter(sourceId, game, Zone.GRAVEYARD, true, ZoneDetail.TOP);
     }
 
     @Override
-    public void counter(UUID sourceId, Game game, Zone zone, boolean owner, boolean top) {
+    public void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
         //20100716 - 603.8
         if (ability instanceof StateTriggeredAbility) {
             ((StateTriggeredAbility) ability).counter(game);

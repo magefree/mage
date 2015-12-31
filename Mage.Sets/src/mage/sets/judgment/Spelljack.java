@@ -40,6 +40,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -94,7 +95,7 @@ class SpelljackEffect extends OneShotEffect {
         if (controller != null) {
             UUID targetId = targetPointer.getFirst(game, source);
             StackObject stackObject = game.getStack().getStackObject(targetId);
-            if (stackObject != null && game.getStack().counter(targetId, source.getSourceId(), game, Zone.EXILED, false, false)) {
+            if (stackObject != null && game.getStack().counter(targetId, source.getSourceId(), game, Zone.EXILED, false, ZoneDetail.NONE)) {
                 Card card = ((Spell) stackObject).getCard();
                 if (card != null) {
                     ContinuousEffect effect = new SpelljackCastFromExileEffect();

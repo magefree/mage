@@ -32,6 +32,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -41,28 +42,28 @@ import mage.players.Player;
 public class CounterTargetWithReplacementEffect extends OneShotEffect {
 
     private Zone targetZone;
-    private boolean flag;
+    private ZoneDetail zoneDetail;
 
     public CounterTargetWithReplacementEffect(Zone targetZone) {
-        this(targetZone, false);
+        this(targetZone, ZoneDetail.NONE);
     }
 
     /**
      *
      * @param targetZone
-     * @param flag use to specify when moving card to library <ul><li>true = put
-     * on top</li><li>false = put on bottom</li></ul>
+     * @param zoneDetail use to specify when moving card to library <ul><li>true
+     * = put on top</li><li>false = put on bottom</li></ul>
      */
-    public CounterTargetWithReplacementEffect(Zone targetZone, boolean flag) {
+    public CounterTargetWithReplacementEffect(Zone targetZone, ZoneDetail zoneDetail) {
         super(Outcome.Detriment);
         this.targetZone = targetZone;
-        this.flag = flag;
+        this.zoneDetail = zoneDetail;
     }
 
     public CounterTargetWithReplacementEffect(final CounterTargetWithReplacementEffect effect) {
         super(effect);
         this.targetZone = effect.targetZone;
-        this.flag = effect.flag;
+        this.zoneDetail = effect.zoneDetail;
     }
 
     @Override
@@ -74,7 +75,7 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, targetZone, false, flag);
+            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, targetZone, false, zoneDetail);
         }
         return false;
     }
@@ -92,7 +93,16 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
         }
         if (targetZone.equals(Zone.LIBRARY)) {
             sb.append("put it on ");
-            sb.append(flag ? "top" : "the bottom");
+            switch (zoneDetail) {
+                case BOTTOM:
+                    sb.append("the bottom");
+                case TOP:
+                    sb.append("top");
+                case CHOOSE:
+                    sb.append("top or bottom");
+                case NONE:
+                    sb.append("<not allowed value>");
+            }
             sb.append(" of its owner's library instead of into that player's graveyard");
         }
 

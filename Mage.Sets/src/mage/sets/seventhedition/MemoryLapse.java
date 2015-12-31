@@ -27,14 +27,14 @@
  */
 package mage.sets.seventhedition;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.target.TargetSpell;
-
-import java.util.UUID;
 
 /**
  *
@@ -46,9 +46,8 @@ public class MemoryLapse extends CardImpl {
         super(ownerId, 88, "Memory Lapse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "7ED";
 
-
         // Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
-        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.LIBRARY, true));
+        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.LIBRARY, ZoneDetail.TOP));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 

@@ -48,9 +48,11 @@ import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -328,11 +330,11 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void counter(UUID sourceId, Game game) {
-        this.counter(sourceId, game, Zone.GRAVEYARD, false, true);
+        this.counter(sourceId, game, Zone.GRAVEYARD, false, ZoneDetail.NONE);
     }
 
     @Override
-    public void counter(UUID sourceId, Game game, Zone zone, boolean owner, boolean top) {
+    public void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
         this.countered = true;
         if (!isCopiedSpell()) {
             Player player = game.getPlayer(game.getControllerId(sourceId));
@@ -346,7 +348,14 @@ public class Spell extends StackObjImpl implements Card {
                     counteringAbility = ((StackObject) counteringObject).getStackAbility();
                 }
                 if (zone.equals(Zone.LIBRARY)) {
-                    if (top) {
+                    if (zoneDetail.equals(ZoneDetail.CHOOSE)) {
+                        if (player.chooseUse(Outcome.Detriment, "Move countered spell to the top of the library? (otherwise it goes to the bottom)", counteringAbility, game)) {
+                            zoneDetail = ZoneDetail.TOP;
+                        } else {
+                            zoneDetail = ZoneDetail.BOTTOM;
+                        }
+                    }
+                    if (zoneDetail.equals(ZoneDetail.TOP)) {
                         player.putCardsOnTopOfLibrary(new CardsImpl(card), game, counteringAbility, false);
                     } else {
                         player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, counteringAbility, false);

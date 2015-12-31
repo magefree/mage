@@ -45,6 +45,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -109,7 +110,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
 
         StackObject stackObject = game.getStack().getStackObject(objectId);
         if (stackObject != null
-                && game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.EXILED, false, false)) {
+                && game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.EXILED, false, ZoneDetail.NONE)) {
             if (!((Spell) stackObject).isCopiedSpell()) {
                 MageObject card = game.getObject(stackObject.getSourceId());
                 if (card instanceof Card) {

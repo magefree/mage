@@ -35,6 +35,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -95,7 +96,7 @@ class DesertionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.BATTLEFIELD, false, false);
+            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.BATTLEFIELD, false, ZoneDetail.NONE);
         }
         return false;
     }

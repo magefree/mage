@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.filter.FilterPermanent;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -43,7 +44,7 @@ public interface StackObject extends MageObject, Controllable {
 
     void counter(UUID sourceId, Game game);
 
-    void counter(UUID sourceId, Game game, Zone zone, boolean owner, boolean top);
+    void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail);
 
     Ability getStackAbility();
 

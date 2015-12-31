@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.UUID;
 import mage.MageObject;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import org.apache.log4j.Logger;
@@ -82,10 +83,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
     }
 
     public boolean counter(UUID objectId, UUID sourceId, Game game) {
-        return counter(objectId, sourceId, game, Zone.GRAVEYARD, false, true);
+        return counter(objectId, sourceId, game, Zone.GRAVEYARD, false, ZoneDetail.TOP);
     }
 
-    public boolean counter(UUID objectId, UUID sourceId, Game game, Zone zone, boolean owner, boolean onTop) {
+    public boolean counter(UUID objectId, UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
         // the counter logic is copied by some spells to handle replacement effects of the countered spell
         // so if logic is changed here check those spells for needed changes too
         // Concerned cards to check: Hinder, Spell Crumple
@@ -108,7 +109,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 if (!(stackObject instanceof Spell)) { // spells are removed from stack by the card movement
                     this.remove(stackObject);
                 }
-                stackObject.counter(sourceId, game, zone, owner, onTop);
+                stackObject.counter(sourceId, game, zone, owner, zoneDetail);
                 if (!game.isSimulation()) {
                     game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 }

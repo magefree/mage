@@ -36,6 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetSpell;
@@ -86,7 +87,7 @@ class SpellCrumpleCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.LIBRARY, false, false);
+            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.LIBRARY, false, ZoneDetail.BOTTOM);
         }
         return false;
     }
