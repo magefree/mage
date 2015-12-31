@@ -95,7 +95,7 @@ class FoldIntoAEtherEffect extends OneShotEffect {
         if (game.getStack().counter(targetId, source.getSourceId(), game)) {
             TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
             if (spellController != null
-                    && target.canChoose(source.getSourceId(), source.getSourceId(), game)
+                    && target.canChoose(source.getSourceId(), spellController.getId(), game)
                     && spellController.chooseUse(Outcome.Neutral, "Put a creature card from your hand in play?", source, game)
                     && spellController.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                 Card card = game.getCard(target.getFirstTarget());
