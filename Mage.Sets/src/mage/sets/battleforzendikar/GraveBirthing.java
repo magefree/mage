@@ -104,7 +104,7 @@ class GraveBirthingEffect extends OneShotEffect {
             target.setNotTarget(true);
             opponent.chooseTarget(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
-            opponent.moveCards(card, null, Zone.EXILED, source, game);
+            opponent.moveCards(card, Zone.EXILED, source, game);
             return true;
         }
         return false;

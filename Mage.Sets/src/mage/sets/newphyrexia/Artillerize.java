@@ -28,11 +28,11 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Artillerize extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
 
     static {
         filter.add(Predicates.or(
@@ -56,7 +56,6 @@ public class Artillerize extends CardImpl {
     public Artillerize(UUID ownerId) {
         super(ownerId, 79, "Artillerize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "NPH";
-
 
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
