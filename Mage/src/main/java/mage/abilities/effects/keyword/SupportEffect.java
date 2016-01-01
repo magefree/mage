@@ -57,7 +57,7 @@ public class SupportEffect extends AddCountersTargetEffect {
     }
 
     public SupportEffect(DynamicValue amount) {
-        super(CounterType.P1P1.createInstance(), new StaticValue(1));
+        super(CounterType.P1P1.createInstance(0), new StaticValue(1));
         this.amountSupportTargets = amount;
         this.staticText = setText();
     }
