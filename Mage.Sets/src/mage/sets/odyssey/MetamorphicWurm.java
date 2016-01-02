@@ -35,6 +35,7 @@ import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -61,8 +62,9 @@ public class MetamorphicWurm extends CardImpl {
                 new ConditionalContinuousEffect(
                     new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
-                    "<i>Threshold</i> - {this} gets +4/+4 as long as seven or more cards are in your graveyard"
+                    "{this} gets +4/+4 as long as seven or more cards are in your graveyard"
                 ));
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

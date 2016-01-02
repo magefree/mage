@@ -25,41 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.mana.AnyColorLandsProduceManaAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class SylvokExplorer extends CardImpl {
+public class SpellgorgerBarbarian extends CardImpl {
 
-    public SylvokExplorer(UUID ownerId) {
-        super(ownerId, 93, "Sylvok Explorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
+    public SpellgorgerBarbarian(UUID ownerId) {
+        super(ownerId, 100, "Spellgorger Barbarian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "JUD";
         this.subtype.add("Human");
-        this.subtype.add("Druid");
-
-        this.power = new MageInt(1);
+        this.subtype.add("Nightmare");
+        this.subtype.add("Barbarian");
+        this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
+        // When Spellgorger Barbarian enters the battlefield, discard a card at random.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardControllerEffect(1, true)));
+        // When Spellgorger Barbarian leaves the battlefield, draw a card.
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public SylvokExplorer(final SylvokExplorer card) {
+    public SpellgorgerBarbarian(final SpellgorgerBarbarian card) {
         super(card);
     }
 
     @Override
-    public SylvokExplorer copy() {
-        return new SylvokExplorer(this);
+    public SpellgorgerBarbarian copy() {
+        return new SpellgorgerBarbarian(this);
     }
 }

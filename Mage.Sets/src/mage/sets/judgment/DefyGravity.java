@@ -25,41 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.judgment;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.mana.AnyColorLandsProduceManaAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
+import mage.constants.TimingRule;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class SylvokExplorer extends CardImpl {
+public class DefyGravity extends CardImpl {
 
-    public SylvokExplorer(UUID ownerId) {
-        super(ownerId, 93, "Sylvok Explorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+    public DefyGravity(UUID ownerId) {
+        super(ownerId, 38, "Defy Gravity", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "JUD";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
+        // Target creature gains flying until end of turn.
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Flashback {U}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{U}"), TimingRule.INSTANT));
     }
 
-    public SylvokExplorer(final SylvokExplorer card) {
+    public DefyGravity(final DefyGravity card) {
         super(card);
     }
 
     @Override
-    public SylvokExplorer copy() {
-        return new SylvokExplorer(this);
+    public DefyGravity copy() {
+        return new DefyGravity(this);
     }
 }

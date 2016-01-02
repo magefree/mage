@@ -35,6 +35,7 @@ import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -60,8 +61,9 @@ public class SpringingTiger extends CardImpl {
                 new ConditionalContinuousEffect(
                     new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
-                    "<i>Threshold</i> - {this} gets +2/+2 as long as seven or more cards are in your graveyard"
+                    "{this} gets +2/+2 as long as seven or more cards are in your graveyard"
                 ));
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

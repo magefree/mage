@@ -25,78 +25,70 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author cbt33, Nantuko (Sengir Vampire)
+ * @author LoneFox
  */
-public class RepentantVampire extends CardImpl {
+public class MaskedGorgon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("green creatures and white creatures");
+    private static final FilterCard filter2 = new FilterCard("Gorgons");
+    private static final FilterCard filter3 = new FilterCard("green and from white");
+
     static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
+        filter1.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
+        filter2.add(new SubtypePredicate("Gorgon"));
+        filter3.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public RepentantVampire(UUID ownerId) {
-        super(ownerId, 157, "Repentant Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Vampire");
+    public MaskedGorgon(UUID ownerId) {
+        super(ownerId, 69, "Masked Gorgon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Gorgon");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever a creature dealt damage by Repentant Vampire this turn dies, put a +1/+1 counter on Repentant Vampire.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-        // Threshold - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has "{tap}: Destroy target black creature."
+        // Green creatures and white creatures have protection from Gorgons.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+            new ProtectionAbility(filter2), Duration.WhileOnBattlefield, filter1)));
+        // Threshold - Masked Gorgon has protection from green and from white as long as seven or more cards are in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BecomesColorSourceEffect(ObjectColor.WHITE, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(7),
-                "As long as seven or more cards are in your graveyard, {this} is white"));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(7),
-                "and has \"{T}: Destroy target black creature.\""));
+            new GainAbilitySourceEffect(new ProtectionAbility(filter3), Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            "{this} has protection from green and from white as long as seven or more cards are in your graveyard"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 
-    public RepentantVampire(final RepentantVampire card) {
+    public MaskedGorgon(final MaskedGorgon card) {
         super(card);
     }
 
     @Override
-    public RepentantVampire copy() {
-        return new RepentantVampire(this);
+    public MaskedGorgon copy() {
+        return new MaskedGorgon(this);
     }
 }

@@ -28,10 +28,11 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.abilities.mana.AnyColorOpponentLandsProduceManaAbility;
+import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
@@ -44,7 +45,7 @@ public class FellwarStone extends CardImpl {
         this.expansionSetCode = "9ED";
 
         // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorOpponentLandsProduceManaAbility());
+        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 
     public FellwarStone(final FellwarStone card) {

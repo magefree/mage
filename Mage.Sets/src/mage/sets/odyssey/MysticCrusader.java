@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -52,7 +53,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author cbt33
  */
 public class MysticCrusader extends CardImpl {
-    
+
     static final FilterCard filter = new FilterCard("black and from red");
 
     static {
@@ -73,8 +74,11 @@ public class MysticCrusader extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
         // Threshold - As long as seven or more cards are in your graveyard, Mystic Crusader gets +1/+1 and has flying.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                                                                    new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
-        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), new CardsInControllerGraveCondition(7), "and has flying"));
+            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()),
+            new CardsInControllerGraveCondition(7), "and has flying"));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 

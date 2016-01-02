@@ -25,43 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.judgment;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
-
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
  */
-public class AkromasBlessing extends CardImpl {
+public class Glory extends mage.sets.prereleaseevents.Glory {
 
-    public AkromasBlessing(UUID ownerId) {
-        super(ownerId, 1, "Akroma's Blessing", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "ONS";
-
-
-        // Choose a color. Creatures you control gain protection from the chosen color until end of turn.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control")));
-        // Cycling {W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
+    public Glory(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 11;
+        this.expansionSetCode = "JUD";
+        this.rarity = Rarity.RARE;
     }
 
-    public AkromasBlessing(final AkromasBlessing card) {
+    public Glory(final Glory card) {
         super(card);
     }
 
     @Override
-    public AkromasBlessing copy() {
-        return new AkromasBlessing(this);
+    public Glory copy() {
+        return new Glory(this);
     }
 }

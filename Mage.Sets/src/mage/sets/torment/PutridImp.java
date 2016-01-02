@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -68,12 +69,12 @@ public class PutridImp extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
-                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
+                "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
         Effect effect = new ConditionalRestrictionEffect(new CantBlockSourceEffect(Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7));
         effect.setText("and can't block");
         ability.addEffect(effect);
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
-        
     }
 
     public PutridImp(final PutridImp card) {

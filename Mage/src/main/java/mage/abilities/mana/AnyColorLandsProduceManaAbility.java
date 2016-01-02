@@ -51,41 +51,42 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class AnyColorOpponentLandsProduceManaAbility extends ManaAbility {
+public class AnyColorLandsProduceManaAbility extends ManaAbility {
 
-    public AnyColorOpponentLandsProduceManaAbility() {
-        super(Zone.BATTLEFIELD, new AnyColorOpponentLandsProduceManaEffect(),new TapSourceCost());
+    public AnyColorLandsProduceManaAbility(TargetController targetController) {
+        super(Zone.BATTLEFIELD, new AnyColorLandsProduceManaEffect(targetController), new TapSourceCost());
     }
 
-    public AnyColorOpponentLandsProduceManaAbility(final AnyColorOpponentLandsProduceManaAbility ability) {
+    public AnyColorLandsProduceManaAbility(final AnyColorLandsProduceManaAbility ability) {
         super(ability);
     }
 
     @Override
-    public AnyColorOpponentLandsProduceManaAbility copy() {
-        return new AnyColorOpponentLandsProduceManaAbility(this);
+    public AnyColorLandsProduceManaAbility copy() {
+        return new AnyColorLandsProduceManaAbility(this);
     }
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        return ((AnyColorOpponentLandsProduceManaEffect)getEffects().get(0)).getNetMana(game, this);
+        return ((AnyColorLandsProduceManaEffect)getEffects().get(0)).getNetMana(game, this);
     }
 }
 
-class AnyColorOpponentLandsProduceManaEffect extends ManaEffect {
+class AnyColorLandsProduceManaEffect extends ManaEffect {
 
-    private static final FilterPermanent filter = new FilterLandPermanent();
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
+    private final FilterPermanent filter;
 
-    public AnyColorOpponentLandsProduceManaEffect() {
+    public AnyColorLandsProduceManaEffect(TargetController targetController) {
         super();
-        staticText = "Add to your mana pool one mana of any color that a land an opponent controls could produce";
+        filter = new FilterLandPermanent();
+        filter.add(new ControllerPredicate(targetController));
+        String text = targetController == TargetController.OPPONENT ? "an opponent controls" : "you control";
+        staticText = "Add to your mana pool one mana of any color that a land " + text + " could produce";
     }
 
-    public AnyColorOpponentLandsProduceManaEffect(final AnyColorOpponentLandsProduceManaEffect effect) {
+    public AnyColorLandsProduceManaEffect(final AnyColorLandsProduceManaEffect effect) {
         super(effect);
+        this.filter = effect.filter.copy();
     }
 
     @Override
@@ -140,7 +141,7 @@ class AnyColorOpponentLandsProduceManaEffect extends ManaEffect {
                     case "White":
                         mana.setWhite(1);
                         break;
-                }                
+                }
                 checkToFirePossibleEvents(mana, game, source);
                 player.getManaPool().addMana(mana, game, source);
             }
@@ -194,7 +195,7 @@ class AnyColorOpponentLandsProduceManaEffect extends ManaEffect {
     }
 
     @Override
-    public AnyColorOpponentLandsProduceManaEffect copy() {
-        return new AnyColorOpponentLandsProduceManaEffect(this);
+    public AnyColorLandsProduceManaEffect copy() {
+        return new AnyColorLandsProduceManaEffect(this);
     }
 }

@@ -29,16 +29,19 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -60,15 +63,16 @@ public class PatriarchsDesire extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature gets +2/-2.
-        ability.addEffect(new BoostEnchantedEffect(2, -2, Duration.WhileOnBattlefield));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, -2, Duration.WhileOnBattlefield)));
+
         // Threshold - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
-        ability.addEffect(new ConditionalContinuousEffect(new BoostEnchantedEffect(2, -2, 
-                                                         Duration.WhileOnBattlefield), 
-                                                         new CardsInControllerGraveCondition(7), 
-                                                         "<br/><br/><i>Threshold</i> - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard." ));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new BoostEnchantedEffect(2, -2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            "Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard."));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
+        this.addAbility(ability);
     }
 
     public PatriarchsDesire(final PatriarchsDesire card) {

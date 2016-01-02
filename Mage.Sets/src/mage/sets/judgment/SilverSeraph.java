@@ -25,41 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.mana.AnyColorLandsProduceManaAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class SylvokExplorer extends CardImpl {
+public class SilverSeraph extends CardImpl {
 
-    public SylvokExplorer(UUID ownerId) {
-        super(ownerId, 93, "Sylvok Explorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+    public SilverSeraph(UUID ownerId) {
+        super(ownerId, 23, "Silver Seraph", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}{W}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Angel");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Threshold - Other creatures you control get +2/+2 as long as seven or more cards are in your graveyard.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true), new CardsInControllerGraveCondition(7),
+            "other creatures you control +2/+2 as long as seven or more cards are in your graveyard"));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
+        this.addAbility(ability);
     }
 
-    public SylvokExplorer(final SylvokExplorer card) {
+    public SilverSeraph(final SilverSeraph card) {
         super(card);
     }
 
     @Override
-    public SylvokExplorer copy() {
-        return new SylvokExplorer(this);
+    public SilverSeraph copy() {
+        return new SilverSeraph(this);
     }
 }

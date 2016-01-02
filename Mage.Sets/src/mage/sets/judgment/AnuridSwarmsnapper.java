@@ -25,41 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.mana.AnyColorLandsProduceManaAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class SylvokExplorer extends CardImpl {
+public class AnuridSwarmsnapper extends CardImpl {
 
-    public SylvokExplorer(UUID ownerId) {
-        super(ownerId, 93, "Sylvok Explorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
-
+    public AnuridSwarmsnapper(UUID ownerId) {
+        super(ownerId, 105, "Anurid Swarmsnapper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Frog");
+        this.subtype.add("Beast");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
+        // {1}{G}: Anurid Swarmsnapper can block an additional creature this turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}{G}")));
     }
 
-    public SylvokExplorer(final SylvokExplorer card) {
+    public AnuridSwarmsnapper(final AnuridSwarmsnapper card) {
         super(card);
     }
 
     @Override
-    public SylvokExplorer copy() {
-        return new SylvokExplorer(this);
+    public AnuridSwarmsnapper copy() {
+        return new AnuridSwarmsnapper(this);
     }
 }

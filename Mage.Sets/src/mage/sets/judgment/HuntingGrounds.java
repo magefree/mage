@@ -25,65 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
- * @author cbt33
+ * @author LoneFox
  */
-public class KamahlsDesire extends CardImpl {
+public class HuntingGrounds extends CardImpl {
 
-    public KamahlsDesire(UUID ownerId) {
-        super(ownerId, 199, "Kamahl's Desire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Aura");
+    public HuntingGrounds(UUID ownerId) {
+        super(ownerId, 138, "Hunting Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}{W}");
+        this.expansionSetCode = "JUD";
 
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // Enchanted creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
-        // Threshold - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield),
-            new CardsInControllerGraveCondition(7),
-            "Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard"));
+        // Threshold - As long as seven or more cards are in your graveyard, Hunting Grounds has "Whenever an opponent casts a spell, you may put a creature card from your hand onto the battlefield."
+        Ability gainedAbility = new SpellCastOpponentTriggeredAbility(new PutPermanentOnBattlefieldEffect(
+            new FilterCreatureCard("a creature card")), true);
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            "As long as seven or more cards are in your graveyard, {this} has \"Whenever an opponent casts a spell, you may put a creature card from your hand onto the battlefield.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 
-    public KamahlsDesire(final KamahlsDesire card) {
+    public HuntingGrounds(final HuntingGrounds card) {
         super(card);
     }
 
     @Override
-    public KamahlsDesire copy() {
-        return new KamahlsDesire(this);
+    public HuntingGrounds copy() {
+        return new HuntingGrounds(this);
     }
 }

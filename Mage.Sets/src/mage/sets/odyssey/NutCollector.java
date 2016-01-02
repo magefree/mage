@@ -29,6 +29,7 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -36,6 +37,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -50,9 +52,9 @@ import mage.game.permanent.token.SquirrelToken;
  * @author cbt33
  */
 public class NutCollector extends CardImpl {
-    
+
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("squirrel");
-    
+
     static {
         filter.add(new SubtypePredicate("Squirrel"));
     }
@@ -69,10 +71,11 @@ public class NutCollector extends CardImpl {
         // At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), TargetController.YOU, true));
         // Threshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                                                new ConditionalContinuousEffect(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false), 
-                                                new CardsInControllerGraveCondition(7), 
-                                                "<i>Threshold</i> - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard")));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+            new ConditionalContinuousEffect(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false),
+            new CardsInControllerGraveCondition(7), "Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard"));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
+        this.addAbility(ability);
     }
 
     public NutCollector(final NutCollector card) {

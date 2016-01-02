@@ -25,41 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.prereleaseevents;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.mana.AnyColorLandsProduceManaAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LoneFox
  */
-public class SylvokExplorer extends CardImpl {
+public class Glory extends CardImpl {
 
-    public SylvokExplorer(UUID ownerId) {
-        super(ownerId, 93, "Sylvok Explorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+    public Glory(UUID ownerId) {
+        super(ownerId, 17, "Glory", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "PTC";
+        this.subtype.add("Incarnation");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {2}{W}: Choose a color. Creatures you control gain protection from the chosen color until end of turn. Activate this ability only if Glory is in your graveyard.
+        Effect effect = new GainProtectionFromColorAllEffect(Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control"));
+        effect.setText("Choose a color. Creatures you control gain protection from the chosen color until end of turn. Activate this ability only if {this} is in your graveyard.");
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, effect, new ManaCostsImpl("{2}{W}")));
     }
 
-    public SylvokExplorer(final SylvokExplorer card) {
+    public Glory(final Glory card) {
         super(card);
     }
 
     @Override
-    public SylvokExplorer copy() {
-        return new SylvokExplorer(this);
+    public Glory copy() {
+        return new Glory(this);
     }
 }

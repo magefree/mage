@@ -96,15 +96,18 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("{this} can block ");
+        String text = "{this} can block ";
         switch(amount) {
             case 0:
-                sb.append("any number of creatures");
+                text += "any number of creatures";
                 break;
             default:
-                sb.append(CardUtil.numberToText(amount, "an")).append(" additional creature").append(amount > 1 ? "s":"");
+                text += CardUtil.numberToText(amount, "an") + " additional creature" + (amount > 1 ? "s" : "");
         }
-        return sb.toString();
+        if(duration == Duration.EndOfTurn) {
+            text += " this turn";
+        }
+        return text;
     }
 
     @Override

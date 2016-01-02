@@ -33,11 +33,12 @@ import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalGainActivatedAbility;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -58,13 +59,13 @@ public class NomadStadium extends CardImpl {
         this.addAbility(manaAbility);
 
         // Threshold - {W}, {tap}, Sacrifice Nomad Stadium: You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
+        Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new GainLifeEffect(4),
             new ManaCostsImpl("{W}"),
-            new CardsInControllerGraveCondition(7),
-            "<i>Threshold</i> - {W}, {T}, Sacrifice {this}: You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.");
+            new CardsInControllerGraveCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

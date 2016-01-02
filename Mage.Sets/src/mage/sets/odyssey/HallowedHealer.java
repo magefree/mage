@@ -33,9 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalGainActivatedAbility;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -46,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author cbt33
  */
- 
+
 public class HallowedHealer extends CardImpl {
 
     public HallowedHealer(UUID ownerId) {
@@ -63,12 +64,12 @@ public class HallowedHealer extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // Threshold - {tap}: Prevent the next 4 damage that would be dealt to target creature or player this turn. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD, 
-                                                                        new PreventDamageToTargetEffect(Duration.EndOfTurn,4), 
-                                                                        new TapSourceCost(), 
-                                                                        new CardsInControllerGraveCondition(7), 
-                                                                        "<i>Threshold</i> - {T}: Prevent the next 4 damage that would be dealt to target creature or player this turn. Activate this ability only if seven or more cards are in your graveyard.");
+        Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+            new PreventDamageToTargetEffect(Duration.EndOfTurn, 4),
+            new TapSourceCost(),
+            new CardsInControllerGraveCondition(7));
         thresholdAbility.addTarget(new TargetCreatureOrPlayer());
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

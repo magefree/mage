@@ -25,78 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
  *
- * @author cbt33, Nantuko (Sengir Vampire)
+ * @author LoneFox
  */
-public class RepentantVampire extends CardImpl {
+public class VigilantSentry extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
+    public VigilantSentry(UUID ownerId) {
+        super(ownerId, 33, "Vigilant Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
+        this.expansionSetCode = "JUD";
+        this.subtype.add("Human");
+        this.subtype.add("Nomad");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    public RepentantVampire(UUID ownerId) {
-        super(ownerId, 157, "Repentant Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Vampire");
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever a creature dealt damage by Repentant Vampire this turn dies, put a +1/+1 counter on Repentant Vampire.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-        // Threshold - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has "{tap}: Destroy target black creature."
+        // Threshold - As long as seven or more cards are in your graveyard, Vigilant Sentry gets +1/+1 and has "{tap}: Target attacking or blocking creature gets +3/+3 until end of turn."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BecomesColorSourceEffect(ObjectColor.WHITE, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(7),
-                "As long as seven or more cards are in your graveyard, {this} is white"));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(7),
-                "and has \"{T}: Destroy target black creature.\""));
+            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new TapSourceCost());
+        gainedAbility.addTarget(new TargetAttackingOrBlockingCreature());
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(gainedAbility),
+            new CardsInControllerGraveCondition(7), "and has \"{T}: Target attacking or blocking creature gets +3/+3 until end of turn.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 
-    public RepentantVampire(final RepentantVampire card) {
+    public VigilantSentry(final VigilantSentry card) {
         super(card);
     }
 
     @Override
-    public RepentantVampire copy() {
-        return new RepentantVampire(this);
+    public VigilantSentry copy() {
+        return new VigilantSentry(this);
     }
 }
