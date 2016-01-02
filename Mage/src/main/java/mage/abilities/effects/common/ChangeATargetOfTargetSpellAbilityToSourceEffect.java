@@ -58,6 +58,9 @@ public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffe
             boolean twoTimesTarget = false;
             if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
                 Target target = targets.get(0);
+                if (target.getFirstTarget().equals(source.getSourceId())) {
+                    return true; // Target was already the same source, so no change / target event to create
+                }
                 if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
                     oldTargetName = getTargetName(targets.getFirstTarget(), game);
                     target.clearChosen();
