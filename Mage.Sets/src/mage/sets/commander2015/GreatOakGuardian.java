@@ -35,6 +35,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -47,6 +48,7 @@ import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -64,12 +66,13 @@ public class GreatOakGuardian extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        
+
         // Reach
         this.addAbility(ReachAbility.getInstance());
-        
+
         // When Great Oak Guardian enters the battlefield, creatures target player controls get +2/+2 until end of turn. Untap them.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GreatOakGuardianEffect(), false);
+        ability.addEffect(new GreatOakGuardianUntapEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -118,11 +121,39 @@ class GreatOakGuardianEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 permanent.addPower(2);
                 permanent.addToughness(2);
-                permanent.untap(game);
             } else {
                 it.remove();
             }
         }
         return true;
+    }
+}
+
+class GreatOakGuardianUntapEffect extends OneShotEffect {
+
+    public GreatOakGuardianUntapEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "untap them";
+    }
+
+    public GreatOakGuardianUntapEffect(final GreatOakGuardianUntapEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GreatOakGuardianUntapEffect copy() {
+        return new GreatOakGuardianUntapEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player targetPlayer = game.getPlayer(source.getControllerId());
+        if (targetPlayer != null) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), targetPlayer.getId(), game)) {
+                permanent.untap(game);
+            }
+            return true;
+        }
+        return false;
     }
 }
