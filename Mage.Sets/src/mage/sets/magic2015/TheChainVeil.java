@@ -34,10 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -66,12 +67,13 @@ public class TheChainVeil extends CardImpl {
         this.supertype.add("Legendary");
 
         // At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TheChainVeilTriggeredEffect(), TargetController.YOU, false), new ActivatedLoyaltyAbilityWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(2), TargetController.YOU, TheChainVeilCondition.getInstance(), false), new ActivatedLoyaltyAbilityWatcher());
 
         // {4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new TheChainVeilIncreaseLoyaltyUseEffect(),
-            new ManaCostsImpl("{4}"));
+                new TheChainVeilIncreaseLoyaltyUseEffect(),
+                new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -87,61 +89,29 @@ public class TheChainVeil extends CardImpl {
     }
 }
 
-class TheChainVeilTriggeredEffect extends OneShotEffect {
-
-    public TheChainVeilTriggeredEffect() {
-        super(Outcome.LoseLife);
-        this.staticText = "if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life";
-    }
-
-    public TheChainVeilTriggeredEffect(final TheChainVeilTriggeredEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheChainVeilTriggeredEffect copy() {
-        return new TheChainVeilTriggeredEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ActivatedLoyaltyAbilityWatcher watcher = (ActivatedLoyaltyAbilityWatcher) game.getState().getWatchers().get("ActivatedLoyaltyAbilityWatcher");
-            if (watcher != null) {
-                if (!watcher.activatedLayaltyAbility(source.getControllerId())) {
-                    controller.loseLife(2, game);
-                }
-            }
-        }
-        return false;
-    }
-}
-
-
 class ActivatedLoyaltyAbilityWatcher extends Watcher {
 
     private final Set<UUID> playerIds = new HashSet<>();
 
     public ActivatedLoyaltyAbilityWatcher() {
-       super("ActivatedLoyaltyAbilityWatcher", WatcherScope.GAME);
+        super("ActivatedLoyaltyAbilityWatcher", WatcherScope.GAME);
     }
 
     public ActivatedLoyaltyAbilityWatcher(final ActivatedLoyaltyAbilityWatcher watcher) {
-       super(watcher);
-       playerIds.addAll(watcher.playerIds);
+        super(watcher);
+        playerIds.addAll(watcher.playerIds);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-       if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY ) {
-           StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-           if (stackObject != null &&
-                   stackObject.getStackAbility() != null &&
-                   stackObject.getStackAbility() instanceof LoyaltyAbility) {
-               playerIds.add(stackObject.getControllerId());
-           }
-       }
+        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
+            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+            if (stackObject != null
+                    && stackObject.getStackAbility() != null
+                    && stackObject.getStackAbility() instanceof LoyaltyAbility) {
+                playerIds.add(stackObject.getControllerId());
+            }
+        }
     }
 
     @Override
@@ -151,7 +121,7 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
 
     @Override
     public ActivatedLoyaltyAbilityWatcher copy() {
-       return new ActivatedLoyaltyAbilityWatcher(this);
+        return new ActivatedLoyaltyAbilityWatcher(this);
     }
 
     public boolean activatedLayaltyAbility(UUID playerId) {
@@ -193,4 +163,31 @@ class TheChainVeilIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return layer == Layer.RulesEffects;
     }
+}
+
+class TheChainVeilCondition implements Condition {
+
+    private static final TheChainVeilCondition fInstance = new TheChainVeilCondition();
+
+    public static Condition getInstance() {
+        return fInstance;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        ActivatedLoyaltyAbilityWatcher watcher = (ActivatedLoyaltyAbilityWatcher) game.getState().getWatchers().get("ActivatedLoyaltyAbilityWatcher");
+        if (watcher != null) {
+            if (!watcher.activatedLayaltyAbility(source.getControllerId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "if you didn't activate a loyalty ability of a planeswalker this turn";
+    }
+
 }
