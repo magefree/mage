@@ -90,15 +90,17 @@ public class ConnectDialog extends MageDialog {
     public ConnectDialog() {
         initComponents();
 
-        this.txtUserName.addActionListener(connectAction);
         this.txtServer.addActionListener(connectAction);
         this.txtPort.addActionListener(connectAction);
+        this.txtUserName.addActionListener(connectAction);
+        this.txtPassword.addActionListener(connectAction);
     }
 
     public void showDialog() {
         this.txtServer.setText(MageFrame.getPreferences().get("serverAddress", Config.serverName));
         this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
         this.txtUserName.setText(MageFrame.getPreferences().get("userName", ""));
+        this.txtPassword.setText(MageFrame.getPreferences().get("password", ""));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get(KEY_CONNECT_AUTO_CONNECT, "false")));
         this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
 
@@ -120,6 +122,7 @@ public class ConnectDialog extends MageDialog {
         MageFrame.getPreferences().put("serverAddress", txtServer.getText().trim());
         MageFrame.getPreferences().put("serverPort", txtPort.getText().trim());
         MageFrame.getPreferences().put("userName", txtUserName.getText().trim());
+        MageFrame.getPreferences().put("password", txtPassword.getText().trim());
         MageFrame.getPreferences().put(KEY_CONNECT_AUTO_CONNECT, Boolean.toString(chkAutoConnect.isSelected()));
     }
 
@@ -139,6 +142,8 @@ public class ConnectDialog extends MageDialog {
         txtPort = new javax.swing.JTextField();
         lblUserName = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
+        lblPassword = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
         lblFlag = new javax.swing.JLabel();
         cbFlag = new mage.client.util.gui.countryBox.CountryComboBox();
         chkAutoConnect = new javax.swing.JCheckBox();
@@ -174,6 +179,9 @@ public class ConnectDialog extends MageDialog {
 
         lblUserName.setLabelFor(txtUserName);
         lblUserName.setText("User name:");
+
+        lblPassword.setLabelFor(txtPassword);
+        lblPassword.setText("Password:");
 
         lblFlag.setLabelFor(txtUserName);
         lblFlag.setText("User flag:");
@@ -234,7 +242,8 @@ public class ConnectDialog extends MageDialog {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lblPort)
                                 .addComponent(lblServer)
-                                .addComponent(lblUserName))
+                                .addComponent(lblUserName)
+                                .addComponent(lblPassword))
                             .addComponent(lblFlag, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +254,8 @@ public class ConnectDialog extends MageDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                                     .addComponent(txtPort, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtUserName))
+                                    .addComponent(txtUserName)
+                                    .addComponent(txtPassword))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFind))
                             .addComponent(chkForceUpdateDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -268,6 +278,10 @@ public class ConnectDialog extends MageDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUserName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblFlag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -302,16 +316,20 @@ public class ConnectDialog extends MageDialog {
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
 
-        if (txtUserName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Please provide a user name");
-            return;
-        }
         if (txtServer.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Please provide a server address");
             return;
         }
         if (txtPort.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Please provide a port number");
+            return;
+        }
+        if (txtUserName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Please provide a user name");
+            return;
+        }
+        if (txtPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Please provide a password");
             return;
         }
         if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535) {
@@ -327,6 +345,7 @@ public class ConnectDialog extends MageDialog {
             connection.setHost(this.txtServer.getText().trim());
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
+            connection.setPassword(this.txtPassword.getText().trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
             MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
 
@@ -541,6 +560,10 @@ public class ConnectDialog extends MageDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_chkForceUpdateDBActionPerformed
 
+    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserNameActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
@@ -550,10 +573,12 @@ public class ConnectDialog extends MageDialog {
     private javax.swing.JCheckBox chkForceUpdateDB;
     private javax.swing.JButton jProxySettingsButton;
     private javax.swing.JLabel lblFlag;
+    private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPort;
     private javax.swing.JLabel lblServer;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblUserName;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPort;
     private javax.swing.JTextField txtServer;
     private javax.swing.JTextField txtUserName;
