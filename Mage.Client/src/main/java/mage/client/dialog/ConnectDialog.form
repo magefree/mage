@@ -167,7 +167,7 @@
         <Property name="text" type="java.lang.String" value="Password:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPassword">
+    <Component class="javax.swing.JPasswordField" name="txtPassword">
     </Component>
     <Component class="javax.swing.JLabel" name="lblFlag">
       <Properties>
