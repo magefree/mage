@@ -102,6 +102,17 @@ public class Session {
         if (m.find()) {
             return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
         }
+
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.get(userName);
+        if (authorizedUser == null) {
+            // Do this in an explicit sign-up flow.
+            AuthorizedUserRepository.instance.add(userName, password);
+        } else {
+            if (!authorizedUser.doCredentialsMatch(userName, password)) {
+                return "Wrong username or password";
+            }
+        }
+
         // TODO: Do an authentication with userName and password.
         User user = UserManager.getInstance().createUser(userName, host);
         boolean reconnect = false;

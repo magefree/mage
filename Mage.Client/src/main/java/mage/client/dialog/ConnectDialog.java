@@ -143,7 +143,7 @@ public class ConnectDialog extends MageDialog {
         lblUserName = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
         lblFlag = new javax.swing.JLabel();
         cbFlag = new mage.client.util.gui.countryBox.CountryComboBox();
         chkAutoConnect = new javax.swing.JCheckBox();
@@ -180,8 +180,20 @@ public class ConnectDialog extends MageDialog {
         lblUserName.setLabelFor(txtUserName);
         lblUserName.setText("User name:");
 
+        txtUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserNameActionPerformed(evt);
+            }
+        });
+
         lblPassword.setLabelFor(txtPassword);
         lblPassword.setText("Password:");
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
 
         lblFlag.setLabelFor(txtUserName);
         lblFlag.setText("User flag:");
@@ -564,6 +576,10 @@ public class ConnectDialog extends MageDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserNameActionPerformed
 
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
@@ -578,7 +594,7 @@ public class ConnectDialog extends MageDialog {
     private javax.swing.JLabel lblServer;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPort;
     private javax.swing.JTextField txtServer;
     private javax.swing.JTextField txtUserName;
