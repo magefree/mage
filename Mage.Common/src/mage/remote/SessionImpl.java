@@ -278,14 +278,14 @@ public class SessionImpl implements Session {
 
             this.sessionId = callbackClient.getSessionId();
             boolean registerResult;
-            if (connection.getPassword() == null) {
+            if (connection.getAdminPassword() == null) {
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                 registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
                 if (registerResult) {
                     server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
                 }
             } else {
-                registerResult = server.registerAdmin(connection.getPassword(), sessionId, client.getVersion());
+                registerResult = server.registerAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
             }
             if (registerResult) {
                 sessionState = SessionState.CONNECTED;

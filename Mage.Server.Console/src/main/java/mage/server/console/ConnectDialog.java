@@ -413,7 +413,7 @@ public class ConnectDialog extends JDialog {
         connection = new Connection();
         connection.setHost(this.txtServer.getText());
         connection.setPort(Integer.valueOf(this.txtPort.getText()));
-        connection.setPassword(new String(txtPassword.getPassword()));
+        connection.setAdminPassword(new String(txtPassword.getPassword()));
         connection.setUsername("Admin");
         connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
         if (!this.cbProxyType.getSelectedItem().equals(ProxyType.NONE)) {
