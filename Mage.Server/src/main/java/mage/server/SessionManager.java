@@ -70,10 +70,10 @@ public class SessionManager {
         sessions.put(sessionId, session);
     }
 
-    public boolean registerUser(String sessionId, String userName) throws MageException {
+    public boolean registerUser(String sessionId, String userName, String password) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            String returnMessage = session.registerUser(userName);
+            String returnMessage = session.registerUser(userName, password);
             if (returnMessage == null) {
                 LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
 

@@ -280,7 +280,7 @@ public class SessionImpl implements Session {
             boolean registerResult;
             if (connection.getAdminPassword() == null) {
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
+                registerResult = server.registerClient(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
                 if (registerResult) {
                     server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
                 }

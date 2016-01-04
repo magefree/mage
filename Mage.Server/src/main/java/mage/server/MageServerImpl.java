@@ -96,24 +96,24 @@ public class MageServerImpl implements MageServer {
     private static final Logger logger = Logger.getLogger(MageServerImpl.class);
     private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
-    private final String password;
+    private final String adminPassword;
     private final boolean testMode;
 
-    public MageServerImpl(String password, boolean testMode) {
-        this.password = password;
+    public MageServerImpl(String adminPassword, boolean testMode) {
+        this.adminPassword = adminPassword;
         this.testMode = testMode;
         ServerMessagesUtil.getInstance().getMessages();
     }
 
     @Override
-    public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException {
+    public boolean registerClient(String userName, String password, String sessionId, MageVersion version) throws MageException {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
                 logger.info("MageVersionException: userName=" + userName + ", version=" + version);
                 LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
-            return SessionManager.getInstance().registerUser(sessionId, userName);
+            return SessionManager.getInstance().registerUser(sessionId, userName, password);
         } catch (MageException ex) {
             if (ex instanceof MageVersionException) {
                 throw (MageVersionException) ex;
@@ -134,12 +134,12 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException {
+    public boolean registerAdmin(String adminPassword, String sessionId, MageVersion version) throws MageException {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
                 throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
             }
-            if (!password.equals(this.password)) {
+            if (!adminPassword.equals(this.adminPassword)) {
                 throw new MageException("Wrong password");
             }
             return SessionManager.getInstance().registerAdmin(sessionId);
