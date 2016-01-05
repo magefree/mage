@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -37,6 +39,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.util.CardUtil;
 
 /**
@@ -63,16 +66,17 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (permanent != null) {
-                return controller.moveCardsToExile(permanent, source, game, true, exileId, sourceObject.getIdName());
-            } else {
-                Card card = game.getCard(getTargetPointer().getFirst(game, source));
-                if (card != null) {
-                    return controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
+            Set<Card> cards = new LinkedHashSet<>();
+            for (Target target : source.getTargets()) {
+                for (UUID targetId : target.getTargets()) {
+                    MageObject mageObject = game.getObject(targetId);
+                    if (mageObject instanceof Card) {
+                        cards.add((Card) mageObject);
+                    }
                 }
             }
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            return controller.moveCardsToExile(cards, source, game, true, exileId, sourceObject.getIdName());
         }
         return false;
     }
