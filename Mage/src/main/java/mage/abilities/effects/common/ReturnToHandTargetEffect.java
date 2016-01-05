@@ -75,10 +75,12 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
-            MageObject mageObject = game.getObject(targetId);
-            if (mageObject instanceof Card) {
-                cards.add((Card) mageObject);
+        for (Target target : source.getTargets()) {
+            for (UUID targetId : target.getTargets()) {
+                MageObject mageObject = game.getObject(targetId);
+                if (mageObject instanceof Card) {
+                    cards.add((Card) mageObject);
+                }
             }
         }
         return controller.moveCards(cards, Zone.HAND, source, game);
