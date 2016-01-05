@@ -48,10 +48,10 @@ public class ComparativeAnalysis extends CardImpl {
         // Target player draws two cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
-
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
+        
         // Surge {2}{U} <You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)</i>
-        addAbility(new SurgeAbility(this, "{2}{U}"));    }
+        addAbility(new SurgeAbility(this, "{2}{U}"));
+    }
 
     public ComparativeAnalysis(final ComparativeAnalysis card) {
         super(card);

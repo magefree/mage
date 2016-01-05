@@ -52,9 +52,10 @@
         <draftCube name="Jim Davis's Cube (469 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.JimDavisCube"/>
         <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MonoBlueCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
-        <draftCube name="MTGO Legacy Cube (600 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOLegacyCube"/>
-        <draftCube name="MTGO Legacy Cube March 2015 (600 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOLegacyCubeMarch2015"/>
-        <draftCube name="MTGO Legacy Cube September 2015 (600 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOLegacyCubeSeptember2015"/>
+        <draftCube name="MTGO Legacy Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCube"/>
+        <draftCube name="MTGO Legacy Cube March 2015" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeMarch2015"/>
+        <draftCube name="MTGO Legacy Cube September 2015" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeSeptember2015"/>
+        <draftCube name="MTGO Legacy Cube January 2016" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeJanuary2016"/>
         <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCube"/>
         <draftCube name="MTGO Vintage Cube 2013" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCube2013"/>
         <draftCube name="MTGO Vintage Cube 2014" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCube2014"/>

@@ -56,7 +56,7 @@ public class CorruptedCrossroads extends CardImpl {
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
-        // {T}, Pay 1 life: Add one mana of any color to your mana pool. Spend this mana only to cast spells with devoid.
+        // {T}, Pay 1 life: Add one mana of any color to your mana pool. Spend this mana only to cast a spell with devoid.
         Ability ability = new ConditionalAnyColorManaAbility(1, new BlightedCrossroadsManaBuilder());
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
@@ -80,7 +80,7 @@ class BlightedCrossroadsManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast spells with devoid";
+        return "Spend this mana only to cast a spell with devoid";
     }
 }
 
@@ -88,7 +88,7 @@ class BlightedCrossroadsConditionalMana extends ConditionalMana {
 
     public BlightedCrossroadsConditionalMana(Mana mana) {
         super(mana);
-        staticText = "Spend this mana only to cast spells with devoid";
+        staticText = "Spend this mana only to cast a spell with devoid";
         addCondition(new BlightedCrossroadsManaCondition());
     }
 }

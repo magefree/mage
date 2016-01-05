@@ -57,6 +57,9 @@ public class RecklessBushwhacker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        // Surge {1}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
+        addAbility(new SurgeAbility(this, "{1}{R}"));
+        
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
@@ -66,9 +69,6 @@ public class RecklessBushwhacker extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(ability, SurgedCondition.getInstance(),
                 "When {this} enters the battlefield, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn."));
 
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {1}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{1}{R}"));
     }
 
     public RecklessBushwhacker(final RecklessBushwhacker card) {

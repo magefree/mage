@@ -79,7 +79,7 @@ public class GeneralTazri extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent("Ally", "Ally creatures"), false),
-                new ManaCostsImpl("{3}{W}{W}")));
+                new ManaCostsImpl("{W}{U}{B}{R}{G}")));
 
     }
 

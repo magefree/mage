@@ -30,6 +30,7 @@ package mage.sets.oathofthegatewatch;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -68,7 +69,9 @@ public class SifterOfSkulls extends CardImpl {
         
         // Whenever another nontoken creature you control dies, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield.
         // It has "Sacrifice this creature: Add {C} to your mana pool."
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new EldraziScionToken()), false, filter));
+        Effect effect = new CreateTokenEffect(new EldraziScionToken());
+        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        this.addAbility(new DiesCreatureTriggeredAbility(effect, false, filter));
     }
 
     public SifterOfSkulls(final SifterOfSkulls card) {
