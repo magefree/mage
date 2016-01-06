@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
 import mage.cards.CardImpl;
@@ -66,13 +65,12 @@ public class Sentinel extends CardImpl {
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Sentinel");
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
-                                 new BlockingAttackerIdPredicate(this.getId())));        
+                new BlockingAttackerIdPredicate(this.getId())));
         // 0: Change Sentinel's base toughness to 1 plus the power of target creature blocking or blocked by Sentinel. (This effect lasts indefinitely.)
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SentinelEffect(), new GenericManaCost(0));
-        ability.addTarget(null);
-        ability.addTarget(new TargetCreaturePermanent(filter));        
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-        
+
     }
 
     public Sentinel(final Sentinel card) {
@@ -86,21 +84,21 @@ public class Sentinel extends CardImpl {
 }
 
 class SentinelEffect extends OneShotEffect {
-    
+
     public SentinelEffect() {
         super(Outcome.Detriment);
         this.staticText = "Change {this}'s base toughness to 1 plus the power of target creature blocking or blocked by {this}. <i>(This effect lasts indefinitely.)</i>";
     }
-    
+
     public SentinelEffect(final SentinelEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public SentinelEffect copy() {
         return new SentinelEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
