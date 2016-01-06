@@ -109,20 +109,20 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         jSplitPane1.setOpaque(false);
         countdown = new Timer(1000,
                 new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (--timeout > 0) {
-                    setTimeout(timeout);
-                } else {
-                    if (updateDeckTask != null) {
-                        updateDeckTask.cancel(true);
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (--timeout > 0) {
+                            setTimeout(timeout);
+                        } else {
+                            if (updateDeckTask != null) {
+                                updateDeckTask.cancel(true);
+                            }
+                            setTimeout(0);
+                            countdown.stop();
+                            removeDeckEditor();
+                        }
                     }
-                    setTimeout(0);
-                    countdown.stop();
-                    removeDeckEditor();
-                }
-            }
-        });
+                });
     }
 
     /**
@@ -154,7 +154,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.tableId = tableId;
         this.mode = mode;
         this.btnAddLand.setVisible(false);
-        
+
         switch (mode) {
             case LIMITED_BUILDING:
                 this.btnAddLand.setVisible(true);
@@ -209,149 +209,145 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             component.clearCardEventListeners();
             component.addCardEventListener(
                     new Listener<Event>() {
-                @Override
-                public void event(Event event) {                    
-                    switch (event.getEventName()) {                        
-                        case "double-click":
-                            moveSelectorCardToDeck(event);
-                            break;
-                        case "alt-double-click":
-                            if (mode == DeckEditorMode.FREE_BUILDING) { 
-                                moveSelectorCardToSideboard(event);
-                            } else {
-                                // because in match mode selector is used as sideboard the card goes to deck also for shift click
-                                moveSelectorCardToDeck(event);
+                        @Override
+                        public void event(Event event) {
+                            switch (event.getEventName()) {
+                                case "double-click":
+                                    moveSelectorCardToDeck(event);
+                                    break;
+                                case "alt-double-click":
+                                    if (mode == DeckEditorMode.FREE_BUILDING) {
+                                        moveSelectorCardToSideboard(event);
+                                    } else {
+                                        // because in match mode selector is used as sideboard the card goes to deck also for shift click
+                                        moveSelectorCardToDeck(event);
+                                    }
+                                    break;
+                                case "remove-main":
+                                    DeckEditorPanel.this.deckArea.getDeckList().handleDoubleClick();
+                                    break;
+                                case "remove-sideboard":
+                                    DeckEditorPanel.this.deckArea.getSideboardList().handleDoubleClick();
+                                    break;
                             }
-                            break;
-                        case "remove-main":
-                            DeckEditorPanel.this.deckArea.getDeckList().handleDoubleClick();
-                            break;
-                        case "remove-sideboard":
-                            DeckEditorPanel.this.deckArea.getSideboardList().handleDoubleClick();
-                            break;
-                    }
-                    refreshDeck();
-                }
-            });
+                            refreshDeck();
+                        }
+                    });
         }
         this.deckArea.clearDeckEventListeners();
         this.deckArea.addDeckEventListener(
                 new Listener<Event>() {
-            @Override
-            public void event(Event event) {
-                if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
-                    switch (event.getEventName()) {
-                        case "double-click":
-                        {
-                            SimpleCardView cardView = (SimpleCardView) event.getSource();
-                            for (Card card : deck.getCards()) {
-                                if (card.getId().equals(cardView.getId())) {
-                                    deck.getCards().remove(card);
+                    @Override
+                    public void event(Event event) {
+                        if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
+                            switch (event.getEventName()) {
+                                case "double-click": {
+                                    SimpleCardView cardView = (SimpleCardView) event.getSource();
+                                    for (Card card : deck.getCards()) {
+                                        if (card.getId().equals(cardView.getId())) {
+                                            deck.getCards().remove(card);
+                                            break;
+                                        }
+                                    }
+                                    hidePopup();
+                                    refreshDeck();
+                                    break;
+                                }
+                                case "alt-double-click": {
+                                    SimpleCardView cardView = (SimpleCardView) event.getSource();
+                                    for (Card card : deck.getCards()) {
+                                        if (card.getId().equals(cardView.getId())) {
+                                            deck.getCards().remove(card);
+                                            deck.getSideboard().add(card);
+                                            break;
+                                        }
+                                    }
+                                    hidePopup();
+                                    refreshDeck();
+                                    break;
+                                }
+                                case "set-number": {
+                                    setCardNumberToCardsList(event, deck.getCards());
+                                }
+                            }
+                        } else {
+                            // constructing phase or sideboarding during match -> card goes always to sideboard
+                            switch (event.getEventName()) {
+                                case "double-click":
+                                case "alt-double-click": {
+                                    SimpleCardView cardView = (SimpleCardView) event.getSource();
+                                    for (Card card : deck.getCards()) {
+                                        if (card.getId().equals(cardView.getId())) {
+                                            deck.getCards().remove(card);
+                                            deck.getSideboard().add(card);
+                                            cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), getBigCard());
+                                            break;
+                                        }
+                                    }
+                                    hidePopup();
+                                    refreshDeck();
                                     break;
                                 }
                             }
-                            hidePopup();
-                            refreshDeck();
-                            break;
                         }
-                        case "alt-double-click":
-                        {
-                            SimpleCardView cardView = (SimpleCardView) event.getSource();
-                            for (Card card : deck.getCards()) {
-                                if (card.getId().equals(cardView.getId())) {
-                                    deck.getCards().remove(card);
-                                    deck.getSideboard().add(card);
-                                    break;
-                                }
-                            }
-                            hidePopup();
-                            refreshDeck();
-                            break;
-                        }
-                        case "set-number":
-                        {
-                            setCardNumberToCardsList(event, deck.getCards());
-                        }                        
                     }
-                } else {
-                    // constructing phase or sideboarding during match -> card goes always to sideboard
-                    switch (event.getEventName()) {
-                        case "double-click":
-                        case "alt-double-click":
-                        {
-                            SimpleCardView cardView = (SimpleCardView) event.getSource();
-                            for (Card card : deck.getCards()) {
-                                if (card.getId().equals(cardView.getId())) {
-                                    deck.getCards().remove(card);
-                                    deck.getSideboard().add(card);
-                                    cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), getBigCard());
-                                    break;
-                                }
-                            }       
-                            hidePopup();
-                            refreshDeck();
-                            break;
-                        }
-                    }                    
-                }
-            }
-        });
+                });
         this.deckArea.addSideboardEventListener(
                 new Listener<Event>() {
-            @Override
-            public void event(Event event) {
-                if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
-                    // normal edit mode
-                    switch (event.getEventName()) {
-                        case "double-click":
-                            // remove card from sideboard (don't add it to deck)
-                            SimpleCardView cardView = (SimpleCardView) event.getSource();
-                            for (Card card : deck.getSideboard()) {
-                                if (card.getId().equals(cardView.getId())) {
-                                    deck.getSideboard().remove(card);
+                    @Override
+                    public void event(Event event) {
+                        if (mode.equals(DeckEditorMode.FREE_BUILDING)) {
+                            // normal edit mode
+                            switch (event.getEventName()) {
+                                case "double-click":
+                                    // remove card from sideboard (don't add it to deck)
+                                    SimpleCardView cardView = (SimpleCardView) event.getSource();
+                                    for (Card card : deck.getSideboard()) {
+                                        if (card.getId().equals(cardView.getId())) {
+                                            deck.getSideboard().remove(card);
+                                            break;
+                                        }
+                                    }
+                                    hidePopup();
+                                    refreshDeck();
                                     break;
-                                }
-                            }   
-                            hidePopup();
-                            refreshDeck();
-                            break;
-                        case "alt-double-click":
-                            // remove card from sideboard
-                            cardView = (SimpleCardView) event.getSource();
-                            for (Card card : deck.getSideboard()) {
-                                if (card.getId().equals(cardView.getId())) {
-                                    deck.getSideboard().remove(card);
-                                    deck.getCards().add(card);
+                                case "alt-double-click":
+                                    // remove card from sideboard
+                                    cardView = (SimpleCardView) event.getSource();
+                                    for (Card card : deck.getSideboard()) {
+                                        if (card.getId().equals(cardView.getId())) {
+                                            deck.getSideboard().remove(card);
+                                            deck.getCards().add(card);
+                                            break;
+                                        }
+                                    }
+                                    hidePopup();
+                                    refreshDeck();
                                     break;
+                                case "set-number": {
+                                    setCardNumberToCardsList(event, deck.getSideboard());
                                 }
-                            }   
-                            hidePopup();
-                            refreshDeck();                            
-                            break;
-                        case "set-number":
-                        {
-                            setCardNumberToCardsList(event, deck.getSideboard());
-                        }                             
-                    }                    
-                } else {
-                    // construct phase or sideboarding during match
-                    switch (event.getEventName()) {
-                        case "double-click":
-                        case "alt-double-click":
-                            SimpleCardView cardView = (SimpleCardView) event.getSource();
-                            for (Card card : deck.getSideboard()) {
-                                if (card.getId().equals(cardView.getId())) {
-                                    deck.getSideboard().remove(card);
-                                    deck.getCards().add(card);
+                            }
+                        } else {
+                            // construct phase or sideboarding during match
+                            switch (event.getEventName()) {
+                                case "double-click":
+                                case "alt-double-click":
+                                    SimpleCardView cardView = (SimpleCardView) event.getSource();
+                                    for (Card card : deck.getSideboard()) {
+                                        if (card.getId().equals(cardView.getId())) {
+                                            deck.getSideboard().remove(card);
+                                            deck.getCards().add(card);
+                                            break;
+                                        }
+                                    }
+                                    hidePopup();
+                                    refreshDeck();
                                     break;
-                                }
-                            }   hidePopup();
-                            refreshDeck();
-                            break;
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
         refreshDeck();
 
         this.setVisible(true);
@@ -364,8 +360,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         int cardsFound = 0;
         List<Card> toDelete = new ArrayList<>();
         for (Card card : cards) {
-            if (card.getName().equals(cardView.getName()) 
-                    && card.getCardNumber() == cardView.getCardNumber() 
+            if (card.getName().equals(cardView.getName())
+                    && card.getCardNumber() == cardView.getCardNumber()
                     && card.getExpansionSetCode().equals(cardView.getExpansionSetCode())) {
                 cardsFound++;
                 if (cardsFound > numberToSet) {
@@ -373,23 +369,23 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 }
             }
-        }                            
+        }
         if (toDelete.isEmpty()) {
             // add cards
             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
             for (int i = cardsFound; i < numberToSet; i++) {
                 cards.add(cardInfo.getMockCard());
-            }                                     
+            }
         } else {
-            // remove cards 
-            for (Card card: toDelete) {
+            // remove cards
+            for (Card card : toDelete) {
                 cards.remove(card);
             }
         }
         hidePopup();
         refreshDeck();
     }
-    
+
     private void moveSelectorCardToDeck(Event event) {
         SimpleCardView cardView = (SimpleCardView) event.getSource();
         CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
@@ -417,7 +413,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 ((CardInfoPane) cardInfoPane).setCard(new CardView(card), null);
             }
             hidePopup();
-        }        
+        }
     }
 
     private void moveSelectorCardToSideboard(Event event) {
@@ -432,7 +428,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
         hidePopup();
     }
-    
+
     private void hidePopup() {
         Plugins.getInstance().getActionCallback().mouseExited(null, null);
     }
@@ -483,7 +479,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             text = text + Integer.toString(second);
         }
         this.txtTimeRemaining.setText(text);
-        if (s==60) {
+        if (s == 60) {
             AudioManager.playOnCountdown1();
         }
     }
@@ -602,75 +598,73 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                /*.addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                 .addContainerGap()
-                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))*/
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                            .addComponent(lblDeckName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
-
-                        .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                /*.addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                 .addContainerGap()
+                                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))*/
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLoad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNew)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExit))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnImport)
-                        .addContainerGap()
-                        .addComponent(btnAddLand)
-                        .addContainerGap()
-                        .addComponent(btnSubmit))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtTimeRemaining))
-                    )
-                .addContainerGap()));
+                                        .addGap(6, 6, 6)
+                                        .addComponent(lblDeckName)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                                .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(btnSave)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnLoad)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnNew)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnExit))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(btnImport)
+                                        .addContainerGap()
+                                        .addComponent(btnAddLand)
+                                        .addContainerGap()
+                                        .addComponent(btnSubmit))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(txtTimeRemaining))
+                        )
+                        .addContainerGap()));
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblDeckName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnSave)
-                .addComponent(btnLoad)
-                .addComponent(btnNew)
-                .addComponent(btnExit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnImport)
-                .addComponent(btnAddLand)
-                .addComponent(btnSubmit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(txtTimeRemaining))
-                //.addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
-                .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblDeckName))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnSave)
+                                .addComponent(btnLoad)
+                                .addComponent(btnNew)
+                                .addComponent(btnExit))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnImport)
+                                .addComponent(btnAddLand)
+                                .addComponent(btnSubmit))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtTimeRemaining))
+                        //.addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
+                        .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                        .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)));
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -697,7 +691,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
             refreshDeck();
             try {
-                MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
+                if (file != null) {
+                    MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
+                }
             } catch (IOException ex) {
             }
         }
@@ -800,7 +796,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         addLand.showDialog(deck, mode);
         refreshDeck();
     }//GEN-LAST:event_btnAddLandActionPerformed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnExit;
