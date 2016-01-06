@@ -34,13 +34,11 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
-import mage.watchers.Watcher;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -58,7 +56,7 @@ public class JoriEnRuinDiver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast your second spell each turn, draw a card.
-        this.addAbility(new JoriEnTriggeredAbility(), new JoriEnWatcher());
+        this.addAbility(new JoriEnTriggeredAbility(), new CastSpellLastTurnWatcher());
     }
 
     public JoriEnRuinDiver(final JoriEnRuinDiver card) {
@@ -94,8 +92,8 @@ class JoriEnTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(controllerId)) {
-            Watcher watcher = game.getState().getWatchers().get("SecondSpellCast", controllerId);
-            if (watcher != null && watcher.conditionMet()) {
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2) {
                 return true;
             }
         }
@@ -105,44 +103,5 @@ class JoriEnTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever you cast your second spell each turn, draw a card.";
-    }
-}
-
-class JoriEnWatcher extends Watcher {
-
-    int spellCount = 0;
-
-    public JoriEnWatcher() {
-        super("SecondSpellCast", WatcherScope.PLAYER);
-    }
-
-    public JoriEnWatcher(final JoriEnWatcher watcher) {
-        super(watcher);
-        this.spellCount = watcher.spellCount;
-    }
-
-    @Override
-    public JoriEnWatcher copy() {
-        return new JoriEnWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        condition = false;
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                spellCount++;
-                if (spellCount == 2) {
-                    condition = true;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        spellCount = 0;
     }
 }

@@ -41,19 +41,20 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author fireshoes
  */
 public class MundasVanguard extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Ally you control");
-    
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
+
     static {
         filter.add(new SubtypePredicate("Ally"));
         filter.add(Predicates.not(new TappedPredicate()));
@@ -69,9 +70,9 @@ public class MundasVanguard extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Put a +1/+1 counter on each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()),
                 new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.setAbilityWord(AbilityWord.COHORT);
         this.addAbility(ability);
     }

@@ -36,13 +36,11 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
-import mage.watchers.Watcher;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -60,7 +58,7 @@ public class IncursionSpecialist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast your second spell each turn, Incursion Specialist gets +2/+0 until end of turn and can't be blocked this turn.
-        this.addAbility(new IncursionTriggeredAbility(), new IncursionWatcher());
+        this.addAbility(new IncursionTriggeredAbility(), new CastSpellLastTurnWatcher());
     }
 
     public IncursionSpecialist(final IncursionSpecialist card) {
@@ -97,8 +95,8 @@ class IncursionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(controllerId)) {
-            Watcher watcher = game.getState().getWatchers().get("SecondSpellCast", controllerId);
-            if (watcher != null && watcher.conditionMet()) {
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2) {
                 return true;
             }
         }
@@ -108,44 +106,5 @@ class IncursionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever you cast your second spell each turn, Incursion Specialist gets +2/+0 until end of turn and can't be blocked this turn.";
-    }
-}
-
-class IncursionWatcher extends Watcher {
-
-    int spellCount = 0;
-
-    public IncursionWatcher() {
-        super("SecondSpellCast", WatcherScope.PLAYER);
-    }
-
-    public IncursionWatcher(final IncursionWatcher watcher) {
-        super(watcher);
-        this.spellCount = watcher.spellCount;
-    }
-
-    @Override
-    public IncursionWatcher copy() {
-        return new IncursionWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        condition = false;
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                spellCount++;
-                if (spellCount == 2) {
-                    condition = true;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        spellCount = 0;
     }
 }

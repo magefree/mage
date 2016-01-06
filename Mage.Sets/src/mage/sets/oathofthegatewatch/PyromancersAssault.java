@@ -34,14 +34,12 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.Watcher;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -56,7 +54,7 @@ public class PyromancersAssault extends CardImpl {
         // Whenever you cast your second spell each turn, Pyromancer's Assault deals 2 damage to target creature or player.
        Ability ability = new PyromancersAssaultTriggeredAbility();
        ability.addTarget(new TargetCreatureOrPlayer());
-       this.addAbility(ability, new PyromancersAssaultWatcher());
+       this.addAbility(ability, new CastSpellLastTurnWatcher());
     }
 
     public PyromancersAssault(final PyromancersAssault card) {
@@ -92,8 +90,8 @@ class PyromancersAssaultTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(controllerId)) {
-            Watcher watcher = game.getState().getWatchers().get("SecondSpellCast", controllerId);
-            if (watcher != null && watcher.conditionMet()) {
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2) {
                 return true;
             }
         }
@@ -103,44 +101,5 @@ class PyromancersAssaultTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever you cast your second spell each turn, {this} deals 2 damage to target creature or player.";
-    }
-}
-
-class PyromancersAssaultWatcher extends Watcher {
-
-    int spellCount = 0;
-
-    public PyromancersAssaultWatcher() {
-        super("SecondSpellCast", WatcherScope.PLAYER);
-    }
-
-    public PyromancersAssaultWatcher(final PyromancersAssaultWatcher watcher) {
-        super(watcher);
-        this.spellCount = watcher.spellCount;
-    }
-
-    @Override
-    public PyromancersAssaultWatcher copy() {
-        return new PyromancersAssaultWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        condition = false;
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                spellCount++;
-                if (spellCount == 2) {
-                    condition = true;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        spellCount = 0;
     }
 }
