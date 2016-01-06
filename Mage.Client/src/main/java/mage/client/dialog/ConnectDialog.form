@@ -40,6 +40,7 @@
                               <Component id="lblPort" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblServer" min="-2" max="-2" attributes="0"/>
                               <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lblFlag" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -53,6 +54,7 @@
                                   <Component id="txtServer" pref="286" max="32767" attributes="0"/>
                                   <Component id="txtPort" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
                                   <Component id="txtUserName" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtPassword" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnFind" min="-2" max="-2" attributes="0"/>
@@ -84,6 +86,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtUserName" min="-2" max="-2" attributes="0"/>
                   <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtPassword" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -151,6 +158,16 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUserName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPassword">
+      <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="txtPassword"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Password:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtPassword">
     </Component>
     <Component class="javax.swing.JLabel" name="lblFlag">
       <Properties>

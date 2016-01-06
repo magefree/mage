@@ -56,7 +56,7 @@ import mage.view.UserView;
 public interface MageServer {
 
     // connection methods
-    boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException;
+    boolean registerClient(String userName, String password, String sessionId, MageVersion version) throws MageException;
 
     boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException;
 // Not used

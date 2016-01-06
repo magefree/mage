@@ -74,8 +74,8 @@ public class Session {
         this.lock = new ReentrantLock();
     }
 
-    public String registerUser(String userName) throws MageException {
-        String returnMessage = registerUserHandling(userName);
+    public String registerUser(String userName, String password) throws MageException {
+        String returnMessage = registerUserHandling(userName, password);
         if (returnMessage != null) {
             sendErrorMessageToClient(returnMessage);
         }
@@ -86,7 +86,7 @@ public class Session {
         return lock.isLocked();
     }
 
-    public String registerUserHandling(String userName) throws MageException {
+    public String registerUserHandling(String userName, String password) throws MageException {
         this.isAdmin = false;
         if (userName.equals("Admin")) {
             return "User name Admin already in use";
@@ -102,6 +102,18 @@ public class Session {
         if (m.find()) {
             return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
         }
+
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.get(userName);
+        if (authorizedUser == null) {
+            // Do this in an explicit sign-up flow.
+            AuthorizedUserRepository.instance.add(userName, password);
+        } else {
+            if (!authorizedUser.doCredentialsMatch(userName, password)) {
+                return "Wrong username or password";
+            }
+        }
+
+        // TODO: Do an authentication with userName and password.
         User user = UserManager.getInstance().createUser(userName, host);
         boolean reconnect = false;
         if (user == null) {  // user already exists

@@ -45,6 +45,7 @@ public class Connection {
     private int port;
     private String username;
     private String password;
+    private String adminPassword;
     private ProxyType proxyType;
     private String proxyHost;
     private int proxyPort;
@@ -170,6 +171,14 @@ public class Connection {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAdminPassword() {
+        return adminPassword;
+    }
+
+    public void setAdminPassword(String adminPassword) {
+        this.adminPassword = adminPassword;
     }
 
     public String getProxyHost() {
