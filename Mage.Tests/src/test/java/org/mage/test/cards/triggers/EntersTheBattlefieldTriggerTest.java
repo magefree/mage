@@ -64,4 +64,35 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
     }
 
+    /**
+     * Diluvian Primordial is bugged and doesn't trigger upon entering the
+     * battlefield
+     */
+    @Test
+    public void testDiluvianPrimordial() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        // Flying
+        // When Diluvian Primordial enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a card cast this way would be put into a graveyard this turn, exile it instead.
+        addCard(Zone.HAND, playerA, "Diluvian Primordial", 1); // {5}{U}{U}
+
+        addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt");
+
+        // You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
+        addCard(Zone.HAND, playerB, "Clever Impersonator", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diluvian Primordial");
+        addTarget(playerA, "Lightning Bolt");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Diluvian Primordial", 1);
+
+        assertExileCount("Lightning Bolt", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+    }
+
 }

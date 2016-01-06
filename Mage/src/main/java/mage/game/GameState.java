@@ -530,6 +530,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.gameOver = true;
     }
 
+    // 608.2e
+    public void processAction(Game game) {
+        game.getState().handleSimultaneousEvent(game);
+        applyEffects(game);
+    }
+
     public void applyEffects(Game game) {
         game.resetShortLivingLKI();
         for (Player player : players.values()) {

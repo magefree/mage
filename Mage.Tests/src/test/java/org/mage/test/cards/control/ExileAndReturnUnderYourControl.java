@@ -148,4 +148,49 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
     }
 
+    /**
+     * I cast a Villainous Wealth in Vintage Cube, and when it came time to cast
+     * my opponent's cards (Mox Sapphire, Mox Emerald, Brainstorm, Snapcaster
+     * Mage, Fact or Fiction and a Quicken), it rolled back to before I had cast
+     * my spell after Quicken resolved. I have the error, but the forums won't
+     * let me post them. I did find it was replicatable whenever you try to cast
+     * Quicken off a Villainous Wealth.
+     */
+    @Test
+    public void testVillainousWealthAndQuicken() {
+        // Villainous Wealth {X}{B}{G}{U}
+        // Target opponent exiles the top X cards of his or her library. You may cast any number
+        // of nonland cards with converted mana cost X or less from among them without paying
+        // their mana costs.
+        addCard(Zone.HAND, playerA, "Villainous Wealth"); // {X}{B}{G}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // At the beginning of your draw step, you may draw two additional cards.
+        // If you do, choose two cards in your hand drawn this turn.
+        // For each of those cards, pay 4 life or put the card on top of your library.
+        addCard(Zone.LIBRARY, playerB, "Mox Emerald");
+        // The next sorcery card you cast this turn can be cast as though it had flash.
+        // Draw a card.
+        addCard(Zone.LIBRARY, playerB, "Quicken"); // Instant - {U}
+        addCard(Zone.LIBRARY, playerB, "Mox Sapphire");
+        skipInitShuffling(); // to keep this card on top of library
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
+        setChoice(playerA, "X=3");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Emerald");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicken");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Sapphire");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Villainous Wealth", 1);
+        assertExileCount(playerB, 0);
+        assertPermanentCount(playerA, "Mox Emerald", 1);
+        assertPermanentCount(playerA, "Mox Sapphire", 1);
+        assertGraveyardCount(playerB, "Quicken", 1);
+
+    }
 }
