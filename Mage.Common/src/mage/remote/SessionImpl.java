@@ -123,13 +123,140 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public boolean registerUser(Connection connection) {
+        if (isConnected()) {
+            disconnect(true);
+        }
+        this.connection = connection;
+        if (!connect()) {
+            return false;
+        }
+        boolean registerResult = false;
+        try {
+            logger.info("Trying to register as " + (this.getUserName() == null ? "" : this.getUserName()) + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+            registerResult = server.registerUser(sessionId, connection.getUsername(),
+                    connection.getPassword(), "");
+            if (registerResult) {
+                logger.info("Registered as " + (this.getUserName() == null ? "" : this.getUserName()) + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+            }
+        } catch (UndeclaredThrowableException ex) {
+            String addMessage = "";
+            Throwable cause = ex.getCause();
+            if (cause instanceof InvocationFailureException) {
+                InvocationFailureException exep = (InvocationFailureException) cause;
+                if (exep.getCause() instanceof IOException) {
+                    if (exep.getCause().getMessage().startsWith("Field hash null is not available on current")) {
+                        addMessage = "Probabaly the server version is not compatible to the client. ";
+                    }
+                }
+            } else if (cause instanceof NoSuchMethodException) {
+                // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
+                // method, so it's likely to be because of a version incompatibility.
+                addMessage = "The following method is not available in the server, probably the " +
+                        "server version is not compatible to the client: " + cause.getMessage();
+            }
+            if (addMessage.isEmpty()) {
+                logger.fatal("", ex);
+            }
+            client.showMessage("Unable to connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
+        } catch (MageVersionException ex) {
+            if (!canceled) {
+                client.showMessage("Unable to connect to server. " + ex.getMessage());
+            }
+            disconnect(false);
+        } catch (CannotConnectException ex) {
+            if (!canceled) {
+                handleCannotConnectException(ex);
+            }
+        } catch (Throwable t) {
+            logger.fatal("Unable to connect to server - ", t);
+            if (!canceled) {
+                disconnect(false);
+                StringBuilder sb = new StringBuilder();
+                sb.append("Unable to connect to server.\n");
+                for (StackTraceElement element : t.getStackTrace()) {
+                    sb.append(element.toString()).append("\n");
+                }
+                client.showMessage(sb.toString());
+            }
+        }
+        return registerResult;
+    }
+
+    @Override
     public synchronized boolean connect(Connection connection) {
         if (isConnected()) {
             disconnect(true);
         }
         this.connection = connection;
-        this.canceled = false;
-        return connect();
+        if (!connect()) {
+            return false;
+        }
+        try {
+            logger.info("Trying to log-in as " + (this.getUserName() == null ? "" : this.getUserName()) + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+            boolean registerResult = false;
+            if (connection.getAdminPassword() == null) {
+                // for backward compatibility. don't remove twice call - first one does nothing but for version checking
+                registerResult = server.registerClientWithPassword(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
+                if (registerResult) {
+                    server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
+                }
+            } else {
+                registerResult = server.registerAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+            }
+            if (registerResult) {
+                serverState = server.getServerState();
+                if (!connection.getUsername().equals("Admin")) {
+                    updateDatabase(connection.isForceDBComparison(), serverState);
+                }
+                logger.info("Logged-in as " + (this.getUserName() == null ? "" : this.getUserName()) + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                client.connected(this.getUserName() == null ? "" : this.getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
+                return true;
+            }
+            disconnect(false);
+            return false;
+        } catch (UndeclaredThrowableException ex) {
+            String addMessage = "";
+            Throwable cause = ex.getCause();
+            if (cause instanceof InvocationFailureException) {
+                InvocationFailureException exep = (InvocationFailureException) cause;
+                if (exep.getCause() instanceof IOException) {
+                    if (exep.getCause().getMessage().startsWith("Field hash null is not available on current")) {
+                        addMessage = "Probabaly the server version is not compatible to the client. ";
+                    }
+                }
+            } else if (cause instanceof NoSuchMethodException) {
+                // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
+                // method, so it's likely to be because of a version incompatibility.
+                addMessage = "The following method is not available in the server, probably the " +
+                        "server version is not compatible to the client: " + cause.getMessage();
+            }
+            if (addMessage.isEmpty()) {
+                logger.fatal("", ex);
+            }
+            client.showMessage("Unable to connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
+        } catch (MageVersionException ex) {
+            if (!canceled) {
+                client.showMessage("Unable to connect to server. " + ex.getMessage());
+            }
+            disconnect(false);
+        } catch (CannotConnectException ex) {
+            if (!canceled) {
+                handleCannotConnectException(ex);
+            }
+        } catch (Throwable t) {
+            logger.fatal("Unable to connect to server - ", t);
+            if (!canceled) {
+                disconnect(false);
+                StringBuilder sb = new StringBuilder();
+                sb.append("Unable to connect to server.\n");
+                for (StackTraceElement element : t.getStackTrace()) {
+                    sb.append(element.toString()).append("\n");
+                }
+                client.showMessage(sb.toString());
+            }
+        }
+        return false;
     }
 
     @Override
@@ -140,8 +267,12 @@ public class SessionImpl implements Session {
 
     @Override
     public boolean connect() {
+        this.canceled = false;
         sessionState = SessionState.CONNECTING;
+        boolean askForReconnect = false;
         try {
+            logger.info("Trying to connect to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+
             System.setProperty("http.nonProxyHosts", "code.google.com");
             System.setProperty("socksNonProxyHosts", "code.google.com");
 
@@ -273,32 +404,12 @@ public class SessionImpl implements Session {
                 logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ")");
             }
 
-            logger.info("Trying to connect as " + (this.getUserName() == null ? "" : this.getUserName()) + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
             callbackClient.invoke(null);
 
             this.sessionId = callbackClient.getSessionId();
-            boolean registerResult;
-            if (connection.getAdminPassword() == null) {
-                // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                registerResult = server.registerClientWithPassword(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
-                if (registerResult) {
-                    server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
-                }
-            } else {
-                registerResult = server.registerAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
-            }
-            if (registerResult) {
-                sessionState = SessionState.CONNECTED;
-                serverState = server.getServerState();
-                if (!connection.getUsername().equals("Admin")) {
-                    updateDatabase(connection.isForceDBComparison(), serverState);
-                }
-                logger.info("Connected as " + (this.getUserName() == null ? "" : this.getUserName()) + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-                client.connected(this.getUserName() == null ? "" : this.getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
-                return true;
-            }
-            disconnect(false);
-            // client.showMessage("Unable to connect to server.");
+            sessionState = SessionState.CONNECTED;
+            logger.info("Connected to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+            return true;
         } catch (MalformedURLException ex) {
             logger.fatal("", ex);
             client.showMessage("Unable to connect to server. " + ex.getMessage());
@@ -333,7 +444,6 @@ public class SessionImpl implements Session {
             if (!canceled) {
                 client.showMessage("Unable to connect to server. " + ex.getMessage());
             }
-            disconnect(false);
         } catch (CannotConnectException ex) {
             if (!canceled) {
                 handleCannotConnectException(ex);
@@ -341,7 +451,6 @@ public class SessionImpl implements Session {
         } catch (Throwable t) {
             logger.fatal("Unable to connect to server - ", t);
             if (!canceled) {
-                disconnect(false);
                 StringBuilder sb = new StringBuilder();
                 sb.append("Unable to connect to server.\n");
                 for (StackTraceElement element : t.getStackTrace()) {
@@ -350,6 +459,7 @@ public class SessionImpl implements Session {
                 client.showMessage(sb.toString());
             }
         }
+        disconnect(false);
         return false;
     }
 
@@ -1395,6 +1505,8 @@ public class SessionImpl implements Session {
 
     @Override
     public String getUserName() {
+        // TODO: Check if it's OK to return an empty string when connection.getUsername() is null.
+        // It will simplify many of the logging code.
         return connection.getUsername();
     }
 

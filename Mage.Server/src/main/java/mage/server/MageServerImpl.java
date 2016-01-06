@@ -106,6 +106,11 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
+    public boolean registerUser(String sessionId, String userName, String password, String email) throws MageException {
+        return SessionManager.getInstance().registerUser(sessionId, userName, password, email);
+    }
+
+    @Override
     public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException {
         // This method is deprecated, so just inform the server version.
         logger.info("MageVersionException: userName=" + userName + ", version=" + version);
@@ -121,7 +126,7 @@ public class MageServerImpl implements MageServer {
                 LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
-            return SessionManager.getInstance().registerUser(sessionId, userName, password);
+            return SessionManager.getInstance().connectUser(sessionId, userName, password);
         } catch (MageException ex) {
             if (ex instanceof MageVersionException) {
                 throw (MageVersionException) ex;
@@ -150,7 +155,7 @@ public class MageServerImpl implements MageServer {
             if (!adminPassword.equals(this.adminPassword)) {
                 throw new MageException("Wrong password");
             }
-            return SessionManager.getInstance().registerAdmin(sessionId);
+            return SessionManager.getInstance().connectAdmin(sessionId);
         } catch (Exception ex) {
             handleException(ex);
         }

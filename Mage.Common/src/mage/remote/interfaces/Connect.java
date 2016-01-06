@@ -34,6 +34,8 @@ import mage.remote.Connection;
  */
 public interface Connect {
 
+    boolean registerUser(Connection connection);
+
     boolean connect(Connection connection);
 
     boolean stopConnecting();

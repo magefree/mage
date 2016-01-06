@@ -55,13 +55,18 @@ import mage.view.UserView;
  */
 public interface MageServer {
 
+    // registers a user to the user DB.
+    boolean registerUser(String sessionId, String userName, String password, String email) throws MageException;
+
     // connection methods
     // DEPRECATED - Use registerClientWithPassword instead. This is kept for older clients.
     // This can be deleted once users transitioned to newer clients (1.4.6v1 and later).
     boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException;
 
+    // FIXME: Rename this to connectClient.
     boolean registerClientWithPassword(String userName, String password, String sessionId, MageVersion version) throws MageException;
 
+    // FIXME: Rename this to connectAdmin.
     boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException;
 // Not used
 //    void deregisterClient(String sessionId) throws MageException;

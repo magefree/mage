@@ -74,20 +74,24 @@ public class Session {
         this.lock = new ReentrantLock();
     }
 
-    public String registerUser(String userName, String password) throws MageException {
-        String returnMessage = registerUserHandling(userName, password);
-        if (returnMessage != null) {
-            sendErrorMessageToClient(returnMessage);
+    public String registerUser(String userName, String password, String email) throws MageException {
+        synchronized(AuthorizedUserRepository.instance) {
+            String returnMessage = validateUserName(userName);
+            if (returnMessage != null) {
+                sendErrorMessageToClient(returnMessage);
+                return returnMessage;
+            }
+            returnMessage = validatePassword(password);
+            if (returnMessage != null) {
+                sendErrorMessageToClient(returnMessage);
+                return returnMessage;
+            }
+            AuthorizedUserRepository.instance.add(userName, password, email);
+            return null;
         }
-        return returnMessage;
     }
-
-    public boolean isLocked() {
-        return lock.isLocked();
-    }
-
-    public String registerUserHandling(String userName, String password) throws MageException {
-        this.isAdmin = false;
+    
+    static private String validateUserName(String userName) {
         if (userName.equals("Admin")) {
             return "User name Admin already in use";
         }
@@ -102,15 +106,37 @@ public class Session {
         if (m.find()) {
             return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
         }
-
         AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.get(userName);
-        if (authorizedUser == null) {
-            // Do this in an explicit sign-up flow.
-            AuthorizedUserRepository.instance.add(userName, password);
-        } else {
-            if (!authorizedUser.doCredentialsMatch(userName, password)) {
-                return "Wrong username or password";
-            }
+        if (authorizedUser != null) {
+            return "User name '" + userName + "' already in use";
+        }
+        return null;
+    }
+
+    static private String validatePassword(String password) {
+        if (password.length() == 0) {
+            return "Password needs to be non-empty";
+        }
+        return null;
+    }
+
+    public String connectUser(String userName, String password) throws MageException {
+        String returnMessage = connectUserHandling(userName, password);
+        if (returnMessage != null) {
+            sendErrorMessageToClient(returnMessage);
+        }
+        return returnMessage;
+    }
+
+    public boolean isLocked() {
+        return lock.isLocked();
+    }
+
+    public String connectUserHandling(String userName, String password) throws MageException {
+        this.isAdmin = false;
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.get(userName);
+        if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
+            return "Wrong username or password";
         }
 
         // TODO: Do an authentication with userName and password.
@@ -147,7 +173,7 @@ public class Session {
         return null;
     }
 
-    public void registerAdmin() {
+    public void connectAdmin() {
         this.isAdmin = true;
         User user = UserManager.getInstance().createUser("Admin", host);
         if (user == null) {
