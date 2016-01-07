@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  */
 public class Envelop extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Sorcery");
+    private static final FilterSpell filter = new FilterSpell("sorcery spell");
 
     static {
         filter.add(new CardTypePredicate(CardType.SORCERY));
