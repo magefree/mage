@@ -106,7 +106,15 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean registerClient(String userName, String password, String sessionId, MageVersion version) throws MageException {
+    public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException {
+        // This method is deprecated, so just inform the server version.
+        logger.info("MageVersionException: userName=" + userName + ", version=" + version);
+        LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
+        throw new MageVersionException(version, Main.getVersion());
+    }
+
+    @Override
+    public boolean registerClientWithPassword(String userName, String password, String sessionId, MageVersion version) throws MageException {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
                 logger.info("MageVersionException: userName=" + userName + ", version=" + version);

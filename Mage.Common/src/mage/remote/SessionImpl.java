@@ -280,7 +280,7 @@ public class SessionImpl implements Session {
             boolean registerResult;
             if (connection.getAdminPassword() == null) {
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                registerResult = server.registerClient(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
+                registerResult = server.registerClientWithPassword(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
                 if (registerResult) {
                     server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
                 }
@@ -304,13 +304,19 @@ public class SessionImpl implements Session {
             client.showMessage("Unable to connect to server. " + ex.getMessage());
         } catch (UndeclaredThrowableException ex) {
             String addMessage = "";
-            if (ex.getCause() instanceof InvocationFailureException) {
-                InvocationFailureException exep = (InvocationFailureException) ex.getCause();
+            Throwable cause = ex.getCause();
+            if (cause instanceof InvocationFailureException) {
+                InvocationFailureException exep = (InvocationFailureException) cause;
                 if (exep.getCause() instanceof IOException) {
                     if (exep.getCause().getMessage().startsWith("Field hash null is not available on current")) {
                         addMessage = "Probabaly the server version is not compatible to the client. ";
                     }
                 }
+            } else if (cause instanceof NoSuchMethodException) {
+                // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
+                // method, so it's likely to be because of a version incompatibility.
+                addMessage = "The following method is not available in the server, probably the " +
+                        "server version is not compatible to the client: " + cause.getMessage();
             }
             if (addMessage.isEmpty()) {
                 logger.fatal("", ex);
