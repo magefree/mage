@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.targetpointer.FirstTargetPointer;
 import mage.util.CardUtil;
 
 /**
@@ -75,10 +76,22 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
-            MageObject mageObject = game.getObject(targetId);
-            if (mageObject instanceof Card) {
-                cards.add((Card) mageObject);
+        if (source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) {
+            for (Target target : source.getTargets()) {
+                for (UUID targetId : target.getTargets()) {
+                    MageObject mageObject = game.getObject(targetId);
+                    if (mageObject instanceof Card) {
+                        cards.add((Card) mageObject);
+                    }
+                }
+            }
+        }
+        else {
+            for (UUID targetId : targetPointer.getTargets(game, source)) {
+                MageObject mageObject = game.getObject(targetId);
+                if (mageObject != null) {
+                    cards.add((Card) mageObject);
+                }
             }
         }
         return controller.moveCards(cards, Zone.HAND, source, game);
