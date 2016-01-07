@@ -40,6 +40,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.targetpointer.FirstTargetPointer;
 import mage.util.CardUtil;
 
 /**
@@ -67,10 +68,20 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Set<Card> cards = new LinkedHashSet<>();
-            for (Target target : source.getTargets()) {
-                for (UUID targetId : target.getTargets()) {
+            if (source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) {
+                for (Target target : source.getTargets()) {
+                    for (UUID targetId : target.getTargets()) {
+                        MageObject mageObject = game.getObject(targetId);
+                        if (mageObject instanceof Card) {
+                            cards.add((Card) mageObject);
+                        }
+                    }
+                }
+            }
+            else {
+                for (UUID targetId : targetPointer.getTargets(game, source)) {
                     MageObject mageObject = game.getObject(targetId);
-                    if (mageObject instanceof Card) {
+                    if (mageObject != null) {
                         cards.add((Card) mageObject);
                     }
                 }
