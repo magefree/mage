@@ -66,7 +66,7 @@ public class AxebaneGuardian extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {tap}: Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control.
-        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
+        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1, 0), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
         "Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control."));
     }
 

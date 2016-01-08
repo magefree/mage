@@ -122,7 +122,7 @@ class SoulbrightFlamekinEffect extends OneShotEffect {
             }
             info.activations++;
             if (info.activations == 3) {
-                controller.getManaPool().addMana(new Mana(8,0,0,0,0,0,0), game, source);
+                controller.getManaPool().addMana(new Mana(8,0,0,0,0,0,0, 0), game, source);
             }
             return true;
         }

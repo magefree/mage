@@ -179,7 +179,7 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                 if (mana.getWhite() > 0) {
                     choice.getChoices().add("White");
                 }
-                if (mana.getColorless() > 0) {
+                if (mana.getGeneric() > 0) {
                     choice.getChoices().add("Colorless");
                 }
 
@@ -217,7 +217,7 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                                 newMana.increaseWhite();
                                 break;
                             case "Colorless":
-                                newMana.increaseColorless();
+                                newMana.increaseGeneric();
                                 break;
                         }
                     }

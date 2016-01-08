@@ -310,7 +310,7 @@ public class ManaPool implements Serializable {
                     total += item.getGreen();
                     item.removeGreen();
                 }
-                if (filter.isColorless()) {
+                if (filter.isGeneric()) {
                     total += item.getColorless();
                     item.removeColorless();
                 }
@@ -342,9 +342,6 @@ public class ManaPool implements Serializable {
         if (filter.isBlue()) {
             m.setBlue(test.getBlue());
         }
-        if (filter.isColorless()) {
-            m.setColorless(test.getColorless());
-        }
         if (filter.isGreen()) {
             m.setGreen(test.getGreen());
         }
@@ -354,12 +351,18 @@ public class ManaPool implements Serializable {
         if (filter.isWhite()) {
             m.setWhite(test.getWhite());
         }
+        if (filter.isColorless()) {
+            m.setColorless(test.getColorless());
+        }
+        if (filter.isGeneric()) {
+            m.setGeneric(test.getGeneric());
+        }
         return m;
     }
 
     public Mana getAllConditionalMana(Ability ability, Game game, FilterMana filter) {
         Mana m = new Mana();
-        m.setColorless(getConditionalCount(ability, game, filter));
+        m.setGeneric(getConditionalCount(ability, game, filter));
         return m;
     }
 
@@ -377,7 +380,7 @@ public class ManaPool implements Serializable {
                 }
                 this.manaItems.add(item);
             } else {
-                ManaPoolItem item = new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId(), source.getOriginalId(), mana.getFlag());
+                ManaPoolItem item = new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getGeneric() + mana.getColorless(), source.getSourceId(), source.getOriginalId(), mana.getFlag());
                 if (emptyOnTurnsEnd) {
                     item.setDuration(Duration.EndOfTurn);
                 }

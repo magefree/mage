@@ -45,7 +45,7 @@ public class PhyrexianManaCost extends ColoredManaCost {
 
     public PhyrexianManaCost(ColoredManaSymbol mana) {
         super(mana);
-        options.add(Mana.ColorlessMana(0));
+        options.add(Mana.GenericMana(0));
     }
 
     public PhyrexianManaCost(PhyrexianManaCost manaCost) {

@@ -50,7 +50,6 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
 public class AnyColorLandsProduceManaAbility extends ManaAbility {
 
     public AnyColorLandsProduceManaAbility(TargetController targetController) {
@@ -68,7 +67,7 @@ public class AnyColorLandsProduceManaAbility extends ManaAbility {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        return ((AnyColorLandsProduceManaEffect)getEffects().get(0)).getNetMana(game, this);
+        return ((AnyColorLandsProduceManaEffect) getEffects().get(0)).getNetMana(game, this);
     }
 }
 
@@ -161,7 +160,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             for (ManaAbility ability : mana) {
                 if (!ability.equals(source) && ability.definesMana()) {
-                    for (Mana netMana: ability.getNetMana(game)) {
+                    for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);
                     }
                 }
@@ -170,7 +169,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         return types;
     }
 
-    public  List<Mana> getNetMana(Game game, Ability source) {
+    public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
         if (types.getBlack() > 0) {
@@ -189,7 +188,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             netManas.add(new Mana(ColoredManaSymbol.W));
         }
         if (types.getColorless() > 0) {
-            netManas.add(new Mana(0,0,0,0,0,1,0));
+            netManas.add(new Mana(0, 0, 0, 0, 0, 0, 0, 1));
         }
         return netManas;
     }

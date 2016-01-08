@@ -61,7 +61,7 @@ public class ActivateOncePerTurnManaAbility extends ManaAbility {
 
     public ActivateOncePerTurnManaAbility(Zone zone, AddManaOfAnyColorEffect effect, Cost cost) {
         super(zone, effect, cost);
-        this.netMana.add(new Mana(0,0,0,0,0,0,effect.getAmount()));
+        this.netMana.add(new Mana(0,0,0,0,0,0,effect.getAmount(), 0));
     }
 
     public ActivateOncePerTurnManaAbility(ActivateOncePerTurnManaAbility ability) {

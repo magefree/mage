@@ -103,8 +103,8 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
         if (mana.getRed() > 0) {
             mana.set(ManaType.RED, mana.getRed() * 2);
         }
-        if (mana.getColorless() > 0) {
-            mana.set(ManaType.COLORLESS, mana.getColorless() * 2);
+        if (mana.getGeneric() > 0) {
+            mana.set(ManaType.COLORLESS, mana.getGeneric() * 2);
         }
         return false;
     }

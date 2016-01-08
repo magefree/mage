@@ -44,8 +44,8 @@ public class SnowManaCost extends ManaCostImpl {
     }
 
     public SnowManaCost() {
-        this.cost = Mana.ColorlessMana(1);
-        this.options.addMana(Mana.ColorlessMana(1));
+        this.cost = Mana.GenericMana(1);
+        this.options.addMana(Mana.GenericMana(1));
         this.setSourceFilter(filter);
     }
 

@@ -55,7 +55,7 @@ public class TinderFarm extends CardImpl {
         // {tap}: Add {G} to your mana pool.
         this.addAbility(new GreenManaAbility());
         // {tap}, Sacrifice Tinder Farm: Add {R}{W} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0, 0), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

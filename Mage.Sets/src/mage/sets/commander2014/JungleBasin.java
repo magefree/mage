@@ -53,7 +53,7 @@ public class JungleBasin extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Forest");
 
-    static{
+    static {
         filter.add(new SubtypePredicate("Forest"));
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -69,8 +69,8 @@ public class JungleBasin extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
 
         // {tap}: Add {C}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 1,0 ), new TapSourceCost()));
-        
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 0, 0, 1), new TapSourceCost()));
+
     }
 
     public JungleBasin(final JungleBasin card) {

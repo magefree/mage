@@ -25,17 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -43,14 +42,14 @@ import mage.cards.CardImpl;
  */
 public class WornPowerstone extends CardImpl {
 
-    public WornPowerstone (UUID ownerId) {
+    public WornPowerstone(UUID ownerId) {
         super(ownerId, 318, "Worn Powerstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "USG";
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new WornPowerstoneAbility());
     }
 
-    public WornPowerstone (final WornPowerstone card) {
+    public WornPowerstone(final WornPowerstone card) {
         super(card);
     }
 
@@ -64,7 +63,7 @@ class WornPowerstoneAbility extends BasicManaAbility {
 
     public WornPowerstoneAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.add(new Mana(0,0,0,0,0,2,0));
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 2));
     }
 
     public WornPowerstoneAbility(final WornPowerstoneAbility ability) {

@@ -61,7 +61,7 @@ public class HarabazDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Add X mana of any one color to your mana pool, where X is the number of Allies you control.
-        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
+        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1, 0), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
                 "Add X mana of any one color to your mana pool, where X is the number of Allies you control", true));
     }
 

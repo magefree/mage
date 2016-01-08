@@ -171,7 +171,7 @@ public class DynamicManaEffect extends BasicManaEffect {
                 }
             }
         } else {
-            computedMana.setColorless(count);
+            computedMana.setGeneric(count);
         }
         return computedMana;
     }

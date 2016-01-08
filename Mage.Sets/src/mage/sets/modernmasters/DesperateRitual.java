@@ -48,7 +48,7 @@ public class DesperateRitual extends CardImpl {
 
 
         // Add {R}{R}{R} to your mana pool.
-        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(3, 0, 0, 0, 0, 0, 0)));
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(3, 0, 0, 0, 0, 0, 0, 0)));
         // Splice onto Arcane {1}{R}
         this.addAbility(new SpliceOntoArcaneAbility("{1}{R}"));
     }

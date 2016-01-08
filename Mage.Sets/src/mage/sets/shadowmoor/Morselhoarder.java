@@ -80,7 +80,7 @@ class MorselhoarderAbility extends ManaAbility {
 
     public MorselhoarderAbility(Cost cost) {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), cost);
-        this.netMana.add(new Mana(0,0,0,0,0,0,1));
+        this.netMana.add(new Mana(0,0,0,0,0,0,1, 0));
     }
 
     public MorselhoarderAbility(final MorselhoarderAbility ability) {

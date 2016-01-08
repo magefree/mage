@@ -92,8 +92,8 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            int reduceMax = mana.getColorless();
-            if (reduceMax > 0 && mana.count() == mana.getColorless()) {
+            int reduceMax = mana.getGeneric();
+            if (reduceMax > 0 && mana.count() == mana.getGeneric()) {
                 reduceMax--;
             }
             if (reduceMax > 2) {

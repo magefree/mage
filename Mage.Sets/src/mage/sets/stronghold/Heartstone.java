@@ -90,7 +90,7 @@ class HeartstoneEffect extends CostModificationEffectImpl {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            if (mana.count() > 1 && mana.getColorless() > 0) {
+            if (mana.count() > 1 && mana.getGeneric() > 0) {
                 CardUtil.reduceCost(abilityToModify, 1);
             }
             return true;

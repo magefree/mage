@@ -55,7 +55,7 @@ public class ManaEchoes extends CardImpl {
         this.expansionSetCode = "ONS";
 
         // Whenever a creature enters the battlefield, you may add X mana of {C} to your mana pool, where X is the number of creatures you control that share a creature type with it.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
                 new ManaEchoesEffect(), new FilterCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, ""));
     }
 
@@ -70,34 +70,34 @@ public class ManaEchoes extends CardImpl {
 }
 
 class ManaEchoesEffect extends OneShotEffect {
-    
+
     public ManaEchoesEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may add X mana of {C} to your mana pool, where X is the number of creatures you control that share a creature type with it";
     }
-    
+
     public ManaEchoesEffect(final ManaEchoesEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ManaEchoesEffect copy() {
         return new ManaEchoesEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));        
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
             int foundCreatures = 0;
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 if (CardUtil.shareSubtypes(permanent, perm)) {
-                    foundCreatures ++;
+                    foundCreatures++;
                 }
             }
             if (foundCreatures > 0) {
-                controller.getManaPool().addMana(new Mana(0,0,0,0,0,foundCreatures,0), game, source);
+                controller.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, 0, 0, foundCreatures), game, source);
             }
             return true;
         }

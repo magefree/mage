@@ -51,7 +51,7 @@ public class SungrassEgg extends CardImpl {
         this.expansionSetCode = "ODY";
 
         // {2}, {tap}, Sacrifice Sungrass Egg: Add {G}{W} to your mana pool. Draw a card.
-        ManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0), new ManaCostsImpl("{2}"));
+        ManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new DrawCardSourceControllerEffect(1));

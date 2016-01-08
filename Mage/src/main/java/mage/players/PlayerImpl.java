@@ -42,6 +42,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -2532,7 +2533,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             ManaOptions availableMana = getManaAvailable(game);
             availableMana.addMana(manaPool.getMana());
-
+            for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
+                availableMana.addMana(conditionalMana);
+            }
             if (hidden) {
                 for (Card card : hand.getUniqueCards(game)) {
                     for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)

@@ -28,18 +28,18 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -71,18 +71,18 @@ public class DreamstoneHedron extends CardImpl {
 
     class DreamstoneHedronFirstManaAbility extends BasicManaAbility {
 
-    public DreamstoneHedronFirstManaAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 3, 0)));
-        this.netMana.add(new Mana(0,0,0,0,0,3,0));
-    }
+        public DreamstoneHedronFirstManaAbility() {
+            super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 0, 0, 3)));
+            this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 3));
+        }
 
-    public DreamstoneHedronFirstManaAbility(final DreamstoneHedronFirstManaAbility ability) {
-        super(ability);
-    }
+        public DreamstoneHedronFirstManaAbility(final DreamstoneHedronFirstManaAbility ability) {
+            super(ability);
+        }
 
-    @Override
-    public DreamstoneHedronFirstManaAbility copy() {
-        return new DreamstoneHedronFirstManaAbility(this);
+        @Override
+        public DreamstoneHedronFirstManaAbility copy() {
+            return new DreamstoneHedronFirstManaAbility(this);
+        }
     }
-}
 }

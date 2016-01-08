@@ -181,7 +181,7 @@ public class ManaPoolItem implements Serializable {
     }
 
     public Mana getMana() {
-        return new Mana(red, green, blue, white, black, colorless, 0);
+        return new Mana(red, green, blue, white, black, 0, 0, colorless);
     }
 
     public int count() {

@@ -70,7 +70,7 @@ public class PetalmaneBaku extends CardImpl {
 
         // {1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color to your mana pool.
         Ability ability = new DynamicManaAbility(
-                new Mana(0, 0, 0, 0, 0, 0, 1),
+                new Mana(0, 0, 0, 0, 0, 0, 1, 0),
                 new RemovedCountersForCostValue(),
                 new ManaCostsImpl<>("{1}"),
                 "Add X mana of any one color to your mana pool",
@@ -130,19 +130,19 @@ public class PetalmaneBaku extends CardImpl {
                     }
                 }
                 if (choice.getColor().isBlack()) {
-                    player.getManaPool().addMana(new Mana(0, 0, 0, 0, numberOfMana, 0, 0), game, source);
+                    player.getManaPool().addMana(new Mana(0, 0, 0, 0, numberOfMana, 0, 0, 0), game, source);
                     return true;
                 } else if (choice.getColor().isBlue()) {
-                    player.getManaPool().addMana(new Mana(0, 0, numberOfMana, 0, 0, 0, 0), game, source);
+                    player.getManaPool().addMana(new Mana(0, 0, numberOfMana, 0, 0, 0, 0, 0), game, source);
                     return true;
                 } else if (choice.getColor().isRed()) {
-                    player.getManaPool().addMana(new Mana(numberOfMana, 0, 0, 0, 0, 0, 0), game, source);
+                    player.getManaPool().addMana(new Mana(numberOfMana, 0, 0, 0, 0, 0, 0, 0), game, source);
                     return true;
                 } else if (choice.getColor().isGreen()) {
-                    player.getManaPool().addMana(new Mana(0, numberOfMana, 0, 0, 0, 0, 0), game, source);
+                    player.getManaPool().addMana(new Mana(0, numberOfMana, 0, 0, 0, 0, 0, 0), game, source);
                     return true;
                 } else if (choice.getColor().isWhite()) {
-                    player.getManaPool().addMana(new Mana(0, 0, 0, numberOfMana, 0, 0, 0), game, source);
+                    player.getManaPool().addMana(new Mana(0, 0, 0, numberOfMana, 0, 0, 0, 0), game, source);
                     return true;
                 }
             }

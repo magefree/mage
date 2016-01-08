@@ -76,7 +76,7 @@ public class ReflectingPool extends CardImpl {
 class ReflectingPoolManaAbility extends ManaAbility {
 
     public ReflectingPoolManaAbility() {
-        super(Zone.BATTLEFIELD, new ReflectingPoolEffect(),new TapSourceCost());
+        super(Zone.BATTLEFIELD, new ReflectingPoolEffect(), new TapSourceCost());
     }
 
     public ReflectingPoolManaAbility(final ReflectingPoolManaAbility ability) {
@@ -90,7 +90,7 @@ class ReflectingPoolManaAbility extends ManaAbility {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        return ((ReflectingPoolEffect)getEffects().get(0)).getNetMana(game, this);
+        return ((ReflectingPoolEffect) getEffects().get(0)).getNetMana(game, this);
     }
 }
 
@@ -127,7 +127,7 @@ class ReflectingPoolEffect extends ManaEffect {
         if (types.getWhite() > 0) {
             choice.getChoices().add("White");
         }
-        if (types.getColorless() > 0) {
+        if (types.getGeneric() > 0) {
             choice.getChoices().add("Colorless");
         }
         if (types.getAny() > 0) {
@@ -164,7 +164,7 @@ class ReflectingPoolEffect extends ManaEffect {
                         mana.setWhite(1);
                         break;
                     case "Colorless":
-                        mana.setColorless(1);
+                        mana.setGeneric(1);
                         break;
                 }
                 checkToFirePossibleEvents(mana, game, source);
@@ -176,11 +176,11 @@ class ReflectingPoolEffect extends ManaEffect {
         return true;
     }
 
-    public  List<Mana> getNetMana(Game game, Ability source) {
+    public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
-        if (types.getAny()> 0) {
-            netManas.add(new Mana(0,0,0,0,0,0,1));
+        if (types.getAny() > 0) {
+            netManas.add(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
             return netManas;
         }
         if (types.getBlack() > 0) {
@@ -198,8 +198,8 @@ class ReflectingPoolEffect extends ManaEffect {
         if (types.getWhite() > 0) {
             netManas.add(new Mana(ColoredManaSymbol.W));
         }
-        if (types.getColorless() > 0) {
-            netManas.add(new Mana(0,0,0,0,0,1,0));
+        if (types.getGeneric() > 0) {
+            netManas.add(new Mana(0, 0, 0, 0, 0, 0, 0, 1));
         }
         return netManas;
     }
@@ -211,7 +211,7 @@ class ReflectingPoolEffect extends ManaEffect {
             Abilities<ManaAbility> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             for (ManaAbility ability : manaAbilities) {
                 if (!ability.equals(source) && ability.definesMana()) {
-                    for (Mana netMana: ability.getNetMana(game)) {
+                    for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);
                         if (netMana.getAny() > 0) {
                             return types;

@@ -56,7 +56,7 @@ public class Deconstruct extends CardImpl {
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 3, 0, 0, 0, 0, 0)));
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 3, 0, 0, 0, 0, 0, 0)));
     }
 
     public Deconstruct(final Deconstruct card) {

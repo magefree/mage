@@ -97,7 +97,7 @@ class FluctuatorEffect extends CostModificationEffectImpl {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            int reduceMax = mana.getColorless();
+            int reduceMax = mana.getGeneric();
             if (reduceMax > 2) {
                 reduceMax = 2;
             }

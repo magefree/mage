@@ -95,7 +95,7 @@ class AstralCornucopiaManaAbility extends ManaAbility {
         if (sourcePermanent != null) {
             int counters = sourcePermanent.getCounters().getCount(CounterType.CHARGE.getName());
             if (counters > 0) {
-                netMana.add(new Mana(0, 0, 0, 0, 0, 0, counters));
+                netMana.add(new Mana(0, 0, 0, 0, 0, 0, counters, 0));
             }
         }
         return netMana;

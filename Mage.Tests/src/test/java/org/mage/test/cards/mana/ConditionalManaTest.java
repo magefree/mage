@@ -141,4 +141,31 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Snapping Drake", 2);
     }
+
+    /**
+     * I've found a bit of a problem with colorless costs. I've been unable to
+     * pay colorless costs with lands conditionally tapping for 2 colorless i.e
+     * shrine of forsaken gods and eldrazi temple ,including if I float the
+     * mana. Seperately but on a related note, if you float at least one
+     * colorless mana you can pay all colorless costs with floated generic mana.
+     */
+    @Test
+    public void testPayColorlessWithConditionalMana() {
+        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.
+        addCard(Zone.BATTLEFIELD, playerA, "Shrine of the Forsaken Gods", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);
+        // When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.
+        // Menace
+        // Discard a card with converted mana cost X: Counter target spell with converted mana cost X.
+        addCard(Zone.HAND, playerA, "Kozilek, the Great Distortion", 1); // {8}{C}{C}
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}{C}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kozilek, the Great Distortion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Kozilek, the Great Distortion", 1);
+    }
 }

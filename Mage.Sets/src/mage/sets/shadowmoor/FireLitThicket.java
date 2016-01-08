@@ -55,7 +55,7 @@ public class FireLitThicket extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0), new ManaCostsImpl("{R/G}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0, 0), new ManaCostsImpl("{R/G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

@@ -144,7 +144,7 @@ public class ManaTest {
     public void shouldCreateManaFromIntegers() {
 
         // when
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7);
+        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 8);
 
         // then
         assertEquals(1, mana.getRed());
@@ -152,8 +152,9 @@ public class ManaTest {
         assertEquals(3, mana.getBlue());
         assertEquals(4, mana.getWhite());
         assertEquals(5, mana.getBlack());
-        assertEquals(6, mana.getColorless());
+        assertEquals(6, mana.getGeneric());
         assertEquals(7, mana.getAny());
+        assertEquals(8, mana.getColorless());
     }
 
     @Test
@@ -161,7 +162,7 @@ public class ManaTest {
         // given
 
         // when
-        Mana mana = new Mana(-1, 2, 3, 4, 5, 6, 7);
+        Mana mana = new Mana(-1, 2, 3, 4, 5, 6, 7, 0);
 
         // then
         assertEquals(0, mana.getRed());
@@ -215,6 +216,16 @@ public class ManaTest {
 
         // then
         assertEquals(1, mana.getBlack());
+    }
+
+    @Test
+    public void shouldCreateGenericMana() {
+
+        // when
+        Mana mana = Mana.GenericMana(1);
+
+        // then
+        assertEquals(1, mana.getGeneric());
     }
 
     @Test
@@ -287,17 +298,17 @@ public class ManaTest {
         // given
 
         // when
-        Mana mana = Mana.ColorlessMana(-1);
+        Mana mana = Mana.GenericMana(-1);
 
         //then
-        assertEquals(0, mana.getColorless());
+        assertEquals(0, mana.getGeneric());
     }
 
     @Test
     public void shouldAddMana() {
         // given
-        Mana thisMana = new Mana(1, 2, 3, 4, 5, 6, 7);
-        Mana thatMana = new Mana(1, 2, 3, 4, 5, 6, 7);
+        Mana thisMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana thatMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         thisMana.add(thatMana);
@@ -308,7 +319,7 @@ public class ManaTest {
         assertEquals(6, thisMana.getBlue());
         assertEquals(8, thisMana.getWhite());
         assertEquals(10, thisMana.getBlack());
-        assertEquals(12, thisMana.getColorless());
+        assertEquals(12, thisMana.getGeneric());
         assertEquals(14, thisMana.getAny());
     }
 
@@ -378,17 +389,17 @@ public class ManaTest {
         Mana mana = new Mana();
 
         // when
-        mana.increaseColorless();
+        mana.increaseGeneric();
 
         // then
-        assertEquals(1, mana.getColorless());
+        assertEquals(1, mana.getGeneric());
     }
 
     @Test
     public void shouldSubtractMana() {
         // given
-        Mana thisMana = new Mana(2, 2, 2, 2, 2, 2, 2);
-        Mana thatMana = new Mana(1, 1, 1, 1, 1, 1, 1);
+        Mana thisMana = new Mana(2, 2, 2, 2, 2, 2, 2, 2);
+        Mana thatMana = new Mana(1, 1, 1, 1, 1, 1, 1, 1);
 
         // when
         thisMana.subtract(thatMana);
@@ -399,15 +410,16 @@ public class ManaTest {
         assertEquals(1, thisMana.getBlue());
         assertEquals(1, thisMana.getWhite());
         assertEquals(1, thisMana.getBlack());
-        assertEquals(1, thisMana.getColorless());
+        assertEquals(1, thisMana.getGeneric());
         assertEquals(1, thisMana.getAny());
+        assertEquals(1, thisMana.getColorless());
     }
 
     @Test
     public void shouldSubtractCost() {
         // given
-        Mana thisMana = new Mana(2, 2, 2, 2, 2, 2, 2);
-        Mana thatMana = new Mana(10, 1, 1, 1, 10, 1, 1);
+        Mana thisMana = new Mana(2, 2, 2, 2, 2, 2, 2, 0);
+        Mana thatMana = new Mana(10, 1, 1, 1, 10, 1, 1, 0);
 
         // when
         thisMana.subtractCost(thatMana);
@@ -418,7 +430,7 @@ public class ManaTest {
         assertEquals(1, thisMana.getBlue());
         assertEquals(1, thisMana.getWhite());
         assertEquals(-8, thisMana.getBlack());
-        assertEquals(1, thisMana.getColorless());
+        assertEquals(1, thisMana.getGeneric());
         assertEquals(1, thisMana.getAny());
     }
 
@@ -430,7 +442,7 @@ public class ManaTest {
 
         Mana cost = new Mana();
         cost.setRed(4);
-        cost.setColorless(2);
+        cost.setGeneric(2);
 
         // when
         available.subtractCost(cost);
@@ -449,7 +461,7 @@ public class ManaTest {
 
         Mana cost = new Mana();
         cost.setRed(4);
-        cost.setColorless(2);
+        cost.setGeneric(2);
 
         // when
         available.subtractCost(cost);
@@ -458,7 +470,7 @@ public class ManaTest {
     @Test
     public void shouldReturnCount() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7);
+        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
         FilterMana filter = new FilterMana();
         filter.setBlack(true);
 
@@ -476,7 +488,7 @@ public class ManaTest {
     @Test
     public void shouldReturnString() {
         // given
-        Mana mana = new Mana(1, 2, 3, 0, 3, 6, 2);
+        Mana mana = new Mana(1, 2, 3, 0, 3, 6, 2, 0);
 
         // when
         String ret = mana.toString();
@@ -488,7 +500,7 @@ public class ManaTest {
     @Test
     public void shouldClearMana() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7);
+        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         mana.clear();
@@ -499,14 +511,14 @@ public class ManaTest {
         assertEquals(0, mana.getBlue());
         assertEquals(0, mana.getWhite());
         assertEquals(0, mana.getBlack());
-        assertEquals(0, mana.getColorless());
+        assertEquals(0, mana.getGeneric());
         assertEquals(0, mana.getAny());
     }
 
     @Test
     public void shouldReturnCopy() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7);
+        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         Mana copy = mana.copy();
@@ -519,7 +531,7 @@ public class ManaTest {
     @Test
     public void shouldGetColorByColoredManaSymbol() {
         // given
-        Mana mana = new Mana(1, 1, 1, 1, 1, 1, 1);
+        Mana mana = new Mana(1, 1, 1, 1, 1, 1, 1, 0);
 
         // when
         int redMana = mana.getColor(ColoredManaSymbol.R);
@@ -539,7 +551,7 @@ public class ManaTest {
     @Test
     public void shouldGetColorByManaType() {
         // given
-        Mana mana = new Mana(1, 1, 1, 1, 1, 1, 1);
+        Mana mana = new Mana(1, 1, 1, 1, 1, 1, 1, 0);
 
         // when
         int redMana = mana.get(ManaType.RED);
@@ -584,7 +596,7 @@ public class ManaTest {
     public void shouldSetToMana() {
         // given
         Mana mana = new Mana();
-        Mana newMana = new Mana(1, 2, 3, 4, 5, 6, 7);
+        Mana newMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         mana.setToMana(newMana);
@@ -597,8 +609,8 @@ public class ManaTest {
     @Test
     public void shouldHaveEqualManaValue() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7);
-        Mana newMana = new Mana(1, 2, 3, 4, 5, 6, 7);
+        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana newMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         boolean equalMana = mana.equalManaValue(newMana);
@@ -632,7 +644,7 @@ public class ManaTest {
         mana.setBlue(-4);
         mana.setWhite(-4);
         mana.setBlack(-4);
-        mana.setColorless(-4);
+        mana.setGeneric(-4);
         mana.setAny(-4);
 
         // then
@@ -641,7 +653,7 @@ public class ManaTest {
         assertEquals(0, mana.getBlue());
         assertEquals(0, mana.getWhite());
         assertEquals(0, mana.getBlack());
-        assertEquals(0, mana.getColorless());
+        assertEquals(0, mana.getGeneric());
         assertEquals(0, mana.getAny());
     }
 }

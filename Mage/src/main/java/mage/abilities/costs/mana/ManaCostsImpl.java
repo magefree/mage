@@ -225,13 +225,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             return;
         }
         // attempt to pay colorless costs (not generic) mana costs first
-        if (pool.getColorless() > 0) {
-            for (ManaCost cost : this) {
-                if (!cost.isPaid() && cost instanceof ColorlessManaCost) {
-                    cost.assignPayment(game, ability, pool);
-                    if (pool.count() == 0) {
-                        return;
-                    }
+        for (ManaCost cost : this) {
+            if (!cost.isPaid() && cost instanceof ColorlessManaCost) {
+                cost.assignPayment(game, ability, pool);
+                if (pool.count() == 0) {
+                    return;
                 }
             }
         }

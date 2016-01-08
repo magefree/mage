@@ -106,7 +106,7 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
 
     @Override
     public void setAmount(int amount) {
-        payment.setColorless(amount);
+        payment.setGeneric(amount);
     }
 
     @Override

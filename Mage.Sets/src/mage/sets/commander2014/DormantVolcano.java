@@ -53,7 +53,7 @@ public class DormantVolcano extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Mountain");
 
-    static{
+    static {
         filter.add(new SubtypePredicate("Mountain"));
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -69,7 +69,7 @@ public class DormantVolcano extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
 
         // {tap}: Add {C}{R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 0, 1,0 ), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 0, 0, 0, 1), new TapSourceCost()));
 
     }
 

@@ -248,11 +248,11 @@ public class ManaOptions extends ArrayList<Mana> {
             Mana oldMan = mana.copy();
             if (mana.includesMana(cost)) {
                 // colorless costs can be paid with different colored mana, can lead to different color combinations
-                if (cost.getColorless() > 0 && cost.getColorless() > mana.getColorless()) {
+                if (cost.getGeneric() > 0 && cost.getGeneric() > mana.getGeneric()) {
                     Mana coloredCost = cost.copy();
-                    coloredCost.setColorless(0);
+                    coloredCost.setGeneric(0);
                     mana.subtract(coloredCost);
-                    for (Mana payCombination : getPossiblePayCombinations(cost.getColorless(), mana)) {
+                    for (Mana payCombination : getPossiblePayCombinations(cost.getGeneric(), mana)) {
                         Mana newMana = mana.copy();
                         newMana.subtract(payCombination);
                         newMana.add(addMana);
@@ -319,7 +319,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         } else {
-            payCombinations.add(new Mana(0, 0, 0, 0, 0, number, 0));
+            payCombinations.add(new Mana(0, 0, 0, 0, 0, 0, 0, number));
         }
         return payCombinations;
     }

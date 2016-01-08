@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.Mana;
@@ -40,7 +39,6 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
 public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
 
     public AddManaOfAnyTypeProducedEffect() {
@@ -78,7 +76,7 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             if (types.getWhite() > 0) {
                 choice.getChoices().add("White");
             }
-            if (types.getColorless() > 0) {
+            if (types.getGeneric() > 0) {
                 choice.getChoices().add("Colorless");
             }
             if (choice.getChoices().size() > 0) {
@@ -110,10 +108,10 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
                     case "Colorless":
                         newMana.setColorless(1);
                         break;
-                }                
+                }
                 checkToFirePossibleEvents(newMana, game, source);
                 targetController.getManaPool().addMana(newMana, game, source);
-                
+
             }
             return true;
         }

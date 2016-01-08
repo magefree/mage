@@ -122,7 +122,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
                 // create filter for possible creatures to tap
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                 filter.add(Predicates.not(new TappedPredicate()));
-                if (unpaid.getMana().getColorless() == 0) {
+                if (unpaid.getMana().getGeneric() == 0) {
                     List<ColorPredicate> colorPredicates = new ArrayList<>();
                     if (unpaid.getMana().getBlack() > 0) {
                         colorPredicates.add(new ColorPredicate(ObjectColor.BLACK));
@@ -182,7 +182,7 @@ class ConvokeEffect extends OneShotEffect {
     public ConvokeEffect(ManaCost unpaid) {
         super(Outcome.Benefit);
         this.unpaid = unpaid;
-        this.staticText = "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)";
+        this.staticText = "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {C} or one mana of that creature's color.)";
     }
 
     public ConvokeEffect(final ConvokeEffect effect) {

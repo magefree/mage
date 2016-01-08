@@ -73,7 +73,7 @@ public class ConditionalAnyColorManaAbility extends ManaAbility {
     @Override
     public List<Mana> getNetMana(Game game) {
         this.netMana.clear();
-        this.netMana.add(new Mana(0,0,0,0,0,0, amount.calculate(game, this, null)));
+        this.netMana.add(new Mana(0,0,0,0,0,0, amount.calculate(game, this, null), 0));
         return super.getNetMana(game);
     }
 
