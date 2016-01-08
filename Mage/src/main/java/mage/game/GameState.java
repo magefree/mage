@@ -869,8 +869,20 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      */
     public void addOtherAbility(Card attachedTo, Ability ability) {
+        addOtherAbility(attachedTo, ability, true);
+    }
+
+    /**
+     * Adds the ability to continuous or triggered abilities
+     *
+     * @param attachedTo
+     * @param ability
+     * @param copyAbility copies non MageSingleton abilities before adding to
+     * state
+     */
+    public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         Ability newAbility;
-        if (ability instanceof MageSingleton) {
+        if (ability instanceof MageSingleton || !copyAbility) {
             newAbility = ability;
         } else {
             newAbility = ability.copy();
