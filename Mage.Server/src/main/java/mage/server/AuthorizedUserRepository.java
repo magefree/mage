@@ -27,7 +27,7 @@ public enum AuthorizedUserRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/authorized_user.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "authorized_user";
     // raise this if db structure was changed
-    private static final long DB_VERSION = 0;
+    private static final long DB_VERSION = 1;
     private static final RandomNumberGenerator rng = new SecureRandomNumberGenerator();
 
     private Dao<AuthorizedUser, Object> dao;
@@ -52,14 +52,14 @@ public enum AuthorizedUserRepository {
         }
     }
 
-    public void add(final String userName, final String password) {
+    public void add(final String userName, final String password, final String email) {
         try {
             dao.callBatchTasks(new Callable<Object>() {
                 @Override
                 public Object call() throws Exception {
                     try {
                         Hash hash = new SimpleHash(Sha256Hash.ALGORITHM_NAME, password, rng.nextBytes(), 1024);
-                        AuthorizedUser user = new AuthorizedUser(userName, hash);
+                        AuthorizedUser user = new AuthorizedUser(userName, hash, email);
                         dao.create(user);
                     } catch (SQLException ex) {
                         Logger.getLogger(AuthorizedUserRepository.class).error("Error adding a user to DB - ", ex);
@@ -68,6 +68,7 @@ public enum AuthorizedUserRepository {
                 }
             });
         } catch (Exception ex) {
+            Logger.getLogger(AuthorizedUserRepository.class).error("Error adding a authorized_user - ", ex);
         }
     }
 
@@ -81,6 +82,7 @@ public enum AuthorizedUserRepository {
             }
             return null;
         } catch (SQLException ex) {
+            Logger.getLogger(AuthorizedUserRepository.class).error("Error getting a authorized_user - ", ex);
         }
         return null;
     }
@@ -92,6 +94,7 @@ public enum AuthorizedUserRepository {
                 conn.executeStatement("shutdown compact", 0);
             }
         } catch (SQLException ex) {
+            Logger.getLogger(AuthorizedUserRepository.class).error("Error closing authorized_user repository - ", ex);
         }
     }
 }

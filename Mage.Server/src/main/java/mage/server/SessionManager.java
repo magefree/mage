@@ -70,14 +70,14 @@ public class SessionManager {
         sessions.put(sessionId, session);
     }
 
-    public boolean registerUser(String sessionId, String userName, String password) throws MageException {
+    public boolean registerUser(String sessionId, String userName, String password, String email) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            String returnMessage = session.registerUser(userName, password);
+            String returnMessage = session.registerUser(userName, password, email);
             if (returnMessage == null) {
-                LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
+                LogServiceImpl.instance.log(LogKeys.KEY_USER_REGISTERED, userName, session.getHost(), sessionId);
 
-                logger.info(userName + " joined server");
+                logger.info(userName + " registered");
                 logger.debug("- userId:    " + session.getUserId());
                 logger.debug("- sessionId: " + sessionId);
                 logger.debug("- host:      " + session.getHost());
@@ -86,15 +86,36 @@ public class SessionManager {
                 logger.debug(userName + " not registered: " + returnMessage);
             }
         } else {
-            logger.error(userName + " tried to join with no sessionId");
+            logger.error(userName + " tried to register with no sessionId");
         }
         return false;
     }
 
-    public boolean registerAdmin(String sessionId) {
+    public boolean connectUser(String sessionId, String userName, String password) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            session.registerAdmin();
+            String returnMessage = session.connectUser(userName, password);
+            if (returnMessage == null) {
+                LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
+
+                logger.info(userName + " connected to server");
+                logger.debug("- userId:    " + session.getUserId());
+                logger.debug("- sessionId: " + sessionId);
+                logger.debug("- host:      " + session.getHost());
+                return true;
+            } else {
+                logger.debug(userName + " not connected: " + returnMessage);
+            }
+        } else {
+            logger.error(userName + " tried to connect with no sessionId");
+        }
+        return false;
+    }
+
+    public boolean connectAdmin(String sessionId) {
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            session.connectAdmin();
             LogServiceImpl.instance.log(LogKeys.KEY_ADMIN_CONNECTED, "Admin", session.getHost(), sessionId);
             logger.info("Admin connected from " + session.getHost());
             return true;

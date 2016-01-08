@@ -56,6 +56,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
@@ -65,7 +66,6 @@ import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
 import mage.client.util.Config;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
 import org.apache.log4j.Logger;
 
 /**
@@ -76,6 +76,7 @@ public class ConnectDialog extends MageDialog {
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
     private Connection connection;
     private ConnectTask task;
+    private RegisterUserDialog registerUserDialog;
 
     private final ActionListener connectAction = new ActionListener() {
         @Override
@@ -94,6 +95,9 @@ public class ConnectDialog extends MageDialog {
         this.txtPort.addActionListener(connectAction);
         this.txtUserName.addActionListener(connectAction);
         this.txtPassword.addActionListener(connectAction);
+
+        registerUserDialog = new RegisterUserDialog();
+        MageFrame.getDesktop().add(registerUserDialog, JLayeredPane.POPUP_LAYER);
     }
 
     public void showDialog() {
@@ -152,6 +156,7 @@ public class ConnectDialog extends MageDialog {
         btnConnect = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
+        btnRegister = new javax.swing.JButton();
 
         setTitle("Connect to server");
         setNormalBounds(new java.awt.Rectangle(100, 100, 410, 307));
@@ -180,20 +185,8 @@ public class ConnectDialog extends MageDialog {
         lblUserName.setLabelFor(txtUserName);
         lblUserName.setText("User name:");
 
-        txtUserName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserNameActionPerformed(evt);
-            }
-        });
-
         lblPassword.setLabelFor(txtPassword);
         lblPassword.setText("Password:");
-
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
 
         lblFlag.setLabelFor(txtUserName);
         lblFlag.setText("User flag:");
@@ -237,6 +230,13 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
+        btnRegister.setText("Register new user");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,11 +244,6 @@ public class ConnectDialog extends MageDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnConnect)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -271,7 +266,16 @@ public class ConnectDialog extends MageDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFind))
                             .addComponent(chkForceUpdateDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))))
+                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRegister)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnConnect)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancel)))
+                        .addGap(26, 26, 26)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -304,13 +308,15 @@ public class ConnectDialog extends MageDialog {
                 .addComponent(chkForceUpdateDB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProxySettingsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConnect)
                     .addComponent(btnCancel))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegister)
+                .addGap(3, 3, 3))
         );
 
         pack();
@@ -360,28 +366,7 @@ public class ConnectDialog extends MageDialog {
             connection.setPassword(this.txtPassword.getText().trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
             MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
-
-            ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
-
-            if (configProxyType != null) {
-                connection.setProxyType(configProxyType);
-                if (!configProxyType.equals(ProxyType.NONE)) {
-                    String host = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                    String port = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "");
-                    if (!host.isEmpty() && !port.isEmpty()) {
-                        connection.setProxyHost(host);
-                        connection.setProxyPort(Integer.valueOf(port));
-                        String username = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_USERNAME, "");
-                        connection.setProxyUsername(username);
-                        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_REMEMBER, "false").equals("true")) {
-                            String password = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PSWD, "");
-                            connection.setProxyPassword(password);
-                        }
-                    } else {
-                        logger.warn("host or\\and port are empty: host=" + host + ", port=" + port);
-                    }
-                }
-            }
+            PreferencesDialog.setProxyInformation(connection);
 
             // pref settings
             MageFrame.getInstance().setUserPrefsToConnection(connection);
@@ -580,10 +565,15 @@ public class ConnectDialog extends MageDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        registerUserDialog.showDialog();
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnFind;
+    private javax.swing.JButton btnRegister;
     private mage.client.util.gui.countryBox.CountryComboBox cbFlag;
     private javax.swing.JCheckBox chkAutoConnect;
     private javax.swing.JCheckBox chkForceUpdateDB;
