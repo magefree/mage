@@ -53,7 +53,7 @@ import mage.players.Player;
 public class MatterReshaper extends CardImpl {
 
     public MatterReshaper(UUID ownerId) {
-        super(ownerId, 8, "Matter Reshaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{C}");
+        super(ownerId, 6, "Matter Reshaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{C}");
         this.expansionSetCode = "OGW";
         this.subtype.add("Eldrazi");
         this.power = new MageInt(3);
