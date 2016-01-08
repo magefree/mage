@@ -32,13 +32,16 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -48,22 +51,20 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class MidnightRitual extends CardImpl {
 
     private final FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
-    
+
     public MidnightRitual(UUID ownerId) {
         super(ownerId, 146, "Midnight Ritual", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{2}{B}");
         this.expansionSetCode = "MMQ";
 
-        // Exile X target creature cards from your graveyard. 
+        // Exile X target creature cards from your graveyard.
         // For each creature card exiled this way, put a 2/2 black Zombie creature token onto the battlefield.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addEffect(new MidnightRitualEffect());
     }
-    
+
     @Override
-    public void adjustTargets(Ability ability, Game game)
-    {
-        if (ability instanceof SpellAbility)
-        {
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), filter));
         }
@@ -80,33 +81,32 @@ public class MidnightRitual extends CardImpl {
 }
 
 class MidnightRitualEffect extends OneShotEffect {
-    
+
     public MidnightRitualEffect() {
         super(Outcome.Neutral);
         this.staticText = "Exile X target creature cards from your graveyard. For each creature card exiled this way, put a 2/2 black Zombie creature token onto the battlefield";
     }
-    
-    public MidnightRitualEffect(final MidnightRitualEffect effect)
-    {
+
+    public MidnightRitualEffect(final MidnightRitualEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public MidnightRitualEffect copy() {
         return new MidnightRitualEffect(this);
     }
-    
+
     @Override
-    public boolean apply(Game game, Ability source)
-    {
-        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                if (card.moveToExile(null, null, source.getSourceId(), game)) {
-                    new ZombieToken().putOntoBattlefield(1, game, source.getSourceId(), card.getOwnerId());
-                }
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards cardsToExile = new CardsImpl(getTargetPointer().getTargets(game, source));
+            controller.moveCards(cardsToExile, Zone.EXILED, source, game);
+            if (!cardsToExile.isEmpty()) {
+                new ZombieToken().putOntoBattlefield(cardsToExile.size(), game, source.getSourceId(), controller.getId());
             }
+            return true;
         }
-        return true;
+        return false;
     }
 }
