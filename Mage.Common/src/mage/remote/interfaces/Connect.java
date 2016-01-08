@@ -34,11 +34,11 @@ import mage.remote.Connection;
  */
 public interface Connect {
 
+    boolean register(Connection connection);
+
     boolean connect(Connection connection);
 
     boolean stopConnecting();
-
-    boolean connect();
 
     void disconnect(boolean showMessage);
 

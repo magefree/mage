@@ -29,15 +29,19 @@ public class AuthorizedUser {
     @DatabaseField
     protected int hashIterations;
 
+    @DatabaseField
+    protected String email;
+
     public AuthorizedUser() {
     }
 
-    public AuthorizedUser(String name, Hash hash) {
+    public AuthorizedUser(String name, Hash hash, String email) {
         this.name = name;
         this.password = hash.toBase64();
         this.salt = hash.getSalt().toBase64();
         this.hashAlgorithm = hash.getAlgorithmName();
         this.hashIterations = hash.getIterations();
+        this.email = email;
     }
 
     public boolean doCredentialsMatch(String name, String password) {

@@ -7,6 +7,8 @@ public interface LogKeys {
 
     String KEY_GAME_STARTED = "gameStarted";
 
+    String KEY_USER_REGISTERED = "userRegistered";
+
     String KEY_USER_CONNECTED = "userConnected";
 
     String KEY_ADMIN_CONNECTED = "adminConnected";
