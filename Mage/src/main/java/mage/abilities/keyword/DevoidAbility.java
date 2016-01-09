@@ -22,6 +22,7 @@ public class DevoidAbility extends SimpleStaticAbility {
         color.setGreen(false);
         color.setBlue(false);
         color.setRed(false);
+        setRuleAtTheTop(true);
     }
 
     public DevoidAbility(final DevoidAbility ability) {
