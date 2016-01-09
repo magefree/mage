@@ -28,50 +28,64 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.SurgeAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetSpell;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public class ZadasCommando extends CardImpl {
 
-    public OverwhelmingDenial(UUID ownerId) {
-        super(ownerId, 61, "Overwhelming Denial", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "OGW";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
 
-        // Overwhelming Denial can't be countered by spell or abilities.
-        Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
-        // Counter target spell.
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{U}{U}"));
+    static {
+        filter.add(new SubtypePredicate("Ally"));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    public ZadasCommando(UUID ownerId) {
+        super(ownerId, 120, "Zada's Commando", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "OGW";
+        this.subtype.add("Goblin");
+        this.subtype.add("Archer");
+        this.subtype.add("Ally");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // First Strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+
+        // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Zada's Commando deals 1 damage to target opponent.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
+        ability.addTarget(new TargetOpponent());
+        ability.setAbilityWord(AbilityWord.COHORT);
+        this.addAbility(ability);
+    }
+
+    public ZadasCommando(final ZadasCommando card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingDenial copy() {
-        return new OverwhelmingDenial(this);
+    public ZadasCommando copy() {
+        return new ZadasCommando(this);
     }
 }

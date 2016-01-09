@@ -25,77 +25,83 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Plopman
+ * @author fireshoes
  */
-public class MagneticTheft extends CardImpl {
+public class KazuulsTollCollector extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Equipment");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 
     static {
         filter.add(new SubtypePredicate("Equipment"));
     }
 
-    public MagneticTheft(UUID ownerId) {
-        super(ownerId, 74, "Magnetic Theft", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "5DN";
+    public KazuulsTollCollector(UUID ownerId) {
+        super(ownerId, 112, "Kazuul's Toll Collector", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "OGW";
+        this.subtype.add("Ogre");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-
-        // Attach target Equipment to target creature.
-        this.getSpellAbility().addEffect(new EquipEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // {0}: Attach target Equipment you control to Kazuul's Toll Collector. Activate this ability only any time you could cast a sorcery.
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new KazuulsTollCollectorEffect(), new ManaCostsImpl("{0}"));
+        ability.addTarget(new TargetControlledPermanent(filter));
+        this.addAbility(ability);
     }
 
-    public MagneticTheft(final MagneticTheft card) {
+    public KazuulsTollCollector(final KazuulsTollCollector card) {
         super(card);
     }
 
     @Override
-    public MagneticTheft copy() {
-        return new MagneticTheft(this);
+    public KazuulsTollCollector copy() {
+        return new KazuulsTollCollector(this);
     }
 }
 
-class EquipEffect extends OneShotEffect {
+class KazuulsTollCollectorEffect extends OneShotEffect {
 
-    public EquipEffect() {
+    public KazuulsTollCollectorEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Attach target Equipment to target creature";
+        staticText = "Attach target Equipment you control to {this}";
     }
 
-    public EquipEffect(final EquipEffect effect) {
+    public KazuulsTollCollectorEffect(final KazuulsTollCollectorEffect effect) {
         super(effect);
     }
 
     @Override
-    public EquipEffect copy() {
-        return new EquipEffect(this);
+    public KazuulsTollCollectorEffect copy() {
+        return new KazuulsTollCollectorEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent equipment = game.getPermanent(source.getFirstTarget());
-        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (creature != null && equipment != null) {
-            return creature.addAttachment(equipment.getId(), game);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && equipment != null) {
+            return permanent.addAttachment(equipment.getId(), game);
         }
         return false;
     }

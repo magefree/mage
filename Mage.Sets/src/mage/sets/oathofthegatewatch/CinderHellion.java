@@ -28,50 +28,44 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.SurgeAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetSpell;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public class CinderHellion extends CardImpl {
 
-    public OverwhelmingDenial(UUID ownerId) {
-        super(ownerId, 61, "Overwhelming Denial", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+    public CinderHellion(UUID ownerId) {
+        super(ownerId, 105, "Cinder Hellion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "OGW";
+        this.subtype.add("Hellion");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // Overwhelming Denial can't be countered by spell or abilities.
-        Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
-        ability.setRuleAtTheTop(true);
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+
+        // When Cinder Hellion enters the battlefield, it deals 2 damage to target opponent.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        
-        // Counter target spell.
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{U}{U}"));
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    public CinderHellion(final CinderHellion card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingDenial copy() {
-        return new OverwhelmingDenial(this);
+    public CinderHellion copy() {
+        return new CinderHellion(this);
     }
 }

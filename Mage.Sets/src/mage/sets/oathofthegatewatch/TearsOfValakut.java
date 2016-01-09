@@ -32,46 +32,50 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.SurgeAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetSpell;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public class TearsOfValakut extends CardImpl {
 
-    public OverwhelmingDenial(UUID ownerId) {
-        super(ownerId, 61, "Overwhelming Denial", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
+    }
+
+    public TearsOfValakut(UUID ownerId) {
+        super(ownerId, 118, "Tears of Valakut", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "OGW";
 
-        // Overwhelming Denial can't be countered by spell or abilities.
+        // Tears of Valakut can't be countered by spells or abilities.
         Effect effect = new CantBeCounteredSourceEffect();
         effect.setText("{this} can't be countered by spells or abilities");
         Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
-        
-        // Counter target spell.
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{U}{U}"));
+
+        // Tears of Valakut deals 5 damage to target creature with flying.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    public TearsOfValakut(final TearsOfValakut card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingDenial copy() {
-        return new OverwhelmingDenial(this);
+    public TearsOfValakut copy() {
+        return new TearsOfValakut(this);
     }
 }

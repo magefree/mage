@@ -28,50 +28,37 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.SurgeAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetSpell;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public class RealityHemorrhage extends CardImpl {
 
-    public OverwhelmingDenial(UUID ownerId) {
-        super(ownerId, 61, "Overwhelming Denial", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+    public RealityHemorrhage(UUID ownerId) {
+        super(ownerId, 100, "Reality Hemorrhage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "OGW";
 
-        // Overwhelming Denial can't be countered by spell or abilities.
-        Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
-        // Counter target spell.
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{U}{U}"));
+        // Devoid
+        this.addAbility(new DevoidAbility(this.color));
+
+        // Reality Hemorrhage deals 2 damage to target creature or player.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    public RealityHemorrhage(final RealityHemorrhage card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingDenial copy() {
-        return new OverwhelmingDenial(this);
+    public RealityHemorrhage copy() {
+        return new RealityHemorrhage(this);
     }
 }

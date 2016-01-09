@@ -28,50 +28,60 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.SurgeAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetSpell;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public class AkoumFlameseeker extends CardImpl {
 
-    public OverwhelmingDenial(UUID ownerId) {
-        super(ownerId, 61, "Overwhelming Denial", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "OGW";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
 
-        // Overwhelming Denial can't be countered by spell or abilities.
-        Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
-        // Counter target spell.
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{U}{U}"));
+    static {
+        filter.add(new SubtypePredicate("Ally"));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    public AkoumFlameseeker(UUID ownerId) {
+        super(ownerId, 101, "Akoum Flameseeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "OGW";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
+        this.subtype.add("Ally");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Discard a card. If you do, draw a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, (new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost())), new TapSourceCost());
+        ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
+        ability.setAbilityWord(AbilityWord.COHORT);
+        this.addAbility(ability);
+    }
+
+    public AkoumFlameseeker(final AkoumFlameseeker card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingDenial copy() {
-        return new OverwhelmingDenial(this);
+    public AkoumFlameseeker copy() {
+        return new AkoumFlameseeker(this);
     }
 }

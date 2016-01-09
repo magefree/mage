@@ -28,50 +28,43 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.SurgeAbility;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.effects.keyword.SupportEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetSpell;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public class PressIntoService extends CardImpl {
 
-    public OverwhelmingDenial(UUID ownerId) {
-        super(ownerId, 61, "Overwhelming Denial", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+    public PressIntoService(UUID ownerId) {
+        super(ownerId, 114, "Press into Service", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "OGW";
 
-        // Overwhelming Denial can't be countered by spell or abilities.
-        Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
-        // Counter target spell.
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{U}{U}"));
+        // Support 2.
+        getSpellAbility().addEffect(new SupportEffect(this, 2));
+
+        // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    public PressIntoService(final PressIntoService card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingDenial copy() {
-        return new OverwhelmingDenial(this);
+    public PressIntoService copy() {
+        return new PressIntoService(this);
     }
 }

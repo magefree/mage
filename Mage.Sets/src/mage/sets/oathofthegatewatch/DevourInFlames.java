@@ -28,50 +28,39 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.SurgeAbility;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetSpell;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlaneswalker;
 
 /**
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public class DevourInFlames extends CardImpl {
 
-    public OverwhelmingDenial(UUID ownerId) {
-        super(ownerId, 61, "Overwhelming Denial", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+    public DevourInFlames(UUID ownerId) {
+        super(ownerId, 106, "Devour in Flames", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "OGW";
 
-        // Overwhelming Denial can't be countered by spell or abilities.
-        Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
-        // Counter target spell.
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{U}{U}"));
+        // As an additional cost to cast Devour in Flames, return a land you control to its owner's hand.
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+
+        // Devour in Flames deals 5 damage to target creature or planeswalker.
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    public DevourInFlames(final DevourInFlames card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingDenial copy() {
-        return new OverwhelmingDenial(this);
+    public DevourInFlames copy() {
+        return new DevourInFlames(this);
     }
 }

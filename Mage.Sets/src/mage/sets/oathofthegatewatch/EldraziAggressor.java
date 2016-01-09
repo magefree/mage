@@ -28,50 +28,58 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.keyword.SurgeAbility;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.DevoidAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetSpell;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author fireshoes
  */
-public class OverwhelmingDenial extends CardImpl {
+public class EldraziAggressor extends CardImpl {
 
-    public OverwhelmingDenial(UUID ownerId) {
-        super(ownerId, 61, "Overwhelming Denial", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "OGW";
+    private final String rule = "{this} has haste as long as you control another colorless creature";
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another colorless creature");
 
-        // Overwhelming Denial can't be countered by spell or abilities.
-        Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
-        // Counter target spell.
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{U}{U}"));
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new ColorlessPredicate());
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    public EldraziAggressor(UUID ownerId) {
+        super(ownerId, 95, "Eldrazi Aggressor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "OGW";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Drone");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Devoid
+        this.addAbility(new DevoidAbility(this.color));
+
+        // Eldrazi Aggressor has haste as long as you control another colorless creature.
+        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+    }
+
+    public EldraziAggressor(final EldraziAggressor card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingDenial copy() {
-        return new OverwhelmingDenial(this);
+    public EldraziAggressor copy() {
+        return new EldraziAggressor(this);
     }
 }
