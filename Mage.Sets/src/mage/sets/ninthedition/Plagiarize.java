@@ -104,9 +104,7 @@ class PlagiarizeEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getFirstTarget())) {
-            if (event.getType() == GameEvent.EventType.DRAW_CARD) {
-                return true;
-            }
+            return true;
         }
         return false;
     }
