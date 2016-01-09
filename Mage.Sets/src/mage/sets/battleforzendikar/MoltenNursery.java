@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class MoltenNursery extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("colorless spell");
+    private static final FilterSpell filter = new FilterSpell("a colorless spell");
 
     static {
         filter.add(new ColorlessPredicate());

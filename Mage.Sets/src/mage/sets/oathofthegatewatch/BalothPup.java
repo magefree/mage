@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  */
 public class BalothPup extends CardImpl {
 
-    private final String rule = "{this} has trample as long as it has a -1/-1 counter on it";
+    private final String rule = "{this} has trample as long as it has a +1/+1 counter on it";
 
     public BalothPup(UUID ownerId) {
         super(ownerId, 127, "Baloth Pup", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

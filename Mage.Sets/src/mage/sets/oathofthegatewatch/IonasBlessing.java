@@ -64,7 +64,7 @@ public class IonasBlessing extends CardImpl {
         this.subtype.add("Aura");
 
         // Enchant creature
-         TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
