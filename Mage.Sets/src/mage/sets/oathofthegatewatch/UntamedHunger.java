@@ -25,44 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class BoonOfErebos extends CardImpl {
+public class UntamedHunger extends CardImpl {
 
-    public BoonOfErebos(UUID ownerId) {
-        super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "THS";
+    public UntamedHunger(UUID ownerId) {
+        super(ownerId, 91, "Untamed Hunger", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+        this.expansionSetCode = "OGW";
+        this.subtype.add("Aura");
 
-        // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new RegenerateTargetEffect();
-        effect.setText("Regenerate it");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature gets +2/+1 and has menace.
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1));
+        Effect effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA);
+        effect.setText("and has menace");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public BoonOfErebos(final BoonOfErebos card) {
+    public UntamedHunger(final UntamedHunger card) {
         super(card);
     }
 
     @Override
-    public BoonOfErebos copy() {
-        return new BoonOfErebos(this);
+    public UntamedHunger copy() {
+        return new UntamedHunger(this);
     }
 }

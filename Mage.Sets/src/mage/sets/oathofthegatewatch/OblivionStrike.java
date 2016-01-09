@@ -25,16 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,27 +39,25 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BoonOfErebos extends CardImpl {
+public class OblivionStrike extends CardImpl {
 
-    public BoonOfErebos(UUID ownerId) {
-        super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "THS";
+    public OblivionStrike(UUID ownerId) {
+        super(ownerId, 75, "Oblivion Strike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "OGW";
 
-        // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new RegenerateTargetEffect();
-        effect.setText("Regenerate it");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
+        // Devoid
+        this.addAbility(new DevoidAbility(this.color));
+        // Exile target creature.
+        getSpellAbility().addEffect(new ExileTargetEffect());
+        getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BoonOfErebos(final BoonOfErebos card) {
+    public OblivionStrike(final OblivionStrike card) {
         super(card);
     }
 
     @Override
-    public BoonOfErebos copy() {
-        return new BoonOfErebos(this);
+    public OblivionStrike copy() {
+        return new OblivionStrike(this);
     }
 }

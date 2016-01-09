@@ -25,16 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -42,58 +38,49 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class CruelUltimatum extends CardImpl {
+public class CorpseChurn extends CardImpl {
 
-    public CruelUltimatum(UUID ownerId) {
-        super(ownerId, 164, "Cruel Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}{B}{B}{B}{R}{R}");
-        this.expansionSetCode = "ALA";
+    public CorpseChurn(UUID ownerId) {
+        super(ownerId, 83, "Corpse Churn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
+        this.expansionSetCode = "OGW";
 
-        // Target opponent sacrifices a creature, discards three cards, then loses 5 life.
-        // You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
-        this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent"));
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(3));
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
-
-        this.getSpellAbility().addEffect(new CruelUltimatumEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
-        this.getSpellAbility().addEffect(new GainLifeEffect(5));
+        // Put the top three cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.
+        getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(3));
+        getSpellAbility().addEffect(new CorpseChurnEffect());
     }
 
-    public CruelUltimatum(final CruelUltimatum card) {
+    public CorpseChurn(final CorpseChurn card) {
         super(card);
     }
 
     @Override
-    public CruelUltimatum copy() {
-        return new CruelUltimatum(this);
+    public CorpseChurn copy() {
+        return new CorpseChurn(this);
     }
 }
 
-class CruelUltimatumEffect extends OneShotEffect {
+class CorpseChurnEffect extends OneShotEffect {
 
-    public CruelUltimatumEffect() {
+    public CorpseChurnEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return a creature card from your graveyard to your hand";
+        this.staticText = ", then you may return a creature card from your graveyard to your hand";
     }
 
-    public CruelUltimatumEffect(final CruelUltimatumEffect effect) {
+    public CorpseChurnEffect(final CorpseChurnEffect effect) {
         super(effect);
     }
 
     @Override
-    public CruelUltimatumEffect copy() {
-        return new CruelUltimatumEffect(this);
+    public CorpseChurnEffect copy() {
+        return new CorpseChurnEffect(this);
     }
 
     @Override
@@ -103,12 +90,14 @@ class CruelUltimatumEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+        target.setNotTarget(true);
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
+                && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card == null) {
-                return false;
+                controller.moveCards(card, Zone.HAND, source, game);
             }
-            controller.moveCards(card, Zone.HAND, source, game);
         }
         return true;
     }

@@ -25,44 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class BoonOfErebos extends CardImpl {
+public class NullCaller extends CardImpl {
 
-    public BoonOfErebos(UUID ownerId) {
-        super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "THS";
+    public NullCaller(UUID ownerId) {
+        super(ownerId, 88, "Null Caller", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "OGW";
+        this.subtype.add("Vampire");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-        // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new RegenerateTargetEffect();
-        effect.setText("Regenerate it");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
+        // {3}{B}, Exile a creature card from your graveyard: Put a 2/2 black Zombie creature token onto the battlefield tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new CreateTokenEffect(new ZombieToken(), 1, true, false),
+                new ManaCostsImpl<>("{3}{B}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+
     }
 
-    public BoonOfErebos(final BoonOfErebos card) {
+    public NullCaller(final NullCaller card) {
         super(card);
     }
 
     @Override
-    public BoonOfErebos copy() {
-        return new BoonOfErebos(this);
+    public NullCaller copy() {
+        return new NullCaller(this);
     }
 }

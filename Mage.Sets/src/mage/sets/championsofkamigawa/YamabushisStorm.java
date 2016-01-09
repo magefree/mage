@@ -1,5 +1,5 @@
 /*
- *  
+ *
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -25,28 +25,18 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
+ *
  */
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
@@ -61,7 +51,7 @@ public class YamabushisStorm extends CardImpl {
 
         // Yamabushi's Storm deals 1 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterCreaturePermanent()));
-        
+
         // If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
         this.getSpellAbility().addWatcher(new DamagedByWatcher());

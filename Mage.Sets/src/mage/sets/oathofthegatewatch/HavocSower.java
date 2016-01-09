@@ -25,44 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class BoonOfErebos extends CardImpl {
+public class HavocSower extends CardImpl {
 
-    public BoonOfErebos(UUID ownerId) {
-        super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "THS";
+    public HavocSower(UUID ownerId) {
+        super(ownerId, 71, "Havoc Sower", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "OGW";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Drone");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new RegenerateTargetEffect();
-        effect.setText("Regenerate it");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
+        // Devoid
+        this.addAbility(new DevoidAbility(this.color));
+        // {1}{C}: Havoc Sower gets +2/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{C}")));
     }
 
-    public BoonOfErebos(final BoonOfErebos card) {
+    public HavocSower(final HavocSower card) {
         super(card);
     }
 
     @Override
-    public BoonOfErebos copy() {
-        return new BoonOfErebos(this);
+    public HavocSower copy() {
+        return new HavocSower(this);
     }
 }

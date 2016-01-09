@@ -25,44 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.DevoidAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class BoonOfErebos extends CardImpl {
+public class SkyScourer extends CardImpl {
 
-    public BoonOfErebos(UUID ownerId) {
-        super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "THS";
+    private static final FilterSpell filterSpell = new FilterSpell("a colorless spell");
 
-        // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new RegenerateTargetEffect();
-        effect.setText("Regenerate it");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
+    static {
+        filterSpell.add(new ColorlessPredicate());
     }
 
-    public BoonOfErebos(final BoonOfErebos card) {
+    public SkyScourer(UUID ownerId) {
+        super(ownerId, 78, "Sky Scourer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "OGW";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Drone");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // Devoid
+        this.addAbility(new DevoidAbility(this.color));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever you cast a colorless spell, Sky Scourer gets +1/+0 until end of turn.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), filterSpell, false));
+
+    }
+
+    public SkyScourer(final SkyScourer card) {
         super(card);
     }
 
     @Override
-    public BoonOfErebos copy() {
-        return new BoonOfErebos(this);
+    public SkyScourer copy() {
+        return new SkyScourer(this);
     }
 }

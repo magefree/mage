@@ -25,12 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -42,27 +39,23 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class BoonOfErebos extends CardImpl {
+public class TarSnare extends CardImpl {
 
-    public BoonOfErebos(UUID ownerId) {
-        super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "THS";
+    public TarSnare(UUID ownerId) {
+        super(ownerId, 90, "Tar Snare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+        this.expansionSetCode = "OGW";
 
-        // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        // Target creature gets -3/-2 until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new RegenerateTargetEffect();
-        effect.setText("Regenerate it");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public BoonOfErebos(final BoonOfErebos card) {
+    public TarSnare(final TarSnare card) {
         super(card);
     }
 
     @Override
-    public BoonOfErebos copy() {
-        return new BoonOfErebos(this);
+    public TarSnare copy() {
+        return new TarSnare(this);
     }
 }
