@@ -56,6 +56,12 @@ public class RegisterUserDialog extends MageDialog {
         lblStatus = new javax.swing.JLabel();
         txtServer = new javax.swing.JTextField();
         txtPort = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        lblPasswordConfirmation = new javax.swing.JLabel();
+        txtPasswordConfirmation = new javax.swing.JPasswordField();
+        lblEmail = new javax.swing.JLabel();
+        lblPasswordConfirmationReasoning = new javax.swing.JLabel();
+        lblEmailReasoning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Register");
@@ -94,34 +100,53 @@ public class RegisterUserDialog extends MageDialog {
 
         lblStatus.setToolTipText("");
 
+        lblPasswordConfirmation.setLabelFor(txtPasswordConfirmation);
+        lblPasswordConfirmation.setText("Password:");
+
+        lblEmail.setLabelFor(txtEmail);
+        lblEmail.setText("Email:");
+
+        lblPasswordConfirmationReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        lblPasswordConfirmationReasoning.setLabelFor(txtPasswordConfirmation);
+        lblPasswordConfirmationReasoning.setText("(confirmation)");
+
+        lblEmailReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        lblEmailReasoning.setLabelFor(txtEmail);
+        lblEmailReasoning.setText("(used for password reset)");
+        lblEmailReasoning.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lblUserName))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPort, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblServer, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblPasswordConfirmationReasoning)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblServer)
+                                .addComponent(lblUserName)
+                                .addComponent(lblPort)
+                                .addComponent(lblPassword)
+                                .addComponent(lblPasswordConfirmation)
+                                .addComponent(lblEmail))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPasswordConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblEmailReasoning)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btnRegister)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnCancel))
-                        .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                        .addComponent(txtServer, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(btnCancel)))
+                    .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,13 +167,24 @@ public class RegisterUserDialog extends MageDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPasswordConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPasswordConfirmation))
+                .addComponent(lblPasswordConfirmationReasoning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmailReasoning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister)
-                    .addComponent(btnCancel))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(btnCancel)
+                    .addComponent(btnRegister))
+                .addContainerGap())
         );
 
         pack();
@@ -163,11 +199,16 @@ public class RegisterUserDialog extends MageDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        if (!this.txtPassword.getText().equals(this.txtPasswordConfirmation.getText())) {
+            MageFrame.getInstance().showError("Passwords don't match.");
+            return;
+        }
         connection = new Connection();
         connection.setHost(this.txtServer.getText().trim());
         connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
         connection.setUsername(this.txtUserName.getText().trim());
         connection.setPassword(this.txtPassword.getText().trim());
+        connection.setEmail(this.txtEmail.getText().trim());
         PreferencesDialog.setProxyInformation(connection);
         task = new ConnectTask();
         task.execute();
@@ -218,12 +259,18 @@ public class RegisterUserDialog extends MageDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEmailReasoning;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPasswordConfirmation;
+    private javax.swing.JLabel lblPasswordConfirmationReasoning;
     private javax.swing.JLabel lblPort;
     private javax.swing.JLabel lblServer;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblUserName;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtPasswordConfirmation;
     private javax.swing.JTextField txtPort;
     private javax.swing.JTextField txtServer;
     private javax.swing.JTextField txtUserName;
