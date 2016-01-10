@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.server;
 
 import mage.cards.repository.CardScanner;
@@ -58,13 +57,11 @@ import org.w3c.dom.Element;
 import javax.management.MBeanServer;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
-
 
 /**
  *
@@ -73,13 +70,12 @@ import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
 public class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
-    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH,  MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
 
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
     private static final String adminPasswordArg = "-adminPassword=";
     private static final String pluginFolder = "plugins";
-
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
@@ -95,15 +91,13 @@ public class Main {
         logger.info("Logging level: " + logger.getEffectiveLevel());
 
         String adminPassword = "";
-        for (String arg: args) {
+        for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
                 testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
-            }
-            else if (arg.startsWith(adminPasswordArg)) {
+            } else if (arg.startsWith(adminPasswordArg)) {
                 adminPassword = arg.replace(adminPasswordArg, "");
                 adminPassword = SystemUtil.sanitize(adminPassword);
-            }
-            else if (arg.startsWith(fastDBModeArg)) {
+            } else if (arg.startsWith(fastDBModeArg)) {
                 fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
             }
         }
@@ -128,19 +122,19 @@ public class Main {
         logger.info("Done.");
 
         deleteSavedGames();
-        for (GamePlugin plugin: config.getGameTypes()) {
+        for (GamePlugin plugin : config.getGameTypes()) {
             GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
-        for (GamePlugin plugin: config.getTournamentTypes()) {
+        for (GamePlugin plugin : config.getTournamentTypes()) {
             TournamentFactory.getInstance().addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
         }
-        for (Plugin plugin: config.getPlayerTypes()) {
+        for (Plugin plugin : config.getPlayerTypes()) {
             PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
         }
-        for (Plugin plugin: config.getDraftCubes()) {
+        for (Plugin plugin : config.getDraftCubes()) {
             CubeFactory.getInstance().addDraftCube(plugin.getName(), loadPlugin(plugin));
         }
-        for (Plugin plugin: config.getDeckTypes()) {
+        for (Plugin plugin : config.getDeckTypes()) {
             DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
         }
 
@@ -149,31 +143,32 @@ public class Main {
         logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());
         logger.info("Config - min user name l.: " + config.getMinUserNameLength());
         logger.info("Config - max user name l.: " + config.getMaxUserNameLength());
-        logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "True":"false"));
-        
+        logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "true" : "false"));
+
         logger.info("Config - backlog size    : " + config.getBacklogSize());
         logger.info("Config - lease period    : " + config.getLeasePeriod());
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
-        
+        logger.info("Config - auth. activated : " + (config.isAuthenticationActivated() ? "true" : "false"));
+        logger.info("Config - google account  : " + config.getGoogleAccount());
+
         Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
         connection.setHost(config.getServerAddress());
         connection.setPort(config.getPort());
         try {
             // Parameter: serializationtype => jboss
-            InvokerLocator serverLocator = new InvokerLocator(connection.getURI());                
+            InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
             if (!isAlreadyRunning(serverLocator)) {
                 server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
                 server.start();
                 logger.info("Started MAGE server - listening on " + connection.toString());
-                
+
                 if (testMode) {
                     logger.info("MAGE server running in test mode");
                 }
                 initStatistics();
-            }
-            else {
+            } else {
                 logger.fatal("Unable to start MAGE server - another server is already started");
             }
         } catch (Exception ex) {
@@ -202,6 +197,7 @@ public class Main {
     }
 
     static class ClientConnectionListener implements ConnectionListener {
+
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
             Session session = SessionManager.getInstance().getSession(client.getSessionId());
@@ -217,12 +213,12 @@ public class Main {
                 if (throwable instanceof ClientDisconnectedException) {
                     // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
                     // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
-                    //SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);                    
+                    //SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
                     SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("CLIENT DISCONNECTED - " + sessionInfo);
                     logger.debug("Stack Trace", throwable);
-                } else {                    
-                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);                    
+                } else {
+                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("LOST CONNECTION - " + sessionInfo);
                     if (logger.isDebugEnabled()) {
                         if (throwable == null) {
@@ -230,7 +226,7 @@ public class Main {
                         } else {
                             logger.debug(" - cause: " + Session.getBasicCause(throwable).toString());
                         }
-                    }                    
+                    }
                 }
             }
         }
@@ -263,13 +259,13 @@ public class Main {
 
         @Override
         public void setMBeanServer(MBeanServer server) {
-            
+
         }
 
         @Override
-        public void setInvoker(ServerInvoker invoker) {            
+        public void setInvoker(ServerInvoker invoker) {
             ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.getInstance().getSecondaryBindPort());
-            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());                        
+            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());
             ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());
         }
 
@@ -340,7 +336,7 @@ public class Main {
             logger.debug("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
-            logger.warn("Tournament type not found:" + plugin.getName() + " / "+ plugin.getJar() + " - check plugin folder", ex);
+            logger.warn("Tournament type not found:" + plugin.getName() + " / " + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
@@ -353,15 +349,14 @@ public class Main {
             directory.mkdirs();
         }
         File[] files = directory.listFiles(
-            new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.endsWith(".game");
+                new FilenameFilter() {
+                    @Override
+                    public boolean accept(File dir, String name) {
+                        return name.endsWith(".game");
+                    }
                 }
-            }
         );
-        for (File file : files)
-        {
+        for (File file : files) {
             file.delete();
         }
     }

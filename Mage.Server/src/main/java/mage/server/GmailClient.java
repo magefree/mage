@@ -18,11 +18,11 @@ import com.google.api.services.gmail.model.Message;
 import java.io.ByteArrayOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.mail.Session;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.Properties;
 import javax.mail.MessagingException;
+import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import mage.server.util.ConfigSettings;
@@ -50,9 +50,9 @@ public class GmailClient {
             }
 
             GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-            httpTransport, JSON_FACTORY, clientSecrets,
-            Collections.singleton(GmailScopes.GMAIL_COMPOSE)).setDataStoreFactory(
-                    dataStoreFactory).build();
+                    httpTransport, JSON_FACTORY, clientSecrets,
+                    Collections.singleton(GmailScopes.GMAIL_COMPOSE)).setDataStoreFactory(
+                            dataStoreFactory).build();
 
             credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
             return true;
@@ -76,7 +76,8 @@ public class GmailClient {
             Message message = new Message();
             message.setRaw(Base64.encodeBase64URLSafeString(baos.toByteArray()));
 
-            gmail.users().messages().send(ConfigSettings.getInstance().getGoogleAccount() + "@gmail.com", message).execute();
+            gmail.users().messages().send(ConfigSettings.getInstance().getGoogleAccount()
+                    + (ConfigSettings.getInstance().getGoogleAccount().endsWith("@gmail.com") ? "" : "@gmail.com"), message).execute();
             return true;
         } catch (MessagingException | IOException ex) {
             logger.error("Error sending message", ex);
