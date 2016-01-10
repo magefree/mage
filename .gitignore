@@ -92,3 +92,5 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 Mage.Client/serverlist.txt
 /bin/
 /target/
+
+client_secrets.json
