@@ -70,7 +70,7 @@ public class EldraziDisplacer extends CardImpl {
         Effect effect = new ExileTargetForSourceEffect();
         effect.setText("Exile another target creature");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{C}"));
-        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true);
         effect.setText(", then return it to the battlefield tapped under its owner's control");
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));
