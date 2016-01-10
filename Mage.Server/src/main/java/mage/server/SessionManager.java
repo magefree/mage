@@ -237,4 +237,13 @@ public class SessionManager {
         }
         return false;
     }
+
+    public void sendErrorMessageToClient(String sessionId, String message) {
+        Session session = sessions.get(sessionId);
+        if (session == null) {
+            logger.error("Following error message is not delivered because session " + sessionId + " is not found: " + message);
+            return;
+        }
+        session.sendErrorMessageToClient(message);
+    }
 }

@@ -234,16 +234,15 @@ public class RegisterUserDialog extends MageDialog {
             try {
                 get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
                 if (result) {
-                    lblStatus.setText("Registration succeeded");
-                    MageFrame.getInstance().showMessage("Registration succeeded");
+                    String message = "Registration succeeded";
+                    lblStatus.setText(message);
+                    MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {
                     lblStatus.setText("Could not register");
                 }
-            } catch (InterruptedException ex) {
-                logger.fatal("Update Players Task error", ex);
-            } catch (ExecutionException ex) {
-                logger.fatal("Update Players Task error", ex);
+            } catch (InterruptedException | ExecutionException ex) {
+                logger.fatal("Registration task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Registration was canceled");
                 lblStatus.setText("Registration was canceled (but an account might have been actually created)");

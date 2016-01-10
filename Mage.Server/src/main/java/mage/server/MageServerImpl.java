@@ -27,9 +27,12 @@
  */
 package mage.server;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -95,9 +98,17 @@ public class MageServerImpl implements MageServer {
 
     private static final Logger logger = Logger.getLogger(MageServerImpl.class);
     private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
-
+    private static final SecureRandom RANDOM = new SecureRandom();
+ 
     private final String adminPassword;
     private final boolean testMode;
+    private final LinkedHashMap<String, String> activeAuthTokens = new LinkedHashMap<String, String>() {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
+            // Keep the latest 1024 auth tokens in memory.
+            return size() > 1024;
+        }
+    };
 
     public MageServerImpl(String adminPassword, boolean testMode) {
         this.adminPassword = adminPassword;
@@ -108,6 +119,50 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean registerUser(String sessionId, String userName, String password, String email) throws MageException {
         return SessionManager.getInstance().registerUser(sessionId, userName, password, email);
+    }
+
+    // generateAuthToken returns a uniformly distributed 6-digits string.
+    static private String generateAuthToken() {
+        return String.format("%06d", RANDOM.nextInt(1000000));
+    }
+
+    @Override
+    public boolean emailAuthToken(String sessionId, String email) throws MageException {
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
+        if (authorizedUser == null) {
+            sendErrorMessageToClient(sessionId, "No user was found with the email address " + email);
+            logger.info("Auth token is requested for " + email + " but there's no such user in DB");
+            return false;
+        }
+        String authToken = generateAuthToken();
+        activeAuthTokens.put(email, authToken);
+        if (!GmailClient.sendMessage(email, "XMage Password Reset Auth Token",
+                "Use this auth token to reset your password: " + authToken + "\n" +
+                "It's valid until the next server restart.")) {
+            sendErrorMessageToClient(sessionId, "There was an error inside the server while emailing an auth token");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean resetPassword(String sessionId, String email, String authToken, String password) throws MageException {
+        String storedAuthToken = activeAuthTokens.get(email);
+        if (storedAuthToken == null || !storedAuthToken.equals(authToken)) {
+            sendErrorMessageToClient(sessionId, "Invalid auth token");
+            logger.info("Invalid auth token " + authToken + " is sent for " + email);
+            return false;
+        }
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
+        if (authorizedUser == null) {
+            sendErrorMessageToClient(sessionId, "The user is no longer in the DB");
+            logger.info("Auth token is valid, but the user with email address " + email + " is no longer in the DB");
+            return false;
+        }
+        AuthorizedUserRepository.instance.remove(authorizedUser.getName());
+        AuthorizedUserRepository.instance.add(authorizedUser.getName(), password, email);
+        activeAuthTokens.remove(email);
+        return true;
     }
 
     @Override
@@ -1043,6 +1098,15 @@ public class MageServerImpl implements MageServer {
                 }
             }, true);
         }
+    }
+
+    private void sendErrorMessageToClient(final String sessionId, final String message) throws MageException {
+        execute("sendErrorMessageToClient", sessionId, new Action() {
+            @Override
+            public void execute() {
+                SessionManager.getInstance().sendErrorMessageToClient(sessionId, message);
+            }
+        });
     }
 
     protected void execute(final String actionName, final String sessionId, final Action action, boolean checkAdminRights) throws MageException {

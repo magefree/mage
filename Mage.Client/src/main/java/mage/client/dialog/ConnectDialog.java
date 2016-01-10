@@ -77,6 +77,7 @@ public class ConnectDialog extends MageDialog {
     private Connection connection;
     private ConnectTask task;
     private RegisterUserDialog registerUserDialog;
+    private ResetPasswordDialog resetPasswordDialog;
 
     private final ActionListener connectAction = new ActionListener() {
         @Override
@@ -98,6 +99,9 @@ public class ConnectDialog extends MageDialog {
 
         registerUserDialog = new RegisterUserDialog();
         MageFrame.getDesktop().add(registerUserDialog, JLayeredPane.POPUP_LAYER);
+
+        resetPasswordDialog = new ResetPasswordDialog();
+        MageFrame.getDesktop().add(resetPasswordDialog, JLayeredPane.POPUP_LAYER);
     }
 
     public void showDialog() {
@@ -157,6 +161,7 @@ public class ConnectDialog extends MageDialog {
         btnCancel = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
+        btnForgotPassword = new javax.swing.JButton();
 
         setTitle("Connect to server");
         setNormalBounds(new java.awt.Rectangle(100, 100, 410, 307));
@@ -237,6 +242,13 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
+        btnForgotPassword.setText("Forgot password");
+        btnForgotPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnForgotPasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -269,10 +281,12 @@ public class ConnectDialog extends MageDialog {
                             .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnRegister)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnConnect)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnForgotPassword)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCancel)))
                         .addGap(26, 26, 26)))
@@ -313,10 +327,11 @@ public class ConnectDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConnect)
-                    .addComponent(btnCancel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnCancel)
+                    .addComponent(btnForgotPassword))
+                .addGap(3, 3, 3)
                 .addComponent(btnRegister)
-                .addGap(3, 3, 3))
+                .addContainerGap())
         );
 
         pack();
@@ -566,10 +581,15 @@ public class ConnectDialog extends MageDialog {
         registerUserDialog.showDialog();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void btnForgotPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotPasswordActionPerformed
+        resetPasswordDialog.showDialog();
+    }//GEN-LAST:event_btnForgotPasswordActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnFind;
+    private javax.swing.JButton btnForgotPassword;
     private javax.swing.JButton btnRegister;
     private mage.client.util.gui.countryBox.CountryComboBox cbFlag;
     private javax.swing.JCheckBox chkAutoConnect;
