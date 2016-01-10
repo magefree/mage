@@ -46,8 +46,8 @@ import mage.util.CardUtil;
  */
 public class Commander extends DeckValidator {
 
-    protected  List<String> banned = new ArrayList<>();
-    protected  List<String> bannedCommander = new ArrayList<>();
+    protected List<String> banned = new ArrayList<>();
+    protected List<String> bannedCommander = new ArrayList<>();
 
     public Commander() {
         this("Commander");
@@ -103,7 +103,7 @@ public class Commander extends DeckValidator {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains",
+        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
                 "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
@@ -130,22 +130,22 @@ public class Commander extends DeckValidator {
                 invalid.put("Commander", "Commander invalid ");
                 return false;
             }
-            if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary")) ||
-                    (commander.getCardType().contains(CardType.PLANESWALKER) && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary"))
+                    || (commander.getCardType().contains(CardType.PLANESWALKER) && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 if (!bannedCommander.contains(commander.getName())) {
                     FilterMana color = CardUtil.getColorIdentity(commander);
                     for (Card card : deck.getCards()) {
                         if (!cardHasValidColor(color, card)) {
-                            invalid.put(card.getName(), "Invalid color (" + commander.getName() +")");
+                            invalid.put(card.getName(), "Invalid color (" + commander.getName() + ")");
                             valid = false;
                         }
                     }
                 } else {
-                    invalid.put("Commander", "Commander banned (" + commander.getName() +")");
+                    invalid.put("Commander", "Commander banned (" + commander.getName() + ")");
                     valid = false;
                 }
             } else {
-                invalid.put("Commander", "Commander invalid (" + commander.getName() +")");
+                invalid.put("Commander", "Commander invalid (" + commander.getName() + ")");
                 valid = false;
             }
         } else {
