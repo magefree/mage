@@ -46,7 +46,7 @@ import mage.constants.Zone;
 public class StalkingDrone extends CardImpl {
 
     public StalkingDrone(UUID ownerId) {
-        super(ownerId, 126, "Stalking Drone", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        super(ownerId, 124, "Stalking Drone", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "OGW";
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
