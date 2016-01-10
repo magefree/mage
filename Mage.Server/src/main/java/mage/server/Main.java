@@ -107,7 +107,18 @@ public class Main {
                 fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
             }
         }
-        
+
+        ConfigSettings config = ConfigSettings.getInstance();
+        if (config.isAuthenticationActivated()) {
+            logger.info("Initializing GmailClient. This will open up a tab in your browser to ask for an OAuth access token.");
+            if (GmailClient.initilize()) {
+                logger.info("GmailClient initilized successfully.");
+            } else {
+                logger.fatal("GmailClient initialization failed.");
+                return;
+            }
+        }
+
         logger.info("Loading cards...");
         if (fastDbMode) {
             CardScanner.scanned = true;
@@ -117,7 +128,6 @@ public class Main {
         logger.info("Done.");
 
         deleteSavedGames();
-        ConfigSettings config = ConfigSettings.getInstance();
         for (GamePlugin plugin: config.getGameTypes()) {
             GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }

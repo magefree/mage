@@ -195,7 +195,7 @@ public class SessionImpl implements Session {
             public boolean run() throws Throwable {
                 logger.info("Trying to register as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
                 boolean registerResult = server.registerUser(sessionId, connection.getUsername(),
-                        connection.getPassword(), "");
+                        connection.getPassword(), connection.getEmail());
                 if (registerResult) {
                     logger.info("Registered as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
                 }

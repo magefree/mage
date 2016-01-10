@@ -94,7 +94,7 @@ public class ConfigSettings {
     public int getBacklogSize() {
         return config.getServer().getBacklogSize().intValue();
     }
-        
+
     public int getMaxGameThreads() {
         return config.getServer().getMaxGameThreads().intValue();
     }
@@ -114,14 +114,22 @@ public class ConfigSettings {
     public String getUserNamePattern() {
         return config.getServer().getUserNamePattern();
     }
-    
+
     public String getMaxAiOpponents() {
         return config.getServer().getMaxAiOpponents();
     }
 
     public Boolean isSaveGameActivated() {
-            return config.getServer().isSaveGameActivated();
-}
+        return config.getServer().isSaveGameActivated();
+    }
+
+    public Boolean isAuthenticationActivated() {
+        return config.getServer().isAuthenticationActivated();
+    }
+
+    public String getGoogleAccount() {
+        return config.getServer().getGoogleAccount();
+    }
 
     public List<Plugin> getPlayerTypes() {
         return config.getPlayerTypes().getPlayerType();
