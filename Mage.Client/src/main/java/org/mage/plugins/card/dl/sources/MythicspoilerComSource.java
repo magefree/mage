@@ -89,6 +89,8 @@ public class MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("BFZ-unisonstrike", "tandemtactics");
         cardNameAliases.put("BFZ-eldrazidevastator", "eldrazidevastator");
         cardNameAliases.put("BFZ-kozliekschanneler", "kozilekschanneler");
+        cardNameAliases.put("OGW-wastes", "wastes1");
+        cardNameAliases.put("OGW-wastes2", "wastes2");
 
         cardNameAliasesStart = new HashMap<>();
         HashSet<String> names = new HashSet<>();
@@ -156,14 +158,16 @@ public class MythicspoilerComSource implements CardImageSource {
                     if (cardName != null && !cardName.isEmpty()) {
                         if (cardNameAliases.containsKey(cardSet + "-" + cardName)) {
                             cardName = cardNameAliases.get(cardSet + "-" + cardName);
-                        }
-                        if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
-                            if (!cardName.startsWith("forest")
-                                    && !cardName.startsWith("swamp")
-                                    && !cardName.startsWith("mountain")
-                                    && !cardName.startsWith("island")
-                                    && !cardName.startsWith("plains")) {
-                                cardName = cardName.substring(0, cardName.length() - 1);
+                        } else {
+                            if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
+                                if (!cardName.startsWith("forest")
+                                        && !cardName.startsWith("swamp")
+                                        && !cardName.startsWith("mountain")
+                                        && !cardName.startsWith("island")
+                                        && !cardName.startsWith("plains")) {
+
+                                    cardName = cardName.substring(0, cardName.length() - 1);
+                                }
                             }
                         }
                         setLinks.put(cardName, baseUrl + cardLink);
@@ -203,7 +207,8 @@ public class MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) {
+    public String generateTokenUrl(CardDownloadData card
+    ) {
         return null;
     }
 

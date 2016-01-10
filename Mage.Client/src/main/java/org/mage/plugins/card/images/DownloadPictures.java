@@ -616,7 +616,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         new TFile(temporaryFile).cp_rp(outputFile);
                     }
                 } else {
-                    logger.warn("Image download for " + card.getName() + "(" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+                    logger.warn("Image download for " + card.getName()
+                            + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
+                            + "(" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
                     if (logger.isDebugEnabled()) { // Shows the returned html from the request to the web server
                         logger.debug("Return ed HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
                     }
