@@ -105,7 +105,7 @@ class VectisDominatorEffect extends OneShotEffect {
                 cost.clearPaid();
                 final StringBuilder sb = new StringBuilder("Pay 2 life? (Otherwise ").append(targetCreature.getName()).append(" will be tapped)");
                 if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
-                    cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), true);
+                    cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), true, null);
                 }
                 if (!cost.isPaid()) {
                     return targetCreature.tap(game);

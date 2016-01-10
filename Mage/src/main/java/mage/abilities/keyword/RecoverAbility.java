@@ -119,7 +119,7 @@ class RecoverEffect extends OneShotEffect {
                 && game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
             if (controller.chooseUse(Outcome.Damage, "Pay " + cost.getText() + " to recover " + sourceCard.getLogName() + "? (Otherwise the card will be exiled)", source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), controller.getId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
                     return new ReturnToHandSourceEffect().apply(game, source);
                 }
             }

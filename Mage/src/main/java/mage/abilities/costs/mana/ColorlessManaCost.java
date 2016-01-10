@@ -29,6 +29,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
@@ -70,8 +71,8 @@ public class ColorlessManaCost extends ManaCostImpl {
     }
 
     @Override
-    public void assignPayment(Game game, Ability ability, ManaPool pool) {
-        this.assignColorless(ability, game, pool, mana);
+    public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
+        this.assignColorless(ability, game, pool, mana, costToPay);
     }
 
     @Override

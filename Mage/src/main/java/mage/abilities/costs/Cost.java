@@ -45,6 +45,8 @@ public interface Cost extends Serializable {
 
     boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana);
 
+    boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay);
+
     boolean isPaid();
 
     void clearPaid();

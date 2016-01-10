@@ -92,7 +92,7 @@ class HasranOgressEffect extends OneShotEffect {
             Cost cost = new ManaCostsImpl("{2}");
             String message = "Would you like to pay {2} to prevent taking 3 damage from Hasran Ogress?";
             if (!(controller.chooseUse(Outcome.Benefit, message, source, game)
-                    && cost.pay(source, game, source.getSourceId(), controller.getId(), false))) {
+                    && cost.pay(source, game, source.getSourceId(), controller.getId(), false, null))) {
                 controller.damage(3, source.getSourceId(), game, false, true);
             }
             return true;

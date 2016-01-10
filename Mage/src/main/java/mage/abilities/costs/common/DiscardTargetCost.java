@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -64,7 +65,7 @@ public class DiscardTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         this.cards.clear();
         this.targets.clearChosen();;
         Player player = game.getPlayer(controllerId);

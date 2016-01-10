@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -59,7 +60,7 @@ public class SacrificeAllCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
             permanents.add(permanent.copy());
             permanent.sacrifice(sourceId, game);

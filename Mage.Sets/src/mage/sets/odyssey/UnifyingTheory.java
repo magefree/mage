@@ -95,7 +95,7 @@ class UnifyingTheoryEffect extends OneShotEffect {
         if (caster != null) {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {2} to draw a card?", source, game)) {
                 Cost cost = new ManaCostsImpl("{2}");
-                if (cost.pay(source, game, source.getSourceId(), caster.getId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), caster.getId(), false, null)) {
                     caster.drawCards(1, game);
                 }
             }

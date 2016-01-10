@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
@@ -161,7 +162,7 @@ class ChampionExileCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         MageObject sourceObject = ability.getSourceObject(game);
         if (controller != null && sourceObject != null) {

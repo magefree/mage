@@ -66,7 +66,7 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect {
             if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
                     && player.chooseUse(Outcome.Benefit, cost.getText() + "? (otherwise " + permanent.getName() + " becomes tapped)", source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     return true;
                 }
             }

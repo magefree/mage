@@ -47,7 +47,7 @@ public interface ManaCost extends Cost {
 
     Mana getPayment();
 
-    void assignPayment(Game game, Ability ability, ManaPool pool);
+    void assignPayment(Game game, Ability ability, ManaPool pool, Cost costsToPay);
 
     void setPayment(Mana mana);
 

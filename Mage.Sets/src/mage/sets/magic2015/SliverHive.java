@@ -29,11 +29,11 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.ConditionalMana;
-import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -124,7 +124,7 @@ class SliverHiveConditionalMana extends ConditionalMana {
 class SliverHiveManaCondition extends CreatureCastManaCondition {
 
     @Override
-    public boolean apply(Game game, Ability source, UUID manaProducer) {
+    public boolean apply(Game game, Ability source, UUID manaProducer, Cost costToPay) {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source.getSourceId());
             if (object.hasSubtype("Sliver")) {

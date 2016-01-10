@@ -130,7 +130,7 @@ class DoUnlessTargetPaysCost extends OneShotEffect {
             message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             cost.clearPaid();
             if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffect.getOutcome(), message, source, game)) {
-                cost.pay(source, game, source.getSourceId(), player.getId(), false);
+                cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
             }
             if (!cost.isPaid()) {
                 executingEffect.setTargetPointer(this.targetPointer);

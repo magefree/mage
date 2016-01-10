@@ -120,7 +120,7 @@ class VishKalBloodArbiterCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
             this.amount = permanent.getCounters().getCount(name);

@@ -1195,7 +1195,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
-            if (cost.pay(null, game, null, playerId, false) || spendAnyMana) {
+            if (cost.pay(null, game, null, playerId, false, null) || spendAnyMana) {
                 return true;
             }
         }

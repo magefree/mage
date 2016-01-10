@@ -30,6 +30,7 @@ package mage.abilities.costs.common;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.game.Game;
@@ -66,7 +67,7 @@ public class ExileSourceCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         MageObject sourceObject = ability.getSourceObject(game);
         Player controller = game.getPlayer(controllerId);
         if (controller != null && sourceObject != null && (sourceObject instanceof Card)) {

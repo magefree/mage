@@ -40,7 +40,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
             message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
             if (player.chooseUse(Outcome.Benefit, message, source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     return true;
                 }
             }

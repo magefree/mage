@@ -65,7 +65,9 @@ public class UntapSourceDuringEachOtherPlayersUntapStepEffect extends Continuous
             applied = Boolean.FALSE;
         }
         if (!applied && layer.equals(Layer.RulesEffects)) {
-            if (!source.getControllerId().equals(game.getActivePlayerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
+            if (!source.getControllerId().equals(game.getActivePlayerId())
+                    && game.getStep() != null
+                    && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
                 Permanent permanent = (Permanent) game.getPermanent(source.getSourceId());
                 if (permanent != null) {
@@ -79,7 +81,7 @@ public class UntapSourceDuringEachOtherPlayersUntapStepEffect extends Continuous
                 }
             }
         } else if (applied && layer.equals(Layer.RulesEffects)) {
-            if (game.getStep().getType() == PhaseStep.END_TURN) {
+            if (game.getStep() != null && game.getStep().getType() == PhaseStep.END_TURN) {
                 game.getState().setValue(source.getSourceId() + "applied", false);
             }
         }

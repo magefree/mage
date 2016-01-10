@@ -105,7 +105,7 @@ class FlashEffect extends OneShotEffect {
                 StringBuilder sb = new StringBuilder("Pay ").append(reducedCost.getText()).append("?");
                 if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                     reducedCost.clearPaid();
-                    if (reducedCost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                    if (reducedCost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                         return true;
                     }
                 }

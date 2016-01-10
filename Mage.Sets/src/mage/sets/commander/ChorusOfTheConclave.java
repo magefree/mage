@@ -147,7 +147,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
             xValue = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
             if (xValue > 0) {
                 Cost cost = new GenericManaCost(xValue);
-                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false);
+                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
             } else {
                 payed = true;
             }

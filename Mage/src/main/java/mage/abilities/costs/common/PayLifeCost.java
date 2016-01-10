@@ -35,6 +35,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.abilities.costs.Cost;
 
 /**
  *
@@ -73,7 +74,7 @@ public class PayLifeCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         int lifeToPayAmount = amount.calculate(game, ability, null);
         this.paid = game.getPlayer(controllerId).loseLife(lifeToPayAmount, game) == lifeToPayAmount;
         return paid;

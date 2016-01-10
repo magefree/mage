@@ -57,6 +57,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.costs.Cost;
 
 /**
  *
@@ -200,7 +201,7 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         int amount = new ManacostVariableValue().calculate(game, ability, null);
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null && permanent.getCounters().getCount(CounterType.P1P1) >= amount) {

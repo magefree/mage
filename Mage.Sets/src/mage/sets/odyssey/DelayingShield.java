@@ -139,7 +139,7 @@ class DelayingShieldUpkeepEffect extends OneShotEffect {
             for (int i = numCounters; i > 0; i--) {
                 if (controller.chooseUse(Outcome.Benefit, "Pay {1}{W}? (" + i + " counters left to pay)", source, game)) {
                     Cost cost = new ManaCostsImpl<>("{1}{W}");
-                    if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                    if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                         continue;
                     }
                 }

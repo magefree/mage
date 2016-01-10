@@ -159,7 +159,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             if (attackBlockOtherTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
                     && player.chooseUse(Outcome.Neutral,
                             attackBlockOtherTax.getText() + " to " + (event.getType().equals(EventType.DECLARE_ATTACKER) ? "attack?" : "block?"), source, game)) {
-                if (attackBlockOtherTax.pay(source, game, source.getSourceId(), event.getPlayerId(), false)) {
+                if (attackBlockOtherTax.pay(source, game, source.getSourceId(), event.getPlayerId(), false, null)) {
                     return false;
                 }
             }

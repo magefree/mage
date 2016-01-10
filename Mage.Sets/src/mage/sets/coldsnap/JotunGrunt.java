@@ -30,6 +30,7 @@ package mage.sets.coldsnap;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.Card;
@@ -84,7 +85,7 @@ class JotunGruntCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             if (targets.choose(Outcome.Removal, controllerId, sourceId, game)) {

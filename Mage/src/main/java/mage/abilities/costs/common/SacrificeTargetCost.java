@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
@@ -66,7 +67,7 @@ public class SacrificeTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         UUID activator = controllerId;
         if (ability.getAbilityType().equals(AbilityType.ACTIVATED) || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
             activator = ((ActivatedAbilityImpl) ability).getActivatorId();

@@ -117,7 +117,7 @@ class ForgottenLoreEffect extends OneShotEffect {
                 if(!done) {
                     if(cost.canPay(source, source.getSourceId(), you.getId(), game) && you.chooseUse(Outcome.Benefit, "Pay {G} to choose a different card ?", source, game)) {
                         cost.clearPaid();
-                        if(!cost.pay(source, game, source.getSourceId(), you.getId(), false)) {
+                        if(!cost.pay(source, game, source.getSourceId(), you.getId(), false, null)) {
                             done = true;
                         }
                     }

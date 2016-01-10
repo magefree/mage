@@ -92,7 +92,7 @@ class DivertEffect extends OneShotEffect {
             if (player != null) {
                 cost.clearPaid();
                 if (!cost.pay(source, game, spell.getControllerId(),
-                        spell.getControllerId(), false)) {
+                        spell.getControllerId(), false, null)) {
                     return spell.chooseNewTargets(game, source.getControllerId(), true, true, null);
                 }
             }

@@ -29,6 +29,7 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -52,7 +53,7 @@ public class ExileFromStackCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
             Player player = game.getPlayer(controllerId);
             for (UUID targetId : targets.get(0).getTargets()) {

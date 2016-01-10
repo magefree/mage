@@ -133,7 +133,7 @@ class ElectropotenceEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.Damage, "Pay {2}{R} to do the damage?", source, game)) {
          // if (controller.chooseUse(Outcome.Damage, "Pay {2}{R}? If you do, " + creature.getName() + " deals damage equal to its power to target creature or player.", game)) {
                 ManaCosts manaCosts = new ManaCostsImpl("{2}{R}");
-                if (manaCosts.pay(source, game, source.getSourceId(), controller.getId(), false)) {
+                if (manaCosts.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
                     int amount = creature.getPower().getValue();
                     UUID target = source.getTargets().getFirstTarget();
                     Permanent targetCreature = game.getPermanent(target);

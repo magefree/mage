@@ -40,6 +40,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,6 +49,12 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class GravityNegator extends CardImpl {
+
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public GravityNegator(UUID ownerId) {
         super(ownerId, 45, "Gravity Negator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -65,7 +73,7 @@ public class GravityNegator extends CardImpl {
         // Whenenever Gravity Negator attacks, you may pay {C}. If you do, another target creature gains flying until end of turn.
         Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{C}")), false,
                 "Whenever {this} attacks you may pay {C}. If you do, another target creature gains flying until end of turn.");
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

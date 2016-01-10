@@ -72,7 +72,7 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         return paid;
     }
 

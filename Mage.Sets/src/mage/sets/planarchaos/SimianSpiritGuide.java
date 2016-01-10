@@ -34,6 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -84,7 +85,7 @@ class ExileSourceFromHandCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Card card = game.getCard(sourceId);
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getHand().contains(sourceId) && card != null) {

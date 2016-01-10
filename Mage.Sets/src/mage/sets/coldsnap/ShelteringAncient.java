@@ -30,6 +30,7 @@ package mage.sets.coldsnap;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -89,7 +90,7 @@ class ShelteringAncientCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             Target target = new TargetCreaturePermanent(1, 1, filter, true);

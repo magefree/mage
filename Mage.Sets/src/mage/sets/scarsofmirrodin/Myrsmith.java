@@ -84,7 +84,7 @@ class MyrsmithEffect extends CreateTokenEffect {
     public boolean apply(Game game, Ability source) {
         Cost cost = new GenericManaCost(1);
         cost.clearPaid();
-        if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+        if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
             super.apply(game, source);
         }
         return true;

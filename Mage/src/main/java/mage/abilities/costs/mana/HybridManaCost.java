@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
@@ -66,11 +67,11 @@ public class HybridManaCost extends ManaCostImpl {
     }
 
     @Override
-    public void assignPayment(Game game, Ability ability, ManaPool pool) {
-        if (assignColored(ability, game, pool, this.mana1)) {
+    public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
+        if (assignColored(ability, game, pool, this.mana1, costToPay)) {
             return;
         }
-        assignColored(ability, game, pool, this.mana2);
+        assignColored(ability, game, pool, this.mana2, costToPay);
     }
 
     @Override

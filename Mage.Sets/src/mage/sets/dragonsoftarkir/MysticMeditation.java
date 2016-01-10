@@ -95,7 +95,7 @@ class MysticMeditationEffect extends OneShotEffect {
                 && controller.chooseUse(Outcome.Discard, "Do you want to discard a creature card?  If you don't, you must discard 2 cards", source, game)) {
             Cost cost = new DiscardTargetCost(new TargetCardInHand(filter));
             if (cost.canPay(source, source.getSourceId(), controller.getId(), game)) {
-                if (cost.pay(source, game, source.getSourceId(), controller.getId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
                     return true;
                 }
             }

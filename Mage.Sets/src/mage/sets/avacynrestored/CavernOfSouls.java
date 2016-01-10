@@ -36,6 +36,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -136,7 +137,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
     }
 
     @Override
-    public boolean apply(Game game, Ability source, UUID manaProducer) {
+    public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
         // check: ... to cast a creature spell
         if (super.apply(game, source)) {
             // check: ... of the chosen type

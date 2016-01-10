@@ -97,7 +97,7 @@ class TajNarSwordsmithEffect extends OneShotEffect {
         if (player != null && player.chooseUse(Outcome.BoostCreature, "Do you want to to pay {X}?", source, game)) {
             int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
             Cost cost = new GenericManaCost(costX);
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                 FilterCard filter = new FilterCard("Equipment card with converted mana cost " + costX + " or less");
                 filter.add(new SubtypePredicate("Equipment"));
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, costX + 1));

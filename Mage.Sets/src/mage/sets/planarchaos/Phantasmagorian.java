@@ -103,7 +103,7 @@ class CounterSourceEffect extends OneShotEffect {
                 cost.clearPaid();
                 if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                         && player.chooseUse(outcome, "Discard three cards to counter " + sourceObject.getIdName() + "?", source, game)) {
-                    if (cost.pay(source, game, source.getSourceId(), playerId, false)) {
+                    if (cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
                         game.informPlayers(player.getLogName() + " discards 3 cards to counter " + sourceObject.getIdName() + ".");
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {

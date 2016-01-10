@@ -157,7 +157,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
@@ -197,7 +197,7 @@ class RevealNinjutsuCardCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
 
         Card card = player.getHand().get(ability.getSourceId(), game);
