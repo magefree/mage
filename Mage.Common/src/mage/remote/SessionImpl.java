@@ -205,6 +205,36 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public synchronized boolean emailAuthToken(final Connection connection) {
+        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+            @Override
+            public boolean run() throws Throwable {
+                logger.info("Trying to ask for an auth token to " + getEmail() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                boolean result = server.emailAuthToken(sessionId, connection.getEmail());
+                if (result) {
+                    logger.info("An auth token is emailed to " + getEmail() + " from MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public synchronized boolean resetPassword(final Connection connection) {
+        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+            @Override
+            public boolean run() throws Throwable {
+                logger.info("Trying reset the password in XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                boolean result = server.resetPassword(sessionId, connection.getEmail(), connection.getAuthToken(), connection.getPassword());
+                if (result) {
+                    logger.info("Password is successfully reset in MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
     public synchronized boolean connect(final Connection connection) {
         return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
             @Override
@@ -1445,6 +1475,16 @@ public class SessionImpl implements Session {
         return username == null ? "" : username;
     }
 
+    private String getEmail() {
+        String email = connection.getEmail();
+        return email == null ? "" : email;
+    }
+ 
+    private String getAuthToken() {
+        String authToken = connection.getAuthToken();
+        return authToken == null ? "" : authToken;
+    }
+ 
     @Override
     public boolean updatePreferencesForServer(UserData userData) {
         try {

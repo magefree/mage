@@ -95,6 +95,11 @@ public class Session {
                 sendErrorMessageToClient(returnMessage);
                 return returnMessage;
             }
+            returnMessage = validateEmail(email);
+            if (returnMessage != null) {
+                sendErrorMessageToClient(returnMessage);
+                return returnMessage;
+            }
             AuthorizedUserRepository.instance.add(userName, password, email);
             if (GmailClient.sendMessage(email, "XMage Registration Completed",
                     "You are successfully registered as " + userName + ".")) {
@@ -121,7 +126,7 @@ public class Session {
         if (m.find()) {
             return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
         }
-        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.get(userName);
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
         if (authorizedUser != null) {
             return "User name '" + userName + "' already in use";
         }
@@ -147,6 +152,14 @@ public class Session {
         return null;
     }
 
+    static private String validateEmail(String email) {
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
+        if (authorizedUser != null) {
+            return "Email address '" + email + "' is associated with another user";
+        }
+        return null;
+    }
+
     public String connectUser(String userName, String password) throws MageException {
         String returnMessage = connectUserHandling(userName, password);
         if (returnMessage != null) {
@@ -161,9 +174,8 @@ public class Session {
 
     public String connectUserHandling(String userName, String password) throws MageException {
         this.isAdmin = false;
-
         if (ConfigSettings.getInstance().isAuthenticationActivated()) {
-            AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.get(userName);
+            AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
             if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
                 return "Wrong username or password";
             }
@@ -347,7 +359,7 @@ public class Session {
         this.host = hostAddress;
     }
 
-    void sendErrorMessageToClient(String message) {
+    public void sendErrorMessageToClient(String message) {
         List<String> messageData = new LinkedList<>();
         messageData.add("Error while connecting to server");
         messageData.add(message);

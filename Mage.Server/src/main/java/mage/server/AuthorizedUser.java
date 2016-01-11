@@ -14,7 +14,7 @@ import org.apache.shiro.crypto.hash.Hash;
 @DatabaseTable(tableName = "authorized_user")
 public class AuthorizedUser {
 
-    @DatabaseField(indexName = "name_index")
+    @DatabaseField(indexName = "name_index", unique = true)
     protected String name;
 
     @DatabaseField
@@ -29,7 +29,7 @@ public class AuthorizedUser {
     @DatabaseField
     protected int hashIterations;
 
-    @DatabaseField
+    @DatabaseField(indexName = "email_index", unique = true)
     protected String email;
 
     public AuthorizedUser() {
@@ -52,5 +52,9 @@ public class AuthorizedUser {
                 ByteSource.Util.bytes(Base64.decode(this.password)),
                 ByteSource.Util.bytes(Base64.decode(this.salt)), "");
         return matcher.doCredentialsMatch(token, info);
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

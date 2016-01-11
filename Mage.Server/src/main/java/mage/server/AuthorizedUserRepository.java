@@ -3,6 +3,7 @@ package mage.server;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
@@ -11,7 +12,6 @@ import com.j256.ormlite.table.TableUtils;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.concurrent.Callable;
 import mage.cards.repository.RepositoryUtil;
 import org.apache.log4j.Logger;
 import org.apache.shiro.crypto.RandomNumberGenerator;
@@ -54,28 +54,43 @@ public enum AuthorizedUserRepository {
 
     public void add(final String userName, final String password, final String email) {
         try {
-            dao.callBatchTasks(new Callable<Object>() {
-                @Override
-                public Object call() throws Exception {
-                    try {
-                        Hash hash = new SimpleHash(Sha256Hash.ALGORITHM_NAME, password, rng.nextBytes(), 1024);
-                        AuthorizedUser user = new AuthorizedUser(userName, hash, email);
-                        dao.create(user);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AuthorizedUserRepository.class).error("Error adding a user to DB - ", ex);
-                    }
-                    return null;
-                }
-            });
-        } catch (Exception ex) {
-            Logger.getLogger(AuthorizedUserRepository.class).error("Error adding a authorized_user - ", ex);
+            Hash hash = new SimpleHash(Sha256Hash.ALGORITHM_NAME, password, rng.nextBytes(), 1024);
+            AuthorizedUser user = new AuthorizedUser(userName, hash, email);
+            dao.create(user);
+        } catch (SQLException ex) {
+            Logger.getLogger(AuthorizedUserRepository.class).error("Error adding a user to DB - ", ex);
         }
     }
 
-    public AuthorizedUser get(String userName) {
+    public void remove(final String userName) {
+        try {
+            DeleteBuilder<AuthorizedUser, Object> db = dao.deleteBuilder();
+            db.where().eq("name", new SelectArg(userName));
+            db.delete();
+        } catch (SQLException ex) {
+            Logger.getLogger(AuthorizedUserRepository.class).error("Error removing a user from DB - ", ex);
+        }
+    }
+
+    public AuthorizedUser getByName(String userName) {
         try {
             QueryBuilder<AuthorizedUser, Object> qb = dao.queryBuilder();
             qb.where().eq("name", new SelectArg(userName));
+            List<AuthorizedUser> results = dao.query(qb.prepare());
+            if (results.size() == 1) {
+                return results.get(0);
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(AuthorizedUserRepository.class).error("Error getting a authorized_user - ", ex);
+        }
+        return null;
+    }
+
+    public AuthorizedUser getByEmail(String userName) {
+        try {
+            QueryBuilder<AuthorizedUser, Object> qb = dao.queryBuilder();
+            qb.where().eq("email", new SelectArg(userName));
             List<AuthorizedUser> results = dao.query(qb.prepare());
             if (results.size() == 1) {
                 return results.get(0);

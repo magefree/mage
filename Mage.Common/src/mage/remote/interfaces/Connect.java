@@ -36,6 +36,10 @@ public interface Connect {
 
     boolean register(Connection connection);
 
+    boolean emailAuthToken(Connection connection);
+
+    boolean resetPassword(Connection connection);
+
     boolean connect(Connection connection);
 
     boolean stopConnecting();
