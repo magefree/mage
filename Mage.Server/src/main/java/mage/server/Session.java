@@ -75,6 +75,9 @@ public class Session {
     }
 
     public String registerUser(String userName, String password, String email) throws MageException {
+        if (!ConfigSettings.getInstance().isAuthenticationActivated()) {
+            return "Registration is disabled by the server config.";
+        }
         synchronized(AuthorizedUserRepository.instance) {
             String returnMessage = validateUserName(userName);
             if (returnMessage != null) {
@@ -140,9 +143,12 @@ public class Session {
 
     public String connectUserHandling(String userName, String password) throws MageException {
         this.isAdmin = false;
-        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.get(userName);
-        if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
-            return "Wrong username or password";
+
+        if (ConfigSettings.getInstance().isAuthenticationActivated()) {
+            AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.get(userName);
+            if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
+                return "Wrong username or password";
+            }
         }
 
         User user = UserManager.getInstance().createUser(userName, host);
