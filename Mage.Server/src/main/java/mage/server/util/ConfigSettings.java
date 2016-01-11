@@ -111,8 +111,16 @@ public class ConfigSettings {
         return config.getServer().getMaxUserNameLength().intValue();
     }
 
-    public String getUserNamePattern() {
-        return config.getServer().getUserNamePattern();
+    public String getInvalidUserNamePattern() {
+        return config.getServer().getInvalidUserNamePattern();
+    }
+
+    public int getMinPasswordLength() {
+        return config.getServer().getMinPasswordLength().intValue();
+    }
+
+    public int getMaxPasswordLength() {
+        return config.getServer().getMaxPasswordLength().intValue();
     }
 
     public String getMaxAiOpponents() {

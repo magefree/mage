@@ -55,6 +55,10 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 public class Session {
 
     private static final Logger logger = Logger.getLogger(Session.class);
+    private static Pattern invalidUserNamePattern =
+            Pattern.compile(ConfigSettings.getInstance().getInvalidUserNamePattern(), Pattern.CASE_INSENSITIVE);
+    private static Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
+    private static Pattern digitsPattern = Pattern.compile("[0-9]");
 
     private final String sessionId;
     private UUID userId;
@@ -76,7 +80,9 @@ public class Session {
 
     public String registerUser(String userName, String password, String email) throws MageException {
         if (!ConfigSettings.getInstance().isAuthenticationActivated()) {
-            return "Registration is disabled by the server config.";
+            String returnMessage = "Registration is disabled by the server config";
+            sendErrorMessageToClient(returnMessage);
+            return returnMessage;
         }
         synchronized(AuthorizedUserRepository.instance) {
             String returnMessage = validateUserName(userName);
@@ -84,7 +90,7 @@ public class Session {
                 sendErrorMessageToClient(returnMessage);
                 return returnMessage;
             }
-            returnMessage = validatePassword(password);
+            returnMessage = validatePassword(password, userName);
             if (returnMessage != null) {
                 sendErrorMessageToClient(returnMessage);
                 return returnMessage;
@@ -104,14 +110,14 @@ public class Session {
         if (userName.equals("Admin")) {
             return "User name Admin already in use";
         }
-        if (userName.length() > ConfigSettings.getInstance().getMaxUserNameLength()) {
-            return "User name may not be longer than " + ConfigSettings.getInstance().getMaxUserNameLength() + " characters";
+        ConfigSettings config = ConfigSettings.getInstance();
+        if (userName.length() < config.getMinUserNameLength()) {
+            return "User name may not be shorter than " + config.getMinUserNameLength() + " characters";
         }
-        if (userName.length() < ConfigSettings.getInstance().getMinUserNameLength()) {
-            return "User name may not be shorter than " + ConfigSettings.getInstance().getMinUserNameLength() + " characters";
+        if (userName.length() > config.getMaxUserNameLength()) {
+            return "User name may not be longer than " + config.getMaxUserNameLength() + " characters";
         }
-        Pattern p = Pattern.compile(ConfigSettings.getInstance().getUserNamePattern(), Pattern.CASE_INSENSITIVE);
-        Matcher m = p.matcher(userName);
+        Matcher m = invalidUserNamePattern.matcher(userName);
         if (m.find()) {
             return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
         }
@@ -122,9 +128,21 @@ public class Session {
         return null;
     }
 
-    static private String validatePassword(String password) {
-        if (password.length() == 0) {
-            return "Password needs to be non-empty";
+    static private String validatePassword(String password, String userName) {
+        ConfigSettings config = ConfigSettings.getInstance();
+        if (password.length() < config.getMinPasswordLength()) {
+            return "Password may not be shorter than " + config.getMinPasswordLength() + " characters";
+        }
+        if (password.length() > config.getMaxPasswordLength()) {
+            return "Password may not be longer than " + config.getMaxPasswordLength() + " characters";
+        }
+        if (password.equals(userName)) {
+            return "Password may not be the same as your username";
+        }
+        Matcher alphabetsMatcher = alphabetsPattern.matcher(password);
+        Matcher digitsMatcher = digitsPattern.matcher(password);
+        if (!alphabetsMatcher.find() || !digitsMatcher.find()) {
+            return "Password has to include at least one alphabet (a-zA-Z) and also at least one digit (0-9)";
         }
         return null;
     }
