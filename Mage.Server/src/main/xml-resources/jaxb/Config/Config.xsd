@@ -29,7 +29,9 @@
 			<xs:attribute name="leasePeriod" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="minUserNameLength" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="maxUserNameLength" type="xs:positiveInteger" use="required"/>
-			<xs:attribute name="userNamePattern" type="xs:string" use="required"/>
+			<xs:attribute name="invalidUserNamePattern" type="xs:string" use="required"/>
+			<xs:attribute name="minPasswordLength" type="xs:positiveInteger" use="required"/>
+			<xs:attribute name="maxPasswordLength" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="maxAiOpponents" type="xs:string" use="optional"/>
 			<xs:attribute name="saveGameActivated" type="xs:boolean" use="optional"/>
 			<xs:attribute name="authenticationActivated" type="xs:boolean" use="optional"/>

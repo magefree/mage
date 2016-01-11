@@ -346,10 +346,7 @@ public class ConnectDialog extends MageDialog {
             JOptionPane.showMessageDialog(rootPane, "Please provide a user name");
             return;
         }
-        if (txtPassword.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Please provide a password");
-            return;
-        }
+        // txtPassword is not checked here, because authentication might be disabled by the server config.
         if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535) {
             JOptionPane.showMessageDialog(rootPane, "Invalid port number");
             txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
