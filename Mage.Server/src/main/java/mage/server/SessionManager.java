@@ -72,23 +72,22 @@ public class SessionManager {
 
     public boolean registerUser(String sessionId, String userName, String password, String email) throws MageException {
         Session session = sessions.get(sessionId);
-        if (session != null) {
-            String returnMessage = session.registerUser(userName, password, email);
-            if (returnMessage == null) {
-                LogServiceImpl.instance.log(LogKeys.KEY_USER_REGISTERED, userName, session.getHost(), sessionId);
-
-                logger.info(userName + " registered");
-                logger.debug("- userId:    " + session.getUserId());
-                logger.debug("- sessionId: " + sessionId);
-                logger.debug("- host:      " + session.getHost());
-                return true;
-            } else {
-                logger.debug(userName + " not registered: " + returnMessage);
-            }
-        } else {
+        if (session == null) {
             logger.error(userName + " tried to register with no sessionId");
+            return false;
         }
-        return false;
+        String returnMessage = session.registerUser(userName, password, email);
+        if (returnMessage != null) {
+            logger.debug(userName + " not registered: " + returnMessage);
+            return false;
+        }
+        LogServiceImpl.instance.log(LogKeys.KEY_USER_REGISTERED, userName, session.getHost(), sessionId);
+
+        logger.info(userName + " registered");
+        logger.debug("- userId:    " + session.getUserId());
+        logger.debug("- sessionId: " + sessionId);
+        logger.debug("- host:      " + session.getHost());
+        return true;
     }
 
     public boolean connectUser(String sessionId, String userName, String password) throws MageException {
