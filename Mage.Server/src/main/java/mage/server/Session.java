@@ -55,10 +55,8 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 public class Session {
 
     private static final Logger logger = Logger.getLogger(Session.class);
-    private static Pattern invalidUserNamePattern =
-            Pattern.compile(ConfigSettings.getInstance().getInvalidUserNamePattern(), Pattern.CASE_INSENSITIVE);
-    private static Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
-    private static Pattern digitsPattern = Pattern.compile("[0-9]");
+    private final static Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
+    private final static Pattern digitsPattern = Pattern.compile("[0-9]");
 
     private final String sessionId;
     private UUID userId;
@@ -84,7 +82,7 @@ public class Session {
             sendErrorMessageToClient(returnMessage);
             return returnMessage;
         }
-        synchronized(AuthorizedUserRepository.instance) {
+        synchronized (AuthorizedUserRepository.instance) {
             String returnMessage = validateUserName(userName);
             if (returnMessage != null) {
                 sendErrorMessageToClient(returnMessage);
@@ -110,7 +108,7 @@ public class Session {
             return null;
         }
     }
-    
+
     static private String validateUserName(String userName) {
         if (userName.equals("Admin")) {
             return "User name Admin already in use";
@@ -122,6 +120,7 @@ public class Session {
         if (userName.length() > config.getMaxUserNameLength()) {
             return "User name may not be longer than " + config.getMaxUserNameLength() + " characters";
         }
+        Pattern invalidUserNamePattern = Pattern.compile(ConfigSettings.getInstance().getInvalidUserNamePattern(), Pattern.CASE_INSENSITIVE);
         Matcher m = invalidUserNamePattern.matcher(userName);
         if (m.find()) {
             return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
