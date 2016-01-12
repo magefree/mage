@@ -68,7 +68,7 @@ public class GenericManaCost extends ManaCostImpl {
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costsToPay) {
-        this.assignColorless(ability, game, pool, mana, costsToPay);
+        this.assignGeneric(ability, game, pool, mana, costsToPay);
     }
 
     @Override

@@ -61,7 +61,7 @@ public class SnowManaCost extends ManaCostImpl {
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
-        this.assignColorless(ability, game, pool, 1, costToPay);
+        this.assignGeneric(ability, game, pool, 1, costToPay);
     }
 
     @Override
