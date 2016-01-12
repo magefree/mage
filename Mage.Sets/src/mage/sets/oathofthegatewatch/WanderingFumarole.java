@@ -63,7 +63,7 @@ public class WanderingFumarole extends CardImpl {
         
         // {2}{U}{R}: Until end of turn, Wandering Fumarole becomes a 1/4 blue and red Elemental creature with 
         // "0: Switch this creature's power and toughness until end of turn." It's still a land.
-        Effect effect = new BecomesCreatureSourceEffect(new HissingQuagmireToken(), "land", Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureSourceEffect(new WanderingFumaroleToken(), "land", Duration.EndOfTurn);
         effect.setText("{this} becomes a 1/4 blue and red Elemental creature with \"0: Switch this creature's power and toughness until end of turn.\" It's still a land");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{U}{R}")));
     }
