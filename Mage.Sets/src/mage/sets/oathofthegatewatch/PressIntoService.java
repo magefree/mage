@@ -28,6 +28,7 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -38,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -54,7 +56,9 @@ public class PressIntoService extends CardImpl {
 
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
+        Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
+        effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
     }
