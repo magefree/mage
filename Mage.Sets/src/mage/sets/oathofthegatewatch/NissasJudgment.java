@@ -29,6 +29,7 @@ package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.CardImpl;
@@ -45,6 +46,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -60,7 +62,9 @@ public class NissasJudgment extends CardImpl {
         getSpellAbility().addEffect(new SupportEffect(this, 2));
 
         // Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature.
-        getSpellAbility().addEffect(new NissasJudgmentEffect());
+        Effect effect = new NissasJudgmentEffect();
+        effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
+        getSpellAbility().addEffect(effect);
     }
 
     public NissasJudgment(final NissasJudgment card) {
