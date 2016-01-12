@@ -29,6 +29,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -120,4 +121,31 @@ public class AwakenTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
     }
+
+    /**
+     * Awakened Clutch of Currents returned the targeted land (for awaken) to my
+     * hand in addition to the targeted creature.
+     */
+    @Test
+    public void testClutchOfCurrents() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        // Return target creature to its owner's hand.
+        // Awaken 3—{4}{U}
+        addCard(Zone.HAND, playerA, "Clutch of Currents", 1); // {U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clutch of Currents with awaken", "Silvercoat Lion");
+        addTarget(playerA, "Island");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Clutch of Currents", 1);
+        assertHandCount(playerB, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Island", 5);
+        assertPowerToughness(playerA, "Island", 3, 3, Filter.ComparisonScope.Any);
+
+    }
+
 }
