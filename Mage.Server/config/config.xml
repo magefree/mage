@@ -39,6 +39,8 @@
             saveGameActivated="false"
             authenticationActivated="false"
             googleAccount=""
+            mailgunApiKey=""
+            mailgunDomain=""
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>

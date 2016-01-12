@@ -99,7 +99,7 @@ public class Session {
                 return returnMessage;
             }
             AuthorizedUserRepository.instance.add(userName, password, email);
-            if (GmailClient.sendMessage(email, "XMage Registration Completed",
+            if (MailgunClient.sendMessage(email, "XMage Registration Completed",
                     "You are successfully registered as " + userName + ".")) {
                 logger.info("Sent a registration confirmation email to " + email + " for " + userName);
             } else {
