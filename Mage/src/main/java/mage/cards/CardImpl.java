@@ -206,7 +206,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     protected static final ArrayList<String> rulesError = new ArrayList<String>() {
         {
-            add("Exception occured in rules generation");
+            add("Exception occurred in rules generation");
         }
     };
 
