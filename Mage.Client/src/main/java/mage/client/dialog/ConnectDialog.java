@@ -236,6 +236,7 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnRegister.setText("Register new user");
+        btnRegister.setToolTipText("<html>XMage now supports user authentication.<br>Register your account before you log in.<html>");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterActionPerformed(evt);
@@ -243,6 +244,7 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnForgotPassword.setText("Forgot password");
+        btnForgotPassword.setToolTipText("<html>You can reset your password if you have registered<br>your account with an email address.</html>");
         btnForgotPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnForgotPasswordActionPerformed(evt);
