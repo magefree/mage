@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  */
 public class TideDrifter extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other colorless creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creatures");
 
     static {
         filter.add(new ColorlessPredicate());
