@@ -62,6 +62,7 @@ public class EssenceDepleter extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}{C}"));
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
+        ability.addEffect(effect);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
