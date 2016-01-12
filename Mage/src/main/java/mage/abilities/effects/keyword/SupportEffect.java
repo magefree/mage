@@ -65,6 +65,7 @@ public class SupportEffect extends AddCountersTargetEffect {
     public SupportEffect(final SupportEffect effect) {
         super(effect);
         this.amountSupportTargets = effect.amountSupportTargets;
+        this.otherPermanent = effect.otherPermanent;
     }
 
     @Override
