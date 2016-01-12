@@ -31,14 +31,16 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -58,7 +60,7 @@ public class NullCaller extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ZombieToken(), 1, true, false),
                 new ManaCostsImpl<>("{3}{B}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));
         this.addAbility(ability);
 
     }
