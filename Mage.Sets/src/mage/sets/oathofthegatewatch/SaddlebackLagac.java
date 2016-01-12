@@ -29,11 +29,14 @@ package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -49,7 +52,9 @@ public class SaddlebackLagac extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Saddleback Lagac enters the battlefield, support 2.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SupportEffect(this, 2), false));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SupportEffect(this, 2), false);
+        ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("target creatures"), false));
+        this.addAbility(ability);
 
     }
 
