@@ -35,7 +35,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
@@ -56,7 +56,7 @@ public class ChitinousCloak extends CardImpl {
 
         // Equipped creature gets +2/+2 and has menace.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
-        Effect effect = new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.EQUIPMENT);
+        Effect effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT);
         effect.setText("and has menace");
         ability.addEffect(effect);
         this.addAbility(ability);
