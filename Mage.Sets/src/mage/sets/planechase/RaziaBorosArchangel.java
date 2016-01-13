@@ -82,7 +82,7 @@ public class RaziaBorosArchangel extends CardImpl {
         target.setTargetTag(1);
         ability.addTarget(target);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature (damage is redirected to)");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature (damage is redirected to)");
         filter.add(new AnotherTargetPredicate(2));
         target = new TargetCreaturePermanent(filter);
         target.setTargetTag(2);
@@ -133,9 +133,11 @@ class RaziaBorosArchangelEffect extends RedirectionEffect {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-            if (redirectToObject.equals(new MageObjectReference(source.getTargets().get(1).getFirstTarget(), game))) {
-                redirectTarget = source.getTargets().get(1);
-                return true;
+            if (game.getControllerId(redirectToObject.getSourceId()) != null) {
+                if (redirectToObject.equals(new MageObjectReference(source.getTargets().get(1).getFirstTarget(), game))) {
+                    redirectTarget = source.getTargets().get(1);
+                    return true;
+                }
             }
         }
         return false;
