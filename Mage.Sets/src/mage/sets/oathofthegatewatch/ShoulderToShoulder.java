@@ -45,7 +45,7 @@ public class ShoulderToShoulder extends CardImpl {
         this.expansionSetCode = "OGW";
 
         // Support 2.
-        getSpellAbility().addEffect(new SupportEffect(this, 2));
+        getSpellAbility().addEffect(new SupportEffect(this, 2, false));
 
         // Draw a card.
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

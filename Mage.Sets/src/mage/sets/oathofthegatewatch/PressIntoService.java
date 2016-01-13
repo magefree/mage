@@ -52,7 +52,7 @@ public class PressIntoService extends CardImpl {
         this.expansionSetCode = "OGW";
 
         // Support 2.
-        getSpellAbility().addEffect(new SupportEffect(this, 2));
+        getSpellAbility().addEffect(new SupportEffect(this, 2, false));
 
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

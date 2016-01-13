@@ -44,7 +44,7 @@ public class LeadByExample extends CardImpl {
         this.expansionSetCode = "OGW";
 
         // Support 2.
-        getSpellAbility().addEffect(new SupportEffect(this, 2));
+        getSpellAbility().addEffect(new SupportEffect(this, 2, false));
     }
 
     public LeadByExample(final LeadByExample card) {

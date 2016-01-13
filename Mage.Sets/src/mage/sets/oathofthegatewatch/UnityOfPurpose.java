@@ -54,7 +54,7 @@ public class UnityOfPurpose extends CardImpl {
         this.expansionSetCode = "OGW";
 
         // Support 2.
-        getSpellAbility().addEffect(new SupportEffect(this, 2));
+        getSpellAbility().addEffect(new SupportEffect(this, 2, false));
 
         // Untap each creature you control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter, "Untap each creature you control with a +1/+1 counter on it"));

@@ -52,7 +52,7 @@ public class SaddlebackLagac extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Saddleback Lagac enters the battlefield, support 2.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SupportEffect(this, 2), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SupportEffect(this, 2, true), false);
         ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("target creatures"), false));
         this.addAbility(ability);
 

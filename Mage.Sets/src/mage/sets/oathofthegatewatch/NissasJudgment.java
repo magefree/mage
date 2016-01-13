@@ -59,7 +59,7 @@ public class NissasJudgment extends CardImpl {
         this.expansionSetCode = "OGW";
 
         // Support 2.
-        getSpellAbility().addEffect(new SupportEffect(this, 2));
+        getSpellAbility().addEffect(new SupportEffect(this, 2, false));
 
         // Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature.
         Effect effect = new NissasJudgmentEffect();

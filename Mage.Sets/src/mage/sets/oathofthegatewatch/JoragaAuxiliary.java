@@ -56,7 +56,7 @@ public class JoragaAuxiliary extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {4}{G}{W}: Support 2.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupportEffect(this, 2), new ManaCostsImpl("{4}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupportEffect(this, 2, true), new ManaCostsImpl("{4}{G}{W}"));
         ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("target creatures"), false));
         this.addAbility(ability);
     }
