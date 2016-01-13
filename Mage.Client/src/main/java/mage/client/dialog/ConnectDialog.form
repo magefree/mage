@@ -240,6 +240,7 @@
     <Component class="javax.swing.JButton" name="btnRegister">
       <Properties>
         <Property name="text" type="java.lang.String" value="Register new user"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;XMage now supports user authentication.&lt;br&gt;Register your account before you log in.&lt;html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegisterActionPerformed"/>
@@ -248,6 +249,7 @@
     <Component class="javax.swing.JButton" name="btnForgotPassword">
       <Properties>
         <Property name="text" type="java.lang.String" value="Forgot password"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;You can reset your password if you have registered&lt;br&gt;your account with an email address.&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForgotPasswordActionPerformed"/>
