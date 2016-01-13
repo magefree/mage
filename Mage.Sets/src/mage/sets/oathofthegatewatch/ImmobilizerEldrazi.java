@@ -50,7 +50,7 @@ import mage.game.Game;
  */
 public class ImmobilizerEldrazi extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with toughness greater than its power");
 
     static {
         filter.add(new ImmobilizerEldraziPredicate());
@@ -66,6 +66,7 @@ public class ImmobilizerEldrazi extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
+
         // {2}{C}: Each creature with toughness greater than its power can't block this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl("{2}{C}"));
 
