@@ -128,6 +128,10 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public boolean emailAuthToken(String sessionId, String email) throws MageException {
+        if (!ConfigSettings.getInstance().isAuthenticationActivated()) {
+            sendErrorMessageToClient(sessionId, "Registration is disabled by the server config");
+            return false;
+        }
         AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
         if (authorizedUser == null) {
             sendErrorMessageToClient(sessionId, "No user was found with the email address " + email);
@@ -147,6 +151,10 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public boolean resetPassword(String sessionId, String email, String authToken, String password) throws MageException {
+        if (!ConfigSettings.getInstance().isAuthenticationActivated()) {
+            sendErrorMessageToClient(sessionId, "Registration is disabled by the server config");
+            return false;
+        }
         String storedAuthToken = activeAuthTokens.get(email);
         if (storedAuthToken == null || !storedAuthToken.equals(authToken)) {
             sendErrorMessageToClient(sessionId, "Invalid auth token");
