@@ -184,8 +184,8 @@ public class Session {
         boolean reconnect = false;
         if (user == null) {  // user already exists
             user = UserManager.getInstance().findUser(userName);
-            // TODO: Remove this check since now we do a user authentication.
-            if (user.getHost().equals(host)) {
+            // If authentication is not activated, check the identity using IP address.
+            if (ConfigSettings.getInstance().isAuthenticationActivated() || user.getHost().equals(host)) {
                 user.updateLastActivity(null);  // minimizes possible expiration
                 this.userId = user.getId();
                 if (user.getSessionId().isEmpty()) {
