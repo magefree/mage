@@ -36,6 +36,8 @@
 			<xs:attribute name="saveGameActivated" type="xs:boolean" use="optional"/>
 			<xs:attribute name="authenticationActivated" type="xs:boolean" use="optional"/>
 			<xs:attribute name="googleAccount" type="xs:string" use="optional"/>
+			<xs:attribute name="mailgunApiKey" type="xs:string" use="optional"/>
+			<xs:attribute name="mailgunDomain" type="xs:string" use="optional"/>
 		</xs:complexType>
 	</xs:element>
 

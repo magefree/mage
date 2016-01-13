@@ -139,6 +139,14 @@ public class ConfigSettings {
         return config.getServer().getGoogleAccount();
     }
 
+    public String getMailgunApiKey() {
+        return config.getServer().getMailgunApiKey();
+    }
+
+    public String getMailgunDomain() {
+        return config.getServer().getMailgunDomain();
+    }
+
     public List<Plugin> getPlayerTypes() {
         return config.getPlayerTypes().getPlayerType();
     }
