@@ -149,6 +149,9 @@ public class ConditionalMana extends Mana implements Serializable {
         if (filter.isRed()) {
             red = 0;
         }
+        if (filter.isColorless()) {
+            colorless = 0;
+        }
         if (filter.isGeneric()) {
             generic = 0;
         }
@@ -187,8 +190,11 @@ public class ConditionalMana extends Mana implements Serializable {
             case WHITE:
                 white = 0;
                 break;
-            case COLORLESS:
+            case GENERIC:
                 generic = 0;
+                break;
+            case COLORLESS:
+                colorless = 0;
                 break;
         }
     }
@@ -215,6 +221,9 @@ public class ConditionalMana extends Mana implements Serializable {
                 ;
                 break;
             case COLORLESS:
+                colorless += amount;
+                ;
+            case GENERIC:
                 generic += amount;
                 ;
                 break;

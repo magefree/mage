@@ -11,6 +11,7 @@ public enum ManaType {
     GREEN("green"),
     RED("red"),
     WHITE("white"),
+    GENERIC("generic"),
     COLORLESS("colorless");
 
     private final String text;
