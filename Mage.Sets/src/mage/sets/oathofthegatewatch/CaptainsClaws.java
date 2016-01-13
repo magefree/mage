@@ -75,6 +75,7 @@ class KorAllyToken extends Token {
 
     public KorAllyToken() {
         super("Kor Ally", "1/1 white Kor Ally creature token");
+        this.setExpansionSetCodeForImage("BFZ");
         cardType.add(CardType.CREATURE);
         subtype.add("Kor");
         subtype.add("Ally");

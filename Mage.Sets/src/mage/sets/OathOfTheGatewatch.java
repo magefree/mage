@@ -24,6 +24,7 @@ public class OathOfTheGatewatch extends ExpansionSet {
     private OathOfTheGatewatch() {
         super("Oath of the Gatewatch", "OGW", "mage.sets.oathofthegatewatch", new GregorianCalendar(2016, 1, 22).getTime(), SetType.EXPANSION);
         this.blockName = "Battle for Zendikar";
+        this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = true;
         this.hasBasicLands = false;
         this.numBoosterLands = 1;
