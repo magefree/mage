@@ -27,6 +27,13 @@
  */
 package mage.server;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.management.MBeanServer;
 import mage.cards.repository.CardScanner;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
@@ -45,23 +52,22 @@ import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.*;
+import org.jboss.remoting.Client;
+import org.jboss.remoting.ClientDisconnectedException;
+import org.jboss.remoting.ConnectionListener;
+import org.jboss.remoting.InvocationRequest;
+import org.jboss.remoting.InvokerLocator;
+import org.jboss.remoting.Remoting;
+import org.jboss.remoting.ServerInvocationHandler;
+import org.jboss.remoting.ServerInvoker;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.callback.ServerInvokerCallbackHandler;
 import org.jboss.remoting.transport.Connector;
+import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 import org.jboss.remoting.transporter.TransporterServer;
 import org.w3c.dom.Element;
-
-import javax.management.MBeanServer;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
-import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
 
 /**
  *
@@ -131,17 +137,21 @@ public class Main {
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
         logger.info("Config - max game threads: " + config.getMaxGameThreads());
         logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());
-        logger.info("Config - min user name l.: " + config.getMinUserNameLength());
-        logger.info("Config - max user name l.: " + config.getMaxUserNameLength());
+        logger.info("Config - min usr name le.: " + config.getMinUserNameLength());
+        logger.info("Config - max usr name le.: " + config.getMaxUserNameLength());
+        logger.info("Config - min pswrd length: " + config.getMinPasswordLength());
+        logger.info("Config - max pswrd length: " + config.getMaxPasswordLength());
+        logger.info("Config - inv.usr name pat: " + config.getInvalidUserNamePattern());
         logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "true" : "false"));
-
         logger.info("Config - backlog size    : " + config.getBacklogSize());
         logger.info("Config - lease period    : " + config.getLeasePeriod());
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
         logger.info("Config - auth. activated : " + (config.isAuthenticationActivated() ? "true" : "false"));
-        logger.info("Config - google account  : " + config.getGoogleAccount());
+        logger.info("Config - mailgun api key : " + config.getMailgunApiKey());
+        logger.info("Config - mailgun domain  : " + config.getMailgunDomain());
+        //logger.info("Config - google account  : " + config.getGoogleAccount());
 
         Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
         connection.setHost(config.getServerAddress());
