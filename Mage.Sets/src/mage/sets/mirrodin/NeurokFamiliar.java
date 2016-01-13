@@ -62,20 +62,19 @@ public class NeurokFamiliar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Neurok Familiar enters the battlefield, reveal the top card of your library. If it's an artifact card, put it into your hand. Otherwise, put it into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new NeurokFamiliarEffect()));        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new NeurokFamiliarEffect()));
     }
 
     public NeurokFamiliar(final NeurokFamiliar card) {
         super(card);
     }
 
-
-    @Override
+    @java.lang.Override
     public NeurokFamiliar copy() {
         return new NeurokFamiliar(this);
     }
 }
-    
+
 class NeurokFamiliarEffect extends OneShotEffect {
 
     private static final FilterArtifactCard filterPutInHand = new FilterArtifactCard("artifact card to put in hand");
@@ -89,12 +88,12 @@ class NeurokFamiliarEffect extends OneShotEffect {
         super(effect);
     }
 
-    @Override
+    @java.lang.Override
     public NeurokFamiliarEffect copy() {
         return new NeurokFamiliarEffect(this);
-    }   
-        
-    @Override
+    }
+
+    @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
@@ -118,4 +117,3 @@ class NeurokFamiliarEffect extends OneShotEffect {
     }
 
 }
-
