@@ -28,6 +28,10 @@ public class ResetPasswordDialog extends MageDialog {
     }
 
     public void showDialog() {
+        this.txtServer.setText(MageFrame.getPreferences().get("serverAddress", Config.serverName));
+        this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
+        this.lblStatus.setText("");
+
         this.setModal(true);
         this.setLocation(50, 50);
         this.setVisible(true);
@@ -59,6 +63,10 @@ public class ResetPasswordDialog extends MageDialog {
         btnGetAuthToken = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
+        lblServer = new javax.swing.JLabel();
+        txtServer = new javax.swing.JTextField();
+        txtPort = new javax.swing.JTextField();
+        lblPort = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reset password");
@@ -192,6 +200,12 @@ public class ResetPasswordDialog extends MageDialog {
             }
         });
 
+        lblServer.setLabelFor(txtServer);
+        lblServer.setText("Server:");
+
+        lblPort.setLabelFor(txtPort);
+        lblPort.setText("Port:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,18 +213,34 @@ public class ResetPasswordDialog extends MageDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnCancel))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblServer)
+                            .addComponent(lblPort))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtServer)
+                            .addComponent(txtPort))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblServer)
+                    .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPort))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,12 +261,9 @@ public class ResetPasswordDialog extends MageDialog {
         }
 
         connection = new Connection();
-
-        // Use the default setting for server connection.
-        connection.setHost(MageFrame.getPreferences().get("serverAddress", Config.serverName));
-        connection.setPort(Integer.valueOf(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port))));
+        connection.setHost(this.txtServer.getText().trim());
+        connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
         PreferencesDialog.setProxyInformation(connection);
-
         connection.setEmail(this.txtEmail.getText().trim());
 
         getAuthTokenTask = new GetAuthTokenTask();
@@ -262,12 +289,9 @@ public class ResetPasswordDialog extends MageDialog {
         }
 
         connection = new Connection();
-
-        // Use the default setting for server connection.
-        connection.setHost(MageFrame.getPreferences().get("serverAddress", Config.serverName));
-        connection.setPort(Integer.valueOf(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port))));
+        connection.setHost(this.txtServer.getText().trim());
+        connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
         PreferencesDialog.setProxyInformation(connection);
-
         connection.setEmail(this.txtEmail.getText().trim());
         connection.setAuthToken(this.txtAuthToken.getText().trim());
         connection.setPassword(this.txtPassword.getText().trim());
@@ -384,10 +408,14 @@ public class ResetPasswordDialog extends MageDialog {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPasswordConfirmation;
     private javax.swing.JLabel lblPasswordConfirmationReasoning;
+    private javax.swing.JLabel lblPort;
+    private javax.swing.JLabel lblServer;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JTextField txtAuthToken;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JPasswordField txtPasswordConfirmation;
+    private javax.swing.JTextField txtPort;
+    private javax.swing.JTextField txtServer;
     // End of variables declaration//GEN-END:variables
 }
