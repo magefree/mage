@@ -45,7 +45,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -101,8 +100,8 @@ class RuinInTheirWakeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Target target = new TargetCardInLibrary(new FilterBasicLandCard());
-            if (controller.choose(outcome, target, source.getSourceId(), game)) {
+            TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+            if (controller.searchLibrary(target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     Cards cardsToReveal = new CardsImpl(card);

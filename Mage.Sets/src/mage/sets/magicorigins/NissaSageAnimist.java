@@ -122,7 +122,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
             if (card.getCardType().contains(CardType.LAND)) {
                 targetZone = Zone.BATTLEFIELD;
             }
-            return controller.moveCards(card, null, targetZone, source, game);
+            return controller.moveCards(card, targetZone, source, game);
         }
         return true;
     }
