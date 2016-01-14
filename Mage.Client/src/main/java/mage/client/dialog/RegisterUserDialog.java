@@ -4,6 +4,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.prefs.Preferences;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
 import mage.client.util.Config;
@@ -238,6 +239,16 @@ public class RegisterUserDialog extends MageDialog {
                 if (result) {
                     String message = "Registration succeeded";
                     lblStatus.setText(message);
+
+                    // Save settings.
+                    Preferences prefs = MageFrame.getPreferences();
+                    prefs.put("serverAddress", connection.getHost());
+                    prefs.put("serverPort", Integer.toString(connection.getPort()));
+                    // For userName and password we save preference per server.
+                    prefs.put(connection.getHost() + "/userName", connection.getUsername());
+                    prefs.put(connection.getHost() + "/password", connection.getPassword());
+                    prefs.put(connection.getHost() + "/email", connection.getEmail());
+
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {

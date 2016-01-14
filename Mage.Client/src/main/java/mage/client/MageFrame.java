@@ -745,10 +745,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private boolean performConnect() {
-        String userName = prefs.get("userName", "");
-        String password = prefs.get("password", "");
+        // TODO: Create MagePreference class to consolidate duplicated preference code in
+        // MageFrame, ConnectDialog and PreferencesDialog.
         String server = prefs.get("serverAddress", "");
         int port = Integer.parseInt(prefs.get("serverPort", ""));
+        // For userName and password we save preference per server.
+        String userName = prefs.get(server + "/userName", "");
+        String password = prefs.get(server + "/password", "");
         String proxyServer = prefs.get("proxyAddress", "");
         int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
         ProxyType proxyType = ProxyType.valueByText(prefs.get("proxyType", "None"));

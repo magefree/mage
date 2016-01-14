@@ -105,10 +105,14 @@ public class ConnectDialog extends MageDialog {
     }
 
     public void showDialog() {
-        this.txtServer.setText(MageFrame.getPreferences().get("serverAddress", Config.serverName));
+        // TODO: Create MagePreference class to consolidate duplicated preference code in
+        // MageFrame, ConnectDialog and PreferencesDialog.
+        String serverAddress = MageFrame.getPreferences().get("serverAddress", Config.serverName);
+        this.txtServer.setText(serverAddress);
         this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
-        this.txtUserName.setText(MageFrame.getPreferences().get("userName", ""));
-        this.txtPassword.setText(MageFrame.getPreferences().get("password", ""));
+        // For userName and password we save preference per server.
+        this.txtUserName.setText(MageFrame.getPreferences().get(serverAddress + "/userName", ""));
+        this.txtPassword.setText(MageFrame.getPreferences().get(serverAddress + "/password", ""));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get(KEY_CONNECT_AUTO_CONNECT, "false")));
         this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
 
@@ -127,10 +131,14 @@ public class ConnectDialog extends MageDialog {
     }
 
     private void saveSettings() {
-        MageFrame.getPreferences().put("serverAddress", txtServer.getText().trim());
+        // TODO: Create MagePreference class to consolidate duplicated preference code in
+        // MageFrame, ConnectDialog and PreferencesDialog.
+        String serverAddress = txtServer.getText().trim();
+        MageFrame.getPreferences().put("serverAddress", serverAddress);
         MageFrame.getPreferences().put("serverPort", txtPort.getText().trim());
-        MageFrame.getPreferences().put("userName", txtUserName.getText().trim());
-        MageFrame.getPreferences().put("password", txtPassword.getText().trim());
+        // For userName and password we save preference per server.
+        MageFrame.getPreferences().put(serverAddress + "/userName", txtUserName.getText().trim());
+        MageFrame.getPreferences().put(serverAddress + "/password", txtPassword.getText().trim());
         MageFrame.getPreferences().put(KEY_CONNECT_AUTO_CONNECT, Boolean.toString(chkAutoConnect.isSelected()));
     }
 
@@ -544,8 +552,12 @@ public class ConnectDialog extends MageDialog {
             if (selectedServer != null) {
                 String[] params = selectedServer.split(":");
                 if (params.length == 3) {
-                    this.txtServer.setText(params[1]);
+                    String serverAddress = params[1];
+                    this.txtServer.setText(serverAddress);
                     this.txtPort.setText(params[2]);
+                    // Update userName and password according to the chosen server.
+                    this.txtUserName.setText(MageFrame.getPreferences().get(serverAddress + "/userName", ""));
+                    this.txtPassword.setText(MageFrame.getPreferences().get(serverAddress + "/password", ""));
                 } else {
                     JOptionPane.showMessageDialog(null, "Wrong server data format.");
                 }
