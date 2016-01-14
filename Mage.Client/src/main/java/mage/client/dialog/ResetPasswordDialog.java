@@ -4,10 +4,9 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.prefs.Preferences;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
-import mage.client.util.Config;
+import mage.client.preference.MagePreferences;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
@@ -34,7 +33,7 @@ public class ResetPasswordDialog extends MageDialog {
         String serverAddress = this.connectDialog.getServer();
         this.txtServer.setText(serverAddress);
         this.txtPort.setText(this.connectDialog.getPort());
-        this.txtEmail.setText(MageFrame.getPreferences().get(serverAddress + "/email", ""));
+        this.txtEmail.setText(MagePreferences.getEmail(serverAddress));
         this.lblStatus.setText("");
 
         this.setModal(true);
@@ -340,8 +339,7 @@ public class ResetPasswordDialog extends MageDialog {
                 get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
                 if (result) {
                     // Save settings.
-                    Preferences prefs = MageFrame.getPreferences();
-                    prefs.put(connection.getHost() + "/email", connection.getEmail());
+                    MagePreferences.setEmail(connection.getHost(), connection.getEmail());
 
                     String message = "Auth token is emailed. Please check your inbox.";
                     lblStatus.setText(message);
@@ -383,13 +381,11 @@ public class ResetPasswordDialog extends MageDialog {
             try {
                 get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
                 if (result) {
+                    // Save settings.
+                    MagePreferences.setPassword(connection.getHost(), connection.getPassword());
+
                     String message = "Password is reset successfully.";
                     lblStatus.setText(message);
-
-                    // Save settings.
-                    Preferences prefs = MageFrame.getPreferences();
-                    prefs.put(connection.getHost() + "/password", connection.getPassword());
-
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {

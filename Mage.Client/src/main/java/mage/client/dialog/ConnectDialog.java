@@ -63,6 +63,7 @@ import mage.client.MageFrame;
 import static mage.client.dialog.PreferencesDialog.KEY_CONNECTION_URL_SERVER_LIST;
 import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_AUTO_CONNECT;
 import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
+import mage.client.preference.MagePreferences;
 import mage.client.util.Config;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.remote.Connection;
@@ -105,14 +106,11 @@ public class ConnectDialog extends MageDialog {
     }
 
     public void showDialog() {
-        // TODO: Create MagePreference class to consolidate duplicated preference code in
-        // MageFrame, ConnectDialog and PreferencesDialog.
-        String serverAddress = MageFrame.getPreferences().get("serverAddress", Config.serverName);
+        String serverAddress = MagePreferences.getServerAddressWithDefault(Config.serverName);
         this.txtServer.setText(serverAddress);
-        this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
-        // For userName and password we save preference per server.
-        this.txtUserName.setText(MageFrame.getPreferences().get(serverAddress + "/userName", ""));
-        this.txtPassword.setText(MageFrame.getPreferences().get(serverAddress + "/password", ""));
+        this.txtPort.setText(Integer.toString(MagePreferences.getServerPortWithDefault(Config.port)));
+        this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
+        this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get(KEY_CONNECT_AUTO_CONNECT, "false")));
         this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
 
@@ -131,14 +129,11 @@ public class ConnectDialog extends MageDialog {
     }
 
     private void saveSettings() {
-        // TODO: Create MagePreference class to consolidate duplicated preference code in
-        // MageFrame, ConnectDialog and PreferencesDialog.
         String serverAddress = txtServer.getText().trim();
-        MageFrame.getPreferences().put("serverAddress", serverAddress);
-        MageFrame.getPreferences().put("serverPort", txtPort.getText().trim());
-        // For userName and password we save preference per server.
-        MageFrame.getPreferences().put(serverAddress + "/userName", txtUserName.getText().trim());
-        MageFrame.getPreferences().put(serverAddress + "/password", txtPassword.getText().trim());
+        MagePreferences.setServerAddress(serverAddress);
+        MagePreferences.setServerPort(Integer.parseInt(txtPort.getText().trim()));
+        MagePreferences.setUserName(serverAddress, txtUserName.getText().trim());
+        MagePreferences.setPassword(serverAddress, txtPassword.getText().trim());
         MageFrame.getPreferences().put(KEY_CONNECT_AUTO_CONNECT, Boolean.toString(chkAutoConnect.isSelected()));
     }
 
@@ -374,7 +369,7 @@ public class ConnectDialog extends MageDialog {
         // txtPassword is not checked here, because authentication might be disabled by the server config.
         if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535) {
             JOptionPane.showMessageDialog(rootPane, "Invalid port number");
-            txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
+            txtPort.setText(Integer.toString(MagePreferences.getServerPortWithDefault(Config.port)));
             return;
         }
 
@@ -556,8 +551,8 @@ public class ConnectDialog extends MageDialog {
                     this.txtServer.setText(serverAddress);
                     this.txtPort.setText(params[2]);
                     // Update userName and password according to the chosen server.
-                    this.txtUserName.setText(MageFrame.getPreferences().get(serverAddress + "/userName", ""));
-                    this.txtPassword.setText(MageFrame.getPreferences().get(serverAddress + "/password", ""));
+                    this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
+                    this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
                 } else {
                     JOptionPane.showMessageDialog(null, "Wrong server data format.");
                 }

@@ -107,6 +107,7 @@ import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
+import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
@@ -745,13 +746,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private boolean performConnect() {
-        // TODO: Create MagePreference class to consolidate duplicated preference code in
-        // MageFrame, ConnectDialog and PreferencesDialog.
-        String server = prefs.get("serverAddress", "");
-        int port = Integer.parseInt(prefs.get("serverPort", ""));
-        // For userName and password we save preference per server.
-        String userName = prefs.get(server + "/userName", "");
-        String password = prefs.get(server + "/password", "");
+        String server = MagePreferences.getServerAddress();
+        int port = MagePreferences.getServerPort();
+        String userName = MagePreferences.getUserName(server);
+        String password = MagePreferences.getPassword(server);
         String proxyServer = prefs.get("proxyAddress", "");
         int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
         ProxyType proxyType = ProxyType.valueByText(prefs.get("proxyType", "None"));

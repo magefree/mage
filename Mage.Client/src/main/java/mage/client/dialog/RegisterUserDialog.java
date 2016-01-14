@@ -4,10 +4,9 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.prefs.Preferences;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
-import mage.client.util.Config;
+import mage.client.preference.MagePreferences;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
@@ -237,18 +236,15 @@ public class RegisterUserDialog extends MageDialog {
             try {
                 get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
                 if (result) {
+                    // Save settings.
+                    MagePreferences.setServerAddress(connection.getHost());
+                    MagePreferences.setServerPort(connection.getPort());
+                    MagePreferences.setUserName(connection.getHost(), connection.getUsername());
+                    MagePreferences.setPassword(connection.getHost(), connection.getPassword());
+                    MagePreferences.setEmail(connection.getHost(), connection.getEmail());
+
                     String message = "Registration succeeded";
                     lblStatus.setText(message);
-
-                    // Save settings.
-                    Preferences prefs = MageFrame.getPreferences();
-                    prefs.put("serverAddress", connection.getHost());
-                    prefs.put("serverPort", Integer.toString(connection.getPort()));
-                    // For userName and password we save preference per server.
-                    prefs.put(connection.getHost() + "/userName", connection.getUsername());
-                    prefs.put(connection.getHost() + "/password", connection.getPassword());
-                    prefs.put(connection.getHost() + "/email", connection.getEmail());
-
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {
