@@ -746,6 +746,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private boolean performConnect() {
         String userName = prefs.get("userName", "");
+        String password = prefs.get("password", "");
         String server = prefs.get("serverAddress", "");
         int port = Integer.parseInt(prefs.get("serverPort", ""));
         String proxyServer = prefs.get("proxyAddress", "");
@@ -757,6 +758,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             Connection connection = new Connection();
             connection.setUsername(userName);
+            connection.setPassword(password);
             connection.setHost(server);
             connection.setPort(port);
             connection.setProxyType(proxyType);
