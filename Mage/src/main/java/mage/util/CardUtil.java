@@ -77,7 +77,7 @@ public class CardUtil {
     public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{"Mountain", "Forest", "Plains", "Swamp", "Island",
         "Aura", "Curse", "Shrine",
         "Equipment", "Fortification", "Contraption",
-        "Trap", "Arcane"};
+        "Trap", "Arcane", "Gate"};
     public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
 
     /**
