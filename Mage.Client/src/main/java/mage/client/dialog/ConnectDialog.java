@@ -97,10 +97,10 @@ public class ConnectDialog extends MageDialog {
         this.txtUserName.addActionListener(connectAction);
         this.txtPassword.addActionListener(connectAction);
 
-        registerUserDialog = new RegisterUserDialog();
+        registerUserDialog = new RegisterUserDialog(this);
         MageFrame.getDesktop().add(registerUserDialog, JLayeredPane.POPUP_LAYER);
 
-        resetPasswordDialog = new ResetPasswordDialog();
+        resetPasswordDialog = new ResetPasswordDialog(this);
         MageFrame.getDesktop().add(resetPasswordDialog, JLayeredPane.POPUP_LAYER);
     }
 
@@ -586,6 +586,14 @@ public class ConnectDialog extends MageDialog {
     private void btnForgotPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotPasswordActionPerformed
         resetPasswordDialog.showDialog();
     }//GEN-LAST:event_btnForgotPasswordActionPerformed
+
+    public String getServer() {
+        return this.txtServer.getText();
+    }
+
+    public String getPort() {
+        return this.txtPort.getText();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

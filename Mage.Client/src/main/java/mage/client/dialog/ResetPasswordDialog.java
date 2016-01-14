@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 public class ResetPasswordDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ResetPasswordDialog.class);
+    private ConnectDialog connectDialog;
     private Connection connection;
     private Session session;
     private GetAuthTokenTask getAuthTokenTask;
@@ -23,13 +24,14 @@ public class ResetPasswordDialog extends MageDialog {
     /**
      * Creates new form ResetPasswordDialog
      */
-    public ResetPasswordDialog() {
+    public ResetPasswordDialog(ConnectDialog connectDialog) {
         initComponents();
+        this.connectDialog = connectDialog;
     }
 
     public void showDialog() {
-        this.txtServer.setText(MageFrame.getPreferences().get("serverAddress", Config.serverName));
-        this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
+        this.txtServer.setText(this.connectDialog.getServer());
+        this.txtPort.setText(this.connectDialog.getPort());
         this.lblStatus.setText("");
 
         this.setModal(true);
