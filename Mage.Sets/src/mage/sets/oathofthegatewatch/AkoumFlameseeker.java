@@ -31,20 +31,22 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -70,7 +72,8 @@ public class AkoumFlameseeker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Discard a card. If you do, draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, (new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost())), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new AkoumFlameseekerEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.setAbilityWord(AbilityWord.COHORT);
         this.addAbility(ability);
@@ -83,5 +86,35 @@ public class AkoumFlameseeker extends CardImpl {
     @Override
     public AkoumFlameseeker copy() {
         return new AkoumFlameseeker(this);
+    }
+}
+
+class AkoumFlameseekerEffect extends OneShotEffect {
+
+    public AkoumFlameseekerEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "Discard a card. If you do, draw a card";
+    }
+
+    public AkoumFlameseekerEffect(final AkoumFlameseekerEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public AkoumFlameseekerEffect copy() {
+        return new AkoumFlameseekerEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards cards = controller.discard(1, applyEffectsAfter, source, game);
+            if (!cards.isEmpty()) {
+                controller.drawCards(1, game);
+            }
+            return true;
+        }
+        return false;
     }
 }
