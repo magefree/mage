@@ -59,8 +59,12 @@ public class PressIntoService extends CardImpl {
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        effect = new UntapTargetEffect();
+        effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+        effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Suppor
+        this.getSpellAbility().addEffect(effect);
     }
 
     public PressIntoService(final PressIntoService card) {
