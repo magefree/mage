@@ -4,6 +4,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.prefs.Preferences;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
 import mage.client.util.Config;
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 public class ResetPasswordDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ResetPasswordDialog.class);
+    private ConnectDialog connectDialog;
     private Connection connection;
     private Session session;
     private GetAuthTokenTask getAuthTokenTask;
@@ -23,13 +25,16 @@ public class ResetPasswordDialog extends MageDialog {
     /**
      * Creates new form ResetPasswordDialog
      */
-    public ResetPasswordDialog() {
+    public ResetPasswordDialog(ConnectDialog connectDialog) {
         initComponents();
+        this.connectDialog = connectDialog;
     }
 
     public void showDialog() {
-        this.txtServer.setText(MageFrame.getPreferences().get("serverAddress", Config.serverName));
-        this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
+        String serverAddress = this.connectDialog.getServer();
+        this.txtServer.setText(serverAddress);
+        this.txtPort.setText(this.connectDialog.getPort());
+        this.txtEmail.setText(MageFrame.getPreferences().get(serverAddress + "/email", ""));
         this.lblStatus.setText("");
 
         this.setModal(true);
@@ -334,6 +339,10 @@ public class ResetPasswordDialog extends MageDialog {
             try {
                 get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
                 if (result) {
+                    // Save settings.
+                    Preferences prefs = MageFrame.getPreferences();
+                    prefs.put(connection.getHost() + "/email", connection.getEmail());
+
                     String message = "Auth token is emailed. Please check your inbox.";
                     lblStatus.setText(message);
                     MageFrame.getInstance().showMessage(message);
@@ -376,6 +385,11 @@ public class ResetPasswordDialog extends MageDialog {
                 if (result) {
                     String message = "Password is reset successfully.";
                     lblStatus.setText(message);
+
+                    // Save settings.
+                    Preferences prefs = MageFrame.getPreferences();
+                    prefs.put(connection.getHost() + "/password", connection.getPassword());
+
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {

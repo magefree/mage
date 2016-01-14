@@ -4,6 +4,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.prefs.Preferences;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
 import mage.client.util.Config;
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 public class RegisterUserDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
+    private ConnectDialog connectDialog;
     private Connection connection;
     private ConnectTask task;
     private Session session;
@@ -22,13 +24,14 @@ public class RegisterUserDialog extends MageDialog {
     /**
      * Creates new form RegisterUserDialog
      */
-    public RegisterUserDialog() {
+    public RegisterUserDialog(ConnectDialog connectDialog) {
         initComponents();
+        this.connectDialog = connectDialog;
     }
 
     public void showDialog() {
-        this.txtServer.setText(MageFrame.getPreferences().get("serverAddress", Config.serverName));
-        this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
+        this.txtServer.setText(this.connectDialog.getServer());
+        this.txtPort.setText(this.connectDialog.getPort());
         this.lblStatus.setText("");
 
         this.setModal(true);
@@ -236,6 +239,16 @@ public class RegisterUserDialog extends MageDialog {
                 if (result) {
                     String message = "Registration succeeded";
                     lblStatus.setText(message);
+
+                    // Save settings.
+                    Preferences prefs = MageFrame.getPreferences();
+                    prefs.put("serverAddress", connection.getHost());
+                    prefs.put("serverPort", Integer.toString(connection.getPort()));
+                    // For userName and password we save preference per server.
+                    prefs.put(connection.getHost() + "/userName", connection.getUsername());
+                    prefs.put(connection.getHost() + "/password", connection.getPassword());
+                    prefs.put(connection.getHost() + "/email", connection.getEmail());
+
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {
