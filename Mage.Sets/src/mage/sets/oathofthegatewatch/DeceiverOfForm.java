@@ -86,7 +86,7 @@ class DeceiverOfFormEffect extends OneShotEffect {
 
     public DeceiverOfFormEffect() {
         super(Outcome.Copy);
-        this.staticText = "At the beginning of combat on your turn, reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn. You may put that card on the bottom of your library";
+        this.staticText = "reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn. You may put that card on the bottom of your library";
     }
 
     public DeceiverOfFormEffect(final DeceiverOfFormEffect effect) {
@@ -134,7 +134,7 @@ class DeceiverOfFormCopyEffect extends ContinuousEffectImpl {
     private final Card card;
 
     public DeceiverOfFormCopyEffect(Card card) {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        super(Duration.EndOfTurn, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.card = card;
         staticText = "becomes copies of that card until end of turn";
     }

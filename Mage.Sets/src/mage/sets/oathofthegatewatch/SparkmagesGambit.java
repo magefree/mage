@@ -28,6 +28,7 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
@@ -47,8 +48,12 @@ public class SparkmagesGambit extends CardImpl {
         this.expansionSetCode = "OGW";
 
         // Sparkmage's Gambit deals 1 damage to each of up to two target creatures. Those creatures can't block this turn.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
+        Effect effect = new DamageTargetEffect(1);
+        effect.setText("{this} deals 1 damage to each of up to two target creatures. ");
+        this.getSpellAbility().addEffect(effect);
+        effect = new CantBlockTargetEffect(Duration.EndOfTurn);
+        effect.setText("Those creatures can't block this turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
