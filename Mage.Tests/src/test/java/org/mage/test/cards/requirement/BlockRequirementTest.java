@@ -112,4 +112,48 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Bog Wraith", 1);
     }
 
+    /**
+     * Elemental Uprising - "it must be blocked this turn if able", not working
+     *
+     * The bug just happened for me today as well - the problem is "must be
+     * blocked" is not being enforced correctly. During opponent's main phase he
+     * casted Elemental Uprising targeting an untapped land. He attacked with
+     * two creatures, I had one creature to block with, and did not block the
+     * land-creature targeted by Elemental Uprising. Instead I blocked a 2/2 of
+     * his with my 2/3. I should have been forced to block the land targeted by
+     * Elemental Uprising.
+     */
+    @Test
+    public void testElementalUprising() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // 2/2
+        // Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. It must be blocked this turn if able.
+        addCard(Zone.HAND, playerA, "Elemental Uprising");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox"); // 2/4
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elemental Uprising", "Mountain");
+
+        // Silvercoat Lion has not to block because it has to pay {3} to block
+        attack(1, playerA, "Mountain");
+        attack(1, playerA, "Silvercoat Lion");
+        block(1, playerB, "Pillarfield Ox", "Silvercoat Lion"); // Not allowed, the Mountain has to be blocked
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Elemental Uprising", 1);
+        assertPowerToughness(playerA, "Mountain", 4, 4);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Pillarfield Ox", 1);
+
+        assertLife(playerB, 18);
+
+    }
 }

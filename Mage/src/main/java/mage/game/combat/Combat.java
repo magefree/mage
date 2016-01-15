@@ -740,7 +740,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                             for (UUID possibleBlockerId : mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId)) {
                                 String blockRequiredMessage = isCreatureDoingARequiredBlock(possibleBlockerId, mustBeBlockedByAtLeastOne, game);
                                 if (blockRequiredMessage != null) { // message means not required
-                                    game.informPlayer(controller, blockRequiredMessage + "It's a requirement to block " + toBeBlockedCreature.getIdName());
+                                    removeBlocker(possibleBlockerId, game);
+                                    game.informPlayer(controller, blockRequiredMessage + " Existing block removed. It's a requirement to block " + toBeBlockedCreature.getIdName() + ".");
                                     return false;
                                 }
                             }
@@ -755,6 +756,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 Permanent possibleBlocker = game.getPermanent(possibleBlockerId);
                                 Player defender = game.getPlayer(possibleBlocker.getControllerId());
                                 if (defender != null) {
+                                    if (possibleBlocker.getBlocking() > 0) {
+                                        removeBlocker(possibleBlockerId, game);
+                                    }
                                     defender.declareBlocker(defender.getId(), possibleBlockerId, toBeBlockedCreatureId, game);
                                 }
                                 break;
@@ -873,6 +877,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 Permanent blockedAttacker = game.getPermanent(blockedAttackerId);
                                 return possibleBlocker.getIdName() + " blocks with other creatures " + blockedAttacker.getIdName() + ", which has to be blocked by only one creature. ";
                             }
+                            // The possible blocker blocks an attacker for that is no attack forced
+                            Permanent blockedAttacker = game.getPermanent(blockedAttackerId);
+                            return possibleBlocker.getIdName() + " blocks " + blockedAttacker.getIdName() + ", which not has to be blocked as a requirement.";
                         }
                     }
                 }
