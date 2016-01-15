@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,6 +44,12 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public class SaddlebackLagac extends CardImpl {
+
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("target creatures");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public SaddlebackLagac(UUID ownerId) {
         super(ownerId, 142, "Saddleback Lagac", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -53,7 +60,7 @@ public class SaddlebackLagac extends CardImpl {
 
         // When Saddleback Lagac enters the battlefield, support 2.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SupportEffect(this, 2, true), false);
-        ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("target creatures"), false));
+        ability.addTarget(new TargetCreaturePermanent(0, 2, filter, false));
         this.addAbility(ability);
 
     }
