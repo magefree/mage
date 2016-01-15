@@ -52,9 +52,11 @@ public class UrborgTombOfYawgmoth extends CardImpl {
         this.supertype.add("Legendary");
 
         // Each land is a Swamp in addition to its other land types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),"")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAllEffect()));
-        
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),
+                "Each land is a Swamp in addition to its other land types"));
+        ability.addEffect(new AddCardSubtypeAllEffect());
+        this.addAbility(ability);
+
     }
 
     public UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
@@ -67,14 +69,14 @@ public class UrborgTombOfYawgmoth extends CardImpl {
     }
 }
 
-
 class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     private static final String addedSubtype = "Swamp";
+
     public AddCardSubtypeAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        staticText = "Each land is a Swamp in addition to its other land types";
+        staticText = "";
     }
 
     public AddCardSubtypeAllEffect(final AddCardSubtypeAllEffect effect) {
@@ -83,8 +85,8 @@ class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if(perm != null && !perm.getSubtype().contains(addedSubtype)){
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            if (perm != null && !perm.getSubtype().contains(addedSubtype)) {
                 perm.getSubtype().add(addedSubtype);
             }
         }
@@ -96,5 +98,4 @@ class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
         return new AddCardSubtypeAllEffect(this);
     }
 
-   
 }

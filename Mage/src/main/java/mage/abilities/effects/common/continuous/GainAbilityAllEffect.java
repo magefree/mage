@@ -141,8 +141,9 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         return true;
     }
 
+    @Override
     public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
 
