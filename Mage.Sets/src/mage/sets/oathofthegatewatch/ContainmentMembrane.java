@@ -63,8 +63,9 @@ public class ContainmentMembrane extends CardImpl {
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
 
-        // Surge {U}
-        addAbility(new SurgeAbility(this, "{U}"));    }
+        // Surge {U} (You may cast a spell for its surge cost if you or a teammate have cast another spell in the same turn.)
+        addAbility(new SurgeAbility(this, "{U}"));
+    }
 
     public ContainmentMembrane(final ContainmentMembrane card) {
         super(card);
