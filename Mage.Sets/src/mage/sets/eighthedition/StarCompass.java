@@ -135,7 +135,7 @@ class StarCompassManaEffect extends ManaEffect {
         if (types.getWhite() > 0) {
             choice.getChoices().add("White");
         }
-        if (types.getGeneric() > 0) {
+        if (types.getColorless() > 0) {
             choice.getChoices().add("Colorless");
         }
         if (types.getAny() > 0) {
@@ -172,7 +172,7 @@ class StarCompassManaEffect extends ManaEffect {
                         mana.setWhite(1);
                         break;
                     case "Colorless":
-                        mana.setGeneric(1);
+                        mana.setColorless(1);
                         break;
                 }
                 checkToFirePossibleEvents(mana, game, source);

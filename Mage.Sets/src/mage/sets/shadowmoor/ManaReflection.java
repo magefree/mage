@@ -53,7 +53,6 @@ public class ManaReflection extends CardImpl {
         super(ownerId, 122, "Mana Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "SHM";
 
-
         // If you tap a permanent for mana, it produces twice as much of that mana instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaReflectionReplacementEffect()));
 
@@ -89,7 +88,7 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Mana mana = ((ManaEvent) event).getMana();
         if (mana.getBlack() > 0) {
-            mana.set(ManaType.BLACK, mana.getBlack()* 2);
+            mana.set(ManaType.BLACK, mana.getBlack() * 2);
         }
         if (mana.getBlue() > 0) {
             mana.set(ManaType.BLUE, mana.getBlue() * 2);
@@ -103,8 +102,8 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
         if (mana.getRed() > 0) {
             mana.set(ManaType.RED, mana.getRed() * 2);
         }
-        if (mana.getGeneric() > 0) {
-            mana.set(ManaType.COLORLESS, mana.getGeneric() * 2);
+        if (mana.getColorless() > 0) {
+            mana.set(ManaType.COLORLESS, mana.getColorless() * 2);
         }
         return false;
     }
@@ -115,7 +114,7 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {       
+    public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId())
                 && game.getPermanentOrLKIBattlefield(event.getSourceId()) != null;
     }

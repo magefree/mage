@@ -76,7 +76,7 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             if (types.getWhite() > 0) {
                 choice.getChoices().add("White");
             }
-            if (types.getGeneric() > 0) {
+            if (types.getColorless() > 0) {
                 choice.getChoices().add("Colorless");
             }
             if (choice.getChoices().size() > 0) {
