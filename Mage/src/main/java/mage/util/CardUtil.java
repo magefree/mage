@@ -74,10 +74,21 @@ public class CardUtil {
     static String numberStrings[] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
         "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
 
-    public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{"Mountain", "Forest", "Plains", "Swamp", "Island",
+    public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{
+        // basic lands subtypes
+        "Mountain", "Forest", "Plains", "Swamp", "Island",
+        // Enchantment subtypes
         "Aura", "Curse", "Shrine",
+        // Artifact subtypes
         "Equipment", "Fortification", "Contraption",
-        "Trap", "Arcane", "Gate"};
+        // Land subtypes
+        "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
+        // Planeswalker subtypes
+        "Ajani", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
+        "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
+        "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
+        // Instant sorcery subtypes
+        "Trap", "Arcane"};
     public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
 
     /**

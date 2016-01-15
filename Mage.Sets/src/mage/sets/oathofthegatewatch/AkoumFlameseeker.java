@@ -109,7 +109,7 @@ class AkoumFlameseekerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = controller.discard(1, applyEffectsAfter, source, game);
+            Cards cards = controller.discard(1, false, source, game);
             if (!cards.isEmpty()) {
                 controller.drawCards(1, game);
             }
