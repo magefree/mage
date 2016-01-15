@@ -37,11 +37,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -53,13 +50,6 @@ import mage.target.common.TargetControlledPermanent;
  * @author rollergo11
  */
 public class RustElemental extends CardImpl {
-    
-    private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("artifact");
-
-    static {
-        filter.add(new AnotherPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));  
-    }
 
     public RustElemental(UUID ownerId) {
         super(ownerId, 234, "Rust Elemental", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -77,54 +67,58 @@ public class RustElemental extends CardImpl {
     public RustElemental(final RustElemental card) {
         super(card);
     }
-       
-    @Override
+
+    @java.lang.Override
     public RustElemental copy() {
         return new RustElemental(this);
     }
-    
-    class RustElementalEffect extends OneShotEffect {
-        
-        public RustElementalEffect() {
-            super(Outcome.Damage);
-            this.staticText = "Sacrifice an artifact other than Rust Elemental. If you can't, tap Rust Elemental and you lose 4 life.";
-        }
-        
-        public RustElementalEffect(final RustElementalEffect effect) {
-            super(effect);
-        }
-        
-        @Override
-        public RustElementalEffect copy() {
-            return new RustElementalEffect(this);
-        }
-        
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+}
 
-            if (permanent != null) {
-                // create cost for sacrificing an artifact
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null) {
-                    TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-                    // if they can pay the cost, then they must pay
-                    if (target.canChoose(player.getId(), game)) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                        Permanent artifactSacrifice = game.getPermanent(target.getFirstTarget());
-                        if (artifactSacrifice != null) {
-                            // sacrifice the chosen artifact
-                            return artifactSacrifice.sacrifice(source.getSourceId(), game);
-                        }             
-                        else {
-                            permanent.tap(game);
-                            player.damage(4, source.getSourceId(), game, false, true);
-                        }
+class RustElementalEffect extends OneShotEffect {
+
+    private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("artifact");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
+    public RustElementalEffect() {
+        super(Outcome.Damage);
+        this.staticText = "Sacrifice an artifact other than {this}. If you can't, tap {this} and you lose 4 life.";
+    }
+
+    public RustElementalEffect(final RustElementalEffect effect) {
+        super(effect);
+    }
+
+    @java.lang.Override
+    public RustElementalEffect copy() {
+        return new RustElementalEffect(this);
+    }
+
+    @java.lang.Override
+    public boolean apply(Game game, Ability source) {
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourceObject != null) {
+            // create cost for sacrificing an artifact
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+                // if they can pay the cost, then they must pay
+                if (target.canChoose(controller.getId(), game)) {
+                    controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                    Permanent artifactSacrifice = game.getPermanent(target.getFirstTarget());
+                    if (artifactSacrifice != null) {
+                        // sacrifice the chosen artifact
+                        artifactSacrifice.sacrifice(source.getSourceId(), game);
                     }
+                } else {
+                    sourceObject.tap(game);
+                    controller.damage(4, source.getSourceId(), game, false, true);
                 }
-                return true;
             }
-            return false;
+            return true;
         }
+        return false;
     }
 }
