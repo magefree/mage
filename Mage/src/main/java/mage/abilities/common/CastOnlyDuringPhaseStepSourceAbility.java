@@ -38,7 +38,7 @@ public class CastOnlyDuringPhaseStepSourceAbility extends SimpleStaticAbility {
     }
 
     public CastOnlyDuringPhaseStepSourceAbility(TurnPhase turnPhase, PhaseStep phaseStep, Condition condition, String effectText) {
-        super(Zone.BATTLEFIELD, new CastOnlyDuringPhaseStepSourceEffect(turnPhase, phaseStep, condition));
+        super(Zone.ALL, new CastOnlyDuringPhaseStepSourceEffect(turnPhase, phaseStep, condition));
         this.setRuleAtTheTop(true);
         if (effectText != null) {
             getEffects().get(0).setText(effectText);

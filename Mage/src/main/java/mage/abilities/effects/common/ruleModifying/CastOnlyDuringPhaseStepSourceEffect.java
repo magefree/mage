@@ -30,7 +30,7 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
         this.turnPhase = turnPhase;
         this.phaseStep = phaseStep;
         this.condition = condition;
-        setText();
+        staticText = setText();
     }
 
     private CastOnlyDuringPhaseStepSourceEffect(final CastOnlyDuringPhaseStepSourceEffect effect) {
