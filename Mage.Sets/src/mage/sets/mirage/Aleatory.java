@@ -29,9 +29,9 @@ package mage.sets.mirage;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.condition.common.AfterBlockersAreDeclaredCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -40,12 +40,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -61,14 +58,12 @@ public class Aleatory extends CardImpl {
         this.expansionSetCode = "MIR";
 
         // Cast Aleatory only during combat after blockers are declared.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new AleatoryRuleModifyingEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.getInstance()));
+
         // Flip a coin. If you win the flip, target creature gets +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new AleatoryEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
@@ -80,43 +75,6 @@ public class Aleatory extends CardImpl {
     @Override
     public Aleatory copy() {
         return new Aleatory(this);
-    }
-}
-
-class AleatoryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
-
-    AleatoryRuleModifyingEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during combat after blockers are declared";
-    }
-
-    AleatoryRuleModifyingEffect(final AleatoryRuleModifyingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            return !game.getPhase().getType().equals(TurnPhase.COMBAT) ||
-                    game.getStep().getType().equals(PhaseStep.BEGIN_COMBAT) ||
-                    game.getStep().getType().equals(PhaseStep.DECLARE_ATTACKERS);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public AleatoryRuleModifyingEffect copy() {
-        return new AleatoryRuleModifyingEffect(this);
     }
 }
 
@@ -139,8 +97,8 @@ class AleatoryEffect extends OneShotEffect {
             if (controller.flipCoin(game)) {
                 game.addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn), source);
                 return true;
-                }
             }
+        }
         return false;
     }
 

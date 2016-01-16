@@ -28,20 +28,14 @@
 package mage.sets.legends;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.common.AfterUpkeepStepCondtion;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -53,11 +47,11 @@ public class Reset extends CardImpl {
         super(ownerId, 73, "Reset", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "LEG";
 
-
         // Cast Reset only during an opponent's turn after his or her upkeep step.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new ResetReplacementEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
+                new CompoundCondition(OnOpponentsTurnCondition.getInstance(), AfterUpkeepStepCondtion.getInstance()),
+                "Cast {this} only during an opponent's turn after his or her upkeep step"));
+
         // Untap all lands you control.
         this.getSpellAbility().addEffect(new UntapAllLandsControllerEffect());
     }
@@ -69,39 +63,5 @@ public class Reset extends CardImpl {
     @Override
     public Reset copy() {
         return new Reset(this);
-    }
-}
-
-class ResetReplacementEffect extends ContinuousRuleModifyingEffectImpl {
-    ResetReplacementEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during an opponent's turn after his or her upkeep step";
-    }
-
-    ResetReplacementEffect(final ResetReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
-            if (game.getTurn().getStepType().equals(PhaseStep.UNTAP)
-                    || game.getTurn().getStepType().equals(PhaseStep.UPKEEP)
-                    || !game.getOpponents(source.getControllerId()).contains(game.getActivePlayerId())) {
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ResetReplacementEffect copy() {
-        return new ResetReplacementEffect(this);
     }
 }

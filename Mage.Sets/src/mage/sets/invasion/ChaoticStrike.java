@@ -29,8 +29,8 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.common.AfterBlockersAreDeclaredCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -38,12 +38,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -59,14 +56,12 @@ public class ChaoticStrike extends CardImpl {
         this.expansionSetCode = "INV";
 
         // Cast Chaotic Strike only during combat after blockers are declared.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new ChaoticStrikeRuleModifyingEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.getInstance()));
+
         // Flip a coin. If you win the flip, target creature gets +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new ChaoticStrikeEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -78,43 +73,6 @@ public class ChaoticStrike extends CardImpl {
     @Override
     public ChaoticStrike copy() {
         return new ChaoticStrike(this);
-    }
-}
-
-class ChaoticStrikeRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
-
-    ChaoticStrikeRuleModifyingEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during combat after blockers are declared";
-    }
-
-    ChaoticStrikeRuleModifyingEffect(final ChaoticStrikeRuleModifyingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            return !game.getPhase().getType().equals(TurnPhase.COMBAT) ||
-                    game.getStep().getType().equals(PhaseStep.BEGIN_COMBAT) ||
-                    game.getStep().getType().equals(PhaseStep.DECLARE_ATTACKERS);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ChaoticStrikeRuleModifyingEffect copy() {
-        return new ChaoticStrikeRuleModifyingEffect(this);
     }
 }
 
@@ -137,8 +95,8 @@ class ChaoticStrikeEffect extends OneShotEffect {
             if (controller.flipCoin(game)) {
                 game.addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn), source);
                 return true;
-                }
             }
+        }
         return false;
     }
 

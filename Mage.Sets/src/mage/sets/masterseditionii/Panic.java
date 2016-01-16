@@ -28,23 +28,17 @@
 package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.condition.common.BeforeBlockersAreDeclaredCondition;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -58,14 +52,12 @@ public class Panic extends CardImpl {
         this.expansionSetCode = "ME2";
 
         // Cast Panic only during combat before blockers are declared.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new PanicRuleModifyingEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, BeforeBlockersAreDeclaredCondition.getInstance()));
+
         // Target creature can't block this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
-        
+
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
@@ -77,44 +69,5 @@ public class Panic extends CardImpl {
     @Override
     public Panic copy() {
         return new Panic(this);
-    }
-}
-
-class PanicRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
-
-    PanicRuleModifyingEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during combat before blockers are declared";
-    }
-
-    PanicRuleModifyingEffect(final PanicRuleModifyingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            return !TurnPhase.COMBAT.equals(game.getTurn().getPhaseType()) ||
-                    game.getStep().getType().equals(PhaseStep.DECLARE_BLOCKERS) ||
-                    game.getStep().getType().equals(PhaseStep.FIRST_COMBAT_DAMAGE) ||
-                    game.getStep().getType().equals(PhaseStep.COMBAT_DAMAGE) ||
-                    game.getStep().getType().equals(PhaseStep.END_COMBAT);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public PanicRuleModifyingEffect copy() {
-        return new PanicRuleModifyingEffect(this);
     }
 }

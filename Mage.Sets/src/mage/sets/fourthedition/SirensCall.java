@@ -29,9 +29,11 @@ package mage.sets.fourthedition;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.common.BeforeAttackersAreDeclaredCondition;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -39,12 +41,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedThisTurnWatcher;
@@ -60,13 +58,13 @@ public class SirensCall extends CardImpl {
         this.expansionSetCode = "4ED";
 
         // Cast Siren's Call only during an opponent's turn, before attackers are declared.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new SirensCallTimingEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
+                new CompoundCondition(OnOpponentsTurnCondition.getInstance(), BeforeAttackersAreDeclaredCondition.getInstance()),
+                "Cast {this} only during an opponent's turn, before attackers are declared"));
+
         // Creatures the active player controls attack this turn if able.
         this.getSpellAbility().addEffect(new SirensCallMustAttackEffect());
-        
+
         // At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SirensCallDestroyEffect())));
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
@@ -79,44 +77,6 @@ public class SirensCall extends CardImpl {
     @Override
     public SirensCall copy() {
         return new SirensCall(this);
-    }
-}
-
-class SirensCallTimingEffect extends ContinuousRuleModifyingEffectImpl {
-
-    SirensCallTimingEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during an opponent's turn, before attackers are declared";
-    }
-
-    SirensCallTimingEffect(final SirensCallTimingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            if (game.getPhase().getType().equals(TurnPhase.BEGINNING) || game.getStep().getType().equals(PhaseStep.BEGIN_COMBAT)) {
-                return !game.getOpponents(source.getControllerId()).contains(game.getActivePlayerId());
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SirensCallTimingEffect copy() {
-        return new SirensCallTimingEffect(this);
     }
 }
 
@@ -154,21 +114,21 @@ class SirensCallMustAttackEffect extends RequirementEffect {
 }
 
 class SirensCallDestroyEffect extends OneShotEffect {
-    
+
     SirensCallDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn";
     }
-    
+
     SirensCallDestroyEffect(final SirensCallDestroyEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public SirensCallDestroyEffect copy() {
         return new SirensCallDestroyEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());

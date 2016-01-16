@@ -31,9 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -41,14 +41,12 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -65,9 +63,7 @@ public class WakeTheDead extends CardImpl {
         this.expansionSetCode = "C14";
 
         // Cast Wake the Dead only during combat on an opponent's turn.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new WakeTheDeadEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, OnOpponentsTurnCondition.getInstance()));
 
         // Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
         this.getSpellAbility().addEffect(new WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect());
@@ -90,44 +86,6 @@ public class WakeTheDead extends CardImpl {
     @Override
     public WakeTheDead copy() {
         return new WakeTheDead(this);
-    }
-}
-
-class WakeTheDeadEffect extends ContinuousRuleModifyingEffectImpl {
-
-    WakeTheDeadEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during combat on an opponent's turn";
-    }
-
-    WakeTheDeadEffect(final WakeTheDeadEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            if (game.getPhase().getType().equals(TurnPhase.COMBAT)) {
-                return !game.getOpponents(source.getControllerId()).contains(game.getActivePlayerId());
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public WakeTheDeadEffect copy() {
-        return new WakeTheDeadEffect(this);
     }
 }
 

@@ -29,25 +29,21 @@ package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.common.AfterBlockersAreDeclaredCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -59,25 +55,23 @@ import mage.target.common.TargetCreaturePermanent;
 public class CurtainOfLight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked attacking creature");
-    
+
     static {
         filter.add(new AttackingPredicate());
         filter.add(Predicates.not(new BlockingPredicate()));
     }
-    
+
     public CurtainOfLight(UUID ownerId) {
         super(ownerId, 6, "Curtain of Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "SOK";
 
         // Cast Curtain of Light only during combat after blockers are declared.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new CurtainOfLightRuleModifyingEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.getInstance()));
+
         // Target unblocked attacking creature becomes blocked.
-        this.getSpellAbility().addEffect(new CurtainOfLightEffect()); 
+        this.getSpellAbility().addEffect(new CurtainOfLightEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -92,59 +86,22 @@ public class CurtainOfLight extends CardImpl {
     }
 }
 
-class CurtainOfLightRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
-
-    CurtainOfLightRuleModifyingEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during combat after blockers are declared";
-    }
-
-    CurtainOfLightRuleModifyingEffect(final CurtainOfLightRuleModifyingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            return !game.getPhase().getType().equals(TurnPhase.COMBAT) ||
-                    game.getStep().getType().equals(PhaseStep.BEGIN_COMBAT) ||
-                    game.getStep().getType().equals(PhaseStep.DECLARE_ATTACKERS);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public CurtainOfLightRuleModifyingEffect copy() {
-        return new CurtainOfLightRuleModifyingEffect(this);
-    }
-}
-
 class CurtainOfLightEffect extends OneShotEffect {
-    
+
     public CurtainOfLightEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target unblocked attacking creature becomes blocked";
     }
-    
+
     public CurtainOfLightEffect(final CurtainOfLightEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CurtainOfLightEffect copy() {
         return new CurtainOfLightEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

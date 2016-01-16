@@ -75,9 +75,8 @@ public class Godsend extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 
-
         // Equipped creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3,3,Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3, Duration.WhileOnBattlefield)));
         // Whenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.
         this.addAbility(new GodsendTriggeredAbility());
         // Opponents can't cast cards with the same name as cards exiled with Godsend.
@@ -99,7 +98,7 @@ public class Godsend extends CardImpl {
 class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 
     private Set<UUID> possibleTargets = new HashSet<>();
-    
+
     GodsendTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GodsendExileEffect(), true);
     }
@@ -121,29 +120,29 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanentOrLKIBattlefield((this.getSourceId()));
-        if (equipment != null && equipment.getAttachedTo()!= null) {
+        if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equippedPermanent = game.getPermanentOrLKIBattlefield((equipment.getAttachedTo()));
             if (equippedPermanent != null) {
                 possibleTargets.clear();
                 String targetName = "";
-                if (equippedPermanent.isAttacking()) {                        
-                    for (CombatGroup group: game.getCombat().getGroups()) {                            
+                if (equippedPermanent.isAttacking()) {
+                    for (CombatGroup group : game.getCombat().getGroups()) {
                         if (group.getAttackers().contains(equippedPermanent.getId())) {
                             possibleTargets.addAll(group.getBlockers());
                         }
                     }
                     targetName = "a creature blocking attacker ";
                 } else if (equippedPermanent.getBlocking() > 0) {
-                    for (CombatGroup group: game.getCombat().getGroups()) {
+                    for (CombatGroup group : game.getCombat().getGroups()) {
                         if (group.getBlockers().contains(equippedPermanent.getId())) {
                             possibleTargets.addAll(group.getAttackers());
                         }
                     }
                     targetName = "a creature blocked by creature ";
-                }                    
-                if (possibleTargets.size() > 0) {                    
+                }
+                if (possibleTargets.size() > 0) {
                     this.getTargets().clear();
-                    if (possibleTargets.size() == 1) {                            
+                    if (possibleTargets.size() == 1) {
                         this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
                     } else {
                         this.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
@@ -170,21 +169,21 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class GodsendExileEffect extends OneShotEffect {
-    
+
     public GodsendExileEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile one of those creatures";
     }
-    
+
     public GodsendExileEffect(final GodsendExileEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public GodsendExileEffect copy() {
         return new GodsendExileEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
@@ -192,10 +191,9 @@ class GodsendExileEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (creature != null && controller != null && sourcePermanent != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
-            controller.moveCardToExileWithInfo(creature, exileId, 
-                    sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ")"
-                    , source.getSourceId(), game, Zone.BATTLEFIELD, true);
-            
+            controller.moveCardToExileWithInfo(creature, exileId,
+                    sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ")", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+
         }
         return false;
     }
@@ -210,11 +208,6 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     public GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -238,11 +231,11 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
             if (object != null) {
                 ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
                 if ((exileZone != null)) {
-                    for(Card card:exileZone.getCards(game)) {
+                    for (Card card : exileZone.getCards(game)) {
                         if ((card.getName().equals(object.getName()))) {
                             return true;
                         }
-                    }                 
+                    }
                 }
             }
         }
