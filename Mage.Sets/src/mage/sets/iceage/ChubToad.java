@@ -52,7 +52,7 @@ public class ChubToad extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Chub Toad blocks or becomes blocked, it gets +2/+2 until end of turn.
-        Effect effect = new BoostSourceEffect(+1, +1, Duration.EndOfTurn);
+        Effect effect = new BoostSourceEffect(+2, +2, Duration.EndOfTurn);
         effect.setText("it gets +2/+2 until end of turn");
         Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(effect, false);
         this.addAbility(ability);
