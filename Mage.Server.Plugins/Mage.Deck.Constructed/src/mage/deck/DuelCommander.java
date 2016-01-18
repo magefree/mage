@@ -40,7 +40,6 @@ public class DuelCommander extends Commander {
         banned.add("Balance");
         banned.add("Back to Basics");
         banned.add("Black Lotus");
-        banned.add("Cataclysm");
         banned.add("Channel");
         banned.add("Entomb");
         banned.add("Fastbond");

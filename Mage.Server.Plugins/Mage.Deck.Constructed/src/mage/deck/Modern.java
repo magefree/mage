@@ -27,20 +27,17 @@
 */
 package mage.deck;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.constants.SetType;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-
 /**
  *
  * @author LevelX2
  */
-
 
 public class Modern extends Constructed {
     public Modern() {
@@ -56,14 +53,14 @@ public class Modern extends Constructed {
 
         banned.add("Ancestral Vision");
         banned.add("Ancient Den");
-        banned.add("Birthing Pod"); //  banned effective January 23, 2015
+        banned.add("Birthing Pod");
         banned.add("Blazing Shoal");
-        banned.add("Bloodbraid Elf"); //  (banned effective February 1, 2013)
+        banned.add("Bloodbraid Elf");
         banned.add("Chrome Mox");
         banned.add("Cloudpost");
         banned.add("Dark Depths");
-        banned.add("Deathrite Shaman"); // (banned effective February 7, 2014
-        banned.add("Dig Through Time"); //  banned effective January 23, 2015
+        banned.add("Deathrite Shaman");
+        banned.add("Dig Through Time");
         banned.add("Dread Return");
         banned.add("Glimpse of Nature");
         banned.add("Great Furnace");
@@ -76,16 +73,17 @@ public class Modern extends Constructed {
         banned.add("Punishing Fire");
         banned.add("Rite of Flame");
         banned.add("Seat of the Synod");
-        banned.add("Second Sunrise"); //  (banned effective May 3, 2013)
-        banned.add("Seething Song");  //  (banned effective February 1, 2013)
+        banned.add("Second Sunrise");
+        banned.add("Seething Song");
         banned.add("Sensei's Divining Top");
         banned.add("Stoneforge Mystic");
         banned.add("Skullclamp");
+        banned.add("Splinter Twin");
+        banned.add("Summer Bloom");
         banned.add("Sword of the Meek");
-        banned.add("Treasure Cruise"); //  banned effective January 23, 2015
+        banned.add("Treasure Cruise");
         banned.add("Tree of Tales");
         banned.add("Umezawa's Jitte");
         banned.add("Vault of Whispers");
-
     }
 }

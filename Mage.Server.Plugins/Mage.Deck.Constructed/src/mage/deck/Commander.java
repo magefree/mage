@@ -74,6 +74,7 @@ public class Commander extends DeckValidator {
         banned.add("Painter's Servant");
         banned.add("Panoptic Mirror");
         banned.add("Primeval Titan");
+        banned.add("Prophet of Kruphix");
         banned.add("Protean Hulk");
         banned.add("Recurring Nightmare");
         banned.add("Rofellos, Llanowar Emissary");
