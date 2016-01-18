@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author fireshoes
  */
 public class ZirilanOfTheClaw extends CardImpl {
-    
+
     public ZirilanOfTheClaw(UUID ownerId) {
         super(ownerId, 204, "Zirilan of the Claw", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "MIR";
@@ -70,7 +70,7 @@ public class ZirilanOfTheClaw extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // {1}{R}{R}, {tap}: Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle your library. 
+        // {1}{R}{R}, {tap}: Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle your library.
         // That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZirilanOfTheClawEffect(), new ManaCostsImpl("{1}{R}{R}"));
         ability.addCost(new TapSourceCost());
@@ -125,10 +125,7 @@ class ZirilanOfTheClawEffect extends OneShotEffect {
                         ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
                         exileEffect.setTargetPointer(new FixedTarget(permanent, game));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(delayedAbility, source);
                     }
                 }
                 return true;

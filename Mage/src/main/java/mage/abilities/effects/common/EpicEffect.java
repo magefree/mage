@@ -64,9 +64,7 @@ public class EpicEffect extends OneShotEffect {
             }
             spell.getSpellAbility().getEffects().remove(epicEffect);
             DelayedTriggeredAbility ability = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new EpicPushEffect(spell, rule), Duration.EndOfGame, false);
-            ability.setSourceId(source.getSourceId());
-            ability.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(ability);
+            game.addDelayedTriggeredAbility(ability, source);
             game.addEffect(new EpicReplacementEffect(), source);
             return true;
         }
@@ -104,7 +102,7 @@ class EpicReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "For the rest of the game, you can't cast spells (Epic - " + mageObject.getName() +")";
+            return "For the rest of the game, you can't cast spells (Epic - " + mageObject.getName() + ")";
         }
         return null;
     }

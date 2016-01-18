@@ -35,20 +35,18 @@ import mage.abilities.SpecialAction;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.RemoveDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.RemoveSpecialActionEffect;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author LoneFox (based on Quenchable Fire code by BetaSteward_at_googlemail.com)
+ * @author LoneFox (based on Quenchable Fire code by
+ * BetaSteward_at_googlemail.com)
  */
-
 public class UnlessPaysDelayedEffect extends OneShotEffect {
 
     private final Cost cost;
@@ -63,7 +61,7 @@ public class UnlessPaysDelayedEffect extends OneShotEffect {
         this.step = step;
         this.affectedPlayersTurn = affectedPlayersTurn;
         staticText = text + "<br><i>Use the Special button to pay the " + cost.getText()
-            + " with a special action before that step.</i>";
+                + " with a special action before that step.</i>";
     }
 
     public UnlessPaysDelayedEffect(final UnlessPaysDelayedEffect effect) {
@@ -91,11 +89,8 @@ public class UnlessPaysDelayedEffect extends OneShotEffect {
             UUID turnPlayer = affectedPlayersTurn ? getTargetPointer().getFirst(game, source) : source.getControllerId();
             effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
             UnlessPaysDelayedEffectTriggeredAbility delayedAbility = new UnlessPaysDelayedEffectTriggeredAbility(turnPlayer, step, effect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(sourceObject, game);
             delayedAbility.setSpecialActionId(newAction.getId());
-            UUID delayedAbilityId = game.addDelayedTriggeredAbility(delayedAbility);
+            UUID delayedAbilityId = game.addDelayedTriggeredAbility(delayedAbility, source);
 
             // update special action
             newAction.addCost(cost);
@@ -143,7 +138,7 @@ class UnlessPaysDelayedEffectTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        switch(step) {
+        switch (step) {
             case UPKEEP:
                 return event.getType() == EventType.UPKEEP_STEP_PRE;
             case DRAW:
@@ -156,7 +151,7 @@ class UnlessPaysDelayedEffectTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(turnPlayer)) {
-            for (SpecialAction action: game.getState().getSpecialActions()) {
+            for (SpecialAction action : game.getState().getSpecialActions()) {
                 if (action.getId().equals(specialActionId)) {
                     game.getState().getSpecialActions().remove(action);
                     break;

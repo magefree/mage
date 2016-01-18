@@ -60,7 +60,6 @@ public class Reincarnation extends CardImpl {
         super(ownerId, 166, "Reincarnation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");
         this.expansionSetCode = "C13";
 
-
         // Choose target creature. When that creature dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.
         this.getSpellAbility().addEffect(new ReincarnationEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -95,10 +94,7 @@ class ReincarnationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility delayedAbility = new ReincarnationDelayedTriggeredAbility(targetPointer.getFirst(game, source));
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
 }
@@ -175,7 +171,7 @@ class ReincarnationDelayedEffect extends OneShotEffect {
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Target targetCreature = new TargetCardInGraveyard(filter);
                 if (targetCreature.canChoose(source.getSourceId(), controller.getId(), game)
-                    && controller.chooseTarget(outcome, targetCreature, source, game)) {
+                        && controller.chooseTarget(outcome, targetCreature, source, game)) {
                     Card card = game.getCard(targetCreature.getFirstTarget());
                     if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
                         return card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());

@@ -27,30 +27,39 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
+import mage.players.Player;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author maurer.it_at_gmail.com
  */
 public class GlimmerpointStag extends CardImpl {
+
+    private final static FilterPermanent filter = new FilterPermanent("another target permanent");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public GlimmerpointStag(UUID ownerId) {
         super(ownerId, 9, "Glimmerpoint Stag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -60,10 +69,12 @@ public class GlimmerpointStag extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        Target etbTarget = new TargetPermanent();
+
+        // When Glimmerpoint Stag enters the battlefield, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new GlimmerpointStagEffect());
-        etbAbility.addTarget(etbTarget);
+        etbAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(etbAbility);
     }
 
@@ -81,7 +92,7 @@ class GlimmerpointStagEffect extends OneShotEffect {
 
     private static final String effectText = "exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step";
 
-    GlimmerpointStagEffect ( ) {
+    GlimmerpointStagEffect() {
         super(Outcome.Detriment);
         staticText = effectText;
     }
@@ -92,17 +103,19 @@ class GlimmerpointStagEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Glimmerpoint Stag Exile", source.getSourceId(), game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(source.getFirstTarget());
+            if (permanent != null) {
+                int zcc = permanent.getZoneChangeCounter(game);
+                controller.moveCards(permanent, Zone.EXILED, source, game);
                 //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
-                return true;
+                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                effect.setTargetPointer(new FixedTarget(permanent.getId(), zcc + 1));
+                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
             }
+            return true;
         }
         return false;
     }

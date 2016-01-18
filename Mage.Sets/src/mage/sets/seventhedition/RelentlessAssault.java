@@ -56,7 +56,6 @@ public class RelentlessAssault extends CardImpl {
         super(ownerId, 214, "Relentless Assault", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "7ED";
 
-
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         this.getSpellAbility().addEffect(new RelentlessAssaultUntapEffect());
@@ -130,10 +129,8 @@ class RelentlessAssaultAddPhasesEffect extends OneShotEffect {
             TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
             game.getState().getTurnMods().add(combat);
             RelentlessAssaultDelayedAddMainPhaseAbility delayedTriggeredAbility = new RelentlessAssaultDelayedAddMainPhaseAbility();
-            delayedTriggeredAbility.setSourceId(source.getSourceId());
-            delayedTriggeredAbility.setControllerId(source.getControllerId());
             delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
-            game.addDelayedTriggeredAbility(delayedTriggeredAbility);
+            game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
             return true;
         }
         return false;
@@ -163,7 +160,7 @@ class RelentlessAssaultDelayedAddMainPhaseAbility extends DelayedTriggeredAbilit
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PHASE_CHANGED 
+        return event.getType() == EventType.PHASE_CHANGED
                 || event.getType() == EventType.COMBAT_PHASE_PRE;
     }
 

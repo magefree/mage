@@ -27,6 +27,7 @@
  */
 package mage.sets.journeyintonyx;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -45,6 +46,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -94,23 +96,20 @@ class TwinflameCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            ArrayList<Permanent> toExile = new ArrayList<>();
             for (UUID creatureId : this.getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
                 if (creature != null) {
                     PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, true);
                     effect.setTargetPointer(new FixedTarget(creature, game));
                     effect.apply(game, source);
-                    for (Permanent addedToken : effect.getAddedPermanent()) {
-                        ExileTargetEffect exileEffect = new ExileTargetEffect();
-                        exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
-                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
-                    }
+                    toExile.addAll(effect.getAddedPermanent());
                 }
             }
+            ExileTargetEffect exileEffect = new ExileTargetEffect();
+            exileEffect.setTargetPointer(new FixedTargets(toExile, game));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;

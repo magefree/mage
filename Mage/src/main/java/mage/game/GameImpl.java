@@ -1495,9 +1495,17 @@ public abstract class GameImpl implements Game, Serializable {
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         delayedAbility.setSourceObject(source.getSourceObject(this), this);
-        return addDelayedTriggeredAbility(delayedAbility);
+        // return addDelayedTriggeredAbility(delayedAbility);
+        DelayedTriggeredAbility newAbility = delayedAbility.copy();
+        newAbility.newId();
+        // ability.init is called as the ability triggeres not now.
+        // If a FixedTarget pointer is already set from the effect setting up this delayed ability
+        // it has to be already initialized so it won't be overwitten as the ability triggers
+        state.addDelayedTriggeredAbility(newAbility);
+        return newAbility.getId();
     }
 
+    @Deprecated
     @Override
     public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();

@@ -102,14 +102,10 @@ class SaffiEriksdotterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility delayedAbility = new SaffiEriksdotterDelayedTriggeredAbility(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
         return false;
     }
 }
-
 
 class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
@@ -140,7 +136,7 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             if (fixedTarget.getFirst(game, this).equals(event.getTargetId())) {
-                if (this.getControllerId().equals(event.getPlayerId())){
+                if (this.getControllerId().equals(event.getPlayerId())) {
                     return true;
                 }
             }
@@ -153,5 +149,3 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
         return "When target creature is put into your graveyard from the battlefield this turn, " + super.getRule();
     }
 }
-
-

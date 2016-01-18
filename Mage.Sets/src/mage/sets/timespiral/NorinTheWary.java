@@ -30,7 +30,7 @@ package mage.sets.timespiral;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -73,7 +73,7 @@ public class NorinTheWary extends CardImpl {
 class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public NorinTheWaryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(true), false);
+        super(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), false);
     }
 
     public NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {

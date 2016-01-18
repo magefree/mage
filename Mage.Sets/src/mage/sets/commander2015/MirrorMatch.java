@@ -44,6 +44,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -108,10 +109,10 @@ class MirrorMatchEffect extends OneShotEffect {
                                 group.addBlockerToGroup(addedToken.getId(), attackerId, game);
                                 isCreature = true;
                             }
-                            ExileTargetEffect exileEffect = new ExileTargetEffect("Exile the token at end of combat");
-                            exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
-                            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
                         }
+                        ExileTargetEffect exileEffect = new ExileTargetEffect("Exile those tokens at end of combat");
+                        exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));
+                        game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
                         if (isCreature) {
                             group.pickBlockerOrder(attacker.getControllerId(), game);
                         }

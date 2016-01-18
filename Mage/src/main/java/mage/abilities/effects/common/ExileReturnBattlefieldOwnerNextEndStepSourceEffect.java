@@ -40,12 +40,12 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ExileReturnToBattlefieldOwnerNextEndStepEffect extends OneShotEffect {
+public class ExileReturnBattlefieldOwnerNextEndStepSourceEffect extends OneShotEffect {
 
     private static final String effectText = "exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
     private boolean returnAlways;
 
-    public ExileReturnToBattlefieldOwnerNextEndStepEffect() {
+    public ExileReturnBattlefieldOwnerNextEndStepSourceEffect() {
         this(false);
     }
 
@@ -55,13 +55,13 @@ public class ExileReturnToBattlefieldOwnerNextEndStepEffect extends OneShotEffec
      * but is moved to another zone (e.g. command zone by commander replacement
      * effect)
      */
-    public ExileReturnToBattlefieldOwnerNextEndStepEffect(boolean returnAlways) {
+    public ExileReturnBattlefieldOwnerNextEndStepSourceEffect(boolean returnAlways) {
         super(Outcome.Benefit);
         staticText = effectText;
         this.returnAlways = returnAlways;
     }
 
-    public ExileReturnToBattlefieldOwnerNextEndStepEffect(ExileReturnToBattlefieldOwnerNextEndStepEffect effect) {
+    public ExileReturnBattlefieldOwnerNextEndStepSourceEffect(ExileReturnBattlefieldOwnerNextEndStepSourceEffect effect) {
         super(effect);
         this.returnAlways = effect.returnAlways;
     }
@@ -78,10 +78,7 @@ public class ExileReturnToBattlefieldOwnerNextEndStepEffect extends OneShotEffec
                     //create delayed triggered ability and return it from every public zone he was next moved to
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                             new ReturnToBattlefieldUnderOwnerControlSourceEffect(false, zcc + 1));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    game.addDelayedTriggeredAbility(delayedAbility, source);
                 }
             }
             return true;
@@ -90,8 +87,8 @@ public class ExileReturnToBattlefieldOwnerNextEndStepEffect extends OneShotEffec
     }
 
     @Override
-    public ExileReturnToBattlefieldOwnerNextEndStepEffect copy() {
-        return new ExileReturnToBattlefieldOwnerNextEndStepEffect(this);
+    public ExileReturnBattlefieldOwnerNextEndStepSourceEffect copy() {
+        return new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(this);
     }
 
 }

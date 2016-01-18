@@ -83,7 +83,7 @@ class LoyalCatharEffect extends OneShotEffect {
 
     private static final String effectText = "return it to the battlefield transformed under your control at the beginning of the next end step";
 
-    LoyalCatharEffect ( ) {
+    LoyalCatharEffect() {
         super(Outcome.Benefit);
         staticText = effectText;
     }
@@ -96,10 +96,7 @@ class LoyalCatharEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         //create delayed triggered ability
         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnLoyalCatharEffect(source.getSourceId()));
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
 

@@ -27,6 +27,7 @@
  */
 package mage.sets.commander2014;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -50,7 +51,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -111,19 +112,18 @@ class WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEff
         if (controller != null) {
             Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
             controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
+            ArrayList<Permanent> toSacrifice = new ArrayList<>(cards.size());
             for (UUID targetId : cards) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
-                    Effect effect = new SacrificeTargetEffect("Sacrifice those creatures at the beginning of the next end step", source.getControllerId());
-                    effect.setTargetPointer(new FixedTarget(creature, game));
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    toSacrifice.add(creature);
                 }
 
             }
+            Effect effect = new SacrificeTargetEffect("Sacrifice those creatures at the beginning of the next end step", source.getControllerId());
+            effect.setTargetPointer(new FixedTargets(toSacrifice, game));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;

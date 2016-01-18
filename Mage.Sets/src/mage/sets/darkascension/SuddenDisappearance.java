@@ -55,7 +55,6 @@ public class SuddenDisappearance extends CardImpl {
         super(ownerId, 23, "Sudden Disappearance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
         this.expansionSetCode = "DKA";
 
-
         // Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new SuddenDisappearanceEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -96,10 +95,7 @@ class SuddenDisappearanceEffect extends OneShotEffect {
                     controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 }
                 AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
 
             }
             return true;

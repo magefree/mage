@@ -30,7 +30,6 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
@@ -60,10 +59,7 @@ public class DestroyTargetAtBeginningOfNextEndStepEffect extends OneShotEffect {
         DestroyTargetEffect effect = new DestroyTargetEffect();
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
 }

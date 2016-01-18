@@ -62,7 +62,6 @@ public class Skeletonize extends CardImpl {
         super(ownerId, 114, "Skeletonize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "ALA";
 
-
         // Skeletonize deals 3 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -100,10 +99,7 @@ class SkeletonizeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility delayedAbility = new SkeletonizeDelayedTriggeredAbility();
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
 }
@@ -130,7 +126,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+        ZoneChangeEvent zce = (ZoneChangeEvent) event;
         if (zce.isDiesEvent()) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", this.getSourceId());
             if (watcher != null) {

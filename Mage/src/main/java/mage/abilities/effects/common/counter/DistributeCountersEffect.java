@@ -37,7 +37,6 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
 
@@ -75,23 +74,20 @@ public class DistributeCountersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if(source.getTargets().size() > 0) {
+        if (source.getTargets().size() > 0) {
             Target multiTarget = source.getTargets().get(0);
-            for(UUID target : multiTarget.getTargets()) {
+            for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
-                if(permanent != null) {
+                if (permanent != null) {
                     permanent.addCounters(counterType.createInstance(multiTarget.getTargetAmount(target)), game);
                 }
             }
 
-            if(removeAtEndOfTurn) {
+            if (removeAtEndOfTurn) {
                 DelayedTriggeredAbility ability = new AtTheBeginOfNextCleanupDelayedTriggeredAbility(
-                    new RemoveCountersAtEndOfTurn(counterType));
-                ability.setSourceId(source.getSourceId());
-                ability.setControllerId(source.getControllerId());
-                ability.setSourceObject(source.getSourceObject(game), game);
+                        new RemoveCountersAtEndOfTurn(counterType));
                 ability.getTargets().addAll(source.getTargets());
-                game.addDelayedTriggeredAbility(ability);
+                game.addDelayedTriggeredAbility(ability, source);
             }
 
             return true;
@@ -107,9 +103,9 @@ public class DistributeCountersEffect extends OneShotEffect {
 
         String name = counterType.getName();
         String text = "distribute " + CardUtil.numberToText(amount) + " " + name + " counters among " + targetDescription + ".";
-        if(removeAtEndOfTurn) {
+        if (removeAtEndOfTurn) {
             text += " For each " + name + " counter you put on a creature this way, remove a "
-                + name + " counter from that creature at the beginning of the next cleanup step.";
+                    + name + " counter from that creature at the beginning of the next cleanup step.";
         }
         return text;
     }
@@ -124,7 +120,7 @@ class RemoveCountersAtEndOfTurn extends OneShotEffect {
         this.counterType = counterType;
         String name = counterType.getName();
         staticText = "For each " + name + " counter you put on a creature this way, remove a "
-            + name + " counter from that creature at the beginning of the next cleanup step.";
+                + name + " counter from that creature at the beginning of the next cleanup step.";
     }
 
     public RemoveCountersAtEndOfTurn(final RemoveCountersAtEndOfTurn effect) {
@@ -139,11 +135,11 @@ class RemoveCountersAtEndOfTurn extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if(source.getTargets().size() > 0) {
+        if (source.getTargets().size() > 0) {
             Target multiTarget = source.getTargets().get(0);
-            for(UUID target : multiTarget.getTargets()) {
+            for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
-                if(permanent != null) {
+                if (permanent != null) {
                     permanent.removeCounters(counterType.getName(), multiTarget.getTargetAmount(target), game);
                 }
             }

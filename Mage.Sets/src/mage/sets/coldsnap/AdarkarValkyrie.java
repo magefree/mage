@@ -60,6 +60,7 @@ import mage.target.targetpointer.FixedTarget;
 public class AdarkarValkyrie extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+
     static {
         filter.add(new AnotherPredicate());
     }
@@ -113,14 +114,10 @@ class AdarkarValkyrieEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility delayedAbility = new AdarkarValkyrieDelayedTriggeredAbility(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
         return false;
     }
 }
-
 
 class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
@@ -162,4 +159,3 @@ class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
         return "When target creature other than Adarkar Valkyrie dies this turn, " + super.getRule();
     }
 }
-

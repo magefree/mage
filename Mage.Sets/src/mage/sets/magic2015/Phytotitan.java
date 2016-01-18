@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2015;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -40,8 +41,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  *
@@ -76,7 +75,7 @@ class PhytotitanEffect extends OneShotEffect {
 
     private static final String effectText = "return it to the battlefield tapped under its owner's control at the beginning of his or her next upkeep";
 
-    PhytotitanEffect ( ) {
+    PhytotitanEffect() {
         super(Outcome.Benefit);
         staticText = effectText;
     }
@@ -91,10 +90,7 @@ class PhytotitanEffect extends OneShotEffect {
         Effect effect = new ReturnSourceFromGraveyardToBattlefieldEffect(true, true);
         effect.setText(staticText);
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
 

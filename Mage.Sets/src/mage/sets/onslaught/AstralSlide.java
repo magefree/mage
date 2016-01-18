@@ -54,7 +54,6 @@ public class AstralSlide extends CardImpl {
         super(ownerId, 4, "Astral Slide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "ONS";
 
-
         // Whenever a player cycles a card, you may exile target creature. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new CycleAllTriggeredAbility(new AstralSlideEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
@@ -70,7 +69,6 @@ public class AstralSlide extends CardImpl {
         return new AstralSlide(this);
     }
 }
-
 
 class AstralSlideEffect extends OneShotEffect {
 
@@ -94,10 +92,7 @@ class AstralSlideEffect extends OneShotEffect {
                 if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                     //create delayed triggered ability
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, false));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    game.addDelayedTriggeredAbility(delayedAbility, source);
                     return true;
                 }
             }

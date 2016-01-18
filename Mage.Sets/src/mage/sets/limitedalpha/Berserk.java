@@ -65,11 +65,10 @@ public class Berserk extends CardImpl {
         super(ownerId, 94, "Berserk", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "LEA";
 
-
         // Cast Berserk only before the combat damage step. (Zone = all because it can be at least graveyard or hand)
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new BerserkReplacementEffect()), new CombatDamageStepStartedWatcher());
 
-        // Target creature gains trample and gets +X/+0 until end of turn, where X is its power. 
+        // Target creature gains trample and gets +X/+0 until end of turn, where X is its power.
         // At the beginning of the next end step, destroy that creature if it attacked this turn.
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains trample");
@@ -94,6 +93,7 @@ public class Berserk extends CardImpl {
 }
 
 class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
+
     BerserkReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only before the combat damage step";
@@ -171,10 +171,7 @@ class BerserkDestroyEffect extends OneShotEffect {
             Effect effect = new BerserkDelayedDestroyEffect();
             effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
             AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;
@@ -205,7 +202,7 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
             if (permanent != null) {
                 Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
                 if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-                    if (((AttackedThisTurnWatcher)watcher).getAttackedThisTurnCreatures().contains(permanent.getId())) {
+                    if (((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures().contains(permanent.getId())) {
                         return permanent.destroy(source.getSourceId(), game, false);
                     }
                 }

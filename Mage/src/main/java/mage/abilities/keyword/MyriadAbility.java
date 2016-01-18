@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 public class MyriadAbility extends AttacksTriggeredAbility {
 
@@ -70,15 +71,10 @@ class MyriadEffect extends OneShotEffect {
                         PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(controller.getId(), null, false, 1, true, true, playerId);
                         effect.setTargetPointer(new FixedTarget(sourceObject, game));
                         effect.apply(game, source);
-                        for (Permanent tokenPermanent : effect.getAddedPermanent()) {
-                            ExileTargetEffect exileEffect = new ExileTargetEffect();
-                            exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                            DelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
-                            delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setControllerId(source.getControllerId());
-                            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                            game.addDelayedTriggeredAbility(delayedAbility);
-                        }
+                        ExileTargetEffect exileEffect = new ExileTargetEffect();
+                        exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));
+                        DelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
+                        game.addDelayedTriggeredAbility(delayedAbility, source);
                     }
                 }
 

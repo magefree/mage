@@ -110,10 +110,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
                     Effect effect = new GraveBetrayalEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-                    delayedAbility.setSourceId(this.getSourceId());
-                    delayedAbility.setControllerId(this.getControllerId());
-                    delayedAbility.setSourceObject(this.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    game.addDelayedTriggeredAbility(delayedAbility, this);
                     return true;
                 }
             }

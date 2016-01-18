@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,7 +58,7 @@ public class HikariTwilightGuardian extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a Spirit or Arcane spell, you may exile Hikari, Twilight Guardian. If you do, return it to the battlefield under its owner's control at the beginning of the next end step.
-        Effect effect = new ExileReturnToBattlefieldOwnerNextEndStepEffect();
+        Effect effect = new ExileReturnBattlefieldOwnerNextEndStepSourceEffect();
         effect.setText("you may exile {this}. If you do, return it to the battlefield under its owner's control at the beginning of the next end step");
         this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, true));
     }

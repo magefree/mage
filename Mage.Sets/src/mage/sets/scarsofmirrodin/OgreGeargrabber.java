@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,7 +20,7 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
@@ -110,10 +110,7 @@ class OgreGeargrabberEffect1 extends OneShotEffect {
         UUID equipmentId = source.getFirstTarget();
         if (equipmentId != null) {
             OgreGeargrabberDelayedTriggeredAbility delayedAbility = new OgreGeargrabberDelayedTriggeredAbility(equipmentId);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             Permanent equipment = game.getPermanent(equipmentId);
             if (equipment != null) {
                 Permanent ogre = game.getPermanent(source.getSourceId());
@@ -132,7 +129,7 @@ class OgreGeargrabberDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID equipmentId;
 
-    OgreGeargrabberDelayedTriggeredAbility (UUID equipmentId) {
+    OgreGeargrabberDelayedTriggeredAbility(UUID equipmentId) {
         super(new OgreGeargrabberEffect2(equipmentId));
         this.equipmentId = equipmentId;
     }
@@ -151,6 +148,7 @@ class OgreGeargrabberDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(controllerId) && event.getTargetId().equals(equipmentId);
     }
+
     @Override
     public OgreGeargrabberDelayedTriggeredAbility copy() {
         return new OgreGeargrabberDelayedTriggeredAbility(this);

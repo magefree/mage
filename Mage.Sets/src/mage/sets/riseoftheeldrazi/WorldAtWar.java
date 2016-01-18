@@ -55,7 +55,6 @@ public class WorldAtWar extends CardImpl {
         super(ownerId, 172, "World at War", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "ROE";
 
-
         // After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
         this.getSpellAbility().addEffect(new WorldAtWarEffect());
 
@@ -95,10 +94,8 @@ class WorldAtWarEffect extends OneShotEffect {
         TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
         game.getState().getTurnMods().add(combat);
         UntapDelayedTriggeredAbility delayedTriggeredAbility = new UntapDelayedTriggeredAbility();
-        delayedTriggeredAbility.setSourceId(source.getSourceId());
-        delayedTriggeredAbility.setControllerId(source.getControllerId());
         delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
-        game.addDelayedTriggeredAbility(delayedTriggeredAbility);
+        game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
         return true;
     }
 
@@ -108,7 +105,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID connectedTurnMod;
     private boolean enabled;
-    
+
     public UntapDelayedTriggeredAbility() {
         super(new UntapAttackingThisTurnEffect());
     }
@@ -173,7 +170,7 @@ class UntapAttackingThisTurnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
         if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-            Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher)watcher).getAttackedThisTurnCreatures();
+            Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
             for (UUID uuid : attackedThisTurn) {
                 Permanent permanent = game.getPermanent(uuid);
                 if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
@@ -185,5 +182,3 @@ class UntapAttackingThisTurnEffect extends OneShotEffect {
     }
 
 }
-
-
