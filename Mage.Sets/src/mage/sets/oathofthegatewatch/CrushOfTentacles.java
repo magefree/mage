@@ -75,6 +75,7 @@ class CrushOfTentaclesToken extends Token {
 
     public CrushOfTentaclesToken() {
         super("Octopus", "8/8 blue Octopus creature");
+        this.setExpansionSetCodeForImage("BFZ");
         this.cardType.add(CardType.CREATURE);
         this.color.setBlue(true);
         this.subtype.add("Octopus");

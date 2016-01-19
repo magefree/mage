@@ -110,11 +110,9 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
     /**
      * Name of Tiny Leader comes from the deck name (it's not in the sideboard)
      * Additionally, it was taken into account that WOTC had missed a few color combinations
-     * when making Legendary Creatures at 3 CMC. There are three Commanders available to use 
+     * when making Legendary Creatures at 3 CMC. There are two Commanders available to use 
      * for the missing color identities: 
-     *  Mardu [WBR 2/2], 
-     *  Sultai [UBG 2/2], and 
-     *  Jeskai [WUR 2/2]. 
+     *  Sultai [UBG 3/3] and Glass [colorless 3/3]
      *
      * @param commanderName
      * @param ownerId
@@ -126,6 +124,9 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
             switch (commanderName) {
                 case "Sultai":
                     commander = new DefaultCommander(ownerId, commanderName, "{U}{B}{G}");
+                    break;
+                case "Glass":
+                    commander = new DefaultCommander(ownerId, commanderName, "{C}{C}{C}");
                     break;
                 default:
                     CardInfo cardInfo = CardRepository.instance.findCard(commanderName);
@@ -184,8 +185,8 @@ class DefaultCommander extends CardImpl {
         if (manaString.contains("{R}")) {
             this.color.setRed(true);
         }
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
     }
 

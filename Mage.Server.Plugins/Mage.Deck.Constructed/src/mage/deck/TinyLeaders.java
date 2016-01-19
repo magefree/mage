@@ -155,10 +155,10 @@ public class TinyLeaders extends DeckValidator {
                 if (commander == null) {
                     if (deck.getName() == null) {
                         invalid.put("Leader", "You have to save your deck with the leader card name entered to the DECK NAME field of the DECK EDITOR (top left) so that XMage knows your leader."
-                                + "(You can use the \"Sultai\" for a UBG (2/2) default Commander.)");
+                                + "(You can use the \"Sultai\" for a UBG (3/3) default Commander or \"Glass\" for a colorless 3/3 default Commander.)");
                     } else {
                         invalid.put("Leader", "Leader [" + deck.getName() + "] not found. You have to enter the name of the leader card into the DECK NAME field of the DECK EDITOR (top left). Check your spelling "
-                                + "(use the \"Sultai\" for a UBG (2/2) default Commander)");
+                                + "(use the \"Sultai\" for a UBG (3/3) default Commander or \"Glass\" for a colorless (3/3) default Commander)");
 
                     }
                 }
