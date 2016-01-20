@@ -233,8 +233,6 @@ public class TournamentPlayer {
         return TourneyPlayerProto.newBuilder()
                 .setName(this.player.getName())
                 .setPlayerType(this.playerType)
-                .setStateInfo(this.stateInfo)
-                .setDisconnectInfo(this.disconnectInfo)
                 .setQuit(this.quitStatus)
                 .build();
     }

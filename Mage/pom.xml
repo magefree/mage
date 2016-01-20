@@ -56,7 +56,7 @@
                 </configuration>
             </plugin>
 
-            <!-- http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->
+            <!-- The plugins below are added by following http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->
             <!-- copy protoc binary into build directory -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -167,7 +167,7 @@
 
         <finalName>mage</finalName>
 
-        <!-- http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->
+        <!-- The extension below is added added by following http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->
         <extensions>
             <!-- provides os.detected.classifier (i.e. linux-x86_64, osx-x86_64) property -->
             <extension>
@@ -178,7 +178,7 @@
         </extensions>
     </build>
 
-    <!-- http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->
+    <!-- The properties below are added added by following http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->
     <properties>
         <!-- protobuf paths -->
         <protobuf.input.directory>${project.basedir}/src/main/proto</protobuf.input.directory>

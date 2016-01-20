@@ -46,9 +46,7 @@ message TourneyPlayerProto {
   optional string name = 1;
   optional string player_type = 2;
   optional string replaced_player_name = 3;
-  optional string state_info = 4;
-  optional string disconnect_info = 5;
-  optional TourneyQuitStatus quit = 6;
+  optional TourneyQuitStatus quit = 4;
 }
 
 enum TourneyQuitStatus {
