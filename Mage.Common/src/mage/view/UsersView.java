@@ -39,12 +39,14 @@ public class UsersView implements Serializable {
 
     private final String flagName;
     private final String userName;
+    private final String history;
     private final String infoState;
     private final String infoGames;
     private final String infoPing;
 
-    public UsersView(String flagName, String userName, String infoState, String infoGames, String infoPing) {
+    public UsersView(String flagName, String userName, String history, String infoState, String infoGames, String infoPing) {
         this.flagName = flagName;
+        this.history = history;
         this.userName = userName;
         this.infoState = infoState;
         this.infoGames = infoGames;
@@ -57,6 +59,10 @@ public class UsersView implements Serializable {
 
     public String getUserName() {
         return userName;
+    }
+
+    public String getHistory() {
+        return history;
     }
 
     public String getInfoState() {

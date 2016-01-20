@@ -438,7 +438,7 @@ public class MageServerImpl implements MageServer {
 //    }
     @Override
     public boolean startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
-        if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
+        if (!TableManager.getInstance().getController(tableId).changeTableStateToStarting()) {
             return false;
         }
         execute("startMatch", sessionId, new Action() {
@@ -463,7 +463,7 @@ public class MageServerImpl implements MageServer {
 //    }
     @Override
     public boolean startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
-        if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
+        if (!TableManager.getInstance().getController(tableId).changeTableStateToStarting()) {
             return false;
         }
         execute("startTournament", sessionId, new Action() {

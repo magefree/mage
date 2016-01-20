@@ -43,11 +43,14 @@ import mage.constants.TableState;
 import mage.game.GameException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
+import mage.game.result.ResultProtos.UserStatsProto;
 import mage.game.tournament.TournamentOptions;
 import mage.server.RoomImpl;
 import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
+import mage.server.record.UserStats;
+import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.ThreadExecutor;
@@ -91,6 +94,74 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         return tableView;
     }
 
+    private static void joinStrings(StringBuilder joined, List<String> strings, String separator) {
+        for (int i = 0; i < strings.size(); ++i) {
+            if (i > 0) {
+                joined.append(separator);
+            }
+            joined.append(strings.get(i));
+        }
+    }
+
+    private static String joinBuilders(List<StringBuilder> builders) {
+        if (builders.isEmpty()) {
+            return null;
+        }
+        StringBuilder builder = builders.get(0);
+        for (int i = 1; i < builders.size(); ++i) {
+            builder.append(" ");
+            builder.append(builders.get(i));
+        }
+        return builder.toString();
+    }
+
+    private static String userStatsToString(UserStatsProto proto) {
+        List<StringBuilder> builders = new ArrayList();
+        if (proto.getMatches() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append("Matches:");
+            builder.append(proto.getMatches());
+            List<String> quit = new ArrayList();
+            if (proto.getMatchesIdleTimeout() > 0) {
+                quit.add("I:" + Integer.toString(proto.getMatchesIdleTimeout()));
+            }
+            if (proto.getMatchesTimerTimeout() > 0) {
+                quit.add("T:" + Integer.toString(proto.getMatchesTimerTimeout()));
+            }
+            if (proto.getMatchesQuit() > 0) {
+                quit.add("Q:" + Integer.toString(proto.getMatchesQuit()));
+            }
+            if (quit.size() > 0) {
+                builder.append(" (");
+                joinStrings(builder, quit, " ");
+                builder.append(")");
+            }
+            builders.add(builder);
+        }
+        if (proto.getTourneys() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append("Tourneys:");
+            builder.append(proto.getTourneys());
+            List<String> quit = new ArrayList();
+            if (proto.getTourneysQuitDuringDrafting() > 0) {
+                quit.add("D:" + Integer.toString(proto.getTourneysQuitDuringDrafting()));
+            }
+            if (proto.getTourneysQuitDuringConstruction() > 0) {
+                quit.add("C:" + Integer.toString(proto.getTourneysQuitDuringConstruction()));
+            }
+            if (proto.getTourneysQuitDuringRound() > 0) {
+                quit.add("R:" + Integer.toString(proto.getTourneysQuitDuringRound()));
+            }
+            if (quit.size() > 0) {
+                builder.append(" (");
+                joinStrings(builder, quit, " ");
+                builder.append(")");
+            }
+            builders.add(builder);
+        }
+        return joinBuilders(builders);
+    }
+
     private void update() {
         ArrayList<TableView> tableList = new ArrayList<>();
         ArrayList<MatchView> matchList = new ArrayList<>();
@@ -100,11 +171,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
             } else if (matchList.size() < 50) {
-                if (table.isTournament()) {
-                    matchList.add(new MatchView(table));
-                } else {
-                    matchList.add(new MatchView(table));
-                }
+                matchList.add(new MatchView(table));
             } else {
                 // more since 50 matches finished since this match so remove it
                 if (table.isTournament()) {
@@ -117,13 +184,19 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         matchView = matchList;
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
+            String history = null;
+            UserStats stats = UserStatsRepository.instance.getUser(user.getName());
+            if (stats != null) {
+                history = userStatsToString(stats.getProto());
+            }
             try {
-                users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), user.getInfo(), user.getGameInfo(), user.getPingInfo()));
+                users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), history, user.getInfo(), user.getGameInfo(), user.getPingInfo()));
             } catch (Exception ex) {
                 logger.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
                 users.add(new UsersView(
                         (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
                         user.getName() != null ? user.getName() : "<no name>",
+                        history != null ? history : "<no history>",
                         user.getInfo() != null ? user.getInfo() : "<no info>",
                         "[exception]",
                         user.getPingInfo() != null ? user.getPingInfo() : "<no ping>"));

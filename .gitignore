@@ -94,3 +94,5 @@ Mage.Client/serverlist.txt
 /target/
 
 client_secrets.json
+
+dependency-reduced-pom.xml
