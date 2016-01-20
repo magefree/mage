@@ -55,6 +55,7 @@ public class UserManager {
     private static final Logger logger = Logger.getLogger(UserManager.class);
 
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, User> usersByName = new ConcurrentHashMap<>();
     
     private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
@@ -74,11 +75,12 @@ public class UserManager {
     }
 
     public User createUser(String userName, String host) {
-        if (findUser(userName) != null) {
+        if (getUserByName(userName) != null) {
             return null; //user already exists
         }
         User user = new User(userName, host);
         users.put(user.getId(), user);
+        usersByName.put(userName, user);
         return user;
     }
 
@@ -89,13 +91,8 @@ public class UserManager {
         return null;
     }
 
-    public User findUser(String userName) {
-        for (User user: users.values()) {
-            if (user.getName().equals(userName)) {
-                return user;
-            }
-        }
-        return null;
+    public User getUserByName(String userName) {
+        return usersByName.get(userName);
     }
 
     public Collection<User> getUsers() {
@@ -149,6 +146,7 @@ public class UserManager {
                                 handleException(ex);
                             } finally {
                                 users.remove(userId);
+                                usersByName.remove(user.getName());
                             }
                         }
                     }

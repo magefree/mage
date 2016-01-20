@@ -183,7 +183,7 @@ public class Session {
         User user = UserManager.getInstance().createUser(userName, host);
         boolean reconnect = false;
         if (user == null) {  // user already exists
-            user = UserManager.getInstance().findUser(userName);
+            user = UserManager.getInstance().getUserByName(userName);
             // If authentication is not activated, check the identity using IP address.
             if (ConfigSettings.getInstance().isAuthenticationActivated() || user.getHost().equals(host)) {
                 user.updateLastActivity(null);  // minimizes possible expiration
@@ -218,7 +218,7 @@ public class Session {
         this.isAdmin = true;
         User user = UserManager.getInstance().createUser("Admin", host);
         if (user == null) {
-            user = UserManager.getInstance().findUser("Admin");
+            user = UserManager.getInstance().getUserByName("Admin");
         }
         UserData adminUserData = UserData.getDefaultUserDataView();
         adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
@@ -230,7 +230,7 @@ public class Session {
     }
 
     public boolean setUserData(String userName, UserData userData) {
-        User user = UserManager.getInstance().findUser(userName);
+        User user = UserManager.getInstance().getUserByName(userName);
         if (user != null) {
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
                 user.setUserData(userData);

@@ -46,6 +46,8 @@ import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
 import mage.server.game.GameSessionPlayer;
+import mage.server.record.UserStats;
+import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentManager;
 import mage.server.tournament.TournamentSession;
@@ -84,6 +86,7 @@ public class User {
     private Date lastActivity;
     private UserState userState;
     private UserData userData;
+    private UserStats userStats;
 
     public User(String userName, String host) {
         this.userId = UUID.randomUUID();
@@ -525,4 +528,17 @@ public class User {
         }
     }
 
+    // getUserStats returns the UserStats for this user. This caches the result, so if the stats is
+    // updated call resetUserStats to refresh it.
+    public UserStats getUserStats() {
+        if (this.userStats == null) {
+            resetUserStats();
+        }
+        return this.userStats;
+    }
+
+    // resetUserStats loads UserStats from DB.
+    public void resetUserStats() {
+        this.userStats = UserStatsRepository.instance.getUser(this.userName);
+    }
 }
