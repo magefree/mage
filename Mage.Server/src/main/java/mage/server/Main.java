@@ -426,6 +426,11 @@ public class Main {
                     } else {
                         UserStatsRepository.instance.update(new UserStats(builder.build(), table.getEndTimeMs()));
                     }
+                    // UserStats for this player is updated, so refresh it.
+                    User user = UserManager.getInstance().getUserByName(player.getName());
+                    if (user != null) {
+                        user.resetUserStats();
+                    }
                 }
             } else if (table.hasTourney()) {
                 TourneyProto tourney = table.getTourney();
@@ -450,6 +455,11 @@ public class Main {
                         UserStatsRepository.instance.add(new UserStats(builder.build(), table.getEndTimeMs()));
                     } else {
                         UserStatsRepository.instance.update(new UserStats(builder.build(), table.getEndTimeMs()));
+                    }
+                    // UserStats for this player is updated, so refresh it.
+                    User user = UserManager.getInstance().getUserByName(player.getName());
+                    if (user != null) {
+                        user.resetUserStats();
                     }
                 }
             }

@@ -110,7 +110,7 @@ public class ChatManager {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
-                User user = UserManager.getInstance().findUser(userName);
+                User user = UserManager.getInstance().getUserByName(userName);
                 if (user != null && performUserCommand(user, message, chatId)) {
                     return;
                 }
@@ -138,7 +138,7 @@ public class ChatManager {
             if (first > 1) {
                 String userToName = rest.substring(0,first);
                 rest = rest.substring(first + 1).trim();
-                User userTo = UserManager.getInstance().findUser(userToName);
+                User userTo = UserManager.getInstance().getUserByName(userToName);
                 if (userTo != null) {
                     if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {
                         message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();

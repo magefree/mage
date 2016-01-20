@@ -185,7 +185,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
             String history = null;
-            UserStats stats = UserStatsRepository.instance.getUser(user.getName());
+            UserStats stats = user.getUserStats();
             if (stats != null) {
                 history = userStatsToString(stats.getProto());
             }
