@@ -1,6 +1,14 @@
-#Generate|TOK:OGW|Elemental||
-#Generate|TOK:OGW|Plant||
-#Generate|TOK:OGW|Zombie||
+|Generate}TOK:OGW|Angel||
+|Generate|TOK:OGW|Elemental|1|
+|Generate|TOK:OGW|Elemental|2|
+|Generate}TOK:OGW|Eldrazi Scion|1|
+|Generate}TOK:OGW|Eldrazi Scion|2|
+|Generate}TOK:OGW|Eldrazi Scion|3|
+|Generate}TOK:OGW|Eldrazi Scion|4|
+|Generate}TOK:OGW|Eldrazi Scion|5|
+|Generate}TOK:OGW|Eldrazi Scion|6|
+|Generate|TOK:OGW|Plant||
+|Generate|TOK:OGW|Zombie||
 
 #|Generate|TOK:DDQ|Angel||
 
