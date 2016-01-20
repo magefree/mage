@@ -40,6 +40,12 @@ import mage.constants.Zone;
  * @author fireshoes
  */
 public class EldraziScionToken extends Token {
+    
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("BFZ", "OGW"));
+    }
 
     public EldraziScionToken() {
         super("Eldrazi Scion", "1/1 colorless Eldrazi Scion creature token with \"Sacrifice this creature: Add {C} to your mana pool.\"");
@@ -49,8 +55,6 @@ public class EldraziScionToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GenericMana(1), new SacrificeSourceCost()));
-        setOriginalExpansionSetCode("BFZ");
-
     }
 
     @Override
@@ -58,6 +62,9 @@ public class EldraziScionToken extends Token {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("BFZ")) {
             this.setTokenType(new Random().nextInt(3) + 1); // 3 different images
+        }
+        if (getOriginalExpansionSetCode().equals("OGW")) {
+            this.setTokenType(new Random().nextInt(6) + 1); // 6 different images
         }
     }
 

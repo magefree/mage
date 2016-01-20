@@ -46,7 +46,7 @@ public class AlliedReinforcements extends CardImpl {
         this.expansionSetCode = "OGW";
 
         // Put two 2/2 white Knight Ally creature tokens onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightAllyToken(), 2));
     }
 
     public AlliedReinforcements(final AlliedReinforcements card) {
@@ -59,10 +59,10 @@ public class AlliedReinforcements extends CardImpl {
     }
 }
 
-class KnightToken extends Token {
+class KnightAllyToken extends Token {
 
-    public KnightToken() {
-        super("Knight", "2/2 white Knight Ally creature token");
+    public KnightAllyToken() {
+        super("Knight Ally", "2/2 white Knight Ally creature token");
         this.setExpansionSetCodeForImage("BFZ");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

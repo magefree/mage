@@ -103,6 +103,7 @@ class SeedGuardianToken extends Token {
 
     public SeedGuardianToken(int xValue) {
         super("Elemental", "X/X green Elemental creature token");
+        setTokenType(2);
         setOriginalExpansionSetCode("OGW");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
