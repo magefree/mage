@@ -63,6 +63,7 @@ class KnightToken extends Token {
 
     public KnightToken() {
         super("Knight", "2/2 white Knight Ally creature token");
+        this.setExpansionSetCodeForImage("BFZ");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Knight");
