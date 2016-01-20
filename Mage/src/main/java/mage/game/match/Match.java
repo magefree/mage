@@ -39,6 +39,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import mage.game.GameInfo;
+import mage.game.result.ResultProtos.MatchProto;
 
 /**
  *
@@ -111,4 +112,6 @@ public interface Match {
 
     void setTableId(UUID tableId);
     void setTournamentRound(int round);
+
+    MatchProto toProto();
 }

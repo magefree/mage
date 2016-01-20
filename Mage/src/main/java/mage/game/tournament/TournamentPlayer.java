@@ -31,6 +31,8 @@ package mage.game.tournament;
 import java.util.Set;
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
+import mage.game.result.ResultProtos.TourneyPlayerProto;
+import mage.game.result.ResultProtos.TourneyQuitStatus;
 import mage.players.Player;
 import mage.util.TournamentUtil;
 
@@ -52,6 +54,8 @@ public class TournamentPlayer {
     protected boolean quit = false;
     protected boolean doneConstructing;
     protected boolean joined = false;
+    protected TourneyQuitStatus quitStatus = TourneyQuitStatus.NO_TOURNEY_QUIT;
+    protected TournamentPlayer replacedTournamentPlayer;
 
     public TournamentPlayer(Player player, String playerType) {
         this.player = player;
@@ -60,7 +64,6 @@ public class TournamentPlayer {
         this.stateInfo = "";
         this.disconnectInfo = "";
         this.results = "";
-
     }
 
     public Player getPlayer() {
@@ -185,12 +188,13 @@ public class TournamentPlayer {
         return quit;
     }
 
-    public void setQuit(String info) {
+    public void setQuit(String info, TourneyQuitStatus status) {
         setEliminated();
         this.setState(TournamentPlayerState.CANCELED);
         this.setStateInfo(info);
         this.quit = true;
         this.doneConstructing = true;
+        this.quitStatus = status;
     }
 
     /**
@@ -215,6 +219,22 @@ public class TournamentPlayer {
         return !this.getState().equals(TournamentPlayerState.CANCELED)
                 && !this.getState().equals(TournamentPlayerState.ELIMINATED)
                 && !this.getState().equals(TournamentPlayerState.FINISHED);
+    }
+
+    public TournamentPlayer getReplacedTournamentPlayer() {
+        return this.replacedTournamentPlayer;
+    }
+
+    public void setReplacedTournamentPlayer(TournamentPlayer player) {
+        this.replacedTournamentPlayer = player;
+    }
+
+    public TourneyPlayerProto toProto() {
+        return TourneyPlayerProto.newBuilder()
+                .setName(this.player.getName())
+                .setPlayerType(this.playerType)
+                .setQuit(this.quitStatus)
+                .build();
     }
 }
 

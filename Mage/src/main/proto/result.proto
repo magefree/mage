@@ -1,0 +1,77 @@
+package mage.game.result;
+
+option java_outer_classname = "ResultProtos";
+
+message TableProto {
+  optional MatchProto match = 1;
+  optional TourneyProto tourney = 2;
+  optional string game_type = 3;
+  optional string deck_type = 4;
+  optional string name = 5;
+  optional string controller_name = 6;
+  optional int64 start_time_ms = 7;
+  optional int64 end_time_ms = 8;
+}
+
+message MatchProto {
+  optional string name = 1;
+  optional string game_type = 2;
+  optional string deck_type = 3;
+  optional int32 games = 4;
+  optional int32 draws = 5;
+  repeated MatchPlayerProto players = 6;
+}
+
+message MatchPlayerProto {
+  optional string name = 1;
+  optional int32 wins = 2;
+  optional MatchQuitStatus quit = 3;
+  optional bool bye = 4;
+}
+
+enum MatchQuitStatus {
+  NO_MATCH_QUIT = 0;
+  IDLE_TIMEOUT = 1;  // I
+  TIMER_TIMEOUT = 2;  // T
+  QUIT = 3;  // Q
+}
+
+message TourneyProto {
+  optional string booster_info = 1;
+  repeated TourneyPlayerProto players = 2;
+  repeated TourneyRoundProto rounds = 3;
+}
+
+message TourneyPlayerProto {
+  optional string name = 1;
+  optional string player_type = 2;
+  optional string replaced_player_name = 3;
+  optional TourneyQuitStatus quit = 4;
+}
+
+enum TourneyQuitStatus {
+  NO_TOURNEY_QUIT = 0;
+  DURING_ROUND = 1;
+  DURING_DRAFTING = 2;
+  DURING_CONSTRUCTION = 3;
+}
+
+message TourneyRoundProto {
+  optional int32 round = 1;
+  repeated MatchProto matches = 2;
+  repeated string byes = 3;
+}
+
+message UserStatsProto {
+  optional string name = 1;
+
+  optional int32 tourneys = 2;
+  optional int32 tourneys_quit_during_round = 3;
+  optional int32 tourneys_quit_during_drafting = 4;
+  optional int32 tourneys_quit_during_construction = 5;
+
+  optional int32 matches = 6;
+  optional int32 matches_idle_timeout = 7;
+  optional int32 matches_timer_timeout = 8;
+  optional int32 matches_quit = 9;
+}

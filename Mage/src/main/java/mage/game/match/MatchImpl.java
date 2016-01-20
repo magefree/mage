@@ -41,6 +41,8 @@ import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
+import mage.game.result.ResultProtos.MatchProto;
+import mage.game.result.ResultProtos.MatchQuitStatus;
 import mage.players.Player;
 import mage.util.DateFormat;
 import org.apache.log4j.Logger;
@@ -486,6 +488,27 @@ public abstract class MatchImpl implements Match {
             matchPlayer.cleanUpOnMatchEnd();
         }
         this.getGames().clear();
+    }
+
+    @Override
+    public MatchProto toProto() {
+        MatchProto.Builder builder = MatchProto.newBuilder()
+                .setName(this.getName())
+                .setGameType(this.getOptions().getGameType())
+                .setDeckType(this.getOptions().getDeckType())
+                .setGames(this.getNumGames())
+                .setDraws(this.getDraws());
+        for (MatchPlayer matchPlayer : this.getPlayers()) {
+            MatchQuitStatus status = !matchPlayer.hasQuit() ? MatchQuitStatus.NO_MATCH_QUIT :
+                    matchPlayer.getPlayer().hasTimerTimeout() ? MatchQuitStatus.TIMER_TIMEOUT :
+                    matchPlayer.getPlayer().hasIdleTimeout() ? MatchQuitStatus.IDLE_TIMEOUT :
+                    MatchQuitStatus.QUIT;
+            builder.addPlayersBuilder()
+                    .setName(matchPlayer.getName())
+                    .setQuit(status)
+                    .setWins(matchPlayer.getWins());
+        }
+        return builder.build();
     }
 
 }

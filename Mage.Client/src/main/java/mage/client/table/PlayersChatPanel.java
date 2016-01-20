@@ -61,7 +61,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     private final List<String> players = new ArrayList<>();
     private final UserTableModel userTableModel;
-    private static final int[] defaultColumnsWidth = {20, 100, 100, 80, 80};
+    private static final int[] defaultColumnsWidth = {20, 100, 100, 100, 80, 80};
 
 
     /*
@@ -118,7 +118,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     class UserTableModel extends AbstractTableModel {
 
-        private final String[] columnNames = new String[]{"Loc", "Players", "Info", "Games", "Connection"};
+        private final String[] columnNames = new String[]{"Loc", "Players", "History", "Info", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
 
         public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
@@ -128,7 +128,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             TableColumnModel tcm = th.getColumnModel();
 
             tcm.getColumn(jTablePlayers.convertColumnIndexToView(1)).setHeaderValue("Players (" + this.players.length + ")");
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(3)).setHeaderValue(
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(4)).setHeaderValue(
                     "Games " + roomUserInfo.getNumberActiveGames()
                     + (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads() : " (")
                     + " limit: " + roomUserInfo.getNumberMaxGames() + ")");
@@ -154,10 +154,12 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                 case 1:
                     return players[arg0].getUserName();
                 case 2:
-                    return players[arg0].getInfoState();
+                    return players[arg0].getHistory();
                 case 3:
-                    return players[arg0].getInfoGames();
+                    return players[arg0].getInfoState();
                 case 4:
+                    return players[arg0].getInfoGames();
+                case 5:
                     return players[arg0].getInfoPing();
             }
             return "";

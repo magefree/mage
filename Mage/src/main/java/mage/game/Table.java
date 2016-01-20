@@ -38,6 +38,7 @@ import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.events.TableEventSource;
 import mage.game.match.Match;
+import mage.game.result.ResultProtos.TableProto;
 import mage.game.tournament.Tournament;
 import mage.players.Player;
 
@@ -61,24 +62,29 @@ public class Table implements Serializable {
     private TableState state;
     private Match match;
     private Tournament tournament;
+    private TableRecorder recorder;
+
+    public interface TableRecorder {
+          void record(Table table);
+    };
 
     protected TableEventSource tableEventSource = new TableEventSource();
 
-    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Tournament tournament) {
-        this(roomId, gameType, name, controllerName, validator, playerTypes);
+    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, TableRecorder recorder, Tournament tournament) {
+        this(roomId, gameType, name, controllerName, validator, playerTypes, recorder);
         this.tournament = tournament;
         this.isTournament = true;
         setState(TableState.WAITING);        
     }
 
-    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Match match) {
-        this(roomId, gameType, name, controllerName, validator, playerTypes);
+    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, TableRecorder recorder, Match match) {
+        this(roomId, gameType, name, controllerName, validator, playerTypes, recorder);
         this.match = match;
         this.isTournament = false;        
         setState(TableState.WAITING);        
     }
 
-    protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes) {
+    protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, TableRecorder recorder) {
         tableId = UUID.randomUUID();
         this.roomId = roomId;
         this.numSeats = playerTypes.size();
@@ -88,6 +94,7 @@ public class Table implements Serializable {
         this.createTime = new Date();
         createSeats(playerTypes);
         this.validator = validator;
+        this.recorder = recorder;
     }
 
     private void createSeats(List<String> playerTypes) {
@@ -235,6 +242,9 @@ public class Table implements Serializable {
         if (isTournament()) {
             getTournament().setTournamentState(state.toString());
         }
+        if (state == TableState.FINISHED) {
+            this.recorder.record(this);
+        }
     }
 
     public TableState getState() {
@@ -296,5 +306,21 @@ public class Table implements Serializable {
             return match.getEndTime();
         }        
     }
-    
+
+    public TableProto toProto() {
+        TableProto.Builder builder = TableProto.newBuilder();
+        if (this.isTournament()) {
+            builder.getTourneyBuilder().mergeFrom(this.getTournament().toProto());
+        } else {
+            builder.getMatchBuilder().mergeFrom(this.getMatch().toProto());
+        }
+        return builder.setGameType(this.getGameType())
+                .setName(this.getName())
+                .setGameType(this.getGameType())
+                .setDeckType(this.getDeckType())
+                .setControllerName(this.getControllerName())
+                .setStartTimeMs(this.getStartTime().getTime())
+                .setEndTimeMs(this.getEndTime().getTime())
+                .build();
+    }
 }
