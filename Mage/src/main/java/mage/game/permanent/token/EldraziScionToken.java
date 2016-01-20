@@ -27,6 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import mage.MageInt;
 import mage.Mana;
@@ -40,7 +43,7 @@ import mage.constants.Zone;
  * @author fireshoes
  */
 public class EldraziScionToken extends Token {
-    
+
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
@@ -55,6 +58,7 @@ public class EldraziScionToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GenericMana(1), new SacrificeSourceCost()));
+        availableImageSetCodes = tokenImageSets;
     }
 
     @Override
