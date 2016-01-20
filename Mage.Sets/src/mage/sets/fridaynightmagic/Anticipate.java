@@ -37,7 +37,7 @@ public class Anticipate extends mage.sets.dragonsoftarkir.Anticipate {
 
     public Anticipate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = 187;
         this.expansionSetCode = "FNMP";
     }
 
