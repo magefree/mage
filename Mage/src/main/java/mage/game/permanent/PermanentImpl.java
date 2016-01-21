@@ -815,6 +815,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                     dealtDamageByThisTurn.add(new MageObjectReference(source, game));
                 }
+                if (source == null) {
+                    game.informPlayers(getLogName() + " gets " + damageDone + " damage");
+                } else {
+                    game.informPlayers(source.getLogName() + " deals " + damageDone + " damage to " + getLogName());
+                }
             }
         }
         return damageDone;
