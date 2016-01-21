@@ -580,7 +580,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelX.setText("0");
         manaLabels.put("X", manaCountLabelX);
         r = new Rectangle(12, 12);
-        BufferedImage imageManaX = ManaSymbols.getManaSymbolImageSmall("X");
+        BufferedImage imageManaX = ManaSymbols.getManaSymbolImageSmall("C");
         HoverButton btnColorlessMana = new HoverButton(null, imageManaX, imageManaX, imageManaX, r);
         btnColorlessMana.setToolTipText("Colorless mana");
         btnColorlessMana.setOpaque(false);
