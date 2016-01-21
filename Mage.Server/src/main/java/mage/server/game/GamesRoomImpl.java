@@ -50,7 +50,6 @@ import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.record.UserStats;
-import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.ThreadExecutor;
@@ -116,12 +115,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     private static String userStatsToString(UserStatsProto proto) {
-        List<StringBuilder> builders = new ArrayList();
+        List<StringBuilder> builders = new ArrayList<>();
         if (proto.getMatches() > 0) {
             StringBuilder builder = new StringBuilder();
             builder.append("Matches:");
             builder.append(proto.getMatches());
-            List<String> quit = new ArrayList();
+            List<String> quit = new ArrayList<>();
             if (proto.getMatchesIdleTimeout() > 0) {
                 quit.add("I:" + Integer.toString(proto.getMatchesIdleTimeout()));
             }
@@ -142,7 +141,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             StringBuilder builder = new StringBuilder();
             builder.append("Tourneys:");
             builder.append(proto.getTourneys());
-            List<String> quit = new ArrayList();
+            List<String> quit = new ArrayList<>();
             if (proto.getTourneysQuitDuringDrafting() > 0) {
                 quit.add("D:" + Integer.toString(proto.getTourneysQuitDuringDrafting()));
             }
