@@ -29,9 +29,9 @@ package mage.sets.futuresight;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -41,7 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -56,9 +56,9 @@ public class GlitteringWish extends CardImpl {
         super(ownerId, 156, "Glittering Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{W}");
         this.expansionSetCode = "FUT";
 
-
         // You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. Exile Glittering Wish.
         this.getSpellAbility().addEffect(new GlitteringWishEffect());
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
     public GlitteringWish(final GlitteringWish card) {
@@ -73,27 +73,17 @@ public class GlitteringWish extends CardImpl {
 
 class GlitteringWishEffect extends OneShotEffect {
 
-    private static final String choiceText = "Choose a multicolored card you own from outside the game, and put it into your hand";
+    private static final String choiceText = "Choose a multicolored card you own from outside the game (sideboard), and put it into your hand?";
 
-    private static final FilterCard filter = new FilterCard("multicolored card");
-    static{
-         filter.add(new Predicate<MageObject>() {
+    private static final FilterCard filter = new FilterCard("multicolored cards");
 
-            @Override
-            public boolean apply(MageObject input, Game game) {
-                return input.getColor(game).isMulticolored();
-            }
-
-            @Override
-            public String toString() {
-                return "Multicolored";
-            }
-        });
+    static {
+        filter.add(new MulticoloredPredicate());
     }
 
     public GlitteringWishEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. Exile Glittering Wish";
+        this.staticText = "You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand";
     }
 
     public GlitteringWishEffect(final GlitteringWishEffect effect) {
@@ -107,18 +97,18 @@ class GlitteringWishEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            while (player.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                Cards cards = player.getSideboard();
-                if(cards.isEmpty()) {
-                    game.informPlayer(player, "You have no cards outside the game.");
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            while (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
+                Cards cards = controller.getSideboard();
+                if (cards.isEmpty()) {
+                    game.informPlayer(controller, "You have no cards outside the game.");
                     break;
                 }
 
                 Set<Card> filtered = cards.getCards(filter, game);
                 if (filtered.isEmpty()) {
-                    game.informPlayer(player, "You have no " + filter.getMessage() + " outside the game.");
+                    game.informPlayer(controller, "You have no " + filter.getMessage() + " outside the game (your sideboard).");
                     break;
                 }
 
@@ -128,23 +118,19 @@ class GlitteringWishEffect extends OneShotEffect {
                 }
 
                 TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
-                if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
-                    Card card = player.getSideboard().get(target.getFirstTarget(), game);
+                if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
+                    Card card = controller.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {
 
                         card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                         Cards revealCard = new CardsImpl();
                         revealCard.add(card);
-                        player.revealCards("Glittering Wish", revealCard, game);
+                        controller.revealCards("Glittering Wish", revealCard, game);
                         break;
                     }
                 }
             }
-            Card cardToExile = game.getCard(source.getSourceId());
-            if(cardToExile != null)
-            {
-                cardToExile.moveToExile(null, "", source.getSourceId(), game);
-            }
+
         }
         return true;
     }
