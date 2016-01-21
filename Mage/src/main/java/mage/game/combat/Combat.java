@@ -86,6 +86,8 @@ public class Combat implements Serializable, Copyable<Combat> {
     private final Map<UUID, Set<UUID>> creaturesForcedToAttack = new HashMap<>();
     private int maxAttackers = Integer.MIN_VALUE;
 
+    private final HashSet<UUID> attackersTappedByAttack = new HashSet<>();
+
     public Combat() {
         this.useToughnessForDamage = false;
     }
@@ -111,6 +113,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             this.creaturesForcedToAttack.put(group.getKey(), group.getValue());
         }
         this.maxAttackers = combat.maxAttackers;
+        this.attackersTappedByAttack.addAll(combat.attackersTappedByAttack);
     }
 
     public List<CombatGroup> getGroups() {
@@ -230,7 +233,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
         } else {
-            possibleDefenders = new HashSet(defenders);
+            possibleDefenders = new HashSet<>(defenders);
         }
         Player player = game.getPlayer(attackerId);
         if (possibleDefenders.size() == 1) {
@@ -270,12 +273,21 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void resumeSelectAttackers(Game game) {
         for (CombatGroup group : groups) {
             for (UUID attacker : group.getAttackers()) {
+                if (attackersTappedByAttack.contains(attacker)) {
+                    Permanent attackingPermanent = game.getPermanent(attacker);
+                    if (attackingPermanent != null) {
+                        attackingPermanent.setTapped(false);
+                        attackingPermanent.tap(game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
+                    }
+                }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackerId));
             }
         }
+        attackersTappedByAttack.clear();
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
         if (!game.isSimulation()) {
             Player player = game.getPlayer(attackerId);
@@ -982,11 +994,13 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
         Permanent attacker = game.getPermanent(creatureId);
         if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
             if (!attacker.isTapped()) {
-                attacker.tap(game);
+                attacker.setTapped(true);
+                attackersTappedByAttack.add(attacker.getId());
             }
         }
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, creatureId, playerId))) {
@@ -1234,6 +1248,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void removeAttacker(UUID attackerId, Game game) {
         for (CombatGroup group : groups) {
             if (group.attackers.contains(attackerId)) {
@@ -1245,7 +1260,10 @@ public class Combat implements Serializable, Copyable<Combat> {
                 Permanent creature = game.getPermanent(attackerId);
                 if (creature != null) {
                     creature.setAttacking(false);
-                    creature.setTapped(false);
+                    if (attackersTappedByAttack.contains(creature.getId())) {
+                        creature.setTapped(false);
+                        attackersTappedByAttack.remove(creature.getId());
+                    }
                 }
                 if (group.attackers.isEmpty()) {
                     groups.remove(group);

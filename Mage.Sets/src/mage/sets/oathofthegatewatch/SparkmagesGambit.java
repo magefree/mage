@@ -49,7 +49,7 @@ public class SparkmagesGambit extends CardImpl {
 
         // Sparkmage's Gambit deals 1 damage to each of up to two target creatures. Those creatures can't block this turn.
         Effect effect = new DamageTargetEffect(1);
-        effect.setText("{this} deals 1 damage to each of up to two target creatures. ");
+        effect.setText("{this} deals 1 damage to each of up to two target creatures");
         this.getSpellAbility().addEffect(effect);
         effect = new CantBlockTargetEffect(Duration.EndOfTurn);
         effect.setText("Those creatures can't block this turn");
