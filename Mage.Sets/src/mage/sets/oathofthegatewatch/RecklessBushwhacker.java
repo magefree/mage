@@ -41,12 +41,19 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author fireshoes
  */
 public class RecklessBushwhacker extends CardImpl {
+
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures you control");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public RecklessBushwhacker(UUID ownerId) {
         super(ownerId, 116, "Reckless Bushwhacker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -59,13 +66,13 @@ public class RecklessBushwhacker extends CardImpl {
 
         // Surge {1}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
         addAbility(new SurgeAbility(this, "{1}{R}"));
-        
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
         // When Reckless Bushwhacker enters the battlefield, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, true), false);
-        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), true));
+        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filter, true));
         this.addAbility(new ConditionalTriggeredAbility(ability, SurgedCondition.getInstance(),
                 "When {this} enters the battlefield, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn."));
 
