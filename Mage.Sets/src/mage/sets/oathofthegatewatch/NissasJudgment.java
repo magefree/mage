@@ -44,7 +44,6 @@ import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
@@ -53,6 +52,12 @@ import mage.target.targetpointer.SecondTargetPointer;
  * @author LevelX2
  */
 public class NissasJudgment extends CardImpl {
+
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
 
     public NissasJudgment(UUID ownerId) {
         super(ownerId, 139, "Nissa's Judgment", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
@@ -64,6 +69,7 @@ public class NissasJudgment extends CardImpl {
         // Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature.
         Effect effect = new NissasJudgmentEffect();
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
+        getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, filter, true));
         getSpellAbility().addEffect(effect);
     }
 
@@ -105,14 +111,11 @@ class NissasJudgmentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCreaturePermanent(0, 1, filter, true);
-            if (controller.choose(outcome, target, source.getSourceId(), game)) {
-                Permanent targetCreature = game.getPermanent(target.getFirstTarget());
-                if (targetCreature != null) {
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterWithCounter, controller.getId(), game)) {
-                        if (permanent.getPower().getValue() > 0) {
-                            targetCreature.damage(permanent.getPower().getValue(), permanent.getId(), game, false, true);
-                        }
+            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (targetCreature != null) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterWithCounter, controller.getId(), game)) {
+                    if (permanent.getPower().getValue() > 0) {
+                        targetCreature.damage(permanent.getPower().getValue(), permanent.getId(), game, false, true);
                     }
                 }
             }
