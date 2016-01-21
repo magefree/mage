@@ -88,11 +88,6 @@ class AlhammarretsArchiveEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(event.getAmount() * 2);
         return false;
@@ -132,9 +127,9 @@ class AlhammarretsArchiveReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(2, game, event.getAppliedEffects());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.drawCards(2, game, event.getAppliedEffects());
         }
         return true;
     }
@@ -146,15 +141,17 @@ class AlhammarretsArchiveReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
-            CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
-            if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
+            if (game.getActivePlayerId().equals(event.getPlayerId())
+                    && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
+                CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
+                if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
+                    return true;
+                }
+            } else {
                 return true;
             }
-        } else {
-            return true;
         }
-
         return false;
     }
 }
