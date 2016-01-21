@@ -228,6 +228,8 @@ public class UndyingTest extends CardTestPlayerBase {
         // Other non-Human creatures you control get +1/+1 and have undying.
         addCard(Zone.BATTLEFIELD, playerA, "Mikaeus, the Unhallowed", 1);
 
+        // Flying
+        // Tatterkite can't have counters placed on it.
         addCard(Zone.BATTLEFIELD, playerA, "Tatterkite", 1); // Artifact Creature - Scarecrow  2/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Tatterkite");
@@ -239,8 +241,33 @@ public class UndyingTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Tatterkite", 1);
         assertPermanentCount(playerA, "Mikaeus, the Unhallowed", 1);
-        assertCounterCount("Tatterkite", CounterType.P1P1, 1);
-        assertPowerToughness(playerA, "Tatterkite", 4, 3);
+        assertCounterCount("Tatterkite", CounterType.P1P1, 0);
+        assertPowerToughness(playerA, "Tatterkite", 3, 2);
+
+    }
+
+    @Test
+    public void testUndyingMikaeusAndTatterkiteSacrifice() {
+        // Sacrifice a creature: Add {C}{C} to your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Ashnod's Altar", 1);
+        // Whenever a Human deals damage to you, destroy it.
+        // Other non-Human creatures you control get +1/+1 and have undying.
+        addCard(Zone.BATTLEFIELD, playerA, "Mikaeus, the Unhallowed", 1);
+
+        // Flying
+        // Tatterkite can't have counters placed on it.
+        addCard(Zone.BATTLEFIELD, playerA, "Tatterkite", 1); // Artifact Creature - Scarecrow  2/1
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a creature");
+        setChoice(playerA, "Tatterkite");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Tatterkite", 1);
+        assertPermanentCount(playerA, "Mikaeus, the Unhallowed", 1);
+        assertCounterCount("Tatterkite", CounterType.P1P1, 0);
+        assertPowerToughness(playerA, "Tatterkite", 3, 2);
 
     }
 
