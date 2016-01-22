@@ -19,6 +19,17 @@
     userNamePattern     - pattern for user name validity check
     maxAiOpponents      - number of allowed AI opponents on the server
     saveGameActivated   - allow game save and replay options (not working correctly yet)
+    authenticationActivated - "true" = user have to register to signon "false" = user need not to register
+    * mail configs only needed if authentication is activated:
+    * if mailUser = "" mailgun is used otherwise nativ mail server on the system
+    googleAccount       - not supported currently
+    mailgunApiKey       - key from the mailgun domain  e.g. = "key-12121111..."
+    mailgunDomain       - domain for the mailgun message sending
+    mailSmtpHost        - hostname to send the mail
+    mailSmtpPort        - port to send the mail
+    mailUser            - username used to send the mail
+    mailPassword        - passworf of the used user to send the mail
+    mailFromAddress     - sender address
     -->
     <server serverAddress="0.0.0.0"
             serverName="mage-server"

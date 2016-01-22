@@ -99,8 +99,15 @@ public class Session {
                 return returnMessage;
             }
             AuthorizedUserRepository.instance.add(userName, password, email);
-            if (MailClient.sendMessage(email, "XMage Registration Completed",
-                    "You are successfully registered as " + userName + ".")) {
+            String subject = "XMage Registration Completed";
+            String text = "You are successfully registered as " + userName + ".";
+            boolean success;
+            if (!ConfigSettings.getInstance().getMailUser().isEmpty()) {
+                success = MailClient.sendMessage(email, subject, text);
+            } else {
+                success = MailgunClient.sendMessage(email, subject, text);
+            }
+            if (success) {
                 logger.info("Sent a registration confirmation email to " + email + " for " + userName);
             } else {
                 logger.error("Failed sending a registration confirmation email to " + email + " for " + userName);

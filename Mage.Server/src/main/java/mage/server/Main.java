@@ -167,7 +167,12 @@ public class Main {
         logger.info("Config - auth. activated : " + (config.isAuthenticationActivated() ? "true" : "false"));
         logger.info("Config - mailgun api key : " + config.getMailgunApiKey());
         logger.info("Config - mailgun domain  : " + config.getMailgunDomain());
-        //logger.info("Config - google account  : " + config.getGoogleAccount());
+        logger.info("Config - mail smtp Host  : " + config.getMailSmtpHost());
+        logger.info("Config - mail smtpPort   : " + config.getMailSmtpPort());
+        logger.info("Config - mail user       : " + config.getMailUser());
+        logger.info("Config - mail passw. len.: " + config.getMailPassword().length());
+        logger.info("Config - mail from addre.: " + config.getMailFromAddress());
+        logger.info("Config - google account  : " + config.getGoogleAccount());
 
         Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
         connection.setHost(config.getServerAddress());
@@ -406,8 +411,8 @@ public class Main {
                 MatchProto match = table.getMatch();
                 for (MatchPlayerProto player : match.getPlayersList()) {
                     UserStats userStats = UserStatsRepository.instance.getUser(player.getName());
-                    UserStatsProto proto = userStats != null ? userStats.getProto() :
-                            UserStatsProto.newBuilder().setName(player.getName()).build();
+                    UserStatsProto proto = userStats != null ? userStats.getProto()
+                            : UserStatsProto.newBuilder().setName(player.getName()).build();
                     UserStatsProto.Builder builder = UserStatsProto.newBuilder(proto)
                             .setMatches(proto.getMatches() + 1);
                     switch (player.getQuit()) {
@@ -436,8 +441,8 @@ public class Main {
                 TourneyProto tourney = table.getTourney();
                 for (TourneyPlayerProto player : tourney.getPlayersList()) {
                     UserStats userStats = UserStatsRepository.instance.getUser(player.getName());
-                    UserStatsProto proto = userStats != null ? userStats.getProto() :
-                            UserStatsProto.newBuilder().setName(player.getName()).build();
+                    UserStatsProto proto = userStats != null ? userStats.getProto()
+                            : UserStatsProto.newBuilder().setName(player.getName()).build();
                     UserStatsProto.Builder builder = UserStatsProto.newBuilder(proto)
                             .setTourneys(proto.getTourneys() + 1);
                     switch (player.getQuit()) {
