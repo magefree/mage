@@ -48,7 +48,7 @@ public class BattleForZendikar extends ExpansionSet {
         return fINSTANCE;
     }
 
-    List<CardInfo> savedSpecialLand = new ArrayList<>();
+    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private BattleForZendikar() {
         super("Battle for Zendikar", "BFZ", "mage.sets.battleforzendikar", new GregorianCalendar(2015, 10, 2).getTime(), SetType.EXPANSION);
@@ -56,25 +56,28 @@ public class BattleForZendikar extends ExpansionSet {
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;
-        this.ratioBoosterSpecialLand = 20; // Approximately as rare as opening a foil mythic = 8 * 6 = ~every 48th booster includes one
-        // I set it to 20 to get it more often
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.numBoosterSpecial = 0;
+
+        // Zendikar Expeditions 1-25
+        // Approximately as rare as opening a foil mythic = 8 * 6 = ~every 48th booster includes one.
+        // I set it to 20 to get it more often
+        this.ratioBoosterSpecialLand = 20;
     }
 
     @Override
     public List<CardInfo> getSpecialLand() {
-        List<CardInfo> specialLand = new ArrayList<>();
         if (savedSpecialLand.isEmpty()) {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes("EXP");
-            specialLand.addAll(CardRepository.instance.findCards(criteria));
+            criteria.minCardNumber(1);
+            criteria.maxCardNumber(25);
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
         }
 
-        specialLand.addAll(savedSpecialLand);
-        return specialLand;
+        return new ArrayList<>(savedSpecialLand);
     }
 }
