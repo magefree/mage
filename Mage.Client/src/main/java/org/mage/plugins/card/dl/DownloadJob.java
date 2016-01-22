@@ -1,11 +1,9 @@
 /**
  * DownloadJob.java
- * 
+ *
  * Created on 25.08.2010
  */
-
 package org.mage.plugins.card.dl;
-
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,25 +19,26 @@ import org.mage.plugins.card.dl.beans.properties.Property;
 import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
 import org.mage.plugins.card.utils.CardImageUtils;
 
-
 /**
  * The class DownloadJob.
- * 
+ *
  * @version V0.0 25.08.2010
  * @author Clemens Koza
  */
 public class DownloadJob extends AbstractLaternaBean {
+
     public static enum State {
+
         NEW, WORKING, FINISHED, ABORTED;
     }
 
-    private final String              name;
-    private final Source              source;
-    private final Destination         destination;
-    private final Property<State>     state    = properties.property("state", State.NEW);
-    private final Property<String>    message  = properties.property("message");
-    private final Property<Exception> error    = properties.property("error");
-    private final BoundedRangeModel   progress = new DefaultBoundedRangeModel();
+    private final String name;
+    private final Source source;
+    private final Destination destination;
+    private final Property<State> state = properties.property("state", State.NEW);
+    private final Property<String> message = properties.property("message");
+    private final Property<Exception> error = properties.property("error");
+    private final BoundedRangeModel progress = new DefaultBoundedRangeModel();
 
     public DownloadJob(String name, Source source, Destination destination) {
         this.name = name;
@@ -48,7 +47,9 @@ public class DownloadJob extends AbstractLaternaBean {
     }
 
     /**
-     * Sets the job's state. If the state is {@link State#ABORTED}, it instead sets the error to "ABORTED"
+     * Sets the job's state. If the state is {@link State#ABORTED}, it instead
+     * sets the error to "ABORTED"
+     *
      * @param state
      */
     public void setState(State state) {
@@ -60,8 +61,9 @@ public class DownloadJob extends AbstractLaternaBean {
     }
 
     /**
-     * Sets the job's state to {@link State#ABORTED} and the error message to the given message. Logs a warning
-     * with the given message.
+     * Sets the job's state to {@link State#ABORTED} and the error message to
+     * the given message. Logs a warning with the given message.
+     *
      * @param message
      */
     public void setError(String message) {
@@ -69,8 +71,9 @@ public class DownloadJob extends AbstractLaternaBean {
     }
 
     /**
-     * Sets the job's state to {@link State#ABORTED} and the error to the given exception. Logs a warning with the
-     * given exception.
+     * Sets the job's state to {@link State#ABORTED} and the error to the given
+     * exception. Logs a warning with the given exception.
+     *
      * @param error
      */
     public void setError(Exception error) {
@@ -78,14 +81,15 @@ public class DownloadJob extends AbstractLaternaBean {
     }
 
     /**
-     * Sets the job's state to {@link State#ABORTED} and the error to the given exception. Logs a warning with the
-     * given message and exception.
+     * Sets the job's state to {@link State#ABORTED} and the error to the given
+     * exception. Logs a warning with the given message and exception.
+     *
      * @param message
      * @param error
      */
     public void setError(String message, Exception error) {
         if (message == null) {
-            
+
             message = "Download of " + this.getName() + "from " + this.getSource().toString() + " caused error: " + error.toString();
         }
 //        log.warn(message, error);
@@ -97,6 +101,7 @@ public class DownloadJob extends AbstractLaternaBean {
 
     /**
      * Sets the job's message.
+     *
      * @param message
      */
     public void setMessage(String message) {
@@ -118,7 +123,6 @@ public class DownloadJob extends AbstractLaternaBean {
     public String getMessage() {
         return message.getValue();
     }
-
 
     public String getName() {
         return name;
@@ -163,9 +167,9 @@ public class DownloadJob extends AbstractLaternaBean {
 
             @Override
             public String toString() {
-                return proxy != null ? proxy.type().toString()+" " :"" + url;
+                return proxy != null ? proxy.type().toString() + " " : "" + url;
             }
-            
+
         };
     }
 
@@ -189,11 +193,11 @@ public class DownloadJob extends AbstractLaternaBean {
             public int length() throws IOException {
                 return getConnection().getContentLength();
             }
-            
+
             @Override
             public String toString() {
-                return proxy != null ? proxy.type().toString()+" " :"" + url;
-            }            
+                return proxy != null ? proxy.type().toString() + " " : "" + url;
+            }
         };
     }
 
@@ -214,6 +218,14 @@ public class DownloadJob extends AbstractLaternaBean {
             }
 
             @Override
+            public boolean isValid() throws IOException {
+                if (file.isFile()) {
+                    return file.length() > 0;
+                }
+                return false;
+            }
+
+            @Override
             public boolean exists() {
                 return file.isFile();
             }
@@ -228,15 +240,19 @@ public class DownloadJob extends AbstractLaternaBean {
     }
 
     public interface Source {
+
         InputStream open() throws IOException;
 
         int length() throws IOException;
     }
 
     public interface Destination {
+
         OutputStream open() throws IOException;
 
         boolean exists() throws IOException;
+
+        boolean isValid() throws IOException;
 
         void delete() throws IOException;
     }
