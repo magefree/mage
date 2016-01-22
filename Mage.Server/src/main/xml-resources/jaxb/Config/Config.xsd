@@ -38,6 +38,11 @@
 			<xs:attribute name="googleAccount" type="xs:string" use="optional"/>
 			<xs:attribute name="mailgunApiKey" type="xs:string" use="optional"/>
 			<xs:attribute name="mailgunDomain" type="xs:string" use="optional"/>
+			<xs:attribute name="mailSmtpHost" type="xs:string" use="optional"/>
+			<xs:attribute name="mailSmtpPort" type="xs:string" use="optional"/>
+			<xs:attribute name="mailUser" type="xs:string" use="optional"/>
+			<xs:attribute name="mailPassword" type="xs:string" use="optional"/>
+			<xs:attribute name="mailFromAddress" type="xs:string" use="optional"/>
 		</xs:complexType>
 	</xs:element>
 

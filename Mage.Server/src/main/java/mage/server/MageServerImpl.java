@@ -140,7 +140,7 @@ public class MageServerImpl implements MageServer {
         }
         String authToken = generateAuthToken();
         activeAuthTokens.put(email, authToken);
-        if (!MailgunClient.sendMessage(email, "XMage Password Reset Auth Token",
+        if (!MailClient.sendMessage(email, "XMage Password Reset Auth Token",
                 "Use this auth token to reset your password: " + authToken + "\n" +
                 "It's valid until the next server restart.")) {
             sendErrorMessageToClient(sessionId, "There was an error inside the server while emailing an auth token");
