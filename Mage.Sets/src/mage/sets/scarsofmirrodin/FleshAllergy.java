@@ -25,22 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -57,10 +55,12 @@ import mage.watchers.Watcher;
  */
 public class FleshAllergy extends CardImpl {
 
-    public FleshAllergy (UUID ownerId) {
+    public FleshAllergy(UUID ownerId) {
         super(ownerId, 62, "Flesh Allergy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "SOM";
 
+        // As an additional cost to cast Flesh Allergy, sacrifice a creature.
+        // Destroy target creature. Its controller loses life equal to the number of creatures that died this turn.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -68,7 +68,7 @@ public class FleshAllergy extends CardImpl {
         this.getSpellAbility().addWatcher(new FleshAllergyWatcher());
     }
 
-    public FleshAllergy (final FleshAllergy card) {
+    public FleshAllergy(final FleshAllergy card) {
         super(card);
     }
 
@@ -97,7 +97,7 @@ class FleshAllergyWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 creaturesDiedThisTurn++;
@@ -132,9 +132,9 @@ class FleshAllergyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get("CreaturesDied");
-        MageObject card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (card != null && watcher != null) {
-            Player player = game.getPlayer(((Permanent)card).getControllerId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        if (permanent != null && watcher != null) {
+            Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 int amount = watcher.creaturesDiedThisTurn;
                 if (amount > 0) {

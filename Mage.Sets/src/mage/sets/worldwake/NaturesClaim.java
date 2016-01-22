@@ -28,14 +28,13 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,7 +47,7 @@ import mage.target.TargetPermanent;
  */
 public class NaturesClaim extends CardImpl {
 
-    public NaturesClaim (UUID ownerId) {
+    public NaturesClaim(UUID ownerId) {
         super(ownerId, 108, "Nature's Claim", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "WWK";
 
@@ -58,7 +57,7 @@ public class NaturesClaim extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
     }
 
-    public NaturesClaim (final NaturesClaim card) {
+    public NaturesClaim(final NaturesClaim card) {
         super(card);
     }
 
@@ -69,6 +68,7 @@ public class NaturesClaim extends CardImpl {
 }
 
 class NaturesClaimEffect extends OneShotEffect {
+
     NaturesClaimEffect() {
         super(Outcome.GainLife);
         staticText = "Its controller gains 4 life";
@@ -80,7 +80,7 @@ class NaturesClaimEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent target = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (target != null) {
             Player player = game.getPlayer(target.getControllerId());
             if (player != null) {
