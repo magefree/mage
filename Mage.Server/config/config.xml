@@ -48,15 +48,15 @@
             maxPasswordLength="100"
             maxAiOpponents="15"
             saveGameActivated="false"
-            authenticationActivated="false"
+            authenticationActivated="true"
             googleAccount=""
-            mailgunApiKey=""
-            mailgunDomain=""
-            mailSmtpHost=""
-            mailSmtpPort=""
-            mailUser=""
-            mailPassword=""
-            mailFromAddress=""
+            mailgunApiKey="key-d93e81f19a9c9ed243ebb7cc9381385c"
+            mailgunDomain="sandbox401a433f30d445309a5e86b6c53f7812.mailgun.org"
+            mailSmtpHost="smtp.1und1.de"
+            mailSmtpPort="465"
+            mailUser="xmageserver@online.de"
+            mailPassword="24wrsfxv"
+            mailFromAddress="xmageserver@online.de"
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>

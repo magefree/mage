@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
+    <!--
+    serverAddress       - ip of the XMage server. Set it to "0.0.0.0" for local host or to the IP the server should use
+    port                - the port the primary server socket is bound to
+    secondaryBindPort   - the port to which the secondary server socket is to be bound. if "-1" is set , an arbitrary port is selected.
+    backlogSize         - the preferred number of unaccepted incoming connections allowed at a given time. The actual number may be greater
+                          than the specified backlog. When the queue is full, further connection requests are rejected. The JBoss default value is 200
+    numAcceptThreads    - the number of threads listening on the ServerSocket. The JBoss default value is 1
+    maxPoolSize         - the maximum number of ServerThreads that can exist at any given time. The JBoss default value is 300
+    leasePeriod         - To turn on server side connection failure detection of remoting clients, it is necessary to satisfy two criteria.
+                          The first is that the client lease period is set and is a value greater than 0. The value is represented in milliseconds.
+                          The client lease period can be set by either the 'clientLeasePeriod' attribute within the Connector configuration or by calling the Connector method
+    maxGameThreads      - Number of games that can be started simultanously on the server
+    maxSecondsIdle      - Number of seconds after that a game is auto conceded by the player that was idle for such a time
+    minUserNameLength   - minmal allowed length of a user name to connect to the server
+    maxUserNameLength   - maximal allowed length of a user name to connect to the server
+    userNamePattern     - pattern for user name validity check
+    maxAiOpponents      - number of allowed AI opponents on the server
+    saveGameActivated   - allow game save and replay options (not working correctly yet)
+    authenticationActivated - "true" = user have to register to signon "false" = user need not to register
+    * mail configs only needed if authentication is activated:
+    * if mailUser = "" mailgun is used otherwise nativ mail server on the system
+    googleAccount       - not supported currently
+    mailgunApiKey       - key from the mailgun domain  e.g. = "key-12121111..."
+    mailgunDomain       - domain for the mailgun message sending
+    mailSmtpHost        - hostname to send the mail
+    mailSmtpPort        - port to send the mail
+    mailUser            - username used to send the mail
+    mailPassword        - passworf of the used user to send the mail
+    mailFromAddress     - sender address
+    -->
     <server serverAddress="0.0.0.0"
             serverName="mage-server"
             port="17171"
@@ -18,6 +48,13 @@
             saveGameActivated="false"
             authenticationActivated="false"
             googleAccount=""
+            mailgunApiKey=""
+            mailgunDomain=""
+            mailSmtpHost=""
+            mailSmtpPort=""
+            mailUser=""
+            mailPassword=""
+            mailFromAddress=""
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human-${project.version}.jar" className="mage.player.human.HumanPlayer"/>
