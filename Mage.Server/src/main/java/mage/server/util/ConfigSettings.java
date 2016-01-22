@@ -147,6 +147,26 @@ public class ConfigSettings {
         return config.getServer().getMailgunDomain();
     }
 
+    public String getMailSmtpHost() {
+        return config.getServer().getMailSmtpHost();
+    }
+
+    public String getMailSmtpPort() {
+        return config.getServer().getMailSmtpPort();
+    }
+
+    public String getMailUser() {
+        return config.getServer().getMailUser();
+    }
+
+    public String getMailPassword() {
+        return config.getServer().getMailPassword();
+    }
+
+    public String getMailFromAddress() {
+        return config.getServer().getMailFromAddress();
+    }
+
     public List<Plugin> getPlayerTypes() {
         return config.getPlayerTypes().getPlayerType();
     }
