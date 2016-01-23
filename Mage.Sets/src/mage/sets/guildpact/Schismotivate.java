@@ -37,6 +37,8 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,7 +55,17 @@ public class Schismotivate extends CardImpl {
 
         // Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn.
         this.getSpellAbility().addEffect(new SchismotivateEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
+        
+        FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature (gets +4/+0 until end of turn)");
+        TargetCreaturePermanent target1 = new TargetCreaturePermanent(filter1);
+        target1.setTargetTag(1);
+        this.getSpellAbility().addTarget(target1);
+        
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature (gets -4/-0 until end of turn)");
+        filter2.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public Schismotivate(final Schismotivate card) {
@@ -88,7 +100,7 @@ class SchismotivateEffect extends ContinuousEffectImpl {
         if (permanent != null) {
             permanent.addPower(4);
         }
-        permanent = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
+        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
             permanent.addPower(-4);
         }

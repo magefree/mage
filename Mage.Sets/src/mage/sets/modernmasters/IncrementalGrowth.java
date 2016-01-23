@@ -35,6 +35,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -53,8 +55,23 @@ public class IncrementalGrowth extends CardImpl {
 
         // Put a +1/+1 counter on target creature, two +1/+1 counters on another target creature, and three +1/+1 counters on a third target creature.
         this.getSpellAbility().addEffect(new IncrementalGrowthEffect());
-        Target target = new TargetCreaturePermanent(3,3);
-        this.getSpellAbility().addTarget(target);
+        
+        FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature (gets a +1/+1 counter)");
+        TargetCreaturePermanent target1 = new TargetCreaturePermanent(filter1);
+        target1.setTargetTag(1);
+        this.getSpellAbility().addTarget(target1);
+        
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature (gets two +1/+1 counter)");
+        filter2.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
+        
+        FilterCreaturePermanent filter3 = new FilterCreaturePermanent("another creature (gets three +1/+1 counters)");
+        filter3.add(new AnotherTargetPredicate(3));
+        TargetCreaturePermanent target3 = new TargetCreaturePermanent(filter3);
+        target3.setTargetTag(3);
+        this.getSpellAbility().addTarget(target3);
     }
 
     public IncrementalGrowth(final IncrementalGrowth card) {
@@ -86,9 +103,9 @@ class IncrementalGrowthEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int i = 0;
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+        for (Target target : source.getTargets()) {
             i++;
-            Permanent creature = game.getPermanent(targetId);
+            Permanent creature = game.getPermanent(target.getFirstTarget());
             if (creature != null) {
                 creature.addCounters(CounterType.P1P1.createInstance(i), game);
             }

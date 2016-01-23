@@ -37,6 +37,8 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,8 +56,17 @@ public class ConsumeStrength extends CardImpl {
 
         // Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new ConsumeStrengthEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
         
+        FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature to get +2/+2");
+        TargetCreaturePermanent target1 = new TargetCreaturePermanent(filter1);
+        target1.setTargetTag(1);
+        this.getSpellAbility().addTarget(target1);
+        
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature to get -2/-2");
+        filter2.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public ConsumeStrength(final ConsumeStrength card) {
@@ -91,7 +102,7 @@ class ConsumeStrengthEffect extends ContinuousEffectImpl {
             permanent.addPower(2);
             permanent.addToughness(2);
         }
-        permanent = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
+        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
             permanent.addPower(-2);
             permanent.addToughness(-2);

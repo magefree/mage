@@ -37,6 +37,8 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,10 +56,18 @@ public class FeralContest extends CardImpl {
 
         // Put a +1/+1 counter on target creature you control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        
+        TargetControlledCreaturePermanent target1 = new TargetControlledCreaturePermanent();
+        target1.setTargetTag(1);
+        this.getSpellAbility().addTarget(target1);
+        
         // Another target creature blocks it this turn if able.
         this.getSpellAbility().addEffect(new FeralContestEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature (must block this turn)");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public FeralContest(final FeralContest card) {
