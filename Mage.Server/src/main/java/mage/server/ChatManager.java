@@ -121,8 +121,8 @@ public class ChatManager {
 
     private boolean performUserCommand(User user, String message, UUID chatId) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
-        if (command.startsWith("I ") || command.startsWith("INFO ")) {
-            message = UserManager.getInstance().getUserHistory(message.substring(command.startsWith("I ") ? 3 : 6));
+        if (command.startsWith("H ") || command.startsWith("HISTORY ")) {
+            message = UserManager.getInstance().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 8));
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
@@ -147,9 +147,9 @@ public class ChatManager {
         }
         if (command.equals("L") || command.equals("LIST")) {
             message += new StringBuilder("<br/>List of commands:")
-                    .append("<br/>\\info [username] - shows the history of a player")
-                    .append("<br/>\\list - Show a list of commands")
-                    .append("<br/>\\whisper [player name] [text] - whisper to the player with the given name").toString();
+                    .append("<br/>\\history or \\h [username] - shows the history of a player")
+                    .append("<br/>\\list or \\l - Show a list of commands")
+                    .append("<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name").toString();
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
