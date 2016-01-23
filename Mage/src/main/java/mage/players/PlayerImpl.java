@@ -92,6 +92,14 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
+import static mage.constants.PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP;
+import static mage.constants.PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF;
+import static mage.constants.PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -760,7 +768,8 @@ public abstract class PlayerImpl implements Player, Serializable {
          about the discarded card, that cost payment is illegal; the game returns to
          the moment before the cost was paid (see rule 717, "Handling Illegal Actions").
          */
-        if (card != null) {
+        if (card != null
+                && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD, card.getId(), source == null ? null : source.getSourceId(), playerId), source)) {
             // write info to game log first so game log infos from triggered or replacement effects follow in the game log
             if (!game.isSimulation()) {
                 game.informPlayers(getLogName() + " discards " + card.getLogName());
