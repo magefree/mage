@@ -37,6 +37,8 @@ import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +56,17 @@ public class RitesOfReaping extends CardImpl {
 
         // Target creature gets +3/+3 until end of turn. Another target creature gets -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new RitesOfReapingEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
+        
+        FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature (gets +3/+3 until end of turn)");
+        TargetCreaturePermanent target1 = new TargetCreaturePermanent(filter1);
+        target1.setTargetTag(1);
+        this.getSpellAbility().addTarget(target1);
+        
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature (gets -3/-3 until end of turn)");
+        filter2.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public RitesOfReaping(final RitesOfReaping card) {
@@ -90,7 +102,7 @@ class RitesOfReapingEffect extends ContinuousEffectImpl {
             permanent.addPower(3);
             permanent.addToughness(3);
         }
-        permanent = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
+        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
             permanent.addPower(-3);
             permanent.addToughness(-3);
