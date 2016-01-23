@@ -824,4 +824,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean addTargets(Ability ability, Game game);
+
+    String getHistory();
 }

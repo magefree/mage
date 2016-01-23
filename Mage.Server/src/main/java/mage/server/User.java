@@ -88,7 +88,6 @@ public class User {
     private UserState userState;
     private UserData userData;
     private UserStats userStats;
-    private String history;
 
     public User(String userName, String host) {
         this.userId = UUID.randomUUID();
@@ -108,12 +107,7 @@ public class User {
         this.watchedGames = new ArrayList<>();
         this.tablesToDelete = new ArrayList<>();
         this.sessionId = "";
-        this.userStats = UserStatsRepository.instance.getUser(this.userName);
-        if (userStats != null) {
-            this.history = userStatsToString(userStats.getProto());
-        } else {
-            this.history = "<No Games yet>";
-        }
+        this.userStats = null;
     }
 
     public String getName() {
@@ -406,6 +400,12 @@ public class User {
             this.userData.update(userData);
         } else {
             this.userData = userData;
+            this.userStats = UserStatsRepository.instance.getUser(this.userName);
+            if (userStats != null) {
+                this.userData.setHistory(userStatsToString(userStats.getProto()));
+            } else {
+                this.userData.setHistory("<new player>");
+            }
         }
     }
 
@@ -549,11 +549,16 @@ public class User {
     // resetUserStats loads UserStats from DB.
     public void resetUserStats() {
         this.userStats = UserStatsRepository.instance.getUser(this.userName);
-        this.history = userStatsToString(userStats.getProto());
+        if (userData != null) {
+            userData.setHistory(userStatsToString(userStats.getProto()));
+        }
     }
 
     public String getHistory() {
-        return history;
+        if (userData != null) {
+            return userData.getHistory();
+        }
+        return "<not available>";
     }
 
     private static String userStatsToString(ResultProtos.UserStatsProto proto) {
