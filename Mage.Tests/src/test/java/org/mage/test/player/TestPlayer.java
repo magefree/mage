@@ -2077,4 +2077,8 @@ public class TestPlayer implements Player {
         return AIPlayer;
     }
 
+    public String getHistory() {
+        return computerPlayer.getHistory();
+    }
+
 }
