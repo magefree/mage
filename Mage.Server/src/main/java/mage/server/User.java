@@ -82,7 +82,6 @@ public class User {
     private final Map<UUID, Deck> sideboarding;
     private final List<UUID> watchedGames;
     private String sessionId;
-    private String info = "";
     private String pingInfo = "";
     private Date lastActivity;
     private UserState userState;
@@ -509,14 +508,6 @@ public class User {
         return sb.toString();
     }
 
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String Info) {
-        this.info = Info;
-    }
-
     public void addGameWatchInfo(UUID gameId) {
         watchedGames.add(gameId);
     }
@@ -561,7 +552,7 @@ public class User {
         return "<not available>";
     }
 
-    private static String userStatsToString(ResultProtos.UserStatsProto proto) {
+    public static String userStatsToString(ResultProtos.UserStatsProto proto) {
         List<StringBuilder> builders = new ArrayList<>();
         if (proto.getMatches() > 0) {
             StringBuilder builder = new StringBuilder();

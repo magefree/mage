@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server;
 
 import java.util.ArrayList;
@@ -44,14 +43,15 @@ import org.apache.log4j.Logger;
 public class ChatManager {
 
     private static final Logger logger = Logger.getLogger(ChatManager.class);
-    
+
     private static final ChatManager INSTANCE = new ChatManager();
 
     public static ChatManager getInstance() {
         return INSTANCE;
     }
 
-    private ChatManager() {}
+    private ChatManager() {
+    }
 
     private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
 
@@ -66,16 +66,16 @@ public class ChatManager {
         if (chatSession != null) {
             chatSession.join(userId);
         } else {
-            logger.trace("Chat to join not found - chatId: " + chatId +" userId: " + userId);
-        }        
-        
+            logger.trace("Chat to join not found - chatId: " + chatId + " userId: " + userId);
+        }
+
     }
 
     public void leaveChat(UUID chatId, UUID userId) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null && chatSession.hasUser(userId)) {
             chatSession.kill(userId, DisconnectReason.CleaningUp);
-        } 
+        }
     }
 
     public void destroyChatSession(UUID chatId) {
@@ -88,7 +88,7 @@ public class ChatManager {
                         logger.trace("Chat removed - chatId: " + chatId);
                     } else {
                         logger.trace("Chat to destroy does not exist - chatId: " + chatId);
-                    } 
+                    }
                 }
             }
         }
@@ -119,63 +119,56 @@ public class ChatManager {
         }
     }
 
-
     private boolean performUserCommand(User user, String message, UUID chatId) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
-        if (command.equals("I") || command.equals("INFO")) {            
-            user.setInfo("");
-            chatSessions.get(chatId).broadcastInfoToUser(user,message);
-            return true;
-        }
         if (command.startsWith("I ") || command.startsWith("INFO ")) {
-            user.setInfo(message.substring(command.startsWith("I ") ? 3 : 6));
-            chatSessions.get(chatId).broadcastInfoToUser(user,message);
+            message = UserManager.getInstance().getUserHistory(message.substring(command.startsWith("I ") ? 3 : 6));
+            chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
         if (command.startsWith("W ") || command.startsWith("WHISPER ")) {
-            String rest = message.substring(command.startsWith("W ")? 3 : 9);
+            String rest = message.substring(command.startsWith("W ") ? 3 : 9);
             int first = rest.indexOf(" ");
             if (first > 1) {
-                String userToName = rest.substring(0,first);
+                String userToName = rest.substring(0, first);
                 rest = rest.substring(first + 1).trim();
                 User userTo = UserManager.getInstance().getUserByName(userToName);
                 if (userTo != null) {
                     if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {
                         message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
-                        chatSessions.get(chatId).broadcastInfoToUser(user,message);
+                        chatSessions.get(chatId).broadcastInfoToUser(user, message);
                     }
                 } else {
                     message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
-                    chatSessions.get(chatId).broadcastInfoToUser(user,message);
+                    chatSessions.get(chatId).broadcastInfoToUser(user, message);
                 }
                 return true;
             }
         }
         if (command.equals("L") || command.equals("LIST")) {
             message += new StringBuilder("<br/>List of commands:")
-                    .append("<br/>\\info [text] - set a info text to your player")
+                    .append("<br/>\\info [username] - shows the history of a player")
                     .append("<br/>\\list - Show a list of commands")
                     .append("<br/>\\whisper [player name] [text] - whisper to the player with the given name").toString();
-            chatSessions.get(chatId).broadcastInfoToUser(user,message);
+            chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
         return false;
     }
 
-
-
     /**
-     * 
-     * use mainly for announcing that a user connection was lost or that a user has reconnected
-     * 
+     *
+     * use mainly for announcing that a user connection was lost or that a user
+     * has reconnected
+     *
      * @param userId
      * @param message
-     * @param color 
+     * @param color
      */
     public void broadcast(UUID userId, String message, MessageColor color) {
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            for (ChatSession chat: chatSessions.values()) {
+            for (ChatSession chat : chatSessions.values()) {
                 if (chat.hasUser(userId)) {
                     chat.broadcast(user.getName(), message, color);
                 }
@@ -186,16 +179,16 @@ public class ChatManager {
     public void sendReconnectMessage(UUID userId) {
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            for (ChatSession chat: chatSessions.values()) {
+            for (ChatSession chat : chatSessions.values()) {
                 if (chat.hasUser(userId)) {
                     chat.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS);
-                }            
-            }        
+                }
+            }
         }
     }
-    
+
     public void removeUser(UUID userId, DisconnectReason reason) {
-        for (ChatSession chatSession: chatSessions.values()) {
+        for (ChatSession chatSession : chatSessions.values()) {
             if (chatSession.hasUser(userId)) {
                 chatSession.kill(userId, reason);
             }

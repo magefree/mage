@@ -114,14 +114,13 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
             try {
-                users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), user.getHistory(), user.getInfo(), user.getGameInfo(), user.getPingInfo()));
+                users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), user.getHistory(), user.getGameInfo(), user.getPingInfo()));
             } catch (Exception ex) {
                 logger.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
                 users.add(new UsersView(
                         (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
                         user.getName() != null ? user.getName() : "<no name>",
                         user.getHistory() != null ? user.getHistory() : "<no history>",
-                        user.getInfo() != null ? user.getInfo() : "<no info>",
                         "[exception]",
                         user.getPingInfo() != null ? user.getPingInfo() : "<no ping>"));
             }
