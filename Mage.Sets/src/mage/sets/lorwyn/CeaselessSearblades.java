@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
 
 /**
  *
- * @author North
+ * @author Will
  */
 public class CeaselessSearblades extends CardImpl {
    
@@ -112,6 +112,6 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you activate an ability of an Elemental, Ceaseless Searblades gets +1/+0 until end of turn.";
+        return "Whenever you activate an ability of an Elemental, " + super.getRule();
     }
 }
