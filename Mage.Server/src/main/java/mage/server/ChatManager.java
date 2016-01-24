@@ -122,7 +122,7 @@ public class ChatManager {
     private boolean performUserCommand(User user, String message, UUID chatId) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
         if (command.startsWith("H ") || command.startsWith("HISTORY ")) {
-            message = UserManager.getInstance().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 8));
+            message = UserManager.getInstance().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
