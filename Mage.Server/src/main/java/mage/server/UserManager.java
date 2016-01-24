@@ -209,4 +209,18 @@ public class UserManager {
         }
         return "History of user " + userName + ": " + user.getUserData().getHistory();
     }
+
+    public void updateUserHistory() {
+        callExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {
+                    User user = getUserByName(updatedUser);
+                    if (user != null) {
+                        user.resetUserStats();
+                    }
+                }
+            }
+        });
+    }
 }
