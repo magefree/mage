@@ -32,20 +32,10 @@ import java.io.FilenameFilter;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import javax.management.MBeanServer;
 import mage.cards.repository.CardScanner;
 import mage.game.match.MatchType;
-import mage.game.result.ResultProtos.MatchPlayerProto;
-import mage.game.result.ResultProtos.MatchProto;
-import mage.game.result.ResultProtos.TableProto;
-import mage.game.result.ResultProtos.TourneyPlayerProto;
-import mage.game.result.ResultProtos.TourneyProto;
-import mage.game.result.ResultProtos.UserStatsProto;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
 import mage.remote.Connection;
@@ -53,9 +43,6 @@ import mage.server.draft.CubeFactory;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
-import mage.server.record.TableRecord;
-import mage.server.record.TableRecordRepository;
-import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ConfigSettings;
@@ -102,8 +89,6 @@ public class Main {
     protected static boolean testMode;
     protected static boolean fastDbMode;
 
-    private static final ScheduledExecutorService updateUserStatsTaskExecutor = Executors.newSingleThreadScheduledExecutor();
-
     /**
      * @param args the command line arguments
      */
@@ -130,6 +115,10 @@ public class Main {
         } else {
             CardScanner.scan();
         }
+        logger.info("Done.");
+
+        logger.info("Updating user stats DB...");
+        UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
 
         deleteSavedGames();
@@ -167,7 +156,12 @@ public class Main {
         logger.info("Config - auth. activated : " + (config.isAuthenticationActivated() ? "true" : "false"));
         logger.info("Config - mailgun api key : " + config.getMailgunApiKey());
         logger.info("Config - mailgun domain  : " + config.getMailgunDomain());
-        //logger.info("Config - google account  : " + config.getGoogleAccount());
+        logger.info("Config - mail smtp Host  : " + config.getMailSmtpHost());
+        logger.info("Config - mail smtpPort   : " + config.getMailSmtpPort());
+        logger.info("Config - mail user       : " + config.getMailUser());
+        logger.info("Config - mail passw. len.: " + config.getMailPassword().length());
+        logger.info("Config - mail from addre.: " + config.getMailFromAddress());
+        logger.info("Config - google account  : " + config.getGoogleAccount());
 
         Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
         connection.setHost(config.getServerAddress());
@@ -190,13 +184,6 @@ public class Main {
         } catch (Exception ex) {
             logger.fatal("Failed to start server - " + connection.toString(), ex);
         }
-
-        updateUserStatsTaskExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                updateUserStats();
-            }
-        }, 60, 60, TimeUnit.SECONDS);
     }
 
     static void initStatistics() {
@@ -390,79 +377,5 @@ public class Main {
 
     public static boolean isTestMode() {
         return testMode;
-    }
-
-    private static void updateUserStats() {
-        long latestEndTimeMs = UserStatsRepository.instance.getLatestEndTimeMs();
-        List<TableRecord> records = TableRecordRepository.instance.getAfter(latestEndTimeMs);
-        for (TableRecord record : records) {
-            TableProto table = record.getProto();
-            if (table.getControllerName().equals("System")) {
-                // This is a sub table within a tournament, so it's already handled by the main
-                // tournament table.
-                continue;
-            }
-            if (table.hasMatch()) {
-                MatchProto match = table.getMatch();
-                for (MatchPlayerProto player : match.getPlayersList()) {
-                    UserStats userStats = UserStatsRepository.instance.getUser(player.getName());
-                    UserStatsProto proto = userStats != null ? userStats.getProto() :
-                            UserStatsProto.newBuilder().setName(player.getName()).build();
-                    UserStatsProto.Builder builder = UserStatsProto.newBuilder(proto)
-                            .setMatches(proto.getMatches() + 1);
-                    switch (player.getQuit()) {
-                        case IDLE_TIMEOUT:
-                            builder.setMatchesIdleTimeout(proto.getMatchesIdleTimeout() + 1);
-                            break;
-                        case TIMER_TIMEOUT:
-                            builder.setMatchesTimerTimeout(proto.getMatchesTimerTimeout() + 1);
-                            break;
-                        case QUIT:
-                            builder.setMatchesQuit(proto.getMatchesQuit() + 1);
-                            break;
-                    }
-                    if (userStats == null) {
-                        UserStatsRepository.instance.add(new UserStats(builder.build(), table.getEndTimeMs()));
-                    } else {
-                        UserStatsRepository.instance.update(new UserStats(builder.build(), table.getEndTimeMs()));
-                    }
-                    // UserStats for this player is updated, so refresh it.
-                    User user = UserManager.getInstance().getUserByName(player.getName());
-                    if (user != null) {
-                        user.resetUserStats();
-                    }
-                }
-            } else if (table.hasTourney()) {
-                TourneyProto tourney = table.getTourney();
-                for (TourneyPlayerProto player : tourney.getPlayersList()) {
-                    UserStats userStats = UserStatsRepository.instance.getUser(player.getName());
-                    UserStatsProto proto = userStats != null ? userStats.getProto() :
-                            UserStatsProto.newBuilder().setName(player.getName()).build();
-                    UserStatsProto.Builder builder = UserStatsProto.newBuilder(proto)
-                            .setTourneys(proto.getTourneys() + 1);
-                    switch (player.getQuit()) {
-                        case DURING_ROUND:
-                            builder.setTourneysQuitDuringRound(proto.getTourneysQuitDuringRound() + 1);
-                            break;
-                        case DURING_DRAFTING:
-                            builder.setTourneysQuitDuringDrafting(proto.getTourneysQuitDuringDrafting() + 1);
-                            break;
-                        case DURING_CONSTRUCTION:
-                            builder.setTourneysQuitDuringConstruction(proto.getTourneysQuitDuringConstruction() + 1);
-                            break;
-                    }
-                    if (userStats == null) {
-                        UserStatsRepository.instance.add(new UserStats(builder.build(), table.getEndTimeMs()));
-                    } else {
-                        UserStatsRepository.instance.update(new UserStats(builder.build(), table.getEndTimeMs()));
-                    }
-                    // UserStats for this player is updated, so refresh it.
-                    User user = UserManager.getInstance().getUserByName(player.getName());
-                    if (user != null) {
-                        user.resetUserStats();
-                    }
-                }
-            }
-        }
     }
 }

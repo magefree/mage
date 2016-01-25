@@ -124,7 +124,7 @@ class RealmRazerEffect extends OneShotEffect {
         if (controller != null) {
             ExileZone exZone = game.getExile().getExileZone(source.getSourceId());
             if (exZone != null) {
-                return controller.moveCards(exZone.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+                return controller.moveCards(exZone.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
             }
             return true;
         }

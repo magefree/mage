@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -41,47 +40,43 @@ import mage.target.TargetSpell;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class DreamFracture extends CardImpl {
+public class DismalFailure extends CardImpl {
 
-    public DreamFracture(UUID ownerId) {
-        super(ownerId, 19, "Dream Fracture", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "EVE";
+    public DismalFailure(UUID ownerId) {
+        super(ownerId, 39, "Dismal Failure", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+        this.expansionSetCode = "PLC";
 
-        // Counter target spell. Its controller draws a card.
-        this.getSpellAbility().addEffect(new DreamFractureEffect());
+        // Counter target spell. Its controller discards a card.
+        this.getSpellAbility().addEffect(new DismalFailureEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-
     }
 
-    public DreamFracture(final DreamFracture card) {
+    public DismalFailure(final DismalFailure card) {
         super(card);
     }
 
     @Override
-    public DreamFracture copy() {
-        return new DreamFracture(this);
+    public DismalFailure copy() {
+        return new DismalFailure(this);
     }
 }
 
-class DreamFractureEffect extends OneShotEffect {
+class DismalFailureEffect extends OneShotEffect {
 
-    public DreamFractureEffect() {
+    public DismalFailureEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Counter target spell. Its controller draws a card";
+        this.staticText = "Counter target spell. Its controller discards a card";
     }
 
-    public DreamFractureEffect(final DreamFractureEffect effect) {
+    public DismalFailureEffect(final DismalFailureEffect effect) {
         super(effect);
     }
 
     @Override
-    public DreamFractureEffect copy() {
-        return new DreamFractureEffect(this);
+    public DismalFailureEffect copy() {
+        return new DismalFailureEffect(this);
     }
 
     @Override
@@ -97,7 +92,7 @@ class DreamFractureEffect extends OneShotEffect {
             countered = true;
         }
         if (controller != null) {
-            controller.drawCards(1, game);
+            controller.discard(1, false, source, game);
         }
         return countered;
     }

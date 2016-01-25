@@ -99,7 +99,7 @@ public class MageServerImpl implements MageServer {
     private static final Logger logger = Logger.getLogger(MageServerImpl.class);
     private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
     private static final SecureRandom RANDOM = new SecureRandom();
- 
+
     private final String adminPassword;
     private final boolean testMode;
     private final LinkedHashMap<String, String> activeAuthTokens = new LinkedHashMap<String, String>() {
@@ -140,9 +140,16 @@ public class MageServerImpl implements MageServer {
         }
         String authToken = generateAuthToken();
         activeAuthTokens.put(email, authToken);
-        if (!MailgunClient.sendMessage(email, "XMage Password Reset Auth Token",
-                "Use this auth token to reset your password: " + authToken + "\n" +
-                "It's valid until the next server restart.")) {
+        String subject = "XMage Password Reset Auth Token";
+        String text = "Use this auth token to reset your password: " + authToken + "\n"
+                + "It's valid until the next server restart.";
+        boolean success;
+        if (!ConfigSettings.getInstance().getMailUser().isEmpty()) {
+            success = MailClient.sendMessage(email, subject, text);
+        } else {
+            success = MailgunClient.sendMessage(email, subject, text);
+        }
+        if (!success) {
             sendErrorMessageToClient(sessionId, "There was an error inside the server while emailing an auth token");
             return false;
         }

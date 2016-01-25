@@ -24,7 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.view;
 
 import java.io.Serializable;
@@ -40,15 +40,13 @@ public class UsersView implements Serializable {
     private final String flagName;
     private final String userName;
     private final String history;
-    private final String infoState;
     private final String infoGames;
     private final String infoPing;
 
-    public UsersView(String flagName, String userName, String history, String infoState, String infoGames, String infoPing) {
+    public UsersView(String flagName, String userName, String history, String infoGames, String infoPing) {
         this.flagName = flagName;
         this.history = history;
         this.userName = userName;
-        this.infoState = infoState;
         this.infoGames = infoGames;
         this.infoPing = infoPing;
     }
@@ -63,10 +61,6 @@ public class UsersView implements Serializable {
 
     public String getHistory() {
         return history;
-    }
-
-    public String getInfoState() {
-        return infoState;
     }
 
     public String getInfoGames() {

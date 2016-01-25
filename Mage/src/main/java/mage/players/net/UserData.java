@@ -23,6 +23,8 @@ public class UserData implements Serializable {
     protected boolean passPriorityActivation;
     protected boolean autoOrderTrigger;
 
+    protected String history;
+
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
             String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted,
@@ -40,6 +42,7 @@ public class UserData implements Serializable {
         this.passPriorityCast = passPriorityCast;
         this.passPriorityActivation = passPriorityActivation;
         this.autoOrderTrigger = autoOrderTrigger;
+        this.history = "";
     }
 
     public void update(UserData userData) {
@@ -166,7 +169,16 @@ public class UserData implements Serializable {
         this.autoOrderTrigger = autoOrderTrigger;
     }
 
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
     public static String getDefaultFlagName() {
         return "world.png";
     }
+
 }
