@@ -183,7 +183,7 @@ public class Session {
         if (ConfigSettings.getInstance().isAuthenticationActivated()) {
             AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
             if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
-                return "Wrong username or password";
+                return "Wrong username or password. In case you haven't, please register your account first.";
             }
         }
 
