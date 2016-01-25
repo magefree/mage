@@ -45,10 +45,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SaddlebackLagac extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("target creatures");
+    private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("target creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        FILTER.add(new AnotherPredicate());
     }
 
     public SaddlebackLagac(UUID ownerId) {
@@ -60,7 +60,7 @@ public class SaddlebackLagac extends CardImpl {
 
         // When Saddleback Lagac enters the battlefield, support 2.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SupportEffect(this, 2, true), false);
-        ability.addTarget(new TargetCreaturePermanent(0, 2, filter, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 2, FILTER, false));
         this.addAbility(ability);
 
     }
