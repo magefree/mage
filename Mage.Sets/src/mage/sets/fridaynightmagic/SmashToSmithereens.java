@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class ClashOfWills extends mage.sets.magicorigins.ClashOfWills {
+public class SmashToSmithereens extends mage.sets.shadowmoor.SmashToSmithereens {
 
-    public ClashOfWills(UUID ownerId) {
+    public SmashToSmithereens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = 190;
         this.expansionSetCode = "FNMP";
     }
 
-    public ClashOfWills(final ClashOfWills card) {
+    public SmashToSmithereens(final SmashToSmithereens card) {
         super(card);
     }
 
     @Override
-    public ClashOfWills copy() {
-        return new ClashOfWills(this);
+    public SmashToSmithereens copy() {
+        return new SmashToSmithereens(this);
     }
 }
