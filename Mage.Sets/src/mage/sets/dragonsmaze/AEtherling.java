@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class AEtherling extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {U}: Exile AEtherling. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(true), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), new ManaCostsImpl("{U}")));
         // {U}: AEtherling can't be blocked this turn
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{U}")));
         // {1}: AEtherling gets +1/-1 until end of turn.

@@ -78,10 +78,8 @@ public class AddExtraTurnControllerEffect extends OneShotEffect {
             game.getState().getTurnMods().add(extraTurn);
             if (loseGameAtEnd) {
                 LoseGameDelayedTriggeredAbility delayedTriggeredAbility = new LoseGameDelayedTriggeredAbility();
-                delayedTriggeredAbility.setSourceId(source.getSourceId());
-                delayedTriggeredAbility.setControllerId(source.getControllerId());
                 delayedTriggeredAbility.setConnectedTurnMod(extraTurn.getId());
-                game.addDelayedTriggeredAbility(delayedTriggeredAbility);
+                game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
             }
         }
         return true;

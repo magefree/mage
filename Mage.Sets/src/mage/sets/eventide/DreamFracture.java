@@ -49,7 +49,6 @@ public class DreamFracture extends CardImpl {
         super(ownerId, 19, "Dream Fracture", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "EVE";
 
-
         // Counter target spell. Its controller draws a card.
         this.getSpellAbility().addEffect(new DreamFractureEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -73,7 +72,7 @@ class DreamFractureEffect extends OneShotEffect {
 
     public DreamFractureEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Counter target spell.  Its controller draws a card";
+        this.staticText = "Counter target spell. Its controller draws a card";
     }
 
     public DreamFractureEffect(final DreamFractureEffect effect) {

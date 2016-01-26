@@ -75,7 +75,7 @@ public class Valleymaker extends CardImpl {
         this.addAbility(ability);
         
         // {tap}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G} to his or her mana pool.
-        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(new Mana(0,3,0,0,0,0,0), "chosen player"), new TapSourceCost());
+        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(new Mana(0,3,0,0,0,0,0, 0), "chosen player"), new TapSourceCost());
         ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
         ability2.addTarget(new TargetPlayer(1, 1, true));
         this.addAbility(ability2);

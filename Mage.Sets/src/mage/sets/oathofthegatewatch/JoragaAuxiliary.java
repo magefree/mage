@@ -29,6 +29,7 @@ package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.keyword.SupportEffect;
@@ -36,6 +37,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -53,7 +56,9 @@ public class JoragaAuxiliary extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {4}{G}{W}: Support 2.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupportEffect(this, 2), new ManaCostsImpl("{4}{G}{W}")));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupportEffect(this, 2, true), new ManaCostsImpl("{4}{G}{W}"));
+        ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("target creatures"), false));
+        this.addAbility(ability);
     }
 
     public JoragaAuxiliary(final JoragaAuxiliary card) {

@@ -54,7 +54,7 @@ public class DromarsAttendant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 1, 0, 0), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 1, 0, 0, 0), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

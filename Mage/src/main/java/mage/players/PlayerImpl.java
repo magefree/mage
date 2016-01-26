@@ -42,6 +42,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -91,6 +92,14 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
+import static mage.constants.PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP;
+import static mage.constants.PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF;
+import static mage.constants.PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -515,31 +524,29 @@ public abstract class PlayerImpl implements Player, Serializable {
                     inRange.add(player.getId());
                 }
             }
+        } else if ((range.getRange() * 2) + 1 >= game.getPlayers().size()) {
+            for (Player player : game.getPlayers().values()) {
+                if (!player.hasLeft()) {
+                    inRange.add(player.getId());
+                }
+            }
         } else {
-            if ((range.getRange() * 2) + 1 >= game.getPlayers().size()) {
-                for (Player player : game.getPlayers().values()) {
-                    if (!player.hasLeft()) {
-                        inRange.add(player.getId());
-                    }
+            inRange.add(playerId);
+            PlayerList players = game.getState().getPlayerList(playerId);
+            for (int i = 0; i < range.getRange(); i++) {
+                Player player = players.getNext(game);
+                while (player.hasLeft()) {
+                    player = players.getNext(game);
                 }
-            } else {
-                inRange.add(playerId);
-                PlayerList players = game.getState().getPlayerList(playerId);
-                for (int i = 0; i < range.getRange(); i++) {
-                    Player player = players.getNext(game);
-                    while (player.hasLeft()) {
-                        player = players.getNext(game);
-                    }
-                    inRange.add(player.getId());
+                inRange.add(player.getId());
+            }
+            players = game.getState().getPlayerList(playerId);
+            for (int i = 0; i < range.getRange(); i++) {
+                Player player = players.getPrevious(game);
+                while (player.hasLeft()) {
+                    player = players.getPrevious(game);
                 }
-                players = game.getState().getPlayerList(playerId);
-                for (int i = 0; i < range.getRange(); i++) {
-                    Player player = players.getPrevious(game);
-                    while (player.hasLeft()) {
-                        player = players.getPrevious(game);
-                    }
-                    inRange.add(player.getId());
-                }
+                inRange.add(player.getId());
             }
         }
     }
@@ -759,7 +766,8 @@ public abstract class PlayerImpl implements Player, Serializable {
          about the discarded card, that cost payment is illegal; the game returns to
          the moment before the cost was paid (see rule 717, "Handling Illegal Actions").
          */
-        if (card != null) {
+        if (card != null
+                && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD, card.getId(), source == null ? null : source.getSourceId(), playerId), source)) {
             // write info to game log first so game log infos from triggered or replacement effects follow in the game log
             if (!game.isSimulation()) {
                 game.informPlayers(getLogName() + " discards " + card.getLogName());
@@ -2088,7 +2096,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             }
         }
-        if (!opponentInGame || // if no more opponent is in game the wins event may no longer be replaced
+        if (!opponentInGame
+                || // if no more opponent is in game the wins event may no longer be replaced
                 !game.replaceEvent(new GameEvent(GameEvent.EventType.WINS, null, null, playerId))) {
             logger.debug("player won -> start: " + this.getName());
             if (!this.loses) {
@@ -2168,10 +2177,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (blocker != null && group != null && group.canBlock(blocker, game)) {
             group.addBlocker(blockerId, playerId, game);
             game.getCombat().addBlockingGroup(blockerId, attackerId, playerId, game);
-        } else {
-            if (this.isHuman() && !game.isSimulation()) {
-                game.informPlayer(this, "You can't block this creature.");
-            }
+        } else if (this.isHuman() && !game.isSimulation()) {
+            game.informPlayer(this, "You can't block this creature.");
         }
     }
 
@@ -2532,7 +2539,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             ManaOptions availableMana = getManaAvailable(game);
             availableMana.addMana(manaPool.getMana());
-
+            for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
+                availableMana.addMana(conditionalMana);
+            }
             if (hidden) {
                 for (Card card : hand.getUniqueCards(game)) {
                     for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
@@ -2790,14 +2799,12 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (targetNum < option.getTargets().size() - 2) {
                 addTargetOptions(options, newOption, targetNum + 1, game);
+            } else if (option.getChoices().size() > 0) {
+                addChoiceOptions(options, newOption, 0, game);
+            } else if (option.getCosts().getTargets().size() > 0) {
+                addCostTargetOptions(options, newOption, 0, game);
             } else {
-                if (option.getChoices().size() > 0) {
-                    addChoiceOptions(options, newOption, 0, game);
-                } else if (option.getCosts().getTargets().size() > 0) {
-                    addCostTargetOptions(options, newOption, 0, game);
-                } else {
-                    options.add(newOption);
-                }
+                options.add(newOption);
             }
         }
     }
@@ -2808,12 +2815,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             newOption.getChoices().get(choiceNum).setChoice(choice);
             if (choiceNum < option.getChoices().size() - 1) {
                 addChoiceOptions(options, newOption, choiceNum + 1, game);
+            } else if (option.getCosts().getTargets().size() > 0) {
+                addCostTargetOptions(options, newOption, 0, game);
             } else {
-                if (option.getCosts().getTargets().size() > 0) {
-                    addCostTargetOptions(options, newOption, 0, game);
-                } else {
-                    options.add(newOption);
-                }
+                options.add(newOption);
             }
         }
     }
@@ -3498,6 +3503,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean addTargets(Ability ability, Game game) {
         // only used for TestPlayer to preSet Targets
         return true;
+    }
+
+    @Override
+    public String getHistory() {
+        return "no available";
     }
 
 }

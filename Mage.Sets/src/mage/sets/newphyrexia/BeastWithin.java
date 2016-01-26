@@ -28,15 +28,13 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken;
@@ -52,7 +50,7 @@ public class BeastWithin extends CardImpl {
         super(ownerId, 103, "Beast Within", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "NPH";
 
-
+        // Destroy target permanent. Its controller puts a 3/3 green Beast creature token onto the battlefield.
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new BeastWithinEffect());
@@ -86,10 +84,9 @@ class BeastWithinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            BeastToken token = new BeastToken();
-            token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
+            new BeastToken().putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
         }
         return true;
     }

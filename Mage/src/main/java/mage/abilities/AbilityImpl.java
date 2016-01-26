@@ -229,11 +229,11 @@ public abstract class AbilityImpl implements Ability {
                 game.resetShortLivingLKI();
                 /**
                  * game.applyEffects() has to be done at least for every effect
-                 * that moves cards/permanent between zones, or chnages control
+                 * that moves cards/permanent between zones, or changes control
                  * of objects so Static effects work as intened if dependant
                  * from the moved objects zone it is in Otherwise for example
-                 * were static abilities with replacement effects deactivated to
-                 * late Example:
+                 * were static abilities with replacement effects deactivated
+                 * too late Example:
                  * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
                  */
                 if (effect.applyEffectsAfter()) {
@@ -379,7 +379,7 @@ public abstract class AbilityImpl implements Ability {
         }
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
-        if (this instanceof ManaAbility && !costs.pay(this, game, sourceId, controllerId, noMana)) {
+        if (this instanceof ManaAbility && !costs.pay(this, game, sourceId, controllerId, noMana, null)) {
             logger.debug("activate mana ability failed - non mana costs");
             return false;
         }
@@ -399,13 +399,13 @@ public abstract class AbilityImpl implements Ability {
         if (!useAlternativeCost(game)) { // old way still used?
 
             //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
-            if (!manaCostsToPay.pay(this, game, sourceId, activatorId, false)) {
+            if (!manaCostsToPay.pay(this, game, sourceId, activatorId, false, null)) {
                 return false; // cancel during mana payment
             }
         }
 
         //20100716 - 601.2g
-        if (!costs.pay(this, game, sourceId, activatorId, noMana)) {
+        if (!costs.pay(this, game, sourceId, activatorId, noMana, null)) {
             logger.debug("activate failed - non mana costs");
             return false;
         }
@@ -554,7 +554,7 @@ public abstract class AbilityImpl implements Ability {
                     xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getMultiplier();
                     StringBuilder manaString = threadLocalBuilder.get();
-                    if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isColorless()) {
+                    if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
                         manaString.append("{").append(amountMana).append("}");
                     } else {
                         String manaSymbol = null;
@@ -596,7 +596,7 @@ public abstract class AbilityImpl implements Ability {
         for (AlternativeCost cost : alternativeCosts) {
             if (cost.isAvailable(game, this)) {
                 if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), this, game)) {
-                    return cost.pay(this, game, sourceId, controllerId, false);
+                    return cost.pay(this, game, sourceId, controllerId, false, null);
                 }
             }
         }

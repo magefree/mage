@@ -120,7 +120,7 @@ class BrokenAmbitionsEffect extends OneShotEffect {
                     message = costToPay.getText() + " to prevent counter effect?";
                 }
                 costToPay.clearPaid();
-                if (!(controller.chooseUse(Outcome.Benefit, message, source, game) && costToPay.pay(source, game, spell.getSourceId(), spell.getControllerId(), false))) {
+                if (!(controller.chooseUse(Outcome.Benefit, message, source, game) && costToPay.pay(source, game, spell.getSourceId(), spell.getControllerId(), false, null))) {
                     game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }
                 if (ClashEffect.getInstance().apply(game, source)) {

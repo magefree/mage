@@ -30,8 +30,8 @@ package mage.sets.darksteel;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -43,11 +43,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.turn.TurnMod;
 
 /**
@@ -60,21 +58,19 @@ public class SavageBeating extends CardImpl {
         super(ownerId, 67, "Savage Beating", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "DST";
 
-
         // Cast Savage Beating only during your turn and only during combat.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new SavageBeatingTimingEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, null, MyTurnCondition.getInstance(),
+                "Cast {this} only during your turn and only during combat"));
+
         // Choose one - Creatures you control gain double strike until end of turn;
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
-        
+
         // or untap all creatures you control and after this phase, there is an additional combat phase.
         Mode mode = new Mode();
         mode.getEffects().add(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap all creatures you control"));
         mode.getEffects().add(new AdditionalCombatPhaseEffect());
         this.getSpellAbility().getModes().addMode(mode);
-        
+
         // Entwine {1}{R}
         this.addAbility(new EntwineAbility("{1}{R}"));
     }
@@ -89,56 +85,25 @@ public class SavageBeating extends CardImpl {
     }
 }
 
-class SavageBeatingTimingEffect extends ContinuousRuleModifyingEffectImpl {
-    SavageBeatingTimingEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during your turn and only during combat";
+class AdditionalCombatPhaseEffect extends OneShotEffect {
+
+    AdditionalCombatPhaseEffect() {
+        super(Outcome.Benefit);
+        staticText = "and after this phase, there is an additional combat phase";
     }
 
-    SavageBeatingTimingEffect(final SavageBeatingTimingEffect effect) {
+    AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
-            if (!game.getActivePlayerId().equals(source.getControllerId()) || !TurnPhase.COMBAT.equals(game.getTurn().getPhaseType())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SavageBeatingTimingEffect copy() {
-        return new SavageBeatingTimingEffect(this);
-    }
-}
-
-class AdditionalCombatPhaseEffect extends OneShotEffect {
-
-    AdditionalCombatPhaseEffect() {
-       super(Outcome.Benefit);
-       staticText = "and after this phase, there is an additional combat phase";
-    }
-
-    AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
-       super(effect);
-    }
-
-    @Override
     public AdditionalCombatPhaseEffect copy() {
-       return new AdditionalCombatPhaseEffect(this);
+        return new AdditionalCombatPhaseEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-       game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
-       return true;
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
+        return true;
     }
 }

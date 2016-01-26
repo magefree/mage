@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.mana;
 
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -140,5 +141,92 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         assertTappedCount("Candelabra of Tawnos", true, 1);
 
         assertPermanentCount(playerB, "Snapping Drake", 2);
+    }
+
+    /**
+     * I've found a bit of a problem with colorless costs. I've been unable to
+     * pay colorless costs with lands conditionally tapping for 2 colorless i.e
+     * shrine of forsaken gods and eldrazi temple ,including if I float the
+     * mana. Seperately but on a related note, if you float at least one
+     * colorless mana you can pay all colorless costs with floated generic mana.
+     */
+    @Test
+    public void testPayColorlessWithConditionalMana() {
+        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.
+        addCard(Zone.BATTLEFIELD, playerA, "Shrine of the Forsaken Gods", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);
+        // When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.
+        // Menace
+        // Discard a card with converted mana cost X: Counter target spell with converted mana cost X.
+        addCard(Zone.HAND, playerA, "Kozilek, the Great Distortion", 1); // {8}{C}{C}
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}{C}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kozilek, the Great Distortion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Kozilek, the Great Distortion", 1);
+    }
+
+    @Test
+    public void CultivatorDroneColorlessSpell() {
+        // Devoid
+        // {T}: Add {C} to your mana pool. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
+        addCard(Zone.BATTLEFIELD, playerA, "Cultivator Drone", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        // Target creature gets +3/-3 until end of turn.
+        addCard(Zone.HAND, playerA, "Spatial Contortion", 1); // {1}{C}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spatial Contortion", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Spatial Contortion", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+    }
+
+    @Test
+    public void CultivatorDroneColorlessAbility() {
+        // Devoid
+        // {T}: Add {C} to your mana pool. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
+        addCard(Zone.BATTLEFIELD, playerA, "Cultivator Drone", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 1);
+        // Untap Endbringer during each other player's untap step.
+        // {T}: Endbringer deals 1 damage to target creature or player.
+        // {C}, {T}: Target creature can't attack or block this turn.
+        // {C}{C}, {T}: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Endbringer", 1); // {1}{C}
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{C}{C},");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, 1);
+    }
+
+    @Test
+    public void CultivatorDroneColorlessCost() {
+        // Devoid
+        // {T}: Add {C} to your mana pool. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
+        addCard(Zone.BATTLEFIELD, playerA, "Cultivator Drone", 1);
+        // Devoid (This card has no color.)
+        // Flying
+        // When Gravity Negator attacks, you may pay {C}. If you do, another target creature gains flying until end of turn. ({C} represents colorless mana)
+        addCard(Zone.BATTLEFIELD, playerA, "Gravity Negator", 1); // 2/3
+
+        attack(1, playerA, "Gravity Negator");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped("Gravity Negator", true);
+        assertAbility(playerA, "Cultivator Drone", FlyingAbility.getInstance(), true);
+
+        assertLife(playerB, 18);
     }
 }

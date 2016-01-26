@@ -55,6 +55,8 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 public class Session {
 
     private static final Logger logger = Logger.getLogger(Session.class);
+    private final static Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
+    private final static Pattern digitsPattern = Pattern.compile("[0-9]");
 
     private final String sessionId;
     private UUID userId;
@@ -74,8 +76,98 @@ public class Session {
         this.lock = new ReentrantLock();
     }
 
-    public String registerUser(String userName) throws MageException {
-        String returnMessage = registerUserHandling(userName);
+    public String registerUser(String userName, String password, String email) throws MageException {
+        if (!ConfigSettings.getInstance().isAuthenticationActivated()) {
+            String returnMessage = "Registration is disabled by the server config";
+            sendErrorMessageToClient(returnMessage);
+            return returnMessage;
+        }
+        synchronized (AuthorizedUserRepository.instance) {
+            String returnMessage = validateUserName(userName);
+            if (returnMessage != null) {
+                sendErrorMessageToClient(returnMessage);
+                return returnMessage;
+            }
+            returnMessage = validatePassword(password, userName);
+            if (returnMessage != null) {
+                sendErrorMessageToClient(returnMessage);
+                return returnMessage;
+            }
+            returnMessage = validateEmail(email);
+            if (returnMessage != null) {
+                sendErrorMessageToClient(returnMessage);
+                return returnMessage;
+            }
+            AuthorizedUserRepository.instance.add(userName, password, email);
+            String subject = "XMage Registration Completed";
+            String text = "You are successfully registered as " + userName + ".";
+            boolean success;
+            if (!ConfigSettings.getInstance().getMailUser().isEmpty()) {
+                success = MailClient.sendMessage(email, subject, text);
+            } else {
+                success = MailgunClient.sendMessage(email, subject, text);
+            }
+            if (success) {
+                logger.info("Sent a registration confirmation email to " + email + " for " + userName);
+            } else {
+                logger.error("Failed sending a registration confirmation email to " + email + " for " + userName);
+            }
+            return null;
+        }
+    }
+
+    static private String validateUserName(String userName) {
+        if (userName.equals("Admin")) {
+            return "User name Admin already in use";
+        }
+        ConfigSettings config = ConfigSettings.getInstance();
+        if (userName.length() < config.getMinUserNameLength()) {
+            return "User name may not be shorter than " + config.getMinUserNameLength() + " characters";
+        }
+        if (userName.length() > config.getMaxUserNameLength()) {
+            return "User name may not be longer than " + config.getMaxUserNameLength() + " characters";
+        }
+        Pattern invalidUserNamePattern = Pattern.compile(ConfigSettings.getInstance().getInvalidUserNamePattern(), Pattern.CASE_INSENSITIVE);
+        Matcher m = invalidUserNamePattern.matcher(userName);
+        if (m.find()) {
+            return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
+        }
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
+        if (authorizedUser != null) {
+            return "User name '" + userName + "' already in use";
+        }
+        return null;
+    }
+
+    static private String validatePassword(String password, String userName) {
+        ConfigSettings config = ConfigSettings.getInstance();
+        if (password.length() < config.getMinPasswordLength()) {
+            return "Password may not be shorter than " + config.getMinPasswordLength() + " characters";
+        }
+        if (password.length() > config.getMaxPasswordLength()) {
+            return "Password may not be longer than " + config.getMaxPasswordLength() + " characters";
+        }
+        if (password.equals(userName)) {
+            return "Password may not be the same as your username";
+        }
+        Matcher alphabetsMatcher = alphabetsPattern.matcher(password);
+        Matcher digitsMatcher = digitsPattern.matcher(password);
+        if (!alphabetsMatcher.find() || !digitsMatcher.find()) {
+            return "Password has to include at least one alphabet (a-zA-Z) and also at least one digit (0-9)";
+        }
+        return null;
+    }
+
+    static private String validateEmail(String email) {
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
+        if (authorizedUser != null) {
+            return "Email address '" + email + "' is associated with another user";
+        }
+        return null;
+    }
+
+    public String connectUser(String userName, String password) throws MageException {
+        String returnMessage = connectUserHandling(userName, password);
         if (returnMessage != null) {
             sendErrorMessageToClient(returnMessage);
         }
@@ -86,27 +178,21 @@ public class Session {
         return lock.isLocked();
     }
 
-    public String registerUserHandling(String userName) throws MageException {
+    public String connectUserHandling(String userName, String password) throws MageException {
         this.isAdmin = false;
-        if (userName.equals("Admin")) {
-            return "User name Admin already in use";
+        if (ConfigSettings.getInstance().isAuthenticationActivated()) {
+            AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
+            if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
+                return "Wrong username or password. In case you haven't, please register your account first.";
+            }
         }
-        if (userName.length() > ConfigSettings.getInstance().getMaxUserNameLength()) {
-            return "User name may not be longer than " + ConfigSettings.getInstance().getMaxUserNameLength() + " characters";
-        }
-        if (userName.length() < ConfigSettings.getInstance().getMinUserNameLength()) {
-            return "User name may not be shorter than " + ConfigSettings.getInstance().getMinUserNameLength() + " characters";
-        }
-        Pattern p = Pattern.compile(ConfigSettings.getInstance().getUserNamePattern(), Pattern.CASE_INSENSITIVE);
-        Matcher m = p.matcher(userName);
-        if (m.find()) {
-            return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
-        }
+
         User user = UserManager.getInstance().createUser(userName, host);
         boolean reconnect = false;
         if (user == null) {  // user already exists
-            user = UserManager.getInstance().findUser(userName);
-            if (user.getHost().equals(host)) {
+            user = UserManager.getInstance().getUserByName(userName);
+            // If authentication is not activated, check the identity using IP address.
+            if (ConfigSettings.getInstance().isAuthenticationActivated() || user.getHost().equals(host)) {
                 user.updateLastActivity(null);  // minimizes possible expiration
                 this.userId = user.getId();
                 if (user.getSessionId().isEmpty()) {
@@ -135,11 +221,11 @@ public class Session {
         return null;
     }
 
-    public void registerAdmin() {
+    public void connectAdmin() {
         this.isAdmin = true;
         User user = UserManager.getInstance().createUser("Admin", host);
         if (user == null) {
-            user = UserManager.getInstance().findUser("Admin");
+            user = UserManager.getInstance().getUserByName("Admin");
         }
         UserData adminUserData = UserData.getDefaultUserDataView();
         adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
@@ -151,7 +237,7 @@ public class Session {
     }
 
     public boolean setUserData(String userName, UserData userData) {
-        User user = UserManager.getInstance().findUser(userName);
+        User user = UserManager.getInstance().getUserByName(userName);
         if (user != null) {
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
                 user.setUserData(userData);
@@ -279,7 +365,7 @@ public class Session {
         this.host = hostAddress;
     }
 
-    void sendErrorMessageToClient(String message) {
+    public void sendErrorMessageToClient(String message) {
         List<String> messageData = new LinkedList<>();
         messageData.add("Error while connecting to server");
         messageData.add(message);

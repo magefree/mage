@@ -56,6 +56,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.ColorlessManaCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.HybridManaCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -1007,7 +1008,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (card.getManaCost().getVariableCosts().size() > 0) {
                 //don't use variable mana costs unless there is at least 3 extra mana for X
                 for (Mana option : options) {
-                    option.add(Mana.ColorlessMana(3));
+                    option.add(Mana.GenericMana(3));
                 }
             }
             for (Mana mana : options) {
@@ -1041,7 +1042,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (ability.getManaCosts().getVariableCosts().size() > 0) {
                         //don't use variable mana costs unless there is at least 3 extra mana for X
                         for (Mana option : abilityOptions) {
-                            option.add(Mana.ColorlessMana(3));
+                            option.add(Mana.GenericMana(3));
                         }
                     }
                     if (abilityOptions.size() == 0) {
@@ -1167,6 +1168,18 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     }
                 }
             }
+            // pay colorless
+            for (ManaAbility manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                if (cost instanceof ColorlessManaCost) {
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
+                        if (cost.testPay(netMana) || spendAnyMana) {
+                            if (activateAbility(manaAbility, game)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
             // finally pay generic
             for (ManaAbility manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof GenericManaCost) {
@@ -1182,7 +1195,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
-            if (cost.pay(null, game, null, playerId, false) || spendAnyMana) {
+            if (cost.pay(null, game, null, playerId, false, null) || spendAnyMana) {
                 return true;
             }
         }

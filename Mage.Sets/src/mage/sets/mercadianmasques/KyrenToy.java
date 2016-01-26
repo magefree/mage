@@ -60,7 +60,7 @@ public class KyrenToy extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
         // {T}, Remove X charge counters from Kyren Toy: Add X mana of {C} to your mana pool, and then add {C} to your mana pool.
         ability = new KyrenToyManaAbility();
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(1)));
@@ -75,8 +75,9 @@ public class KyrenToy extends CardImpl {
     public KyrenToy copy() {
         return new KyrenToy(this);
     }
-    
+
     private class KyrenToyManaAbility extends BasicManaAbility {
+
         KyrenToyManaAbility() {
             super(new KyrenToyManaEffect());
         }
@@ -89,7 +90,7 @@ public class KyrenToy extends CardImpl {
         public KyrenToyManaAbility copy() {
             return new KyrenToyManaAbility(this);
         }
-}
+    }
 
     private class KyrenToyManaEffect extends ManaEffect {
 
@@ -110,10 +111,10 @@ public class KyrenToy extends CardImpl {
                 int numberOfMana = 0;
                 for (Cost cost : source.getCosts()) {
                     if (cost instanceof RemoveVariableCountersSourceCost) {
-                        numberOfMana = ((RemoveVariableCountersSourceCost)cost).getAmount();
+                        numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
                     }
                 }
-                Mana mana = new Mana(0, 0, 0, 0, 0, numberOfMana + 1, 0);
+                Mana mana = new Mana(0, 0, 0, 0, 0, 0, 0, numberOfMana + 1);
                 checkToFirePossibleEvents(mana, game, source);
                 player.getManaPool().addMana(mana, game, source);
                 return true;
@@ -130,5 +131,5 @@ public class KyrenToy extends CardImpl {
         public KyrenToyManaEffect copy() {
             return new KyrenToyManaEffect(this);
         }
-    }    
+    }
 }

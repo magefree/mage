@@ -55,7 +55,7 @@ public class MysticGate extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 0, 0, 0), new ManaCostsImpl("{W/U}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 0, 0, 0, 0), new ManaCostsImpl("{W/U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

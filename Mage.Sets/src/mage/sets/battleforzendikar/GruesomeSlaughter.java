@@ -65,7 +65,9 @@ public class GruesomeSlaughter extends CardImpl {
         effect.setText("{this} deals damage equal to its power to target creature.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn, filter));
+        effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, filter);
+        effect.setText("Until end of turn, colorless creatures you control gain \"{T}: This creature deals damage equal to its power to target creature.\"");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public GruesomeSlaughter(final GruesomeSlaughter card) {

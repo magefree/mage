@@ -25,16 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.revisededition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -42,13 +41,13 @@ import mage.cards.CardImpl;
  */
 public class SolRing extends CardImpl {
 
-    public SolRing (UUID ownerId) {
+    public SolRing(UUID ownerId) {
         super(ownerId, 274, "Sol Ring", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "3ED";
         this.addAbility(new SolRingAbility());
     }
 
-    public SolRing (final SolRing card) {
+    public SolRing(final SolRing card) {
         super(card);
     }
 
@@ -62,7 +61,7 @@ class SolRingAbility extends BasicManaAbility {
 
     public SolRingAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.add(new Mana(0,0,0,0,0,2,0));
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 2));
     }
 
     public SolRingAbility(final SolRingAbility ability) {

@@ -101,7 +101,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         } else {
             if (upTo) {
                 Mana mana = abilityToModify.getManaCostsToPay().getMana();
-                int reduceMax = mana.getColorless();
+                int reduceMax = mana.getGeneric();
                 if (reduceMax > amount) {
                     reduceMax = amount;
                 }

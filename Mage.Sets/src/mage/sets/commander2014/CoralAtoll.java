@@ -53,11 +53,10 @@ public class CoralAtoll extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Island");
 
-    static{
+    static {
         filter.add(new SubtypePredicate("Island"));
         filter.add(Predicates.not(new TappedPredicate()));
     }
-
 
     public CoralAtoll(UUID ownerId) {
         super(ownerId, 287, "Coral Atoll", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
@@ -68,9 +67,8 @@ public class CoralAtoll extends CardImpl {
         // When Coral Atoll enters the battlefield, sacrifice it unless you return an untapped Island you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
         // {tap}: Add {C}{U} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 0, 1,0 ), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 0, 0, 0, 1), new TapSourceCost()));
 
-        
     }
 
     public CoralAtoll(final CoralAtoll card) {

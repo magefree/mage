@@ -232,10 +232,7 @@ class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
             // init target pointer now because the dashed creature will only be returned from battlefield zone (now in entering state so zone change counter is not raised yet)
             effect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1));
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;

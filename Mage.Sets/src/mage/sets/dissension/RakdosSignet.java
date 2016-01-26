@@ -50,7 +50,7 @@ public class RakdosSignet extends CardImpl {
         this.expansionSetCode = "DIS";
 
         // {1}, {tap}: Add {B}{R} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0), new GenericManaCost(1));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0, 0), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

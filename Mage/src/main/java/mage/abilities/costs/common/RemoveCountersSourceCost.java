@@ -30,6 +30,7 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.Counter;
 import mage.game.Game;
@@ -70,7 +71,7 @@ public class RemoveCountersSourceCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null && permanent.getCounters().getCount(name) >= amount) {
             permanent.removeCounters(name, amount, game);

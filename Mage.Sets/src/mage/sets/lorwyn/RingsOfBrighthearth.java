@@ -131,7 +131,7 @@ class RingsOfBrighthearthEffect extends OneShotEffect {
         ManaCostsImpl cost = new ManaCostsImpl("{2}");
         if (player != null) {
             if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? If you do, copy that ability. You may choose new targets for the copy.", source, game)) {
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     Ability ability = (Ability) getValue("stackAbility");
                     Player controller = game.getPlayer(source.getControllerId());
                     Permanent sourcePermanent = game.getPermanent(source.getSourceId());

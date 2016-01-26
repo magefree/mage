@@ -55,10 +55,9 @@ public class ManaDrain extends CardImpl {
         super(ownerId, 78, "Mana Drain", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "VMA";
 
-        
         // Counter target spell. At the beginning of your next main phase, add X mana of {C} to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new ManaDrainCounterEffect());        
+        this.getSpellAbility().addEffect(new ManaDrainCounterEffect());
     }
 
     public ManaDrain(final ManaDrain card) {
@@ -94,14 +93,11 @@ class ManaDrainCounterEffect extends OneShotEffect {
             game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
             // mana gets added also if counter is not successful
             int cmc = spell.getConvertedManaCost();
-            Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(0,0,0,0,0,cmc,0), "your");
+            Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(0, 0, 0, 0, 0, 0, 0, cmc), "your");
             effect.setTargetPointer(new FixedTarget(source.getControllerId()));
-            AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility =
-                    new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
+                    = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;

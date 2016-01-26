@@ -53,14 +53,14 @@ import mage.target.targetpointer.FixedTarget;
 public class GrislySpectacle extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public GrislySpectacle (UUID ownerId) {
+    public GrislySpectacle(UUID ownerId) {
         super(ownerId, 66, "Grisly Spectacle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
         this.expansionSetCode = "GTC";
-
 
         // Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -73,7 +73,7 @@ public class GrislySpectacle extends CardImpl {
     }
 
     @Override
-    public GrislySpectacle  copy() {
+    public GrislySpectacle copy() {
         return new GrislySpectacle(this);
     }
 }
@@ -96,7 +96,6 @@ class GrislySpectacleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-         // the mill effect works also if creature is indestructible or regenerated
         Permanent creature = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());

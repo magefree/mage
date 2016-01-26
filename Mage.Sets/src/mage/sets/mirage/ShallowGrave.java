@@ -112,10 +112,7 @@ class ShallowGraveEffect extends OneShotEffect {
                         ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
                         exileEffect.setTargetPointer(fixedTarget);
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(delayedAbility, source);
                     }
                 }
             }

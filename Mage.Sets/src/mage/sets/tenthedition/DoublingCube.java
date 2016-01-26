@@ -93,7 +93,7 @@ class DoublingCubeEffect extends ManaEffect {
         int greenMana = pool.getGreen();
         int redMana = pool.getRed();
         int colorlessMana = pool.getColorless();
-        Mana mana = new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, colorlessMana, 0);
+        Mana mana = new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, colorlessMana, 0, 0);
         checkToFirePossibleEvents(mana, game, source);
         pool.addMana(mana, game, source);
         return true;

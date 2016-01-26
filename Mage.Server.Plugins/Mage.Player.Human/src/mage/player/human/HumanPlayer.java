@@ -358,15 +358,13 @@ public class HumanPlayer extends PlayerImpl {
                                 }
                             }
                         }
-                    } else {
-                        if (target.canTarget(response.getUUID(), game)) {
-                            if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
-                                target.remove(response.getUUID());
-                            } else {
-                                target.addTarget(response.getUUID(), null, game);
-                                if (target.doneChosing()) {
-                                    return true;
-                                }
+                    } else if (target.canTarget(response.getUUID(), game)) {
+                        if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
+                            target.remove(response.getUUID());
+                        } else {
+                            target.addTarget(response.getUUID(), null, game);
+                            if (target.doneChosing()) {
+                                return true;
                             }
                         }
                     }
@@ -530,12 +528,10 @@ public class HumanPlayer extends PlayerImpl {
             if (response.getUUID() != null) {
                 if (target.getTargets().contains(response.getUUID())) { // if already included remove it
                     target.remove(response.getUUID());
-                } else {
-                    if (target.canTarget(response.getUUID(), cards, game)) {
-                        target.addTarget(response.getUUID(), source, game);
-                        if (target.doneChosing()) {
-                            return true;
-                        }
+                } else if (target.canTarget(response.getUUID(), cards, game)) {
+                    target.addTarget(response.getUUID(), source, game);
+                    if (target.doneChosing()) {
+                        return true;
                     }
                 }
             } else {
@@ -805,7 +801,7 @@ public class HumanPlayer extends PlayerImpl {
                     if (cost instanceof PhyrexianManaCost) {
                         PhyrexianManaCost ph = (PhyrexianManaCost) cost;
                         if (ph.canPay(null, null, playerId, game)) {
-                            ((PhyrexianManaCost) cost).pay(null, game, null, playerId, false);
+                            ((PhyrexianManaCost) cost).pay(null, game, null, playerId, false, null);
                         }
                         break;
                     }
@@ -1065,10 +1061,8 @@ public class HumanPlayer extends PlayerImpl {
                     // does not block yet and can block or can block more attackers
                     if (filter.match(blocker, null, playerId, game)) {
                         selectCombatGroup(defendingPlayerId, blocker.getId(), game);
-                    } else {
-                        if (filterBlock.match(blocker, null, playerId, game) && game.getStack().isEmpty()) {
-                            removeBlocker = true;
-                        }
+                    } else if (filterBlock.match(blocker, null, playerId, game) && game.getStack().isEmpty()) {
+                        removeBlocker = true;
                     }
 
                     if (removeBlocker) {
@@ -1545,5 +1539,10 @@ public class HumanPlayer extends PlayerImpl {
         }
         pass(game);
         return true;
+    }
+
+    @Override
+    public String getHistory() {
+        return "no available";
     }
 }

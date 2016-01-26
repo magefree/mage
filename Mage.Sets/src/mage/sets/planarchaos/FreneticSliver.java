@@ -35,7 +35,7 @@ import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -97,7 +97,7 @@ class FreneticSliverEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (player.flipCoin(game)) {
-                return new ExileReturnToBattlefieldOwnerNextEndStepEffect(true).apply(game, source);
+                return new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true).apply(game, source);
             } else {
                 Permanent perm = game.getPermanent(source.getSourceId());
                 if (perm != null) {

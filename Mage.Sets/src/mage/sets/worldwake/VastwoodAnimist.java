@@ -49,15 +49,11 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
-
-
 /**
  *
  * @author jeffwadsworth
  */
 public class VastwoodAnimist extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public VastwoodAnimist(UUID ownerId) {
         super(ownerId, 116, "Vastwood Animist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -71,7 +67,7 @@ public class VastwoodAnimist extends CardImpl {
 
         // {tap}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VastwoodAnimistEffect(), new TapSourceCost());
-        ability.addTarget(new TargetControlledPermanent(filter));
+        ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
     }
 
@@ -88,6 +84,7 @@ public class VastwoodAnimist extends CardImpl {
 class VastwoodAnimistEffect extends OneShotEffect {
 
     final static FilterControlledPermanent filterAllies = new FilterControlledPermanent("allies you control");
+
     static {
         filterAllies.add(new SubtypePredicate("Ally"));
     }
@@ -117,7 +114,6 @@ class VastwoodAnimistEffect extends OneShotEffect {
 }
 
 class VastwoodAnimistElementalToken extends Token {
-
 
     VastwoodAnimistElementalToken(int amount) {
         super("", "X/X Elemental creature, where X is the number of Allies you control");

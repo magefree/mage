@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * PlayerPanel.java
  *
  * Created on Nov 18, 2009, 3:01:31 PM
@@ -288,7 +288,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             basicTooltipText = "<HTML>Name: " + player.getName()
                     + "<br/>Country: " + countryname
                     + "<br/>Deck hash code: " + player.getDeckHashCode()
-                    + "<br/>Wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)";
+                    + "<br/>This match wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)"
+                    + (player.getUserData() == null ? "" : "<br/>History: " + player.getUserData().getHistory());
         }
         // Extend tooltip
         StringBuilder tooltipText = new StringBuilder(basicTooltipText);
@@ -580,7 +581,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelX.setText("0");
         manaLabels.put("X", manaCountLabelX);
         r = new Rectangle(12, 12);
-        BufferedImage imageManaX = ManaSymbols.getManaSymbolImageSmall("X");
+        BufferedImage imageManaX = ManaSymbols.getManaSymbolImageSmall("C");
         HoverButton btnColorlessMana = new HoverButton(null, imageManaX, imageManaX, imageManaX, r);
         btnColorlessMana.setToolTipText("Colorless mana");
         btnColorlessMana.setOpaque(false);

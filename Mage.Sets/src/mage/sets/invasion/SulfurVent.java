@@ -55,7 +55,7 @@ public class SulfurVent extends CardImpl {
         // {tap}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());
         // {tap}, Sacrifice Sulfur Vent: Add {U}{R} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0, 0), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

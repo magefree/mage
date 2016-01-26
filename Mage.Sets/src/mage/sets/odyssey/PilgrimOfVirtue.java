@@ -54,10 +54,10 @@ import mage.target.TargetSource;
  * @author cbt33, Plopman (Circle of Protection: Red)
  */
 public class PilgrimOfVirtue extends CardImpl {
-    
-        static final FilterCard filter = new FilterCard("black");
-    
-    static{
+
+    static final FilterCard filter = new FilterCard("black");
+
+    static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
@@ -91,15 +91,16 @@ public class PilgrimOfVirtue extends CardImpl {
 class PilgrimOfVirtueEffect extends PreventionEffectImpl {
 
     private static final FilterObject filter = new FilterObject("black source");
-    static{
+
+    static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-    } 
-    private TargetSource target;
+    }
+    private final TargetSource target;
 
     public PilgrimOfVirtueEffect() {
         super(Duration.EndOfTurn);
         target = new TargetSource(filter);
-        
+
         staticText = "The next time a black source of your choice would deal damage to you this turn, prevent that damage";
     }
 

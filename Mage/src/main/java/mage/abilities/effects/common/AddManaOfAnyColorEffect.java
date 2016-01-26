@@ -46,7 +46,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     }
 
     public AddManaOfAnyColorEffect(final int amount) {
-        super(new Mana(0,0,0,0,0,0, amount));
+        super(new Mana(0,0,0,0,0,0, amount, 0));
         this.amount = amount;
         this.staticText = new StringBuilder("add ")
                 .append(CardUtil.numberToText(amount))
@@ -103,7 +103,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
     @Override
     public Mana getMana() {
-        return (new Mana(0,0,0,0,0,0,amount));
+        return (new Mana(0,0,0,0,0,0,amount, 0));
     }
     
 }

@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * TableWaitingDialog.java
  *
  * Created on Dec 16, 2009, 10:27:44 AM
@@ -68,7 +68,7 @@ public class TableWaitingDialog extends MageDialog {
     private Session session;
     private final TableWaitModel tableWaitModel;
     private UpdateSeatsTask updateTask;
-    private static final int[] defaultColumnsWidth = {20, 50, 100, 100};
+    private static final int[] defaultColumnsWidth = {20, 50, 100, 100, 100};
 
     /**
      * Creates new form TableWaitingDialog
@@ -268,10 +268,8 @@ public class TableWaitingDialog extends MageDialog {
             if (session.startMatch(roomId, tableId)) {
                 closeDialog();
             }
-        } else {
-            if (session.startTournament(roomId, tableId)) {
-                closeDialog();
-            }
+        } else if (session.startTournament(roomId, tableId)) {
+            closeDialog();
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
@@ -319,7 +317,7 @@ public class TableWaitingDialog extends MageDialog {
 
 class TableWaitModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Seat", "Loc", "Player Name", "Player Type"};
+    private final String[] columnNames = new String[]{"Seat", "Loc", "Player Name", "Player Type", "History"};
     private SeatView[] seats = new SeatView[0];
 
     public void loadData(TableView table) {
@@ -353,6 +351,8 @@ class TableWaitModel extends AbstractTableModel {
                     return seats[arg0].getPlayerName();
                 case 3:
                     return seats[arg0].getPlayerType();
+                case 4:
+                    return seats[arg0].getHistory();
             }
         }
         return "";

@@ -77,7 +77,7 @@ public class SasayaOrochiAscendant extends CardImpl {
         this.flipCardName = "Sasaya's Essence";
 
         // Reveal your hand: If you have seven or more land cards in your hand, flip Sasaya, Orochi Ascendant.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SasayaOrochiAscendantFlipEffect(), new RevealHandSourceControllerCost() ));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SasayaOrochiAscendantFlipEffect(), new RevealHandSourceControllerCost()));
     }
 
     public SasayaOrochiAscendant(final SasayaOrochiAscendant card) {
@@ -91,21 +91,21 @@ public class SasayaOrochiAscendant extends CardImpl {
 }
 
 class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
-    
+
     public SasayaOrochiAscendantFlipEffect() {
         super(Outcome.Benefit);
         this.staticText = "If you have seven or more land cards in your hand, flip {this}";
     }
-    
+
     public SasayaOrochiAscendantFlipEffect(final SasayaOrochiAscendantFlipEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public SasayaOrochiAscendantFlipEffect copy() {
         return new SasayaOrochiAscendantFlipEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -121,7 +121,7 @@ class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
 
 class SasayasEssence extends Token {
 
-    SasayasEssence  () {
+    SasayasEssence() {
         super("Sasaya's Essence", "");
         supertype.add("Legendary");
         cardType.add(CardType.ENCHANTMENT);
@@ -190,7 +190,7 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
-                            while(!choice.isChosen()) {
+                            while (!choice.isChosen()) {
                                 controller.choose(outcome, choice, game);
                                 if (!controller.canRespond()) {
                                     return false;

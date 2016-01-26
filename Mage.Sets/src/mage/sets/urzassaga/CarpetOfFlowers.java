@@ -202,7 +202,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
                         mana.setWhite(count);
                         break;
                     case "Colorless":
-                        mana.setColorless(count);
+                        mana.setGeneric(count);
                         break;
                 }
                 checkToFirePossibleEvents(mana, game, source);

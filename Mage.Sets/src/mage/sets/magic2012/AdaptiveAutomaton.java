@@ -50,7 +50,6 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  * @author nantuko
@@ -87,8 +86,8 @@ public class AdaptiveAutomaton extends CardImpl {
     }
 }
 
-
 class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl {
+
     public AdaptiveAutomatonAddSubtypeEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "{this} is the chosen type in addition to its other types";

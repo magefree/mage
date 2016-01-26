@@ -130,12 +130,12 @@ class AdjustingCostsEffect extends CostModificationEffectImpl {
         Mana mana = spellAbility.getManaCostsToPay().getMana();
         Player player = game.getPlayer(source.getControllerId());
  
-        if (mana.getColorless() > 0 && player != null && player.getLife() < 4) {
-            int newCount = mana.getColorless() - 6;
+        if (mana.getGeneric() > 0 && player != null && player.getLife() < 4) {
+            int newCount = mana.getGeneric() - 6;
             if (newCount < 0) {
                 newCount = 0;
             }
-            mana.setColorless(newCount);
+            mana.setGeneric(newCount);
             spellAbility.getManaCostsToPay().load(mana.toString());
             return true;
         }

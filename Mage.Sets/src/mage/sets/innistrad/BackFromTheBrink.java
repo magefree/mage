@@ -30,6 +30,7 @@ package mage.sets.innistrad;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
@@ -97,7 +98,7 @@ class BackFromTheBrinkCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
             Player controller = game.getPlayer(controllerId);
             if (controller != null) {

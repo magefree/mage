@@ -64,7 +64,7 @@ public class HeritageDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Tap three untapped Elves you control: Add {G}{G}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 3, 0, 0, 0, 0, 0), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 3, 0, 0, 0, 0, 0, 0), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
     }
 
     public HeritageDruid(final HeritageDruid card) {

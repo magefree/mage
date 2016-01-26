@@ -6,6 +6,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.abilities.costs.Cost;
 
 public class ControlPermanentCost extends CostImpl {
     private FilterControlledPermanent filter;
@@ -26,7 +27,7 @@ public class ControlPermanentCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         this.paid = true;
         return paid;
     }

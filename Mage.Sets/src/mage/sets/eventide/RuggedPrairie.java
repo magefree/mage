@@ -56,7 +56,7 @@ public class RuggedPrairie extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0), new ManaCostsImpl("{R/W}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0, 0), new ManaCostsImpl("{R/W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

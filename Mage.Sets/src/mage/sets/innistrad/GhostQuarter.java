@@ -96,7 +96,7 @@ class GhostQuarterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getPermanentOrLKIBattlefield(source.getFirstTarget()); // if indestructible effect should work also
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", source, game)) {

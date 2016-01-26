@@ -28,14 +28,14 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -48,7 +48,6 @@ public class FossilFind extends CardImpl {
     public FossilFind(UUID ownerId) {
         super(ownerId, 206, "Fossil Find", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R/G}");
         this.expansionSetCode = "SHM";
-
 
         // Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose.
         this.getSpellAbility().addEffect(new FossilFindEffect());
@@ -82,14 +81,14 @@ class FossilFindEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && !player.getGraveyard().isEmpty()) {
-            Card card = player.getGraveyard().getRandom(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && !controller.getGraveyard().isEmpty()) {
+            Card card = controller.getGraveyard().getRandom(game);
             if (card != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                game.informPlayers(card.getName() + "returned to the hand of" + player.getLogName());
+                controller.moveCards(card, Zone.HAND, source, game);
                 return true;
             }
+            controller.moveCards(controller.getGraveyard(), Zone.GRAVEYARD, source, game);
         }
         return false;
     }

@@ -27,6 +27,7 @@
  */
 package mage.sets.fatereforged;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -48,7 +49,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -101,20 +102,19 @@ class RallyTheAncestorsEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
             player.moveCards(cards, Zone.BATTLEFIELD, source, game);
+            ArrayList<Permanent> toExile = new ArrayList<>(cards.size());
             for (Card card : cards) {
                 if (card != null) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
-                        Effect exileEffect = new ExileTargetEffect("Exile those creatures at the beginning of your next upkeep");
-                        exileEffect.setTargetPointer(new FixedTarget(permanent, game));
-                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(exileEffect);
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        toExile.add(permanent);
                     }
                 }
             }
+            Effect exileEffect = new ExileTargetEffect("Exile those creatures at the beginning of your next upkeep");
+            exileEffect.setTargetPointer(new FixedTargets(toExile, game));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(exileEffect);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;

@@ -29,17 +29,14 @@ package mage.sets.fatereforged;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -56,11 +53,12 @@ public class Vaultbreaker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Vaultbreaker attacks, you may discard a card. If you do, draw a card.
-        this.addAbility(new AttacksTriggeredAbility(new VaultbreakerEffect(), true));
-        
+        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1),
+                new DiscardCardCost()), false, "Whenever {this} attacks, you may discard a card. If you do, draw a card"));
+
         // Dash {2}{R}
         this.addAbility(new DashAbility(this, "{2}{R}"));
-        
+
     }
 
     public Vaultbreaker(final Vaultbreaker card) {
@@ -70,35 +68,5 @@ public class Vaultbreaker extends CardImpl {
     @Override
     public Vaultbreaker copy() {
         return new Vaultbreaker(this);
-    }
-}
-
-class VaultbreakerEffect extends OneShotEffect {
-
-    VaultbreakerEffect() {
-        super(Outcome.Neutral);
-        staticText = "you may discard a card.  If you do, draw a card";
-    }
-
-    VaultbreakerEffect(final VaultbreakerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards discardedCard = controller.discard(1, false, source, game);
-            if (discardedCard != null) {
-                controller.drawCards(1, game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public VaultbreakerEffect copy() {
-        return new VaultbreakerEffect(this);
     }
 }

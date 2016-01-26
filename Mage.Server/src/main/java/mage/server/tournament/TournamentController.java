@@ -43,6 +43,7 @@ import mage.game.events.TableEvent;
 import static mage.game.events.TableEvent.EventType.CONSTRUCT;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
+import mage.game.result.ResultProtos.TourneyQuitStatus;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
@@ -351,31 +352,34 @@ public class TournamentController {
         tournamentSession.setKilled();
         if (tournamentPlayer.isInTournament()) {
             String info;
+            TourneyQuitStatus status;
             if (tournament.isDoneConstructing()) {
                 info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
                 // quit active matches of that tournament
                 TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
-            } else {
-                if (tournamentPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
-                    info = "during Draft phase";
-                    if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
-                        this.abortDraftTournament();
-                    } else {
-                        DraftController draftController = DraftManager.getInstance().getController(tableId);
-                        if (draftController != null) {
-                            DraftSession draftSession = draftController.getDraftSession(playerId);
-                            if (draftSession != null) {
-                                DraftManager.getInstance().kill(draftSession.getDraftId(), userId);
-                            }
+                status = TourneyQuitStatus.DURING_ROUND;
+            } else if (tournamentPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
+                info = "during Draft phase";
+                if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
+                    this.abortDraftTournament();
+                } else {
+                    DraftController draftController = DraftManager.getInstance().getController(tableId);
+                    if (draftController != null) {
+                        DraftSession draftSession = draftController.getDraftSession(playerId);
+                        if (draftSession != null) {
+                            DraftManager.getInstance().kill(draftSession.getDraftId(), userId);
                         }
                     }
-                } else if (tournamentPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
-                    info = "during Construction phase";
-                } else {
-                    info = "";
                 }
+                status = TourneyQuitStatus.DURING_DRAFTING;
+            } else if (tournamentPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
+                info = "during Construction phase";
+                status = TourneyQuitStatus.DURING_CONSTRUCTION;
+            } else {
+                info = "";
+                status = TourneyQuitStatus.NO_TOURNEY_QUIT;
             }
-            tournamentPlayer.setQuit(info);
+            tournamentPlayer.setQuit(info, status);
             tournament.quit(playerId);
             tournamentSession.quit();
             ChatManager.getInstance().broadcast(chatId, "", tournamentPlayer.getPlayer().getLogName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);

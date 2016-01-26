@@ -148,7 +148,7 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
         if (player != null) {
             VariableCost cost = new PayVariableLifeCost();
             int xValue = cost.announceXValue(source, game);
-            cost.getFixedCostsFromAnnouncedValue(xValue).pay(source, game, source.getSourceId(), source.getControllerId(), false);
+            cost.getFixedCostsFromAnnouncedValue(xValue).pay(source, game, source.getSourceId(), source.getControllerId(), false, null);
             
             Cards cards = new CardsImpl();
             int count = Math.min(player.getLibrary().size(), xValue);

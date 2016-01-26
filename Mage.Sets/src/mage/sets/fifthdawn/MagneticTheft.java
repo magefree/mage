@@ -29,22 +29,16 @@ package mage.sets.fifthdawn;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -58,7 +52,7 @@ public class MagneticTheft extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Equipment"));
     }
-    
+
     public MagneticTheft(UUID ownerId) {
         super(ownerId, 74, "Magnetic Theft", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "5DN";

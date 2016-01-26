@@ -28,6 +28,7 @@
 package mage.sets.theros;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -47,11 +48,12 @@ public class BoonOfErebos extends CardImpl {
         super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "THS";
 
-
         // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2,0, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new RegenerateTargetEffect());
+        Effect effect = new RegenerateTargetEffect();
+        effect.setText("Regenerate it");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 

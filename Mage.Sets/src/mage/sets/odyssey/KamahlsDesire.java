@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -65,13 +66,15 @@ public class KamahlsDesire extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature has first strike.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
         // Threshold - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.
-        ability.addEffect(new ConditionalContinuousEffect(new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield), 
-                                                         new CardsInControllerGraveCondition(7),  
-                                                         "<i>Threshold</i> - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard"));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield),
+            new CardsInControllerGraveCondition(7),
+            "Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard"));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
 

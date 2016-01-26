@@ -108,7 +108,7 @@ class CruelUltimatumEffect extends OneShotEffect {
             if (card == null) {
                 return false;
             }
-            controller.moveCards(card, null, Zone.HAND, source, game);
+            controller.moveCards(card, Zone.HAND, source, game);
         }
         return true;
     }

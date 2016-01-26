@@ -38,6 +38,7 @@ import mage.game.draft.Draft;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.game.result.ResultProtos.TourneyProto;
 import mage.players.Player;
 
 /**
@@ -98,4 +99,6 @@ public interface Tournament {
 
     void clearDraft();
     Draft getDraft();
+
+    TourneyProto toProto();
 }

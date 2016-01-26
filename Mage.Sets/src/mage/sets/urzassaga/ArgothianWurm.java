@@ -101,7 +101,7 @@ class ArgothianWurmEffect extends PutOnLibrarySourceEffect {
                 if (player != null
                         && cost.canPay(source, source.getSourceId(), playerId, game)
                         && player.chooseUse(Outcome.Sacrifice, "Sacrifice a land?", source, game)
-                        && cost.pay(source, game, source.getSourceId(), playerId, true)) {
+                        && cost.pay(source, game, source.getSourceId(), playerId, true, null)) {
                     costPaid = true;
                 }
             }

@@ -57,7 +57,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  * @author LevelX2
  */
 public class FuryOfTheHorde extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("two red cards");
 
     static {
@@ -68,15 +68,14 @@ public class FuryOfTheHorde extends CardImpl {
         super(ownerId, 81, "Fury of the Horde", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
         this.expansionSetCode = "CSP";
 
-
         // You may exile two red cards from your hand rather than pay Fury of the Horde's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(2, filter))));
-        
+
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addEffect(new FuryOfTheHordeUntapEffect());
         this.getSpellAbility().addEffect(new FuryOfTheHordeAddPhasesEffect());
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
-        
+
     }
 
     public FuryOfTheHorde(final FuryOfTheHorde card) {
@@ -88,7 +87,6 @@ public class FuryOfTheHorde extends CardImpl {
         return new FuryOfTheHorde(this);
     }
 }
-
 
 class FuryOfTheHordeUntapEffect extends OneShotEffect {
 
@@ -110,7 +108,7 @@ class FuryOfTheHordeUntapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
         if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-            Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher)watcher).getAttackedThisTurnCreatures();
+            Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
             for (UUID uuid : attackedThisTurn) {
                 Permanent permanent = game.getPermanent(uuid);
                 if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
@@ -141,21 +139,19 @@ class FuryOfTheHordeAddPhasesEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {        
+    public boolean apply(Game game, Ability source) {
         // 15.07.2006 If it's somehow not a main phase when Fury of the Horde resolves, all it does is untap all creatures that attacked that turn. No new phases are created.
-         if (TurnPhase.PRECOMBAT_MAIN.equals(game.getTurn().getPhaseType())
-                 || TurnPhase.POSTCOMBAT_MAIN.equals(game.getTurn().getPhaseType()) ) {
+        if (TurnPhase.PRECOMBAT_MAIN.equals(game.getTurn().getPhaseType())
+                || TurnPhase.POSTCOMBAT_MAIN.equals(game.getTurn().getPhaseType())) {
             // we can't add two turn modes at once, will add additional post combat on delayed trigger resolution
             TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
             game.getState().getTurnMods().add(combat);
             DelayedAddMainPhaseAbility delayedTriggeredAbility = new DelayedAddMainPhaseAbility();
-            delayedTriggeredAbility.setSourceId(source.getSourceId());
-            delayedTriggeredAbility.setControllerId(source.getControllerId());
             delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
-            game.addDelayedTriggeredAbility(delayedTriggeredAbility);
+            game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
             return true;
         }
-         return false;
+        return false;
     }
 
 }
@@ -164,7 +160,7 @@ class DelayedAddMainPhaseAbility extends DelayedTriggeredAbility {
 
     private UUID connectedTurnMod;
     private boolean enabled;
-    
+
     public DelayedAddMainPhaseAbility() {
         super(null, Duration.EndOfTurn);
         this.usesStack = false; // don't show this to the user

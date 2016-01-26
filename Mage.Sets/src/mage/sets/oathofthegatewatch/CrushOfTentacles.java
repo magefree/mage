@@ -57,10 +57,8 @@ public class CrushOfTentacles extends CardImpl {
         effect.setText("If {this} surge cost was paid, put an 8/8 blue Octopus creature token onto the battlefield");
         getSpellAbility().addEffect(effect);
 
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
         // Surge {3}{U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
         addAbility(new SurgeAbility(this, "{3}{U}{U}"));
-
     }
 
     public CrushOfTentacles(final CrushOfTentacles card) {
@@ -77,6 +75,7 @@ class CrushOfTentaclesToken extends Token {
 
     public CrushOfTentaclesToken() {
         super("Octopus", "8/8 blue Octopus creature");
+        this.setExpansionSetCodeForImage("BFZ");
         this.cardType.add(CardType.CREATURE);
         this.color.setBlue(true);
         this.subtype.add("Octopus");

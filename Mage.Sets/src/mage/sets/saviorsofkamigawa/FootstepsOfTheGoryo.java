@@ -102,10 +102,7 @@ class FootstepsOfTheGoryoEffect extends OneShotEffect {
                         Effect sacrificeEffect = new SacrificeTargetEffect("Sacrifice that creature at the beginning of next end step", source.getControllerId());
                         sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(delayedAbility, source);
                     }
                 }
             }

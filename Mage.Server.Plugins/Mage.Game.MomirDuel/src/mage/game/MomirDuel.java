@@ -27,6 +27,11 @@
  */
 package mage.game;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,15 +43,19 @@ import mage.cards.Card;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.command.Emblem;
 import mage.game.match.MatchType;
 import mage.game.permanent.token.EmptyToken;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.*;
 
 /**
  *
@@ -89,7 +98,7 @@ public class MomirDuel extends GameImpl {
     @Override
     public Set<UUID> getOpponents(UUID playerId) {
         Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
+        for (UUID opponentId : this.getPlayer(playerId).getInRange()) {
             if (!opponentId.equals(playerId)) {
                 opponents.add(opponentId);
             }
@@ -114,7 +123,7 @@ class MomirEmblem extends Emblem {
 
     public MomirEmblem() {
         setName("Momir Vig, Simic Visionary");
-
+        //TODO: setExpansionSetCodeForImage(???);
         // {X}, Discard a card: Put a token into play as a copy of a random creature card with converted mana cost X. Play this ability only any time you could play a sorcery and only once each turn.
         LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.COMMAND, new MomirEffect(), new VariableManaCost());
         ability.addCost(new DiscardCardCost());
@@ -153,6 +162,8 @@ class MomirEffect extends OneShotEffect {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
+        } else {
+            game.informPlayers("No random creature card with converted mana cost of " + value + " was found.");
         }
         return true;
     }

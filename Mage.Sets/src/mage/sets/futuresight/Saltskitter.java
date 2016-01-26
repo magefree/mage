@@ -30,7 +30,7 @@ package mage.sets.futuresight;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -58,7 +58,7 @@ public class Saltskitter extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever another creature enters the battlefield, exile Saltskitter. Return Saltskitter to the battlefield under its owner's control at the beginning of the next end step.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ExileReturnToBattlefieldOwnerNextEndStepEffect(true), filter));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), filter));
     }
 
     public Saltskitter(final Saltskitter card) {

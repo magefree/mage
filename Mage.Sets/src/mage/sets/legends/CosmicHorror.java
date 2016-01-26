@@ -100,7 +100,7 @@ class CosmicHorrorEffect extends OneShotEffect {
             }
             if (controller.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     return true;
                 }
             }

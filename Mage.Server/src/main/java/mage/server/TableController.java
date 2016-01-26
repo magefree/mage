@@ -62,6 +62,7 @@ import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.PlayerFactory;
+import mage.server.record.TableRecorderImpl;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentController;
@@ -105,7 +106,7 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
+        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), TableRecorderImpl.getInstance(), match);
         chatId = ChatManager.getInstance().createChatSession("Match Table " + table.getId());
         init();
     }
@@ -124,7 +125,7 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
+        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), TableRecorderImpl.getInstance(), tournament);
         chatId = ChatManager.getInstance().createChatSession("Tourn. table " + table.getId());
     }
 
@@ -237,6 +238,7 @@ public class TableController {
 
         TournamentPlayer newTournamentPlayer = tournament.getPlayer(newPlayer.getId());
         newTournamentPlayer.setState(oldTournamentPlayer.getState());
+        newTournamentPlayer.setReplacedTournamentPlayer(oldTournamentPlayer);
 
         DraftManager.getInstance().getController(table.getId()).replacePlayer(oldPlayer, newPlayer);
         return true;
@@ -957,26 +959,16 @@ public class TableController {
         return getTable().getState();
     }
 
-    public synchronized boolean changeTableState(TableState newTableState) {
-        switch (newTableState) {
-            case WAITING:
-                if (getTable().getState().equals(TableState.STARTING)) {
-                    // tournament already started
-                    return false;
-                }
-                break;
-            case STARTING:
-                if (!getTable().getState().equals(TableState.READY_TO_START)) {
-                    // tournament is not ready, can't start
-                    return false;
-                }
-                if (!table.allSeatsAreOccupied()) {
-                    logger.debug("Not alle Seats are occupied: stop start tableId:" + table.getId());
-                    return false;
-                }
-                break;
+    public synchronized boolean changeTableStateToStarting() {
+        if (!getTable().getState().equals(TableState.READY_TO_START)) {
+            // tournament is not ready, can't start
+            return false;
         }
-        getTable().setState(newTableState);
+         if (!table.allSeatsAreOccupied()) {
+            logger.debug("Not alle Seats are occupied: stop start tableId:" + table.getId());
+            return false;
+        }
+        getTable().setState(TableState.STARTING);
         return true;
     }
 }

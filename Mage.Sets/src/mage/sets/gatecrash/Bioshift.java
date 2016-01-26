@@ -56,7 +56,7 @@ public class Bioshift extends CardImpl {
         // Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
         getSpellAbility().addEffect(new MoveCounterFromTargetToTargetEffect());
         getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (you take counters from)")));
-        getSpellAbility().addTarget(new BioshiftSecondTargetPermanent());
+        getSpellAbility().addTarget(new BioshiftSecondTargetCreaturePermanent());
     }
     
 
@@ -113,14 +113,15 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
     }
 }
 
-class BioshiftSecondTargetPermanent extends TargetPermanent {
+class BioshiftSecondTargetCreaturePermanent extends TargetCreaturePermanent {
     
-    BioshiftSecondTargetPermanent() {
-        super();
-        this.filter = new FilterCreaturePermanent("another target creature with the same controller (counters go to)");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature with the same controller (counters go to)");
+    
+    BioshiftSecondTargetCreaturePermanent() {
+        super(filter);
     }
 
-    BioshiftSecondTargetPermanent(final BioshiftSecondTargetPermanent target) {
+    BioshiftSecondTargetCreaturePermanent(final BioshiftSecondTargetCreaturePermanent target) {
         super(target);
     }
 
@@ -137,7 +138,7 @@ class BioshiftSecondTargetPermanent extends TargetPermanent {
     }
 
     @Override
-    public BioshiftSecondTargetPermanent copy() {
-        return new BioshiftSecondTargetPermanent(this);
+    public BioshiftSecondTargetCreaturePermanent copy() {
+        return new BioshiftSecondTargetCreaturePermanent(this);
     }
 }

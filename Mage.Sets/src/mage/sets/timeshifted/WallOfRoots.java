@@ -34,6 +34,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -90,7 +91,7 @@ class WallOfRootsCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
             permanent.addCounters(new BoostCounter(0, -1), game);

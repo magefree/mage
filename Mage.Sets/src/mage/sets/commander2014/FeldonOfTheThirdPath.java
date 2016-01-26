@@ -110,10 +110,7 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
                 SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
                 sacrificeEffect.setTargetPointer(new FixedTarget(addedToken, game));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
             }
             return true;
         }

@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -65,20 +66,20 @@ public class CrashingCentaur extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn), new ManaCostsImpl("{G}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
-        
+
         // Threshold - As long as seven or more cards are in your graveyard, Crashing Centaur gets +2/+2 and has shroud.
         Ability thresholdAbility = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                     new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
-                    "<i>Threshold</i> - If seven or more cards are in your graveyard, {this} gets +2/+2"));
+                    "If seven or more cards are in your graveyard, {this} gets +2/+2"));
                 Effect effect = new ConditionalContinuousEffect(
                                         new GainAbilitySourceEffect(ShroudAbility.getInstance()),
                                         new CardsInControllerGraveCondition(7), "and has shroud");
         thresholdAbility.addEffect(effect);
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
-        
     }
 
     public CrashingCentaur(final CrashingCentaur card) {

@@ -81,7 +81,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         if (upTo) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            int reduceMax = mana.getColorless();
+            int reduceMax = mana.getGeneric();
             if (reduceMax > 2) {
                 reduceMax = 2;
             }

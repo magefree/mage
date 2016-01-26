@@ -1237,4 +1237,10 @@ public class PlayerStub implements Player {
     public boolean addTargets(Ability ability, Game game) {
         return false;
     }
+
+    @Override
+    public String getHistory() {
+        return "";
+    }
+
 }

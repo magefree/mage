@@ -88,7 +88,11 @@ public class AddCountersTargetEffect extends OneShotEffect {
                 if (permanent != null) {
                     if (counter != null) {
                         Counter newCounter = counter.copy();
-                        newCounter.add(amount.calculate(game, source, this));
+                        int calculated = amount.calculate(game, source, this);
+                        if (calculated > 0 && newCounter.getCount() > 0) {
+                            newCounter.remove(newCounter.getCount());
+                        }
+                        newCounter.add(calculated);
                         int before = permanent.getCounters().getCount(counter.getName());
                         permanent.addCounters(newCounter, game);
                         int numberAdded = permanent.getCounters().getCount(counter.getName()) - before;

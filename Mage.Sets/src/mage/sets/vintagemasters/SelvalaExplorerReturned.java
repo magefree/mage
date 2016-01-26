@@ -102,7 +102,7 @@ class SelvalaExplorerReturnedEffect extends OneShotEffect {
         if (controller != null) {
             int parley = ParleyCount.getInstance().calculate(game, source, this);
             if (parley > 0) {
-                controller.getManaPool().addMana(new Mana(0, parley, 0, 0, 0, 0, 0), game, source);
+                controller.getManaPool().addMana(new Mana(0, parley, 0, 0, 0, 0, 0, 0), game, source);
                 controller.gainLife(parley, game);
             }
             return true;

@@ -28,11 +28,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility;
@@ -41,6 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -55,7 +54,6 @@ public class PlasmCapture extends CardImpl {
     public PlasmCapture(UUID ownerId) {
         super(ownerId, 91, "Plasm Capture", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{G}{U}{U}");
         this.expansionSetCode = "DGM";
-
 
         // Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -95,12 +93,9 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
             game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
             // mana gets added also if counter is not successful
             int mana = spell.getConvertedManaCost();
-            AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility =
-                    new AtTheBeginOfMainPhaseDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), false, TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
+                    = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), false, TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;
@@ -130,9 +125,9 @@ class PlasmCaptureManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if(player != null){
+        if (player != null) {
             Mana mana = new Mana();
-            for(int i = 0; i < amountOfMana; i++){
+            for (int i = 0; i < amountOfMana; i++) {
                 ChoiceColor choiceColor = new ChoiceColor();
                 while (!player.choose(Outcome.Benefit, choiceColor, game)) {
                     if (!player.canRespond()) {

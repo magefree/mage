@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -61,7 +62,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {

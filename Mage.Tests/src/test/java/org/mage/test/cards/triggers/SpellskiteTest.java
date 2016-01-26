@@ -225,4 +225,29 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+
+    /**
+     * When an AI opponent casts a spell targeting one of my creatures, Wild
+     * Defiance does not trigger. (Tested with Flame Slash, which was able to
+     * kill my Spellskite)
+     */
+    @Test
+    public void testWildDefiance() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        // Flame Slash deals 4 damage to target creature.
+        addCard(Zone.HAND, playerA, "Flame Slash"); // {R}
+
+        // Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Wild Defiance", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Slash", "Spellskite");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Flame Slash", 1);
+        assertPowerToughness(playerB, "Spellskite", 3, 7);
+    }
+
 }

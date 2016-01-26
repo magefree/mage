@@ -90,7 +90,7 @@ class VictimizeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")));
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                 controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game),
                         Zone.BATTLEFIELD, source, game, true, false, false, null);
             }

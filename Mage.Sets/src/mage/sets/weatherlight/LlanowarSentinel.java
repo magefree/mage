@@ -94,7 +94,7 @@ class LlanowarSentinelEffect extends OneShotEffect {
         if(player != null) {
             if(player.chooseUse(Outcome.BoostCreature, "Do you want to to pay {1}{G}?", source, game)) {
                 Cost cost = new ManaCostsImpl("{1}{G}");
-                if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     FilterCard filter = new FilterCard("card named Llanowar Sentinel");
                     filter.add(new NamePredicate("Llanowar Sentinel"));
                     new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter), false, true).apply(game, source);

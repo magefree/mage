@@ -84,7 +84,7 @@ public class ChancellorOfTheAnnex extends CardImpl {
 
 class ChancellorOfTheAnnexEffect extends OneShotEffect {
 
-    public ChancellorOfTheAnnexEffect () {
+    public ChancellorOfTheAnnexEffect() {
         super(Outcome.Benefit);
         staticText = "when each opponent casts his or her first spell of the game, counter that spell unless that player pays {1}";
     }
@@ -97,9 +97,7 @@ class ChancellorOfTheAnnexEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             DelayedTriggeredAbility ability = new ChancellorOfTheAnnexDelayedTriggeredAbility(opponentId);
-            ability.setSourceId(source.getSourceId());
-            ability.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(ability);
+            game.addDelayedTriggeredAbility(ability, source);
         }
         return true;
     }
@@ -115,7 +113,7 @@ class ChancellorOfTheAnnexDelayedTriggeredAbility extends DelayedTriggeredAbilit
 
     private final UUID playerId;
 
-    ChancellorOfTheAnnexDelayedTriggeredAbility (UUID playerId) {
+    ChancellorOfTheAnnexDelayedTriggeredAbility(UUID playerId) {
         super(new CounterUnlessPaysEffect(new GenericManaCost(1)));
         this.playerId = playerId;
     }

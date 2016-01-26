@@ -103,7 +103,7 @@ class DecreeOfJusticeCycleEffect extends OneShotEffect {
         if (player != null) {
             int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
             cost.add(new GenericManaCost(costX));
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                 Token token = new SoldierToken();
                 token.putOntoBattlefield(costX, game, source.getSourceId(), source.getControllerId());
             }

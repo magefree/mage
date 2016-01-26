@@ -36,6 +36,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.Counter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class FateTransfer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature to move all counters from");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("target creature to move all counters to");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target creature to move all counters to");
 
     public FateTransfer(UUID ownerId) {
         super(ownerId, 161, "Fate Transfer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U/B}");
@@ -55,8 +56,15 @@ public class FateTransfer extends CardImpl {
 
         // Move all counters from target creature onto another target creature.
         this.getSpellAbility().addEffect(new FateTransferEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter2));
+        
+        TargetCreaturePermanent fromTarget = new TargetCreaturePermanent(filter);
+        fromTarget.setTargetTag(1);
+        this.getSpellAbility().addTarget(fromTarget);
+        
+        TargetCreaturePermanent toTarget = new TargetCreaturePermanent(filter2);
+        filter2.add(new AnotherTargetPredicate(2));
+        toTarget.setTargetTag(2);
+        this.getSpellAbility().addTarget(toTarget);
 
     }
 

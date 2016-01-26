@@ -156,7 +156,7 @@ public abstract class ExpansionSet implements Serializable {
             List<CardInfo> specialLands = getSpecialLand();
             List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
             for (int i = 0; i < numBoosterLands; i++) {
-                if (ratioBoosterSpecialLand > 0 && rnd.nextInt(ratioBoosterSpecialLand) == 1 && specialLands != null) {
+                if (ratioBoosterSpecialLand > 0 && rnd.nextInt(ratioBoosterSpecialLand) == 0 && specialLands != null) {
                     addToBooster(booster, specialLands);
                 } else {
                     addToBooster(booster, basicLands);
@@ -174,7 +174,7 @@ public abstract class ExpansionSet implements Serializable {
         List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
         List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
         for (int i = 0; i < numBoosterRare; i++) {
-            if (ratioBoosterMythic > 0 && rnd.nextInt(ratioBoosterMythic) == 1) {
+            if (ratioBoosterMythic > 0 && rnd.nextInt(ratioBoosterMythic) == 0) {
                 addToBooster(booster, mythics);
             } else {
                 addToBooster(booster, rares);

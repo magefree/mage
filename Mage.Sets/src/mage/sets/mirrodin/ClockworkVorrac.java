@@ -28,9 +28,6 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
@@ -43,7 +40,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -79,6 +78,7 @@ public class ClockworkVorrac extends CardImpl {
 }
 
 class ClockworkVorracEffect extends OneShotEffect {
+
     ClockworkVorracEffect() {
         super(Outcome.UnboostCreature);
         staticText = "remove a +1/+1 counter from {this} at end of combat";
@@ -93,9 +93,7 @@ class ClockworkVorracEffect extends OneShotEffect {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
             AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
-            ability.setSourceId(source.getSourceId());
-            ability.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(ability);
+            game.addDelayedTriggeredAbility(ability, source);
         }
         return false;
     }
@@ -106,4 +104,3 @@ class ClockworkVorracEffect extends OneShotEffect {
     }
 
 }
-

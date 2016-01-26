@@ -28,13 +28,13 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.Target;
@@ -51,7 +51,6 @@ public class DeathDenied extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-
         // Return X target creature cards from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target creature cards from your graveyard to your hand");
@@ -65,8 +64,8 @@ public class DeathDenied extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
-            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1?" creature cards":"creature card").append(" from your graveyard").toString()));
-            ability.addTarget(target);     
+            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ? " creature cards" : "creature card").append(" from your graveyard").toString()));
+            ability.addTarget(target);
         }
     }
 

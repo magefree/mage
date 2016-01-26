@@ -33,12 +33,12 @@ import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalGainActivatedAbility;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.effects.common.DrawDiscardTargetEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -60,15 +60,14 @@ public class CephalidColiseum extends CardImpl {
         this.addAbility(manaAbility);
 
         // Threshold - {U}, {tap}, Sacrifice Cephalid Coliseum: Target player draws three cards, then discards three cards. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
-            new DrawCardTargetEffect(3),
+        Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+            new DrawDiscardTargetEffect(3, 3),
             new ManaCostsImpl("{U}"),
-            new CardsInControllerGraveCondition(7),
-            "<i>Threshold</i> - {U}, {T}, Sacrifice {this}: Target player draws three cards, then discards three cards. Activate this ability only if seven or more cards are in your graveyard.");
-        thresholdAbility.addEffect(new DiscardTargetEffect(3));
+            new CardsInControllerGraveCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
         thresholdAbility.addTarget(new TargetPlayer());
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

@@ -83,7 +83,7 @@ public class ForiysianTotem extends CardImpl {
 class ForiysianTotemToken extends Token {
 
     public ForiysianTotemToken() {
-        super("", "4/4 red Giant artifact creature");
+        super("", "4/4 red Giant artifact creature with trample");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add("Giant");

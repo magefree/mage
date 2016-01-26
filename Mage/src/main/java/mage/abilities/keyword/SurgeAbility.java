@@ -57,12 +57,13 @@ public class SurgeAbility extends SpellAbility {
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
         this.setRuleAtTheTop(true);
-        rule = "Surge " + surgeCosts
+        this.rule = "Surge " + surgeCosts
                 + " <i>(You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)</i>";
     }
 
     public SurgeAbility(final SurgeAbility ability) {
         super(ability);
+        this.rule = ability.rule;
     }
 
     @Override

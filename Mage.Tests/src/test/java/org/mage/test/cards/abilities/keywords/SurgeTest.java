@@ -110,4 +110,30 @@ public class SurgeTest extends CardTestPlayerBase {
         assertLife(playerB, 14);
     }
 
+    @Test
+    public void testContainmentMembrane() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        // Enchant creature
+        // Enchanted creature doesn't untap during its controller's untap step.
+        // Surge {U} (You may cast a spell for its surge cost if you or a teammate have cast another spell in the same turn.)
+        addCard(Zone.HAND, playerA, "Containment Membrane"); // {2}{U}
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1, true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Containment Membrane", "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 17);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertPermanentCount(playerA, "Containment Membrane", 1);
+
+        assertTapped("Silvercoat Lion", true);
+
+    }
+
 }

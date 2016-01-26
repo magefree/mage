@@ -29,14 +29,22 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -56,9 +64,14 @@ public class Chlorophant extends CardImpl {
         // At the beginning of your upkeep, you may put a +1/+1 counter on Chlorophant.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, true));
         // Threshold - As long as seven or more cards are in your graveyard, Chlorophant has "At the beginning of your upkeep, you may put another +1/+1 counter on Chlorophant."
-        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, true),
-                                                        new CardsInControllerGraveCondition(7),
-                                                        "<i>Threshold</i> As long as seven or more cards are in your graveyard, {this} has \"At the beginning of your upkeep, you may put another +1/+1 counter on {this}\""));
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance());
+        effect.setText("At the beginning of your upkeep, you may put another +1/+1 counter on {this}.");
+        Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+            new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            "As long as seven or more cards are in your graveyard, {this} has \"At the beginning of your upkeep, you may put another +1/+1 counter on {this}.\""));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
+        this.addAbility(ability);
     }
 
     public Chlorophant(final Chlorophant card) {

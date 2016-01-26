@@ -42,6 +42,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
@@ -125,7 +126,13 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        UUID targetId;
+        if (getTargetPointer() instanceof FixedTarget) {
+            targetId = ((FixedTarget) getTargetPointer()).getTarget();
+        } else {
+            targetId = getTargetPointer().getFirst(game, source);
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
         Card copyFrom;
         ApplyToPermanent applier = new EmptyApplyToPermanent();
         if (permanent != null) {

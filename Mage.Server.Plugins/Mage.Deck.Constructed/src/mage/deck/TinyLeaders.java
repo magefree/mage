@@ -120,7 +120,7 @@ public class TinyLeaders extends DeckValidator {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains",
+        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
                 "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
         counts.put(deck.getName(), 1); // add the commander to the counts, so it can't be in the deck or sideboard again
@@ -145,19 +145,20 @@ public class TinyLeaders extends DeckValidator {
         if (deck.getSideboard().size() <= 10) {
             Card commander = GameTinyLeadersImpl.getCommanderCard(deck.getName(), null);
             /**
-             * 905.5b - Each card must have a converted mana cost of three of less.
-             *          Cards with {X} in their mana cost count X as zero.
-             *          Split and double-face cards are legal only if both of their halves would be legal independently.
+             * 905.5b - Each card must have a converted mana cost of three of
+             * less. Cards with {X} in their mana cost count X as zero. Split
+             * and double-face cards are legal only if both of their halves
+             * would be legal independently.
              */
-            
-            if (commander == null  || commander.getManaCost().convertedManaCost() > 3) {
+
+            if (commander == null || commander.getManaCost().convertedManaCost() > 3) {
                 if (commander == null) {
                     if (deck.getName() == null) {
-                        invalid.put("Leader", "You have to save your deck with the leader card name entered to the DECK NAME field of the DECK EDITOR (top left) so that XMage knows your leader." +
-                                "(You can use the \"Sultai\" for a UBG (2/2) default Commander.)");
+                        invalid.put("Leader", "You have to save your deck with the leader card name entered to the DECK NAME field of the DECK EDITOR (top left) so that XMage knows your leader."
+                                + "(You can use the \"Sultai\" for a UBG (3/3) default Commander or \"Glass\" for a colorless 3/3 default Commander.)");
                     } else {
-                    invalid.put("Leader", "Leader [" + deck.getName() + "] not found. You have to enter the name of the leader card into the DECK NAME field of the DECK EDITOR (top left). Check your spelling " +
-                            "(use the \"Sultai\" for a UBG (2/2) default Commander)");
+                        invalid.put("Leader", "Leader [" + deck.getName() + "] not found. You have to enter the name of the leader card into the DECK NAME field of the DECK EDITOR (top left). Check your spelling "
+                                + "(use the \"Sultai\" for a UBG (3/3) default Commander or \"Glass\" for a colorless (3/3) default Commander)");
 
                     }
                 }
@@ -172,12 +173,12 @@ public class TinyLeaders extends DeckValidator {
                     FilterMana color = CardUtil.getColorIdentity(commander);
                     for (Card card : deck.getCards()) {
                         if (!isCardFormatValid(card, commander, color)) {
-                            valid = false; 
+                            valid = false;
                         }
                     }
                     for (Card card : deck.getSideboard()) {
                         if (!isCardFormatValid(card, commander, color)) {
-                            valid = false; 
+                            valid = false;
                         }
                     }
                 } else {
@@ -204,14 +205,14 @@ public class TinyLeaders extends DeckValidator {
 
         //905.5b - Converted mana cost must be 3 or less
         if (card instanceof SplitCard) {
-            if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() > 3) {                            
+            if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() > 3) {
                 invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ")");
-                return false;                                
+                return false;
             }
-            if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() > 3 ) {
+            if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() > 3) {
                 invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ")");
-                return false;                                
-            }                            
+                return false;
+            }
         } else {
             if (card.getManaCost().convertedManaCost() > 3) {
                 invalid.put(card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ")");
@@ -220,7 +221,7 @@ public class TinyLeaders extends DeckValidator {
         }
         return true;
     }
-    
+
     /**
      *
      * @param commander FilterMana object with Color Identity of Commander set

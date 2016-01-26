@@ -61,7 +61,7 @@ public class WirewoodChanneler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield.
-        DynamicManaAbility ability = new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
+        DynamicManaAbility ability = new DynamicManaAbility(new Mana(0,0,0,0,0,0,1, 0), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
                 "Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield", true);
         this.addAbility(ability);
     }

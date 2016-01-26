@@ -56,7 +56,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FormOfTheDragon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

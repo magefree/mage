@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
@@ -62,7 +63,7 @@ public class UntaidakeTheCloudKeeper extends CardImpl {
         Ability ability = new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new LegendarySpellManaBuilder());
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);
-        
+
     }
 
     public UntaidakeTheCloudKeeper(final UntaidakeTheCloudKeeper card) {
@@ -76,6 +77,7 @@ public class UntaidakeTheCloudKeeper extends CardImpl {
 }
 
 class LegendarySpellManaBuilder extends ConditionalManaBuilder {
+
     @Override
     public ConditionalMana build(Object... options) {
         return new LegendaryCastConditionalMana(this.mana);
@@ -97,6 +99,7 @@ class LegendaryCastConditionalMana extends ConditionalMana {
 }
 
 class LegendaryCastManaCondition extends ManaCondition implements Condition {
+
     @Override
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
@@ -109,7 +112,7 @@ class LegendaryCastManaCondition extends ManaCondition implements Condition {
     }
 
     @Override
-    public boolean apply(Game game, Ability source, UUID originalId) {
+    public boolean apply(Game game, Ability source, UUID originalId, Cost costsToPay) {
         return apply(game, source);
     }
 }

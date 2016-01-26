@@ -42,6 +42,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -52,8 +53,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -82,12 +83,14 @@ public class DecayingSoil extends CardImpl {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
         ability.addTarget(target);
         this.addAbility(ability);
-        
+
         // Threshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility(new DecayingSoilEffect(), filter)),
-                new CardsInControllerGraveCondition(7), 
-                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand")));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+            new ConditionalContinuousEffect(new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility(new DecayingSoilEffect(), filter)),
+            new CardsInControllerGraveCondition(7),
+            "As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand.\""));
+        ability.setAbilityWord(AbilityWord.THRESHOLD);
+        this.addAbility(ability);
     }
 
     public DecayingSoil(final DecayingSoil card) {
@@ -172,9 +175,9 @@ class DecayingSoilEffect extends OneShotEffect {
         if (player != null) {
             if (player.chooseUse(Outcome.Benefit, " - Pay " + cost.getText() + "?", source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     UUID target = this.getTargetPointer().getFirst(game, source);
-                      if (target != null) {  
+                      if (target != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
                         if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {

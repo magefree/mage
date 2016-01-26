@@ -25,18 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -44,7 +42,7 @@ import java.util.UUID;
  */
 public class PalladiumMyr extends CardImpl {
 
-    public PalladiumMyr (UUID ownerId) {
+    public PalladiumMyr(UUID ownerId) {
         super(ownerId, 190, "Palladium Myr", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Myr");
@@ -53,7 +51,7 @@ public class PalladiumMyr extends CardImpl {
         this.addAbility(new PalladiumMyrAbility());
     }
 
-    public PalladiumMyr (final PalladiumMyr card) {
+    public PalladiumMyr(final PalladiumMyr card) {
         super(card);
     }
 
@@ -67,7 +65,7 @@ class PalladiumMyrAbility extends BasicManaAbility {
 
     public PalladiumMyrAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.add(new Mana(0,0,0,0,0,2,0));
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 2));
     }
 
     public PalladiumMyrAbility(final PalladiumMyrAbility ability) {

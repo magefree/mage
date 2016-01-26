@@ -46,7 +46,7 @@ public class ClutchOfCurrents extends CardImpl {
         this.expansionSetCode = "BFZ";
 
         // Return target creature to its owner's hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(true, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Awaken 3—{4}{U}

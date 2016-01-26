@@ -74,6 +74,9 @@ public class FilterCard extends FilterObject<Card> {
      */
     @Override
     public boolean match(Card card, Game game) {
+        if (card == null) {
+            return false;
+        }
         if (card.isSplitCard()) {
             return super.match(((SplitCard) card).getLeftHalfCard(), game)
                     || super.match(((SplitCard) card).getRightHalfCard(), game);

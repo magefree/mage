@@ -114,7 +114,7 @@ class VedalkenEngineerAbility extends ManaAbility {
 
     public VedalkenEngineerAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
         super(Zone.BATTLEFIELD, new VedalkenEngineerEffect(amount, manaBuilder), cost);
-        this.netMana.add(new Mana(0,0,0,0,0,0, amount));
+        this.netMana.add(new Mana(0,0,0,0,0,0, amount, 0));
     }
 
     public VedalkenEngineerAbility(final VedalkenEngineerAbility ability) {

@@ -33,11 +33,12 @@ import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalGainActivatedAbility;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -60,14 +61,14 @@ public class CabalPit extends CardImpl {
         this.addAbility(manaAbility);
 
         // Threshold - {B}, {T}, Sacrifice Cabal Pit: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
+        Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new BoostTargetEffect(-2,-2, Duration.EndOfTurn),
             new ManaCostsImpl("{B}"),
-            new CardsInControllerGraveCondition(7),
-            "<i>Threshold</i> - {B}, {T}, Sacrifice {this}: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.");
+            new CardsInControllerGraveCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
         thresholdAbility.addTarget(new TargetCreaturePermanent());
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

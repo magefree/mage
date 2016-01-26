@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -34,6 +33,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -41,13 +41,21 @@ import mage.game.Game;
  */
 public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEffect {
 
+    private boolean tapped;
+
     public ReturnToBattlefieldUnderOwnerControlTargetEffect() {
+        this(false);
+    }
+
+    public ReturnToBattlefieldUnderOwnerControlTargetEffect(boolean tapped) {
         super(Outcome.Benefit);
         staticText = "return that card to the battlefield under its owner's control";
+        this.tapped = tapped;
     }
 
     public ReturnToBattlefieldUnderOwnerControlTargetEffect(final ReturnToBattlefieldUnderOwnerControlTargetEffect effect) {
         super(effect);
+        this.tapped = effect.tapped;
     }
 
     @Override
@@ -57,14 +65,14 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null) {
-            Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId())) {
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
             }
+            return true;
         }
         return false;
     }
-
 }

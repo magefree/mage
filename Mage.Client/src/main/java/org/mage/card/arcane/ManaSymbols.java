@@ -1,14 +1,9 @@
 package org.mage.card.arcane;
 
-import mage.cards.repository.ExpansionRepository;
-import mage.client.dialog.PreferencesDialog;
-import mage.client.util.ImageHelper;
-import mage.client.util.gui.BufferedImageBuilder;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -16,6 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
+import mage.cards.repository.ExpansionRepository;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.util.ImageHelper;
+import mage.client.util.gui.BufferedImageBuilder;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.constants.Constants;
 
 public class ManaSymbols {
 
@@ -30,10 +32,10 @@ public class ManaSymbols {
     public static void loadImages() {
         String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9", "B", "BG",
             "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU",
-            "WP", "UP", "BP", "RP", "GP", "X" /*, "Y", "Z", "slash"*/};
+            "WP", "UP", "BP", "RP", "GP", "X", "C" /*, "Y", "Z", "slash"*/};
 
         for (String symbol : symbols) {
-            File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_MANA_MEDIUM  + "/" + symbol + ".jpg");
+            File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
             Rectangle r = new Rectangle(11, 11);
             try {
                 Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
@@ -198,6 +200,7 @@ public class ManaSymbols {
     }
 
     public enum Type {
+
         CARD,
         TOOLTIP,
         PAY

@@ -28,26 +28,15 @@
 package mage.sets.tempestremastered;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.PayVariableLifeCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -60,13 +49,12 @@ public class Necrologia extends CardImpl {
         this.expansionSetCode = "TPR";
 
         // Cast Necrologia only during your end step.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new NecrologiaTimingEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.END_TURN, MyTurnCondition.getInstance(),
+                "Cast {this} only during your end step"));
+
         // As an additional cost to cast to Necrologia, pay X life.
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));
-        
+
         // Draw X cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new GetXValue()));
     }
@@ -78,37 +66,5 @@ public class Necrologia extends CardImpl {
     @Override
     public Necrologia copy() {
         return new Necrologia(this);
-    }
-}
-
-class NecrologiaTimingEffect extends ContinuousRuleModifyingEffectImpl {
-    NecrologiaTimingEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during your end step";
-    }
-
-    NecrologiaTimingEffect(final NecrologiaTimingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
-    }
-
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            if (!game.getActivePlayerId().equals(source.getControllerId()) || !PhaseStep.END_TURN.equals(game.getTurn().getStepType())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public NecrologiaTimingEffect copy() {
-        return new NecrologiaTimingEffect(this);
     }
 }

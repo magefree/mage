@@ -19,6 +19,17 @@
     userNamePattern     - pattern for user name validity check
     maxAiOpponents      - number of allowed AI opponents on the server
     saveGameActivated   - allow game save and replay options (not working correctly yet)
+    authenticationActivated - "true" = user have to register to signon "false" = user need not to register
+    * mail configs only needed if authentication is activated:
+    * if mailUser = "" mailgun is used otherwise nativ mail server on the system
+    googleAccount       - not supported currently
+    mailgunApiKey       - key from the mailgun domain  e.g. = "key-12121111..."
+    mailgunDomain       - domain for the mailgun message sending
+    mailSmtpHost        - hostname to send the mail
+    mailSmtpPort        - port to send the mail
+    mailUser            - username used to send the mail
+    mailPassword        - passworf of the used user to send the mail
+    mailFromAddress     - sender address
     -->
     <server serverAddress="0.0.0.0"
             serverName="mage-server"
@@ -32,9 +43,20 @@
             maxSecondsIdle="600"
             minUserNameLength="3"
             maxUserNameLength="14"
-            userNamePattern="[^a-z0-9_]"
+            invalidUserNamePattern="[^a-z0-9_]"
+            minPasswordLength="8"
+            maxPasswordLength="100"
             maxAiOpponents="15"
             saveGameActivated="false"
+            authenticationActivated="true"
+            googleAccount=""
+            mailgunApiKey="key-d93e81f19a9c9ed243ebb7cc9381385c"
+            mailgunDomain="sandbox401a433f30d445309a5e86b6c53f7812.mailgun.org"
+            mailSmtpHost="smtp.1und1.de"
+            mailSmtpPort="465"
+            mailUser="xmageserver@online.de"
+            mailPassword="24wrsfxv"
+            mailFromAddress="xmageserver@online.de"
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>
@@ -73,9 +95,10 @@
         <draftCube name="Jim Davis's Cube (469 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.JimDavisCube"/>
         <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MonoBlueCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
-        <draftCube name="MTGO Legacy Cube (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCube"/>
-        <draftCube name="MTGO Legacy Cube March 2015 (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCubeMarch2015"/>
-        <draftCube name="MTGO Legacy Cube September 2015 (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCubeSeptember2015"/>
+        <draftCube name="MTGO Legacy Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCube"/>
+        <draftCube name="MTGO Legacy Cube March 2015" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeMarch2015"/>
+        <draftCube name="MTGO Legacy Cube September 2015" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeSeptember2015"/>
+        <draftCube name="MTGO Legacy Cube January 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJanuary2016"/>
         <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCube"/>
         <draftCube name="MTGO Vintage Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCube2013"/>
         <draftCube name="MTGO Vintage Cube 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCube2014"/>

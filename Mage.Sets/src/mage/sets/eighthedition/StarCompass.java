@@ -80,7 +80,7 @@ public class StarCompass extends CardImpl {
 class StarCompassManaAbility extends ManaAbility {
 
     public StarCompassManaAbility() {
-        super(Zone.BATTLEFIELD, new StarCompassManaEffect(),new TapSourceCost());
+        super(Zone.BATTLEFIELD, new StarCompassManaEffect(), new TapSourceCost());
     }
 
     public StarCompassManaAbility(final StarCompassManaAbility ability) {
@@ -94,14 +94,14 @@ class StarCompassManaAbility extends ManaAbility {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        return ((StarCompassManaEffect)getEffects().get(0)).getNetMana(game, this);
+        return ((StarCompassManaEffect) getEffects().get(0)).getNetMana(game, this);
     }
 }
 
 class StarCompassManaEffect extends ManaEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
-    
+
     static {
         filter.add(new SupertypePredicate("Basic"));
     }
@@ -184,7 +184,7 @@ class StarCompassManaEffect extends ManaEffect {
         return true;
     }
 
-    public  List<Mana> getNetMana(Game game, Ability source) {
+    public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
         if (types.getBlack() > 0) {
@@ -202,8 +202,8 @@ class StarCompassManaEffect extends ManaEffect {
         if (types.getWhite() > 0) {
             netManas.add(new Mana(ColoredManaSymbol.W));
         }
-        if (types.getColorless() > 0) {
-            netManas.add(new Mana(0,0,0,0,0,1,0));
+        if (types.getGeneric() > 0) {
+            netManas.add(new Mana(0, 0, 0, 0, 0, 0, 0, 1));
         }
         return netManas;
     }
@@ -215,7 +215,7 @@ class StarCompassManaEffect extends ManaEffect {
             Abilities<ManaAbility> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             for (ManaAbility ability : manaAbilities) {
                 if (!ability.equals(source) && ability.definesMana()) {
-                    for (Mana netMana: ability.getNetMana(game)) {
+                    for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);
                     }
                 }

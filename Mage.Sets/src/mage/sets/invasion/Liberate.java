@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class Liberate extends CardImpl {
 
@@ -83,13 +83,10 @@ class LiberateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if(permanent != null && sourceObject != null) {
-            if(permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
+        if (permanent != null && sourceObject != null) {
+            if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
                 AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
                 return true;
             }
         }

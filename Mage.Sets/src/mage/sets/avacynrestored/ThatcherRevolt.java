@@ -27,6 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -42,7 +43,7 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -88,14 +89,16 @@ class ThatcherRevoltEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         RedHumanToken token = new RedHumanToken();
         token.putOntoBattlefield(3, game, source.getSourceId(), source.getControllerId());
+        ArrayList<Permanent> toSacrifice = new ArrayList<>();
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
-                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect();
-                sacrificeEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
+                toSacrifice.add(tokenPermanent);
             }
         }
+        SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect();
+        sacrificeEffect.setTargetPointer(new FixedTargets(toSacrifice, game));
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
         return true;
     }
 }

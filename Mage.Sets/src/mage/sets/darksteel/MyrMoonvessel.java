@@ -25,18 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  * @author Loki
@@ -49,7 +47,7 @@ public class MyrMoonvessel extends CardImpl {
         this.subtype.add("Myr");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 1, 0))));
+        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 0, 0, 1))));
     }
 
     public MyrMoonvessel(final MyrMoonvessel card) {

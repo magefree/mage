@@ -56,12 +56,11 @@ public class ArcaneDenial extends CardImpl {
         super(ownerId, 28, "Arcane Denial", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "C13";
 
-
         // Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new ArcaneDenialEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         // You draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
     public ArcaneDenial(final ArcaneDenial card) {
@@ -78,7 +77,7 @@ class ArcaneDenialEffect extends OneShotEffect {
 
     public ArcaneDenialEffect() {
         super(Outcome.Detriment);
-        staticText ="Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep";
+        staticText = "Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep";
     }
 
     public ArcaneDenialEffect(final ArcaneDenialEffect effect) {
@@ -107,9 +106,7 @@ class ArcaneDenialEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(controller.getId()));
             effect.setText("Its controller may draw up to two cards");
             DelayedTriggeredAbility ability = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
-            ability.setSourceId(source.getSourceId());
-            ability.setControllerId(controller.getId());
-            game.addDelayedTriggeredAbility(ability);
+            game.addDelayedTriggeredAbility(ability, source);
         }
         return countered;
     }

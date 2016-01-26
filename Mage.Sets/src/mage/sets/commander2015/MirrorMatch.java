@@ -29,25 +29,22 @@ package mage.sets.commander2015;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -60,9 +57,7 @@ public class MirrorMatch extends CardImpl {
         this.expansionSetCode = "C15";
 
         // Cast Mirror Match only during the declare blockers step.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new MirrorMatchRuleModifyingEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS));
 
         // For each creature attacking you or a planeswalker you control, put a token that's a copy of that creature onto the battlefield blocking that creature. Exile those tokens at end of combat.
         this.getSpellAbility().addEffect(new MirrorMatchEffect());
@@ -76,41 +71,6 @@ public class MirrorMatch extends CardImpl {
     @Override
     public MirrorMatch copy() {
         return new MirrorMatch(this);
-    }
-}
-
-class MirrorMatchRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
-
-    MirrorMatchRuleModifyingEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during the declare blockers step";
-    }
-
-    MirrorMatchRuleModifyingEffect(final MirrorMatchRuleModifyingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return GameEvent.EventType.CAST_SPELL.equals(event.getType());
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            return !game.getTurn().getStepType().equals(PhaseStep.DECLARE_BLOCKERS);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public MirrorMatchRuleModifyingEffect copy() {
-        return new MirrorMatchRuleModifyingEffect(this);
     }
 }
 
@@ -149,10 +109,10 @@ class MirrorMatchEffect extends OneShotEffect {
                                 group.addBlockerToGroup(addedToken.getId(), attackerId, game);
                                 isCreature = true;
                             }
-                            ExileTargetEffect exileEffect = new ExileTargetEffect("Exile the token at end of combat");
-                            exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
-                            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
                         }
+                        ExileTargetEffect exileEffect = new ExileTargetEffect("Exile those tokens at end of combat");
+                        exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));
+                        game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
                         if (isCreature) {
                             group.pickBlockerOrder(attacker.getControllerId(), game);
                         }

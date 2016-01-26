@@ -107,6 +107,7 @@ import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
+import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
@@ -745,9 +746,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private boolean performConnect() {
-        String userName = prefs.get("userName", "");
-        String server = prefs.get("serverAddress", "");
-        int port = Integer.parseInt(prefs.get("serverPort", ""));
+        String server = MagePreferences.getServerAddress();
+        int port = MagePreferences.getServerPort();
+        String userName = MagePreferences.getUserName(server);
+        String password = MagePreferences.getPassword(server);
         String proxyServer = prefs.get("proxyAddress", "");
         int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
         ProxyType proxyType = ProxyType.valueByText(prefs.get("proxyType", "None"));
@@ -757,6 +759,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             Connection connection = new Connection();
             connection.setUsername(userName);
+            connection.setPassword(password);
             connection.setHost(server);
             connection.setPort(port);
             connection.setProxyType(proxyType);

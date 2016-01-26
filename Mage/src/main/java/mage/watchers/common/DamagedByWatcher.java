@@ -45,15 +45,23 @@ import mage.watchers.Watcher;
  */
 public class DamagedByWatcher extends Watcher {
 
-    public Set<MageObjectReference> damagedCreatures = new HashSet<>();
+    public Set<MageObjectReference> damagedBySource = new HashSet<>();
+
+    private final boolean watchPlaneswalkers;
 
     public DamagedByWatcher() {
+        this(false);
+    }
+
+    public DamagedByWatcher(boolean watchPlaneswalkers) {
         super("DamagedByWatcher", WatcherScope.CARD);
+        this.watchPlaneswalkers = watchPlaneswalkers;
     }
 
     public DamagedByWatcher(final DamagedByWatcher watcher) {
         super(watcher);
-        this.damagedCreatures.addAll(watcher.damagedCreatures);
+        this.damagedBySource.addAll(watcher.damagedBySource);
+        this.watchPlaneswalkers = watcher.watchPlaneswalkers;
     }
 
     @Override
@@ -63,10 +71,12 @@ public class DamagedByWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE && sourceId.equals(event.getSourceId())) {
+        boolean eventHasAppropriateType = (event.getType() == EventType.DAMAGED_CREATURE) ||
+                                          (watchPlaneswalkers && event.getType() == EventType.DAMAGED_PLANESWALKER);
+        if (eventHasAppropriateType && sourceId.equals(event.getSourceId())) {
             MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
-            if (!damagedCreatures.contains(mor)) {
-                damagedCreatures.add(mor);
+            if (!damagedBySource.contains(mor)) {
+                damagedBySource.add(mor);
             }
         }
     }
@@ -74,7 +84,7 @@ public class DamagedByWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        damagedCreatures.clear();
+        damagedBySource.clear();
     }
 
     public boolean wasDamaged(UUID sourceId, Game game) {
@@ -86,6 +96,6 @@ public class DamagedByWatcher extends Watcher {
     }
 
     public boolean wasDamaged(Permanent permanent, Game game) {
-        return damagedCreatures.contains(new MageObjectReference(permanent, game));
+        return damagedBySource.contains(new MageObjectReference(permanent, game));
     }
 }

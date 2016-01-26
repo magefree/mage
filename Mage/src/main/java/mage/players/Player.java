@@ -678,7 +678,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param toZone
      * @param source
      * @param game
-     * @param tapped tha cards are tapped on the battlefield
+     * @param tapped the cards are tapped on the battlefield
      * @param faceDown the cards are face down in the to zone
      * @param byOwner the card is moved (or put onto battlefield) by the owner
      * of the card and if target zone is battlefield controls the permanent
@@ -824,4 +824,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean addTargets(Ability ability, Game game);
+
+    String getHistory();
 }

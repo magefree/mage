@@ -79,15 +79,15 @@ public class ShireiShizosCaretaker extends CardImpl {
 }
 
 class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
-        
+
     ShireiShizosCaretakerTriggeredAbility(UUID shireiId) {
         super(Zone.BATTLEFIELD, new ShireiShizosCaretakerEffect(shireiId), false);
     }
-    
+
     ShireiShizosCaretakerTriggeredAbility(final ShireiShizosCaretakerTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public ShireiShizosCaretakerTriggeredAbility copy() {
         return new ShireiShizosCaretakerTriggeredAbility(this);
@@ -97,19 +97,19 @@ class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Permanent LKIpermanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
         Card card = game.getCard(zEvent.getTargetId());
 
-        if (card != null && LKIpermanent != null &&
-                card.getOwnerId().equals(this.controllerId) && 
-                zEvent.getToZone() == Zone.GRAVEYARD &&
-                zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                card.getCardType().contains(CardType.CREATURE) &&
-                LKIpermanent.getPower().getValue() <= 1) {
+        if (card != null && LKIpermanent != null
+                && card.getOwnerId().equals(this.controllerId)
+                && zEvent.getToZone() == Zone.GRAVEYARD
+                && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && card.getCardType().contains(CardType.CREATURE)
+                && LKIpermanent.getPower().getValue() <= 1) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             }
@@ -117,7 +117,7 @@ class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever a creature with power 1 or less is put into your graveyard from the battlefield, you may return that card to the battlefield at the beginning of the next end step if Shirei, Shizo's Caretaker is still on the battlefield.";
@@ -125,25 +125,25 @@ class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class ShireiShizosCaretakerEffect extends OneShotEffect {
-    
+
     protected final UUID shireiId;
-    
+
     ShireiShizosCaretakerEffect(UUID shireiId) {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "you may return that card to the battlefield at the beginning of the next end step if {this} is still on the battlefield.";
         this.shireiId = shireiId;
     }
-    
+
     ShireiShizosCaretakerEffect(final ShireiShizosCaretakerEffect effect) {
         super(effect);
         this.shireiId = effect.shireiId;
     }
-    
+
     @Override
     public ShireiShizosCaretakerEffect copy() {
         return new ShireiShizosCaretakerEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
@@ -151,11 +151,8 @@ class ShireiShizosCaretakerEffect extends OneShotEffect {
             Effect effect = new ShireiShizosCaretakerReturnEffect(shireiId);
             effect.setText("return that card to the battlefield if {this} is still on the battlefield");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
             delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
-            game.addDelayedTriggeredAbility(delayedAbility);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;
@@ -163,23 +160,23 @@ class ShireiShizosCaretakerEffect extends OneShotEffect {
 }
 
 class ShireiShizosCaretakerReturnEffect extends ReturnToBattlefieldUnderYourControlTargetEffect {
-    
+
     protected final UUID shireiId;
-    
+
     ShireiShizosCaretakerReturnEffect(UUID shireiId) {
         this.shireiId = shireiId;
     }
-    
+
     ShireiShizosCaretakerReturnEffect(final ShireiShizosCaretakerReturnEffect effect) {
         super(effect);
         this.shireiId = effect.shireiId;
     }
-    
+
     @Override
     public ShireiShizosCaretakerReturnEffect copy() {
         return new ShireiShizosCaretakerReturnEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         if (game.getBattlefield().containsPermanent(shireiId)) {

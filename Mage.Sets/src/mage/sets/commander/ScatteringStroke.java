@@ -55,7 +55,6 @@ public class ScatteringStroke extends CardImpl {
         super(ownerId, 60, "Scattering Stroke", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "CMD";
 
-
         // Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X} to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addEffect(new ScatteringStrokeEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -70,7 +69,6 @@ public class ScatteringStroke extends CardImpl {
         return new ScatteringStroke(this);
     }
 }
-
 
 class ScatteringStrokeEffect extends OneShotEffect {
 
@@ -95,13 +93,10 @@ class ScatteringStrokeEffect extends OneShotEffect {
         if (controller != null && spell != null) {
             game.getStack().counter(spell.getId(), source.getSourceId(), game);
             if (ClashEffect.getInstance().apply(game, source)) {
-                Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(0,0,0,0,0,spell.getConvertedManaCost(),0));
-                AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility =
-                        new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, true, TargetController.YOU, AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(0, 0, 0, 0, 0, 0, 0, spell.getConvertedManaCost()));
+                AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
+                        = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, true, TargetController.YOU, AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
             }
             return true;
         }

@@ -119,7 +119,7 @@ class RiseOfTheHobgoblinsEffect extends OneShotEffect {
         if (you != null && you.chooseUse(Outcome.Neutral, "Do you want to to pay {X}?", source, game)) {
             int costX = you.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
             cost.add(new GenericManaCost(costX));
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                 Token token = new GoblinSoldierToken();
                 return token.putOntoBattlefield(costX, game, source.getSourceId(), source.getControllerId());
             }

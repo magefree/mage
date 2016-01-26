@@ -116,9 +116,9 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         UUID targetId = getTargetPointer().getFirst(game, source);
         if (targetId != null) {
-            return targetId.equals(objectId) &&
-                source.getControllerId().equals(affectedControllerId) &&
-                Zone.GRAVEYARD.equals(game.getState().getZone(objectId));
+            return targetId.equals(objectId)
+                    && source.getControllerId().equals(affectedControllerId)
+                    && Zone.GRAVEYARD.equals(game.getState().getZone(objectId));
         } else {
             // the target card has changed zone meanwhile, so the effect is no longer needed
             discard();
@@ -142,9 +142,7 @@ class HavengulLichPlayedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility ability = new HavengulLichDelayedTriggeredAbility(getTargetPointer().getFirst(game, source));
-        ability.setSourceId(source.getSourceId());
-        ability.setControllerId(source.getControllerId());
-        game.addDelayedTriggeredAbility(ability);
+        game.addDelayedTriggeredAbility(ability, source);
         return true;
     }
 
@@ -160,7 +158,7 @@ class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UUID cardId;
 
-    public HavengulLichDelayedTriggeredAbility (UUID cardId) {
+    public HavengulLichDelayedTriggeredAbility(UUID cardId) {
         super(new HavengulLichEffect(cardId), Duration.EndOfTurn);
         this.cardId = cardId;
     }
@@ -216,7 +214,7 @@ class HavengulLichEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Card card = game.getCard(cardId);
         if (permanent != null && card != null) {
-            for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+            for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }

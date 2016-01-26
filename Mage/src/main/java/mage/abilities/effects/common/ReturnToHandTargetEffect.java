@@ -48,19 +48,26 @@ import mage.util.CardUtil;
 public class ReturnToHandTargetEffect extends OneShotEffect {
 
     boolean withName;
+    protected boolean multitargetHandling;
 
     public ReturnToHandTargetEffect() {
         this(true);
     }
 
     public ReturnToHandTargetEffect(boolean withName) {
+        this(withName, false);
+    }
+
+    public ReturnToHandTargetEffect(boolean withName, boolean multitargetHandling) {
         super(Outcome.ReturnToHand);
         this.withName = withName;
+        this.multitargetHandling = multitargetHandling;
     }
 
     public ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
         super(effect);
         this.withName = effect.withName;
+        this.multitargetHandling = effect.multitargetHandling;
     }
 
     @Override
@@ -75,10 +82,21 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
-            MageObject mageObject = game.getObject(targetId);
-            if (mageObject instanceof Card) {
-                cards.add((Card) mageObject);
+        if (multitargetHandling) {
+            for (Target target : source.getTargets()) {
+                for (UUID targetId : target.getTargets()) {
+                    MageObject mageObject = game.getObject(targetId);
+                    if (mageObject instanceof Card) {
+                        cards.add((Card) mageObject);
+                    }
+                }
+            }
+        } else {
+            for (UUID targetId : targetPointer.getTargets(game, source)) {
+                MageObject mageObject = game.getObject(targetId);
+                if (mageObject != null) {
+                    cards.add((Card) mageObject);
+                }
             }
         }
         return controller.moveCards(cards, Zone.HAND, source, game);

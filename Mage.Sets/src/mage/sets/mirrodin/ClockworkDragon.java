@@ -25,14 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
@@ -45,7 +40,10 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,7 +54,7 @@ import mage.game.permanent.Permanent;
  */
 public class ClockworkDragon extends CardImpl {
 
-    public ClockworkDragon (UUID ownerId) {
+    public ClockworkDragon(UUID ownerId) {
         super(ownerId, 155, "Clockwork Dragon", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Dragon");
@@ -68,7 +66,7 @@ public class ClockworkDragon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(3)));
     }
 
-    public ClockworkDragon (final ClockworkDragon card) {
+    public ClockworkDragon(final ClockworkDragon card) {
         super(card);
     }
 
@@ -79,6 +77,7 @@ public class ClockworkDragon extends CardImpl {
 }
 
 class ClockworkDragonEffect extends OneShotEffect {
+
     ClockworkDragonEffect() {
         super(Outcome.UnboostCreature);
         staticText = "remove a +1/+1 counter from {this} at end of combat";
@@ -93,9 +92,7 @@ class ClockworkDragonEffect extends OneShotEffect {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
             AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
-            ability.setSourceId(source.getSourceId());
-            ability.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(ability);
+            game.addDelayedTriggeredAbility(ability, source);
         }
         return false;
     }

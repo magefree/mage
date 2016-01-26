@@ -50,7 +50,7 @@ public class SeismicSpike extends CardImpl {
         // Destroy target land. Add {R}{R} to your mana pool.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
-        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0, 0)));
     }
 
     public SeismicSpike(final SeismicSpike card) {

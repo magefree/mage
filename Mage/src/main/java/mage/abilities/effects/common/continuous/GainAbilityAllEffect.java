@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -77,7 +78,6 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         this.ability = ability;
         this.filter = filter;
         this.excludeSource = excludeSource;
-        setText();
     }
 
     public GainAbilityAllEffect(final GainAbilityAllEffect effect) {
@@ -141,8 +141,14 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private void setText() {
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
         StringBuilder sb = new StringBuilder();
+
         boolean quotes = (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
         if (excludeSource) {
             sb.append("Other ");
@@ -171,6 +177,6 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         if (duration.toString().length() > 0) {
             sb.append(" ").append(duration.toString());
         }
-        staticText = sb.toString();
+        return sb.toString();
     }
 }

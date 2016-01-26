@@ -54,7 +54,7 @@ public class FyndhornElder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Add {G}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 2, 0, 0, 0, 0, 0), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 2, 0, 0, 0, 0, 0, 0), new TapSourceCost()));
     }
 
     public FyndhornElder(final FyndhornElder card) {

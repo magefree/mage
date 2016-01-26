@@ -57,7 +57,7 @@ public class CoalStoker extends CardImpl {
 
         // When Coal Stoker enters the battlefield, if you cast it from your hand, add {R}{R}{R} to your mana pool.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new BasicManaEffect(new Mana(3, 0, 0, 0, 0, 0, 0)), new CastFromHandCondition(),
+                new ConditionalOneShotEffect(new BasicManaEffect(new Mana(3, 0, 0, 0, 0, 0, 0, 0)), new CastFromHandCondition(),
                 " if you cast it from your hand, add {R}{R}{R} to your mana pool."));
         this.addAbility(ability, new CastFromHandWatcher());
     }

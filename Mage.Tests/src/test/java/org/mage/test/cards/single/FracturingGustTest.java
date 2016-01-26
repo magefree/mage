@@ -36,12 +36,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class FracturingGustTest extends CardTestPlayerBase {
 
     @Test
-    public void testCard() {
+    public void testWithStaticAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        // Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
         addCard(Zone.HAND, playerA, "Fracturing Gust", 1);
 
         // Players can't gain life.
@@ -49,12 +49,10 @@ public class FracturingGustTest extends CardTestPlayerBase {
         // At the beginning of your end step, target opponent chosen at random gains control of Witch Hunt.
         addCard(Zone.BATTLEFIELD, playerB, "Witch Hunt", 1);
 
-        // Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fracturing Gust");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
 
         assertGraveyardCount(playerA, "Fracturing Gust", 1);
         assertGraveyardCount(playerB, "Witch Hunt", 1);
@@ -65,4 +63,26 @@ public class FracturingGustTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testWithTriggerdAbility() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        // Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
+        addCard(Zone.HAND, playerA, "Fracturing Gust", 1);
+
+        // When Guardian Automaton dies, you gain 3 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Guardian Automaton", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fracturing Gust");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Fracturing Gust", 1);
+        assertGraveyardCount(playerA, "Guardian Automaton", 1);
+
+        // + 2 from destroyed Guardian Automaton
+        assertLife(playerA, 25);
+        assertLife(playerB, 20);
+
+    }
 }

@@ -79,7 +79,7 @@ public class BrutalExpulsion extends CardImpl {
         effect.setText("If that permanent would be put into a graveyard this turn, exile it instead");
         mode.getEffects().add(effect);
         this.getSpellAbility().addMode(mode);
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher(true));
     }
 
     public BrutalExpulsion(final BrutalExpulsion card) {

@@ -28,7 +28,6 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -49,7 +48,6 @@ public class Gloomlance extends CardImpl {
     public Gloomlance(UUID ownerId) {
         super(ownerId, 67, "Gloomlance", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "SHM";
-
 
         // Destroy target creature. If that creature was green or white, its controller discards a card.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -85,7 +83,7 @@ class GloomlanceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             Player targetController = game.getPlayer(targetCreature.getControllerId());
             targetCreature.destroy(source.getSourceId(), game, false);

@@ -521,6 +521,11 @@ public class TestPlayer implements Player {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         if (!modesSet.isEmpty() && modes.getMaxModes() > modes.getSelectedModes().size()) {
+            // set mode to null to select less than maximum modes if multiple modes are allowed
+            if (modesSet.get(0) == null) {
+                modesSet.remove(0);
+                return null;
+            }
             int selectedMode = Integer.parseInt(modesSet.get(0));
             int i = 1;
             for (Mode mode : modes.getAvailableModes(source, game)) {
@@ -2075,6 +2080,10 @@ public class TestPlayer implements Player {
 
     public boolean isAIPlayer() {
         return AIPlayer;
+    }
+
+    public String getHistory() {
+        return computerPlayer.getHistory();
     }
 
 }

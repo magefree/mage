@@ -117,10 +117,7 @@ class TatsumaTheDragonsFangEffect extends OneShotEffect {
                 Effect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
                 returnEffect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())));
                 DelayedTriggeredAbility delayedAbility = new TatsumaTheDragonsFangTriggeredAbility(fixedTarget, returnEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
             }
         }
 

@@ -66,15 +66,15 @@ public class BoseijuWhoSheltersAll extends CardImpl {
 
         // Boseiju, Who Shelters All enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // {tap}, Pay 2 life: Add {C} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
-        Mana mana = new Mana(0, 0, 0, 0, 0, 1, 0);
+        Mana mana = new Mana(0, 0, 0, 0, 0, 0, 0, 1);
         mana.setFlag(true); // used to indicate this mana ability
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
         ability.addCost(new PayLifeCost(2));
         ability.getEffects().get(0).setText("Add {C} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities");
         this.addAbility(ability);
-                
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoseijuWhoSheltersAllCantCounterEffect()), new BoseijuWhoSheltersAllWatcher());
     }
 
@@ -126,7 +126,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
 class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
-    
+
     public BoseijuWhoSheltersAllCantCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = null;
@@ -154,12 +154,12 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
         }
         return null;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get("ManaPaidFromBoseijuWhoSheltersAllWatcher");

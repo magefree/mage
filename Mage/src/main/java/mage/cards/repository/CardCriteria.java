@@ -63,6 +63,7 @@ public class CardCriteria {
     private String sortBy;
     private Long start;
     private Long count;
+    private int minCardNumber;
     private int maxCardNumber;
 
     public CardCriteria() {
@@ -81,6 +82,7 @@ public class CardCriteria {
         this.white = true;
         this.colorless = true;
 
+        this.minCardNumber = Integer.MIN_VALUE;
         this.maxCardNumber = Integer.MAX_VALUE;
     }
 
@@ -176,6 +178,11 @@ public class CardCriteria {
 
     public CardCriteria convertedManaCost(Integer convertedManaCost) {
         this.convertedManaCost = convertedManaCost;
+        return this;
+    }
+
+    public CardCriteria minCardNumber(int minCardNumber) {
+        this.minCardNumber = minCardNumber;
         return this;
     }
 
@@ -290,6 +297,11 @@ public class CardCriteria {
                 where.or(colorClauses);
                 clausesCount++;
             }
+        }
+
+        if (minCardNumber != Integer.MIN_VALUE) {
+            where.ge("cardNumber", minCardNumber);
+            clausesCount++;
         }
 
         if (maxCardNumber != Integer.MAX_VALUE) {

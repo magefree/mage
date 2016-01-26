@@ -28,22 +28,23 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
-
 
 /**
  * @author noxx
@@ -96,18 +97,18 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object instanceof PermanentCard) {
-                if (game.getOpponents(source.getControllerId()).contains(((PermanentCard)object).getControllerId())) {
+                if (game.getOpponents(source.getControllerId()).contains(((PermanentCard) object).getControllerId())) {
                     return true;
                 }
             }
             if (object instanceof Spell) {
-                if (game.getOpponents(source.getControllerId()).contains(((Spell)object).getControllerId())) {
+                if (game.getOpponents(source.getControllerId()).contains(((Spell) object).getControllerId())) {
                     return true;
                 }
             }

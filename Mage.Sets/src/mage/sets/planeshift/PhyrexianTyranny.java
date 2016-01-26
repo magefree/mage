@@ -127,7 +127,7 @@ class PhyrexianTyrannyEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             Cost cost = new GenericManaCost(2);
-            if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
+            if (!cost.pay(source, game, player.getId(), player.getId(), false, null)) {
                 player.damage(2, source.getSourceId(), game, false, true);
             }
             return true;

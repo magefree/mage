@@ -152,7 +152,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
 
     /**
      * If a Harmonic Sliver enters the battlefield the controller has to destroy
-     * one artifacts or enchantments
+     * one artifact or enchantment
      */
     @Test
     public void testHarmonicSliverNative1() {

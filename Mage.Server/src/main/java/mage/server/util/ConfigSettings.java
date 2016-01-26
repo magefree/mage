@@ -94,7 +94,7 @@ public class ConfigSettings {
     public int getBacklogSize() {
         return config.getServer().getBacklogSize().intValue();
     }
-        
+
     public int getMaxGameThreads() {
         return config.getServer().getMaxGameThreads().intValue();
     }
@@ -111,17 +111,61 @@ public class ConfigSettings {
         return config.getServer().getMaxUserNameLength().intValue();
     }
 
-    public String getUserNamePattern() {
-        return config.getServer().getUserNamePattern();
+    public String getInvalidUserNamePattern() {
+        return config.getServer().getInvalidUserNamePattern();
     }
-    
+
+    public int getMinPasswordLength() {
+        return config.getServer().getMinPasswordLength().intValue();
+    }
+
+    public int getMaxPasswordLength() {
+        return config.getServer().getMaxPasswordLength().intValue();
+    }
+
     public String getMaxAiOpponents() {
         return config.getServer().getMaxAiOpponents();
     }
 
     public Boolean isSaveGameActivated() {
-            return config.getServer().isSaveGameActivated();
-}
+        return config.getServer().isSaveGameActivated();
+    }
+
+    public Boolean isAuthenticationActivated() {
+        return config.getServer().isAuthenticationActivated();
+    }
+
+    public String getGoogleAccount() {
+        return config.getServer().getGoogleAccount();
+    }
+
+    public String getMailgunApiKey() {
+        return config.getServer().getMailgunApiKey();
+    }
+
+    public String getMailgunDomain() {
+        return config.getServer().getMailgunDomain();
+    }
+
+    public String getMailSmtpHost() {
+        return config.getServer().getMailSmtpHost();
+    }
+
+    public String getMailSmtpPort() {
+        return config.getServer().getMailSmtpPort();
+    }
+
+    public String getMailUser() {
+        return config.getServer().getMailUser();
+    }
+
+    public String getMailPassword() {
+        return config.getServer().getMailPassword();
+    }
+
+    public String getMailFromAddress() {
+        return config.getServer().getMailFromAddress();
+    }
 
     public List<Plugin> getPlayerTypes() {
         return config.getPlayerTypes().getPlayerType();

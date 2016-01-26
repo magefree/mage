@@ -28,9 +28,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -43,6 +40,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -66,7 +65,7 @@ public class GroveOfTheGuardian extends CardImpl {
         this.expansionSetCode = "RTR";
 
         // {T}: Add {C} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 0, 1, 0), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 0, 0, 0, 1), new TapSourceCost()));
 
         // {3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Put an 8/8 green and white Elemental creature token with vigilance onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ElementalToken(), 1), new ManaCostsImpl("{3}{G}{W}"));
@@ -86,6 +85,7 @@ public class GroveOfTheGuardian extends CardImpl {
     }
 
     private class ElementalToken extends Token {
+
         ElementalToken() {
             super("Elemental", "an 8/8 green and white Elemental creature token with vigilance");
 

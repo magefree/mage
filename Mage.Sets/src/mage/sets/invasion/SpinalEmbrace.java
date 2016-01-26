@@ -30,9 +30,8 @@ package mage.sets.invasion;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -46,11 +45,9 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -63,6 +60,7 @@ import mage.target.targetpointer.FixedTarget;
 public class SpinalEmbrace extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
@@ -71,11 +69,9 @@ public class SpinalEmbrace extends CardImpl {
         super(ownerId, 276, "Spinal Embrace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{B}");
         this.expansionSetCode = "INV";
 
-
         // Cast Spinal Embrace only during combat.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpinalEmbraceEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT));
+
         // Untap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
@@ -93,40 +89,6 @@ public class SpinalEmbrace extends CardImpl {
     @Override
     public SpinalEmbrace copy() {
         return new SpinalEmbrace(this);
-    }
-}
-
-class SpinalEmbraceEffect extends ContinuousRuleModifyingEffectImpl {
-    SpinalEmbraceEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during combat";
-    }
-
-    SpinalEmbraceEffect(final SpinalEmbraceEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            return !TurnPhase.COMBAT.equals(game.getTurn().getPhaseType());
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SpinalEmbraceEffect copy() {
-        return new SpinalEmbraceEffect(this);
     }
 }
 
@@ -151,10 +113,7 @@ class SpinalEmbraceAddDelayedEffect extends OneShotEffect {
         SpinalEmbraceSacrificeEffect sacrificeEffect = new SpinalEmbraceSacrificeEffect();
         sacrificeEffect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
 }

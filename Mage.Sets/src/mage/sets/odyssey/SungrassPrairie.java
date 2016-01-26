@@ -49,7 +49,7 @@ public class SungrassPrairie extends CardImpl {
         this.expansionSetCode = "ODY";
 
         // {1}, {tap}: Add {G}{W} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

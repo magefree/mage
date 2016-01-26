@@ -60,7 +60,7 @@ public class WavesOfAggression extends CardImpl {
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         this.getSpellAbility().addEffect(new WavesOfAggressionUntapEffect());
-        this.getSpellAbility().addEffect(new WavesOfAggressionAddPhasesEffect());        
+        this.getSpellAbility().addEffect(new WavesOfAggressionAddPhasesEffect());
         // Retrace
         this.addAbility(new RetraceAbility(this));
     }
@@ -132,10 +132,8 @@ class WavesOfAggressionAddPhasesEffect extends OneShotEffect {
             TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
             game.getState().getTurnMods().add(combat);
             WavesOfAggressionDelayedAddMainPhaseAbility delayedTriggeredAbility = new WavesOfAggressionDelayedAddMainPhaseAbility();
-            delayedTriggeredAbility.setSourceId(source.getSourceId());
-            delayedTriggeredAbility.setControllerId(source.getControllerId());
             delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
-            game.addDelayedTriggeredAbility(delayedTriggeredAbility);
+            game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
             return true;
         }
         return false;

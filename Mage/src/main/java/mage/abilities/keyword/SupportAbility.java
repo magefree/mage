@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SupportAbility extends EntersBattlefieldTriggeredAbility {
 
     public SupportAbility(Card card, int amount) {
-        super(new SupportEffect(card, amount), false);
+        super(new SupportEffect(card, amount, true));
         if (!card.getCardType().contains(CardType.INSTANT) && !card.getCardType().contains(CardType.SORCERY)) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
             if (card.getCardType().contains(CardType.CREATURE)) {

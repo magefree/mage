@@ -12,6 +12,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -70,7 +71,7 @@ class SpellCastManaCondition extends ManaCondition implements Condition {
     }
 
     @Override
-    public boolean apply(Game game, Ability source, UUID originalId) {
+    public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
         return apply(game, source);
     }
 

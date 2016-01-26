@@ -41,12 +41,19 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author fireshoes
  */
 public class RecklessBushwhacker extends CardImpl {
+
+    private final static FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("other creatures you control");
+
+    static {
+        FILTER.add(new AnotherPredicate());
+    }
 
     public RecklessBushwhacker(UUID ownerId) {
         super(ownerId, 116, "Reckless Bushwhacker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -57,18 +64,18 @@ public class RecklessBushwhacker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        // Surge {1}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
+        addAbility(new SurgeAbility(this, "{1}{R}"));
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
         // When Reckless Bushwhacker enters the battlefield, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, true), false);
-        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), true));
+        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, FILTER, true));
         this.addAbility(new ConditionalTriggeredAbility(ability, SurgedCondition.getInstance(),
                 "When {this} enters the battlefield, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn."));
 
-        // Has to be placed last here, because added spellAbility objects (e.g. effects) have to be copied from this
-        // Surge {1}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
-        addAbility(new SurgeAbility(this, "{1}{R}"));
     }
 
     public RecklessBushwhacker(final RecklessBushwhacker card) {

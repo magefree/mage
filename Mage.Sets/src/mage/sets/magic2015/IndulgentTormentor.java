@@ -102,14 +102,14 @@ class IndulgentTormentorEffect extends OneShotEffect {
             Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
             if (cost.canPay(source, source.getSourceId(), opponent.getId(), game)
                     && opponent.chooseUse(outcome, "Sacrifice a creature to prevent the card draw?", source, game)) {
-                if (cost.pay(source, game, source.getSourceId(), opponent.getId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), opponent.getId(), false, null)) {
                     return true;
                 }
             }
             cost = new PayLifeCost(3);
             if (cost.canPay(source, source.getSourceId(), opponent.getId(), game)
                     && opponent.chooseUse(outcome, "Pay 3 life to prevent the card draw?", source, game)) {
-                if (cost.pay(source, game, source.getSourceId(), opponent.getId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), opponent.getId(), false, null)) {
                     return true;
                 }
             }

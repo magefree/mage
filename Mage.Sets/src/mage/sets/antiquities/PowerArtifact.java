@@ -78,8 +78,8 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            int reduce = mana.getColorless();
-            if (reduce > 0 && mana.count() == mana.getColorless()) {
+            int reduce = mana.getGeneric();
+            if (reduce > 0 && mana.count() == mana.getGeneric()) {
                 reduce--;
             }
             if (reduce > 2) {

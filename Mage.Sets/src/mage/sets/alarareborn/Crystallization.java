@@ -54,15 +54,11 @@ import mage.target.targetpointer.FixedTarget;
  * @author jeffwadsworth
  */
 public class Crystallization extends CardImpl {
-    
+
     public Crystallization(UUID ownerId) {
         super(ownerId, 144, "Crystallization", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G/U}{W}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
-        
-
-
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -77,11 +73,11 @@ public class Crystallization extends CardImpl {
         // When enchanted creature becomes the target of a spell or ability, exile that creature.
         this.addAbility(new CrystallizationTriggeredAbility());
     }
-    
+
     public Crystallization(final Crystallization card) {
         super(card);
     }
-    
+
     @Override
     public Crystallization copy() {
         return new Crystallization(this);
@@ -89,15 +85,15 @@ public class Crystallization extends CardImpl {
 }
 
 class CrystallizationTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     public CrystallizationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect());
     }
-    
+
     public CrystallizationTriggeredAbility(final CrystallizationTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public CrystallizationTriggeredAbility copy() {
         return new CrystallizationTriggeredAbility(this);
@@ -107,7 +103,7 @@ class CrystallizationTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.TARGETED;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(sourceId);
@@ -120,7 +116,7 @@ class CrystallizationTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "When enchanted creature becomes the target of a spell or ability, exile that creature.";

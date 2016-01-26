@@ -44,7 +44,7 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.PermanentToken;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
@@ -167,11 +167,10 @@ class KnowledgePoolEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && spell != null && sourceObject != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
-            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
+            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
             if (controller.moveCardsToExile(spell, source, game, true, exileZoneId, sourceObject.getIdName())) {
                 Player player = game.getPlayer(spell.getControllerId());
                 if (player != null && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with " + sourceObject.getLogName() + " without paying that card's mana cost?", source, game)) {

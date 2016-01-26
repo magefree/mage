@@ -50,8 +50,8 @@ public class CabalRitual extends CardImpl {
         // Add {B}{B}{B} to your mana pool.
         // Threshold — Add {B}{B}{B}{B}{B} to your mana pool instead if seven or more cards are in your graveyard.
         this.getSpellAbility().addEffect(new ConditionalManaEffect(
-                new BasicManaEffect(new Mana(0, 0, 0, 0, 5, 0, 0)),
-                new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0)),
+                new BasicManaEffect(new Mana(0, 0, 0, 0, 5, 0, 0, 0)),
+                new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0, 0)),
                 new CardsInControllerGraveCondition(7),
                 "Add {B}{B}{B} to your mana pool.<br/><br/><i>Threshold</i> - Add {B}{B}{B}{B}{B} to your mana pool instead if seven or more cards are in your graveyard"));
     }

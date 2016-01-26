@@ -28,11 +28,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -44,6 +39,11 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -63,7 +63,7 @@ public class GruesomeEncore extends CardImpl {
         super(ownerId, 44, "Gruesome Encore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "MBS";
 
-        // Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. 
+        // Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste.
         this.getSpellAbility().addEffect(new GruesomeEncoreEffect());
         // Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
         this.getSpellAbility().addEffect(new GruesomeEncoreReplacementEffect());
@@ -109,10 +109,7 @@ class GruesomeEncoreEffect extends OneShotEffect {
             ExileTargetEffect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTarget(card.getId()));
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
 
             return true;
         }

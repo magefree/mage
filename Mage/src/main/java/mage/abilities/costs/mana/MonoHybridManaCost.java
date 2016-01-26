@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
@@ -43,9 +44,9 @@ public class MonoHybridManaCost extends ManaCostImpl {
     public MonoHybridManaCost(ColoredManaSymbol mana) {
         this.mana = mana;
         this.cost = new Mana(mana);
-        this.cost.add(Mana.ColorlessMana(2));
+        this.cost.add(Mana.GenericMana(2));
         addColoredOption(mana);
-        options.add(Mana.ColorlessMana(2));
+        options.add(Mana.GenericMana(2));
     }
 
     public MonoHybridManaCost(MonoHybridManaCost manaCost) {
@@ -68,9 +69,9 @@ public class MonoHybridManaCost extends ManaCostImpl {
     }
 
     @Override
-    public void assignPayment(Game game, Ability ability, ManaPool pool) {
-        if (!assignColored(ability, game, pool, mana)) {
-            assignColorless(ability, game, pool, mana2);
+    public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
+        if (!assignColored(ability, game, pool, mana, costToPay)) {
+            assignGeneric(ability, game, pool, mana2, costToPay);
         }
     }
 
@@ -125,7 +126,7 @@ public class MonoHybridManaCost extends ManaCostImpl {
     public List<Mana> getManaOptions() {
         List<Mana> manaList = new ArrayList<>();
         manaList.add(new Mana(mana));
-        manaList.add(Mana.ColorlessMana(2));
+        manaList.add(Mana.GenericMana(2));
         return manaList;
     }
 }

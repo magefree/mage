@@ -113,7 +113,7 @@ class AugurOfBolasEffect extends OneShotEffect {
                 int number = topCards.count(new FilterInstantOrSorceryCard(), source.getSourceId(), source.getControllerId(), game);
                 if (number > 0) {
                     if (controller.chooseUse(outcome, "Reveal an instant or sorcery card from the looked at cards and put it into your hand?", source, game)) {
-                        Card card = null;
+                        Card card;
                         if (number == 1) {
                             card = topCards.getCards(new FilterInstantOrSorceryCard(), source.getSourceId(), source.getControllerId(), game).iterator().next();
                         } else {
@@ -122,7 +122,7 @@ class AugurOfBolasEffect extends OneShotEffect {
                             card = topCards.get(target.getFirstTarget(), game);
                         }
                         if (card != null) {
-                            controller.moveCards(card, null, Zone.HAND, source, game);
+                            controller.moveCards(card, Zone.HAND, source, game);
                             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
                             topCards.remove(card);
                         }

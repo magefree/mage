@@ -31,9 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -42,7 +40,6 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -94,14 +91,17 @@ class CragganwickCrematorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Player targetedPlayer = game.getPlayer(source.getFirstTarget());
-        if (you != null && targetedPlayer != null) {
-            Card discardedCard = targetedPlayer.discardOne(true, source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+
+        if (controller != null) {
+            Card discardedCard = controller.discardOne(true, source, game);
             if (discardedCard != null
                     && discardedCard.getCardType().contains(CardType.CREATURE)) {
-                int damage = discardedCard.getPower().getValue();
-                targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
+                Player targetedPlayer = game.getPlayer(source.getFirstTarget());
+                if (targetedPlayer != null) {
+                    int damage = discardedCard.getPower().getValue();
+                    targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
+                }
             }
             return true;
         }

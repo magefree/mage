@@ -60,7 +60,7 @@ public class WastelandStrangler extends CardImpl {
 
         // When Wasteland Strangler enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, target creature gets -3/-3 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ExileOpponentsCardFromExileToGraveyardCost(true)), true);
+                new DoIfCostPaid(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ExileOpponentsCardFromExileToGraveyardCost(true)), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

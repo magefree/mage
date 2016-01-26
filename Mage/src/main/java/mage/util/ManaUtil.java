@@ -152,7 +152,7 @@ public class ManaUtil {
 
         if (countColored.isEmpty()) { // seems there is no colorful mana we can pay for
             // try to pay {1}
-            if (unpaidMana.getColorless() > 0) {
+            if (unpaidMana.getGeneric() > 0) {
                 // use any (lets choose first)
                 return replace(useableAbilities, useableAbilities.values().iterator().next());
             }
@@ -375,7 +375,7 @@ public class ManaUtil {
 
         if (countColorfull == 0) { // seems there is no colorful mana we can use
             // try to pay {1}
-            if (mana.getColorless() > 0) {
+            if (mana.getGeneric() > 0) {
                 // use any (lets choose first)
                 return replace(useableAbilities, useableAbilities.values().iterator().next());
             }

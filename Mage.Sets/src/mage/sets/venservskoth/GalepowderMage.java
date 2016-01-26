@@ -33,8 +33,9 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -48,6 +49,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -56,11 +58,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class GalepowderMage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-    
+
     static {
         filter.add(new AnotherPredicate());
     }
-    
+
     public GalepowderMage(UUID ownerId) {
         super(ownerId, 12, "Galepowder Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "DDI";
@@ -74,7 +76,7 @@ public class GalepowderMage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Galepowder Mage attacks, exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new AttacksTriggeredAbility(new GalepowderMageEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));                
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
@@ -116,17 +118,16 @@ class GalepowderMageEffect extends OneShotEffect {
                     UUID exileId = UUID.randomUUID();
                     if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                         if (card != null) {
-                            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
-                            delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setControllerId(card.getOwnerId());
-                            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                            game.addDelayedTriggeredAbility(delayedAbility);
+                            Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                            effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
+                            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+                            game.addDelayedTriggeredAbility(delayedAbility, source);
                         }
                     }
                 }
-            }            
+            }
             return true;
-        }        
+        }
         return false;
     }
 }

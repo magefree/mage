@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -67,7 +67,7 @@ public class GhostCouncilOfOrzhova extends CardImpl {
         this.addAbility(ability);
 
         // {1}, Sacrifice a creature: Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
     }

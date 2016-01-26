@@ -82,6 +82,7 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 
 *.classpath
 *.iml
+hs_err*.log
 /submitted
 
 /Mage.Server/config/ai.please.cast.this.txt
@@ -92,3 +93,7 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 Mage.Client/serverlist.txt
 /bin/
 /target/
+
+client_secrets.json
+
+dependency-reduced-pom.xml

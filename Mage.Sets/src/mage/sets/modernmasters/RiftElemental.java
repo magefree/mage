@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -141,7 +142,7 @@ class RemoveCounterFromCardCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         paid = false;
         Player controller = game.getPlayer(controllerId);
         if (target.choose(Outcome.UnboostCreature, controllerId, sourceId, game)) {

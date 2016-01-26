@@ -100,11 +100,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
             } else if (matchList.size() < 50) {
-                if (table.isTournament()) {
-                    matchList.add(new MatchView(table));
-                } else {
-                    matchList.add(new MatchView(table));
-                }
+                matchList.add(new MatchView(table));
             } else {
                 // more since 50 matches finished since this match so remove it
                 if (table.isTournament()) {
@@ -118,13 +114,13 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
             try {
-                users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), user.getInfo(), user.getGameInfo(), user.getPingInfo()));
+                users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), user.getHistory(), user.getGameInfo(), user.getPingInfo()));
             } catch (Exception ex) {
                 logger.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
                 users.add(new UsersView(
                         (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
                         user.getName() != null ? user.getName() : "<no name>",
-                        user.getInfo() != null ? user.getInfo() : "<no info>",
+                        user.getHistory() != null ? user.getHistory() : "<no history>",
                         "[exception]",
                         user.getPingInfo() != null ? user.getPingInfo() : "<no ping>"));
             }

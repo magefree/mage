@@ -44,7 +44,7 @@ public class DarkRitual extends CardImpl {
         super(ownerId, 24, "Dark Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "HOP";
 
-        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0)));
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0, 0)));
     }
 
     public DarkRitual(final DarkRitual card) {

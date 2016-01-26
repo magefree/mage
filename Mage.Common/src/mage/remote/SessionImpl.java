@@ -122,195 +122,36 @@ public class SessionImpl implements Session {
         return sessionId;
     }
 
-    @Override
-    public synchronized boolean connect(Connection connection) {
-        if (isConnected()) {
-            disconnect(true);
-        }
-        this.connection = connection;
-        this.canceled = false;
-        return connect();
+    // RemotingTask encapsulates a task which is involved with some JBoss Remoting. This is
+    // intended to be used with handleRemotingTaskExceptions for sharing the common exception
+    // handling.
+    public interface RemotingTask {
+        public boolean run() throws Throwable;
     }
 
-    @Override
-    public boolean stopConnecting() {
-        canceled = true;
-        return true;
-    }
-
-    @Override
-    public boolean connect() {
-        sessionState = SessionState.CONNECTING;
+    // handleRemotingTaskExceptions runs the given task and handles exceptions appropriately. This
+    // way we can share the common exception handling.
+    private boolean handleRemotingTaskExceptions(RemotingTask remoting) {
         try {
-            System.setProperty("http.nonProxyHosts", "code.google.com");
-            System.setProperty("socksNonProxyHosts", "code.google.com");
-
-            // clear previous values
-            System.clearProperty("socksProxyHost");
-            System.clearProperty("socksProxyPort");
-            System.clearProperty("http.proxyHost");
-            System.clearProperty("http.proxyPort");
-
-            switch (connection.getProxyType()) {
-                case SOCKS:
-                    System.setProperty("socksProxyHost", connection.getProxyHost());
-                    System.setProperty("socksProxyPort", Integer.toString(connection.getProxyPort()));
-                    break;
-                case HTTP:
-                    System.setProperty("http.proxyHost", connection.getProxyHost());
-                    System.setProperty("http.proxyPort", Integer.toString(connection.getProxyPort()));
-                    Authenticator.setDefault(new MageAuthenticator(connection.getProxyUsername(), connection.getProxyPassword()));
-                    break;
-            }
-            InvokerLocator clientLocator = new InvokerLocator(connection.getURI());
-
-            Map<String, String> metadata = new HashMap<>();
-            /*
-             5.8.3.1.1. Write timeouts
-             The socket timeout facility offered by the JDK applies only to read operations on the socket. As of release 2.5.2,
-             the socket and bisocket (and also sslsocket and sslbisocket) transports offer a write timeout facility. When a client
-             or server is configured, in any of the usual ways, with the parameter org.jboss.remoting.transport.socket.SocketWrapper.WRITE_TIMEOUT
-             (actual value "writeTimeout") set to a positive value (in milliseconds), all write operations will time out if they do
-             not complete within the configured period. When a write operation times out, the socket upon which the write was invoked
-             will be closed, which is likely to result in a java.net.SocketException.
-             Note. A SocketException is considered to be a "retriable" exception, so, if the parameter "numberOfCallRetries" is set
-             to a value greater than 1, an invocation interrupted by a write timeout can be retried.
-             Note. The write timeout facility applies to writing of both invocations and responses. It applies to push callbacks as well.
-             */
-            metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
-            metadata.put("generalizeSocketException", "true");
-            server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
-
-            // http://docs.jboss.org/jbossremoting/docs/guide/2.5/html_single/#d0e1057
-            Map<String, String> clientMetadata = new HashMap<>();
-
-            clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
-            /*  generalizeSocketException
-             *  If set to false, a failed invocation will be retried in the case of
-             *  SocketExceptions. If set to true, a failed invocation will be retried in the case of
-             *  <classname>SocketException</classname>s and also any <classname>IOException</classname>
-             *  whose message matches the regular expression
-             *  <code>^.*(?:connection.*reset|connection.*closed|broken.*pipe).*$</code>.
-             *  See also the "numberOfCallRetries" parameter, above. The default value is false.*/
-            clientMetadata.put("generalizeSocketException", "true");
-
-            /* A remoting server also has the capability to detect when a client is no longer available.
-             * This is done by estabilishing a lease with the remoting clients that connect to a server.
-             * On the client side, an org.jboss.remoting.LeasePinger periodically sends PING messages to
-             * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners
-             * if the PING doesn't arrive withing the specified timeout period. */
-            clientMetadata.put(Client.ENABLE_LEASE, "true");
-            /*
-             When the socket client invoker makes its first invocation, it will check to see if there is an available
-             socket connection in its pool. Since is the first invocation, there will not be and will create a new socket
-             connection and use it for making the invocation. Then when finished making invocation, will return the still
-             active socket connection to the pool. As more client invocations are made, is possible for the number of
-             socket connections to reach the maximum allowed (which is controlled by 'clientMaxPoolSize' property). At this
-             point, when the next client invocation is made, it will wait up to some configured number of milliseconds, at
-             which point it will throw an org.jboss.remoting.CannotConnectException. The number of milliseconds is given by
-             the parameter MicroSocketClientInvoker.CONNECTION_WAIT (actual value "connectionWait"), with a default of
-             30000 milliseconds. Note that if more than one call retry is configured (see next paragraph),
-             the CannotConnectException will be swallowed.
-             Once the socket client invoker get an available socket connection from the pool, are not out of the woods yet.
-             For example, a network problem could cause a java.net.SocketException. There is also a possibility that the socket
-             connection, while still appearing to be valid, has "gone stale" while sitting in the pool. For example, a ServerThread
-             on the other side of the connection could time out and close its socket. If the attempt to complete an invocation
-             fails, then MicroSocketClientInvoker will make a number of attempts, according to the parameter "numberOfCallRetries",
-             with a default value of 3. Once the configured number of retries has been exhausted,
-             an org.jboss.remoting.InvocationFailureException will be thrown.
-             */
-            clientMetadata.put("numberOfCallRetries", "1");
-
-            /**
-             * I'll explain the meaning of "secondaryBindPort" and
-             * "secondaryConnectPort", and maybe that will help. The Remoting
-             * bisocket transport creates two ServerSockets on the server. The
-             * "primary" ServerSocket is used to create connections used for
-             * ordinary invocations, e.g., a request to create a JMS consumer,
-             * and the "secondary" ServerSocket is used to create "control"
-             * connections for internal Remoting messages. The port for the
-             * primary ServerSocket is configured by the "serverBindPort"
-             * parameter, and the port for the secondary ServerSocket is, by
-             * default, chosen randomly. The "secondaryBindPort" parameter can
-             * be used to assign a specific port to the secondary ServerSocket.
-             * Now, if there is a translating firewall between the client and
-             * server, the client should be given the value of the port that is
-             * translated to the actual binding port of the secondary
-             * ServerSocket. For example, your configuration will tell the
-             * secondary ServerSocket to bind to port 14000, and it will tell
-             * the client to connect to port 14001. It assumes that there is a
-             * firewall which will translate 14001 to 14000. Apparently, that's
-             * not happening.
-             */
-            // secondaryBindPort - the port to which the secondary server socket is to be bound. By default, an arbitrary port is selected.
-            // secondaryConnectPort - the port clients are to use to connect to the secondary server socket.
-            // By default, the value of secondaryBindPort is used. secondaryConnectPort is useful if the server is behind a translating firewall.
-            // Indicated the max number of threads used within oneway thread pool.
-            clientMetadata.put(Client.MAX_NUM_ONEWAY_THREADS, "10");
-            clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
-            callbackClient = new Client(clientLocator, "callback", clientMetadata);
-
-            Map<String, String> listenerMetadata = new HashMap<>();
-            if (debugMode) {
-                // prevent client from disconnecting while debugging
-                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "1000000");
-                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "900000");
-            } else {
-                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "15000");
-                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "13000");
-            }
-            callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
-
-            Map<String, String> callbackMetadata = new HashMap<>();
-            callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
-            if (callbackHandler == null) {
-                callbackHandler = new CallbackHandler();
-            }
-            callbackClient.addListener(callbackHandler, callbackMetadata);
-
-            Set callbackConnectors = callbackClient.getCallbackConnectors(callbackHandler);
-            if (callbackConnectors.size() != 1) {
-                logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ")");
-            }
-
-            logger.info("Trying to connect as " + (this.getUserName() == null ? "" : this.getUserName()) + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
-            callbackClient.invoke(null);
-
-            this.sessionId = callbackClient.getSessionId();
-            boolean registerResult;
-            if (connection.getPassword() == null) {
-                // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
-                if (registerResult) {
-                    server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
-                }
-            } else {
-                registerResult = server.registerAdmin(connection.getPassword(), sessionId, client.getVersion());
-            }
-            if (registerResult) {
-                sessionState = SessionState.CONNECTED;
-                serverState = server.getServerState();
-                if (!connection.getUsername().equals("Admin")) {
-                    updateDatabase(connection.isForceDBComparison(), serverState);
-                }
-                logger.info("Connected as " + (this.getUserName() == null ? "" : this.getUserName()) + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-                client.connected(this.getUserName() == null ? "" : this.getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
-                return true;
-            }
-            disconnect(false);
-            // client.showMessage("Unable to connect to server.");
+            return remoting.run();
         } catch (MalformedURLException ex) {
             logger.fatal("", ex);
             client.showMessage("Unable to connect to server. " + ex.getMessage());
         } catch (UndeclaredThrowableException ex) {
             String addMessage = "";
-            if (ex.getCause() instanceof InvocationFailureException) {
-                InvocationFailureException exep = (InvocationFailureException) ex.getCause();
+            Throwable cause = ex.getCause();
+            if (cause instanceof InvocationFailureException) {
+                InvocationFailureException exep = (InvocationFailureException) cause;
                 if (exep.getCause() instanceof IOException) {
                     if (exep.getCause().getMessage().startsWith("Field hash null is not available on current")) {
                         addMessage = "Probabaly the server version is not compatible to the client. ";
                     }
                 }
+            } else if (cause instanceof NoSuchMethodException) {
+                // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
+                // method, so it's likely to be because of a version incompatibility.
+                addMessage = "The following method is not available in the server, probably the " +
+                        "server version is not compatible to the client: " + cause.getMessage();
             }
             if (addMessage.isEmpty()) {
                 logger.fatal("", ex);
@@ -344,6 +185,247 @@ public class SessionImpl implements Session {
                 client.showMessage(sb.toString());
             }
         }
+        return false;
+    }
+
+    @Override
+    public synchronized boolean register(final Connection connection) {
+        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+            @Override
+            public boolean run() throws Throwable {
+                logger.info("Trying to register as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                boolean registerResult = server.registerUser(sessionId, connection.getUsername(),
+                        connection.getPassword(), connection.getEmail());
+                if (registerResult) {
+                    logger.info("Registered as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                }
+                return registerResult;
+            }
+        });
+    }
+
+    @Override
+    public synchronized boolean emailAuthToken(final Connection connection) {
+        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+            @Override
+            public boolean run() throws Throwable {
+                logger.info("Trying to ask for an auth token to " + getEmail() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                boolean result = server.emailAuthToken(sessionId, connection.getEmail());
+                if (result) {
+                    logger.info("An auth token is emailed to " + getEmail() + " from MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public synchronized boolean resetPassword(final Connection connection) {
+        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+            @Override
+            public boolean run() throws Throwable {
+                logger.info("Trying reset the password in XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                boolean result = server.resetPassword(sessionId, connection.getEmail(), connection.getAuthToken(), connection.getPassword());
+                if (result) {
+                    logger.info("Password is successfully reset in MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public synchronized boolean connect(final Connection connection) {
+        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+            @Override
+            public boolean run() throws Throwable {
+                logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                boolean registerResult;
+                if (connection.getAdminPassword() == null) {
+                    // for backward compatibility. don't remove twice call - first one does nothing but for version checking
+                    registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
+                    if (registerResult) {
+                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
+                    }
+                } else {
+                    registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+                }
+                if (registerResult) {
+                    serverState = server.getServerState();
+                    if (!connection.getUsername().equals("Admin")) {
+                        updateDatabase(connection.isForceDBComparison(), serverState);
+                    }
+                    logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                    client.connected(getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
+                    return true;
+                }
+                disconnect(false);
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean stopConnecting() {
+        canceled = true;
+        return true;
+    }
+
+    private boolean establishJBossRemotingConnection(final Connection connection) {
+        if (isConnected()) {
+            disconnect(true);
+        }
+        this.connection = connection;
+        this.canceled = false;
+        sessionState = SessionState.CONNECTING;
+        boolean result = handleRemotingTaskExceptions(new RemotingTask() {
+            @Override
+            public boolean run() throws Throwable {
+                logger.info("Trying to connect to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+
+                System.setProperty("http.nonProxyHosts", "code.google.com");
+                System.setProperty("socksNonProxyHosts", "code.google.com");
+
+                // clear previous values
+                System.clearProperty("socksProxyHost");
+                System.clearProperty("socksProxyPort");
+                System.clearProperty("http.proxyHost");
+                System.clearProperty("http.proxyPort");
+
+                switch (connection.getProxyType()) {
+                    case SOCKS:
+                        System.setProperty("socksProxyHost", connection.getProxyHost());
+                        System.setProperty("socksProxyPort", Integer.toString(connection.getProxyPort()));
+                        break;
+                    case HTTP:
+                        System.setProperty("http.proxyHost", connection.getProxyHost());
+                        System.setProperty("http.proxyPort", Integer.toString(connection.getProxyPort()));
+                        Authenticator.setDefault(new MageAuthenticator(connection.getProxyUsername(), connection.getProxyPassword()));
+                        break;
+                }
+                InvokerLocator clientLocator = new InvokerLocator(connection.getURI());
+
+                Map<String, String> metadata = new HashMap<>();
+                /*
+                 5.8.3.1.1. Write timeouts
+                 The socket timeout facility offered by the JDK applies only to read operations on the socket. As of release 2.5.2,
+                 the socket and bisocket (and also sslsocket and sslbisocket) transports offer a write timeout facility. When a client
+                 or server is configured, in any of the usual ways, with the parameter org.jboss.remoting.transport.socket.SocketWrapper.WRITE_TIMEOUT
+                 (actual value "writeTimeout") set to a positive value (in milliseconds), all write operations will time out if they do
+                 not complete within the configured period. When a write operation times out, the socket upon which the write was invoked
+                 will be closed, which is likely to result in a java.net.SocketException.
+                 Note. A SocketException is considered to be a "retriable" exception, so, if the parameter "numberOfCallRetries" is set
+                 to a value greater than 1, an invocation interrupted by a write timeout can be retried.
+                 Note. The write timeout facility applies to writing of both invocations and responses. It applies to push callbacks as well.
+                 */
+                metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+                metadata.put("generalizeSocketException", "true");
+                server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
+
+                // http://docs.jboss.org/jbossremoting/docs/guide/2.5/html_single/#d0e1057
+                Map<String, String> clientMetadata = new HashMap<>();
+
+                clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+                /*  generalizeSocketException
+                 *  If set to false, a failed invocation will be retried in the case of
+                 *  SocketExceptions. If set to true, a failed invocation will be retried in the case of
+                 *  <classname>SocketException</classname>s and also any <classname>IOException</classname>
+                 *  whose message matches the regular expression
+                 *  <code>^.*(?:connection.*reset|connection.*closed|broken.*pipe).*$</code>.
+                 *  See also the "numberOfCallRetries" parameter, above. The default value is false.*/
+                clientMetadata.put("generalizeSocketException", "true");
+
+                /* A remoting server also has the capability to detect when a client is no longer available.
+                 * This is done by estabilishing a lease with the remoting clients that connect to a server.
+                 * On the client side, an org.jboss.remoting.LeasePinger periodically sends PING messages to
+                 * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners
+                 * if the PING doesn't arrive withing the specified timeout period. */
+                clientMetadata.put(Client.ENABLE_LEASE, "true");
+                /*
+                 When the socket client invoker makes its first invocation, it will check to see if there is an available
+                 socket connection in its pool. Since is the first invocation, there will not be and will create a new socket
+                 connection and use it for making the invocation. Then when finished making invocation, will return the still
+                 active socket connection to the pool. As more client invocations are made, is possible for the number of
+                 socket connections to reach the maximum allowed (which is controlled by 'clientMaxPoolSize' property). At this
+                 point, when the next client invocation is made, it will wait up to some configured number of milliseconds, at
+                 which point it will throw an org.jboss.remoting.CannotConnectException. The number of milliseconds is given by
+                 the parameter MicroSocketClientInvoker.CONNECTION_WAIT (actual value "connectionWait"), with a default of
+                 30000 milliseconds. Note that if more than one call retry is configured (see next paragraph),
+                 the CannotConnectException will be swallowed.
+                 Once the socket client invoker get an available socket connection from the pool, are not out of the woods yet.
+                 For example, a network problem could cause a java.net.SocketException. There is also a possibility that the socket
+                 connection, while still appearing to be valid, has "gone stale" while sitting in the pool. For example, a ServerThread
+                 on the other side of the connection could time out and close its socket. If the attempt to complete an invocation
+                 fails, then MicroSocketClientInvoker will make a number of attempts, according to the parameter "numberOfCallRetries",
+                 with a default value of 3. Once the configured number of retries has been exhausted,
+                 an org.jboss.remoting.InvocationFailureException will be thrown.
+                 */
+                clientMetadata.put("numberOfCallRetries", "1");
+
+                /**
+                 * I'll explain the meaning of "secondaryBindPort" and
+                 * "secondaryConnectPort", and maybe that will help. The Remoting
+                 * bisocket transport creates two ServerSockets on the server. The
+                 * "primary" ServerSocket is used to create connections used for
+                 * ordinary invocations, e.g., a request to create a JMS consumer,
+                 * and the "secondary" ServerSocket is used to create "control"
+                 * connections for internal Remoting messages. The port for the
+                 * primary ServerSocket is configured by the "serverBindPort"
+                 * parameter, and the port for the secondary ServerSocket is, by
+                 * default, chosen randomly. The "secondaryBindPort" parameter can
+                 * be used to assign a specific port to the secondary ServerSocket.
+                 * Now, if there is a translating firewall between the client and
+                 * server, the client should be given the value of the port that is
+                 * translated to the actual binding port of the secondary
+                 * ServerSocket. For example, your configuration will tell the
+                 * secondary ServerSocket to bind to port 14000, and it will tell
+                 * the client to connect to port 14001. It assumes that there is a
+                 * firewall which will translate 14001 to 14000. Apparently, that's
+                 * not happening.
+                 */
+                // secondaryBindPort - the port to which the secondary server socket is to be bound. By default, an arbitrary port is selected.
+                // secondaryConnectPort - the port clients are to use to connect to the secondary server socket.
+                // By default, the value of secondaryBindPort is used. secondaryConnectPort is useful if the server is behind a translating firewall.
+                // Indicated the max number of threads used within oneway thread pool.
+                clientMetadata.put(Client.MAX_NUM_ONEWAY_THREADS, "10");
+                clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
+                callbackClient = new Client(clientLocator, "callback", clientMetadata);
+
+                Map<String, String> listenerMetadata = new HashMap<>();
+                if (debugMode) {
+                    // prevent client from disconnecting while debugging
+                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "1000000");
+                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "900000");
+                } else {
+                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "15000");
+                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "13000");
+                }
+                callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
+
+                Map<String, String> callbackMetadata = new HashMap<>();
+                callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
+                if (callbackHandler == null) {
+                    callbackHandler = new CallbackHandler();
+                }
+                callbackClient.addListener(callbackHandler, callbackMetadata);
+
+                Set callbackConnectors = callbackClient.getCallbackConnectors(callbackHandler);
+                if (callbackConnectors.size() != 1) {
+                    logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ")");
+                }
+
+                callbackClient.invoke(null);
+
+                sessionId = callbackClient.getSessionId();
+                sessionState = SessionState.CONNECTED;
+                logger.info("Connected to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                return true;
+            }
+        });
+        if (result) {
+            return true;
+        }
+        disconnect(false);
         return false;
     }
 
@@ -1389,9 +1471,20 @@ public class SessionImpl implements Session {
 
     @Override
     public String getUserName() {
-        return connection.getUsername();
+        String username = connection.getUsername();
+        return username == null ? "" : username;
     }
 
+    private String getEmail() {
+        String email = connection.getEmail();
+        return email == null ? "" : email;
+    }
+ 
+    private String getAuthToken() {
+        String authToken = connection.getAuthToken();
+        return authToken == null ? "" : authToken;
+    }
+ 
     @Override
     public boolean updatePreferencesForServer(UserData userData) {
         try {

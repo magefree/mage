@@ -44,27 +44,22 @@ import mage.util.CardUtil;
 public class SupportEffect extends AddCountersTargetEffect {
 
     private final DynamicValue amountSupportTargets;
-    private boolean otherPermanent;
+    private final boolean otherPermanent;
 
-    public SupportEffect(Card card, int amount) {
-        this(new StaticValue(amount));
+    public SupportEffect(Card card, int amount, boolean otherPermanent) {
+        super(CounterType.P1P1.createInstance(0), new StaticValue(1));
+        this.amountSupportTargets = new StaticValue(amount);
+        this.otherPermanent = otherPermanent;
         if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
-            otherPermanent = false;
             card.getSpellAbility().addTarget(new TargetCreaturePermanent(0, amount, new FilterCreaturePermanent("target creatures"), false));
-        } else {
-            otherPermanent = true;
         }
-    }
-
-    public SupportEffect(DynamicValue amount) {
-        super(CounterType.P1P1.createInstance(), new StaticValue(1));
-        this.amountSupportTargets = amount;
-        this.staticText = setText();
+        staticText = setText();
     }
 
     public SupportEffect(final SupportEffect effect) {
         super(effect);
         this.amountSupportTargets = effect.amountSupportTargets;
+        this.otherPermanent = effect.otherPermanent;
     }
 
     @Override

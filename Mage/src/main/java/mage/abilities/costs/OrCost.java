@@ -78,6 +78,11 @@ public class OrCost implements Cost {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        return pay(ability, game, sourceId, controllerId, noMana, this);
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         selectedCost = null;
         // if only one can be paid select it
         if (!firstCost.canPay(ability, sourceId, controllerId, game)) {
@@ -105,7 +110,7 @@ public class OrCost implements Cost {
         if (selectedCost == null) {
             return false;
         }
-        return selectedCost.pay(ability, game, sourceId, controllerId, noMana);
+        return selectedCost.pay(ability, game, sourceId, controllerId, noMana, costToPay);
 
     }
 

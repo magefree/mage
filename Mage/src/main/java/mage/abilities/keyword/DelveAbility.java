@@ -98,11 +98,11 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
     public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && controller.getGraveyard().size() > 0) {
-            if (unpaid.getMana().getColorless() > 0 && source.getAbilityType().equals(AbilityType.SPELL)) {
+            if (unpaid.getMana().getGeneric() > 0 && source.getAbilityType().equals(AbilityType.SPELL)) {
                 SpecialAction specialAction = new DelveSpecialAction();
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());
-                int unpaidAmount = unpaid.getMana().getColorless();
+                int unpaidAmount = unpaid.getMana().getGeneric();
                 if (!controller.getManaPool().isAutoPayment() && unpaidAmount > 1) {
                     unpaidAmount = 1;
                 }
@@ -157,7 +157,7 @@ class DelveEffect extends OneShotEffect {
             List<Card> exiledCards = exileFromGraveCost.getExiledCards();
             if (exiledCards.size() > 0) {
                 ManaPool manaPool = controller.getManaPool();
-                manaPool.addMana(new Mana(0, 0, 0, 0, 0, exiledCards.size(), 0), game, source);
+                manaPool.addMana(new Mana(0, 0, 0, 0, 0, 0, 0, exiledCards.size()), game, source);
                 manaPool.unlockManaType(ManaType.COLORLESS);
                 String keyString = CardUtil.getCardZoneString("delvedCards", source.getSourceId(), game);
                 @SuppressWarnings("unchecked")

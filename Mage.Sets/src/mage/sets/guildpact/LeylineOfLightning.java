@@ -92,7 +92,7 @@ class LeylineOfLightningEffect extends DamageTargetEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Cost cost = new GenericManaCost(1);
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                 super.apply(game, source);
             }
             return true;

@@ -109,7 +109,7 @@ class SeizuresEffect extends OneShotEffect {
             if(cost.canPay(source, source.getSourceId(), player.getId(), game)
                 && player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to avoid damage?", source, game)) {
                 cost.clearPaid();
-                if(cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                if(cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                     return true;
                 }
             }

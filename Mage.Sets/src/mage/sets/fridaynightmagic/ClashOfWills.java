@@ -37,7 +37,7 @@ public class ClashOfWills extends mage.sets.magicorigins.ClashOfWills {
 
     public ClashOfWills(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = 189;
         this.expansionSetCode = "FNMP";
     }
 

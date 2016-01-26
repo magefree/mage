@@ -1,9 +1,19 @@
 package org.mage.test.serverside.base;
 
-import mage.constants.PhaseStep;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -25,19 +35,13 @@ import org.junit.BeforeClass;
 import org.mage.test.player.RandomPlayer;
 import org.mage.test.player.TestPlayer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Base class for all tests.
  *
  * @author ayratn
  */
 public abstract class MageTestBase {
+
     protected static Logger logger = Logger.getLogger(MageTestBase.class);
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
@@ -46,17 +50,17 @@ public abstract class MageTestBase {
 
     protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)(:\\{tapped\\})?");
 
-    protected List<Card> handCardsA = new ArrayList<Card>();
-    protected List<Card> handCardsB = new ArrayList<Card>();
-    protected List<PermanentCard> battlefieldCardsA = new ArrayList<PermanentCard>();
-    protected List<PermanentCard> battlefieldCardsB = new ArrayList<PermanentCard>();
-    protected List<Card> graveyardCardsA = new ArrayList<Card>();
-    protected List<Card> graveyardCardsB = new ArrayList<Card>();
-    protected List<Card> libraryCardsA = new ArrayList<Card>();
-    protected List<Card> libraryCardsB = new ArrayList<Card>();
+    protected List<Card> handCardsA = new ArrayList<>();
+    protected List<Card> handCardsB = new ArrayList<>();
+    protected List<PermanentCard> battlefieldCardsA = new ArrayList<>();
+    protected List<PermanentCard> battlefieldCardsB = new ArrayList<>();
+    protected List<Card> graveyardCardsA = new ArrayList<>();
+    protected List<Card> graveyardCardsB = new ArrayList<>();
+    protected List<Card> libraryCardsA = new ArrayList<>();
+    protected List<Card> libraryCardsB = new ArrayList<>();
 
-    protected Map<Zone, String> commandsA = new HashMap<Zone, String>();
-    protected Map<Zone, String> commandsB = new HashMap<Zone, String>();
+    protected Map<Zone, String> commandsA = new HashMap<>();
+    protected Map<Zone, String> commandsB = new HashMap<>();
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
@@ -67,8 +71,7 @@ public abstract class MageTestBase {
     protected static Game currentGame = null;
 
     /**
-     * Player thats starts the game first.
-     * By default, it is ComputerA.
+     * Player thats starts the game first. By default, it is ComputerA.
      */
     protected static Player activePlayer = null;
 
@@ -77,6 +80,7 @@ public abstract class MageTestBase {
     protected PhaseStep stopAtStep = PhaseStep.UNTAP;
 
     protected enum ParserState {
+
         INIT,
         OPTIONS,
         EXPECTED
@@ -85,18 +89,13 @@ public abstract class MageTestBase {
     protected ParserState parserState;
 
     /**
-     * Expected results of the test.
-     * Read from test case in {@link String} based format:
+     * Expected results of the test. Read from test case in {@link String} based
+     * format:
      * <p/>
-     * Example:
-     * turn:1
-     * result:won:ComputerA
-     * life:ComputerA:20
-     * life:ComputerB:0
-     * battlefield:ComputerB:Tine Shrike:0
-     * graveyard:ComputerB:Tine Shrike:1
+     * Example: turn:1 result:won:ComputerA life:ComputerA:20 life:ComputerB:0
+     * battlefield:ComputerB:Tine Shrike:0 graveyard:ComputerB:Tine Shrike:1
      */
-    protected List<String> expectedResults = new ArrayList<String>();
+    protected List<String> expectedResults = new ArrayList<>();
 
     protected static final String TESTS_PATH = "tests" + File.separator;
 
@@ -163,8 +162,9 @@ public abstract class MageTestBase {
 
     private static void deleteSavedGames() {
         File directory = new File("saved/");
-        if (!directory.exists())
+        if (!directory.exists()) {
             directory.mkdirs();
+        }
         File[] files = directory.listFiles(
                 new FilenameFilter() {
                     @Override
@@ -185,7 +185,9 @@ public abstract class MageTestBase {
         try {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
-                if (line == null || line.isEmpty() || line.startsWith("#")) continue;
+                if (line == null || line.isEmpty() || line.startsWith("#")) {
+                    continue;
+                }
                 if (line.startsWith("$include")) {
                     includeFrom(line);
                     continue;

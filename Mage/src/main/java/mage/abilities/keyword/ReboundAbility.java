@@ -127,9 +127,7 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
                 if (player != null) {
                     // Add the delayed triggered effect
                     ReboundEffectCastFromExileDelayedTrigger trigger = new ReboundEffectCastFromExileDelayedTrigger(source.getSourceId(), source.getSourceId());
-                    trigger.setControllerId(source.getControllerId());
-                    trigger.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(trigger);
+                    game.addDelayedTriggeredAbility(trigger, source);
 
                     player.moveCardToExileWithInfo(sourceCard, sourceCard.getId(), player.getName() + " Rebound", source.getSourceId(), game, Zone.STACK, true);
                     return true;

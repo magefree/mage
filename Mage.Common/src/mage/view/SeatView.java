@@ -44,6 +44,7 @@ public class SeatView implements Serializable {
     private UUID playerId;
     private final String playerName;
     private final String playerType;
+    private final String history;
 
     public SeatView(Seat seat) {
         if (seat.getPlayer() != null) {
@@ -51,13 +52,16 @@ public class SeatView implements Serializable {
             this.playerName = seat.getPlayer().getName();
             if (seat.getPlayer().getUserData() == null) {
                 this.flagName = UserData.getDefaultFlagName();
+                this.history = "";
             } else {
                 this.flagName = seat.getPlayer().getUserData().getFlagName();
+                this.history = seat.getPlayer().getUserData().getHistory();
             }
         } else {
             // Empty seat
             this.playerName = "";
             this.flagName = "";
+            this.history = "";
         }
         this.playerType = seat.getPlayerType();
     }
@@ -76,6 +80,10 @@ public class SeatView implements Serializable {
 
     public String getFlagName() {
         return flagName;
+    }
+
+    public String getHistory() {
+        return history;
     }
 
 }

@@ -29,11 +29,11 @@ package mage.sets.speedvscunning;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
@@ -42,14 +42,13 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
 /**
@@ -113,7 +112,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             if (event.getTargetId().equals(source.getSourceId())) {
-                Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();;
+                Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
                 if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                     return true;
                 }
@@ -128,13 +127,13 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+        Permanent permanent;
+        if (event instanceof EntersTheBattlefieldEvent) {
+            permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+        } else {
+            permanent = game.getPermanent(event.getTargetId());
+        }
         if (permanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose what the creature becomes to");
@@ -149,22 +148,19 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                     }
                 }
             }
-            MageObject mageObject;
-            if (permanent instanceof PermanentCard) {
-                mageObject = ((PermanentCard) permanent).getCard();
-            } else {
-                mageObject = ((PermanentToken) permanent).getToken();
-            }
+            int power = 0;
+            int toughness = 0;
             switch (choice.getChoice()) {
                 case choice51:
-                    mageObject.getPower().setValue(5);
-                    mageObject.getToughness().setValue(1);
+                    power = 5;
+                    toughness = 1;
                     break;
                 case choice15:
-                    mageObject.getPower().setValue(1);
-                    mageObject.getToughness().setValue(5);
+                    power = 1;
+                    toughness = 5;
                     break;
             }
+            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
         }
         return false;
 

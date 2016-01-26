@@ -45,6 +45,9 @@ public class Connection {
     private int port;
     private String username;
     private String password;
+    private String email;
+    private String authToken;
+    private String adminPassword;
     private ProxyType proxyType;
     private String proxyHost;
     private int proxyPort;
@@ -170,6 +173,30 @@ public class Connection {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
+    public String getAdminPassword() {
+        return adminPassword;
+    }
+
+    public void setAdminPassword(String adminPassword) {
+        this.adminPassword = adminPassword;
     }
 
     public String getProxyHost() {

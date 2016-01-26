@@ -147,7 +147,7 @@ class EchoEffect extends OneShotEffect {
         if (controller != null && source.getSourceObjectIfItStillExists(game) != null) {
                 if (controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", source, game)) {
                     cost.clearPaid();
-                    if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                    if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                         return true;
                     }
                 }

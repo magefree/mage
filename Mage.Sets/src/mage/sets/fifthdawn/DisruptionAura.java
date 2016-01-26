@@ -112,7 +112,7 @@ class DisruptionAuraEffect extends OneShotEffect {
             Cost cost = permanent.getManaCost().copy();
             if (player.chooseUse(Outcome.Benefit, message, source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     return true;
                 }
             }

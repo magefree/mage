@@ -127,10 +127,7 @@ class PuppeteerCliqueEffect extends OneShotEffect {
                         ExileTargetEffect exileEffect = new ExileTargetEffect("exile " + permanent.getLogName());
                         exileEffect.setTargetPointer(new FixedTarget(permanent, game));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect, TargetController.YOU);
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(delayedAbility, source);
                         result = true;
                     }
                 }

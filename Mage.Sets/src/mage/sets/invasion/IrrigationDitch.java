@@ -55,7 +55,7 @@ public class IrrigationDitch extends CardImpl {
         // {tap}: Add {W} to your mana pool.
         this.addAbility(new WhiteManaAbility());
         // {tap}, Sacrifice Irrigation Ditch: Add {G}{U} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0, 0), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

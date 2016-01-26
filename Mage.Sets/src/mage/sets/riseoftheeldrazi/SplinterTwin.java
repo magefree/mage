@@ -111,10 +111,7 @@ class SplinterTwinEffect extends OneShotEffect {
                 ExileTargetEffect exileEffect = new ExileTargetEffect();
                 exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
             }
             return true;
         }

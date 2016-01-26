@@ -61,7 +61,7 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)), null, Zone.HAND, source, game);
+            return controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)), Zone.HAND, source, game);
         }
         return false;
     }

@@ -131,10 +131,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
                             Effect effect2 = new ReturnToHandTargetEffect();
                             effect2.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
                             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
-                            delayedAbility.setControllerId(source.getControllerId());
-                            delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                            game.addDelayedTriggeredAbility(delayedAbility);
+                            game.addDelayedTriggeredAbility(delayedAbility, source);
                         }
                     }
                 }
@@ -152,10 +149,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
                         Effect effect2 = new ReturnToHandTargetEffect();
                         effect2.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(delayedAbility, source);
                     }
                 }
             }

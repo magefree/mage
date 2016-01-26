@@ -29,24 +29,15 @@ package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
 import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
+
 
 /**
  *
@@ -60,7 +51,7 @@ public class AkromasBlessing extends CardImpl {
 
 
         // Choose a color. Creatures you control gain protection from the chosen color until end of turn.
-        this.getSpellAbility().addEffect(new AkromasBlessingChooseColorEffect());
+        this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control")));
         // Cycling {W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
     }
@@ -72,48 +63,5 @@ public class AkromasBlessing extends CardImpl {
     @Override
     public AkromasBlessing copy() {
         return new AkromasBlessing(this);
-    }
-}
-
-class AkromasBlessingChooseColorEffect extends OneShotEffect {
-
-    public AkromasBlessingChooseColorEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Choose a color. Creatures you control gain protection from the chosen color until end of turn";
-    }
-
-    public AkromasBlessingChooseColorEffect(final AkromasBlessingChooseColorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AkromasBlessingChooseColorEffect copy() {
-        return new AkromasBlessingChooseColorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject != null && controller != null) {
-            ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(outcome, choice, game);
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            if (choice.getColor() == null) {
-                return false;
-            }
-            game.informPlayers(sourceObject.getName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
-            FilterCard filterColor = new FilterCard();
-            filterColor.add(new ColorPredicate(choice.getColor()));
-            filterColor.setMessage(choice.getChoice());
-            ContinuousEffect effect = new GainAbilityAllEffect(new ProtectionAbility(new FilterCard(filterColor)), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
-            game.addEffect(effect, source);
-            return true;
-        }
-        return false;
     }
 }

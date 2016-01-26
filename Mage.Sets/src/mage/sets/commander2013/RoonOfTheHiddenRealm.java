@@ -35,11 +35,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -51,6 +51,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -59,6 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class RoonOfTheHiddenRealm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+
     static {
         filter.add(new AnotherPredicate());
     }
@@ -118,22 +120,19 @@ class RoonOfTheHiddenRealmEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             if (getTargetPointer().getFirst(game, source) != null) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-                Card card = game.getCard(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    UUID exileId = UUID.randomUUID();
-                    if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
-                        if (card != null) {
-                            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
-                            delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setControllerId(card.getOwnerId());
-                            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                            game.addDelayedTriggeredAbility(delayedAbility);
-                        }
+                    int zcc = permanent.getZoneChangeCounter(game);
+                    if (controller.moveCards(permanent, Zone.EXILED, source, game)) {
+                        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                        effect.setTargetPointer(new FixedTarget(permanent.getId(), zcc + 1));
+                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility
+                                = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+                        game.addDelayedTriggeredAbility(delayedAbility, source);
                     }
                 }
-            }            
+            }
             return true;
-        }        
+        }
         return false;
     }
 }

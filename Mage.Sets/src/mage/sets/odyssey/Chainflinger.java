@@ -34,9 +34,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalGainActivatedAbility;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -62,13 +63,13 @@ public class Chainflinger extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // Threshold - {2}{R}, {tap}: Chainflinger deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
+        Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new DamageTargetEffect(2),
-            new ManaCostsImpl("2}{R}"),
-            new CardsInControllerGraveCondition(7),
-            "<i>Threshold</i> - {2}{R}, {t}: {this} deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.");
+            new ManaCostsImpl("{2}{R}"),
+            new CardsInControllerGraveCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addTarget(new TargetCreatureOrPlayer());
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

@@ -42,6 +42,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -73,13 +74,14 @@ public class DirtyWererat extends CardImpl {
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                         new CardsInControllerGraveCondition(7),
-                        "<i>Threshold</i> - If seven or more cards are in your graveyard, Dirty Wererat gets +2/+2 and can't block"
+                        "If seven or more cards are in your graveyard, {this} gets +2/+2"
                 ));
         Effect effect = new ConditionalRestrictionEffect(
                 new CantBlockSourceEffect(Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7));
         effect.setText("and can't block");
         thresholdAbility.addEffect(effect);
+        thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }
 

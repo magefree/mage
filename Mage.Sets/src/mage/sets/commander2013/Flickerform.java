@@ -37,8 +37,6 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -67,7 +65,6 @@ public class Flickerform extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -92,6 +89,7 @@ public class Flickerform extends CardImpl {
 class FlickerformEffect extends OneShotEffect {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
+
     static {
         filter.add(new SubtypePredicate("Aura"));
     }
@@ -122,7 +120,7 @@ class FlickerformEffect extends OneShotEffect {
             if (enchantedCreature != null) {
                 UUID exileZoneId = UUID.randomUUID();
                 enchantedCreature.moveToExile(exileZoneId, enchantment.getName(), source.getSourceId(), game);
-                for (UUID attachementId: enchantedCreature.getAttachments()) {
+                for (UUID attachementId : enchantedCreature.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachementId);
                     if (attachment != null && filter.match(attachment, game)) {
                         attachment.moveToExile(exileZoneId, enchantment.getName(), source.getSourceId(), game);
@@ -130,13 +128,10 @@ class FlickerformEffect extends OneShotEffect {
                 }
                 if (!(enchantedCreature instanceof Token)) {
                 // At the beginning of the next end step, return that card to the battlefield under its owner's control.
-                // If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature
+                    // If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                             new FlickerformReturnEffect(enchantedCreature.getId(), exileZoneId));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    game.addDelayedTriggeredAbility(delayedAbility, source);
                 }
                 return true;
             }
@@ -149,6 +144,7 @@ class FlickerformEffect extends OneShotEffect {
 class FlickerformReturnEffect extends OneShotEffect {
 
     private static final FilterCard filterAura = new FilterCard();
+
     static {
         filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
         filterAura.add(new SubtypePredicate("Aura"));
@@ -183,7 +179,7 @@ class FlickerformReturnEffect extends OneShotEffect {
             enchantedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), enchantedCard.getOwnerId());
             Permanent newPermanent = game.getPermanent(enchantedCardId);
             if (newPermanent != null) {
-                for(Card enchantment : exileZone.getCards(game)) {
+                for (Card enchantment : exileZone.getCards(game)) {
                     if (filterAura.match(enchantment, game)) {
                         boolean canTarget = false;
                         for (Target target : enchantment.getSpellAbility().getTargets()) {

@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,7 +20,7 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
@@ -38,6 +38,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import mage.server.User.UserState;
+import mage.server.record.UserStats;
+import mage.server.record.UserStatsRepository;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
@@ -45,7 +47,7 @@ import org.apache.log4j.Logger;
  *
  * manages users - if a user is disconnected and 10 minutes have passed with no
  * activity the user is removed
- * 
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class UserManager {
@@ -55,7 +57,8 @@ public class UserManager {
     private static final Logger logger = Logger.getLogger(UserManager.class);
 
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
-    
+    private final ConcurrentHashMap<String, User> usersByName = new ConcurrentHashMap<>();
+
     private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
     private static final UserManager INSTANCE = new UserManager();
@@ -63,8 +66,8 @@ public class UserManager {
     public static UserManager getInstance() {
         return INSTANCE;
     }
-    
-    private UserManager()  {
+
+    private UserManager() {
         expireExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -74,11 +77,12 @@ public class UserManager {
     }
 
     public User createUser(String userName, String host) {
-        if (findUser(userName) != null) {
+        if (getUserByName(userName) != null) {
             return null; //user already exists
         }
         User user = new User(userName, host);
         users.put(user.getId(), user);
+        usersByName.put(userName, user);
         return user;
     }
 
@@ -89,13 +93,8 @@ public class UserManager {
         return null;
     }
 
-    public User findUser(String userName) {
-        for (User user: users.values()) {
-            if (user.getName().equals(userName)) {
-                return user;
-            }
-        }
-        return null;
+    public User getUserByName(String userName) {
+        return usersByName.get(userName);
     }
 
     public Collection<User> getUsers() {
@@ -116,7 +115,7 @@ public class UserManager {
     public void disconnect(UUID userId, DisconnectReason reason) {
         if (userId != null) {
             User user = users.get(userId);
-            if (user != null) {                
+            if (user != null) {
                 user.setSessionId(""); // Session will be set again with new id if user reconnects
             }
             ChatManager.getInstance().removeUser(userId, reason);
@@ -126,43 +125,44 @@ public class UserManager {
     public boolean isAdmin(UUID userId) {
         if (userId != null) {
             User user = users.get(userId);
-            if (user != null) {                
+            if (user != null) {
                 return user.getName().equals("Admin");
             }
         }
         return false;
     }
 
-    public void removeUser(final UUID userId, final DisconnectReason reason) {        
+    public void removeUser(final UUID userId, final DisconnectReason reason) {
         if (userId != null) {
             final User user = users.get(userId);
             if (user != null) {
                 callExecutor.execute(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
-                                user.remove(reason);
-                                logger.debug("USER REMOVE END - " + user.getName());
-                            } catch (Exception ex) {
-                                handleException(ex);
-                            } finally {
-                                users.remove(userId);
-                            }
+                        new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
+                            user.remove(reason);
+                            logger.debug("USER REMOVE END - " + user.getName());
+                        } catch (Exception ex) {
+                            handleException(ex);
+                        } finally {
+                            users.remove(userId);
+                            usersByName.remove(user.getName());
                         }
                     }
+                }
                 );
             } else {
                 logger.warn("Trying to remove userId: " + userId + " - but it does not exist.");
             }
-        }        
+        }
     }
 
     public boolean extendUserSession(UUID userId, String pingInfo) {
         if (userId != null) {
             User user = users.get(userId);
-            if (user != null) {  
+            if (user != null) {
                 user.updateLastActivity(pingInfo);
                 return true;
             }
@@ -171,7 +171,8 @@ public class UserManager {
     }
 
     /**
-     * Is the connection lost for more than 3 minutes, the user will be removed (within 3 minutes the user can reconnect)
+     * Is the connection lost for more than 3 minutes, the user will be removed
+     * (within 3 minutes the user can reconnect)
      */
     private void checkExpired() {
         Calendar calendar = Calendar.getInstance();
@@ -187,13 +188,39 @@ public class UserManager {
 
     public void handleException(Exception ex) {
         if (ex != null) {
-            logger.fatal("User manager exception " + (ex.getMessage() == null ? "null":ex.getMessage()));
+            logger.fatal("User manager exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
             if (ex.getCause() != null) {
-                logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null":ex.getCause().getMessage()));
+                logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()));
             }
             ex.printStackTrace();
-        }else {
+        } else {
             logger.fatal("User manager exception - null");
         }
+    }
+
+    public String getUserHistory(String userName) {
+        User user = getUserByName(userName);
+        if (user == null) {
+            UserStats userStats = UserStatsRepository.instance.getUser(userName);
+            if (userStats == null) {
+                return "User " + userName + " not found";
+            }
+            return User.userStatsToString(userStats.getProto());
+        }
+        return "History of user " + userName + ": " + user.getUserData().getHistory();
+    }
+
+    public void updateUserHistory() {
+        callExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {
+                    User user = getUserByName(updatedUser);
+                    if (user != null) {
+                        user.resetUserStats();
+                    }
+                }
+            }
+        });
     }
 }

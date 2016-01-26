@@ -2298,6 +2298,30 @@ public class PreferencesDialog extends javax.swing.JDialog {
         this.repaint();
     }
 
+    public static void setProxyInformation(Connection connection) {
+        ProxyType configProxyType = Connection.ProxyType.valueByText(getCachedValue(KEY_PROXY_TYPE, "None"));
+        if (configProxyType == null) {
+            return;
+        }
+
+        connection.setProxyType(configProxyType);
+        if (!configProxyType.equals(ProxyType.NONE)) {
+            String host = getCachedValue(KEY_PROXY_ADDRESS, "");
+            String port = getCachedValue(KEY_PROXY_PORT, "");
+            if (!host.isEmpty() && !port.isEmpty()) {
+                connection.setProxyHost(host);
+                connection.setProxyPort(Integer.valueOf(port));
+                String username = getCachedValue(KEY_PROXY_USERNAME, "");
+                connection.setProxyUsername(username);
+                if (getCachedValue(KEY_PROXY_REMEMBER, "false").equals("true")) {
+                    String password = getCachedValue(KEY_PROXY_PSWD, "");
+                    connection.setProxyPassword(password);
+                }
+            } else {
+                log.warn("host or\\and port are empty: host=" + host + ", port=" + port);
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */

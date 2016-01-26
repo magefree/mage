@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -62,7 +63,7 @@ public class RevealTargetFromHandCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (targets.choose(Outcome.Benefit, controllerId, sourceId, game)) {
             convertedManaCosts = 0;
             numberCardsRevealed = 0;

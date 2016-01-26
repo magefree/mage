@@ -107,7 +107,7 @@ class CrystalShardEffect extends OneShotEffect {
                     cost.clearPaid();
                     final StringBuilder sb = new StringBuilder("Pay {1}? (Otherwise ").append(targetCreature.getName()).append(" will be returned to its owner's hand)");
                     if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
-                        cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), false);
+                        cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), false, null);
                     }
                     if (!cost.isPaid()) {
                         controller.moveCards(targetCreature, Zone.BATTLEFIELD, Zone.HAND, source, game);

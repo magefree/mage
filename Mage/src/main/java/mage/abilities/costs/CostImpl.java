@@ -28,6 +28,8 @@
 package mage.abilities.costs;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
 
@@ -49,6 +51,11 @@ public abstract class CostImpl implements Cost {
         this.text = cost.text;
         this.paid = cost.paid;
         this.targets = cost.targets.copy();
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        return pay(ability, game, sourceId, controllerId, noMana, this);
     }
 
     @Override

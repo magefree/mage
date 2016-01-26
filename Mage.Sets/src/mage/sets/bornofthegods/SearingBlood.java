@@ -57,7 +57,6 @@ public class SearingBlood extends CardImpl {
         super(ownerId, 111, "Searing Blood", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
         this.expansionSetCode = "BNG";
 
-
         // Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new SearingBloodEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -92,10 +91,7 @@ class SearingBloodEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility delayedAbility = new SearingBloodDelayedTriggeredAbility(source.getFirstTarget());
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
 
         return new DamageTargetEffect(2).apply(game, source);
     }

@@ -30,9 +30,9 @@ package mage.sets.commander2013;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -43,9 +43,7 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Phase;
 import mage.game.turn.TurnMod;
@@ -60,11 +58,9 @@ public class IllusionistsGambit extends CardImpl {
         super(ownerId, 47, "Illusionist's Gambit", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "C13";
 
-
         // Cast Illusionist's Gambit only during the declare blockers step on an opponent's turn.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new IllusionistsGambitEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OnOpponentsTurnCondition.getInstance()));
+
         // Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or a planeswalker you control that combat.
         this.getSpellAbility().addEffect(new IllusionistsGambitRemoveFromCombatEffect());
     }
@@ -76,38 +72,6 @@ public class IllusionistsGambit extends CardImpl {
     @Override
     public IllusionistsGambit copy() {
         return new IllusionistsGambit(this);
-    }
-}
-
-class IllusionistsGambitEffect extends ContinuousRuleModifyingEffectImpl {
-    IllusionistsGambitEffect() {
-        super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "Cast {this} only during the declare blockers step on an opponent's turn";
-    }
-
-    IllusionistsGambitEffect(final IllusionistsGambitEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
-            if (game.getTurn().getStepType().equals(PhaseStep.DECLARE_BLOCKERS)) {
-                return !game.getOpponents(source.getControllerId()).contains(game.getActivePlayerId());
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public IllusionistsGambitEffect copy() {
-        return new IllusionistsGambitEffect(this);
     }
 }
 
@@ -130,7 +94,7 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<UUID> attackers = game.getCombat().getAttackers();
-        for (UUID attackerId :attackers) {
+        for (UUID attackerId : attackers) {
             Permanent creature = game.getPermanent(attackerId);
             if (creature != null) {
                 creature.removeFromCombat(game);
@@ -237,13 +201,13 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(UUID defenderId, Ability source, Game game) {
-        if (defenderId.equals(source.getControllerId()) ) {
+        if (defenderId.equals(source.getControllerId())) {
             return false;
         }
         // planeswalker
         Permanent permanent = game.getPermanent(defenderId);
         if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                              && permanent.getCardType().contains(CardType.PLANESWALKER)) {
+                && permanent.getCardType().contains(CardType.PLANESWALKER)) {
             return false;
         }
         return true;

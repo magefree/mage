@@ -87,7 +87,7 @@ class StasisSnareExileEffect extends OneShotEffect {
 
     public StasisSnareExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile target creature an opponent controls until Stasis Snare leaves the battlefield";
+        this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield";
     }
 
     public StasisSnareExileEffect(final StasisSnareExileEffect effect) {

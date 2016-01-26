@@ -50,7 +50,7 @@ public class SimicSignet extends CardImpl {
         this.expansionSetCode = "DIS";
 
         // {1}, {tap}: Add {G}{U} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0), new GenericManaCost(1));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0, 0), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

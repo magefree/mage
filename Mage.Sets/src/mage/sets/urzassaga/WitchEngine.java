@@ -65,7 +65,7 @@ public class WitchEngine extends CardImpl {
         this.addAbility(new SwampwalkAbility());
         
         // {tap}: Add {B}{B}{B}{B} to your mana pool. Target opponent gains control of Witch Engine.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 4, 0, 0)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 4, 0, 0, 0)), new TapSourceCost());
         ability.addEffect(new WitchEngineEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

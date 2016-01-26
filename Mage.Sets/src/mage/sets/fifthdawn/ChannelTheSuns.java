@@ -48,7 +48,7 @@ public class ChannelTheSuns extends CardImpl {
 
 
         // Add {W}{U}{B}{R}{G} to your mana pool.
-        Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(1, 1, 1, 1, 1, 0, 0));
+        Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(1, 1, 1, 1, 1, 0, 0, 0));
         this.getSpellAbility().addEffect(effect);
     }
 

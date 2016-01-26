@@ -135,7 +135,7 @@ class KazuulTyrantOfTheCliffsEffect extends OneShotEffect {
         Player payee = game.getPlayer(targetPointer.getFirst(game, source));
         if (payee != null) {
             cost.clearPaid();
-            if (!cost.pay(source, game, source.getSourceId(), payee.getId(), false)) {
+            if (!cost.pay(source, game, source.getSourceId(), payee.getId(), false, null)) {
                 return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             }
         }

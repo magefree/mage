@@ -135,6 +135,8 @@ class ChandraElementalElementalToken extends Token {
 
     public ChandraElementalElementalToken() {
         super("Elemental", "3/1 red Elemental creature tokens with haste");
+        setTokenType(1);
+        setOriginalExpansionSetCode("OGW");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Elemental");

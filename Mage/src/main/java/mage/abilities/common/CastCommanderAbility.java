@@ -27,7 +27,6 @@
  */
 package mage.abilities.common;
 
-
 import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
@@ -57,21 +56,13 @@ public class CastCommanderAbility extends SpellAbility {
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
             // save amount of times commander was cast
-            Integer castCount = (Integer)game.getState().getValue(sourceId + "_castCount");
-            if(castCount != null){
-                castCount++;
-                game.getState().setValue(sourceId + "_castCount", castCount);
-            }
-            else {
-                castCount = 1;
-                game.getState().setValue(sourceId + "_castCount", castCount);
-            }
+            Integer castCount = (Integer) game.getState().getValue(sourceId + "_castCount");
+            castCount++;
+            game.getState().setValue(sourceId + "_castCount", castCount);
             return true;
         }
         return false;
     }
-
-
 
     @Override
     public CastCommanderAbility copy() {

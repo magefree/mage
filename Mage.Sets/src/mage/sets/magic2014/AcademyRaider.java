@@ -29,16 +29,14 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -59,7 +57,7 @@ public class AcademyRaider extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
 
         // Whenever Academy Raider deals combat damage to a player, you may discard a card. If you do, draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardAndDrawEffect(), true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), false));
 
     }
 
@@ -70,34 +68,5 @@ public class AcademyRaider extends CardImpl {
     @Override
     public AcademyRaider copy() {
         return new AcademyRaider(this);
-    }
-}
-
-class DiscardAndDrawEffect extends OneShotEffect {
-
-    public DiscardAndDrawEffect() {
-        super(Outcome.DrawCard);
-        staticText = "you may discard a card. If you do, draw a card";
-    }
-
-    public DiscardAndDrawEffect(final DiscardAndDrawEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DiscardAndDrawEffect copy() {
-        return new DiscardAndDrawEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            you.discard(1, source, game);
-            if (you.drawCards(1, game) > 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }

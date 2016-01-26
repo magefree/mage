@@ -51,6 +51,11 @@ import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
+import mage.game.result.ResultProtos.MatchPlayerProto;
+import mage.game.result.ResultProtos.MatchProto;
+import mage.game.result.ResultProtos.MatchQuitStatus;
+import mage.game.result.ResultProtos.TourneyProto;
+import mage.game.result.ResultProtos.TourneyRoundProto;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
@@ -553,6 +558,53 @@ public abstract class TournamentImpl implements Tournament {
     @Override
     public Draft getDraft() {
         return draft;
+    }
+
+    @Override
+    public TourneyProto toProto() {
+        TourneyProto.Builder tourneyBuilder = TourneyProto.newBuilder()
+                .setBoosterInfo(this.getBoosterInfo());
+        for (TournamentPlayer player : players.values()) {
+            TournamentPlayer replacedPlayer = player.getReplacedTournamentPlayer();
+            if (replacedPlayer != null) {
+                player = replacedPlayer;
+            }
+            tourneyBuilder.addPlayersBuilder().mergeFrom(player.toProto());
+        }
+        for (Round round : rounds) {
+            TourneyRoundProto.Builder roundBuilder = tourneyBuilder.addRoundsBuilder()
+                    .setRound(round.getRoundNumber());
+            for (TournamentPairing pair : round.getPairs()) {
+                Match match = pair.getMatch();
+                if (match != null && match.hasEnded()) {
+                    MatchProto.Builder matchBuilder = roundBuilder.addMatchesBuilder()
+                            .setName(match.getName())
+                            .setGameType(match.getOptions().getGameType())
+                            .setDeckType(match.getOptions().getDeckType())
+                            .setGames(match.getNumGames())
+                            .setDraws(match.getDraws())
+                            .addPlayers(matchToProto(match, pair.getPlayer1()))
+                            .addPlayers(matchToProto(match, pair.getPlayer2()));
+                }
+            }
+            for (TournamentPlayer tp : round.getPlayerByes()) {
+                roundBuilder.addByes(tp.getPlayer().getName());
+            }
+        }
+        return tourneyBuilder.build();
+    }
+
+    private MatchPlayerProto matchToProto(Match match, TournamentPlayer player) {
+        MatchPlayer matchPlayer = match.getPlayer(player.getPlayer().getId());
+        MatchQuitStatus quit = !matchPlayer.hasQuit() ? MatchQuitStatus.NO_MATCH_QUIT :
+                matchPlayer.getPlayer().hasIdleTimeout() ? MatchQuitStatus.IDLE_TIMEOUT :
+                matchPlayer.getPlayer().hasTimerTimeout() ? MatchQuitStatus.TIMER_TIMEOUT :
+                MatchQuitStatus.QUIT;
+        return MatchPlayerProto.newBuilder()
+                .setName(player.getPlayer().getName())
+                .setWins(matchPlayer.getWins())
+                .setQuit(quit)
+                .build();
     }
 
 }

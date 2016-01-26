@@ -154,7 +154,7 @@ class NimDeathmantleEffect extends OneShotEffect {
         if (controller != null && equipment != null) {
             if (controller.chooseUse(Outcome.Benefit, equipment.getName() + " - Pay " + cost.getText() + "?", source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     UUID target = targetPointer.getFirst(game, source);
                     if (target != null) {
                         Card card = game.getCard(target);

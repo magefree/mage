@@ -37,24 +37,25 @@ import org.mage.test.serverside.base.CardTestCommanderDuelBase;
  *
  * @author LevelX2
  */
-
 public class OpalPalaceTest extends CardTestCommanderDuelBase {
+
     /**
-     *  I cast my commander with Opal Palace's second ability and it did not receive a +1/+1 counter 
-     * the first time it was cast (rulings say it should on the first time cast).
+     * I cast my commander with Opal Palace's second ability and it did not
+     * receive a +1/+1 counter the first time it was cast (rulings say it should
+     * on the first time cast).
      */
     @Test
     public void testFirstAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
-        
+
         // {T}: Add {C} to your mana pool.
-        // {1}, {T}: Add to your mana pool one mana of any color in your commander's color identity. 
+        // {1}, {T}: Add to your mana pool one mana of any color in your commander's color identity.
         // If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it
-        // equal to the number of times it's been cast from the command zone this game.        
+        // equal to the number of times it's been cast from the command zone this game.
         addCard(Zone.BATTLEFIELD, playerA, "Opal Palace", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath"); // {3}{B}{B}
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

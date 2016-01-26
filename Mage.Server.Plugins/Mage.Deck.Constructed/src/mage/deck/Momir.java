@@ -27,11 +27,12 @@
  */
 package mage.deck;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
-
-import java.util.*;
 
 /**
  *
