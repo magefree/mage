@@ -403,7 +403,7 @@ public class User {
             if (userStats != null) {
                 this.userData.setHistory(userStatsToString(userStats.getProto()));
             } else {
-                this.userData.setHistory("<new player>");
+                this.userData.setHistory("Matches: 0");
             }
         }
     }
