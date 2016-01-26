@@ -40,11 +40,11 @@ public class CantCastTest extends CardTestPlayerBase {
 
     /**
      * I control Void Winnower. But my opponent can cast Jayemdae Tome (that's
-     * converted mana cost is even) He can cast other even spell.
-     *
+     * converted mana cost is even) He can cast other even spell. Test casting
+     * cost 4
      */
     @Test
-    public void testVoidWinnower() {
+    public void testVoidWinnower1() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
@@ -53,7 +53,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Jayemdae Tome", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jayemdae Tome");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jayemdae Tome"); // {4}
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -64,6 +64,9 @@ public class CantCastTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Test with X=3
+     */
     @Test
     public void testVoidWinnower2() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
@@ -87,6 +90,9 @@ public class CantCastTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Test with X=4
+     */
     @Test
     public void testVoidWinnower3() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
@@ -134,6 +140,29 @@ public class CantCastTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "", 0);
         assertHandCount(playerA, "Pine Walker", 1);
+
+    }
+
+    /**
+     * Test with casting cost = {0}
+     */
+    @Test
+    public void testVoidWinnowerZero() {
+        // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
+        // Your opponents can't block with creatures with even converted mana costs.
+        addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
+
+        // Metalcraft - {T}: Add one mana of any color to your mana pool. Activate this ability only if you control three or more artifacts.
+        addCard(Zone.HAND, playerA, "Mox Opal", 1); // {0}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Opal");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Mox Opal", 1);
+
+        assertLife(playerB, 20);
 
     }
 }

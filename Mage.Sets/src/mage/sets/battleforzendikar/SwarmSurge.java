@@ -47,10 +47,10 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  */
 public class SwarmSurge extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Colorless creatures you control");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Colorless creatures you control");
 
     static {
-        filter.add(new ColorlessPredicate());
+        FILTER.add(new ColorlessPredicate());
     }
 
     public SwarmSurge(UUID ownerId) {
@@ -66,7 +66,7 @@ public class SwarmSurge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
 
         // Colorless creatures you control also gain first strike until end of turn.
-        Effect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
+        Effect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, FILTER);
         effect.setText("Colorless creatures you control also gain first strike until end of turn");
         this.getSpellAbility().addEffect(effect);
     }
