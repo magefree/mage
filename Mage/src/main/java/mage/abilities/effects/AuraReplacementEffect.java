@@ -117,6 +117,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
 
         game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cuase continuous effects
+        Player controllingPlayer = null;
         if (targetId == null) {
             SpellAbility spellAbility = card.getSpellAbility();
             if (spellAbility.getTargets().isEmpty()) {
@@ -145,8 +146,14 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
                 target.setNotTarget(true); // always not target because this way it's not handled targeted
                 target.clearChosen(); // neccessary if e.g. aura is blinked multiple times
             }
-            Player player = game.getPlayer(card.getOwnerId());
-            if (target != null && player != null && player.choose(auraOutcome, target, card.getId(), game)) {
+
+            if (event.getPlayerId() != null) {
+                controllingPlayer = game.getPlayer(event.getPlayerId());
+            } else {
+                controllingPlayer = game.getPlayer(card.getOwnerId());
+            }
+
+            if (target != null && controllingPlayer != null && controllingPlayer.choose(auraOutcome, target, card.getId(), game)) {
                 targetId = target.getFirstTarget();
             }
         }
@@ -162,7 +169,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (targetCard != null || targetPermanent != null || targetPlayer != null) {
             card.removeFromZone(game, fromZone, sourceId);
             card.updateZoneChangeCounter(game);
-            PermanentCard permanent = new PermanentCard(card, card.getOwnerId(), game);
+            PermanentCard permanent = new PermanentCard(card, (controllingPlayer == null ? card.getOwnerId() : controllingPlayer.getId()), game);
             game.getBattlefield().addPermanent(permanent);
             card.setZone(Zone.BATTLEFIELD, game);
             if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)) {

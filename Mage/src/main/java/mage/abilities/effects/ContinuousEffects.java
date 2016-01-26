@@ -82,7 +82,7 @@ import org.apache.log4j.Logger;
  */
 public class ContinuousEffects implements Serializable {
 
-    private static final Logger logger = Logger.getLogger(ContinuousEffects.class);
+    private static final Logger LOGGER = Logger.getLogger(ContinuousEffects.class);
 
     private long order = 0;
 
@@ -226,7 +226,7 @@ public class ContinuousEffects implements Serializable {
                             }
                         }
                     } else {
-                        logger.error("No abilities for continuous effect: " + effect.toString());
+                        LOGGER.error("No abilities for continuous effect: " + effect.toString());
                     }
                     break;
                 default:
@@ -462,17 +462,15 @@ public class ContinuousEffects implements Serializable {
                     exists = permanent.getCard().getAbilities().contains(ability);
                 }
             }
-        } else {
-            if (object instanceof PermanentCard) {
-                PermanentCard permanent = (PermanentCard) object;
-                if (permanent.isFaceDown(game) && !ability.getWorksFaceDown()) {
-                    return false;
-                }
-            } else if (object instanceof Spell) {
-                Spell spell = (Spell) object;
-                if (spell.isFaceDown(game) && !ability.getWorksFaceDown()) {
-                    return false;
-                }
+        } else if (object instanceof PermanentCard) {
+            PermanentCard permanent = (PermanentCard) object;
+            if (permanent.isFaceDown(game) && !ability.getWorksFaceDown()) {
+                return false;
+            }
+        } else if (object instanceof Spell) {
+            Spell spell = (Spell) object;
+            if (spell.isFaceDown(game) && !ability.getWorksFaceDown()) {
+                return false;
             }
         }
         return exists;
@@ -539,10 +537,8 @@ public class ContinuousEffects implements Serializable {
                     if (effect.applies(objectId, ability, controllerId, game)) {
                         return true;
                     }
-                } else {
-                    if (effect.applies(objectId, affectedAbility, ability, game)) {
-                        return true;
-                    }
+                } else if (effect.applies(objectId, affectedAbility, ability, game)) {
+                    return true;
                 }
             }
         }
@@ -1082,11 +1078,9 @@ public class ContinuousEffects implements Serializable {
             if (abilities == null) {
                 abilities = new HashSet<>();
                 temporaryEffects.put(effect, abilities);
-            } else {
-                if (abilities.contains(source)) {
-                    // this ability (for the continuous effect) is already added
-                    return;
-                }
+            } else if (abilities.contains(source)) {
+                // this ability (for the continuous effect) is already added
+                return;
             }
             abilities.add(source);
 
@@ -1097,10 +1091,10 @@ public class ContinuousEffects implements Serializable {
 
     public void addEffect(ContinuousEffect effect, Ability source) {
         if (effect == null) {
-            logger.error("Effect is null: " + source.toString());
+            LOGGER.error("Effect is null: " + source.toString());
             return;
         } else if (source == null) {
-            logger.warn("Adding effect without ability : " + effect.toString());
+            LOGGER.warn("Adding effect without ability : " + effect.toString());
         }
         switch (effect.getEffectType()) {
             case REPLACEMENT:
@@ -1166,10 +1160,8 @@ public class ContinuousEffects implements Serializable {
                         if (ability.getSourceId().equals(sourceId)) {
                             ability.setControllerId(controllerId);
                         }
-                    } else {
-                        if (!ability.getZone().equals(Zone.COMMAND)) {
-                            logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
-                        }
+                    } else if (!ability.getZone().equals(Zone.COMMAND)) {
+                        LOGGER.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
                     }
                 }
             }
@@ -1240,7 +1232,7 @@ public class ContinuousEffects implements Serializable {
                     }
                 }
             } else {
-                logger.error("Replacement effect without ability: " + entry.getKey().toString());
+                LOGGER.error("Replacement effect without ability: " + entry.getKey().toString());
             }
         }
         return texts;
@@ -1278,7 +1270,7 @@ public class ContinuousEffects implements Serializable {
                         }
                     }
                 } else {
-                    logger.warn("Ability without sourceId:" + ability.getRule());
+                    LOGGER.warn("Ability without sourceId:" + ability.getRule());
                 }
             }
         }

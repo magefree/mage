@@ -104,7 +104,7 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
 class AnnihilatorEffect extends OneShotEffect {
 
     private final int count;
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent FILTER = new FilterControlledPermanent();
 
     AnnihilatorEffect(int count) {
         super(Outcome.Sacrifice);
@@ -124,8 +124,8 @@ class AnnihilatorEffect extends OneShotEffect {
             player = game.getPlayer(defendingPlayerId);
         }
         if (player != null) {
-            int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId(), game));
-            Target target = new TargetControlledPermanent(amount, amount, filter, true);
+            int amount = Math.min(count, game.getBattlefield().countAll(FILTER, player.getId(), game));
+            Target target = new TargetControlledPermanent(amount, amount, FILTER, true);
             if (target.canChoose(player.getId(), game)) {
                 while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
                     player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);

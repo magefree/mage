@@ -601,7 +601,7 @@ public class TestPlayer implements Player {
                                 targetName = targetName.substring(0, targetName.length() - 11);
                             }
                         }
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPermanent, game)) {
+                        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, getId(), sourceId, game)) {
                             if (target.getTargets().contains(permanent.getId())) {
                                 continue;
                             }
