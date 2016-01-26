@@ -25,58 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.DevoidAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorlessPredicate;
+import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author icetc
  */
-public class SwarmSurge extends CardImpl {
+public class ThunderWall extends CardImpl {
 
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Colorless creatures you control");
+    public ThunderWall(UUID ownerId) {
+        super(ownerId, 104, "Thunder Wall", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "ICE";
+        this.subtype.add("Wall");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
 
-    static {
-        FILTER.add(new ColorlessPredicate());
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // {U}: Thunder Wall gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public SwarmSurge(UUID ownerId) {
-        super(ownerId, 100, "Swarm Surge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "BFZ";
-
-        // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-
-        // Creatures you control get +2/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
-
-        // Colorless creatures you control also gain first strike until end of turn.
-        Effect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, FILTER);
-        effect.setText("Colorless creatures you control also gain first strike until end of turn");
-        this.getSpellAbility().addEffect(effect);
-    }
-
-    public SwarmSurge(final SwarmSurge card) {
+    public ThunderWall(final ThunderWall card) {
         super(card);
     }
 
     @Override
-    public SwarmSurge copy() {
-        return new SwarmSurge(this);
+    public ThunderWall copy() {
+        return new ThunderWall(this);
     }
 }
