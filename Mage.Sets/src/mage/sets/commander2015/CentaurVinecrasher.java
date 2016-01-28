@@ -41,7 +41,9 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandCard;
 
@@ -66,9 +68,9 @@ public class CentaurVinecrasher extends CardImpl {
         effect.setText("with a number of +1/+1 counters on it equal to the number of land cards in all graveyards");
         this.addAbility(new EntersBattlefieldAbility(effect));
         // Whenever a land card is put into a graveyard from anywhere, you may pay {G}{G}. If you do, return Centaur Vinecrasher from your graveyard to your hand.
-        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(Zone.GRAVEYARD,
                 new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{G}{G}")),
-                false, new FilterLandCard("a land card"), TargetController.ANY
+                false, new FilterLandCard("a land card"), TargetController.ANY, SetTargetPointer.NONE
         ));
     }
 
