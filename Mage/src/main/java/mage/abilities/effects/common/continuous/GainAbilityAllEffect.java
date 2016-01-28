@@ -75,7 +75,8 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource, Layer layer, SubLayer subLayer) {
         super(duration, layer, subLayer, Outcome.AddAbility);
-        this.ability = ability;
+        this.ability = ability.copy();
+        this.ability.newId();
         this.filter = filter;
         this.excludeSource = excludeSource;
     }
@@ -160,12 +161,10 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             } else {
                 sb.append(" have ");
             }
+        } else if (filter.getMessage().toLowerCase().startsWith("each")) {
+            sb.append(" gains ");
         } else {
-            if (filter.getMessage().toLowerCase().startsWith("each")) {
-                sb.append(" gains ");
-            } else {
-                sb.append(" gain ");
-            }
+            sb.append(" gain ");
         }
         if (quotes) {
             sb.append("\"");

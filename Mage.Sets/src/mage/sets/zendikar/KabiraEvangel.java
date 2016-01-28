@@ -49,10 +49,10 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class KabiraEvangel extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent FILTER1 = new FilterControlledCreaturePermanent();
 
     static {
-        filter1.add(new SubtypePredicate("Ally"));
+        FILTER1.add(new SubtypePredicate("Ally"));
     }
 
     public KabiraEvangel(UUID ownerId) {
@@ -69,7 +69,7 @@ public class KabiraEvangel extends CardImpl {
         filter2.add(Predicates.or(new CardIdPredicate(this.getId()), new SubtypePredicate("Ally")));
 
         // Whenever Kabira Evangel or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
-        Effect effect = new GainProtectionFromColorAllEffect(Duration.EndOfTurn, filter1);
+        Effect effect = new GainProtectionFromColorAllEffect(Duration.EndOfTurn, FILTER1);
         effect.setText("choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter2, true));
     }
