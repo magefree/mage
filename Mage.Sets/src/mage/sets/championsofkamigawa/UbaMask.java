@@ -112,9 +112,10 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
                     exiledCards = new HashMap<>();
                     game.getState().setValue(UbaMask.UBA_MASK_VALUE_KEY, exiledCards);
                 }
-                Set<MageObjectReference> exiledCardsByPlayer = exiledCards.get(event.getPlayerId());
+                HashSet<MageObjectReference> exiledCardsByPlayer = exiledCards.get(event.getPlayerId());
                 if (exiledCardsByPlayer == null) {
                     exiledCardsByPlayer = new HashSet<>();
+                    exiledCards.put(event.getPlayerId(), exiledCardsByPlayer);
                 }
                 exiledCardsByPlayer.add(new MageObjectReference(card.getId(), game));
             }
