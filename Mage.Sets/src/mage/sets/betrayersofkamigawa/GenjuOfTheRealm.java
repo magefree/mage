@@ -28,11 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -44,7 +39,11 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -55,29 +54,28 @@ import mage.target.common.TargetLandPermanent;
  * @author LevelX2
  */
 public class GenjuOfTheRealm extends CardImpl {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-   
+
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent();
+
     public GenjuOfTheRealm(UUID ownerId) {
         super(ownerId, 151, "Genju of the Realm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
         this.supertype.add("Legendary");
 
-
         // Enchant Land
-        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // {2}: Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land", Duration.EndOfTurn),new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted land is put into a graveyard, you may return Genju of the Realm from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted land", true, false);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted land", true, false);
         this.addAbility(ability3);
     }
 
@@ -91,6 +89,7 @@ public class GenjuOfTheRealm extends CardImpl {
     }
 
     private class SpiritToken extends Token {
+
         SpiritToken() {
             super("Spirit", "legendary 8/12 Spirit creature with trample");
             supertype.add("Legendary");

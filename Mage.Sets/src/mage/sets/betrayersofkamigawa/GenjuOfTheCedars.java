@@ -28,11 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -44,7 +39,11 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
@@ -56,17 +55,17 @@ import mage.target.common.TargetLandPermanent;
  * @author LevelX2
  */
 public class GenjuOfTheCedars extends CardImpl {
-    
+
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
-   
+
     static {
         filter.add(new SubtypePredicate("Forest"));
     }
+
     public GenjuOfTheCedars(UUID ownerId) {
         super(ownerId, 126, "Genju of the Cedars", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
-
 
         // Enchant Forest
         TargetPermanent auraTarget = new TargetLandPermanent(filter);
@@ -76,13 +75,13 @@ public class GenjuOfTheCedars extends CardImpl {
         this.addAbility(ability);
 
         // {2}: Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land", Duration.EndOfTurn),new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
-        // When enchanted Forest is put into a graveyard, you may return Genju of the Cedars from your graveyard to your hand.        
-        Effect effect = new ReturnToHandSourceEffect();
+        // When enchanted Forest is put into a graveyard, you may return Genju of the Cedars from your graveyard to your hand.
+        Effect effect = new ReturnToHandSourceEffect(false, true);
         effect.setText("you may return {this} from your graveyard to your hand");
-        Ability ability3 = new DiesAttachedTriggeredAbility(effect , "enchanted Forest", true, false);
+        Ability ability3 = new DiesAttachedTriggeredAbility(effect, "enchanted Forest", true, false);
         this.addAbility(ability3);
     }
 
@@ -96,6 +95,7 @@ public class GenjuOfTheCedars extends CardImpl {
     }
 
     private class SpiritToken extends Token {
+
         SpiritToken() {
             super("", "4/4 green Spirit creature");
             cardType.add(CardType.CREATURE);
