@@ -28,11 +28,9 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepTargetEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;

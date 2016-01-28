@@ -27,6 +27,7 @@
  */
 package mage.sets.odyssey;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -44,8 +45,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -58,12 +57,12 @@ public class SkeletalScrying extends CardImpl {
 
 
         // As an additional cost to cast Skeletal Scrying, exile X cards from your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.ALL,new SkeletalScryingRuleEffect());
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SkeletalScryingRuleEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         // You draw X cards and you lose X life.
         this.getSpellAbility().addEffect(new SkeletalScryingEffect(new ManacostVariableValue()));
-        
+
     }
 
     public SkeletalScrying(final SkeletalScrying card) {
@@ -88,7 +87,7 @@ class SkeletalScryingRuleEffect extends OneShotEffect {
 
     public SkeletalScryingRuleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "As an additional cost to cast Skeletal Scrying, exile X cards from your graveyard";
+        this.staticText = "As an additional cost to cast {this}, exile X cards from your graveyard";
     }
 
     public SkeletalScryingRuleEffect(final SkeletalScryingRuleEffect effect) {
@@ -112,7 +111,7 @@ class SkeletalScryingEffect extends OneShotEffect {
     public SkeletalScryingEffect(int amount) {
         this(new StaticValue(amount));
     }
-    
+
     public SkeletalScryingEffect(DynamicValue amount) {
         super(Outcome.Neutral);
         this.amount = amount.copy();
