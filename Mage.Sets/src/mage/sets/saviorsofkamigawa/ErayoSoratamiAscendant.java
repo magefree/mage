@@ -163,7 +163,7 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a spell for the first time in a turn, counter that spell.";
+        return "Whenever an opponent casts a spell for the first time each turn, counter that spell.";
     }
 
     @Override

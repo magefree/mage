@@ -58,8 +58,8 @@ public class GolgariGraveTroll extends CardImpl {
     public GolgariGraveTroll(UUID ownerId) {
         super(ownerId, 167, "Golgari Grave-Troll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "RAV";
-        this.subtype.add("Skeleton");
         this.subtype.add("Troll");
+        this.subtype.add("Skeleton");
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
