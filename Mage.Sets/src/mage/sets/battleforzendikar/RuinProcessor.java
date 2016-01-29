@@ -53,7 +53,7 @@ public class RuinProcessor extends CardImpl {
 
         // When you cast Ruin Processor, you may put a card an opponent owns from exile into that player's graveyard. If you do, you gain 5 life.
         this.addAbility(new CastSourceTriggeredAbility(
-                new DoIfCostPaid(new GainLifeEffect(5), new ExileOpponentsCardFromExileToGraveyardCost(true)), true));
+                new DoIfCostPaid(new GainLifeEffect(5), new ExileOpponentsCardFromExileToGraveyardCost(true)), false));
 
     }
 

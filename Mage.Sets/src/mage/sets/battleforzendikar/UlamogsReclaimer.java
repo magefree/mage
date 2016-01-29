@@ -59,7 +59,7 @@ public class UlamogsReclaimer extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
         // When Ulamog's Reclaimer enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, return target instant or sorcery card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new ExileOpponentsCardFromExileToGraveyardCost(true)), true);
+                new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new ExileOpponentsCardFromExileToGraveyardCost(true)), false);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard")));
         this.addAbility(ability);
     }
