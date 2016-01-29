@@ -25,48 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package org.mage.test.cards.enchantments;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class SliverHivelord extends CardImpl {
+public class LignifyTest extends CardTestPlayerBase {
 
-    public SliverHivelord(UUID ownerId) {
-        super(ownerId, 211, "Sliver Hivelord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "M15";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sliver");
-
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+    /**
+     * Lignify shouldn't make the creature it enchants a (whatever it
+     * is)treefolk as it makes the creature just a treefolk i.e. a Sliver
+     * Hivelord enchanted by lignify should be just a treefolk and not a sliver
+     * treefolk
+     */
+    @Test
+    public void LooseType() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        // Enchant creature
+        // Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities.
+        addCard(Zone.HAND, playerA, "Lignify", 1); // {1}{G}
 
         // Sliver creatures you control have indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(IndestructibleAbility.getInstance(),
-                        Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+        addCard(Zone.BATTLEFIELD, playerB, "Sliver Hivelord", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lignify", "Sliver Hivelord");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Lignify", 1);
+        assertPermanentCount(playerB, "Sliver Hivelord", 1);
+
+        assertAbility(playerB, "Sliver Hivelord", IndestructibleAbility.getInstance(), false);
+        assertPowerToughness(playerB, "Sliver Hivelord", 0, 4);
+
+        Permanent hivelord = getPermanent("Sliver Hivelord", playerB);
+
+        Assert.assertFalse("Sliver Hivelord may not be of subtype Sliver", hivelord.getSubtype().contains("Sliver"));
 
     }
 
-    public SliverHivelord(final SliverHivelord card) {
-        super(card);
-    }
-
-    @Override
-    public SliverHivelord copy() {
-        return new SliverHivelord(this);
-    }
 }
