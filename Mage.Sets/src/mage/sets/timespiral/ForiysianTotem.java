@@ -53,7 +53,7 @@ import java.util.UUID;
  */
 public class ForiysianTotem extends CardImpl {
 
-    private final static String ruleText = "As long as {this} is a creature, it can black an additional creature each combat.";
+    private final static String ruleText = "As long as {this} is a creature, it can block an additional creature each combat.";
 
     public ForiysianTotem(UUID ownerId) {
         super(ownerId, 254, "Foriysian Totem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -65,7 +65,7 @@ public class ForiysianTotem extends CardImpl {
         // {4}{R}: Foriysian Totem becomes a 4/4 red Giant artifact creature with trample until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForiysianTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{R}")));
 
-        // As long as Foriysian Totem is a creature, it can black an additional creature each combat.
+        // As long as Foriysian Totem is a creature, it can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new CanBlockAdditionalCreatureEffect(1), new SourceMatchesFilterCondition(new FilterCreaturePermanent()), ruleText)));
     }
 
