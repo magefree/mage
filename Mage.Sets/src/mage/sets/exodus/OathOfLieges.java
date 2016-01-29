@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -54,22 +55,21 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class OathOfLieges extends CardImpl {
 
-    private final UUID originalId;
-    private static final FilterPlayer filter = new FilterPlayer("player who controls more lands than you do and is his your opponent");
+    private static final FilterPlayer FILTER = new FilterPlayer("player who controls more lands than you do and is your opponent");
 
     static {
-        filter.add(new OathOfLiegesPredicate());
+        FILTER.add(new OathOfLiegesPredicate());
     }
+
+    private final UUID originalId;
 
     public OathOfLieges(UUID ownerId) {
         super(ownerId, 11, "Oath of Lieges", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "EXO";
 
         // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
-        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false, true, Outcome.PutLandInPlay, true);
-        effect.setText("that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, true);
-        ability.addTarget(new TargetPlayer(1, 1, false, filter));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfLiegesEffect(), TargetController.ANY, false);
+        ability.addTarget(new TargetPlayer(1, 1, false, FILTER));
         originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
@@ -85,14 +85,9 @@ public class OathOfLieges extends CardImpl {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
             if (activePlayer != null) {
                 ability.getTargets().clear();
-                TargetPlayer target = new TargetPlayer(1, 1, false, filter);
+                TargetPlayer target = new TargetPlayer(1, 1, false, FILTER);
                 target.setTargetController(activePlayer.getId());
                 ability.getTargets().add(target);
-                for (Effect effect : ability.getEffects()) {
-                    if (effect instanceof SearchLibraryPutInPlayTargetPlayerEffect) {
-                        effect.setTargetPointer(new FixedTarget(activePlayer.getId()));
-                    }
-                }
             }
         }
     }
@@ -103,9 +98,41 @@ public class OathOfLieges extends CardImpl {
     }
 }
 
+class OathOfLiegesEffect extends OneShotEffect {
+
+    public OathOfLiegesEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library";
+    }
+
+    public OathOfLiegesEffect(final OathOfLiegesEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OathOfLiegesEffect copy() {
+        return new OathOfLiegesEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player activePlayer = game.getPlayer(game.getActivePlayerId());
+        if (activePlayer != null) {
+            if (activePlayer.chooseUse(outcome, "Search your library for a basic land card, put that card onto the battlefield, then shuffle your library?", source, game)) {
+                Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false, true, Outcome.PutLandInPlay, true);
+                effect.setTargetPointer(new FixedTarget(game.getActivePlayerId()));
+                return effect.apply(game, source);
+            }
+            return true;
+        }
+
+        return false;
+    }
+}
+
 class OathOfLiegesPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent();
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
@@ -115,11 +142,11 @@ class OathOfLiegesPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
         if (targetPlayer == null || activePlayerId == null) {
             return false;
         }
-        if (targetPlayer.getId().equals(activePlayerId)) {
+        if (targetPlayer.getId().equals(activePlayerId) || !targetPlayer.hasOpponent(activePlayerId, game)) {
             return false;
         }
-        int countTargetPlayer = game.getBattlefield().countAll(filter, targetPlayer.getId(), game);
-        int countActivePlayer = game.getBattlefield().countAll(filter, activePlayerId, game);
+        int countTargetPlayer = game.getBattlefield().countAll(FILTER, targetPlayer.getId(), game);
+        int countActivePlayer = game.getBattlefield().countAll(FILTER, activePlayerId, game);
 
         return countTargetPlayer > countActivePlayer;
     }
