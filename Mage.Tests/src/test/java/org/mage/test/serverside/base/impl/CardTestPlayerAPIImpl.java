@@ -507,6 +507,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
     }
 
+    public void assertAbility(Player player, String cardName, Ability ability, boolean flag) throws AssertionError {
+        assertAbility(player, cardName, ability, flag, 1);
+    }
+
     /**
      *
      * @param player
@@ -514,23 +518,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param ability
      * @param flag true if creature should contain ability, false if it should
      * NOT contain it instead
+     * @param count number of permanents with that ability
      * @throws AssertionError
      */
-    public void assertAbility(Player player, String cardName, Ability ability, boolean flag) throws AssertionError {
-        int count = 0;
+    public void assertAbility(Player player, String cardName, Ability ability, boolean flag, int count) throws AssertionError {
+        int foundCount = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
             if (permanent.getName().equals(cardName)) {
                 found = permanent;
-                count++;
+                foundCount++;
             }
         }
 
         Assert.assertNotNull("There is no such permanent under player's control, player=" + player.getName()
                 + ", cardName=" + cardName, found);
 
-        Assert.assertTrue("There is more than one such permanent under player's control, player=" + player.getName()
-                + ", cardName=" + cardName, count == 1);
+        Assert.assertTrue("There is another number (" + foundCount + ") as defined (" + count + ") of such permanents under player's control, player=" + player.getName()
+                + ", cardName=" + cardName, count == foundCount);
 
         if (flag) {
             Assert.assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName()
