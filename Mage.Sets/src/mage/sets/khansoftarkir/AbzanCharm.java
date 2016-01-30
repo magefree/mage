@@ -49,20 +49,19 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class AbzanCharm extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or greater");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature with power 3 or greater");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+        FILTER.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
     public AbzanCharm(UUID ownerId) {
         super(ownerId, 161, "Abzan Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{B}{G}");
         this.expansionSetCode = "KTK";
 
-
         // Choose one -
         // *Exile target creature with power 3 or greater
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(FILTER));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
 
         // *You draw two cards and you lose 2 life
