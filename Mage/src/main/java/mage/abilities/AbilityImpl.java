@@ -637,10 +637,8 @@ public abstract class AbilityImpl implements Ability {
     public void setSourceId(UUID sourceId) {
         if (this.sourceId == null) {
             this.sourceId = sourceId;
-        } else {
-            if (!(this instanceof MageSingleton)) {
-                this.sourceId = sourceId;
-            }
+        } else if (!(this instanceof MageSingleton)) {
+            this.sourceId = sourceId;
         }
         if (subAbilities != null) {
             for (Ability subAbility : subAbilities) {
@@ -970,19 +968,19 @@ public abstract class AbilityImpl implements Ability {
                 object = game.getObject(getSourceId());
             }
         }
-        if (object != null && !object.getAbilities().contains(this)) {
+        if (object != null) {
             if (object instanceof Permanent) {
-                return false;
-            } else {
+                if (!((Permanent) object).getAbilities(game).contains(this)) {
+                    return false;
+                }
+                return ((Permanent) object).isPhasedIn();
+            } else if (!object.getAbilities().contains(this)) {
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
                 if (otherAbilities == null || !otherAbilities.contains(this)) {
                     return false;
                 }
             }
-        }
-        if (object instanceof Permanent) {
-            return ((Permanent) object).isPhasedIn();
         }
         return true;
     }
@@ -1060,18 +1058,16 @@ public abstract class AbilityImpl implements Ability {
                 } else {
                     sb.append(GameLog.getColoredObjectIdName(object));
                 }
-            } else {
-                if (object instanceof Spell) {
-                    Spell spell = (Spell) object;
-                    String castText = spell.getSpellCastText(game);
-                    sb.append((castText.startsWith("Cast ") ? castText.substring(5) : castText));
-                    if (spell.getFromZone() == Zone.GRAVEYARD) {
-                        sb.append(" from graveyard");
-                    }
-                    sb.append(getOptionalTextSuffix(game, spell));
-                } else {
-                    sb.append(GameLog.getColoredObjectIdName(object));
+            } else if (object instanceof Spell) {
+                Spell spell = (Spell) object;
+                String castText = spell.getSpellCastText(game);
+                sb.append((castText.startsWith("Cast ") ? castText.substring(5) : castText));
+                if (spell.getFromZone() == Zone.GRAVEYARD) {
+                    sb.append(" from graveyard");
                 }
+                sb.append(getOptionalTextSuffix(game, spell));
+            } else {
+                sb.append(GameLog.getColoredObjectIdName(object));
             }
         } else {
             sb.append("unknown");
