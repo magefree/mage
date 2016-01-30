@@ -93,11 +93,11 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher", source.getControllerId());
+        quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher");
         Card card = game.getCard(source.getSourceId());
         if (quickenWatcher != null && card != null) {
             zoneChangeCounter = card.getZoneChangeCounter(game);
-            quickenWatcher.addQuickenSpell(source.getSourceId(), zoneChangeCounter);
+            quickenWatcher.addQuickenSpell(source.getControllerId(), source.getSourceId(), zoneChangeCounter);
         }
     }
 
@@ -113,7 +113,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (quickenWatcher.isQuickenSpellActive(source.getSourceId(), zoneChangeCounter)) {
+        if (quickenWatcher.isQuickenSpellActive(affectedControllerId, source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
             if (card != null && card.getCardType().contains(CardType.SORCERY) && source.getControllerId().equals(affectedControllerId)) {
                 return true;
@@ -129,7 +129,7 @@ class QuickenWatcher extends Watcher {
     public List<String> activeQuickenSpells = new ArrayList<>();
 
     public QuickenWatcher() {
-        super("consumeQuickenWatcher", WatcherScope.PLAYER);
+        super("consumeQuickenWatcher", WatcherScope.GAME);
     }
 
     public QuickenWatcher(final QuickenWatcher watcher) {
@@ -153,13 +153,13 @@ class QuickenWatcher extends Watcher {
         }
     }
 
-    public void addQuickenSpell(UUID sourceId, int zoneChangeCounter) {
-        String spellKey = new StringBuilder(sourceId.toString()).append("_").append(zoneChangeCounter).toString();
+    public void addQuickenSpell(UUID playerId, UUID sourceId, int zoneChangeCounter) {
+        String spellKey = playerId.toString() + sourceId.toString() + "_" + zoneChangeCounter;
         activeQuickenSpells.add(spellKey);
     }
 
-    public boolean isQuickenSpellActive(UUID sourceId, int zoneChangeCounter) {
-        String spellKey = new StringBuilder(sourceId.toString()).append("_").append(zoneChangeCounter).toString();
+    public boolean isQuickenSpellActive(UUID playerId, UUID sourceId, int zoneChangeCounter) {
+        String spellKey = playerId.toString() + sourceId.toString() + "_" + zoneChangeCounter;
         return activeQuickenSpells.contains(spellKey);
     }
 
