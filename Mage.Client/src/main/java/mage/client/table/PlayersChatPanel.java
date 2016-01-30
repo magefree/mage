@@ -61,7 +61,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     private final List<String> players = new ArrayList<>();
     private final UserTableModel userTableModel;
-    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 100, 100, 100, 80, 80};
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 100, 40, 100, 40, 100, 80, 80};
 
 
     /*
@@ -118,7 +118,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     class UserTableModel extends AbstractTableModel {
 
-        private final String[] columnNames = new String[]{"Loc", "Players", "Matches", "Tourneys", "Games", "Connection"};
+        private final String[] columnNames = new String[]{"Loc", "Players", "Matches", "MQ%", "Tourneys", "TQ%", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
 
         public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
@@ -128,7 +128,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             TableColumnModel tcm = th.getColumnModel();
 
             tcm.getColumn(jTablePlayers.convertColumnIndexToView(1)).setHeaderValue("Players (" + this.players.length + ")");
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(4)).setHeaderValue(
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(6)).setHeaderValue(
                     "Games " + roomUserInfo.getNumberActiveGames()
                     + (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads() : " (")
                     + " limit: " + roomUserInfo.getNumberMaxGames() + ")");
@@ -156,10 +156,14 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                 case 2:
                     return players[arg0].getMatchHistory();
                 case 3:
-                    return players[arg0].getTourneyHistory();
+                    return players[arg0].getMatchQuitRatio();
                 case 4:
-                    return players[arg0].getInfoGames();
+                    return players[arg0].getTourneyHistory();
                 case 5:
+                    return players[arg0].getTourneyQuitRatio();
+                case 6:
+                    return players[arg0].getInfoGames();
+                case 7:
                     return players[arg0].getInfoPing();
             }
             return "";

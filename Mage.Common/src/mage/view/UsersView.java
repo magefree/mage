@@ -40,14 +40,19 @@ public class UsersView implements Serializable {
     private final String flagName;
     private final String userName;
     private final String matchHistory;
+    private final String matchQuitRatio;
     private final String tourneyHistory;
+    private final String tourneyQuitRatio;
     private final String infoGames;
     private final String infoPing;
 
-    public UsersView(String flagName, String userName, String matchHistory, String tourneyHistory, String infoGames, String infoPing) {
+    public UsersView(String flagName, String userName, String matchHistory, int matchQuitRatio,
+            String tourneyHistory, int tourneyQuitRatio, String infoGames, String infoPing) {
         this.flagName = flagName;
         this.matchHistory = matchHistory;
+        this.matchQuitRatio = Integer.toString(matchQuitRatio);
         this.tourneyHistory = tourneyHistory;
+        this.tourneyQuitRatio = Integer.toString(tourneyQuitRatio);
         this.userName = userName;
         this.infoGames = infoGames;
         this.infoPing = infoPing;
@@ -65,8 +70,16 @@ public class UsersView implements Serializable {
         return matchHistory;
     }
 
+    public String getMatchQuitRatio() {
+        return matchQuitRatio;
+    }
+
     public String getTourneyHistory() {
         return tourneyHistory;
+    }
+
+    public String getTourneyQuitRatio() {
+        return tourneyQuitRatio;
     }
 
     public String getInfoGames() {

@@ -530,10 +530,14 @@ public class User {
         userStats = UserStatsRepository.instance.getUser(this.userName);
         if (userStats != null) {
             userData.setMatchHistory(userStatsToMatchHistory(userStats.getProto()));
+            userData.setMatchQuitRatio(userStatsToMatchQuitRatio(userStats.getProto()));
             userData.setTourneyHistory(userStatsToTourneyHistory(userStats.getProto()));
+            userData.setTourneyQuitRatio(userStatsToTourneyQuitRatio(userStats.getProto()));
         } else {
             userData.setMatchHistory("0");
+            userData.setMatchQuitRatio(0);
             userData.setTourneyHistory("0");
+            userData.setTourneyQuitRatio(0);
         }
     }
 
@@ -542,6 +546,13 @@ public class User {
             return userData.getMatchHistory();
         }
         return "<not available>";
+    }
+
+    public int getMatchQuitRatio() {
+        if (userData != null) {
+            return userData.getMatchQuitRatio();
+        }
+        return 0;
     }
 
     public String getTourneyHistory() {
@@ -554,6 +565,13 @@ public class User {
     public static String userStatsToHistory(ResultProtos.UserStatsProto proto) {
         return "Matches:" + userStatsToMatchHistory(proto) +
                 " Tourneys: " + userStatsToTourneyHistory(proto);
+    }
+
+    public int getTourneyQuitRatio() {
+        if (userData != null) {
+            return userData.getTourneyQuitRatio();
+        }
+        return 0;
     }
 
     public static String userStatsToMatchHistory(ResultProtos.UserStatsProto proto) {
@@ -577,6 +595,17 @@ public class User {
         return builder.toString();
     }
 
+    public static int userStatsToMatchQuitRatio(ResultProtos.UserStatsProto proto) {
+        int matches = proto.getMatches();
+        if (matches == 0) {
+            return 0;
+        }
+        int quits = proto.getMatchesIdleTimeout() +
+                proto.getMatchesTimerTimeout() +
+                proto.getMatchesQuit();
+        return 100 * quits / matches;
+    }
+
     public static String userStatsToTourneyHistory(ResultProtos.UserStatsProto proto) {
         StringBuilder builder = new StringBuilder();
         builder.append(proto.getTourneys());
@@ -596,6 +625,17 @@ public class User {
             builder.append(")");
         }
         return builder.toString();
+    }
+
+    public static int userStatsToTourneyQuitRatio(ResultProtos.UserStatsProto proto) {
+        int tourneys = proto.getTourneys();
+        if (tourneys == 0) {
+            return 0;
+        }
+        int quits = proto.getTourneysQuitDuringDrafting() +
+                proto.getTourneysQuitDuringConstruction() +
+                proto.getTourneysQuitDuringRound();
+        return 100 * quits / tourneys;
     }
 
     private static void joinStrings(StringBuilder joined, List<String> strings, String separator) {
