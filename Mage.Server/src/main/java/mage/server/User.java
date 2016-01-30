@@ -399,12 +399,7 @@ public class User {
             this.userData.update(userData);
         } else {
             this.userData = userData;
-            this.userStats = UserStatsRepository.instance.getUser(this.userName);
-            if (userStats != null) {
-                this.userData.setHistory(userStatsToString(userStats.getProto()));
-            } else {
-                this.userData.setHistory("Matches: 0");
-            }
+            resetUserStats();
         }
     }
 
@@ -528,85 +523,72 @@ public class User {
         }
     }
 
-    // getUserStats returns the UserStats for this user. This caches the result, so if the stats is
-    // updated call resetUserStats to refresh it.
-    public UserStats getUserStats() {
-        if (this.userStats == null) {
-            resetUserStats();
-        }
-        return this.userStats;
-    }
-
-    // resetUserStats loads UserStats from DB.
     public void resetUserStats() {
-        this.userStats = UserStatsRepository.instance.getUser(this.userName);
-        if (userData != null) {
-            userData.setHistory(userStatsToString(userStats.getProto()));
+        if (userData == null) {
+            return;
+        }
+        userStats = UserStatsRepository.instance.getUser(this.userName);
+        if (userStats != null) {
+            userData.setMatchHistory(userStatsToMatchHistory(userStats.getProto()));
+            userData.setTourneyHistory(userStatsToTourneyHistory(userStats.getProto()));
+        } else {
+            userData.setMatchHistory("0");
+            userData.setTourneyHistory("0");
         }
     }
 
-    public String getHistory() {
+    public String getMatchHistory() {
         if (userData != null) {
-            return userData.getHistory();
+            return userData.getMatchHistory();
         }
         return "<not available>";
     }
 
-    public static String userStatsToString(ResultProtos.UserStatsProto proto) {
-        List<StringBuilder> builders = new ArrayList<>();
-        if (proto.getMatches() > 0) {
-            StringBuilder builder = new StringBuilder();
-            builder.append("Matches:");
-            builder.append(proto.getMatches());
-            List<String> quit = new ArrayList<>();
-            if (proto.getMatchesIdleTimeout() > 0) {
-                quit.add("I:" + Integer.toString(proto.getMatchesIdleTimeout()));
-            }
-            if (proto.getMatchesTimerTimeout() > 0) {
-                quit.add("T:" + Integer.toString(proto.getMatchesTimerTimeout()));
-            }
-            if (proto.getMatchesQuit() > 0) {
-                quit.add("Q:" + Integer.toString(proto.getMatchesQuit()));
-            }
-            if (quit.size() > 0) {
-                builder.append(" (");
-                joinStrings(builder, quit, " ");
-                builder.append(")");
-            }
-            builders.add(builder);
+    public String getTourneyHistory() {
+        if (userData != null) {
+            return userData.getTourneyHistory();
         }
-        if (proto.getTourneys() > 0) {
-            StringBuilder builder = new StringBuilder();
-            builder.append("Tourneys:");
-            builder.append(proto.getTourneys());
-            List<String> quit = new ArrayList<>();
-            if (proto.getTourneysQuitDuringDrafting() > 0) {
-                quit.add("D:" + Integer.toString(proto.getTourneysQuitDuringDrafting()));
-            }
-            if (proto.getTourneysQuitDuringConstruction() > 0) {
-                quit.add("C:" + Integer.toString(proto.getTourneysQuitDuringConstruction()));
-            }
-            if (proto.getTourneysQuitDuringRound() > 0) {
-                quit.add("R:" + Integer.toString(proto.getTourneysQuitDuringRound()));
-            }
-            if (quit.size() > 0) {
-                builder.append(" (");
-                joinStrings(builder, quit, " ");
-                builder.append(")");
-            }
-            builders.add(builder);
-        }
-        return joinBuilders(builders);
+        return "<not available>";
     }
 
-    private static String joinBuilders(List<StringBuilder> builders) {
-        if (builders.isEmpty()) {
-            return null;
+    public static String userStatsToMatchHistory(ResultProtos.UserStatsProto proto) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(proto.getMatches());
+        List<String> quit = new ArrayList<>();
+        if (proto.getMatchesIdleTimeout() > 0) {
+            quit.add("I:" + Integer.toString(proto.getMatchesIdleTimeout()));
         }
-        StringBuilder builder = builders.get(0);
-        for (int i = 1; i < builders.size(); ++i) {
-            builder.append(" ");
-            builder.append(builders.get(i));
+        if (proto.getMatchesTimerTimeout() > 0) {
+            quit.add("T:" + Integer.toString(proto.getMatchesTimerTimeout()));
+        }
+        if (proto.getMatchesQuit() > 0) {
+            quit.add("Q:" + Integer.toString(proto.getMatchesQuit()));
+        }
+        if (quit.size() > 0) {
+            builder.append(" (");
+            joinStrings(builder, quit, " ");
+            builder.append(")");
+        }
+        return builder.toString();
+    }
+
+    public static String userStatsToTourneyHistory(ResultProtos.UserStatsProto proto) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(proto.getTourneys());
+        List<String> quit = new ArrayList<>();
+        if (proto.getTourneysQuitDuringDrafting() > 0) {
+            quit.add("D:" + Integer.toString(proto.getTourneysQuitDuringDrafting()));
+        }
+        if (proto.getTourneysQuitDuringConstruction() > 0) {
+            quit.add("C:" + Integer.toString(proto.getTourneysQuitDuringConstruction()));
+        }
+        if (proto.getTourneysQuitDuringRound() > 0) {
+            quit.add("R:" + Integer.toString(proto.getTourneysQuitDuringRound()));
+        }
+        if (quit.size() > 0) {
+            builder.append(" (");
+            joinStrings(builder, quit, " ");
+            builder.append(")");
         }
         return builder.toString();
     }
