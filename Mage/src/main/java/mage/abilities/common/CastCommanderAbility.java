@@ -57,7 +57,11 @@ public class CastCommanderAbility extends SpellAbility {
         if (super.activate(game, noMana)) {
             // save amount of times commander was cast
             Integer castCount = (Integer) game.getState().getValue(sourceId + "_castCount");
-            castCount++;
+            if (castCount == null) {
+                castCount = 1;
+            } else {
+                castCount++;
+            }
             game.getState().setValue(sourceId + "_castCount", castCount);
             return true;
         }
