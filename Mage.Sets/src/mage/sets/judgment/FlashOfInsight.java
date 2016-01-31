@@ -31,6 +31,8 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -45,6 +47,8 @@ import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -56,21 +60,18 @@ import mage.target.TargetCard;
  */
 public class FlashOfInsight extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("blue cards from your graveyard");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
-
     public FlashOfInsight(UUID ownerId) {
         super(ownerId, 40, "Flash of Insight", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{1}{U}");
         this.expansionSetCode = "JUD";
 
-
         // Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new FlashOfInsightEffect());
+
         // Flashback-{1}{U}, Exile X blue cards from your graveyard.
         Ability ability = new FlashbackAbility(new ManaCostsImpl("{1}{U}"), TimingRule.INSTANT);
+        FilterCard filter = new FilterCard("blue cards from your graveyard");
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+        filter.add(Predicates.not(new CardIdPredicate(getId())));
         ability.addCost(new ExileXFromYourGraveCost(filter));
         this.addAbility(ability);
     }
@@ -103,37 +104,34 @@ class FlashOfInsightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player == null || sourceObject == null) {
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        int xValue;
-        xValue = source.getManaCostsToPay().getX();
+        int xValue = source.getManaCostsToPay().getX();
+
+        for (Cost cost : source.getCosts()) {
+            if (cost instanceof ExileFromGraveCost) {
+                xValue = ((ExileFromGraveCost) cost).getExiledCards().size();
+            }
+        }
 
         Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), xValue);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.lookAtCards(sourceObject.getName(), cards, game);
+        cards.addAll(controller.getLibrary().getTopCards(game, xValue));
+        controller.lookAtCards(sourceObject.getIdName(), cards, game);
 
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-        if (player.choose(Outcome.DrawCard, cards, target, game)) {
+        target.setNotTarget(true);
+        if (controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
+                controller.moveCards(card, Zone.HAND, source, game);
                 cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                game.informPlayers(sourceObject.getName() + ": " + player.getLogName() + " puts a card into his or her hand");
             }
         }
-
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
-
+        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }

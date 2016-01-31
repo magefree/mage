@@ -55,7 +55,6 @@ public class ExileXFromYourGraveCost extends VariableCostImpl {
 
     public ExileXFromYourGraveCost(final ExileXFromYourGraveCost cost) {
         super(cost);
-        this.amountPaid = cost.amountPaid;
         this.filter = cost.filter;
     }
 
@@ -78,5 +77,4 @@ public class ExileXFromYourGraveCost extends VariableCostImpl {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(xValue, filter);
         return new ExileFromGraveCost(target);
     }
-
 }
