@@ -55,7 +55,7 @@ public class SeatView implements Serializable {
                 this.history = "";
             } else {
                 this.flagName = seat.getPlayer().getUserData().getFlagName();
-                this.history = seat.getPlayer().getUserData().getHistory();
+                this.history = seat.getPlayer().getUserData().getMatchHistory() + " " + seat.getPlayer().getUserData().getTourneyHistory();
             }
         } else {
             // Empty seat
