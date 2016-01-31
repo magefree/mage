@@ -205,9 +205,9 @@ public class UserManager {
             if (userStats == null) {
                 return "User " + userName + " not found";
             }
-            return User.userStatsToString(userStats.getProto());
+            return "History of user " + userName + ": " + User.userStatsToMatchHistory(userStats.getProto()) + " " + User.userStatsToTourneyHistory(userStats.getProto());
         }
-        return "History of user " + userName + ": " + user.getUserData().getHistory();
+        return "History of user " + userName + ": " + user.getUserData().getMatchHistory() + " " + user.getUserData().getTourneyHistory();
     }
 
     public void updateUserHistory() {
