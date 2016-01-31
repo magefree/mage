@@ -171,6 +171,10 @@ public class UserData implements Serializable {
         this.autoOrderTrigger = autoOrderTrigger;
     }
 
+    public String getHistory() {
+        return "Matches:" + this.matchHistory + " Tourneys:" + this.tourneyHistory;
+    }
+
     public void setMatchHistory(String history) {
         this.matchHistory = history;
     }

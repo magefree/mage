@@ -551,6 +551,11 @@ public class User {
         return "<not available>";
     }
 
+    public static String userStatsToHistory(ResultProtos.UserStatsProto proto) {
+        return "Matches:" + userStatsToMatchHistory(proto) +
+                " Tourneys: " + userStatsToTourneyHistory(proto);
+    }
+
     public static String userStatsToMatchHistory(ResultProtos.UserStatsProto proto) {
         StringBuilder builder = new StringBuilder();
         builder.append(proto.getMatches());
