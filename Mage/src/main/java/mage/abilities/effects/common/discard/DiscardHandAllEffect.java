@@ -57,8 +57,7 @@ public class DiscardHandAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId : sourcePlayer.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 Set<Card> cards = player.getHand().getCards(game);
@@ -66,7 +65,7 @@ public class DiscardHandAllEffect extends OneShotEffect {
                     player.discard(card, source, game);
                 }
             }
-	}
+        }
         return true;
     }
 }

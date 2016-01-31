@@ -40,7 +40,7 @@ import org.apache.log4j.Logger;
  */
 public class GameWorker<T> implements Callable {
 
-    private static final Logger logger = Logger.getLogger(GameWorker.class);
+    private static final Logger LOGGER = Logger.getLogger(GameWorker.class);
 
     private final GameCallback gameController;
     private final Game game;
@@ -55,18 +55,26 @@ public class GameWorker<T> implements Callable {
     @Override
     public Object call() {
         try {
-            logger.debug("GAME WORKER started gameId " + game.getId());
+            LOGGER.debug("GAME WORKER started gameId " + game.getId());
             Thread.currentThread().setName("GAME " + game.getId());
             game.start(choosingPlayerId);
             game.fireUpdatePlayersEvent();
             gameController.gameResult(game.getWinner());
             game.cleanUp();
         } catch (MageException ex) {
-            logger.fatal("GameWorker mage error [" + game.getId() + "]" + ex, ex);
+            LOGGER.fatal("GameWorker mage error [" + game.getId() + "] " + ex, ex);
         } catch (Exception e) {
-            logger.fatal("GameWorker general exception [" + game.getId() + "]" + e.getMessage(), e);
+            LOGGER.fatal("GameWorker general exception [" + game.getId() + "] " + e.getMessage(), e);
+            if (e instanceof NullPointerException) {
+                if (e.getStackTrace() == null) {
+                    LOGGER.info("Stack trace is null");
+                } else {
+                    LOGGER.info("Null-Pointer-Exception: Stack trace");
+                    LOGGER.info(e.getStackTrace());
+                }
+            }
         } catch (Error err) {
-            logger.fatal("GameWorker general error [" + game.getId() + "]" + err, err);
+            LOGGER.fatal("GameWorker general error [" + game.getId() + "] " + err, err);
         }
         return null;
     }

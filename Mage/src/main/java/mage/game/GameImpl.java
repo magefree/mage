@@ -138,24 +138,24 @@ public abstract class GameImpl implements Game, Serializable {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
 
-    private static final Logger logger = Logger.getLogger(GameImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(GameImpl.class);
 
-    private static final FilterPermanent filterAura = new FilterPermanent();
-    private static final FilterPermanent filterEquipment = new FilterPermanent();
-    private static final FilterPermanent filterFortification = new FilterPermanent();
-    private static final FilterPermanent filterLegendary = new FilterPermanent();
+    private static final FilterPermanent FILTER_AURA = new FilterPermanent();
+    private static final FilterPermanent FILTER_EQUIPMENT = new FilterPermanent();
+    private static final FilterPermanent FILTER_FORTIFICATION = new FilterPermanent();
+    private static final FilterPermanent FILTER_LEGENDARY = new FilterPermanent();
 
     static {
-        filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate("Aura"));
+        FILTER_AURA.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        FILTER_AURA.add(new SubtypePredicate("Aura"));
 
-        filterEquipment.add(new CardTypePredicate(CardType.ARTIFACT));
-        filterEquipment.add(new SubtypePredicate("Equipment"));
+        FILTER_EQUIPMENT.add(new CardTypePredicate(CardType.ARTIFACT));
+        FILTER_EQUIPMENT.add(new SubtypePredicate("Equipment"));
 
-        filterFortification.add(new CardTypePredicate(CardType.ARTIFACT));
-        filterFortification.add(new SubtypePredicate("Fortification"));
+        FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
+        FILTER_FORTIFICATION.add(new SubtypePredicate("Fortification"));
 
-        filterLegendary.add(new SupertypePredicate("Legendary"));
+        FILTER_LEGENDARY.add(new SupertypePredicate("Legendary"));
     }
 
     private static Random rnd = new Random();
@@ -230,7 +230,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     public GameImpl(final GameImpl game) {
         long t1 = 0;
-        if (logger.isDebugEnabled()) {
+        if (LOGGER.isDebugEnabled()) {
             t1 = System.currentTimeMillis();
         }
         this.id = game.id;
@@ -248,7 +248,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.lkiExtended.putAll(game.lkiExtended);
         this.shortLivingLKI.putAll(game.shortLivingLKI);
         this.permanentsEntering.putAll(game.permanentsEntering);
-        if (logger.isDebugEnabled()) {
+        if (LOGGER.isDebugEnabled()) {
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
         }
@@ -577,7 +577,7 @@ public abstract class GameImpl implements Game, Serializable {
             boolean result = checkIfGameIsOver();
             return result;
         } else {
-            logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
+            LOGGER.debug("Game over for player Id: " + playerId + " gameId " + getId());
             leave(playerId);
             return true;
         }
@@ -599,15 +599,15 @@ public abstract class GameImpl implements Game, Serializable {
         }
         if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
             end();
-            if (remainingPlayers == 0 && logger.isDebugEnabled()) {
-                logger.debug("DRAW for gameId: " + getId());
+            if (remainingPlayers == 0 && LOGGER.isDebugEnabled()) {
+                LOGGER.debug("DRAW for gameId: " + getId());
                 for (Player player : state.getPlayers().values()) {
-                    logger.debug("-- " + player.getName() + " left: " + (player.hasLeft() ? "Y" : "N") + " lost: " + (player.hasLost() ? "Y" : "N"));
+                    LOGGER.debug("-- " + player.getName() + " left: " + (player.hasLeft() ? "Y" : "N") + " lost: " + (player.hasLost() ? "Y" : "N"));
                 }
             }
             for (Player player : state.getPlayers().values()) {
                 if (!player.hasLeft() && !player.hasLost()) {
-                    logger.debug(new StringBuilder("Player ").append(player.getName()).append(" has won gameId: ").append(this.getId()));
+                    LOGGER.debug(new StringBuilder("Player ").append(player.getName()).append(" has won gameId: ").append(this.getId()));
                     player.won(this);
                 }
             }
@@ -643,8 +643,8 @@ public abstract class GameImpl implements Game, Serializable {
     public int bookmarkState() {
         if (!simulation) {
             saveState(true);
-            if (logger.isTraceEnabled()) {
-                logger.trace("Bookmarking state: " + gameStates.getSize());
+            if (LOGGER.isTraceEnabled()) {
+                LOGGER.trace("Bookmarking state: " + gameStates.getSize());
             }
             savedStates.push(gameStates.getSize() - 1);
             return savedStates.size();
@@ -772,7 +772,7 @@ public abstract class GameImpl implements Game, Serializable {
                 sb.append("]");
                 count++;
             }
-            logger.info(sb.toString());
+            LOGGER.info(sb.toString());
         }
     }
 
@@ -926,7 +926,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         Player startingPlayer = state.getPlayer(startingPlayerId);
         if (startingPlayer == null) {
-            logger.debug("Starting player not found. playerId:" + startingPlayerId);
+            LOGGER.debug("Starting player not found. playerId:" + startingPlayerId);
             return;
         }
         StringBuilder message = new StringBuilder(choosingPlayer.getLogName()).append(" chooses that ");
@@ -1052,12 +1052,12 @@ public abstract class GameImpl implements Game, Serializable {
         UUID winnerIdFound = null;
         for (Player player : state.getPlayers().values()) {
             if (player.hasWon()) {
-                logger.debug(player.getName() + " has won gameId: " + getId());
+                LOGGER.debug(player.getName() + " has won gameId: " + getId());
                 winnerIdFound = player.getId();
                 break;
             }
             if (!player.hasLost() && !player.hasLeft()) {
-                logger.debug(player.getName() + " has not lost so he won gameId: " + this.getId());
+                LOGGER.debug(player.getName() + " has not lost so he won gameId: " + this.getId());
                 player.won(this);
                 winnerIdFound = player.getId();
                 break;
@@ -1089,7 +1089,7 @@ public abstract class GameImpl implements Game, Serializable {
                 return player.getId();
             }
         }
-        logger.debug("Game was not possible to pick a choosing player.  GameId:" + getId());
+        LOGGER.debug("Game was not possible to pick a choosing player.  GameId:" + getId());
         return null;
     }
 
@@ -1106,7 +1106,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void end() {
         if (!state.isGameOver()) {
-            logger.debug("END of gameId: " + this.getId());
+            LOGGER.debug("END of gameId: " + this.getId());
             endTime = new Date();
             state.endGame();
             for (Player player : state.getPlayers().values()) {
@@ -1175,7 +1175,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (player != null) {
             player.timerTimeout(this);
         } else {
-            logger.error(new StringBuilder("timerTimeout - player not found - playerId: ").append(playerId));
+            LOGGER.error(new StringBuilder("timerTimeout - player not found - playerId: ").append(playerId));
         }
     }
 
@@ -1185,7 +1185,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (player != null) {
             player.idleTimeout(this);
         } else {
-            logger.error(new StringBuilder("idleTimeout - player not found - playerId: ").append(playerId));
+            LOGGER.error(new StringBuilder("idleTimeout - player not found - playerId: ").append(playerId));
         }
     }
 
@@ -1193,7 +1193,7 @@ public abstract class GameImpl implements Game, Serializable {
     public synchronized void concede(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            logger.debug("Player " + player.getName() + " concedes game " + this.getId());
+            LOGGER.debug("Player " + player.getName() + " concedes game " + this.getId());
             fireInformEvent(player.getLogName() + " has conceded.");
             player.concede(this);
         }
@@ -1306,7 +1306,11 @@ public abstract class GameImpl implements Game, Serializable {
                             }
                         }
                     } catch (Exception ex) {
-                        logger.fatal("Game exception gameId: " + getId(), ex);
+                        LOGGER.fatal("Game exception gameId: " + getId(), ex);
+                        if ((ex instanceof NullPointerException)
+                                && errorContinueCounter == 1 && ex.getStackTrace() != null) {
+                            LOGGER.fatal(ex.getStackTrace());
+                        }
                         this.fireErrorEvent("Game exception occurred: ", ex);
                         restoreState(bookmark, "");
                         bookmark = 0;
@@ -1325,7 +1329,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         } catch (Exception ex) {
-            logger.fatal("Game exception ", ex);
+            LOGGER.fatal("Game exception ", ex);
             this.fireErrorEvent("Game exception occurred: ", ex);
             this.end();
         } finally {
@@ -1709,7 +1713,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.getSupertype().contains("World")) {
                 worldEnchantment.add(perm);
             }
-            if (filterAura.match(perm, this)) {
+            if (FILTER_AURA.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     Card card = this.getCard(perm.getId());
@@ -1732,7 +1736,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                     if (spellAbility.getTargets().isEmpty()) {
                         Permanent enchanted = this.getPermanent(perm.getAttachedTo());
-                        logger.error("Aura without target: " + perm.getName() + " attached to " + (enchanted == null ? " null" : enchanted.getName()));
+                        LOGGER.error("Aura without target: " + perm.getName() + " attached to " + (enchanted == null ? " null" : enchanted.getName()));
                     } else {
                         Target target = spellAbility.getTargets().get(0);
                         if (target instanceof TargetPermanent) {
@@ -1744,10 +1748,8 @@ public abstract class GameImpl implements Game, Serializable {
                                     UUID wasAttachedTo = perm.getAttachedTo();
                                     perm.attachTo(null, this);
                                     fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
-                                } else {
-                                    if (movePermanentToGraveyardWithInfo(perm)) {
-                                        somethingHappened = true;
-                                    }
+                                } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                    somethingHappened = true;
                                 }
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
@@ -1758,19 +1760,15 @@ public abstract class GameImpl implements Game, Serializable {
                                             somethingHappened = true;
                                         }
                                     }
-                                } else {
-                                    if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeEnchantedBy(perm, this)) {
-                                        // handle bestow unattachment
-                                        Card card = this.getCard(perm.getId());
-                                        if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-                                            UUID wasAttachedTo = perm.getAttachedTo();
-                                            perm.attachTo(null, this);
-                                            fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
-                                        } else {
-                                            if (movePermanentToGraveyardWithInfo(perm)) {
-                                                somethingHappened = true;
-                                            }
-                                        }
+                                } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeEnchantedBy(perm, this)) {
+                                    // handle bestow unattachment
+                                    Card card = this.getCard(perm.getId());
+                                    if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                                        UUID wasAttachedTo = perm.getAttachedTo();
+                                        perm.attachTo(null, this);
+                                        fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                                    } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                        somethingHappened = true;
                                     }
                                 }
                             }
@@ -1792,10 +1790,10 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (this.getState().isLegendaryRuleActive() && filterLegendary.match(perm, this)) {
+            if (this.getState().isLegendaryRuleActive() && FILTER_LEGENDARY.match(perm, this)) {
                 legendary.add(perm);
             }
-            if (filterEquipment.match(perm, this)) {
+            if (FILTER_EQUIPMENT.match(perm, this)) {
                 //20091005 - 704.5p, 702.14d
                 if (perm.getAttachedTo() != null) {
                     Permanent creature = getPermanent(perm.getAttachedTo());
@@ -1810,7 +1808,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (filterFortification.match(perm, this)) {
+            if (FILTER_FORTIFICATION.match(perm, this)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null || !land.getAttachments().contains(perm.getId())) {
@@ -2093,7 +2091,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void debugMessage(String message) {
-        logger.warn(message);
+        LOGGER.warn(message);
     }
 
     @Override
@@ -2117,7 +2115,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (simulation) {
             return;
         }
-        logger.trace("fireUpdatePlayersEvent");
+        LOGGER.trace("fireUpdatePlayersEvent");
         tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
         getState().clearLookedAt();
         getState().clearRevealed();
@@ -2128,7 +2126,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (simulation) {
             return;
         }
-        logger.trace("fireGameEndIfo");
+        LOGGER.trace("fireGameEndIfo");
         tableEventSource.fireTableEvent(EventType.END_GAME_INFO, null, this);
     }
 
@@ -2214,10 +2212,10 @@ public abstract class GameImpl implements Game, Serializable {
 
         Player player = getPlayer(playerId);
         if (player == null || player.hasLeft()) {
-            logger.debug("Player already left " + (player != null ? player.getName() : playerId));
+            LOGGER.debug("Player already left " + (player != null ? player.getName() : playerId));
             return;
         }
-        logger.debug("Start leave game: " + player.getName());
+        LOGGER.debug("Start leave game: " + player.getName());
         player.leave();
         if (checkIfGameIsOver()) {
             // no need to remove objects if only one player is left so the game is over
@@ -2532,9 +2530,9 @@ public abstract class GameImpl implements Game, Serializable {
                                     try {
                                         Integer amount = Integer.parseInt(s[1]);
                                         player.setLife(amount, this);
-                                        logger.info("Setting player's life: ");
+                                        LOGGER.info("Setting player's life: ");
                                     } catch (NumberFormatException e) {
-                                        logger.fatal("error setting life", e);
+                                        LOGGER.fatal("error setting life", e);
                                     }
                                 }
 

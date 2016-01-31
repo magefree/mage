@@ -141,7 +141,7 @@ public class MageServerImpl implements MageServer {
         String authToken = generateAuthToken();
         activeAuthTokens.put(email, authToken);
         String subject = "XMage Password Reset Auth Token";
-        String text = "Use this auth token to reset your password: " + authToken + "\n"
+        String text = "Use this auth token to reset " + authorizedUser.name + "'s password: " + authToken + "\n"
                 + "It's valid until the next server restart.";
         boolean success;
         if (!ConfigSettings.getInstance().getMailUser().isEmpty()) {
@@ -500,11 +500,11 @@ public class MageServerImpl implements MageServer {
         try {
             callExecutor.execute(
                     new Runnable() {
-                        @Override
-                        public void run() {
-                            ChatManager.getInstance().broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE);
-                        }
-                    }
+                @Override
+                public void run() {
+                    ChatManager.getInstance().broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE);
+                }
+            }
             );
         } catch (Exception ex) {
             handleException(ex);
@@ -1139,19 +1139,19 @@ public class MageServerImpl implements MageServer {
             try {
                 callExecutor.execute(
                         new Runnable() {
-                            @Override
-                            public void run() {
-                                if (SessionManager.getInstance().isValidSession(sessionId)) {
-                                    try {
-                                        action.execute();
-                                    } catch (MageException me) {
-                                        throw new RuntimeException(me);
-                                    }
-                                } else {
-                                    LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
-                                }
+                    @Override
+                    public void run() {
+                        if (SessionManager.getInstance().isValidSession(sessionId)) {
+                            try {
+                                action.execute();
+                            } catch (MageException me) {
+                                throw new RuntimeException(me);
                             }
+                        } else {
+                            LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
                         }
+                    }
+                }
                 );
             } catch (Exception ex) {
                 handleException(ex);
