@@ -24,7 +24,9 @@ public class UserData implements Serializable {
     protected boolean autoOrderTrigger;
 
     protected String matchHistory;
+    protected int matchQuitRatio;
     protected String tourneyHistory;
+    protected int tourneyQuitRatio;
 
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
@@ -44,7 +46,9 @@ public class UserData implements Serializable {
         this.passPriorityActivation = passPriorityActivation;
         this.autoOrderTrigger = autoOrderTrigger;
         this.matchHistory = "";
+        this.matchQuitRatio = 0;
         this.tourneyHistory = "";
+        this.tourneyQuitRatio = 0;
     }
 
     public void update(UserData userData) {
@@ -183,12 +187,28 @@ public class UserData implements Serializable {
         return matchHistory;
     }
 
+    public void setMatchQuitRatio(int ratio) {
+        this.matchQuitRatio = ratio;
+    }
+
+    public int getMatchQuitRatio() {
+        return matchQuitRatio;
+    }
+
     public void setTourneyHistory(String history) {
         this.tourneyHistory = history;
     }
 
     public String getTourneyHistory() {
         return tourneyHistory;
+    }
+
+    public void setTourneyQuitRatio(int ratio) {
+        this.tourneyQuitRatio = ratio;
+    }
+
+    public int getTourneyQuitRatio() {
+        return tourneyQuitRatio;
     }
 
     public static String getDefaultFlagName() {

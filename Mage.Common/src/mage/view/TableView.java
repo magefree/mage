@@ -62,6 +62,7 @@ public class TableView implements Serializable {
     private boolean isTournament;
     private List<SeatView> seats = new ArrayList<>();
     private List<UUID> games = new ArrayList<>();
+    private final String quitRatio;
 
     public TableView(Table table) {    
         this.tableId = table.getId();
@@ -130,6 +131,7 @@ public class TableView implements Serializable {
             }
             this.additionalInfo = addInfo.toString();
             this.skillLevel = table.getMatch().getOptions().getSkillLevel();
+            this.quitRatio = Integer.toString(table.getMatch().getOptions().getQuitRatio());
         } else {
         // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
@@ -176,6 +178,7 @@ public class TableView implements Serializable {
             this.tableStateText = stateText.toString();
             this.deckType =  table.getDeckType() + " " + table.getTournament().getBoosterInfo() + (tableNameInfo != null ? tableNameInfo : "");
             this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
+            this.quitRatio = Integer.toString(table.getTournament().getOptions().getQuitRatio());
         }
     }
 
@@ -230,4 +233,7 @@ public class TableView implements Serializable {
         return skillLevel;
     }
 
+    public String getQuitRatio() {
+        return quitRatio;
+    }
 }

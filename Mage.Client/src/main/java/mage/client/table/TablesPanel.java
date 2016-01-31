@@ -119,7 +119,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     JToggleButton[] filterButtons;
 
-    private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60, 60};
+    private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60, 40, 60};
 
     /**
      * Creates new form TablesPanel
@@ -1239,9 +1239,10 @@ class TableTableModel extends AbstractTableModel {
     public static final int COLUMN_INFO = 4;
     public static final int COLUMN_STATUS = 5;
     public static final int COLUMN_SKILL = 7;
-    public static final int ACTION_COLUMN = 8; // column the action is located (starting with 0)
+    public static final int COLUMN_QUIT_RATIO = 8;
+    public static final int ACTION_COLUMN = 9; // column the action is located (starting with 0)
 
-    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Action"};
+    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Quit %", "Action"};
 
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
@@ -1288,6 +1289,8 @@ class TableTableModel extends AbstractTableModel {
             case 7:
                 return tables[arg0].getSkillLevel();
             case 8:
+                return tables[arg0].getQuitRatio();
+            case 9:
                 switch (tables[arg0].getTableState()) {
 
                     case WAITING:
@@ -1314,14 +1317,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 9:
-                return tables[arg0].isTournament();
             case 10:
+                return tables[arg0].isTournament();
+            case 11:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 11:
+            case 12:
                 return tables[arg0].getTableId();
         }
         return "";

@@ -170,7 +170,7 @@ public class TableController {
             }
         }
         if (userPlayerMap.containsKey(userId) && playerType.equals("Human")) {
-            user.showUserMessage("Join Table", new StringBuilder("You can join a table only one time.").toString());
+            user.showUserMessage("Join Table", "You can join a table only one time.");
             return false;
         }
         Deck deck = null;
@@ -194,6 +194,14 @@ public class TableController {
                 }
                 return false;
             }
+        }
+        // Check quit ratio.
+        int quitRatio = table.getTournament().getOptions().getQuitRatio();
+        if (quitRatio < user.getTourneyQuitRatio()) {
+            String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
+                    .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
+            user.showUserMessage("Join Table", message);
+            return false;
         }
 
         Player player = createPlayer(name, seat.getPlayerType(), skill);
@@ -284,6 +292,15 @@ public class TableController {
             }
             return false;
         }
+        // Check quit ratio.
+        int quitRatio = table.getMatch().getOptions().getQuitRatio();
+        if (quitRatio < user.getMatchQuitRatio()) {
+            String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
+                    .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
+            user.showUserMessage("Join Table", message);
+            return false;
+        }
+
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player == null) {
             String message = new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType()).toString();

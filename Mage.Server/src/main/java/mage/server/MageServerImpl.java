@@ -238,9 +238,21 @@ public class MageServerImpl implements MageServer {
             @Override
             public TableView execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                User user = UserManager.getInstance().getUser(userId);
+
+                // check if the user satisfies the quitRatio requirement.
+                if (user != null) {
+                    int quitRatio = options.getQuitRatio();
+                    if (quitRatio < user.getMatchQuitRatio()) {
+                        String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
+                                .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
+                        user.showUserMessage("Create table", message);
+                        throw new MageException("No message");
+                    }
+                }
+
                 TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
                 if (logger.isDebugEnabled()) {
-                    User user = UserManager.getInstance().getUser(userId);
                     if (user != null) {
                         logger.debug("TABLE created - tableId: " + table.getTableId() + " " + table.getTableName());
                         logger.debug("- " + user.getName() + " userId: " + user.getId());
@@ -260,6 +272,7 @@ public class MageServerImpl implements MageServer {
             public TableView execute() throws MageException {
                 try {
                     UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                    User user = UserManager.getInstance().getUser(userId);
                     // check AI players max
                     String maxAiOpponents = ConfigSettings.getInstance().getMaxAiOpponents();
                     if (maxAiOpponents != null) {
@@ -271,10 +284,19 @@ public class MageServerImpl implements MageServer {
                             }
                         }
                         if (aiPlayers > max) {
-                            User user = UserManager.getInstance().getUser(userId);
                             if (user != null) {
                                 user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
                             }
+                            throw new MageException("No message");
+                        }
+                    }
+                    // check if the user satisfies the quitRatio requirement.
+                    if (user != null) {
+                        int quitRatio = options.getQuitRatio();
+                        if (quitRatio < user.getTourneyQuitRatio()) {
+                            String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
+                                    .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
+                            user.showUserMessage("Create tournament", message);
                             throw new MageException("No message");
                         }
                     }
