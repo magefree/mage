@@ -97,7 +97,7 @@ class MemoryJarEffect extends OneShotEffect {
     {
         Cards cards = new CardsImpl();
         //Exile hand
-        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null)
             {
@@ -114,7 +114,7 @@ class MemoryJarEffect extends OneShotEffect {
             }
         }
         //Draw 7 cards
-        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null)
             {
@@ -162,7 +162,7 @@ class MemoryJarDelayedEffect extends OneShotEffect {
         if(cards != null)
         {
             //Discard
-            for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+            for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null)
                 {

@@ -95,7 +95,7 @@ class CracklingDoomEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             ArrayList<Permanent> toSacrifice = new ArrayList<>();
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {

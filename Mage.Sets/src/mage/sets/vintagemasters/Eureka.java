@@ -99,7 +99,7 @@ class EurekaEffect extends OneShotEffect {
                 if (firstInactivePlayer == null) {
                     firstInactivePlayer = currentPlayer.getId();
                 }
-                if (currentPlayer != null && currentPlayer.canRespond() && controller.getInRange().contains(currentPlayer.getId())) {
+                if (currentPlayer != null && currentPlayer.canRespond() && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {
 
                     target.clearChosen();
                     if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)

@@ -120,7 +120,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
                     continue;
                 }
                 // if player is in range he chooses a creature to control
-                if (currentPlayer != null && controller.getInRange().contains(currentPlayer.getId())) {
+                if (currentPlayer != null && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature controlled by ").append(nextPlayer.getLogName()).toString());
                     filter.add(new ControllerIdPredicate(nextPlayer.getId()));
                     Target target = new TargetCreaturePermanent(filter);

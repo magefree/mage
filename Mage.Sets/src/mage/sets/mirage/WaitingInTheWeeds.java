@@ -96,7 +96,7 @@ class WaitingInTheWeedsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Token token = new CatToken();
                 int amount = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size();
                 token.putOntoBattlefield(amount, game, source.getSourceId(), playerId);

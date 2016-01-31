@@ -75,7 +75,7 @@ public class DamagePlayersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         switch (controller) {
             case ANY:
-                for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+                for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);

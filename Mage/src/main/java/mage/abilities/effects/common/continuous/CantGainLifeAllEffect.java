@@ -43,13 +43,13 @@ import mage.players.Player;
  * @author LevelX2
  */
 public class CantGainLifeAllEffect extends ContinuousEffectImpl {
- 
+
     private TargetController targetController;
-    
+
     public CantGainLifeAllEffect() {
         this(Duration.WhileOnBattlefield);
     }
-    
+
     public CantGainLifeAllEffect(Duration duration) {
         this(duration, TargetController.ANY);
     }
@@ -58,7 +58,7 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         this.targetController = targetController;
         staticText = setText();
-        
+
     }
 
     public CantGainLifeAllEffect(final CantGainLifeAllEffect effect) {
@@ -74,21 +74,21 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {        
+        if (controller != null) {
             switch (targetController) {
                 case YOU:
                     controller.setCanGainLife(false);
-                break;
+                    break;
                 case NOT_YOU:
-                    for (UUID playerId: controller.getInRange()) {
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         Player player = game.getPlayer(playerId);
                         if (player != null && !player.equals(controller)) {
                             player.setCanGainLife(false);
                         }
                     }
-                break;
+                    break;
                 case OPPONENT:
-                    for (UUID playerId: controller.getInRange()) {
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         if (controller.hasOpponent(playerId, game)) {
                             Player player = game.getPlayer(playerId);
                             if (player != null) {
@@ -96,15 +96,15 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
                             }
                         }
                     }
-                break;
+                    break;
                 case ANY:
-                    for (UUID playerId: controller.getInRange()) {
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {
                             player.setCanGainLife(false);
                         }
                     }
-                break;
+                    break;
             }
             return true;
         }
@@ -116,17 +116,17 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
         switch (targetController) {
             case YOU:
                 sb.append("You");
-            break;
+                break;
             case NOT_YOU:
                 sb.append("Other players");
-            break;
+                break;
             case OPPONENT:
                 sb.append("Your opponents");
-            break;
+                break;
             case ANY:
                 sb.append("Players");
-            break;
-        }        
+                break;
+        }
         sb.append(" can't gain life");
         if (!this.duration.toString().isEmpty()) {
             sb.append(" ");
@@ -135,8 +135,8 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
             } else {
                 sb.append(duration.toString());
             }
-            
+
         }
-        return sb.toString();        
+        return sb.toString();
     }
 }

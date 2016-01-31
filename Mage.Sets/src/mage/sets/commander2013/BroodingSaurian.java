@@ -106,7 +106,7 @@ class BroodingSaurianControlEffect extends ContinuousEffectImpl {
         // add all creatures in range
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 FilterPermanent playerFilter = filter.copy();
                 playerFilter.add(new OwnerIdPredicate(playerId));
                 for (Permanent permanent :game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {

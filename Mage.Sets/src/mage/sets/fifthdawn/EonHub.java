@@ -65,6 +65,6 @@ class SkipUpkeepStepEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        return  controller != null && controller.getInRange().contains(event.getPlayerId());
+        return  controller != null && game.getState().getPlayersInRange(controller.getId(), game).contains(event.getPlayerId());
     }
 }

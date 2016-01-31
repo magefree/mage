@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * TablesPanel.java
  *
  * Created on 15-Dec-2009, 10:54:01 PM
@@ -384,10 +384,8 @@ public class TablesPanel extends javax.swing.JPanel {
                     updateMatchesTask = new UpdateMatchesTask(session, roomId, this);
                     updateMatchesTask.execute();
                 }
-            } else {
-                if (updateMatchesTask != null) {
-                    updateMatchesTask.cancel(true);
-                }
+            } else if (updateMatchesTask != null) {
+                updateMatchesTask.cancel(true);
             }
         }
     }
@@ -1138,6 +1136,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setFreeMulligans(2);
             options.setSkillLevel(SkillLevel.CASUAL);
             options.setRollbackTurnsAllowed(true);
+            options.setQuitRatio(100);
             table = session.createTable(roomId, options);
 
             session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"), "");
@@ -1499,12 +1498,10 @@ class MatchesTableModel extends AbstractTableModel {
             case 6:
                 if (matches[arg0].isTournament()) {
                     return "Show";
+                } else if (matches[arg0].isReplayAvailable()) {
+                    return "Replay";
                 } else {
-                    if (matches[arg0].isReplayAvailable()) {
-                        return "Replay";
-                    } else {
-                        return "None";
-                    }
+                    return "None";
                 }
             case 7:
                 return matches[arg0].getGames();

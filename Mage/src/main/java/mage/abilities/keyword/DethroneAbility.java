@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.keyword;
 
 import java.util.UUID;
@@ -38,13 +37,16 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
- * Dethrone triggers whenever a creature with dethrone attacks the player with the most life or tied
- * for the most life. When the ability resolves, you put a +1/+1 counter on the creature. This happens
- * before blockers are declared. Once the ability triggers, it doesn't matter what happens to anybody's
- * life total. If the defending player doesn't have the most life when the ability resolves, the creature
- * will still get the +1/+1 counter. Note that dethrone won't trigger if the creature attacks a Planeswalker.
- * You're going after the crown, after all, not the royal advisors. If you have the most life, your dethrone
- * abilities won't trigger, but you may find a few choice ways to avoid that situation.
+ * Dethrone triggers whenever a creature with dethrone attacks the player with
+ * the most life or tied for the most life. When the ability resolves, you put a
+ * +1/+1 counter on the creature. This happens before blockers are declared.
+ * Once the ability triggers, it doesn't matter what happens to anybody's life
+ * total. If the defending player doesn't have the most life when the ability
+ * resolves, the creature will still get the +1/+1 counter. Note that dethrone
+ * won't trigger if the creature attacks a Planeswalker. You're going after the
+ * crown, after all, not the royal advisors. If you have the most life, your
+ * dethrone abilities won't trigger, but you may find a few choice ways to avoid
+ * that situation.
  *
  * @author LevelX2
  */
@@ -76,7 +78,7 @@ public class DethroneAbility extends TriggeredAbilityImpl {
             Player controller = game.getPlayer(getControllerId());
             if (attackedPlayer != null && controller != null) {
                 int mostLife = Integer.MIN_VALUE;
-                for (UUID playerId: controller.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         if (player.getLife() > mostLife) {

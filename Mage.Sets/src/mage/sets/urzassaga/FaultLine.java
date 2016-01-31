@@ -94,7 +94,7 @@ class FaultLineEffect extends OneShotEffect {
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             permanent.damage(amount, source.getSourceId(), game, false, true);
         }
-        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null)
                 player.damage(amount, source.getSourceId(), game, false, true);

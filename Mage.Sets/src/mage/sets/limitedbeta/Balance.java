@@ -57,7 +57,6 @@ public class Balance extends CardImpl {
         super(ownerId, 188, "Balance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "LEB";
 
-
         // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
         this.getSpellAbility().addEffect(new BalanceEffect());
     }
@@ -95,7 +94,7 @@ class BalanceEffect extends OneShotEffect {
             //Lands
             int minLand = Integer.MAX_VALUE;
             Cards landsToSacrifice = new CardsImpl();
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int count = game.getBattlefield().countAll(new FilterControlledLandPermanent(), player.getId(), game);
@@ -104,8 +103,8 @@ class BalanceEffect extends OneShotEffect {
                     }
                 }
             }
-            
-            for (UUID playerId : controller.getInRange()) {
+
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     TargetControlledPermanent target = new TargetControlledPermanent(minLand, minLand, new FilterControlledLandPermanent("lands to keep"), true);
@@ -118,7 +117,7 @@ class BalanceEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             for (UUID cardId : landsToSacrifice) {
                 Permanent permanent = game.getPermanent(cardId);
                 if (permanent != null) {
@@ -129,7 +128,7 @@ class BalanceEffect extends OneShotEffect {
             //Creatures
             int minCreature = Integer.MAX_VALUE;
             Cards creaturesToSacrifice = new CardsImpl();
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int count = game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), player.getId(), game);
@@ -139,7 +138,7 @@ class BalanceEffect extends OneShotEffect {
                 }
             }
 
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     TargetControlledPermanent target = new TargetControlledPermanent(minCreature, minCreature, new FilterControlledCreaturePermanent("creatures to keep"), true);
@@ -152,18 +151,18 @@ class BalanceEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             for (UUID cardId : creaturesToSacrifice) {
                 Permanent permanent = game.getPermanent(cardId);
                 if (permanent != null) {
                     permanent.sacrifice(source.getSourceId(), game);
                 }
             }
-            
+
             //Cards in hand
             int minCard = Integer.MAX_VALUE;
             HashMap<UUID, Cards> cardsToDiscard = new HashMap<>(2);
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int count = player.getHand().size();
@@ -173,7 +172,7 @@ class BalanceEffect extends OneShotEffect {
                 }
             }
 
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Cards cards = new CardsImpl();
@@ -188,8 +187,8 @@ class BalanceEffect extends OneShotEffect {
                     }
                 }
             }
-            
-            for (UUID playerId : controller.getInRange()) {
+
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && cardsToDiscard.get(playerId) != null) {
                     for (UUID cardId : cardsToDiscard.get(playerId)) {

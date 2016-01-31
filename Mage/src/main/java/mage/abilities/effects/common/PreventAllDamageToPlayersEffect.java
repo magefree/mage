@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -39,8 +38,6 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
-
 public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
 
     public PreventAllDamageToPlayersEffect(Duration duration, boolean onlyCombat) {
@@ -66,7 +63,7 @@ public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)) {
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && controller.getInRange().contains(event.getTargetId())){
+            if (controller != null && game.getState().getPlayersInRange(controller.getId(), game).contains(event.getTargetId())) {
                 return true;
             }
         }

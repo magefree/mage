@@ -47,7 +47,7 @@ public class CardsInHandCondition implements Condition {
     public static enum CountType {
         MORE_THAN, FEWER_THAN, EQUAL_TO
     };
-    
+
     private Condition condition;
     private CountType type;
     private int count;
@@ -60,7 +60,7 @@ public class CardsInHandCondition implements Condition {
     public CardsInHandCondition(CountType type, int count) {
         this(type, count, null);
     }
-    
+
     public CardsInHandCondition(CountType type, int count, Condition conditionToDecorate) {
         this(type, count, conditionToDecorate, TargetController.YOU);
     }
@@ -73,7 +73,7 @@ public class CardsInHandCondition implements Condition {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {        
+    public boolean apply(Game game, Ability source) {
         boolean conditionApplies = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -95,7 +95,7 @@ public class CardsInHandCondition implements Condition {
                     boolean conflict = false;
                     switch (this.type) {
                         case FEWER_THAN:
-                            for (UUID playerId :controller.getInRange()) {
+                            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                                 Player player = game.getPlayer(playerId);
                                 if (player != null) {
                                     if (player.getHand().size() >= this.count) {
@@ -103,10 +103,10 @@ public class CardsInHandCondition implements Condition {
                                         break;
                                     }
                                 }
-                            }                            
+                            }
                             break;
                         case MORE_THAN:
-                            for (UUID playerId :controller.getInRange()) {
+                            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                                 Player player = game.getPlayer(playerId);
                                 if (player != null) {
                                     if (player.getHand().size() <= this.count) {
@@ -114,10 +114,10 @@ public class CardsInHandCondition implements Condition {
                                         break;
                                     }
                                 }
-                            }                            
+                            }
                             break;
                         case EQUAL_TO:
-                            for (UUID playerId :controller.getInRange()) {
+                            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                                 Player player = game.getPlayer(playerId);
                                 if (player != null) {
                                     if (player.getHand().size() != this.count) {
@@ -127,11 +127,11 @@ public class CardsInHandCondition implements Condition {
                                 }
                             }
                             break;
-                    }                
+                    }
                     conditionApplies = !conflict;
                     break;
                 default:
-                    throw new UnsupportedOperationException("Value of TargetController not supported for this class.");                    
+                    throw new UnsupportedOperationException("Value of TargetController not supported for this class.");
             }
 
             //If a decorated condition exists, check it as well and apply them together.
@@ -163,7 +163,7 @@ public class CardsInHandCondition implements Condition {
             case MORE_THAN:
                 sb.append(" more than ");
                 break;
-            case EQUAL_TO:                
+            case EQUAL_TO:
                 sb.append(" exactly ");
                 break;
         }
@@ -171,9 +171,9 @@ public class CardsInHandCondition implements Condition {
             sb.append("no");
         } else {
             sb.append(CardUtil.numberToText(workCount));
-        }                
+        }
         sb.append(" cards in hand");
         return sb.toString();
     }
-    
+
 }

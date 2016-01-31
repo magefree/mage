@@ -156,7 +156,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
-        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
                 count++;
@@ -187,7 +187,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         int count = 0;
-        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && filter.match(player, game)) {
                 count++;
@@ -211,7 +211,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
-        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && (notTarget || player.canBeTargetedBy(targetSource, sourceControllerId, game)) && filter.match(player, game)) {
                 possibleTargets.add(playerId);
@@ -228,7 +228,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && filter.match(player, game)) {
                 possibleTargets.add(playerId);

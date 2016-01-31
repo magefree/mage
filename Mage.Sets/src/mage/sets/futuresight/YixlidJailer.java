@@ -94,7 +94,7 @@ public class YixlidJailer extends CardImpl {
             if (layer == Layer.AbilityAddingRemovingEffects_6) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    for (UUID playerId : controller.getInRange()) {
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {
                             for (Card card : player.getGraveyard().getCards(game)) {

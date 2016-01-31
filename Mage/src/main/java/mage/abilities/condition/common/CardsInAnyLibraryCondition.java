@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.condition.common;
 
 import java.util.UUID;
@@ -52,10 +51,10 @@ public class CardsInAnyLibraryCondition implements Condition {
     public final boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    switch(type) {
+                    switch (type) {
                         case GreaterThan:
                             if (player.getLibrary().size() > value) {
                                 return true;
@@ -81,15 +80,15 @@ public class CardsInAnyLibraryCondition implements Condition {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("a library has ");
-        switch(type) {
+        switch (type) {
             case GreaterThan:
-                sb.append(value+1).append(" or more cards in it ");
+                sb.append(value + 1).append(" or more cards in it ");
                 break;
             case Equal:
                 sb.append(value).append(" cards in it ");
                 break;
             case LessThan:
-                sb.append(value-1).append(" or fewer cards in it ");
+                sb.append(value - 1).append(" or fewer cards in it ");
                 break;
         }
         return sb.toString();

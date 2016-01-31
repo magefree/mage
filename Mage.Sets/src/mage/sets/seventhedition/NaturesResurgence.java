@@ -86,7 +86,7 @@ class NaturesResurgenceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         if (sourcePlayer != null) {
-            for (UUID playerId : sourcePlayer.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int amount = player.getGraveyard().count(filter, game);

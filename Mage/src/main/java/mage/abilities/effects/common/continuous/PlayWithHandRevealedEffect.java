@@ -63,15 +63,15 @@ public class PlayWithHandRevealedEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Iterable<UUID> affectedPlayers;
-            switch(who) {
+            switch (who) {
                 case ANY:
-                    affectedPlayers = controller.getInRange();
+                    affectedPlayers = game.getState().getPlayersInRange(controller.getId(), game);
                     break;
                 case OPPONENT:
                     affectedPlayers = game.getOpponents(source.getControllerId());
                     break;
                 case YOU:
-                    ArrayList tmp = new ArrayList<UUID>();
+                    ArrayList tmp = new ArrayList<>();
                     tmp.add(source.getControllerId());
                     affectedPlayers = tmp;
                     break;
@@ -79,7 +79,7 @@ public class PlayWithHandRevealedEffect extends ContinuousEffectImpl {
                     return false;
             }
 
-            for(UUID playerID: affectedPlayers) {
+            for (UUID playerID : affectedPlayers) {
                 Player player = game.getPlayer(playerID);
                 if (player != null) {
                     player.revealCards(player.getName() + "'s hand cards", player.getHand(), game, false);
@@ -100,7 +100,7 @@ public class PlayWithHandRevealedEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        switch(who) {
+        switch (who) {
             case ANY:
                 return "Players play with their hands revealed";
             case OPPONENT:

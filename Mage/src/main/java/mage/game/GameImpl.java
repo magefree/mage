@@ -2734,9 +2734,11 @@ public abstract class GameImpl implements Game, Serializable {
     public void setDraw(UUID playerId) {
         Player player = getPlayer(playerId);
         if (player != null) {
-            for (UUID playerToSetId : player.getInRange()) {
+            for (UUID playerToSetId : getState().getPlayersInRange(playerId, this)) {
                 Player playerToDraw = getPlayer(playerToSetId);
-                playerToDraw.lostForced(this);
+                if (playerToDraw != null) {
+                    playerToDraw.lostForced(this);
+                }
             }
         }
     }

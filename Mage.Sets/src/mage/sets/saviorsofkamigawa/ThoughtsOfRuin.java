@@ -96,7 +96,7 @@ class ThoughtsOfRuinEffect extends OneShotEffect {
             if (amount > 0) {
                 List<Permanent> permanentsToSacrifice = new ArrayList<Permanent>();
                 // select all lands to sacrifice
-                for (UUID playerId : controller.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         int lands = game.getState().getBattlefield().countAll(filter, playerId, game);

@@ -113,7 +113,7 @@ class RiteOfRuinEffect extends OneShotEffect {
             FilterControlledPermanent filter = new FilterControlledPermanent(cardType + " permanent you control");
             filter.add(new CardTypePredicate(cardType));
 
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 int amount = Math.min(count, game.getBattlefield().countAll(filter, playerId, game));
                 TargetControlledPermanent target = new TargetControlledPermanent(amount, amount, filter, false);
                 Player player = game.getPlayer(playerId);

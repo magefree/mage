@@ -113,7 +113,7 @@ public class TargetSource extends TargetObject {
     public boolean canChoose(UUID sourceControllerId, Game game) {
         int count = 0;
         for (StackObject stackObject: game.getStack()) {
-            if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
+            if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -158,7 +158,7 @@ public class TargetSource extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject: game.getStack()) {
-            if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
+            if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
                 possibleTargets.add(stackObject.getId());
             }
         }

@@ -98,7 +98,7 @@ class KitsunePalliatorEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent.getId()));
             game.addEffect(effect, source);
         }
-        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 effect.setTargetPointer(new FixedTarget(player.getId()));

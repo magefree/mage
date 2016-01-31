@@ -28,13 +28,13 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -44,7 +44,9 @@ import mage.util.CardUtil;
  */
 public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
 
-    public static enum HandSizeModification { SET, INCREASE, REDUCE };
+    public static enum HandSizeModification {
+        SET, INCREASE, REDUCE
+    };
 
     protected int handSize;
     protected HandSizeModification handSizeModification;
@@ -54,14 +56,14 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
      * @param handSize Maximum hand size to set or to reduce by
      * @param duration Effect duration
      * @param handSizeModification SET, INCREASE, REDUCE
-     * 
+     *
      */
     public MaximumHandSizeControllerEffect(int handSize, Duration duration, HandSizeModification handSizeModification) {
         this(handSize, duration, handSizeModification, TargetController.YOU);
     }
 
     public MaximumHandSizeControllerEffect(int handSize, Duration duration, HandSizeModification handSizeModification, TargetController targetController) {
-        super(duration, Layer.PlayerEffects, SubLayer.NA, defineOutcome(handSizeModification,  targetController));
+        super(duration, Layer.PlayerEffects, SubLayer.NA, defineOutcome(handSizeModification, targetController));
         this.handSize = handSize;
         this.handSizeModification = handSizeModification;
         this.targetController = targetController;
@@ -79,7 +81,7 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
     public MaximumHandSizeControllerEffect copy() {
         return new MaximumHandSizeControllerEffect(this);
     }
-    
+
     protected static Outcome defineOutcome(HandSizeModification handSizeModification, TargetController targetController) {
         Outcome newOutcome = Outcome.Benefit;
         if ((targetController.equals(TargetController.YOU) || targetController.equals(TargetController.ANY))
@@ -93,14 +95,14 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            switch(targetController) {
+            switch (targetController) {
                 case ANY:
-                    for (UUID playerId: controller.getInRange()) {
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         setHandSize(game, playerId);
                     }
                     break;
                 case OPPONENT:
-                    for (UUID playerId: game.getOpponents(source.getControllerId())) {
+                    for (UUID playerId : game.getOpponents(source.getControllerId())) {
                         setHandSize(game, playerId);
                     }
                     break;
@@ -118,7 +120,7 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
     private void setHandSize(Game game, UUID playerId) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            switch(handSizeModification) {
+            switch (handSizeModification) {
                 case SET:
                     player.setMaxHandSize(handSize);
                     break;
@@ -134,7 +136,7 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        switch(targetController) {
+        switch (targetController) {
             case ANY:
                 if (handSize == Integer.MAX_VALUE) {
                     sb.append("All players have no ");
@@ -158,9 +160,9 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
                 break;
         }
         sb.append("maximum hand size");
-        if (handSizeModification.equals(HandSizeModification.INCREASE)){
+        if (handSizeModification.equals(HandSizeModification.INCREASE)) {
             sb.append(" is increased by ");
-        } else if (handSizeModification.equals(HandSizeModification.REDUCE)){
+        } else if (handSizeModification.equals(HandSizeModification.REDUCE)) {
             sb.append(" is reduced by ");
         } else if (handSize != Integer.MAX_VALUE) {
             sb.append(" is ");

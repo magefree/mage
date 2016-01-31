@@ -119,7 +119,7 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                 }
             }
 
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     // Hand

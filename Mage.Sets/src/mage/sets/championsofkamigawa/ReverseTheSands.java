@@ -88,14 +88,14 @@ class ReverseTheSandsEffect extends OneShotEffect {
         if (controller != null) {
             Choice lifeChoice = new ChoiceImpl(true);
             Set<String> choices = new HashSet<String>();
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     choices.add(new StringBuilder(Integer.toString(player.getLife())).append(" life of ").append(player.getLogName()).toString());
                 }
             }
             lifeChoice.setChoices(choices);
-            for (UUID playersId : controller.getInRange()) {
+            for (UUID playersId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playersId);
                 if (player != null) {
                     String selectedChoice;

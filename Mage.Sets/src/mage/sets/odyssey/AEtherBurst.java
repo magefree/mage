@@ -72,7 +72,7 @@ public class AEtherBurst extends CardImpl {
             Player controller = game.getPlayer(ability.getControllerId());
             int amount = 0;
             if (controller != null) {
-                for (UUID playerId : controller.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         amount += player.getGraveyard().getCards(filter, game).size();

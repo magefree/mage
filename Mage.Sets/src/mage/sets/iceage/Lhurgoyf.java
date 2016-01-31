@@ -96,7 +96,7 @@ class LhurgoyfEffect extends ContinuousEffectImpl {
             MageObject mageObject = game.getObject(source.getSourceId());
             if (mageObject != null) {
                 int number = 0;
-                for (UUID playerId : controller.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         number += player.getGraveyard().count(new FilterCreatureCard(), game);

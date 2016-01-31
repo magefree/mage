@@ -139,7 +139,7 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
             for (CommandObject commandObject : game.getState().getCommand()) {
                 commandObject.getColor(game).setColor(colorless);
             }
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     // hand
@@ -186,7 +186,7 @@ class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl implements AsTho
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        return controller != null && controller.getInRange().contains(affectedControllerId);
+        return controller != null && game.getState().getPlayersInRange(controller.getId(), game).contains(affectedControllerId);
     }
 
     @Override

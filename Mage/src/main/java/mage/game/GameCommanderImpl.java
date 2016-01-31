@@ -209,7 +209,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     @Override
     public Set<UUID> getOpponents(UUID playerId) {
         Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId : this.getPlayer(playerId).getInRange()) {
+        for (UUID opponentId : getState().getPlayersInRange(playerId, this)) {
             if (!opponentId.equals(playerId)) {
                 opponents.add(opponentId);
             }

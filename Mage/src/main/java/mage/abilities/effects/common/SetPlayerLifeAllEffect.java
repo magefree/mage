@@ -58,10 +58,10 @@ public class SetPlayerLifeAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         switch (targetController) {
             case ANY:
-                for (UUID playerId : sourcePlayer.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         player.setLife(amount.calculate(game, source, this), game);
@@ -69,7 +69,7 @@ public class SetPlayerLifeAllEffect extends OneShotEffect {
                 }
                 break;
             case OPPONENT:
-                for (UUID playerId : game.getOpponents(sourcePlayer.getId())) {
+                for (UUID playerId : game.getOpponents(controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         player.setLife(amount.calculate(game, source, this), game);

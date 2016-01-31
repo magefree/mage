@@ -297,7 +297,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         if (controller == null || sourcePermanent == null) {
             return false;
         }
-        for (UUID playerId : controller.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
             if (source.getControllerId().equals(player.getId())) {

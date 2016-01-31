@@ -53,8 +53,7 @@ public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
         this.allPlayers = allPlayers;
         if (allPlayers) {
             staticText = "Players play with the top card of their libraries revealed.";
-        }
-        else {
+        } else {
             staticText = "Play with the top card of your library revealed";
         }
     }
@@ -69,14 +68,13 @@ public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (allPlayers) {
-                for (UUID playerId : controller.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         player.setTopCardRevealed(true);
                     }
                 }
-            }
-            else {
+            } else {
                 controller.setTopCardRevealed(true);
             }
             return true;

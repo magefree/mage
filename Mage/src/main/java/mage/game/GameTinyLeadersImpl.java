@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game;
 
 import java.util.HashSet;
@@ -57,8 +56,8 @@ import mage.watchers.common.CommanderInfoWatcher;
  *
  * @author JRHerlehy
  */
-public abstract class GameTinyLeadersImpl extends GameImpl{
-    
+public abstract class GameTinyLeadersImpl extends GameImpl {
+
     protected boolean alsoHand; // replace also commander going to library
     protected boolean alsoLibrary; // replace also commander going to library
     protected boolean startingPlayerSkipsDraw = true;
@@ -72,14 +71,14 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
         this.alsoHand = game.alsoHand;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
     }
-    
+
     @Override
     protected void init(UUID choosingPlayerId) {
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
         //Move tiny leader to command zone
-        for (UUID playerId: state.getPlayerList(startingPlayerId)) {
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
-            if (player != null){
+            if (player != null) {
                 Card commander = getCommanderCard(player.getMatchPlayer().getDeck().getName(), player.getId());
                 if (commander != null) {
                     Set<Card> cards = new HashSet<>();
@@ -95,7 +94,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
                     getState().getWatchers().add(watcher);
                     watcher.addCardInfoToCommander(this);
                 } else {
-                    throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() +"]");
+                    throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + "]");
                 }
             }
 
@@ -109,14 +108,14 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
 
     /**
      * Name of Tiny Leader comes from the deck name (it's not in the sideboard)
-     * Additionally, it was taken into account that WOTC had missed a few color combinations
-     * when making Legendary Creatures at 3 CMC. There are two Commanders available to use 
-     * for the missing color identities: 
-     *  Sultai [UBG 3/3] and Glass [colorless 3/3]
+     * Additionally, it was taken into account that WOTC had missed a few color
+     * combinations when making Legendary Creatures at 3 CMC. There are two
+     * Commanders available to use for the missing color identities: Sultai [UBG
+     * 3/3] and Glass [colorless 3/3]
      *
      * @param commanderName
      * @param ownerId
-     * @return 
+     * @return
      */
     public static Card getCommanderCard(String commanderName, UUID ownerId) {
         Card commander = null;
@@ -141,7 +140,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
     @Override
     public Set<UUID> getOpponents(UUID playerId) {
         Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
+        for (UUID opponentId : getState().getPlayersInRange(playerId, this)) {
             if (!opponentId.equals(playerId)) {
                 opponents.add(opponentId);
             }
@@ -151,7 +150,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
 
     @Override
     public boolean isOpponent(Player player, UUID playerToCheck) {
-       return !player.getId().equals(playerToCheck);
+        return !player.getId().equals(playerToCheck);
     }
 
     public void setAlsoHand(boolean alsoHand) {

@@ -112,7 +112,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
             if (watcher != null) {
                 int xValue = watcher.getManaSpentToCastLastTime(sourceCard.getZoneChangeCounter(game) - 1);
                 if (xValue > 0) {
-                    for (UUID playerId : controller.getInRange()) {
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {
                             int cardsToExile = Math.min(player.getLibrary().size(), xValue);
