@@ -72,7 +72,7 @@ class CleansingMeditationEffect extends OneShotEffect {
 
     public CleansingMeditationEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy all enchantments. Threshold - If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield";
+        this.staticText = "Destroy all enchantments. Threshold - If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.";
     }
 
     public CleansingMeditationEffect(final CleansingMeditationEffect effect) {
@@ -87,7 +87,7 @@ class CleansingMeditationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Cards cardsToBattlefield = new CardsImpl();
-        
+
         // Threshold?
         boolean threshold = false;
         DynamicValue c = new CardsInControllerGraveyardCount();
@@ -95,17 +95,21 @@ class CleansingMeditationEffect extends OneShotEffect {
         if (numCards >= 7) {
             threshold = true;
         }
+
         Player controller = game.getPlayer(source.getControllerId());
+
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(), source.getControllerId(), source.getSourceId(), game)) {
             if (permanent != null && permanent.destroy(source.getSourceId(), game, false)) {
-                if (threshold && permanent.getOwnerId().equals(controller.getId())) {
+                if (threshold && controller != null && permanent.getOwnerId().equals(controller.getId())) {
                     cardsToBattlefield.add(permanent);
                 }
             }
         }
-        if (threshold) {
-              controller.moveCards(cardsToBattlefield, Zone.BATTLEFIELD, source, game);
+
+        if (threshold && controller != null) {
+            controller.moveCards(cardsToBattlefield, Zone.BATTLEFIELD, source, game);
         }
+
         return true;
     }
 }
