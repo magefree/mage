@@ -38,7 +38,7 @@ public class ScytheLeopard extends mage.sets.battleforzendikar.ScytheLeopard {
 
     public ScytheLeopard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = 141;
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }
