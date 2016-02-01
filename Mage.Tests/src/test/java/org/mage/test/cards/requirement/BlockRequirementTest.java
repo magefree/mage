@@ -34,7 +34,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author LevelX2
+ * @author LevelX2, icetc
  */
 public class BlockRequirementTest extends CardTestPlayerBase {
 
@@ -154,6 +154,33 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Pillarfield Ox", 1);
 
         assertLife(playerB, 18);
+    }
+
+      /**
+     * Okk is red creature that can't block unless a creature with greater power also blocks.
+     */
+    @Test
+    public void testOkkBlocking() {
+
+        // 3/3 Vanilla creature
+        addCard(Zone.BATTLEFIELD, playerA, "Hill Giant", 1);
+
+        // 4/4 Goblin:
+        // Okk can't attack unless a creature with greater power also attacks.        
+        // Okk can't block unless a creature with greater power also blocks.
+        addCard(Zone.BATTLEFIELD, playerB, "Okk", 1); //
+
+        attack(1, playerA, "Hill Giant");
+
+        // Not allowed because of Okk's blocking restrictions
+        block(1, playerB, "Okk", "Hill Giant");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // Hill giant is still alive and Played B looses 3 lives
+        assertPermanentCount(playerA, "Hill Giant", 1);
+        assertLife(playerB, 17);
 
     }
 }

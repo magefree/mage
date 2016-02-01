@@ -910,6 +910,27 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @return
      */
     public boolean checkBlockRestrictionsAfter(Player player, Player controller, Game game) {
+        // Restrictions applied to blocking creatures    
+        for (UUID blockingCreatureId : this.getBlockers()) {
+            Permanent blockingCreature = game.getPermanent(blockingCreatureId);
+            if (blockingCreature != null) {
+                for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(blockingCreature, game).entrySet()) {
+                    RestrictionEffect effect = entry.getKey();
+                    for (Ability ability : entry.getValue()) {
+                        if (!effect.canBlockCheckAfter(ability, game)) {
+                            if (controller.isHuman()) {
+                                game.informPlayer(controller, new StringBuilder(blockingCreature.getLogName()).append(" can't block this way.").toString());
+                                return false;
+                            } else {
+                                // remove blocking creatures for AI
+                                removeBlocker(blockingCreatureId, game);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Restrictions applied because of attacking creatures
         for (UUID attackingCreatureId : this.getAttackers()) {
             Permanent attackingCreature = game.getPermanent(attackingCreatureId);
             if (attackingCreature != null) {
@@ -929,7 +950,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                                         }
                                     }
                                 }
-
                             }
                         }
                     }
