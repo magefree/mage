@@ -178,4 +178,40 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertExileCount("Conflagrate", 1);
 
     }
+
+    /**
+     * Ancestral Vision has no casting cost (this is different to a casting cost
+     * of {0}). Snapcaster Mage, for example, is able to give it flashback
+     * whilst it is in the graveyard.
+     *
+     * However the controller should not be able to cast Ancestral Visions from
+     * the graveyard for {0} mana.
+     */
+    @Test
+    public void testFlashbackAncestralVision() {
+        // Suspend 4-{U}
+        // Target player draws three cards.
+        addCard(Zone.GRAVEYARD, playerA, "Ancestral Vision", 1);
+
+        // Flash
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        addTarget(playerA, "Ancestral Vision");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
+        addTarget(playerA, playerA);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Snapcaster Mage", 0);
+        assertPermanentCount(playerA, "Snapcaster Mage", 1);
+        assertGraveyardCount(playerA, "Ancestral Vision", 1);
+        assertHandCount(playerA, 0);
+
+    }
 }
