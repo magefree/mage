@@ -50,6 +50,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -414,6 +415,12 @@ public class Combat implements Serializable, Copyable<Combat> {
     public void selectBlockers(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
             game.getCombat().selectBlockers(null, game);
+        }
+        for (UUID attackingCreatureID : game.getCombat().getAttackers()) {
+            Permanent permanent = game.getPermanent(attackingCreatureID);
+            if (permanent != null && permanent.getBlocking() == 0) {
+                game.fireEvent(GameEvent.getEvent(EventType.UNBLOCKED_ATTACKER, attackingCreatureID, attackerId));
+            }
         }
     }
 
@@ -822,8 +829,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 // the creature is blocking a forcing attacker, so the block is ok
                                 blockIsValid = true;
                                 break CombatGroups;
-                            } else {
-                                // check if the blocker blocks a attacker that must be blocked at least by one and is the only blocker, this block is also valid
+                            } else // check if the blocker blocks a attacker that must be blocked at least by one and is the only blocker, this block is also valid
+                            {
                                 if (combatGroup.getBlockers().size() == 1) {
                                     if (mustBeBlockedByAtLeastOne.containsKey(forcingAttackerId)) {
                                         if (mustBeBlockedByAtLeastOne.get(forcingAttackerId).contains(creatureForcedToBlock.getId())) {
@@ -910,7 +917,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @return
      */
     public boolean checkBlockRestrictionsAfter(Player player, Player controller, Game game) {
-        // Restrictions applied to blocking creatures    
+        // Restrictions applied to blocking creatures
         for (UUID blockingCreatureId : this.getBlockers()) {
             Permanent blockingCreature = game.getPermanent(blockingCreatureId);
             if (blockingCreature != null) {
@@ -998,12 +1005,10 @@ public class Combat implements Serializable, Copyable<Combat> {
                 if (defendingPlayer != null) {
                     if (defendingPlayer.getMaxAttackedBy() == Integer.MAX_VALUE) {
                         maxAttackers = Integer.MAX_VALUE;
+                    } else if (maxAttackers == Integer.MIN_VALUE) {
+                        maxAttackers = defendingPlayer.getMaxAttackedBy();
                     } else {
-                        if (maxAttackers == Integer.MIN_VALUE) {
-                            maxAttackers = defendingPlayer.getMaxAttackedBy();
-                        } else {
-                            maxAttackers += defendingPlayer.getMaxAttackedBy();
-                        }
+                        maxAttackers += defendingPlayer.getMaxAttackedBy();
                     }
                 }
             }

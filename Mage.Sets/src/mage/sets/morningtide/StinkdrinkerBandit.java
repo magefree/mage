@@ -29,22 +29,20 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.Effect;
-import mage.abilities.common.SimpleTriggeredAbility;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.ProwlAbility;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.BlockedPredicate;
+import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -52,30 +50,20 @@ import mage.game.events.GameEvent;
  */
 public class StinkdrinkerBandit extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Attacking and unblocked Rogues");
-    
-    static {  
-        filter.add(new SubtypePredicate("Rogue"));
-        filter.add(new AttackingPredicate());
-        filter.add(Predicates.not(new BlockedPredicate()));
-    }
-    
     public StinkdrinkerBandit(UUID ownerId) {
         super(ownerId, 80, "Stinkdrinker Bandit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
-        
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        
+
         // Prowl {1}, {B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)
         this.addAbility(new ProwlAbility(this, "{1}{B}"));
-        
+
         // Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.
-        Effect effect = new BoostControlledEffect(2,1,Duration.EndOfTurn, filter);
-        Ability ability = new SimpleTriggeredAbility(Zone.BATTLEFIELD, GameEvent.EventType.DECLARED_BLOCKERS, effect, "Whenever a Rogue you control attacks and isn't blocked,");
-        this.addAbility(ability);
+        this.addAbility(new StinkdrinkerBanditTriggeredAbility());
     }
 
     public StinkdrinkerBandit(final StinkdrinkerBandit card) {
@@ -85,5 +73,43 @@ public class StinkdrinkerBandit extends CardImpl {
     @Override
     public StinkdrinkerBandit copy() {
         return new StinkdrinkerBandit(this);
+    }
+}
+
+class StinkdrinkerBanditTriggeredAbility extends TriggeredAbilityImpl {
+
+    public StinkdrinkerBanditTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new BoostTargetEffect(2, 1, Duration.EndOfTurn));
+    }
+
+    public StinkdrinkerBanditTriggeredAbility(final StinkdrinkerBanditTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public StinkdrinkerBanditTriggeredAbility copy() {
+        return new StinkdrinkerBanditTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.UNBLOCKED_ATTACKER);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent attackingCreature = game.getPermanent(event.getTargetId());
+        if (attackingCreature != null && attackingCreature.hasSubtype("Rogue")) {
+            for (Effect effect : getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.";
     }
 }
