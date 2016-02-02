@@ -39,10 +39,12 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author anonymous
+ * @author Luna Skyrise
  */
 public class LymphSliver extends CardImpl {
 
@@ -58,7 +60,7 @@ public class LymphSliver extends CardImpl {
         // All Sliver creatures have absorb 1.
         Ability absorb = new SimpleStaticAbility(Zone.BATTLEFIELD, new SliverAbsorbEffect());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(absorb,
-            Duration.WhileOnBattlefield, filter, "All Sliver creatures have absorb 1. <i>(If a source would deal damage to a Sliver, prevent 1 of that damage.)</i>")));
+                Duration.WhileOnBattlefield, filter, "All Sliver creatures have absorb 1. <i>(If a source would deal damage to a Sliver, prevent 1 of that damage.)</i>")));
     }
 
     public LymphSliver(final LymphSliver card) {
@@ -72,6 +74,7 @@ public class LymphSliver extends CardImpl {
 }
 
 class SliverAbsorbEffect extends PreventionEffectImpl {
+
     public SliverAbsorbEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "Absorb 1 <i>(If a source would deal damage to this creature, prevent 1 of that damage.</i>)";
@@ -85,4 +88,10 @@ class SliverAbsorbEffect extends PreventionEffectImpl {
     public SliverAbsorbEffect copy() {
         return new SliverAbsorbEffect(this);
     }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(source.getSourceId()) && super.applies(event, source, game);
+    }
+
 }
