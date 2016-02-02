@@ -165,4 +165,33 @@ public class CantCastTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+
+    /**
+     * Test that panic can only be cast during the correct pahse/steü
+     */
+    @Test
+    public void testPanic() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+
+        // Cast Panic only during combat before blockers are declared.
+        // Target creature can't block this turn.
+        // Draw a card at the beginning of the next turn's upkeep.
+        addCard(Zone.HAND, playerA, "Panic", 4); // Instant - {R}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Panic", "Silvercoat Lion");
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Panic", "Silvercoat Lion");
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "Panic", "Silvercoat Lion");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Panic", "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerA, "Panic", 3);
+        assertHandCount(playerA, 4);
+        assertGraveyardCount(playerA, "Panic", 1);
+
+    }
+
 }
