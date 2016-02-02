@@ -77,7 +77,7 @@ public class ProwlWatcher extends Watcher {
             if (dEvent.isCombatDamage()) {
                 Permanent creature = game.getPermanent(dEvent.getSourceId());
                 if (creature != null && !allSubtypes.contains(creature.getControllerId())) {
-                    if (creature.getAbilities().containsKey(ChangelingAbility.getInstance().getId())) {
+                    if (creature.getAbilities().containsKey(ChangelingAbility.getInstance().getId()) || creature.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
                         allSubtypes.add(creature.getControllerId());
                     } else {
                         Set<String> subtypes = damagingSubtypes.get(creature.getControllerId());
