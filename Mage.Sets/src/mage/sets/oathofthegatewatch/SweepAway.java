@@ -85,6 +85,8 @@ class SweepAwayEffect extends OneShotEffect {
             if (permanent.isAttacking()) {
                 if (controller.chooseUse(Outcome.Neutral, "Put " + permanent.getIdName() + " on top of its owner's library (otherwise return to hand)?", source, game)) {
                     new PutOnLibraryTargetEffect(true).apply(game, source);
+                } else {
+                    new ReturnToHandTargetEffect(true).apply(game, source);
                 }
             } else {
                 new ReturnToHandTargetEffect(true).apply(game, source);
