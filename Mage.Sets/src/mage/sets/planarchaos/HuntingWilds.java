@@ -40,6 +40,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -49,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -63,13 +65,13 @@ public class HuntingWilds extends CardImpl {
 
         // Kicker {3}{G}
         this.addAbility(new KickerAbility("{3}{G}"));
-        
+
         FilterLandCard filter = new FilterLandCard("Forest card");
         filter.add(new SubtypePredicate("Forest"));
-        
+
         // Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter), true));
-        
+
         // If Hunting Wilds was kicked, untap all Forests put onto the battlefield this way.
         // They become 3/3 green creatures with haste that are still lands.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new HuntingWildsEffect(), KickedCondition.getInstance()));
@@ -86,40 +88,37 @@ public class HuntingWilds extends CardImpl {
 }
 
 class HuntingWildsEffect extends OneShotEffect {
-    
+
     public HuntingWildsEffect() {
         super(Outcome.BecomeCreature);
-        this.staticText = "Untap all Forests put onto the battlefield this way.  They become 3/3 green creatures with haste that are still lands";
+        this.staticText = "Untap all Forests put onto the battlefield this way. They become 3/3 green creatures with haste that are still lands";
     }
-    
+
     public HuntingWildsEffect(final HuntingWildsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public HuntingWildsEffect copy() {
         return new HuntingWildsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getPlayer(source.getControllerId()) != null) {
-            for (Effect sourceEffect : source.getEffects()) {
-                if (sourceEffect instanceof SearchLibraryPutInPlayEffect) {
-                    for (UUID target : ((SearchLibraryPutInPlayEffect)sourceEffect).getTargets()) {
-                        if (target != null) {
-                            FixedTarget fixedTarget = new FixedTarget(target);
-                            BecomesCreatureTargetEffect becomesCreatureEffect = new BecomesCreatureTargetEffect(new HuntingWildsToken(), false, true, Duration.Custom);
-                            becomesCreatureEffect.setTargetPointer(fixedTarget);
-                            game.addEffect(becomesCreatureEffect, source);
+        for (Effect sourceEffect : source.getEffects()) {
+            if (sourceEffect instanceof SearchLibraryPutInPlayEffect) {
+                Cards foundCards = new CardsImpl(((SearchLibraryPutInPlayEffect) sourceEffect).getTargets());
+                if (!foundCards.isEmpty()) {
+                    FixedTargets fixedTargets = new FixedTargets(foundCards, game);
+                    UntapTargetEffect untapEffect = new UntapTargetEffect();
+                    untapEffect.setTargetPointer(fixedTargets);
+                    untapEffect.apply(game, source);
 
-                            UntapTargetEffect untapEffect = new UntapTargetEffect();
-                            untapEffect.setTargetPointer(fixedTarget);
-                            untapEffect.apply(game, source);
-                        }
-                    }
-                    return true;
+                    BecomesCreatureTargetEffect becomesCreatureEffect = new BecomesCreatureTargetEffect(new HuntingWildsToken(), false, true, Duration.Custom);
+                    becomesCreatureEffect.setTargetPointer(fixedTargets);
+                    game.addEffect(becomesCreatureEffect, source);
                 }
+                return true;
             }
         }
         return false;
@@ -127,14 +126,14 @@ class HuntingWildsEffect extends OneShotEffect {
 }
 
 class HuntingWildsToken extends Token {
-    
+
     public HuntingWildsToken() {
         super("", "3/3 green creature with haste");
         this.cardType.add(CardType.CREATURE);
-        
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        
+
         this.addAbility(HasteAbility.getInstance());
     }
 }
