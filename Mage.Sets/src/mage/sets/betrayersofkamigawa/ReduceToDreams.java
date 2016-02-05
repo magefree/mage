@@ -28,22 +28,11 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.other.OwnerIdPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 
 /**
  *
@@ -55,9 +44,8 @@ public class ReduceToDreams extends CardImpl {
         super(ownerId, 49, "Reduce to Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "BOK";
 
-
         // Return all artifacts and enchantments to their owners' hands.
-        this.getSpellAbility().addEffect(new ReduceToDreamsEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterArtifactOrEnchantmentPermanent()));
     }
 
     public ReduceToDreams(final ReduceToDreams card) {
@@ -67,45 +55,5 @@ public class ReduceToDreams extends CardImpl {
     @Override
     public ReduceToDreams copy() {
         return new ReduceToDreams(this);
-    }
-}
-
-class ReduceToDreamsEffect extends OneShotEffect {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts and enchantments");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)
-        ));
-    }
-
-    public ReduceToDreamsEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return all artifacts and enchantments to their owners' hands";
-    }
-
-    public ReduceToDreamsEffect(final ReduceToDreamsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
-                FilterPermanent playerFilter = filter.copy();
-                playerFilter.add(new OwnerIdPredicate(playerId));
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {
-                    permanent.moveToZone(Zone.HAND, playerId, game, true);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public ReduceToDreamsEffect copy() {
-        return new ReduceToDreamsEffect(this);
     }
 }
