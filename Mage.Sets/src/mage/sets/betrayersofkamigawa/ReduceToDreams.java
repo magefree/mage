@@ -36,11 +36,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -72,11 +75,11 @@ class ReduceToDreamsEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts and enchantments");
     static {
         filter.add(Predicates.or(
-                    new CardTypePredicate(CardType.ARTIFACT),
-                    new CardTypePredicate(CardType.ENCHANTMENT)
-                ));
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT)
+        ));
     }
-    
+
     public ReduceToDreamsEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return all artifacts and enchantments to their owners' hands";
@@ -88,8 +91,15 @@ class ReduceToDreamsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                FilterPermanent playerFilter = filter.copy();
+                playerFilter.add(new OwnerIdPredicate(playerId));
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {
+                    permanent.moveToZone(Zone.HAND, playerId, game, true);
+                }
+            }
         }
         return true;
     }

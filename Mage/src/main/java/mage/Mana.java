@@ -813,6 +813,31 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
+     * Returns if this objects mana contains any mana the same as the passed in
+     * {@link Mana}'s mana.
+     *
+     * @param mana the mana to check for
+     * @return true if this contains any of the same type of mana that this has
+     */
+    public boolean containsAny(final Mana mana) {
+        if (mana.black > 0 && this.black > 0) {
+            return true;
+        } else if (mana.blue > 0 && this.blue > 0) {
+            return true;
+        } else if (mana.red > 0 && this.red > 0) {
+            return true;
+        } else if (mana.white > 0 && this.white > 0) {
+            return true;
+        } else if (mana.green > 0 && this.green > 0) {
+            return true;
+        } else if (mana.colorless > 0 && this.colorless > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Returns the total count of mana in this object as specified by the passed
      * in {@link ColoredManaSymbol}.
      *
