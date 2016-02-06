@@ -128,6 +128,9 @@ import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
+import net.java.balloontip.BalloonTip;
+import net.java.balloontip.positioners.LeftAbovePositioner;
+import net.java.balloontip.styles.EdgedBalloonStyle;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
@@ -175,6 +178,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
+
+    private BalloonTip balloonTip;
 
     /**
      * @return the session
@@ -298,6 +303,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         });
 
+        // balloonTip = new BalloonTip(desktopPane, "", new ModernBalloonStyle(0, 0, Color.WHITE, Color.YELLOW, Color.BLUE), false);
+        balloonTip = new BalloonTip(desktopPane, "", new EdgedBalloonStyle(Color.WHITE, Color.BLUE), false);
+        balloonTip.setPositioner(new LeftAbovePositioner(0, 0));
+
         mageToolbar.add(new javax.swing.JToolBar.Separator());
         mageToolbar.add(createWindowsButton());
 
@@ -352,6 +361,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_CHECK, "false").equals("true")) {
                     checkForNewImages();
                 }
+
                 updateMemUsageTask.execute();
                 LOGGER.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
                 if (autoConnect()) {
@@ -360,6 +370,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     connectDialog.showDialog();
                 }
                 setWindowTitle();
+
             }
         });
 
@@ -1043,11 +1054,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-        {
-            if (topPanebefore != null) {
+         if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
-        }
     }
 
     public void hideGames() {
@@ -1289,6 +1298,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static void addDraft(UUID draftId, DraftPanel draftPanel) {
         DRAFTS.put(draftId, draftPanel);
+    }
+
+    public BalloonTip getBalloonTip() {
+        return balloonTip;
     }
 
     @Override

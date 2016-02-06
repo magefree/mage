@@ -33,7 +33,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-
 /**
  * Describes condition when source matches specified filter
  *
@@ -41,17 +40,17 @@ import mage.game.permanent.Permanent;
  */
 public class SourceMatchesFilterCondition implements Condition {
 
-    private FilterPermanent filter;
+    private FilterPermanent FILTER;
 
     public SourceMatchesFilterCondition(FilterPermanent filter) {
-        this.filter = filter;
+        this.FILTER = filter;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+            if (FILTER.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
                 return true;
             }
         }

@@ -34,14 +34,21 @@
 package mage.client.table;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.Icon;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import mage.client.MageFrame;
 import mage.client.chat.ChatPanelBasic;
 import static mage.client.chat.ChatPanelBasic.CHAT_ALPHA;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
@@ -52,6 +59,7 @@ import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.remote.MageRemoteException;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;
+import net.java.balloontip.utils.ToolTipUtils;
 
 /**
  *
@@ -79,6 +87,8 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jTablePlayers.setRowSorter(new MageTableRowSorter(userTableModel));
 
         TableUtil.setColumnWidthAndOrder(jTablePlayers, DEFAULT_COLUMNS_WIDTH, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
+        userTableModel.initHeaderTooltips();
+
         jTablePlayers.setDefaultRenderer(Icon.class, new CountryCellRenderer());
 
         jScrollPaneTalk.setSystemMessagesPane(colorPaneSystem);
@@ -169,10 +179,61 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             return "";
         }
 
+        public void initHeaderTooltips() {
+            ColumnHeaderToolTips tips = new ColumnHeaderToolTips();
+            for (int c = 0; c < jTablePlayers.getColumnCount(); c++) {
+                String tooltipText = "";
+                switch (c) {
+                    case 0:
+                        tooltipText = "<HTML><b>The flag the user has assigned to his profile</b>"
+                                + "<br>You can assign the flag in the connect to server dialog window";
+                        break;
+                    case 1:
+                        tooltipText = "<HTML><b>Name of the user</b>"
+                                + "<br>(the number behind the header text is the number of currently connected users to the server)";
+                        break;
+                    case 2:
+                        tooltipText = "<HTML><b>Number of matches the user played so far</b>"
+                                + "<br>Q = number of matches quit"
+                                + "<br>I = number of matches lost because of idle timeout"
+                                + "<br>T = number of matches lost because of match timeout";
+                        break;
+                    case 3:
+                        tooltipText = "<HTML><b>%-Ratio of matches played to matches quit</b>"
+                                + "<br>this calculation does not include tournament matches";
+                        break;
+                    case 4:
+                        tooltipText = "<HTML><b>Number of tournaments the user played so far</b>"
+                                + "<br>D = number of tournaments left during draft phase"
+                                + "<br>C = number of tournaments left during constructing phase"
+                                + "<br>R = number of tournaments left during rounds";
+                        break;
+                    case 5:
+                        tooltipText = "<HTML><b>%-Ratio of tournament matches played to tournament matches quit</b>"
+                                + "<br>this calculation does not include non tournament matches";
+                        break;
+                    case 6:
+                        tooltipText = "<HTML><b>Current activities of the player</b>"
+                                + "<BR>the header itself shows the number of currently active games"
+                                + "<BR>T: = number of games threads "
+                                + "<BR><i>(that can vary from active games because of sideboarding or crashed games)</i>"
+                                + "<BR>limt: the maximum of games the server is configured to"
+                                + "<BR><i>(if the number of started games exceed that limit, the games have to wait"
+                                + "<BR>until active games end)</i>";
+                        break;
+                    case 7:
+                        tooltipText = "<HTML><b>Latency of the user's connection to the server</b>";
+                        break;
+                }
+                tips.setToolTip(c, tooltipText);
+            }
+            JTableHeader header = jTablePlayers.getTableHeader();
+            header.addMouseMotionListener(tips);
+        }
+
         @Override
         public String getColumnName(int columnIndex) {
             String colName = "";
-
             if (columnIndex <= getColumnCount()) {
                 colName = columnNames[columnIndex];
             }
@@ -185,6 +246,9 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             switch (columnIndex) {
                 case 0:
                     return Icon.class;
+                case 3:
+                case 5:
+                    return Integer.class;
                 default:
                     return String.class;
             }
@@ -290,4 +354,41 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPaneText;
     private javax.swing.JTable jTablePlayers;
     // End of variables declaration//GEN-END:variables
+
+    class ColumnHeaderToolTips extends MouseMotionAdapter {
+
+        int curCol;
+        Map<Integer, String> tips = new HashMap<>();
+
+        public void setToolTip(Integer mCol, String tooltip) {
+            if (tooltip == null) {
+                tips.remove(mCol);
+            } else {
+                tips.put(mCol, tooltip);
+            }
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent evt) {
+            JTableHeader header = (JTableHeader) evt.getSource();
+            JTable table = header.getTable();
+            TableColumnModel colModel = table.getColumnModel();
+            int vColIndex = colModel.getColumnIndexAtX(evt.getX());
+            TableColumn col = null;
+            if (vColIndex >= 0) {
+                col = colModel.getColumn(table.convertColumnIndexToModel(vColIndex));
+            }
+            if (table.convertColumnIndexToModel(vColIndex) != curCol) {
+                if (col != null) {
+                    MageFrame.getInstance().getBalloonTip().setAttachedComponent(header);
+                    MageFrame.getInstance().getBalloonTip().setTextContents(tips.get(table.convertColumnIndexToModel(vColIndex)));
+                    ToolTipUtils.balloonToToolTip(MageFrame.getInstance().getBalloonTip(), 600, 10000);
+                } else {
+                    MageFrame.getInstance().getBalloonTip().setTextContents("");
+                }
+                curCol = table.convertColumnIndexToModel(vColIndex);
+            }
+        }
+    }
+
 }

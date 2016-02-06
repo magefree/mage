@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * TournamentPanel.java
  *
  * Created on 20-Jan-2011, 9:18:30 PM
@@ -72,7 +72,10 @@ import org.apache.log4j.Logger;
  */
 public class TournamentPanel extends javax.swing.JPanel {
 
-    private static final Logger logger = Logger.getLogger(TournamentPanel.class);
+    private static final Logger LOGGER = Logger.getLogger(TournamentPanel.class);
+
+    private static final int[] DEFAULT_COLUMNS_WIDTH_PLAYERS = {30, 150, 150, 60, 400, 100};
+    private static final int[] DEFAULT_COLUMNS_WIDTH_MATCHES = {60, 140, 140, 400, 80};
 
     private UUID tournamentId;
     private boolean firstInitDone = false;
@@ -81,9 +84,6 @@ public class TournamentPanel extends javax.swing.JPanel {
     private TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
     private final DateFormat df;
-
-    private static final int[] defaultColumnsWidthPlayers = {30, 150, 150, 60, 400};
-    private static final int[] defaultColumnsWidthMatches = {60, 140, 140, 400, 80};
 
     /**
      * Creates new form TournamentPanel
@@ -99,11 +99,11 @@ public class TournamentPanel extends javax.swing.JPanel {
         df = DateFormat.getDateTimeInstance();
 
         tablePlayers.createDefaultColumnsFromModel();
-        TableUtil.setColumnWidthAndOrder(tablePlayers, defaultColumnsWidthPlayers, KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH, KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER);
+        TableUtil.setColumnWidthAndOrder(tablePlayers, DEFAULT_COLUMNS_WIDTH_PLAYERS, KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH, KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER);
         tablePlayers.setDefaultRenderer(Icon.class, new CountryCellRenderer());
 
         tableMatches.createDefaultColumnsFromModel();
-        TableUtil.setColumnWidthAndOrder(tableMatches, defaultColumnsWidthMatches, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
+        TableUtil.setColumnWidthAndOrder(tableMatches, DEFAULT_COLUMNS_WIDTH_MATCHES, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
 
         chatPanel1.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         chatPanel1.setChatType(ChatPanelBasic.ChatType.TOURNAMENT);
@@ -123,7 +123,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 //                    session.replayGame(gameId);
 //                }
                 if (state.startsWith("Dueling") && actionText.equals("Watch")) {
-                    logger.info("Watching game " + gameId);
+                    LOGGER.info("Watching game " + gameId);
                     session.watchTournamentTable(tableId);
                 }
             }
@@ -545,7 +545,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
 class TournamentPlayersTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Loc", "Player Name", "State", "Points", "Results"};
+    private final String[] columnNames = new String[]{"Loc", "Player Name", "State", "Points", "Results", "History"};
     private TournamentPlayerView[] players = new TournamentPlayerView[0];
 
     public void loadData(TournamentView tournament) {
@@ -576,6 +576,8 @@ class TournamentPlayersTableModel extends AbstractTableModel {
                 return Integer.toString(players[arg0].getPoints());
             case 4:
                 return players[arg0].getResults();
+            case 5:
+                return players[arg0].getHistory();
         }
         return "";
     }

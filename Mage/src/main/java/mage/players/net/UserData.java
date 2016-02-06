@@ -176,7 +176,10 @@ public class UserData implements Serializable {
     }
 
     public String getHistory() {
-        return "Matches:" + this.matchHistory + " Tourneys:" + this.tourneyHistory;
+        if (UserGroup.COMPUTER.equals(this.groupId)) {
+            return "";
+        }
+        return "Matches: " + this.matchHistory + " (" + this.matchQuitRatio + "%) Tourneys: " + this.tourneyHistory + " (" + this.tourneyQuitRatio + "%)";
     }
 
     public void setMatchHistory(String history) {

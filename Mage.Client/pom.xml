@@ -42,7 +42,7 @@
             <groupId>net.sf.trove4j</groupId>
             <artifactId>trove4j</artifactId>
             <version>3.0.3</version>
-        </dependency>          
+        </dependency>
         <dependency>
             <groupId>com.mortennobel</groupId>
             <artifactId>java-image-scaling</artifactId>
@@ -73,12 +73,12 @@
             <artifactId>forms_rt</artifactId>
             <version>7.0.3</version>
         </dependency>
-       <dependency>
-           <groupId>junit</groupId>
-           <artifactId>junit</artifactId>
-           <type>jar</type>
-           <scope>test</scope>
-       </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-counter-plugin</artifactId>
@@ -131,8 +131,13 @@
             <artifactId>tritonus_share</artifactId>
             <version>0.3.6</version>
         </dependency>
+        <dependency>
+            <groupId>net.java.balloontip</groupId>
+            <artifactId>balloontip</artifactId>
+            <version>1.2.4.1</version>
+        </dependency>
     </dependencies>
-    
+
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
     <repositories>
         <repository>
@@ -140,7 +145,7 @@
             <url>file://${project.basedir}/../repository</url>
         </repository>
     </repositories>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -183,7 +188,7 @@
 
         <finalName>mage-client</finalName>
     </build>
-	
+
     <properties>
         <manifest.file>src/main/resources/META-INF/MANIFEST.MF</manifest.file>
     </properties>

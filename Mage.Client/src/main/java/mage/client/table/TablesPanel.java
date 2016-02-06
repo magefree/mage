@@ -100,7 +100,8 @@ import org.apache.log4j.Logger;
  */
 public class TablesPanel extends javax.swing.JPanel {
 
-    private static final Logger logger = Logger.getLogger(TablesPanel.class);
+    private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 60};
 
     private TableTableModel tableModel;
     private MatchesTableModel matchesModel;
@@ -119,8 +120,6 @@ public class TablesPanel extends javax.swing.JPanel {
 
     JToggleButton[] filterButtons;
 
-    private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60, 40, 60};
-
     /**
      * Creates new form TablesPanel
      */
@@ -138,7 +137,7 @@ public class TablesPanel extends javax.swing.JPanel {
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
 
-        TableUtil.setColumnWidthAndOrder(tableTables, defaultColumnsWidth,
+        TableUtil.setColumnWidthAndOrder(tableTables, DEFAULT_COLUMNS_WIDTH,
                 PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER);
 
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
@@ -187,18 +186,18 @@ public class TablesPanel extends javax.swing.JPanel {
                                         try {
                                             frame.setSelected(true);
                                         } catch (PropertyVetoException ve) {
-                                            logger.error(ve);
+                                            LOGGER.error(ve);
                                         }
                                     }
 
                                 }
                             } catch (InterruptedException ex) {
-                                logger.error(ex);
+                                LOGGER.error(ex);
                             }
                             return;
                         }
                         if (isTournament) {
-                            logger.info("Joining tournament " + tableId);
+                            LOGGER.info("Joining tournament " + tableId);
                             if (deckType.startsWith("Limited")) {
                                 if (!status.endsWith("PW")) {
                                     session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1, null, "");
@@ -209,7 +208,7 @@ public class TablesPanel extends javax.swing.JPanel {
                                 joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
                             }
                         } else {
-                            logger.info("Joining table " + tableId);
+                            LOGGER.info("Joining table " + tableId);
                             joinTableDialog.showDialog(roomId, tableId, false, false);
                         }
                         break;
@@ -220,18 +219,18 @@ public class TablesPanel extends javax.swing.JPanel {
                         break;
                     case "Show":
                         if (isTournament) {
-                            logger.info("Showing tournament table " + tableId);
+                            LOGGER.info("Showing tournament table " + tableId);
                             session.watchTable(roomId, tableId);
                         }
                         break;
                     case "Watch":
                         if (!isTournament) {
-                            logger.info("Watching table " + tableId);
+                            LOGGER.info("Watching table " + tableId);
                             session.watchTable(roomId, tableId);
                         }
                         break;
                     case "Replay":
-                        logger.info("Replaying game " + gameId);
+                        LOGGER.info("Replaying game " + gameId);
                         session.replayGame(gameId);
                         break;
                 }
@@ -258,7 +257,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         break;
                     case "Show":;
                         if (matchesModel.isTournament(modelRow)) {
-                            logger.info("Showing tournament table " + matchesModel.getTableId(modelRow));
+                            LOGGER.info("Showing tournament table " + matchesModel.getTableId(modelRow));
                             session.watchTable(roomId, matchesModel.getTableId(modelRow));
                         }
                         break;
@@ -1177,7 +1176,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnStateFinishedActionPerformed
 
     private void handleError(Exception ex) {
-        logger.fatal("Error loading deck: ", ex);
+        LOGGER.fatal("Error loading deck: ", ex);
         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 

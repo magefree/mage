@@ -44,10 +44,10 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class PulseOfMurasa extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature or land card in a graveyard");
+    private static final FilterCard FILTER = new FilterCard("creature or land card in a graveyard");
 
     static {
-        filter.add(Predicates.or(
+        FILTER.add(Predicates.or(
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.LAND)));
     }
@@ -58,9 +58,9 @@ public class PulseOfMurasa extends CardImpl {
 
         // Return target creature or land card from a graveyard to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(FILTER));
         // You gain 6 life.
-        getSpellAbility().addEffect(new GainLifeEffect(6));
+        this.getSpellAbility().addEffect(new GainLifeEffect(6));
     }
 
     public PulseOfMurasa(final PulseOfMurasa card) {
