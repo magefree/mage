@@ -34,7 +34,7 @@ import mage.players.Player;
  */
 public class EpicEffect extends OneShotEffect {
 
-    final String rule = "<br><br/>Epic <i>(For the rest of the game, you can't cast spells.  At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability.  If the spell has targets, you may choose new targets for the copy)";
+    final String rule = "<br>Epic <i>(For the rest of the game, you can't cast spells.  At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability.  If the spell has targets, you may choose new targets for the copy)";
 
     public EpicEffect() {
         super(Outcome.Benefit);

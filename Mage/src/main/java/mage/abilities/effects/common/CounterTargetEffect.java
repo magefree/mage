@@ -69,6 +69,6 @@ public class CounterTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "counter target " + mode.getTargets().get(0).getTargetName();
+        return "counter target " + (mode.getTargets().get(0) != null ? mode.getTargets().get(0).getTargetName() : "spell");
     }
 }

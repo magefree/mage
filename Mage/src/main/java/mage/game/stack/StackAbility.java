@@ -553,7 +553,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public int getSourceObjectZoneChangeCounter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
@@ -563,7 +563,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public int getZoneChangeCounter(Game game) {
-        throw new UnsupportedOperationException("Not supported.");
+        return game.getState().getZoneChangeCounter(getSourceId());
     }
 
     @Override

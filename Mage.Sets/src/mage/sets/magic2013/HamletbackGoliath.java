@@ -75,6 +75,7 @@ public class HamletbackGoliath extends CardImpl {
 }
 
 class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl {
+
     HamletbackGoliathTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HamletbackGoliathEffect(), true);
     }
@@ -109,11 +110,12 @@ class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever another creature enters the battlefield, you may put X +1/+1 counters on Hamletback Goliath, where X is that creature's power.";
+        return "Whenever another creature enters the battlefield, you may put X +1/+1 counters on {this}, where X is that creature's power.";
     }
 }
 
 class HamletbackGoliathEffect extends OneShotEffect {
+
     HamletbackGoliathEffect() {
         super(Outcome.BoostCreature);
     }
@@ -125,15 +127,14 @@ class HamletbackGoliathEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
-        Permanent HamletbackGoliath = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (creature == null) {
             creature = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         }
-        if (creature != null) {
-           HamletbackGoliath.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), game);
-            return true;
+        if (creature != null && sourceObject != null) {
+            sourceObject.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), game);
         }
-        return false;
+        return true;
     }
 
     @Override

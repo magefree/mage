@@ -43,6 +43,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -743,6 +744,9 @@ public class ContinuousEffects implements Serializable {
                         if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                             effect.setValue("targetAbility", targetAbility);
                             if (effect.applies(event, sourceAbility, game)) {
+                                if (targetAbility instanceof ActivatedAbility && ((ActivatedAbility) targetAbility).isCheckPlayableMode()) {
+                                    checkPlayableMode = true;
+                                }
                                 if (!checkPlayableMode) {
                                     String message = effect.getInfoMessage(sourceAbility, event, game);
                                     if (message != null && !message.isEmpty()) {

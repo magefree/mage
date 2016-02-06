@@ -46,6 +46,7 @@ import mage.game.GameState;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -62,7 +63,7 @@ public class GameView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger logger = Logger.getLogger(GameView.class);
+    private static final Logger LOGGER = Logger.getLogger(GameView.class);
 
     private final int priorityTime;
     private final List<PlayerView> players = new ArrayList<>();
@@ -101,6 +102,9 @@ public class GameView implements Serializable {
                 // Stack Ability
                 MageObject object = game.getObject(stackObject.getSourceId());
                 Card card = game.getCard(stackObject.getSourceId());
+                if (card == null && (object instanceof PermanentCard)) {
+                    card = ((PermanentCard) object).getCard();
+                }
                 if (card != null) {
                     if (object != null) {
                         if (object instanceof Permanent) {
@@ -139,19 +143,17 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
+                    } else if (object instanceof StackAbility) {
+                        StackAbility stackAbility = ((StackAbility) object);
+                        stackAbility.newId();
+                        stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));
+                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else {
-                        if (object instanceof StackAbility) {
-                            StackAbility stackAbility = ((StackAbility) object);
-                            stackAbility.newId();
-                            stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));
-                            checkPaid(stackObject.getId(), ((StackAbility) stackObject));
-                        } else {
-                            logger.fatal("Object can't be cast to StackAbility: " + object.getName() + " " + object.toString() + " " + object.getClass().toString());
-                        }
+                        LOGGER.fatal("Object can't be cast to StackAbility: " + object.getName() + " " + object.toString() + " " + object.getClass().toString());
                     }
                 } else {
                     // can happen if a player times out while ability is on the stack
-                    logger.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
+                    LOGGER.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
             } else {
                 // Spell
@@ -186,7 +188,7 @@ public class GameView implements Serializable {
         }
         if (isPlayer) {
             // has only to be set for active palyer with priority (e.g. pay mana by delve or Quenchable Fire special action)
-            if (createdForPlayer != null && createdForPlayerId.equals(state.getPriorityPlayerId())) {
+            if (createdForPlayer != null && createdForPlayerId != null && createdForPlayerId.equals(state.getPriorityPlayerId())) {
                 this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId(), createdForPlayer.isInPayManaMode()).size() > 0;
             }
         } else {

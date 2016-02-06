@@ -898,7 +898,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public boolean putCardsOnTopOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
-        if (!cardsToLibrary.isEmpty()) {
+        if (cardsToLibrary != null && !cardsToLibrary.isEmpty()) {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
@@ -982,6 +982,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana) {
+        if (game == null || ability == null) {
+            return false;
+        }
         if (!ability.getSpellAbilityType().equals(SpellAbilityType.BASE)) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
         }

@@ -13,7 +13,6 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
@@ -24,6 +23,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -125,10 +125,9 @@ class CloudKeyCostModificationEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-
         if (abilityToModify instanceof SpellAbility && abilityToModify.getControllerId().equals(source.getControllerId())) {
-            Card card = game.getCard(abilityToModify.getSourceId());
-            if (card.getCardType().toString().contains((String) game.getState().getValue(source.getSourceId().toString() + "_CloudKey"))) {
+            Spell spell = game.getStack().getSpell(abilityToModify.getSourceId());
+            if (spell != null && spell.getCardType().toString().contains((String) game.getState().getValue(source.getSourceId().toString() + "_CloudKey"))) {
                 return true;
             }
         }

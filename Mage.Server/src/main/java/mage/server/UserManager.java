@@ -188,11 +188,10 @@ public class UserManager {
 
     public void handleException(Exception ex) {
         if (ex != null) {
-            LOGGER.fatal("User manager exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
-            if (ex.getCause() != null) {
-                LOGGER.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()));
+            LOGGER.fatal("User manager exception ", ex);
+            if (ex.getStackTrace() != null) {
+                LOGGER.fatal(ex.getStackTrace());
             }
-            ex.printStackTrace();
         } else {
             LOGGER.fatal("User manager exception - null");
         }
