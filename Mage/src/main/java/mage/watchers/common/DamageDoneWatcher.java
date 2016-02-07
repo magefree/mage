@@ -21,15 +21,21 @@ import mage.watchers.Watcher;
 public class DamageDoneWatcher extends Watcher {
 
     // which object did how much damage during the turn
-    public Map<MageObjectReference, Integer> damagingObjects = new HashMap<>();
+    public final Map<MageObjectReference, Integer> damagingObjects;
+
+    // which object received how much damage during the turn
+    public final Map<MageObjectReference, Integer> damagedObjects;
 
     public DamageDoneWatcher() {
         super("DamageDone", WatcherScope.GAME);
+        this.damagingObjects = new HashMap<>();
+        this.damagedObjects = new HashMap<>();
     }
 
     public DamageDoneWatcher(final DamageDoneWatcher watcher) {
         super(watcher);
-        this.damagingObjects.putAll(damagingObjects);
+        this.damagingObjects = new HashMap<>(watcher.damagingObjects);
+        this.damagedObjects = new HashMap<>(watcher.damagedObjects);
     }
 
     @Override
@@ -43,9 +49,13 @@ public class DamageDoneWatcher extends Watcher {
             case DAMAGED_CREATURE:
             case DAMAGED_PLANESWALKER:
             case DAMAGED_PLAYER: {
-                MageObjectReference mor = new MageObjectReference(event.getSourceId(), game);
-                int count = damagingObjects.containsKey(mor) ? damagingObjects.get(mor) : 0;
-                damagingObjects.put(mor, count + event.getAmount());
+                MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
+                int damageDone = damagingObjects.containsKey(damageSourceRef) ? damagingObjects.get(damageSourceRef) : 0;
+                damagingObjects.put(damageSourceRef, damageDone + event.getAmount());
+
+                MageObjectReference damageTargetRef = new MageObjectReference(event.getTargetId(), game);
+                int damageReceived = damagedObjects.containsKey(damageTargetRef) ? damagedObjects.get(damageTargetRef) : 0;
+                damagedObjects.put(damageTargetRef, damageReceived + event.getAmount());
             }
         }
     }
@@ -54,11 +64,22 @@ public class DamageDoneWatcher extends Watcher {
     public void reset() {
         super.reset();
         damagingObjects.clear();
+        damagedObjects.clear();
     }
 
-    public int damageDone(UUID objectId, int zoneChangeCounter, Game game) {
+    public int damageDoneBy(UUID objectId, int zoneChangeCounter, Game game) {
         MageObjectReference mor = new MageObjectReference(objectId, zoneChangeCounter, game);
         return damagingObjects.containsKey(mor) ? damagingObjects.get(mor) : 0;
+    }
+
+    public int damageDoneTo(UUID objectId, int zoneChangeCounter, Game game) {
+        MageObjectReference mor = new MageObjectReference(objectId, zoneChangeCounter, game);
+        return damagedObjects.containsKey(mor) ? damagedObjects.get(mor) : 0;
+    }
+
+    public boolean isDamaged(UUID objectId, int zoneChangeCounter, Game game) {
+        MageObjectReference mor = new MageObjectReference(objectId, zoneChangeCounter, game);
+        return damagedObjects.containsKey(mor);
     }
 
 }
