@@ -45,10 +45,10 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  */
 public class GoldmeadowDodger extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or greater");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures with power 4 or greater");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        FILTER.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
     public GoldmeadowDodger(UUID ownerId) {
@@ -60,7 +60,7 @@ public class GoldmeadowDodger extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Goldmeadow Dodger can't be blocked by creatures with power 4 or greater.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(FILTER, Duration.WhileOnBattlefield)));
     }
 
     public GoldmeadowDodger(final GoldmeadowDodger card) {
