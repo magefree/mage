@@ -36,6 +36,11 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
+ * 701.32. Support
+ *
+ * 701.32a “Support N” on a permanent means “Put a +1/+1 counter on each of up
+ * to N other target creatures.” “Support N” on an instant or sorcery spell
+ * means “Put a +1/+1 counter on each of up to N target creatures.”
  *
  * @author LevelX2
  */

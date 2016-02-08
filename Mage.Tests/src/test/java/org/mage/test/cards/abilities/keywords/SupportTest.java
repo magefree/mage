@@ -25,46 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package org.mage.test.cards.abilities.keywords;
 
-import java.util.UUID;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.Filter;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.target.TargetSpell;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class MentalMisstep extends CardImpl {
+public class SupportTest extends CardTestPlayerBase {
 
-    private static final FilterSpell FILTER = new FilterSpell("spell with converted mana cost 1");
+    /**
+     * Support Ability can target its source. Its cannot really.
+     */
+    @Test
+    public void testCreatureSupport() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        // When Gladehart Cavalry enters the battlefield, support 6.
+        // Whenever a creature you control with a +1/+1 counter on it dies, you gain 2 life.
+        addCard(Zone.HAND, playerA, "Gladehart Cavalry"); // {5}{G}{G} 6/6
 
-    static {
-        FILTER.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 1));
-    }
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");
 
-    public MentalMisstep(UUID ownerId) {
-        super(ownerId, 38, "Mental Misstep", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{UP}");
-        this.expansionSetCode = "NPH";
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gladehart Cavalry");
+        addTarget(playerA, "Silvercoat Lion^Pillarfield Ox^Gladehart Cavalry");// Gladehart Cavalry should not be allowed
 
-        // Counter target spell with converted mana cost 1.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(FILTER));
-    }
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
 
-    public MentalMisstep(final MentalMisstep card) {
-        super(card);
-    }
-
-    @Override
-    public MentalMisstep copy() {
-        return new MentalMisstep(this);
+        assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
+        assertPowerToughness(playerA, "Pillarfield Ox", 3, 5);
+        assertPowerToughness(playerA, "Gladehart Cavalry", 6, 6);
     }
 
 }
