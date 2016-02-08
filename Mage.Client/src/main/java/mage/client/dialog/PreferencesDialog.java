@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * PreferencesDialog.java
  *
  * Created on 26.06.2011, 16:35:40
@@ -60,6 +60,7 @@ import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
 import mage.client.util.Config;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import static mage.constants.Constants.DEFAULT_AVATAR_ID;
@@ -79,7 +80,7 @@ import org.apache.log4j.Logger;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
-    private static final Logger log = Logger.getLogger(PreferencesDialog.class);
+    private static final Logger LOGGER = Logger.getLogger(PreferencesDialog.class);
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
@@ -91,6 +92,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_SHOW_STORM_COUNTER = "gameShowStormCounter";
     public static final String KEY_GAME_CONFIRM_EMPTY_MANA_POOL = "gameConfirmEmptyManaPool";
     public static final String KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER = "gameAskMoveToGraveORder";
+
+    public static final String KEY_GUI_FONT_SIZE = "guiFontSize";
 
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
     public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
@@ -355,6 +358,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_gamelog = new javax.swing.JPanel();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         cbDraftLogAutoSave = new javax.swing.JCheckBox();
+        tabGuiSize = new javax.swing.JPanel();
+        guiSize_font = new javax.swing.JPanel();
+        fontSizeLabel = new javax.swing.JLabel();
+        sliderFontSize = new javax.swing.JSlider();
         tabPhases = new javax.swing.JPanel();
         jLabelHeadLine = new javax.swing.JLabel();
         jLabelYourTurn = new javax.swing.JLabel();
@@ -395,7 +402,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         btnBrowseImageLocation = new javax.swing.JButton();
         cbCheckForNewImages = new javax.swing.JCheckBox();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        cbPreferedImageLanguage = new javax.swing.JComboBox<String>();
+        cbPreferedImageLanguage = new javax.swing.JComboBox<>();
         labelPreferedImageLanguage = new javax.swing.JLabel();
         panelBackgroundImages = new javax.swing.JPanel();
         cbUseDefaultBackground = new javax.swing.JCheckBox();
@@ -447,7 +454,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel33 = new javax.swing.JPanel();
         tabConnection = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
-        cbProxyType = new javax.swing.JComboBox<ProxyType>();
+        cbProxyType = new javax.swing.JComboBox<>();
         pnlProxySettings = new javax.swing.JPanel();
         pnlProxy = new javax.swing.JPanel();
         lblProxyServer = new javax.swing.JLabel();
@@ -710,6 +717,43 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Main", tabMain);
 
+        guiSize_font.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Font"));
+        guiSize_font.setLayout(new java.awt.BorderLayout());
+
+        fontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fontSizeLabel.setText("Font Size");
+        fontSizeLabel.setToolTipText("<HTML>The size of the font used to display text.");
+        guiSize_font.add(fontSizeLabel, java.awt.BorderLayout.CENTER);
+
+        sliderFontSize.setMajorTickSpacing(1);
+        sliderFontSize.setMaximum(30);
+        sliderFontSize.setMinimum(10);
+        sliderFontSize.setMinorTickSpacing(1);
+        sliderFontSize.setPaintLabels(true);
+        sliderFontSize.setPaintTicks(true);
+        sliderFontSize.setSnapToTicks(true);
+        sliderFontSize.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
+        guiSize_font.add(sliderFontSize, java.awt.BorderLayout.PAGE_START);
+
+        javax.swing.GroupLayout tabGuiSizeLayout = new javax.swing.GroupLayout(tabGuiSize);
+        tabGuiSize.setLayout(tabGuiSizeLayout);
+        tabGuiSizeLayout.setHorizontalGroup(
+            tabGuiSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabGuiSizeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(guiSize_font, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        tabGuiSizeLayout.setVerticalGroup(
+            tabGuiSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabGuiSizeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(guiSize_font, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(332, Short.MAX_VALUE))
+        );
+
+        tabsPanel.addTab("GUI Size", tabGuiSize);
+
         jLabelHeadLine.setText("Choose phases your game will stop on if not skipped by a skip action (e.g. F6):");
 
         jLabelYourTurn.setText("Your turn");
@@ -956,7 +1000,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelPreferedImageLanguage.setText("Prefered image language:");
         labelPreferedImageLanguage.setFocusable(false);
@@ -1950,6 +1994,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
+        // GUI Size
+        if (getCachedValue(KEY_GUI_FONT_SIZE, 14) != dialog.sliderFontSize.getValue()) {
+            save(prefs, dialog.sliderFontSize, KEY_GUI_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            FontSizeHelper.updateGUI();
+        }
+
         // Phases & Priority
         save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
         save(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
@@ -2320,10 +2370,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     connection.setProxyPassword(password);
                 }
             } else {
-                log.warn("host or\\and port are empty: host=" + host + ", port=" + port);
+                LOGGER.warn("host or\\and port are empty: host=" + host + ", port=" + port);
             }
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -2347,6 +2398,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
                     // Main & Phases
                     loadPhases(prefs);
+
+                    // Gui Size
+                    loadGuiSize(prefs);
 
                     // Images
                     loadImagesSettings(prefs);
@@ -2413,6 +2467,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false");
         load(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "true");
 
+    }
+
+    private static void loadGuiSize(Preferences prefs) {
+        load(prefs, dialog.sliderFontSize, KEY_GUI_FONT_SIZE, "14");
     }
 
     private static void loadImagesSettings(Preferences prefs) {
@@ -2731,7 +2789,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             addAvatar(jPanel32, 32, false, false);
 
         } catch (Exception e) {
-            log.error(e, e);
+            LOGGER.error(e, e);
         }
     }
 
@@ -2850,6 +2908,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel connection_servers;
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
+    private javax.swing.JLabel fontSizeLabel;
+    private javax.swing.JPanel guiSize_font;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -2910,10 +2970,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox showAbilityPickerForced;
     private javax.swing.JCheckBox showCardName;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
+    private javax.swing.JSlider sliderFontSize;
     private javax.swing.JPanel sounds_backgroundMusic;
     private javax.swing.JPanel sounds_clips;
     private javax.swing.JPanel tabAvatars;
     private javax.swing.JPanel tabConnection;
+    private javax.swing.JPanel tabGuiSize;
     private javax.swing.JPanel tabImages;
     private javax.swing.JPanel tabMain;
     private javax.swing.JPanel tabPhases;

@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * ChatPanel.java
  *
  * Created on 15-Dec-2009, 11:04:31 PM
@@ -34,10 +34,13 @@
 package mage.client.chat;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.UUID;
 import javax.swing.JTextField;
 import mage.client.MageFrame;
+import mage.client.util.FontSizeHelper;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -119,7 +122,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     public ChatPanelBasic() {
         initComponents();
         setBackground(new Color(0, 0, 0, CHAT_ALPHA));
-
+        changeGUISize(FontSizeHelper.getChatFont());
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
@@ -128,6 +131,24 @@ public class ChatPanelBasic extends javax.swing.JPanel {
 
     public void cleanUp() {
 
+    }
+
+    public void changeGUISize(Font font) {
+        txtConversation.setFont(font);
+        txtMessage.setFont(font);
+        if (jScrollPaneTxt != null) {
+            jScrollPaneTxt.setFont(font);
+        }
+        int height = 30;
+        if (font.getSize() > 20) {
+            height = 30 + Math.min(font.getSize() - 10, 30);
+        }
+        txtMessage.setMinimumSize(new Dimension(txtMessage.getWidth(), height));
+        txtMessage.setMaximumSize(new Dimension(txtMessage.getWidth(), height));
+        txtMessage.setPreferredSize(new Dimension(txtMessage.getWidth(), height));
+        txtMessage.setSize(new Dimension(txtMessage.getWidth(), height));
+        this.revalidate();
+        this.repaint();
     }
 
     public ChatType getChatType() {
@@ -212,13 +233,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     }
 
     protected String getColoredText(String color, String text) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<font color='");
-        sb.append(color);
-        sb.append("'>");
-        sb.append(text);
-        sb.append("</font>");
-        return sb.toString();
+        return "<font color='" + color + "'>" + text + "</font>";
     }
 
     public String getText() {
@@ -285,7 +300,8 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         txtConversation = new mage.client.components.ColorPane();
         txtMessage = new javax.swing.JTextField();
 
-        jScrollPaneTxt.setBorder(null);
+        jScrollPaneTxt.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jScrollPaneTxt.setPreferredSize(new java.awt.Dimension(32767, 32767));
 
         txtConversation.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtConversation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -294,6 +310,10 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         txtConversation.setOpaque(false);
         jScrollPaneTxt.setViewportView(txtConversation);
 
+        txtMessage.setMaximumSize(new java.awt.Dimension(5000, 60));
+        txtMessage.setMinimumSize(new java.awt.Dimension(6, 60));
+        txtMessage.setName(""); // NOI18N
+        txtMessage.setPreferredSize(new java.awt.Dimension(6, 60));
         txtMessage.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtMessageKeyTyped(evt);
@@ -304,18 +324,15 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMessage)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(txtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(txtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -179,7 +179,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static long startTime;
 
-    private BalloonTip balloonTip;
+    private final BalloonTip balloonTip;
 
     /**
      * @return the session
@@ -306,6 +306,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         // balloonTip = new BalloonTip(desktopPane, "", new ModernBalloonStyle(0, 0, Color.WHITE, Color.YELLOW, Color.BLUE), false);
         balloonTip = new BalloonTip(desktopPane, "", new EdgedBalloonStyle(Color.WHITE, Color.BLUE), false);
         balloonTip.setPositioner(new LeftAbovePositioner(0, 0));
+        balloonTip.setVisible(false);
 
         mageToolbar.add(new javax.swing.JToolBar.Separator());
         mageToolbar.add(createWindowsButton());
@@ -1270,6 +1271,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static void removeChat(UUID chatId) {
         CHATS.remove(chatId);
+    }
+
+    public static Map<UUID, ChatPanelBasic> getChatPanels() {
+        return CHATS;
     }
 
     public static void addGame(UUID gameId, GamePanel gamePanel) {
