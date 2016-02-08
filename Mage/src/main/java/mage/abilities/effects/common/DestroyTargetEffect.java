@@ -109,7 +109,7 @@ public class DestroyTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().size() == 0) {
+        if (mode.getTargets().isEmpty()) {
             sb.append("destroy that creature"); //TODO add possibility to specify text with targetPointer usage
         } else {
             Target target;

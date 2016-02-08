@@ -41,6 +41,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FirstTargetPointer;
+import mage.target.targetpointer.SecondTargetPointer;
+import mage.util.CardUtil;
 
 /**
  *
@@ -146,10 +148,27 @@ public class ExileTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
+        StringBuilder sb = new StringBuilder();
         if (mode.getTargets().isEmpty()) {
-            return "exile it";
+            sb.append("exile that permanent"); // this will be used if the target is set by target pointer and staticText not set.
         } else {
-            return "exile target " + mode.getTargets().get(0).getTargetName();
+            Target target;
+            if (targetPointer instanceof SecondTargetPointer && mode.getTargets().size() > 1) {
+                target = mode.getTargets().get(1);
+            } else {
+                target = mode.getTargets().get(0);
+            }
+            if (target.getNumberOfTargets() == 1) {
+                String targetName = target.getTargetName();
+                sb.append("exile ");
+                if (!targetName.startsWith("another")) {
+                    sb.append("target ");
+                }
+                sb.append(targetName);
+            } else {
+                sb.append("exile ").append(CardUtil.numberToText(target.getNumberOfTargets())).append(" target ").append(target.getTargetName());
+            }
         }
+        return sb.toString();
     }
 }
