@@ -571,6 +571,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                 // Logger.getLogger(this.getClass()).info(url.toString());
                 URLConnection httpConn = url.openConnection(p);
+                // images download from magiccards.info may not work with default 'User-Agent: Java/1.x.x' request header
+                httpConn.setRequestProperty("User-Agent", "");
                 httpConn.connect();
                 int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
                 if (responseCode == 200) {
