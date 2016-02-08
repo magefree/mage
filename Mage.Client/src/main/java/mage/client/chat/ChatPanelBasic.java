@@ -310,10 +310,10 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         txtConversation.setOpaque(false);
         jScrollPaneTxt.setViewportView(txtConversation);
 
-        txtMessage.setMaximumSize(new java.awt.Dimension(5000, 60));
-        txtMessage.setMinimumSize(new java.awt.Dimension(6, 60));
+        txtMessage.setMaximumSize(new java.awt.Dimension(5000, 70));
+        txtMessage.setMinimumSize(new java.awt.Dimension(6, 70));
         txtMessage.setName(""); // NOI18N
-        txtMessage.setPreferredSize(new java.awt.Dimension(6, 60));
+        txtMessage.setPreferredSize(new java.awt.Dimension(6, 70));
         txtMessage.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtMessageKeyTyped(evt);
@@ -330,7 +330,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(txtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

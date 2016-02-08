@@ -27,8 +27,10 @@
  */
 package mage.client.chat;
 
+import java.awt.Font;
 import static mage.client.chat.ChatPanelBasic.TIMESTAMP_COLOR;
 import mage.client.components.ColorPane;
+import mage.client.util.FontSizeHelper;
 import mage.view.ChatMessage;
 import org.mage.card.arcane.ManaSymbols;
 
@@ -103,6 +105,15 @@ public class ChatPanelSeparated extends ChatPanelBasic {
 
     public void setSystemMessagesPane(ColorPane systemMessagesPane) {
         this.systemMessagesPane = systemMessagesPane;
+        changeGUISize(FontSizeHelper.getChatFont());
+    }
+
+    @Override
+    public void changeGUISize(Font font) {
+        if (systemMessagesPane != null) {
+            systemMessagesPane.setFont(font);
+        }
+        super.changeGUISize(font);
     }
 
 }

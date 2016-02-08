@@ -721,18 +721,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSize_font.setLayout(new java.awt.BorderLayout());
 
         fontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fontSizeLabel.setText("Font Size");
+        fontSizeLabel.setText("Size");
         fontSizeLabel.setToolTipText("<HTML>The size of the font used to display text.");
         guiSize_font.add(fontSizeLabel, java.awt.BorderLayout.CENTER);
+        fontSizeLabel.getAccessibleContext().setAccessibleName("Size");
 
-        sliderFontSize.setMajorTickSpacing(1);
-        sliderFontSize.setMaximum(30);
+        sliderFontSize.setMajorTickSpacing(10);
+        sliderFontSize.setMaximum(50);
         sliderFontSize.setMinimum(10);
         sliderFontSize.setMinorTickSpacing(1);
         sliderFontSize.setPaintLabels(true);
         sliderFontSize.setPaintTicks(true);
         sliderFontSize.setSnapToTicks(true);
-        sliderFontSize.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
+        sliderFontSize.setToolTipText("<HTML>Size of the font.");
         guiSize_font.add(sliderFontSize, java.awt.BorderLayout.PAGE_START);
 
         javax.swing.GroupLayout tabGuiSizeLayout = new javax.swing.GroupLayout(tabGuiSize);
@@ -741,8 +742,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabGuiSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(guiSize_font, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(guiSize_font, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(296, Short.MAX_VALUE))
         );
         tabGuiSizeLayout.setVerticalGroup(
             tabGuiSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
