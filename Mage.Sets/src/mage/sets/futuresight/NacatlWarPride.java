@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -123,7 +122,7 @@ class NacatlWarPrideEffect extends OneShotEffect {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(origNactalWarPride);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true);
-            
+
             for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
                 Permanent tokenPermanent = game.getPermanent(tokenId);
                 if (tokenPermanent != null) {
@@ -131,19 +130,15 @@ class NacatlWarPrideEffect extends OneShotEffect {
                 }
             }
         }
-        
+
         if (!copies.isEmpty()) {
             FixedTargets fixedTargets = new FixedTargets(copies, game);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(fixedTargets);
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
             return true;
         }
-        
+
         return false;
     }
 }
