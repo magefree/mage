@@ -191,7 +191,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         //20091005 - 602.5d/602.5e
         if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)
                 || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
-            if (costs.canPay(this, sourceId, controllerId, game) && canChooseTarget(game)) {
+            if (costs.canPay(this, sourceId, playerId, game) && canChooseTarget(game)) {
                 this.activatorId = playerId;
                 return true;
             }

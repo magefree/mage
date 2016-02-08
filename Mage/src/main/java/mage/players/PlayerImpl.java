@@ -1184,18 +1184,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
 
-            if (ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
-                result = specialAction((SpecialAction) ability.copy(), game);
-            } else if (ability.getAbilityType().equals(AbilityType.MANA)) {
-                result = playManaAbility((ManaAbility) ability.copy(), game);
-            } else if (ability.getAbilityType().equals(AbilityType.SPELL)) {
-                if (ability instanceof FlashbackAbility) {
+            switch (ability.getAbilityType()) {
+                case SPECIAL_ACTION:
+                    result = specialAction((SpecialAction) ability.copy(), game);
+                    break;
+                case MANA:
+                    result = playManaAbility((ManaAbility) ability.copy(), game);
+                    break;
+                case SPELL:
+                    if (ability instanceof FlashbackAbility) {
+                        result = playAbility(ability.copy(), game);
+                    } else {
+                        result = cast((SpellAbility) ability, game, false);
+                    }
+                    break;
+                default:
                     result = playAbility(ability.copy(), game);
-                } else {
-                    result = cast((SpellAbility) ability, game, false);
-                }
-            } else {
-                result = playAbility(ability.copy(), game);
+                    break;
             }
         }
 
@@ -2398,7 +2403,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (canBeCastRegularly) {
                 ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
-                if (abilityOptions.size() == 0) {
+                if (abilityOptions.isEmpty()) {
                     return true;
                 } else {
                     if (available == null) {
@@ -2637,6 +2642,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (!playableActivated.containsKey(ability.toString())) {
                         playableActivated.put(ability.toString(), ability);
                     }
+                }
+            }
+            // activated abilities from stack objects
+            for (StackObject stackObject : game.getState().getStack()) {
+                for (ActivatedAbility ability : stackObject.getAbilities().getActivatedAbilities(Zone.STACK)) {
+                    if (ability instanceof ActivatedAbility
+                            && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
+                        playableActivated.put(ability.toString(), ability);
+                    }
+
                 }
             }
             // activated abilities from objects in the command zone (emblems or commanders)
