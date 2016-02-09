@@ -38,14 +38,14 @@ import mage.players.Player;
 /**
  *
  *
- *  @author fireshoes
+ * @author fireshoes
  */
 public class DeliriumCondition implements Condition {
 
-    private static DeliriumCondition fInstance = new DeliriumCondition();
+    private final static DeliriumCondition INSTANCE = new DeliriumCondition();
 
     public static Condition getInstance() {
-        return fInstance;
+        return INSTANCE;
     }
 
     @Override

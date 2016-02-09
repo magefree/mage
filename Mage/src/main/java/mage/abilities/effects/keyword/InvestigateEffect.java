@@ -9,22 +9,20 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
 import mage.game.permanent.token.Token;
 
 /**
  *
  * @author LevelX2
  */
-public class InvestigateEffect extends OneShotEffect {
+public class InvestigateEffect extends CreateTokenEffect {
 
     public InvestigateEffect() {
-        super(Outcome.PutCreatureInPlay);
+        super(new ClueArtifactToken());
         this.staticText = "Investigate. <i>(Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
     }
 
@@ -37,10 +35,6 @@ public class InvestigateEffect extends OneShotEffect {
         return new InvestigateEffect(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
 }
 
 class ClueArtifactToken extends Token {

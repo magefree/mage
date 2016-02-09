@@ -27,8 +27,7 @@
  */
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -43,17 +42,16 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class DevilToken extends Token {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
-
     public DevilToken() {
         super("Devil", "1/1 red Devil creature with \"When this creature dies, it deals 1 damage to target creature or player.\"");
+        availableImageSetCodes.addAll(Arrays.asList("SOI"));
         cardType.add(CardType.CREATURE);
         subtype.add("Devil");
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
         Effect effect = new DamageTargetEffect(1);
-        effect.setText("When {this} dies, it deals 1 damage to target creature or player");
+        effect.setText("it deals 1 damage to target creature or player");
         Ability ability = new DiesTriggeredAbility(effect);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

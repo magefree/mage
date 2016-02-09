@@ -52,10 +52,10 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class KrallenhordeHowler extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Creature spells");
+    private static final FilterCard FILTER = new FilterCard("Creature spells");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE)));
+        FILTER.add(Predicates.or(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public KrallenhordeHowler(UUID ownerId) {
@@ -71,7 +71,7 @@ public class KrallenhordeHowler extends CardImpl {
         this.canTransform = true;
 
         // Creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(FILTER, 1)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Howler.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

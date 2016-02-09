@@ -28,19 +28,15 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,11 +44,11 @@ import mage.target.TargetPermanent;
  * @author fireshoes
  */
 public class StructuralDistortion extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent("artifact or land");
-    
+
+    private static final FilterPermanent FILTER = new FilterPermanent("artifact or land");
+
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),new CardTypePredicate(CardType.LAND)));
+        FILTER.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.LAND)));
     }
 
     public StructuralDistortion(UUID ownerId) {
@@ -60,9 +56,11 @@ public class StructuralDistortion extends CardImpl {
         this.expansionSetCode = "SOI";
 
         // Exile target artifact or land. Structural Distortion deals 2 damage to that permanent's controller.
-        this.getSpellAbility().addEffect(new StructuralDistortionEffect());
-        Target target = new TargetPermanent(filter);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        Effect effect = new DamageTargetControllerEffect(2);
+        effect.setText("{this} deals 2 damage to that permanent's controller");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER));
     }
 
     public StructuralDistortion(final StructuralDistortion card) {
@@ -72,36 +70,5 @@ public class StructuralDistortion extends CardImpl {
     @Override
     public StructuralDistortion copy() {
         return new StructuralDistortion(this);
-    }
-}
-
-class StructuralDistortionEffect extends OneShotEffect {
-
-    public StructuralDistortionEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "Exile target artifact or land. {this} deals 2 damage to that permanent's controller";
-    }
-
-    public StructuralDistortionEffect(final StructuralDistortionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StructuralDistortionEffect copy() {
-        return new StructuralDistortionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            permanent.moveToExile(source.getSourceId(), null, source.getSourceId(), game);
-            Player permController = game.getPlayer(permanent.getControllerId());
-            if (permController != null) {
-                permController.damage(2, source.getSourceId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
     }
 }

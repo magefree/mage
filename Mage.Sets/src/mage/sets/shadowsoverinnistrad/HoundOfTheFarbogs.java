@@ -29,12 +29,14 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -45,8 +47,8 @@ import mage.constants.Zone;
  * @author fireshoes
  */
 public class HoundOfTheFarbogs extends CardImpl {
-    
-    final static private String rule = "{this} has menace as long as there are four or more card types among cards in your graveyard";
+
+    final static private String RULE = "{this} has menace as long as there are four or more card types among cards in your graveyard";
 
     public HoundOfTheFarbogs(UUID ownerId) {
         super(ownerId, 117, "Hound of the Farbogs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
@@ -57,8 +59,10 @@ public class HoundOfTheFarbogs extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Delirium</i> &mdash; Hound of the Farborgs has menace as long as there are four or more card types among cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield), new DeliriumCondition(), rule)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield), new DeliriumCondition(), RULE));
+        ability.setAbilityWord(AbilityWord.DELIRIUM);
+        this.addAbility(ability);
     }
 
     public HoundOfTheFarbogs(final HoundOfTheFarbogs card) {

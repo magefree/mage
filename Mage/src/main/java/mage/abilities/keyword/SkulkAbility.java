@@ -52,13 +52,12 @@ class SkulkEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return !permanent.getControllerId().equals(source.getControllerId());
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getId().equals(source.getSourceId())
-                && blocker.getPower().getValue() >= attacker.getPower().getValue();
+        return blocker.getPower().getValue() <= attacker.getPower().getValue();
     }
 
     @Override

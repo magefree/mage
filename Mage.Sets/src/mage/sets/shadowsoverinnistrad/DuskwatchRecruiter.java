@@ -44,19 +44,13 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
  * @author fireshoes
  */
 public class DuskwatchRecruiter extends CardImpl {
-    
-    private static final FilterCard filter = new FilterCard("a creature card");
-    static {
-            filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
 
     public DuskwatchRecruiter(UUID ownerId) {
         super(ownerId, 203, "Duskwatch Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -64,19 +58,19 @@ public class DuskwatchRecruiter extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.subtype.add("Werewolf");
-        
+
         this.canTransform = true;
         this.secondSideCard = new KrallenhordeHowler(ownerId);
-        
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {2}{G}: Look at the top three cards of your library. You may reveal a creature card from among them and put it into your hand. 
+        // {2}{G}: Look at the top three cards of your library. You may reveal a creature card from among them and put it into your hand.
         // Put the rest on the bottom of your library in any order.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), filter, false), 
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), new FilterCreatureCard("a creature card"), false),
                 new ManaCostsImpl("{2}{G}")));
-        
+
         // At the beginning of each upkeep, if no spells were cast last turn, transform Duskwatch Recruiter.
         this.addAbility(new TransformAbility());
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);

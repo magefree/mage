@@ -48,8 +48,8 @@ public class ExposeEvil extends CardImpl {
         // Tap up to two target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
-        
-        // Investigate.
+
+        // Investigate (Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")
         this.getSpellAbility().addEffect(new InvestigateEffect());
     }
 
