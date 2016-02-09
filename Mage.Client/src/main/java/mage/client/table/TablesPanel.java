@@ -35,6 +35,8 @@ package mage.client.table;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -79,6 +81,7 @@ import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
 import mage.client.dialog.TableWaitingDialog;
 import mage.client.util.ButtonColumn;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.TableUtil;
@@ -141,6 +144,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER);
 
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
+        setGUISize();
 
         chatPanelMain.getUserChatPanel().useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         chatPanelMain.getUserChatPanel().setBorder(null);
@@ -274,6 +278,20 @@ public class TablesPanel extends javax.swing.JPanel {
     public void cleanUp() {
         saveSettings();
         chatPanelMain.cleanUp();
+    }
+
+    public void changeGUISize() {
+        chatPanelMain.changeGUISize();
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        Font font = FontSizeHelper.getTableFont();
+        tableTables.getTableHeader().setFont(font);
+        int rowHeight = FontSizeHelper.getTableRowHeight();
+        tableTables.getTableHeader().setPreferredSize(new Dimension(rowHeight, rowHeight));
+        tableCompleted.getTableHeader().setFont(font);
+        tableCompleted.getTableHeader().setPreferredSize(new Dimension(rowHeight, rowHeight));
     }
 
     private void saveDividerLocations() {

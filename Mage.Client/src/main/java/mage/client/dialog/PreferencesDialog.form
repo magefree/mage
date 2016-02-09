@@ -435,9 +435,6 @@
                     <Property name="text" type="java.lang.String" value="Size"/>
                     <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the font used to display text."/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Size"/>
-                  </AccessibilityProperties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                       <BorderConstraints direction="Center"/>

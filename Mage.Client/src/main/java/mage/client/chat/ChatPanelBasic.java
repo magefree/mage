@@ -147,6 +147,9 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         txtMessage.setMaximumSize(new Dimension(txtMessage.getWidth(), height));
         txtMessage.setPreferredSize(new Dimension(txtMessage.getWidth(), height));
         txtMessage.setSize(new Dimension(txtMessage.getWidth(), height));
+        if (connectedChat != null) {
+            connectedChat.changeGUISize(font);
+        }
         this.revalidate();
         this.repaint();
     }

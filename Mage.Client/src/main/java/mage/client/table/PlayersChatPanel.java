@@ -34,6 +34,8 @@
 package mage.client.table;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
@@ -53,6 +55,7 @@ import mage.client.chat.ChatPanelBasic;
 import static mage.client.chat.ChatPanelBasic.CHAT_ALPHA;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_WIDTH;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
@@ -85,6 +88,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jTablePlayers.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
         jTablePlayers.setForeground(Color.white);
         jTablePlayers.setRowSorter(new MageTableRowSorter(userTableModel));
+        setGUISize();
 
         TableUtil.setColumnWidthAndOrder(jTablePlayers, DEFAULT_COLUMNS_WIDTH, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
         userTableModel.initHeaderTooltips();
@@ -111,6 +115,21 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     public void cleanUp() {
         TableUtil.saveColumnWidthAndOrderToPrefs(jTablePlayers, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
         jScrollPaneTalk.cleanUp();
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        Font font = FontSizeHelper.getTableFont();
+        jTablePlayers.getTableHeader().setFont(font);
+        int rowHeight = FontSizeHelper.getTableRowHeight();
+        jTablePlayers.getTableHeader().setPreferredSize(new Dimension(rowHeight, rowHeight));
+        font = FontSizeHelper.getTabFont();
+        jTabbedPaneText.setFont(font);
+        this.revalidate();
+        this.repaint();
     }
 
     public void setSplitDividerLocation(int location) {

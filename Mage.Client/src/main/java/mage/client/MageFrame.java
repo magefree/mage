@@ -31,6 +31,8 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -112,6 +114,7 @@ import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
 import mage.client.util.EDTExceptionHandler;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.SystemUtil;
 import mage.client.util.audio.MusicPlayer;
@@ -235,6 +238,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            // Change default font and row size for JTables
+            Font font = FontSizeHelper.getTableFont();
+            UIManager.put("Table.font", font);
+            UIManager.put("Table.rowHeight", FontSizeHelper.getTableRowHeight());
         } catch (Exception ex) {
             LOGGER.fatal(null, ex);
         }
@@ -354,6 +361,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         UI.addButton(MageComponents.TABLES_MENU_BUTTON, btnGames);
+
+        setGUISize();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -836,6 +845,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         mageToolbar.setFloatable(false);
         mageToolbar.setRollover(true);
+        mageToolbar.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        mageToolbar.setMaximumSize(new java.awt.Dimension(614, 60));
+        mageToolbar.setMinimumSize(new java.awt.Dimension(566, 60));
+        mageToolbar.setPreferredSize(new java.awt.Dimension(614, 60));
 
         btnSendFeedback.setText("Feedback");
         btnSendFeedback.setFocusable(false);
@@ -950,9 +963,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(desktopPane))
+                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
 
         pack();
@@ -1055,9 +1068,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-         if (topPanebefore != null) {
+        {
+            if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
+        }
     }
 
     public void hideGames() {
@@ -1387,6 +1402,40 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         callbackClient.processCallback(callback);
     }
 
+    public void changeGUISize() {
+        tablesPane.changeGUISize();
+        setGUISize();
+        this.revalidate();
+        this.repaint();
+    }
+
+    private void setGUISize() {
+
+        Font font = FontSizeHelper.getToolbarFont();
+        mageToolbar.setFont(font);
+        int newHeight = font.getSize() + 6;
+        Dimension mageToolbarDimension = mageToolbar.getPreferredSize();
+        mageToolbarDimension.height = newHeight + 6;
+        mageToolbar.setMinimumSize(mageToolbarDimension);
+        mageToolbar.setMaximumSize(mageToolbarDimension);
+        mageToolbar.setPreferredSize(mageToolbarDimension);
+        for (Component component : mageToolbar.getComponents()) {
+            if (component instanceof JButton || component instanceof JLabel || component instanceof JToggleButton) {
+                component.setFont(font);
+                Dimension d = component.getPreferredSize();
+                d.height = newHeight;
+                component.setMinimumSize(d);
+                component.setMaximumSize(d);
+
+            }
+            if (component instanceof javax.swing.JToolBar.Separator) {
+                Dimension d = component.getPreferredSize();
+                d.height = newHeight;
+                component.setMinimumSize(d);
+                component.setMaximumSize(d);
+            }
+        }
+    }
 }
 
 class MagePaneMenuItem extends JCheckBoxMenuItem {

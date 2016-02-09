@@ -1998,7 +1998,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // GUI Size
         if (getCachedValue(KEY_GUI_FONT_SIZE, 14) != dialog.sliderFontSize.getValue()) {
             save(prefs, dialog.sliderFontSize, KEY_GUI_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            FontSizeHelper.updateGUI();
+            FontSizeHelper.changeGUISize();
         }
 
         // Phases & Priority
