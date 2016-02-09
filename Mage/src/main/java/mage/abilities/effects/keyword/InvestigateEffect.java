@@ -46,7 +46,7 @@ public class InvestigateEffect extends OneShotEffect {
 class ClueArtifactToken extends Token {
 
     ClueArtifactToken() {
-        super("Clue", "colorless Clue artifact token onto the battlefield with \"2, Sacrifice this artifact: Draw a card.\"");
+        super("Clue", "colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\"");
         this.setOriginalExpansionSetCode("SOI");
         this.cardType.add(CardType.ARTIFACT);
 

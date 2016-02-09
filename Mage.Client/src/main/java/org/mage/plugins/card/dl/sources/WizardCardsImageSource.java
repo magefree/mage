@@ -132,6 +132,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DRK", "The Dark");
         setsAliases.put("DST", "Darksteel");
         setsAliases.put("DTK", "Dragons of Tarkir");
+        setsAliases.put("EMN", "Eldritch Moon");
         setsAliases.put("EVE", "Eventide");
         setsAliases.put("EVG", "Duel Decks: Elves vs. Goblins");
         setsAliases.put("EXO", "Exodus");
@@ -184,6 +185,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("MRD", "Mirrodin");
         setsAliases.put("NMS", "Nemesis");
         setsAliases.put("NPH", "New Phyrexia");
+        setsAliases.put("OGW", "Oath of the Gatewatch");
         setsAliases.put("ODY", "Odyssey");
         setsAliases.put("ONS", "Onslaught");
         setsAliases.put("ORI", "Magic Origins");
@@ -204,6 +206,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("S99", "Starter 1999");
         setsAliases.put("SCG", "Scourge");
         setsAliases.put("SHM", "Shadowmoor");
+        setsAliases.put("SOI", "Shadows over Innistrad");
         setsAliases.put("SOK", "Saviors of Kamigawa");
         setsAliases.put("SOM", "Scars of Mirrodin");
         setsAliases.put("STH", "Stronghold");

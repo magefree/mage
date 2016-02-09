@@ -60,6 +60,7 @@ Duel Decks: Sorin vs. Tibalt|DDK|
 Duel Decks: Speed vs. Cunning|DDN|
 Duel Decks: Venser vs. Koth|DDI|
 Duel Decks: Zendikar vs. Eldrazi|DDP|
+Eldritch Moon|EMN|
 European Land Program|EURO|
 Eventide|EVE|
 Exodus|EXO|
@@ -139,6 +140,7 @@ Scars of Mirrodin|SOM|
 Scourge|SCG|
 Shadowmoor|SHM|
 Shards of Alara|ALA|
+Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|
 Starter 2000|S00|
 Starter 1999|S99|

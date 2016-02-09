@@ -48,6 +48,7 @@ Duel Decks: Speed vs. Cunning|speedvscunning|
 Duel Decks: Venser vs. Koth|venservskoth|
 Duel Decks: Zendikar vs. Eldrazi|zendikarvseldrazi|
 Eighth Edition|eighthedition|
+Eldritch Moon|eldritchmoon|
 European Land Program|europeanlandprogram|
 Eventide|eventide|
 Exodus|exodus|
@@ -133,6 +134,7 @@ Scars of Mirrodin|scarsofmirrodin|
 Scourge|scourge|
 Seventh Edition|seventhedition|
 Shadowmoor|shadowmoor|
+Shadows over Innistrad|shadowsoverinnistrad|
 Shards of Alara|shardsofalara|
 Starter 1999|starter1999|
 Starter 2000|starter2000|

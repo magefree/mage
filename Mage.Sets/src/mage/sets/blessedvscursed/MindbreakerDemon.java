@@ -27,27 +27,23 @@
  */
 package mage.sets.blessedvscursed;
 
-import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -64,18 +60,20 @@ public class MindbreakerDemon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // When Mindbreaker Demon enters the battlefield, put the top four cards of your library into your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(4)));
-        
+
         // At the beginning of your upkeep, if you don't have 4 or more card types in your graveyard, you lose 4 life.
-        this.addAbility(new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(4), TargetController.YOU, false),
-                new TwentyGraveyardCreatureCondition(),
-                "At the beginning of your upkeep, if you don't have 4 or more card types in your graveyard, you lose 4 life."));
+                new InvertCondition(new DeliriumCondition()),
+                "At the beginning of your upkeep, if you don't have 4 or more card types in your graveyard, you lose 4 life.");
+        ability.setAbilityWord(AbilityWord.DELIRIUM);
+        this.addAbility(ability);
     }
 
     public MindbreakerDemon(final MindbreakerDemon card) {
@@ -85,32 +83,5 @@ public class MindbreakerDemon extends CardImpl {
     @Override
     public MindbreakerDemon copy() {
         return new MindbreakerDemon(this);
-    }
-}
-
-class TwentyGraveyardCreatureCondition implements Condition {
-    
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-    
-    @Override
-    public boolean apply(Game game, Ability source) {  
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            MageObject target = game.getObject(source.getSourceId());
-            if (target != null) {
-                HashSet<CardType> foundCardTypes = new HashSet<>();
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        for (Card card : player.getGraveyard().getCards(game)) {
-                            foundCardTypes.addAll(card.getCardType());
-                        }
-                    }
-                }
-                int number = foundCardTypes.size();
-                return number < 4;
-            }
-        }
-        return false;
     }
 }
