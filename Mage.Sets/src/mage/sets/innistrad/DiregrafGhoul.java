@@ -28,20 +28,17 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.TapSourceEffect;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author nantuko
  */
 public class DiregrafGhoul extends CardImpl {
-
-    private static final String staticText = "{this} enters the battlefield tapped";
 
     public DiregrafGhoul(UUID ownerId) {
         super(ownerId, 97, "Diregraf Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
@@ -53,7 +50,7 @@ public class DiregrafGhoul extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Diregraf Ghoul enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), staticText));
+        this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
     public DiregrafGhoul(final DiregrafGhoul card) {
