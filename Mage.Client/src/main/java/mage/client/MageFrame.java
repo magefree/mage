@@ -237,6 +237,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            FontSizeHelper.setGUISize();
             // Change default font and row size for JTables
             Font font = FontSizeHelper.getTableFont();
             UIManager.put("Table.font", font);
@@ -244,7 +245,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         } catch (Exception ex) {
             LOGGER.fatal(null, ex);
         }
-        FontSizeHelper.setGUISize();
+
         ManaSymbols.loadImages();
         Plugins.getInstance().loadPlugins();
 
@@ -1068,9 +1069,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-         if (topPanebefore != null) {
+        {
+            if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
+        }
     }
 
     public void hideGames() {
@@ -1402,6 +1405,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void changeGUISize() {
+        setGUISize();
+        this.revalidate();
+        this.repaint();
+    }
+
+    private void setGUISize() {
+        Font font = FontSizeHelper.getToolbarFont();
         // Tables
         if (tablesPane != null) {
             tablesPane.changeGUISize();
@@ -1419,13 +1429,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 ((TournamentPane) component).changeGUISize();
             }
         }
-        setGUISize();
-        this.revalidate();
-        this.repaint();
-    }
-
-    private void setGUISize() {
-        Font font = FontSizeHelper.getToolbarFont();
         mageToolbar.setFont(font);
         int newHeight = font.getSize() + 6;
         Dimension mageToolbarDimension = mageToolbar.getPreferredSize();
@@ -1449,6 +1452,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 component.setMaximumSize(d);
             }
         }
+        balloonTip.setFont(FontSizeHelper.tooltipFont);
     }
 }
 

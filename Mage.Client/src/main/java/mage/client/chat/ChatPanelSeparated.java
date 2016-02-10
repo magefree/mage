@@ -113,6 +113,7 @@ public class ChatPanelSeparated extends ChatPanelBasic {
         if (systemMessagesPane != null) {
             systemMessagesPane.setFont(font);
         }
+
         super.changeGUISize(font);
     }
 

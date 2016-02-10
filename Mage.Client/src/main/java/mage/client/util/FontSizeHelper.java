@@ -23,6 +23,11 @@ public class FontSizeHelper {
     public static int tableHeaderHeight = 24;
     public static int tableRowHeight = 20;
 
+    public static int dividerBarSize;
+    public static int scrollBarSize;
+
+    public static Font tooltipFont = new java.awt.Font("Arial", 0, 12);
+
     public static Font getChatFont() {
         int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_FONT_SIZE, 14);
         return new java.awt.Font("Arial", 0, fontSize);
@@ -70,13 +75,19 @@ public class FontSizeHelper {
             symbolTooltipSize = fontSize - 5;
             symbolPaySize = fontSize - 5;
             symbolCardSize = fontSize - 5;
+            dividerBarSize = 10 + (fontSize / 4);
+            scrollBarSize = 14 + (fontSize / 4);
         } else {
             symbolTooltipSize = fontSize;
             symbolPaySize = fontSize;
             symbolCardSize = fontSize;
+            dividerBarSize = 10;
+            scrollBarSize = 14;
         }
+        tooltipFont = new java.awt.Font("Arial", 0, fontSize - 2);
 
         tableRowHeight = fontSize + 4;
         tableHeaderHeight = fontSize + 10;
+
     }
 }

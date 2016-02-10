@@ -138,6 +138,8 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         txtMessage.setFont(font);
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setFont(font);
+            jScrollPaneTxt.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+            jScrollPaneTxt.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
         }
         int height = 30;
         if (font.getSize() > 20) {
@@ -150,8 +152,6 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         if (connectedChat != null) {
             connectedChat.changeGUISize(font);
         }
-        this.revalidate();
-        this.repaint();
     }
 
     public ChatType getChatType() {

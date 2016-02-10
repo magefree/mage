@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.Icon;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
@@ -124,11 +125,14 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private void setGUISize() {
         Font font = FontSizeHelper.getTableFont();
         jTablePlayers.getTableHeader().setFont(font);
-        jTablePlayers.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
-        font = FontSizeHelper.getTabFont();
-        jTabbedPaneText.setFont(font);
-        this.revalidate();
-        this.repaint();
+        jTablePlayers.getTableHeader().setPreferredSize(new Dimension((int) jTablePlayers.getTableHeader().getPreferredSize().getWidth(), FontSizeHelper.tableHeaderHeight));
+        jScrollPanePlayers.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+        jScrollPanePlayers.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+        jScrollPaneSystem.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+        jScrollPaneSystem.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+
+        jTabbedPaneText.setFont(FontSizeHelper.getTabFont());
+        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
     }
 
     public void setSplitDividerLocation(int location) {
@@ -146,7 +150,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     class UserTableModel extends AbstractTableModel {
 
-        private final String[] columnNames = new String[]{"Loc", "Players", "Matches", "MQ%", "Tourneys", "TQ%", "Games", "Connection"};
+        private final String[] columnNames = new String[]{"Loc", "Players", "Matches", "MQP", "Tourneys", "TQP", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
 
         public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
@@ -217,7 +221,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                                 + "<br>T = number of matches lost because of match timeout";
                         break;
                     case 3:
-                        tooltipText = "<HTML><b>%-Ratio of matches played to matches quit</b>"
+                        tooltipText = "<HTML><b>Percent-Ratio of matches played related to matches quit</b>"
                                 + "<br>this calculation does not include tournament matches";
                         break;
                     case 4:
@@ -227,7 +231,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                                 + "<br>R = number of tournaments left during rounds";
                         break;
                     case 5:
-                        tooltipText = "<HTML><b>%-Ratio of tournament matches played to tournament matches quit</b>"
+                        tooltipText = "<HTML><b>Percent-Ratio of tournament matches played related to tournament matches quit</b>"
                                 + "<br>this calculation does not include non tournament matches";
                         break;
                     case 6:
@@ -399,7 +403,9 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             if (table.convertColumnIndexToModel(vColIndex) != curCol) {
                 if (col != null) {
                     MageFrame.getInstance().getBalloonTip().setAttachedComponent(header);
-                    MageFrame.getInstance().getBalloonTip().setTextContents(tips.get(table.convertColumnIndexToModel(vColIndex)));
+                    JLabel content = new JLabel(tips.get(table.convertColumnIndexToModel(vColIndex)));
+                    content.setFont(FontSizeHelper.tooltipFont);
+                    MageFrame.getInstance().getBalloonTip().setContents(content);
                     ToolTipUtils.balloonToToolTip(MageFrame.getInstance().getBalloonTip(), 600, 10000);
                 } else {
                     MageFrame.getInstance().getBalloonTip().setTextContents("");

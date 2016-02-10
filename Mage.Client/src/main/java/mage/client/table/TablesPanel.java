@@ -291,6 +291,10 @@ public class TablesPanel extends javax.swing.JPanel {
         tableTables.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
         tableCompleted.getTableHeader().setFont(font);
         tableCompleted.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
+        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
+        jSplitPane2.setDividerSize(FontSizeHelper.dividerBarSize);
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
     }
 
     private void saveDividerLocations() {

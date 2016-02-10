@@ -157,6 +157,12 @@ public class TournamentPanel extends javax.swing.JPanel {
         tablePlayers.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
         tableMatches.getTableHeader().setFont(font);
         tableMatches.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
+        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
+        jSplitPane2.setDividerSize(FontSizeHelper.dividerBarSize);
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+        jScrollPane2.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+        jScrollPane2.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
     }
 
     private void saveDividerLocations() {
