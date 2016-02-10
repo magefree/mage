@@ -24,18 +24,19 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 
-/*
+ /*
  * CardSelector.java
  *
  * Created on Feb 18, 2010, 2:49:03 PM
  */
-
 package mage.client.deckeditor;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -64,6 +65,7 @@ import mage.client.cards.CardGrid;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
@@ -75,7 +77,6 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.view.CardsView;
-
 
 /**
  *
@@ -95,22 +96,25 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         }
     };
 
-    /** Creates new form CardSelector */
+    /**
+     * Creates new form CardSelector
+     */
     public CardSelector() {
         sortSetting = SortSettingBase.getInstance();
         initComponents();
         cardGrid = new CardGrid();
         makeTransparent();
         initListViewComponents();
-        currentView = mainModel; // by default we use List View        
+        setGUISize();
+        currentView = mainModel; // by default we use List View
     }
 
     private void makeTransparent() {
         this.addComponentListener(this);
         setOpaque(false);
-        
+
         cardGrid.setOpaque(false);
-        
+
         cardSelectorScrollPane.setOpaque(false);
         cardSelectorScrollPane.getViewport().setOpaque(false);
         cbSortBy.setModel(new DefaultComboBoxModel<>(SortBy.values()));
@@ -158,27 +162,37 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
                     if (e.isAltDown()) {
-                        jButtonAddToSideboardActionPerformed(null);                        
+                        jButtonAddToSideboardActionPerformed(null);
                     } else {
                         jButtonAddToMainActionPerformed(null);
                     }
                 }
             }
         });
-        
+
         jToggleCardView.setToolTipText(jToggleCardView.getToolTipText() + " (works only up to " + CardGrid.MAX_IMAGES + " cards).");
     }
-    
+
     /**
      * Free all references
-     * 
+     *
      */
     public void cleanUp() {
         this.cardGrid.clear();
         this.mainModel.clear();
     }
 
-    public void switchToGrid(){
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        Font font = FontSizeHelper.getTableFont();
+        mainTable.getTableHeader().setFont(font);
+        mainTable.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
+    }
+
+    public void switchToGrid() {
         jToggleListView.setSelected(false);
         jToggleCardView.setSelected(true);
         currentView = cardGrid;
@@ -199,7 +213,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.cbExpansionSet.setVisible(false);
         this.limited = true;
         this.cards.clear();
-        for (Card card: sideboard) {
+        for (Card card : sideboard) {
             this.cards.add(card);
         }
         filterCards();
@@ -268,7 +282,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
             filter.add(Predicates.or(predicates));
 
-
             if (this.cbExpansionSet.isVisible()) {
                 String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
                 if (!expansionSelection.equals("- All Sets")) {
@@ -313,11 +326,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         }
         if (this.tbPlaneswalkers.isSelected()) {
             criteria.types(CardType.PLANESWALKER);
-        }        
+        }
         // criteria.types(CardType.TRIBAL);
         // criteria.types(CardType.CONSPIRACY);
-        
-        
 
         if (this.cbExpansionSet.isVisible()) {
             String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
@@ -337,7 +348,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             return !string1.equals(string2);
         }
     }
-    
+
     private void filterCardsColor(int modifiers, String actionCommand) {
         // ALT or CTRL button was pushed
         if ((modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK || (modifiers & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
@@ -348,10 +359,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             tbGreen.setSelected(inverter(invert, tbGreen.getActionCommand(), actionCommand));
             tbRed.setSelected(inverter(invert, tbRed.getActionCommand(), actionCommand));
             tbWhite.setSelected(inverter(invert, tbWhite.getActionCommand(), actionCommand));
-        } 
-        filterCards();        
+        }
+        filterCards();
     }
-    
+
     private void filterCardsType(int modifiers, String actionCommand) {
         // ALT or CTRL button was pushed
         if ((modifiers & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK || (modifiers & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
@@ -363,38 +374,36 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             tbLand.setSelected(inverter(invert, tbLand.getActionCommand(), actionCommand));
             tbPlaneswalkers.setSelected(inverter(invert, tbPlaneswalkers.getActionCommand(), actionCommand));
             tbSorceries.setSelected(inverter(invert, tbSorceries.getActionCommand(), actionCommand));
-        } 
-        filterCards();        
+        }
+        filterCards();
     }
-    
+
     private void filterCards() {
         FilterCard filter = buildFilter();
         try {
             List<Card> filteredCards = new ArrayList<>();
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             if (limited) {
-                for (Card card: cards) {
+                for (Card card : cards) {
                     if (filter.match(card, null)) {
                         filteredCards.add(card);
                     }
                 }
-            }
-            else {
+            } else {
                 List<CardInfo> foundCards = CardRepository.instance.findCards(buildCriteria());
                 for (CardInfo cardInfo : foundCards) {
                     Card card = cardInfo.getMockCard();
                     if (filter.match(card, null)) {
                         filteredCards.add(card);
                     }
-                }                
+                }
             }
             if (currentView instanceof CardGrid && filteredCards.size() > CardGrid.MAX_IMAGES) {
                 this.toggleViewMode();
             }
             this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, false);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
-        }
-        finally {
+        } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
@@ -413,7 +422,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     public void removeCard(UUID cardId) {
         this.mainModel.removeCard(cardId);
         this.cardGrid.removeCard(cardId);
-        for (Card card: cards) {
+        for (Card card : cards) {
             if (card.getId().equals(cardId)) {
                 cards.remove(card);
                 break;
@@ -421,10 +430,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         }
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1032,7 +1041,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         mainModel.removeFromSideEvent(0);
     }//GEN-LAST:event_jButtonRemoveFromSideboardActionPerformed
 
-
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         filterCards();
     }//GEN-LAST:event_jButtonSearchActionPerformed
@@ -1059,11 +1067,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_tbBlackActionPerformed
 
     private void tbWhiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbWhiteActionPerformed
-        filterCardsColor(evt.getModifiers(), evt.getActionCommand());        
+        filterCardsColor(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_tbWhiteActionPerformed
 
     private void tbColorlessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbColorlessActionPerformed
-        filterCardsColor(evt.getModifiers(), evt.getActionCommand());     
+        filterCardsColor(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_tbColorlessActionPerformed
 
     private void tbCreaturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbCreaturesActionPerformed
@@ -1103,7 +1111,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             cbSortBy.setEnabled(false);
             chkPiles.setEnabled(false);
             jButtonAddToMain.setEnabled(true);
-            jButtonAddToSideboard.setEnabled(true);            
+            jButtonAddToSideboard.setEnabled(true);
         } else {
             jToggleCardView.setSelected(true);
             jToggleListView.setSelected(false);
@@ -1112,7 +1120,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             cbSortBy.setEnabled(true);
             chkPiles.setEnabled(true);
             jButtonAddToMain.setEnabled(false);
-            jButtonAddToSideboard.setEnabled(false);        
+            jButtonAddToSideboard.setEnabled(false);
         }
     }
 

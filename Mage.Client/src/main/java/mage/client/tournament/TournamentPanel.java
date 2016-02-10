@@ -34,6 +34,8 @@
 package mage.client.tournament;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
@@ -56,6 +58,7 @@ import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_
 import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH;
 import mage.client.util.ButtonColumn;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.Format;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
@@ -105,6 +108,8 @@ public class TournamentPanel extends javax.swing.JPanel {
         tableMatches.createDefaultColumnsFromModel();
         TableUtil.setColumnWidthAndOrder(tableMatches, DEFAULT_COLUMNS_WIDTH_MATCHES, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
 
+        setGUISize();
+
         chatPanel1.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         chatPanel1.setChatType(ChatPanelBasic.ChatType.TOURNAMENT);
 
@@ -140,6 +145,18 @@ public class TournamentPanel extends javax.swing.JPanel {
             this.chatPanel1.disconnect();
         }
 
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        Font font = FontSizeHelper.getTableFont();
+        tablePlayers.getTableHeader().setFont(font);
+        tablePlayers.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
+        tableMatches.getTableHeader().setFont(font);
+        tableMatches.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
     }
 
     private void saveDividerLocations() {

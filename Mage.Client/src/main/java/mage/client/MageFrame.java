@@ -234,18 +234,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         TConfig config = TConfig.current();
         config.setArchiveDetector(new TArchiveDetector("zip"));
         config.setAccessPreference(FsAccessOption.STORE, true);
-
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             // Change default font and row size for JTables
             Font font = FontSizeHelper.getTableFont();
             UIManager.put("Table.font", font);
-            UIManager.put("Table.rowHeight", FontSizeHelper.getTableRowHeight());
+            UIManager.put("Table.rowHeight", FontSizeHelper.tableRowHeight);
         } catch (Exception ex) {
             LOGGER.fatal(null, ex);
         }
-
+        FontSizeHelper.setGUISize();
         ManaSymbols.loadImages();
         Plugins.getInstance().loadPlugins();
 
@@ -531,6 +530,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 MagePane window = (MagePane) windows[i];
                 if (window.isVisible()) {
                     menuItem = new MagePaneMenuItem(window);
+                    menuItem.setFont(FontSizeHelper.getToolbarFont());
                     menuItem.setState(i == 0);
                     menuItem.addActionListener(new ActionListener() {
                         @Override
@@ -1068,11 +1068,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-        {
-            if (topPanebefore != null) {
+         if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
-        }
     }
 
     public void hideGames() {
@@ -1270,6 +1268,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void setStatusText(String status) {
         this.lblStatus.setText(status);
+        changeGUISize(); // Needed to layout the tooltbar after text length chnage
     }
 
     public static MageUI getUI() {
@@ -1403,14 +1402,29 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void changeGUISize() {
-        tablesPane.changeGUISize();
+        // Tables
+        if (tablesPane != null) {
+            tablesPane.changeGUISize();
+        }
+        // Deck editor
+        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
+        for (JInternalFrame window : windows) {
+            if (window instanceof DeckEditorPane) {
+                ((DeckEditorPane) window).getPanel().changeGUISize();
+            }
+        }
+        // Tournament panels
+        for (Component component : desktopPane.getComponents()) {
+            if (component instanceof TournamentPane) {
+                ((TournamentPane) component).changeGUISize();
+            }
+        }
         setGUISize();
         this.revalidate();
         this.repaint();
     }
 
     private void setGUISize() {
-
         Font font = FontSizeHelper.getToolbarFont();
         mageToolbar.setFont(font);
         int newHeight = font.getSize() + 6;

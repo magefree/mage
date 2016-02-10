@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * CardsList.java
  *
  * Created on Dec 18, 2009, 10:40:12 AM
@@ -36,6 +36,7 @@ package mage.client.cards;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -72,6 +73,7 @@ import mage.client.util.CardViewNameComparator;
 import mage.client.util.CardViewRarityComparator;
 import mage.client.util.Config;
 import mage.client.util.Event;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.Listener;
 import mage.client.util.gui.TableSpinnerEditor;
 import mage.constants.CardType;
@@ -105,6 +107,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         initComponents();
         makeTransparent();
         initListViewComponents();
+        setGUISize();
     }
 
     public void cleanUp() {
@@ -138,6 +141,16 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         cardArea.removeAll();
         this.bigCard = null;
 
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        Font font = FontSizeHelper.getTableFont();
+        mainTable.getTableHeader().setFont(font);
+        mainTable.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
     }
 
     private void makeTransparent() {

@@ -124,8 +124,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private void setGUISize() {
         Font font = FontSizeHelper.getTableFont();
         jTablePlayers.getTableHeader().setFont(font);
-        int rowHeight = FontSizeHelper.getTableRowHeight();
-        jTablePlayers.getTableHeader().setPreferredSize(new Dimension(rowHeight, rowHeight));
+        jTablePlayers.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
         font = FontSizeHelper.getTabFont();
         jTabbedPaneText.setFont(font);
         this.revalidate();

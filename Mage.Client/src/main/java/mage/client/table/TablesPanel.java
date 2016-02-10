@@ -288,10 +288,9 @@ public class TablesPanel extends javax.swing.JPanel {
     private void setGUISize() {
         Font font = FontSizeHelper.getTableFont();
         tableTables.getTableHeader().setFont(font);
-        int rowHeight = FontSizeHelper.getTableRowHeight();
-        tableTables.getTableHeader().setPreferredSize(new Dimension(rowHeight, rowHeight));
+        tableTables.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
         tableCompleted.getTableHeader().setFont(font);
-        tableCompleted.getTableHeader().setPreferredSize(new Dimension(rowHeight, rowHeight));
+        tableCompleted.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
     }
 
     private void saveDividerLocations() {

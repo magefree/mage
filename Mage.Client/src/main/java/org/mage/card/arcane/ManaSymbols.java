@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import org.apache.log4j.Logger;
@@ -21,12 +22,12 @@ import org.mage.plugins.card.constants.Constants;
 
 public class ManaSymbols {
 
-    private static final Logger log = Logger.getLogger(ManaSymbols.class);
-    private static final Map<String, BufferedImage> manaImages = new HashMap<>();
-    private static final Map<String, Image> manaImagesOriginal = new HashMap<>();
-    private static final Map<String, Image> setImages = new HashMap<>();
-    private static final Map<String, Dimension> setImagesExist = new HashMap<>();
-    private static final Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
+    private static final Logger LOGGER = Logger.getLogger(ManaSymbols.class);
+    private static final Map<String, BufferedImage> MANA_IMAGES = new HashMap<>();
+    private static final Map<String, Image> MANA_IMAGES_ORIGINAL = new HashMap<>();
+    private static final Map<String, Image> SET_IMAGES = new HashMap<>();
+    private static final Map<String, Dimension> SET_IMAGES_EXIST = new HashMap<>();
+    private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
     private static String cachedPath;
 
     public static void loadImages() {
@@ -40,21 +41,21 @@ public class ManaSymbols {
             try {
                 Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                 BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                manaImages.put(symbol, resized);
+                MANA_IMAGES.put(symbol, resized);
             } catch (Exception e) {
-                log.error("Error for symbol:" + symbol);
+                LOGGER.error("Error for symbol:" + symbol);
             }
             file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
             try {
                 Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-                manaImagesOriginal.put(symbol, image);
+                MANA_IMAGES_ORIGINAL.put(symbol, image);
             } catch (Exception e) {
             }
         }
         List<String> setCodes = ExpansionRepository.instance.getSetCodes();
         if (setCodes == null) {
             // the cards db file is probaly not included in the client. It will be created after the first connect to a server.
-            log.warn("No db information for sets found. Connect to a server to create database file on client side. Then try to restart the client.");
+            LOGGER.warn("No db information for sets found. Connect to a server to create database file on client side. Then try to restart the client.");
             return;
         }
         for (String set : setCodes) {
@@ -67,10 +68,10 @@ public class ManaSymbols {
                     if (h > 0) {
                         Rectangle r = new Rectangle(21, (int) (h * 21.0f / width));
                         BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                        setImages.put(set, resized);
+                        SET_IMAGES.put(set, resized);
                     }
                 } else {
-                    setImages.put(set, image);
+                    SET_IMAGES.put(set, image);
                 }
             } catch (Exception e) {
             }
@@ -123,7 +124,7 @@ public class ManaSymbols {
                 Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                 int width = image.getWidth(null);
                 int height = image.getHeight(null);
-                setImagesExist.put(set, new Dimension(width, height));
+                SET_IMAGES_EXIST.put(set, new Dimension(width, height));
             } catch (Exception e) {
             }
         }
@@ -158,7 +159,7 @@ public class ManaSymbols {
     }
 
     public static Image getManaSymbolImage(String symbol) {
-        return manaImagesOriginal.get(symbol);
+        return MANA_IMAGES_ORIGINAL.get(symbol);
     }
 
     public static void draw(Graphics g, String manaCost, int x, int y) {
@@ -170,7 +171,7 @@ public class ManaSymbols {
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken().substring(0);
-            Image image = manaImages.get(symbol);
+            Image image = MANA_IMAGES.get(symbol);
             if (image == null) {
                 //log.error("Symbol not recognized \"" + symbol + "\" in mana cost: " + manaCost);
                 continue;
@@ -210,15 +211,29 @@ public class ManaSymbols {
         value = value.replace("{source}", "|source|");
         value = value.replace("{this}", "|this|");
         String replaced = value;
-        if (!manaImages.isEmpty()) {
-            if (type.equals(Type.TOOLTIP)) {
-                replaced = replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true) + "/symbols/small/$1$2.jpg' alt='$1$2' width=11 height=11>");
-            } else if (type.equals(Type.CARD)) {
-                value = value.replace("{slash}", "<img src='file:" + getSymbolsPath() + "/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
-                replaced = replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true) + "/symbols/medium/$1$2.jpg' alt='$1$2' width=12 height=12>");
-            } else if (type.equals(Type.PAY)) {
-                value = value.replace("{slash}", "<img src='file:" + getSymbolsPath() + "/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
-                replaced = replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true) + "/symbols/medium/$1$2.jpg' alt='$1$2' width=15 height=15>");
+
+        if (!MANA_IMAGES.isEmpty()) {
+            switch (type) {
+                case TOOLTIP:
+                    replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true) + "/symbols/small/$1$2.jpg' alt='$1$2' width=11 height=11>");
+//                    replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
+//                            + "/symbols/" + FontSizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' width="
+//                            + FontSizeHelper.symbolTooltipSize + " height=" + FontSizeHelper.symbolTooltipSize + ">");
+                    break;
+                case CARD:
+                    value = value.replace("{slash}", "<img src='file:" + getSymbolsPath() + "/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
+                    replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
+                            + "/symbols/" + FontSizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' width="
+                            + FontSizeHelper.symbolCardSize + " height=" + FontSizeHelper.symbolCardSize + ">");
+                    break;
+                case PAY:
+                    value = value.replace("{slash}", "<img src='file:" + getSymbolsPath() + "/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
+                    replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
+                            + "/symbols/" + FontSizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' "
+                            + "width=" + FontSizeHelper.symbolPaySize + " height=" + FontSizeHelper.symbolPaySize + ">");
+                    break;
+                default:
+                    break;
             }
         }
         replaced = replaced.replace("|source|", "{source}");
@@ -228,9 +243,9 @@ public class ManaSymbols {
 
     public static String replaceSetCodeWithHTML(String set, String rarity) {
         String _set = set;
-        if (setImagesExist.containsKey(_set)) {
-            Integer width = setImagesExist.get(_set).width;
-            Integer height = setImagesExist.get(_set).height;
+        if (SET_IMAGES_EXIST.containsKey(_set)) {
+            Integer width = SET_IMAGES_EXIST.get(_set).width;
+            Integer height = SET_IMAGES_EXIST.get(_set).height;
             return "<img src='file:" + getSymbolsPath() + "/sets/small/" + _set + "-" + rarity + ".png' alt='" + rarity + " ' width=" + width + " height=" + height + ">";
         } else {
             return set;
@@ -238,10 +253,10 @@ public class ManaSymbols {
     }
 
     public static Image getSetSymbolImage(String set) {
-        return setImages.get(set);
+        return SET_IMAGES.get(set);
     }
 
     public static BufferedImage getManaSymbolImageSmall(String symbol) {
-        return manaImages.get(symbol);
+        return MANA_IMAGES.get(symbol);
     }
 }
