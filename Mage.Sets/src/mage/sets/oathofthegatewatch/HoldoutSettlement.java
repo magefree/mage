@@ -33,6 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,7 +64,7 @@ public class HoldoutSettlement extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
+        Ability ability = new AnyColorManaAbility();
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
