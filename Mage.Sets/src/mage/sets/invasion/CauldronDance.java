@@ -27,11 +27,11 @@
  */
 package mage.sets.invasion;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.condition.common.AfterBlockersAreDeclaredCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -49,8 +49,6 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  * @author nomage
  */
@@ -66,7 +64,6 @@ public class CauldronDance extends CardImpl {
         // Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
         this.getSpellAbility().addEffect(new CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-
 
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new CauldronDancePutCreatureFromHandOntoBattlefieldEffect());
@@ -126,7 +123,8 @@ class CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect extends OneShotE
 }
 
 class CauldronDancePutCreatureFromHandOntoBattlefieldEffect extends OneShotEffect {
-    private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
+
+    private static final String CHOICE_TEXT = "Put a creature card from your hand onto the battlefield?";
 
     public CauldronDancePutCreatureFromHandOntoBattlefieldEffect() {
         super(Outcome.Benefit);
@@ -146,7 +144,7 @@ class CauldronDancePutCreatureFromHandOntoBattlefieldEffect extends OneShotEffec
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
+            if (controller.chooseUse(Outcome.PutCreatureInPlay, CHOICE_TEXT, source, game)) {
                 TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());

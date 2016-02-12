@@ -29,14 +29,10 @@ package mage.sets.scourge;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -45,22 +41,16 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author anonymous
+ * @author nomage
  */
 public class BladewingsThrall extends CardImpl {
 
-    final static private String rule = "{this} has flying as long as you control a Dragon";
+    final static private String RULE = "{this} has flying as long as you control a Dragon";
 
     public BladewingsThrall(UUID ownerId) {
         super(ownerId, 55, "Bladewing's Thrall", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
@@ -70,9 +60,14 @@ public class BladewingsThrall extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Bladewing's Thrall has flying as long as you control a Dragon.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Dragon", "a Dragon")), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Dragon", "a Dragon")),
+                RULE)));
+
         // When a Dragon enters the battlefield, you may return Bladewing's Thrall from your graveyard to the battlefield.
-        this.addAbility(new BladewingsThrallTriggeredAbility());
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToBattlefieldEffect(), new FilterCreaturePermanent("Dragon", "a Dragon"), true));
     }
 
     public BladewingsThrall(final BladewingsThrall card) {
@@ -82,39 +77,5 @@ public class BladewingsThrall extends CardImpl {
     @Override
     public BladewingsThrall copy() {
         return new BladewingsThrall(this);
-    }
-}
-
-class BladewingsThrallTriggeredAbility extends TriggeredAbilityImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon", "a Dragon");
-
-    public BladewingsThrallTriggeredAbility() {
-        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true);
-    }
-
-    public BladewingsThrallTriggeredAbility(BladewingsThrallTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        UUID targetId = event.getTargetId();
-        Permanent permanent = game.getPermanent(targetId);
-        return filter.match(permanent, getSourceId(), getControllerId(), game);
-    }
-
-    @Override
-    public String getRule() {
-        return "When a Dragon enters the battlefield, you may return Bladewing's Thrall from your graveyard to the battlefield";
-    }
-
-    @Override
-    public BladewingsThrallTriggeredAbility copy() {
-        return new BladewingsThrallTriggeredAbility(this);
     }
 }
